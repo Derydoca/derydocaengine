@@ -11,7 +11,6 @@ public:
 	void Clear(float r, float g, float b, float a);
 	void Update();
 	bool IsClosed();
-	void Close();
 	inline float GetAspectRatio() { return (float)m_width / (float)m_height; }
 	virtual ~Display();
 private:

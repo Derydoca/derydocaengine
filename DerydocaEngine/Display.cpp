@@ -53,18 +53,29 @@ bool Display::IsClosed() {
 	return m_isClosed;
 }
 
-void Display::Close() {
-	m_isClosed = true;
-}
-
 void Display::Update() {
 	SDL_GL_SwapWindow(m_window);
 
 	SDL_Event e;
 
 	while (SDL_PollEvent(&e)) {
-		if (e.type == SDL_QUIT) {
+		switch (e.type) {
+		case SDL_QUIT:
 			m_isClosed = true;
+			break;
+		case SDL_MOUSEMOTION:
+			break;
+		case SDL_KEYDOWN:
+			switch (e.key.keysym.sym) {
+			case SDLK_ESCAPE:
+				m_isClosed = true;
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
 		}
 	}
 }
