@@ -6,10 +6,16 @@
 #include "Texture.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Clock.h"
+#include "ButtonState.h"
 
 int main()
 {
+	// Initialize the clock to this machine
+	Clock::init();
+	Clock clock();
 
+	//ButtonState keyboard(SDL_GetKeyboardState());
 	Display display(800, 600, "Derydoca Engine");
 
 	Mesh mesh2("../res/rebel.obj");
@@ -25,6 +31,7 @@ int main()
 	float counter = 0.0f;
 
 	while (!display.IsClosed()) {
+
 		currentTime = SDL_GetTicks();
 		deltaTime = currentTime - lastFrameTime;
 

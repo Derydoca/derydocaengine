@@ -42,6 +42,15 @@
     <ClCompile Include="obj_loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h">
@@ -69,6 +78,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

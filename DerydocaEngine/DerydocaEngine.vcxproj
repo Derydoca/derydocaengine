@@ -123,8 +123,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="Key.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="obj_loader.cpp" />
@@ -134,8 +137,11 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="Key.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="Shader.h" />
