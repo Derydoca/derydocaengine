@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "Clock.h"
 #include "ButtonState.h"
+#include "DebugVisualizer.h"
 
 int main()
 {
@@ -30,6 +31,8 @@ int main()
 
 	float counter = 0.0f;
 
+	DebugVisualizer dVis;
+	
 	while (!display.IsClosed()) {
 
 		currentTime = SDL_GetTicks();
@@ -42,15 +45,11 @@ int main()
 
 		transform.GetPos().x = sinCounter;
 		transform.GetPos().z = sinCounter ;
-		transform.GetRot().x = currentTime * 0.001f;
-		transform.GetRot().y = currentTime * 0.001f;
-		transform.GetRot().z = currentTime * 0.001f;
+		transform.SetEulerAngles(glm::vec3(cosCounter, cosCounter, cosCounter));
 
 		transform1.GetPos().x = -cosCounter;
 		transform1.GetPos().y = -cosCounter;
-		transform1.GetRot().x = currentTime * -0.001f;
-		transform1.GetRot().y = currentTime * -0.001f;
-		transform1.GetRot().z = currentTime * -0.001f;
+		transform1.SetEulerAngles(glm::vec3(sinCounter, sinCounter, sinCounter));
 
 		shader.Bind();
 		texture.Bind(0);
@@ -60,6 +59,9 @@ int main()
 
 		shader.Update(transform1, camera);
 		mesh2.Draw();
+
+		dVis.draw();
+		//dVis.clear();
 
 		display.Update();
 		counter += 0.001f;
