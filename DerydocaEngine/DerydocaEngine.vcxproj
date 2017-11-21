@@ -126,6 +126,8 @@
     <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="DebugLine.cpp" />
+    <ClCompile Include="DebugVisualizer.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="main.cpp" />
@@ -140,6 +142,8 @@
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="DebugLine.h" />
+    <ClInclude Include="DebugVisualizer.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Mesh.h" />
