@@ -11,7 +11,7 @@ ButtonState::~ButtonState()
 {
 }
 
-void ButtonState::Update(unsigned int currentState)
+void ButtonState::update(unsigned int currentState)
 {
 	unsigned int changedStates = currentState ^ m_currentState;
 	m_downStates = changedStates & currentState;

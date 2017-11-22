@@ -2,9 +2,9 @@
 
 DebugVisualizer::DebugVisualizer()
 {
-	m_testLine.SetLineWidth(2.0f);
-	m_testLine.SetLineStart(glm::vec3(0, 0, 0));
-	m_testLine.SetLineEnd(glm::vec3(1, 1, 1));
+	m_testLine.setLineWidth(2.0f);
+	m_testLine.setLineStart(glm::vec3(0, 0, 0));
+	m_testLine.setLineEnd(glm::vec3(1, 1, 1));
 }
 
 
@@ -26,11 +26,11 @@ void DebugVisualizer::draw()
 		glEnd();
 	}*/
 
-	glLineWidth(m_testLine.GetLineWidth());
-	glColor3f(1.0, 0.0, 0.0);
+	glLineWidth(m_testLine.getLineWidth());
+	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_LINES);
-	glVertex3f(m_testLine.GetLineStart().x, m_testLine.GetLineStart().y, m_testLine.GetLineStart().z);
-	glVertex3f(m_testLine.GetLineEnd().x, m_testLine.GetLineEnd().y, m_testLine.GetLineEnd().z);
+	glVertex3f(m_testLine.getLineStart().x, m_testLine.getLineStart().y, m_testLine.getLineStart().z);
+	glVertex3f(m_testLine.getLineEnd().x, m_testLine.getLineEnd().y, m_testLine.getLineEnd().z);
 	glEnd();
 }
 

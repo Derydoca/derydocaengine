@@ -31,7 +31,7 @@ Texture::~Texture()
 	glDeleteTextures(1, &m_texture);
 }
 
-void Texture::Bind(unsigned int unit)
+void Texture::bind(unsigned int unit)
 {
 	assert(unit >= 0 && unit <= 31);
 

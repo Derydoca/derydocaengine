@@ -8,9 +8,10 @@ class Shader
 {
 public:
 	Shader(const std::string& fileName);
-	void Bind();
-	void Update(const Transform& transform, const Camera& camera);
 	~Shader();
+
+	void bind();
+	void update(const Transform& transform, const Camera& camera);
 private:
 	static const unsigned int NUM_SHADERS = 2;
 	Shader(const Shader& other) {}

@@ -35,7 +35,7 @@ Display::Display(int width, int height, const std::string& title)
 	glCullFace(GL_BACK);
 }
 
-void Display::Clear(float r, float g, float b, float a)
+void Display::clear(float r, float g, float b, float a)
 {
 	glClearColor(r, g, b, a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -49,11 +49,11 @@ Display::~Display()
 	SDL_Quit();
 }
 
-bool Display::IsClosed() {
+bool Display::isClosed() {
 	return m_isClosed;
 }
 
-void Display::Update() {
+void Display::update() {
 	SDL_GL_SwapWindow(m_window);
 
 	SDL_Event e;

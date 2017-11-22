@@ -2,27 +2,36 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
+#include "Transform.h"
 
 // TODO: Define the methods in the cpp file
 class Camera
 {
 public:
-	Camera(const glm::vec3& pos, float fov, float aspect, float zNear, float zFar) {
-		m_perspective = glm::perspective(fov, aspect, zNear, zFar);
-		m_position = pos;
-		m_forward = glm::vec3(0, 0, 1);
-		m_up = glm::vec3(0, 1, 0);
+	Camera(const Transform& trans, float fov, float aspect, float zNear, float zFar) :
+		m_transform(trans),
+		m_fov(fov),
+		m_aspect(aspect),
+		m_zNear(zNear),
+		m_zFar(zFar)
+	{
+		recalcPerspectiveMatrix();
 	}
-
-	inline glm::mat4 GetViewProjection() const {
-		return m_perspective * glm::lookAt(m_position, m_position + m_forward, m_up);
-	}
-
 	~Camera();
+
+	inline glm::mat4 getViewProjection() const { return m_perspective * m_transform.getModel(); }
+	inline Transform getTransform() { return m_transform; }
+
+	inline void setFov(float fov)
+	{
+		m_fov = fov;
+		recalcPerspectiveMatrix();
+	};
 private:
+	float m_fov, m_aspect, m_zNear, m_zFar;
 	glm::mat4 m_perspective;
-	glm::vec3 m_position;
-	glm::vec3 m_forward;
-	glm::vec3 m_up;
+	Transform m_transform;
+
+	inline void recalcPerspectiveMatrix() { m_perspective = glm::perspective(m_fov, m_aspect, m_zNear, m_zFar); }
 };
 

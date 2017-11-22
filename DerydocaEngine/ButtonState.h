@@ -5,11 +5,11 @@ public:
 	ButtonState(unsigned int initialState);
 	~ButtonState();
 
-	void Update(unsigned int currentState);
-	inline bool IsKeyDown(unsigned int mask) { return mask & m_currentState != 0; }
-	inline bool IsKeyUp(unsigned int mask) { return mask & m_currentState == 0; }
-	inline bool IsKeyDownFrame(unsigned int mask) { return mask & m_downStates != 0; }
-	inline bool IsKeyUpFrame(unsigned int mask) { return mask & m_upStates != 0; }
+	void update(unsigned int currentState);
+	inline bool isKeyDown(unsigned int mask) { return mask & m_currentState != 0; }
+	inline bool isKeyUp(unsigned int mask) { return mask & m_currentState == 0; }
+	inline bool isKeyDownFrame(unsigned int mask) { return mask & m_downStates != 0; }
+	inline bool isKeyUpFrame(unsigned int mask) { return mask & m_upStates != 0; }
 private:
 	unsigned int m_currentState;
 	unsigned int m_downStates;

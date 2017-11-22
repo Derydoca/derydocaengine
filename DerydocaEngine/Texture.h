@@ -7,8 +7,9 @@ class Texture
 {
 public:
 	Texture(const std::string& fileName);
-	void Bind(unsigned int unit);
 	~Texture();
+
+	void bind(unsigned int unit);
 private:
 	Texture(const Texture& other) {}
 	void operator=(const Texture& other) {}

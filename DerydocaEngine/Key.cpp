@@ -7,13 +7,13 @@ Key::Key()
 	m_downTime = 0;
 }
 
-void Key::KeyDown()
+void Key::keyDown()
 {
 	m_isDown = true;
 	m_downTime = SDL_GetTicks();
 }
 
-void Key::KeyUp()
+void Key::keyUp()
 {
 	m_isDown = false;
 }

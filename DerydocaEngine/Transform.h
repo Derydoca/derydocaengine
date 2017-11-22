@@ -9,9 +9,16 @@ class Transform
 public:
 
 	Transform() :
-		m_pos(glm::vec3(0, 0, 0)),
-		m_quat(glm::tquat<float>(0, 0, 0, 1)),
+		m_pos(glm::vec3()),
+		m_quat(glm::fquat()),
 		m_scale(glm::vec3(1, 1, 1))
+	{
+	}
+
+	Transform(const glm::vec3& pos) :
+		m_pos(pos),
+		m_quat(glm::fquat()),
+		m_scale(glm::vec3(1,1,1))
 	{
 	}
 
@@ -19,32 +26,30 @@ public:
 		m_pos(pos),
 		m_scale(scale)
 	{
-		SetEulerAngles(rot);
+		setEulerAngles(rot);
 	}
 
-	Transform(const glm::vec3& pos, const glm::tquat<float>& quat, const glm::vec3& scale) :
+	Transform(const glm::vec3& pos, const glm::fquat& quat, const glm::vec3& scale) :
 		m_pos(pos),
 		m_quat(quat),
 		m_scale(scale)
 	{
 	}
 
-	inline glm::mat4 GetModel() const {
-		glm::mat4 matrix = glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale);
-		return matrix;
-	}
+	inline glm::mat4 getModel() const { return glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale); }
 
-	inline glm::vec3& GetPos() { return m_pos; }
-	inline glm::vec3& GetScale() { return m_scale; }
+	inline glm::vec3& getPos() { return m_pos; }
+	inline glm::fquat& getQuat() { return m_quat; }
+	inline glm::vec3& getScale() { return m_scale; }
 
-	inline void SetPos(const glm::vec3& pos) { m_pos = pos; }
-	inline void SetEulerAngles(const glm::vec3& euler) { m_quat = glm::tquat<float>(euler); }
-	inline void SetScale(const glm::vec3& scale) { m_scale = scale; }
+	inline void setPos(const glm::vec3& pos) { m_pos = pos; }
+	inline void setEulerAngles(const glm::vec3& euler) { m_quat = glm::fquat(euler); }
+	inline void setQuat(const glm::fquat& quat) { m_quat = quat; }
+	inline void setScale(const glm::vec3& scale) { m_scale = scale; }
 
 	~Transform();
 private:
 	glm::vec3 m_pos;
 	glm::vec3 m_scale;
-
-	glm::tquat<float> m_quat;
+	glm::fquat m_quat;
 };
