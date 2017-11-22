@@ -69,10 +69,16 @@ void Display::update() {
 			switch (e.key.keysym.sym) {
 			case SDLK_ESCAPE:
 				m_isClosed = true;
+				m_keyboard->setKeyState(e.key.keysym.sym, true);
 				break;
 			default:
+				m_keyboard->setKeyState(e.key.keysym.sym, true);
 				break;
 			}
+			break;
+		case SDL_KEYUP:
+
+			m_keyboard->setKeyState(e.key.keysym.sym, false);
 			break;
 		default:
 			break;

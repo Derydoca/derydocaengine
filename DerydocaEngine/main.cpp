@@ -9,48 +9,61 @@
 #include "Clock.h"
 #include "ButtonState.h"
 #include "DebugVisualizer.h"
+#include "Keyboard.h"
 
 int main()
 {
 	// Initialize the clock to this machine
 	Clock::init();
-	Clock clock();
+	Clock* clock = new Clock();
 
-	//ButtonState keyboard(SDL_GetKeyboardState());
+	Keyboard* keyboard = new Keyboard();
+	keyboard->init();
+
 	Display display(800, 600, "Derydoca Engine");
+	display.setKeyboard(keyboard);
 
 	Mesh mesh2("../res/rebel.obj");
 	Shader shader("../res/basicShader");
 	Texture texture("../res/rebel.jpg");
 	Transform cameraTransform(glm::vec3(0, 0, -30));
-	Camera camera(cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
+	Camera camera(&cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
 	Transform transform;
 	Transform transform1;
 
-	unsigned long startTime, lastFrameTime, currentTime, deltaTime;
-	startTime = lastFrameTime = currentTime = SDL_GetTicks();
-
-	float counter = 0.0f;
-
 	DebugVisualizer dVis;
-	
+
+	glm::vec3 camPos = cameraTransform.getPos();
+
 	while (!display.isClosed()) {
-
-		currentTime = SDL_GetTicks();
-		deltaTime = currentTime - lastFrameTime;
-
+		// Clear the display buffer
 		display.clear(0.0f, 0.0f, 0.0f, 1.0f);
 
-		float sinCounter = sinf(currentTime * 0.001f);
-		float cosCounter = cosf(currentTime * 0.001f);
+		// Simple camera movement
+		float moveSpeed = 10.0f * clock->getDeltaTime();
+		if (keyboard->isKeyDown(SDLK_w)) {
+			camPos.z += moveSpeed;
+		}
+		if (keyboard->isKeyDown(SDLK_a)) {
+			camPos.x += moveSpeed;
+		}
+		if (keyboard->isKeyDown(SDLK_s)) {
+			camPos.z -= moveSpeed;
+		}
+		if (keyboard->isKeyDown(SDLK_d)) {
+			camPos.x -= moveSpeed;
+		}
+		if (keyboard->isKeyDown(SDLK_q)) {
+			camPos.y += moveSpeed;
+		}
+		if (keyboard->isKeyDown(SDLK_e)) {
+			camPos.y -= moveSpeed;
+		}
+		cameraTransform.setPos(camPos);
 
-		// Test the FOV updating
-		//camera.setFov((sinCounter * 1.0f) + 70.0f);
-
-		transform.getPos().x = sinCounter;
-		transform.getPos().z = sinCounter ;
-		transform.setEulerAngles(glm::vec3(cosCounter, cosCounter, cosCounter));
-
+		// Move one of the models around
+		float sinCounter = sinf(clock->getTime());
+		float cosCounter = cosf(clock->getTime());
 		transform1.getPos().x = -cosCounter;
 		transform1.getPos().y = -cosCounter;
 		transform1.setEulerAngles(glm::vec3(sinCounter, sinCounter, sinCounter));
@@ -67,8 +80,8 @@ int main()
 		dVis.draw();
 
 		display.update();
-		counter += 0.001f;
 
+		clock->update();
 	}
 
 	return 0;

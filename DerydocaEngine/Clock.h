@@ -4,7 +4,9 @@
 class Clock
 {
 public:
-	Clock(float startTimeSeconds = 0.0f);
+	//Clock(float startTimeSeconds = 0.0f);
+	Clock();
+	Clock(unsigned long startCycle);
 	~Clock();
 
 	inline unsigned long getTimeCycles() const { return m_timeCycles; }
@@ -12,12 +14,14 @@ public:
 	inline bool isPaused() const { return m_paused; };
 	inline void setTimeScale(float scale) { m_timeScale = scale; }
 	inline float getTimeScale() const { return m_timeScale; }
+	inline float getDeltaTime() const { return m_deltaTime; }
+	inline float getTime() const { return cyclesToSeconds(m_timeCycles); }
 
 	static void init() { s_cyclesPerSecond = (float)SDL_GetPerformanceFrequency(); }
 	float calcDeltaSeconds(const Clock& other);
+	void update();
 	void update(float dtRealSeconds);
 	void singleStep();
-private:
 
 	static inline unsigned long secondsToCycles(float timeSeconds) {
 		return (unsigned long)(timeSeconds * s_cyclesPerSecond);
@@ -27,11 +31,16 @@ private:
 		return (float)timeCycles / s_cyclesPerSecond;
 	}
 
+private:
+
 	static float s_cyclesPerSecond;
 
 	unsigned long m_timeCycles;
 	float m_timeScale;
 	bool m_paused;
+	float m_deltaTime;
+	unsigned long m_startCycle;
+	unsigned long m_lastFrameCycle;
 
 };
 

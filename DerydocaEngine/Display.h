@@ -3,6 +3,7 @@
 #include <sdl2/SDL.h>
 #undef main
 #include <string>
+#include "Keyboard.h"
 
 class Display
 {
@@ -14,6 +15,7 @@ public:
 	void update();
 	bool isClosed();
 	inline float getAspectRatio() { return (float)m_width / (float)m_height; }
+	inline void setKeyboard(Keyboard* keyboard) { m_keyboard = keyboard; }
 private:
 	Display(const Display& other) {}
 	Display& operator=(const Display& other) {}
@@ -23,5 +25,6 @@ private:
 	bool m_isClosed;
 	int m_width;
 	int m_height;
+	Keyboard* m_keyboard;
 };
 

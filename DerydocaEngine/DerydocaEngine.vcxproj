@@ -130,6 +130,7 @@
     <ClCompile Include="DebugVisualizer.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="Key.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="obj_loader.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="DebugVisualizer.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="Key.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="Shader.h" />

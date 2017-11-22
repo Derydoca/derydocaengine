@@ -6,11 +6,22 @@ Clock::~Clock()
 {
 }
 
-Clock::Clock(float startTimeSeconds) :
-	m_timeCycles(secondsToCycles(startTimeSeconds)),
+Clock::Clock() :
 	m_timeScale(1.0f),
 	m_paused(false)
 {
+	m_timeCycles = SDL_GetPerformanceCounter();
+	m_startCycle = m_timeCycles;
+	m_lastFrameCycle = m_timeCycles;
+}
+
+Clock::Clock(unsigned long startCycle) :
+	m_timeCycles(startCycle),
+	m_timeScale(1.0f),
+	m_paused(false)
+{
+	m_startCycle = m_timeCycles;
+	m_lastFrameCycle = m_timeCycles;
 }
 
 float Clock::calcDeltaSeconds(const Clock & other)
@@ -19,10 +30,23 @@ float Clock::calcDeltaSeconds(const Clock & other)
 	return cyclesToSeconds(dt);
 }
 
+void Clock::update()
+{
+	if (!m_paused) {
+		unsigned long currentFrameCycle = SDL_GetPerformanceCounter();
+		float dtRealSeconds = cyclesToSeconds(currentFrameCycle - m_lastFrameCycle);
+		unsigned long dtScaledCycles = secondsToCycles(dtRealSeconds * m_timeScale);
+		m_deltaTime = dtRealSeconds * m_timeScale;
+		m_timeCycles += dtScaledCycles;
+		m_lastFrameCycle = currentFrameCycle;
+	}
+}
+
 void Clock::update(float dtRealSeconds)
 {
 	if (!m_paused) {
 		unsigned long dtScaledCycles = secondsToCycles(dtRealSeconds * m_timeScale);
+		m_deltaTime = dtRealSeconds * m_timeScale;
 		m_timeCycles += dtScaledCycles;
 	}
 }
