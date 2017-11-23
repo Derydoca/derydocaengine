@@ -133,12 +133,14 @@
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TreeNode.cpp" />
+    <ClCompile Include="WasdMover.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h" />
@@ -150,6 +152,7 @@
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
@@ -157,6 +160,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="WasdMover.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

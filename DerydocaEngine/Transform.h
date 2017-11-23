@@ -36,7 +36,7 @@ public:
 	{
 	}
 
-	inline glm::mat4 getModel() const { return glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale); }
+	inline glm::mat4 getModel() const { return glm::scale(m_scale) * glm::mat4_cast(m_quat) * glm::translate(m_pos); }
 
 	inline glm::vec3& getPos() { return m_pos; }
 	inline glm::fquat& getQuat() { return m_quat; }

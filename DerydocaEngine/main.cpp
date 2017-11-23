@@ -10,6 +10,7 @@
 #include "ButtonState.h"
 #include "DebugVisualizer.h"
 #include "Keyboard.h"
+#include "WasdMover.h"
 
 int main()
 {
@@ -20,6 +21,8 @@ int main()
 	Keyboard* keyboard = new Keyboard();
 	keyboard->init();
 
+	Mouse* mouse = new Mouse();
+
 	Display display(800, 600, "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
@@ -28,6 +31,7 @@ int main()
 	Texture texture("../res/rebel.jpg");
 	Transform cameraTransform(glm::vec3(0, 0, -30));
 	Camera camera(&cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
+	WasdMover mover(&cameraTransform, keyboard, mouse);
 	Transform transform;
 	Transform transform1;
 
@@ -40,26 +44,7 @@ int main()
 		display.clear(0.0f, 0.0f, 0.0f, 1.0f);
 
 		// Simple camera movement
-		float moveSpeed = 10.0f * clock->getDeltaTime();
-		if (keyboard->isKeyDown(SDLK_w)) {
-			camPos.z += moveSpeed;
-		}
-		if (keyboard->isKeyDown(SDLK_a)) {
-			camPos.x += moveSpeed;
-		}
-		if (keyboard->isKeyDown(SDLK_s)) {
-			camPos.z -= moveSpeed;
-		}
-		if (keyboard->isKeyDown(SDLK_d)) {
-			camPos.x -= moveSpeed;
-		}
-		if (keyboard->isKeyDown(SDLK_q)) {
-			camPos.y += moveSpeed;
-		}
-		if (keyboard->isKeyDown(SDLK_e)) {
-			camPos.y -= moveSpeed;
-		}
-		cameraTransform.setPos(camPos);
+		mover.update(clock->getDeltaTime());
 
 		// Move one of the models around
 		float sinCounter = sinf(clock->getTime());
@@ -80,6 +65,7 @@ int main()
 		dVis.draw();
 
 		display.update();
+		mouse->update();
 
 		clock->update();
 	}
