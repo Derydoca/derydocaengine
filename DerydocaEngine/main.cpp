@@ -23,13 +23,13 @@ int main()
 
 	Mouse* mouse = new Mouse();
 
-	Display display(800, 600, "Derydoca Engine");
+	Display display(1920, 1080, "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
 	Mesh mesh2("../res/rebel.obj");
 	Shader shader("../res/basicShader");
 	Texture texture("../res/rebel.jpg");
-	Transform cameraTransform(glm::vec3(0, 0, -30));
+	Transform cameraTransform(glm::vec3(0, 0, -10));
 	Camera camera(&cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
 	WasdMover mover(&cameraTransform, keyboard, mouse);
 	Transform transform;
@@ -51,7 +51,7 @@ int main()
 		float cosCounter = cosf(clock->getTime());
 		transform1.getPos().x = -cosCounter;
 		transform1.getPos().y = -cosCounter;
-		transform1.setEulerAngles(glm::vec3(sinCounter, sinCounter, sinCounter));
+		transform1.setEulerAngles(glm::vec3(clock->getTime(), clock->getTime(), 0));
 
 		shader.bind();
 		texture.bind(0);

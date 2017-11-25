@@ -10,6 +10,7 @@
 class Mesh
 {
 public:
+	Mesh();
 	Mesh(Vertex* vertices, unsigned int numVertices, unsigned int* indices, unsigned int numIndices);
 	Mesh(const std::string& fileName);
 	~Mesh();

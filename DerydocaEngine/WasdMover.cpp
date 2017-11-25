@@ -58,5 +58,6 @@ void WasdMover::update(float deltaTime) {
 	}
 
 	// Rotate
-	m_transform->setEulerAngles(glm::vec3(m_eulerRot.x, m_eulerRot.y, 0.0f));
+	glm::fquat newQuat = glm::rotate(m_eulerRot.x, glm::vec3(1, 0, 0)) * glm::rotate(m_eulerRot.y, glm::vec3(0, 1, 0));
+	m_transform->setQuat(newQuat);
 }
