@@ -44,8 +44,8 @@ void WasdMover::update(float deltaTime) {
 
 	// Update the rotations based on mouse movement
 	glm::ivec2 diff = m_mouse->getDifferential();
-	m_eulerRot.x -= (float)diff.y * 0.01f;
-	m_eulerRot.y -= (float)diff.x * 0.01f;
+	m_eulerRot.x += (float)diff.y * 0.01f;
+	m_eulerRot.y += (float)diff.x * 0.01f;
 
 	// Clamp the vertical look
 	if (m_eulerRot.x < m_minXRot)
