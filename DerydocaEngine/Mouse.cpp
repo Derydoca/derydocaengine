@@ -16,7 +16,6 @@ void Mouse::init()
 	SDL_GetMouseState(&m_currentPos.x, &m_currentPos.y);
 	m_prevPos.x = m_currentPos.x;
 	m_prevPos.y = m_currentPos.y;
-	//SDL_BUTTON_LEFT
 }
 
 void Mouse::update()
@@ -26,5 +25,10 @@ void Mouse::update()
 	m_prevPos.y = m_currentPos.y;
 
 	// Query the mouse for it's current position
-	SDL_GetMouseState(&m_currentPos.x, &m_currentPos.y);
+	unsigned int buttonMask = SDL_GetMouseState(&m_currentPos.x, &m_currentPos.y);
+
+	for (int i = 0; i < 5; i++)
+	{
+		m_keys[i].setState(buttonMask & SDL_BUTTON(i+1));
+	}
 }

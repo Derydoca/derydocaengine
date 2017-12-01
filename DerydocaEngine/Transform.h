@@ -2,7 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "LinkedListNode.h"
+#include "LinkedList.h"
 
 // TODO: Define the methods in the cpp file
 class Transform
@@ -48,11 +48,12 @@ public:
 	inline void setQuat(const glm::fquat& quat) { m_quat = quat; }
 	inline void setScale(const glm::vec3& scale) { m_scale = scale; }
 
+	void addChild(Transform* child);
+
 	~Transform();
 private:
 	glm::vec3 m_pos;
 	glm::vec3 m_scale;
 	glm::fquat m_quat;
-	Transform* m_parent;
-	LinkedListNode<Transform>* m_child;
+	LinkedList<Transform> m_children;
 };

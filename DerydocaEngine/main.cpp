@@ -39,6 +39,9 @@ int main()
 
 	glm::vec3 camPos = cameraTransform.getPos();
 
+	// Divisor defines minimum frames per second
+	unsigned long minFrameTime = 1000 / 60;
+
 	while (!display.isClosed()) {
 		// Clear the display buffer
 		display.clear(0.0f, 0.0f, 0.0f, 1.0f);
@@ -67,6 +70,13 @@ int main()
 		display.update();
 		mouse->update();
 
+		unsigned long msToWait = (unsigned long)(minFrameTime - (clock->getRenderTime() * 1000.0f));
+		if (msToWait > 0) {
+			if (msToWait > minFrameTime) {
+				msToWait = minFrameTime;
+			}
+			SDL_Delay(msToWait);
+		}
 		clock->update();
 	}
 

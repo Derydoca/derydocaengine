@@ -31,6 +31,11 @@ public:
 		return (float)timeCycles / s_cyclesPerSecond;
 	}
 
+	unsigned long getRenderTime() {
+		unsigned long ticks = SDL_GetPerformanceCounter() - m_lastFrameCycle;
+		return cyclesToSeconds(ticks);
+	}
+
 private:
 
 	static float s_cyclesPerSecond;

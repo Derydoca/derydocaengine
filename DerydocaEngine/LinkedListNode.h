@@ -4,34 +4,64 @@ class LinkedListNode
 {
 public:
 	LinkedListNode() {}
+	LinkedListNode(T* data) :
+		m_data(data)
+	{
+
+	}
 	~LinkedListNode() {}
 
-	inline T* left() const { return m_left; }
-	inline T* right() const { return m_right; }
+	inline LinkedListNode* prev() const { return m_prev; }
+	inline LinkedListNode* next() const { return m_next; }
+	inline T* data() { return m_data; }
 
 	void removeSelf()
 	{
-		if (m_left == m_right) {
-			return;
+		if (m_prev != NULL) {
+			if (m_next == NULL) {
+				m_next->setPrev(NULL);
+			}
+			else {
+				m_next->setPrev(m_prev);
+				m_prev->setNext(m_next);
+			}
 		}
-		m_left->setRight(m_right);
-		m_right->setLeft(m_left);
+		else if (m_next != null) {
+			m_next->setPrev(NULL);
+		}
+
+		setPrev(NULL);
+		setNext(NULL);
 	}
-	void addLeft(T* other)
+	void addPrev(LinkedListNode* other)
 	{
-		m_left->setRight(other);
-		setLeft(other);
+		if (m_prev == NULL) {
+			other->setNext(this);
+		}
+		else {
+			m_prev->setNext(other);
+			other->setPrev(m_prev);
+			other->setNext(this);
+		}
+		setPrev(other);
 	}
-	void addRight(T* other)
+	void addNext(LinkedListNode* other)
 	{
-		m_right->setLeft(other);
-		setRight(other);
+		if (m_next == NULL) {
+			other->setPrev(this);
+		}
+		else {
+			m_next->setPrev(other);
+			other->setNext(m_next);
+			other->setPrev(this);
+		}
+		setNext(other);
 	}
 protected:
-	T* setLeft(T* other) { m_left = other; }
-	T* setRight(T* other) { m_right = other; }
+	void setPrev(LinkedListNode* other) { m_prev = other; }
+	void setNext(LinkedListNode* other) { m_next = other; }
 private:
-	T* m_left;
-	T* m_right;
+	T* m_data;
+	LinkedListNode* m_prev;
+	LinkedListNode* m_next;
 };
-
