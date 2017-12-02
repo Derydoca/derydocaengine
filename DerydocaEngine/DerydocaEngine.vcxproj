@@ -129,6 +129,7 @@
     <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="CubeMap.cpp" />
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
     <ClCompile Include="Display.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="CubeMap.h" />
     <ClInclude Include="DebugLine.h" />
     <ClInclude Include="DebugVisualizer.h" />
     <ClInclude Include="Display.h" />

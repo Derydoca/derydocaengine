@@ -11,6 +11,8 @@
 #include "DebugVisualizer.h"
 #include "Keyboard.h"
 #include "WasdMover.h"
+#include "CubeMap.h"
+#include "Skybox.h"
 
 int main()
 {
@@ -28,14 +30,18 @@ int main()
 
 	Mesh mesh2("../res/rebel.obj");
 	Shader shader("../res/basicShader");
+	Shader skyShader("../res/cubemapShader");
 	Texture texture("../res/rebel.jpg");
 	Transform cameraTransform(glm::vec3(0, 0, -10));
 	Camera camera(&cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
 	WasdMover mover(&cameraTransform, keyboard, mouse);
 	Transform transform;
 	Transform transform1;
+	Transform transform2;
+	CubeMap sky = CubeMap("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
+	Skybox* skybox = new Skybox();
 
-	DebugVisualizer dVis;
+	//DebugVisualizer dVis;
 
 	glm::vec3 camPos = cameraTransform.getPos();
 
@@ -44,7 +50,7 @@ int main()
 
 	while (!display.isClosed()) {
 		// Clear the display buffer
-		display.clear(0.0f, 0.0f, 0.0f, 1.0f);
+		display.clear(0.0f, 0.0f, 1.0f, 1.0f);
 
 		// Simple camera movement
 		mover.update(clock->getDeltaTime());
@@ -55,6 +61,7 @@ int main()
 		transform1.getPos().x = -cosCounter;
 		transform1.getPos().y = -cosCounter;
 		transform1.setEulerAngles(glm::vec3(clock->getTime(), clock->getTime(), 0));
+		transform2.getPos().x = cosCounter;
 
 		shader.bind();
 		texture.bind(0);
@@ -65,7 +72,14 @@ int main()
 		shader.update(transform1, camera);
 		mesh2.draw();
 
-		dVis.draw();
+		skyShader.bind();
+		sky.bind(0);
+		//skyShader.update(camera.getViewProjection());
+		skyShader.update(transform2, camera);
+		//shader.update(transform2, camera);
+		skybox->getMesh()->draw();
+
+		//dVis.draw();
 
 		display.update();
 		mouse->update();

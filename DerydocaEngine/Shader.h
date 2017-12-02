@@ -12,6 +12,7 @@ public:
 
 	void bind();
 	void update(const Transform& transform, const Camera& camera);
+	void update(const glm::mat4 matrix);
 private:
 	static const unsigned int NUM_SHADERS = 2;
 	Shader(const Shader& other) {}

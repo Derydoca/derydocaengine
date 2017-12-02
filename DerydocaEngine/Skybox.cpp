@@ -4,6 +4,7 @@
 
 Skybox::Skybox()
 {
+	buildMesh(1.0f);
 }
 
 
@@ -11,28 +12,19 @@ Skybox::~Skybox()
 {
 }
 
-void Skybox::buildMesh()
+void Skybox::buildMesh(float size)
 {
 	Vertex* verts = new Vertex[8]();
-	verts[0].setPos(-1,  1,  1);
-	verts[1].setPos( 1,  1,  1);
-	verts[2].setPos( 1,  1, -1);
-	verts[3].setPos(-1,  1, -1);
-	verts[4].setPos(-1,  -1,  1);
-	verts[5].setPos( 1,  -1,  1);
-	verts[6].setPos( 1,  -1, -1);
-	verts[7].setPos(-1,  -1, -1);
+	verts[0].setPos(-size,   size,  size);
+	verts[1].setPos( size,   size,  size);
+	verts[2].setPos( size,   size, -size);
+	verts[3].setPos(-size,   size, -size);
+	verts[4].setPos(-size,  -size,  size);
+	verts[5].setPos( size,  -size,  size);
+	verts[6].setPos( size,  -size, -size);
+	verts[7].setPos(-size,  -size, -size);
 
-	verts[0].setTexCoord(0, 1);
-	verts[1].setTexCoord(1, 1);
-	verts[2].setTexCoord(1, 0);
-	verts[3].setTexCoord(0, 0);
-	verts[4].setTexCoord(0, 0);
-	verts[5].setTexCoord(0, 0);
-	verts[6].setTexCoord(0, 0);
-	verts[7].setTexCoord(0, 0);
-
-	int indices[36] = {
+	unsigned int indices[36] = {
 		// Top
 		2, 1, 0,
 		3, 2, 0,
@@ -57,4 +49,11 @@ void Skybox::buildMesh()
 		2, 3, 6,
 		3, 7, 6
 	};
+
+	Mesh* m = new Mesh(
+		verts, 
+		(unsigned int)8, 
+		indices, 
+		(unsigned int)36);
+	m_mesh = m;
 }

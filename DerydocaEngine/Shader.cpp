@@ -50,6 +50,11 @@ void Shader::update(const Transform & transform, const Camera& camera)
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
 }
 
+void Shader::update(const glm::mat4 matrix)
+{
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &matrix[0][0]);
+}
+
 static GLuint CreateShader(const std::string& text, GLenum shaderType) {
 	GLuint shader = glCreateShader(shaderType);
 

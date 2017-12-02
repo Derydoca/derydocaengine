@@ -6,9 +6,11 @@ class Skybox
 public:
 	Skybox();
 	~Skybox();
-private:
-	void buildMesh();
 
-	Mesh m_mesh;
+	Mesh* getMesh() { return m_mesh; };
+private:
+	void buildMesh(float size);
+
+	Mesh* m_mesh;
 };
 
