@@ -1,38 +1,26 @@
 #include "CubeMap.h"
+#include "GLError.h"
 
 CubeMap::CubeMap(const std::string & xpos, const std::string & xneg, const std::string & ypos, const std::string & yneg, const std::string & zpos, const std::string & zneg)
 {
-	const std::string cubeFaces[6] = { xpos, xneg, ypos, yneg, zpos, zneg };
+	m_texture = SOIL_load_OGL_cubemap
+	(
+		xpos.c_str(),
+		xneg.c_str(),
+		ypos.c_str(),
+		yneg.c_str(),
+		zpos.c_str(),
+		zneg.c_str(),
+		SOIL_LOAD_RGB,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS
+	);
 
-	glGenTextures(1, &m_texture);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, m_texture);
-
-	unsigned char* imageData;
-	GLint width, height, components;
-
-	// Hack to get the info necessary to create tex storage 2d
-	imageData = stbi_load(cubeFaces[0].c_str(), &width, &height, &components, 4);
-	free(imageData);
-
-	glTexStorage2D(GL_TEXTURE_CUBE_MAP, 1, GL_RGBA, width, height);
-
-	for (int i = 0; i < 6; i++)
-	{
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_GENERATE_MIPMAP, GL_TRUE);
-		imageData = stbi_load(cubeFaces[i].c_str(), &width, &height, &components, 4);
-		glTexSubImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-		//glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, components, width, height, 0, components, GL_UNSIGNED_BYTE, imageData);
-		free(imageData);
-	}
-
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
-	glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+	GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
+	GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+	GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+	GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 }
 
 

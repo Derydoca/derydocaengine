@@ -1,5 +1,6 @@
 #pragma once
-#include "stb_image.h"
+//#include "stb_image.h"
+#include "SOIL.h"
 #include <string>
 #include <GL/glew.h>
 #include <iostream>

@@ -1,29 +1,24 @@
 #include "Texture.h"
-#include "stb_image.h"
 #include <cassert>
 #include <iostream>
+#include "SOIL.h"
 
 Texture::Texture(const std::string& fileName)
 {
-	int width, height, numComponents;
-	unsigned char* imageData = stbi_load(fileName.c_str(), &width, &height, &numComponents, 4);
+	/* load an image file directly as a new OpenGL texture */
+	m_texture = SOIL_load_OGL_texture
+	(
+		fileName.c_str(),
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
 
-	if (imageData == NULL) {
-		std::cerr << "Texture loading failed for texture: " << fileName << std::endl;
+	/* check for an error during the load process */
+	if (0 == m_texture)
+	{
+		printf("SOIL loading error: '%s'\n", SOIL_last_result());
 	}
-
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-
-	stbi_image_free(imageData);
 }
 
 Texture::~Texture()

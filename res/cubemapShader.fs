@@ -8,6 +8,6 @@ uniform samplerCube cubeMap;
 
 void main(void)
 {
-    //gl_FragColor = texture(cubeMap, texCoord0);
-    gl_FragColor = (vec4(texCoord0, 1.0) / 2) + (texture(cubeMap, texCoord0) / 2);
+    gl_FragColor = texture(cubeMap, texCoord0);
+    //gl_FragColor = (vec4(texCoord0, 1.0) / 2) + (texture(cubeMap, texCoord0) / 2);
 }

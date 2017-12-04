@@ -4,7 +4,7 @@
 
 Skybox::Skybox()
 {
-	buildMesh(1.0f);
+	buildMesh(100.0f);
 }
 
 

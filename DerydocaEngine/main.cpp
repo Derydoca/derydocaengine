@@ -25,19 +25,19 @@ int main()
 
 	Mouse* mouse = new Mouse();
 
-	Display display(1920, 1080, "Derydoca Engine");
+	Display display(800, 600, "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
 	Mesh mesh2("../res/rebel.obj");
 	Shader shader("../res/basicShader");
 	Shader skyShader("../res/cubemapShader");
+	//Shader reflectionShader("../res/reflectionShader");
 	Texture texture("../res/rebel.jpg");
 	Transform cameraTransform(glm::vec3(0, 0, -10));
 	Camera camera(&cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
 	WasdMover mover(&cameraTransform, keyboard, mouse);
 	Transform transform;
 	Transform transform1;
-	Transform transform2;
 	CubeMap sky = CubeMap("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
 	Skybox* skybox = new Skybox();
 
@@ -61,7 +61,6 @@ int main()
 		transform1.getPos().x = -cosCounter;
 		transform1.getPos().y = -cosCounter;
 		transform1.setEulerAngles(glm::vec3(clock->getTime(), clock->getTime(), 0));
-		transform2.getPos().x = cosCounter;
 
 		shader.bind();
 		texture.bind(0);
@@ -74,9 +73,7 @@ int main()
 
 		skyShader.bind();
 		sky.bind(0);
-		//skyShader.update(camera.getViewProjection());
-		skyShader.update(transform2, camera);
-		//shader.update(transform2, camera);
+		skyShader.update(camera.getRotationProjection());
 		skybox->getMesh()->draw();
 
 		//dVis.draw();
