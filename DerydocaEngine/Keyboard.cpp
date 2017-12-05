@@ -36,6 +36,22 @@ bool Keyboard::isKeyDown(int keycode)
 	return m_keys[keycode].isDown();
 }
 
+bool Keyboard::isKeyDownFrame(int keycode)
+{
+	if (keycode >= m_numkeys) {
+		return false;
+	}
+	m_keys[keycode].isDownFrame();
+}
+
+bool Keyboard::isKeyUpFrame(int keycode)
+{
+	if (keycode >= m_numkeys) {
+		return false;
+	}
+	m_keys[keycode].isUpFrame();
+}
+
 void Keyboard::setKeyState(int keycode, bool isDown)
 {
 	if (keycode >= m_numkeys) {

@@ -12,7 +12,7 @@ public:
 	{
 	}
 
-	Vertex(const glm::vec3& pos, const glm::vec2& texCoord, const glm::vec3& normal = glm::vec3(0, 0, 0)) :
+	Vertex(const glm::vec3& pos, const glm::vec2& texCoord, const glm::vec3& normal = glm::vec3(0, 1, 0)) :
 		m_pos(pos),
 		m_texCoord(texCoord),
 		m_normal(normal)

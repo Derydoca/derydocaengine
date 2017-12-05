@@ -12,6 +12,8 @@ public:
 	void init();
 	void update();
 	bool isKeyDown(int keycode);
+	bool isKeyDownFrame(int keycode);
+	bool isKeyUpFrame(int keycode);
 	void setKeyState(int keycode, bool isDown);
 private:
 	const int m_numkeys = 512;
