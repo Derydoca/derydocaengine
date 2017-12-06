@@ -22,7 +22,8 @@ Display::Display(int width, int height, const std::string& title)
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);
 
-	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL);
+	SDL_SetWindowResizable(m_window, SDL_TRUE);
 	m_glContext = SDL_GL_CreateContext(m_window);
 
 	GLenum status = glewInit();
@@ -83,6 +84,23 @@ void Display::update() {
 		case SDL_KEYUP:
 
 			m_keyboard->setKeyState(e.key.keysym.sym, false);
+			break;
+		case SDL_WINDOWEVENT:
+			switch (e.window.event)
+			{
+			case SDL_WINDOWEVENT_SIZE_CHANGED:
+				//printf("resized " + e.window.data1 + ", " + e.window.data2);
+				m_width = e.window.data1;
+				m_height = e.window.data2;
+				SDL_SetWindowSize(m_window, m_width, m_height);
+				//SDL_RenderSetLogicalSize(m_window, m_width, m_height);
+				//SDL_GL_DeleteContext(m_glContext);
+				//m_glContext = SDL_GL_CreateContext(m_window);
+				
+				break;
+			default:
+				break;
+			}
 			break;
 		default:
 			break;

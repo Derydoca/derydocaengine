@@ -15,6 +15,7 @@
 #include "Skybox.h"
 #include "ScreenshotUtil.h"
 #include "Terrain.h"
+#include "EngineSettings.h"
 
 int main()
 {
@@ -27,7 +28,7 @@ int main()
 
 	Mouse* mouse = new Mouse();
 
-	Display display(800, 600, "Derydoca Engine");
+	Display display(1920, 1080, "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
 	Mesh mesh2("../res/rebel.obj");
@@ -35,6 +36,7 @@ int main()
 	Shader skyShader("../res/cubemapShader");
 	//Shader reflectionShader("../res/reflectionShader");
 	Texture texture("../res/rebel.jpg");
+	Texture grassTexture("../res/grass.png");
 	Transform cameraTransform(glm::vec3(0, 0, -10));
 	Camera camera(&cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
 	WasdMover mover(&cameraTransform, keyboard, mouse);
@@ -43,9 +45,10 @@ int main()
 	CubeMap sky = CubeMap("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
 	Skybox* skybox = new Skybox();
 	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(&display, keyboard);
-	//Terrain* terrain = new Terrain(256, 256, 0.1f);
-	Terrain* terrain = new Terrain("../res/heightmap.png", 0.1f, 10.0f);
-	Transform terrainTransform(glm::vec3(0, 0, 0));
+	//Terrain* terrain = new Terrain(256, 256, 0.1f, 2.0f);
+	Terrain* terrain = new Terrain("../res/heightmap2.png", 0.2f, 15.0f);
+	Transform terrainTransform(glm::vec3(-50.0f, -10.0f, -50.0f));
+	EngineSettings* settings = new EngineSettings();
 
 	DebugVisualizer dVis;
 
@@ -79,6 +82,7 @@ int main()
 		shader.update(transform1, camera);
 		mesh2.draw();
 
+		grassTexture.bind(0);
 		shader.update(terrainTransform, camera);
 		terrain->draw();
 

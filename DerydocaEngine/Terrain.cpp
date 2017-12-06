@@ -8,15 +8,7 @@ Terrain::Terrain(const std::string & fileName, float unitScale, float heightScal
 	int channels;
 	unsigned char* image = SOIL_load_image(fileName.c_str(), &m_width, &m_depth, &channels, SOIL_LOAD_L);
 
-	//m_heightData = new float*[m_depth];
-	//for (int i = 0; i < m_depth; i++)
-	//{
-	//	m_heightData[i] = new float[m_width];
-	//	for (int j = 0; j < m_width; j++)
-	//	{
-	//		m_heightData[j][i] = 0.0f;//image[(z * m_width) + x] / 255.0f;
-	//	}
-	//}// Initialize the height map
+	// Initialize the height map
 	float tHeight = 0.0f;
 	float incrementer = 0.05f;
 	m_heightData = new float*[m_depth];
@@ -80,21 +72,16 @@ void Terrain::updateMesh()
 		{
 			int index = (z * m_width) + x;
 
-			/*
-			*/
-			// The ? : and ifs are necessary for the border cases.
-
-			float sx = m_heightData[x<m_width-1 ? x+1 : x][z] - m_heightData[x>0 ? x-1 : x][z];
-			if (x == 0 || x == m_width-1)
+			// Calculate the normal
+			float sx = m_heightData[x < m_width - 1 ? x + 1 : x][z] - m_heightData[x > 0 ? x - 1 : x][z];
+			if (x == 0 || x == m_width - 1) {
 				sx *= 2;
-
-			float sy = m_heightData[x][z<m_depth-1 ? z+1 : z] - m_heightData[x][z>0 ?  z-1 : z];
-			if (z == 0 || z == m_depth -1)
+			}
+			float sy = m_heightData[x][z < m_depth - 1 ? z + 1 : z] - m_heightData[x][z > 0 ? z - 1 : z];
+			if (z == 0 || z == m_depth - 1) {
 				sy *= 2;
-
-			/*normal[y*width+x].set(-sx*yScale, 2*xzScale, sy*yScale);
-			normal[y*width+x].normalize();*/
-			glm::vec3 normal(-sx * m_heightScale, 2 * m_unitScale, sy * m_heightScale);
+			}
+			glm::vec3 normal(-sx * m_heightScale, 2 * m_unitScale, -sy * m_heightScale);
 			normal = glm::normalize(normal);
 
 			verts[index] = Vertex(glm::vec3(x, m_heightData[x][z] * m_heightScale, z) * m_unitScale, glm::vec2(x, z) * m_unitScale, normal);

@@ -26,6 +26,12 @@ void ScreenshotUtil::update()
 		std::string file = "c:/test/ss_" + std::string(s) + ".bmp";
 
 		// Save the file
-		SOIL_save_screenshot(file.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, m_display->getWidth(), m_display->getHeight());
+		int result = SOIL_save_screenshot(file.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, m_display->getWidth(), m_display->getHeight());
+		if (result == 0) {
+			printf("Unable to save screenshot. Error code: " + result);
+		}
+		else {
+			printf("Screenshot saved!");
+		}
 	}
 }
