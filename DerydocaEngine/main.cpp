@@ -28,7 +28,7 @@ int main()
 
 	Mouse* mouse = new Mouse();
 
-	Display display(1920, 1080, "Derydoca Engine");
+	Display display(800, 600, "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
 	Mesh mesh2("../res/rebel.obj");
