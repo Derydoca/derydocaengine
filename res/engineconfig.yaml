@@ -1,0 +1,6 @@
+window:
+    width: 800
+    height: 600
+camera:
+    position: [0, 0, -10]
+    fov: 70.0

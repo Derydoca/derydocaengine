@@ -19,6 +19,8 @@
 
 int main()
 {
+	EngineSettings* settings = new EngineSettings();
+
 	// Initialize the clock to this machine
 	Clock::init();
 	Clock* clock = new Clock();
@@ -28,7 +30,7 @@ int main()
 
 	Mouse* mouse = new Mouse();
 
-	Display display(800, 600, "Derydoca Engine");
+	Display display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
 	Mesh mesh2("../res/rebel.obj");
@@ -37,8 +39,8 @@ int main()
 	//Shader reflectionShader("../res/reflectionShader");
 	Texture texture("../res/rebel.jpg");
 	Texture grassTexture("../res/grass.png");
-	Transform cameraTransform(glm::vec3(0, 0, -10));
-	Camera camera(&cameraTransform, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
+	Transform cameraTransform(settings->getCamPos());
+	Camera camera(&cameraTransform, settings->getFOV(), display.getAspectRatio(), 0.01f, 1000.0f);
 	WasdMover mover(&cameraTransform, keyboard, mouse);
 	Transform transform;
 	Transform transform1;
@@ -48,7 +50,6 @@ int main()
 	//Terrain* terrain = new Terrain(256, 256, 0.1f, 2.0f);
 	Terrain* terrain = new Terrain("../res/heightmap2.png", 0.2f, 15.0f);
 	Transform terrainTransform(glm::vec3(-50.0f, -10.0f, -50.0f));
-	EngineSettings* settings = new EngineSettings();
 
 	DebugVisualizer dVis;
 
