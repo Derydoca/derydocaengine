@@ -49,28 +49,38 @@ int main()
 	Skybox* skybox = new Skybox();
 
 	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(&display, keyboard);
-
-	Texture grassTexture("../res/grass.png");
-	Terrain* terrain = new Terrain("../res/heightmap2.png", 0.2f, 15.0f);
-	Transform terrainTransform(glm::vec3(-50.0f, -10.0f, -50.0f));
-
+	
 	DebugVisualizer dVis;
 
 	glm::vec3 camPos = cameraTransform.getPos();
 
 	//---
 
+	Shader shader("../res/basicShader");
+
 	GameObject* goRoot = new GameObject();
+	goRoot->addComponent(screenshotUtil);
+
+	Texture grassTexture("../res/grass.png");
+	Material* matTerrain = new Material();
+	matTerrain->setShader(&shader);
+	matTerrain->setTextureSlot(0, &texture);
+
+	Terrain* terrain = new Terrain("../res/heightmap2.png", 0.2f, 15.0f);
+	terrain->setTextureSlot(0, &grassTexture);
+	GameObject* goTerrain = new GameObject();
+	goTerrain->getTransform()->setPos(glm::vec3(-50.0f, -3.0f, -50.0f));
+	goTerrain->addComponent(terrain);
+	goRoot->addChild(goTerrain);
 
 	MatrixStack* matStack = new MatrixStack();
 
-	Shader shader("../res/basicShader");
-
 	Material* matSquirrel = new Material();
 	matSquirrel->setShader(&shader);
+	matSquirrel->setTextureSlot(0, &texture);
 
 	Mesh* squirrel = new Mesh("../res/rebel.obj");
-	Rotator* rotSquirrel = new Rotator();
+	Rotator* rotSquirrel = new Rotator(1);
 	MeshRenderer* mrSquirrel = new MeshRenderer(squirrel, matSquirrel);
 	GameObject* goSquirrel = new GameObject();
 	goSquirrel->addComponent(rotSquirrel);
@@ -79,7 +89,7 @@ int main()
 	goRoot->addChild(goSquirrel);
 
 	MeshRenderer* mrSquirrel2 = new MeshRenderer(squirrel, matSquirrel);
-	Rotator* rotSquirrel2 = new Rotator();
+	Rotator* rotSquirrel2 = new Rotator(2);
 	GameObject* goSquirrel2 = new GameObject();
 	goSquirrel2->addComponent(rotSquirrel2);
 	goSquirrel2->addComponent(mrSquirrel2);
@@ -87,7 +97,7 @@ int main()
 	goSquirrel->addChild(goSquirrel2);
 
 	MeshRenderer* mrSquirrel3 = new MeshRenderer(squirrel, matSquirrel);
-	Rotator* rotSquirrel3 = new Rotator();
+	Rotator* rotSquirrel3 = new Rotator(3);
 	GameObject* goSquirrel3 = new GameObject();
 	goSquirrel3->addComponent(rotSquirrel3);
 	goSquirrel3->addComponent(mrSquirrel3);
@@ -97,24 +107,18 @@ int main()
 	// Divisor defines minimum frames per second
 	unsigned long minFrameTime = 1000 / 60;
 
-	while (!display.isClosed()) {
-		screenshotUtil->update();
+	goRoot->init();
 
+	while (!display.isClosed()) {
 		// Clear the display buffer
 		display.clear(0.0f, 0.0f, 1.0f, 1.0f);
 
 		// Simple camera movement
 		mover.update(clock->getDeltaTime());
 
-		shader.bind();
-		texture.bind(0);
-
 		goRoot->update(clock->getDeltaTime());
 		goRoot->render(&camera, matStack);
-
-		grassTexture.bind(0);
-		shader.update(&terrainTransform, &camera);
-		terrain->draw();
+		goRoot->postRender();
 
 		skyShader.bind();
 		sky.bind(0);

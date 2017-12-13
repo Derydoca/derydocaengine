@@ -11,6 +11,8 @@ public:
 	~MeshRenderer();
 	void render(Camera* camera, MatrixStack* matrixStack);
 	void update(float deltaTime);
+	void postRender();
+	Material* getMaterial() { return m_material; }
 private:
 	Mesh* m_mesh;
 	Material* m_material;

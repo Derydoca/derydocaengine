@@ -13,7 +13,7 @@ ScreenshotUtil::~ScreenshotUtil()
 {
 }
 
-void ScreenshotUtil::update()
+void ScreenshotUtil::postRender()
 {
 	if(m_keyboard->isKeyDownFrame(SDLK_p)) {
 		// Build a file name with a unique time stamp
@@ -34,4 +34,13 @@ void ScreenshotUtil::update()
 			printf("Screenshot saved!");
 		}
 	}
+}
+
+void ScreenshotUtil::update(float deltaTime)
+{
+}
+
+void ScreenshotUtil::render(Camera* camera, MatrixStack* matrixStack)
+{
+
 }

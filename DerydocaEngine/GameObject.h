@@ -13,8 +13,10 @@ public:
 	GameObject();
 	~GameObject();
 
+	void init();
 	void update(float deltaTime);
 	void render(Camera* camera, MatrixStack* matrixStack);
+	void postRender();
 
 	void addChild(GameObject* gameObject);
 	void addComponent(GameComponent* component);

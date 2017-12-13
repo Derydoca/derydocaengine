@@ -14,7 +14,7 @@ public:
 	inline bool isPaused() const { return m_paused; };
 	inline void setTimeScale(float scale) { m_timeScale = scale; }
 	inline float getTimeScale() const { return m_timeScale; }
-	inline float getDeltaTime() const { return m_deltaTime; }
+	inline float getDeltaTime() const { if (m_deltaTime < 0) { return 0.01f; } return m_deltaTime; }
 	inline float getTime() const { return cyclesToSeconds(m_timeCycles); }
 
 	static void init() { s_cyclesPerSecond = (float)SDL_GetPerformanceFrequency(); }

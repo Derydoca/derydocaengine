@@ -1,6 +1,5 @@
 #include "Terrain.h"
 
-
 Terrain::Terrain(const std::string & fileName, float unitScale, float heightScale) :
 	m_unitScale(unitScale),
 	m_heightScale(heightScale)
@@ -24,6 +23,11 @@ Terrain::Terrain(const std::string & fileName, float unitScale, float heightScal
 	}
 
 	Terrain::updateMesh();
+
+	Shader* shader = new Shader("../res/basicShader");
+	Material* mat = new Material();
+	mat->setShader(shader);
+	m_meshRenderer = new MeshRenderer(m_mesh, mat);
 }
 
 Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
@@ -48,11 +52,20 @@ Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
 	}
 
 	Terrain::updateMesh();
+
+	Shader* shader = new Shader("../res/basicShader");
+	Material* mat = new Material();
+	mat->setShader(shader);
+	m_meshRenderer = new MeshRenderer(m_mesh, mat);
 }
 
 Terrain::~Terrain()
 {
 	delete(m_mesh);
+}
+
+void Terrain::init()
+{
 }
 
 void Terrain::draw()
@@ -106,4 +119,22 @@ void Terrain::updateMesh()
 	}
 
 	m_mesh = new Mesh(verts, numVerts, indices, numIndices);
+}
+
+void Terrain::setTextureSlot(int slot, Texture * texture)
+{
+	m_meshRenderer->getMaterial()->setTextureSlot(slot, texture);
+}
+
+void Terrain::render(Camera * camera, MatrixStack * matrixStack)
+{
+	m_meshRenderer->render(camera, matrixStack);
+}
+
+void Terrain::update(float deltaTime)
+{
+}
+
+void Terrain::postRender()
+{
 }

@@ -13,9 +13,10 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::render(Camera* camera, MatrixStack* matrixStack)
 {
-	assert(m_material);
+	//assert(m_material);
+	//m_material->getShader()->bind();
 
-	m_material->getShader()->bind();
+	m_material->bind();
 	glm::mat4 newMatrix = camera->getViewProjection() * matrixStack->getMatrix();
 	//m_material->getShader()->update(getGameObject()->getTransform(), camera);
 	m_material->getShader()->update(newMatrix);
@@ -25,4 +26,8 @@ void MeshRenderer::render(Camera* camera, MatrixStack* matrixStack)
 void MeshRenderer::update(float deltaTime)
 {
 
+}
+
+void MeshRenderer::postRender()
+{
 }
