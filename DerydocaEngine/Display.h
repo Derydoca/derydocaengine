@@ -4,6 +4,8 @@
 #undef main
 #include <string>
 #include "Keyboard.h"
+#include <GL/glew.h>
+#include <iostream>
 
 class Display
 {

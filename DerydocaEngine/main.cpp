@@ -16,6 +16,11 @@
 #include "ScreenshotUtil.h"
 #include "Terrain.h"
 #include "EngineSettings.h"
+#include "GameObject.h"
+#include "MeshRenderer.h"
+#include "Material.h"
+#include "MatrixStack.h"
+#include "Rotator.h"
 
 int main()
 {
@@ -33,27 +38,61 @@ int main()
 	Display display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
-	Mesh mesh2("../res/rebel.obj");
-	Shader shader("../res/basicShader");
 	Shader skyShader("../res/cubemapShader");
-	//Shader reflectionShader("../res/reflectionShader");
 	Texture texture("../res/rebel.jpg");
-	Texture grassTexture("../res/grass.png");
+
 	Transform cameraTransform(settings->getCamPos());
 	Camera camera(&cameraTransform, settings->getFOV(), display.getAspectRatio(), 0.01f, 1000.0f);
 	WasdMover mover(&cameraTransform, keyboard, mouse);
-	Transform transform;
-	Transform transform1;
+
 	CubeMap sky = CubeMap("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
 	Skybox* skybox = new Skybox();
+
 	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(&display, keyboard);
-	//Terrain* terrain = new Terrain(256, 256, 0.1f, 2.0f);
+
+	Texture grassTexture("../res/grass.png");
 	Terrain* terrain = new Terrain("../res/heightmap2.png", 0.2f, 15.0f);
 	Transform terrainTransform(glm::vec3(-50.0f, -10.0f, -50.0f));
 
 	DebugVisualizer dVis;
 
 	glm::vec3 camPos = cameraTransform.getPos();
+
+	//---
+
+	GameObject* goRoot = new GameObject();
+
+	MatrixStack* matStack = new MatrixStack();
+
+	Shader shader("../res/basicShader");
+
+	Material* matSquirrel = new Material();
+	matSquirrel->setShader(&shader);
+
+	Mesh* squirrel = new Mesh("../res/rebel.obj");
+	Rotator* rotSquirrel = new Rotator();
+	MeshRenderer* mrSquirrel = new MeshRenderer(squirrel, matSquirrel);
+	GameObject* goSquirrel = new GameObject();
+	goSquirrel->addComponent(rotSquirrel);
+	goSquirrel->addComponent(mrSquirrel);
+	goSquirrel->getTransform()->setPos(glm::vec3(0, 0, 0));
+	goRoot->addChild(goSquirrel);
+
+	MeshRenderer* mrSquirrel2 = new MeshRenderer(squirrel, matSquirrel);
+	Rotator* rotSquirrel2 = new Rotator();
+	GameObject* goSquirrel2 = new GameObject();
+	goSquirrel2->addComponent(rotSquirrel2);
+	goSquirrel2->addComponent(mrSquirrel2);
+	goSquirrel2->getTransform()->setPos(glm::vec3(1, 0, 0));
+	goSquirrel->addChild(goSquirrel2);
+
+	MeshRenderer* mrSquirrel3 = new MeshRenderer(squirrel, matSquirrel);
+	Rotator* rotSquirrel3 = new Rotator();
+	GameObject* goSquirrel3 = new GameObject();
+	goSquirrel3->addComponent(rotSquirrel3);
+	goSquirrel3->addComponent(mrSquirrel3);
+	goSquirrel3->getTransform()->setPos(glm::vec3(0.5f, 0, 0));
+	goSquirrel2->addChild(goSquirrel3);
 
 	// Divisor defines minimum frames per second
 	unsigned long minFrameTime = 1000 / 60;
@@ -67,24 +106,14 @@ int main()
 		// Simple camera movement
 		mover.update(clock->getDeltaTime());
 
-		// Move one of the models around
-		float sinCounter = sinf(clock->getTime());
-		float cosCounter = cosf(clock->getTime());
-		transform1.getPos().x = -cosCounter;
-		transform1.getPos().y = -cosCounter;
-		transform1.setEulerAngles(glm::vec3(clock->getTime(), clock->getTime(), 0));
-
 		shader.bind();
 		texture.bind(0);
 
-		shader.update(transform, camera);
-		mesh2.draw();
-
-		shader.update(transform1, camera);
-		mesh2.draw();
+		goRoot->update(clock->getDeltaTime());
+		goRoot->render(&camera, matStack);
 
 		grassTexture.bind(0);
-		shader.update(terrainTransform, camera);
+		shader.update(&terrainTransform, &camera);
 		terrain->draw();
 
 		skyShader.bind();

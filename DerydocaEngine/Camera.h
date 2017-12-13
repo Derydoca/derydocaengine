@@ -19,7 +19,7 @@ public:
 	}
 	~Camera();
 
-	inline glm::mat4 getViewProjection() const { return m_perspective * m_transform->getModel(); }
+	inline glm::mat4 getViewProjection() const { return m_perspective * m_transform->getOtherModel(); }
 	inline glm::mat4 getRotationProjection() const { return m_perspective * glm::mat4_cast(m_transform->getQuat()); }
 	
 	inline void setFov(float fov)
