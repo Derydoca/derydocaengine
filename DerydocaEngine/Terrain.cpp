@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include "Shader.h"
 
 Terrain::Terrain(const std::string & fileName, float unitScale, float heightScale) :
 	m_unitScale(unitScale),

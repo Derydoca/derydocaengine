@@ -4,6 +4,11 @@ WasdMover::~WasdMover()
 {
 }
 
+void WasdMover::init()
+{
+	m_transform = getGameObject()->getTransform();
+}
+
 void WasdMover::update(float deltaTime) {
 
 	// Set the mouse to relative mode when the right mouse button is down

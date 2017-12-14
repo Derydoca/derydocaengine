@@ -1,5 +1,7 @@
 #include "MeshRenderer.h"
 #include "GameObject.h"
+#include "Shader.h"
+#include "Texture.h"
 
 MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) :
 	m_mesh(mesh),

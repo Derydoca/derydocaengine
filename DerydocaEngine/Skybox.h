@@ -5,6 +5,7 @@ class Skybox
 {
 public:
 	Skybox();
+	Skybox(float size);
 	~Skybox();
 
 	Mesh* getMesh() { return m_mesh; };

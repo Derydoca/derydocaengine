@@ -4,12 +4,13 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Key.h"
+#include "GameComponent.h"
+#include "GameObject.h"
 
-class WasdMover
+class WasdMover : public GameComponent
 {
 public:
-	WasdMover(Transform* transform, Keyboard* keyboard, Mouse* mouse) :
-		m_transform(transform),
+	WasdMover(Keyboard* keyboard, Mouse* mouse) :
 		m_keyboard(keyboard),
 		m_mouse(mouse),
 		m_moveSpeed(5.0f),
@@ -24,6 +25,7 @@ public:
 	}
 	~WasdMover();
 
+	void init();
 	void update(float deltaTime);
 private:
 	Transform* m_transform;

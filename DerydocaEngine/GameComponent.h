@@ -1,18 +1,15 @@
 #pragma once
 
-
-#include "Camera.h"
-//#include "GameObject.h"
-
 class GameObject;
 class MatrixStack;
+class Camera;
 
 class GameComponent {
 public:
-	virtual void init() {};
-	virtual void update(float deltaTime) = 0;
-	virtual void render(Camera* camera, MatrixStack* matrixStack) = 0;
-	virtual void postRender() = 0;
+	virtual void init() {}
+	virtual void update(float deltaTime) {}
+	virtual void render(Camera* camera, MatrixStack* matrixStack) {}
+	virtual void postRender() {}
 	inline void setGameObject(GameObject* gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }
 private:

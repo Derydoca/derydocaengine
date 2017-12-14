@@ -13,7 +13,6 @@ public:
 	Display(int width, int height, const std::string& title);
 	virtual ~Display();
 
-	void clear(float r, float g, float b, float a);
 	void update();
 	bool isClosed();
 	inline float getAspectRatio() { return (float)m_width / (float)m_height; }

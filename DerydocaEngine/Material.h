@@ -1,6 +1,9 @@
 #pragma once
-#include "Shader.h"
-#include "Texture.h"
+//#include "Shader.h"
+//#include "Texture.h"
+
+class Shader;
+class Texture;
 
 class Material
 {

@@ -11,7 +11,6 @@
 #include "DebugVisualizer.h"
 #include "Keyboard.h"
 #include "WasdMover.h"
-#include "CubeMap.h"
 #include "Skybox.h"
 #include "ScreenshotUtil.h"
 #include "Terrain.h"
@@ -21,14 +20,15 @@
 #include "Material.h"
 #include "MatrixStack.h"
 #include "Rotator.h"
+#include "CameraManager.h"
 
 int main()
 {
-	EngineSettings* settings = new EngineSettings();
-
 	// Initialize the clock to this machine
 	Clock::init();
 	Clock* clock = new Clock();
+
+	EngineSettings* settings = new EngineSettings();
 
 	Keyboard* keyboard = new Keyboard();
 	keyboard->init();
@@ -38,34 +38,31 @@ int main()
 	Display display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
-	Shader skyShader("../res/cubemapShader");
-	Texture texture("../res/rebel.jpg");
-
-	Transform cameraTransform(settings->getCamPos());
-	Camera camera(&cameraTransform, settings->getFOV(), display.getAspectRatio(), 0.01f, 1000.0f);
-	WasdMover mover(&cameraTransform, keyboard, mouse);
-
-	CubeMap sky = CubeMap("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
-	Skybox* skybox = new Skybox();
-
-	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(&display, keyboard);
-	
 	DebugVisualizer dVis;
-
-	glm::vec3 camPos = cameraTransform.getPos();
 
 	//---
 
 	Shader shader("../res/basicShader");
 
 	GameObject* goRoot = new GameObject();
+	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(&display, keyboard);
 	goRoot->addComponent(screenshotUtil);
 
-	Texture grassTexture("../res/grass.png");
-	Material* matTerrain = new Material();
-	matTerrain->setShader(&shader);
-	matTerrain->setTextureSlot(0, &texture);
+	GameObject* goCamera = new GameObject();
+	Shader skyShader("../res/cubemapShader");
+	Texture* sky = new Texture("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
+	Material* skyMaterial = new Material();
+	skyMaterial->setShader(&skyShader);
+	skyMaterial->setTextureSlot(0, sky);
+	Camera camera(settings->getFOV(), display.getAspectRatio(), 0.01f, 1000.0f);
+	camera.setSkybox(skyMaterial);
+	camera.setClearType(Camera::ClearType::SkyboxClear);
+	WasdMover mover(keyboard, mouse);
+	goCamera->addComponent(&camera);
+	goCamera->addComponent(&mover);
+	goRoot->addChild(goCamera);
 
+	Texture grassTexture("../res/grass.png");
 	Terrain* terrain = new Terrain("../res/heightmap2.png", 0.2f, 15.0f);
 	terrain->setTextureSlot(0, &grassTexture);
 	GameObject* goTerrain = new GameObject();
@@ -75,6 +72,7 @@ int main()
 
 	MatrixStack* matStack = new MatrixStack();
 
+	Texture texture("../res/rebel.jpg");
 	Material* matSquirrel = new Material();
 	matSquirrel->setShader(&shader);
 	matSquirrel->setTextureSlot(0, &texture);
@@ -110,20 +108,14 @@ int main()
 	goRoot->init();
 
 	while (!display.isClosed()) {
-		// Clear the display buffer
-		display.clear(0.0f, 0.0f, 1.0f, 1.0f);
-
-		// Simple camera movement
-		mover.update(clock->getDeltaTime());
 
 		goRoot->update(clock->getDeltaTime());
-		goRoot->render(&camera, matStack);
+		for each (Camera* cam in CameraManager::getInstance().getCameras())
+		{
+			camera.clear();
+			goRoot->render(cam, matStack);
+		}
 		goRoot->postRender();
-
-		skyShader.bind();
-		sky.bind(0);
-		skyShader.update(camera.getRotationProjection());
-		skybox->getMesh()->draw();
 
 		dVis.draw(camera.getViewProjection());
 

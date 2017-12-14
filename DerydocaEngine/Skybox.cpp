@@ -7,6 +7,10 @@ Skybox::Skybox()
 	buildMesh(100.0f);
 }
 
+Skybox::Skybox(float size)
+{
+	buildMesh(size);
+}
 
 Skybox::~Skybox()
 {
