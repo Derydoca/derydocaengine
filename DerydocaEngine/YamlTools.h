@@ -15,7 +15,7 @@ public:
 		}
 	}
 
-	static int getFloat(YAML::Node node, std::string name, float defaultValue = 0) {
+	static float getFloat(YAML::Node node, std::string name, float defaultValue = 0) {
 		if (node[name])
 		{
 			return node[name].as<std::float_t>();
@@ -25,26 +25,6 @@ public:
 			return defaultValue;
 		}
 	}
-
-	//static glm::vec3 getVec3(
-	//	YAML::Node node,
-	//	std::string name,
-	//	glm::vec3 defaultValue)
-	//{
-	//	if (node[name] && node[name].IsSequence() && node[name].size() == 3)
-	//	{
-	//		YAML::Node vecNode = node[name];
-	//		return glm::vec3(
-	//			vecNode[0].as<float>(),
-	//			vecNode[1].as<float>(),
-	//			vecNode[2].as<float>()
-	//		);
-	//	}
-	//	else
-	//	{
-	//		return defaultValue;
-	//	}
-	//}
 
 };
 

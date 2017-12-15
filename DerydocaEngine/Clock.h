@@ -1,15 +1,16 @@
 #pragma once
 #include <sdl2\SDL.h>
+#include "glm\glm.hpp"
 
 class Clock
 {
 public:
 	//Clock(float startTimeSeconds = 0.0f);
 	Clock();
-	Clock(unsigned long startCycle);
+	Clock(Uint64 startCycle);
 	~Clock();
 
-	inline unsigned long getTimeCycles() const { return m_timeCycles; }
+	inline Uint64 getTimeCycles() const { return m_timeCycles; }
 	inline void setPaused(bool wantPaused) { m_paused = wantPaused; }
 	inline bool isPaused() const { return m_paused; };
 	inline void setTimeScale(float scale) { m_timeScale = scale; }
@@ -23,29 +24,29 @@ public:
 	void update(float dtRealSeconds);
 	void singleStep();
 
-	static inline unsigned long secondsToCycles(float timeSeconds) {
-		return (unsigned long)(timeSeconds * s_cyclesPerSecond);
+	static inline Uint64 secondsToCycles(float timeSeconds) {
+		return (Uint64)(timeSeconds * s_cyclesPerSecond);
 	}
 
-	static inline float cyclesToSeconds(unsigned long timeCycles) {
+	static inline float cyclesToSeconds(Uint64 timeCycles) {
 		return (float)timeCycles / s_cyclesPerSecond;
 	}
 
-	unsigned long getRenderTime() {
-		unsigned long ticks = SDL_GetPerformanceCounter() - m_lastFrameCycle;
-		return cyclesToSeconds(ticks);
+	Uint64 getRenderTimeMS() {
+		Uint64 ticks = SDL_GetPerformanceCounter() - m_lastFrameCycle;
+		return (int)(cyclesToSeconds(ticks) / 1000);
 	}
 
 private:
 
 	static float s_cyclesPerSecond;
 
-	unsigned long m_timeCycles;
+	Uint64 m_timeCycles;
 	float m_timeScale;
 	bool m_paused;
 	float m_deltaTime;
-	unsigned long m_startCycle;
-	unsigned long m_lastFrameCycle;
+	Uint64 m_startCycle;
+	Uint64 m_lastFrameCycle;
 
 };
 

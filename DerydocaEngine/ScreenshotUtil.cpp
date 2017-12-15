@@ -35,12 +35,3 @@ void ScreenshotUtil::postRender()
 		}
 	}
 }
-
-void ScreenshotUtil::update(float deltaTime)
-{
-}
-
-void ScreenshotUtil::render(Camera* camera, MatrixStack* matrixStack)
-{
-
-}

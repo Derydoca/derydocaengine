@@ -3,8 +3,9 @@
 #include <GL/glew.h>
 #include "DebugLine.h"
 #include "Shader.h"
+#include "GameComponent.h"
 
-class DebugVisualizer
+class DebugVisualizer : public GameComponent
 {
 public:
 	DebugVisualizer();
@@ -12,7 +13,7 @@ public:
 
 	void draw(glm::mat4 worldMatrix);
 
-	void addLine(glm::vec3 start, glm::vec3 end);
+	void postRender();
 private:
 	void clear();
 	

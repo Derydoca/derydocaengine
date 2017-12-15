@@ -14,8 +14,6 @@ Keyboard::~Keyboard()
 void Keyboard::init()
 {
 	SDL_GetKeyboardState(NULL);
-
-	//m_keys = new Key[m_numkeys];
 }
 
 void Keyboard::update()
@@ -41,7 +39,7 @@ bool Keyboard::isKeyDownFrame(int keycode)
 	if (keycode >= m_numkeys) {
 		return false;
 	}
-	m_keys[keycode].isDownFrame();
+	return m_keys[keycode].isDownFrame();
 }
 
 bool Keyboard::isKeyUpFrame(int keycode)
@@ -49,7 +47,7 @@ bool Keyboard::isKeyUpFrame(int keycode)
 	if (keycode >= m_numkeys) {
 		return false;
 	}
-	m_keys[keycode].isUpFrame();
+	return m_keys[keycode].isUpFrame();
 }
 
 void Keyboard::setKeyState(int keycode, bool isDown)

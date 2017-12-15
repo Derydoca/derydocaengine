@@ -65,10 +65,6 @@ Terrain::~Terrain()
 	delete(m_mesh);
 }
 
-void Terrain::init()
-{
-}
-
 void Terrain::draw()
 {
 	m_mesh->draw();
@@ -127,15 +123,7 @@ void Terrain::setTextureSlot(int slot, Texture * texture)
 	m_meshRenderer->getMaterial()->setTextureSlot(slot, texture);
 }
 
-void Terrain::render(Camera * camera, MatrixStack * matrixStack)
+void Terrain::render(MatrixStack * matrixStack)
 {
-	m_meshRenderer->render(camera, matrixStack);
-}
-
-void Terrain::update(float deltaTime)
-{
-}
-
-void Terrain::postRender()
-{
+	m_meshRenderer->render(matrixStack);
 }

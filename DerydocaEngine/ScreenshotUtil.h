@@ -13,8 +13,6 @@ public:
 	ScreenshotUtil(Display* display, Keyboard* keyboard);
 	~ScreenshotUtil();
 
-	void update(float deltaTime);
-	void render(Camera* camera, MatrixStack* matrixStack);
 	void postRender();
 private:
 	Keyboard* m_keyboard;

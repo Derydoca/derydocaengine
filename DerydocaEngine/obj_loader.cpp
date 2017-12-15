@@ -24,6 +24,7 @@ OBJModel::OBJModel(const std::string& fileName)
 		{
 			getline(file, line);
 
+#pragma warning( disable : 4267)
 			unsigned int lineLength = line.length();
 
 			if (lineLength < 2)
@@ -81,6 +82,7 @@ IndexedModel OBJModel::ToIndexedModel()
 	IndexedModel result;
 	IndexedModel normalModel;
 
+#pragma warning( disable : 4267)
 	unsigned int numIndices = OBJIndices.size();
 
 	std::vector<OBJIndex*> indexLookup;
@@ -161,6 +163,7 @@ IndexedModel OBJModel::ToIndexedModel()
 unsigned int OBJModel::FindLastVertexIndex(const std::vector<OBJIndex*>& indexLookup, const OBJIndex* currentIndex, const IndexedModel& result)
 {
 	unsigned int start = 0;
+#pragma warning( disable : 4267)
 	unsigned int end = indexLookup.size();
 	unsigned int current = (end - start) / 2 + start;
 	unsigned int previous = start;
@@ -259,6 +262,7 @@ void OBJModel::CreateOBJFace(const std::string& line)
 
 OBJIndex OBJModel::ParseOBJIndex(const std::string& token, bool* hasUVs, bool* hasNormals)
 {
+#pragma warning( disable : 4267)
 	unsigned int tokenLength = token.length();
 	const char* tokenString = token.c_str();
 
@@ -293,6 +297,7 @@ OBJIndex OBJModel::ParseOBJIndex(const std::string& token, bool* hasUVs, bool* h
 
 glm::vec3 OBJModel::ParseOBJVec3(const std::string& line)
 {
+#pragma warning( disable : 4267)
 	unsigned int tokenLength = line.length();
 	const char* tokenString = line.c_str();
 
@@ -326,6 +331,7 @@ glm::vec3 OBJModel::ParseOBJVec3(const std::string& line)
 
 glm::vec2 OBJModel::ParseOBJVec2(const std::string& line)
 {
+#pragma warning( disable : 4267)
 	unsigned int tokenLength = line.length();
 	const char* tokenString = line.c_str();
 
@@ -375,6 +381,7 @@ static inline unsigned int ParseOBJIndexValue(const std::string& token, unsigned
 
 static inline float ParseOBJFloatValue(const std::string& token, unsigned int start, unsigned int end)
 {
+#pragma warning( disable : 4244)
 	return atof(token.substr(start, end - start).c_str());
 }
 
@@ -383,6 +390,7 @@ static inline std::vector<std::string> SplitString(const std::string &s, char de
 	std::vector<std::string> elems;
 
 	const char* cstr = s.c_str();
+#pragma warning( disable : 4267)
 	unsigned int strLength = s.length();
 	unsigned int start = 0;
 	unsigned int end = 0;

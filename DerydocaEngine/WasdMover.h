@@ -18,13 +18,13 @@ public:
 		m_mouseSensitivityY(0.005f),
 		m_fastMoveMultiplier(2.0f),
 		m_slowMoveMultiplier(0.5f),
-		m_minXRot(-1.0f),
-		m_maxXRot(1.0f)
+		m_minXRot(-glm::half_pi<float>()),
+		m_maxXRot(glm::half_pi<float>())
 	{
 		m_rmb = m_mouse->getKey(2);
 	}
 	~WasdMover();
-
+	
 	void init();
 	void update(float deltaTime);
 private:

@@ -1,29 +1,34 @@
-#include <iostream>
-#include <GL/glew.h>
 #include "Display.h"
+#include "Clock.h"
+#include "Keyboard.h"
+#include "EngineSettings.h"
+#include "GameObject.h"
+#include "CameraManager.h"
+
+#if _DEBUG
+// Debug only headers
+#include "DebugVisualizer.h"
+#endif
+
+// TODO: remove these header files after scene loading is implemented
 #include "Mesh.h"
 #include "Shader.h"
-#include "Texture.h"
 #include "Transform.h"
 #include "Camera.h"
-#include "Clock.h"
-#include "ButtonState.h"
-#include "DebugVisualizer.h"
-#include "Keyboard.h"
+#include "Texture.h"
 #include "WasdMover.h"
 #include "Skybox.h"
 #include "ScreenshotUtil.h"
 #include "Terrain.h"
-#include "EngineSettings.h"
-#include "GameObject.h"
 #include "MeshRenderer.h"
 #include "Material.h"
-#include "MatrixStack.h"
 #include "Rotator.h"
-#include "CameraManager.h"
+#include "ButtonState.h"
 
 int main()
 {
+	ButtonState* bs = new ButtonState(0);
+
 	// Initialize the clock to this machine
 	Clock::init();
 	Clock* clock = new Clock();
@@ -38,8 +43,6 @@ int main()
 	Display display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
-	DebugVisualizer dVis;
-
 	//---
 
 	Shader shader("../res/basicShader");
@@ -47,6 +50,11 @@ int main()
 	GameObject* goRoot = new GameObject();
 	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(&display, keyboard);
 	goRoot->addComponent(screenshotUtil);
+
+#if _DEBUG
+	DebugVisualizer dVis;
+	goRoot->addComponent(&dVis);
+#endif
 
 	GameObject* goCamera = new GameObject();
 	Shader skyShader("../res/cubemapShader");
@@ -56,7 +64,7 @@ int main()
 	skyMaterial->setTextureSlot(0, sky);
 	Camera camera(settings->getFOV(), display.getAspectRatio(), 0.01f, 1000.0f);
 	camera.setSkybox(skyMaterial);
-	camera.setClearType(Camera::ClearType::SkyboxClear);
+	camera.setClearMode(Camera::ClearMode::SkyboxClear);
 	WasdMover mover(keyboard, mouse);
 	goCamera->addComponent(&camera);
 	goCamera->addComponent(&mover);
@@ -69,8 +77,6 @@ int main()
 	goTerrain->getTransform()->setPos(glm::vec3(-50.0f, -3.0f, -50.0f));
 	goTerrain->addComponent(terrain);
 	goRoot->addChild(goTerrain);
-
-	MatrixStack* matStack = new MatrixStack();
 
 	Texture texture("../res/rebel.jpg");
 	Material* matSquirrel = new Material();
@@ -110,20 +116,14 @@ int main()
 	while (!display.isClosed()) {
 
 		goRoot->update(clock->getDeltaTime());
-		for each (Camera* cam in CameraManager::getInstance().getCameras())
-		{
-			camera.clear();
-			goRoot->render(cam, matStack);
-		}
+		CameraManager::getInstance().render(goRoot);
 		goRoot->postRender();
-
-		dVis.draw(camera.getViewProjection());
 
 		display.update();
 		mouse->update();
 
 		// Pause the code execution if we are running faster than our capped frame rate
-		unsigned long msToWait = (unsigned long)(minFrameTime - (clock->getRenderTime() * 1000.0f));
+		unsigned long msToWait = (unsigned long)(minFrameTime - clock->getRenderTimeMS());
 		if (msToWait > 0) {
 			if (msToWait > minFrameTime) {
 				msToWait = minFrameTime;

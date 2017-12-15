@@ -37,7 +37,7 @@ Mesh::~Mesh()
 
 void Mesh::InitMesh(const IndexedModel & model)
 {
-	m_drawCount = model.indices.size();
+	m_drawCount = static_cast<unsigned int>(model.indices.size());
 
 	glGenVertexArrays(1, &m_vertexArrayObject);
 	glBindVertexArray(m_vertexArrayObject);

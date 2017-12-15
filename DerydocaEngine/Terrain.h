@@ -21,10 +21,7 @@ public:
 
 	void setTextureSlot(int slot, Texture* texture);
 
-	void init();
-	void render(Camera* camera, MatrixStack* matrixStack);
-	void update(float deltaTime);
-	void postRender();
+	void render(MatrixStack* matrixStack);
 private:
 	int m_width;
 	int m_depth;

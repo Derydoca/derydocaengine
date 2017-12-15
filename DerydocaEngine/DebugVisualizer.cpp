@@ -1,4 +1,5 @@
 #include "DebugVisualizer.h"
+#include "CameraManager.h"
 
 DebugVisualizer::DebugVisualizer()
 {
@@ -40,8 +41,9 @@ void DebugVisualizer::draw(glm::mat4 worldMatrix)
 	glEnd();
 }
 
-void DebugVisualizer::addLine(glm::vec3 start, glm::vec3 end)
+void DebugVisualizer::postRender()
 {
+	draw(CameraManager::getInstance().getCurrentCamera()->getViewProjection());
 }
 
 void DebugVisualizer::clear()

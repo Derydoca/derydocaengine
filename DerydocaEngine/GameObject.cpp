@@ -9,17 +9,17 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::render(Camera* camera, MatrixStack* matrixStack) {
+void GameObject::render(MatrixStack* matrixStack) {
 	matrixStack->push(m_transform.getModel());
 
 	for each (GameComponent* c in m_components)
 	{
-		c->render(camera, matrixStack);
+		c->render(matrixStack);
 	}
 
 	for each (GameObject* go in m_children)
 	{
-		go->render(camera, matrixStack);
+		go->render(matrixStack);
 	}
 
 	matrixStack->pop();

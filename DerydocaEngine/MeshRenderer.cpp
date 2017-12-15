@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "CameraManager.h"
 
 MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) :
 	m_mesh(mesh),
@@ -13,23 +14,10 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-void MeshRenderer::render(Camera* camera, MatrixStack* matrixStack)
+void MeshRenderer::render(MatrixStack* matrixStack)
 {
-	//assert(m_material);
-	//m_material->getShader()->bind();
-
 	m_material->bind();
-	glm::mat4 newMatrix = camera->getViewProjection() * matrixStack->getMatrix();
-	//m_material->getShader()->update(getGameObject()->getTransform(), camera);
+	glm::mat4 newMatrix = CameraManager::getInstance().getCurrentCamera()->getViewProjection() * matrixStack->getMatrix();
 	m_material->getShader()->update(newMatrix);
 	m_mesh->draw();
-}
-
-void MeshRenderer::update(float deltaTime)
-{
-
-}
-
-void MeshRenderer::postRender()
-{
 }
