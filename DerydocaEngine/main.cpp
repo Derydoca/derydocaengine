@@ -24,6 +24,7 @@
 #include "Material.h"
 #include "Rotator.h"
 #include "ButtonState.h"
+#include "RenderTexture.h"
 
 int main()
 {
@@ -63,12 +64,27 @@ int main()
 	skyMaterial->setShader(&skyShader);
 	skyMaterial->setTextureSlot(0, sky);
 	Camera camera(settings->getFOV(), display.getAspectRatio(), 0.01f, 1000.0f);
+	camera.setDisplay(&display);
 	camera.setSkybox(skyMaterial);
 	camera.setClearMode(Camera::ClearMode::SkyboxClear);
 	WasdMover mover(keyboard, mouse);
 	goCamera->addComponent(&camera);
 	goCamera->addComponent(&mover);
 	goRoot->addChild(goCamera);
+
+	RenderTexture* renderTexture = new RenderTexture(512, 512);
+	Camera* renderTextureCam = new Camera(70.0f, renderTexture->getAspectRatio(), 0.01f, 1000.0f);
+	renderTextureCam->setDisplay(&display);
+	renderTextureCam->setSkybox(skyMaterial);
+	renderTextureCam->setClearMode(Camera::ClearMode::SkyboxClear);
+	renderTextureCam->setRenderTexture(renderTexture);
+	renderTextureCam->setDisplayRect(0.5, 0.5, 0.5, 0.5);
+	GameObject* goRenderTexture = new GameObject();
+	Transform* renderTexCamTrans = goRenderTexture->getTransform();
+	renderTexCamTrans->setPos(glm::vec3(0, -1.0f, -5.0f));
+	renderTexCamTrans->setEulerAngles(glm::vec3(0.25f, 0.0f, 0.0f));
+	goRenderTexture->addComponent(renderTextureCam);
+	goRoot->addChild(goRenderTexture);
 
 	Texture grassTexture("../res/grass.png");
 	Terrain* terrain = new Terrain("../res/heightmap2.png", 0.2f, 15.0f);
@@ -77,6 +93,18 @@ int main()
 	goTerrain->getTransform()->setPos(glm::vec3(-50.0f, -3.0f, -50.0f));
 	goTerrain->addComponent(terrain);
 	goRoot->addChild(goTerrain);
+
+	GameObject* goRenderTextureScreen = new GameObject();
+	Transform* rtScreenTrans = goRenderTextureScreen->getTransform();
+	rtScreenTrans->setPos(glm::vec3(0.0f, 5.0f, 0.0f));
+	rtScreenTrans->setEulerAngles(glm::vec3(90.0f, 0, 0));
+	Mesh* plane = new Mesh("../res/plane.obj");
+	Material* renderTextureMaterial = new Material();
+	renderTextureMaterial->setShader(&shader);
+	renderTextureMaterial->setTextureSlot(0, renderTexture);
+	MeshRenderer* planeRenderer = new MeshRenderer(plane, renderTextureMaterial);
+	goRenderTextureScreen->addComponent(planeRenderer);
+	goRoot->addChild(goRenderTextureScreen);
 
 	Texture texture("../res/rebel.jpg");
 	Material* matSquirrel = new Material();

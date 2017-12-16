@@ -26,12 +26,14 @@ void ScreenshotUtil::postRender()
 		std::string file = "c:/test/ss_" + std::string(s) + ".bmp";
 
 		// Save the file
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, 800, 600);
 		int result = SOIL_save_screenshot(file.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, m_display->getWidth(), m_display->getHeight());
 		if (result == 0) {
-			printf("Unable to save screenshot. Error code: " + result);
+			printf("Unable to save screenshot.\n");
 		}
 		else {
-			printf("Screenshot saved!");
+			printf("Screenshot saved!\n");
 		}
 	}
 }

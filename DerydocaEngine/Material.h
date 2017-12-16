@@ -2,6 +2,7 @@
 
 class Shader;
 class Texture;
+class RenderTexture;
 
 class Material
 {

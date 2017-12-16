@@ -14,10 +14,12 @@ Camera::Camera(float fov, float aspect, float zNear, float zFar) :
 
 	m_skybox = new Skybox();
 	m_matrixStack = new MatrixStack();
+	m_displayRect = new Rectangle();
 }
 
 Camera::~Camera()
 {
+	delete(m_displayRect);
 	// TODO: Figure out why deleting the matrix stack is creating a compiler error
 	//delete(m_matrixStack);
 	delete(m_skybox);
@@ -27,6 +29,14 @@ Camera::~Camera()
 void Camera::init()
 {
 	m_transform = getGameObject()->getTransform();
+}
+
+void Camera::setDisplayRect(float x, float y, float w, float h)
+{
+	m_displayRect->setX(x);
+	m_displayRect->setY(x);
+	m_displayRect->setWidth(x);
+	m_displayRect->setHeight(x);
 }
 
 void Camera::setFov(float fov)
@@ -59,6 +69,26 @@ void Camera::clear()
 
 void Camera::renderRoot(GameObject* gameObject)
 {
+	int textureW, textureH = 1;
+
+	if (m_renderTexture)
+	{
+		m_renderTexture->bindAsRenderTexture();
+		textureW = m_renderTexture->getWidth();
+		textureH = m_renderTexture->getHeight();
+	}
+	else
+	{
+		m_display->bindAsRenderTarget();
+		textureW = m_display->getWidth();
+		textureH = m_display->getHeight();
+	}
+
+	glViewport(
+		textureW * m_displayRect->getX(),
+		textureH * m_displayRect->getY(),
+		textureW * m_displayRect->getWidth(),
+		textureH * m_displayRect->getHeight());
 	clear();
 	gameObject->render(m_matrixStack);
 }

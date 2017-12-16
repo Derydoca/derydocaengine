@@ -4,6 +4,12 @@
 #include "SOIL.h"
 #include "GLError.h"
 
+Texture::Texture()
+{
+	m_texture = 0;
+	m_textureType = GL_TEXTURE_2D;
+}
+
 Texture::Texture(const std::string& fileName)
 {
 	/* load an image file directly as a new OpenGL texture */

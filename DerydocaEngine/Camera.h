@@ -6,6 +6,9 @@
 #include "Skybox.h"
 #include "Color.h"
 #include "Material.h"
+#include "RenderTexture.h"
+#include "Display.h"
+#include "Rectangle.h"
 
 class MatrixStack;
 
@@ -87,7 +90,10 @@ public:
 	*/
 	void renderRoot(GameObject* root);
 
+	void setDisplay(Display* display) { m_display = display; }
+	void setRenderTexture(RenderTexture* renderTexture) { m_renderTexture = renderTexture; }
 	void init();
+	void setDisplayRect(float x, float y, float w, float h);
 private:
 	float m_fov, m_aspect, m_zNear, m_zFar;
 	glm::mat4 m_perspective;
@@ -97,6 +103,9 @@ private:
 	ClearMode m_clearMode = NoClear;
 	Material* m_skyboxMaterial;
 	MatrixStack* m_matrixStack;
+	RenderTexture* m_renderTexture;
+	Display* m_display;
+	Rectangle* m_displayRect;
 
 	void clear();
 	inline void recalcPerspectiveMatrix() { m_perspective = glm::perspective(m_fov, m_aspect, m_zNear, m_zFar); }

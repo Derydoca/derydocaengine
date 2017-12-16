@@ -146,13 +146,13 @@
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="obj_loader.cpp" />
+    <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Rotator.cpp" />
     <ClCompile Include="ScreenshotUtil.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WasdMover.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +178,8 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="obj_loader.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Rotator.h" />
     <ClInclude Include="ScreenshotUtil.h" />
     <ClInclude Include="Shader.h" />

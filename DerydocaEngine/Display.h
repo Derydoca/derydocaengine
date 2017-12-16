@@ -20,6 +20,8 @@ public:
 
 	inline int getWidth() const { return m_width; }
 	inline int getHeight() const { return m_height; }
+
+	void bindAsRenderTarget();
 private:
 	Display(const Display& other) {}
 	Display& operator=(const Display& other) {}

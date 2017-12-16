@@ -1,11 +1,8 @@
 #include "Mouse.h"
 
-
-
 Mouse::Mouse()
 {
 }
-
 
 Mouse::~Mouse()
 {
@@ -27,6 +24,7 @@ void Mouse::update()
 	// Query the mouse for it's current position
 	unsigned int buttonMask = SDL_GetMouseState(&m_currentPos.x, &m_currentPos.y);
 
+	// Update the mouse's button states
 	for (int i = 0; i < 5; i++)
 	{
 		m_keys[i].setState(buttonMask & SDL_BUTTON(i+1));

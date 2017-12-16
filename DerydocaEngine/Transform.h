@@ -2,10 +2,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "LinkedList.h"
 
-// TODO: Define the methods in the cpp file
-class Transform
+struct Transform
 {
 public:
 
@@ -37,6 +35,8 @@ public:
 	{
 	}
 
+	~Transform() {};
+
 	inline glm::mat4 getModel() const { return glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale); }
 	inline glm::mat4 getOtherModel() const { return glm::scale(m_scale) * glm::mat4_cast(m_quat) * glm::translate(m_pos); }
 
@@ -48,13 +48,8 @@ public:
 	inline void setEulerAngles(const glm::vec3& euler) { m_quat = glm::fquat(euler); }
 	inline void setQuat(const glm::fquat& quat) { m_quat = quat; }
 	inline void setScale(const glm::vec3& scale) { m_scale = scale; }
-
-	void addChild(Transform* child);
-
-	~Transform();
 private:
 	glm::vec3 m_pos;
 	glm::vec3 m_scale;
 	glm::fquat m_quat;
-	LinkedList<Transform> m_children;
 };

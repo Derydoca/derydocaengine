@@ -49,6 +49,11 @@ bool Display::isClosed() {
 	return m_isClosed;
 }
 
+void Display::bindAsRenderTarget()
+{
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+}
+
 void Display::update() {
 	SDL_GL_SwapWindow(m_window);
 
