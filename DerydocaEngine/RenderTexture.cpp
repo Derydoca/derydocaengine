@@ -2,7 +2,24 @@
 #include <iostream>
 #include <cassert>
 
+RenderTexture::RenderTexture()
+{
+
+}
+
 RenderTexture::RenderTexture(int width, int height)
+{
+	initializeTexture(width, height);
+}
+
+RenderTexture::~RenderTexture()
+{
+	if(m_depthbuffer) glDeleteRenderbuffers(1, &m_depthbuffer);
+	if(m_texture) glDeleteTextures(1, &m_texture);
+	if(m_framebuffer) glDeleteFramebuffers(1, &m_framebuffer);
+}
+
+void RenderTexture::initializeTexture(int width, int height)
 {
 	m_width = width;
 	m_height = height;
@@ -26,13 +43,6 @@ RenderTexture::RenderTexture(int width, int height)
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 		printf("UNABLE TO CREATE RENDER TEXTURE!");
 	}
-}
-
-RenderTexture::~RenderTexture()
-{
-	glDeleteRenderbuffers(1, &m_depthbuffer);
-	glDeleteTextures(1, &m_texture);
-	glDeleteFramebuffers(1, &m_framebuffer);
 }
 
 void RenderTexture::bind(unsigned int unit)

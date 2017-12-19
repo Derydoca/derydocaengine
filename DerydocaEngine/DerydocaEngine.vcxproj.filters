@@ -74,6 +74,7 @@
     <ClCompile Include="DebugVisualizer.cpp">
       <Filter>Engine\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="Oculus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -181,6 +182,7 @@
     <ClInclude Include="GLError.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Oculus.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

@@ -4,6 +4,7 @@
 #include "EngineSettings.h"
 #include "GameObject.h"
 #include "CameraManager.h"
+#include "Oculus.h"
 
 #if _DEBUG
 // Debug only headers
@@ -71,6 +72,8 @@ int main()
 	goCamera->addComponent(&camera);
 	goCamera->addComponent(&mover);
 	goRoot->addChild(goCamera);
+	Oculus* oculus = new Oculus();
+	goRoot->addComponent(oculus);
 
 	RenderTexture* renderTexture = new RenderTexture(512, 512);
 	Camera* renderTextureCam = new Camera(70.0f, renderTexture->getAspectRatio(), 0.01f, 1000.0f);

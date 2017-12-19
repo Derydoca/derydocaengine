@@ -92,7 +92,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;SOIL.lib;libyaml-cppmdd.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;SOIL.lib;libyaml-cppmdd.lib;LibOVR.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <LinkTimeCodeGeneration>
@@ -146,6 +146,7 @@
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="obj_loader.cpp" />
+    <ClCompile Include="Oculus.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Rotator.cpp" />
     <ClCompile Include="ScreenshotUtil.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="obj_loader.h" />
+    <ClInclude Include="Oculus.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Rotator.h" />
