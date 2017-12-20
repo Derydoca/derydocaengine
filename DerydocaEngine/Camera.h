@@ -46,7 +46,11 @@ public:
 
 	@return VP matrix
 	*/
-	inline glm::mat4 getViewProjection() const { return m_perspective * m_transform->getOtherModel(); }
+	inline glm::mat4 getViewProjectionMatrix() const { return m_perspective * m_transform->getOtherModel(); }
+
+	inline glm::mat4 getProjectionMatrix() const { return m_perspective; }
+
+	inline glm::mat4 getViewMatrix() const { return m_transform->getModel(); };
 
 	/*
 	Gets a matrix representing the camera's rotation and projection.

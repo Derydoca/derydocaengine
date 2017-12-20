@@ -1,6 +1,7 @@
 #include "Shader.h"
 #include <fstream>
 #include <iostream>
+#include "CameraManager.h"
 
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 static std::string LoadShader(const std::string& fileName);
@@ -8,6 +9,8 @@ static GLuint CreateShader(const std::string& text, GLenum shaderType);
 
 Shader::Shader(const std::string& fileName)
 {
+	printf("Loading shader: %s\n", fileName.c_str());
+
 	m_program = glCreateProgram();
 	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
 	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
@@ -16,9 +19,9 @@ Shader::Shader(const std::string& fileName)
 		glAttachShader(m_program, m_shaders[i]);
 	}
 
-	glBindAttribLocation(m_program, 0, "position");
+	glBindAttribLocation(m_program, 0, "VertexPosition");
 	glBindAttribLocation(m_program, 1, "texCoord");
-	glBindAttribLocation(m_program, 2, "normal");
+	glBindAttribLocation(m_program, 2, "VertexNormal");
 
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed: ");
@@ -26,7 +29,9 @@ Shader::Shader(const std::string& fileName)
 	glValidateProgram(m_program);
 	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-	m_uniforms[TRANSFORM_U] = glGetUniformLocation(m_program, "transform");
+	m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_program, "MVP");
+	m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_program, "ModelViewMatrix");
+	m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_program, "NormalMatrix");
 }
 
 Shader::~Shader()
@@ -44,15 +49,62 @@ void Shader::bind()
 	glUseProgram(m_program);
 }
 
-void Shader::update(const Transform * transform, const Camera * camera)
+void Shader::update(const MatrixStack * matrixStack)
 {
-	glm::mat4 model = camera->getViewProjection() * transform->getModel();
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &model[0][0]);
+	Camera* camera = CameraManager::getInstance().getCurrentCamera();
+
+	glm::mat4 mvpMatrix = camera->getViewProjectionMatrix() * matrixStack->getMatrix();
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, &mvpMatrix[0][0]);
+
+	glm::mat4 mvMatrix = camera->getViewMatrix() * matrixStack->getMatrix();
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_MV], 1, GL_FALSE, &mvMatrix[0][0]);
+
+	glm::mat4 normalMatrix = glm::mat3(matrixStack->getMatrix());
+	glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, &normalMatrix[0][0]);
 }
 
 void Shader::update(const glm::mat4 matrix)
 {
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_U], 1, GL_FALSE, &matrix[0][0]);
+	glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, &matrix[0][0]);
+}
+
+void Shader::setFloat(std::string name, float val)
+{
+	glUniform1f(getUniformName(name), val);
+}
+
+void Shader::setVec3(std::string name, glm::vec3 val)
+{
+	glUniform3f(getUniformName(name), val.x, val.y, val.z);
+}
+
+void Shader::setVec4(std::string name, glm::vec4 val)
+{
+	glUniform4f(getUniformName(name), val.x, val.y, val.z, val.w);
+}
+
+void Shader::setMat3(std::string name, glm::mat3 val)
+{
+	glUniformMatrix3fv(getUniformName(name), 1, GL_FALSE, &val[0][0]);
+}
+
+void Shader::setMat4(std::string name, glm::mat4 val)
+{
+	glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, &val[0][0]);
+}
+
+int Shader::getUniformName(std::string stringName)
+{
+	if (m_uniformLookup.count(stringName) != 0)
+	{
+		return m_uniformLookup[stringName];
+	}
+	else
+	{
+		int uniformName = glGetUniformLocation(m_program, stringName.c_str());
+		m_uniformLookup[stringName] = uniformName;
+		return uniformName;
+	}
 }
 
 static GLuint CreateShader(const std::string& text, GLenum shaderType) {

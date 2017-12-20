@@ -43,7 +43,7 @@ void DebugVisualizer::draw(glm::mat4 worldMatrix)
 
 void DebugVisualizer::postRender()
 {
-	draw(CameraManager::getInstance().getCurrentCamera()->getViewProjection());
+	draw(CameraManager::getInstance().getCurrentCamera()->getViewProjectionMatrix());
 }
 
 void DebugVisualizer::clear()

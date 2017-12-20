@@ -1,4 +1,7 @@
 #pragma once
+#include <map>
+#include "Color.h"
+#include "glm\glm.hpp"
 
 class Shader;
 class Texture;
@@ -13,10 +16,22 @@ public:
 	inline void setShader(Shader* shader) { m_shader = shader; }
 	inline Shader* getShader() const { return m_shader; }
 	void setTextureSlot(int slot, Texture* texture);
+	void setFloat(const std::string name, float value);
+	void setVec3(const std::string name, glm::vec3 value);
+	void setVec4(const std::string name, glm::vec4 value);
+	void setColorRGB(const std::string name, Color value);
+	void setColorRGBA(const std::string name, Color value);
+	void setMat3(const std::string name, glm::mat3 value);
+	void setMat4(const std::string name, glm::mat4 value);
 	void bind();
 private:
 	Shader* m_shader;
 	// TODO: Replace this with a BST for multiple textures
 	Texture* m_texture;
+	std::map<std::string, float> m_floatValues;
+	std::map<std::string, glm::vec3> m_vec3Values;
+	std::map<std::string, glm::vec4> m_vec4Values;
+	std::map<std::string, glm::mat3> m_mat3Values;
+	std::map<std::string, glm::mat4> m_mat4Values;
 };
 

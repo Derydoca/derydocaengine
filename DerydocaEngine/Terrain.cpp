@@ -1,5 +1,6 @@
 #include "Terrain.h"
 #include "Shader.h"
+#include "ShaderManager.h"
 
 Terrain::Terrain(const std::string & fileName, float unitScale, float heightScale) :
 	m_unitScale(unitScale),
@@ -27,7 +28,8 @@ Terrain::Terrain(const std::string & fileName, float unitScale, float heightScal
 
 	Shader* shader = new Shader("../res/basicShader");
 	Material* mat = new Material();
-	mat->setShader(shader);
+	//mat->setShader(shader);
+	mat->setShader(ShaderManager::getInstance().getPhong());
 	m_meshRenderer = new MeshRenderer(m_mesh, mat);
 }
 
@@ -56,7 +58,8 @@ Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
 
 	Shader* shader = new Shader("../res/basicShader");
 	Material* mat = new Material();
-	mat->setShader(shader);
+	//mat->setShader(shader);
+	mat->setShader(ShaderManager::getInstance().getPhong());
 	m_meshRenderer = new MeshRenderer(m_mesh, mat);
 }
 

@@ -12,6 +12,7 @@ public:
 	void operator=(ShaderManager const&) = delete;
 
 	Shader* getShadowShader() { return m_shadowShader; }
+	Shader* getPhong() { return m_phong; }
 private:
 	ShaderManager();
 	~ShaderManager();
@@ -23,5 +24,6 @@ private:
 	static ShaderManager m_instance;
 
 	Shader* m_shadowShader;
+	Shader* m_phong;
 };
 

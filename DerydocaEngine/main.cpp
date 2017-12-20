@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "CameraManager.h"
 #include "Oculus.h"
+#include "ShaderManager.h"
 
 #if _DEBUG
 // Debug only headers
@@ -46,6 +47,16 @@ int main()
 	Display display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 	display.setKeyboard(keyboard);
 
+	Mesh* sphereMesh = new Mesh("../res/plane.obj");
+
+	Material* mat = new Material();
+	{
+		Shader* shader = new Shader("../res/basicShader");
+		mat->setShader(shader);
+		Texture* grassTexture = new Texture("../res/grass.png");
+		mat->setTextureSlot(0, grassTexture);
+	}
+
 	//---
 
 	Shader shader("../res/basicShader");
@@ -69,6 +80,8 @@ int main()
 	camera.setDisplay(&display);
 	camera.setSkybox(skyMaterial);
 	camera.setClearMode(Camera::ClearMode::SkyboxClear);
+	//camera.setClearColor(Color(1, 1, 0));
+	//camera.setClearMode(Camera::ClearMode::ColorClear);
 	//camera.setProjectionMode(Camera::ProjectionMode::Orthographic);
 	WasdMover mover(keyboard, mouse);
 	goCamera->addComponent(&camera);
@@ -81,7 +94,10 @@ int main()
 	sunlight->setLightType(Light::LightType::Directional);
 	GameObject* goSunlight = new GameObject();
 	goSunlight->addComponent(sunlight);
+	goSunlight->getTransform()->setPos(glm::vec3(0, 1, 0));
 	goSunlight->getTransform()->setEulerAngles(glm::vec3(1.0f, 0.0f, 0.0f));
+	MeshRenderer* lightMesh = new MeshRenderer(sphereMesh, mat);
+	goSunlight->addComponent(lightMesh);
 
 	RenderTexture* renderTexture = new RenderTexture(512, 512);
 	Camera* renderTextureCam = new Camera(70.0f, renderTexture->getAspectRatio(), 0.01f, 1000.0f);
@@ -119,7 +135,33 @@ int main()
 
 	Texture texture("../res/rebel.jpg");
 	Material* matSquirrel = new Material();
+	matSquirrel->setColorRGB("Kd", Color(1, 0, 0, 0));
+	matSquirrel->setColorRGB("Ka", Color(0.1, 0.1, 0.1, 0));
+	matSquirrel->setColorRGB("Ks", Color(0, 0, 1, 0));
+	matSquirrel->setFloat("Shininess", 1.0f);
+	//{
+	//	float x, z;
+	//	for (int i = 0; i < 5; i++) {
+	//		std::stringstream name;
+	//		name << "lights[" << i << "].Position";
+	//		x = 2.0f * cosf((glm::two_pi<float>() / 5) * i);
+	//		z = 2.0f * sinf((glm::two_pi<float>() / 5) * i);
+	//		//matSquirrel->setVec4(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
+	//		matSquirrel->setVec4(name.str().c_str(), glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
+	//	}
+	//
+	//	matSquirrel->setVec3("lights[0].Intensity", glm::vec3(0.0f, 0.8f, 0.8f));
+	//	matSquirrel->setVec3("lights[1].Intensity", glm::vec3(0.0f, 0.0f, 0.8f));
+	//	matSquirrel->setVec3("lights[2].Intensity", glm::vec3(0.8f, 0.0f, 0.0f));
+	//	matSquirrel->setVec3("lights[3].Intensity", glm::vec3(0.0f, 0.8f, 0.0f));
+	//	matSquirrel->setVec3("lights[4].Intensity", glm::vec3(0.8f, 0.8f, 0.8f));
+	//}
+	matSquirrel->setVec3("lights[0].Intensity", glm::vec3(0, 0.8f, 0.8f));
+	matSquirrel->setVec4("lights[0].Position", glm::vec4(-1, 0, 0, 0));
+	matSquirrel->setVec3("lights[1].Intensity", glm::vec3(0.8f, 0, 0));
+	matSquirrel->setVec4("lights[1].Position", glm::vec4(1, 0, 0, 0));
 	matSquirrel->setShader(&shader);
+	matSquirrel->setShader(ShaderManager::getInstance().getPhong());
 	matSquirrel->setTextureSlot(0, &texture);
 
 	Mesh* squirrel = new Mesh("../res/rebel.obj");
