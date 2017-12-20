@@ -26,6 +26,7 @@
 #include "Rotator.h"
 #include "ButtonState.h"
 #include "RenderTexture.h"
+#include "Light.h"
 
 int main()
 {
@@ -68,12 +69,19 @@ int main()
 	camera.setDisplay(&display);
 	camera.setSkybox(skyMaterial);
 	camera.setClearMode(Camera::ClearMode::SkyboxClear);
+	//camera.setProjectionMode(Camera::ProjectionMode::Orthographic);
 	WasdMover mover(keyboard, mouse);
 	goCamera->addComponent(&camera);
 	goCamera->addComponent(&mover);
 	goRoot->addChild(goCamera);
 	Oculus* oculus = new Oculus();
 	goRoot->addComponent(oculus);
+
+	Light* sunlight = new Light();
+	sunlight->setLightType(Light::LightType::Directional);
+	GameObject* goSunlight = new GameObject();
+	goSunlight->addComponent(sunlight);
+	goSunlight->getTransform()->setEulerAngles(glm::vec3(1.0f, 0.0f, 0.0f));
 
 	RenderTexture* renderTexture = new RenderTexture(512, 512);
 	Camera* renderTextureCam = new Camera(70.0f, renderTexture->getAspectRatio(), 0.01f, 1000.0f);

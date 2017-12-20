@@ -23,8 +23,6 @@ private:
 
 	CameraManager(CameraManager const&);
 
-	static CameraManager m_instance;
-
 	std::list<Camera*> m_cameras;
 	Camera* m_currentCamera;
 };

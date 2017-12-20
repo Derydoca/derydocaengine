@@ -18,24 +18,24 @@ Object used for rendering the world to screen.
 class Camera : public GameComponent
 {
 public:
-	/*
-	Types of screen clear methods when rendering a camera.
-	*/
+	/* Types of screen clear methods when rendering a camera. */
 	enum ClearMode {
-		/*
-		Do not clear the screen.
-		*/
+		/* Do not clear the screen. */
 		NoClear,
 
-		/*
-		Clears the screen with a solid color.
-		*/
+		/* Clears the screen with a solid color. */
 		ColorClear,
 
-		/*
-		Clears the screen with a skybox.
-		*/
+		/* Clears the screen with a skybox. */
 		SkyboxClear
+	};
+
+	/* Types of projection modes */
+	enum ProjectionMode {
+		/* Orthographic projection */
+		Orthographic,
+		/* Perspective projection */
+		Perspective
 	};
 
 	Camera(float fov, float aspect, float zNear, float zFar);
@@ -94,6 +94,10 @@ public:
 	void setRenderTexture(RenderTexture* renderTexture) { m_renderTexture = renderTexture; }
 	void init();
 	void setDisplayRect(float x, float y, float w, float h);
+
+	void setProjectionMode(ProjectionMode mode);
+	void setOrthoSize(float size);
+	float getOrthoSize(float size) { return m_orthoSize; }
 private:
 	float m_fov, m_aspect, m_zNear, m_zFar;
 	glm::mat4 m_perspective;
@@ -101,13 +105,15 @@ private:
 	Color m_clearColor;
 	Skybox* m_skybox;
 	ClearMode m_clearMode = NoClear;
+	ProjectionMode m_projectionMode = Perspective;
 	Material* m_skyboxMaterial;
 	MatrixStack* m_matrixStack;
 	RenderTexture* m_renderTexture;
 	Display* m_display;
 	Rectangle* m_displayRect;
+	float m_orthoSize = 10.0f;
 
 	void clear();
-	inline void recalcPerspectiveMatrix() { m_perspective = glm::perspective(m_fov, m_aspect, m_zNear, m_zFar); }
+	inline void recalcPerspectiveMatrix();
 };
 

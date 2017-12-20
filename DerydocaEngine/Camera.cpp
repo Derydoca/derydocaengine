@@ -39,6 +39,18 @@ void Camera::setDisplayRect(float x, float y, float w, float h)
 	m_displayRect->setHeight(x);
 }
 
+void Camera::setProjectionMode(ProjectionMode mode)
+{
+	m_projectionMode = mode;
+	recalcPerspectiveMatrix();
+}
+
+void Camera::setOrthoSize(float size)
+{
+	m_orthoSize = size;
+	recalcPerspectiveMatrix();
+}
+
 void Camera::setFov(float fov)
 {
 	m_fov = fov;
@@ -63,6 +75,18 @@ void Camera::clear()
 		m_skybox->getMesh()->draw();
 		break;
 	default:
+		break;
+	}
+}
+
+inline void Camera::recalcPerspectiveMatrix()
+{
+	switch (m_projectionMode) {
+	case Orthographic:
+		m_perspective = glm::mat4(); //glm::ortho(-m_orthoSize, m_orthoSize, -m_orthoSize, m_orthoSize, m_zNear, m_zFar);
+		break;
+	case Perspective:
+		m_perspective = glm::perspective(m_fov, m_aspect, m_zNear, m_zFar);
 		break;
 	}
 }

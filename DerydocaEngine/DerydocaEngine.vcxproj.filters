@@ -41,9 +41,6 @@
     <ClCompile Include="EngineSettings.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Skybox.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -75,6 +72,16 @@
       <Filter>Engine\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Oculus.cpp" />
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -126,9 +133,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Skybox.h">
@@ -183,6 +187,16 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Oculus.h" />
+    <ClInclude Include="ShadowMap.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
