@@ -21,7 +21,6 @@ public:
 		m_minXRot(-glm::half_pi<float>()),
 		m_maxXRot(glm::half_pi<float>())
 	{
-		m_rmb = m_mouse->getKey(2);
 	}
 	~WasdMover();
 	
@@ -38,6 +37,5 @@ private:
 	glm::vec3 m_localMomentum;
 	glm::vec2 m_eulerRot;
 	float m_minXRot, m_maxXRot;
-	Key* m_rmb;
 };
 

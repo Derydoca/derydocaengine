@@ -20,9 +20,6 @@
     <ClCompile Include="ButtonState.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="Key.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>Input</Filter>
     </ClCompile>

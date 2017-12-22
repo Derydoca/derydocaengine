@@ -46,9 +46,9 @@ public:
 
 	@return VP matrix
 	*/
-	inline glm::mat4 getViewProjectionMatrix() const { return m_perspective * m_transform->getOtherModel(); }
+	inline glm::mat4 getViewProjectionMatrix() const { return m_projectionMatrix * glm::inverse(m_transform->getModel()); }
 
-	inline glm::mat4 getProjectionMatrix() const { return m_perspective; }
+	inline glm::mat4 getProjectionMatrix() const { return m_projectionMatrix; }
 
 	inline glm::mat4 getViewMatrix() const { return m_transform->getModel(); };
 
@@ -57,7 +57,7 @@ public:
 
 	@return Rotation projection matrix
 	*/
-	inline glm::mat4 getRotationProjection() const { return m_perspective * glm::mat4_cast(m_transform->getQuat()); }
+	inline glm::mat4 getRotationProjection() const { return m_projectionMatrix * glm::inverse(glm::mat4_cast(m_transform->getQuat())); }
 	
 	/*
 	Sets the field of view for this camera
@@ -104,7 +104,7 @@ public:
 	float getOrthoSize(float size) { return m_orthoSize; }
 private:
 	float m_fov, m_aspect, m_zNear, m_zFar;
-	glm::mat4 m_perspective;
+	glm::mat4 m_projectionMatrix;
 	Transform* m_transform;
 	Color m_clearColor;
 	Skybox* m_skybox;

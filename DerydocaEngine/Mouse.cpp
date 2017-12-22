@@ -17,6 +17,8 @@ void Mouse::init()
 
 void Mouse::update()
 {
+	m_tick++;
+
 	// Move the last recorded position to the previous position
 	m_prevPos.x = m_currentPos.x;
 	m_prevPos.y = m_currentPos.y;
@@ -27,6 +29,32 @@ void Mouse::update()
 	// Update the mouse's button states
 	for (int i = 0; i < 5; i++)
 	{
-		m_keys[i].setState(buttonMask & SDL_BUTTON(i+1));
+		m_keys[i].setState(buttonMask & SDL_BUTTON(i+1), m_tick);
 	}
+}
+
+bool Mouse::isKeyDown(int keycode)
+{
+	if (keycode >= 5) {
+		return false;
+	}
+	return m_keys[keycode].isDown();
+}
+
+bool Mouse::isKeyDownFrame(int keycode)
+{
+	if (keycode >= 5) {
+		return false;
+	}
+	Key key = m_keys[keycode];
+	return key.isDown() && key.getStateChangeTick() == m_tick;
+}
+
+bool Mouse::isKeyUpFrame(int keycode)
+{
+	if (keycode >= 5) {
+		return false;
+	}
+	Key key = m_keys[keycode];
+	return !key.isDown() && key.getStateChangeTick() == m_tick;
 }

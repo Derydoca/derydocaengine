@@ -18,12 +18,7 @@ void Keyboard::init()
 
 void Keyboard::update()
 {
-	SDL_PumpEvents();
-	const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
-	bool bIsDown = keyboardState[98] != 0;
-	for(int i = 0; i < m_numkeys; i++) {
-		m_keys[i].setState(keyboardState[i]);
-	}
+	m_tick++;
 }
 
 bool Keyboard::isKeyDown(int keycode)
@@ -39,7 +34,8 @@ bool Keyboard::isKeyDownFrame(int keycode)
 	if (keycode >= m_numkeys) {
 		return false;
 	}
-	return m_keys[keycode].isDownFrame();
+	Key key = m_keys[keycode];
+	return key.isDown() && key.getStateChangeTick() == m_tick;
 }
 
 bool Keyboard::isKeyUpFrame(int keycode)
@@ -47,7 +43,8 @@ bool Keyboard::isKeyUpFrame(int keycode)
 	if (keycode >= m_numkeys) {
 		return false;
 	}
-	return m_keys[keycode].isUpFrame();
+	Key key = m_keys[keycode];
+	return !key.isDown() && key.getStateChangeTick() == m_tick;
 }
 
 void Keyboard::setKeyState(int keycode, bool isDown)
@@ -55,5 +52,5 @@ void Keyboard::setKeyState(int keycode, bool isDown)
 	if (keycode >= m_numkeys) {
 		return;
 	}
-	m_keys[keycode].setState(isDown);
+	m_keys[keycode].setState(isDown, m_tick);
 }

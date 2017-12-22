@@ -57,6 +57,8 @@ void Display::bindAsRenderTarget()
 void Display::update() {
 	SDL_GL_SwapWindow(m_window);
 
+	m_keyboard->update();
+
 	SDL_Event e;
 
 	while (SDL_PollEvent(&e)) {

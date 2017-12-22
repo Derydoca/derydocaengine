@@ -18,5 +18,6 @@ public:
 private:
 	const int m_numkeys = 512;
 	Key m_keys[512];
+	unsigned long m_tick = 0;
 };
 

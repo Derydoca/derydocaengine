@@ -138,7 +138,6 @@
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Key.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />

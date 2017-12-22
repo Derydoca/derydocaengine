@@ -38,14 +38,13 @@ public:
 	~Transform() {};
 
 	inline glm::mat4 getModel() const { return glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale); }
-	inline glm::mat4 getOtherModel() const { return glm::scale(m_scale) * glm::mat4_cast(m_quat) * glm::translate(m_pos); }
 
 	inline glm::vec3& getPos() { return m_pos; }
 	inline glm::fquat& getQuat() { return m_quat; }
 	inline glm::vec3& getScale() { return m_scale; }
 
 	inline void setPos(const glm::vec3& pos) { m_pos = pos; }
-	inline void setEulerAngles(const glm::vec3& euler) { m_quat = glm::fquat(euler); }
+	inline void setEulerAngles(const glm::vec3& euler) { m_quat = glm::fquat(euler * 0.0174533f); }
 	inline void setQuat(const glm::fquat& quat) { m_quat = quat; }
 	inline void setScale(const glm::vec3& scale) { m_scale = scale; }
 private:
