@@ -135,6 +135,7 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
+    <ClCompile Include="DiffuseTestScene.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="SquirrelTerrainScene.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -169,6 +171,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="DebugLine.h" />
     <ClInclude Include="DebugVisualizer.h" />
+    <ClInclude Include="DiffuseTestScene.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="GameObject.h" />
@@ -191,12 +194,14 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Rotator.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="ScreenshotUtil.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SOIL.h" />
+    <ClInclude Include="SquirrelTerrainScene.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />

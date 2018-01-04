@@ -86,6 +86,8 @@
     </ClCompile>
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
+    <ClCompile Include="SquirrelTerrainScene.cpp" />
+    <ClCompile Include="DiffuseTestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -205,6 +207,9 @@
     </ClInclude>
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="KeyboardMover.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SquirrelTerrainScene.h" />
+    <ClInclude Include="DiffuseTestScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
