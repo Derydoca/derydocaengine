@@ -139,7 +139,9 @@
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="KeyboardMover.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -156,6 +158,7 @@
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WasdMover.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +176,9 @@
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="KeyboardMover.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LightManager.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="Material.h" />

@@ -1,7 +1,9 @@
 #include "Shader.h"
 #include <fstream>
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
 #include "CameraManager.h"
+#include "GLError.h"
 
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 static std::string LoadShader(const std::string& fileName);
@@ -11,18 +13,32 @@ Shader::Shader(const std::string& fileName)
 {
 	printf("Loading shader: %s\n", fileName.c_str());
 
-	m_program = glCreateProgram();
+	// Create the shaders
 	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
 	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
 
+	// Create the program
+	m_program = glCreateProgram();
+	if (0 == m_program)
+	{
+		fprintf(stderr, "Error creating program object..\n");
+		__debugbreak();
+	}
+
+	// Attach the shaders to the program
 	for (unsigned int i = 0; i < NUM_SHADERS; i++) {
 		glAttachShader(m_program, m_shaders[i]);
 	}
 
+	// Get the vertex attribute locations
 	glBindAttribLocation(m_program, 0, "VertexPosition");
 	glBindAttribLocation(m_program, 1, "texCoord");
 	glBindAttribLocation(m_program, 2, "VertexNormal");
 
+	// Bind the output color to 0
+	glBindFragDataLocation(m_program, 0, "FragColor");
+
+	// Link the program
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed: ");
 
@@ -32,6 +48,8 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_program, "MVP");
 	m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_program, "ModelViewMatrix");
 	m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_program, "NormalMatrix");
+	m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_program, "ProjectionMatrix");
+	m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_program, "ModelMatrix");
 }
 
 Shader::~Shader()
@@ -49,18 +67,71 @@ void Shader::bind()
 	glUseProgram(m_program);
 }
 
+void printMatrix(std::string matName, glm::mat4 mat)
+{
+	auto matPtr = glm::value_ptr(mat);
+	printf("\n%s:\n", matName.c_str());
+	printf("    %f   %f   %f   %f\n", matPtr[0], matPtr[1], matPtr[2], matPtr[3]);
+	printf("    %f   %f   %f   %f\n", matPtr[4], matPtr[5], matPtr[6], matPtr[7]);
+	printf("    %f   %f   %f   %f\n", matPtr[8], matPtr[9], matPtr[10], matPtr[11]);
+	printf("    %f   %f   %f   %f\n", matPtr[12], matPtr[13], matPtr[14], matPtr[15]);
+}
+
+void printMatrix(std::string matName, glm::mat3 mat)
+{
+	auto matPtr = glm::value_ptr(mat);
+	printf("\n%s:\n", matName.c_str());
+	printf("    %f   %f   %f\n", matPtr[0], matPtr[1], matPtr[2]);
+	printf("    %f   %f   %f\n", matPtr[3], matPtr[4], matPtr[5]);
+	printf("    %f   %f   %f\n", matPtr[6], matPtr[7], matPtr[8]);
+}
+
 void Shader::update(const MatrixStack * matrixStack)
 {
 	Camera* camera = CameraManager::getInstance().getCurrentCamera();
 
-	glm::mat4 mvpMatrix = camera->getViewProjectionMatrix() * matrixStack->getMatrix();
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, &mvpMatrix[0][0]);
+	if (m_uniforms[TRANSFORM_MVP] >= 0)
+	{
+		glm::mat4 mvpMatrix = camera->getInverseViewProjectionMatrix() * matrixStack->getMatrix();
+		glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+	}
 
-	glm::mat4 mvMatrix = camera->getViewMatrix() * matrixStack->getMatrix();
-	glUniformMatrix4fv(m_uniforms[TRANSFORM_MV], 1, GL_FALSE, &mvMatrix[0][0]);
+	if (m_uniforms[TRANSFORM_MV] >= 0)
+	{
+		glm::mat4 mvMatrix = camera->getViewMatrix() * matrixStack->getMatrix();
+		glUniformMatrix4fv(m_uniforms[TRANSFORM_MV], 1, GL_FALSE, glm::value_ptr(mvMatrix));
+	}
 
-	glm::mat4 normalMatrix = glm::mat3(matrixStack->getMatrix());
-	glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, &normalMatrix[0][0]);
+	if (m_uniforms[TRANSFORM_NORMAL] >= 0)
+	{
+		// Inverse transpose matrix of the model view matrix
+		//glm::mat4 viewProjectionMatrix = camera->getViewProjectionMatrix() * matrixStack->getMatrix();
+		//glm::mat4 inversedMatrix = glm::inverse(viewProjectionMatrix);
+		//glm::mat4 transposedMatrix = glm::transpose(inversedMatrix);
+		//glm::mat3 normalMatrix3x3 = glm::mat3(transposedMatrix);
+
+		//printMatrix("Camera Model", camera->getGameObject()->getTransform()->getModel());
+		//printMatrix("Camera Projection", camera->getProjectionMatrix());
+		//printMatrix("View Projection Matrix", viewProjectionMatrix);
+		//printMatrix("Inversed Matrix", inversedMatrix);
+		//printMatrix("Transposed Matrix", transposedMatrix);
+		//printMatrix("Normal Matrix", normalMatrix3x3);
+
+		//glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix3x3));
+
+		glm::mat3 normalMatrix3x3 = glm::mat3(camera->getInverseViewProjectionMatrix() * matrixStack->getMatrix());
+		glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix3x3));
+	}
+
+	if (m_uniforms[TRANSFORM_PROJECTION] >= 0) {
+		glm::mat4 projectionMatrix = camera->getProjectionMatrix();
+		glUniformMatrix4fv(m_uniforms[TRANSFORM_PROJECTION], 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+	}
+
+	if (m_uniforms[TRANSFORM_MODEL] >= 0) {
+		glm::mat4 modelMatrix = matrixStack->getMatrix();
+		glUniformMatrix4fv(m_uniforms[TRANSFORM_PROJECTION], 1, GL_FALSE, glm::value_ptr(modelMatrix));
+	}
 }
 
 void Shader::update(const glm::mat4 matrix)
@@ -73,6 +144,16 @@ void Shader::setFloat(std::string name, float val)
 	glUniform1f(getUniformName(name), val);
 }
 
+void Shader::setColorRGB(std::string name, Color color)
+{
+	glUniform3f(getUniformName(name), color.r, color.g, color.b);
+}
+
+void Shader::setColorRGBA(std::string name, Color color)
+{
+	glUniform4f(getUniformName(name), color.r, color.g, color.b, color.a);
+}
+
 void Shader::setVec3(std::string name, glm::vec3 val)
 {
 	glUniform3f(getUniformName(name), val.x, val.y, val.z);
@@ -80,7 +161,8 @@ void Shader::setVec3(std::string name, glm::vec3 val)
 
 void Shader::setVec4(std::string name, glm::vec4 val)
 {
-	glUniform4f(getUniformName(name), val.x, val.y, val.z, val.w);
+	int glName = getUniformName(name);
+	glUniform4fv(glName, 1, glm::value_ptr(val));
 }
 
 void Shader::setMat3(std::string name, glm::mat3 val)

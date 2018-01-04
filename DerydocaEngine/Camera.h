@@ -46,7 +46,9 @@ public:
 
 	@return VP matrix
 	*/
-	inline glm::mat4 getViewProjectionMatrix() const { return m_projectionMatrix * glm::inverse(m_transform->getModel()); }
+	inline glm::mat4 getInverseViewProjectionMatrix() const { return m_projectionMatrix * glm::inverse(m_transform->getModel()); }
+
+	inline glm::mat4 getViewProjectionMatrix() const { return m_projectionMatrix * m_transform->getModel(); }
 
 	inline glm::mat4 getProjectionMatrix() const { return m_projectionMatrix; }
 

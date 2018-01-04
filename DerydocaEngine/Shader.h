@@ -17,6 +17,8 @@ public:
 	void update(const glm::mat4 matrix);
 
 	void setFloat(std::string name, float val);
+	void setColorRGB(std::string name, Color color);
+	void setColorRGBA(std::string name, Color color);
 	void setVec3(std::string name, glm::vec3 val);
 	void setVec4(std::string name, glm::vec4 val);
 	void setMat3(std::string name, glm::mat3 val);
@@ -28,16 +30,18 @@ private:
 	int getUniformName(std::string stringName);
 
 	enum {
-		TRANSFORM_MVP,
-		TRANSFORM_MV,
-		TRANSFORM_NORMAL,
+		TRANSFORM_MVP = 0,
+		TRANSFORM_MV = 1,
+		TRANSFORM_NORMAL = 2,
+		TRANSFORM_PROJECTION = 3,
+		TRANSFORM_MODEL = 4,
 
 		NUM_UNIFORMS
 	};
 
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
-	GLuint m_uniforms[NUM_UNIFORMS];
+	GLint m_uniforms[NUM_UNIFORMS];
 	std::map<std::string, int> m_uniformLookup;
 };
 

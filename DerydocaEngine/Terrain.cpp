@@ -126,6 +126,11 @@ void Terrain::setTextureSlot(int slot, Texture * texture)
 	m_meshRenderer->getMaterial()->setTextureSlot(slot, texture);
 }
 
+void Terrain::init()
+{
+	m_meshRenderer->setGameObject(getGameObject());
+}
+
 void Terrain::render(MatrixStack * matrixStack)
 {
 	m_meshRenderer->render(matrixStack);

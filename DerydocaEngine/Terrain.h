@@ -20,6 +20,7 @@ public:
 	void updateMesh();
 
 	void setTextureSlot(int slot, Texture* texture);
+	void init();
 
 	void render(MatrixStack* matrixStack);
 private:

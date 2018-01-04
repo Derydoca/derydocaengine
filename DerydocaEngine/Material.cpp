@@ -54,9 +54,12 @@ void Material::setMat4(const std::string name, glm::mat4 value)
 void Material::bind()
 {
 	assert(m_shader);
-	assert(m_texture);
+	//assert(m_texture);
 
-	m_texture->bind(0);
+	if (m_texture != NULL)
+	{
+		m_texture->bind(0);
+	}
 	m_shader->bind();
 
 	for (auto const& x : m_floatValues)

@@ -28,6 +28,7 @@
 #include "ButtonState.h"
 #include "RenderTexture.h"
 #include "Light.h"
+#include "KeyboardMover.h"
 
 int main()
 {
@@ -90,15 +91,27 @@ int main()
 	Oculus* oculus = new Oculus();
 	goRoot->addComponent(oculus);
 
-	Light* sunlight = new Light();
-	sunlight->setLightType(Light::LightType::Directional);
-	GameObject* goSunlight = new GameObject();
-	goSunlight->addComponent(sunlight);
-	goSunlight->getTransform()->setPos(glm::vec3(0, 1, 0));
-	goSunlight->getTransform()->setEulerAngles(glm::vec3(1.0f, 0.0f, 0.0f));
-	MeshRenderer* lightMesh = new MeshRenderer(sphereMesh, mat);
-	goSunlight->addComponent(lightMesh);
+	//Light* sunlight = new Light();
+	//sunlight->setLightType(Light::LightType::Directional);
+	//GameObject* goSunlight = new GameObject();
+	//goSunlight->addComponent(sunlight);
+	//goSunlight->getTransform()->setPos(glm::vec3(0, 1, 0));
+	//goSunlight->getTransform()->setEulerAngles(glm::vec3(1.0f, 0.0f, 0.0f));
+	//MeshRenderer* lightMesh = new MeshRenderer(sphereMesh, mat);
+	//goSunlight->addComponent(lightMesh);
 
+	Mesh* sphere = new Mesh("../res/sphere.obj");
+	Light* pointLight = new Light();
+	pointLight->setColor(new Color(0, 1, 0));
+	GameObject* goPointLight = new GameObject("Point Light");
+	goPointLight->addComponent(pointLight);
+	KeyboardMover* lightMover = new KeyboardMover(keyboard, 5.0f, SDLK_t, SDLK_g, SDLK_f, SDLK_h, SDLK_r, SDLK_y);
+	goPointLight->addComponent(lightMover);
+	MeshRenderer* mrSphere = new MeshRenderer(sphere, mat);
+	goPointLight->addComponent(mrSphere);
+	goPointLight->getTransform()->setScale(glm::vec3(0.2f, 0.2f, 0.2f));
+	goRoot->addChild(goPointLight);
+/*
 	RenderTexture* renderTexture = new RenderTexture(512, 512);
 	Camera* renderTextureCam = new Camera(70.0f, renderTexture->getAspectRatio(), 0.01f, 1000.0f);
 	renderTextureCam->setDisplay(&display);
@@ -132,50 +145,38 @@ int main()
 	MeshRenderer* planeRenderer = new MeshRenderer(plane, renderTextureMaterial);
 	goRenderTextureScreen->addComponent(planeRenderer);
 	goRoot->addChild(goRenderTextureScreen);
-
+*/
 	Texture texture("../res/rebel.jpg");
 	Material* matSquirrel = new Material();
 	matSquirrel->setColorRGB("Kd", Color(1, 0, 0, 0));
 	matSquirrel->setColorRGB("Ka", Color(0.1, 0.1, 0.1, 0));
 	matSquirrel->setColorRGB("Ks", Color(0, 0, 1, 0));
 	matSquirrel->setFloat("Shininess", 1.0f);
-	//{
-	//	float x, z;
-	//	for (int i = 0; i < 5; i++) {
-	//		std::stringstream name;
-	//		name << "lights[" << i << "].Position";
-	//		x = 2.0f * cosf((glm::two_pi<float>() / 5) * i);
-	//		z = 2.0f * sinf((glm::two_pi<float>() / 5) * i);
-	//		//matSquirrel->setVec4(name.str().c_str(), view * glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
-	//		matSquirrel->setVec4(name.str().c_str(), glm::vec4(x, 1.2f, z + 1.0f, 1.0f));
-	//	}
-	//
-	//	matSquirrel->setVec3("lights[0].Intensity", glm::vec3(0.0f, 0.8f, 0.8f));
-	//	matSquirrel->setVec3("lights[1].Intensity", glm::vec3(0.0f, 0.0f, 0.8f));
-	//	matSquirrel->setVec3("lights[2].Intensity", glm::vec3(0.8f, 0.0f, 0.0f));
-	//	matSquirrel->setVec3("lights[3].Intensity", glm::vec3(0.0f, 0.8f, 0.0f));
-	//	matSquirrel->setVec3("lights[4].Intensity", glm::vec3(0.8f, 0.8f, 0.8f));
-	//}
-	matSquirrel->setVec3("lights[0].Intensity", glm::vec3(0, 0.8f, 0.8f));
-	matSquirrel->setVec4("lights[0].Position", glm::vec4(-1, 0, 0, 0));
-	matSquirrel->setVec3("lights[1].Intensity", glm::vec3(0.8f, 0, 0));
-	matSquirrel->setVec4("lights[1].Position", glm::vec4(1, 0, 0, 0));
 	matSquirrel->setShader(&shader);
 	matSquirrel->setShader(ShaderManager::getInstance().getPhong());
 	matSquirrel->setTextureSlot(0, &texture);
 
-	Mesh* squirrel = new Mesh("../res/rebel.obj");
-	Rotator* rotSquirrel = new Rotator(1);
-	MeshRenderer* mrSquirrel = new MeshRenderer(squirrel, matSquirrel);
-	GameObject* goSquirrel = new GameObject();
+	Material* diffuseMaterial = new Material();
+	Shader* diffuseShader = new Shader("../res/diffuseWorldPos");
+	diffuseMaterial->setShader(diffuseShader);
+	//glm::vec4 diffuseLightPosition = glm::vec4(0, 0, 0, 1);
+	//diffuseMaterial->setVec4("LightPosition", diffuseLightPosition);
+	diffuseMaterial->setColorRGB("Kd", Color(1, 0, 0));
+	diffuseMaterial->setColorRGB("Ld", Color(1, 1, 1));
+
+	Mesh* squirrel = new Mesh("../res/sphere.obj");
+	Rotator* rotSquirrel = new Rotator(0);
+	//MeshRenderer* mrSquirrel = new MeshRenderer(squirrel, matSquirrel);
+	MeshRenderer* mrSquirrel = new MeshRenderer(squirrel, diffuseMaterial);
+	GameObject* goSquirrel = new GameObject("Squirrel 1");
 	goSquirrel->addComponent(rotSquirrel);
 	goSquirrel->addComponent(mrSquirrel);
-	goSquirrel->getTransform()->setPos(glm::vec3(0, 0, 0));
+	goSquirrel->getTransform()->setPos(glm::vec3(0, 0, -5));
 	goRoot->addChild(goSquirrel);
-
+/*
 	MeshRenderer* mrSquirrel2 = new MeshRenderer(squirrel, matSquirrel);
 	Rotator* rotSquirrel2 = new Rotator(2);
-	GameObject* goSquirrel2 = new GameObject();
+	GameObject* goSquirrel2 = new GameObject("Squirrel 2");
 	goSquirrel2->addComponent(rotSquirrel2);
 	goSquirrel2->addComponent(mrSquirrel2);
 	goSquirrel2->getTransform()->setPos(glm::vec3(1, 0, 0));
@@ -183,12 +184,12 @@ int main()
 
 	MeshRenderer* mrSquirrel3 = new MeshRenderer(squirrel, matSquirrel);
 	Rotator* rotSquirrel3 = new Rotator(3);
-	GameObject* goSquirrel3 = new GameObject();
+	GameObject* goSquirrel3 = new GameObject("Squirrel 3");
 	goSquirrel3->addComponent(rotSquirrel3);
 	goSquirrel3->addComponent(mrSquirrel3);
 	goSquirrel3->getTransform()->setPos(glm::vec3(0.5f, 0, 0));
 	goSquirrel2->addChild(goSquirrel3);
-
+*/
 	// Divisor defines minimum frames per second
 	unsigned long minFrameTime = 1000 / 60;
 

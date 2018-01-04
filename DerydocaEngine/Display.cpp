@@ -36,6 +36,25 @@ Display::Display(int width, int height, const std::string& title)
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+
+	// Print information about the current instance of OpenGL
+	const GLubyte *renderer = glGetString(GL_RENDERER);
+	const GLubyte *vendor = glGetString(GL_VENDOR);
+	const GLubyte *version = glGetString(GL_VERSION);
+	const GLubyte *glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
+	printf("Renderer: %s\n", renderer);
+	printf("Vendor: %s\n", vendor);
+	printf("Version: %s\n", version);
+	printf("GLSL Version: %s\n", glslVersion);
+	printf("Max Vertex Attributes: %i\n", GL_MAX_VERTEX_ATTRIBS);
+
+	GLint nExtensions;
+	glGetIntegerv(GL_NUM_EXTENSIONS, &nExtensions);
+	printf("Supported extensions (%i):\n", nExtensions);
+	for (GLint i = 0; i < nExtensions; i++)
+	{
+		printf("    %i: %s\n", i, glGetStringi(GL_EXTENSIONS, i));
+	}
 }
 
 Display::~Display()

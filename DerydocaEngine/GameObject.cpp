@@ -2,6 +2,13 @@
 
 GameObject::GameObject()
 {
+	m_transform.setGameObject(this);
+}
+
+GameObject::GameObject(std::string name)
+{
+	m_transform.setGameObject(this);
+	setName(name);
 }
 
 
@@ -65,6 +72,7 @@ void GameObject::postRender() {
 void GameObject::addChild(GameObject* gameObject)
 {
 	m_children.push_back(gameObject);
+	gameObject->m_parent = this;
 }
 
 void GameObject::addComponent(GameComponent* component)

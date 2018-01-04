@@ -81,6 +81,11 @@
     <ClCompile Include="Light.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="KeyboardMover.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -198,6 +203,8 @@
     <ClInclude Include="Light.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="LightManager.h" />
+    <ClInclude Include="KeyboardMover.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

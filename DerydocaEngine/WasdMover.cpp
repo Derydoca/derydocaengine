@@ -73,6 +73,15 @@ void WasdMover::update(float deltaTime) {
 			m_eulerRot.x = m_maxXRot;
 		}
 
+		if (m_keyboard->isKeyDownFrame(SDLK_LEFTBRACKET))
+		{
+			m_eulerRot.y -= 90.0f * 0.0174533f;
+		}
+		if (m_keyboard->isKeyDownFrame(SDLK_RIGHTBRACKET))
+		{
+			m_eulerRot.y += 90.0f * 0.0174533f;
+		}
+
 		// Rotate
 		glm::fquat newQuat =
 			glm::rotate(m_eulerRot.y, glm::vec3(0, 1, 0))

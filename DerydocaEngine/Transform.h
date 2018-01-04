@@ -3,6 +3,8 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 
+class GameObject;
+
 struct Transform
 {
 public:
@@ -39,6 +41,7 @@ public:
 
 	inline glm::mat4 getModel() const { return glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale); }
 
+	glm::vec3& getWorldPos();
 	inline glm::vec3& getPos() { return m_pos; }
 	inline glm::fquat& getQuat() { return m_quat; }
 	inline glm::vec3& getScale() { return m_scale; }
@@ -47,8 +50,12 @@ public:
 	inline void setEulerAngles(const glm::vec3& euler) { m_quat = glm::fquat(euler * 0.0174533f); }
 	inline void setQuat(const glm::fquat& quat) { m_quat = quat; }
 	inline void setScale(const glm::vec3& scale) { m_scale = scale; }
+	void setGameObject(GameObject* object) { m_gameObject = object; }
+
+	void translate(glm::vec3& delta);
 private:
 	glm::vec3 m_pos;
 	glm::vec3 m_scale;
 	glm::fquat m_quat;
+	GameObject* m_gameObject;
 };
