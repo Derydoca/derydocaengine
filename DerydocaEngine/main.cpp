@@ -31,6 +31,7 @@
 #include "KeyboardMover.h"
 
 #include "SquirrelTerrainScene.h"
+#include "DiffuseTestScene.h"
 
 int main()
 {
