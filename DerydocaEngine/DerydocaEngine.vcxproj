@@ -145,6 +145,7 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MaterialRefresher.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MaterialRefresher.h" />
     <ClInclude Include="MatrixStack.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />

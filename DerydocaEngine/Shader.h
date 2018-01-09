@@ -23,6 +23,10 @@ public:
 	void setVec4(std::string name, glm::vec4 val);
 	void setMat3(std::string name, glm::mat3 val);
 	void setMat4(std::string name, glm::mat4 val);
+
+	std::string GetLoadPath() const { return m_loadPath; }
+	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
+	std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 private:
 	static const unsigned int NUM_SHADERS = 2;
 	Shader(const Shader& other) {}
@@ -42,6 +46,7 @@ private:
 	GLuint m_program;
 	GLuint m_shaders[NUM_SHADERS];
 	GLint m_uniforms[NUM_UNIFORMS];
+	std::string m_loadPath;
 	std::map<std::string, int> m_uniformLookup;
 };
 

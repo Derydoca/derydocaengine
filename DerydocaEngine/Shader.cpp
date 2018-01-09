@@ -11,11 +11,13 @@ static GLuint CreateShader(const std::string& text, GLenum shaderType);
 
 Shader::Shader(const std::string& fileName)
 {
+	m_loadPath = fileName;
+
 	printf("Loading shader: %s\n", fileName.c_str());
 
 	// Create the shaders
-	m_shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-	m_shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+	m_shaders[0] = CreateShader(LoadShader(GetVertexShaderPath()), GL_VERTEX_SHADER);
+	m_shaders[1] = CreateShader(LoadShader(GetFragmentShaderPath()), GL_FRAGMENT_SHADER);
 
 	// Create the program
 	m_program = glCreateProgram();

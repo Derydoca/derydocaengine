@@ -1,22 +1,26 @@
-#version 150
+#version 400
 
-uniform mat4 camera;
-uniform mat4 model;
+in vec3 VertexPosition;
+in vec3 VertexNormal;
 
-in vec3 vert;
-in vec2 texCoord0;
-in vec3 normal;
+out vec3 LightIntensity;
 
-out vec3 fragVert;
-out vec2 fragTexCoord;
-out vec3 fragNormal;
+uniform vec3 LightPositionWorld; // Light position in world coords.
+uniform vec3 Kd;            // Diffuse reflectivity
 
-void main() {
-    // Pass some variables to the fragment shader
-    fragTexCoord = texCoord0;
-    fragNormal = normal;
-    fragVert = position;
-    
-    // Apply all matrix transformations to vert
-    gl_Position = camera * model * vec4(position, 1);
+uniform mat4 MVP;
+uniform mat4 ModelMatrix;
+
+void main()
+{
+    vec3 vertWorldPos = (vec4(VertexPosition, 1)).xyz;
+    vec3 lightDirectionUnnormalized = LightPositionWorld - vertWorldPos;
+    vec3 lightDirection = normalize(lightDirectionUnnormalized);
+    vec4 transformedNormal = (MVP * vec4(VertexNormal, 0));
+    vec3 normalDirection = normalize(transformedNormal.xyz);
+
+    float cosTheta = dot(VertexNormal, lightDirection);
+    float dist = distance(VertexPosition, LightPositionWorld);
+    LightIntensity = vec3(1,1,1) * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
+    gl_Position = MVP * vec4(VertexPosition,1.0);
 }

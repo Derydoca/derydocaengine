@@ -34,11 +34,12 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		shader->setVec3(positionName, screenPosition);
 
 		//HACK
-		shader->setVec3("LightPosition", lightWorldPos);
+		shader->setVec3("LightPositionWorld", lightWorldPos);
+		shader->setVec3("LightPosition", screenPosition);
 		shader->setColorRGB("Kd", light->getColor());
 		//auto camPos = CameraManager::getInstance().getCurrentCamera()->getGameObject()->getTransform()->getPos();
 		//printf("CAMERA: %f, %f, %f\n", camPos.x, camPos.y, camPos.z);
-		printf("LIGHT:  %f, %f, %f\n", worldPosition4.x, worldPosition4.y, worldPosition4.z);
+		//printf("LIGHT:  %f, %f, %f\n", worldPosition4.x, worldPosition4.y, worldPosition4.z);
 
 		// Increase our light index
 		lightIndex++;

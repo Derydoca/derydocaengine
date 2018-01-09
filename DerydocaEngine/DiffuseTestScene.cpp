@@ -17,8 +17,8 @@
 #include "RenderTexture.h"
 #include "Light.h"
 #include "KeyboardMover.h"
-
 #include "ShaderManager.h"
+#include "MaterialRefresher.h"
 
 
 
@@ -70,8 +70,9 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	root->addChild(goPointLight);
 
 	// Diffuse material
+	std::string diffuseShaderPath = "../res/diffuse2";
 	Material* diffuseMaterial = new Material();
-	Shader* diffuseShader = new Shader("../res/diffuseWorldPos");
+	Shader* diffuseShader = new Shader(diffuseShaderPath);
 	diffuseMaterial->setShader(diffuseShader);
 
 	// Manual mesh
@@ -88,11 +89,14 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	// Test mesh with diffuse material applied
 	Mesh* testMesh = new Mesh("../res/sphere.obj");
 	//MeshRenderer* mrSquirrel = new MeshRenderer(squirrel, matSquirrel);
-	MeshRenderer* mrSquirrel = new MeshRenderer(testMesh, diffuseMaterial);
-	GameObject* goSquirrel = new GameObject("Squirrel 1");
-	goSquirrel->addComponent(mrSquirrel);
-	//goSquirrel->getTransform()->setPos(glm::vec3(0, 0, -5));
-	root->addChild(goSquirrel);
+	MeshRenderer* mrDiffuseTest = new MeshRenderer(testMesh, diffuseMaterial);
+	MaterialRefresher* refresher = new MaterialRefresher(keyboard, mrDiffuseTest);
+	GameObject* goDiffuseTest = new GameObject("Diffuse Test Mesh");
+	goDiffuseTest->addComponent(mrDiffuseTest);
+	goDiffuseTest->addComponent(refresher);
+	goDiffuseTest->getTransform()->setPos(glm::vec3(0, 0, -0.5));
+	goDiffuseTest->getTransform()->setEulerAngles(glm::vec3(0, 0, 90));
+	root->addChild(goDiffuseTest);
 }
 
 void DiffuseTestScene::tearDown(GameObject * root)

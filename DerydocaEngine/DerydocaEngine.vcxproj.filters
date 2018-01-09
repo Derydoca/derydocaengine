@@ -88,6 +88,7 @@
     <ClCompile Include="KeyboardMover.cpp" />
     <ClCompile Include="SquirrelTerrainScene.cpp" />
     <ClCompile Include="DiffuseTestScene.cpp" />
+    <ClCompile Include="MaterialRefresher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -210,6 +211,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SquirrelTerrainScene.h" />
     <ClInclude Include="DiffuseTestScene.h" />
+    <ClInclude Include="MaterialRefresher.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
