@@ -132,7 +132,7 @@ void Shader::update(const MatrixStack * matrixStack)
 
 	if (m_uniforms[TRANSFORM_MODEL] >= 0) {
 		glm::mat4 modelMatrix = matrixStack->getMatrix();
-		glUniformMatrix4fv(m_uniforms[TRANSFORM_PROJECTION], 1, GL_FALSE, glm::value_ptr(modelMatrix));
+		glUniformMatrix4fv(m_uniforms[TRANSFORM_MODEL], 1, GL_FALSE, glm::value_ptr(modelMatrix));
 	}
 }
 

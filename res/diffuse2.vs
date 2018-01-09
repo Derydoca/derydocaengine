@@ -6,21 +6,19 @@ in vec3 VertexNormal;
 out vec3 LightIntensity;
 
 uniform vec3 LightPositionWorld; // Light position in world coords.
-uniform vec3 Kd;            // Diffuse reflectivity
+uniform vec3 LightPosition;      // Light position in eye coords.
+uniform vec3 Kd;                 // Diffuse reflectivity
 
 uniform mat4 MVP;
-uniform mat4 ModelMatrix;
 
 void main()
 {
-    vec3 vertWorldPos = (vec4(VertexPosition, 1)).xyz;
-    vec3 lightDirectionUnnormalized = LightPositionWorld - vertWorldPos;
-    vec3 lightDirection = normalize(lightDirectionUnnormalized);
-    vec4 transformedNormal = (MVP * vec4(VertexNormal, 0));
-    vec3 normalDirection = normalize(transformedNormal.xyz);
+    vec3 vertEyePos = (MVP * vec4(VertexPosition, 1.0)).xyz;
+    vec3 lightDirection = normalize(LightPosition - vertEyePos);
+    vec3 normalDirection = normalize((MVP * vec4(VertexNormal, 0)).xyz);
 
-    float cosTheta = dot(VertexNormal, lightDirection);
-    float dist = distance(VertexPosition, LightPositionWorld);
+    float cosTheta = dot(normalDirection, lightDirection);
+    float dist = distance(vertEyePos, LightPosition);
     LightIntensity = vec3(1,1,1) * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
     gl_Position = MVP * vec4(VertexPosition,1.0);
 }

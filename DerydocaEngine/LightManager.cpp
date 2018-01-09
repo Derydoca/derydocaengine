@@ -27,9 +27,9 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
 		glm::vec4 worldPosition4 = glm::vec4(lightWorldPos, 1);
 		Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
-		glm::mat4 lightMvp = currentCamera->getProjectionMatrix() * currentCamera->getViewMatrix();
+		glm::mat4 lightMvp = currentCamera->getInverseViewProjectionMatrix();
 		glm::vec4 screenPosition = lightMvp * worldPosition4;
-		screenPosition *= -1;
+		//screenPosition *= -1;
 		std::string positionName = "lights[" + std::to_string(lightIndex) + "].Position";
 		shader->setVec3(positionName, screenPosition);
 
@@ -39,7 +39,7 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		shader->setColorRGB("Kd", light->getColor());
 		//auto camPos = CameraManager::getInstance().getCurrentCamera()->getGameObject()->getTransform()->getPos();
 		//printf("CAMERA: %f, %f, %f\n", camPos.x, camPos.y, camPos.z);
-		//printf("LIGHT:  %f, %f, %f\n", worldPosition4.x, worldPosition4.y, worldPosition4.z);
+		//printf("LIGHT:  %f, %f, %f\n", screenPosition.x, screenPosition.y, screenPosition.z);
 
 		// Increase our light index
 		lightIndex++;
