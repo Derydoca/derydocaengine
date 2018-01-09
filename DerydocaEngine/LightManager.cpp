@@ -7,13 +7,12 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 	assert(objectTransform);
 	assert(shader);
 
-	static float rotationVal = 0.0f;
-
-	rotationVal += 0.05f;
-	float x = cos(rotationVal);
-
 	// Get a list of lights that will affect the object being sent in
 	std::list<Light*> lights = getLights(objectTransform);
+
+	// Cache some things
+	Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
+	glm::mat4 viewMat = currentCamera->getViewMatrix();
 
 	// Loop through each light and bind them to the shader
 	int lightIndex = 0;
@@ -25,21 +24,9 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 
 		// Set the position
 		glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
-		glm::vec4 worldPosition4 = glm::vec4(lightWorldPos, 1);
-		Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
-		glm::mat4 lightMvp = currentCamera->getInverseViewProjectionMatrix();
-		glm::vec4 screenPosition = lightMvp * worldPosition4;
-		//screenPosition *= -1;
+		glm::vec4 lightPositionEyeCoords = viewMat * glm::vec4(lightWorldPos, 1);
 		std::string positionName = "lights[" + std::to_string(lightIndex) + "].Position";
-		shader->setVec3(positionName, screenPosition);
-
-		//HACK
-		shader->setVec3("LightPositionWorld", lightWorldPos);
-		shader->setVec3("LightPosition", screenPosition);
-		shader->setColorRGB("Kd", light->getColor());
-		//auto camPos = CameraManager::getInstance().getCurrentCamera()->getGameObject()->getTransform()->getPos();
-		//printf("CAMERA: %f, %f, %f\n", camPos.x, camPos.y, camPos.z);
-		//printf("LIGHT:  %f, %f, %f\n", screenPosition.x, screenPosition.y, screenPosition.z);
+		shader->setVec3(positionName, lightPositionEyeCoords);
 
 		// Increase our light index
 		lightIndex++;
@@ -57,15 +44,25 @@ LightManager::~LightManager()
 
 std::list<Light*> LightManager::getLights(Transform * objectTransform)
 {
+	// Create a list to store the lights
 	std::list<Light*> lights = std::list<Light*>();
+
+	// Go through each light
 	int numLights = 0;
 	for each (Light* light in m_lights)
 	{
+		// TODO: Only include lights that would potentially effect this object
+
+		// Add the light to the list
 		lights.push_back(light);
+
+		// If we are at the maximum number of supported lights, lets end it early
 		numLights++;
 		if (numLights >= MAX_LIGHTS) {
 			break;
 		}
 	}
+
+	// Return the list of lights
 	return lights;
 }

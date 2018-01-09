@@ -3,22 +3,37 @@
 in vec3 VertexPosition;
 in vec3 VertexNormal;
 
+struct LightInfo{
+    vec3 Position; // Light position in eye coords
+    vec3 Intensity; // Light intensity
+};
+uniform LightInfo lights[5];
+
 out vec3 LightIntensity;
 
-uniform vec3 LightPositionWorld; // Light position in world coords.
-uniform vec3 LightPosition;      // Light position in eye coords.
-uniform vec3 Kd;                 // Diffuse reflectivity
-
 uniform mat4 MVP;
+uniform mat4 ModelViewMatrix;
+uniform mat3 NormalMatrix;
+
+vec3 ads(int lightIndex)
+{
+
+    vec3 tnorm = normalize(NormalMatrix * VertexNormal);
+    vec3 eyeCoords = (ModelViewMatrix * vec4(VertexPosition, 1.0)).xyz;
+    vec3 s = normalize(lights[lightIndex].Position - eyeCoords);
+
+    float cosTheta = dot(s, tnorm);
+    float dist = distance(eyeCoords, lights[lightIndex].Position.xyz);
+    return lights[lightIndex].Intensity * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
+}
 
 void main()
 {
-    vec3 vertEyePos = (MVP * vec4(VertexPosition, 1.0)).xyz;
-    vec3 lightDirection = normalize(LightPosition - vertEyePos);
-    vec3 normalDirection = normalize((MVP * vec4(VertexNormal, 0)).xyz);
+    LightIntensity = vec3(0.0);
+    for(int i = 0; i < 5; i++)
+    {
+        LightIntensity += ads(i);
+    }
 
-    float cosTheta = dot(normalDirection, lightDirection);
-    float dist = distance(vertEyePos, LightPosition);
-    LightIntensity = vec3(1,1,1) * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
     gl_Position = MVP * vec4(VertexPosition,1.0);
 }

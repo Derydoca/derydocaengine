@@ -74,7 +74,7 @@ int main()
 	goRoot->addComponent(&dVis);
 #endif
 
-	Scene* scene = new SquirrelTerrainScene();
+	Scene* scene = new DiffuseTestScene();
 	scene->setUp(goRoot, settings, display, keyboard, mouse);
 
 	// Divisor defines minimum frames per second

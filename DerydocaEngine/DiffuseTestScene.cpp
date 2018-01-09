@@ -59,15 +59,39 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	// Point light with small grassy sphere representation
 	Mesh* sphere = new Mesh("../res/sphere.obj");
 	Light* pointLight = new Light();
-	pointLight->setColor(new Color(0, 1, 0));
+	pointLight->setColor(new Color(0, 1, 0.5));
 	GameObject* goPointLight = new GameObject("Point Light");
 	goPointLight->addComponent(pointLight);
 	KeyboardMover* lightMover = new KeyboardMover(keyboard, 5.0f, SDLK_t, SDLK_g, SDLK_f, SDLK_h, SDLK_r, SDLK_y);
 	goPointLight->addComponent(lightMover);
 	MeshRenderer* mrSphere = new MeshRenderer(sphere, grassMaterial);
 	goPointLight->addComponent(mrSphere);
-	goPointLight->getTransform()->setScale(glm::vec3(0.2f, 0.2f, 0.2f));
+	goPointLight->getTransform()->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	root->addChild(goPointLight);
+
+	// Point light with small grassy sphere representation
+	Light* pointLight2 = new Light();
+	pointLight2->setColor(new Color(1, 0.5, 0));
+	GameObject* goPointLight2 = new GameObject("Point Light 2");
+	goPointLight2->addComponent(pointLight2);
+	KeyboardMover* lightMover2 = new KeyboardMover(keyboard, 5.0f, SDLK_i, SDLK_k, SDLK_j, SDLK_l, SDLK_u, SDLK_o);
+	goPointLight2->addComponent(lightMover2);
+	MeshRenderer* mrSphere2 = new MeshRenderer(sphere, grassMaterial);
+	goPointLight2->addComponent(mrSphere2);
+	goPointLight2->getTransform()->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+	root->addChild(goPointLight2);
+
+	// Point light with small grassy sphere representation
+	Light* pointLight3 = new Light();
+	pointLight3->setColor(new Color(0.5, 0, 1));
+	GameObject* goPointLight3 = new GameObject("Point Light 3");
+	goPointLight3->addComponent(pointLight3);
+	KeyboardMover* lightMover3 = new KeyboardMover(keyboard, 5.0f, SDLK_x, SDLK_z, SDLK_c, SDLK_v, SDLK_b, SDLK_n);
+	goPointLight3->addComponent(lightMover3);
+	MeshRenderer* mrSphere3 = new MeshRenderer(sphere, grassMaterial);
+	goPointLight3->addComponent(mrSphere3);
+	goPointLight3->getTransform()->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
+	root->addChild(goPointLight3);
 
 	// Diffuse material
 	std::string diffuseShaderPath = "../res/diffuse2";
@@ -88,15 +112,33 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 
 	// Test mesh with diffuse material applied
 	Mesh* testMesh = new Mesh("../res/sphere.obj");
-	//MeshRenderer* mrSquirrel = new MeshRenderer(squirrel, matSquirrel);
 	MeshRenderer* mrDiffuseTest = new MeshRenderer(testMesh, diffuseMaterial);
-	MaterialRefresher* refresher = new MaterialRefresher(keyboard, mrDiffuseTest);
+	MaterialRefresher* refresher = new MaterialRefresher(mrDiffuseTest);
 	GameObject* goDiffuseTest = new GameObject("Diffuse Test Mesh");
 	goDiffuseTest->addComponent(mrDiffuseTest);
 	goDiffuseTest->addComponent(refresher);
 	goDiffuseTest->getTransform()->setPos(glm::vec3(0, 0, -0.5));
 	goDiffuseTest->getTransform()->setEulerAngles(glm::vec3(0, 0, 90));
 	root->addChild(goDiffuseTest);
+
+
+	MeshRenderer* mrDiffuseTest2 = new MeshRenderer(testMesh, diffuseMaterial);
+	MaterialRefresher* refresher2 = new MaterialRefresher(mrDiffuseTest2);
+	GameObject* goDiffuseTest2 = new GameObject("Diffuse Test Mesh");
+	goDiffuseTest2->addComponent(mrDiffuseTest2);
+	goDiffuseTest2->addComponent(refresher2);
+	goDiffuseTest2->getTransform()->setPos(glm::vec3(2, 0, -0.5));
+	goDiffuseTest2->getTransform()->setEulerAngles(glm::vec3(0, 0, 90));
+	root->addChild(goDiffuseTest2);
+
+	MeshRenderer* mrDiffuseTest3 = new MeshRenderer(testMesh, diffuseMaterial);
+	MaterialRefresher* refresher3 = new MaterialRefresher(mrDiffuseTest3);
+	GameObject* goDiffuseTest3 = new GameObject("Diffuse Test Mesh");
+	goDiffuseTest3->addComponent(mrDiffuseTest3);
+	goDiffuseTest3->addComponent(refresher3);
+	goDiffuseTest3->getTransform()->setPos(glm::vec3(1, 1.75, -0.5));
+	goDiffuseTest3->getTransform()->setEulerAngles(glm::vec3(0, 0, 90));
+	root->addChild(goDiffuseTest3);
 }
 
 void DiffuseTestScene::tearDown(GameObject * root)

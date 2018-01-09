@@ -2,8 +2,7 @@
 #include "Material.h"
 #include "Shader.h"
 
-MaterialRefresher::MaterialRefresher(Keyboard* keyboard, MeshRenderer* meshRenderer) :
-	m_keyboard(keyboard),
+MaterialRefresher::MaterialRefresher(MeshRenderer* meshRenderer) :
 	m_meshRenderer(meshRenderer)
 {
 }
@@ -39,10 +38,6 @@ void MaterialRefresher::init()
 
 void MaterialRefresher::update(float deltaTime)
 {
-	if (m_keyboard->isKeyDownFrame(SDLK_m)) {
-		refreshMaterial();
-	}
-
 	if (isShaderSourceUpdated()) {
 		refreshMaterial();
 	}

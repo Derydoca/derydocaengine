@@ -90,38 +90,24 @@ void printMatrix(std::string matName, glm::mat3 mat)
 
 void Shader::update(const MatrixStack * matrixStack)
 {
+	glm::mat4 modelMatrix = matrixStack->getMatrix();
 	Camera* camera = CameraManager::getInstance().getCurrentCamera();
 
 	if (m_uniforms[TRANSFORM_MVP] >= 0)
 	{
-		glm::mat4 mvpMatrix = camera->getInverseViewProjectionMatrix() * matrixStack->getMatrix();
+		glm::mat4 mvpMatrix = camera->getInverseViewProjectionMatrix() * modelMatrix;
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 	}
 
 	if (m_uniforms[TRANSFORM_MV] >= 0)
 	{
-		glm::mat4 mvMatrix = camera->getViewMatrix() * matrixStack->getMatrix();
+		glm::mat4 mvMatrix = camera->getViewMatrix() * modelMatrix;
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MV], 1, GL_FALSE, glm::value_ptr(mvMatrix));
 	}
 
 	if (m_uniforms[TRANSFORM_NORMAL] >= 0)
 	{
-		// Inverse transpose matrix of the model view matrix
-		//glm::mat4 viewProjectionMatrix = camera->getViewProjectionMatrix() * matrixStack->getMatrix();
-		//glm::mat4 inversedMatrix = glm::inverse(viewProjectionMatrix);
-		//glm::mat4 transposedMatrix = glm::transpose(inversedMatrix);
-		//glm::mat3 normalMatrix3x3 = glm::mat3(transposedMatrix);
-
-		//printMatrix("Camera Model", camera->getGameObject()->getTransform()->getModel());
-		//printMatrix("Camera Projection", camera->getProjectionMatrix());
-		//printMatrix("View Projection Matrix", viewProjectionMatrix);
-		//printMatrix("Inversed Matrix", inversedMatrix);
-		//printMatrix("Transposed Matrix", transposedMatrix);
-		//printMatrix("Normal Matrix", normalMatrix3x3);
-
-		//glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix3x3));
-
-		glm::mat3 normalMatrix3x3 = glm::mat3(camera->getInverseViewProjectionMatrix() * matrixStack->getMatrix());
+		glm::mat3 normalMatrix3x3 = glm::mat3(camera->getViewMatrix() * modelMatrix);
 		glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix3x3));
 	}
 
@@ -131,7 +117,6 @@ void Shader::update(const MatrixStack * matrixStack)
 	}
 
 	if (m_uniforms[TRANSFORM_MODEL] >= 0) {
-		glm::mat4 modelMatrix = matrixStack->getMatrix();
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MODEL], 1, GL_FALSE, glm::value_ptr(modelMatrix));
 	}
 }
