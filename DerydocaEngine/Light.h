@@ -10,11 +10,11 @@ public:
 	enum LightType
 	{
 		/* A orthagonal light infinitely far away */
-		Directional,
-		/* A light projected in a frustum */
-		Spotlight,
+		Directional = 0,
 		/* A light radiating in all directions */
-		Point
+		Point = 1,
+		/* A light projected in a frustum */
+		Spotlight = 2,
 	};
 
 	Light();

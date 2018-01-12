@@ -40,6 +40,7 @@ public:
 	~Transform() {};
 
 	inline glm::mat4 getModel() const { return glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale); }
+	glm::mat4 getWorldModel();
 
 	glm::vec3& getWorldPos();
 	inline glm::vec3& getPos() { return m_pos; }

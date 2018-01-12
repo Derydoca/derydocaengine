@@ -27,6 +27,6 @@ private:
 
 	LightManager(LightManager const&);
 	std::list<Light*> m_lights;
-	const int MAX_LIGHTS = 4;
+	const int MAX_LIGHTS = 10;
 };
 

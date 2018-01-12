@@ -1,27 +1,50 @@
 #version 410
 
-varying vec4 position;
-varying vec3 normal;
+in vec3 vertPosition;
+in vec3 vertNormal;
+varying vec2 texCoord0;
 
-uniform vec4 LightPosition; // Light position in eye coords. ??
-uniform vec3 Kd;            // Diffuse reflectivity
-uniform vec3 Ld;            // Diffuse light intensity
+struct LightInfo{
+    int Type;
+    vec3 Direction;
+    vec3 Position; // Light position in eye coords
+    vec3 Intensity; // Light intensity
+};
+uniform LightInfo lights[10];
 
+layout( location = 0 ) out vec4 FragColor;
+
+uniform mat4 ModelViewMatrix;
 uniform mat3 NormalMatrix;
-uniform mat4 MVP;
+uniform sampler2D diffuse;
 
-out vec4 FragColor;
-
-void main()
+vec3 ads(int lightIndex)
 {
-    //vec3 tnorm = normalize( NormalMatrix * normal);
-    vec3 tnorm = normalize(normal);
-    vec4 eyeCoords = MVP * position;
-    //eyeCoords = vec3(eyeCoords.x, eyeCoords.y, eyeCoords.z, eyeCoords.w);
-    vec3 s = normalize(vec3(LightPosition - eyeCoords));
-    //vec3 s = normalize(vec3(LightPosition - position)); // 'Specular' is square
+    if(lights[lightIndex].Type == 0)
+    {
+        vec3 tnorm = normalize(NormalMatrix * vertNormal);
+        float cosTheta = dot(lights[lightIndex].Direction, tnorm);
+        return lights[lightIndex].Intensity * max(cosTheta, 0.0) * 3.0;
+    }
+    else if(lights[lightIndex].Type == 1)
+    {
+        vec3 tnorm = normalize(NormalMatrix * vertNormal);
+        vec3 eyeCoords = (ModelViewMatrix * vec4(vertPosition, 1.0)).xyz;
+        vec3 s = normalize(lights[lightIndex].Position - eyeCoords);
 
-    vec3 lightIntensity = Ld * Kd * max( dot( s, tnorm ),0.0);
-    FragColor = vec4(lightIntensity, 1);
-    //FragColor = vec4(1, 0, 0, 1);
+        float cosTheta = dot(s, tnorm);
+        float dist = distance(eyeCoords, lights[lightIndex].Position.xyz);
+        return lights[lightIndex].Intensity * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
+    }
+}
+
+void main() {
+
+    vec3 color = vec3(0.0);
+    for(int i = 0; i < 5; i++)
+    {
+        color += ads(i);
+    }
+
+    FragColor = texture2D(diffuse, texCoord0) * vec4(color, 1);
 }

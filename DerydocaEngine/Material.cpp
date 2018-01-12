@@ -56,11 +56,11 @@ void Material::bind()
 	assert(m_shader);
 	//assert(m_texture);
 
+	m_shader->bind();
 	if (m_texture != NULL)
 	{
 		m_texture->bind(0);
 	}
-	m_shader->bind();
 
 	for (auto const& x : m_floatValues)
 	{

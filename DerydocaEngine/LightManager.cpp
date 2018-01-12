@@ -18,6 +18,20 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 	int lightIndex = 0;
 	for each (Light* light in lights)
 	{
+		Light::LightType lightType = light->getLightType();
+
+		if (lightType == Light::Directional)
+		{
+			// Set the light direction
+			std::string typeName = "lights[" + std::to_string(lightIndex) + "].Direction";
+			glm::vec3 lightDirection = currentCamera->getViewMatrix() * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(1, 0, 0, 0);
+			shader->setVec3(typeName, lightDirection);
+		}
+
+		// Set the light type
+		std::string typeName = "lights[" + std::to_string(lightIndex) + "].Type";
+		shader->setInt(typeName, (int)lightType);
+
 		// Set the intensity
 		std::string intensityName = "lights[" + std::to_string(lightIndex) + "].Intensity";
 		shader->setColorRGB(intensityName, light->getColor());

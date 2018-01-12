@@ -51,7 +51,7 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 
 	// Grass material
 	Material* grassMaterial = new Material();
-	Shader* shader = new Shader("../res/basicShader");
+	Shader* shader = new Shader("../res/diffuseFrag");
 	grassMaterial->setShader(shader);
 	Texture* grassTexture = new Texture("../res/grass.png");
 	grassMaterial->setTextureSlot(0, grassTexture);
@@ -93,11 +93,22 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	goPointLight3->getTransform()->setScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	root->addChild(goPointLight3);
 
+	// Directional light
+	Light* directionalLight = new Light();
+	directionalLight->setLightType(Light::Directional);
+	directionalLight->setColor(new Color(0.3, 0.3, 0.3));
+	GameObject* goDirectionalLight = new GameObject("Directional Light");
+	goDirectionalLight->addComponent(directionalLight);
+	goDirectionalLight->getTransform()->setEulerAngles(glm::vec3(-30, -30, 0));
+	root->addChild(goDirectionalLight);
+
 	// Diffuse material
-	std::string diffuseShaderPath = "../res/diffuse2";
+	std::string diffuseShaderPath = "../res/diffuseFrag";
 	Material* diffuseMaterial = new Material();
 	Shader* diffuseShader = new Shader(diffuseShaderPath);
 	diffuseMaterial->setShader(diffuseShader);
+	Texture* rebelMaterial = new Texture("../res/rebel.jpg");
+	diffuseMaterial->setTextureSlot(0, rebelMaterial);
 
 	// Manual mesh
 	Vertex* verts = new Vertex[4]();

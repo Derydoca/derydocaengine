@@ -1,6 +1,31 @@
 #include "Transform.h"
 #include "GameObject.h"
 
+glm::mat4 Transform::getWorldModel()
+{
+	// Start off with the object's local model
+	glm::mat4 worldModel = getModel();
+
+	if (this->m_gameObject != NULL)
+	{
+		// Temporary storage object for recursive iteration
+		GameObject* currentGameObject = this->m_gameObject->getParent();
+
+		// Recursively transform the position by all parent objects
+		while (currentGameObject != NULL)
+		{
+			// Transform the position by the transform's matrix
+			worldModel = currentGameObject->getTransform()->getModel() * worldModel;
+
+			// Get the parent transform and start the loop over again
+			currentGameObject = currentGameObject->getParent();
+		}
+	}
+
+	// Return the world position
+	return worldModel;
+}
+
 glm::vec3 & Transform::getWorldPos()
 {
 	// Start off with the object's local position

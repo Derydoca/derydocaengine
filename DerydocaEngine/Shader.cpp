@@ -141,6 +141,11 @@ void Shader::setColorRGBA(std::string name, Color color)
 	glUniform4f(getUniformName(name), color.r, color.g, color.b, color.a);
 }
 
+void Shader::setInt(std::string name, int val)
+{
+	glUniform1i(getUniformName(name), val);
+}
+
 void Shader::setVec3(std::string name, glm::vec3 val)
 {
 	glUniform3f(getUniformName(name), val.x, val.y, val.z);

@@ -19,6 +19,7 @@ public:
 	void setFloat(std::string name, float val);
 	void setColorRGB(std::string name, Color color);
 	void setColorRGBA(std::string name, Color color);
+	void setInt(std::string name, int val);
 	void setVec3(std::string name, glm::vec3 val);
 	void setVec4(std::string name, glm::vec4 val);
 	void setMat3(std::string name, glm::mat3 val);
