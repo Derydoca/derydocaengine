@@ -1,0 +1,35 @@
+Scene:
+  - Type: Material
+    ID: 100
+    Properties:
+      Shader: ../res/diffuseFrag
+      MaterialParameters:
+        - Type: Texture
+          Slot: 0
+          Path: ../res/rebel.jpg
+  - Type: Mesh
+    ID: 200
+    Properties:
+      Path: ../res/rebel.obj
+  - Type: GameObject
+    ID: 300
+    Properties:
+      Name: Diffuse Shaded Model
+      Transform:
+        Position:
+          - 0
+          - 0
+          - -3
+        Rotation:
+          - 0
+          - 0
+          - 0
+        Scale:
+          - 3
+          - 3
+          - 3
+      Components:
+        - Type: MeshRenderer
+          ID: 310
+          Material: 100
+          Mesh: 200

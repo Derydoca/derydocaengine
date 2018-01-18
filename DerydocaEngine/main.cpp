@@ -32,6 +32,7 @@
 
 #include "SquirrelTerrainScene.h"
 #include "DiffuseTestScene.h"
+#include "SerializedScene.h"
 
 int main()
 {
@@ -74,7 +75,12 @@ int main()
 	goRoot->addComponent(&dVis);
 #endif
 
-	Scene* scene = new DiffuseTestScene();
+	Scene* sceneBase = new DiffuseTestScene();
+	sceneBase->setUp(goRoot, settings, display, keyboard, mouse);
+
+	SerializedScene* scene = new SerializedScene();
+	scene->LoadFromFile("../res/generatedLevel.yaml");
+	//scene->SaveToFile("../res/generatedLevel.yaml");
 	scene->setUp(goRoot, settings, display, keyboard, mouse);
 
 	// Divisor defines minimum frames per second

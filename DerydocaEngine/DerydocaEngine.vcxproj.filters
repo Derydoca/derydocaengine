@@ -89,6 +89,7 @@
     <ClCompile Include="SquirrelTerrainScene.cpp" />
     <ClCompile Include="DiffuseTestScene.cpp" />
     <ClCompile Include="MaterialRefresher.cpp" />
+    <ClCompile Include="SerializedScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -212,6 +213,8 @@
     <ClInclude Include="SquirrelTerrainScene.h" />
     <ClInclude Include="DiffuseTestScene.h" />
     <ClInclude Include="MaterialRefresher.h" />
+    <ClInclude Include="SerializedScene.h" />
+    <ClInclude Include="SceneObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

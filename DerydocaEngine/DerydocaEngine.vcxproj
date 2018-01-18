@@ -154,6 +154,7 @@
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Rotator.cpp" />
     <ClCompile Include="ScreenshotUtil.cpp" />
+    <ClCompile Include="SerializedScene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
@@ -197,7 +198,9 @@
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Rotator.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneObject.h" />
     <ClInclude Include="ScreenshotUtil.h" />
+    <ClInclude Include="SerializedScene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShadowMap.h" />
