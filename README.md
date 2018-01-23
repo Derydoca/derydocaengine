@@ -8,11 +8,11 @@ This is being written in Visual Studio 2017. For anyone who wants to use another
 
 ## Third Party Libraries
 
-GLEW - For exposing OpenGL functions
-SDL2 - For window management
-GLM - For all the complex math made to make games
-SOIL - For image loading
-LibYAML - For configuration files
+*  GLEW - For exposing OpenGL functions
+*  SDL2 - For window management
+*  GLM - For all the complex math made to make games
+*  SOIL - For image loading
+*  yaml-cpp - For configuration files and serialized levels
 
 ## Acknowledgements
 
