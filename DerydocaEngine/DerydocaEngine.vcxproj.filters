@@ -90,6 +90,7 @@
     <ClCompile Include="DiffuseTestScene.cpp" />
     <ClCompile Include="MaterialRefresher.cpp" />
     <ClCompile Include="SerializedScene.cpp" />
+    <ClCompile Include="ObjectLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -215,6 +216,10 @@
     <ClInclude Include="MaterialRefresher.h" />
     <ClInclude Include="SerializedScene.h" />
     <ClInclude Include="SceneObject.h" />
+    <ClInclude Include="ObjectLibrary.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceType.h" />
+    <ClInclude Include="StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

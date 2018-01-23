@@ -90,6 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;SOIL.lib;libyaml-cppmdd.lib;LibOVR.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,6 +150,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="ObjectLibrary.cpp" />
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="Oculus.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
@@ -192,10 +194,13 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="ObjectLibrary.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="Oculus.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderTexture.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceType.h" />
     <ClInclude Include="Rotator.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneObject.h" />
@@ -207,6 +212,7 @@
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SOIL.h" />
     <ClInclude Include="SquirrelTerrainScene.h" />
+    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />

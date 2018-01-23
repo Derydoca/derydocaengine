@@ -33,9 +33,13 @@
 #include "SquirrelTerrainScene.h"
 #include "DiffuseTestScene.h"
 #include "SerializedScene.h"
+#include "ObjectLibrary.h"
 
 int main()
 {
+	ObjectLibrary* lib = new ObjectLibrary;
+	lib->initialize("../proj/");
+
 	ButtonState* bs = new ButtonState(0);
 
 	// Initialize the clock to this machine
