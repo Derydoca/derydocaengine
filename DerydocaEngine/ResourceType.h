@@ -1,7 +1,12 @@
 #pragma once
+#include <string>
 
 enum ResourceType
 {
-	Texture,
-	Text,
+	UnknownResource,
+	MaterialResource,
+	TextureResource,
+	TextResource,
 };
+
+ResourceType pathToResourceType(std::string str);

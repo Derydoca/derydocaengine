@@ -1,12 +1,4 @@
 Scene:
-  - Type: Material
-    ID: 100
-    Properties:
-      Shader: ../res/diffuseFrag
-      MaterialParameters:
-        - Type: Texture
-          Slot: 0
-          Path: ../res/rebel.jpg
   - Type: Mesh
     ID: 200
     Properties:
@@ -31,5 +23,5 @@ Scene:
       Components:
         - Type: MeshRenderer
           ID: 310
-          Material: 100
+          Material: 2
           Mesh: 200

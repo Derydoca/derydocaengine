@@ -1,1 +1,4 @@
 id: 1
+properties:
+  width: 512,
+  height: 512,

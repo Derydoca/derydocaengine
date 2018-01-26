@@ -91,6 +91,15 @@
     <ClCompile Include="MaterialRefresher.cpp" />
     <ClCompile Include="SerializedScene.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
+    <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="ResourceType.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="MaterialSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -220,6 +229,15 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceType.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="ResourceTypeSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
@@ -239,6 +257,9 @@
     </Filter>
     <Filter Include="Engine\Debug">
       <UniqueIdentifier>{927235fe-be96-458a-8f36-9cbd90f48ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceSerializers">
+      <UniqueIdentifier>{2986fdc5-b7d0-41f8-ac17-50fcd646a29b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,0 +1,5 @@
+Shader: ../res/diffuseFrag
+MaterialParameters:
+  - Type: Texture
+    Slot: 0
+    Path: ../res/rebel.jpg

@@ -147,6 +147,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialRefresher.cpp" />
+    <ClCompile Include="MaterialSerializer.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -154,6 +155,9 @@
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="Oculus.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceSerializer.cpp" />
+    <ClCompile Include="ResourceType.cpp" />
     <ClCompile Include="Rotator.cpp" />
     <ClCompile Include="ScreenshotUtil.cpp" />
     <ClCompile Include="SerializedScene.cpp" />
@@ -162,6 +166,7 @@
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SquirrelTerrainScene.cpp" />
+    <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -190,6 +195,7 @@
     <ClInclude Include="LinkedListNode.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialRefresher.h" />
+    <ClInclude Include="MaterialSerializer.h" />
     <ClInclude Include="MatrixStack.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
@@ -200,6 +206,8 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceSerializer.h" />
+    <ClInclude Include="ResourceTypeSerializer.h" />
     <ClInclude Include="ResourceType.h" />
     <ClInclude Include="Rotator.h" />
     <ClInclude Include="Scene.h" />

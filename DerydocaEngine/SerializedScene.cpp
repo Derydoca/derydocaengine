@@ -2,6 +2,7 @@
 #include "YamlTools.h"
 #include <iostream>
 #include <fstream>
+#include "ObjectLibrary.h"
 
 // Find a better (generic) way to initialize the scene objects
 #include "Material.h"
@@ -101,14 +102,18 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 				std::string compType = compNode["Type"].as<std::string>();
 				if (compType == "MeshRenderer")
 				{
-					SceneObject* materialObj = findNode(compNode["Material"].as<int>());
+					int materialId = compNode["Material"].as<int>();
 					SceneObject* meshObj = findNode(compNode["Mesh"].as<int>());
-					if (!materialObj->isObjectCreated() || !meshObj->isObjectCreated())
+					if (!meshObj->isObjectCreated())
 					{
 						printf("Unable to create MeshRenderer component because material or mesh is invalid.");
 						continue;
 					}
-					MeshRenderer* mr = new MeshRenderer((Mesh*)meshObj->getObjectReference(), (Material*)materialObj->getObjectReference());
+
+					Resource* materialResource = ObjectLibrary::getInstance().getResource(materialId);
+					Material* mat = (Material*)materialResource->getResourceObject();
+
+					MeshRenderer* mr = new MeshRenderer((Mesh*)meshObj->getObjectReference(), mat);
 					go->addComponent(mr);
 				}
 			}

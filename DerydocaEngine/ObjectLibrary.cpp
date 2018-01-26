@@ -19,11 +19,11 @@ Resource * ObjectLibrary::getResource(int id)
 {
 	// Loop through the list of resources until we find one with the correct ID
 	// TODO: Use a better container for resource objects
-	for (Resource r : m_resources)
+	for (Resource* r : m_resources)
 	{
-		if (r.getId() == id)
+		if (r->getId() == id)
 		{
-			return &r;
+			return r;
 		}
 	}
 
@@ -62,12 +62,12 @@ void ObjectLibrary::createMetaFile(int id, std::string metaFilePath)
 	file.close();
 }
 
-void ObjectLibrary::registerResource(Resource resource)
+void ObjectLibrary::registerResource(Resource* resource)
 {
 	m_resources.push_back(resource);
-	if (resource.getId() > m_largestID)
+	if (resource->getId() > m_largestID)
 	{
-		m_largestID = resource.getId();
+		m_largestID = resource->getId();
 	}
 }
 
@@ -99,6 +99,6 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 	// If a resource was successfully loaded, add it to the list of resources
 	if (r)
 	{
-		registerResource(*r);
+		registerResource(r);
 	}
 }

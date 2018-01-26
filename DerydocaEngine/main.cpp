@@ -37,8 +37,7 @@
 
 int main()
 {
-	ObjectLibrary* lib = new ObjectLibrary;
-	lib->initialize("../proj/");
+	ObjectLibrary::getInstance().initialize("../proj/");
 
 	ButtonState* bs = new ButtonState(0);
 
