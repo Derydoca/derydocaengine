@@ -11,9 +11,6 @@
     <ClCompile Include="Rotator.cpp">
       <Filter>Game Components</Filter>
     </ClCompile>
-    <ClCompile Include="obj_loader.cpp">
-      <Filter>Libraries</Filter>
-    </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>Game Components</Filter>
     </ClCompile>
@@ -111,12 +108,6 @@
     <ClInclude Include="Rotator.h">
       <Filter>Game Components</Filter>
     </ClInclude>
-    <ClInclude Include="SOIL.h">
-      <Filter>Libraries</Filter>
-    </ClInclude>
-    <ClInclude Include="obj_loader.h">
-      <Filter>Libraries</Filter>
-    </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>Game Components</Filter>
     </ClInclude>
@@ -154,9 +145,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Skybox.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.h">
@@ -242,9 +230,6 @@
   <ItemGroup>
     <Filter Include="Game Components">
       <UniqueIdentifier>{6de40de1-1620-4246-9a36-f184d4e2e99a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Libraries">
-      <UniqueIdentifier>{1c4e3881-089f-492a-8509-a541828c7262}</UniqueIdentifier>
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{9e9a0417-56b9-440e-8db7-c98e7c5dc0ca}</UniqueIdentifier>

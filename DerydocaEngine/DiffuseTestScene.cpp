@@ -110,17 +110,6 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	Texture* rebelMaterial = new Texture("../res/rebel.jpg");
 	diffuseMaterial->setTextureSlot(0, rebelMaterial);
 
-	// Manual mesh
-	Vertex* verts = new Vertex[4]();
-	verts[0] = Vertex(glm::vec3(0, 0, 0), glm::vec2(0, 0), glm::vec3(0, 0, 1));
-	verts[1] = Vertex(glm::vec3(0, 1, 0), glm::vec2(0, 1), glm::vec3(0, 0, 1));
-	verts[2] = Vertex(glm::vec3(1, 1, 0), glm::vec2(1, 1), glm::vec3(0, 0, 1));
-	verts[3] = Vertex(glm::vec3(1, 0, 0), glm::vec2(1, 0), glm::vec3(0, 0, 1));
-	unsigned int ind[6] = {
-		0, 2, 1, 0, 3, 2
-	};
-	Mesh* m = new Mesh(verts, (unsigned int)4, ind, (unsigned int)6);
-
 	// Test mesh with diffuse material applied
 	Mesh* testMesh = new Mesh("../res/sphere.obj");
 	MeshRenderer* mrDiffuseTest = new MeshRenderer(testMesh, diffuseMaterial);

@@ -78,7 +78,9 @@ void Terrain::updateMesh()
 
 	// Build the list of verts
 	int numVerts = m_width * m_depth;
-	Vertex* verts = new Vertex[numVerts];
+	glm::vec3* positions = new glm::vec3[numVerts];
+	glm::vec3* normals = new glm::vec3[numVerts];
+	glm::vec2* texCoords = new glm::vec2[numVerts];
 	for (int z = 0; z < m_depth; z++)
 	{
 		for (int x = 0; x < m_width; x++)
@@ -97,7 +99,9 @@ void Terrain::updateMesh()
 			glm::vec3 normal(-sx * m_heightScale, 2 * m_unitScale, -sy * m_heightScale);
 			normal = glm::normalize(normal);
 
-			verts[index] = Vertex(glm::vec3(x, m_heightData[x][z] * m_heightScale, z) * m_unitScale, glm::vec2(x, z) * m_unitScale, normal);
+			positions[index] = glm::vec3(x, m_heightData[x][z] * m_heightScale, z) * m_unitScale;
+			texCoords[index] = glm::vec2(x, z) * m_unitScale;
+			normals[index] = normal;
 		}
 	}
 
@@ -118,7 +122,7 @@ void Terrain::updateMesh()
 		}
 	}
 
-	m_mesh = new Mesh(verts, numVerts, indices, numIndices);
+	m_mesh = new Mesh(numVerts, positions, normals, texCoords, indices, numIndices);
 }
 
 void Terrain::setTextureSlot(int slot, Texture * texture)

@@ -18,15 +18,15 @@ Skybox::~Skybox()
 
 void Skybox::buildMesh(float size)
 {
-	Vertex* verts = new Vertex[8]();
-	verts[0].setPos(-size,   size,  size);
-	verts[1].setPos( size,   size,  size);
-	verts[2].setPos( size,   size, -size);
-	verts[3].setPos(-size,   size, -size);
-	verts[4].setPos(-size,  -size,  size);
-	verts[5].setPos( size,  -size,  size);
-	verts[6].setPos( size,  -size, -size);
-	verts[7].setPos(-size,  -size, -size);
+	glm::vec3* positions = new glm::vec3[8]();
+	positions[0] = glm::vec3(-size, size, size);
+	positions[1] = glm::vec3(size, size, size);
+	positions[2] = glm::vec3(size, size, -size);
+	positions[3] = glm::vec3(-size, size, -size);
+	positions[4] = glm::vec3(-size, -size, size);
+	positions[5] = glm::vec3(size, -size, size);
+	positions[6] = glm::vec3(size, -size, -size);
+	positions[7] = glm::vec3(-size, -size, -size);
 
 	unsigned int indices[36] = {
 		// Top
@@ -54,10 +54,12 @@ void Skybox::buildMesh(float size)
 		3, 7, 6
 	};
 
-	Mesh* m = new Mesh(
-		verts, 
-		(unsigned int)8, 
-		indices, 
-		(unsigned int)36);
-	m_mesh = m;
+	m_mesh = new Mesh(
+		8,
+		positions,
+		nullptr,
+		nullptr,
+		indices,
+		36
+	);
 }

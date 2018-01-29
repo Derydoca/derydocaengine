@@ -153,7 +153,6 @@
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
-    <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="Oculus.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -202,7 +201,6 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="ObjectLibrary.h" />
-    <ClInclude Include="obj_loader.h" />
     <ClInclude Include="Oculus.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderTexture.h" />
@@ -219,13 +217,11 @@
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
-    <ClInclude Include="SOIL.h" />
     <ClInclude Include="SquirrelTerrainScene.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="Vertex.h" />
     <ClInclude Include="WasdMover.h" />
     <ClInclude Include="YamlTools.h" />
   </ItemGroup>
