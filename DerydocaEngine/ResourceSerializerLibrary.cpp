@@ -5,12 +5,16 @@
 
 ResourceTypeSerializer * ResourceSerializerLibrary::getTypeSerializer(std::string sourceFilePath)
 {
+	// Determine the resource type from the file path
 	ResourceType type = pathToResourceType(sourceFilePath);
+
+	// Return the serializer associated to that type
 	return getTypeSerializer(type);
 }
 
 ResourceTypeSerializer * ResourceSerializerLibrary::getTypeSerializer(ResourceType type)
 {
+	// Return the associated serializer for the resource type specified
 	auto search = m_typeSerializers.find(type);
 	if (search != m_typeSerializers.end())
 	{
@@ -24,6 +28,7 @@ ResourceTypeSerializer * ResourceSerializerLibrary::getTypeSerializer(ResourceTy
 
 void ResourceSerializerLibrary::registerTypeSerializer(ResourceTypeSerializer * serializer)
 {
+	// Add this serializer to the list of serializers
 	m_typeSerializers.insert(std::pair<ResourceType, ResourceTypeSerializer*>(serializer->getResourceType(), serializer));
 }
 

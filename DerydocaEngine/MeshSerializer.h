@@ -10,9 +10,9 @@ public:
 	MeshSerializer();
 	~MeshSerializer();
 
-	ResourceType getResourceType();
 	void* deserialize(Resource* resource);
 	YAML::Node generateResourceNodes(std::string filePath);
+	ResourceType getResourceType();
 	Resource* loadResourceFromMeta(YAML::Node resourceNode);
 
 private:

@@ -2,7 +2,6 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <iostream>
 #include <string>
 #include "ResourceSerializerLibrary.h"
 #include "StringUtils.h"
@@ -10,7 +9,6 @@
 #include "YamlTools.h"
 
 namespace fs = std::experimental::filesystem::v1;
-std::string m_metaExtension = ".derymeta";
 
 void ObjectLibrary::initialize(std::string projectPath)
 {
@@ -19,26 +17,30 @@ void ObjectLibrary::initialize(std::string projectPath)
 
 Resource * ObjectLibrary::getResource(boost::uuids::uuid uuid)
 {
-	// Loop through the list of resources until we find one with the correct ID
-	// TODO: Use a better container for resource objects
-	for (Resource* r : m_resources)
+	// Find a resource with a matching uuid
+	auto search = m_resources.find(uuid);
+	if (search != m_resources.end())
 	{
-		if (r->getId() == uuid)
-		{
-			return r;
-		}
+		// If we found it, return the reference to the resource
+		return search->second;
 	}
-
-	// If nothing was found, return a null pointer
-	return nullptr;
+	else
+	{
+		// If it was not in the collection, return null
+		return nullptr;
+	}
 }
 
 void ObjectLibrary::initializeDirectory(std::string directory)
 {
 	printf("Loading project directory...\n");
+
+	// Iterate through all files in this directory
 	for (auto & p : fs::directory_iterator(directory))
 	{
 		std::string filePath = p.path().string();
+
+		// If the file is not a meta file, initialize it
 		if (!endsWith(filePath, m_metaExtension))
 		{
 			initializeFile(filePath);
@@ -46,39 +48,24 @@ void ObjectLibrary::initializeDirectory(std::string directory)
 	}
 }
 
-void ObjectLibrary::createMetaFile(int id, std::string metaFilePath)
-{
-	YAML::Node root;
-
-	// Set the document's properties
-	root["id"] = id;
-
-	// Create the file emitter
-	YAML::Emitter out;
-	out.SetIndent(2);
-	out.SetMapFormat(YAML::Block);
-	out << root;
-	std::ofstream file;
-	file.open(metaFilePath);
-	file << out.c_str();
-	file.close();
-}
-
 bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaFilePath)
 {
+	// Find the serializer for this file type
 	auto serializer = ResourceSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+
+	// If the serializer was not found, abort and return false
 	if (serializer == nullptr)
 	{
 		printf("The file '%s' does not have a serializer associated with it.\n", sourceFilePath.c_str());
 		return false;
 	}
 
+	// Create the yaml structure
 	YAML::Node root;
 	YAML::Node resources = serializer->generateResourceNodes(sourceFilePath);
-
 	root["resources"] = resources;
 
-	// Create the file emitter
+	// Create the file emitter and save it to disk
 	YAML::Emitter out;
 	out.SetIndent(2);
 	out.SetMapFormat(YAML::Block);
@@ -93,42 +80,8 @@ bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaF
 
 void ObjectLibrary::registerResource(Resource* resource)
 {
-	m_resources.push_back(resource);
-	/*if (resource->getId() > m_largestID)
-	{
-		m_largestID = resource->getId();
-	}*/
-}
-
-Resource* ObjectLibrary::loadMetaFile(std::string sourceFilePath, std::string metaFilePath)
-{
-	return nullptr;
-	/*int id;
-
-	YAML::Node file = YAML::LoadFile(metaFilePath);
-	id = file["id"].as<int>();
-
-	Resource* r = new Resource(id, sourceFilePath, metaFilePath);
-	return r;*/
-
-	//YAML::Node file = YAML::LoadFile(metaFilePath);
-	//YAML::Node resources = file["resources"];
-	//if (!resources)
-	//{
-	//	return nullptr;
-	//}
-
-	//if (!resources.IsSequence())
-	//{
-	//	return nullptr;
-	//}
-
-	//for (unsigned int i = 0; i < resources.size(); i++)
-	//{
-	//	YAML::Node resource = resources[i];
-	//	//boost::uuids::uuid uuid = resource["id"].as<boost::uuids::uuid>();
-	//	//Resource* resource = nullptr;//new Resource(uuid, sourceFilePath, metaFilePath, UnknownResourceType);
-	//}
+	//m_resources.push_back(resource);
+	m_resources.insert(std::pair<boost::uuids::uuid, Resource*>(resource->getId(), resource));
 }
 
 void ObjectLibrary::initializeFile(std::string sourceFilePath)

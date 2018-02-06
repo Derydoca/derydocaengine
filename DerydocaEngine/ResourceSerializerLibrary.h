@@ -16,10 +16,11 @@ public:
 
 	void operator=(ResourceSerializerLibrary const&) = delete;
 private:
-	void registerTypeSerializer(ResourceTypeSerializer* serializer);
 	ResourceSerializerLibrary();
 	~ResourceSerializerLibrary();
 	ResourceSerializerLibrary(ResourceSerializerLibrary const&);
+
+	void registerTypeSerializer(ResourceTypeSerializer* serializer);
 
 	std::map<ResourceType, ResourceTypeSerializer*> m_typeSerializers;
 };
