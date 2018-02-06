@@ -9,5 +9,7 @@ public:
 
 	virtual ResourceType getResourceType();
 	virtual void* deserialize(Resource* resource);
+	YAML::Node generateResourceNodes(std::string filePath);
+	Resource* loadResourceFromMeta(YAML::Node resourceNode);
 };
 

@@ -7,14 +7,14 @@ EngineSettings::EngineSettings()
 
 	YAML::Node window = config["window"];
 
-	m_width = YamlTools::getInt(window, "width", 800);
-	m_height = YamlTools::getInt(window, "height", 600);
+	m_width = YamlTools::getIntSafe(window, "width", 800);
+	m_height = YamlTools::getIntSafe(window, "height", 600);
 
 	YAML::Node camera = config["camera"];
 
 	//m_camPos = YamlTools::getVec3(camera, "position", glm::vec3());
 	m_camPos = camera["position"].as<glm::vec3>();
-	m_fov = YamlTools::getFloat(camera, "fov", 70.0f);
+	m_fov = YamlTools::getFloatSafe(camera, "fov", 70.0f);
 }
 
 EngineSettings::~EngineSettings()

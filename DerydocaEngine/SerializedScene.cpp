@@ -1,8 +1,8 @@
 #include "SerializedScene.h"
-#include "YamlTools.h"
 #include <iostream>
 #include <fstream>
 #include "ObjectLibrary.h"
+#include "YamlTools.h"
 
 // Find a better (generic) way to initialize the scene objects
 #include "Material.h"
@@ -102,19 +102,23 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 				std::string compType = compNode["Type"].as<std::string>();
 				if (compType == "MeshRenderer")
 				{
-					int materialId = compNode["Material"].as<int>();
+					boost::uuids::uuid materialId = compNode["Material"].as<boost::uuids::uuid>();
+					//boost::uuids::uuid materialId = boost::uuids::uuid();
+					std::string materialIdX = compNode["Material"].as<std::string>();
 					SceneObject* meshObj = findNode(compNode["Mesh"].as<int>());
 					if (!meshObj->isObjectCreated())
 					{
-						printf("Unable to create MeshRenderer component because material or mesh is invalid.");
+						printf("Unable to create MeshRenderer component because material or mesh is invalid.\n");
 						continue;
 					}
 
 					Resource* materialResource = ObjectLibrary::getInstance().getResource(materialId);
-					Material* mat = (Material*)materialResource->getResourceObject();
-
-					MeshRenderer* mr = new MeshRenderer((Mesh*)meshObj->getObjectReference(), mat);
-					go->addComponent(mr);
+					if (materialResource)
+					{
+						Material* mat = (Material*)materialResource->getResourceObject();
+						MeshRenderer* mr = new MeshRenderer((Mesh*)meshObj->getObjectReference(), mat);
+						go->addComponent(mr);
+					}
 				}
 			}
 		}
@@ -138,31 +142,31 @@ void SerializedScene::LoadFromFile(std::string filePath)
 		YAML::Node propertiesNode = sceneNode["Properties"];
 		if (!typeNode)
 		{
-			printf("Skipping scene node %i because type is not defined.", i);
+			printf("Skipping scene node %i because type is not defined.\n", i);
 			continue;
 		}
 
 		if (!typeNode.IsScalar())
 		{
-			printf("Skipping scene node %i because type is not a scalar.", i);
+			printf("Skipping scene node %i because type is not a scalar.\n", i);
 			continue;
 		}
 
 		if (!typeNode.IsScalar())
 		{
-			printf("Skipping scene node %i because type is not a scalar.", i);
+			printf("Skipping scene node %i because type is not a scalar.\n", i);
 			continue;
 		}
 
 		if (!idNode || !idNode.IsScalar())
 		{
-			printf("Skipping scene node %i because it does not contain a valid ID.", i);
+			printf("Skipping scene node %i because it does not contain a valid ID.\n", i);
 			continue;
 		}
 
 		if (!propertiesNode)
 		{
-			printf("Skipping scene node %i because it contains no properties.", i);
+			printf("Skipping scene node %i because it contains no properties.\n", i);
 			continue;
 		}
 

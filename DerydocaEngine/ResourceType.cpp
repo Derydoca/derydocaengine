@@ -6,18 +6,22 @@ ResourceType pathToResourceType(std::string str)
 	std::string extension = getFileExtension(str);
 	if (extension == "derymaterial")
 	{
-		return MaterialResource;
+		return MaterialResourceType;
+	}
+	else if (extension == "fbx" || extension == "obj")
+	{
+		return ModelResourceType;
 	}
 	else if (extension == "bmp" || extension == "tga" || extension == "png")
 	{
-		return TextureResource;
+		return TextureResourceType;
 	}
 	else if (extension == "txt")
 	{
-		return TextResource;
+		return TextResourceType;
 	}
 	else
 	{
-		return UnknownResource;
+		return UnknownResourceType;
 	}
 }

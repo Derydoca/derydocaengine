@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Boost\boost_1_66_0;.\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -149,15 +149,19 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialRefresher.cpp" />
     <ClCompile Include="MaterialSerializer.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="MeshResource.cpp" />
+    <ClCompile Include="MeshSerializer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
     <ClCompile Include="Oculus.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="ResourceSerializer.cpp" />
+    <ClCompile Include="ResourceSerializerLibrary.cpp" />
     <ClCompile Include="ResourceType.cpp" />
+    <ClCompile Include="ResourceTypeSerializer.cpp" />
     <ClCompile Include="Rotator.cpp" />
     <ClCompile Include="ScreenshotUtil.cpp" />
     <ClCompile Include="SerializedScene.cpp" />
@@ -196,16 +200,19 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialRefresher.h" />
     <ClInclude Include="MaterialSerializer.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="MatrixStack.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="MeshResource.h" />
+    <ClInclude Include="MeshSerializer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="ObjectLibrary.h" />
     <ClInclude Include="Oculus.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceSerializer.h" />
+    <ClInclude Include="ResourceSerializerLibrary.h" />
     <ClInclude Include="ResourceTypeSerializer.h" />
     <ClInclude Include="ResourceType.h" />
     <ClInclude Include="Rotator.h" />

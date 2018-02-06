@@ -65,7 +65,6 @@
     <ClCompile Include="DebugVisualizer.cpp">
       <Filter>Engine\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="Oculus.cpp" />
     <ClCompile Include="ShadowMap.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
@@ -81,21 +80,56 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="LightManager.cpp" />
-    <ClCompile Include="KeyboardMover.cpp" />
-    <ClCompile Include="SquirrelTerrainScene.cpp" />
-    <ClCompile Include="DiffuseTestScene.cpp" />
-    <ClCompile Include="MaterialRefresher.cpp" />
-    <ClCompile Include="SerializedScene.cpp" />
-    <ClCompile Include="ObjectLibrary.cpp" />
-    <ClCompile Include="StringUtils.cpp" />
-    <ClCompile Include="ResourceType.cpp" />
-    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="MaterialSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceSerializer.cpp">
+    <ClCompile Include="MeshSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSerializerLibrary.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceTypeSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="DiffuseTestScene.cpp">
+      <Filter>Temporary</Filter>
+    </ClCompile>
+    <ClCompile Include="SquirrelTerrainScene.cpp">
+      <Filter>Temporary</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardMover.cpp">
+      <Filter>Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialRefresher.cpp">
+      <Filter>Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshResource.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceType.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Oculus.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectLibrary.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializedScene.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,7 +226,6 @@
     <ClInclude Include="GLError.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Oculus.h" />
     <ClInclude Include="ShadowMap.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
@@ -205,26 +238,62 @@
     <ClInclude Include="Light.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="LightManager.h" />
-    <ClInclude Include="KeyboardMover.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SquirrelTerrainScene.h" />
-    <ClInclude Include="DiffuseTestScene.h" />
-    <ClInclude Include="MaterialRefresher.h" />
-    <ClInclude Include="SerializedScene.h" />
-    <ClInclude Include="SceneObject.h" />
-    <ClInclude Include="ObjectLibrary.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceType.h" />
-    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="ResourceTypeSerializer.h">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="MaterialSerializer.h">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceSerializer.h">
+    <ClInclude Include="MeshSerializer.h">
       <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSerializerLibrary.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="DiffuseTestScene.h">
+      <Filter>Temporary</Filter>
+    </ClInclude>
+    <ClInclude Include="SquirrelTerrainScene.h">
+      <Filter>Temporary</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardMover.h">
+      <Filter>Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialRefresher.h">
+      <Filter>Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshResource.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceType.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Oculus.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectLibrary.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializedScene.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +314,12 @@
     </Filter>
     <Filter Include="Engine\ResourceSerializers">
       <UniqueIdentifier>{2986fdc5-b7d0-41f8-ac17-50fcd646a29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Temporary">
+      <UniqueIdentifier>{a5b73a2c-e3e7-4a1f-a9ea-0298b48d348b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resources">
+      <UniqueIdentifier>{39a6eafb-ac19-4fe7-93a3-831a7932737e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

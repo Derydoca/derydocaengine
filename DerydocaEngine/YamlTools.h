@@ -1,10 +1,15 @@
 #pragma once
 #include "yaml-cpp\yaml.h"
+#include "glm/glm.hpp"
+#include <boost/lexical_cast.hpp>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_io.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 
 class YamlTools {
 public:
 
-	static int getInt(YAML::Node node, std::string name, int defaultValue = 0) {
+	static int getIntSafe(YAML::Node node, std::string name, int defaultValue = 0) {
 		if (node[name])
 		{
 			return node[name].as<std::int32_t>();
@@ -15,7 +20,7 @@ public:
 		}
 	}
 
-	static float getFloat(YAML::Node node, std::string name, float defaultValue = 0) {
+	static float getFloatSafe(YAML::Node node, std::string name, float defaultValue = 0) {
 		if (node[name])
 		{
 			return node[name].as<std::float_t>();
@@ -29,6 +34,8 @@ public:
 };
 
 namespace YAML {
+
+	// Add support for GLM vec4
 	template<>
 	struct convert<glm::vec4> {
 		static Node encode(const glm::vec4& vec) {
@@ -37,6 +44,7 @@ namespace YAML {
 			node.push_back(vec.y);
 			node.push_back(vec.z);
 			node.push_back(vec.w);
+			return node;
 		}
 
 		static bool Decode(const Node& node, glm::vec4& vec) {
@@ -53,6 +61,7 @@ namespace YAML {
 		}
 	};
 
+	// Add support for GLM vec3
 	template<>
 	struct convert<glm::vec3> {
 		static Node encode(const glm::vec3& vec) {
@@ -60,6 +69,7 @@ namespace YAML {
 			node.push_back(vec.x);
 			node.push_back(vec.y);
 			node.push_back(vec.z);
+			return node;
 		}
 
 		static bool decode(const Node& node, glm::vec3& vec) {
@@ -71,6 +81,27 @@ namespace YAML {
 			vec.y = node[1].as<float>();
 			vec.z = node[2].as<float>();
 
+			return true;
+		}
+	};
+
+	// Add support for Boost UUIDs
+	template<>
+	struct convert<boost::uuids::uuid> {
+		static Node encode(const boost::uuids::uuid& uuid)
+		{
+			std::string stringUuid = boost::lexical_cast<std::string>(uuid);
+			Node node;
+			node = stringUuid;
+			return node;
+		}
+
+		static bool decode(const Node& node, boost::uuids::uuid& uuid)
+		{
+			std::string stringUuid = node.as<std::string>();
+			boost::uuids::string_generator gen;
+			uuid = gen(stringUuid);
+			//delete(&gen);
 			return true;
 		}
 	};

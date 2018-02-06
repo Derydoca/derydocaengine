@@ -13,7 +13,7 @@ MaterialSerializer::~MaterialSerializer()
 
 ResourceType MaterialSerializer::getResourceType()
 {
-	return ResourceType::MaterialResource;
+	return ResourceType::MaterialResourceType;
 }
 
 void * MaterialSerializer::deserialize(Resource* resource)
@@ -36,4 +36,23 @@ void * MaterialSerializer::deserialize(Resource* resource)
 		}
 	}
 	return material;
+}
+
+YAML::Node MaterialSerializer::generateResourceNodes(std::string filePath)
+{
+	YAML::Node resources;
+
+	YAML::Node materialResource;
+	materialResource["id"] = generateUuid();
+
+	resources.push_back(materialResource);
+
+	return resources;
+}
+
+Resource * MaterialSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+{
+	Resource* r = new Resource();
+	r->setType(MaterialResourceType);
+	return r;
 }
