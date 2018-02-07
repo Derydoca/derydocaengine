@@ -103,20 +103,20 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 				if (compType == "MeshRenderer")
 				{
 					boost::uuids::uuid materialId = compNode["Material"].as<boost::uuids::uuid>();
-					//boost::uuids::uuid materialId = boost::uuids::uuid();
-					std::string materialIdX = compNode["Material"].as<std::string>();
-					SceneObject* meshObj = findNode(compNode["Mesh"].as<int>());
-					if (!meshObj->isObjectCreated())
+					Resource* materialResource = ObjectLibrary::getInstance().getResource(materialId);
+
+					boost::uuids::uuid meshId = compNode["Mesh"].as<boost::uuids::uuid>();
+					Resource* meshResource = ObjectLibrary::getInstance().getResource(meshId);
+					Mesh* mesh = nullptr;
+					if (meshResource)
 					{
-						printf("Unable to create MeshRenderer component because material or mesh is invalid.\n");
-						continue;
+						mesh = (Mesh*)meshResource->getResourceObject();
 					}
 
-					Resource* materialResource = ObjectLibrary::getInstance().getResource(materialId);
 					if (materialResource)
 					{
 						Material* mat = (Material*)materialResource->getResourceObject();
-						MeshRenderer* mr = new MeshRenderer((Mesh*)meshObj->getObjectReference(), mat);
+						MeshRenderer* mr = new MeshRenderer(mesh, mat);
 						go->addComponent(mr);
 					}
 				}

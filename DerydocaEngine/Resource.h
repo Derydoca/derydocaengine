@@ -9,7 +9,6 @@ struct Resource
 {
 public:
 	Resource();
-	Resource(uuid id, std::string sourceFilePath, std::string metaFilePath);
 	Resource(uuid id, std::string sourceFilePath, std::string metaFilePath, ResourceType type);
 
 	void setId(uuid id) { m_id = id; }

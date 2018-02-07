@@ -1,8 +1,4 @@
 Scene:
-  - Type: Mesh
-    ID: 200
-    Properties:
-      Path: ../res/rebel.obj
   - Type: GameObject
     ID: 300
     Properties:
@@ -24,4 +20,4 @@ Scene:
         - Type: MeshRenderer
           ID: 310
           Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
-          Mesh: 200
+          Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307

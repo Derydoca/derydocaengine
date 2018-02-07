@@ -1,22 +1,13 @@
 #include "ResourceSerializerLibrary.h"
+#include "MaterialResourceSerializer.h"
+#include "MeshResourceSerializer.h"
 
-#include "MaterialSerializer.h"
-#include "MeshSerializer.h"
 
-ResourceTypeSerializer * ResourceSerializerLibrary::getTypeSerializer(std::string sourceFilePath)
-{
-	// Determine the resource type from the file path
-	ResourceType type = pathToResourceType(sourceFilePath);
-
-	// Return the serializer associated to that type
-	return getTypeSerializer(type);
-}
-
-ResourceTypeSerializer * ResourceSerializerLibrary::getTypeSerializer(ResourceType type)
+ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType type)
 {
 	// Return the associated serializer for the resource type specified
-	auto search = m_typeSerializers.find(type);
-	if (search != m_typeSerializers.end())
+	auto search = m_serializers.find(type);
+	if (search != m_serializers.end())
 	{
 		return search->second;
 	}
@@ -26,24 +17,23 @@ ResourceTypeSerializer * ResourceSerializerLibrary::getTypeSerializer(ResourceTy
 	}
 }
 
-void ResourceSerializerLibrary::registerTypeSerializer(ResourceTypeSerializer * serializer)
-{
-	// Add this serializer to the list of serializers
-	m_typeSerializers.insert(std::pair<ResourceType, ResourceTypeSerializer*>(serializer->getResourceType(), serializer));
-}
-
 ResourceSerializerLibrary::ResourceSerializerLibrary()
 {
-	// Register all type serializers
-	registerTypeSerializer(new MaterialSerializer());
-	registerTypeSerializer(new MeshSerializer());
+	registerSerializer(new MaterialResourceSerializer());
+	registerSerializer(new MeshResourceSerializer());
 }
 
 ResourceSerializerLibrary::~ResourceSerializerLibrary()
 {
 	// Delete all type serializers
-	for (std::map<ResourceType, ResourceTypeSerializer*>::iterator it = m_typeSerializers.begin(); it != m_typeSerializers.end(); ++it)
+	for (std::map<ResourceType, ResourceSerializer*>::iterator it = m_serializers.begin(); it != m_serializers.end(); ++it)
 	{
 		delete(it->second);
 	}
+}
+
+void ResourceSerializerLibrary::registerSerializer(ResourceSerializer * serializer)
+{
+	// Add this serializer to the list of serializers
+	m_serializers.insert(std::pair<ResourceType, ResourceSerializer*>(serializer->getResourceType(), serializer));
 }

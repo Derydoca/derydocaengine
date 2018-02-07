@@ -1,15 +1,14 @@
 #pragma once
-#include "ResourceTypeSerializer.h"
+#include "FileTypeSerializer.h"
 
-class MaterialSerializer : public ResourceTypeSerializer
+class MaterialSerializer : public FileTypeSerializer
 {
 public:
 	MaterialSerializer();
 	~MaterialSerializer();
 
-	virtual void* deserialize(Resource* resource);
 	YAML::Node generateResourceNodes(std::string filePath);
-	virtual ResourceType getResourceType();
+	virtual FileType getFileType();
 	Resource* loadResourceFromMeta(YAML::Node resourceNode);
 };
 

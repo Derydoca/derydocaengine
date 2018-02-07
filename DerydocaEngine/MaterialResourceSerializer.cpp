@@ -1,22 +1,17 @@
-#include "MaterialSerializer.h"
-#include <yaml-cpp\yaml.h>
-#include "Material.h"
+#include "MaterialResourceSerializer.h"
 #include "Shader.h"
+#include "Material.h"
+#include "Resource.h"
 
-MaterialSerializer::MaterialSerializer()
+MaterialResourceSerializer::MaterialResourceSerializer()
 {
 }
 
-MaterialSerializer::~MaterialSerializer()
+MaterialResourceSerializer::~MaterialResourceSerializer()
 {
 }
 
-ResourceType MaterialSerializer::getResourceType()
-{
-	return ResourceType::MaterialResourceType;
-}
-
-void * MaterialSerializer::deserialize(Resource* resource)
+void * MaterialResourceSerializer::deserialize(Resource * resource)
 {
 	// Load the yaml file
 	YAML::Node root = YAML::LoadFile(resource->getSourceFilePath());
@@ -46,22 +41,7 @@ void * MaterialSerializer::deserialize(Resource* resource)
 	return material;
 }
 
-YAML::Node MaterialSerializer::generateResourceNodes(std::string filePath)
+ResourceType MaterialResourceSerializer::getResourceType()
 {
-	YAML::Node resources;
-
-	YAML::Node materialResource;
-	materialResource["id"] = generateUuid();
-
-	resources.push_back(materialResource);
-
-	return resources;
-}
-
-Resource * MaterialSerializer::loadResourceFromMeta(YAML::Node resourceNode)
-{
-	// Create a material resource type
-	Resource* r = new Resource();
-	r->setType(MaterialResourceType);
-	return r;
+	return ResourceType::MaterialResourceType;
 }

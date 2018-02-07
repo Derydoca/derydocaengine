@@ -80,18 +80,6 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="MaterialSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceSerializerLibrary.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceTypeSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClCompile>
     <ClCompile Include="DiffuseTestScene.cpp">
       <Filter>Temporary</Filter>
     </ClCompile>
@@ -108,9 +96,6 @@
       <Filter>Game Components</Filter>
     </ClCompile>
     <ClCompile Include="MeshResource.cpp">
-      <Filter>Engine\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceType.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
@@ -130,6 +115,31 @@
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTypeSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSerializerLibrary.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileType.cpp" />
+    <ClCompile Include="ResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSerializerLibrary.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,18 +248,6 @@
     <ClInclude Include="Light.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceTypeSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceSerializerLibrary.h">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClInclude>
     <ClInclude Include="DiffuseTestScene.h">
       <Filter>Temporary</Filter>
     </ClInclude>
@@ -295,6 +293,31 @@
     <ClInclude Include="Scene.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="MaterialFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTypeSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSerializerLibrary.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileType.h" />
+    <ClInclude Include="ResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSerializerLibrary.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
@@ -312,14 +335,17 @@
     <Filter Include="Engine\Debug">
       <UniqueIdentifier>{927235fe-be96-458a-8f36-9cbd90f48ec7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ResourceSerializers">
-      <UniqueIdentifier>{2986fdc5-b7d0-41f8-ac17-50fcd646a29b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Temporary">
       <UniqueIdentifier>{a5b73a2c-e3e7-4a1f-a9ea-0298b48d348b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Resources">
       <UniqueIdentifier>{39a6eafb-ac19-4fe7-93a3-831a7932737e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\FileSerializers">
+      <UniqueIdentifier>{2986fdc5-b7d0-41f8-ac17-50fcd646a29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceSerializers">
+      <UniqueIdentifier>{7eac81a0-a90a-4d89-85dd-89c2d08d44f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

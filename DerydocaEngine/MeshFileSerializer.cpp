@@ -1,5 +1,6 @@
-#include "MeshSerializer.h"
+#include "MeshFileSerializer.h"
 #include "MeshResource.h"
+#include "Mesh.h"
 
 MeshSerializer::MeshSerializer()
 {
@@ -10,14 +11,9 @@ MeshSerializer::~MeshSerializer()
 {
 }
 
-ResourceType MeshSerializer::getResourceType()
+FileType MeshSerializer::getFileType()
 {
-	return ModelResourceType;
-}
-
-void * MeshSerializer::deserialize(Resource * resource)
-{
-	return nullptr;
+	return FileType::MeshFileType;
 }
 
 YAML::Node MeshSerializer::generateResourceNodes(std::string filePath)
@@ -69,6 +65,7 @@ Resource * MeshSerializer::loadResourceFromMeta(YAML::Node resourceNode)
 		MeshResource* meshResource = new MeshResource();
 		meshResource->setMeshIndex(resourceNode["index"].as<unsigned int>());
 		meshResource->setMeshName(resourceNode["name"].as<std::string>());
+		meshResource->setType(MeshResourceType);
 		return meshResource;
 	}
 

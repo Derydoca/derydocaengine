@@ -5,10 +5,5 @@ enum ResourceType
 {
 	UnknownResourceType,
 	MaterialResourceType,
-	TextureResourceType,
-	TextResourceType,
-	ModelResourceType,
 	MeshResourceType,
 };
-
-ResourceType pathToResourceType(std::string str);

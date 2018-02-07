@@ -1,0 +1,5 @@
+resources:
+  - id: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+    type: Mesh
+    index: 0
+    name: ""

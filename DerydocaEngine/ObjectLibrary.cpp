@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "ResourceSerializerLibrary.h"
+#include "FileSerializerLibrary.h"
 #include "StringUtils.h"
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
@@ -51,7 +51,7 @@ void ObjectLibrary::initializeDirectory(std::string directory)
 bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaFilePath)
 {
 	// Find the serializer for this file type
-	auto serializer = ResourceSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+	auto serializer = FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
 
 	// If the serializer was not found, abort and return false
 	if (serializer == nullptr)
@@ -80,7 +80,7 @@ bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaF
 
 void ObjectLibrary::registerResource(Resource* resource)
 {
-	//m_resources.push_back(resource);
+	// Load the resource into the map
 	m_resources.insert(std::pair<boost::uuids::uuid, Resource*>(resource->getId(), resource));
 }
 
@@ -124,7 +124,7 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 		boost::uuids::uuid resourceUuid = resourceNode["id"].as<boost::uuids::uuid>();
 
 		// Find the serializer related to this source file object
-		auto serializer = ResourceSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+		auto serializer = FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
 
 		// If the serializer could not be found, continue onto the next resource
 		if (serializer == nullptr)

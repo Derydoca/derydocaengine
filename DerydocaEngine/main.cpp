@@ -82,8 +82,7 @@ int main()
 	sceneBase->setUp(goRoot, settings, display, keyboard, mouse);
 
 	SerializedScene* scene = new SerializedScene();
-	scene->LoadFromFile("../res/generatedLevel.yaml");
-	//scene->SaveToFile("../res/generatedLevel.yaml");
+	scene->LoadFromFile("../proj/generatedLevel.derylevel");
 	scene->setUp(goRoot, settings, display, keyboard, mouse);
 
 	// Divisor defines minimum frames per second

@@ -1,18 +1,17 @@
 #pragma once
-#include "ResourceTypeSerializer.h"
+#include "FileTypeSerializer.h"
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 
-class MeshSerializer : public ResourceTypeSerializer
+class MeshSerializer : public FileTypeSerializer
 {
 public:
 	MeshSerializer();
 	~MeshSerializer();
 
-	void* deserialize(Resource* resource);
 	YAML::Node generateResourceNodes(std::string filePath);
-	ResourceType getResourceType();
+	FileType getFileType();
 	Resource* loadResourceFromMeta(YAML::Node resourceNode);
 
 private:
