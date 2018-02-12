@@ -141,6 +141,9 @@
     <ClCompile Include="ResourceSerializerLibrary.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponentFactory.cpp">
+      <Filter>Game Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -317,6 +320,9 @@
     </ClInclude>
     <ClInclude Include="ResourceSerializerLibrary.h">
       <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponentFactory.h">
+      <Filter>Game Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

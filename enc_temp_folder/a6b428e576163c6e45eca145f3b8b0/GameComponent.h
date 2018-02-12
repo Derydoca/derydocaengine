@@ -20,9 +20,9 @@ public:
 	virtual void update(float deltaTime) {}
 	virtual void render(MatrixStack* matrixStack) {}
 	virtual void postRender() {}
+	//virtual bool deserialize(YAML::Node compNode);
 	inline void setGameObject(GameObject* gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }
-
 protected:
 	template<typename T>
 	inline T loadResource(YAML::Node node, std::string resourceName)
@@ -38,7 +38,6 @@ protected:
 			return nullptr;
 		}
 	}
-
 private:
 	GameObject* m_gameObject;
 };

@@ -3,6 +3,7 @@
 #include <fstream>
 #include "ObjectLibrary.h"
 #include "YamlTools.h"
+#include "GameComponentFactory.h"
 
 // Find a better (generic) way to initialize the scene objects
 #include "Material.h"
@@ -24,39 +25,14 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 	for (int i = 0; i < m_sceneObjects.size(); i++)
 	{
 		SceneObject* sceneObject = m_sceneObjects[i];
+
+		// If the object is already created, move onto the next object
 		if (sceneObject->isObjectCreated())
 		{
 			continue;
 		}
 
-		if (sceneObject->getType() == "Material")
-		{
-			YAML::Node properties = sceneObject->getProperties();
-			std::string shaderPath = properties["Shader"].as<std::string>();
-			Shader* shader = new Shader(shaderPath);
-			Material* material = new Material();
-			material->setShader(shader);
-			YAML::Node parameters = properties["MaterialParameters"];
-			for (int i = 0; i < parameters.size(); i++)
-			{
-				std::string paramType = parameters[i]["Type"].as<std::string>();
-				if (paramType == "Texture")
-				{
-					int slot = parameters[i]["Slot"].as<int>();
-					std::string texturePath = parameters[i]["Path"].as<std::string>();
-					Texture* texture = new Texture(texturePath);
-					material->setTextureSlot(slot, texture);
-				}
-			}
-			sceneObject->setObjectReference(material);
-		}
-		else if (sceneObject->getType() == "Mesh")
-		{
-			std::string meshPath = sceneObject->getProperties()["Path"].as<std::string>();
-			Mesh* mesh = new Mesh(meshPath);
-			sceneObject->setObjectReference(mesh);
-		}
-		else if (sceneObject->getType() == "GameObject")
+		if (sceneObject->getType() == "GameObject")
 		{
 			YAML::Node properties = sceneObject->getProperties();
 
@@ -85,6 +61,8 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 	for (int i = 0; i < m_sceneObjects.size(); i++)
 	{
 		SceneObject* sceneObject = m_sceneObjects[i];
+
+		// Do not resolve the object if it is not created for some reason
 		if (!sceneObject->isObjectCreated())
 		{
 			continue;
@@ -100,26 +78,21 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 			{
 				YAML::Node compNode = componentNodes[componentIndex];
 				std::string compType = compNode["Type"].as<std::string>();
-				if (compType == "MeshRenderer")
+
+				GameComponent* component = GameComponentFactory::getInstance().CreateGameComponent(compType);
+				std::cout << "Component processed" << endl;
+
+				if (component == nullptr)
 				{
-					boost::uuids::uuid materialId = compNode["Material"].as<boost::uuids::uuid>();
-					Resource* materialResource = ObjectLibrary::getInstance().getResource(materialId);
-
-					boost::uuids::uuid meshId = compNode["Mesh"].as<boost::uuids::uuid>();
-					Resource* meshResource = ObjectLibrary::getInstance().getResource(meshId);
-					Mesh* mesh = nullptr;
-					if (meshResource)
-					{
-						mesh = (Mesh*)meshResource->getResourceObject();
-					}
-
-					if (materialResource)
-					{
-						Material* mat = (Material*)materialResource->getResourceObject();
-						MeshRenderer* mr = new MeshRenderer(mesh, mat);
-						go->addComponent(mr);
-					}
+					continue;
 				}
+
+				MeshRenderer* mr = (MeshRenderer*)component;
+				if (mr->deserialize(compNode))
+				{
+					go->addComponent(mr);
+				}
+
 			}
 		}
 	}
@@ -140,6 +113,7 @@ void SerializedScene::LoadFromFile(std::string filePath)
 		YAML::Node typeNode = sceneNode["Type"];
 		YAML::Node idNode = sceneNode["ID"];
 		YAML::Node propertiesNode = sceneNode["Properties"];
+
 		if (!typeNode)
 		{
 			printf("Skipping scene node %i because type is not defined.\n", i);
@@ -170,7 +144,7 @@ void SerializedScene::LoadFromFile(std::string filePath)
 			continue;
 		}
 
-		int id = idNode.as<int>();
+		boost::uuids::uuid id = idNode.as<boost::uuids::uuid>();
 		std::string typeName = typeNode.as<std::string>();
 
 		SceneObject* obj = new SceneObject(id, typeName, propertiesNode);
@@ -241,7 +215,7 @@ void SerializedScene::SaveToFile(std::string filePath)
 	file.close();
 }
 
-SceneObject * SerializedScene::findNode(int id)
+SceneObject * SerializedScene::findNode(boost::uuids::uuid id)
 {
 	for (int i = 0; i < m_sceneObjects.size(); i++)
 	{

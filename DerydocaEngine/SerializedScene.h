@@ -16,6 +16,6 @@ public:
 private:
 	std::vector<SceneObject*> m_sceneObjects;
 
-	SceneObject* findNode(int id);
+	SceneObject* findNode(boost::uuids::uuid id);
 };
 

@@ -141,6 +141,7 @@
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="FileType.cpp" />
+    <ClCompile Include="GameComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Display.h" />
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="FileType.h" />
+    <ClInclude Include="GameComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GLError.h" />
     <ClInclude Include="GameComponent.h" />
