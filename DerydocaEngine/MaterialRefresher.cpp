@@ -2,6 +2,10 @@
 #include "Material.h"
 #include "Shader.h"
 
+MaterialRefresher::MaterialRefresher()
+{
+}
+
 MaterialRefresher::MaterialRefresher(MeshRenderer* meshRenderer) :
 	m_meshRenderer(meshRenderer)
 {

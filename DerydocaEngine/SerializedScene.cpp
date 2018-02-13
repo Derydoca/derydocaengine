@@ -87,10 +87,9 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 					continue;
 				}
 
-				MeshRenderer* mr = (MeshRenderer*)component;
-				if (mr->deserialize(compNode))
+				if (component->deserialize(compNode))
 				{
-					go->addComponent(mr);
+					go->addComponent(component);
 				}
 
 			}

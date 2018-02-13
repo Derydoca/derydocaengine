@@ -2,6 +2,10 @@
 
 
 
+ScreenshotUtil::ScreenshotUtil()
+{
+}
+
 ScreenshotUtil::ScreenshotUtil(Display* display, Keyboard* keyboard) :
 	m_display(display),
 	m_keyboard(keyboard)

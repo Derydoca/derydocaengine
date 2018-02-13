@@ -2,6 +2,10 @@
 #include "GameObject.h"
 #include "glm\glm.hpp"
 
+KeyboardMover::KeyboardMover()
+{
+}
+
 KeyboardMover::KeyboardMover(Keyboard * keyboard, float movementSpeed, int keyForward, int keyBackward, int keyLeft, int keyRight, int keyUp, int keyDown) :
 	m_keyboard(keyboard),
 	m_movementSpeed(movementSpeed),
@@ -60,4 +64,17 @@ void KeyboardMover::update(float deltaTime)
 
 	// Translate the gameobject
 	m_transform->translate(frameMovement);
+}
+
+bool KeyboardMover::deserialize(YAML::Node node)
+{
+	m_movementSpeed = node["movementSpeed"].as<float>();
+	m_keyForward = node["keyForward"].as<int>();
+	m_keyBackward = node["keyBackward"].as<int>();
+	m_keyLeft = node["keyLeft"].as<int>();
+	m_keyRight = node["keyRight"].as<int>();
+	m_keyUp = node["keyUp"].as<int>();
+	m_keyDown = node["keyDown"].as<int>();
+
+	return true;
 }

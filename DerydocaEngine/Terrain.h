@@ -11,6 +11,8 @@
 class Terrain : public GameComponent
 {
 public:
+	GENINSTANCE(Terrain);
+	Terrain();
 	Terrain(const std::string& fileName, float unitScale, float heightScale);
 	Terrain(int width, int depth, float unitScale, float heightScale);
 	~Terrain();
@@ -22,6 +24,7 @@ public:
 	void init();
 
 	void render(MatrixStack* matrixStack);
+	bool deserialize(YAML::Node node);
 private:
 	int m_width;
 	int m_depth;
@@ -30,5 +33,7 @@ private:
 	float** m_heightData;
 	Mesh* m_mesh;
 	MeshRenderer* m_meshRenderer;
+
+	void loadTerrainFromTexture(const std::string& fileName, float unitScale, float heightScale);
 };
 

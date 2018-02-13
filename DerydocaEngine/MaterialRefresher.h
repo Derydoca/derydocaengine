@@ -9,6 +9,8 @@ This will monitor the material source code and recompile/reapply the shader to t
 class MaterialRefresher : public GameComponent
 {
 public:
+	GENINSTANCE(MaterialRefresher);
+	MaterialRefresher();
 	MaterialRefresher(MeshRenderer* meshRenderer);
 	~MaterialRefresher();
 

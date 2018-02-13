@@ -2,35 +2,15 @@
 #include "Shader.h"
 #include "ShaderManager.h"
 
-Terrain::Terrain(const std::string & fileName, float unitScale, float heightScale) :
-	m_unitScale(unitScale),
-	m_heightScale(heightScale)
+Terrain::Terrain()
 {
-	int channels;
-	unsigned char* image = SOIL_load_image(fileName.c_str(), &m_width, &m_depth, &channels, SOIL_LOAD_L);
+	m_unitScale = 0.1f;
+	m_heightScale = 0.1f;
+}
 
-	// Initialize the height map
-	float tHeight = 0.0f;
-	float incrementer = 0.05f;
-	m_heightData = new float*[m_depth];
-	for (int i = 0; i < m_depth; ++i) {
-		m_heightData[i] = new float[m_width];
-		for (int j = 0; j < m_width; j++)
-		{
-			m_heightData[i][j] = image[(i * m_width) + j] / 255.0f;
-			tHeight += 0.05f;
-		}
-		tHeight = 0.0f;
-		incrementer *= -1;
-	}
-
-	Terrain::updateMesh();
-
-	Shader* shader = new Shader("../res/basicShader");
-	Material* mat = new Material();
-	mat->setShader(shader);
-
-	m_meshRenderer = new MeshRenderer(m_mesh, mat);
+Terrain::Terrain(const std::string & fileName, float unitScale, float heightScale)
+{
+	loadTerrainFromTexture(fileName, unitScale, heightScale);
 }
 
 Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
@@ -138,4 +118,51 @@ void Terrain::init()
 void Terrain::render(MatrixStack * matrixStack)
 {
 	m_meshRenderer->render(matrixStack);
+}
+
+bool Terrain::deserialize(YAML::Node node)
+{
+	YAML::Node fileNameNode = node["fileName"];
+	if (fileNameNode)
+	{
+		std::string fileName = fileNameNode.as<std::string>();
+		float unitScale = node["unitScale"].as<float>();
+		float heightScale = node["heightScale"].as<float>();
+		loadTerrainFromTexture(fileName, unitScale, heightScale);
+		return true;
+	}
+
+	return false;
+}
+
+void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitScale, float heightScale)
+{
+	m_unitScale = unitScale;
+	m_heightScale = heightScale;
+
+	int channels;
+	unsigned char* image = SOIL_load_image(fileName.c_str(), &m_width, &m_depth, &channels, SOIL_LOAD_L);
+
+	// Initialize the height map
+	float tHeight = 0.0f;
+	float incrementer = 0.05f;
+	m_heightData = new float*[m_depth];
+	for (int i = 0; i < m_depth; ++i) {
+		m_heightData[i] = new float[m_width];
+		for (int j = 0; j < m_width; j++)
+		{
+			m_heightData[i][j] = image[(i * m_width) + j] / 255.0f;
+			tHeight += 0.05f;
+		}
+		tHeight = 0.0f;
+		incrementer *= -1;
+	}
+
+	Terrain::updateMesh();
+
+	Shader* shader = new Shader("../res/basicShader");
+	Material* mat = new Material();
+	mat->setShader(shader);
+
+	m_meshRenderer = new MeshRenderer(m_mesh, mat);
 }

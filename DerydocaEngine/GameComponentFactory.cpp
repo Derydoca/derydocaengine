@@ -1,6 +1,20 @@
 #include "GameComponentFactory.h"
 #include <iostream>
+#include "Camera.h"
 #include "MeshRenderer.h"
+#include "KeyboardMover.h"
+//#include "MaterialRefresher.h"
+#include "Rotator.h"
+#include "ScreenshotUtil.h"
+#include "Terrain.h"
+#include "WasdMover.h"
+#include "DebugVisualizer.h"
+#include "Oculus.h"
+#include "Light.h"
+
+// Registers a class to the instance generator map
+#define REGINSTANCE(TYPE) \
+	registerInstanceGenerator(#TYPE, TYPE::generateInstance);
 
 GameComponent * GameComponentFactory::CreateGameComponent(string gameComponentType)
 {
@@ -27,7 +41,17 @@ void GameComponentFactory::registerInstanceGenerator(string gameComponentType, s
 
 GameComponentFactory::GameComponentFactory()
 {
-	REGINSTANCE(MeshRenderer)
+	REGINSTANCE(Camera);
+	REGINSTANCE(MeshRenderer);
+	REGINSTANCE(KeyboardMover);
+	//REGINSTANCE(MaterialRefresher);
+	REGINSTANCE(Rotator);
+	REGINSTANCE(ScreenshotUtil);
+	REGINSTANCE(Terrain);
+	REGINSTANCE(WasdMover);
+	REGINSTANCE(DebugVisualizer);
+	REGINSTANCE(Oculus);
+	REGINSTANCE(Light);
 }
 
 GameComponentFactory::~GameComponentFactory()

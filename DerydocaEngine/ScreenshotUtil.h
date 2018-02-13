@@ -10,6 +10,8 @@
 class ScreenshotUtil : public GameComponent
 {
 public:
+	GENINSTANCE(ScreenshotUtil);
+	ScreenshotUtil();
 	ScreenshotUtil(Display* display, Keyboard* keyboard);
 	~ScreenshotUtil();
 

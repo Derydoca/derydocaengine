@@ -3,6 +3,15 @@
 #include "Shader.h"
 #include "MatrixStack.h"
 
+Camera::Camera()
+{
+	CameraManager::getInstance().addCamera(this);
+
+	m_skybox = new Skybox();
+	m_matrixStack = new MatrixStack();
+	m_displayRect = new Rectangle();
+}
+
 Camera::Camera(float fov, float aspect, float zNear, float zFar) :
 	m_fov(fov),
 	m_aspect(aspect),
@@ -49,6 +58,17 @@ void Camera::setOrthoSize(float size)
 {
 	m_orthoSize = size;
 	recalcPerspectiveMatrix();
+}
+
+bool Camera::deserialize(YAML::Node node)
+{
+	m_fov = node["fov"].as<float>();
+	m_zNear = node["zNear"].as<float>();
+	m_zFar = node["zFar"].as<float>();
+
+	recalcPerspectiveMatrix();
+
+	return true;
 }
 
 void Camera::setFov(float fov)

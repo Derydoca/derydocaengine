@@ -6,6 +6,8 @@
 class Light : public GameComponent
 {
 public:
+	GENINSTANCE(Light);
+
 	/* Defines a light's type */
 	enum LightType
 	{

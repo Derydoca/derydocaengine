@@ -18,6 +18,8 @@ Object used for rendering the world to screen.
 class Camera : public GameComponent
 {
 public:
+	GENINSTANCE(Camera);
+
 	/* Types of screen clear methods when rendering a camera. */
 	enum ClearMode {
 		/* Do not clear the screen. */
@@ -38,6 +40,7 @@ public:
 		Perspective
 	};
 
+	Camera();
 	Camera(float fov, float aspect, float zNear, float zFar);
 	~Camera();
 
@@ -104,6 +107,7 @@ public:
 	void setProjectionMode(ProjectionMode mode);
 	void setOrthoSize(float size);
 	float getOrthoSize(float size) { return m_orthoSize; }
+	bool deserialize(YAML::Node node);
 private:
 	float m_fov, m_aspect, m_zNear, m_zFar;
 	glm::mat4 m_projectionMatrix;

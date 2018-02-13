@@ -6,10 +6,6 @@
 
 using namespace std;
 
-// Registers a class to the instance generator map
-#define REGINSTANCE(TYPE) \
-	registerInstanceGenerator(#TYPE, TYPE::generateInstance);
-
 class GameComponentFactory
 {
 public:

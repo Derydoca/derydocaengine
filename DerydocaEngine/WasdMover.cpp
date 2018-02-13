@@ -1,5 +1,9 @@
 #include "WasdMover.h"
 
+WasdMover::WasdMover()
+{
+}
+
 WasdMover::~WasdMover()
 {
 }
@@ -90,4 +94,17 @@ void WasdMover::update(float deltaTime) {
 			;
 		m_transform->setQuat(newQuat);
 	}
+}
+
+bool WasdMover::deserialize(YAML::Node node)
+{
+	m_moveSpeed = node["moveSpeed"].as<float>();
+	m_mouseSensitivityX = node["mouseSensitivityX"].as<float>();
+	m_mouseSensitivityY = node["mouseSensitivityY"].as<float>();
+	m_fastMoveMultiplier = node["fastMoveMultiplier"].as<float>();
+	m_slowMoveMultiplier = node["slowMoveMultiplier"].as<float>();
+	m_minXRot = node["minXRot"].as<float>();
+	m_maxXRot = node["maxXRot"].as<float>();
+
+	return false;
 }

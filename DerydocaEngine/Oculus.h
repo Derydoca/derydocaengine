@@ -10,6 +10,7 @@
 class Oculus : public GameComponent
 {
 public:
+	GENINSTANCE(Oculus);
 	Oculus();
 	~Oculus();
 

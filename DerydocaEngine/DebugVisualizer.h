@@ -8,6 +8,7 @@
 class DebugVisualizer : public GameComponent
 {
 public:
+	GENINSTANCE(DebugVisualizer);
 	DebugVisualizer();
 	~DebugVisualizer();
 

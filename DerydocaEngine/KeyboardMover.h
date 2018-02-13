@@ -6,6 +6,8 @@
 class KeyboardMover : public GameComponent
 {
 public:
+	GENINSTANCE(KeyboardMover);
+	KeyboardMover();
 	KeyboardMover(
 		Keyboard* keyboard,
 		float movementSpeed,
@@ -19,6 +21,8 @@ public:
 
 	void init();
 	void update(float deltaTime);
+
+	bool deserialize(YAML::Node node);
 private:
 	Transform* m_transform;
 	Keyboard* m_keyboard;
