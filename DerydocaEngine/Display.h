@@ -6,6 +6,7 @@
 #include "Keyboard.h"
 #include <GL/glew.h>
 #include <iostream>
+#include <vector>
 
 class Display
 {
@@ -13,10 +14,10 @@ public:
 	Display(int width, int height, const std::string& title);
 	virtual ~Display();
 
+	void init(int width, int height, const std::string& title);
 	void update();
 	bool isClosed();
 	inline float getAspectRatio() { return (float)m_width / (float)m_height; }
-	inline void setKeyboard(Keyboard* keyboard) { m_keyboard = keyboard; }
 
 	inline int getWidth() const { return m_width; }
 	inline int getHeight() const { return m_height; }

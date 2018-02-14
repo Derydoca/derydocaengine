@@ -14,6 +14,19 @@ GameObject::GameObject(std::string name)
 
 GameObject::~GameObject()
 {
+	// Delete all of the components attached to this object
+	for (auto it = m_components.begin(); it != m_components.end(); ++it)
+	{
+		delete(*it);
+	}
+	m_components.clear();
+
+	// Delete all of the children of this object
+	for (auto it = m_children.begin(); it != m_children.end(); ++it)
+	{
+		delete(*it);
+	}
+	m_children.clear();
 }
 
 void GameObject::render(MatrixStack* matrixStack) {

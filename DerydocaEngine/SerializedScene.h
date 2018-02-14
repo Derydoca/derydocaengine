@@ -8,7 +8,7 @@ public:
 	SerializedScene();
 	~SerializedScene();
 
-	void setUp(GameObject* root, EngineSettings* settings, Display* display, Keyboard* keyboard, Mouse* mouse);
+	void setUp(GameObject* root);
 	void tearDown(GameObject* root);
 
 	void LoadFromFile(std::string filePath);

@@ -1,6 +1,7 @@
 #pragma once
 #include "yaml-cpp\yaml.h"
 #include "glm/glm.hpp"
+#include "Color.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_io.hpp>
@@ -80,6 +81,38 @@ namespace YAML {
 			vec.x = node[0].as<float>();
 			vec.y = node[1].as<float>();
 			vec.z = node[2].as<float>();
+
+			return true;
+		}
+	};
+
+	// Add support for Colors
+	template<>
+	struct convert<Color> {
+		static Node encode(const Color& color) {
+			Node node;
+			node.push_back(color.r);
+			node.push_back(color.g);
+			node.push_back(color.b);
+			node.push_back(color.a);
+			return node;
+		}
+
+		static bool decode(const Node& node, Color& color) {
+			if (!node.IsSequence() || node.size() < 3) {
+				return false;
+			}
+
+			if (node.size() >= 3)
+			{
+				color.r = node[0].as<float>();
+				color.g = node[1].as<float>();
+				color.b = node[2].as<float>();
+			}
+			if (node.size() > 3)
+			{
+				color.a = node[3].as<float>();
+			}
 
 			return true;
 		}

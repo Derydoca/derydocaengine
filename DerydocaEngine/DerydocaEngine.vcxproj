@@ -143,6 +143,7 @@
     <ClCompile Include="FileType.cpp" />
     <ClCompile Include="GameComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -191,12 +192,14 @@
     <ClInclude Include="DebugVisualizer.h" />
     <ClInclude Include="DiffuseTestScene.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="FileType.h" />
     <ClInclude Include="GameComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GLError.h" />
     <ClInclude Include="GameComponent.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardMover.h" />

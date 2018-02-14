@@ -1,12 +1,10 @@
 #include "Light.h"
 #include "LightManager.h"
 
-
 Light::Light()
 {
 	LightManager::getInstance().addLight(this);
 }
-
 
 Light::~Light()
 {
@@ -21,4 +19,12 @@ glm::mat4 Light::getProjectionMatrix()
 glm::mat4 Light::getViewMatrix()
 {
 	return glm::mat4();
+}
+
+bool Light::deserialize(YAML::Node node)
+{
+	Color lightColor = node["color"].as<Color>();
+	setColor(&lightColor);
+
+	return true;
 }

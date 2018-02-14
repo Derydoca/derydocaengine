@@ -1,7 +1,10 @@
 #include "WasdMover.h"
+#include "InputManager.h"
 
 WasdMover::WasdMover()
 {
+	m_mouse = InputManager::getInstance().getMouse();
+	m_keyboard = InputManager::getInstance().getKeyboard();
 }
 
 WasdMover::~WasdMover()
@@ -106,5 +109,5 @@ bool WasdMover::deserialize(YAML::Node node)
 	m_minXRot = node["minXRot"].as<float>();
 	m_maxXRot = node["maxXRot"].as<float>();
 
-	return false;
+	return true;
 }

@@ -13,7 +13,7 @@ public:
 	DiffuseTestScene();
 	~DiffuseTestScene();
 
-	virtual void setUp(GameObject* root, EngineSettings* settings, Display* display, Keyboard* keyboard, Mouse* mouse);
+	virtual void setUp(GameObject* root);
 	virtual void tearDown(GameObject* root);
 };
 

@@ -144,6 +144,7 @@
     <ClCompile Include="GameComponentFactory.cpp">
       <Filter>Game Components</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -324,6 +325,10 @@
     <ClInclude Include="GameComponentFactory.h">
       <Filter>Game Components</Filter>
     </ClInclude>
+    <ClInclude Include="DisplayManager.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

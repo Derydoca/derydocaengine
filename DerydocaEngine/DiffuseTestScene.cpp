@@ -1,4 +1,6 @@
 #include "DiffuseTestScene.h"
+#include "DisplayManager.h"
+#include "InputManager.h"
 
 // TODO: remove these header files after scene loading is implemented
 #include "Mesh.h"
@@ -31,23 +33,23 @@ DiffuseTestScene::~DiffuseTestScene()
 {
 }
 
-void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Display * display, Keyboard * keyboard, Mouse * mouse)
+void DiffuseTestScene::setUp(GameObject * root)
 {
 	// Camera with Cubemap
-	GameObject* goCamera = new GameObject();
+	//GameObject* goCamera = new GameObject();
 	Shader* skyShader = new Shader("../res/cubemapShader");
 	Texture* sky = new Texture("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
 	Material* skyMaterial = new Material();
 	skyMaterial->setShader(skyShader);
 	skyMaterial->setTextureSlot(0, sky);
-	Camera* camera = new Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
-	camera->setDisplay(display);
-	camera->setSkybox(skyMaterial);
-	camera->setClearMode(Camera::ClearMode::SkyboxClear);
-	WasdMover* mover = new WasdMover(keyboard, mouse);
-	goCamera->addComponent(camera);
-	goCamera->addComponent(mover);
-	root->addChild(goCamera);
+	//Camera* camera = new Camera(settings->getFOV(), DisplayManager::getInstance().getDisplay(0)->getAspectRatio(), 0.01f, 1000.0f);
+	//camera->setDisplay(DisplayManager::getInstance().getDisplay(0));
+	//camera->setSkybox(skyMaterial);
+	//camera->setClearMode(Camera::ClearMode::SkyboxClear);
+	//WasdMover* mover = new WasdMover(InputManager::getInstance().getKeyboard(), InputManager::getInstance().getMouse());
+	//goCamera->addComponent(camera);
+	//goCamera->addComponent(mover);
+	//root->addChild(goCamera);
 
 	// Grass material
 	Material* grassMaterial = new Material();
@@ -62,7 +64,7 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	pointLight->setColor(new Color(0, 1, 0.5));
 	GameObject* goPointLight = new GameObject("Point Light");
 	goPointLight->addComponent(pointLight);
-	KeyboardMover* lightMover = new KeyboardMover(keyboard, 5.0f, SDLK_t, SDLK_g, SDLK_f, SDLK_h, SDLK_r, SDLK_y);
+	KeyboardMover* lightMover = new KeyboardMover(InputManager::getInstance().getKeyboard(), 5.0f, SDLK_t, SDLK_g, SDLK_f, SDLK_h, SDLK_r, SDLK_y);
 	goPointLight->addComponent(lightMover);
 	MeshRenderer* mrSphere = new MeshRenderer(sphere, grassMaterial);
 	goPointLight->addComponent(mrSphere);
@@ -74,7 +76,7 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	pointLight2->setColor(new Color(1, 0.5, 0));
 	GameObject* goPointLight2 = new GameObject("Point Light 2");
 	goPointLight2->addComponent(pointLight2);
-	KeyboardMover* lightMover2 = new KeyboardMover(keyboard, 5.0f, SDLK_i, SDLK_k, SDLK_j, SDLK_l, SDLK_u, SDLK_o);
+	KeyboardMover* lightMover2 = new KeyboardMover(InputManager::getInstance().getKeyboard(), 5.0f, SDLK_i, SDLK_k, SDLK_j, SDLK_l, SDLK_u, SDLK_o);
 	goPointLight2->addComponent(lightMover2);
 	MeshRenderer* mrSphere2 = new MeshRenderer(sphere, grassMaterial);
 	goPointLight2->addComponent(mrSphere2);
@@ -86,7 +88,7 @@ void DiffuseTestScene::setUp(GameObject * root, EngineSettings * settings, Displ
 	pointLight3->setColor(new Color(0.5, 0, 1));
 	GameObject* goPointLight3 = new GameObject("Point Light 3");
 	goPointLight3->addComponent(pointLight3);
-	KeyboardMover* lightMover3 = new KeyboardMover(keyboard, 5.0f, SDLK_x, SDLK_z, SDLK_c, SDLK_v, SDLK_b, SDLK_n);
+	KeyboardMover* lightMover3 = new KeyboardMover(InputManager::getInstance().getKeyboard(), 5.0f, SDLK_x, SDLK_z, SDLK_c, SDLK_v, SDLK_b, SDLK_n);
 	goPointLight3->addComponent(lightMover3);
 	MeshRenderer* mrSphere3 = new MeshRenderer(sphere, grassMaterial);
 	goPointLight3->addComponent(mrSphere3);

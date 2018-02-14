@@ -2,6 +2,7 @@
 #include "CameraManager.h"
 #include "Shader.h"
 #include "MatrixStack.h"
+#include "DisplayManager.h"
 
 Camera::Camera()
 {
@@ -9,7 +10,12 @@ Camera::Camera()
 
 	m_skybox = new Skybox();
 	m_matrixStack = new MatrixStack();
-	m_displayRect = new Rectangle();
+	m_displayRect = new Rectangle(0, 0, 1, 1);
+
+	setDisplay(DisplayManager::getInstance().getDisplay(0));
+	m_aspect = m_display->getAspectRatio();
+	setClearMode(ClearMode::ColorClear);
+	setClearColor(Color(0.5, 0.0, 0.0));
 }
 
 Camera::Camera(float fov, float aspect, float zNear, float zFar) :

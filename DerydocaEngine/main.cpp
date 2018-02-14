@@ -1,45 +1,20 @@
 #include "Display.h"
 #include "Clock.h"
-#include "Keyboard.h"
 #include "EngineSettings.h"
 #include "GameObject.h"
 #include "CameraManager.h"
-#include "Oculus.h"
-#include "ShaderManager.h"
-
-#if _DEBUG
-// Debug only headers
-#include "DebugVisualizer.h"
-#endif
-
-// TODO: remove these header files after scene loading is implemented
-#include "Mesh.h"
-#include "Shader.h"
+#include "InputManager.h"
 #include "Transform.h"
 #include "Camera.h"
-#include "Texture.h"
 #include "WasdMover.h"
-#include "Skybox.h"
-#include "ScreenshotUtil.h"
-#include "Terrain.h"
-#include "MeshRenderer.h"
-#include "Material.h"
-#include "Rotator.h"
-#include "ButtonState.h"
-#include "RenderTexture.h"
-#include "Light.h"
-#include "KeyboardMover.h"
-
-#include "SquirrelTerrainScene.h"
-#include "DiffuseTestScene.h"
 #include "SerializedScene.h"
 #include "ObjectLibrary.h"
+#include "ScreenshotUtil.h"
 
 int main()
 {
+	// Load the project file
 	ObjectLibrary::getInstance().initialize("../proj/");
-
-	ButtonState* bs = new ButtonState(0);
 
 	// Initialize the clock to this machine
 	Clock::init();
@@ -47,57 +22,58 @@ int main()
 
 	EngineSettings* settings = new EngineSettings();
 
-	Keyboard* keyboard = new Keyboard();
-	keyboard->init();
-
-	Mouse* mouse = new Mouse();
-
 	Display* display = new Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
-	display->setKeyboard(keyboard);
 
-	Mesh* sphereMesh = new Mesh("../res/plane.obj");
+	GameObject* sceneRoot = new GameObject();
 
-	Material* mat = new Material();
-	{
-		Shader* shader = new Shader("../res/basicShader");
-		mat->setShader(shader);
-		Texture* grassTexture = new Texture("../res/grass.png");
-		mat->setTextureSlot(0, grassTexture);
-	}
+#pragma region Editor specific game objects
 
-	//---
+	// Keep this here as a simple way to grab screenshots of the engine
+	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(display, InputManager::getInstance().getKeyboard());
+	sceneRoot->addComponent(screenshotUtil);
 
-	Shader shader("../res/basicShader");
+	// This is the editor camera
+	GameObject* editorCameraObject = new GameObject("__editorCamera");
+	Transform* editorCameraTransform = editorCameraObject->getTransform();
+	editorCameraTransform->setPos(settings->getCamPos());
+	Camera* editorCamera = new Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
+	editorCamera->setDisplay(display);
+	editorCamera->setClearMode(Camera::ClearMode::ColorClear);
+	editorCamera->setClearColor(Color(0.5, 0, 0));
+	editorCameraObject->addComponent(editorCamera);
+	editorCameraObject->addComponent(new WasdMover(InputManager::getInstance().getKeyboard(), InputManager::getInstance().getMouse()));
+	sceneRoot->addChild(editorCameraObject);
 
-	GameObject* goRoot = new GameObject();
-	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(display, keyboard);
-	goRoot->addComponent(screenshotUtil);
+#pragma endregion
 
-#if _DEBUG
-	DebugVisualizer dVis;
-	goRoot->addComponent(&dVis);
-#endif
-
-	Scene* sceneBase = new DiffuseTestScene();
-	sceneBase->setUp(goRoot, settings, display, keyboard, mouse);
-
+	// Load a scene from a file
 	SerializedScene* scene = new SerializedScene();
-	scene->LoadFromFile("../proj/generatedLevel.derylevel");
-	scene->setUp(goRoot, settings, display, keyboard, mouse);
+	scene->LoadFromFile("../proj/threeSquirrels.derylevel");
+	scene->setUp(sceneRoot);
 
 	// Divisor defines minimum frames per second
 	unsigned long minFrameTime = 1000 / 60;
 
-	goRoot->init();
+	// Initialize all components in the scene before rendering anything
+	sceneRoot->init();
 
+	// Render loop
 	while (!display->isClosed()) {
 
-		goRoot->update(clock->getDeltaTime());
-		CameraManager::getInstance().render(goRoot);
-		goRoot->postRender();
+		// Tick the clock forward the number of ms it took since the last frame rendered
+		sceneRoot->update(clock->getDeltaTime());
 
+		// Render all scene objects
+		CameraManager::getInstance().render(sceneRoot);
+
+		// Let the scene objects do whatever it is they need to do after rendering has completed this frame
+		sceneRoot->postRender();
+
+		// Let the display respond to any input events
 		display->update();
-		mouse->update();
+
+		// Update the mouse inputs
+		InputManager::getInstance().getMouse()->update();
 
 		// Pause the code execution if we are running faster than our capped frame rate
 		unsigned long msToWait = (unsigned long)(minFrameTime - clock->getRenderTimeMS());
@@ -109,6 +85,15 @@ int main()
 		}
 		clock->update();
 	}
+
+	// Clean up the scene
+	scene->tearDown(sceneRoot);
+
+	// Clean up all other objects
+	delete(sceneRoot);
+	delete(display);
+	delete(settings);
+	delete(clock);
 
 	return 0;
 }

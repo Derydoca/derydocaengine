@@ -5,12 +5,6 @@
 #include "YamlTools.h"
 #include "GameComponentFactory.h"
 
-// Find a better (generic) way to initialize the scene objects
-#include "Material.h"
-#include "Shader.h"
-#include "Mesh.h"
-#include "MeshRenderer.h"
-
 SerializedScene::SerializedScene()
 {
 }
@@ -19,7 +13,7 @@ SerializedScene::~SerializedScene()
 {
 }
 
-void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Display * display, Keyboard * keyboard, Mouse * mouse)
+void SerializedScene::setUp(GameObject * root)
 {
 	// Initialize the components
 	for (int i = 0; i < m_sceneObjects.size(); i++)
@@ -51,7 +45,6 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 			YAML::Node scaleNode = transformNode["Scale"];
 			glm::vec3 scale = glm::vec3(scaleNode[0].as<float>(), scaleNode[1].as<float>(), scaleNode[2].as<float>());
 			trans->setScale(scale);
-			root->addChild(go);
 
 			sceneObject->setObjectReference(go);
 		}
@@ -73,6 +66,19 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 			YAML::Node properties = sceneObject->getProperties();
 			GameObject* go = (GameObject*)sceneObject->getObjectReference();
 
+			YAML::Node parentObjectIdNode = properties["Parent"];
+			if (parentObjectIdNode)
+			{
+				uuid parentId = parentObjectIdNode.as<uuid>();
+				SceneObject* parentSceneObject = findNode(parentId);
+				GameObject* parentGo = (GameObject*)parentSceneObject->getObjectReference();
+				parentGo->addChild(go);
+			}
+			else
+			{
+				root->addChild(go);
+			}
+
 			YAML::Node componentNodes = properties["Components"];
 			for (int componentIndex = 0; componentIndex < componentNodes.size(); componentIndex++)
 			{
@@ -80,7 +86,6 @@ void SerializedScene::setUp(GameObject * root, EngineSettings * settings, Displa
 				std::string compType = compNode["Type"].as<std::string>();
 
 				GameComponent* component = GameComponentFactory::getInstance().CreateGameComponent(compType);
-				std::cout << "Component processed" << endl;
 
 				if (component == nullptr)
 				{

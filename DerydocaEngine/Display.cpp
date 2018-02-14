@@ -1,4 +1,6 @@
 #include "Display.h"
+#include "DisplayManager.h"
+#include "InputManager.h"
 
 Display::Display(int width, int height, const std::string& title)
 {
@@ -55,6 +57,10 @@ Display::Display(int width, int height, const std::string& title)
 	{
 		printf("    %i: %s\n", i, glGetStringi(GL_EXTENSIONS, i));
 	}
+
+	m_keyboard = InputManager::getInstance().getKeyboard();
+
+	DisplayManager::getInstance().addDisplay(this);
 }
 
 Display::~Display()
@@ -71,6 +77,10 @@ bool Display::isClosed() {
 void Display::bindAsRenderTarget()
 {
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+}
+
+void Display::init(int width, int height, const std::string & title)
+{
 }
 
 void Display::update() {

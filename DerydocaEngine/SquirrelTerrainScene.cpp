@@ -18,6 +18,8 @@
 #include "RenderTexture.h"
 #include "Light.h"
 #include "KeyboardMover.h"
+#include "DisplayManager.h"
+#include "InputManager.h"
 
 #include "ShaderManager.h"
 
@@ -31,35 +33,32 @@ SquirrelTerrainScene::~SquirrelTerrainScene()
 {
 }
 
-void SquirrelTerrainScene::setUp(GameObject* root, EngineSettings* settings, Display* display, Keyboard* keyboard, Mouse* mouse)
+void SquirrelTerrainScene::setUp(GameObject* root)
 {
-
 	Material* mat = new Material();
 	Shader* shader = new Shader("../res/basicShader");
 	mat->setShader(shader);
 	Texture* grassTexture = new Texture("../res/grass.png");
 	mat->setTextureSlot(0, grassTexture);
 
-
-
-	GameObject* goCamera = new GameObject();
+	//GameObject* goCamera = new GameObject();
 	Shader* skyShader = new Shader("../res/cubemapShader");
 	Texture* sky = new Texture("../res/cubemap-xpos.png", "../res/cubemap-xneg.png", "../res/cubemap-ypos.png", "../res/cubemap-yneg.png", "../res/cubemap-zpos.png", "../res/cubemap-zneg.png");
 	Material* skyMaterial = new Material();
 	skyMaterial->setShader(skyShader);
 	skyMaterial->setTextureSlot(0, sky);
-	Camera* camera = new Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
-	camera->setDisplay(display);
-	camera->setSkybox(skyMaterial);
-	camera->setClearMode(Camera::ClearMode::SkyboxClear);
-	WasdMover* mover = new WasdMover(keyboard, mouse);
-	goCamera->addComponent(camera);
-	goCamera->addComponent(mover);
-	root->addChild(goCamera);
+	//Camera* camera = new Camera(settings->getFOV(), DisplayManager::getInstance().getDisplay(0)->getAspectRatio(), 0.01f, 1000.0f);
+	//camera->setDisplay(DisplayManager::getInstance().getDisplay(0));
+	//camera->setSkybox(skyMaterial);
+	//camera->setClearMode(Camera::ClearMode::SkyboxClear);
+	//WasdMover* mover = new WasdMover(InputManager::getInstance().getKeyboard(), InputManager::getInstance().getMouse());
+	//goCamera->addComponent(camera);
+	//goCamera->addComponent(mover);
+	//root->addChild(goCamera);
 
 	RenderTexture* renderTexture = new RenderTexture(512, 512);
 	Camera* renderTextureCam = new Camera(70.0f, renderTexture->getAspectRatio(), 0.01f, 1000.0f);
-	renderTextureCam->setDisplay(display);
+	renderTextureCam->setDisplay(DisplayManager::getInstance().getDisplay(0));
 	renderTextureCam->setSkybox(skyMaterial);
 	renderTextureCam->setClearMode(Camera::ClearMode::SkyboxClear);
 	renderTextureCam->setRenderTexture(renderTexture);
