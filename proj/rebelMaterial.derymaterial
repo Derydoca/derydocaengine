@@ -2,4 +2,4 @@ Shader: ../res/diffuseFrag
 MaterialParameters:
   - Type: Texture
     Slot: 0
-    Path: ../res/rebel.jpg
+    ID: d88e3c9a-dc0e-4dd7-add6-c81daf470610

@@ -99,7 +99,7 @@ void WasdMover::update(float deltaTime) {
 	}
 }
 
-bool WasdMover::deserialize(YAML::Node node)
+void WasdMover::deserialize(YAML::Node node)
 {
 	m_moveSpeed = node["moveSpeed"].as<float>();
 	m_mouseSensitivityX = node["mouseSensitivityX"].as<float>();
@@ -108,6 +108,4 @@ bool WasdMover::deserialize(YAML::Node node)
 	m_slowMoveMultiplier = node["slowMoveMultiplier"].as<float>();
 	m_minXRot = node["minXRot"].as<float>();
 	m_maxXRot = node["maxXRot"].as<float>();
-
-	return true;
 }

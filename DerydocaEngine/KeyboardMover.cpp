@@ -66,7 +66,7 @@ void KeyboardMover::update(float deltaTime)
 	m_transform->translate(frameMovement);
 }
 
-bool KeyboardMover::deserialize(YAML::Node node)
+void KeyboardMover::deserialize(YAML::Node node)
 {
 	m_movementSpeed = node["movementSpeed"].as<float>();
 	m_keyForward = node["keyForward"].as<int>();
@@ -75,6 +75,4 @@ bool KeyboardMover::deserialize(YAML::Node node)
 	m_keyRight = node["keyRight"].as<int>();
 	m_keyUp = node["keyUp"].as<int>();
 	m_keyDown = node["keyDown"].as<int>();
-
-	return true;
 }

@@ -36,7 +36,7 @@ Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
 
 	Terrain::updateMesh();
 
-	Shader* shader = new Shader("../res/basicShader");
+	Shader* shader = new Shader("../res/diffuseFrag");
 	Material* mat = new Material();
 	mat->setShader(shader);
 
@@ -120,7 +120,7 @@ void Terrain::render(MatrixStack * matrixStack)
 	m_meshRenderer->render(matrixStack);
 }
 
-bool Terrain::deserialize(YAML::Node node)
+void Terrain::deserialize(YAML::Node node)
 {
 	YAML::Node fileNameNode = node["fileName"];
 	if (fileNameNode)
@@ -129,10 +129,7 @@ bool Terrain::deserialize(YAML::Node node)
 		float unitScale = node["unitScale"].as<float>();
 		float heightScale = node["heightScale"].as<float>();
 		loadTerrainFromTexture(fileName, unitScale, heightScale);
-		return true;
 	}
-
-	return false;
 }
 
 void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitScale, float heightScale)
@@ -160,7 +157,7 @@ void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitSca
 
 	Terrain::updateMesh();
 
-	Shader* shader = new Shader("../res/basicShader");
+	Shader* shader = new Shader("../res/diffuseFrag");
 	Material* mat = new Material();
 	mat->setShader(shader);
 

@@ -24,7 +24,7 @@ public:
 	void init();
 
 	void render(MatrixStack* matrixStack);
-	bool deserialize(YAML::Node node);
+	void deserialize(YAML::Node node);
 private:
 	int m_width;
 	int m_depth;

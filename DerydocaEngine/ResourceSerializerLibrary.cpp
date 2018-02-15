@@ -1,6 +1,7 @@
 #include "ResourceSerializerLibrary.h"
 #include "MaterialResourceSerializer.h"
 #include "MeshResourceSerializer.h"
+#include "TextureResourceSerializer.h"
 
 
 ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType type)
@@ -21,6 +22,7 @@ ResourceSerializerLibrary::ResourceSerializerLibrary()
 {
 	registerSerializer(new MaterialResourceSerializer());
 	registerSerializer(new MeshResourceSerializer());
+	registerSerializer(new TextureResourceSerializer());
 }
 
 ResourceSerializerLibrary::~ResourceSerializerLibrary()

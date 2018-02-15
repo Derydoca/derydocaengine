@@ -22,7 +22,7 @@ public:
 	virtual void postRender() {}
 	inline void setGameObject(GameObject* gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }
-	virtual bool deserialize(YAML::Node compNode) { return true; };
+	virtual void deserialize(YAML::Node compNode) { };
 
 protected:
 	template<typename T>

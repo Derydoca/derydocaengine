@@ -1,5 +1,6 @@
 #pragma once
 #include <yaml-cpp\yaml.h>
+#include "GameObject.h"
 
 class SceneObject
 {
@@ -17,11 +18,11 @@ public:
 	std::string getType() { return m_type; }
 	YAML::Node getProperties() { return m_properties; }
 	bool isObjectCreated() { return m_objectReference != 0; }
-	void* getObjectReference() { return m_objectReference; }
-	void setObjectReference(void* reference) { m_objectReference = reference; }
+	GameObject* getGameObject() { return m_objectReference; }
+	void setObjectReference(GameObject* reference) { m_objectReference = reference; }
 private:
 	boost::uuids::uuid m_id;
 	std::string m_type;
 	YAML::Node m_properties;
-	void* m_objectReference;
+	GameObject* m_objectReference;
 };

@@ -21,10 +21,11 @@ glm::mat4 Light::getViewMatrix()
 	return glm::mat4();
 }
 
-bool Light::deserialize(YAML::Node node)
+void Light::deserialize(YAML::Node node)
 {
 	Color lightColor = node["color"].as<Color>();
 	setColor(&lightColor);
 
-	return true;
+	LightType type = (LightType)node["type"].as<int>();
+	setLightType(type);
 }

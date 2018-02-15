@@ -1,0 +1,5 @@
+Shader: ../res/cubemapShader
+MaterialParameters:
+  - Type: Texture
+    Slot: 0
+    Path: ../res/rebel.jpg

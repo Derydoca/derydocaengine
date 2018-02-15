@@ -145,6 +145,12 @@
       <Filter>Game Components</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="ImageFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -329,6 +335,12 @@
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ImageFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

@@ -12,14 +12,10 @@ FileType pathToFileType(std::string str)
 	{
 		return MeshFileType;
 	}
-	//else if (extension == "bmp" || extension == "tga" || extension == "png")
-	//{
-	//	return TextureResourceType;
-	//}
-	//else if (extension == "txt")
-	//{
-	//	return TextResourceType;
-	//}
+	else if (extension == "bmp" || extension == "tga" || extension == "png" || extension == "jpg" || extension == "jpeg")
+	{
+		return ImageFileType;
+	}
 	else
 	{
 		return UnknownFileType;

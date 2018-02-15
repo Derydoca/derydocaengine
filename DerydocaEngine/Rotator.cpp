@@ -21,9 +21,7 @@ void Rotator::update(float deltaTime)
 	getGameObject()->getTransform()->setEulerAngles(glm::vec3(0, m_rotVal, 0));
 }
 
-bool Rotator::deserialize(YAML::Node node)
+void Rotator::deserialize(YAML::Node node)
 {
 	m_rotSpeed = node["rotationSpeed"].as<float>();
-
-	return true;
 }

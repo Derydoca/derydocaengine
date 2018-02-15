@@ -32,8 +32,7 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 		if (paramType == "Texture")
 		{
 			int slot = parameters[i]["Slot"].as<int>();
-			std::string texturePath = parameters[i]["Path"].as<std::string>();
-			Texture* texture = new Texture(texturePath);
+			auto texture = loadResource<Texture*>(parameters[i], "ID");
 			material->setTextureSlot(slot, texture);
 		}
 	}

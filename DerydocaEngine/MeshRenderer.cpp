@@ -19,15 +19,13 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-bool MeshRenderer::deserialize(YAML::Node compNode)
+void MeshRenderer::deserialize(YAML::Node compNode)
 {
 	auto material = loadResource<Material*>(compNode, "Material");
 	setMaterial(material);
 
 	auto mesh = loadResource<Mesh*>(compNode, "Mesh");
 	setMesh(mesh);
-
-	return true;
 }
 
 void MeshRenderer::init()

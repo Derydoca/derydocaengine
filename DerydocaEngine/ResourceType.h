@@ -6,4 +6,5 @@ enum ResourceType
 	UnknownResourceType,
 	MaterialResourceType,
 	MeshResourceType,
+	TextureResourceType,
 };

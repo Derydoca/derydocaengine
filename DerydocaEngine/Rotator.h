@@ -11,7 +11,7 @@ public:
 
 	void update(float deltaTime);
 
-	bool deserialize(YAML::Node node);
+	void deserialize(YAML::Node node);
 private:
 	float m_rotVal;
 	float m_rotSpeed;

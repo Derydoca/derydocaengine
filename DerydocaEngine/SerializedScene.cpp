@@ -26,28 +26,53 @@ void SerializedScene::setUp(GameObject * root)
 			continue;
 		}
 
-		if (sceneObject->getType() == "GameObject")
+		YAML::Node properties = sceneObject->getProperties();
+
+		// Get the name of the game object
+		std::string name;
+		if (properties["Name"])
 		{
-			YAML::Node properties = sceneObject->getProperties();
-
-			std::string name = properties["Name"].as<std::string>();
-			GameObject* go = new GameObject(name);
-
-			// Set the transform component
-			Transform* trans = go->getTransform();
-			YAML::Node transformNode = properties["Transform"];
-			YAML::Node positionNode = transformNode["Position"];
-			glm::vec3 Position = glm::vec3(positionNode[0].as<float>(), positionNode[1].as<float>(), positionNode[2].as<float>());
-			trans->setPos(Position);
-			YAML::Node rotationNode = transformNode["Rotation"];
-			glm::vec3 rotationEuler = glm::vec3(rotationNode[0].as<float>(), rotationNode[1].as<float>(), rotationNode[2].as<float>());
-			trans->setEulerAngles(rotationEuler);
-			YAML::Node scaleNode = transformNode["Scale"];
-			glm::vec3 scale = glm::vec3(scaleNode[0].as<float>(), scaleNode[1].as<float>(), scaleNode[2].as<float>());
-			trans->setScale(scale);
-
-			sceneObject->setObjectReference(go);
+			name = properties["Name"].as<std::string>();
 		}
+		else
+		{
+			name = "[NO NAME]";
+		}
+
+		// Create the game object with the name found in the file
+		GameObject* go = new GameObject(name);
+
+		// Set the transform component
+		Transform* trans = go->getTransform();
+		YAML::Node transformNode = properties["Transform"];
+
+		// Get the position
+		glm::vec3 transformPosition;
+		if (transformNode["Position"])
+		{
+			transformPosition = transformNode["Position"].as<glm::vec3>();
+		}
+
+		// Get the rotation as a quaternion
+		glm::fquat transformQuat;
+		if (transformNode["Rotation"])
+		{
+			transformQuat = transformNode["Rotation"].as<glm::fquat>();
+		}
+
+		// Get the scale
+		glm::vec3 transformScale;
+		if (transformNode["Scale"])
+		{
+			transformScale = transformNode["Scale"].as<glm::vec3>();
+		}
+
+		// Apply the transform, rotation (quat), and sclae
+		trans->setPos(transformPosition);
+		trans->setQuat(transformQuat);
+		trans->setScale(transformScale);
+
+		sceneObject->setObjectReference(go);
 	}
 
 	// Resolve dependencies
@@ -61,43 +86,49 @@ void SerializedScene::setUp(GameObject * root)
 			continue;
 		}
 
-		if (sceneObject->getType() == "GameObject")
+		YAML::Node properties = sceneObject->getProperties();
+		GameObject* go = sceneObject->getGameObject();
+
+		// Determine if this game object is parented to another game object
+		YAML::Node parentObjectIdNode = properties["Parent"];
+		if (parentObjectIdNode)
 		{
-			YAML::Node properties = sceneObject->getProperties();
-			GameObject* go = (GameObject*)sceneObject->getObjectReference();
+			// If it is parented to another game object, set the relationship
+			uuid parentId = parentObjectIdNode.as<uuid>();
+			SceneObject* parentSceneObject = findNode(parentId);
+			GameObject* parentGo = parentSceneObject->getGameObject();
+			parentGo->addChild(go);
+		}
+		else
+		{
+			// Otherwise this object should exist on the root of the scene
+			root->addChild(go);
+		}
 
-			YAML::Node parentObjectIdNode = properties["Parent"];
-			if (parentObjectIdNode)
+		// Iterate through each component
+		YAML::Node componentNodes = properties["Components"];
+		for (int componentIndex = 0; componentIndex < componentNodes.size(); componentIndex++)
+		{
+			YAML::Node compNode = componentNodes[componentIndex];
+			std::string compType = compNode["Type"].as<std::string>();
+
+			// Create a game component based on the component type provided
+			GameComponent* component = GameComponentFactory::getInstance().CreateGameComponent(compType);
+
+			// If no component was created, the component type is not supported so we should continue
+			if (component == nullptr)
 			{
-				uuid parentId = parentObjectIdNode.as<uuid>();
-				SceneObject* parentSceneObject = findNode(parentId);
-				GameObject* parentGo = (GameObject*)parentSceneObject->getObjectReference();
-				parentGo->addChild(go);
+				continue;
 			}
-			else
+
+			// Let the component deserialize the data it ineeds
+			if (compNode["Properties"])
 			{
-				root->addChild(go);
+				component->deserialize(compNode["Properties"]);
 			}
 
-			YAML::Node componentNodes = properties["Components"];
-			for (int componentIndex = 0; componentIndex < componentNodes.size(); componentIndex++)
-			{
-				YAML::Node compNode = componentNodes[componentIndex];
-				std::string compType = compNode["Type"].as<std::string>();
-
-				GameComponent* component = GameComponentFactory::getInstance().CreateGameComponent(compType);
-
-				if (component == nullptr)
-				{
-					continue;
-				}
-
-				if (component->deserialize(compNode))
-				{
-					go->addComponent(component);
-				}
-
-			}
+			// Add the component to the game object
+			go->addComponent(component);
 		}
 	}
 }
@@ -161,7 +192,7 @@ void SerializedScene::LoadFromFile(std::string filePath)
 void SerializedScene::SaveToFile(std::string filePath)
 {
 	YAML::Node root;
-	
+
 	YAML::Node materialNode;
 	materialNode["Type"] = "Material";
 	materialNode["ID"] = 100;

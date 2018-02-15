@@ -66,15 +66,13 @@ void Camera::setOrthoSize(float size)
 	recalcPerspectiveMatrix();
 }
 
-bool Camera::deserialize(YAML::Node node)
+void Camera::deserialize(YAML::Node node)
 {
 	m_fov = node["fov"].as<float>();
 	m_zNear = node["zNear"].as<float>();
 	m_zFar = node["zFar"].as<float>();
 
 	recalcPerspectiveMatrix();
-
-	return true;
 }
 
 void Camera::setFov(float fov)

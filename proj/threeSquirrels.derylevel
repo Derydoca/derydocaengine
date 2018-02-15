@@ -4,15 +4,17 @@ Scene:
     Properties:
       Name: Squirrel 1
       Transform:
-        Position: [0, 0, -1]
-        Rotation: [0, 0, 0]
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
         - Type: MeshRenderer
-          Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
-          Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+          Properties:
+            Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
         - Type: Rotator
-          rotationSpeed: 30.0
+          Properties:
+            rotationSpeed: 30.0
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6bb
     Properties:
@@ -20,14 +22,16 @@ Scene:
       Parent: a2ff98cc-9421-4226-8a26-680ad31eb6aa
       Transform:
         Position: [0, 0, 1]
-        Rotation: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
         - Type: MeshRenderer
-          Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
-          Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+          Properties:
+            Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
         - Type: Rotator
-          rotationSpeed: 30.0
+          Properties:
+            rotationSpeed: 30.0
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6cc
     Properties:
@@ -35,72 +39,108 @@ Scene:
       Parent: a2ff98cc-9421-4226-8a26-680ad31eb6bb
       Transform:
         Position: [0, 0, 0.5]
-        Rotation: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
         - Type: MeshRenderer
-          Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
-          Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+          Properties:
+            Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
         - Type: Rotator
-          rotationSpeed: 100.0
+          Properties:
+            rotationSpeed: 100.0
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6dd
     Properties:
-      Name: White Light
+      Name: Light Spinner
       Transform:
-        Position: [0.25, 0, 0]
-        Rotation: [0, 0, 0]
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
-        - Type: Light
-          color: [1.0, 1.0, 1.0, 1.0]
         - Type: Rotator
-          rotationSpeed: -20.0
+          Properties:
+            rotationSpeed: -20.0
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6ee
-    Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
     Properties:
+      Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
       Name: Red Light
       Transform:
         Position: [1, 0, 0]
-        Rotation: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
         - Type: Light
-          color: [1.0, 0.0, 0.0, 1.0]
+          Properties:
+            color: [1.0, 0.0, 0.0, 1.0]
+            type: 1
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6ee
-    Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
     Properties:
+      Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
       Name: Green Light
       Transform:
         Position: [0, 0, 1]
-        Rotation: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
         - Type: Light
-          color: [0.0, 1.0, 0.0, 1.0]
+          Properties:
+            color: [0.0, 1.0, 0.0, 1.0]
+            type: 1
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6ee
-    Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e3
     Properties:
+      Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
       Name: Blue Light
       Transform:
         Position: [-1, 0, 0]
-        Rotation: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
         - Type: Light
-          color: [0.0, 0.0, 1.0, 1.0]
+          Properties:
+            color: [0.0, 0.0, 1.0, 1.0]
+            type: 1
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6ee
-    Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e4
     Properties:
+      Parent: a2ff98cc-9421-4226-8a26-680ad31eb6dd
       Name: Yellow Light
       Transform:
         Position: [0, 0, -1]
-        Rotation: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
         - Type: Light
-          color: [0.8, 0.8, 0.0, 1.0]
+          Properties:
+            color: [0.8, 0.8, 0.0, 1.0]
+            type: 1
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb699
+    Properties:
+      Name: Sun
+      Transform:
+        Position: [0, 0, -1]
+        Rotation: [0.65, 0.368, -0.652, -0.129]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: Light
+          Properties:
+            color: [0.2, 0.2, 0.02, 1.0]
+            type: 0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6dd
+    Properties:
+      Name: Terrain
+      Transform:
+        Position: [-50, -1.3, -50]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: Terrain
+          Properties:
+            fileName: ../res/heightmap2.png
+            unitScale: 0.2
+            heightScale: 15.0

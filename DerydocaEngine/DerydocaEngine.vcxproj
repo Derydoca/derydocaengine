@@ -143,6 +143,7 @@
     <ClCompile Include="FileType.cpp" />
     <ClCompile Include="GameComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="ImageFileSerializer.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureResourceSerializer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WasdMover.cpp" />
   </ItemGroup>
@@ -199,6 +201,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GLError.h" />
     <ClInclude Include="GameComponent.h" />
+    <ClInclude Include="ImageFileSerializer.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
@@ -242,6 +245,7 @@
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureResourceSerializer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="WasdMover.h" />
     <ClInclude Include="YamlTools.h" />

@@ -37,7 +37,7 @@ public:
 	}
 	Color getColor() { return m_color; }
 
-	bool deserialize(YAML::Node node);
+	void deserialize(YAML::Node node);
 private:
 	LightType m_lightType = Point;
 	Color m_color = Color(1, 1, 1, 1);

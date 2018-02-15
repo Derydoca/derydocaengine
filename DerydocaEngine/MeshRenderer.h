@@ -15,7 +15,7 @@ public:
 	void render(MatrixStack* matrixStack);
 	Material* getMaterial() { return m_material; }
 
-	bool deserialize(YAML::Node compNode);
+	void deserialize(YAML::Node compNode);
 
 	void init();
 private:

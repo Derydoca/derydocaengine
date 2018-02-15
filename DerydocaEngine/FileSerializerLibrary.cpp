@@ -2,6 +2,7 @@
 
 #include "MaterialFileSerializer.h"
 #include "MeshFileSerializer.h"
+#include "ImageFileSerializer.h"
 
 FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string sourceFilePath)
 {
@@ -37,6 +38,7 @@ FileSerializerLibrary::FileSerializerLibrary()
 	// Register all type serializers
 	registerTypeSerializer(new MaterialSerializer());
 	registerTypeSerializer(new MeshSerializer());
+	registerTypeSerializer(new ImageFileSerializer());
 }
 
 FileSerializerLibrary::~FileSerializerLibrary()

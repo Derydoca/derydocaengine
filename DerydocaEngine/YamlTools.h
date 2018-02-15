@@ -1,6 +1,8 @@
 #pragma once
 #include "yaml-cpp\yaml.h"
 #include "glm/glm.hpp"
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/quaternion.hpp>
 #include "Color.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/uuid/uuid.hpp>
@@ -36,6 +38,32 @@ public:
 
 namespace YAML {
 
+	// Add support for GLM fquat
+	template<>
+	struct convert<glm::fquat> {
+		static Node encode(const glm::fquat& quat) {
+			Node node;
+			node.push_back(quat.x);
+			node.push_back(quat.y);
+			node.push_back(quat.z);
+			node.push_back(quat.w);
+			return node;
+		}
+
+		static bool decode(const Node& node, glm::fquat& quat) {
+			if (!node.IsSequence() || node.size() != 4) {
+				return false;
+			}
+
+			quat.x = node[0].as<float>();
+			quat.y = node[1].as<float>();
+			quat.z = node[2].as<float>();
+			quat.w = node[3].as<float>();
+
+			return true;
+		}
+	};
+
 	// Add support for GLM vec4
 	template<>
 	struct convert<glm::vec4> {
@@ -48,7 +76,7 @@ namespace YAML {
 			return node;
 		}
 
-		static bool Decode(const Node& node, glm::vec4& vec) {
+		static bool decode(const Node& node, glm::vec4& vec) {
 			if (!node.IsSequence() || node.size() != 3) {
 				return false;
 			}
