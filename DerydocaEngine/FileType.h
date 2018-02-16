@@ -7,6 +7,7 @@ enum FileType
 	MaterialFileType,
 	MeshFileType,
 	ImageFileType,
+	LevelFileType,
 };
 
 FileType pathToFileType(std::string str);

@@ -5,7 +5,6 @@
 #include "boost/uuid/uuid.hpp"
 
 class GameComponent;
-
 class ResourceTypeSerializer;
 
 class ObjectLibrary
@@ -18,10 +17,12 @@ public:
 	}
 	void operator=(ObjectLibrary const&) = delete;
 
-	void initialize(std::string projectPath);
+	void initialize(std::string engineResourcesPath, std::string projectPath);
 	std::string getMetaExtension() const { return m_metaExtension; }
 	Resource* getResource(boost::uuids::uuid uuid);
 	GameComponent* getComponent(boost::uuids::uuid id);
+	void initializeDirectory(std::string directory);
+	void initializeFile(std::string sourceFilePath);
 
 	void registerComponent(boost::uuids::uuid id, GameComponent* component);
 private:
@@ -30,8 +31,6 @@ private:
 	ObjectLibrary(ObjectLibrary const&) {}
 
 	bool createMetaFile(std::string sourceFilePath, std::string metaFilePath);
-	void initializeDirectory(std::string directory);
-	void initializeFile(std::string sourceFilePath);
 	void registerResource(Resource* resource);
 
 	const std::string m_metaExtension = ".derymeta";

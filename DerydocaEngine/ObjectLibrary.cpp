@@ -1,17 +1,21 @@
 #include "ObjectLibrary.h"
-#include <filesystem>
-#include <fstream>
 #include <iostream>
 #include <string>
+#include "boost\filesystem.hpp"
 #include "FileSerializerLibrary.h"
 #include "StringUtils.h"
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
 
-namespace fs = std::experimental::filesystem::v1;
+using namespace boost::filesystem;
+using namespace std;
 
-void ObjectLibrary::initialize(std::string projectPath)
+void ObjectLibrary::initialize(string engineResourcesPath, string projectPath)
 {
+	cout << "Initializing engine resources: " << engineResourcesPath << endl;
+	initializeDirectory(engineResourcesPath);
+
+	cout << "Initializing project directory: " << projectPath << endl;
 	initializeDirectory(projectPath);
 }
 
@@ -49,18 +53,21 @@ void ObjectLibrary::registerComponent(boost::uuids::uuid id, GameComponent * com
 
 void ObjectLibrary::initializeDirectory(std::string directory)
 {
-	printf("Loading project directory...\n");
-
-	// Iterate through all files in this directory
-	for (auto & p : fs::directory_iterator(directory))
+	directory_iterator it{ directory };
+	while (it != directory_iterator{})
 	{
-		std::string filePath = p.path().string();
-
-		// If the file is not a meta file, initialize it
-		if (!endsWith(filePath, m_metaExtension))
+		if (is_directory(it->path()))
 		{
-			initializeFile(filePath);
+			initializeDirectory(it->path().string());
 		}
+		else
+		{
+			if (!endsWith(it->path().string(), m_metaExtension))
+			{
+				initializeFile(it->path().string());
+			}
+		}
+		it++;
 	}
 }
 
@@ -105,7 +112,8 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 	// If the meta file does not exist
-	if (!fs::exists(metaFilePath))
+	//if (!fs::exists(metaFilePath))
+	if (!exists(metaFilePath))
 	{
 		// Create the meta file
 		if (!createMetaFile(sourceFilePath, metaFilePath))

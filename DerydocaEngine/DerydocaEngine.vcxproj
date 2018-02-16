@@ -95,14 +95,34 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>glew32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;SOIL.lib;libyaml-cppmdd.lib;LibOVR.lib;assimp.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\lib;C:\Boost\boost_1_66_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"</Command>
+      <Command>@echo Processing the engine source resource directory
+"$(SolutionDir)x64\Debug\DerydocaEngine.exe" /processDirectory "$(SolutionDir)engineResources"
+
+@echo Processing the engine source example project directory
+"$(SolutionDir)x64\Debug\DerydocaEngine.exe" /processDirectory "$(SolutionDir)exampleProject"
+
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
+
+@echo Copying example project
+xcopy /y /d /e "$(SolutionDir)exampleProject\*" "$(OutDir)exampleProject\"
+
+@echo Copying res directory
+xcopy /y /d /e "$(SolutionDir)res\*" "$(OutDir)res\"
+
+@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -139,6 +159,7 @@
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="FileType.cpp" />
     <ClCompile Include="GameComponentFactory.cpp" />
@@ -147,6 +168,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
+    <ClCompile Include="LevelFileSerializer.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -195,6 +217,7 @@
     <ClInclude Include="DebugVisualizer.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="DisplayManager.h" />
+    <ClInclude Include="Editor.h" />
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="FileType.h" />
     <ClInclude Include="GameComponentFactory.h" />
@@ -206,6 +229,7 @@
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardMover.h" />
+    <ClInclude Include="LevelFileSerializer.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="LinkedList.h" />

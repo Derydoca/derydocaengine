@@ -1,10 +1,17 @@
 #include "EngineSettings.h"
 
-EngineSettings::EngineSettings()
+EngineSettings::EngineSettings(string configFilePath)
 {
 	// Load the configuration file
-	YAML::Node root = YAML::LoadFile("../res/engineconfig.yaml");
+	YAML::Node root = YAML::LoadFile(configFilePath);
 
+	YAML::Node engineNode = root["Engine"];
+	if (engineNode)
+	{
+		m_engineResourceDirectory = engineNode["Resources"].as<string>();
+		m_projectDirectory = engineNode["Project"].as<string>();
+	}
+	 
 	YAML::Node windowNode = root["Window"];
 	if (windowNode)
 	{
@@ -27,13 +34,13 @@ EngineSettings::EngineSettings()
 		if (skyboxIdNode)
 		{
 			m_skyboxId = skyboxIdNode.as<uuid>();
+			m_isSkyboxDefined = true;
 		}
 	}
 	else
 	{
 		m_camPos = glm::vec3(0, 0, 0);
 		m_fov = 70.0f;
-		m_skyboxId = boost::uuids::uuid();
 	}
 }
 

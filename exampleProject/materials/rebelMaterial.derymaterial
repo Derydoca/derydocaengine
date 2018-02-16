@@ -1,4 +1,4 @@
-Shader: ../res/diffuseFrag
+Shader: .\res\diffuseFrag
 MaterialParameters:
   - Type: Texture
     Slot: 0

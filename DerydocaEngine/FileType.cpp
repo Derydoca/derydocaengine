@@ -16,6 +16,10 @@ FileType pathToFileType(std::string str)
 	{
 		return ImageFileType;
 	}
+	else if (extension == "derylevel")
+	{
+		return LevelFileType;
+	}
 	else
 	{
 		return UnknownFileType;

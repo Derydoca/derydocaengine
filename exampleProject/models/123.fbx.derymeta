@@ -1,13 +1,13 @@
 Resources:
-  - ID: 49f82057-4a07-45c6-810e-59d2cfbfa86a
+  - ID: 5df02ad4-92f9-4cf6-a9c5-1aa4adc73655
     Type: Mesh
     Index: 0
     Name: CUTextOne
-  - ID: 78c8fc6c-f1d2-4b7d-bdb2-0d78e055d44b
+  - ID: 40cf4dc9-93c8-47ea-9631-37649628678e
     Type: Mesh
     Index: 1
     Name: CUTextOne.001
-  - ID: bf3d5eb5-162e-4ad6-9fec-8177e696e82e
+  - ID: ddf447e9-4980-43a0-9bfc-6d19564358ee
     Type: Mesh
     Index: 2
     Name: CUTextOne.002

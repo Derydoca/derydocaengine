@@ -3,7 +3,7 @@
 
 DebugVisualizer::DebugVisualizer()
 {
-	m_shader = new Shader("../res/debugVisShader");
+	m_shader = new Shader(".\\res\\debugVisShader");
 
 	m_testLine.setLineWidth(2.0f);
 	m_testLine.setLineStart(glm::vec3(0, 0, 0));

@@ -148,6 +148,10 @@
     <ClCompile Include="CubemapResourceSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
+    <ClCompile Include="LevelFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -338,6 +342,10 @@
     <ClInclude Include="CubemapResource.h">
       <Filter>Engine\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="LevelFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

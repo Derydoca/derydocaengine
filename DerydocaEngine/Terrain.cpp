@@ -36,7 +36,7 @@ Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
 
 	Terrain::updateMesh();
 
-	Shader* shader = new Shader("../res/diffuseFrag");
+	Shader* shader = new Shader(".\\res\\diffuseFrag");
 	Material* mat = new Material();
 	mat->setShader(shader);
 
@@ -122,13 +122,15 @@ void Terrain::render(MatrixStack * matrixStack)
 
 void Terrain::deserialize(YAML::Node node)
 {
-	YAML::Node fileNameNode = node["fileName"];
-	if (fileNameNode)
+	YAML::Node heightmapNode = node["heightmap"];
+	if (heightmapNode)
 	{
-		std::string fileName = fileNameNode.as<std::string>();
+		uuid heightmapResourceId = heightmapNode.as<uuid>();
+		Resource* heightmapResource = ObjectLibrary::getInstance().getResource(heightmapResourceId);
+
 		float unitScale = node["unitScale"].as<float>();
 		float heightScale = node["heightScale"].as<float>();
-		loadTerrainFromTexture(fileName, unitScale, heightScale);
+		loadTerrainFromTexture(heightmapResource->getSourceFilePath(), unitScale, heightScale);
 		if (node["material"])
 		{
 			Material* material = loadResource<Material*>(node, "material");
@@ -162,7 +164,7 @@ void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitSca
 
 	Terrain::updateMesh();
 
-	Shader* shader = new Shader("../res/diffuseFrag");
+	Shader* shader = new Shader(".\\res\\diffuseFrag");
 	Material* mat = new Material();
 	mat->setShader(shader);
 

@@ -32,7 +32,7 @@ void MeshRenderer::deserialize(YAML::Node compNode)
 	{
 		uuid renderTextureCameraId = renderTextureSourceNode.as<uuid>();
 		Camera* renderTextureCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
-		Shader* renderTextureShader = new Shader("../res/basicShader");
+		Shader* renderTextureShader = new Shader(".\\res\\basicShader");
 		Material* renderTextureMaterial = new Material();
 		renderTextureMaterial->setShader(renderTextureShader);
 		renderTextureMaterial->setTextureSlot(0, renderTextureCamera->getRenderTexture());

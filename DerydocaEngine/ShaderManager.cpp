@@ -14,6 +14,6 @@ ShaderManager::~ShaderManager()
 
 void ShaderManager::initializeStaticShaders()
 {
-	m_shadowShader = new Shader("../res/shadowShader");
-	m_phong = new Shader("../res/phong");
+	m_shadowShader = new Shader(".\\res\\shadowShader");
+	m_phong = new Shader(".\\res\\phong");
 }

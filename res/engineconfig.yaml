@@ -1,3 +1,6 @@
+Engine:
+    Resources: .\engineResources\
+    Project: .\exampleProject\
 Window:
 # Blog header image size: 2000 x 800
     Width: 800
@@ -5,4 +8,4 @@ Window:
 Camera:
     Position: [0, 0, 0]
     FOV: 70.0
-    Skybox: b4977e34-c3bf-494a-9764-cb37ab2f0b57
+    Skybox: dc59842d-3530-47a8-bb22-acc400f8b930
