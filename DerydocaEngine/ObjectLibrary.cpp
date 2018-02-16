@@ -31,6 +31,22 @@ Resource * ObjectLibrary::getResource(boost::uuids::uuid uuid)
 	}
 }
 
+GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid id)
+{
+	auto search = m_sceneComponents.find(id);
+	if (search != m_sceneComponents.end())
+	{
+		return search->second;
+	}
+
+	return nullptr;
+}
+
+void ObjectLibrary::registerComponent(boost::uuids::uuid id, GameComponent * component)
+{
+	m_sceneComponents.insert(std::pair<uuid, GameComponent*>(id, component));
+}
+
 void ObjectLibrary::initializeDirectory(std::string directory)
 {
 	printf("Loading project directory...\n");
@@ -63,7 +79,7 @@ bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaF
 	// Create the yaml structure
 	YAML::Node root;
 	YAML::Node resources = serializer->generateResourceNodes(sourceFilePath);
-	root["resources"] = resources;
+	root["Resources"] = resources;
 
 	// Create the file emitter and save it to disk
 	YAML::Emitter out;
@@ -102,7 +118,7 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 
 	// Load the meta file
 	YAML::Node file = YAML::LoadFile(metaFilePath);
-	YAML::Node resourcesNode = file["resources"];
+	YAML::Node resourcesNode = file["Resources"];
 	if (!resourcesNode)
 	{
 		printf("The meta file '%s' does not have a resource node assigned it it. This file could not be parsed!\n", metaFilePath.c_str());
@@ -114,14 +130,14 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 		YAML::Node resourceNode = resourcesNode[i];
 
 		// If no ID node is defined, exit out because it is required
-		if (!resourceNode["id"])
+		if (!resourceNode["ID"])
 		{
 			printf("A node was skipped because it was missing an ID parameter.\n");
 			continue;
 		}
 
 		// Get the ID
-		boost::uuids::uuid resourceUuid = resourceNode["id"].as<boost::uuids::uuid>();
+		boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
 
 		// Find the serializer related to this source file object
 		auto serializer = FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);

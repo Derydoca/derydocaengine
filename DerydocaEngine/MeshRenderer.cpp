@@ -26,6 +26,18 @@ void MeshRenderer::deserialize(YAML::Node compNode)
 
 	auto mesh = loadResource<Mesh*>(compNode, "Mesh");
 	setMesh(mesh);
+
+	YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];
+	if (renderTextureSourceNode && renderTextureSourceNode.IsScalar())
+	{
+		uuid renderTextureCameraId = renderTextureSourceNode.as<uuid>();
+		Camera* renderTextureCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
+		Shader* renderTextureShader = new Shader("../res/basicShader");
+		Material* renderTextureMaterial = new Material();
+		renderTextureMaterial->setShader(renderTextureShader);
+		renderTextureMaterial->setTextureSlot(0, renderTextureCamera->getRenderTexture());
+		setMaterial(renderTextureMaterial);
+	}
 }
 
 void MeshRenderer::init()

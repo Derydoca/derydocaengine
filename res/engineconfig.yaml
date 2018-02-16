@@ -1,7 +1,8 @@
-window:
+Window:
 # Blog header image size: 2000 x 800
-    width: 800
-    height: 600
-camera:
-    position: [0, 0, 0]
-    fov: 70.0
+    Width: 800
+    Height: 600
+Camera:
+    Position: [0, 0, 0]
+    FOV: 70.0
+    Skybox: b4977e34-c3bf-494a-9764-cb37ab2f0b57

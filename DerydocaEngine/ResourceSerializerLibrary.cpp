@@ -2,7 +2,7 @@
 #include "MaterialResourceSerializer.h"
 #include "MeshResourceSerializer.h"
 #include "TextureResourceSerializer.h"
-
+#include "CubemapResourceSerializer.h"
 
 ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType type)
 {
@@ -23,6 +23,7 @@ ResourceSerializerLibrary::ResourceSerializerLibrary()
 	registerSerializer(new MaterialResourceSerializer());
 	registerSerializer(new MeshResourceSerializer());
 	registerSerializer(new TextureResourceSerializer());
+	registerSerializer(new CubemapResourceSerializer());
 }
 
 ResourceSerializerLibrary::~ResourceSerializerLibrary()

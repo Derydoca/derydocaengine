@@ -55,7 +55,9 @@ public:
 
 	inline glm::mat4 getProjectionMatrix() const { return m_projectionMatrix; }
 
-	inline glm::mat4 getViewMatrix() const { return m_transform->getModel(); };
+	inline glm::mat4 getViewMatrix() const { return m_transform->getModel(); }
+
+	inline RenderTexture* getRenderTexture() const { return m_renderTexture; }
 
 	/*
 	Gets a matrix representing the camera's rotation and projection.

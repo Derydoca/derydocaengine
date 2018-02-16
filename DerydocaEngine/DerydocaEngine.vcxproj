@@ -135,9 +135,9 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="CubemapResourceSerializer.cpp" />
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
-    <ClCompile Include="DiffuseTestScene.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="FileType.cpp" />
@@ -176,7 +176,6 @@
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
-    <ClCompile Include="SquirrelTerrainScene.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -190,9 +189,10 @@
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="CubemapResource.h" />
+    <ClInclude Include="CubemapResourceSerializer.h" />
     <ClInclude Include="DebugLine.h" />
     <ClInclude Include="DebugVisualizer.h" />
-    <ClInclude Include="DiffuseTestScene.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="DisplayManager.h" />
     <ClInclude Include="EngineSettings.h" />
@@ -241,7 +241,6 @@
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
-    <ClInclude Include="SquirrelTerrainScene.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />

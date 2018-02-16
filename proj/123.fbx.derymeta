@@ -1,13 +1,13 @@
-resources:
-  - id: 49f82057-4a07-45c6-810e-59d2cfbfa86a
-    type: Mesh
-    index: 0
-    name: CUTextOne
-  - id: 78c8fc6c-f1d2-4b7d-bdb2-0d78e055d44b
-    type: Mesh
-    index: 1
-    name: CUTextOne.001
-  - id: bf3d5eb5-162e-4ad6-9fec-8177e696e82e
-    type: Mesh
-    index: 2
-    name: CUTextOne.002
+Resources:
+  - ID: 49f82057-4a07-45c6-810e-59d2cfbfa86a
+    Type: Mesh
+    Index: 0
+    Name: CUTextOne
+  - ID: 78c8fc6c-f1d2-4b7d-bdb2-0d78e055d44b
+    Type: Mesh
+    Index: 1
+    Name: CUTextOne.001
+  - ID: bf3d5eb5-162e-4ad6-9fec-8177e696e82e
+    Type: Mesh
+    Index: 2
+    Name: CUTextOne.002

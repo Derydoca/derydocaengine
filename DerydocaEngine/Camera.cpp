@@ -72,6 +72,14 @@ void Camera::deserialize(YAML::Node node)
 	m_zNear = node["zNear"].as<float>();
 	m_zFar = node["zFar"].as<float>();
 
+	YAML::Node renderTextureNode = node["RenderTexture"];
+	if (renderTextureNode)
+	{
+		int width = renderTextureNode["Width"].as<int>();
+		int height = renderTextureNode["Height"].as<int>();
+		m_renderTexture = new RenderTexture(width, height);
+	}
+
 	recalcPerspectiveMatrix();
 }
 

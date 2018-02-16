@@ -129,6 +129,11 @@ void Terrain::deserialize(YAML::Node node)
 		float unitScale = node["unitScale"].as<float>();
 		float heightScale = node["heightScale"].as<float>();
 		loadTerrainFromTexture(fileName, unitScale, heightScale);
+		if (node["material"])
+		{
+			Material* material = loadResource<Material*>(node, "material");
+			m_meshRenderer->setMaterial(material);
+		}
 	}
 }
 

@@ -13,7 +13,7 @@ YAML::Node ImageFileSerializer::generateResourceNodes(std::string filePath)
 	YAML::Node resources;
 
 	YAML::Node materialResource;
-	materialResource["id"] = generateUuid();
+	materialResource["ID"] = generateUuid();
 
 	resources.push_back(materialResource);
 

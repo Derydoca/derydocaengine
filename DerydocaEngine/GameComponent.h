@@ -16,6 +16,7 @@ class Camera;
 
 class GameComponent {
 public:
+	GameComponent() {}
 	virtual void init() {}
 	virtual void update(float deltaTime) {}
 	virtual void render(MatrixStack* matrixStack) {}

@@ -80,12 +80,6 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="DiffuseTestScene.cpp">
-      <Filter>Temporary</Filter>
-    </ClCompile>
-    <ClCompile Include="SquirrelTerrainScene.cpp">
-      <Filter>Temporary</Filter>
-    </ClCompile>
     <ClCompile Include="KeyboardMover.cpp">
       <Filter>Game Components</Filter>
     </ClCompile>
@@ -149,6 +143,9 @@
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
     <ClCompile Include="TextureResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="CubemapResourceSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -258,12 +255,6 @@
     <ClInclude Include="Light.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="DiffuseTestScene.h">
-      <Filter>Temporary</Filter>
-    </ClInclude>
-    <ClInclude Include="SquirrelTerrainScene.h">
-      <Filter>Temporary</Filter>
-    </ClInclude>
     <ClInclude Include="KeyboardMover.h">
       <Filter>Game Components</Filter>
     </ClInclude>
@@ -341,6 +332,12 @@
     <ClInclude Include="TextureResourceSerializer.h">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClInclude>
+    <ClInclude Include="CubemapResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="CubemapResource.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
@@ -357,9 +354,6 @@
     </Filter>
     <Filter Include="Engine\Debug">
       <UniqueIdentifier>{927235fe-be96-458a-8f36-9cbd90f48ec7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Temporary">
-      <UniqueIdentifier>{a5b73a2c-e3e7-4a1f-a9ea-0298b48d348b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Resources">
       <UniqueIdentifier>{39a6eafb-ac19-4fe7-93a3-831a7932737e}</UniqueIdentifier>

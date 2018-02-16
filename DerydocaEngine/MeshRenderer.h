@@ -18,10 +18,9 @@ public:
 	void deserialize(YAML::Node compNode);
 
 	void init();
+	void setMesh(Mesh* mesh) { m_mesh = mesh; }
+	void setMaterial(Material* material) { m_material = material; }
 private:
 	Mesh* m_mesh;
 	Material* m_material;
-
-	void setMesh(Mesh* mesh) { m_mesh = mesh; }
-	void setMaterial(Material* material) { m_material = material; }
 };

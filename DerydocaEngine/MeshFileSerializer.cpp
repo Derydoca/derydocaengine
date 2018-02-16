@@ -31,13 +31,13 @@ YAML::Node MeshSerializer::generateResourceNodes(std::string filePath)
 		if (!findMeshResourceNode(resources, i, mesh->mName, resourceNode))
 		{
 			// If one was not found, initialize the ID and type
-			resourceNode["id"] = generateUuid();
-			resourceNode["type"] = "Mesh";
+			resourceNode["ID"] = generateUuid();
+			resourceNode["Type"] = "Mesh";
 		}
 
 		// Set object properties
-		resourceNode["index"] = i;
-		resourceNode["name"] = mesh->mName.C_Str();
+		resourceNode["Index"] = i;
+		resourceNode["Name"] = mesh->mName.C_Str();
 
 		// Add it to the resource node
 		resources.push_back(resourceNode);
@@ -49,22 +49,22 @@ YAML::Node MeshSerializer::generateResourceNodes(std::string filePath)
 Resource * MeshSerializer::loadResourceFromMeta(YAML::Node resourceNode)
 {
 	// If the type field is missing, then it cannot be loaded
-	if (!resourceNode["type"])
+	if (!resourceNode["Type"])
 	{
 		printf("The node with ID of %s could not be loaded because it did not have a type field defined to it.\n", resourceNode["id"].as<std::string>().c_str());
 		return nullptr;
 	}
 
 	// Read the type of the resource
-	std::string type = resourceNode["type"].as<std::string>();
+	std::string type = resourceNode["Type"].as<std::string>();
 
 	// Deserialize to a specific resource type based on the type name
 	if (type == "Mesh")
 	{
 		// If it is a mesh, make a mesh resource
 		MeshResource* meshResource = new MeshResource();
-		meshResource->setMeshIndex(resourceNode["index"].as<unsigned int>());
-		meshResource->setMeshName(resourceNode["name"].as<std::string>());
+		meshResource->setMeshIndex(resourceNode["Index"].as<unsigned int>());
+		meshResource->setMeshName(resourceNode["Name"].as<std::string>());
 		meshResource->setType(MeshResourceType);
 		return meshResource;
 	}
@@ -80,14 +80,14 @@ bool MeshSerializer::findMeshResourceNode(YAML::Node root, unsigned int index, a
 		YAML::Node resource = root[i];
 
 		// Skip over any resource that is not a mesh
-		std::string type = resource["type"].as<std::string>();
+		std::string type = resource["Type"].as<std::string>();
 		if (type != "Mesh")
 		{
 			continue;
 		}
 
 		// If the mesh's name matches the supplied name, return the node
-		std::string nodeName = resource["name"].as<std::string>();
+		std::string nodeName = resource["Name"].as<std::string>();
 		if (nodeName.c_str() == name.C_Str())
 		{
 			resourceNode = resource;
@@ -95,7 +95,7 @@ bool MeshSerializer::findMeshResourceNode(YAML::Node root, unsigned int index, a
 		}
 
 		// If the mesh's index matches the supplied index, return the node
-		unsigned int nodeIndex = resource["index"].as<unsigned int>();
+		unsigned int nodeIndex = resource["Index"].as<unsigned int>();
 		if (nodeIndex == index)
 		{
 			resourceNode = resource;

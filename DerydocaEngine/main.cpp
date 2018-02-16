@@ -10,6 +10,9 @@
 #include "SerializedScene.h"
 #include "ObjectLibrary.h"
 #include "ScreenshotUtil.h"
+#include "CubemapResource.h"
+#include "Skybox.h"
+#include "Shader.h"
 
 int main()
 {
@@ -38,8 +41,24 @@ int main()
 	editorCameraTransform->setPos(settings->getCamPos());
 	Camera* editorCamera = new Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
 	editorCamera->setDisplay(display);
-	editorCamera->setClearMode(Camera::ClearMode::ColorClear);
-	editorCamera->setClearColor(Color(0.5, 0, 0));
+	if (settings->isSkyboxDefined())
+	{
+		// If a skybox is defined, build the skybox material and assign it to the editor camera
+		Shader* skyboxShader = new Shader("../res/cubemapShader");
+		CubemapResource* cubemapResource = (CubemapResource*)ObjectLibrary::getInstance().getResource(settings->getSkyboxId());
+		Texture* skyboxTexture = (Texture*)cubemapResource->getResourceObject();
+		Material* skyboxMaterial = new Material();
+		skyboxMaterial->setShader(skyboxShader);
+		skyboxMaterial->setTextureSlot(0, skyboxTexture);
+		editorCamera->setSkybox(skyboxMaterial);
+		editorCamera->setClearMode(Camera::ClearMode::SkyboxClear);
+	}
+	else
+	{
+		// By default, clear the screen with a deep red
+		editorCamera->setClearMode(Camera::ClearMode::ColorClear);
+		editorCamera->setClearColor(Color(0.5, 0, 0));
+	}
 	editorCameraObject->addComponent(editorCamera);
 	editorCameraObject->addComponent(new WasdMover(InputManager::getInstance().getKeyboard(), InputManager::getInstance().getMouse()));
 	sceneRoot->addChild(editorCameraObject);

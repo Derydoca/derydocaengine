@@ -4,6 +4,8 @@
 #include "Resource.h"
 #include "boost/uuid/uuid.hpp"
 
+class GameComponent;
+
 class ResourceTypeSerializer;
 
 class ObjectLibrary
@@ -19,6 +21,9 @@ public:
 	void initialize(std::string projectPath);
 	std::string getMetaExtension() const { return m_metaExtension; }
 	Resource* getResource(boost::uuids::uuid uuid);
+	GameComponent* getComponent(boost::uuids::uuid id);
+
+	void registerComponent(boost::uuids::uuid id, GameComponent* component);
 private:
 	ObjectLibrary() {}
 	~ObjectLibrary() {}
@@ -31,5 +36,6 @@ private:
 
 	const std::string m_metaExtension = ".derymeta";
 	std::map<boost::uuids::uuid, Resource*> m_resources;
+	std::map<boost::uuids::uuid, GameComponent*> m_sceneComponents;
 };
 

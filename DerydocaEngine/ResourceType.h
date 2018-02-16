@@ -7,4 +7,5 @@ enum ResourceType
 	MaterialResourceType,
 	MeshResourceType,
 	TextureResourceType,
+	CubemapResourceType,
 };

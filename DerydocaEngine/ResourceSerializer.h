@@ -2,8 +2,8 @@
 #include "ResourceType.h"
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
-
-struct Resource;
+#include "Resource.h"
+#include "ObjectLibrary.h"
 
 class ResourceSerializer
 {
@@ -25,6 +25,13 @@ protected:
 		{
 			return nullptr;
 		}
+	}
+
+	std::string getSourceFilePath(YAML::Node node, std::string resourceName)
+	{
+		boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
+		Resource * resource = ObjectLibrary::getInstance().getResource(id);
+		return resource->getSourceFilePath();
 	}
 };
 

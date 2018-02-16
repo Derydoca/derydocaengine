@@ -1,5 +1,10 @@
 Shader: ../res/cubemapShader
 MaterialParameters:
-  - Type: Texture
+  - Type: Cubemap
     Slot: 0
-    Path: ../res/rebel.jpg
+    XPos: efdebf49-155d-43fc-b2d8-60a64ab3414f
+    XNeg: 35c5de9d-c6c0-403b-8f3e-9d345fd9d096
+    YPos: 1c8f97bc-600d-47f7-ba11-ba67b7b8e4b4
+    YNeg: 877dec9e-17fc-49b9-a0c0-f4f5bcd4e147
+    ZPos: b4af8c79-a089-4886-bb7b-dcf80d6d6618
+    ZNeg: 1eb90c13-6cd8-4536-bfe3-b4e7845bed4f
