@@ -101,16 +101,13 @@
       </LinkTimeCodeGeneration>
     </Link>
     <PostBuildEvent>
-      <Command>@echo Processing the engine source resource directory
-"$(SolutionDir)x64\Debug\DerydocaEngine.exe" /processDirectory "$(SolutionDir)engineResources"
-
-@echo Processing the engine source example project directory
-"$(SolutionDir)x64\Debug\DerydocaEngine.exe" /processDirectory "$(SolutionDir)exampleProject"
+      <Command>@echo Processing the engine source resource directory and example project directory
+"$(SolutionDir)x64\Debug\DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources" "$(SolutionDir)exampleProject"
 
 @echo Copying engine resources
 xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
 
-@echo Copying example project
+@echo Copying example project directory
 xcopy /y /d /e "$(SolutionDir)exampleProject\*" "$(OutDir)exampleProject\"
 
 @echo Copying engine settings file
@@ -155,6 +152,7 @@ xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="CommandLineArgs.cpp" />
     <ClCompile Include="CubemapResourceSerializer.cpp" />
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
@@ -213,6 +211,7 @@ xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="CommandLineArgs.h" />
     <ClInclude Include="CubemapResource.h" />
     <ClInclude Include="CubemapResourceSerializer.h" />
     <ClInclude Include="DebugLine.h" />

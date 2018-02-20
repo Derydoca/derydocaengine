@@ -1,13 +1,20 @@
 #include "Editor.h"
 #include "EngineSettings.h"
 #include "ObjectLibrary.h"
+#include "CommandLineArgs.h"
 
 int main(int argc, char* argv[])
 {
-	if (argc > 2 && strcmp(argv[1], "/processDirectory") == 0)
+	CommandLineArgs args = CommandLineArgs(argc, argv);
+	
+	if (args.keyExists("processDirectory"))
 	{
-		// If the command to process a directory was passed in, process it and then immediately exit
-		ObjectLibrary::getInstance().initializeDirectory(argv[2]);
+		list<string> directoriesToProcess = args.getValues("processDirectory");
+
+		for (auto it = directoriesToProcess.begin(); it != directoriesToProcess.end(); ++it)
+		{
+			ObjectLibrary::getInstance().initializeDirectory(it->c_str());
+		}
 
 		return 0;
 	}

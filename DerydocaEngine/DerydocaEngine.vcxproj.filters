@@ -160,6 +160,7 @@
     <ClCompile Include="ShaderResourceSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
+    <ClCompile Include="CommandLineArgs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -365,6 +366,7 @@
     <ClInclude Include="ShaderResourceSerializer.h">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClInclude>
+    <ClInclude Include="CommandLineArgs.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
