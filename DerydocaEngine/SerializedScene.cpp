@@ -130,7 +130,6 @@ void SerializedScene::setUp(GameObject * root)
 			// Add the component to the game object
 			go->addComponent(component);
 
-			uuid componentId;
 			YAML::Node componentIdNode = compNode["ID"];
 			if (componentIdNode)
 			{
