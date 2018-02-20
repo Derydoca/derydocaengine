@@ -6,6 +6,7 @@
 #include "StringUtils.h"
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
+#include "FileType.h"
 
 using namespace boost::filesystem;
 using namespace std;
@@ -73,8 +74,16 @@ void ObjectLibrary::initializeDirectory(std::string directory)
 
 bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaFilePath)
 {
+	FileType fileType = pathToFileType(sourceFilePath);
+
+	// If this is a file type we are expected to ignore, lets ignore it
+	if (fileType == FileType::IgnoredFileType)
+	{
+		return false;
+	}
+
 	// Find the serializer for this file type
-	auto serializer = FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+	auto serializer = FileSerializerLibrary::getInstance().getTypeSerializer(fileType);
 
 	// If the serializer was not found, abort and return false
 	if (serializer == nullptr)
@@ -112,14 +121,12 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 	// If the meta file does not exist
-	//if (!fs::exists(metaFilePath))
 	if (!exists(metaFilePath))
 	{
 		// Create the meta file
 		if (!createMetaFile(sourceFilePath, metaFilePath))
 		{
-			// If the meta file could not be created, skip this file
-			printf("The file '%s' was not loaded into the object library because the meta file was unable to be created.\n", sourceFilePath.c_str());
+			// If the meta file was not be created, skip this file
 			return;
 		}
 	}
@@ -170,6 +177,7 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 		// Set the common parameters of the resource object
 		resource->setFilePaths(sourceFilePath, metaFilePath);
 		resource->setId(resourceUuid);
+		serializer->postLoadInitialize(resource);
 
 		// Register the resource so it can be referenced later
 		registerResource(resource);

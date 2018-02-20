@@ -1,4 +1,4 @@
-Shader: .\res\diffuseFrag
+Shader: 6ea94009-4b34-4011-aaf4-bac38b0ac397
 MaterialParameters:
   - Type: Texture
     Slot: 0

@@ -204,11 +204,11 @@ void SerializedScene::SaveToFile(std::string filePath)
 	materialNode["Type"] = "Material";
 	materialNode["ID"] = 100;
 	YAML::Node materialProperties;
-	materialProperties["Shader"] = "..\\res\\diffuseFrag";
+	materialProperties["Shader"] = "..\\engineResources\\shaders\\diffuseFrag";
 	YAML::Node materialTexture;
 	materialTexture["Type"] = "Texture";
 	materialTexture["Slot"] = 0;
-	materialTexture["Path"] = ".\\res\\grass.png";
+	materialTexture["Path"] = ".\\engineResources\\grass.png";
 	materialProperties["MaterialParameters"].push_back(materialTexture);
 	materialNode["Properties"] = materialProperties;
 	root["Scene"].push_back(materialNode);
@@ -217,7 +217,7 @@ void SerializedScene::SaveToFile(std::string filePath)
 	meshNode["Type"] = "Mesh";
 	meshNode["ID"] = 200;
 	YAML::Node meshProperties;
-	meshProperties["Path"] = ".\\res\\sphere.obj";
+	meshProperties["Path"] = ".\\engineResources\\sphere.obj";
 	meshNode["Properties"] = meshProperties;
 	root["Scene"].push_back(meshNode);
 

@@ -14,6 +14,7 @@ public:
 	virtual YAML::Node generateResourceNodes(std::string filePath) = 0;
 	virtual FileType getFileType() = 0;
 	virtual Resource* loadResourceFromMeta(YAML::Node resourceNode) = 0;
+	virtual void postLoadInitialize(Resource* resource) {}
 
 	friend boost::uuids::uuid generateUuid();
 };

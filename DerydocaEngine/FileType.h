@@ -4,10 +4,12 @@
 enum FileType
 {
 	UnknownFileType,
+	IgnoredFileType,
 	MaterialFileType,
 	MeshFileType,
 	ImageFileType,
 	LevelFileType,
+	ShaderFileType,
 };
 
 FileType pathToFileType(std::string str);

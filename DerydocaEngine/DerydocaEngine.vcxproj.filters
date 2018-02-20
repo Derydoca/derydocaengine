@@ -151,7 +151,15 @@
     <ClCompile Include="LevelFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="Editor.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -345,7 +353,18 @@
     <ClInclude Include="LevelFileSerializer.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
-    <ClInclude Include="Editor.h" />
+    <ClInclude Include="Editor.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderResource.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

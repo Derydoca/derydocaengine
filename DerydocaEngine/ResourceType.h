@@ -9,4 +9,6 @@ enum ResourceType
 	TextureResourceType,
 	CubemapResourceType,
 	LevelResourceType,
+	ShaderResourceType,
 };
+ 

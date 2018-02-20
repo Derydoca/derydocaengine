@@ -113,8 +113,8 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
 @echo Copying example project
 xcopy /y /d /e "$(SolutionDir)exampleProject\*" "$(OutDir)exampleProject\"
 
-@echo Copying res directory
-xcopy /y /d /e "$(SolutionDir)res\*" "$(OutDir)res\"
+@echo Copying engine settings file
+xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
 @echo Copying DLLs
 xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"</Command>
@@ -195,7 +195,9 @@ xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="ScreenshotUtil.cpp" />
     <ClCompile Include="SerializedScene.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderFileSerializer.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="ShaderResourceSerializer.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="StringUtils.cpp" />
@@ -262,7 +264,10 @@ xcopy /y /d "$(SolutionDir)libs\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="ScreenshotUtil.h" />
     <ClInclude Include="SerializedScene.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderFileSerializer.h" />
     <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="ShaderResource.h" />
+    <ClInclude Include="ShaderResourceSerializer.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="StringUtils.h" />

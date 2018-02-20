@@ -36,7 +36,7 @@ Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
 
 	Terrain::updateMesh();
 
-	Shader* shader = new Shader(".\\res\\diffuseFrag");
+	Shader* shader = new Shader(".\\engineResources\\shaders\\diffuseFrag");
 	Material* mat = new Material();
 	mat->setShader(shader);
 
@@ -164,7 +164,7 @@ void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitSca
 
 	Terrain::updateMesh();
 
-	Shader* shader = new Shader(".\\res\\diffuseFrag");
+	Shader* shader = new Shader(".\\engineResources\\shaders\\diffuseFrag");
 	Material* mat = new Material();
 	mat->setShader(shader);
 

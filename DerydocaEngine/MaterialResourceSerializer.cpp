@@ -17,8 +17,9 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 	YAML::Node root = YAML::LoadFile(resource->getSourceFilePath());
 
 	// Load the shader specified in the file
-	std::string shaderPath = root["Shader"].as<std::string>();
-	Shader* shader = new Shader(shaderPath);
+	//std::string shaderPath = root["Shader"].as<std::string>();
+	//Shader* shader = new Shader(shaderPath);
+	Shader* shader = loadResource<Shader*>(root, "Shader");
 
 	// Create a material with the shader we created
 	Material* material = new Material();

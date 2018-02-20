@@ -20,7 +20,7 @@ public:
 	std::string getSourceFilePath() { return m_sourceFilePath; }
 	std::string getMetaFilePath() { return m_metaFilePath; }
 	void* getResourceObject();
-private:
+protected:
 	uuid m_id;
 	ResourceType m_type;
 	std::string m_sourceFilePath;

@@ -4,6 +4,7 @@
 #include "MeshFileSerializer.h"
 #include "ImageFileSerializer.h"
 #include "LevelFileSerializer.h"
+#include "ShaderFileSerializer.h"
 
 FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string sourceFilePath)
 {
@@ -41,6 +42,7 @@ FileSerializerLibrary::FileSerializerLibrary()
 	registerTypeSerializer(new MeshSerializer());
 	registerTypeSerializer(new ImageFileSerializer());
 	registerTypeSerializer(new LevelFileSerializer());
+	registerTypeSerializer(new ShaderFileSerializer());
 }
 
 FileSerializerLibrary::~FileSerializerLibrary()

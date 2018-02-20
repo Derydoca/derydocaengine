@@ -1,4 +1,4 @@
-Shader: .\res\cubemapShader
+Shader: bef58587-98d5-4351-9a78-07f6d1f93a87
 MaterialParameters:
   - Type: Cubemap
     Slot: 0

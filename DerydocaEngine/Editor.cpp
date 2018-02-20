@@ -18,7 +18,7 @@
 
 int Editor::Run()
 {
-	EngineSettings* settings = new EngineSettings(".\\res\\engineconfig.yaml");
+	EngineSettings* settings = new EngineSettings(".\\engineSettings.yaml"); 
 	
 	// Load the project file
 	ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), settings->getProjectDirectory());
@@ -46,7 +46,7 @@ int Editor::Run()
 	if (settings->isSkyboxDefined())
 	{
 		// If a skybox is defined, build the skybox material and assign it to the editor camera
-		Shader* skyboxShader = new Shader(".\\res\\cubemapShader");
+		Shader* skyboxShader = new Shader(".\\engineResources\\shaders\\cubemapShader");
 		CubemapResource* cubemapResource = (CubemapResource*)ObjectLibrary::getInstance().getResource(settings->getSkyboxId());
 		Texture* skyboxTexture = (Texture*)cubemapResource->getResourceObject();
 		Material* skyboxMaterial = new Material();

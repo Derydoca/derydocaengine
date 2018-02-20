@@ -20,6 +20,14 @@ FileType pathToFileType(std::string str)
 	{
 		return LevelFileType;
 	}
+	else if (extension == "vs")
+	{
+		return ShaderFileType;
+	}
+	else if (extension == "fs")
+	{
+		return IgnoredFileType;
+	}
 	else
 	{
 		return UnknownFileType;
