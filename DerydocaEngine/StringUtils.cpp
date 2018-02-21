@@ -10,7 +10,7 @@ bool endsWith(const std::string& string, const std::string& suffix)
 
 	// Check each character in the suffix to see if it matches the source string's suffix
 	size_t stringSuffixIndex = string.length() - suffix.length();
-	for (int i = 0; i < suffix.length(); i++)
+	for (size_t i = 0; i < suffix.length(); i++)
 	{
 		if (string[stringSuffixIndex + i] != suffix[i])
 		{
