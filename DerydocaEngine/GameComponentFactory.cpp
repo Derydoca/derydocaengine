@@ -9,7 +9,6 @@
 #include "Terrain.h"
 #include "WasdMover.h"
 #include "DebugVisualizer.h"
-#include "Oculus.h"
 #include "Light.h"
 
 // Registers a class to the instance generator map
@@ -50,7 +49,6 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(Terrain);
 	REGINSTANCE(WasdMover);
 	REGINSTANCE(DebugVisualizer);
-	REGINSTANCE(Oculus);
 	REGINSTANCE(Light);
 }
 

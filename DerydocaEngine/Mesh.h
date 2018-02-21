@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-class aiMesh;
+struct aiMesh;
 
 class Mesh
 {

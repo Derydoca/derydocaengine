@@ -1,4 +1,14 @@
-DerydocaEngine/x64/*
+# Exclude all builds of the application
+builds/*
+
+# Do not include any build artifacts
 DerydocaEngine/Debug/*
+DerydocaEngine/Debug/DerydocaEngine.tlog/*.tlog
+DerydocaEngine/Release/*
+DerydocaEngine/x64/Debug/*
+DerydocaEngine/x64/Release/*
+
+# Exclude the hidden visual studio file
 .vs/*
-x64/*
+
+*.tlog

@@ -95,9 +95,6 @@
     <ClCompile Include="Resource.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="Oculus.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectLibrary.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -285,9 +282,6 @@
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Engine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Oculus.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="ObjectLibrary.h">
       <Filter>Engine</Filter>
