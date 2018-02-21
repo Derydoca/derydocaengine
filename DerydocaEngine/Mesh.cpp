@@ -12,7 +12,7 @@ Mesh::Mesh(const std::string& fileName) : Mesh(fileName, 0)
 {
 }
 
-Mesh::Mesh(const std::string & fileName, int meshIndex)
+Mesh::Mesh(const std::string & fileName, unsigned int meshIndex)
 {
 	const aiScene* aiModel = aiImportFile(fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -126,7 +126,7 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 	{
 		m_numIndices = mesh->mNumFaces * 3;
 		m_indices = new unsigned int[m_numIndices];
-		for (int i = 0; i < mesh->mNumFaces; i++)
+		for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 		{
 			m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
 			m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];

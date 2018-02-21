@@ -26,7 +26,7 @@ glm::mat4 Transform::getWorldModel()
 	return worldModel;
 }
 
-glm::vec3 & Transform::getWorldPos()
+glm::vec3 Transform::getWorldPos()
 {
 	// Start off with the object's local position
 	glm::vec4 pos = glm::vec4(m_pos, 1);
@@ -48,7 +48,11 @@ glm::vec3 & Transform::getWorldPos()
 	}
 
 	// Return the world position
-	return glm::vec3(pos);
+	glm::vec3 worldPos;
+	worldPos.x = pos.x;
+	worldPos.y = pos.y;
+	worldPos.z = pos.z;
+	return worldPos;
 }
 
 void Transform::translate(glm::vec3 & delta)

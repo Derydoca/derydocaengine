@@ -61,7 +61,7 @@ void RenderTexture::bindAsRenderTexture()
 float RenderTexture::getAspectRatio()
 {
 	if (m_height != 0) {
-		return m_width / m_height;
+		return (float)m_width / (float)m_height;
 	}
 	return 1;
 }
