@@ -13,7 +13,7 @@ public:
 
 	void addDisplay(Display* display) { m_displays.push_back(display); }
 
-	Display* getDisplay(int index) {
+	Display* getDisplay(size_t index) {
 		if (index >= m_displays.size())
 		{
 			return nullptr;

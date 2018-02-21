@@ -27,7 +27,7 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 
 	// Assign all material parameters to the material
 	YAML::Node parameters = root["MaterialParameters"];
-	for (int i = 0; i < parameters.size(); i++)
+	for (size_t i = 0; i < parameters.size(); i++)
 	{
 		std::string paramType = parameters[i]["Type"].as<std::string>();
 		if (paramType == "Texture")

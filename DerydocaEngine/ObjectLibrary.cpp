@@ -88,7 +88,7 @@ bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaF
 	// If the serializer was not found, abort and return false
 	if (serializer == nullptr)
 	{
-		printf("The file '%s' does not have a serializer associated with it.\n", sourceFilePath.c_str());
+		cout << "The file '" << sourceFilePath.c_str() << "' does not have a serializer associated with it." << endl;
 		return false;
 	}
 
@@ -136,18 +136,18 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 	YAML::Node resourcesNode = file["Resources"];
 	if (!resourcesNode)
 	{
-		printf("The meta file '%s' does not have a resource node assigned it it. This file could not be parsed!\n", metaFilePath.c_str());
+		cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!" << endl;
 	}
 
 	// Go through all the resource nodes in the file
-	for (int i = 0; i < resourcesNode.size(); i++)
+	for (size_t i = 0; i < resourcesNode.size(); i++)
 	{
 		YAML::Node resourceNode = resourcesNode[i];
 
 		// If no ID node is defined, exit out because it is required
 		if (!resourceNode["ID"])
 		{
-			printf("A node was skipped because it was missing an ID parameter.\n");
+			cout << "A node was skipped because it was missing an ID parameter." << endl;
 			continue;
 		}
 
@@ -160,7 +160,7 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 		// If the serializer could not be found, continue onto the next resource
 		if (serializer == nullptr)
 		{
-			printf("The file '%s' does not have a parser assigned to the extension. This file could not be parsed!\n", sourceFilePath.c_str());
+			cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!" << endl;
 			continue;
 		}
 
@@ -170,7 +170,7 @@ void ObjectLibrary::initializeFile(std::string sourceFilePath)
 		// If no resource could be parsed from the node, continue on
 		if (resource == nullptr)
 		{
-			printf("Unable to convert node %i to resource. This resource could not be parsed!\n", i);
+			cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!" << endl;
 			continue;
 		}
 

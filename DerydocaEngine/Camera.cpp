@@ -141,10 +141,10 @@ void Camera::renderRoot(GameObject* gameObject)
 	}
 
 	glViewport(
-		textureW * m_displayRect->getX(),
-		textureH * m_displayRect->getY(),
-		textureW * m_displayRect->getWidth(),
-		textureH * m_displayRect->getHeight());
+		(GLint)(textureW * m_displayRect->getX()),
+		(GLint)(textureH * m_displayRect->getY()),
+		(GLint)(textureW * m_displayRect->getWidth()),
+		(GLint)(textureH * m_displayRect->getHeight()));
 	clear();
 	gameObject->render(m_matrixStack);
 }

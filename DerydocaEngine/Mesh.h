@@ -5,14 +5,14 @@
 #include <string>
 #include <vector>
 
-class aiMesh;
+struct aiMesh;
 
 class Mesh
 {
 public:
 	Mesh();
 	Mesh(const std::string& fileName);
-	Mesh(const std::string& fileName, int meshIndex);
+	Mesh(const std::string& fileName, unsigned int meshIndex);
 	Mesh(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
 	~Mesh();
 	void draw();

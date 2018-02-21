@@ -9,8 +9,8 @@ bool endsWith(const std::string& string, const std::string& suffix)
 	}
 
 	// Check each character in the suffix to see if it matches the source string's suffix
-	int stringSuffixIndex = string.length() - suffix.length();
-	for (int i = 0; i < suffix.length(); i++)
+	size_t stringSuffixIndex = string.length() - suffix.length();
+	for (size_t i = 0; i < suffix.length(); i++)
 	{
 		if (string[stringSuffixIndex + i] != suffix[i])
 		{
@@ -25,7 +25,7 @@ bool endsWith(const std::string& string, const std::string& suffix)
 std::string getFileExtension(std::string path)
 {
 	// Find the last instance of a period in the string
-	int strScanIndex;
+	size_t strScanIndex;
 	for (strScanIndex = path.length(); strScanIndex > 0; strScanIndex--)
 	{
 		if (path[strScanIndex] == '.')

@@ -16,7 +16,7 @@ SerializedScene::~SerializedScene()
 void SerializedScene::setUp(GameObject * root)
 {
 	// Initialize the components
-	for (int i = 0; i < m_sceneObjects.size(); i++)
+	for (size_t i = 0; i < m_sceneObjects.size(); i++)
 	{
 		SceneObject* sceneObject = m_sceneObjects[i];
 
@@ -76,7 +76,7 @@ void SerializedScene::setUp(GameObject * root)
 	}
 
 	// Resolve dependencies
-	for (int i = 0; i < m_sceneObjects.size(); i++)
+	for (size_t i = 0; i < m_sceneObjects.size(); i++)
 	{
 		SceneObject* sceneObject = m_sceneObjects[i];
 
@@ -107,7 +107,7 @@ void SerializedScene::setUp(GameObject * root)
 
 		// Iterate through each component
 		YAML::Node componentNodes = properties["Components"];
-		for (int componentIndex = 0; componentIndex < componentNodes.size(); componentIndex++)
+		for (size_t componentIndex = 0; componentIndex < componentNodes.size(); componentIndex++)
 		{
 			YAML::Node compNode = componentNodes[componentIndex];
 			std::string compType = compNode["Type"].as<std::string>();
@@ -130,7 +130,6 @@ void SerializedScene::setUp(GameObject * root)
 			// Add the component to the game object
 			go->addComponent(component);
 
-			uuid componentId;
 			YAML::Node componentIdNode = compNode["ID"];
 			if (componentIdNode)
 			{
@@ -259,7 +258,7 @@ void SerializedScene::SaveToFile(std::string filePath)
 
 SceneObject * SerializedScene::findNode(boost::uuids::uuid id)
 {
-	for (int i = 0; i < m_sceneObjects.size(); i++)
+	for (size_t i = 0; i < m_sceneObjects.size(); i++)
 	{
 		if (m_sceneObjects[i]->getId() == id)
 		{
