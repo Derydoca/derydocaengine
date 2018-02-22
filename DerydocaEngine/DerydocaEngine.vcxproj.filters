@@ -71,9 +71,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
@@ -260,9 +257,6 @@
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderManager.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Light.h">

@@ -1,6 +1,5 @@
 #include "ShadowMap.h"
 #include "GL\glew.h"
-#include "ShaderManager.h"
 #include "Shader.h"
 
 ShadowMap::ShadowMap()
@@ -44,6 +43,5 @@ void ShadowMap::bindAsRenderTexture()
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_shadowFramebuffer);
 	glClearDepth(1.0);
 	glClear(GL_DEPTH_BUFFER_BIT);
-	ShaderManager::getInstance().getShadowShader()->bind();
 	//glUniformMatrix4fv()
 }
