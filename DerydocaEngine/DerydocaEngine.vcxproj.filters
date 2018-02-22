@@ -158,6 +158,9 @@
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="CommandLineArgs.cpp" />
+    <ClCompile Include="ShaderLibrary.cpp">
+      <Filter>Engine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -361,6 +364,9 @@
       <Filter>Engine\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="CommandLineArgs.h" />
+    <ClInclude Include="ShaderLibrary.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

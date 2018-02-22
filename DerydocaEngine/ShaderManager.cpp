@@ -1,5 +1,6 @@
 #include "ShaderManager.h"
 #include "Shader.h"
+#include "ShaderLibrary.h"
 
 ShaderManager::ShaderManager()
 {
@@ -14,6 +15,8 @@ ShaderManager::~ShaderManager()
 
 void ShaderManager::initializeStaticShaders()
 {
-	m_shadowShader = new Shader(".\\engineResources\\shaders\\shadowShader");
-	m_phong = new Shader(".\\engineResources\\shaders\\phong");
+	m_shadowShader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\shadowShader");
+	m_phong = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\phong");
 }
+
+// TODO: Kill this

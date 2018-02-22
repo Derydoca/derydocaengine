@@ -14,7 +14,7 @@
 #include "ScreenshotUtil.h"
 #include "CubemapResource.h"
 #include "Skybox.h"
-#include "Shader.h"
+#include "ShaderLibrary.h"
 
 int Editor::Run()
 {
@@ -46,7 +46,7 @@ int Editor::Run()
 	if (settings->isSkyboxDefined())
 	{
 		// If a skybox is defined, build the skybox material and assign it to the editor camera
-		Shader* skyboxShader = new Shader(".\\engineResources\\shaders\\cubemapShader");
+		Shader* skyboxShader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\cubemapShader");
 		CubemapResource* cubemapResource = (CubemapResource*)ObjectLibrary::getInstance().getResource(settings->getSkyboxId());
 		Texture* skyboxTexture = (Texture*)cubemapResource->getResourceObject();
 		Material* skyboxMaterial = new Material();

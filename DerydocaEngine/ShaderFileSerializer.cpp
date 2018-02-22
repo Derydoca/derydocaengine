@@ -2,6 +2,7 @@
 #include "ShaderResource.h"
 #include "boost/filesystem.hpp"
 #include "boost/filesystem/convenience.hpp"
+#include "ShaderLibrary.h"
 
 using namespace boost::filesystem;
 
@@ -50,4 +51,7 @@ void ShaderFileSerializer::postLoadInitialize(Resource* resource)
 		// Set the path to the fragment shader
 		shaderResource->setFragmentShaderSource(fragmentShaderPath.string());
 	}
+
+	// Store the shader name in the library
+	ShaderLibrary::getInstance().registerShaderName(shaderResource->getRawShaderName(), shaderResource->getId());
 }

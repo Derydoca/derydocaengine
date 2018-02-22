@@ -1,9 +1,10 @@
 #include "DebugVisualizer.h"
 #include "CameraManager.h"
+#include "ShaderLibrary.h"
 
 DebugVisualizer::DebugVisualizer()
 {
-	m_shader = new Shader(".\\engineResources\\shaders\\debugVisShader");
+	m_shader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\debugVisShader");
 
 	m_testLine.setLineWidth(2.0f);
 	m_testLine.setLineStart(glm::vec3(0, 0, 0));

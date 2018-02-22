@@ -1,9 +1,9 @@
 #include "MeshRenderer.h"
 #include "GameObject.h"
-#include "Shader.h"
 #include "Texture.h"
 #include "CameraManager.h"
 #include "LightManager.h"
+#include "ShaderLibrary.h"
 
 MeshRenderer::MeshRenderer()
 {
@@ -32,7 +32,7 @@ void MeshRenderer::deserialize(YAML::Node compNode)
 	{
 		uuid renderTextureCameraId = renderTextureSourceNode.as<uuid>();
 		Camera* renderTextureCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
-		Shader* renderTextureShader = new Shader(".\\engineResources\\shaders\\basicShader");
+		Shader* renderTextureShader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\basicShader");
 		Material* renderTextureMaterial = new Material();
 		renderTextureMaterial->setShader(renderTextureShader);
 		renderTextureMaterial->setTextureSlot(0, renderTextureCamera->getRenderTexture());
