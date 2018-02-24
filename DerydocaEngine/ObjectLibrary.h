@@ -22,8 +22,10 @@ public:
 	Resource* getResource(std::string uuidString);
 	Resource* getResource(boost::uuids::uuid uuid);
 	GameComponent* getComponent(boost::uuids::uuid id);
-	void initializeDirectory(std::string directory);
-	void initializeFile(std::string sourceFilePath);
+	void updateMetaFilesDirectory(std::string directory);
+	void updateMetaFiles(std::string file);
+	void loadDirectory(std::string directory);
+	void loadFile(std::string sourceFilePath);
 
 	void registerComponent(boost::uuids::uuid id, GameComponent* component);
 

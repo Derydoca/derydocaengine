@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
 		for (auto it = directoriesToProcess.begin(); it != directoriesToProcess.end(); ++it)
 		{
-			ObjectLibrary::getInstance().initializeDirectory(it->c_str());
+			ObjectLibrary::getInstance().updateMetaFilesDirectory(it->c_str());
 		}
 
 		return 0;

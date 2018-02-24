@@ -1,6 +1,9 @@
 #include "Display.h"
 #include "DisplayManager.h"
 #include "InputManager.h"
+#include <iostream>
+
+using namespace std;
 
 Display::Display(int width, int height, const std::string& title)
 {
@@ -39,24 +42,26 @@ Display::Display(int width, int height, const std::string& title)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
+/*
 	// Print information about the current instance of OpenGL
 	const GLubyte *renderer = glGetString(GL_RENDERER);
 	const GLubyte *vendor = glGetString(GL_VENDOR);
 	const GLubyte *version = glGetString(GL_VERSION);
 	const GLubyte *glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
-	printf("Renderer: %s\n", renderer);
-	printf("Vendor: %s\n", vendor);
-	printf("Version: %s\n", version);
-	printf("GLSL Version: %s\n", glslVersion);
-	printf("Max Vertex Attributes: %i\n", GL_MAX_VERTEX_ATTRIBS);
+	cout << "Renderer: " << renderer << endl;
+	cout << "Vendor: " << vendor << endl;
+	cout << "Version: " << version << endl;
+	cout << "GLSL Version: " << glslVersion << endl;
+	cout << "Max Vertex Attributes: " << GL_MAX_VERTEX_ATTRIBS << endl;
 
 	GLint nExtensions;
 	glGetIntegerv(GL_NUM_EXTENSIONS, &nExtensions);
-	printf("Supported extensions (%i):\n", nExtensions);
+	cout << "Supported extensions (" << nExtensions << "):" << endl;
 	for (GLint i = 0; i < nExtensions; i++)
 	{
-		printf("    %i: %s\n", i, glGetStringi(GL_EXTENSIONS, i));
+		cout << "    " << i << ": " << glGetStringi(GL_EXTENSIONS, i) << endl;
 	}
+*/
 
 	m_keyboard = InputManager::getInstance().getKeyboard();
 
@@ -116,7 +121,6 @@ void Display::update() {
 			switch (e.window.event)
 			{
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
-				//printf("resized " + e.window.data1 + ", " + e.window.data2);
 				m_width = e.window.data1;
 				m_height = e.window.data2;
 				SDL_SetWindowSize(m_window, m_width, m_height);
