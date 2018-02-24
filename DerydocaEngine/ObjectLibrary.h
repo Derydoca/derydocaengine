@@ -19,12 +19,22 @@ public:
 
 	void initialize(std::string engineResourcesPath, std::string projectPath);
 	std::string getMetaExtension() const { return m_metaExtension; }
+	Resource* getResource(std::string uuidString);
 	Resource* getResource(boost::uuids::uuid uuid);
 	GameComponent* getComponent(boost::uuids::uuid id);
 	void initializeDirectory(std::string directory);
 	void initializeFile(std::string sourceFilePath);
 
 	void registerComponent(boost::uuids::uuid id, GameComponent* component);
+
+	template<class resourceType>
+	resourceType getResource(std::string uuidString)
+	{
+		boost::uuids::string_generator gen;
+		boost::uuids::uuid uuid = gen(uuidString);
+		Resource* resource = getResource(uuid);
+		return static_cast<resourceType*>(resource);
+	}
 private:
 	ObjectLibrary() {}
 	~ObjectLibrary() {}

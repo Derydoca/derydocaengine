@@ -1,15 +1,17 @@
 #include "EngineSettings.h"
+#include <iostream>
 
 EngineSettings::EngineSettings(string configFilePath)
 {
+	m_settingsFilePath = boost::filesystem::absolute(configFilePath);
+
 	// Load the configuration file
-	YAML::Node root = YAML::LoadFile(configFilePath);
+	YAML::Node root = YAML::LoadFile(m_settingsFilePath.string());
 
 	YAML::Node engineNode = root["Engine"];
 	if (engineNode)
 	{
 		m_engineResourceDirectory = engineNode["Resources"].as<string>();
-		m_projectDirectory = engineNode["Project"].as<string>();
 	}
 	 
 	YAML::Node windowNode = root["Window"];

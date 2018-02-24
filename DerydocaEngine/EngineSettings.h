@@ -1,10 +1,11 @@
 #pragma once
 #include "yaml-cpp\yaml.h"
 #include <assert.h>
+#include <boost\filesystem.hpp>
+#include <boost\uuid\uuid.hpp>
+#include <string>
 #include "glm/glm.hpp"
 #include "YamlTools.h"
-#include "boost\uuid\uuid.hpp"
-#include <string>
 
 using namespace boost::uuids;
 using namespace std;
@@ -21,7 +22,6 @@ public:
 	float getFOV() const { return m_fov; }
 	uuid getSkyboxId() { return m_skyboxId; }
 	string getEngineResourceDirectory() const { return m_engineResourceDirectory; }
-	string getProjectDirectory() const { return m_projectDirectory; }
 
 	bool isSkyboxDefined() { return m_isSkyboxDefined; }
 private:
@@ -32,6 +32,6 @@ private:
 	uuid m_skyboxId;
 	bool m_isSkyboxDefined = false;
 	string m_engineResourceDirectory;
-	string m_projectDirectory;
+	boost::filesystem::path m_settingsFilePath;
 };
 

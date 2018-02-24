@@ -1,7 +1,8 @@
 #include "ObjectLibrary.h"
 #include <iostream>
 #include <string>
-#include "boost\filesystem.hpp"
+#include <boost\filesystem.hpp>
+#include <boost\uuid\uuid_generators.hpp>
 #include "FileSerializerLibrary.h"
 #include "StringUtils.h"
 #include "yaml-cpp\yaml.h"
@@ -18,6 +19,13 @@ void ObjectLibrary::initialize(string engineResourcesPath, string projectPath)
 
 	cout << "Initializing project directory: " << projectPath << endl;
 	initializeDirectory(projectPath);
+}
+
+Resource * ObjectLibrary::getResource(std::string uuidString)
+{
+	boost::uuids::string_generator gen;
+	boost::uuids::uuid uuid = gen(uuidString);
+	return getResource(uuid);
 }
 
 Resource * ObjectLibrary::getResource(boost::uuids::uuid uuid)

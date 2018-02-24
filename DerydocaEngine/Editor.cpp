@@ -15,13 +15,14 @@
 #include "CubemapResource.h"
 #include "Skybox.h"
 #include "ShaderLibrary.h"
+#include <boost\filesystem.hpp>
 
-int Editor::Run()
+int Editor::Run(std::string projectPath, std::string levelIdentifier)
 {
 	EngineSettings* settings = new EngineSettings(".\\engineSettings.yaml"); 
 	
 	// Load the project file
-	ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), settings->getProjectDirectory());
+	ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), projectPath);
 
 	// Initialize the clock to this machine
 	Clock::init();
@@ -67,10 +68,23 @@ int Editor::Run()
 
 #pragma endregion
 
-	// Load a scene from a file
-	SerializedScene* scene = new SerializedScene();
-	scene->LoadFromFile(".\\exampleProject\\levels\\threeSquirrels.derylevel");
-	scene->setUp(sceneRoot);
+	// If a scene was provided, load it
+	SerializedScene* scene = nullptr;
+	if (!levelIdentifier.empty())
+	{
+		Resource* levelResource = ObjectLibrary::getInstance().getResource(levelIdentifier);
+
+		if (levelResource == nullptr)
+		{
+			cout << "No level resource with the ID of '" << levelIdentifier << "' could be found." << endl;
+		}
+		else
+		{
+			scene = new SerializedScene();
+			scene->LoadFromFile(levelResource->getSourceFilePath());
+			scene->setUp(sceneRoot);
+		}
+	}
 
 	// Divisor defines minimum frames per second
 	unsigned long minFrameTime = 1000 / 60;
@@ -108,7 +122,10 @@ int Editor::Run()
 	}
 
 	// Clean up the scene
-	scene->tearDown(sceneRoot);
+	if (scene != nullptr)
+	{
+		scene->tearDown(sceneRoot);
+	}
 
 	// Clean up all other objects
 	delete(sceneRoot);

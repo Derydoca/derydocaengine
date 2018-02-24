@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\Boost\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\Boost\boost_1_66_0</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
@@ -99,20 +99,17 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>@echo Processing the engine source resource directory and example project directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources" "$(SolutionDir)exampleProject"
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
 @echo Copying engine resources
 xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
 
-@echo Copying example project directory
-xcopy /y /d /e "$(SolutionDir)exampleProject\*" "$(OutDir)exampleProject\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
-@echo Copying DLLs
-xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"</Command>
+@echo Processing the engine resource directory
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,7 +117,7 @@ xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDi
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Boost\boost_1_66_0;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\Boost\boost_1_66_0</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -136,20 +133,17 @@ xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDi
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>@echo Processing the engine source resource directory and example project directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources" "$(SolutionDir)exampleProject"
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
 @echo Copying engine resources
 xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
 
-@echo Copying example project directory
-xcopy /y /d /e "$(SolutionDir)exampleProject\*" "$(OutDir)exampleProject\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
-@echo Copying DLLs
-xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"</Command>
+@echo Processing the engine resource directory
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -163,7 +157,7 @@ xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDi
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Boost\boost_1_66_0;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\Boost\boost_1_66_0</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -173,20 +167,17 @@ xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDi
       <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>@echo Processing the engine source resource directory and example project directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources" "$(SolutionDir)exampleProject"
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
 @echo Copying engine resources
 xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
 
-@echo Copying example project directory
-xcopy /y /d /e "$(SolutionDir)exampleProject\*" "$(OutDir)exampleProject\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
-@echo Copying DLLs
-xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"</Command>
+@echo Processing the engine resource directory
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -196,7 +187,7 @@ xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDi
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Boost\boost_1_66_0;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\Boost\boost_1_66_0</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -206,20 +197,17 @@ xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDi
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>@echo Processing the engine source resource directory and example project directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources" "$(SolutionDir)exampleProject"
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
 @echo Copying engine resources
 xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
 
-@echo Copying example project directory
-xcopy /y /d /e "$(SolutionDir)exampleProject\*" "$(OutDir)exampleProject\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
-@echo Copying DLLs
-xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"</Command>
+@echo Processing the engine resource directory
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

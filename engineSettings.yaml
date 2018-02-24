@@ -1,6 +1,5 @@
 Engine:
     Resources: .\engineResources\
-    Project: .\exampleProject\
 Window:
 # Blog header image size: 2000 x 800
     Width: 800
