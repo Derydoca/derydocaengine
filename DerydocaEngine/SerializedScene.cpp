@@ -145,7 +145,7 @@ void SerializedScene::tearDown(GameObject * root)
 
 void SerializedScene::LoadFromFile(std::string filePath)
 {
-	printf("Loading scene from file: %s\n", filePath.c_str());
+	cout << "Loading scene: " << filePath << endl;
 	YAML::Node file = YAML::LoadFile(filePath);
 	YAML::Node scene = file["Scene"];
 	for (unsigned i = 0; i < scene.size(); i++)
@@ -157,31 +157,31 @@ void SerializedScene::LoadFromFile(std::string filePath)
 
 		if (!typeNode)
 		{
-			printf("Skipping scene node %i because type is not defined.\n", i);
+			cout << "Skipping scene node " << i << " because type is not defined." << endl;
 			continue;
 		}
 
 		if (!typeNode.IsScalar())
 		{
-			printf("Skipping scene node %i because type is not a scalar.\n", i);
+			cout << "Skipping scene node " << i << " because type is not a scalar.\n" << endl;
 			continue;
 		}
 
 		if (!typeNode.IsScalar())
 		{
-			printf("Skipping scene node %i because type is not a scalar.\n", i);
+			cout << "Skipping scene node " << i << " because type is not a scalar.\n" << endl;
 			continue;
 		}
 
 		if (!idNode || !idNode.IsScalar())
 		{
-			printf("Skipping scene node %i because it does not contain a valid ID.\n", i);
+			cout << "Skipping scene node " << i << " because it does not contain a valid ID.\n" << endl;
 			continue;
 		}
 
 		if (!propertiesNode)
 		{
-			printf("Skipping scene node %i because it contains no properties.\n", i);
+			cout << "Skipping scene node " << i << " because it contains no properties.\n" << endl;
 			continue;
 		}
 

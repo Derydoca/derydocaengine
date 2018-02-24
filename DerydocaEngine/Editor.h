@@ -1,7 +1,8 @@
 #pragma once
+#include <string>
 
 class Editor
 {
 public:
-	int Run();
+	int Run(std::string projectPath, std::string scenePath);
 };

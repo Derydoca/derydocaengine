@@ -1,7 +1,8 @@
 #include "ObjectLibrary.h"
 #include <iostream>
 #include <string>
-#include "boost\filesystem.hpp"
+#include <boost\filesystem.hpp>
+#include <boost\uuid\uuid_generators.hpp>
 #include "FileSerializerLibrary.h"
 #include "StringUtils.h"
 #include "yaml-cpp\yaml.h"
@@ -13,11 +14,20 @@ using namespace std;
 
 void ObjectLibrary::initialize(string engineResourcesPath, string projectPath)
 {
-	cout << "Initializing engine resources: " << engineResourcesPath << endl;
-	initializeDirectory(engineResourcesPath);
+	cout << "Updating meta files for the project: " << projectPath << endl;
+	updateMetaFilesDirectory(projectPath);
+	cout << "Loading project files: " << engineResourcesPath << endl;
+	loadDirectory(projectPath);
 
-	cout << "Initializing project directory: " << projectPath << endl;
-	initializeDirectory(projectPath);
+	cout << "Loading engine files: " << engineResourcesPath << endl;
+	loadDirectory(engineResourcesPath);
+}
+
+Resource * ObjectLibrary::getResource(std::string uuidString)
+{
+	boost::uuids::string_generator gen;
+	boost::uuids::uuid uuid = gen(uuidString);
+	return getResource(uuid);
 }
 
 Resource * ObjectLibrary::getResource(boost::uuids::uuid uuid)
@@ -47,25 +57,61 @@ GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid id)
 	return nullptr;
 }
 
-void ObjectLibrary::registerComponent(boost::uuids::uuid id, GameComponent * component)
-{
-	m_sceneComponents.insert(std::pair<uuid, GameComponent*>(id, component));
-}
-
-void ObjectLibrary::initializeDirectory(std::string directory)
+void ObjectLibrary::updateMetaFilesDirectory(std::string directory)
 {
 	directory_iterator it{ directory };
 	while (it != directory_iterator{})
 	{
 		if (is_directory(it->path()))
 		{
-			initializeDirectory(it->path().string());
+			updateMetaFilesDirectory(it->path().string());
 		}
 		else
 		{
 			if (!endsWith(it->path().string(), m_metaExtension))
 			{
-				initializeFile(it->path().string());
+				updateMetaFiles(it->path().string());
+			}
+		}
+		it++;
+	}
+}
+
+void ObjectLibrary::updateMetaFiles(std::string sourceFilePath)
+{
+	std::string metaFilePath = sourceFilePath + m_metaExtension;
+
+	// If the meta file does not exist
+	if (!exists(metaFilePath))
+	{
+		// Create the meta file
+		if (!createMetaFile(sourceFilePath, metaFilePath))
+		{
+			// If the meta file was not be created, skip this file
+			return;
+		}
+	}
+}
+
+void ObjectLibrary::registerComponent(boost::uuids::uuid id, GameComponent * component)
+{
+	m_sceneComponents.insert(std::pair<uuid, GameComponent*>(id, component));
+}
+
+void ObjectLibrary::loadDirectory(std::string directory)
+{
+	directory_iterator it{ directory };
+	while (it != directory_iterator{})
+	{
+		if (is_directory(it->path()))
+		{
+			loadDirectory(it->path().string());
+		}
+		else
+		{
+			if (!endsWith(it->path().string(), m_metaExtension))
+			{
+				loadFile(it->path().string());
 			}
 		}
 		it++;
@@ -116,19 +162,14 @@ void ObjectLibrary::registerResource(Resource* resource)
 	m_resources.insert(std::pair<boost::uuids::uuid, Resource*>(resource->getId(), resource));
 }
 
-void ObjectLibrary::initializeFile(std::string sourceFilePath)
+void ObjectLibrary::loadFile(std::string sourceFilePath)
 {
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
-	// If the meta file does not exist
+	// If the meta file does not exist, skip loading this resource
 	if (!exists(metaFilePath))
 	{
-		// Create the meta file
-		if (!createMetaFile(sourceFilePath, metaFilePath))
-		{
-			// If the meta file was not be created, skip this file
-			return;
-		}
+		return;
 	}
 
 	// Load the meta file
