@@ -32,9 +32,17 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		std::string typeName = "lights[" + std::to_string(lightIndex) + "].Type";
 		shader->setInt(typeName, (int)lightType);
 
-		// Set the intensity
-		std::string intensityName = "lights[" + std::to_string(lightIndex) + "].Ld";
-		shader->setColorRGBA(intensityName, light->getColor());
+		// Set the Ambient
+		std::string ambientName = "lights[" + std::to_string(lightIndex) + "].La";
+		shader->setColorRGBA(ambientName, Color(1.0, 1.0, 1.0, 1.0));
+
+		// Set the Diffuse
+		std::string diffuseName = "lights[" + std::to_string(lightIndex) + "].Ld";
+		shader->setColorRGBA(diffuseName, light->getColor());
+
+		// Set the Specular
+		std::string specularName = "lights[" + std::to_string(lightIndex) + "].Ls";
+		shader->setColorRGBA(specularName, Color(1.0, 1.0, 1.0, 1.0));
 
 		// Set the position
 		glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();

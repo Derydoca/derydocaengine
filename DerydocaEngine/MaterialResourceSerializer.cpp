@@ -35,11 +35,17 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 			auto texture = loadResource<Texture*>(parameters[i], "ID");
 			material->setTextureSlot(slot, texture);
 		}
-		if (paramType == "Color")
+		else if (paramType == "Color")
 		{
-			Color paramColor = parameters[i]["Value"].as<Color>();
+			Color paramValue = parameters[i]["Value"].as<Color>();
 			std::string paramName = parameters[i]["Name"].as<string>();
-			material->setColorRGBA(paramName, paramColor);
+			material->setColorRGBA(paramName, paramValue);
+		}
+		else if (paramType == "Float")
+		{
+			float paramValue = parameters[i]["Value"].as<float>();
+			std::string paramName = parameters[i]["Name"].as<string>();
+			material->setFloat(paramName, paramValue);
 		}
 	}
 
