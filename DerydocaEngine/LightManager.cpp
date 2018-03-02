@@ -34,7 +34,7 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 
 		// Set the intensity
 		std::string intensityName = "lights[" + std::to_string(lightIndex) + "].Ld";
-		shader->setColorRGB(intensityName, light->getColor());
+		shader->setColorRGBA(intensityName, light->getColor());
 
 		// Set the position
 		glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();

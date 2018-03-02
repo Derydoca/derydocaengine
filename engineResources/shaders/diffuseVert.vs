@@ -6,11 +6,11 @@ out vec3 LightIntensity;
 
 struct LightInfo {
     vec4 Position; // Eye coords
-    vec3 Ld;
+    vec4 Ld;
 };
 uniform LightInfo lights[10];
 
-uniform vec3 Kd; // Diffuse reflectivity
+uniform vec4 Kd; // Diffuse reflectivity
 uniform mat4 ModelViewMatrix;
 uniform mat3 NormalMatrix;
 uniform mat4 ProjectionMatrix;
