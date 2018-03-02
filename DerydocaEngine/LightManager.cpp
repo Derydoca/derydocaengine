@@ -23,31 +23,31 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		if (lightType == Light::Directional)
 		{
 			// Set the light direction
-			std::string typeName = "lights[" + std::to_string(lightIndex) + "].Direction";
+			std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
 			glm::vec3 lightDirection = currentCamera->getViewMatrix() * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(1, 0, 0, 0);
 			shader->setVec3(typeName, lightDirection);
 		}
 
 		// Set the light type
-		std::string typeName = "lights[" + std::to_string(lightIndex) + "].Type";
+		std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Type";
 		shader->setInt(typeName, (int)lightType);
 
 		// Set the Ambient
-		std::string ambientName = "lights[" + std::to_string(lightIndex) + "].La";
+		std::string ambientName = "Lights[" + std::to_string(lightIndex) + "].La";
 		shader->setColorRGBA(ambientName, Color(1.0, 1.0, 1.0, 1.0));
 
 		// Set the Diffuse
-		std::string diffuseName = "lights[" + std::to_string(lightIndex) + "].Ld";
+		std::string diffuseName = "Lights[" + std::to_string(lightIndex) + "].Ld";
 		shader->setColorRGBA(diffuseName, light->getColor());
 
 		// Set the Specular
-		std::string specularName = "lights[" + std::to_string(lightIndex) + "].Ls";
+		std::string specularName = "Lights[" + std::to_string(lightIndex) + "].Ls";
 		shader->setColorRGBA(specularName, Color(1.0, 1.0, 1.0, 1.0));
 
 		// Set the position
 		glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
 		glm::vec4 lightPositionEyeCoords = viewMat * glm::vec4(lightWorldPos, 1);
-		std::string positionName = "lights[" + std::to_string(lightIndex) + "].Position";
+		std::string positionName = "Lights[" + std::to_string(lightIndex) + "].Position";
 		shader->setVec4(positionName, lightPositionEyeCoords);
 
 		// Increase our light index

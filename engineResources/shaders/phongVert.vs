@@ -11,7 +11,7 @@ struct LightInfo {
     vec4 Ld; // Diffuse intensity
     vec4 Ls; // Specular intensity
 };
-uniform LightInfo lights[10];
+uniform LightInfo Lights[10];
 
 struct MaterialInfo {
     vec4 Ka; // Ambient
@@ -26,30 +26,39 @@ uniform mat3 NormalMatrix;
 uniform mat4 ProjectionMatrix;
 uniform mat4 MVP;
 
-vec4 phong(int lightIndex)
+void getEyeSpace(out vec3 norm, out vec4 position)
 {
-    vec3 tnorm = normalize(NormalMatrix * VertexNormal);
-    vec4 eyeCoords = ModelViewMatrix * vec4(VertexPosition, 1.0);
-    vec3 s = normalize(vec3(lights[lightIndex].Position - eyeCoords));
-    vec3 v = normalize(-eyeCoords.xyz);
-    vec3 r = reflect(-s, tnorm);
-    vec4 ambient = lights[lightIndex].La * Material.Ka;
-    float sDotN = max(dot(s, tnorm), 0.0);
-    vec4 diffuse = lights[lightIndex].Ld * Material.Kd * sDotN;
+    norm = normalize(NormalMatrix * VertexNormal);
+    position = ModelViewMatrix * vec4(VertexPosition, 1.0);
+}
+
+vec4 phongModel(vec4 position, vec3 norm, int lightIndex)
+{
+    vec3 s = normalize(vec3(Lights[lightIndex].Position - position));
+    vec3 v = normalize(-position.xyz);
+    vec3 r = reflect(-s, norm);
+    vec4 ambient = Lights[lightIndex].La * Material.Ka;
+    float sDotN = max(dot(s, norm), 0.0);
+    vec4 diffuse = Lights[lightIndex].Ld * Material.Kd * sDotN;
     vec4 spec = vec4(0.0);
     if(sDotN > 0.0)
     {
-        spec = lights[lightIndex].Ls * Material.Ks * pow(max(dot(r,v), 0.0), Material.Shininess);
+        spec = Lights[lightIndex].Ls * Material.Ks * pow(max(dot(r,v), 0.0), Material.Shininess);
     }
     return ambient + diffuse + spec;
 }
 
 void main()
 {
+    vec3 eyeNorm;
+    vec4 eyePosition;
+    // Get the position and normal in eye space
+    getEyeSpace(eyeNorm, eyePosition);
+    // Evaluate the lighting equation
     LightIntensity = vec4(0.0);
     for(int i = 0; i < 10; i++)
     {
-        LightIntensity += phong(i);
+        LightIntensity += phongModel(eyePosition, eyeNorm, i);
     }
 
     gl_Position = MVP * vec4(VertexPosition, 1.0);

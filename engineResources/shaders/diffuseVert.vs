@@ -8,7 +8,7 @@ struct LightInfo {
     vec4 Position; // Eye coords
     vec4 Ld;
 };
-uniform LightInfo lights[10];
+uniform LightInfo Lights[10];
 
 uniform vec4 Kd; // Diffuse reflectivity
 uniform mat4 ModelViewMatrix;
@@ -20,8 +20,8 @@ vec3 diffuse(int lightIndex)
 {
     vec3 tnorm = normalize(NormalMatrix * VertexNormal);
     vec4 eyeCoords = ModelViewMatrix * vec4(VertexPosition, 1.0);
-    vec3 s = normalize(vec3(lights[lightIndex].Position - eyeCoords));
-    return lights[lightIndex].Ld * Kd * max(dot(s, tnorm), 0.0);
+    vec3 s = normalize(vec3(Lights[lightIndex].Position - eyeCoords));
+    return Lights[lightIndex].Ld * Kd * max(dot(s, tnorm), 0.0);
 }
 
 void main()
