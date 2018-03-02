@@ -1,0 +1,5 @@
+Shader: e73b5549-e7ae-47c1-9ffb-6355e1e171cc
+MaterialParameters:
+  - Type: ColorRGB
+    Name: Kd
+    Value: [1.0, 1.0, 1.0]

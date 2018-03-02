@@ -167,17 +167,20 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
       <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>@echo Copying DLLs
+      <Command>@echo Processing the engine resource directory
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"
+
+@echo Processing the sample project directory
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)exampleProject"
+
+@echo Copying DLLs
 xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
 @echo Copying engine resources
 xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
 
 @echo Copying engine settings file
-xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
-
-@echo Processing the engine resource directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
+xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

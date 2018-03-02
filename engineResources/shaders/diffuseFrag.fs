@@ -4,11 +4,11 @@ in vec3 vertPosition;
 in vec3 vertNormal;
 varying vec2 texCoord0;
 
-struct LightInfo{
+struct LightInfo {
     int Type;
     vec3 Direction;
     vec3 Position; // Light position in eye coords
-    vec3 Intensity; // Light intensity
+    vec3 Ld; // Light intensity
 };
 uniform LightInfo lights[10];
 
@@ -24,7 +24,7 @@ vec3 ads(int lightIndex)
     {
         vec3 tnorm = normalize(NormalMatrix * vertNormal);
         float cosTheta = dot(lights[lightIndex].Direction, tnorm);
-        return lights[lightIndex].Intensity * max(cosTheta, 0.0) * 3.0;
+        return lights[lightIndex].Ld * max(cosTheta, 0.0) * 3.0;
     }
     else if(lights[lightIndex].Type == 1)
     {
@@ -34,7 +34,7 @@ vec3 ads(int lightIndex)
 
         float cosTheta = dot(s, tnorm);
         float dist = distance(eyeCoords, lights[lightIndex].Position.xyz);
-        return lights[lightIndex].Intensity * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
+        return lights[lightIndex].Ld * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
     }
 }
 

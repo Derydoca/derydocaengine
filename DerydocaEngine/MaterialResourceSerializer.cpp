@@ -35,6 +35,12 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 			auto texture = loadResource<Texture*>(parameters[i], "ID");
 			material->setTextureSlot(slot, texture);
 		}
+		if (paramType == "ColorRGB")
+		{
+			Color paramColor = parameters[i]["Value"].as<Color>();
+			std::string paramName = parameters[i]["Name"].as<string>();
+			material->setColorRGB(paramName, paramColor);
+		}
 	}
 
 	return material;

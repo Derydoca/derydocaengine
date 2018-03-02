@@ -33,14 +33,14 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		shader->setInt(typeName, (int)lightType);
 
 		// Set the intensity
-		std::string intensityName = "lights[" + std::to_string(lightIndex) + "].Intensity";
+		std::string intensityName = "lights[" + std::to_string(lightIndex) + "].Ld";
 		shader->setColorRGB(intensityName, light->getColor());
 
 		// Set the position
 		glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
 		glm::vec4 lightPositionEyeCoords = viewMat * glm::vec4(lightWorldPos, 1);
 		std::string positionName = "lights[" + std::to_string(lightIndex) + "].Position";
-		shader->setVec3(positionName, lightPositionEyeCoords);
+		shader->setVec4(positionName, lightPositionEyeCoords);
 
 		// Increase our light index
 		lightIndex++;
