@@ -107,8 +107,8 @@ void Shader::update(const MatrixStack * matrixStack)
 
 	if (m_uniforms[TRANSFORM_NORMAL] >= 0)
 	{
-		glm::mat3 normalMatrix3x3 = glm::mat3(camera->getViewMatrix() * modelMatrix);
-		glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix3x3));
+		glm::mat3 normalMatrix = glm::inverse(glm::transpose(glm::mat3(camera->getViewMatrix() * modelMatrix)));
+		glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix));
 	}
 
 	if (m_uniforms[TRANSFORM_PROJECTION] >= 0) {
