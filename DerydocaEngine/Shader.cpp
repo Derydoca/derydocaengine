@@ -241,6 +241,6 @@ static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const s
 			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 		}
 
-		std::cerr << errorMessage << ": '" << error << "'" << std::endl;
+		std::cerr << errorMessage << ": '" << std::endl << error << "'" << std::endl;
 	}
 }

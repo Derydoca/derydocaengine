@@ -39,8 +39,9 @@ Display::Display(int width, int height, const std::string& title)
 
 	glEnable(GL_DEPTH_TEST);
 
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	// TODO: Reenable after working through the opengl shader cookbook and evaluate a better way of handling this on a per-mesh basis
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 
 /*
 	// Print information about the current instance of OpenGL
