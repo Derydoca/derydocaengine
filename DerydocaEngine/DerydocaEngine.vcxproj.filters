@@ -158,6 +158,7 @@
     <ClCompile Include="ShaderLibrary.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -361,6 +362,7 @@
     <ClInclude Include="ShaderLibrary.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderSubroutineSwitcher.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

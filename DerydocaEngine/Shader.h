@@ -28,6 +28,9 @@ public:
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
 	std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
+
+	GLuint getSubroutineIndex(std::string subroutineName);
+	void setSubroutine(GLuint program, GLuint subroutineIndex);
 private:
 	static const unsigned int NUM_SHADERS = 2;
 	Shader(const Shader& other) {}

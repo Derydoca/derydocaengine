@@ -70,6 +70,18 @@ void GameObject::update(float deltaTime) {
 	}
 }
 
+void GameObject::preRender() {
+	for each (GameComponent* c in m_components)
+	{
+		c->preRender();
+	}
+
+	for each (GameObject* go in m_children)
+	{
+		go->preRender();
+	}
+}
+
 void GameObject::postRender() {
 	for each (GameComponent* c in m_components)
 	{

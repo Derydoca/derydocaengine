@@ -258,6 +258,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="ShaderFileSerializer.cpp" />
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="ShaderResourceSerializer.cpp" />
+    <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="StringUtils.cpp" />
@@ -328,6 +329,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="ShaderResourceSerializer.h" />
+    <ClInclude Include="ShaderSubroutineSwitcher.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="StringUtils.h" />

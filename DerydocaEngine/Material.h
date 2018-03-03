@@ -2,6 +2,7 @@
 #include <map>
 #include "Color.h"
 #include "glm\glm.hpp"
+#include <gl\glew.h>
 
 class Shader;
 class Texture;
@@ -23,6 +24,7 @@ public:
 	void setColorRGBA(const std::string name, Color value);
 	void setMat3(const std::string name, glm::mat3 value);
 	void setMat4(const std::string name, glm::mat4 value);
+	void setSubroutine(const GLuint program, const GLuint value);
 	void bind();
 private:
 	Shader* m_shader;
@@ -33,5 +35,6 @@ private:
 	std::map<std::string, glm::vec4> m_vec4Values;
 	std::map<std::string, glm::mat3> m_mat3Values;
 	std::map<std::string, glm::mat4> m_mat4Values;
+	std::map<GLuint, GLuint> m_subroutineValues;
 };
 

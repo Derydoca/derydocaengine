@@ -17,6 +17,7 @@ public:
 	void init();
 	void update(float deltaTime);
 	void render(MatrixStack* matrixStack);
+	void preRender();
 	void postRender();
 
 	void addChild(GameObject* gameObject);

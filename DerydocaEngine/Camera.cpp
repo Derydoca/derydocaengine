@@ -146,5 +146,6 @@ void Camera::renderRoot(GameObject* gameObject)
 		(GLint)(textureW * m_displayRect->getWidth()),
 		(GLint)(textureH * m_displayRect->getHeight()));
 	clear();
+	gameObject->preRender();
 	gameObject->render(m_matrixStack);
 }

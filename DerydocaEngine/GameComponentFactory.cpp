@@ -10,6 +10,7 @@
 #include "WasdMover.h"
 #include "DebugVisualizer.h"
 #include "Light.h"
+#include "ShaderSubroutineSwitcher.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -50,6 +51,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(WasdMover);
 	REGINSTANCE(DebugVisualizer);
 	REGINSTANCE(Light);
+	REGINSTANCE(ShaderSubroutineSwitcher);
 }
 
 GameComponentFactory::~GameComponentFactory()

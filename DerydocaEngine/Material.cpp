@@ -51,6 +51,11 @@ void Material::setMat4(const std::string name, glm::mat4 value)
 	m_mat4Values[name] = value;
 }
 
+void Material::setSubroutine(const GLuint program, const GLuint value)
+{
+	m_subroutineValues[program] = value;
+}
+
 void Material::bind()
 {
 	assert(m_shader);
@@ -85,6 +90,11 @@ void Material::bind()
 	for (auto const& x : m_mat4Values)
 	{
 		m_shader->setMat4(x.first, x.second);
+	}
+
+	for (auto const& x : m_subroutineValues)
+	{
+		m_shader->setSubroutine(x.first, x.second);
 	}
 
 }
