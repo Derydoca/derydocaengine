@@ -3,21 +3,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerWorkingDirectory>..\builds\x64\Debug</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 97c4ef79-9857-4240-95d5-f5dc38c3fe5f</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 9fae56dc-03b0-4427-b33d-35b3eaeb822d</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerWorkingDirectory>..\builds\x64\Release</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 97c4ef79-9857-4240-95d5-f5dc38c3fe5f</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 9fae56dc-03b0-4427-b33d-35b3eaeb822d</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerWorkingDirectory>..\builds\Win32\Release</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 97c4ef79-9857-4240-95d5-f5dc38c3fe5f</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 9fae56dc-03b0-4427-b33d-35b3eaeb822d</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>..\builds\Win32\Debug</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 97c4ef79-9857-4240-95d5-f5dc38c3fe5f</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 9fae56dc-03b0-4427-b33d-35b3eaeb822d</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>

@@ -6,7 +6,7 @@ using namespace std;
 
 string convertTimeToString(ptime now)
 {
-	static std::locale loc(std::wcout.getloc(), new wtime_facet(L"%Y%m%d%H%M%S"));
+	static std::locale loc(std::wcout.getloc(), new time_facet("%Y%m%d%H%M%S"));
 	std::basic_stringstream<char> wss;
 	wss.imbue(loc);
 	wss << now;

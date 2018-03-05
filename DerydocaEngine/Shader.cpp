@@ -5,6 +5,8 @@
 #include "CameraManager.h"
 #include "GLError.h"
 
+using namespace std;
+
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 static std::string LoadShader(const std::string& fileName);
 static GLuint CreateShader(const std::string& text, GLenum shaderType);
@@ -34,7 +36,7 @@ Shader::Shader(const std::string& fileName)
 
 	// Get the vertex attribute locations
 	glBindAttribLocation(m_program, 0, "VertexPosition");
-	glBindAttribLocation(m_program, 1, "texCoord");
+	glBindAttribLocation(m_program, 1, "VertexTexCoord");
 	glBindAttribLocation(m_program, 2, "VertexNormal");
 
 	// Bind the output color to 0

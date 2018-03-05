@@ -1,7 +1,7 @@
 #version 410
 
-in vec3 vertPosition;
-in vec3 vertNormal;
+in vec3 VertexPosition;
+in vec3 VertexNormal;
 varying vec2 texCoord0;
 
 struct LightInfo {
