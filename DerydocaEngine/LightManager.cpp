@@ -32,6 +32,10 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Type";
 		shader->setInt(typeName, (int)lightType);
 
+		// Set the Intensity
+		std::string intensityName = "Lights[" + std::to_string(lightIndex) + "].Intensity";
+		shader->setColorRGBA(intensityName, light->getColor());
+
 		// Set the Ambient
 		std::string ambientName = "Lights[" + std::to_string(lightIndex) + "].La";
 		shader->setColorRGBA(ambientName, Color(1.0, 1.0, 1.0, 1.0));

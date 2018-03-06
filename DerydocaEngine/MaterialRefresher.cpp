@@ -6,12 +6,6 @@ MaterialRefresher::MaterialRefresher()
 {
 }
 
-MaterialRefresher::MaterialRefresher(MeshRenderer* meshRenderer) :
-	m_meshRenderer(meshRenderer)
-{
-}
-
-
 MaterialRefresher::~MaterialRefresher()
 {
 }
@@ -29,8 +23,15 @@ bool getLastModifiedTime(LPCSTR filePath, FILETIME &time)
 
 void MaterialRefresher::init()
 {
-	// Cache information necessary for hot-loading the shader
-	Shader* shader = m_meshRenderer->getMaterial()->getShader();
+	m_meshRenderer = getComponent<MeshRenderer>();
+	assert(m_meshRenderer);
+
+	Material* material = m_meshRenderer->getMaterial();
+	assert(material);
+
+	Shader* shader = material->getShader();
+	assert(shader);
+
 	m_shaderLoadPath = shader->GetLoadPath();
 	m_vertexShaderPath = shader->GetVertexShaderPath();
 	m_fragmentShaderPath = shader->GetFragmentShaderPath();

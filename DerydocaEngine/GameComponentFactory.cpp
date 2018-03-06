@@ -3,7 +3,7 @@
 #include "Camera.h"
 #include "MeshRenderer.h"
 #include "KeyboardMover.h"
-//#include "MaterialRefresher.h"
+#include "MaterialRefresher.h"
 #include "Rotator.h"
 #include "ScreenshotUtil.h"
 #include "Terrain.h"
@@ -44,7 +44,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(Camera);
 	REGINSTANCE(MeshRenderer);
 	REGINSTANCE(KeyboardMover);
-	//REGINSTANCE(MaterialRefresher);
+	REGINSTANCE(MaterialRefresher);
 	REGINSTANCE(Rotator);
 	REGINSTANCE(ScreenshotUtil);
 	REGINSTANCE(Terrain);

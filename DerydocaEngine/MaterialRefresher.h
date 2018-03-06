@@ -11,7 +11,6 @@ class MaterialRefresher : public GameComponent
 public:
 	GENINSTANCE(MaterialRefresher);
 	MaterialRefresher();
-	MaterialRefresher(MeshRenderer* meshRenderer);
 	~MaterialRefresher();
 
 	void init();
