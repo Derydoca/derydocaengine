@@ -10,12 +10,11 @@ ShaderSubroutineSwitcher::ShaderSubroutineSwitcher()
 
 ShaderSubroutineSwitcher::~ShaderSubroutineSwitcher()
 {
-	setSubroutine(GL_VERTEX_SHADER, m_subroutineName);
 }
 
 void ShaderSubroutineSwitcher::init()
 {
-	
+	setSubroutine(GL_VERTEX_SHADER, m_subroutineName);
 }
 
 void ShaderSubroutineSwitcher::deserialize(YAML::Node compNode)

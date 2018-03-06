@@ -1,21 +1,5 @@
 Scene:
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8ab6-680ad31eb6aa
-    Properties:
-      Name: Vertex Diffuse Model
-      Transform:
-        Position: [0, 0, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 3d15b574-e99a-4c11-8d94-d3cfc3da9bc9
-            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
-        - Type: Rotator
-          Properties:
-            rotationSpeed: 30.0
-  - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
       Name: Phong Model
