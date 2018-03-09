@@ -26,7 +26,6 @@ uniform mat4 MVP;
 
 vec4 adsDirectional(int lightIndex, vec4 position, vec3 norm)
 {
-    //Lights[lightIndex].Intensity
     vec3 s;
     if(Lights[lightIndex].Type == 0)
     {

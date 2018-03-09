@@ -2,6 +2,8 @@
 #include "CameraManager.h"
 #include "glm\glm.hpp"
 
+using namespace std;
+
 void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader)
 {
 	assert(objectTransform);
@@ -50,7 +52,7 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 
 		// Set the position
 		glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
-		glm::vec4 lightPositionEyeCoords = viewMat * glm::vec4(lightWorldPos, 1);
+		glm::vec4 lightPositionEyeCoords = viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(lightWorldPos, 1);
 		std::string positionName = "Lights[" + std::to_string(lightIndex) + "].Position";
 		shader->setVec4(positionName, lightPositionEyeCoords);
 
