@@ -22,12 +22,23 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 	{
 		Light::LightType lightType = light->getLightType();
 
-		if (lightType == Light::Directional)
+		if (lightType == Light::Directional || lightType == Light::Spotlight)
 		{
 			// Set the light direction
 			std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
 			glm::vec3 lightDirection = currentCamera->getViewMatrix() * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(1, 0, 0, 0);
 			shader->setVec3(typeName, lightDirection);
+		}
+
+		if (lightType == Light::Spotlight)
+		{
+			// Set the spotlight exponent
+			std::string exponentName = "Lights[" + std::to_string(lightIndex) + "].Exponent";
+			shader->setFloat(exponentName, light->getSpotlightExponent());
+
+			// Set the spotlight cutoff
+			std::string cutoffName = "Lights[" + std::to_string(lightIndex) + "].Cutoff";
+			shader->setFloat(cutoffName, light->getSpotlightCutoff());
 		}
 
 		// Set the light type

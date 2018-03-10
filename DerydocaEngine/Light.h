@@ -36,10 +36,14 @@ public:
 		m_color.a = color->a;
 	}
 	Color getColor() { return m_color; }
+	float getSpotlightExponent() { return m_spotlightExponent; }
+	float getSpotlightCutoff() { return m_spotlightCutoff; }
 
 	void deserialize(YAML::Node node);
 private:
 	LightType m_lightType = Point;
 	Color m_color = Color(1, 1, 1, 1);
+	float m_spotlightExponent;
+	float m_spotlightCutoff;
 };
 

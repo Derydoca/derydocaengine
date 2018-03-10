@@ -28,4 +28,16 @@ void Light::deserialize(YAML::Node node)
 
 	LightType type = (LightType)node["type"].as<int>();
 	setLightType(type);
+
+	YAML::Node spotlightExponentNode = node["spotlightExponent"];
+	if (spotlightExponentNode)
+	{
+		m_spotlightExponent = spotlightExponentNode.as<float>();
+	}
+	
+	YAML::Node spotlightCutoffNode = node["spotlightExponent"];
+	if (spotlightCutoffNode)
+	{
+		m_spotlightCutoff = spotlightCutoffNode.as<float>();
+	}
 }
