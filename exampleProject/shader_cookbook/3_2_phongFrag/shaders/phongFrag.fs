@@ -27,30 +27,6 @@ out vec4 FragColor;
 
 vec4 ads(int lightIndex)
 {
-    vec3 n = normalize(Normal);
-    vec3 s;
-    vec3 lightPos = vec3(Lights[lightIndex].Position);
-    //vec3 lightPos = vec3(0);
-    if(Lights[lightIndex].Type == 0)
-    {
-        // Ignore directional lights for now
-        return vec4(0);
-        s = normalize(lightPos);
-    }
-    else
-    {
-        s = normalize(lightPos - Position);
-    }
-    
-    vec3 v = normalize(vec3(-Position));
-    vec3 r = reflect(-s, n);
-    vec4 diffuse = Kd * max(dot(s, n), 0.0);
-    vec4 spec = Ks * pow(max(dot(r,v), 0.0), Shininess);
-    return Ka + diffuse;// + spec;
-}
-
-vec4 ads2(int lightIndex)
-{
     vec3 lightPos = vec3(Lights[lightIndex].Position);
 
     vec3 l;
@@ -77,9 +53,6 @@ vec4 ads2(int lightIndex)
     {
         spec = vec4(pow(max(dot(r, v), 0.0), Shininess));
     }
-
-    //return diff;
-    //return spec;
 
     return Ka + diff + spec;
 }
