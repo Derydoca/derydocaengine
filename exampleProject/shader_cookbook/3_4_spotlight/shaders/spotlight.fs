@@ -29,7 +29,6 @@ vec3 adsWithSpotlight(int lightIndex)
     vec3 ambient = vec3(Lights[lightIndex].Intensity) * vec3(Ka);
     if(angle < cutoff)
     {
-        return vec3(1);
         float spotFactor = pow(dot(-s, Lights[lightIndex].Direction), Lights[lightIndex].Exponent);
         vec3 v = normalize(-Position);
         vec3 h = normalize(v + s);

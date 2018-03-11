@@ -24,12 +24,13 @@ Scene:
       Transform:
         Position: [0, 0, 0]
         Rotation: [0, 0, 0, 1]
-        Scale: [5, 5, 5]
+        Scale: [2, 2, 2]
       Components:
         - Type: MeshRenderer
           Properties:
             Material: c6278fc2-7756-4ae8-bb8a-45eaa4518786
-            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
+            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5 # Plane
+            #Mesh: c8692242-532d-4905-a1eb-0ed40dab3114 # Sphere
         - Type: MaterialRefresher
           Properties:
 #  - Type: GameObject
@@ -60,7 +61,7 @@ Scene:
       Components:
         - Type: Rotator
           Properties:
-            rotationSpeed: -90.0
+            rotationSpeed: 0.0
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
     Properties:
@@ -75,8 +76,8 @@ Scene:
           Properties:
             color: [0.2, 0.84, 0.33, 1.0]
             type: 2
-            spotlightExponent: 2.0
-            spotlightCutoff: 100.0
+            spotlightExponent: 8.0
+            spotlightCutoff: 500.0
         - Type: MeshRenderer
           Properties:
             Material: 9a932980-a824-4ec9-bd89-e67cc45e992a

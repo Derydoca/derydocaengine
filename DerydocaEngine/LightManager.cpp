@@ -26,7 +26,7 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		{
 			// Set the light direction
 			std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
-			glm::vec3 lightDirection = currentCamera->getViewMatrix() * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(1, 0, 0, 0);
+			glm::vec3 lightDirection = glm::vec3(currentCamera->getViewMatrix() * glm::vec4(0, -1, 0, 0));
 			shader->setVec3(typeName, lightDirection);
 		}
 
