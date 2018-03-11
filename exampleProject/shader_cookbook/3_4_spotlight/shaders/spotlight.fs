@@ -26,13 +26,14 @@ vec3 adsWithSpotlight(int lightIndex)
     vec3 s = normalize(vec3(Lights[lightIndex].Position) - Position);
     float angle = acos(dot(-s, Lights[lightIndex].Direction));
     float cutoff = radians(clamp(Lights[lightIndex].Cutoff, 0.0, 90.0));
-    vec3 ambient = Lights[lightIndex].Intensity.xyz * Ka.xyz;
+    vec3 ambient = vec3(Lights[lightIndex].Intensity) * vec3(Ka);
     if(angle < cutoff)
     {
+        return vec3(1);
         float spotFactor = pow(dot(-s, Lights[lightIndex].Direction), Lights[lightIndex].Exponent);
-        vec3 v = normalize(vec3(-Position));
+        vec3 v = normalize(-Position);
         vec3 h = normalize(v + s);
-        return ambient + spotFactor * Lights[lightIndex].Intensity.xyz * (Kd.xyz * max(dot(s, Normal), 0.0) + Ks.xyz * pow(max(dot(h, Normal), 0.0), Shininess));
+        return ambient + spotFactor * vec3(Lights[lightIndex].Intensity) * (vec3(Kd) * max(dot(s, Normal), 0.0) + vec3(Ks) * pow(max(dot(h, Normal), 0.0), Shininess));
     }
     else
     {
@@ -42,10 +43,10 @@ vec3 adsWithSpotlight(int lightIndex)
 
 void main()
 {
-    FragColor = vec4(0.0);
+    vec3 color = vec3(0.0);
     for(int i = 0; i < 10; i++)
     {
-        FragColor += adsWithSpotlight(i);
+        color += adsWithSpotlight(i);
     }
-    //FragColor = vec4(adsWithSpotlight(), 1.0);
+    FragColor = vec4(color, 1.0);
 }

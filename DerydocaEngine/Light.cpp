@@ -35,7 +35,7 @@ void Light::deserialize(YAML::Node node)
 		m_spotlightExponent = spotlightExponentNode.as<float>();
 	}
 	
-	YAML::Node spotlightCutoffNode = node["spotlightExponent"];
+	YAML::Node spotlightCutoffNode = node["spotlightCutoff"];
 	if (spotlightCutoffNode)
 	{
 		m_spotlightCutoff = spotlightCutoffNode.as<float>();
