@@ -1,0 +1,77 @@
+Scene:
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: b3a531d7-f46e-4bbc-a3c1-1ac1e8186964
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6bb
+    Properties:
+      Name: Floor
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [5, 5, 5]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: b3a531d7-f46e-4bbc-a3c1-1ac1e8186964
+            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31ebee1
+    Properties:
+      Name: Light Spinner
+      Transform:
+        Position: [1, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: Rotator
+          Properties:
+            rotationSpeed: -90.0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
+    Properties:
+      Name: Point Light 1
+      Parent: a2ff98cc-9421-4226-8a26-680ad31ebee1
+      Transform:
+        Position: [1.5, 0.5, 2.5]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [0.7, 0.25, 0.5, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    Properties:
+      Name: Point Light 2
+      Transform:
+        Position: [-2, 0.5, -1]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [0.2, 0.84, 0.33, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
