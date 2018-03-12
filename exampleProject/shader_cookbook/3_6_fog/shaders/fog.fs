@@ -24,7 +24,7 @@ uniform float Shininess;
 
 out vec4 FragColor;
 
-vec4 ads(int lightIndex)
+vec3 ads(int lightIndex)
 {
     vec3 s = normalize(Lights[lightIndex].Position.xyz - Position);
     vec3 v = normalize(vec3(-Position));
@@ -42,7 +42,7 @@ void main()
     float fogFactor = (Fog.MaxDist - dist) / (Fog.MaxDist - Fog.MinDist);
     fogFactor = clamp(fogFactor, 0.0, 1.0);
 
-    vec4 shadeColor = vec4(0.0);
+    vec3 shadeColor = vec3(0.0);
     for(int i = 0; i < 10; i++)
     {
         shadeColor += ads(i);

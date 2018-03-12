@@ -1,8 +1,24 @@
 Scene:
   - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel 1
+      Transform:
+        Position: [0, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 5662c98d-234f-4e94-a935-b2592fae40c8
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Squirrel 2
       Transform:
         Position: [0, 0, 0]
         Rotation: [0, 0, 0, 1]
@@ -15,23 +31,35 @@ Scene:
         - Type: Rotator
           Properties:
             rotationSpeed: 30.0
-        - Type: MaterialRefresher
+  - Type: GameObject
+    ID: a0ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel 3
+      Transform:
+        Position: [0, 0, 2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
           Properties:
+            Material: 5662c98d-234f-4e94-a935-b2592fae40c8
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6bb
     Properties:
       Name: Floor
       Transform:
-        Position: [0, 0, 0]
+        Position: [0, 5, 0]
         Rotation: [0, 0, 0, 1]
         Scale: [5, 5, 5]
       Components:
         - Type: MeshRenderer
           Properties:
             Material: 5662c98d-234f-4e94-a935-b2592fae40c8
-            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
-        - Type: MaterialRefresher
-          Properties:
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31ebee1
     Properties:
@@ -67,7 +95,7 @@ Scene:
     Properties:
       Name: Point Light 2
       Transform:
-        Position: [-2, 0.5, -1]
+        Position: [2, 0.5, -1]
         Rotation: [0, 0, 0, 1]
         Scale: [0.05, 0.05, 0.05]
       Components:

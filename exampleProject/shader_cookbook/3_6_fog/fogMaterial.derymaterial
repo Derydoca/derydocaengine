@@ -14,7 +14,7 @@ MaterialParameters:
     Value: 100.0
   - Type: Float
     Name: Fog.MaxDist
-    Value: 10.0
+    Value: 7.0
   - Type: Float
     Name: Fog.MinDist
     Value: 1.0
