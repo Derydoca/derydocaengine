@@ -29,8 +29,7 @@ Scene:
         - Type: MeshRenderer
           Properties:
             Material: c6278fc2-7756-4ae8-bb8a-45eaa4518786
-            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5 # Plane
-            #Mesh: c8692242-532d-4905-a1eb-0ed40dab3114 # Sphere
+            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
         - Type: MaterialRefresher
           Properties:
   - Type: GameObject
@@ -49,7 +48,6 @@ Scene:
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
     Properties:
       Name: Spotlight 1
-      #Parent: a2ff98cc-9421-4226-8a26-680ad31ebee1
       Transform:
         Position: [0, 1, 0]
         Rotation: [1, 0, 0, 0]
@@ -59,7 +57,7 @@ Scene:
           Properties:
             color: [0.2, 0.84, 0.33, 1.0]
             type: 2
-            spotlightExponent: 70.0
+            spotlightExponent: 30.0
             spotlightCutoff: 20.0
         - Type: MeshRenderer
           Properties:
@@ -71,7 +69,7 @@ Scene:
       Name: Spotlight 2
       Parent: a2ff98cc-9421-4226-8a26-680ad31ebee1
       Transform:
-        Position: [0.55, 1, 0.85]
+        Position: [0.55, 1.1, 0.85]
         Rotation: [0.514, 0.081, -0.752, -0.404]
         Scale: [0.05, 0.05, 0.05]
       Components:
@@ -79,7 +77,7 @@ Scene:
           Properties:
             color: [0.8, 0.2, 0.54, 1.0]
             type: 2
-            spotlightExponent: 70.0
+            spotlightExponent: 25.0
             spotlightCutoff: 15.0
         - Type: MeshRenderer
           Properties:
