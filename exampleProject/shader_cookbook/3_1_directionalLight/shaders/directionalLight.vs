@@ -9,11 +9,10 @@ struct LightInfo {
     int Type;
     vec4 Position;
     vec4 Intensity;
+    vec3 Direction;
 };
 uniform LightInfo Lights[10];
 
-//uniform vec4 LightPosition;
-uniform vec4 LightIntensity;
 uniform vec4 Kd;
 uniform vec4 Ka;
 uniform vec4 Ks;
@@ -29,7 +28,7 @@ vec4 adsDirectional(int lightIndex, vec4 position, vec3 norm)
     vec3 s;
     if(Lights[lightIndex].Type == 0)
     {
-        s = normalize(vec3(Lights[lightIndex].Position));
+        s = normalize(vec3(-Lights[lightIndex].Direction));
     }
     else
     {
