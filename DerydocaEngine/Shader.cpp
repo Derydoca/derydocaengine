@@ -169,6 +169,13 @@ void Shader::setMat4(std::string name, glm::mat4 val)
 	glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, &val[0][0]);
 }
 
+void Shader::setTexture(std::string name, int textureUnit, Texture* texture)
+{
+	glActiveTexture(GL_TEXTURE0 + textureUnit);
+	glBindTexture(texture->getTextureType(), texture->getTextureId());
+	glUniform1i(getUniformName(name), textureUnit);
+}
+
 GLuint Shader::getSubroutineIndex(std::string subroutineName)
 {
 	return glGetSubroutineIndex(m_program, GL_VERTEX_SHADER, subroutineName.c_str());

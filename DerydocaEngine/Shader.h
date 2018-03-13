@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "Camera.h"
 #include "Color.h"
+#include "Texture.h"
 
 class Shader
 {
@@ -24,6 +25,7 @@ public:
 	void setVec4(std::string name, glm::vec4 val);
 	void setMat3(std::string name, glm::mat3 val);
 	void setMat4(std::string name, glm::mat4 val);
+	void setTexture(std::string name, int textureUnit, Texture* handle);
 
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }

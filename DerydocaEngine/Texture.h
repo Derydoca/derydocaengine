@@ -14,6 +14,8 @@ public:
 	void bind(unsigned int unit);
 	int getWidth() { return m_width; }
 	int getHeight() { return m_height; }
+	GLenum getTextureType() const { return m_textureType; }
+	GLuint getTextureId() const { return m_texture; }
 protected:
 	int m_width, m_height;
 	GLuint m_texture;

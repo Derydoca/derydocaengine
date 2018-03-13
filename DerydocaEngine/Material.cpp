@@ -11,6 +11,11 @@ Material::~Material()
 {
 }
 
+void Material::setTexture(const std::string name, Texture* texture)
+{
+	m_textures[name] = texture;
+}
+
 void Material::setTextureSlot(int slot, Texture * texture)
 {
 	m_texture = texture;
@@ -61,10 +66,19 @@ void Material::bind()
 	assert(m_shader);
 	//assert(m_texture);
 
+	// TODO: Remove this texture binding method
 	m_shader->bind();
 	if (m_texture != NULL)
 	{
 		m_texture->bind(0);
+	}
+
+	{
+		int texIndex = 0;
+		for (auto const& x : m_textures)
+		{
+			m_shader->setTexture(x.first, texIndex++, x.second);
+		}
 	}
 
 	for (auto const& x : m_floatValues)

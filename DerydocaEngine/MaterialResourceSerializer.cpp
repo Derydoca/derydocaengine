@@ -31,9 +31,12 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 		std::string paramType = parameters[i]["Type"].as<std::string>();
 		if (paramType == "Texture")
 		{
-			int slot = parameters[i]["Slot"].as<int>();
 			auto texture = loadResource<Texture*>(parameters[i], "ID");
-			material->setTextureSlot(slot, texture);
+			YAML::Node nameNode = parameters[i]["Name"];
+			if (texture != nullptr && nameNode)
+			{
+				material->setTexture(nameNode.as<std::string>(), texture);
+			}
 		}
 		else if (paramType == "Color")
 		{
