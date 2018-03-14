@@ -38,6 +38,7 @@ Shader::Shader(const std::string& fileName)
 	glBindAttribLocation(m_program, 0, "VertexPosition");
 	glBindAttribLocation(m_program, 1, "VertexTexCoord");
 	glBindAttribLocation(m_program, 2, "VertexNormal");
+	glBindAttribLocation(m_program, 3, "VertexTangent");
 
 	// Bind the output color to 0
 	glBindFragDataLocation(m_program, 0, "FragColor");

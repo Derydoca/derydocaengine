@@ -80,6 +80,15 @@ void Mesh::RefreshVbo()
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	}
 
+	// Initialize the tangents buffer
+	if (m_tangents != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_tangents, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
 	// Initialize the indices buffer
 	if (m_indices != nullptr)
 	{
@@ -131,6 +140,15 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 			m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
 			m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
 			m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
+		}
+	}
+
+	if (mesh->HasTangentsAndBitangents())
+	{
+		m_tangents = new glm::vec3[m_numVertices];
+		for (unsigned int i = 0; i < m_numVertices; i++)
+		{
+			m_tangents[i] = glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
 		}
 	}
 

@@ -26,6 +26,7 @@ private:
 
 	enum {
 		POSITION_VB,
+		TANGENT_VB,
 		TEXCOORD_VB,
 		NORMAL_VB,
 		INDEX_VB,
@@ -34,6 +35,7 @@ private:
 
 	glm::vec3* m_positions;
 	glm::vec3* m_normals;
+	glm::vec3* m_tangents;
 	glm::vec2* m_texCoords;
 	unsigned int m_numVertices;
 	unsigned int* m_indices;
