@@ -2,7 +2,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel 1
+      Name: Crate
       Transform:
         Position: [0, 0, -2]
         Rotation: [0, 0, 0, 1]
@@ -11,7 +11,7 @@ Scene:
         - Type: MeshRenderer
           Properties:
             Material: badc3645-48c8-4bc4-8a92-c4d000b7a0d1
-            Mesh: 70878dd4-3199-468e-82d3-91aa1f2c89ce
+            Mesh: 5a167ea6-4e5d-45b3-a295-9678ddc86727
         - Type: Rotator
           Properties:
             rotationSpeed: 30.0
