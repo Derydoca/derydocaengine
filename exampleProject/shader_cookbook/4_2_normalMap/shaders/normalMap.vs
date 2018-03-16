@@ -1,23 +1,20 @@
-#version 400
+#version 430
 
 in vec3 VertexPosition;
 in vec3 VertexNormal;
 in vec2 VertexTexCoord;
-in vec3 VertexTangent;
+in vec4 VertexTangent;
 in vec3 VertexBitangent;
 
-struct LightInfo
-{
-    vec4 Position;
-    vec4 Intensity;
+struct LightInfo {
+  vec4 Position;  // Light position in eye coords.
+  vec4 Intensity; // A,D,S intensity
 };
 uniform LightInfo Lights[10];
 
 out vec3 LightDirs[10];
 out vec2 TexCoord;
 out vec3 ViewDir;
-out vec3 Bitangent;
-out vec3 Tangent;
 
 uniform mat4 ModelViewMatrix;
 uniform mat3 NormalMatrix;
@@ -26,28 +23,28 @@ uniform mat4 MVP;
 
 void main()
 {
-    Bitangent = VertexBitangent; 
-    Tangent = VertexTangent; 
+    // Transform normal and tangent to eye space
+    vec3 norm = normalize( NormalMatrix * VertexNormal );
+    vec3 tang = normalize( NormalMatrix * vec3(VertexTangent) );
+    // Compute the binormal
+    vec3 binormal = normalize( cross( norm, tang ) ) * VertexTangent.w;
 
-    vec3 norm = normalize(NormalMatrix * VertexNormal);
-    vec3 tang = normalize(NormalMatrix * VertexTangent);
-    //vec3 bitang = normalize(NormalMatrix * VertexBitangent);
-    vec3 bitang = normalize(cross(norm, tang));
+    // Matrix for transformation to tangent space
     mat3 toObjectLocal = mat3(
-        tang.x, bitang.x, norm.x,
-        tang.y, bitang.y, norm.y,
-        tang.z, bitang.z, norm.z
-    );
-    mat3 invTBN = transpose(toObjectLocal);
-    // Get the position in eye coords
-    vec3 pos = vec3(ModelViewMatrix * vec4(VertexPosition, 1.0));
-    // Transform light directions and view direction to tangent space
+        tang.x, binormal.x, norm.x,
+        tang.y, binormal.y, norm.y,
+        tang.z, binormal.z, norm.z ) ;
+
+    // Transform light direction and view direction to tangent space
+    vec3 pos = vec3( ModelViewMatrix * vec4(VertexPosition,1.0) );
     for(int i = 0; i < 10; i++)
     {
-        LightDirs[i] = normalize(toObjectLocal * (Lights[i].Position.xyz - pos));
+        LightDirs[i] = normalize( toObjectLocal * (Lights[i].Position.xyz - pos) );
     }
+
     ViewDir = toObjectLocal * normalize(-pos);
-    // Pass along the texture coordinate
+
     TexCoord = VertexTexCoord;
-    gl_Position = MVP * vec4(VertexPosition, 1.0);
+
+    gl_Position = MVP * vec4(VertexPosition,1.0);
 }
