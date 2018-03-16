@@ -11,6 +11,11 @@ Material::~Material()
 {
 }
 
+void Material::setBool(const std::string name, bool value)
+{
+	m_boolValues[name] = value;
+}
+
 void Material::setTexture(const std::string name, Texture* texture)
 {
 	m_textures[name] = texture;

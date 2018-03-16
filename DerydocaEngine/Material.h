@@ -16,6 +16,7 @@ public:
 
 	inline void setShader(Shader* shader) { m_shader = shader; }
 	inline Shader* getShader() const { return m_shader; }
+	void setBool(const std::string name, bool value);
 	void setTexture(const std::string name, Texture* texture);
 	void setTextureSlot(int slot, Texture* texture);
 	void setFloat(const std::string name, float value);
@@ -31,6 +32,7 @@ private:
 	Shader* m_shader;
 	// TODO: Replace this with a BST for multiple textures
 	Texture* m_texture;
+	std::map<std::string, bool> m_boolValues;
 	std::map<std::string, Texture*> m_textures;
 	std::map<std::string, float> m_floatValues;
 	std::map<std::string, glm::vec3> m_vec3Values;

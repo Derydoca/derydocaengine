@@ -123,6 +123,9 @@ void Shader::update(const MatrixStack * matrixStack)
 	if (m_uniforms[TRANSFORM_MODEL] >= 0) {
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MODEL], 1, GL_FALSE, glm::value_ptr(modelMatrix));
 	}
+
+	glm::vec3 worldCamPos = camera->getGameObject()->getTransform()->getWorldPos();
+	glUniform3f(getUniformName("WorldCameraPosition"), worldCamPos.x, worldCamPos.y, worldCamPos.z);
 }
 
 void Shader::update(const glm::mat4 matrix)

@@ -50,6 +50,12 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 			std::string paramName = parameters[i]["Name"].as<string>();
 			material->setFloat(paramName, paramValue);
 		}
+		else if (paramType == "Bool")
+		{
+			bool paramValue = parameters[i]["Value"].as<bool>();
+			std::string paramName = parameters[i]["Name"].as<string>();
+			material->setBool(paramName, paramValue);
+		}
 	}
 
 	return material;
