@@ -1,9 +1,5 @@
 Shader: 954aa86c-f113-42dd-a4af-9096d2164f3a
 MaterialParameters:
-  - Type: Texture
-    Name: ProjectorTex
-    #ID: 984b57ee-d8b8-4d15-a682-95f1185538a7 # AARR
-    ID: 8bda31a9-2691-4aaa-b136-bf13539b50a5 # Grass
   - Type: Color
     Name: Material.Ka
     Value: [0.01, 0.01, 0.01, 1.0]

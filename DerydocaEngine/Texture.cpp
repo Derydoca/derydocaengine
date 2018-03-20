@@ -11,6 +11,12 @@ Texture::Texture()
 }
 
 Texture::Texture(const std::string& fileName)
+	: Texture(fileName, nullptr)
+{
+
+}
+
+Texture::Texture(const std::string& fileName, TextureParameters* params)
 {
 	/* load an image file directly as a new OpenGL texture */
 	m_texture = SOIL_load_OGL_texture
@@ -21,8 +27,16 @@ Texture::Texture(const std::string& fileName)
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
 	);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	TextureWrapMode wrapModeS = TextureWrapMode::REPEAT;
+	TextureWrapMode wrapModeT = TextureWrapMode::REPEAT;
+	if (params != nullptr)
+	{
+		wrapModeS = params->getWrapModeS();
+		wrapModeT = params->getWrapModeT();
+	}
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, params->textureWrapModeToOpenGL(wrapModeS));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, params->textureWrapModeToOpenGL(wrapModeT));
 
 	/* check for an error during the load process */
 	if (0 == m_texture)

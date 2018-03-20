@@ -27,7 +27,7 @@ out vec4 FragColor;
 vec3 phongModel(int lightIndex, vec3 pos, vec3 norm)
 {
     vec3 s = normalize(vec3(Lights[lightIndex].Position) - pos);
-    vec3 c = normalize(-pos.xyz);
+    vec3 v = normalize(-pos.xyz);
     vec3 r = reflect(-s, norm);
     vec3 ambient = Lights[lightIndex].Intensity.xyz * Material.Ka.xyz;
     float sDotN = max(dot(s, norm), 0.0);
@@ -35,22 +35,24 @@ vec3 phongModel(int lightIndex, vec3 pos, vec3 norm)
     vec3 spec = vec3(0.0);
     if(sDotN > 0.0)
     {
-        spec = Lights[lightIndex].Intensity.xyz * Material.Ks.xyz * pow(max(dot(r,c), 0.0), Material.Shininess);
+        spec = Lights[lightIndex].Intensity.xyz * Material.Ks.xyz * pow(max(dot(r,v), 0.0), Material.Shininess);
     }
     return ambient + diffuse + spec;
 }
 
 void main()
 {
-    vec3 color = phongModel(0, vec3(EyePosition), normalize(EyeNormal));
+    vec3 color = vec3(0);
+    for(int i = 0; i < 10; i++)
+    {
+        color += phongModel(i, vec3(EyePosition), normalize(EyeNormal));
+    }
 
     vec4 projTexColor = vec4(0.0);
     if(ProjTexCoord.z > 0.0)
     {
-        //projTexColor = textureProj(ProjectorTex, ProjTexCoord);
-        projTexColor = texture(ProjectorTex, vec2(0.25,0.25));
+        projTexColor = textureProj(ProjectorTex, ProjTexCoord);
     }
 
     FragColor = vec4(color, 1.0) + projTexColor * 0.5;
-    //FragColor = projTexColor;
 }

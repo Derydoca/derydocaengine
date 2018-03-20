@@ -365,6 +365,7 @@
     </ClInclude>
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
     <ClInclude Include="ImageProjector.h" />
+    <ClInclude Include="TextureParameters.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

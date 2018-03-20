@@ -57,11 +57,24 @@ public:
 	}
 
 protected:
+	inline Resource* getResource(YAML::Node node, std::string resourceName)
+	{
+		YAML::Node resourceNode = node[resourceName];
+
+		if (resourceNode == nullptr)
+		{
+			return nullptr;
+		}
+
+		boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
+		Resource * resource = ObjectLibrary::getInstance().getResource(id);
+		return resource;
+	}
+
 	template<typename T>
 	inline T loadResource(YAML::Node node, std::string resourceName)
 	{
-		boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
-		Resource * resource = ObjectLibrary::getInstance().getResource(id);
+		Resource * resource = getResource(node, resourceName);
 		if (resource)
 		{
 			return (T)resource->getResourceObject();

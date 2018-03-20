@@ -24,13 +24,14 @@ private:
 	bool m_dirty = true;
 	vec3 m_focalPoint;
 	vec3 m_upVector;
-	mat4 m_projectionMatrix;
+	mat4 m_projectorMatrix;
 	float m_fov;
 	float m_zNear;
 	float m_zFar;
-	Texture* m_texture;
+	Texture* m_projectorTexture;
 	vector<MeshRenderer*> m_meshRenderers;
 
 	void updateProjectionMatrix();
+	void setProjectionGraphic();
 };
 

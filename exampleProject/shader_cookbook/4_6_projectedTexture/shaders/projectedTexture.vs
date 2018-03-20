@@ -23,5 +23,5 @@ void main()
     EyePosition = ModelViewMatrix * pos4;
     ProjTexCoord = ProjectorMatrix * (ModelMatrix * pos4);
     
-    gl_Position = MVP * vec4(VertexPosition, 1.0);
+    gl_Position = MVP * pos4;
 }

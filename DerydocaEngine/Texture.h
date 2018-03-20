@@ -2,12 +2,14 @@
 
 #include <string>
 #include <GL/glew.h>
+#include "TextureParameters.h"
 
 class Texture
 {
 public:
 	Texture();
 	Texture(const std::string& fileName);
+	Texture(const std::string& fileName, TextureParameters* params);
 	Texture(const std::string& xpos, const std::string& xneg, const std::string& ypos, const std::string& yneg, const std::string& zpos, const std::string& zneg);
 	~Texture();
 

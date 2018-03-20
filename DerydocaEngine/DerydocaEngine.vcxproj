@@ -337,6 +337,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureParameters.h" />
     <ClInclude Include="TextureResourceSerializer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="WasdMover.h" />
