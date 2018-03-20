@@ -30,12 +30,20 @@ void MeshRenderer::deserialize(YAML::Node compNode)
 	YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];
 	if (renderTextureSourceNode && renderTextureSourceNode.IsScalar())
 	{
+		// Get the name that should be used to bind this texture to the shader
+		string renderTextureName = "RenderTexture";
+		YAML::Node renderTextureNameNode = compNode["RenderTextureName"];
+		if (renderTextureNameNode != nullptr && renderTextureNameNode.IsScalar())
+		{
+			renderTextureName = renderTextureNameNode.as<string>();
+		}
+
 		uuid renderTextureCameraId = renderTextureSourceNode.as<uuid>();
 		Camera* renderTextureCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
 		Shader* renderTextureShader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\basicShader");
 		Material* renderTextureMaterial = new Material();
 		renderTextureMaterial->setShader(renderTextureShader);
-		renderTextureMaterial->setTextureSlot(0, renderTextureCamera->getRenderTexture());
+		renderTextureMaterial->setTexture(renderTextureName, renderTextureCamera->getRenderTexture());
 		setMaterial(renderTextureMaterial);
 	}
 }
