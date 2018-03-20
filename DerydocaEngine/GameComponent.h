@@ -4,6 +4,7 @@
 #include "YamlTools.h"
 #include "ObjectLibrary.h"
 #include "boost\uuid\uuid.hpp"
+#include <vector>
 
 struct Resource;
 
@@ -69,6 +70,39 @@ protected:
 		{
 			return nullptr;
 		}
+	}
+
+	template<typename T>
+	inline std::vector<T> loadComponents(YAML::Node node, std::string componentCollectionName)
+	{
+		vector<T> objectArr = vector<T>();
+
+		// Get the collection node
+		YAML::Node componentIdCollectionNode = node[componentCollectionName];
+		if (componentIdCollectionNode == nullptr || !componentIdCollectionNode.IsSequence())
+		{
+			return objectArr;
+		}
+
+		// Iterate through all component IDs in the collection
+		for (size_t componentIndex = 0; componentIndex < componentIdCollectionNode.size(); componentIndex++)
+		{
+			boost::uuids::uuid id = componentIdCollectionNode[componentIndex].as<boost::uuids::uuid>();
+			GameComponent* component = ObjectLibrary::getInstance().getComponent(id);
+			if (component)
+			{
+				// Add it to the array if we found one
+				objectArr.push_back((T)component);
+			}
+			else
+			{
+				// If no component was found, log the issue and continue on
+				cout << "Unable to load the component with ID of '" << id << "' because it was not found in the ObjectLibrary." << endl;
+			}
+		}
+
+		// Serve up what we found
+		return objectArr;
 	}
 
 private:

@@ -11,6 +11,7 @@
 #include "DebugVisualizer.h"
 #include "Light.h"
 #include "ShaderSubroutineSwitcher.h"
+#include "ImageProjector.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -52,6 +53,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(DebugVisualizer);
 	REGINSTANCE(Light);
 	REGINSTANCE(ShaderSubroutineSwitcher);
+	REGINSTANCE(ImageProjector);
 }
 
 GameComponentFactory::~GameComponentFactory()

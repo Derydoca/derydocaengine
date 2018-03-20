@@ -159,6 +159,7 @@
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
+    <ClCompile Include="ImageProjector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -363,6 +364,7 @@
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
+    <ClInclude Include="ImageProjector.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
