@@ -220,6 +220,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="EdgeDetectionFilter.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="FileType.cpp" />
@@ -246,6 +247,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="MeshResourceSerializer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
+    <ClCompile Include="RenderPass.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="FileSerializerLibrary.cpp" />
@@ -282,6 +284,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="DebugVisualizer.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="DisplayManager.h" />
+    <ClInclude Include="EdgeDetectionFilter.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="FileType.h" />
@@ -314,6 +317,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="ObjectLibrary.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RenderPass.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="FileSerializerLibrary.h" />

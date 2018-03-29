@@ -39,12 +39,8 @@ void MeshRenderer::deserialize(YAML::Node compNode)
 		}
 
 		uuid renderTextureCameraId = renderTextureSourceNode.as<uuid>();
-		Camera* renderTextureCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
-		Shader* renderTextureShader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\basicShader");
-		Material* renderTextureMaterial = new Material();
-		renderTextureMaterial->setShader(renderTextureShader);
-		renderTextureMaterial->setTexture(renderTextureName, renderTextureCamera->getRenderTexture());
-		setMaterial(renderTextureMaterial);
+		m_meshRendererCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
+		material->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
 	}
 }
 
@@ -59,5 +55,6 @@ void MeshRenderer::render(MatrixStack* matrixStack)
 	m_material->bind();
 	m_material->getShader()->update(matrixStack);
 	LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), m_material->getShader());
+
 	m_mesh->draw();
 }

@@ -3,6 +3,11 @@
 #include "Shader.h"
 #include "MatrixStack.h"
 #include "DisplayManager.h"
+#include "MeshResource.h"
+#include "glm\glm.hpp"
+#include "Shader.h"
+
+using namespace glm;
 
 Camera::Camera()
 {
@@ -43,6 +48,12 @@ Camera::~Camera()
 
 void Camera::init()
 {
+	MeshResource* quadResource = (MeshResource*)ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71");
+	if (quadResource != nullptr)
+	{
+		m_quad = (Mesh*)quadResource->getResourceObject();
+	}
+
 	m_transform = getGameObject()->getTransform();
 }
 
@@ -78,6 +89,8 @@ void Camera::deserialize(YAML::Node node)
 		int width = renderTextureNode["Width"].as<int>();
 		int height = renderTextureNode["Height"].as<int>();
 		m_renderTexture = new RenderTexture(width, height);
+
+		m_postProcessShader = loadResource<Shader*>(renderTextureNode, "PostProcessShader");
 	}
 
 	recalcPerspectiveMatrix();
@@ -145,7 +158,34 @@ void Camera::renderRoot(GameObject* gameObject)
 		(GLint)(textureH * m_displayRect->getY()),
 		(GLint)(textureW * m_displayRect->getWidth()),
 		(GLint)(textureH * m_displayRect->getHeight()));
+	glEnable(GL_DEPTH_TEST);
 	clear();
 	gameObject->preRender();
 	gameObject->render(m_matrixStack);
+
+	// Postprocessing happens here
+	if (m_renderTexture != nullptr && m_postProcessShader != nullptr)
+	{
+		glDisable(GL_DEPTH_TEST);
+
+		// Load the shader with matricies that will transform the quad to take up the entire buffer
+		mat4 m = mat4(1.0);
+		mat4 v = mat4(1.0);
+		mat4 p = mat4(1.0);
+		mat4 mv = v * m;
+		mat4 mvp = p * v * m;
+
+		m_postProcessShader->bind();
+		
+		m_postProcessShader->setMat4("ModelViewMatrix", mv);
+		m_postProcessShader->setMat3("NormalMatrix", mat3(mv[0], vec3(mv[1]), vec3(mv[2])));
+		m_postProcessShader->setMat4("MVP", mvp);
+
+		m_postProcessShader->setInt("Width", m_renderTexture->getWidth());
+		m_postProcessShader->setInt("Height", m_renderTexture->getHeight());
+		m_postProcessShader->setTexture("RenderTex", 0, m_renderTexture);
+
+		// Render the full-buffer quad
+		m_quad->draw();
+	}
 }

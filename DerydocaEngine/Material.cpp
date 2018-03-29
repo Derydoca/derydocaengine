@@ -16,6 +16,11 @@ void Material::setBool(const std::string name, bool value)
 	m_boolValues[name] = value;
 }
 
+void Material::setInt(const std::string name, int value)
+{
+	m_intValues[name] = value;
+}
+
 void Material::setTexture(const std::string name, Texture* texture)
 {
 	m_textures[name] = texture;
@@ -89,6 +94,11 @@ void Material::bind()
 	for (auto const& x : m_floatValues)
 	{
 		m_shader->setFloat(x.first, x.second);
+	}
+
+	for (auto const& x : m_intValues)
+	{
+		m_shader->setInt(x.first, x.second);
 	}
 
 	for (auto const& x : m_vec3Values)

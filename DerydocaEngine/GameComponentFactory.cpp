@@ -12,6 +12,7 @@
 #include "Light.h"
 #include "ShaderSubroutineSwitcher.h"
 #include "ImageProjector.h"
+#include "EdgeDetectionFilter.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -54,6 +55,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(Light);
 	REGINSTANCE(ShaderSubroutineSwitcher);
 	REGINSTANCE(ImageProjector);
+	REGINSTANCE(EdgeDetectionFilter);
 }
 
 GameComponentFactory::~GameComponentFactory()

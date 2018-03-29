@@ -160,6 +160,8 @@
     </ClCompile>
     <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
     <ClCompile Include="ImageProjector.cpp" />
+    <ClCompile Include="EdgeDetectionFilter.cpp" />
+    <ClCompile Include="RenderPass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -366,6 +368,8 @@
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
     <ClInclude Include="ImageProjector.h" />
     <ClInclude Include="TextureParameters.h" />
+    <ClInclude Include="EdgeDetectionFilter.h" />
+    <ClInclude Include="RenderPass.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
