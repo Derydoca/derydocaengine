@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "Color.h"
 #include "Texture.h"
+#include "Mesh.h"
 
 class Shader
 {
@@ -18,9 +19,11 @@ public:
 	void update(const glm::mat4 matrix);
 
 	void setFloat(std::string name, float val);
+	void setFloatArray(std::string name, float* arrayLocation, unsigned int arrayLength);
 	void setColorRGB(std::string name, Color color);
 	void setColorRGBA(std::string name, Color color);
 	void setInt(std::string name, int val);
+	void setIntArray(std::string name, int* arrayLocation, unsigned int arrayLength);
 	void setVec3(std::string name, glm::vec3 val);
 	void setVec4(std::string name, glm::vec4 val);
 	void setMat3(std::string name, glm::mat3 val);
@@ -31,8 +34,12 @@ public:
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
 	std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 
-	GLuint getSubroutineIndex(std::string subroutineName);
+	GLuint getSubroutineIndex(GLuint program, std::string subroutineName);
 	void setSubroutine(GLuint program, GLuint subroutineIndex);
+
+	void setSubPasses(GLuint program, std::string* subPassNames, int numSubPasses);
+
+	void renderMesh(Mesh* mesh);
 private:
 	static const unsigned int NUM_SHADERS = 2;
 	Shader(const Shader& other) {}
@@ -54,5 +61,7 @@ private:
 	GLint m_uniforms[NUM_UNIFORMS];
 	std::string m_loadPath;
 	std::map<std::string, int> m_uniformLookup;
+	int m_numSubPasses;
+	int* m_subPassNames;
 };
 

@@ -138,6 +138,16 @@ void Shader::setFloat(std::string name, float val)
 	glUniform1f(getUniformName(name), val);
 }
 
+void Shader::setFloatArray(std::string name, float * arrayLocation, unsigned int arrayLength)
+{
+	for (unsigned int i = 0; i < arrayLength; i++)
+	{
+		std::string uniformStringName = name + "[" + std::to_string(i) + "]";
+		int uniformName = getUniformName(uniformStringName);
+		glUniform1f(uniformName, arrayLocation[i]);
+	}
+}
+
 void Shader::setColorRGB(std::string name, Color color)
 {
 	glUniform3f(getUniformName(name), color.r, color.g, color.b);
@@ -151,6 +161,16 @@ void Shader::setColorRGBA(std::string name, Color color)
 void Shader::setInt(std::string name, int val)
 {
 	glUniform1i(getUniformName(name), val);
+}
+
+void Shader::setIntArray(std::string name, int * arrayLocation, unsigned int arrayLength)
+{
+	for (unsigned int i = 0; i < arrayLength; i++)
+	{
+		std::string uniformStringName = name + std::to_string(i);
+		int uniformName = getUniformName(uniformStringName);
+		glUniform1d(uniformName, arrayLocation[i]);
+	}
 }
 
 void Shader::setVec3(std::string name, glm::vec3 val)
@@ -181,14 +201,42 @@ void Shader::setTexture(std::string name, int textureUnit, Texture* texture)
 	glUniform1i(getUniformName(name), textureUnit);
 }
 
-GLuint Shader::getSubroutineIndex(std::string subroutineName)
+GLuint Shader::getSubroutineIndex(GLuint program, std::string subroutineName)
 {
-	return glGetSubroutineIndex(m_program, GL_VERTEX_SHADER, subroutineName.c_str());
+	return glGetSubroutineIndex(m_program, program, subroutineName.c_str());
 }
 
 void Shader::setSubroutine(GLuint program, GLuint subroutineIndex)
 {
-	glUniformSubroutinesuiv(GL_VERTEX_SHADER, 1, &subroutineIndex);
+	glUniformSubroutinesuiv(program, 1, &subroutineIndex);
+}
+
+void Shader::setSubPasses(GLuint program, std::string* subPassNames, int numSubPasses)
+{
+	m_numSubPasses = numSubPasses;
+
+	delete[] m_subPassNames;
+	m_subPassNames = new int[numSubPasses];
+	for (int i = 0; i < numSubPasses; i++)
+	{
+		m_subPassNames[i] = getSubroutineIndex(program, subPassNames[i]);
+	}
+}
+
+void Shader::renderMesh(Mesh * mesh)
+{
+	if (m_numSubPasses <= 0)
+	{
+		mesh->draw();
+	}
+	else
+	{
+		for (int i = 0; i < m_numSubPasses; i++)
+		{
+			// TODO: Extend this to use different program types other than just the fragment shader
+			setSubroutine(GL_FRAGMENT_SHADER, m_subPassNames[i]);
+		}
+	}
 }
 
 int Shader::getUniformName(std::string stringName)

@@ -226,6 +226,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="FileType.cpp" />
     <ClCompile Include="GameComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GaussianBlurFilter.cpp" />
     <ClCompile Include="ImageFileSerializer.cpp" />
     <ClCompile Include="ImageProjector.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -247,7 +248,6 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="MeshResourceSerializer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
-    <ClCompile Include="RenderPass.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="FileSerializerLibrary.cpp" />
@@ -290,6 +290,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="FileType.h" />
     <ClInclude Include="GameComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GaussianBlurFilter.h" />
     <ClInclude Include="GLError.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="ImageFileSerializer.h" />
@@ -317,7 +318,6 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="ObjectLibrary.h" />
     <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="RenderPass.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="FileSerializerLibrary.h" />

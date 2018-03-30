@@ -186,6 +186,6 @@ void Camera::renderRoot(GameObject* gameObject)
 		m_postProcessShader->setTexture("RenderTex", 0, m_renderTexture);
 
 		// Render the full-buffer quad
-		m_quad->draw();
+		m_postProcessShader->renderMesh(m_quad);
 	}
 }

@@ -47,7 +47,7 @@ void ShaderSubroutineSwitcher::setSubroutine(GLuint program, string subroutineNa
 	}
 
 	// Ask the shader for the index of the desired subroutine
-	GLuint subroutineIndex = shader->getSubroutineIndex(subroutineName);
+	GLuint subroutineIndex = shader->getSubroutineIndex(GL_VERTEX_SHADER, subroutineName);
 
 	// Tell the shader to use this subroutine
 	material->setSubroutine(program, subroutineIndex);

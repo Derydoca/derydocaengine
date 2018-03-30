@@ -13,6 +13,7 @@
 #include "ShaderSubroutineSwitcher.h"
 #include "ImageProjector.h"
 #include "EdgeDetectionFilter.h"
+#include "GaussianBlurFilter.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -56,6 +57,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(ShaderSubroutineSwitcher);
 	REGINSTANCE(ImageProjector);
 	REGINSTANCE(EdgeDetectionFilter);
+	REGINSTANCE(GaussianBlurFilter);
 }
 
 GameComponentFactory::~GameComponentFactory()

@@ -161,7 +161,7 @@
     <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
     <ClCompile Include="ImageProjector.cpp" />
     <ClCompile Include="EdgeDetectionFilter.cpp" />
-    <ClCompile Include="RenderPass.cpp" />
+    <ClCompile Include="GaussianBlurFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -369,7 +369,7 @@
     <ClInclude Include="ImageProjector.h" />
     <ClInclude Include="TextureParameters.h" />
     <ClInclude Include="EdgeDetectionFilter.h" />
-    <ClInclude Include="RenderPass.h" />
+    <ClInclude Include="GaussianBlurFilter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
