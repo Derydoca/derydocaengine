@@ -235,6 +235,7 @@ void Shader::renderMesh(Mesh * mesh)
 		{
 			// TODO: Extend this to use different program types other than just the fragment shader
 			setSubroutine(GL_FRAGMENT_SHADER, m_subPassNames[i]);
+			mesh->draw();
 		}
 	}
 }

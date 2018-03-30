@@ -2,43 +2,48 @@
 
 in vec3 Position;
 in vec3 Normal;
-in vec2 TexCoord;
 
 uniform sampler2D RenderTex;
+
 uniform int Width;
 uniform int Height;
-uniform float PixOffset[5] = float[] (0.0, 1.0, 2.0, 3.0, 4.0);
-uniform float Weights[5];
 
 subroutine vec4 RenderPassType();
 subroutine uniform RenderPassType RenderPass;
+
+uniform float Weights[5];
 
 out vec4 FragColor;
 
 subroutine(RenderPassType)
 vec4 pass1()
 {
-    float dy = 1.0 / float(Height);
-    vec4 sum = texture(RenderTex, TexCoord) * Weights[0];
-    for(int i = 1; i < 5; i++)
-    {
-        sum += texture(RenderTex, TexCoord + vec2(0.0, PixOffset[i]) * dy) * Weights[i];
-        sum += texture(RenderTex, TexCoord - vec2(0.0, PixOffset[i]) * dy) * Weights[i];
-    }
+    ivec2 pix = ivec2(gl_FragCoord.xy);
+    vec4 sum = texelFetch(RenderTex, pix, 0) * Weights[0];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, 1)) * Weights[1];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, -1)) * Weights[1];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, 2)) * Weights[2];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, -2)) * Weights[2];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, 3)) * Weights[3];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, -3)) * Weights[3];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, 4)) * Weights[4];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(0, -4)) * Weights[4];
     return sum;
 }
 
 subroutine(RenderPassType)
 vec4 pass2()
 {
-    return vec4(1);
-    float dx = 1.0 / float(Width);
-    vec4 sum = texture(RenderTex, TexCoord) * Weights[0];
-    for(int i = 1; i < 5; i++)
-    {
-        sum += texture(RenderTex, TexCoord + vec2(PixOffset[i], 0.0) * dx) * Weights[i];
-        sum += texture(RenderTex, TexCoord - vec2(PixOffset[i], 0.0) * dx) * Weights[i];
-    }
+    ivec2 pix = ivec2(gl_FragCoord.xy);
+    vec4 sum = texelFetch(RenderTex, pix, 0) * Weights[0];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(1, 0)) * Weights[1];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(-1, 0)) * Weights[1];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(2, 0)) * Weights[2];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(-2, 0)) * Weights[2];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(3, 0)) * Weights[3];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(-3, 0)) * Weights[3];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(4, 0)) * Weights[4];
+    sum += texelFetchOffset(RenderTex, pix, 0, ivec2(-4, 0)) * Weights[4];
     return sum;
 }
 
@@ -46,4 +51,5 @@ void main()
 {
     FragColor = RenderPass();
     //FragColor = pass1();
+    //FragColor = vec4(1);
 }
