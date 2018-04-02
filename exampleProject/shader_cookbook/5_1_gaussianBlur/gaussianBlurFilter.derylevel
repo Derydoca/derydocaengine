@@ -33,9 +33,9 @@ Scene:
           Properties:
             Material: 9886e9a7-f340-47a2-9edf-2e764acc3b08
             Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
-        # - Type: Rotator
-        #   Properties:
-        #     rotationSpeed: 30.0
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:

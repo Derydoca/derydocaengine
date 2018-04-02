@@ -50,6 +50,4 @@ vec4 pass2()
 void main()
 {
     FragColor = RenderPass();
-    //FragColor = pass1();
-    //FragColor = vec4(1);
 }
