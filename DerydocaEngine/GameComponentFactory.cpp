@@ -15,6 +15,7 @@
 #include "EdgeDetectionFilter.h"
 #include "GaussianBlurFilter.h"
 #include "BloomFilter.h"
+#include "GammaCorrectionFilter.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -60,6 +61,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(EdgeDetectionFilter);
 	REGINSTANCE(GaussianBlurFilter);
 	REGINSTANCE(BloomFilter);
+	REGINSTANCE(GammaCorrectionFilter);
 }
 
 GameComponentFactory::~GameComponentFactory()

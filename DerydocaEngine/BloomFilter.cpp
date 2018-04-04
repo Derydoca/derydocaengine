@@ -51,7 +51,6 @@ void BloomFilter::init()
 			{
 				RenderPass("lumThreshPass", m_blurTex, "BlurTex"),
 				RenderPass("blurY", m_blurTex2, "BlurTex2"),
-				//"blurY",
 				"blurX"
 			};
 		shader->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 3);

@@ -227,6 +227,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="FileType.cpp" />
     <ClCompile Include="GameComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GammaCorrectionFilter.cpp" />
     <ClCompile Include="GaussianBlurFilter.cpp" />
     <ClCompile Include="ImageFileSerializer.cpp" />
     <ClCompile Include="ImageProjector.cpp" />
@@ -292,6 +293,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="FileType.h" />
     <ClInclude Include="GameComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GammaCorrectionFilter.h" />
     <ClInclude Include="GaussianBlurFilter.h" />
     <ClInclude Include="GLError.h" />
     <ClInclude Include="GameComponent.h" />
