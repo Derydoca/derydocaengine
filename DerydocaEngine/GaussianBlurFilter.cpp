@@ -39,8 +39,8 @@ void GaussianBlurFilter::init()
 	Shader* shader = m_postProcessCamera->getPostProcessShader();
 	if (shader != nullptr)
 	{
-		std::string subPassNames[2] = { "pass1", "pass2" };
-		shader->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 2);
+		RenderPass subPasses[2] = { "pass1", "pass2" };
+		shader->setSubPasses(GL_FRAGMENT_SHADER, subPasses, 2);
 	}
 
 	updateShader();

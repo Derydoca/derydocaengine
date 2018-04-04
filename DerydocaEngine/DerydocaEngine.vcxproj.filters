@@ -162,6 +162,7 @@
     <ClCompile Include="ImageProjector.cpp" />
     <ClCompile Include="EdgeDetectionFilter.cpp" />
     <ClCompile Include="GaussianBlurFilter.cpp" />
+    <ClCompile Include="BloomFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -370,6 +371,8 @@
     <ClInclude Include="TextureParameters.h" />
     <ClInclude Include="EdgeDetectionFilter.h" />
     <ClInclude Include="GaussianBlurFilter.h" />
+    <ClInclude Include="BloomFilter.h" />
+    <ClInclude Include="RenderPass.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

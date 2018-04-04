@@ -7,6 +7,7 @@
 #include "Color.h"
 #include "Texture.h"
 #include "Mesh.h"
+#include "RenderPass.h"
 
 class Shader
 {
@@ -37,9 +38,9 @@ public:
 	GLuint getSubroutineIndex(GLuint program, std::string subroutineName);
 	void setSubroutine(GLuint program, GLuint subroutineIndex);
 
-	void setSubPasses(GLuint program, std::string* subPassNames, int numSubPasses);
+	void setSubPasses(GLuint program, RenderPass* renderPasses, int numPasses);
 
-	void renderMesh(Mesh* mesh);
+	void renderMesh(Mesh* mesh, RenderTexture* renderTexture);
 private:
 	static const unsigned int NUM_SHADERS = 2;
 	Shader(const Shader& other) {}
@@ -61,7 +62,7 @@ private:
 	GLint m_uniforms[NUM_UNIFORMS];
 	std::string m_loadPath;
 	std::map<std::string, int> m_uniformLookup;
-	int m_numSubPasses;
-	int* m_subPassNames;
+	int m_numPasses;
+	RenderPass* m_renderPasses;
 };
 

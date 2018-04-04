@@ -211,30 +211,63 @@ void Shader::setSubroutine(GLuint program, GLuint subroutineIndex)
 	glUniformSubroutinesuiv(program, 1, &subroutineIndex);
 }
 
-void Shader::setSubPasses(GLuint program, std::string* subPassNames, int numSubPasses)
+void Shader::setSubPasses(GLuint program, RenderPass* renderPasses, int numPasses)
 {
-	m_numSubPasses = numSubPasses;
+	m_numPasses = numPasses;
 
-	delete[] m_subPassNames;
-	m_subPassNames = new int[numSubPasses];
-	for (int i = 0; i < numSubPasses; i++)
+	delete[] m_renderPasses;
+	m_renderPasses = new RenderPass[numPasses];
+	for (int i = 0; i < numPasses; i++)
 	{
-		m_subPassNames[i] = getSubroutineIndex(program, subPassNames[i]);
+		int subroutineIndex = getSubroutineIndex(program, renderPasses[i].getName());
+		m_renderPasses[i] = RenderPass(&renderPasses[i], subroutineIndex);
 	}
 }
 
-void Shader::renderMesh(Mesh * mesh)
+void Shader::renderMesh(Mesh * mesh, RenderTexture* m_renderTexture)
 {
-	if (m_numSubPasses <= 0)
+	if (m_numPasses <= 0)
 	{
 		mesh->draw();
 	}
 	else
 	{
-		for (int i = 0; i < m_numSubPasses; i++)
+		for (int i = 0; i < m_numPasses; i++)
 		{
-			// TODO: Extend this to use different program types other than just the fragment shader
-			setSubroutine(GL_FRAGMENT_SHADER, m_subPassNames[i]);
+			//int textureW = 1;
+			//int textureH = 1;
+
+			RenderPass rp = m_renderPasses[i];
+			if (rp.hasRenderTextureAssigned())
+			{
+				rp.getRenderTexture()->bindAsRenderTexture();
+				//textureW = renderPassRenderTexture->getWidth();
+				//textureH = renderPassRenderTexture->getHeight();
+			}
+			else if (m_renderTexture != nullptr)
+			{
+				m_renderTexture->bindAsRenderTexture();
+				//textureW = m_renderTexture->getWidth();
+				//textureH = m_renderTexture->getHeight();
+			}
+			else
+			{
+				cout << "No proper render target was supplied!" << endl;
+			}
+
+			// TODO: Add viewport suport
+			//glViewport(
+			//	(GLint)(textureW * m_displayRect->getX()),
+			//	(GLint)(textureH * m_displayRect->getY()),
+			//	(GLint)(textureW * m_displayRect->getWidth()),
+			//	(GLint)(textureH * m_displayRect->getHeight()));
+
+			setTexture("RenderTex", 0, m_renderTexture);
+			setSubroutine(GL_FRAGMENT_SHADER, rp.getShaderSubroutineIndex());
+			if (i > 0 && m_renderPasses[i - 1].hasRenderTextureAssigned())
+			{
+				setTexture(m_renderPasses[i - 1].getRenderTextureName(), 1, m_renderPasses[i - 1].getRenderTexture());
+			}
 			mesh->draw();
 		}
 	}
