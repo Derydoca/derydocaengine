@@ -249,6 +249,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="MeshFileSerializer.cpp" />
     <ClCompile Include="MeshResourceSerializer.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="MultisampleSwitch.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -320,6 +321,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="MeshFileSerializer.h" />
     <ClInclude Include="MeshResourceSerializer.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="MultisampleSwitch.h" />
     <ClInclude Include="ObjectLibrary.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderPass.h" />
