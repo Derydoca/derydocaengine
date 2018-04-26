@@ -30,6 +30,7 @@ public:
 	void setMat3(std::string name, glm::mat3 val);
 	void setMat4(std::string name, glm::mat4 val);
 	void setTexture(std::string name, int textureUnit, Texture* handle);
+	void setTexture(std::string name, int textureUnit, GLenum textureType, GLuint handle);
 
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }

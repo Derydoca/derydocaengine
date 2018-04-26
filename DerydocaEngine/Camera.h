@@ -40,6 +40,11 @@ public:
 		Perspective
 	};
 
+	enum RenderingMode {
+		Forward,
+		Deferred
+	};
+
 	Camera();
 	Camera(float fov, float aspect, float zNear, float zFar);
 	~Camera();
@@ -105,6 +110,9 @@ public:
 	void setRenderTexture(RenderTexture* renderTexture) { m_renderTexture = renderTexture; }
 	void init();
 	void setDisplayRect(float x, float y, float w, float h);
+	void setRenderingMode(RenderingMode mode);
+
+	void createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int width, int height);
 
 	void setProjectionMode(ProjectionMode mode);
 	void setOrthoSize(float size);
@@ -119,6 +127,7 @@ private:
 	Skybox* m_skybox;
 	ClearMode m_clearMode = NoClear;
 	ProjectionMode m_projectionMode = Perspective;
+	RenderingMode m_renderingMode;
 	Material* m_skyboxMaterial;
 	MatrixStack* m_matrixStack;
 	RenderTexture* m_renderTexture;
@@ -127,8 +136,12 @@ private:
 	Mesh* m_quad;
 	Shader* m_postProcessShader;
 	float m_orthoSize = 10.0f;
+	GLuint m_deferredFBO;
+	GLuint m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
+	Shader* m_deferredRendererCompositor;
 
 	void clear();
 	inline void recalcPerspectiveMatrix();
+	void setIdentityMatricies(Shader* shader);
 };
 

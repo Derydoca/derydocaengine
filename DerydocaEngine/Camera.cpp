@@ -6,6 +6,7 @@
 #include "MeshResource.h"
 #include "glm\glm.hpp"
 #include "Shader.h"
+#include "ShaderLibrary.h"
 
 using namespace glm;
 
@@ -63,6 +64,61 @@ void Camera::setDisplayRect(float x, float y, float w, float h)
 	m_displayRect->setY(x);
 	m_displayRect->setWidth(x);
 	m_displayRect->setHeight(x);
+}
+
+void Camera::setRenderingMode(RenderingMode mode)
+{
+	m_renderingMode = mode;
+
+	if (m_renderingMode == RenderingMode::Deferred)
+	{
+		// initialize g-buffer
+
+		int width = m_display->getWidth();
+		int height = m_display->getHeight();
+
+		glGenFramebuffers(1, &m_deferredFBO);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
+
+		// Depth buffer
+		glGenRenderbuffers(1, &m_gbuffDepth);
+		glBindRenderbuffer(GL_RENDERBUFFER, m_gbuffDepth);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+
+		// Create the textures
+		createGBufTex(GL_TEXTURE0, GL_RGB32F, m_gbuffPos, width, height);
+		createGBufTex(GL_TEXTURE1, GL_RGB32F, m_gbuffNorm, width, height);
+		createGBufTex(GL_TEXTURE2, GL_RGB8, m_gbuffColor, width, height);
+
+		// Attach images to the framebuffer
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_gbuffDepth);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_gbuffPos, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, m_gbuffNorm, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, m_gbuffColor, 0);
+
+		GLenum drawBuffers[] = { GL_NONE, GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
+		glDrawBuffers(4, drawBuffers);
+		
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		// TODO: Find a better way to get the shader so the ID is not hard-coded
+		m_deferredRendererCompositor = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\deferredRenderCompositorShader");
+	}
+	else
+	{
+		// destroy g-buffer
+	}
+}
+
+void Camera::createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int width, int height)
+{
+	glActiveTexture(textureUnit);
+	glGenTextures(1, &texid);
+	glBindTexture(GL_TEXTURE_2D, texid);
+	glTexStorage2D(GL_TEXTURE_2D, 0, format, width, height);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
 }
 
 void Camera::setProjectionMode(ProjectionMode mode)
@@ -153,6 +209,11 @@ void Camera::renderRoot(GameObject* gameObject)
 		textureH = m_display->getHeight();
 	}
 
+	if (m_renderingMode == RenderingMode::Deferred)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
+	}
+
 	glViewport(
 		(GLint)(textureW * m_displayRect->getX()),
 		(GLint)(textureH * m_displayRect->getY()),
@@ -169,17 +230,7 @@ void Camera::renderRoot(GameObject* gameObject)
 		glDisable(GL_DEPTH_TEST);
 
 		// Load the shader with matricies that will transform the quad to take up the entire buffer
-		mat4 m = mat4(1.0);
-		mat4 v = mat4(1.0);
-		mat4 p = mat4(1.0);
-		mat4 mv = v * m;
-		mat4 mvp = p * v * m;
-
-		m_postProcessShader->bind();
-		
-		m_postProcessShader->setMat4("ModelViewMatrix", mv);
-		m_postProcessShader->setMat3("NormalMatrix", mat3(mv[0], vec3(mv[1]), vec3(mv[2])));
-		m_postProcessShader->setMat4("MVP", mvp);
+		setIdentityMatricies(m_postProcessShader);
 
 		m_postProcessShader->setInt("Width", m_renderTexture->getWidth());
 		m_postProcessShader->setInt("Height", m_renderTexture->getHeight());
@@ -188,4 +239,38 @@ void Camera::renderRoot(GameObject* gameObject)
 		// Render the full-buffer quad
 		m_postProcessShader->renderMesh(m_quad, m_renderTexture);
 	}
+
+	// Deferred rendering happens here
+	if (m_renderingMode == RenderingMode::Deferred)
+	{
+		// Render it to the screen
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glDisable(GL_DEPTH_TEST);
+
+		// Set the identity matrices so that the quad renders to the entire render area
+		setIdentityMatricies(m_deferredRendererCompositor);
+
+		// Render the full-buffer quad
+		m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
+		m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
+		m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
+		m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
+	}
+}
+
+void Camera::setIdentityMatricies(Shader* shader)
+{
+	mat4 m = mat4(1.0);
+	mat4 v = mat4(1.0);
+	mat4 p = mat4(1.0);
+	mat4 mv = v * m;
+	mat4 mvp = p * v * m;
+
+	shader->bind();
+
+	shader->setMat4("ModelViewMatrix", mv);
+	shader->setMat3("NormalMatrix", mat3(mv[0], vec3(mv[1]), vec3(mv[2])));
+	shader->setMat4("MVP", mvp);
 }

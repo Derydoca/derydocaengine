@@ -201,6 +201,13 @@ void Shader::setTexture(std::string name, int textureUnit, Texture* texture)
 	glUniform1i(getUniformName(name), textureUnit);
 }
 
+void Shader::setTexture(std::string name, int textureUnit, GLenum textureType, GLuint textureId)
+{
+	glActiveTexture(GL_TEXTURE0 + textureUnit);
+	glBindTexture(textureType, textureId);
+	glUniform1i(getUniformName(name), textureUnit);
+}
+
 GLuint Shader::getSubroutineIndex(GLuint program, std::string subroutineName)
 {
 	return glGetSubroutineIndex(m_program, program, subroutineName.c_str());
@@ -252,7 +259,9 @@ void Shader::renderMesh(Mesh * mesh, RenderTexture* m_renderTexture)
 			}
 			else
 			{
-				cout << "No proper render target was supplied!" << endl;
+				// Render to the screen
+				glBindFramebuffer(GL_FRAMEBUFFER, 0);
+				//cout << "No proper render target was supplied!" << endl;
 			}
 
 			// TODO: Add viewport suport
