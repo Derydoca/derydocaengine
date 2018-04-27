@@ -205,7 +205,8 @@ void Shader::setTexture(std::string name, int textureUnit, GLenum textureType, G
 {
 	glActiveTexture(GL_TEXTURE0 + textureUnit);
 	glBindTexture(textureType, textureId);
-	glUniform1i(getUniformName(name), textureUnit);
+	int uniformName = getUniformName(name);
+	glUniform1i(uniformName, textureUnit);
 }
 
 GLuint Shader::getSubroutineIndex(GLuint program, std::string subroutineName)

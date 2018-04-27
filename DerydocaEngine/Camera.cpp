@@ -7,6 +7,7 @@
 #include "glm\glm.hpp"
 #include "Shader.h"
 #include "ShaderLibrary.h"
+#include "LightManager.h"
 
 using namespace glm;
 
@@ -115,7 +116,7 @@ void Camera::createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int
 	glActiveTexture(textureUnit);
 	glGenTextures(1, &texid);
 	glBindTexture(GL_TEXTURE_2D, texid);
-	glTexStorage2D(GL_TEXTURE_2D, 0, format, width, height);
+	glTexStorage2D(GL_TEXTURE_2D, 1, format, width, height);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
@@ -246,6 +247,7 @@ void Camera::renderRoot(GameObject* gameObject)
 		// Render it to the screen
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glDisable(GL_DEPTH_TEST);
 
@@ -256,6 +258,7 @@ void Camera::renderRoot(GameObject* gameObject)
 		m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
 		m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
 		m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
+		LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), m_deferredRendererCompositor);
 		m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
 	}
 }

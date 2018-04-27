@@ -27,6 +27,7 @@ Display::Display(int width, int height, const std::string& title)
 
 	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL);
 	SDL_SetWindowResizable(m_window, SDL_TRUE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	m_glContext = SDL_GL_CreateContext(m_window);
 
 	GLenum status = glewInit();

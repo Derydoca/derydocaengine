@@ -1,7 +1,7 @@
 #version 430
 
 in vec3 VertexPosition;
-vec3 VertexNormal;
+in vec3 VertexNormal;
 in vec2 VertexTexCoord;
 
 out vec3 Position;
