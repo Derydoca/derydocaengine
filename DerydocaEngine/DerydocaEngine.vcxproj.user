@@ -13,11 +13,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerWorkingDirectory>..\builds\Win32\Release</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 1ab6abce-c7db-4c0d-99f6-aa0be559c787</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene d434db6e-c5e9-4bdb-ad91-3d95747571ac</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>..\builds\Win32\Debug</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 17c210f0-f045-4083-8ede-9c83116800c0</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 21ba96c7-873c-44aa-8843-c2a07dc4d9f0</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>

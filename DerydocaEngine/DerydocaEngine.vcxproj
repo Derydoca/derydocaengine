@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib32-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmdd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -125,7 +125,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <LinkTimeCodeGeneration>
@@ -164,7 +164,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib32-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>@echo Copying DLLs
@@ -193,7 +193,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>assimp.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -345,6 +345,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Texture.h" />

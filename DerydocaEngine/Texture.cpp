@@ -1,8 +1,7 @@
 #include "Texture.h"
 #include <cassert>
 #include <iostream>
-#include "SOIL.h"
-//#include "GLError.h"
+#include "stb_image.h"
 
 Texture::Texture()
 {
@@ -18,15 +17,10 @@ Texture::Texture(const std::string& fileName)
 
 Texture::Texture(const std::string& fileName, TextureParameters* params)
 {
-	/* load an image file directly as a new OpenGL texture */
-	m_texture = SOIL_load_OGL_texture
-	(
-		fileName.c_str(),
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-	);
+	// Set the texture type
+	m_textureType = GL_TEXTURE_2D;
 
+	// Get the wrap modes
 	TextureWrapMode wrapModeS = TextureWrapMode::REPEAT;
 	TextureWrapMode wrapModeT = TextureWrapMode::REPEAT;
 	if (params != nullptr)
@@ -35,52 +29,76 @@ Texture::Texture(const std::string& fileName, TextureParameters* params)
 		wrapModeT = params->getWrapModeT();
 	}
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, params->textureWrapModeToOpenGL(wrapModeS));
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, params->textureWrapModeToOpenGL(wrapModeT));
+	// Load the image data
+	int w, h, bpp;
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char* data = stbi_load(fileName.c_str(), &w, &h, &bpp, 0);
 
-	/* check for an error during the load process */
-	if (0 == m_texture)
+	// Create the texture handle and set parameters for it
+	glGenTextures(1, &m_texture);
+	glBindTexture(m_textureType, m_texture);
+	glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, params->textureWrapModeToOpenGL(wrapModeS));
+	glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, params->textureWrapModeToOpenGL(wrapModeT));
+	glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// If the data was loaded
+	if (data)
 	{
-		printf("SOIL loading error: '%s'\n", SOIL_last_result());
+		// Load the image in OpenGL and generate mipmaps
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
 	}
 
-	m_textureType = GL_TEXTURE_2D;
+	// Free up our memory
+	stbi_image_free(data);
 }
 
 Texture::Texture(const std::string & xpos, const std::string & xneg, const std::string & ypos, const std::string & yneg, const std::string & zpos, const std::string & zneg)
 {
-	m_texture = SOIL_load_OGL_cubemap
-	(
-		xpos.c_str(),
-		xneg.c_str(),
-		ypos.c_str(),
-		yneg.c_str(),
-		zpos.c_str(),
-		zneg.c_str(),
-		SOIL_LOAD_RGB,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS
-	);
-	
-	/* check for an error during the load process */
-	if (0 == m_texture)
-	{
-		printf("SOIL loading error: '%s'\n", SOIL_last_result());
-	}
-
-	//GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-	//GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
-	//GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-	//GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-	//GL_CHECK(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
-
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
+	// Set the texture type
 	m_textureType = GL_TEXTURE_CUBE_MAP;
+
+	// Create the texture handle and set parameters for it
+	glGenTextures(1, &m_texture);
+	glBindTexture(m_textureType, m_texture);
+
+	// Store the list of sides in a string array so we can easily iterate over them
+	std::string* cubemapSourceImages = new std::string[6]{ xpos, xneg, ypos, yneg, zpos, zneg };
+
+	// Loop through each side of the cubemap
+	int w, h, bpp;
+	for (unsigned int i = 0; i < 6; i++)
+	{
+		// Load the data
+		stbi_set_flip_vertically_on_load(false);
+		unsigned char* data = stbi_load(cubemapSourceImages[i].c_str(), &w, &h, &bpp, 0);
+
+		// If the data was loaded
+		if (data)
+		{
+			// Load the image in OpenGL and generate mipmaps
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+		{
+			std::cout << "Failed to load texture for cubemap" << std::endl;
+		}
+		// Free up our memory
+		stbi_image_free(data);
+
+		// Set our parameters
+		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
 }
 
 Texture::~Texture()

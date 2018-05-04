@@ -1,5 +1,6 @@
 #include "ScreenshotUtil.h"
 #include "boost/date_time/posix_time/posix_time.hpp"
+#include "stb_image.h"
 
 using namespace boost::posix_time;
 using namespace std;
@@ -46,12 +47,21 @@ void ScreenshotUtil::postRender()
 		// Save the file
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glViewport(0, 0, 800, 600);
+
+		int w = m_display->getWidth();
+		int h = m_display->getHeight();
+
+		cout << "SCREENSHOTS ARE NOT SUPPORTED AT THIS TIME" << endl;
+		/*GLubyte* data = malloc(w * h * sizeof(Uint32));
+		glReadPixels(0, 0, , GL_RGB, GL_UNSIGNED_INT, )
+		stbi__create_png_image();
+
 		int result = SOIL_save_screenshot(file.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, m_display->getWidth(), m_display->getHeight());
 		if (result == 0) {
 			printf("Unable to save screenshot.\n");
 		}
 		else {
 			printf("Screenshot saved!\n");
-		}
+		}*/
 	}
 }

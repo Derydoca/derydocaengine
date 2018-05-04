@@ -3,6 +3,8 @@
 #include "ObjectLibrary.h"
 #include "CommandLineArgs.h"
 #include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 using namespace std;
 

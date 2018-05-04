@@ -7,6 +7,6 @@ Window:
 Camera:
     Position: [0, 0, 0]
     FOV: 70.0
-    RenderMode: 1
+    RenderMode: 0
     # Skybox: dc59842d-3530-47a8-bb22-acc400f8b930 # Debug Skybox
-    # Skybox: a5dfbc43-582b-46cf-9416-e853b21cae07 # Stormy Days
+    Skybox: a5dfbc43-582b-46cf-9416-e853b21cae07 # Stormy Days
