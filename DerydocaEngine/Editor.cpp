@@ -44,7 +44,7 @@ int Editor::Run(std::string projectPath, std::string levelIdentifier)
 	editorCameraTransform->setPos(settings->getCamPos());
 	Camera* editorCamera = new Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
 	editorCamera->setDisplay(display);
-	editorCamera->setRenderingMode(Camera::RenderingMode::Deferred);
+	editorCamera->setRenderingMode(settings->getCamRenderMode());
 	if (settings->isSkyboxDefined())
 	{
 		// If a skybox is defined, build the skybox material and assign it to the editor camera

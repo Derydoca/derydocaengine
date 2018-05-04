@@ -41,8 +41,8 @@ public:
 	};
 
 	enum RenderingMode {
-		Forward,
-		Deferred
+		Forward = 0,
+		Deferred = 1
 	};
 
 	Camera();

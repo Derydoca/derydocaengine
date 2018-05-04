@@ -25,7 +25,7 @@ out vec4 FragColor;
 
 vec3 diffuseModel(int lightIndex, vec3 pos, vec3 norm, vec3 diff )
 {
-    vec3 s = normalize(vec3(Lights[0].Position) - pos);
+    vec3 s = normalize(vec3(Lights[lightIndex].Position) - pos);
     float sDotN = max( dot(s,norm), 0.0 );
     vec3 diffuse = Lights[lightIndex].Intensity.xyz * diff * sDotN;
 

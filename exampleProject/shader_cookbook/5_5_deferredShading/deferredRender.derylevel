@@ -56,13 +56,13 @@ Scene:
     Properties:
       Name: Point Light 2
       Transform:
-        Position: [-2, 0.5, 1]
+        Position: [-200, 0.5, 1]
         Rotation: [0, 0, 0, 1]
         Scale: [0.05, 0.05, 0.05]
       Components:
         - Type: Light
           Properties:
-            color: [1.0, 1.0, 1.0, 1.0]
+            color: [0.0, 1.0, 1.0, 1.0]
             type: 1
         - Type: MeshRenderer
           Properties:

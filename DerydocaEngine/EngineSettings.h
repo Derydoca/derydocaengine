@@ -6,6 +6,7 @@
 #include <string>
 #include "glm/glm.hpp"
 #include "YamlTools.h"
+#include "Camera.h"
 
 using namespace boost::uuids;
 using namespace std;
@@ -22,6 +23,7 @@ public:
 	float getFOV() const { return m_fov; }
 	uuid getSkyboxId() { return m_skyboxId; }
 	string getEngineResourceDirectory() const { return m_engineResourceDirectory; }
+	Camera::RenderingMode getCamRenderMode() { return m_renderingMode; }
 
 	bool isSkyboxDefined() { return m_isSkyboxDefined; }
 private:
@@ -29,6 +31,7 @@ private:
 	int m_height;
 	glm::vec3 m_camPos;
 	float m_fov;
+	Camera::RenderingMode m_renderingMode;
 	uuid m_skyboxId;
 	bool m_isSkyboxDefined = false;
 	string m_engineResourceDirectory;
