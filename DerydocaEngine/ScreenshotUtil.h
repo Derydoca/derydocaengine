@@ -3,8 +3,6 @@
 #include "Keyboard.h"
 #include "Display.h"
 #include "GameComponent.h"
-#include <chrono>
-#include <ctime>
 
 class ScreenshotUtil : public GameComponent
 {

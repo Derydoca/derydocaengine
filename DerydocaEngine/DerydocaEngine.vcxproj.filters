@@ -378,6 +378,7 @@
     <ClInclude Include="GammaCorrectionFilter.h" />
     <ClInclude Include="MultisampleSwitch.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="stb_image_write.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

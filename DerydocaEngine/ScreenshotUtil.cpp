@@ -1,6 +1,9 @@
+#include <chrono>
+#include <ctime>
 #include "ScreenshotUtil.h"
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include "stb_image.h"
+#include "stb_image_write.h"
 
 using namespace boost::posix_time;
 using namespace std;
@@ -31,7 +34,8 @@ ScreenshotUtil::~ScreenshotUtil()
 
 void ScreenshotUtil::postRender()
 {
-	if(m_keyboard->isKeyDownFrame(SDLK_p)) {
+	if(m_keyboard->isKeyDownFrame(SDLK_p))
+	{
 		// Build a file name with a unique time stamp
 		std::chrono::system_clock::time_point p = std::chrono::system_clock::now();
 		std::time_t t = std::chrono::system_clock::to_time_t(p);
@@ -39,29 +43,27 @@ void ScreenshotUtil::postRender()
 		ptime now = second_clock::universal_time();
 		string timestamp = convertTimeToString(now);
 
-		//std::tm tm = *std::localtime(&t);
-		//char s[26];
-		//strftime(s, sizeof s, "%Y%m%d%H%M%S", &tm);
-		std::string file = "c:/test/ss_" + timestamp + ".bmp";
+		std::string file = "c:/test/ss_" + timestamp + ".png";
 
-		// Save the file
+		// Get the screen buffer's content
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glViewport(0, 0, 800, 600);
-
 		int w = m_display->getWidth();
 		int h = m_display->getHeight();
+		GLubyte* data = new GLubyte[w * h * 3];
+		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, data);
 
-		cout << "SCREENSHOTS ARE NOT SUPPORTED AT THIS TIME" << endl;
-		/*GLubyte* data = malloc(w * h * sizeof(Uint32));
-		glReadPixels(0, 0, , GL_RGB, GL_UNSIGNED_INT, )
-		stbi__create_png_image();
-
-		int result = SOIL_save_screenshot(file.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, m_display->getWidth(), m_display->getHeight());
-		if (result == 0) {
-			printf("Unable to save screenshot.\n");
+		// Write it to disk
+		stbi_flip_vertically_on_write(1);
+		int result = stbi_write_png(file.c_str(), w, h, 3, data, w * 3);
+		
+		// Give some feedback
+		if (result == 0)
+		{
+			cout << "Unable to save screenshot" << endl;
 		}
-		else {
-			printf("Screenshot saved!\n");
-		}*/
+		else
+		{
+			cout << "Screenshot saved!" << endl;
+		}
 	}
 }
