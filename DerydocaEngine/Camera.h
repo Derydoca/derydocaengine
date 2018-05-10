@@ -107,6 +107,9 @@ public:
 	void renderRoot(GameObject* root);
 
 	void setDisplay(Display* display) { m_display = display; }
+	Display* getDisplay() { return m_display; }
+	float getDisplayWidth() { return m_renderTexture != nullptr ? m_renderTexture->getWidth() : m_display->getWidth(); }
+	float getDisplayHeight() { return m_renderTexture != nullptr ? m_renderTexture->getHeight() : m_display->getHeight(); }
 	void setRenderTexture(RenderTexture* renderTexture) { m_renderTexture = renderTexture; }
 	void init();
 	void setDisplayRect(float x, float y, float w, float h);

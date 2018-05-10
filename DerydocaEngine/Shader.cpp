@@ -143,6 +143,14 @@ void Shader::update(const MatrixStack * matrixStack)
 
 	glm::vec3 worldCamPos = camera->getGameObject()->getTransform()->getWorldPos();
 	glUniform3f(getUniformName("WorldCameraPosition"), worldCamPos.x, worldCamPos.y, worldCamPos.z);
+
+	float w2 = camera->getDisplayWidth() / 2;
+	float h2 = camera->getDisplayHeight() / 2;
+	glm::mat4 viewportMatrix = glm::mat4(glm::vec4(w2, 0.0f, 0.0f, 0.0f),
+										 glm::vec4(0.0f, h2, 0.0f, 0.0f),
+										 glm::vec4(0.0f, 0.0f, 1.0f, 0.0f),
+										 glm::vec4(w2+0, h2+0, 0.0f, 1.0f));
+	glUniformMatrix4fv(getUniformName("ViewportMatrix"), 1, GL_FALSE, glm::value_ptr(viewportMatrix));
 }
 
 void Shader::update(const glm::mat4 matrix)
