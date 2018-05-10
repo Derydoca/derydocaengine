@@ -1,4 +1,5 @@
 #include "StringUtils.h"
+#include <boost/algorithm/string.hpp>
 
 bool endsWith(const std::string& string, const std::string& suffix)
 {
@@ -42,5 +43,5 @@ std::string getFileExtension(std::string path)
 	}
 
 	// Otherwise, return the substring of just the extension
-	return path.substr(strScanIndex);
+	return boost::algorithm::to_lower_copy(path.substr(strScanIndex));
 }

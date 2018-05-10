@@ -52,6 +52,14 @@ void ShaderFileSerializer::postLoadInitialize(Resource* resource)
 		shaderResource->setFragmentShaderSource(fragmentShaderPath.string());
 	}
 
+	// If a geometry shader exists
+	path geometryShaderPath = rawShaderName.append(".gs");
+	if (exists(geometryShaderPath))
+	{
+		// Set the path to the geometry shader
+		shaderResource->setGeometryShaderSource(geometryShaderPath.string());
+	}
+
 	// Store the shader name in the library
 	ShaderLibrary::getInstance().registerShaderName(shaderResource->getRawShaderName(), shaderResource->getId());
 }

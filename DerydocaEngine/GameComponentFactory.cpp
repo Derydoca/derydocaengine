@@ -17,6 +17,7 @@
 #include "BloomFilter.h"
 #include "GammaCorrectionFilter.h"
 #include "MultisampleSwitch.h"
+#include "ParticleSystem.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -64,6 +65,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(BloomFilter);
 	REGINSTANCE(GammaCorrectionFilter);
 	REGINSTANCE(MultisampleSwitch);
+	REGINSTANCE(ParticleSystem);
 }
 
 GameComponentFactory::~GameComponentFactory()

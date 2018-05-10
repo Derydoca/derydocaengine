@@ -165,6 +165,7 @@
     <ClCompile Include="BloomFilter.cpp" />
     <ClCompile Include="GammaCorrectionFilter.cpp" />
     <ClCompile Include="MultisampleSwitch.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -379,6 +380,7 @@
     <ClInclude Include="MultisampleSwitch.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />
+    <ClInclude Include="ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

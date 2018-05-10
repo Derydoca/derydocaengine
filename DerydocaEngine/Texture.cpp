@@ -46,7 +46,12 @@ Texture::Texture(const std::string& fileName, TextureParameters* params)
 	if (data)
 	{
 		// Load the image in OpenGL and generate mipmaps
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		GLenum pixelFormat = GL_RGB;
+		if (bpp == 4)
+		{
+			pixelFormat = GL_RGBA;
+		}
+		glTexImage2D(GL_TEXTURE_2D, 0, pixelFormat, w, h, 0, pixelFormat, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else

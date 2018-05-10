@@ -1,14 +1,24 @@
 #include "Shader.h"
 #include <fstream>
 #include <iostream>
+#include <sys/stat.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "CameraManager.h"
 #include "GLError.h"
+
+#define LOAD_SHADER_IF_EXISTS(shaderIndex, shaderType, fileName) \
+{ \
+	if(CheckIfShaderExists(fileName)) \
+	{ \
+		m_shaders[(shaderIndex)] = CreateShader(LoadShader(fileName), shaderType); \
+	} \
+}
 
 using namespace std;
 
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 static std::string LoadShader(const std::string& fileName);
+static bool CheckIfShaderExists(const std::string& fileName);
 static GLuint CreateShader(const std::string& text, GLenum shaderType);
 
 Shader::Shader(const std::string& fileName)
@@ -18,8 +28,9 @@ Shader::Shader(const std::string& fileName)
 	printf("Loading shader: %s\n", fileName.c_str());
 
 	// Create the shaders
-	m_shaders[0] = CreateShader(LoadShader(GetVertexShaderPath()), GL_VERTEX_SHADER);
-	m_shaders[1] = CreateShader(LoadShader(GetFragmentShaderPath()), GL_FRAGMENT_SHADER);
+	LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
+	LOAD_SHADER_IF_EXISTS(1, GL_GEOMETRY_SHADER, GetGeometryShaderPath());
+	LOAD_SHADER_IF_EXISTS(2, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
 
 	// Create the program
 	m_program = glCreateProgram();
@@ -31,6 +42,12 @@ Shader::Shader(const std::string& fileName)
 
 	// Attach the shaders to the program
 	for (unsigned int i = 0; i < NUM_SHADERS; i++) {
+		// Skip shaders that were not loaded (i.e. shaders w/o geom shaders)
+		if (m_shaders[i] == 0)
+		{
+			continue;
+		}
+
 		glAttachShader(m_program, m_shaders[i]);
 	}
 
@@ -336,6 +353,12 @@ static std::string LoadShader(const std::string& fileName) {
 	}
 
 	return output;
+}
+
+static bool CheckIfShaderExists(const std::string& fileName)
+{
+	struct stat buffer;
+	return (stat(fileName.c_str(), &buffer) == 0);
 }
 
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage) {

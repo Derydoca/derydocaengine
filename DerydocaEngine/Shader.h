@@ -34,6 +34,7 @@ public:
 
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
+	std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 	std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 
 	GLuint getSubroutineIndex(GLuint program, std::string subroutineName);
@@ -43,7 +44,7 @@ public:
 
 	void renderMesh(Mesh* mesh, RenderTexture* renderTexture);
 private:
-	static const unsigned int NUM_SHADERS = 2;
+	static const unsigned int NUM_SHADERS = 3;
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
 	int getUniformName(std::string stringName);
