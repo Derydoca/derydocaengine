@@ -8,11 +8,12 @@ Mesh::Mesh() {
 
 }
 
-Mesh::Mesh(const std::string& fileName) : Mesh(fileName, 0)
+void Mesh::load(const std::string& fileName)
 {
+	load(fileName, 0);
 }
 
-Mesh::Mesh(const std::string & fileName, unsigned int meshIndex)
+void Mesh::load(const std::string & fileName, unsigned int meshIndex)
 {
 	const aiScene* aiModel = aiImportFile(fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -30,14 +31,15 @@ Mesh::Mesh(const std::string & fileName, unsigned int meshIndex)
 	RefreshVbo();
 }
 
-Mesh::Mesh(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices) :
-	m_positions(positions),
-	m_numVertices(numVertices),
-	m_indices(indices),
-	m_numIndices(numIndices),
-	m_normals(normals),
-	m_texCoords(texCoords)
+void Mesh::load(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices)
 {
+	m_positions = positions;
+	m_numVertices = numVertices;
+	m_indices = indices;
+	m_numIndices = numIndices;
+	m_normals = normals;
+	m_texCoords = texCoords;
+
 	RefreshVbo();
 }
 
@@ -173,7 +175,8 @@ void Mesh::draw()
 {
 	glBindVertexArray(m_vertexArrayObject);
 
-	glDrawElementsBaseVertex(GL_TRIANGLES, m_numIndices, GL_UNSIGNED_INT, 0, 0);
+	GLenum mode = m_flags & MeshFlags::load_adjacent ? GL_TRIANGLES_ADJACENCY : GL_TRIANGLES;
+	glDrawElementsBaseVertex(mode, m_numIndices, GL_UNSIGNED_INT, 0, 0);
 
 	glBindVertexArray(0);
 }

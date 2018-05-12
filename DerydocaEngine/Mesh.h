@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <string>
 #include <vector>
+#include "MeshFlags.h"
 
 struct aiMesh;
 
@@ -11,11 +12,12 @@ class Mesh
 {
 public:
 	Mesh();
-	Mesh(const std::string& fileName);
-	Mesh(const std::string& fileName, unsigned int meshIndex);
-	Mesh(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
 	~Mesh();
+	void load(const std::string& fileName);
+	void load(const std::string& fileName, unsigned int meshIndex);
+	void load(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
 	void draw();
+	void setFlags(MeshFlags flags) { m_flags = flags; }
 
 private:
 	Mesh(const Mesh& other) {}
@@ -44,5 +46,6 @@ private:
 	unsigned int m_numIndices;
 	GLuint m_vertexArrayObject;
 	GLuint m_vertexArrayBuffers[NUM_BUFFERS];
+	MeshFlags m_flags{};
 };
 

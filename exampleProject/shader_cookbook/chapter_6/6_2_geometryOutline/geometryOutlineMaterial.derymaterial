@@ -1,0 +1,23 @@
+Shader: 7e32afca-77ab-461b-9e9a-fe9059fdcfcf
+MaterialParameters:
+  - Type: Color
+    Name: Material.Kd
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Color
+    Name: Material.Ka
+    Value: [0.05, 0.05, 0.05, 1.0]
+  - Type: Color
+    Name: Material.Ks
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Float
+    Name: Material.Shininess
+    Value: 5.0
+  - Type: Float
+    Name: EdgeWidth
+    Value: 0.01
+  - Type: Color
+    Name: LineColor
+    Value: [0.0, 0.2, 0.0, 1.0]
+  - Type: Float
+    Name: PctExtend
+    Value: 0.25

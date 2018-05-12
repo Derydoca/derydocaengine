@@ -54,7 +54,8 @@ void Skybox::buildMesh(float size)
 		3, 7, 6
 	};
 
-	m_mesh = new Mesh(
+	m_mesh = new Mesh();
+	m_mesh->load(
 		8,
 		positions,
 		nullptr,

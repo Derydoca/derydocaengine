@@ -381,6 +381,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="MeshFlags.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
