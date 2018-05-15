@@ -18,6 +18,7 @@
 #include "GammaCorrectionFilter.h"
 #include "MultisampleSwitch.h"
 #include "ParticleSystem.h"
+#include "BezierCurveRenderer.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -66,6 +67,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(GammaCorrectionFilter);
 	REGINSTANCE(MultisampleSwitch);
 	REGINSTANCE(ParticleSystem);
+	REGINSTANCE(BezierCurveRenderer);
 }
 
 GameComponentFactory::~GameComponentFactory()

@@ -167,6 +167,7 @@
     <ClCompile Include="MultisampleSwitch.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="MeshAdjacencyCalculator.cpp" />
+    <ClCompile Include="BezierCurveRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -384,6 +385,7 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="MeshFlags.h" />
     <ClInclude Include="MeshAdjacencyCalculator.h" />
+    <ClInclude Include="BezierCurveRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

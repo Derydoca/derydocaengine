@@ -24,7 +24,7 @@ FileType pathToFileType(std::string str)
 	{
 		return ShaderFileType;
 	}
-	else if (extension == "txt" || extension == "fs" || extension == "gs")
+	else if (extension == "txt" || extension == "fs" || extension == "gs" || extension == "tes" || extension == "tcs")
 	{
 		return IgnoredFileType;
 	}

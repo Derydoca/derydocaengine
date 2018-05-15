@@ -34,6 +34,8 @@ public:
 
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
+	std::string GetTesslleationControlShaderPath() const { return m_loadPath + ".tcs"; }
+	std::string GetTessellationEvaluationShaderPath() const { return m_loadPath + ".tes"; }
 	std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 	std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 
@@ -44,7 +46,7 @@ public:
 
 	void renderMesh(Mesh* mesh, RenderTexture* renderTexture);
 private:
-	static const unsigned int NUM_SHADERS = 3;
+	static const unsigned int NUM_SHADERS = 5;
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
 	int getUniformName(std::string stringName);

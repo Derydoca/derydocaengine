@@ -211,6 +211,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BezierCurveRenderer.cpp" />
     <ClCompile Include="BloomFilter.cpp" />
     <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -277,6 +278,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="WasdMover.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BezierCurveRenderer.h" />
     <ClInclude Include="BloomFilter.h" />
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />

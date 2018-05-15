@@ -29,8 +29,10 @@ Shader::Shader(const std::string& fileName)
 
 	// Create the shaders
 	LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
-	LOAD_SHADER_IF_EXISTS(1, GL_GEOMETRY_SHADER, GetGeometryShaderPath());
-	LOAD_SHADER_IF_EXISTS(2, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
+	LOAD_SHADER_IF_EXISTS(1, GL_TESS_CONTROL_SHADER, GetTesslleationControlShaderPath());
+	LOAD_SHADER_IF_EXISTS(2, GL_TESS_EVALUATION_SHADER, GetTessellationEvaluationShaderPath());
+	LOAD_SHADER_IF_EXISTS(3, GL_GEOMETRY_SHADER, GetGeometryShaderPath());
+	LOAD_SHADER_IF_EXISTS(4, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
 
 	// Create the program
 	m_program = glCreateProgram();
