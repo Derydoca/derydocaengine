@@ -3,6 +3,7 @@
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
+#include "MeshAdjacencyCalculator.h"
 
 Mesh::Mesh() {
 
@@ -91,7 +92,7 @@ void Mesh::RefreshVbo()
 		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	}
 
-	// Initialize the tangents buffer
+	// Initialize the bitangents buffer
 	if (m_bitangents != nullptr)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
@@ -144,13 +145,23 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasFaces())
 	{
-		m_numIndices = mesh->mNumFaces * 3;
-		m_indices = new unsigned int[m_numIndices];
-		for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+		if (m_flags & MeshFlags::load_adjacent)
 		{
-			m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
-			m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
-			m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
+			MeshAdjacencyCalculator mac;
+			m_numIndices = mesh->mNumFaces * 3 * 2;
+			m_indices = new unsigned int[m_numIndices];
+			mac.buildAdjacencyList(mesh, m_indices);
+		}
+		else
+		{
+			m_numIndices = mesh->mNumFaces * 3;
+			m_indices = new unsigned int[m_numIndices];
+			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+			{
+				m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
+				m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
+				m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
+			}
 		}
 	}
 

@@ -166,6 +166,7 @@
     <ClCompile Include="GammaCorrectionFilter.cpp" />
     <ClCompile Include="MultisampleSwitch.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="MeshAdjacencyCalculator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -382,6 +383,7 @@
     <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="MeshFlags.h" />
+    <ClInclude Include="MeshAdjacencyCalculator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

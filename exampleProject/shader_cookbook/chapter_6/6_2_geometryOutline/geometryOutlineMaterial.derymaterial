@@ -17,7 +17,7 @@ MaterialParameters:
     Value: 0.01
   - Type: Color
     Name: LineColor
-    Value: [0.0, 0.2, 0.0, 1.0]
+    Value: [0.0, 0.0, 0.0, 1.0]
   - Type: Float
     Name: PctExtend
-    Value: 0.25
+    Value: 0.005
