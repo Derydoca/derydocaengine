@@ -272,6 +272,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TessellatingQuad.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureResourceSerializer.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -356,6 +357,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TessellatingQuad.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureParameters.h" />
     <ClInclude Include="TextureResourceSerializer.h" />

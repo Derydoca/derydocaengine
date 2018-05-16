@@ -19,6 +19,7 @@
 #include "MultisampleSwitch.h"
 #include "ParticleSystem.h"
 #include "BezierCurveRenderer.h"
+#include "TessellatingQuad.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -68,6 +69,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(MultisampleSwitch);
 	REGINSTANCE(ParticleSystem);
 	REGINSTANCE(BezierCurveRenderer);
+	REGINSTANCE(TessellatingQuad);
 }
 
 GameComponentFactory::~GameComponentFactory()

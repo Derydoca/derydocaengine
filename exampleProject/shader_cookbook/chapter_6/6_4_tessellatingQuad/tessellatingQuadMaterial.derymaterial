@@ -1,0 +1,11 @@
+Shader: 60a16235-d54d-4c6e-a617-b7ac5b49d58a
+MaterialParameters:
+  - Type: Float
+    Name: Line.Width
+    Value: 0.75
+  - Type: Color
+    Name: Line.Color
+    Value: [0.0, 0.0, 0.0, 1.0]
+  - Type: Color
+    Name: QuadColor
+    Value: [0.0, 0.5, 0.0, 1.0]

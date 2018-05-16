@@ -1,0 +1,247 @@
+Scene:
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-4, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 2
+            outer: 2
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-2, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 4
+            outer: 2
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 8
+            outer: 2
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [2, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 16
+            outer: 2
+
+            
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-4, 2, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 2
+            outer: 4
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-2, 2, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 4
+            outer: 4
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, 2, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 8
+            outer: 4
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [2, 2, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 16
+            outer: 4
+
+            
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-4, 4, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 2
+            outer: 8
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-2, 4, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 4
+            outer: 8
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, 4, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 8
+            outer: 8
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [2, 4, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 16
+            outer: 8
+
+            
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-4, 6, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 2
+            outer: 16
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [-2, 6, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 4
+            outer: 16
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, 6, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 8
+            outer: 16
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [2, 6, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: TessellatingQuad
+          Properties:
+            material: 9304fc4e-7af5-41be-a60b-14583ebe8373
+            controlPoints: [-0.9, -0.9, 0.9, -0.9, 0.9, 0.9, -0.9, 0.9]
+            inner: 16
+            outer: 16

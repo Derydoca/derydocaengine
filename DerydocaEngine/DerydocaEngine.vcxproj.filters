@@ -168,6 +168,7 @@
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="MeshAdjacencyCalculator.cpp" />
     <ClCompile Include="BezierCurveRenderer.cpp" />
+    <ClCompile Include="TessellatingQuad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -386,6 +387,7 @@
     <ClInclude Include="MeshFlags.h" />
     <ClInclude Include="MeshAdjacencyCalculator.h" />
     <ClInclude Include="BezierCurveRenderer.h" />
+    <ClInclude Include="TessellatingQuad.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
