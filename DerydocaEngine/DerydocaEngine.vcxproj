@@ -212,6 +212,10 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BezierCurveRenderer.cpp" />
+    <ClCompile Include="BezierPatchMesh.cpp" />
+    <ClCompile Include="BezierPatchMeshFileLoader.cpp" />
+    <ClCompile Include="BezierPatchMeshFileSerializer.cpp" />
+    <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
     <ClCompile Include="BloomFilter.cpp" />
     <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -272,6 +276,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TessellatedMeshRenderer.cpp" />
     <ClCompile Include="TessellatingQuad.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureResourceSerializer.cpp" />
@@ -280,6 +285,10 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BezierCurveRenderer.h" />
+    <ClInclude Include="BezierPatchMesh.h" />
+    <ClInclude Include="BezierPatchMeshFileLoader.h" />
+    <ClInclude Include="BezierPatchMeshFileSerializer.h" />
+    <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
     <ClInclude Include="BloomFilter.h" />
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />
@@ -357,6 +366,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TessellatedMeshRenderer.h" />
     <ClInclude Include="TessellatingQuad.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureParameters.h" />

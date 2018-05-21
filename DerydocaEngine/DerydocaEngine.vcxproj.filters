@@ -169,6 +169,13 @@
     <ClCompile Include="MeshAdjacencyCalculator.cpp" />
     <ClCompile Include="BezierCurveRenderer.cpp" />
     <ClCompile Include="TessellatingQuad.cpp" />
+    <ClCompile Include="BezierPatchMesh.cpp" />
+    <ClCompile Include="BezierPatchMeshFileLoader.cpp" />
+    <ClCompile Include="BezierPatchMeshFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
+    <ClCompile Include="TessellatedMeshRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -388,6 +395,13 @@
     <ClInclude Include="MeshAdjacencyCalculator.h" />
     <ClInclude Include="BezierCurveRenderer.h" />
     <ClInclude Include="TessellatingQuad.h" />
+    <ClInclude Include="BezierPatchMesh.h" />
+    <ClInclude Include="BezierPatchMeshFileLoader.h" />
+    <ClInclude Include="BezierPatchMeshFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
+    <ClInclude Include="TessellatedMeshRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

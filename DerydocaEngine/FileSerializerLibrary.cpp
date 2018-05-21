@@ -5,6 +5,7 @@
 #include "ImageFileSerializer.h"
 #include "LevelFileSerializer.h"
 #include "ShaderFileSerializer.h"
+#include "BezierPatchMeshFileSerializer.h"
 
 FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string sourceFilePath)
 {
@@ -43,6 +44,7 @@ FileSerializerLibrary::FileSerializerLibrary()
 	registerTypeSerializer(new ImageFileSerializer());
 	registerTypeSerializer(new LevelFileSerializer());
 	registerTypeSerializer(new ShaderFileSerializer());
+	registerTypeSerializer(new BezierPatchMeshFileSerializer());
 }
 
 FileSerializerLibrary::~FileSerializerLibrary()

@@ -10,5 +10,6 @@ enum ResourceType
 	CubemapResourceType,
 	LevelResourceType,
 	ShaderResourceType,
+	BezierPatchMeshResourceType,
 };
  

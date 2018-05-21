@@ -20,6 +20,7 @@
 #include "ParticleSystem.h"
 #include "BezierCurveRenderer.h"
 #include "TessellatingQuad.h"
+#include "TessellatedMeshRenderer.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -70,6 +71,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(ParticleSystem);
 	REGINSTANCE(BezierCurveRenderer);
 	REGINSTANCE(TessellatingQuad);
+	REGINSTANCE(TessellatedMeshRenderer);
 }
 
 GameComponentFactory::~GameComponentFactory()

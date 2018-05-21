@@ -24,9 +24,18 @@ bool getLastModifiedTime(LPCSTR filePath, FILETIME &time)
 void MaterialRefresher::init()
 {
 	m_meshRenderer = getComponent<MeshRenderer>();
-	assert(m_meshRenderer);
-
-	Material* material = m_meshRenderer->getMaterial();
+	Material* material = nullptr;
+	if (m_meshRenderer == nullptr)
+	{
+		m_usingMeshRenderer = true;
+		material = m_meshRenderer->getMaterial();
+	}
+	else
+	{
+		m_usingMeshRenderer = false;
+		m_tessMeshRenderer = getComponent<TessellatedMeshRenderer>();
+		material = m_tessMeshRenderer->getMaterial();
+	}
 	assert(material);
 
 	Shader* shader = material->getShader();
@@ -35,10 +44,16 @@ void MaterialRefresher::init()
 	m_shaderLoadPath = shader->GetLoadPath();
 	m_vertexShaderPath = shader->GetVertexShaderPath();
 	m_fragmentShaderPath = shader->GetFragmentShaderPath();
+	m_geometryShaderPath = shader->GetGeometryShaderPath();
+	m_tessEvalShaderPath = shader->GetTessellationEvaluationShaderPath();
+	m_tessControlShaderPath = shader->GetTesslleationControlShaderPath();
 
 	// Store the initial modified time
-	getLastModifiedTime(m_vertexShaderPath.c_str(), m_vertexShaderModifiedTime);
-	getLastModifiedTime(m_fragmentShaderPath.c_str(), m_fragmentShaderModifiedTime);
+	m_vertexShaderExists = getLastModifiedTime(m_vertexShaderPath.c_str(), m_vertexShaderModifiedTime);
+	m_fragmentShaderExists = getLastModifiedTime(m_fragmentShaderPath.c_str(), m_fragmentShaderModifiedTime);
+	m_geometryShaderExists = getLastModifiedTime(m_geometryShaderPath.c_str(), m_geometryShaderModifiedTime);
+	m_tessEvalShaderExists = getLastModifiedTime(m_tessEvalShaderPath.c_str(), m_tessEvalShaderModifiedTime);
+	m_tessControlShaderExists = getLastModifiedTime(m_tessControlShaderPath.c_str(), m_tessControlShaderModifiedTime);
 }
 
 void MaterialRefresher::update(float deltaTime)
@@ -51,11 +66,14 @@ void MaterialRefresher::update(float deltaTime)
 void MaterialRefresher::refreshMaterial()
 {
 	// Remember the last modified time for later
-	getLastModifiedTime(m_vertexShaderPath.c_str(), m_vertexShaderModifiedTime);
-	getLastModifiedTime(m_fragmentShaderPath.c_str(), m_fragmentShaderModifiedTime);
+	m_vertexShaderExists = getLastModifiedTime(m_vertexShaderPath.c_str(), m_vertexShaderModifiedTime);
+	m_fragmentShaderExists = getLastModifiedTime(m_fragmentShaderPath.c_str(), m_fragmentShaderModifiedTime);
+	m_geometryShaderExists = getLastModifiedTime(m_geometryShaderPath.c_str(), m_geometryShaderModifiedTime);
+	m_tessEvalShaderExists = getLastModifiedTime(m_tessEvalShaderPath.c_str(), m_tessEvalShaderModifiedTime);
+	m_tessControlShaderExists = getLastModifiedTime(m_tessControlShaderPath.c_str(), m_tessControlShaderModifiedTime);
 
 	printf("Unloading the previous material.\n");
-	Material* mat = m_meshRenderer->getMaterial();
+	Material* mat = m_usingMeshRenderer ? m_meshRenderer->getMaterial() : m_tessMeshRenderer->getMaterial();
 	Shader* oldShader = mat->getShader();
 	delete(oldShader);
 
@@ -71,6 +89,7 @@ bool MaterialRefresher::isShaderSourceUpdated()
 
 	// Check the vertex shader
 	if (
+		m_vertexShaderExists &&
 		getLastModifiedTime(m_vertexShaderPath.c_str(), tempFileTime) &&
 		CompareFileTime(&tempFileTime, &m_vertexShaderModifiedTime) != 0) {
 		return true;
@@ -78,8 +97,33 @@ bool MaterialRefresher::isShaderSourceUpdated()
 
 	// Check the fragment shader
 	if (
+		m_fragmentShaderExists &&
 		getLastModifiedTime(m_fragmentShaderPath.c_str(), tempFileTime) &&
 		CompareFileTime(&tempFileTime, &m_fragmentShaderModifiedTime) != 0) {
+		return true;
+	}
+
+	// Check the geometry shader
+	if (
+		m_geometryShaderExists &&
+		getLastModifiedTime(m_geometryShaderPath.c_str(), tempFileTime) &&
+		CompareFileTime(&tempFileTime, &m_geometryShaderModifiedTime) != 0) {
+		return true;
+	}
+
+	// Check the tesselation evaluation shader
+	if (
+		m_tessEvalShaderExists &&
+		getLastModifiedTime(m_tessEvalShaderPath.c_str(), tempFileTime) &&
+		CompareFileTime(&tempFileTime, &m_tessEvalShaderModifiedTime) != 0) {
+		return true;
+	}
+
+	// Check the tesselation control shader
+	if (
+		m_tessControlShaderExists &&
+		getLastModifiedTime(m_tessControlShaderPath.c_str(), tempFileTime) &&
+		CompareFileTime(&tempFileTime, &m_tessControlShaderModifiedTime) != 0) {
 		return true;
 	}
 
