@@ -1,0 +1,40 @@
+#version 400
+
+layout (vertices = 16) out;
+
+uniform int UseDynamicTessellation;
+uniform int TessLevel;
+uniform float MinTessLevel;
+uniform float MaxTessLevel;
+uniform float MinDistance;
+uniform float MaxDistance;
+uniform mat4 ModelViewMatrix;
+
+void main()
+{
+    float fTessLevel = 1.0;
+
+    if(UseDynamicTessellation == 1)
+    {
+        // Position in camera coordinates
+        vec4 p = ModelViewMatrix * gl_in[gl_InvocationID].gl_Position;
+
+        // Distance from camera scaled between 0 and 1
+        float depth = clamp((abs(p.z) - MinDistance) / (MaxDistance - MinDistance), 0.0, 1.0);
+        fTessLevel = mix(MaxTessLevel, MinTessLevel, depth);
+    }
+    else
+    {
+        fTessLevel = float(TessLevel);
+    }
+
+    // Pass along the vertex position unmodified
+    gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
+
+    gl_TessLevelOuter[0] = fTessLevel;
+    gl_TessLevelOuter[1] = fTessLevel;
+    gl_TessLevelOuter[2] = fTessLevel;
+    gl_TessLevelOuter[3] = fTessLevel;
+    gl_TessLevelInner[0] = fTessLevel;
+    gl_TessLevelInner[1] = fTessLevel;
+}

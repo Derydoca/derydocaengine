@@ -18,6 +18,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>..\builds\Win32\Debug</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 1758c798-4a75-4785-97f9-f0e4c31e7fc4</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\..\exampleProject -scene 05b3b1c0-e93f-4129-b0f2-d7d1f9b47a20</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>

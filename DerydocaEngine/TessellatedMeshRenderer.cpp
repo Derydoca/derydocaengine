@@ -11,7 +11,12 @@ TessellatedMeshRenderer::~TessellatedMeshRenderer()
 
 void TessellatedMeshRenderer::init()
 {
+	m_material->setInt("UseDynamicTessellation", m_useDynamicTessellation ? 1 : 0);
 	m_material->setInt("TessLevel", m_tessellationLevel);
+	m_material->setFloat("MinTessLevel", m_minDynamicTessLevel);
+	m_material->setFloat("MaxTessLevel", m_maxDynamicTessLevel);
+	m_material->setFloat("MinDistance", m_minDynamicTessDistance);
+	m_material->setFloat("MaxDistance", m_maxDynamicTessDistance);
 
 	glGenBuffers(1, &m_vbo);
 
@@ -36,6 +41,36 @@ void TessellatedMeshRenderer::deserialize(YAML::Node compNode)
 	if (tessellationLevelNode)
 	{
 		m_tessellationLevel = tessellationLevelNode.as<int>();
+	}
+
+	YAML::Node useDynamicTessellationNode = compNode["useDynamicTessellation"];
+	if (useDynamicTessellationNode)
+	{
+		m_useDynamicTessellation = useDynamicTessellationNode.as<bool>();
+	}
+
+	YAML::Node minDynamicTessDistanceNode = compNode["minDynamicTessDistance"];
+	if (minDynamicTessDistanceNode)
+	{
+		m_minDynamicTessDistance = minDynamicTessDistanceNode.as<float>();
+	}
+
+	YAML::Node maxDynamicTessDistanceNode = compNode["maxDynamicTessDistance"];
+	if (maxDynamicTessDistanceNode)
+	{
+		m_maxDynamicTessDistance = maxDynamicTessDistanceNode.as<float>();
+	}
+
+	YAML::Node minDynamicTessLevelNode = compNode["minDynamicTessLevel"];
+	if (minDynamicTessLevelNode)
+	{
+		m_minDynamicTessLevel = minDynamicTessLevelNode.as<float>();
+	}
+
+	YAML::Node maxDynamicTessLevelNode = compNode["maxDynamicTessLevel"];
+	if (maxDynamicTessLevelNode)
+	{
+		m_maxDynamicTessLevel = maxDynamicTessLevelNode.as<float>();
 	}
 
 	m_material = loadResource<Material*>(compNode, "material");
