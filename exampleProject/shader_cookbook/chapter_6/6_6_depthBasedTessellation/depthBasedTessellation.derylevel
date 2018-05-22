@@ -5,7 +5,47 @@ Scene:
       Name: Teapot
       Transform:
         Position: [0, 0, -2]
-        Rotation: [0, 0, 0, 1]
+        Rotation: [0.5, -0.5, -0.5, -0.5]
+        Scale: [0.25, 0.25, 0.25]
+      Components:
+        - Type: TessellatedMeshRenderer
+          Properties:
+            material: 7fd9e7f0-c697-411d-914a-30ae88295492
+            bezierPatchMesh: 0d648145-3b5d-45f4-bea8-fe2d25648b20
+            useDynamicTessellation: true
+            tessellationLevel: 2
+            minDynamicTessDistance: 0.05
+            maxDynamicTessDistance: 5.0
+            minDynamicTessLevel: 2.0
+            maxDynamicTessLevel: 16.0
+        - Type: MaterialRefresher
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Teapot
+      Transform:
+        Position: [0, 0, -4]
+        Rotation: [0.5, -0.5, -0.5, -0.5]
+        Scale: [0.25, 0.25, 0.25]
+      Components:
+        - Type: TessellatedMeshRenderer
+          Properties:
+            material: 7fd9e7f0-c697-411d-914a-30ae88295492
+            bezierPatchMesh: 0d648145-3b5d-45f4-bea8-fe2d25648b20
+            useDynamicTessellation: true
+            tessellationLevel: 2
+            minDynamicTessDistance: 0.05
+            maxDynamicTessDistance: 5.0
+            minDynamicTessLevel: 2.0
+            maxDynamicTessLevel: 16.0
+        - Type: MaterialRefresher
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Teapot
+      Transform:
+        Position: [0, 0, -6]
+        Rotation: [0.5, -0.5, -0.5, -0.5]
         Scale: [0.25, 0.25, 0.25]
       Components:
         - Type: TessellatedMeshRenderer

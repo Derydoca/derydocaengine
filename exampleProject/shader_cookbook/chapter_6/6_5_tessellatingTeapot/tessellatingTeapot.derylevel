@@ -5,7 +5,7 @@ Scene:
       Name: Squirrel
       Transform:
         Position: [-1.5, 0, -2]
-        Rotation: [0, 0, 0, 1]
+        Rotation: [0.5, -0.5, -0.5, -0.5]
         Scale: [0.25, 0.25, 0.25]
       Components:
         - Type: TessellatedMeshRenderer
@@ -20,7 +20,7 @@ Scene:
       Name: Squirrel
       Transform:
         Position: [0, 0, -2]
-        Rotation: [0, 0, 0, 1]
+        Rotation: [0.5, -0.5, -0.5, -0.5]
         Scale: [0.25, 0.25, 0.25]
       Components:
         - Type: TessellatedMeshRenderer
@@ -35,7 +35,7 @@ Scene:
       Name: Squirrel
       Transform:
         Position: [1.5, 0, -2]
-        Rotation: [0, 0, 0, 1]
+        Rotation: [0.5, -0.5, -0.5, -0.5]
         Scale: [0.25, 0.25, 0.25]
       Components:
         - Type: TessellatedMeshRenderer
