@@ -16,34 +16,32 @@ Camera::Camera()
 	CameraManager::getInstance().addCamera(this);
 
 	m_skybox = new Skybox();
-	m_matrixStack = new MatrixStack();
 	m_displayRect = new Rectangle(0, 0, 1, 1);
 
 	setDisplay(DisplayManager::getInstance().getDisplay(0));
-	m_aspect = m_display->getAspectRatio();
+	m_projection.setAspectRatio(m_display->getAspectRatio());
+	m_projection.recalculateProjectionMatrix();
 	setClearMode(ClearMode::ColorClear);
 	setClearColor(Color(0.5, 0.0, 0.0));
 }
 
-Camera::Camera(float fov, float aspect, float zNear, float zFar) :
-	m_fov(fov),
-	m_aspect(aspect),
-	m_zNear(zNear),
-	m_zFar(zFar)
+Camera::Camera(float fov, float aspect, float zNear, float zFar)
 {
-	recalcPerspectiveMatrix();
+	m_projection.setFov(fov);
+	m_projection.setAspectRatio(aspect);
+	m_projection.setZNear(zNear);
+	m_projection.setZFar(zFar);
+	m_projection.recalculateProjectionMatrix();
+
 	CameraManager::getInstance().addCamera(this);
 
 	m_skybox = new Skybox();
-	m_matrixStack = new MatrixStack();
 	m_displayRect = new Rectangle();
 }
 
 Camera::~Camera()
 {
 	delete(m_displayRect);
-	// TODO: Figure out why deleting the matrix stack is creating a compiler error
-	//delete(m_matrixStack);
 	delete(m_skybox);
 	CameraManager::getInstance().removeCamera(this);
 }
@@ -124,21 +122,26 @@ void Camera::createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int
 
 void Camera::setProjectionMode(ProjectionMode mode)
 {
-	m_projectionMode = mode;
-	recalcPerspectiveMatrix();
+	m_projection.setProjectionMode(mode);
+	m_projection.recalculateProjectionMatrix();
 }
 
 void Camera::setOrthoSize(float size)
 {
 	m_orthoSize = size;
-	recalcPerspectiveMatrix();
+	m_projection.recalculateProjectionMatrix();
 }
 
 void Camera::deserialize(YAML::Node node)
 {
-	m_fov = node["fov"].as<float>();
-	m_zNear = node["zNear"].as<float>();
-	m_zFar = node["zFar"].as<float>();
+	float fov = node["fov"].as<float>();
+	float zNear = node["zNear"].as<float>();
+	float zFar = node["zFar"].as<float>();
+
+	m_projection.setFov(fov);
+	m_projection.setZNear(zNear);
+	m_projection.setZFar(zFar);
+	m_projection.recalculateProjectionMatrix();
 
 	YAML::Node renderTextureNode = node["RenderTexture"];
 	if (renderTextureNode)
@@ -149,14 +152,6 @@ void Camera::deserialize(YAML::Node node)
 
 		m_postProcessShader = loadResource<Shader*>(renderTextureNode, "PostProcessShader");
 	}
-
-	recalcPerspectiveMatrix();
-}
-
-void Camera::setFov(float fov)
-{
-	m_fov = fov;
-	recalcPerspectiveMatrix();
 }
 
 void Camera::clear()
@@ -173,7 +168,7 @@ void Camera::clear()
 		assert(m_skyboxMaterial);
 
 		m_skyboxMaterial->bind();
-		m_skyboxMaterial->getShader()->update(getRotationProjection());
+		m_skyboxMaterial->getShader()->update(m_projection.getRotationProjection(getGameObject()->getTransform()->getQuat()));
 		m_skybox->getMesh()->draw();
 		break;
 	default:
@@ -181,20 +176,10 @@ void Camera::clear()
 	}
 }
 
-inline void Camera::recalcPerspectiveMatrix()
-{
-	switch (m_projectionMode) {
-	case Orthographic:
-		m_projectionMatrix = glm::mat4(); //glm::ortho(-m_orthoSize, m_orthoSize, -m_orthoSize, m_orthoSize, m_zNear, m_zFar);
-		break;
-	case Perspective:
-		m_projectionMatrix = glm::perspective(m_fov, m_aspect, m_zNear, m_zFar);
-		break;
-	}
-}
-
 void Camera::renderRoot(GameObject* gameObject)
 {
+	LightManager::getInstance().renderShadowMaps(gameObject->getTransform());
+
 	int textureW, textureH = 1;
 
 	if (m_renderTexture)
@@ -223,7 +208,7 @@ void Camera::renderRoot(GameObject* gameObject)
 	glEnable(GL_DEPTH_TEST);
 	clear();
 	gameObject->preRender();
-	gameObject->render(m_matrixStack);
+	gameObject->render(&m_matrixStack);
 
 	// Postprocessing happens here
 	if (m_renderTexture != nullptr && m_postProcessShader != nullptr)
@@ -258,7 +243,7 @@ void Camera::renderRoot(GameObject* gameObject)
 		m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
 		m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
 		m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
-		LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), m_deferredRendererCompositor);
+		LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
 		m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
 	}
 }

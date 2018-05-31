@@ -402,6 +402,7 @@
     </ClInclude>
     <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
     <ClInclude Include="TessellatedMeshRenderer.h" />
+    <ClInclude Include="Projection.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

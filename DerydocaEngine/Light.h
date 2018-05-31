@@ -2,6 +2,10 @@
 #include "glm\glm.hpp"
 #include "GameComponent.h"
 #include "Color.h"
+#include "MatrixStack.h"
+#include "Material.h"
+#include "Transform.h"
+#include "Projection.h"
 
 class Light : public GameComponent
 {
@@ -38,12 +42,31 @@ public:
 	Color getColor() { return m_color; }
 	float getSpotlightExponent() { return m_spotlightExponent; }
 	float getSpotlightCutoff() { return m_spotlightCutoff; }
+	GLuint getShadowMap() { return m_depthTexture; }
+	bool isCastingShadows() { return m_castShadows; }
+	bool setCastingShadows(bool castShadows) { m_castShadows = castShadows; }
+	Projection getProjection() { return m_projection; }
+	glm::mat4 getShadowMatrix(mat4 objectModelMatrix);
 
+	void init();
 	void deserialize(YAML::Node node);
+
+	void renderShadowMap(GameObject* gameObject);
 private:
+	void generateShadowMap();
+
 	LightType m_lightType = Point;
 	Color m_color = Color(1, 1, 1, 1);
 	float m_spotlightExponent;
 	float m_spotlightCutoff;
+	bool m_castShadows = false;
+	int m_shadowMapHeight = 512;
+	int m_shadowMapWidth = 512;
+	GLuint m_depthTexture;
+	GLuint m_shadowFBO;
+	MatrixStack m_matrixStack;
+	Material* m_shadowMapMaterial;
+	Projection m_projection;
+	glm::mat4 m_shadowBias;
 };
 

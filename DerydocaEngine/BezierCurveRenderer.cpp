@@ -77,7 +77,7 @@ void BezierCurveRenderer::deserialize(YAML::Node compNode)
 void BezierCurveRenderer::render(MatrixStack * matrixStack)
 {
 	m_material->bind();
-	m_material->getShader()->update(matrixStack);
+	m_material->getShader()->updateViaActiveCamera(matrixStack);
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_PATCHES, 0, 4);
 

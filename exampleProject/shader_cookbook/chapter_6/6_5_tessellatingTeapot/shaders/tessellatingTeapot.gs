@@ -31,16 +31,16 @@ void main()
     float hc = abs(b * sin(alpha));
 
     // Send the triangle along with the edge distance
-    EdgeDistance = vec3(ha, 0, 0);
-    Normal = TENormal[0];
-    Position = TEPosition[0];
-    gl_Position = gl_in[0].gl_Position;
-    EmitVertex();
-    
     EdgeDistance = vec3(0, hb, 0);
     Normal = TENormal[1];
     Position = TEPosition[1];
     gl_Position = gl_in[1].gl_Position;
+    EmitVertex();
+    
+    EdgeDistance = vec3(ha, 0, 0);
+    Normal = TENormal[0];
+    Position = TEPosition[0];
+    gl_Position = gl_in[0].gl_Position;
     EmitVertex();
     
     EdgeDistance = vec3(0, 0, hc);

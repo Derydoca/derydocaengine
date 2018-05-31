@@ -9,6 +9,8 @@
 #include "RenderTexture.h"
 #include "Display.h"
 #include "Rectangle.h"
+#include "Projection.h"
+#include "MatrixStack.h"
 
 class MatrixStack;
 
@@ -32,14 +34,6 @@ public:
 		SkyboxClear
 	};
 
-	/* Types of projection modes */
-	enum ProjectionMode {
-		/* Orthographic projection */
-		Orthographic,
-		/* Perspective projection */
-		Perspective
-	};
-
 	enum RenderingMode {
 		Forward = 0,
 		Deferred = 1
@@ -49,34 +43,7 @@ public:
 	Camera(float fov, float aspect, float zNear, float zFar);
 	~Camera();
 
-	/*
-	Gets a matrix representing the camera's projection.
-
-	@return VP matrix
-	*/
-	inline glm::mat4 getInverseViewProjectionMatrix() const { return m_projectionMatrix * glm::inverse(m_transform->getModel()); }
-
-	inline glm::mat4 getViewProjectionMatrix() const { return m_projectionMatrix * m_transform->getModel(); }
-
-	inline glm::mat4 getProjectionMatrix() const { return m_projectionMatrix; }
-
-	inline glm::mat4 getViewMatrix() const { return glm::inverse(m_transform->getModel()); }
-	
 	inline RenderTexture* getRenderTexture() const { return m_renderTexture; }
-
-	/*
-	Gets a matrix representing the camera's rotation and projection.
-
-	@return Rotation projection matrix
-	*/
-	inline glm::mat4 getRotationProjection() const { return m_projectionMatrix * glm::inverse(glm::mat4_cast(m_transform->getQuat())); }
-	
-	/*
-	Sets the field of view for this camera
-
-	@fov Field of view in degrees
-	*/
-	void setFov(float fov);
 
 	/*
 	Sets the clear mode
@@ -122,17 +89,15 @@ public:
 	float getOrthoSize(float size) { return m_orthoSize; }
 	void deserialize(YAML::Node node);
 	Shader* getPostProcessShader() const { return m_postProcessShader; }
+	Projection getProjection() const { return m_projection; }
 private:
-	float m_fov, m_aspect, m_zNear, m_zFar;
-	glm::mat4 m_projectionMatrix;
 	Transform* m_transform;
 	Color m_clearColor;
 	Skybox* m_skybox;
 	ClearMode m_clearMode = NoClear;
-	ProjectionMode m_projectionMode = Perspective;
 	RenderingMode m_renderingMode;
 	Material* m_skyboxMaterial;
-	MatrixStack* m_matrixStack;
+	MatrixStack m_matrixStack;
 	RenderTexture* m_renderTexture;
 	Display* m_display;
 	Rectangle* m_displayRect;
@@ -142,9 +107,9 @@ private:
 	GLuint m_deferredFBO;
 	GLuint m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
 	Shader* m_deferredRendererCompositor;
+	Projection m_projection;
 
 	void clear();
-	inline void recalcPerspectiveMatrix();
 	void setIdentityMatricies(Shader* shader);
 };
 

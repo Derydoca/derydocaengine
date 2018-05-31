@@ -95,8 +95,8 @@ void ParticleSystem::render(MatrixStack* matrixStack)
 	assert(getGameObject());
 
 	m_material->bind();
-	m_material->getShader()->update(matrixStack);
-	LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), m_material->getShader());
+	m_material->getShader()->updateViaActiveCamera(matrixStack);
+	LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());
 
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_POINTS, 0, m_numParticles);

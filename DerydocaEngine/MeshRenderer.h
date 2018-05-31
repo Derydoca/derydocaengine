@@ -13,6 +13,7 @@ public:
 	MeshRenderer(Mesh* mesh, Material* material);
 	~MeshRenderer();
 	void render(MatrixStack* matrixStack);
+	void renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform);
 	Material* getMaterial() { return m_material; }
 	Camera* getMeshRendererCamera() { return m_meshRendererCamera; }
 

@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "RenderPass.h"
+#include "Projection.h"
 
 class Shader
 {
@@ -16,8 +17,9 @@ public:
 	~Shader();
 
 	void bind();
-	void update(const MatrixStack * matrixStack);
+	void update(const MatrixStack * matrixStack, Projection projection, Transform* trans);
 	void update(const glm::mat4 matrix);
+	void updateViaActiveCamera(const MatrixStack * matrixStack);
 
 	void setFloat(std::string name, float val);
 	void setFloatArray(std::string name, float* arrayLocation, unsigned int arrayLength);

@@ -15,6 +15,8 @@ public:
 	virtual void init();
 	virtual void deserialize(YAML::Node compNode);
 	void render(MatrixStack* matrixStack);
+	void renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform);
+
 	Material* getMaterial() const { return m_material; }
 private:
 	BezierPatchMesh * m_mesh;

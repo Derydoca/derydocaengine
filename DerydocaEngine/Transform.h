@@ -49,6 +49,7 @@ public:
 	inline glm::vec3& getPos() { return m_pos; }
 	inline glm::fquat& getQuat() { return m_quat; }
 	inline glm::vec3& getScale() { return m_scale; }
+	GameObject* getGameObject() const { return m_gameObject; }
 
 	inline void setPos(const glm::vec3& pos) { m_pos = pos; }
 	inline void setEulerAngles(const glm::vec3& euler) { m_quat = glm::fquat(euler * 0.0174533f); }

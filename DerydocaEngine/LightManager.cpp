@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader)
+void LightManager::bindLightsToShader(MatrixStack* matrixStack, Transform* objectTransform, Shader* shader)
 {
 	assert(objectTransform);
 	assert(shader);
@@ -14,7 +14,8 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 
 	// Cache some things
 	Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
-	glm::mat4 viewMat = currentCamera->getViewMatrix();
+	glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
+	glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
 
 	// Loop through each light and bind them to the shader
 	int lightIndex = 0;
@@ -26,7 +27,7 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		{
 			// Set the light direction
 			std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
-			glm::vec3 lightDirection = glm::normalize(glm::vec3(currentCamera->getViewMatrix() * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(0, 1, 0, 0)));
+			glm::vec3 lightDirection = glm::normalize(glm::vec3(viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(0, 1, 0, 0)));
 			shader->setVec3(typeName, lightDirection);
 		}
 
@@ -67,9 +68,36 @@ void LightManager::bindLightsToShader(Transform* objectTransform, Shader* shader
 		std::string positionName = "Lights[" + std::to_string(lightIndex) + "].Position";
 		shader->setVec4(positionName, lightPositionEyeCoords);
 
+		// Set the shadow map
+		std::string shadowMapName = "ShadowMaps[" + std::to_string(lightIndex) + "]";
+		shader->setTexture(shadowMapName, 10 + lightIndex, GL_TEXTURE_2D, light->getShadowMap());
+
+		// Set the shadow matrix
+		if (matrixStack)
+		{
+			std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
+			shader->setMat4(shadowMatrixName, light->getShadowMatrix(matrixStack->getMatrix()));
+		}
+
 		// Increase our light index
 		lightIndex++;
 	}
+}
+
+void LightManager::renderShadowMaps(Transform* objectTransform)
+{
+	// Get a list of lights that will affect the object being sent in
+	std::list<Light*> lights = getLights(objectTransform);
+
+	for each (Light* light in lights)
+	{
+		if (light->isCastingShadows())
+		{
+			light->renderShadowMap(objectTransform->getGameObject());
+		}
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 LightManager::LightManager()

@@ -16,7 +16,8 @@ public:
 	void addLight(Light* light) { m_lights.push_back(light); }
 	void removeLight(Light* light) { m_lights.remove(light); }
 
-	void bindLightsToShader(Transform* objectTransform, Shader* shader);
+	void bindLightsToShader(MatrixStack* matrixStack, Transform* objectTransform, Shader* shader);
+	void renderShadowMaps(Transform* objectTransform);
 
 	void operator=(LightManager const&) = delete;
 private:

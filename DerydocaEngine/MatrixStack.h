@@ -9,7 +9,7 @@ public:
 	MatrixStack() {
 		m_matrixStack.push(glm::mat4());
 	};
-	~MatrixStack();
+	~MatrixStack() { }
 
 	void push(glm::mat4 matrix) {
 		glm::mat4 newMatrix = getMatrix() * matrix;

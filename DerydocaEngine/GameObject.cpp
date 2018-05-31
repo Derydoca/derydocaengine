@@ -45,6 +45,23 @@ void GameObject::render(MatrixStack* matrixStack) {
 	matrixStack->pop();
 }
 
+void GameObject::renderMesh(MatrixStack * matrixStack, Material * material, Projection projection, Transform* projectionTransform)
+{
+	matrixStack->push(m_transform.getModel());
+
+	for each (GameComponent* c in m_components)
+	{
+		c->renderMesh(matrixStack, material, projection, projectionTransform);
+	}
+
+	for each (GameObject* go in m_children)
+	{
+		go->renderMesh(matrixStack, material, projection, projectionTransform);
+	}
+
+	matrixStack->pop();
+}
+
 void GameObject::init()
 {
 	for each (GameComponent* c in m_components)

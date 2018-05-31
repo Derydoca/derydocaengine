@@ -49,7 +49,8 @@ void DebugVisualizer::postRender()
 	{
 		return;
 	}
-	draw(currentCamera->getInverseViewProjectionMatrix());
+	glm::mat4 model = currentCamera->getGameObject()->getTransform()->getModel();
+	draw(currentCamera->getProjection().getInverseViewProjectionMatrix(model));
 }
 
 void DebugVisualizer::clear()

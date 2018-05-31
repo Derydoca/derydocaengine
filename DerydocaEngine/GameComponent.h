@@ -5,6 +5,8 @@
 #include "ObjectLibrary.h"
 #include "boost\uuid\uuid.hpp"
 #include <vector>
+#include "Material.h"
+#include "Projection.h"
 
 struct Resource;
 
@@ -22,6 +24,7 @@ public:
 	virtual void update(float deltaTime) {}
 	virtual void preRender() {}
 	virtual void render(MatrixStack* matrixStack) {}
+	virtual void renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform) {}
 	virtual void postRender() {}
 	inline void setGameObject(GameObject* gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }
@@ -75,6 +78,22 @@ protected:
 	inline T loadResource(YAML::Node node, std::string resourceName)
 	{
 		Resource * resource = getResource(node, resourceName);
+		if (resource)
+		{
+			return (T)resource->getResourceObject();
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+
+	template<typename T>
+	inline T loadResource(std::string resourceName)
+	{
+		boost::uuids::string_generator gen;
+		uuid id = gen(resourceName);
+		Resource * resource = ObjectLibrary::getInstance().getResource(id);
 		if (resource)
 		{
 			return (T)resource->getResourceObject();

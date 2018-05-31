@@ -184,7 +184,6 @@ namespace YAML {
 			std::string stringUuid = node.as<std::string>();
 			boost::uuids::string_generator gen;
 			uuid = gen(stringUuid);
-			//delete(&gen);
 			return true;
 		}
 	};

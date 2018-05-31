@@ -6,6 +6,8 @@
 #include "GameComponent.h"
 #include "Camera.h"
 #include "MatrixStack.h"
+#include "Material.h"
+#include "Projection.h"
 
 class GameObject
 {
@@ -17,6 +19,7 @@ public:
 	void init();
 	void update(float deltaTime);
 	void render(MatrixStack* matrixStack);
+	void renderMesh(MatrixStack* matrixStack, Material* renderMesh, Projection projection, Transform* projectionTransform);
 	void preRender();
 	void postRender();
 

@@ -111,31 +111,31 @@ void printMatrix(std::string matName, glm::mat3 mat)
 	printf("    %f   %f   %f\n", matPtr[6], matPtr[7], matPtr[8]);
 }
 
-void Shader::update(const MatrixStack * matrixStack)
+void Shader::update(const MatrixStack * matrixStack, Projection projection, Transform* trans)
 {
 	glm::mat4 modelMatrix = matrixStack->getMatrix();
-	Camera* camera = CameraManager::getInstance().getCurrentCamera();
+	glm::mat4 transformModelMatrix = trans->getModel();
 
 	if (m_uniforms[TRANSFORM_MVP] >= 0)
 	{
-		glm::mat4 mvpMatrix = camera->getInverseViewProjectionMatrix() * modelMatrix;
+		glm::mat4 mvpMatrix = projection.getInverseViewProjectionMatrix(transformModelMatrix) * modelMatrix;
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 	}
 
 	if (m_uniforms[TRANSFORM_MV] >= 0)
 	{
-		glm::mat4 mvMatrix = camera->getViewMatrix() * modelMatrix;
+		glm::mat4 mvMatrix = projection.getViewMatrix(transformModelMatrix) * modelMatrix;
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MV], 1, GL_FALSE, glm::value_ptr(mvMatrix));
 	}
 
 	if (m_uniforms[TRANSFORM_NORMAL] >= 0)
 	{
-		glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(camera->getViewMatrix() * modelMatrix)));
+		glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(projection.getViewMatrix(transformModelMatrix) * modelMatrix)));
 		glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix));
 	}
 
 	if (m_uniforms[TRANSFORM_PROJECTION] >= 0) {
-		glm::mat4 projectionMatrix = camera->getProjectionMatrix();
+		glm::mat4 projectionMatrix = projection.getProjectionMatrix();
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_PROJECTION], 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 	}
 
@@ -143,21 +143,29 @@ void Shader::update(const MatrixStack * matrixStack)
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MODEL], 1, GL_FALSE, glm::value_ptr(modelMatrix));
 	}
 
-	glm::vec3 worldCamPos = camera->getGameObject()->getTransform()->getWorldPos();
+	glm::vec3 worldCamPos = trans->getWorldPos();
 	glUniform3f(getUniformName("WorldCameraPosition"), worldCamPos.x, worldCamPos.y, worldCamPos.z);
 
-	float w2 = camera->getDisplayWidth() / 2;
-	float h2 = camera->getDisplayHeight() / 2;
-	glm::mat4 viewportMatrix = glm::mat4(glm::vec4(w2, 0.0f, 0.0f, 0.0f),
-										 glm::vec4(0.0f, h2, 0.0f, 0.0f),
-										 glm::vec4(0.0f, 0.0f, 1.0f, 0.0f),
-										 glm::vec4(w2+0, h2+0, 0.0f, 1.0f));
-	glUniformMatrix4fv(getUniformName("ViewportMatrix"), 1, GL_FALSE, glm::value_ptr(viewportMatrix));
 }
 
 void Shader::update(const glm::mat4 matrix)
 {
 	glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, &matrix[0][0]);
+}
+
+void Shader::updateViaActiveCamera(const MatrixStack * matrixStack)
+{
+	Camera* camera = CameraManager::getInstance().getCurrentCamera();
+
+	update(matrixStack, camera->getProjection(), camera->getGameObject()->getTransform());
+
+	float w2 = camera->getDisplayWidth() / 2;
+	float h2 = camera->getDisplayHeight() / 2;
+	glm::mat4 viewportMatrix = glm::mat4(glm::vec4(w2, 0.0f, 0.0f, 0.0f),
+	glm::vec4(0.0f, h2, 0.0f, 0.0f),
+	glm::vec4(0.0f, 0.0f, 1.0f, 0.0f),
+	glm::vec4(w2+0, h2+0, 0.0f, 1.0f));
+	glUniformMatrix4fv(getUniformName("ViewportMatrix"), 1, GL_FALSE, glm::value_ptr(viewportMatrix));
 }
 
 void Shader::setFloat(std::string name, float val)

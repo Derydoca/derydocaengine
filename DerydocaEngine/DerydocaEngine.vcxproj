@@ -340,6 +340,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="MultisampleSwitch.h" />
     <ClInclude Include="ObjectLibrary.h" />
     <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Projection.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RenderPass.h" />
     <ClInclude Include="RenderTexture.h" />
