@@ -73,6 +73,11 @@ void Light::deserialize(YAML::Node node)
 		m_shadowMapWidth = shadowMapWidthNode.as<int>();
 	}
 
+	YAML::Node shadowMapFilterTypeNode = node["shadowMapFilterType"];
+	if (shadowMapFilterTypeNode)
+	{
+		m_shadowMapFilterType = (ShadowMapFilterType)shadowMapFilterTypeNode.as<int>();
+	}
 }
 
 void Light::renderShadowMap(GameObject* gameObject)
@@ -103,8 +108,9 @@ void Light::generateShadowMap()
 	glBindTexture(GL_TEXTURE_2D, m_depthTexture);
 	glFinish();
 	glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, m_shadowMapWidth, m_shadowMapHeight);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	GLint filterType = getShadowMapFilterTypeEnum();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterType);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterType);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border);
@@ -147,4 +153,17 @@ void Light::generateShadowMap()
 	m_projection.setZFar(100.0f);
 	m_projection.setZNear(0.01f);
 	m_projection.recalculateProjectionMatrix();
+}
+
+GLint Light::getShadowMapFilterTypeEnum()
+{
+	switch (m_shadowMapFilterType)
+	{
+	case ShadowMapFilterType::Linear:
+		return GL_LINEAR;
+	case ShadowMapFilterType::Nearest:
+		return GL_NEAREST;
+	default:
+		return GL_NEAREST;
+	}
 }

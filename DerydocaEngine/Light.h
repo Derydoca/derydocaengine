@@ -23,6 +23,15 @@ public:
 		Spotlight = 2,
 	};
 
+	/* Defines how a light's shadowmap is filtered between texels */
+	enum ShadowMapFilterType
+	{
+		/* Hard shadowing with visible aliasing */
+		Nearest = 0,
+		/* Linearly interpolate between texels for smooth shadow edges */
+		Linear = 1
+	};
+
 	Light();
 	~Light();
 
@@ -54,6 +63,7 @@ public:
 	void renderShadowMap(GameObject* gameObject);
 private:
 	void generateShadowMap();
+	GLint getShadowMapFilterTypeEnum();
 
 	LightType m_lightType = Point;
 	Color m_color = Color(1, 1, 1, 1);
@@ -68,5 +78,6 @@ private:
 	Material* m_shadowMapMaterial;
 	Projection m_projection;
 	glm::mat4 m_shadowBias;
+	ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;
 };
 
