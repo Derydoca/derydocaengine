@@ -78,6 +78,12 @@ void Light::deserialize(YAML::Node node)
 	{
 		m_shadowMapFilterType = (ShadowMapFilterType)shadowMapFilterTypeNode.as<int>();
 	}
+
+	YAML::Node shadowSoftnessNode = node["shadowSoftness"];
+	if (shadowSoftnessNode)
+	{
+		m_shadowSoftness = shadowSoftnessNode.as<float>();
+	}
 }
 
 void Light::renderShadowMap(GameObject* gameObject)

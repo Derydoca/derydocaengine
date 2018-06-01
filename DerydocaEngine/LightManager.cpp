@@ -68,20 +68,36 @@ void LightManager::bindLightsToShader(MatrixStack* matrixStack, Transform* objec
 		std::string positionName = "Lights[" + std::to_string(lightIndex) + "].Position";
 		shader->setVec4(positionName, lightPositionEyeCoords);
 
-		// Set the shadow map
-		std::string shadowMapName = "ShadowMaps[" + std::to_string(lightIndex) + "]";
-		shader->setTexture(shadowMapName, 10 + lightIndex, GL_TEXTURE_2D, light->getShadowMap());
-
-		// Set the shadow matrix
-		if (matrixStack)
+		// If the light is casting shadows, set the related uniforms for it
+		if (light->isCastingShadows())
 		{
-			std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
-			shader->setMat4(shadowMatrixName, light->getShadowMatrix(matrixStack->getMatrix()));
+			// Set the shadow map
+			std::string shadowMapName = "ShadowMaps[" + std::to_string(lightIndex) + "]";
+			int shadowMapTextureUnit = 10 + lightIndex; // Find a better way to get an index for this
+			shader->setTexture(shadowMapName, shadowMapTextureUnit, GL_TEXTURE_2D, light->getShadowMap());
+
+			// Set the shadow softness
+			std::string shadowSoftnessName = "Lights[" + std::to_string(lightIndex) + "].ShadowSoftness";
+			shader->setFloat(shadowSoftnessName, light->getShadowSoftness());
+
+			// Set the shadow matrix
+			if (matrixStack)
+			{
+				std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
+				shader->setMat4(shadowMatrixName, light->getShadowMatrix(matrixStack->getMatrix()));
+			}
 		}
 
 		// Increase our light index
 		lightIndex++;
 	}
+
+	// Set the shadow jitter texture
+	int shadowJitterTextureUnit = 30; // Find a better way to get an index for this
+	shader->setTexture("ShadowJitterTex", shadowJitterTextureUnit, GL_TEXTURE_3D, m_shadowJitterTexture);
+
+	// Set the shadow jitter texture size
+	shader->setVec3("ShadowJitterTexSize", m_shadowJitterTextureSize);
 
 	shader->setInt("LightCount", lights.size());
 }
@@ -104,8 +120,8 @@ void LightManager::renderShadowMaps(Transform* objectTransform)
 
 LightManager::LightManager()
 {
+	buildOffsetTex(8, 4, 8);
 }
-
 
 LightManager::~LightManager()
 {
@@ -134,4 +150,65 @@ std::list<Light*> LightManager::getLights(Transform * objectTransform)
 
 	// Return the list of lights
 	return lights;
+}
+
+float jitter()
+{
+	return ((float)rand() / RAND_MAX) - 0.5f;
+}
+
+void LightManager::buildOffsetTex(int texSize, int samplesU, int samplesV)
+{
+	int size = texSize;
+	int samples = samplesU * samplesV;
+	int bufSize = size * size * samples * 2;
+	float *data = new float[bufSize];
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			for (int k = 0; k < samples; k += 2)
+			{
+				int x1, y1, x2, y2;
+				x1 = k % (samplesU);
+				y1 = (samples - 1 - k) / samplesU;
+				x2 = (k + 1) % samplesU;
+				y2 = (samples - 1 - k - 1) / samplesU;
+
+				vec4 v;
+				// Center on grid and jitter
+				v.x = (x1 + 0.5f) + jitter();
+				v.y = (y1 + 0.5f) + jitter();
+				v.z = (x2 + 0.5f) + jitter();
+				v.w = (y2 + 0.5f) + jitter();
+
+				// Scale between 0 and 1
+				v.x /= samplesU;
+				v.y /= samplesV;
+				v.z /= samplesU;
+				v.w /= samplesV;
+
+				// Warp to disk
+				int cell = ((k / 2) * size * size + j * size + i) * 4;
+				data[cell + 0] = sqrtf(v.y) * cosf(glm::two_pi<float>() * v.x);
+				data[cell + 1] = sqrtf(v.y) * sinf(glm::two_pi<float>() * v.x);
+				data[cell + 2] = sqrtf(v.w) * cosf(glm::two_pi<float>() * v.z);
+				data[cell + 3] = sqrtf(v.w) * sinf(glm::two_pi<float>() * v.z);
+			}
+		}
+	}
+
+	glActiveTexture(GL_TEXTURE9);
+	glGenTextures(1, &m_shadowJitterTexture);
+
+	glBindTexture(GL_TEXTURE_3D, m_shadowJitterTexture);
+	glTexStorage3D(GL_TEXTURE_3D, 1, GL_RGBA32F, size, size, samples / 2);
+	glTexSubImage3D(GL_TEXTURE_3D, 0, 0, 0, 0, size, size, samples / 2, GL_RGBA, GL_FLOAT, data);
+	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	delete[] data;
+
+	m_shadowJitterTextureSize = glm::vec3(texSize, texSize, samplesU * samplesV / 2.0f);
 }

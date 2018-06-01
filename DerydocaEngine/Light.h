@@ -56,6 +56,7 @@ public:
 	bool setCastingShadows(bool castShadows) { m_castShadows = castShadows; }
 	Projection getProjection() { return m_projection; }
 	glm::mat4 getShadowMatrix(mat4 objectModelMatrix);
+	float getShadowSoftness() const { return m_shadowSoftness; }
 
 	void init();
 	void deserialize(YAML::Node node);
@@ -79,5 +80,6 @@ private:
 	Projection m_projection;
 	glm::mat4 m_shadowBias;
 	ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;
+	float m_shadowSoftness = 0.01;
 };
 

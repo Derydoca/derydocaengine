@@ -22,12 +22,15 @@ public:
 	void operator=(LightManager const&) = delete;
 private:
 	LightManager();
+	LightManager(LightManager const&);
 	~LightManager();
 
+	void buildOffsetTex(int texSize, int samplesU, int samplesV);
 	std::list<Light*> getLights(Transform* objectTransform);
 
-	LightManager(LightManager const&);
-	std::list<Light*> m_lights;
 	const int MAX_LIGHTS = 10;
-};
 
+	std::list<Light*> m_lights;
+	GLuint m_shadowJitterTexture;
+	glm::vec3 m_shadowJitterTextureSize;
+};
