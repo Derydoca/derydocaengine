@@ -5,7 +5,7 @@ in vec3 VertexNormal;
 
 out vec3 Normal;
 out vec3 Position;
-out vec4 WorldCoord;
+out vec4 ModelCoord;
 
 uniform mat4 ModelViewMatrix;
 uniform mat3 NormalMatrix;
@@ -15,6 +15,6 @@ void main()
 {
     Position = (ModelViewMatrix * vec4(VertexPosition, 1.0)).xyz;
     Normal = normalize(NormalMatrix * VertexNormal);
-    WorldCoord = vec4(VertexPosition, 1.0);
+    ModelCoord = vec4(VertexPosition, 1.0);
     gl_Position = MVP * vec4(VertexPosition, 1.0);
 }

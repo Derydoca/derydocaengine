@@ -82,6 +82,8 @@ void LightManager::bindLightsToShader(MatrixStack* matrixStack, Transform* objec
 		// Increase our light index
 		lightIndex++;
 	}
+
+	shader->setInt("LightCount", lights.size());
 }
 
 void LightManager::renderShadowMaps(Transform* objectTransform)
