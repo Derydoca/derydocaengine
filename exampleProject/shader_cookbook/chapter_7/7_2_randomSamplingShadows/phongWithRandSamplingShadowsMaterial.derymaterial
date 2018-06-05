@@ -8,7 +8,7 @@ MaterialParameters:
     Value: [1.0, 1.0, 1.0, 1.0]
   - Type: Color
     Name: Material.Ks
-    Value: [1.0, 1.0, 1.0, 1.0]
+    Value: [0.3, 0.3, 0.3, 1.0]
   - Type: Float
     Name: Material.Shininess
-    Value: 5.0
+    Value: 50.0

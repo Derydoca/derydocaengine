@@ -29,7 +29,7 @@ in vec4 ModelCoord;
 
 out vec4 FragColor;
 
-vec4 ads(int lightIndex)
+vec3 ads(int lightIndex)
 {
     vec3 s = normalize(Lights[lightIndex].Position.xyz - Position);
     vec3 v = normalize(vec3(-Position));
@@ -39,7 +39,7 @@ vec4 ads(int lightIndex)
     vec3 diffuse = Lights[lightIndex].Intensity.xyz * Material.Kd.xyz * max(0.0, dot(s, n));
     vec3 spec = Lights[lightIndex].Intensity.xyz * Material.Ks.xyz * pow(max(0.0, dot(h, n)), Material.Shininess);
 
-    return vec4((diffuse + spec), 1.0);
+    return diffuse + spec;
 }
 
 float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
@@ -87,24 +87,19 @@ float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
 
 void main()
 {
-    vec4 ShadowCoord = Lights[0].ShadowMatrix * ModelCoord;
-
-    FragColor = Material.Ka;
+    FragColor = vec4(0, 0, 0, 1);
     for(int i = 0; i < LightCount; i++)
     {
+        vec4 ShadowCoord = Lights[i].ShadowMatrix * ModelCoord;
+        
         float shadow = getShadowInfluence(i, ShadowCoord);
+        vec3 diffAndSpec = ads(i);
 
-        vec4 shadedLight = vec4(0, 0, 0, 1);
-        if(shadow > 0)
-        {
-            shadedLight = ads(i) * shadow;
-        }
-
-        FragColor += shadedLight;
+        FragColor += vec4((diffAndSpec * shadow) + Material.Ka.xyz, 1.0);
     }
 
     FragColor.w = 1.0;
 
     // Gamma correct
-    FragColor = pow(FragColor, vec4(1.0 / 2.2));
+    FragColor = pow(FragColor, vec4(1.0 / 1.5));
 }

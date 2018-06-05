@@ -40,7 +40,7 @@ vec3 ads(int lightIndex)
     vec3 n = normalize(Normal);
     
     vec4 aoFactor = texture(Material.AOTex, TexCoord);
-    vec3 diffuse = Lights[lightIndex].Intensity.xyz * Material.Kd.xyz * max(0.0, dot(s, n))* aoFactor.r;
+    vec3 diffuse = Lights[lightIndex].Intensity.xyz * Material.Kd.xyz * max(0.0, dot(s, n)) * aoFactor.r;
     vec3 spec = Lights[lightIndex].Intensity.xyz * Material.Ks.xyz * pow(max(0.0, dot(h, n)), Material.Shininess);
 
     return diffuse + spec;
@@ -91,11 +91,11 @@ float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
 
 void main()
 {
-    vec4 ShadowCoord = Lights[0].ShadowMatrix * ModelCoord;
-
     FragColor = vec4(0, 0, 0, 1);
     for(int i = 0; i < LightCount; i++)
     {
+        vec4 ShadowCoord = Lights[i].ShadowMatrix * ModelCoord;
+
         float shadow = getShadowInfluence(i, ShadowCoord);
         vec3 diffuseTexFactor = texture(Material.DiffuseTex, TexCoord).xyz;
         vec3 diffAndSpec = ads(i);
