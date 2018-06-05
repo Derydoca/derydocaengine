@@ -29,6 +29,7 @@ public:
 	void setMat4(const std::string name, glm::mat4 value);
 	void setSubroutine(const GLuint program, const GLuint value);
 	void bind();
+	void unbind();
 private:
 	Shader* m_shader;
 	// TODO: Replace this with a BST for multiple textures

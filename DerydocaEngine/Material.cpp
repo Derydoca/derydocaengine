@@ -74,7 +74,6 @@ void Material::setSubroutine(const GLuint program, const GLuint value)
 void Material::bind()
 {
 	assert(m_shader);
-	//assert(m_texture);
 
 	// TODO: Remove this texture binding method
 	m_shader->bind();
@@ -126,4 +125,47 @@ void Material::bind()
 		m_shader->setSubroutine(x.first, x.second);
 	}
 
+}
+
+void Material::unbind()
+{
+	assert(m_shader);
+	
+	{
+		int texIndex = 0;
+		for (auto const& x : m_textures)
+		{
+			m_shader->clearTexture(x.first, texIndex++, x.second->getTextureType());
+		}
+	}
+
+	for (auto const& x : m_floatValues)
+	{
+		m_shader->clearFloat(x.first);
+	}
+
+	for (auto const& x : m_intValues)
+	{
+		m_shader->clearInt(x.first);
+	}
+
+	for (auto const& x : m_vec3Values)
+	{
+		m_shader->clearVec3(x.first);
+	}
+
+	for (auto const& x : m_vec4Values)
+	{
+		m_shader->clearVec4(x.first);
+	}
+
+	for (auto const& x : m_mat3Values)
+	{
+		m_shader->clearMat3(x.first);
+	}
+
+	for (auto const& x : m_mat4Values)
+	{
+		m_shader->clearMat4(x.first);
+	}
 }

@@ -34,6 +34,18 @@ public:
 	void setTexture(std::string name, int textureUnit, Texture* handle);
 	void setTexture(std::string name, int textureUnit, GLenum textureType, GLuint handle);
 
+	void clearFloat(std::string name);
+	void clearFloatArray(std::string name, unsigned int arrayLength);
+	void clearColorRGB(std::string name);
+	void clearColorRGBA(std::string name);
+	void clearInt(std::string name);
+	void clearIntArray(std::string name, unsigned int arrayLength);
+	void clearVec3(std::string name);
+	void clearVec4(std::string name);
+	void clearMat3(std::string name);
+	void clearMat4(std::string name);
+	void clearTexture(std::string name, int textureUnit, GLenum textureType);
+
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
 	std::string GetTesslleationControlShaderPath() const { return m_loadPath + ".tcs"; }

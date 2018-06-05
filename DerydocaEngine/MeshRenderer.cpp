@@ -57,6 +57,8 @@ void MeshRenderer::render(MatrixStack* matrixStack)
 	LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());
 
 	m_mesh->draw();
+
+	m_material->unbind();
 }
 
 void MeshRenderer::renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform)

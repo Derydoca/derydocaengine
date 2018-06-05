@@ -145,7 +145,6 @@ void Shader::update(const MatrixStack * matrixStack, Projection projection, Tran
 
 	glm::vec3 worldCamPos = trans->getWorldPos();
 	glUniform3f(getUniformName("WorldCameraPosition"), worldCamPos.x, worldCamPos.y, worldCamPos.z);
-
 }
 
 void Shader::update(const glm::mat4 matrix)
@@ -400,4 +399,71 @@ static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const s
 
 		std::cerr << errorMessage << ": '" << std::endl << error << "'" << std::endl;
 	}
+}
+
+void Shader::clearFloat(std::string name)
+{
+	glUniform1f(getUniformName(name), 0);
+}
+
+void Shader::clearFloatArray(std::string name, unsigned int arrayLength)
+{
+	for (unsigned int i = 0; i < arrayLength; i++)
+	{
+		std::string uniformStringName = name + "[" + std::to_string(i) + "]";
+		int uniformName = getUniformName(uniformStringName);
+		glUniform1f(uniformName, 0);
+	}
+}
+
+void Shader::clearColorRGB(std::string name)
+{
+	glUniform3f(getUniformName(name), 0, 0, 0);
+}
+
+void Shader::clearColorRGBA(std::string name)
+{
+	glUniform4f(getUniformName(name), 0, 0, 0, 0);
+}
+
+void Shader::clearInt(std::string name)
+{
+	glUniform1i(getUniformName(name), 0);
+}
+
+void Shader::clearIntArray(std::string name, unsigned int arrayLength)
+{
+	for (unsigned int i = 0; i < arrayLength; i++)
+	{
+		std::string uniformStringName = name + std::to_string(i);
+		int uniformName = getUniformName(uniformStringName);
+		glUniform1d(uniformName, 0);
+	}
+}
+
+void Shader::clearVec3(std::string name)
+{
+	glUniform3f(getUniformName(name), 0, 0, 0);
+}
+
+void Shader::clearVec4(std::string name)
+{
+	glUniform4f(getUniformName(name), 0, 0, 0, 0);
+}
+
+void Shader::clearMat3(std::string name)
+{
+	glUniformMatrix3fv(getUniformName(name), 1, GL_FALSE, nullptr);
+}
+
+void Shader::clearMat4(std::string name)
+{
+	glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, nullptr);
+}
+
+void Shader::clearTexture(std::string name, int textureUnit, GLenum textureType)
+{
+	glActiveTexture(GL_TEXTURE0 + textureUnit);
+	glBindTexture(textureType, 0);
+	glUniform1i(getUniformName(name), textureUnit);
 }
