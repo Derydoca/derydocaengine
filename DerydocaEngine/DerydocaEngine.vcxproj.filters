@@ -176,6 +176,7 @@
     </ClCompile>
     <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
     <ClCompile Include="TessellatedMeshRenderer.cpp" />
+    <ClCompile Include="NoiseTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -403,6 +404,7 @@
     <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
     <ClInclude Include="TessellatedMeshRenderer.h" />
     <ClInclude Include="Projection.h" />
+    <ClInclude Include="NoiseTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
