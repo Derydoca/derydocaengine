@@ -1,37 +1,73 @@
 #include "NoiseTexture.h"
 #include <glm/gtc/noise.hpp>
+#include "MeshRenderer.h"
 
 using namespace glm;
 
 NoiseTexture::NoiseTexture()
 {
+	m_texture = new Texture();
 }
 
 NoiseTexture::~NoiseTexture()
 {
+	delete m_texture;
 }
 
 void NoiseTexture::init()
 {
+	MeshRenderer* mr = getComponent<MeshRenderer>();
+	m_material = mr->getMaterial();
+
+	generateNoiseTexture(m_baseFrequency, m_persistence, m_periodic);
 }
 
 void NoiseTexture::deserialize(YAML::Node compNode)
 {
+	YAML::Node widthNode = compNode["width"];
+	if (widthNode)
+	{
+		m_width = widthNode.as<int>();
+	}
+
+	YAML::Node heightNode = compNode["height"];
+	if (heightNode)
+	{
+		m_height = heightNode.as<int>();
+	}
+
+	YAML::Node textureNameNode = compNode["textureName"];
+	if (textureNameNode)
+	{
+		m_textureName = textureNameNode.as<string>();
+	}
+
+	YAML::Node baseFrequencyNode = compNode["baseFrequency"];
+	if (baseFrequencyNode)
+	{
+		m_baseFrequency = baseFrequencyNode.as<float>();
+	}
+
+	YAML::Node persistenceNode = compNode["persistence"];
+	if (persistenceNode)
+	{
+		m_persistence = persistenceNode.as<float>();
+	}
+
+	YAML::Node periodicNode = compNode["periodic"];
+	if (periodicNode)
+	{
+		m_periodic = periodicNode.as<bool>();
+	}
 }
 
-void NoiseTexture::generateTexture(float baseFreq, float persistence, bool periodic)
+void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool periodic)
 {
-	//noise::module::Perlin perlinNoise;
+	GLubyte* textureData = new GLubyte[m_width * m_height * 4];
 
-	//perlinNoise.SetFrequency(4.0);
-	delete[] m_textureData;
-	m_textureData = new GLubyte[m_width * m_height * 4];
-	double xRange = 1.0;
-	double yRange = 1.0;
-	double xFactor = xRange / m_width;
-	double yFactor = yRange / m_height;
+	double xFactor = 1.0f / (m_width - 1);
+	double yFactor = 1.0f / (m_height - 1);
 
-	//perlinNoise.SetOctaveCount(oct + 1);
 	for (int row = 0; row < m_height; row++)
 	{
 		for (int col = 0; col < m_width; col++)
@@ -41,19 +77,15 @@ void NoiseTexture::generateTexture(float baseFreq, float persistence, bool perio
 			float sum = 0.0f;
 			float freq = baseFreq;
 			float persist = persistence;
-
-			for (int oct = 0; oct < 4; oct++)
-			{
-				vec2 p(x * freq, y * freq);
+			for (int oct = 0; oct < 4; oct++) {
+				glm::vec2 p(x * freq, y * freq);
 
 				float val = 0.0f;
-				if (periodic)
-				{
-					val = perlin(p, glm::vec2(freq)) * persist;
+				if (periodic) {
+					val = glm::perlin(p, glm::vec2(freq)) * persist;
 				}
-				else
-				{
-					val = perlin(p) * persist;
+				else {
+					val = glm::perlin(p) * persist;
 				}
 
 				sum += val;
@@ -65,17 +97,22 @@ void NoiseTexture::generateTexture(float baseFreq, float persistence, bool perio
 				result = result < 0.0f ? 0.0f : result;
 
 				// Store in texture
-				m_textureData[((row * m_width + col) * 4) + oct] = (GLubyte)(result * 255.0f);
-				freq += 2.0f;
-				persist += persistence;
+				textureData[((row * m_width + col) * 4) + oct] = (GLubyte)(result * 255.0f);
+				freq *= 2.0f;
+				persist *= persistence;
 			}
 		}
 	}
 
+	TextureParameters texParams;
+	texParams.setWrapModeS(TextureWrapMode::REPEAT);
+	texParams.setWrapModeT(TextureWrapMode::REPEAT);
+	m_texture->updateBuffer(textureData, m_width, m_height, GL_RGBA, &texParams);
 
+	m_material->setTexture(m_textureName, m_texture);
 }
 
-GLuint NoiseTexture::storeTexture()
+GLuint NoiseTexture::uploadTexture()
 {
 	GLuint texID;
 	glGenTextures(1, &texID);

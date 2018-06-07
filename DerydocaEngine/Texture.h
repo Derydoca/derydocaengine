@@ -18,6 +18,7 @@ public:
 	int getHeight() { return m_height; }
 	GLenum getTextureType() const { return m_textureType; }
 	GLuint getTextureId() const { return m_texture; }
+	void updateBuffer(GLubyte * data, int width, int height, GLint pixelFormat, TextureParameters* params);
 protected:
 	int m_width, m_height;
 	GLuint m_texture;

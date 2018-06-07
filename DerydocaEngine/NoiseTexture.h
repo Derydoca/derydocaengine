@@ -1,11 +1,13 @@
 #pragma once
 #include "GameComponent.h"
+#include "Material.h"
 
-class NoiseTexture :
-	public GameComponent
+using namespace std;
+
+class NoiseTexture : public GameComponent
 {
 public:
-	GENINSTANCE(GameComponent);
+	GENINSTANCE(NoiseTexture);
 
 	NoiseTexture();
 	~NoiseTexture();
@@ -13,11 +15,17 @@ public:
 	virtual void init();
 	virtual void deserialize(YAML::Node compNode);
 
-	void generateTexture(float baseFreq, float persistence, bool periodic);
-	GLuint storeTexture();
+	void generateNoiseTexture(float baseFreq, float persistence, bool periodic);
 private:
 	int m_width = 256;
 	int m_height = 256;
-	GLubyte* m_textureData = nullptr;
+	string m_textureName = "NoiseTexture";
+	Material* m_material = nullptr;
+	Texture* m_texture = nullptr;
+	float m_baseFrequency = 4.0;
+	float m_persistence = 1.0;
+	bool m_periodic = false;
+
+	GLuint uploadTexture();
 };
 
