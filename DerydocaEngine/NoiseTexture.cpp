@@ -110,6 +110,8 @@ void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool 
 	m_texture->updateBuffer(textureData, m_width, m_height, GL_RGBA, &texParams);
 
 	m_material->setTexture(m_textureName, m_texture);
+
+	delete [] textureData;
 }
 
 GLuint NoiseTexture::uploadTexture()
