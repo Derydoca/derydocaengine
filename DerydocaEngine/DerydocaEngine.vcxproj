@@ -283,6 +283,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="TextureResourceSerializer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WasdMover.cpp" />
+    <ClCompile Include="WoodSliceTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BezierCurveRenderer.h" />
@@ -376,6 +377,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="TextureResourceSerializer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="WasdMover.h" />
+    <ClInclude Include="WoodSliceTexture.h" />
     <ClInclude Include="YamlTools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

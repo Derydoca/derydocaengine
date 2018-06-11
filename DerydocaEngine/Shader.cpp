@@ -453,12 +453,12 @@ void Shader::clearVec4(std::string name)
 
 void Shader::clearMat3(std::string name)
 {
-	glUniformMatrix3fv(getUniformName(name), 1, GL_FALSE, nullptr);
+	glUniformMatrix3fv(getUniformName(name), 1, GL_FALSE, &mat3()[0][0]);
 }
 
 void Shader::clearMat4(std::string name)
 {
-	glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, nullptr);
+	glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, &mat4()[0][0]);
 }
 
 void Shader::clearTexture(std::string name, int textureUnit, GLenum textureType)
