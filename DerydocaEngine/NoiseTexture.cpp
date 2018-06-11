@@ -19,7 +19,7 @@ void NoiseTexture::init()
 	MeshRenderer* mr = getComponent<MeshRenderer>();
 	m_material = mr->getMaterial();
 
-	generateNoiseTexture(m_baseFrequency, m_persistence, m_periodic);
+	generateNoiseTexture(m_baseFrequency, m_persistence, m_periodic, m_seamless);
 }
 
 void NoiseTexture::deserialize(YAML::Node compNode)
@@ -59,14 +59,22 @@ void NoiseTexture::deserialize(YAML::Node compNode)
 	{
 		m_periodic = periodicNode.as<bool>();
 	}
+
+	YAML::Node seamlessNode = compNode["seamless"];
+	if (seamlessNode)
+	{
+		m_seamless = seamlessNode.as<bool>();
+	}
 }
 
-void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool periodic)
+void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool periodic, bool seamless)
 {
 	GLubyte* textureData = new GLubyte[m_width * m_height * 4];
 
-	double xFactor = 1.0f / (m_width - 1);
-	double yFactor = 1.0f / (m_height - 1);
+	float xRange = 1.0f;
+	float yRange = 1.0f;
+	float xFactor = xRange / (m_width - 1);
+	float yFactor = yRange / (m_height - 1);
 
 	for (int row = 0; row < m_height; row++)
 	{
@@ -78,14 +86,57 @@ void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool 
 			float freq = baseFreq;
 			float persist = persistence;
 			for (int oct = 0; oct < 4; oct++) {
-				glm::vec2 p(x * freq, y * freq);
 
 				float val = 0.0f;
-				if (periodic) {
-					val = glm::perlin(p, glm::vec2(freq)) * persist;
+				if (seamless)
+				{
+					float a, b, c, d;
+
+					vec2 aPos = vec2(x, y) * freq;
+					vec2 bPos = vec2(x + xRange, y) * freq;
+					vec2 cPos = vec2(x, y + yRange) * freq;
+					vec2 dPos = vec2(x + xRange, y + yRange) * freq;
+
+					if (periodic)
+					{
+						a = perlin(aPos);
+						b = perlin(bPos);
+						c = perlin(cPos);
+						d = perlin(dPos);
+					}
+					else
+					{
+						a = perlin(aPos, vec2(freq));
+						b = perlin(bPos, vec2(freq));
+						c = perlin(cPos, vec2(freq));
+						d = perlin(dPos, vec2(freq));
+					}
+
+					a *= persist;
+					b *= persist;
+					c *= persist;
+					d *= persist;
+
+					float xmix = 1.0 - x / xRange;
+					float ymix = 1.0 - y / yRange;
+					float x1 = mix(a, b, xmix);
+					float x2 = mix(c, d, xmix);
+
+					val = mix(x1, x2, ymix);
 				}
-				else {
-					val = glm::perlin(p) * persist;
+				else
+				{
+					glm::vec2 p(x * freq, y * freq);
+					if (periodic)
+					{
+						val = glm::perlin(p, vec2(freq));
+					}
+					else
+					{
+						val = glm::perlin(p);
+					}
+
+					val *= persist;
 				}
 
 				sum += val;
@@ -111,20 +162,5 @@ void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool 
 
 	m_material->setTexture(m_textureName, m_texture);
 
-	delete [] textureData;
-}
-
-GLuint NoiseTexture::uploadTexture()
-{
-	GLuint texID;
-	glGenTextures(1, &texID);
-
-	glBindTexture(GL_TEXTURE_2D, texID);
-	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, m_width, m_height);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	return texID;
+	delete[] textureData;
 }

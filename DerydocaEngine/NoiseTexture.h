@@ -15,7 +15,7 @@ public:
 	virtual void init();
 	virtual void deserialize(YAML::Node compNode);
 
-	void generateNoiseTexture(float baseFreq, float persistence, bool periodic);
+	void generateNoiseTexture(float baseFreq, float persistence, bool periodic, bool seamless);
 private:
 	int m_width = 256;
 	int m_height = 256;
@@ -25,7 +25,6 @@ private:
 	float m_baseFrequency = 4.0;
 	float m_persistence = 1.0;
 	bool m_periodic = false;
-
-	GLuint uploadTexture();
+	bool m_seamless = false;
 };
 
