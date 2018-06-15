@@ -17,7 +17,18 @@ NoiseTexture::~NoiseTexture()
 void NoiseTexture::init()
 {
 	MeshRenderer* mr = getComponent<MeshRenderer>();
-	m_material = mr->getMaterial();
+	if (mr)
+	{
+		m_material = mr->getMaterial();
+	}
+	else
+	{
+		Camera* cam = getComponent<Camera>();
+		if (cam)
+		{
+			m_material = cam->getPostProcessMaterial();
+		}
+	}
 
 	generateNoiseTexture(m_baseFrequency, m_persistence, m_periodic, m_seamless);
 }

@@ -88,7 +88,8 @@ public:
 	void setOrthoSize(float size);
 	float getOrthoSize(float size) { return m_orthoSize; }
 	void deserialize(YAML::Node node);
-	Shader* getPostProcessShader() const { return m_postProcessShader; }
+	Shader* getPostProcessShader() const { return m_postProcessMaterial->getShader(); }
+	Material* getPostProcessMaterial() { return m_postProcessMaterial; }
 	Projection getProjection() const { return m_projection; }
 private:
 	Transform* m_transform;
@@ -102,7 +103,7 @@ private:
 	Display* m_display;
 	Rectangle* m_displayRect;
 	Mesh* m_quad;
-	Shader* m_postProcessShader;
+	Material* m_postProcessMaterial;
 	float m_orthoSize = 10.0f;
 	GLuint m_deferredFBO;
 	GLuint m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;

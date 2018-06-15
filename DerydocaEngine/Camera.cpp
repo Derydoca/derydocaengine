@@ -55,6 +55,11 @@ void Camera::init()
 	}
 
 	m_transform = getGameObject()->getTransform();
+
+	if (m_postProcessMaterial)
+	{
+		m_postProcessMaterial->setTexture("RenderTex", m_renderTexture);
+	}
 }
 
 void Camera::setDisplayRect(float x, float y, float w, float h)
@@ -150,7 +155,9 @@ void Camera::deserialize(YAML::Node node)
 		int height = renderTextureNode["Height"].as<int>();
 		m_renderTexture = new RenderTexture(width, height);
 
-		m_postProcessShader = loadResource<Shader*>(renderTextureNode, "PostProcessShader");
+		Shader* postProcessingShader = loadResource<Shader*>(renderTextureNode, "PostProcessShader");
+		m_postProcessMaterial = new Material();
+		m_postProcessMaterial->setShader(postProcessingShader);
 	}
 }
 
@@ -211,19 +218,22 @@ void Camera::renderRoot(GameObject* gameObject)
 	gameObject->render(&m_matrixStack);
 
 	// Postprocessing happens here
-	if (m_renderTexture != nullptr && m_postProcessShader != nullptr)
+	if (m_renderTexture != nullptr && m_postProcessMaterial != nullptr)
 	{
 		glDisable(GL_DEPTH_TEST);
 
-		// Load the shader with matricies that will transform the quad to take up the entire buffer
-		setIdentityMatricies(m_postProcessShader);
+		m_postProcessMaterial->bind();
 
-		m_postProcessShader->setInt("Width", m_renderTexture->getWidth());
-		m_postProcessShader->setInt("Height", m_renderTexture->getHeight());
-		m_postProcessShader->setTexture("RenderTex", 0, m_renderTexture);
+		// Load the shader with matricies that will transform the quad to take up the entire buffer
+		Shader* postProcessShader = m_postProcessMaterial->getShader();
+		setIdentityMatricies(postProcessShader);
+
+		postProcessShader->setInt("Width", m_renderTexture->getWidth());
+		postProcessShader->setInt("Height", m_renderTexture->getHeight());
+		//postProcessShader->setTexture("RenderTex", 0, m_renderTexture);
 
 		// Render the full-buffer quad
-		m_postProcessShader->renderMesh(m_quad, m_renderTexture);
+		postProcessShader->renderMesh(m_quad, m_renderTexture);
 	}
 
 	// Deferred rendering happens here

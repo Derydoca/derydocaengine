@@ -23,6 +23,7 @@
 #include "TessellatedMeshRenderer.h"
 #include "NoiseTexture.h"
 #include "WoodSliceTexture.h"
+#include "NightVisionFilter.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -76,6 +77,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(TessellatedMeshRenderer);
 	REGINSTANCE(NoiseTexture);
 	REGINSTANCE(WoodSliceTexture);
+	REGINSTANCE(NightVisionFilter);
 }
 
 GameComponentFactory::~GameComponentFactory()

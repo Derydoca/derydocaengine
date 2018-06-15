@@ -46,7 +46,7 @@ public:
 		{
 			// Attempt to cast this object to the type we want
 			GameComponent* component = *it;
-			T* attemptedCast = static_cast<T*>(component);
+			T* attemptedCast = dynamic_cast<T*>(component);
 
 			// If the cast worked, return the component
 			if (attemptedCast != nullptr)
