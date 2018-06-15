@@ -20,8 +20,8 @@ Scene:
               PostProcessShader: 11616222-358e-4fb0-a305-6ec8c87bb749
         - Type: NoiseTexture
           Properties:
-            width: 512
-            height: 512
+            width: 810
+            height: 540
             seamless: false
             textureName: NoiseTexture
             baseFrequency: 160.0
@@ -35,7 +35,7 @@ Scene:
     Properties:
       Name: Squirrel
       Transform:
-        Position: [-2.8, 0, -2]
+        Position: [-2.6, 0, -2]
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
@@ -67,7 +67,7 @@ Scene:
     Properties:
       Name: Squirrel
       Transform:
-        Position: [-3.6, 0, -3]
+        Position: [-4.2, 0, -3]
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
