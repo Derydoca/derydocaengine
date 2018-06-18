@@ -25,7 +25,7 @@ void MaterialRefresher::init()
 {
 	m_meshRenderer = getComponent<MeshRenderer>();
 	Material* material = nullptr;
-	if (m_meshRenderer == nullptr)
+	if (m_meshRenderer != nullptr)
 	{
 		m_usingMeshRenderer = true;
 		material = m_meshRenderer->getMaterial();

@@ -24,6 +24,7 @@
 #include "NoiseTexture.h"
 #include "WoodSliceTexture.h"
 #include "NightVisionFilter.h"
+#include "WaveDisplacement.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -78,6 +79,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(NoiseTexture);
 	REGINSTANCE(WoodSliceTexture);
 	REGINSTANCE(NightVisionFilter);
+	REGINSTANCE(WaveDisplacement);
 }
 
 GameComponentFactory::~GameComponentFactory()
