@@ -259,6 +259,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="NightVisionFilter.cpp" />
     <ClCompile Include="NoiseTexture.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
+    <ClCompile Include="ParticleFountain.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -345,6 +346,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="NightVisionFilter.h" />
     <ClInclude Include="NoiseTexture.h" />
     <ClInclude Include="ObjectLibrary.h" />
+    <ClInclude Include="ParticleFountain.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="Rectangle.h" />

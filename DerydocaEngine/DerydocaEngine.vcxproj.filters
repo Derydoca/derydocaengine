@@ -180,6 +180,7 @@
     <ClCompile Include="WoodSliceTexture.cpp" />
     <ClCompile Include="NightVisionFilter.cpp" />
     <ClCompile Include="WaveDisplacement.cpp" />
+    <ClCompile Include="ParticleFountain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -411,6 +412,7 @@
     <ClInclude Include="WoodSliceTexture.h" />
     <ClInclude Include="NightVisionFilter.h" />
     <ClInclude Include="WaveDisplacement.h" />
+    <ClInclude Include="ParticleFountain.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

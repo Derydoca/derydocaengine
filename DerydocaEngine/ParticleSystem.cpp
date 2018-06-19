@@ -32,7 +32,6 @@ void ParticleSystem::init()
 		float posy = RandomFloat(-m_volumeSize.y / 2, m_volumeSize.y / 2);
 		float posz = RandomFloat(-m_volumeSize.z / 2, m_volumeSize.z / 2);
 		m_particleLocations[i] = vec3(posx, posy, posz);
-		//cout << i << ": " << m_particleLocations[i].x << ", " << m_particleLocations[i].y << ", " << m_particleLocations[i].z << endl;
 	}
 
 	glGenBuffers(1, m_vertexArrayBuffers);
@@ -100,7 +99,5 @@ void ParticleSystem::render(MatrixStack* matrixStack)
 
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_POINTS, 0, m_numParticles);
-	//glDrawElementsBaseVertex(GL_POINTS, m_numParticles, GL_UNSIGNED_INT, 0, 0);
-	//glBindVertexArray(0);
 	glFinish();
 }

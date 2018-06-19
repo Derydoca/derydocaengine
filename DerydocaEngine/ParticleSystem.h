@@ -27,6 +27,5 @@ private:
 	vec3 m_volumeSize;
 	vec3* m_particleLocations;
 	Texture* m_texture;
-	//Shader* m_shader;
 	Material* m_material;
 };
