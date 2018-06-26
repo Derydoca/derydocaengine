@@ -60,6 +60,13 @@ public:
 	}
 
 protected:
+	template<typename T>
+	inline T getResource(YAML::Node node, std::string resourceName)
+	{
+		Resource* resource = getResource(node, resourceName);
+		return static_cast<T>(resource);
+	}
+
 	inline Resource* getResource(YAML::Node node, std::string resourceName)
 	{
 		YAML::Node resourceNode = node[resourceName];

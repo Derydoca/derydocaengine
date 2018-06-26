@@ -14,6 +14,7 @@ class Shader
 {
 public:
 	Shader(const std::string& fileName);
+	Shader(const std::string& fileName, int count, const char *const * varyings);
 	~Shader();
 
 	void bind();
@@ -64,6 +65,7 @@ private:
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
 	int getUniformName(std::string stringName);
+	void setTransformFeedbackVaryings(int count, const char *const * varyings);
 
 	enum {
 		TRANSFORM_MVP = 0,

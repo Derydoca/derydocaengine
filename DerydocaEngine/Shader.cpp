@@ -77,6 +77,65 @@ Shader::Shader(const std::string& fileName)
 	m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_program, "ModelMatrix");
 }
 
+Shader::Shader(const std::string & fileName, int varyingsCount, const char * const * varyings)
+{
+	m_loadPath = fileName;
+
+	printf("Loading shader: %s\n", fileName.c_str());
+
+	// Create the shaders
+	LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
+	LOAD_SHADER_IF_EXISTS(1, GL_TESS_CONTROL_SHADER, GetTesslleationControlShaderPath());
+	LOAD_SHADER_IF_EXISTS(2, GL_TESS_EVALUATION_SHADER, GetTessellationEvaluationShaderPath());
+	LOAD_SHADER_IF_EXISTS(3, GL_GEOMETRY_SHADER, GetGeometryShaderPath());
+	LOAD_SHADER_IF_EXISTS(4, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
+
+	// Create the program
+	m_program = glCreateProgram();
+	if (0 == m_program)
+	{
+		fprintf(stderr, "Error creating program object..\n");
+		__debugbreak();
+	}
+
+	// Attach the shaders to the program
+	for (unsigned int i = 0; i < NUM_SHADERS; i++) {
+		// Skip shaders that were not loaded (i.e. shaders w/o geom shaders)
+		if (m_shaders[i] == 0)
+		{
+			continue;
+		}
+
+		glAttachShader(m_program, m_shaders[i]);
+	}
+
+	// Get the vertex attribute locations
+	glBindAttribLocation(m_program, 0, "VertexPosition");
+	glBindAttribLocation(m_program, 1, "VertexTexCoord");
+	glBindAttribLocation(m_program, 2, "VertexNormal");
+	glBindAttribLocation(m_program, 3, "VertexTangent");
+	glBindAttribLocation(m_program, 4, "VertexBitangent");
+
+	// Bind the output color to 0
+	glBindFragDataLocation(m_program, 0, "FragColor");
+
+	// Bind the varyings
+	setTransformFeedbackVaryings(varyingsCount, varyings);
+
+	// Link the program
+	glLinkProgram(m_program);
+	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed: ");
+
+	glValidateProgram(m_program);
+	CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
+
+	m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_program, "MVP");
+	m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_program, "ModelViewMatrix");
+	m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_program, "NormalMatrix");
+	m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_program, "ProjectionMatrix");
+	m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_program, "ModelMatrix");
+}
+
 Shader::~Shader()
 {
 	for (unsigned int i = 0; i < NUM_SHADERS; i++) {
@@ -241,6 +300,11 @@ void Shader::setTexture(std::string name, int textureUnit, GLenum textureType, G
 	glBindTexture(textureType, textureId);
 	int uniformName = getUniformName(name);
 	glUniform1i(uniformName, textureUnit);
+}
+
+void Shader::setTransformFeedbackVaryings(int count, const char *const * varyings)
+{
+	glTransformFeedbackVaryings(m_program, count, varyings, GL_SEPARATE_ATTRIBS);
 }
 
 GLuint Shader::getSubroutineIndex(GLuint program, std::string subroutineName)
