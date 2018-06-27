@@ -18,6 +18,8 @@ public:
 	void load(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
 	void draw();
 	void setFlags(MeshFlags flags) { m_flags = flags; }
+	GLuint getVao() const { return m_vertexArrayObject; }
+	unsigned int getNumIndices() const { return m_numIndices; }
 
 private:
 	Mesh(const Mesh& other) {}

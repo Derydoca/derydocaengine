@@ -261,6 +261,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="ObjectLibrary.cpp" />
     <ClCompile Include="ParticleContinuousFountain.cpp" />
     <ClCompile Include="ParticleFountain.cpp" />
+    <ClCompile Include="ParticleInstanced.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -349,6 +350,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ObjectLibrary.h" />
     <ClInclude Include="ParticleContinuousFountain.h" />
     <ClInclude Include="ParticleFountain.h" />
+    <ClInclude Include="ParticleInstanced.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Projection.h" />
     <ClInclude Include="Rectangle.h" />

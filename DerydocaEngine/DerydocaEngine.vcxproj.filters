@@ -182,6 +182,7 @@
     <ClCompile Include="WaveDisplacement.cpp" />
     <ClCompile Include="ParticleFountain.cpp" />
     <ClCompile Include="ParticleContinuousFountain.cpp" />
+    <ClCompile Include="ParticleInstanced.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -415,6 +416,7 @@
     <ClInclude Include="WaveDisplacement.h" />
     <ClInclude Include="ParticleFountain.h" />
     <ClInclude Include="ParticleContinuousFountain.h" />
+    <ClInclude Include="ParticleInstanced.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

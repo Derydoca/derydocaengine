@@ -27,6 +27,7 @@
 #include "WaveDisplacement.h"
 #include "ParticleFountain.h"
 #include "ParticleContinuousFountain.h"
+#include "ParticleInstanced.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -84,6 +85,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(WaveDisplacement);
 	REGINSTANCE(ParticleFountain);
 	REGINSTANCE(ParticleContinuousFountain);
+	REGINSTANCE(ParticleInstanced);
 }
 
 GameComponentFactory::~GameComponentFactory()
