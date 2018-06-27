@@ -33,7 +33,6 @@ void main()
         if(t < ParticleLifetime)
         {
             Position += v0 * t + g * t * t;
-            //Position = VertexPosition + VertexInitialVelocity * t + Gravity * t * t;
         }
     }
 
