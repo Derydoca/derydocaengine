@@ -7,6 +7,7 @@ layout (location = 0) in vec3 VertexPosition;
 layout (location = 1) in vec3 VertexVelocity;
 layout (location = 2) in float VertexStartTime;
 layout (location = 3) in vec3 VertexInitialVelocity;
+layout (location = 4) in vec3 VertexInitialPosition;
 
 // To transform feedback
 out vec3 Position;
@@ -38,7 +39,7 @@ void update()
         if (age > ParticleLifetime)
         {
             // The particle is dead and is ready to be recycled
-            Position = EmitterPosition;
+            Position = VertexInitialPosition;
             Velocity = VertexInitialVelocity;
             StartTime = Time;
         }

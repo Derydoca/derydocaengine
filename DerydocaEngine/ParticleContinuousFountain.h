@@ -4,6 +4,12 @@
 class ParticleContinuousFountain : public GameComponent
 {
 public:
+	enum ParticleEmitterType
+	{
+		Point = 0,
+		Cube = 1
+	};
+
 	GENINSTANCE(ParticleContinuousFountain);
 
 	ParticleContinuousFountain();
@@ -28,12 +34,15 @@ private:
 	GLuint m_velBuf[2];
 	GLuint m_startTime[2];
 	GLuint m_initVel;
+	GLuint m_initPos;
 	GLuint m_particleArray[2];
 	GLuint m_feedback[2];
 	GLuint m_drawBuf = 1;
 	GLuint m_updateSub;
 	GLuint m_renderSub;
 	Transform* m_trans;
+	ParticleEmitterType m_emitterType;
+	vec3 m_emitterSize = vec3(1.0, 1.0, 1.0);
 
 	void initBuffers();
 	float randFloat();

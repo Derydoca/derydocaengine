@@ -68,6 +68,18 @@ void ParticleContinuousFountain::deserialize(YAML::Node compNode)
 		m_lifetime = lifetimeNode.as<float>();
 	}
 
+	YAML::Node emitterTypeNode = compNode["emitterType"];
+	if (emitterTypeNode)
+	{
+		m_emitterType = (ParticleEmitterType)emitterTypeNode.as<int>();
+	}
+
+	YAML::Node emitterSizeNode = compNode["emitterSize"];
+	if (emitterSizeNode)
+	{
+		m_emitterSize = emitterSizeNode.as<vec3>();
+	}
+
 	const char * outputNames[] = { "Position", "Velocity", "StartTime" };
 	ShaderResource* shaderResource = getResource<ShaderResource*>(compNode, "shader");
 	assert(shaderResource);
@@ -102,6 +114,7 @@ void ParticleContinuousFountain::initBuffers()
 	glGenBuffers(2, m_velBuf);
 	glGenBuffers(2, m_startTime);
 	glGenBuffers(1, &m_initVel);
+	glGenBuffers(1, &m_initPos);
 
 	// Allocate space for the buffers
 	int size = m_numParticles * 3 * sizeof(GLfloat);
@@ -115,12 +128,14 @@ void ParticleContinuousFountain::initBuffers()
 	glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_COPY);
 	glBindBuffer(GL_ARRAY_BUFFER, m_initVel);
 	glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, m_initPos);
+	glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, m_startTime[0]);
 	glBufferData(GL_ARRAY_BUFFER, m_numParticles * sizeof(float), NULL, GL_DYNAMIC_COPY);
 	glBindBuffer(GL_ARRAY_BUFFER, m_startTime[1]);
 	glBufferData(GL_ARRAY_BUFFER, m_numParticles * sizeof(float), NULL, GL_DYNAMIC_COPY);
 
-	// Fill the first position buffer with zeroes
+	// Fill the position data
 	GLfloat* data = new GLfloat[m_numParticles * 3];
 	vec3 worldPos = m_trans->getWorldPos();
 	for (int i = 0; i < m_numParticles; i++)
@@ -128,8 +143,17 @@ void ParticleContinuousFountain::initBuffers()
 		data[i * 3 + 0] = worldPos.x;
 		data[i * 3 + 1] = worldPos.y;
 		data[i * 3 + 2] = worldPos.z;
+
+		if (m_emitterType == ParticleEmitterType::Cube)
+		{
+			data[i * 3 + 0] += mix(m_emitterSize.x / 2, -m_emitterSize.x / 2, randFloat());
+			data[i * 3 + 1] += mix(m_emitterSize.y / 2, -m_emitterSize.y / 2, randFloat());
+			data[i * 3 + 2] += mix(m_emitterSize.z / 2, -m_emitterSize.z / 2, randFloat());
+		}
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, m_posBuf[0]);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+	glBindBuffer(GL_ARRAY_BUFFER, m_initPos);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 
 	// Fill the first velocity buffer with random velocities
@@ -198,6 +222,10 @@ void ParticleContinuousFountain::initBuffers()
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(3);
 
+	glBindBuffer(GL_ARRAY_BUFFER, m_initPos);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(4);
+
 	// Set up particle array 0
 	glBindVertexArray(m_particleArray[1]);
 	glBindBuffer(GL_ARRAY_BUFFER, m_posBuf[1]);
@@ -215,6 +243,10 @@ void ParticleContinuousFountain::initBuffers()
 	glBindBuffer(GL_ARRAY_BUFFER, m_initVel);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(3);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_initPos);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(4);
 
 	glBindVertexArray(0);
 
