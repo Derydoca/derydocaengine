@@ -44,7 +44,8 @@ private:
 	Transform* m_trans;
 	ParticleEmitterType m_emitterType;
 	vec3 m_emitterSize = vec3(1.0, 1.0, 1.0);
-	float m_pointSize = 10.0f;
+	float m_particleSizeMin = 10.0f;
+	float m_particleSizeMax = 10.0f;
 
 	void initBuffers();
 	float randFloat();

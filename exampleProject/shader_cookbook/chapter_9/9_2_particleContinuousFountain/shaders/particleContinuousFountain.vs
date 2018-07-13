@@ -21,6 +21,8 @@ uniform float H; // delta time
 uniform vec3 Accel;
 uniform float ParticleLifetime;
 uniform vec3 EmitterPosition;
+uniform float MinParticleSize;
+uniform float MaxParticleSize;
 
 uniform mat4 MVP;
 
@@ -56,6 +58,8 @@ subroutine (RenderPassType)
 void render()
 {
     float age = Time - VertexStartTime;
+    float agePct = age / ParticleLifetime;
+    gl_PointSize = mix(MinParticleSize, MaxParticleSize, agePct);
     Transp = 1.0 - age / ParticleLifetime;
     gl_Position = MVP * vec4(VertexPosition, 1.0);
 }

@@ -11,14 +11,14 @@ Scene:
         - Type: ParticleContinuousFountain
           Properties:
             numParticles: 10000
-            velocityMin: [0.0, 0.1, 0.0]
-            velocityMax: [0.0, 0.5, 0.0]
-            lifetime: 4.0
-            acceleration: [0.0, 0.1, 0.0]
+            velocityMin: [0.0, 0.05, 0.0]
+            velocityMax: [0.0, 0.1, 0.0]
+            lifetime: 12.0
+            acceleration: [0.0, 0.025, 0.0]
             angle: 12.0
             emitterType: 1
             emitterSize: [1.0, 0.0, 0.0]
-            particleSizeMin: 50.0
-            particleSizeMax: 50.0
+            particleSizeMin: 10.0
+            particleSizeMax: 300.0
             shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
-            texture: 3530afaf-4c1e-423e-a1ca-e30a002c1132
+            texture: 7d1edd30-bff2-4caf-8152-c74269901ff0

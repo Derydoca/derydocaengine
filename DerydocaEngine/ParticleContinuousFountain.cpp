@@ -102,10 +102,16 @@ void ParticleContinuousFountain::deserialize(YAML::Node compNode)
 		m_acceleration = accelerationNode.as<vec3>();
 	}
 
-	YAML::Node pointSizeNode = compNode["pointSize"];
-	if (pointSizeNode)
+	YAML::Node particleSizeMinNode = compNode["particleSizeMin"];
+	if (particleSizeMinNode)
 	{
-		m_pointSize = pointSizeNode.as<float>();
+		m_particleSizeMin = particleSizeMinNode.as<float>();
+	}
+
+	YAML::Node particleSizeMaxNode = compNode["particleSizeMax"];
+	if (particleSizeMaxNode)
+	{
+		m_particleSizeMax = particleSizeMaxNode.as<float>();
 	}
 
 	const char * outputNames[] = { "Position", "Velocity", "StartTime" };
@@ -117,6 +123,8 @@ void ParticleContinuousFountain::deserialize(YAML::Node compNode)
 	m_material->setShader(shader);
 	m_material->setFloat("ParticleLifetime", m_lifetime);
 	m_material->setVec3("Accel", m_acceleration);
+	m_material->setFloat("MinParticleSize", m_particleSizeMin);
+	m_material->setFloat("MaxParticleSize", m_particleSizeMax);
 
 	Texture* m_tex = loadResource<Texture*>(compNode, "texture");
 	m_material->setTexture("ParticleTex", m_tex);
@@ -127,9 +135,9 @@ void ParticleContinuousFountain::render(MatrixStack * matrixStack)
 	m_material->bind();
 	m_material->getShader()->updateViaActiveCamera(matrixStack);
 
+	glEnable(GL_PROGRAM_POINT_SIZE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glPointSize(m_pointSize);
 
 	updateParticlePositions(m_lastDeltaTime);
 	renderParticles();
