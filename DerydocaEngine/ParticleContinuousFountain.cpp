@@ -47,13 +47,29 @@ void ParticleContinuousFountain::deserialize(YAML::Node compNode)
 	YAML::Node velocityMaxNode = compNode["velocityMax"];
 	if (velocityMaxNode)
 	{
-		m_velocityMax = velocityMaxNode.as<float>();
+		if (velocityMaxNode.IsScalar())
+		{
+			float vel = velocityMaxNode.as<float>();
+			m_velocityMax = vec3(vel);
+		}
+		else
+		{
+			m_velocityMax = velocityMaxNode.as<vec3>();
+		}
 	}
 
 	YAML::Node velocityMinNode = compNode["velocityMin"];
 	if (velocityMinNode)
 	{
-		m_velocityMin = velocityMinNode.as<float>();
+		if(velocityMinNode.IsScalar())
+		{
+			float vel = velocityMinNode.as<float>();
+			m_velocityMin = vec3(vel);
+		}
+		else
+		{
+			m_velocityMin = velocityMinNode.as<vec3>();
+		}
 	}
 
 	YAML::Node angleNode = compNode["angle"];
@@ -80,6 +96,18 @@ void ParticleContinuousFountain::deserialize(YAML::Node compNode)
 		m_emitterSize = emitterSizeNode.as<vec3>();
 	}
 
+	YAML::Node accelerationNode = compNode["acceleration"];
+	if (accelerationNode)
+	{
+		m_acceleration = accelerationNode.as<vec3>();
+	}
+
+	YAML::Node pointSizeNode = compNode["pointSize"];
+	if (pointSizeNode)
+	{
+		m_pointSize = pointSizeNode.as<float>();
+	}
+
 	const char * outputNames[] = { "Position", "Velocity", "StartTime" };
 	ShaderResource* shaderResource = getResource<ShaderResource*>(compNode, "shader");
 	assert(shaderResource);
@@ -101,7 +129,7 @@ void ParticleContinuousFountain::render(MatrixStack * matrixStack)
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glPointSize(10.0f);
+	glPointSize(m_pointSize);
 
 	updateParticlePositions(m_lastDeltaTime);
 	renderParticles();
@@ -157,24 +185,19 @@ void ParticleContinuousFountain::initBuffers()
 	glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 
 	// Fill the first velocity buffer with random velocities
-	vec3 v(0.0f);
-	float velocity;
-	float theta;
-	float phi;
-
 	for (int i = 0; i < m_numParticles; i++)
 	{
-		// Pick the direction of the particles
-		theta = mix(0.0f, glm::pi<float>() / m_angle, randFloat());
-		phi = mix(0.0f, glm::two_pi<float>(), randFloat());
 
-		v.x = sinf(theta) * cosf(phi);
-		v.y = cosf(theta);
-		v.z = sinf(theta) * sinf(phi);
-
-		// Scale to set the magnitude of the velocity
-		velocity = mix(m_velocityMin, m_velocityMax, randFloat());
-		v = normalize(v) * velocity;
+		vec3 v = vec3();
+		switch (m_emitterType)
+		{
+		case ParticleEmitterType::Cone:
+			v = getVelocityFromCube();
+			break;
+		default:
+			v = getVelocityFromCube();
+			break;
+		}
 
 		data[3 * i] = v.x;
 		data[3 * i + 1] = v.y;
@@ -300,6 +323,7 @@ void ParticleContinuousFountain::updateParticlePositions(float deltaTime)
 
 void ParticleContinuousFountain::renderParticles()
 {
+	glDisable(GL_DEPTH_TEST);
 	m_material->setSubroutine(GL_VERTEX_SHADER, m_renderSub);
 
 	// Setup the other stuff
@@ -311,4 +335,32 @@ void ParticleContinuousFountain::renderParticles()
 	// Swap buffers
 	m_drawBuf = 1 - m_drawBuf;
 
+	glEnable(GL_DEPTH_TEST);
+}
+
+vec3 ParticleContinuousFountain::getVelocityFromCone()
+{
+	vec3 v(0.0f);
+	vec3 velocity;
+	float theta;
+	float phi;
+
+	// Pick the direction of the particles
+	theta = mix(0.0f, glm::pi<float>() / m_angle, randFloat());
+	phi = mix(0.0f, glm::two_pi<float>(), randFloat());
+
+	v.x = sinf(theta) * cosf(phi);
+	v.y = cosf(theta);
+	v.z = sinf(theta) * sinf(phi);
+
+	// Scale to set the magnitude of the velocity
+	velocity = mix(m_velocityMin, m_velocityMax, randFloat());
+	v = normalize(v) * velocity;
+
+	return v;
+}
+
+vec3 ParticleContinuousFountain::getVelocityFromCube()
+{
+	return mix(m_velocityMin, m_velocityMax, randFloat());
 }
