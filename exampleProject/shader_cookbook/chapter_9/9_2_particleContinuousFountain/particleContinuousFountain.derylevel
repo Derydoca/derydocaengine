@@ -15,5 +15,6 @@ Scene:
             velocityMax: 1.25
             lifetime: 5.0
             angle: 12.0
+            emitterType: 2
             shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
             texture: cb774137-e5d2-4ee1-b2ab-f906cbeb148d

@@ -10,7 +10,7 @@ Scene:
       Components:
         - Type: ParticleContinuousFountain
           Properties:
-            numParticles: 10000
+            numParticles: 1200
             velocityMin: [0.0, 0.05, 0.0]
             velocityMax: [0.0, 0.1, 0.0]
             lifetime: 12.0

@@ -91,6 +91,7 @@ void ParticleSystem::deserialize(YAML::Node compNode)
 
 void ParticleSystem::render(MatrixStack* matrixStack)
 {
+	glDisable(GL_DEPTH_TEST);
 	assert(getGameObject());
 
 	m_material->bind();
@@ -99,5 +100,6 @@ void ParticleSystem::render(MatrixStack* matrixStack)
 
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_POINTS, 0, m_numParticles);
+	glEnable(GL_DEPTH_TEST);
 	glFinish();
 }

@@ -74,6 +74,7 @@ void ParticleFountain::deserialize(YAML::Node compNode)
 
 void ParticleFountain::render(MatrixStack * matrixStack)
 {
+	glDisable(GL_DEPTH_TEST);
 	m_material->bind();
 	m_material->getShader()->updateViaActiveCamera(matrixStack);
 
@@ -84,6 +85,7 @@ void ParticleFountain::render(MatrixStack * matrixStack)
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_POINTS, 0, m_numParticles);
 	glFinish();
+	glEnable(GL_DEPTH_TEST);
 }
 
 void ParticleFountain::initBuffers()

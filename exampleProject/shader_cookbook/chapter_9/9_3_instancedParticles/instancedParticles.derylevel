@@ -10,7 +10,7 @@ Scene:
       Components:
         - Type: ParticleInstanced
           Properties:
-            numParticles: 10000
+            numParticles: 500
             velocityMin: 0.75
             velocityMax: 1.25
             lifetime: 5.0
