@@ -22,27 +22,6 @@ public:
 		}
 	}
 	~MeshAdjacencyEdge() {}
-	/*
-	bool operator == (const MeshAdjacencyEdge& ref) const
-	{
-		return ((m_index1 == ref.m_index1 && m_index2 == ref.m_index2) || (m_index2 == ref.m_index1 && m_index1 == ref.m_index2));
-	}
-
-	bool operator != (const MeshAdjacencyEdge& ref) const
-	{
-		return !((m_index1 == ref.m_index1 && m_index2 == ref.m_index2) || (m_index2 == ref.m_index1 && m_index1 == ref.m_index2));
-	}
-
-	bool operator < (const MeshAdjacencyEdge& ref) const
-	{
-		return m_index1 < ref.m_index1 && m_index2 < ref.m_index2;
-	}
-
-	bool operator > (const MeshAdjacencyEdge& ref) const
-	{
-		return m_index1 > ref.m_index1 && m_index2 > ref.m_index2;
-	}
-*/
 
 	bool operator < (const MeshAdjacencyEdge& o) const
 	{

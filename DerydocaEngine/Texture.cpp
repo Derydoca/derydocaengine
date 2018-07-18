@@ -104,6 +104,8 @@ Texture::Texture(const std::string & xpos, const std::string & xneg, const std::
 		glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
+
+	delete[] cubemapSourceImages;
 }
 
 Texture::~Texture()

@@ -55,6 +55,7 @@ void ScreenshotUtil::postRender()
 		// Write it to disk
 		stbi_flip_vertically_on_write(1);
 		int result = stbi_write_png(file.c_str(), w, h, 3, data, w * 3);
+		delete[] data;
 		
 		// Give some feedback
 		if (result == 0)

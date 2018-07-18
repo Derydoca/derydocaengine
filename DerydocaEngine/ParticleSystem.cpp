@@ -16,7 +16,8 @@ ParticleSystem::ParticleSystem()
 
 ParticleSystem::~ParticleSystem()
 {
-	delete(m_particleLocations);
+	delete m_particleLocations;
+	delete m_material;
 	glDeleteVertexArrays(1, &m_vao);
 }
 

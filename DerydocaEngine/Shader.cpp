@@ -144,6 +144,8 @@ Shader::~Shader()
 	}
 
 	glDeleteProgram(m_program);
+
+	delete[] m_renderPasses;
 }
 
 void Shader::bind()

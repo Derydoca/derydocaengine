@@ -129,10 +129,11 @@ int Editor::Run(std::string projectPath, std::string levelIdentifier)
 	}
 
 	// Clean up all other objects
-	delete(sceneRoot);
-	delete(display);
-	delete(settings);
-	delete(clock);
+	delete sceneRoot;
+	delete display;
+	delete settings;
+	delete clock;
+	delete scene;
 
 	return 0;
 }

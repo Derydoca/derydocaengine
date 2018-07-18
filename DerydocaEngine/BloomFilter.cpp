@@ -10,7 +10,8 @@ BloomFilter::BloomFilter()
 
 BloomFilter::~BloomFilter()
 {
-	delete(m_blurTex);
+	delete m_blurTex;
+	delete m_blurTex2;
 }
 
 void BloomFilter::init()
@@ -41,6 +42,8 @@ void BloomFilter::init()
 	RenderTexture* cameraRenderTexture = m_postProcessCamera->getRenderTexture();
 	int width = cameraRenderTexture->getWidth();
 	int height = cameraRenderTexture->getHeight();
+	delete m_blurTex;
+	delete m_blurTex2;
 	m_blurTex = new RenderTexture(width, height);
 	m_blurTex2 = new RenderTexture(width, height);
 
