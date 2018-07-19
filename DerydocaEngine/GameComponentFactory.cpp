@@ -3,13 +3,31 @@
 #include "Camera.h"
 #include "MeshRenderer.h"
 #include "KeyboardMover.h"
-//#include "MaterialRefresher.h"
+#include "MaterialRefresher.h"
 #include "Rotator.h"
 #include "ScreenshotUtil.h"
 #include "Terrain.h"
 #include "WasdMover.h"
 #include "DebugVisualizer.h"
 #include "Light.h"
+#include "ShaderSubroutineSwitcher.h"
+#include "ImageProjector.h"
+#include "EdgeDetectionFilter.h"
+#include "GaussianBlurFilter.h"
+#include "BloomFilter.h"
+#include "GammaCorrectionFilter.h"
+#include "MultisampleSwitch.h"
+#include "ParticleSystem.h"
+#include "BezierCurveRenderer.h"
+#include "TessellatingQuad.h"
+#include "TessellatedMeshRenderer.h"
+#include "NoiseTexture.h"
+#include "WoodSliceTexture.h"
+#include "NightVisionFilter.h"
+#include "WaveDisplacement.h"
+#include "ParticleFountain.h"
+#include "ParticleContinuousFountain.h"
+#include "ParticleInstanced.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -43,13 +61,31 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(Camera);
 	REGINSTANCE(MeshRenderer);
 	REGINSTANCE(KeyboardMover);
-	//REGINSTANCE(MaterialRefresher);
+	REGINSTANCE(MaterialRefresher);
 	REGINSTANCE(Rotator);
 	REGINSTANCE(ScreenshotUtil);
 	REGINSTANCE(Terrain);
 	REGINSTANCE(WasdMover);
 	REGINSTANCE(DebugVisualizer);
 	REGINSTANCE(Light);
+	REGINSTANCE(ShaderSubroutineSwitcher);
+	REGINSTANCE(ImageProjector);
+	REGINSTANCE(EdgeDetectionFilter);
+	REGINSTANCE(GaussianBlurFilter);
+	REGINSTANCE(BloomFilter);
+	REGINSTANCE(GammaCorrectionFilter);
+	REGINSTANCE(MultisampleSwitch);
+	REGINSTANCE(ParticleSystem);
+	REGINSTANCE(BezierCurveRenderer);
+	REGINSTANCE(TessellatingQuad);
+	REGINSTANCE(TessellatedMeshRenderer);
+	REGINSTANCE(NoiseTexture);
+	REGINSTANCE(WoodSliceTexture);
+	REGINSTANCE(NightVisionFilter);
+	REGINSTANCE(WaveDisplacement);
+	REGINSTANCE(ParticleFountain);
+	REGINSTANCE(ParticleContinuousFountain);
+	REGINSTANCE(ParticleInstanced);
 }
 
 GameComponentFactory::~GameComponentFactory()

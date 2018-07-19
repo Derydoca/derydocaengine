@@ -11,6 +11,21 @@ Material::~Material()
 {
 }
 
+void Material::setBool(const std::string name, bool value)
+{
+	m_boolValues[name] = value;
+}
+
+void Material::setInt(const std::string name, int value)
+{
+	m_intValues[name] = value;
+}
+
+void Material::setTexture(const std::string name, Texture* texture)
+{
+	m_textures[name] = texture;
+}
+
 void Material::setTextureSlot(int slot, Texture * texture)
 {
 	m_texture = texture;
@@ -51,20 +66,38 @@ void Material::setMat4(const std::string name, glm::mat4 value)
 	m_mat4Values[name] = value;
 }
 
+void Material::setSubroutine(const GLuint program, const GLuint value)
+{
+	m_subroutineValues[program] = value;
+}
+
 void Material::bind()
 {
 	assert(m_shader);
-	//assert(m_texture);
 
+	// TODO: Remove this texture binding method
 	m_shader->bind();
 	if (m_texture != NULL)
 	{
 		m_texture->bind(0);
 	}
 
+	{
+		int texIndex = 0;
+		for (auto const& x : m_textures)
+		{
+			m_shader->setTexture(x.first, texIndex++, x.second);
+		}
+	}
+
 	for (auto const& x : m_floatValues)
 	{
 		m_shader->setFloat(x.first, x.second);
+	}
+
+	for (auto const& x : m_intValues)
+	{
+		m_shader->setInt(x.first, x.second);
 	}
 
 	for (auto const& x : m_vec3Values)
@@ -87,4 +120,52 @@ void Material::bind()
 		m_shader->setMat4(x.first, x.second);
 	}
 
+	for (auto const& x : m_subroutineValues)
+	{
+		m_shader->setSubroutine(x.first, x.second);
+	}
+
+}
+
+void Material::unbind()
+{
+	assert(m_shader);
+	
+	{
+		int texIndex = 0;
+		for (auto const& x : m_textures)
+		{
+			m_shader->clearTexture(x.first, texIndex++, x.second->getTextureType());
+		}
+	}
+
+	for (auto const& x : m_floatValues)
+	{
+		m_shader->clearFloat(x.first);
+	}
+
+	for (auto const& x : m_intValues)
+	{
+		m_shader->clearInt(x.first);
+	}
+
+	for (auto const& x : m_vec3Values)
+	{
+		m_shader->clearVec3(x.first);
+	}
+
+	for (auto const& x : m_vec4Values)
+	{
+		m_shader->clearVec4(x.first);
+	}
+
+	for (auto const& x : m_mat3Values)
+	{
+		m_shader->clearMat3(x.first);
+	}
+
+	for (auto const& x : m_mat4Values)
+	{
+		m_shader->clearMat4(x.first);
+	}
 }

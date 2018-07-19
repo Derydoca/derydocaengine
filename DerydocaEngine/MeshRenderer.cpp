@@ -30,13 +30,17 @@ void MeshRenderer::deserialize(YAML::Node compNode)
 	YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];
 	if (renderTextureSourceNode && renderTextureSourceNode.IsScalar())
 	{
+		// Get the name that should be used to bind this texture to the shader
+		string renderTextureName = "RenderTexture";
+		YAML::Node renderTextureNameNode = compNode["RenderTextureName"];
+		if (renderTextureNameNode != nullptr && renderTextureNameNode.IsScalar())
+		{
+			renderTextureName = renderTextureNameNode.as<string>();
+		}
+
 		uuid renderTextureCameraId = renderTextureSourceNode.as<uuid>();
-		Camera* renderTextureCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
-		Shader* renderTextureShader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\basicShader");
-		Material* renderTextureMaterial = new Material();
-		renderTextureMaterial->setShader(renderTextureShader);
-		renderTextureMaterial->setTextureSlot(0, renderTextureCamera->getRenderTexture());
-		setMaterial(renderTextureMaterial);
+		m_meshRendererCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
+		material->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
 	}
 }
 
@@ -49,7 +53,17 @@ void MeshRenderer::render(MatrixStack* matrixStack)
 	assert(getGameObject());
 
 	m_material->bind();
-	m_material->getShader()->update(matrixStack);
-	LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), m_material->getShader());
+	m_material->getShader()->updateViaActiveCamera(matrixStack);
+	LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());
+
+	m_mesh->draw();
+
+	m_material->unbind();
+}
+
+void MeshRenderer::renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform)
+{
+	material->bind();
+	material->getShader()->update(matrixStack, projection, projectionTransform);
 	m_mesh->draw();
 }

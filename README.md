@@ -12,7 +12,7 @@ This is being written in Visual Studio 2017. For anyone who wants to use another
 *  SDL2 (2.0.7) - For window management
 *  ASSIMP (3.1.1) - For importing 3D art assets
 *  GLM (0.9.8.5) - For all the complex math made to make games
-*  SOIL - For image loading
+*  stb_image - For image loading
 *  yaml-cpp (0.6.0) - For configuration files and serialized objects
 *  OculusSDK (1.4.0) - For future use
 

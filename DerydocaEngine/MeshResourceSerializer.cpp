@@ -18,7 +18,9 @@ void * MeshResourceSerializer::deserialize(Resource * resource)
 	MeshResource* mr = (MeshResource*)resource;
 	auto file = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-	Mesh* m = new Mesh(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
+	Mesh* m = new Mesh();
+	m->setFlags(mr->getFlags());
+	m->load(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
 
 	return m;
 }

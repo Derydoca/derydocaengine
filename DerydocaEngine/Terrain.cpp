@@ -1,5 +1,6 @@
 #include "Terrain.h"
 #include "ShaderLibrary.h"
+#include "stb_image.h"
 
 Terrain::Terrain()
 {
@@ -44,7 +45,9 @@ Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
 
 Terrain::~Terrain()
 {
-	delete(m_mesh);
+	delete m_mesh;
+	delete m_heightData;
+	delete m_meshRenderer;
 }
 
 void Terrain::draw()
@@ -101,7 +104,8 @@ void Terrain::updateMesh()
 		}
 	}
 
-	m_mesh = new Mesh(numVerts, positions, normals, texCoords, indices, numIndices);
+	m_mesh = new Mesh();
+	m_mesh->load(numVerts, positions, normals, texCoords, indices, numIndices);
 }
 
 void Terrain::setTextureSlot(int slot, Texture * texture)
@@ -143,8 +147,9 @@ void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitSca
 	m_unitScale = unitScale;
 	m_heightScale = heightScale;
 
-	int channels;
-	unsigned char* image = SOIL_load_image(fileName.c_str(), &m_width, &m_depth, &channels, SOIL_LOAD_L);
+	// Load the image data
+	int w, h, bpp;
+	unsigned char* data = stbi_load(fileName.c_str(), &w, &h, &bpp, 0);
 
 	// Initialize the height map
 	float tHeight = 0.0f;
@@ -154,7 +159,7 @@ void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitSca
 		m_heightData[i] = new float[m_width];
 		for (int j = 0; j < m_width; j++)
 		{
-			m_heightData[i][j] = image[(i * m_width) + j] / 255.0f;
+			m_heightData[i][j] = data[(i * m_width) + j] / 255.0f;
 			tHeight += 0.05f;
 		}
 		tHeight = 0.0f;

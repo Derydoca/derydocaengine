@@ -1,0 +1,14 @@
+Shader: ce40b21a-68bb-4971-a35a-4c9415a527cd
+MaterialParameters:
+  - Type: Color
+    Name: Ka
+    Value: [0.01, 0.01, 0.01, 1.0]
+  - Type: Color
+    Name: Kd
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Color
+    Name: Ks
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Float
+    Name: Shininess
+    Value: 100.0

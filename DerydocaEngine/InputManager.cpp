@@ -12,4 +12,6 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
+	delete m_keyboard;
+	delete m_mouse;
 }

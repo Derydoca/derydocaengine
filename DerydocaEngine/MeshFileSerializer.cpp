@@ -1,11 +1,23 @@
 #include "MeshFileSerializer.h"
 #include "MeshResource.h"
 #include "Mesh.h"
+#include <iostream>
+
+using namespace std;
+
+static MeshFlags stringToFlag(string flagString)
+{
+	if (flagString == "load_adjacent")
+	{
+		return MeshFlags::load_adjacent;
+	}
+
+	return (MeshFlags)0;
+}
 
 MeshSerializer::MeshSerializer()
 {
 }
-
 
 MeshSerializer::~MeshSerializer()
 {
@@ -66,6 +78,16 @@ Resource * MeshSerializer::loadResourceFromMeta(YAML::Node resourceNode)
 		meshResource->setMeshIndex(resourceNode["Index"].as<unsigned int>());
 		meshResource->setMeshName(resourceNode["Name"].as<std::string>());
 		meshResource->setType(MeshResourceType);
+		
+		YAML::Node flagsNode = resourceNode["Flags"];
+		if (flagsNode && flagsNode.IsSequence())
+		{
+			for (size_t i = 0; i < flagsNode.size(); i++)
+			{
+				meshResource->setFlag(stringToFlag(flagsNode[0].as<string>()));
+			}
+		}
+
 		return meshResource;
 	}
 

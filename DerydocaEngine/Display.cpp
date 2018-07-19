@@ -27,6 +27,9 @@ Display::Display(int width, int height, const std::string& title)
 
 	m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL);
 	SDL_SetWindowResizable(m_window, SDL_TRUE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	m_glContext = SDL_GL_CreateContext(m_window);
 
 	GLenum status = glewInit();
@@ -39,8 +42,9 @@ Display::Display(int width, int height, const std::string& title)
 
 	glEnable(GL_DEPTH_TEST);
 
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	// TODO: Reenable after working through the opengl shader cookbook and evaluate a better way of handling this on a per-mesh basis
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 
 /*
 	// Print information about the current instance of OpenGL

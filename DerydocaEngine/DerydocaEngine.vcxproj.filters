@@ -158,6 +158,31 @@
     <ClCompile Include="ShaderLibrary.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
+    <ClCompile Include="ImageProjector.cpp" />
+    <ClCompile Include="EdgeDetectionFilter.cpp" />
+    <ClCompile Include="GaussianBlurFilter.cpp" />
+    <ClCompile Include="BloomFilter.cpp" />
+    <ClCompile Include="GammaCorrectionFilter.cpp" />
+    <ClCompile Include="MultisampleSwitch.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="MeshAdjacencyCalculator.cpp" />
+    <ClCompile Include="BezierCurveRenderer.cpp" />
+    <ClCompile Include="TessellatingQuad.cpp" />
+    <ClCompile Include="BezierPatchMesh.cpp" />
+    <ClCompile Include="BezierPatchMeshFileLoader.cpp" />
+    <ClCompile Include="BezierPatchMeshFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
+    <ClCompile Include="TessellatedMeshRenderer.cpp" />
+    <ClCompile Include="NoiseTexture.cpp" />
+    <ClCompile Include="WoodSliceTexture.cpp" />
+    <ClCompile Include="NightVisionFilter.cpp" />
+    <ClCompile Include="WaveDisplacement.cpp" />
+    <ClCompile Include="ParticleFountain.cpp" />
+    <ClCompile Include="ParticleContinuousFountain.cpp" />
+    <ClCompile Include="ParticleInstanced.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -361,6 +386,37 @@
     <ClInclude Include="ShaderLibrary.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderSubroutineSwitcher.h" />
+    <ClInclude Include="ImageProjector.h" />
+    <ClInclude Include="TextureParameters.h" />
+    <ClInclude Include="EdgeDetectionFilter.h" />
+    <ClInclude Include="GaussianBlurFilter.h" />
+    <ClInclude Include="BloomFilter.h" />
+    <ClInclude Include="RenderPass.h" />
+    <ClInclude Include="GammaCorrectionFilter.h" />
+    <ClInclude Include="MultisampleSwitch.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="stb_image_write.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="MeshFlags.h" />
+    <ClInclude Include="MeshAdjacencyCalculator.h" />
+    <ClInclude Include="BezierCurveRenderer.h" />
+    <ClInclude Include="TessellatingQuad.h" />
+    <ClInclude Include="BezierPatchMesh.h" />
+    <ClInclude Include="BezierPatchMeshFileLoader.h" />
+    <ClInclude Include="BezierPatchMeshFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
+    <ClInclude Include="TessellatedMeshRenderer.h" />
+    <ClInclude Include="Projection.h" />
+    <ClInclude Include="NoiseTexture.h" />
+    <ClInclude Include="WoodSliceTexture.h" />
+    <ClInclude Include="NightVisionFilter.h" />
+    <ClInclude Include="WaveDisplacement.h" />
+    <ClInclude Include="ParticleFountain.h" />
+    <ClInclude Include="ParticleContinuousFountain.h" />
+    <ClInclude Include="ParticleInstanced.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

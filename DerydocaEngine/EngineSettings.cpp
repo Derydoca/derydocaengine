@@ -38,6 +38,13 @@ EngineSettings::EngineSettings(string configFilePath)
 			m_skyboxId = skyboxIdNode.as<uuid>();
 			m_isSkyboxDefined = true;
 		}
+
+		YAML::Node renderingModeNode = cameraNode["RenderMode"];
+		if (renderingModeNode)
+		{
+			int rm = renderingModeNode.as<int>();
+			m_renderingMode = static_cast<Camera::RenderingMode>(rm);
+		}
 	}
 	else
 	{

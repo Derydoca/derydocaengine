@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D0307648-A7A9-413C-A47C-D21474B321D1}</ProjectGuid>
     <RootNamespace>DerydocaEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -95,21 +95,21 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib32-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmdd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>@echo Copying DLLs
 xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
-@echo Copying engine resources
-xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
 @echo Processing the engine resource directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"
+
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,7 +125,7 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <LinkTimeCodeGeneration>
@@ -136,14 +136,14 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
       <Command>@echo Copying DLLs
 xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
-@echo Copying engine resources
-xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
 @echo Processing the engine resource directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"
+
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -164,20 +164,20 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib32-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>@echo Copying DLLs
 xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
-@echo Copying engine resources
-xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
 @echo Processing the engine resource directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"
+
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -193,24 +193,30 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>assimp.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;SOIL.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp.lib;glew32.lib;LibOVR.lib;libyaml-cppmd.lib;SDL2.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\Boost\boost_1_66_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>@echo Copying DLLs
 xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
 
-@echo Copying engine resources
-xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"
-
 @echo Copying engine settings file
 xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
 
 @echo Processing the engine resource directory
-"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"</Command>
+"$(OutDir)DerydocaEngine.exe" -processDirectory "$(SolutionDir)engineResources"
+
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BezierCurveRenderer.cpp" />
+    <ClCompile Include="BezierPatchMesh.cpp" />
+    <ClCompile Include="BezierPatchMeshFileLoader.cpp" />
+    <ClCompile Include="BezierPatchMeshFileSerializer.cpp" />
+    <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
+    <ClCompile Include="BloomFilter.cpp" />
     <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
@@ -220,12 +226,16 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
     <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="EdgeDetectionFilter.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="FileType.cpp" />
     <ClCompile Include="GameComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GammaCorrectionFilter.cpp" />
+    <ClCompile Include="GaussianBlurFilter.cpp" />
     <ClCompile Include="ImageFileSerializer.cpp" />
+    <ClCompile Include="ImageProjector.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
@@ -239,12 +249,20 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
     <ClCompile Include="MaterialResourceSerializer.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshAdjacencyCalculator.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="MeshResource.cpp" />
     <ClCompile Include="MeshFileSerializer.cpp" />
     <ClCompile Include="MeshResourceSerializer.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="MultisampleSwitch.cpp" />
+    <ClCompile Include="NightVisionFilter.cpp" />
+    <ClCompile Include="NoiseTexture.cpp" />
     <ClCompile Include="ObjectLibrary.cpp" />
+    <ClCompile Include="ParticleContinuousFountain.cpp" />
+    <ClCompile Include="ParticleFountain.cpp" />
+    <ClCompile Include="ParticleInstanced.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="FileSerializerLibrary.cpp" />
@@ -258,16 +276,27 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
     <ClCompile Include="ShaderFileSerializer.cpp" />
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="ShaderResourceSerializer.cpp" />
+    <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TessellatedMeshRenderer.cpp" />
+    <ClCompile Include="TessellatingQuad.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureResourceSerializer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WasdMover.cpp" />
+    <ClCompile Include="WaveDisplacement.cpp" />
+    <ClCompile Include="WoodSliceTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BezierCurveRenderer.h" />
+    <ClInclude Include="BezierPatchMesh.h" />
+    <ClInclude Include="BezierPatchMeshFileLoader.h" />
+    <ClInclude Include="BezierPatchMeshFileSerializer.h" />
+    <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
+    <ClInclude Include="BloomFilter.h" />
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
@@ -280,14 +309,18 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
     <ClInclude Include="DebugVisualizer.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="DisplayManager.h" />
+    <ClInclude Include="EdgeDetectionFilter.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="FileType.h" />
     <ClInclude Include="GameComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GammaCorrectionFilter.h" />
+    <ClInclude Include="GaussianBlurFilter.h" />
     <ClInclude Include="GLError.h" />
     <ClInclude Include="GameComponent.h" />
     <ClInclude Include="ImageFileSerializer.h" />
+    <ClInclude Include="ImageProjector.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
@@ -304,13 +337,24 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
     <ClInclude Include="Math.h" />
     <ClInclude Include="MatrixStack.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshAdjacencyCalculator.h" />
+    <ClInclude Include="MeshFlags.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="MeshResource.h" />
     <ClInclude Include="MeshFileSerializer.h" />
     <ClInclude Include="MeshResourceSerializer.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="MultisampleSwitch.h" />
+    <ClInclude Include="NightVisionFilter.h" />
+    <ClInclude Include="NoiseTexture.h" />
     <ClInclude Include="ObjectLibrary.h" />
+    <ClInclude Include="ParticleContinuousFountain.h" />
+    <ClInclude Include="ParticleFountain.h" />
+    <ClInclude Include="ParticleInstanced.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Projection.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RenderPass.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="FileSerializerLibrary.h" />
@@ -328,14 +372,22 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
     <ClInclude Include="ShaderLibrary.h" />
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="ShaderResourceSerializer.h" />
+    <ClInclude Include="ShaderSubroutineSwitcher.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="stb_image_write.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TessellatedMeshRenderer.h" />
+    <ClInclude Include="TessellatingQuad.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureParameters.h" />
     <ClInclude Include="TextureResourceSerializer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="WasdMover.h" />
+    <ClInclude Include="WaveDisplacement.h" />
+    <ClInclude Include="WoodSliceTexture.h" />
     <ClInclude Include="YamlTools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

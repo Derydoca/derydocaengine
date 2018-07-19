@@ -1,0 +1,172 @@
+Scene:
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [0, -1, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 0.05, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [-1, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [0, 0, -1]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 0.05]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Teapot
+      Transform:
+        Position: [-0.3, -1, -0.3]
+        Rotation: [0.5, -0.5, -0.5, -0.5]
+        Scale: [0.15, 0.15, 0.15]
+      Components:
+        - Type: TessellatedMeshRenderer
+          Properties:
+            material: dc8679a6-0ed9-4057-bdcb-1ff0bdcc827e
+            bezierPatchMesh: 0d648145-3b5d-45f4-bea8-fe2d25648b20
+            tessellationLevel: 4
+            
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, -0.25, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.75, 0.75, 0.75]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+
+
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    Properties:
+      Name: Point Light 1
+      Transform:
+        Position: [0, 0, 2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [1.0, 1.0, 1.0, 1.0]
+            type: 1
+            castShadows: true
+            shadowMapFilterType: 1
+            shadowMapHeight: 512
+            shadowMapWidth: 512
+  
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [4, 1.5, 3]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.2, 0.2, 0.2]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [0, 1.5, 3]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.2, 0.2, 0.2]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+            
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [2, 3.5, 3]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.2, 0.2, 0.2]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [2, -0.5, 3]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.2, 0.2, 0.2]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+            
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [2, 1.5, 5]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.2, 0.2, 0.2]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [2, 1.5, 1]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.2, 0.2, 0.2]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 15625be5-1ecd-4a83-b10f-c521cf3166e4
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac

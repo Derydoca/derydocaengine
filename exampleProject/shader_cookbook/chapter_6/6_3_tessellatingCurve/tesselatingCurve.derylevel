@@ -1,0 +1,17 @@
+Scene:
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: BezierCurveRenderer
+          Properties:
+            shader: 1ab52d3b-c0d1-4f63-adda-6a2c097cb036
+            controlPoints: [-1.0, -1.0, -0.5, 1.0, 0.5, -1.0, 1.0, 1.0]
+            numSegments: 50
+            numStrips: 1
+            lineColor: [1.0, 0.0, 0.0, 1.0]

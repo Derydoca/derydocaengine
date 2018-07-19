@@ -114,6 +114,28 @@ namespace YAML {
 		}
 	};
 
+	// Add support for GLM vec2
+	template<>
+	struct convert<glm::vec2> {
+		static Node encode(const glm::vec2& vec) {
+			Node node;
+			node.push_back(vec.x);
+			node.push_back(vec.y);
+			return node;
+		}
+
+		static bool decode(const Node& node, glm::vec2& vec) {
+			if (!node.IsSequence() || node.size() != 2) {
+				return false;
+			}
+
+			vec.x = node[0].as<float>();
+			vec.y = node[1].as<float>();
+
+			return true;
+		}
+	};
+
 	// Add support for Colors
 	template<>
 	struct convert<Color> {
@@ -162,7 +184,6 @@ namespace YAML {
 			std::string stringUuid = node.as<std::string>();
 			boost::uuids::string_generator gen;
 			uuid = gen(stringUuid);
-			//delete(&gen);
 			return true;
 		}
 	};

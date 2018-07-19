@@ -1,0 +1,10 @@
+Shader: bef58587-98d5-4351-9a78-07f6d1f93a87
+MaterialParameters:
+  - Type: Cubemap
+    Slot: 0
+    ZPos: 22f6b427-346c-48aa-b2e2-ec442729fa6b
+    ZNeg: a7ed30f8-0490-40d3-8630-e3b52de3f064
+    YPos: 8751f9ce-ab2a-4b20-958a-86f24570aba8
+    YNeg: df72ce2d-c882-4de3-a84e-8207865d847d
+    XNeg: fe9fe899-eaa8-4a97-b943-1293a5b9701c
+    XPos: cce7792a-4d75-4bf5-8c20-099c8133a018

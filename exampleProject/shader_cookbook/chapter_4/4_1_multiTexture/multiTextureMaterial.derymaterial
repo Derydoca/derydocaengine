@@ -1,0 +1,20 @@
+Shader: 0f12cf03-b783-4280-8af1-4d7fa01167da
+MaterialParameters:
+  - Type: Texture
+    Name: Tex1
+    ID: d88e3c9a-dc0e-4dd7-add6-c81daf470610
+  - Type: Texture
+    Name: Tex2
+    ID: 4cae1246-923f-4975-b9b8-7f076ba15011
+  - Type: Color
+    Name: Material.Ka
+    Value: [0.01, 0.01, 0.01, 1.0]
+  - Type: Color
+    Name: Material.Kd
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Color
+    Name: Material.Ks
+    Value: [0.5, 0.5, 0.5, 1.0]
+  - Type: Float
+    Name: Material.Shininess
+    Value: 30.0

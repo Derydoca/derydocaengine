@@ -1,0 +1,20 @@
+Shader: 9c02f231-0092-4361-9cd8-05fe4db5ec23
+MaterialParameters:
+  - Type: Color
+    Name: Material.Ka
+    Value: [0.1, 0.1, 0.1, 1.0]
+  - Type: Color
+    Name: Material.Kd
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Color
+    Name: Material.Ks
+    Value: [0.3, 0.3, 0.3, 1.0]
+  - Type: Float
+    Name: Material.Shininess
+    Value: 50.0
+  - Type: Texture
+    Name: Material.AOTex
+    ID: 3831bb8d-2a86-455e-aeeb-baeac024d1e7
+  - Type: Texture
+    Name: Material.DiffuseTex
+    ID: a43c2a20-8738-4313-96dd-57547edc61b1 # Solid white texture

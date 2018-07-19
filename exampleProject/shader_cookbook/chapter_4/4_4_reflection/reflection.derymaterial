@@ -1,0 +1,14 @@
+Shader: 3988658b-66f3-4279-8162-62450947bdd1
+MaterialParameters:
+  - Type: Texture
+    Name: CubeMapTex
+    ID: a5dfbc43-582b-46cf-9416-e853b21cae07
+  - Type: Bool
+    Name: DrawSkyBox
+    Value: false
+  - Type: Float
+    Name: ReflectFactor
+    Value: 0.75
+  - Type: Color
+    Name: MaterialColor
+    Value: [1.0, 0.8, 0.8, 1.0]

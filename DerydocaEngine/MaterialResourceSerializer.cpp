@@ -31,9 +31,30 @@ void * MaterialResourceSerializer::deserialize(Resource * resource)
 		std::string paramType = parameters[i]["Type"].as<std::string>();
 		if (paramType == "Texture")
 		{
-			int slot = parameters[i]["Slot"].as<int>();
 			auto texture = loadResource<Texture*>(parameters[i], "ID");
-			material->setTextureSlot(slot, texture);
+			YAML::Node nameNode = parameters[i]["Name"];
+			if (texture != nullptr && nameNode)
+			{
+				material->setTexture(nameNode.as<std::string>(), texture);
+			}
+		}
+		else if (paramType == "Color")
+		{
+			Color paramValue = parameters[i]["Value"].as<Color>();
+			std::string paramName = parameters[i]["Name"].as<string>();
+			material->setColorRGBA(paramName, paramValue);
+		}
+		else if (paramType == "Float")
+		{
+			float paramValue = parameters[i]["Value"].as<float>();
+			std::string paramName = parameters[i]["Name"].as<string>();
+			material->setFloat(paramName, paramValue);
+		}
+		else if (paramType == "Bool")
+		{
+			bool paramValue = parameters[i]["Value"].as<bool>();
+			std::string paramName = parameters[i]["Name"].as<string>();
+			material->setBool(paramName, paramValue);
 		}
 	}
 

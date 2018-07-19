@@ -3,16 +3,18 @@
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
+#include "MeshAdjacencyCalculator.h"
 
 Mesh::Mesh() {
 
 }
 
-Mesh::Mesh(const std::string& fileName) : Mesh(fileName, 0)
+void Mesh::load(const std::string& fileName)
 {
+	load(fileName, 0);
 }
 
-Mesh::Mesh(const std::string & fileName, unsigned int meshIndex)
+void Mesh::load(const std::string & fileName, unsigned int meshIndex)
 {
 	const aiScene* aiModel = aiImportFile(fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -30,20 +32,27 @@ Mesh::Mesh(const std::string & fileName, unsigned int meshIndex)
 	RefreshVbo();
 }
 
-Mesh::Mesh(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices) :
-	m_positions(positions),
-	m_numVertices(numVertices),
-	m_indices(indices),
-	m_numIndices(numIndices),
-	m_normals(normals),
-	m_texCoords(texCoords)
+void Mesh::load(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices)
 {
+	m_positions = positions;
+	m_numVertices = numVertices;
+	m_indices = indices;
+	m_numIndices = numIndices;
+	m_normals = normals;
+	m_texCoords = texCoords;
+
 	RefreshVbo();
 }
 
 Mesh::~Mesh()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayObject);
+	delete[] m_positions;
+	delete[] m_texCoords;
+	delete[] m_normals;
+	delete[] m_tangents;
+	delete[] m_indices;
+	delete[] m_bitangents;
 }
 
 void Mesh::RefreshVbo()
@@ -80,6 +89,24 @@ void Mesh::RefreshVbo()
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	}
 
+	// Initialize the tangents buffer
+	if (m_tangents != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_tangents, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	// Initialize the bitangents buffer
+	if (m_bitangents != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_bitangents, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(4);
+		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
 	// Initialize the indices buffer
 	if (m_indices != nullptr)
 	{
@@ -97,6 +124,7 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasPositions())
 	{
+		delete[] m_positions;
 		m_positions = new glm::vec3[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{
@@ -106,6 +134,7 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasTextureCoords(uvIndex))
 	{
+		delete[] m_texCoords;
 		m_texCoords = new glm::vec2[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{
@@ -115,6 +144,7 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasNormals())
 	{
+		delete[] m_normals;
 		m_normals = new glm::vec3[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{
@@ -124,13 +154,42 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasFaces())
 	{
-		m_numIndices = mesh->mNumFaces * 3;
-		m_indices = new unsigned int[m_numIndices];
-		for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+		if (m_flags & MeshFlags::load_adjacent)
 		{
-			m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
-			m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
-			m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
+			MeshAdjacencyCalculator mac;
+			m_numIndices = mesh->mNumFaces * 3 * 2;
+			delete[] m_indices;
+			m_indices = new unsigned int[m_numIndices];
+			mac.buildAdjacencyList(mesh, m_indices);
+		}
+		else
+		{
+			m_numIndices = mesh->mNumFaces * 3;
+			delete[] m_indices;
+			m_indices = new unsigned int[m_numIndices];
+			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+			{
+				m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
+				m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
+				m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
+			}
+		}
+	}
+
+	if (mesh->HasTangentsAndBitangents())
+	{
+		delete[] m_tangents;
+		m_tangents = new glm::vec3[m_numVertices];
+		for (unsigned int i = 0; i < m_numVertices; i++)
+		{
+			m_tangents[i] = glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
+		}
+
+		delete[] m_bitangents;
+		m_bitangents = new glm::vec3[m_numVertices];
+		for (unsigned int i = 0; i < m_numVertices; i++)
+		{
+			m_bitangents[i] = glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z);
 		}
 	}
 
@@ -140,7 +199,8 @@ void Mesh::draw()
 {
 	glBindVertexArray(m_vertexArrayObject);
 
-	glDrawElementsBaseVertex(GL_TRIANGLES, m_numIndices, GL_UNSIGNED_INT, 0, 0);
+	GLenum mode = m_flags & MeshFlags::load_adjacent ? GL_TRIANGLES_ADJACENCY : GL_TRIANGLES;
+	glDrawElementsBaseVertex(mode, m_numIndices, GL_UNSIGNED_INT, 0, 0);
 
 	glBindVertexArray(0);
 }

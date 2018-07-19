@@ -10,6 +10,7 @@ enum FileType
 	ImageFileType,
 	LevelFileType,
 	ShaderFileType,
+	BezierPatchMeshType,
 };
 
 FileType pathToFileType(std::string str);

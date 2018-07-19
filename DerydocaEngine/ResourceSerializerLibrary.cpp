@@ -4,6 +4,7 @@
 #include "TextureResourceSerializer.h"
 #include "CubemapResourceSerializer.h"
 #include "ShaderResourceSerializer.h"
+#include "BezierPatchMeshResourceSerializer.h"
 
 ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType type)
 {
@@ -26,6 +27,7 @@ ResourceSerializerLibrary::ResourceSerializerLibrary()
 	registerSerializer(new TextureResourceSerializer());
 	registerSerializer(new CubemapResourceSerializer());
 	registerSerializer(new ShaderResourceSerializer());
+	registerSerializer(new BezierPatchMeshResourceSerializer());
 }
 
 ResourceSerializerLibrary::~ResourceSerializerLibrary()

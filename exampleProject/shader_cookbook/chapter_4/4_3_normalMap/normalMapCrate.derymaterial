@@ -1,0 +1,17 @@
+Shader: 5bc0addd-34ec-4d58-804e-8984cf59cb10
+MaterialParameters:
+  - Type: Texture
+    Name: ColorTex
+    ID: 8f44b37f-ec08-4ca8-937c-c3909a38e370
+  - Type: Texture
+    Name: NormalMapTex
+    ID: 72669a45-5836-448e-9602-7d21a8dff9f0
+  - Type: Color
+    Name: Material.Ka
+    Value: [0.01, 0.01, 0.01, 1.0]
+  - Type: Color
+    Name: Material.Ks
+    Value: [0.25, 0.25, 0.25, 1.0]
+  - Type: Float
+    Name: Material.Shininess
+    Value: 10.0

@@ -1,0 +1,23 @@
+Scene:
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [0, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.5, 0.5, 0.5]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: c72587d9-63db-4143-a7a6-c8c49d83570c
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+        - Type: NoiseTexture
+          Properties:
+            width: 256
+            height: 256
+            seamless: true
+            textureName: NoiseTexture
+            baseFrequency: 4.0
+            persistence: 0.5
+            periodic: false

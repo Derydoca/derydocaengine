@@ -1,0 +1,187 @@
+Scene:
+  - Type: GameObject
+    ID: a2ff98cc-9b21-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Vertex Diffuse Model
+      Transform:
+        Position: [-0.9, 0.75, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 3d15b574-e99a-4c11-8d94-d3cfc3da9bc9
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
+    ID: a2bf98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Phong Model
+      Transform:
+        Position: [-0.9, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: f486c300-2871-4494-b458-ae91e333fd09
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-aa26-680ad31eb6aa
+    Properties:
+      Name: Phong Two Sided Model
+      Transform:
+        Position: [1.3, 0.45, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: e59b0287-0aec-4378-9dab-daf8900e7dcb
+            Mesh: d70e47aa-02d0-40e6-8abf-23f28a674fe7
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Grid Discard Shader Example
+      Transform:
+        Position: [0.3, 0.75, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: afadee0b-1b3d-424c-ae8d-477deb2db1bf
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4626-8a26-680ad31eb6aa
+    Properties:
+      Name: Phong Model Flat
+      Transform:
+        Position: [-0.3, 0.75, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 61a35185-b9fb-4549-bd85-e451b44a3ca7
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6a1
+    Properties:
+      Name: Shader Subroutine Example (Diffuse)
+      Transform:
+        Position: [-0.3, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 5e80871d-4167-4977-a19f-b263f3ca8d6c
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+        - Type: ShaderSubroutineSwitcher
+          Properties:
+            SubroutineName: diffuseOnly
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6b2
+    Properties:
+      Name: Shader Subroutine Example (Phong)
+      Transform:
+        Position: [0.3, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 5e80871d-4167-4977-a19f-b263f3ca8d6c
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+        - Type: ShaderSubroutineSwitcher
+          Properties:
+            SubroutineName: phongModel
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
+    Properties:
+      Name: Point Light Left
+      Transform:
+        Position: [-1.5, 0, 0.5]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [1.0, 0.0, 0.0, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
+    Properties:
+      Name: Point Light Right
+      Transform:
+        Position: [1.5, 0, 0.5]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [0.0, 0.0, 1.0, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
+    Properties:
+      Name: Point Light Top
+      Transform:
+        Position: [0, 2, 0.5]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [0.0, 0.7, 0.0, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
+    Properties:
+      Name: Point Light Back
+      Transform:
+        Position: [0, 0.3, -1]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [1.0, 1.0, 1.0, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114

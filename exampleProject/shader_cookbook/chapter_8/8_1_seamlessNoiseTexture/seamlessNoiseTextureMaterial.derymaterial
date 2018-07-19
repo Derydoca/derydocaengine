@@ -1,0 +1,6 @@
+Shader: 2001f352-fde3-4134-9acf-7ca2e310533b
+MaterialParameters:
+  - Type: Float
+    Name: Scale
+    Value: 2.0
+    

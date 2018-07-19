@@ -1,0 +1,29 @@
+Shader: 77b98909-dc39-409c-827a-f142eac3e4b0
+MaterialParameters:
+  - Type: Color
+    Name: Material.Ka
+    Value: [0.1, 0.1, 0.1, 1.0]
+  - Type: Color
+    Name: Material.Kd
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Color
+    Name: Material.Ks
+    Value: [0.3, 0.3, 0.3, 1.0]
+  - Type: Float
+    Name: Material.Shininess
+    Value: 10.0
+  - Type: Color
+    Name: PaintMaterial.Ka
+    Value: [0.1, 0.1, 0.1, 1.0]
+  - Type: Color
+    Name: PaintMaterial.Kd
+    Value: [1.0, 0.2, 0.0, 1.0]
+  - Type: Color
+    Name: PaintMaterial.Ks
+    Value: [0.3, 0.3, 0.3, 1.0]
+  - Type: Float
+    Name: PaintMaterial.Shininess
+    Value: 150.0
+  - Type: Float
+    Name: Threshold
+    Value: 0.6

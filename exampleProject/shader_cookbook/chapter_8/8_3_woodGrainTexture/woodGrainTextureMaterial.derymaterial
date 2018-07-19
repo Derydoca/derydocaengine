@@ -1,0 +1,11 @@
+Shader: 3fa9c617-505b-4a71-90fe-57baa5fdf752
+MaterialParameters:
+  - Type: Float
+    Name: Scale
+    Value: 1.0
+  - Type: Color
+    Name: DarkWoodColor
+    Value: [0.8, 0.5, 0.1, 1.0]
+  - Type: Color
+    Name: LightWoodColor
+    Value: [1.0, 0.75, 0.25, 1.0]

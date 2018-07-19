@@ -1,6 +1,5 @@
 #pragma once
 #include "Mesh.h"
-#include "SOIL.h"
 #include "Camera.h"
 #include "MatrixStack.h"
 #include "GameComponent.h"

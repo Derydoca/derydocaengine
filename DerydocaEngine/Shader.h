@@ -5,34 +5,67 @@
 #include "Transform.h"
 #include "Camera.h"
 #include "Color.h"
+#include "Texture.h"
+#include "Mesh.h"
+#include "RenderPass.h"
+#include "Projection.h"
 
 class Shader
 {
 public:
 	Shader(const std::string& fileName);
+	Shader(const std::string& fileName, int count, const char *const * varyings);
 	~Shader();
 
 	void bind();
-	void update(const MatrixStack * matrixStack);
+	void update(const MatrixStack * matrixStack, Projection projection, Transform* trans);
 	void update(const glm::mat4 matrix);
+	void updateViaActiveCamera(const MatrixStack * matrixStack);
 
 	void setFloat(std::string name, float val);
+	void setFloatArray(std::string name, float* arrayLocation, unsigned int arrayLength);
 	void setColorRGB(std::string name, Color color);
 	void setColorRGBA(std::string name, Color color);
 	void setInt(std::string name, int val);
+	void setIntArray(std::string name, int* arrayLocation, unsigned int arrayLength);
 	void setVec3(std::string name, glm::vec3 val);
 	void setVec4(std::string name, glm::vec4 val);
 	void setMat3(std::string name, glm::mat3 val);
 	void setMat4(std::string name, glm::mat4 val);
+	void setTexture(std::string name, int textureUnit, Texture* handle);
+	void setTexture(std::string name, int textureUnit, GLenum textureType, GLuint handle);
+
+	void clearFloat(std::string name);
+	void clearFloatArray(std::string name, unsigned int arrayLength);
+	void clearColorRGB(std::string name);
+	void clearColorRGBA(std::string name);
+	void clearInt(std::string name);
+	void clearIntArray(std::string name, unsigned int arrayLength);
+	void clearVec3(std::string name);
+	void clearVec4(std::string name);
+	void clearMat3(std::string name);
+	void clearMat4(std::string name);
+	void clearTexture(std::string name, int textureUnit, GLenum textureType);
 
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
+	std::string GetTesslleationControlShaderPath() const { return m_loadPath + ".tcs"; }
+	std::string GetTessellationEvaluationShaderPath() const { return m_loadPath + ".tes"; }
+	std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 	std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
+
+	GLuint getSubroutineIndex(GLuint program, std::string subroutineName);
+	void setSubroutine(GLuint program, GLuint subroutineIndex);
+
+	void setSubPasses(GLuint program, RenderPass* renderPasses, int numPasses);
+
+	void renderMesh(Mesh* mesh, RenderTexture* renderTexture);
 private:
-	static const unsigned int NUM_SHADERS = 2;
+	static const unsigned int NUM_SHADERS = 5;
 	Shader(const Shader& other) {}
 	void operator=(const Shader& other) {}
 	int getUniformName(std::string stringName);
+	void setTransformFeedbackVaryings(int count, const char *const * varyings);
 
 	enum {
 		TRANSFORM_MVP = 0,
@@ -49,5 +82,7 @@ private:
 	GLint m_uniforms[NUM_UNIFORMS];
 	std::string m_loadPath;
 	std::map<std::string, int> m_uniformLookup;
+	int m_numPasses;
+	RenderPass* m_renderPasses;
 };
 

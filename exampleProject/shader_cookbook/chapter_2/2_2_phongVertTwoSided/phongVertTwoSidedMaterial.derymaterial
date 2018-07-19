@@ -1,0 +1,14 @@
+Shader: c9a2ea76-5da9-47a5-92dd-76dbbcc60ba8
+MaterialParameters:
+  - Type: Color
+    Name: Material.Ka
+    Value: [0.05, 0.05, 0.05, 1.0]
+  - Type: Color
+    Name: Material.Kd
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Color
+    Name: Material.Ks
+    Value: [1.0, 1.0, 1.0, 1.0]
+  - Type: Float
+    Name: Material.Shininess
+    Value: 5.0

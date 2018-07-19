@@ -12,11 +12,14 @@ public:
 
 	void setRawShaderName(string rawShaderName) { m_rawShaderName = rawShaderName; }
 	void setFragmentShaderSource(string fragmentShaderSource) { m_fragmentShaderSource = fragmentShaderSource; }
+	void setGeometryShaderSource(string geometryShaderSource) { m_geometryShaderSource = geometryShaderSource; }
 
 	string getRawShaderName() const { return m_rawShaderName; }
 	string getVertexShaderLocation() const { return m_sourceFilePath; }
 	string getFragmentShaderSource() const { return m_fragmentShaderSource; }
+	string getGeometryShaderSource() const { return m_geometryShaderSource; }
 private:
 	string m_rawShaderName;
 	string m_fragmentShaderSource;
+	string m_geometryShaderSource;
 };

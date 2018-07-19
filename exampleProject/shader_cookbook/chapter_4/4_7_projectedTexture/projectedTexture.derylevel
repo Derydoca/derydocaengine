@@ -1,0 +1,85 @@
+Scene:
+  - Type: GameObject
+    ID: a1ff98cc-9421-4225-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel
+      Transform:
+        Position: [0, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          ID: aaaaaaaa-9421-4226-8a26-680ad31eb6aa
+          Properties:
+            Material: b2bf94c3-f303-4da4-87e6-8fc8928be1e7
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Floor
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [10, 10, 10]
+      Components:
+        - Type: MeshRenderer
+          ID: aaaaaaaa-9421-4226-8a26-680ad31eb6aa
+          Properties:
+            Material: b2bf94c3-f303-4da4-87e6-8fc8928be1e7
+            Mesh: e66593df-56c5-41e5-9016-358e0bada566
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad11eb600
+    Properties:
+      Name: Projector
+      Transform:
+        Position: [1.0, 1.0, -1.0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: ImageProjector
+          Properties:
+            focalPoint: [0.0, 0.0, -2.0]
+            upVector: [1, 0, 0]
+            fov: 30.0
+            zNear: 0.2
+            zFar: 1000.0
+            texture: 984b57ee-d8b8-4d15-a682-95f1185538a7
+            affectedMeshRenderers:
+              - aaaaaaaa-9421-4226-8a26-680ad31eb6aa
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
+    Properties:
+      Name: Point Light Left
+      Transform:
+        Position: [-1, 1, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [0.5, 0.5, 0.5, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    Properties:
+      Name: Point Light Right
+      Transform:
+        Position: [1, 1, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [0.0, 0.0, 0.5, 1.0]
+            type: 1
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114

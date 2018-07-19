@@ -3,6 +3,11 @@
 #include "ObjectLibrary.h"
 #include "CommandLineArgs.h"
 #include <iostream>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#define STBI_MSC_SECURE_CRT
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 
 using namespace std;
 
@@ -42,4 +47,5 @@ int main(int argc, char* argv[])
 	// Open the editor
 	Editor* editor = new Editor();
 	return editor->Run(projectArgs.front(), levelIdentifier);
+	delete editor;
 }
