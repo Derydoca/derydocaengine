@@ -48,6 +48,7 @@ public:
 
 	void setFov(float fov) { m_fov = fov; }
 	void setAspectRatio(float aspectRatio) { m_aspect = aspectRatio; }
+	void setAspectRatio(int width, int height) { m_aspect = (float)width / (float)(height != 0 ? height: 1); }
 	void setZNear(float zNear) { m_zNear = zNear; }
 	void setZFar(float zFar) { m_zFar = zFar; }
 

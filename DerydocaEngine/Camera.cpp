@@ -116,6 +116,12 @@ void Camera::setRenderingMode(RenderingMode mode)
 	}
 }
 
+void Camera::resize(int width, int height)
+{
+	m_projection.setAspectRatio(width, height);
+	m_projection.recalculateProjectionMatrix();
+}
+
 void Camera::createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int width, int height)
 {
 	glActiveTexture(textureUnit);

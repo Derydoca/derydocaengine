@@ -3,10 +3,12 @@
 #include <sdl2/SDL.h>
 #undef main
 #include <string>
-#include "Keyboard.h"
 #include <GL/glew.h>
 #include <iostream>
 #include <vector>
+#include "Keyboard.h"
+
+class Camera;
 
 class Display
 {
@@ -23,9 +25,13 @@ public:
 	inline int getHeight() const { return m_height; }
 
 	void bindAsRenderTarget();
+	void registerCamera(Camera* cam) { m_camera = cam; }
+	void unregisterCamera() { m_camera = nullptr; }
 private:
 	Display(const Display& other) {}
 	Display& operator=(const Display& other) {}
+
+	void windowSizeChanged(int width, int height);
 
 	SDL_Window* m_window;
 	SDL_GLContext m_glContext;
@@ -33,5 +39,6 @@ private:
 	int m_width;
 	int m_height;
 	Keyboard* m_keyboard;
+	Camera* m_camera;
 };
 

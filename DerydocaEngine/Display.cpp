@@ -2,6 +2,7 @@
 #include "DisplayManager.h"
 #include "InputManager.h"
 #include <iostream>
+#include "Camera.h"
 
 using namespace std;
 
@@ -88,6 +89,17 @@ void Display::bindAsRenderTarget()
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }
 
+void Display::windowSizeChanged(int width, int height)
+{
+	m_width = width;
+	m_height = height;
+
+	if (m_camera)
+	{
+		m_camera->resize(width, height);
+	}
+}
+
 void Display::init(int width, int height, const std::string & title)
 {
 }
@@ -125,13 +137,8 @@ void Display::update() {
 			switch (e.window.event)
 			{
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
-				m_width = e.window.data1;
-				m_height = e.window.data2;
-				SDL_SetWindowSize(m_window, m_width, m_height);
-				//SDL_RenderSetLogicalSize(m_window, m_width, m_height);
-				//SDL_GL_DeleteContext(m_glContext);
-				//m_glContext = SDL_GL_CreateContext(m_window);
-				
+				windowSizeChanged(e.window.data1, e.window.data2);
+
 				break;
 			default:
 				break;

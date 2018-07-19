@@ -73,7 +73,20 @@ public:
 	*/
 	void renderRoot(GameObject* root);
 
-	void setDisplay(Display* display) { m_display = display; }
+	void setDisplay(Display* display)
+	{
+		if (m_display != nullptr)
+		{
+			m_display->unregisterCamera();
+		}
+
+		m_display = display;
+
+		if (m_display != nullptr)
+		{
+			m_display->registerCamera(this);
+		}
+	}
 	Display* getDisplay() { return m_display; }
 	float getDisplayWidth() { return m_renderTexture != nullptr ? m_renderTexture->getWidth() : m_display->getWidth(); }
 	float getDisplayHeight() { return m_renderTexture != nullptr ? m_renderTexture->getHeight() : m_display->getHeight(); }
@@ -81,6 +94,7 @@ public:
 	void init();
 	void setDisplayRect(float x, float y, float w, float h);
 	void setRenderingMode(RenderingMode mode);
+	void resize(int width, int height);
 
 	void createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int width, int height);
 
