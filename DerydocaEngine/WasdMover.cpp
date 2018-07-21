@@ -20,10 +20,10 @@ void WasdMover::update(float deltaTime) {
 
 	// Set the mouse to relative mode when the right mouse button is down
 	if (m_mouse->isKeyDownFrame(2)) {
-		m_mouse->setRelativeMode(SDL_TRUE);
+		m_mouse->setRelative(true);
 	}
 	else if (m_mouse->isKeyUpFrame(2)) {
-		m_mouse->setRelativeMode(SDL_FALSE);
+		m_mouse->setRelative(false);
 	}
 
 	// Only allow the camera to be moved when the right mouse button is down
@@ -66,7 +66,7 @@ void WasdMover::update(float deltaTime) {
 		m_transform->setPos(m_transform->getPos() + glm::vec3(globalMomentum));
 
 		// Update the rotations based on mouse movement
-		glm::ivec2 diff = m_mouse->getDifferential();
+		glm::ivec2 diff = m_mouse->getRelativeMovement();
 		m_eulerRot.x -= (float)diff.y * m_mouseSensitivityX;
 		m_eulerRot.y -= (float)diff.x * m_mouseSensitivityY;
 

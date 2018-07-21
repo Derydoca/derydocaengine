@@ -13,9 +13,13 @@ public:
 
 	inline bool isDown() { return m_isDown; }
 	void setState(bool isDown, unsigned long tick) {
+
+		if (m_prevDownState != isDown)
+		{
+			m_stateChangeTick = tick;
+		}
 		m_prevDownState = m_isDown;
 		m_isDown = isDown;
-		m_stateChangeTick = tick;
 	}
 
 	unsigned long getStateChangeTick() { return m_stateChangeTick; }

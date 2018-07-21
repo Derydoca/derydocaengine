@@ -23,6 +23,7 @@ public:
 
 	inline int getWidth() const { return m_width; }
 	inline int getHeight() const { return m_height; }
+	inline SDL_Window* getWindow() const { return m_window; }
 
 	void bindAsRenderTarget();
 	void registerCamera(Camera* cam) { m_camera = cam; }

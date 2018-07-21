@@ -7,6 +7,7 @@ InputManager::InputManager()
 	m_keyboard->init();
 
 	m_mouse = new Mouse();
+	m_mouse->init();
 
 }
 

@@ -8,6 +8,8 @@ using namespace std;
 
 Display::Display(int width, int height, const std::string& title)
 {
+	DisplayManager::getInstance().addDisplay(this);
+
 	m_width = width;
 	m_height = height;
 
@@ -69,8 +71,6 @@ Display::Display(int width, int height, const std::string& title)
 */
 
 	m_keyboard = InputManager::getInstance().getKeyboard();
-
-	DisplayManager::getInstance().addDisplay(this);
 }
 
 Display::~Display()
