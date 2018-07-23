@@ -41,8 +41,10 @@ Camera::Camera(float fov, float aspect, float zNear, float zFar)
 
 Camera::~Camera()
 {
-	delete(m_displayRect);
-	delete(m_skybox);
+	delete m_displayRect;
+	delete m_skybox;
+	delete m_renderTexture;
+	delete m_postProcessMaterial;
 	CameraManager::getInstance().removeCamera(this);
 }
 

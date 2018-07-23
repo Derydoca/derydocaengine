@@ -200,7 +200,7 @@ void ParticleContinuousFountain::initBuffers()
 		switch (m_emitterType)
 		{
 		case ParticleEmitterType::Cone:
-			v = getVelocityFromCube();
+			v = getVelocityFromCone();
 			break;
 		default:
 			v = getVelocityFromCube();

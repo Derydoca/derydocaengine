@@ -45,7 +45,9 @@ Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
 
 Terrain::~Terrain()
 {
-	delete(m_mesh);
+	delete m_mesh;
+	delete m_heightData;
+	delete m_meshRenderer;
 }
 
 void Terrain::draw()

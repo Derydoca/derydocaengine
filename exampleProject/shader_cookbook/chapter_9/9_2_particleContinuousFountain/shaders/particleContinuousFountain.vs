@@ -59,7 +59,13 @@ void render()
 {
     float age = Time - VertexStartTime;
     float agePct = age / ParticleLifetime;
-    gl_PointSize = mix(MinParticleSize, MaxParticleSize, agePct);
+    if(agePct > 0 && agePct <= 1.0) {
+        gl_PointSize = mix(MinParticleSize, MaxParticleSize, agePct);
+    }
+    else
+    {
+        gl_PointSize = 0.0;
+    }
     Transp = 1.0 - age / ParticleLifetime;
     gl_Position = MVP * vec4(VertexPosition, 1.0);
 }

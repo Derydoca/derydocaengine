@@ -9,7 +9,7 @@ Light::Light()
 Light::~Light()
 {
 	LightManager::getInstance().removeLight(this);
-	delete(m_shadowMapMaterial);
+	delete m_shadowMapMaterial;
 }
 
 glm::mat4 Light::getProjectionMatrix()
@@ -146,6 +146,7 @@ void Light::generateShadowMap()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	Shader* shadowMapShader = loadResource<Shader*>("05cdcea1-2312-4e30-828c-68717d484274");
+	delete m_shadowMapMaterial;
 	m_shadowMapMaterial = new Material();
 	m_shadowMapMaterial->setShader(shadowMapShader);
 

@@ -13,6 +13,7 @@ ImageProjector::ImageProjector()
 
 ImageProjector::~ImageProjector()
 {
+	delete m_projectorTexture;
 }
 
 void ImageProjector::init()

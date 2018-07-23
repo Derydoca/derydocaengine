@@ -47,4 +47,5 @@ int main(int argc, char* argv[])
 	// Open the editor
 	Editor* editor = new Editor();
 	return editor->Run(projectArgs.front(), levelIdentifier);
+	delete editor;
 }

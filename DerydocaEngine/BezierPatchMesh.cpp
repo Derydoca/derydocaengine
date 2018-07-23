@@ -7,7 +7,7 @@ BezierPatchMesh::BezierPatchMesh()
 
 BezierPatchMesh::~BezierPatchMesh()
 {
-	delete(m_patchData);
+	delete[] m_patchData;
 }
 
 void BezierPatchMesh::loadPatchData(int numPatches, float * patchData)

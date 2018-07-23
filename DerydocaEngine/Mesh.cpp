@@ -47,6 +47,12 @@ void Mesh::load(unsigned int numVertices, glm::vec3* positions, glm::vec3* norma
 Mesh::~Mesh()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayObject);
+	delete[] m_positions;
+	delete[] m_texCoords;
+	delete[] m_normals;
+	delete[] m_tangents;
+	delete[] m_indices;
+	delete[] m_bitangents;
 }
 
 void Mesh::RefreshVbo()
@@ -118,6 +124,7 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasPositions())
 	{
+		delete[] m_positions;
 		m_positions = new glm::vec3[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{
@@ -127,6 +134,7 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasTextureCoords(uvIndex))
 	{
+		delete[] m_texCoords;
 		m_texCoords = new glm::vec2[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{
@@ -136,6 +144,7 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasNormals())
 	{
+		delete[] m_normals;
 		m_normals = new glm::vec3[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{
@@ -149,12 +158,14 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 		{
 			MeshAdjacencyCalculator mac;
 			m_numIndices = mesh->mNumFaces * 3 * 2;
+			delete[] m_indices;
 			m_indices = new unsigned int[m_numIndices];
 			mac.buildAdjacencyList(mesh, m_indices);
 		}
 		else
 		{
 			m_numIndices = mesh->mNumFaces * 3;
+			delete[] m_indices;
 			m_indices = new unsigned int[m_numIndices];
 			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 			{
@@ -167,12 +178,14 @@ void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
 
 	if (mesh->HasTangentsAndBitangents())
 	{
+		delete[] m_tangents;
 		m_tangents = new glm::vec3[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{
 			m_tangents[i] = glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
 		}
 
+		delete[] m_bitangents;
 		m_bitangents = new glm::vec3[m_numVertices];
 		for (unsigned int i = 0; i < m_numVertices; i++)
 		{

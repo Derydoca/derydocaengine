@@ -8,6 +8,7 @@ BezierCurveRenderer::BezierCurveRenderer()
 
 BezierCurveRenderer::~BezierCurveRenderer()
 {
+	delete m_material;
 }
 
 void BezierCurveRenderer::init()
