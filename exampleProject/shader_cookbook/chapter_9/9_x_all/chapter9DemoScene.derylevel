@@ -1,0 +1,131 @@
+Scene:
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Particle Instanced
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.15, 0.15, 0.15]
+      Components:
+        - Type: ParticleInstanced
+          Properties:
+            numParticles: 10000
+            velocityMin: 0.75
+            velocityMax: 1.25
+            lifetime: 5.0
+            angle: 12.0
+            shader: eb2e2b32-03fa-4e1f-aa82-72286fc83b51
+            mesh: 84d21022-d7b4-4dee-b617-90763d995773
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Displaced Plane
+      Transform:
+        Position: [0, -0.5, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 8de02efa-e971-47a4-9908-a7752ddaccd1
+            Mesh: e66593df-56c5-41e5-9016-358e0bada566
+        - Type: WaveDisplacement
+          Properties:
+            k: 5.0
+            velocity: 0.5
+            amplitude: 0.1
+        - Type: MaterialRefresher
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    Properties:
+      Name: Point Light 1
+      Transform:
+        Position: [2, 0.1, 2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [1.0, 1.0, 1.0, 1.0]
+            type: 1
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    Properties:
+      Name: Point Light 2
+      Transform:
+        Position: [-2, 0, 2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [1.0, 0.2, 0.2, 1.0]
+            type: 1
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Particle Continuous Fountain
+      Transform:
+        Position: [0, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: ParticleContinuousFountain
+          Properties:
+            emitterType: 2
+            numParticles: 10000
+            velocityMin: 0.75
+            velocityMax: 1.25
+            lifetime: 5.0
+            angle: 12.0
+            particleSizeMin: 20.0
+            particleSizeMax: 20.0
+            shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
+            texture: cb774137-e5d2-4ee1-b2ab-f906cbeb148d
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Particle Continuous Fountain
+      Transform:
+        Position: [-1, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: ParticleContinuousFountain
+          Properties:
+            numParticles: 10000
+            velocityMin: [0.0, 0.05, 0.0]
+            velocityMax: [0.0, 0.1, 0.0]
+            lifetime: 12.0
+            acceleration: [0.0, 0.025, 0.0]
+            angle: 12.0
+            emitterType: 1
+            emitterSize: [1.0, 0.0, 0.0]
+            particleSizeMin: 10.0
+            particleSizeMax: 300.0
+            shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
+            texture: 7d1edd30-bff2-4caf-8152-c74269901ff0
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Particle Continuous Fountain
+      Transform:
+        Position: [1, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: ParticleContinuousFountain
+          Properties:
+            numParticles: 10000
+            velocityMin: [0.0, 0.1, 0.0]
+            velocityMax: [0.0, 0.5, 0.0]
+            lifetime: 4.0
+            acceleration: [0.0, 0.1, 0.0]
+            angle: 12.0
+            emitterType: 1
+            emitterSize: [1.0, 0.0, 0.0]
+            particleSizeMin: 50.0
+            particleSizeMax: 50.0
+            shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
+            texture: 3530afaf-4c1e-423e-a1ca-e30a002c1132
