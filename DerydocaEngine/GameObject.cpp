@@ -75,6 +75,19 @@ void GameObject::init()
 	}
 }
 
+void GameObject::postInit()
+{
+	for each (GameComponent* c in m_components)
+	{
+		c->postInit();
+	}
+
+	for each (GameObject* go in m_children)
+	{
+		go->postInit();
+	}
+}
+
 void GameObject::update(float deltaTime) {
 	for each (GameComponent* c in m_components)
 	{

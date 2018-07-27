@@ -21,6 +21,7 @@ class GameComponent {
 public:
 	GameComponent() {}
 	virtual void init() {}
+	virtual void postInit() {}
 	virtual void update(float deltaTime) {}
 	virtual void preRender() {}
 	virtual void render(MatrixStack* matrixStack) {}

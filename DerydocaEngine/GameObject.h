@@ -17,6 +17,7 @@ public:
 	~GameObject();
 
 	void init();
+	void postInit();
 	void update(float deltaTime);
 	void render(MatrixStack* matrixStack);
 	void renderMesh(MatrixStack* matrixStack, Material* renderMesh, Projection projection, Transform* projectionTransform);

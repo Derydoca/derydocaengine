@@ -184,6 +184,17 @@
     <ClCompile Include="ParticleContinuousFountain.cpp" />
     <ClCompile Include="ParticleInstanced.cpp" />
     <ClCompile Include="FontFace.cpp" />
+    <ClCompile Include="TexturePacker.cpp">
+      <Filter>TexturePacker</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturePackerImage.cpp">
+      <Filter>TexturePacker</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturePackerTextureData.cpp">
+      <Filter>TexturePacker</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp" />
+    <ClCompile Include="IntRectangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -419,6 +430,17 @@
     <ClInclude Include="ParticleContinuousFountain.h" />
     <ClInclude Include="ParticleInstanced.h" />
     <ClInclude Include="FontFace.h" />
+    <ClInclude Include="IntRectangle.h" />
+    <ClInclude Include="TexturePacker.h">
+      <Filter>TexturePacker</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturePackerImage.h">
+      <Filter>TexturePacker</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturePackerTextureData.h">
+      <Filter>TexturePacker</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
@@ -444,6 +466,9 @@
     </Filter>
     <Filter Include="Engine\ResourceSerializers">
       <UniqueIdentifier>{7eac81a0-a90a-4d89-85dd-89c2d08d44f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TexturePacker">
+      <UniqueIdentifier>{792a8148-58f8-4c2a-a2c9-68f368699d87}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

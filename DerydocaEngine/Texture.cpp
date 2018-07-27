@@ -123,6 +123,9 @@ void Texture::bind(unsigned int unit)
 
 void Texture::updateBuffer(GLubyte * data, int width, int height, GLint pixelFormat, TextureParameters* params)
 {
+	m_width = width;
+	m_height = height;
+
 	// Set the texture type
 	m_textureType = GL_TEXTURE_2D;
 
@@ -135,11 +138,15 @@ void Texture::updateBuffer(GLubyte * data, int width, int height, GLint pixelFor
 		wrapModeT = params->getWrapModeT();
 	}
 
+	if (pixelFormat == GL_RED)
+	{
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	}
+
 	// Create the texture handle and set parameters for it
 	glGenTextures(1, &m_texture);
 	glBindTexture(m_textureType, m_texture);
-	glTexStorage2D(m_textureType, 1, GL_RGBA8, width, height);
-	glTexSubImage2D(m_textureType, 0, 0, 0, width, height, pixelFormat, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(m_textureType, 0, pixelFormat, width, height, 0, pixelFormat, GL_UNSIGNED_BYTE, data);
 	glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, params->textureWrapModeToOpenGL(wrapModeS));
 	glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, params->textureWrapModeToOpenGL(wrapModeT));
 	glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

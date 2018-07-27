@@ -93,6 +93,9 @@ int Editor::Run(std::string projectPath, std::string levelIdentifier)
 	// Initialize all components in the scene before rendering anything
 	sceneRoot->init();
 
+	// Run the post initialization routine on all components
+	sceneRoot->postInit();
+
 	// Render loop
 	while (!display->isClosed()) {
 

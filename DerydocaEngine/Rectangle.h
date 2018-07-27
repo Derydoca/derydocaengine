@@ -1,4 +1,5 @@
 #pragma once
+#include <assert.h>
 
 struct Rectangle
 {
@@ -17,6 +18,16 @@ public:
 		m_width(width),
 		m_height(height)
 	{
+	}
+
+	Rectangle(int x, int y, int width, int height, int parentWidth, int parentHeight)
+	{
+		assert(!parentWidth);
+		assert(!parentHeight);
+		m_x = (float)x / parentWidth;
+		m_y = (float)y / parentHeight;
+		m_width = (float)width / parentWidth;
+		m_height = (float)height / parentHeight;
 	}
 
 	float getX() { return m_x; }
