@@ -28,6 +28,10 @@ FileType pathToFileType(std::string str)
 	{
 		return BezierPatchMeshType;
 	}
+	else if (extension == "ttf")
+	{
+		return FontType;
+	}
 	else if (extension == "txt" || extension == "fs" || extension == "gs" || extension == "tes" || extension == "tcs")
 	{
 		return IgnoredFileType;

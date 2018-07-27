@@ -142,9 +142,6 @@
     <ClCompile Include="CubemapResourceSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="LevelFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
     <ClCompile Include="Editor.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -195,6 +192,12 @@
     </ClCompile>
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="IntRectangle.cpp" />
+    <ClCompile Include="LevelFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FontFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -379,9 +382,6 @@
     <ClInclude Include="CubemapResource.h">
       <Filter>Engine\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="LevelFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClInclude>
     <ClInclude Include="Editor.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -441,6 +441,12 @@
       <Filter>TexturePacker</Filter>
     </ClInclude>
     <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="LevelFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FontFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

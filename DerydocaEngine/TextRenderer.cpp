@@ -1,5 +1,6 @@
 #include "TextRenderer.h"
 #include "TexturePackerImage.h"
+#include "YamlTools.h"
 
 TextRenderer::TextRenderer()
 {
@@ -11,7 +12,6 @@ TextRenderer::~TextRenderer()
 
 void TextRenderer::init()
 {
-	m_fontFace = new FontFace();
 	m_meshRenderer = getComponent<MeshRenderer>();
 }
 
@@ -38,6 +38,16 @@ void TextRenderer::render(MatrixStack * matrixStack)
 
 void TextRenderer::deserialize(YAML::Node compNode)
 {
+	YAML::Node fontSizeNode = compNode["fontSize"];
+	if (fontSizeNode)
+	{
+		m_fontSize = fontSizeNode.as<float>();
+	}
+
+	auto fontResource = getResource<Resource*>(compNode, "font");
+	m_fontFace = new FontFace();
+	m_fontFace->setFontSize(m_fontSize);
+	m_fontFace->loadFromFile(fontResource->getSourceFilePath());
 }
 
 void TextRenderer::updateText()

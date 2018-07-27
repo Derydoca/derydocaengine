@@ -30,6 +30,7 @@ private:
 	string m_text = "Derydoca Engine can render text!";
 	ivec2 m_texSize;
 	Mesh m_mesh;
+	float m_fontSize;
 
 	MeshRenderer* m_meshRenderer;
 };

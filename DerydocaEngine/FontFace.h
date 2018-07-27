@@ -30,12 +30,14 @@ public:
 			return m_charImages.at(charCode);
 		}
 	};
+	void setFontSize(int fontSize) { m_fontSize = fontSize; }
+
+	void loadFromFile(string filePath);
 private:
 	FT_Library m_library;
 	FT_Face m_face;
 	ivec2 m_dotsPerInch = ivec2(300, 300);
-	float m_fontSize = 16;
-	string m_fontFilePath = "C:\\Roboto-Medium.ttf";
+	float m_fontSize = 16.0;
 	Texture* m_texture;
 	map<int, TexturePackerImage> m_charImages;
 };

@@ -5,16 +5,24 @@
 
 FontFace::FontFace()
 {
+}
+
+FontFace::~FontFace()
+{
+}
+
+void FontFace::loadFromFile(string filePath)
+{
 	FT_Error error = FT_Init_FreeType(&m_library);
 	if (error)
 	{
 		cout << "An error occurred while attempting to initialize FreeType. Error: " << error << endl;
 	}
 
-	error = FT_New_Face(m_library, m_fontFilePath.c_str(), 0, &m_face);
+	error = FT_New_Face(m_library, filePath.c_str(), 0, &m_face);
 	if (error == FT_Err_Unknown_File_Format)
 	{
-		cout << "Unable to load the font because it is of an unknown file format. File: " << m_fontFilePath << endl;
+		cout << "Unable to load the font because it is of an unknown file format. File: " << filePath << endl;
 		return;
 	}
 	else if (error)
@@ -27,7 +35,8 @@ FontFace::FontFace()
 
 	TexturePacker packer = TexturePacker();
 
-	for (int i = 32; i < 176; i++)
+	//for (int i = 32; i < 176; i++)
+	for(int i = 65; i < 122; i++)
 	{
 		FT_ULong charCode = i;
 		FT_UInt glyph_index = FT_Get_Char_Index(m_face, charCode);
@@ -62,8 +71,4 @@ FontFace::FontFace()
 	{
 		m_charImages[image.getID()] = image;
 	}
-}
-
-FontFace::~FontFace()
-{
 }
