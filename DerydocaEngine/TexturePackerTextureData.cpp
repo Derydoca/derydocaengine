@@ -36,12 +36,8 @@ void TexturePackerTextureData::Fill(int sx, int sy, int ex, int ey, unsigned cha
 
 Texture * TexturePackerTextureData::allocTexture()
 {
-	// Create the data buffer
-	unsigned char* dataBuffer = new unsigned char[getWidth() * getHeight()];
-	for (int y = 0; y < getHeight(); y++)
-	{
-		memcpy(dataBuffer + (y * getWidth()), m_data[y].data(), getWidth());
-	}
+	// Create the image buffer
+	unsigned char* dataBuffer = allocImageBuffer();
 
 	// Load it into a texture
 	Texture* tex = new Texture();
@@ -52,4 +48,16 @@ Texture * TexturePackerTextureData::allocTexture()
 
 	// Return the texture
 	return tex;
+}
+
+unsigned char * TexturePackerTextureData::allocImageBuffer()
+{
+	// Create the image buffer
+	unsigned char* dataBuffer = new unsigned char[getWidth() * getHeight()];
+	for (int y = 0; y < getHeight(); y++)
+	{
+		memcpy(dataBuffer + (y * getWidth()), m_data[y].data(), getWidth());
+	}
+
+	return dataBuffer;
 }

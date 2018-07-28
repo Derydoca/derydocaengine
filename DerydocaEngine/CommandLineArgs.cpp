@@ -51,11 +51,11 @@ bool CommandLineArgs::keyExists(string key)
 	return m_arguments.find(key) != m_arguments.end();
 }
 
-list<string> CommandLineArgs::getValues(string key)
+vector<string> CommandLineArgs::getValues(string key)
 {
 	if (!keyExists(key))
 	{
-		return list<string>();
+		return vector<string>();
 	}
 
 	return m_arguments[key];

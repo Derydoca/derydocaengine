@@ -2,6 +2,12 @@
 #include <iostream>
 #include "TexturePacker.h"
 #include "Texture.h"
+#include "yaml-cpp\yaml.h"
+#include "YamlTools.h"
+#include <iostream>
+#include <fstream>
+#include "stb_image_write.h"
+#include "ObjectLibrary.h"
 
 FontFace::FontFace()
 {
@@ -11,7 +17,19 @@ FontFace::~FontFace()
 {
 }
 
-void FontFace::loadFromFile(string filePath)
+Texture * FontFace::getTexture()
+{
+	// Upload the texture to the GPU if the image buffer has changed and has not been submitted
+	if (m_textureDirty)
+	{
+		m_texture.updateBuffer(m_imageBuffer, m_imageBufferSize.x, m_imageBufferSize.y, GL_RED, nullptr);
+		m_textureDirty = false;
+	}
+
+	return &m_texture;
+}
+
+void FontFace::loadFromFontFile(string filePath)
 {
 	FT_Error error = FT_Init_FreeType(&m_library);
 	if (error)
@@ -63,12 +81,61 @@ void FontFace::loadFromFile(string filePath)
 		packer.addImage(i, m_face->glyph->bitmap.width, m_face->glyph->bitmap.rows, m_face->glyph->bitmap_left, m_face->glyph->bitmap_top, m_face->glyph->advance.x, m_face->glyph->advance.y, m_face->glyph->bitmap.buffer);
 	}
 
+	// Pack the images
 	packer.packImages();
-	m_texture = packer.allocTexture();
+	
+	// Store the image buffer
+	m_imageBuffer = packer.allocImageBuffer();
+	m_imageBufferSize.x = packer.getWidth();
+	m_imageBufferSize.y = packer.getHeight();
+	m_textureDirty = true;
+
+	// Load the character image data map
 	vector<TexturePackerImage> images = packer.getSubImageData();
 	m_charImages.clear();
 	for (auto image : images)
 	{
 		m_charImages[image.getID()] = image;
 	}
+}
+
+void FontFace::loadFromSerializedFile(string filePath)
+{
+	using namespace YAML;
+
+	Node file = YAML::LoadFile(filePath);
+
+	Node font = file["Font"];
+
+	m_fontSize = font["fontSize"].as<float>();
+	// Load the image
+
+	m_textureDirty = true;
+}
+
+void FontFace::saveToSerializedFile(string filePath)
+{
+	using namespace YAML;
+	
+	Node root = Node();
+
+	Node font = root["Font"];
+
+	font["width"] = m_imageBufferSize.x;
+	font["height"] = m_imageBufferSize.y;
+	font["fontSize"] = m_fontSize;
+	string imageFileName = filePath + ".bmp";
+	stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
+	ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
+	Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
+	font["image"] = boost::lexical_cast<string>(imageResource->getId());
+
+	YAML::Emitter out;
+	out.SetIndent(2);
+	out.SetMapFormat(YAML::Block);
+	out << root;
+	std::ofstream file;
+	file.open(filePath);
+	file << out.c_str();
+	file.close();
 }

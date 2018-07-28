@@ -1,11 +1,11 @@
 #pragma once
 #include <map>
-#include <list>
+#include <vector>
 #include <string>
 
 using namespace std;
 
-using argumentCollection = map<string, list<string>>;
+using argumentCollection = map<string, vector<string>>;
 
 class CommandLineArgs
 {
@@ -15,7 +15,7 @@ public:
 
 	string getExecutablePath() const { return m_executablePath; }
 	bool keyExists(string key);
-	list<string> getValues(string key);
+	vector<string> getValues(string key);
 private:
 	void processArguments(int argc, char* argv[]);
 

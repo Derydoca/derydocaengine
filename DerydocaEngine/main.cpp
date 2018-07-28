@@ -8,6 +8,7 @@
 #define STBI_MSC_SECURE_CRT
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
+#include "FontFace.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ int main(int argc, char* argv[])
 	
 	if (args.keyExists("processDirectory"))
 	{
-		list<string> directoriesToProcess = args.getValues("processDirectory");
+		vector<string> directoriesToProcess = args.getValues("processDirectory");
 
 		for (auto it = directoriesToProcess.begin(); it != directoriesToProcess.end(); ++it)
 		{
@@ -27,8 +28,23 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	if (args.keyExists("processFont"))
+	{
+		vector<string> processArgs = args.getValues("processFont");
+		if (processArgs.size() != 3)
+		{
+			cout << "Unable to process font file. Incorrect argument count." << endl;
+			return 0;
+		}
+
+		FontFace face;
+		face.loadFromFontFile(processArgs[0]);
+		face.setFontSize(atof(processArgs[1].c_str()));
+		face.saveToSerializedFile(processArgs[2]);
+	}
+
 	// Get the project path for the engine
-	list<string> projectArgs = args.getValues("project");
+	vector<string> projectArgs = args.getValues("project");
 	if (projectArgs.size() == 0)
 	{
 		// If no project path was provided, the engine must exit
@@ -37,7 +53,7 @@ int main(int argc, char* argv[])
 	}
 
 	// Get the path for the scene to load
-	list<string> sceneArgs = args.getValues("scene");
+	vector<string> sceneArgs = args.getValues("scene");
 	string levelIdentifier;
 	if (sceneArgs.size() > 0)
 	{

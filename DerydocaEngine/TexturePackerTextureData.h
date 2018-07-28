@@ -22,6 +22,7 @@ struct TexturePackerTextureData
 		return m_data[y][x];
 	}
 	Texture* allocTexture();
+	unsigned char* allocImageBuffer();
 private:
 	vector<vector<unsigned char>> m_data;
 };

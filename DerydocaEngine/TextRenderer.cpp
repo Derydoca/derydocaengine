@@ -62,7 +62,7 @@ void TextRenderer::deserialize(YAML::Node compNode)
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	m_fontFace = new FontFace();
 	m_fontFace->setFontSize(m_fontSize);
-	m_fontFace->loadFromFile(fontResource->getSourceFilePath());
+	m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
 }
 
 void TextRenderer::updateText()

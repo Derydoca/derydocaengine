@@ -57,6 +57,65 @@ GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid id)
 	return nullptr;
 }
 
+Resource* ObjectLibrary::getMetaFile(std::string sourceFilePath)
+{
+	string metaFilePath = sourceFilePath + m_metaExtension;
+
+	// Load the meta file
+	YAML::Node file = YAML::LoadFile(metaFilePath);
+	YAML::Node resourcesNode = file["Resources"];
+	if (!resourcesNode)
+	{
+		cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!" << endl;
+		return nullptr;
+	}
+
+	// Go through all the resource nodes in the file
+	for (size_t i = 0; i < resourcesNode.size(); i++)
+	{
+		YAML::Node resourceNode = resourcesNode[i];
+
+		// If no ID node is defined, exit out because it is required
+		if (!resourceNode["ID"])
+		{
+			cout << "A node was skipped because it was missing an ID parameter." << endl;
+			continue;
+		}
+
+		// Get the ID
+		boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
+
+		// Find the serializer related to this source file object
+		auto serializer = FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+
+		// If the serializer could not be found, continue onto the next resource
+		if (serializer == nullptr)
+		{
+			cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!" << endl;
+			continue;
+		}
+
+		// Load the resource object
+		Resource* resource = serializer->loadResourceFromMeta(resourceNode);
+
+		// If no resource could be parsed from the node, continue on
+		if (resource == nullptr)
+		{
+			cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!" << endl;
+			continue;
+		}
+
+		// Set the common parameters of the resource object
+		resource->setFilePaths(sourceFilePath, metaFilePath);
+		resource->setId(resourceUuid);
+		serializer->postLoadInitialize(resource);
+
+		return resource;
+	}
+
+	return nullptr;
+}
+
 void ObjectLibrary::updateMetaFilesDirectory(std::string directory)
 {
 	directory_iterator it{ directory };

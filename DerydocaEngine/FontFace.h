@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include "Rectangle.h"
 #include "TexturePackerImage.h"
+#include "Texture.h"
 
 using namespace std;
 using namespace glm;
@@ -19,7 +20,7 @@ public:
 	FontFace();
 	~FontFace();
 
-	Texture* getTexture() const { return m_texture; }
+	Texture* getTexture();
 	TexturePackerImage getCharData(int charCode) const {
 		if (m_charImages.find(charCode) == m_charImages.end())
 		{
@@ -32,13 +33,18 @@ public:
 	};
 	void setFontSize(int fontSize) { m_fontSize = fontSize; }
 
-	void loadFromFile(string filePath);
+	void loadFromFontFile(string filePath);
+	void loadFromSerializedFile(string filePath);
+	void saveToSerializedFile(string filePath);
 private:
 	FT_Library m_library;
 	FT_Face m_face;
 	ivec2 m_dotsPerInch = ivec2(300, 300);
 	float m_fontSize = 16.0;
-	Texture* m_texture;
+	Texture m_texture;
 	map<int, TexturePackerImage> m_charImages;
+	unsigned char* m_imageBuffer;
+	ivec2 m_imageBufferSize;
+	bool m_textureDirty = false;
 };
 

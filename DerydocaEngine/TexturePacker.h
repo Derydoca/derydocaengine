@@ -19,8 +19,11 @@ public:
 	void packImages();
 	bool getIsDirty() const { return m_isDirty; }
 	Texture* allocTexture() { return dest.allocTexture(); };
+	unsigned char* allocImageBuffer() { return dest.allocImageBuffer(); }
 	void freeSubImageData();
 	vector<TexturePackerImage> getSubImageData() { return m_images; }
+	int getWidth() const { return dest.getWidth(); }
+	int getHeight() const { return dest.getHeight(); }
 private:
 	const int IMAGE_SIZE = 512;
 	vector<TexturePackerImage> m_images;
