@@ -8,6 +8,7 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/uuid/uuid_generators.hpp>
+#include "Rectangle.h"
 
 class YamlTools {
 public:
@@ -184,6 +185,34 @@ namespace YAML {
 			std::string stringUuid = node.as<std::string>();
 			boost::uuids::string_generator gen;
 			uuid = gen(stringUuid);
+			return true;
+		}
+	};
+
+	// Add support for Rectangles
+	template<>
+	struct convert<Rectangle> {
+		static Node encode(Rectangle& rect)
+		{
+			Node node;
+			node.push_back(rect.getX());
+			node.push_back(rect.getY());
+			node.push_back(rect.getWidth());
+			node.push_back(rect.getHeight());
+			return node;
+		}
+
+		static bool decode(const Node& node, Rectangle rect)
+		{
+			if (!node.IsSequence() || node.size() != 4) {
+				return false;
+			}
+
+			rect.setX(node[0].as<float>());
+			rect.setY(node[1].as<float>());
+			rect.setWidth(node[2].as<float>());
+			rect.setHeight(node[3].as<float>());
+
 			return true;
 		}
 	};

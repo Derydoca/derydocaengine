@@ -27,10 +27,11 @@ private:
 	vec3* m_verts;
 	unsigned int* m_indices;
 	vec2* m_uvs;
-	string m_text = "Derydoca Engine can render text!";
+	string m_text = "Text";
 	ivec2 m_texSize;
 	Mesh m_mesh;
 	float m_fontSize;
+	vec2 m_bounds = vec2(5.0f, 5.0f);
 
 	MeshRenderer* m_meshRenderer;
 };

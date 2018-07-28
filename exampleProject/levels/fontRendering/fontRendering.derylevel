@@ -17,6 +17,8 @@ Scene:
             material: 75a01949-631c-4027-a413-9148261668d9
             font: 23100bba-2b7d-4f3d-9fb6-ee4ff0ca59c5
             fontSize: 16.0
+            text: "Look!\rThis text spans multiple lines!\r~@~NEAT~@~"
+            bounds: [3.0, 10.0]
 
             
   - Type: GameObject
