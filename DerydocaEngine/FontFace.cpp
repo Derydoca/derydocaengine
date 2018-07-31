@@ -6,7 +6,9 @@
 #include "YamlTools.h"
 #include <iostream>
 #include <fstream>
+#include "stb_image.h"
 #include "stb_image_write.h"
+#include "ObjectLibrary.h"
 #include "ObjectLibrary.h"
 
 FontFace::FontFace()
@@ -53,8 +55,8 @@ void FontFace::loadFromFontFile(string filePath)
 
 	TexturePacker packer = TexturePacker();
 
-	//for (int i = 32; i < 176; i++)
-	for(int i = 65; i < 122; i++)
+	for (int i = 32; i < 176; i++)
+	//for (int i = 65; i < 122; i++)
 	{
 		FT_ULong charCode = i;
 		FT_UInt glyph_index = FT_Get_Char_Index(m_face, charCode);
@@ -83,7 +85,7 @@ void FontFace::loadFromFontFile(string filePath)
 
 	// Pack the images
 	packer.packImages();
-	
+
 	// Store the image buffer
 	m_imageBuffer = packer.allocImageBuffer();
 	m_imageBufferSize.x = packer.getWidth();
@@ -108,7 +110,39 @@ void FontFace::loadFromSerializedFile(string filePath)
 	Node font = file["Font"];
 
 	m_fontSize = font["fontSize"].as<float>();
+	m_imageBufferSize.x = font["width"].as<int>();
+	m_imageBufferSize.y = font["height"].as<int>();
+	
 	// Load the image
+	string imageUuid = font["image"].as<string>();
+	Resource* r = ObjectLibrary::getInstance().getResource(imageUuid);
+	int imgw, imgh, imgch;
+	unsigned char* imageData = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
+	delete[] m_imageBuffer;
+	m_imageBuffer = new unsigned char[m_imageBufferSize.x * m_imageBufferSize.y];
+	for (int i = 0; i < m_imageBufferSize.x * m_imageBufferSize.y; i++)
+	{
+		m_imageBuffer[i] = imageData[i * imgch];
+	}
+	delete[] imageData;
+
+	Node charactersNode = font["characters"];
+	for (int i = 0; i < charactersNode.size(); i++)
+	{
+		Node charNode = charactersNode[i];
+		int id = charNode["id"].as<int>();
+		int w = charNode["width"].as<int>();
+		int h = charNode["height"].as<int>();
+		int ax = charNode["advanceX"].as<int>();
+		int ay = charNode["advanceY"].as<int>();
+		int bx = charNode["bearingX"].as<int>();
+		int by = charNode["bearingY"].as<int>();
+		int tx = charNode["texX"].as<int>();
+		int ty = charNode["texY"].as<int>();
+		TexturePackerImage img(id, w, h, 1, bx, by, ax, ay);
+		img.setTextureSheetRectangle(tx, ty, w, h);
+		m_charImages.emplace(id, img);
+	}
 
 	m_textureDirty = true;
 }
@@ -116,19 +150,37 @@ void FontFace::loadFromSerializedFile(string filePath)
 void FontFace::saveToSerializedFile(string filePath)
 {
 	using namespace YAML;
-	
+
 	Node root = Node();
 
 	Node font = root["Font"];
 
+	font["fontSize"] = m_fontSize;
 	font["width"] = m_imageBufferSize.x;
 	font["height"] = m_imageBufferSize.y;
-	font["fontSize"] = m_fontSize;
 	string imageFileName = filePath + ".bmp";
 	stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
 	ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
 	Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 	font["image"] = boost::lexical_cast<string>(imageResource->getId());
+
+	Node charactersNode = font["characters"];
+
+	for (auto charImage : m_charImages)
+	{
+		Node charNode;
+		charNode["id"] = charImage.second.getID();
+		charNode["width"] = charImage.second.getWidth();
+		charNode["height"] = charImage.second.getHeight();
+		charNode["advanceX"] = charImage.second.getAdvanceX();
+		charNode["advanceY"] = charImage.second.getAdvanceY();
+		charNode["bearingX"] = charImage.second.getBearingX();
+		charNode["bearingY"] = charImage.second.getBearingY();
+		IntRectangle texPos = charImage.second.getTexSheetPosition();
+		charNode["texX"] = texPos.getX();
+		charNode["texY"] = texPos.getY();
+		charactersNode.push_back(charNode);
+	}
 
 	YAML::Emitter out;
 	out.SetIndent(2);

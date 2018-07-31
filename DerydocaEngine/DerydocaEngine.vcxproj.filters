@@ -198,6 +198,9 @@
     <ClCompile Include="FontFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
+    <ClCompile Include="RasterFontFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -445,6 +448,9 @@
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
     <ClInclude Include="FontFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterFontFileSerializer.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,6 +12,7 @@ enum FileType
 	ShaderFileType,
 	BezierPatchMeshType,
 	FontType,
+	RasterFontType,
 };
 
 FileType pathToFileType(std::string str);

@@ -15,7 +15,7 @@ Scene:
         - Type: TextRenderer
           Properties:
             material: 75a01949-631c-4027-a413-9148261668d9
-            font: 23100bba-2b7d-4f3d-9fb6-ee4ff0ca59c5
+            font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
             fontSize: 16.0
             text: "Look!\rThis text spans multiple lines!\r~@~NEAT~@~"
             bounds: [3.0, 10.0]

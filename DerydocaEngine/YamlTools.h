@@ -9,6 +9,7 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include "Rectangle.h"
+#include "IntRectangle.h"
 
 class YamlTools {
 public:
@@ -137,6 +138,78 @@ namespace YAML {
 		}
 	};
 
+	// Add support for GLM ivec4
+	template<>
+	struct convert<glm::ivec4> {
+		static Node encode(const glm::ivec4& vec) {
+			Node node;
+			node.push_back(vec.x);
+			node.push_back(vec.y);
+			node.push_back(vec.z);
+			node.push_back(vec.w);
+			return node;
+		}
+
+		static bool decode(const Node& node, glm::ivec4& vec) {
+			if (!node.IsSequence() || node.size() != 3) {
+				return false;
+			}
+
+			vec.x = node[0].as<int>();
+			vec.y = node[1].as<int>();
+			vec.z = node[2].as<int>();
+			vec.w = node[3].as<int>();
+
+			return true;
+		}
+	};
+
+	// Add support for GLM vec3
+	template<>
+	struct convert<glm::ivec3> {
+		static Node encode(const glm::ivec3& vec) {
+			Node node;
+			node.push_back(vec.x);
+			node.push_back(vec.y);
+			node.push_back(vec.z);
+			return node;
+		}
+
+		static bool decode(const Node& node, glm::ivec3& vec) {
+			if (!node.IsSequence() || node.size() != 3) {
+				return false;
+			}
+
+			vec.x = node[0].as<int>();
+			vec.y = node[1].as<int>();
+			vec.z = node[2].as<int>();
+
+			return true;
+		}
+	};
+
+	// Add support for GLM vec2
+	template<>
+	struct convert<glm::ivec2> {
+		static Node encode(const glm::ivec2& vec) {
+			Node node;
+			node.push_back(vec.x);
+			node.push_back(vec.y);
+			return node;
+		}
+
+		static bool decode(const Node& node, glm::ivec2& vec) {
+			if (!node.IsSequence() || node.size() != 2) {
+				return false;
+			}
+
+			vec.x = node[0].as<int>();
+			vec.y = node[1].as<int>();
+
+			return true;
+		}
+	};
+
 	// Add support for Colors
 	template<>
 	struct convert<Color> {
@@ -202,7 +275,7 @@ namespace YAML {
 			return node;
 		}
 
-		static bool decode(const Node& node, Rectangle rect)
+		static bool decode(const Node& node, Rectangle& rect)
 		{
 			if (!node.IsSequence() || node.size() != 4) {
 				return false;
@@ -212,6 +285,34 @@ namespace YAML {
 			rect.setY(node[1].as<float>());
 			rect.setWidth(node[2].as<float>());
 			rect.setHeight(node[3].as<float>());
+
+			return true;
+		}
+	};
+
+	// Add support for IntRectangles
+	template<>
+	struct convert<IntRectangle> {
+		static Node encode(IntRectangle& rect)
+		{
+			Node node;
+			node.push_back(rect.getX());
+			node.push_back(rect.getY());
+			node.push_back(rect.getWidth());
+			node.push_back(rect.getHeight());
+			return node;
+		}
+
+		static bool decode(const Node& node, IntRectangle& rect)
+		{
+			if (!node.IsSequence() || node.size() != 4) {
+				return false;
+			}
+
+			rect.setX(node[0].as<int>());
+			rect.setY(node[1].as<int>());
+			rect.setWidth(node[2].as<int>());
+			rect.setHeight(node[3].as<int>());
 
 			return true;
 		}

@@ -32,6 +32,10 @@ FileType pathToFileType(std::string str)
 	{
 		return FontType;
 	}
+	else if (extension == "dfont")
+	{
+		return RasterFontType;
+	}
 	else if (extension == "txt" || extension == "fs" || extension == "gs" || extension == "tes" || extension == "tcs")
 	{
 		return IgnoredFileType;

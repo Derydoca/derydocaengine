@@ -60,9 +60,16 @@ void TextRenderer::deserialize(YAML::Node compNode)
 	}
 
 	auto fontResource = getResource<Resource*>(compNode, "font");
-	m_fontFace = new FontFace();
-	m_fontFace->setFontSize(m_fontSize);
-	m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
+	if (fontResource->getType() == ResourceType::FontResourceType) {
+		m_fontFace = new FontFace();
+		m_fontFace->setFontSize(m_fontSize);
+		m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
+	}
+	else if (fontResource->getType() == ResourceType::RasterFontResourceType)
+	{
+		m_fontFace = new FontFace();
+		m_fontFace->loadFromSerializedFile(fontResource->getSourceFilePath());
+	}
 }
 
 void TextRenderer::updateText()

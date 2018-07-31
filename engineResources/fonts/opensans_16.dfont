@@ -1,0 +1,1302 @@
+Font:
+  fontSize: 16
+  width: 512
+  height: 441
+  image: a99d685b-5f1c-4eef-a366-f5604aa3261b
+  characters:
+    - id: 32
+      width: 0
+      height: 0
+      advanceX: 1088
+      advanceY: 0
+      bearingX: 0
+      bearingY: 0
+      texX: 60
+      texY: 49
+    - id: 33
+      width: 9
+      height: 49
+      advanceX: 1152
+      advanceY: 0
+      bearingX: 4
+      bearingY: 48
+      texX: 388
+      texY: 369
+    - id: 34
+      width: 19
+      height: 17
+      advanceX: 1728
+      advanceY: 0
+      bearingX: 4
+      bearingY: 48
+      texX: 274
+      texY: 206
+    - id: 35
+      width: 41
+      height: 48
+      advanceX: 2752
+      advanceY: 0
+      bearingX: 1
+      bearingY: 48
+      texX: 316
+      texY: 49
+    - id: 36
+      width: 30
+      height: 55
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 4
+      bearingY: 51
+      texX: 266
+      texY: 100
+    - id: 37
+      width: 49
+      height: 50
+      advanceX: 3520
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 266
+      texY: 0
+    - id: 38
+      width: 46
+      height: 50
+      advanceX: 3136
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 365
+      texY: 0
+    - id: 39
+      width: 7
+      height: 17
+      advanceX: 960
+      advanceY: 0
+      bearingX: 4
+      bearingY: 48
+      texX: 309
+      texY: 51
+    - id: 40
+      width: 16
+      height: 59
+      advanceX: 1280
+      advanceY: 0
+      bearingX: 2
+      bearingY: 48
+      texX: 0
+      texY: 362
+    - id: 41
+      width: 16
+      height: 59
+      advanceX: 1280
+      advanceY: 0
+      bearingX: 2
+      bearingY: 48
+      texX: 354
+      texY: 368
+    - id: 42
+      width: 32
+      height: 30
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 2
+      bearingY: 51
+      texX: 321
+      texY: 363
+    - id: 43
+      width: 32
+      height: 33
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 40
+      texX: 232
+      texY: 339
+    - id: 44
+      width: 10
+      height: 16
+      advanceX: 1024
+      advanceY: 0
+      bearingX: 2
+      bearingY: 8
+      texX: 183
+      texY: 136
+    - id: 45
+      width: 17
+      height: 5
+      advanceX: 1408
+      advanceY: 0
+      bearingX: 2
+      bearingY: 20
+      texX: 41
+      texY: 49
+    - id: 46
+      width: 9
+      height: 9
+      advanceX: 1152
+      advanceY: 0
+      bearingX: 4
+      bearingY: 8
+      texX: 394
+      texY: 157
+    - id: 47
+      width: 24
+      height: 48
+      advanceX: 1600
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 91
+      texY: 305
+    - id: 48
+      width: 32
+      height: 50
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 330
+      texY: 150
+    - id: 49
+      width: 18
+      height: 48
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 490
+      texY: 369
+    - id: 50
+      width: 32
+      height: 49
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 0
+      texY: 154
+    - id: 51
+      width: 32
+      height: 50
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 183
+      texY: 152
+    - id: 52
+      width: 36
+      height: 48
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 1
+      bearingY: 48
+      texX: 34
+      texY: 104
+    - id: 53
+      width: 31
+      height: 49
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 4
+      bearingY: 48
+      texX: 99
+      texY: 158
+    - id: 54
+      width: 33
+      height: 50
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 149
+      texY: 135
+    - id: 55
+      width: 32
+      height: 48
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 48
+      texX: 66
+      texY: 156
+    - id: 56
+      width: 32
+      height: 50
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 297
+      texY: 146
+    - id: 57
+      width: 32
+      height: 50
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 229
+      texY: 149
+    - id: 58
+      width: 9
+      height: 38
+      advanceX: 1152
+      advanceY: 0
+      bearingX: 4
+      bearingY: 37
+      texX: 216
+      texY: 153
+    - id: 59
+      width: 11
+      height: 45
+      advanceX: 1152
+      advanceY: 0
+      bearingX: 2
+      bearingY: 37
+      texX: 297
+      texY: 51
+    - id: 60
+      width: 32
+      height: 33
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 41
+      texX: 23
+      texY: 341
+    - id: 61
+      width: 32
+      height: 18
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 33
+      texX: 230
+      texY: 372
+    - id: 62
+      width: 32
+      height: 33
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 41
+      texX: 265
+      texY: 341
+    - id: 63
+      width: 27
+      height: 50
+      advanceX: 1856
+      advanceY: 0
+      bearingX: 0
+      bearingY: 49
+      texX: 131
+      texY: 185
+    - id: 64
+      width: 54
+      height: 54
+      advanceX: 3840
+      advanceY: 0
+      bearingX: 3
+      bearingY: 48
+      texX: 63
+      texY: 0
+    - id: 65
+      width: 43
+      height: 48
+      advanceX: 2688
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 458
+      texY: 0
+    - id: 66
+      width: 34
+      height: 48
+      advanceX: 2752
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 439
+      texY: 136
+    - id: 67
+      width: 37
+      height: 50
+      advanceX: 2688
+      advanceY: 0
+      bearingX: 4
+      bearingY: 49
+      texX: 41
+      texY: 54
+    - id: 68
+      width: 39
+      height: 48
+      advanceX: 3136
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 217
+      texY: 51
+    - id: 69
+      width: 28
+      height: 48
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 217
+      texY: 248
+    - id: 70
+      width: 28
+      height: 48
+      advanceX: 2240
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 303
+      texY: 248
+    - id: 71
+      width: 40
+      height: 50
+      advanceX: 3136
+      advanceY: 0
+      bearingX: 4
+      bearingY: 49
+      texX: 0
+      texY: 49
+    - id: 72
+      width: 37
+      height: 48
+      advanceX: 3136
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 297
+      texY: 97
+    - id: 73
+      width: 7
+      height: 48
+      advanceX: 1216
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 497
+      texY: 283
+    - id: 74
+      width: 18
+      height: 60
+      advanceX: 1152
+      advanceY: 0
+      bearingX: -6
+      bearingY: 48
+      texX: 399
+      texY: 332
+    - id: 75
+      width: 36
+      height: 48
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 229
+      texY: 100
+    - id: 76
+      width: 28
+      height: 48
+      advanceX: 2240
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 0
+      texY: 253
+    - id: 77
+      width: 48
+      height: 48
+      advanceX: 3840
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 316
+      texY: 0
+    - id: 78
+      width: 38
+      height: 48
+      advanceX: 3264
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 118
+      texY: 62
+    - id: 79
+      width: 45
+      height: 50
+      advanceX: 3328
+      advanceY: 0
+      bearingX: 4
+      bearingY: 49
+      texX: 412
+      texY: 0
+    - id: 80
+      width: 31
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 394
+      texY: 183
+    - id: 81
+      width: 45
+      height: 61
+      advanceX: 3328
+      advanceY: 0
+      bearingX: 4
+      bearingY: 49
+      texX: 118
+      texY: 0
+    - id: 82
+      width: 35
+      height: 48
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 113
+      texY: 110
+    - id: 83
+      width: 31
+      height: 50
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 262
+      texY: 155
+    - id: 84
+      width: 37
+      height: 48
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 473
+      texY: 87
+    - id: 85
+      width: 37
+      height: 49
+      advanceX: 3136
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 435
+      texY: 86
+    - id: 86
+      width: 40
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 358
+      texY: 50
+    - id: 87
+      width: 62
+      height: 48
+      advanceX: 3968
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 0
+      texY: 0
+    - id: 88
+      width: 39
+      height: 48
+      advanceX: 2496
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 257
+      texY: 51
+    - id: 89
+      width: 38
+      height: 48
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 79
+      texY: 55
+    - id: 90
+      width: 34
+      height: 48
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 2
+      bearingY: 48
+      texX: 404
+      texY: 135
+    - id: 91
+      width: 16
+      height: 59
+      advanceX: 1408
+      advanceY: 0
+      bearingX: 5
+      bearingY: 48
+      texX: 371
+      texY: 369
+    - id: 92
+      width: 24
+      height: 48
+      advanceX: 1600
+      advanceY: 0
+      bearingX: 0
+      bearingY: 48
+      texX: 448
+      texY: 330
+    - id: 93
+      width: 16
+      height: 59
+      advanceX: 1408
+      advanceY: 0
+      bearingX: 1
+      bearingY: 48
+      texX: 473
+      texY: 369
+    - id: 94
+      width: 34
+      height: 30
+      advanceX: 2304
+      advanceY: 0
+      bearingX: 1
+      bearingY: 48
+      texX: 195
+      texY: 344
+    - id: 95
+      width: 32
+      height: 5
+      advanceX: 1920
+      advanceY: 0
+      bearingX: -1
+      bearingY: -6
+      texX: 198
+      texY: 375
+    - id: 96
+      width: 14
+      height: 11
+      advanceX: 2496
+      advanceY: 0
+      bearingX: 12
+      bearingY: 52
+      texX: 435
+      texY: 75
+    - id: 97
+      width: 29
+      height: 37
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 3
+      bearingY: 36
+      texX: 418
+      texY: 332
+    - id: 98
+      width: 33
+      height: 52
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 5
+      bearingY: 51
+      texX: 370
+      texY: 104
+    - id: 99
+      width: 27
+      height: 38
+      advanceX: 2048
+      advanceY: 0
+      bearingX: 3
+      bearingY: 37
+      texX: 56
+      texY: 342
+    - id: 100
+      width: 33
+      height: 52
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 3
+      bearingY: 51
+      texX: 79
+      texY: 104
+    - id: 101
+      width: 32
+      height: 38
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 37
+      texX: 58
+      texY: 304
+    - id: 102
+      width: 26
+      height: 51
+      advanceX: 1472
+      advanceY: 0
+      bearingX: 0
+      bearingY: 51
+      texX: 145
+      texY: 299
+    - id: 103
+      width: 35
+      height: 53
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 1
+      bearingY: 37
+      texX: 399
+      texY: 51
+    - id: 104
+      width: 31
+      height: 51
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 5
+      bearingY: 51
+      texX: 34
+      texY: 153
+    - id: 105
+      width: 7
+      height: 50
+      advanceX: 1088
+      advanceY: 0
+      bearingX: 5
+      bearingY: 50
+      texX: 504
+      texY: 283
+    - id: 106
+      width: 16
+      height: 66
+      advanceX: 1088
+      advanceY: 0
+      bearingX: -4
+      bearingY: 50
+      texX: 116
+      texY: 333
+    - id: 107
+      width: 30
+      height: 51
+      advanceX: 2240
+      advanceY: 0
+      bearingX: 5
+      bearingY: 51
+      texX: 363
+      texY: 156
+    - id: 108
+      width: 7
+      height: 51
+      advanceX: 1088
+      advanceY: 0
+      bearingX: 5
+      bearingY: 51
+      texX: 71
+      texY: 105
+    - id: 109
+      width: 52
+      height: 37
+      advanceX: 3968
+      advanceY: 0
+      bearingX: 5
+      bearingY: 37
+      texX: 458
+      texY: 49
+    - id: 110
+      width: 31
+      height: 37
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 5
+      bearingY: 37
+      texX: 473
+      texY: 331
+    - id: 111
+      width: 34
+      height: 38
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 3
+      bearingY: 37
+      texX: 23
+      texY: 302
+    - id: 112
+      width: 33
+      height: 53
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 5
+      bearingY: 37
+      texX: 195
+      texY: 99
+    - id: 113
+      width: 33
+      height: 53
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 3
+      bearingY: 37
+      texX: 0
+      texY: 100
+    - id: 114
+      width: 22
+      height: 37
+      advanceX: 1728
+      advanceY: 0
+      bearingX: 5
+      bearingY: 37
+      texX: 418
+      texY: 370
+    - id: 115
+      width: 26
+      height: 38
+      advanceX: 2048
+      advanceY: 0
+      bearingX: 3
+      bearingY: 37
+      texX: 133
+      texY: 350
+    - id: 116
+      width: 22
+      height: 45
+      advanceX: 1536
+      advanceY: 0
+      bearingX: 1
+      bearingY: 44
+      texX: 298
+      texY: 345
+    - id: 117
+      width: 31
+      height: 37
+      advanceX: 2624
+      advanceY: 0
+      bearingX: 5
+      bearingY: 36
+      texX: 367
+      texY: 331
+    - id: 118
+      width: 34
+      height: 36
+      advanceX: 2176
+      advanceY: 0
+      bearingX: 0
+      bearingY: 36
+      texX: 232
+      texY: 302
+    - id: 119
+      width: 52
+      height: 36
+      advanceX: 3328
+      advanceY: 0
+      bearingX: 0
+      bearingY: 36
+      texX: 164
+      texY: 51
+    - id: 120
+      width: 33
+      height: 36
+      advanceX: 2240
+      advanceY: 0
+      bearingX: 1
+      bearingY: 36
+      texX: 333
+      texY: 327
+    - id: 121
+      width: 34
+      height: 52
+      advanceX: 2176
+      advanceY: 0
+      bearingX: 0
+      bearingY: 36
+      texX: 335
+      texY: 98
+    - id: 122
+      width: 27
+      height: 36
+      advanceX: 1984
+      advanceY: 0
+      bearingX: 2
+      bearingY: 36
+      texX: 84
+      texY: 353
+    - id: 123
+      width: 22
+      height: 59
+      advanceX: 1600
+      advanceY: 0
+      bearingX: 2
+      bearingY: 48
+      texX: 172
+      texY: 299
+    - id: 124
+      width: 5
+      height: 67
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 16
+      bearingY: 51
+      texX: 441
+      texY: 370
+    - id: 125
+      width: 22
+      height: 59
+      advanceX: 1600
+      advanceY: 0
+      bearingX: 2
+      bearingY: 48
+      texX: 0
+      texY: 302
+    - id: 126
+      width: 32
+      height: 9
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 28
+      texX: 263
+      texY: 374
+    - id: 127
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 390
+      texY: 283
+    - id: 128
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 361
+      texY: 279
+    - id: 129
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 332
+      texY: 255
+    - id: 130
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 58
+      texY: 254
+    - id: 131
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 174
+      texY: 251
+    - id: 132
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 145
+      texY: 250
+    - id: 133
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 274
+      texY: 244
+    - id: 134
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 410
+      texY: 235
+    - id: 135
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 482
+      texY: 234
+    - id: 136
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 381
+      texY: 231
+    - id: 137
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 58
+      texY: 205
+    - id: 138
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 468
+      texY: 282
+    - id: 139
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 29
+      texY: 204
+    - id: 140
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 0
+      texY: 204
+    - id: 141
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 294
+      texY: 196
+    - id: 142
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 482
+      texY: 185
+    - id: 143
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 116
+      texY: 284
+    - id: 144
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 419
+      texY: 284
+    - id: 145
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 275
+      texY: 293
+    - id: 146
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 203
+      texY: 296
+    - id: 147
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 304
+      texY: 297
+    - id: 148
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 216
+      texY: 199
+    - id: 149
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 323
+      texY: 200
+    - id: 150
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 159
+      texY: 202
+    - id: 151
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 188
+      texY: 203
+    - id: 152
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 245
+      texY: 205
+    - id: 153
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 87
+      texY: 207
+    - id: 154
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 352
+      texY: 207
+    - id: 155
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 116
+      texY: 235
+    - id: 156
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 439
+      texY: 236
+    - id: 157
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 29
+      texY: 253
+    - id: 158
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 246
+      texY: 254
+    - id: 159
+      width: 28
+      height: 48
+      advanceX: 2560
+      advanceY: 0
+      bearingX: 6
+      bearingY: 48
+      texX: 87
+      texY: 256
+    - id: 160
+      width: 0
+      height: 0
+      advanceX: 1088
+      advanceY: 0
+      bearingX: 0
+      bearingY: 0
+      texX: 59
+      texY: 49
+    - id: 161
+      width: 9
+      height: 49
+      advanceX: 1152
+      advanceY: 0
+      bearingX: 4
+      bearingY: 37
+      texX: 502
+      texY: 0
+    - id: 162
+      width: 27
+      height: 50
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 6
+      bearingY: 49
+      texX: 454
+      texY: 185
+    - id: 163
+      width: 34
+      height: 48
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 2
+      bearingY: 48
+      texX: 474
+      texY: 136
+    - id: 164
+      width: 31
+      height: 31
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 4
+      bearingY: 39
+      texX: 160
+      texY: 358
+    - id: 165
+      width: 37
+      height: 48
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 1
+      bearingY: 48
+      texX: 157
+      texY: 87
+    - id: 166
+      width: 5
+      height: 67
+      advanceX: 2368
+      advanceY: 0
+      bearingX: 16
+      bearingY: 51
+      texX: 192
+      texY: 374
+    - id: 167
+      width: 27
+      height: 51
+      advanceX: 2240
+      advanceY: 0
+      bearingX: 4
+      bearingY: 51
+      texX: 426
+      texY: 184
+    - id: 168
+      width: 19
+      height: 6
+      advanceX: 2496
+      advanceY: 0
+      bearingX: 10
+      bearingY: 48
+      texX: 195
+      texY: 88
+    - id: 169
+      width: 50
+      height: 50
+      advanceX: 3584
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 164
+      texY: 0
+    - id: 170
+      width: 19
+      height: 23
+      advanceX: 1536
+      advanceY: 0
+      bearingX: 2
+      bearingY: 48
+      texX: 435
+      texY: 51
+    - id: 171
+      width: 29
+      height: 27
+      advanceX: 2112
+      advanceY: 0
+      bearingX: 2
+      bearingY: 31
+      texX: 404
+      texY: 105
+    - id: 172
+      width: 32
+      height: 17
+      advanceX: 2432
+      advanceY: 0
+      bearingX: 3
+      bearingY: 26
+      texX: 17
+      texY: 374
+    - id: 173
+      width: 17
+      height: 5
+      advanceX: 1408
+      advanceY: 0
+      bearingX: 2
+      bearingY: 20
+      texX: 370
+      texY: 99
+    - id: 174
+      width: 50
+      height: 50
+      advanceX: 3584
+      advanceY: 0
+      bearingX: 3
+      bearingY: 49
+      texX: 215
+      texY: 0
+    - id: 175
+      width: 35
+      height: 5
+      advanceX: 2176
+      advanceY: 0
+      bearingX: -1
+      bearingY: 55
+      texX: 263
+      texY: 384

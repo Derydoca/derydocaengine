@@ -12,5 +12,6 @@ enum ResourceType
 	ShaderResourceType,
 	BezierPatchMeshResourceType,
 	FontResourceType,
+	RasterFontResourceType,
 };
  
