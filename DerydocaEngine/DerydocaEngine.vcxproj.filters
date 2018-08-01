@@ -453,6 +453,7 @@
     <ClInclude Include="RasterFontFileSerializer.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
+    <ClInclude Include="Rect.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

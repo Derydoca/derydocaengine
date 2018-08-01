@@ -4,6 +4,7 @@
 #include "Rectangle.h"
 #include "TexturePackerImage.h"
 #include "TexturePackerTextureData.h"
+#include "IntRectangle.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ public:
 	TexturePacker();
 	~TexturePacker();
 
-	void addImage(int id, int width, int height, int bearingX, int bearyingY, int advanceX, int advanceY, unsigned char* imageBuffer);
+	void addImage(int id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height);
 	void packImages();
 	bool getIsDirty() const { return m_isDirty; }
 	Texture* allocTexture() { return dest.allocTexture(); };

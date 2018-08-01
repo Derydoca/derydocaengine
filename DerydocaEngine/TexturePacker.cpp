@@ -14,16 +14,16 @@ TexturePacker::~TexturePacker()
 	freeSubImageData();
 }
 
-void TexturePacker::addImage(int id, int width, int height, int bearingX, int bearyingY, int advanceX, int advanceY, unsigned char* imageBuffer)
+void TexturePacker::addImage(int id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height)
 {
-	TexturePackerImage image(id, width, height, 1, bearingX, bearyingY, advanceX, advanceY);
+	TexturePackerImage image(id, width, height, 1, sizeX, sizeY, bearingX, bearingY, advanceX, advanceY);
 	m_images.push_back(image);
 	m_isDirty = true;
 	unsigned char* buffer = m_imageBuffers[id];
 	delete[] buffer;
-	int bufferSize = width * height;
-	unsigned char* newBuffer = new unsigned char[bufferSize];
-	for (int i = 0; i < bufferSize; i++)
+	int imageBufferSize = width * height;
+	unsigned char* newBuffer = new unsigned char[imageBufferSize];
+	for (int i = 0; i < imageBufferSize; i++)
 	{
 		newBuffer[i] = imageBuffer[i];
 	}
@@ -47,6 +47,9 @@ void TexturePacker::packImages()
 	dest.Resize(IMAGE_SIZE, 1);
 
 	sort(m_images.begin(), m_images.end(), compareTexturePackerImageBySize);
+
+	// Create a temporary image location array
+	IntRectangle* imageLocations = new IntRectangle[m_images.size()];
 
 	for (size_t i = 0; i < m_images.size(); i++)
 	{
@@ -73,7 +76,8 @@ void TexturePacker::packImages()
 					dest.AddImage(scanPosX, scanPosY, &m_images[i], m_imageBuffers[m_images[i].getID()]);
 					m_imageBounds.push_back(IntRectangle(scanPosX, scanPosY, imageWidth, imageHeight));
 
-					m_images[i].setTextureSheetRectangle(scanPosX, scanPosY, imageWidth, imageHeight);
+					// Store the location of the image so that we can calculate the normalized position
+					imageLocations[i] = IntRectangle(scanPosX, scanPosY, imageWidth, imageHeight);
 
 					found = true;
 					cout << "Placed image " << i + 1 << "/" << m_images.size() << endl;
@@ -81,6 +85,20 @@ void TexturePacker::packImages()
 			}
 		}
 	}
+
+	// Convert the image positions to normalized values and store it with the image data
+	for (size_t i = 0; i < m_images.size(); i++)
+	{
+		IntRectangle loc = imageLocations[i];
+		float x = (float)loc.getX() / dest.getWidth();
+		float y = (float)loc.getY() / dest.getHeight();
+		float w = (float)loc.getWidth() / dest.getWidth();
+		float h = (float)loc.getHeight() / dest.getHeight();
+		m_images[i].setTextureSheetRectangle(x, y, x + w, y + h);
+	}
+
+	// Delete the temporary image locations array
+	delete[] imageLocations;
 
 	freeSubImageData();
 }

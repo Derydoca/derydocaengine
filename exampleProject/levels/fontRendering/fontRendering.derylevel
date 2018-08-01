@@ -6,7 +6,7 @@ Scene:
       Transform:
         Position: [0, 0, -1]
         Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
+        Scale: [0.003, 0.003, 0.003]
       Components:
         - Type: MeshRenderer
           Properties:
@@ -17,7 +17,7 @@ Scene:
             material: 75a01949-631c-4027-a413-9148261668d9
             font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
             fontSize: 16.0
-            text: "Look!\rThis text spans multiple lines!\r~@~NEAT~@~"
+            text: "Please visit www.derydoca.com\rfor more information."
             bounds: [3.0, 10.0]
 
             

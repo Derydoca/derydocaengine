@@ -2,1301 +2,1877 @@ Font:
   fontSize: 16
   width: 512
   height: 441
-  image: a99d685b-5f1c-4eef-a366-f5604aa3261b
+  image: 42b3fc16-04b2-4635-82fe-283347f04d1d
   characters:
     - id: 32
       width: 0
       height: 0
-      advanceX: 1088
+      sizeX: 0
+      sizeY: 0
+      advanceX: 17
       advanceY: 0
       bearingX: 0
       bearingY: 0
-      texX: 60
-      texY: 49
+      texX: 0.1171875
+      texY: 0.1111111
+      texDX: 0.1171875
+      texDY: 0.1111111
     - id: 33
       width: 9
       height: 49
-      advanceX: 1152
+      sizeX: 9
+      sizeY: 49
+      advanceX: 18
       advanceY: 0
       bearingX: 4
       bearingY: 48
-      texX: 388
-      texY: 369
+      texX: 0.7578125
+      texY: 0.8367347
+      texDX: 0.7753906
+      texDY: 0.9478458
     - id: 34
       width: 19
       height: 17
-      advanceX: 1728
+      sizeX: 19
+      sizeY: 17
+      advanceX: 27
       advanceY: 0
       bearingX: 4
       bearingY: 48
-      texX: 274
-      texY: 206
+      texX: 0.5351563
+      texY: 0.4671202
+      texDX: 0.5722656
+      texDY: 0.5056689
     - id: 35
       width: 41
       height: 48
-      advanceX: 2752
+      sizeX: 41
+      sizeY: 48
+      advanceX: 43
       advanceY: 0
       bearingX: 1
       bearingY: 48
-      texX: 316
-      texY: 49
+      texX: 0.6171875
+      texY: 0.1111111
+      texDX: 0.6972656
+      texDY: 0.2199546
     - id: 36
       width: 30
       height: 55
-      advanceX: 2432
+      sizeX: 30
+      sizeY: 55
+      advanceX: 38
       advanceY: 0
       bearingX: 4
       bearingY: 51
-      texX: 266
-      texY: 100
+      texX: 0.5195313
+      texY: 0.2267574
+      texDX: 0.578125
+      texDY: 0.3514739
     - id: 37
       width: 49
       height: 50
-      advanceX: 3520
+      sizeX: 49
+      sizeY: 50
+      advanceX: 55
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 266
+      texX: 0.5195313
       texY: 0
+      texDX: 0.6152344
+      texDY: 0.1133787
     - id: 38
       width: 46
       height: 50
-      advanceX: 3136
+      sizeX: 46
+      sizeY: 50
+      advanceX: 49
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 365
+      texX: 0.7128906
       texY: 0
+      texDX: 0.8027344
+      texDY: 0.1133787
     - id: 39
       width: 7
       height: 17
-      advanceX: 960
+      sizeX: 7
+      sizeY: 17
+      advanceX: 15
       advanceY: 0
       bearingX: 4
       bearingY: 48
-      texX: 309
-      texY: 51
+      texX: 0.6035156
+      texY: 0.1156463
+      texDX: 0.6171875
+      texDY: 0.154195
     - id: 40
       width: 16
       height: 59
-      advanceX: 1280
+      sizeX: 16
+      sizeY: 59
+      advanceX: 20
       advanceY: 0
       bearingX: 2
       bearingY: 48
       texX: 0
-      texY: 362
+      texY: 0.8208617
+      texDX: 0.03125
+      texDY: 0.9546486
     - id: 41
       width: 16
       height: 59
-      advanceX: 1280
+      sizeX: 16
+      sizeY: 59
+      advanceX: 20
       advanceY: 0
       bearingX: 2
       bearingY: 48
-      texX: 354
-      texY: 368
+      texX: 0.6914063
+      texY: 0.8344671
+      texDX: 0.7226563
+      texDY: 0.968254
     - id: 42
       width: 32
       height: 30
-      advanceX: 2368
+      sizeX: 32
+      sizeY: 30
+      advanceX: 37
       advanceY: 0
       bearingX: 2
       bearingY: 51
-      texX: 321
-      texY: 363
+      texX: 0.6269531
+      texY: 0.8231292
+      texDX: 0.6894531
+      texDY: 0.8911564
     - id: 43
       width: 32
       height: 33
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 33
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 40
-      texX: 232
-      texY: 339
+      texX: 0.453125
+      texY: 0.7687075
+      texDX: 0.515625
+      texDY: 0.8435374
     - id: 44
       width: 10
       height: 16
-      advanceX: 1024
+      sizeX: 10
+      sizeY: 16
+      advanceX: 16
       advanceY: 0
       bearingX: 2
       bearingY: 8
-      texX: 183
-      texY: 136
+      texX: 0.3574219
+      texY: 0.30839
+      texDX: 0.3769531
+      texDY: 0.3446712
     - id: 45
       width: 17
       height: 5
-      advanceX: 1408
+      sizeX: 17
+      sizeY: 5
+      advanceX: 22
       advanceY: 0
       bearingX: 2
       bearingY: 20
-      texX: 41
-      texY: 49
+      texX: 0.08007813
+      texY: 0.1111111
+      texDX: 0.1132813
+      texDY: 0.122449
     - id: 46
       width: 9
       height: 9
-      advanceX: 1152
+      sizeX: 9
+      sizeY: 9
+      advanceX: 18
       advanceY: 0
       bearingX: 4
       bearingY: 8
-      texX: 394
-      texY: 157
+      texX: 0.7695313
+      texY: 0.3560091
+      texDX: 0.7871094
+      texDY: 0.3764172
     - id: 47
       width: 24
       height: 48
-      advanceX: 1600
+      sizeX: 24
+      sizeY: 48
+      advanceX: 25
       advanceY: 0
       bearingX: 0
       bearingY: 48
-      texX: 91
-      texY: 305
+      texX: 0.1777344
+      texY: 0.69161
+      texDX: 0.2246094
+      texDY: 0.8004535
     - id: 48
       width: 32
       height: 50
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 50
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 330
-      texY: 150
+      texX: 0.6445313
+      texY: 0.3401361
+      texDX: 0.7070313
+      texDY: 0.4535147
     - id: 49
       width: 18
       height: 48
-      advanceX: 2432
+      sizeX: 18
+      sizeY: 48
+      advanceX: 38
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 490
-      texY: 369
+      texX: 0.9570313
+      texY: 0.8367347
+      texDX: 0.9921875
+      texDY: 0.9455782
     - id: 50
       width: 32
       height: 49
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 49
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 49
       texX: 0
-      texY: 154
+      texY: 0.3492064
+      texDX: 0.0625
+      texDY: 0.4603175
     - id: 51
       width: 32
       height: 50
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 50
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 183
-      texY: 152
+      texX: 0.3574219
+      texY: 0.3446712
+      texDX: 0.4199219
+      texDY: 0.4580499
     - id: 52
       width: 36
       height: 48
-      advanceX: 2432
+      sizeX: 36
+      sizeY: 48
+      advanceX: 38
       advanceY: 0
       bearingX: 1
       bearingY: 48
-      texX: 34
-      texY: 104
+      texX: 0.06640625
+      texY: 0.2358277
+      texDX: 0.1367188
+      texDY: 0.3446712
     - id: 53
       width: 31
       height: 49
-      advanceX: 2432
+      sizeX: 31
+      sizeY: 49
+      advanceX: 38
       advanceY: 0
       bearingX: 4
       bearingY: 48
-      texX: 99
-      texY: 158
+      texX: 0.1933594
+      texY: 0.3582766
+      texDX: 0.2539063
+      texDY: 0.4693877
     - id: 54
       width: 33
       height: 50
-      advanceX: 2432
+      sizeX: 33
+      sizeY: 50
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 149
-      texY: 135
+      texX: 0.2910156
+      texY: 0.3061225
+      texDX: 0.3554688
+      texDY: 0.4195011
     - id: 55
       width: 32
       height: 48
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 48
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 48
-      texX: 66
-      texY: 156
+      texX: 0.1289063
+      texY: 0.3537415
+      texDX: 0.1914063
+      texDY: 0.462585
     - id: 56
       width: 32
       height: 50
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 50
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 297
-      texY: 146
+      texX: 0.5800781
+      texY: 0.3310658
+      texDX: 0.6425781
+      texDY: 0.4444444
     - id: 57
       width: 32
       height: 50
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 50
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 229
-      texY: 149
+      texX: 0.4472656
+      texY: 0.3378685
+      texDX: 0.5097656
+      texDY: 0.4512472
     - id: 58
       width: 9
       height: 38
-      advanceX: 1152
+      sizeX: 9
+      sizeY: 38
+      advanceX: 18
       advanceY: 0
       bearingX: 4
       bearingY: 37
-      texX: 216
-      texY: 153
+      texX: 0.421875
+      texY: 0.3469388
+      texDX: 0.4394531
+      texDY: 0.4331066
     - id: 59
       width: 11
       height: 45
-      advanceX: 1152
+      sizeX: 11
+      sizeY: 45
+      advanceX: 18
       advanceY: 0
       bearingX: 2
       bearingY: 37
-      texX: 297
-      texY: 51
+      texX: 0.5800781
+      texY: 0.1156463
+      texDX: 0.6015625
+      texDY: 0.2176871
     - id: 60
       width: 32
       height: 33
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 33
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 41
-      texX: 23
-      texY: 341
+      texX: 0.04492188
+      texY: 0.7732427
+      texDX: 0.1074219
+      texDY: 0.8480726
     - id: 61
       width: 32
       height: 18
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 18
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 33
-      texX: 230
-      texY: 372
+      texX: 0.4492188
+      texY: 0.8435374
+      texDX: 0.5117188
+      texDY: 0.8843537
     - id: 62
       width: 32
       height: 33
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 33
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 41
-      texX: 265
-      texY: 341
+      texX: 0.5175781
+      texY: 0.7732427
+      texDX: 0.5800781
+      texDY: 0.8480726
     - id: 63
       width: 27
       height: 50
-      advanceX: 1856
+      sizeX: 27
+      sizeY: 50
+      advanceX: 29
       advanceY: 0
       bearingX: 0
       bearingY: 49
-      texX: 131
-      texY: 185
+      texX: 0.2558594
+      texY: 0.4195011
+      texDX: 0.3085938
+      texDY: 0.5328798
     - id: 64
       width: 54
       height: 54
-      advanceX: 3840
+      sizeX: 54
+      sizeY: 54
+      advanceX: 60
       advanceY: 0
       bearingX: 3
       bearingY: 48
-      texX: 63
+      texX: 0.1230469
       texY: 0
+      texDX: 0.2285156
+      texDY: 0.122449
     - id: 65
       width: 43
       height: 48
-      advanceX: 2688
+      sizeX: 43
+      sizeY: 48
+      advanceX: 42
       advanceY: 0
       bearingX: 0
       bearingY: 48
-      texX: 458
+      texX: 0.8945313
       texY: 0
+      texDX: 0.9785156
+      texDY: 0.1088435
     - id: 66
       width: 34
       height: 48
-      advanceX: 2752
+      sizeX: 34
+      sizeY: 48
+      advanceX: 43
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 439
-      texY: 136
+      texX: 0.8574219
+      texY: 0.30839
+      texDX: 0.9238281
+      texDY: 0.4172336
     - id: 67
       width: 37
       height: 50
-      advanceX: 2688
+      sizeX: 37
+      sizeY: 50
+      advanceX: 42
       advanceY: 0
       bearingX: 4
       bearingY: 49
-      texX: 41
-      texY: 54
+      texX: 0.08007813
+      texY: 0.122449
+      texDX: 0.1523438
+      texDY: 0.2358277
     - id: 68
       width: 39
       height: 48
-      advanceX: 3136
+      sizeX: 39
+      sizeY: 48
+      advanceX: 49
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 217
-      texY: 51
+      texX: 0.4238281
+      texY: 0.1156463
+      texDX: 0.5
+      texDY: 0.2244898
     - id: 69
       width: 28
       height: 48
-      advanceX: 2368
+      sizeX: 28
+      sizeY: 48
+      advanceX: 37
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 217
-      texY: 248
+      texX: 0.4238281
+      texY: 0.5623583
+      texDX: 0.4785156
+      texDY: 0.6712018
     - id: 70
       width: 28
       height: 48
-      advanceX: 2240
+      sizeX: 28
+      sizeY: 48
+      advanceX: 35
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 303
-      texY: 248
+      texX: 0.5917969
+      texY: 0.5623583
+      texDX: 0.6464844
+      texDY: 0.6712018
     - id: 71
       width: 40
       height: 50
-      advanceX: 3136
+      sizeX: 40
+      sizeY: 50
+      advanceX: 49
       advanceY: 0
       bearingX: 4
       bearingY: 49
       texX: 0
-      texY: 49
+      texY: 0.1111111
+      texDX: 0.078125
+      texDY: 0.2244898
     - id: 72
       width: 37
       height: 48
-      advanceX: 3136
+      sizeX: 37
+      sizeY: 48
+      advanceX: 49
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 297
-      texY: 97
+      texX: 0.5800781
+      texY: 0.2199547
+      texDX: 0.6523438
+      texDY: 0.3287982
     - id: 73
       width: 7
       height: 48
-      advanceX: 1216
+      sizeX: 7
+      sizeY: 48
+      advanceX: 19
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 497
-      texY: 283
+      texX: 0.9707031
+      texY: 0.6417233
+      texDX: 0.984375
+      texDY: 0.7505668
     - id: 74
       width: 18
       height: 60
-      advanceX: 1152
+      sizeX: 18
+      sizeY: 60
+      advanceX: 18
       advanceY: 0
       bearingX: -6
       bearingY: 48
-      texX: 399
-      texY: 332
+      texX: 0.7792969
+      texY: 0.7528344
+      texDX: 0.8144531
+      texDY: 0.8888888
     - id: 75
       width: 36
       height: 48
-      advanceX: 2624
+      sizeX: 36
+      sizeY: 48
+      advanceX: 41
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 229
-      texY: 100
+      texX: 0.4472656
+      texY: 0.2267574
+      texDX: 0.5175781
+      texDY: 0.3356009
     - id: 76
       width: 28
       height: 48
-      advanceX: 2240
+      sizeX: 28
+      sizeY: 48
+      advanceX: 35
       advanceY: 0
       bearingX: 6
       bearingY: 48
       texX: 0
-      texY: 253
+      texY: 0.5736961
+      texDX: 0.0546875
+      texDY: 0.6825397
     - id: 77
       width: 48
       height: 48
-      advanceX: 3840
+      sizeX: 48
+      sizeY: 48
+      advanceX: 60
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 316
+      texX: 0.6171875
       texY: 0
+      texDX: 0.7109375
+      texDY: 0.1088435
     - id: 78
       width: 38
       height: 48
-      advanceX: 3264
+      sizeX: 38
+      sizeY: 48
+      advanceX: 51
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 118
-      texY: 62
+      texX: 0.2304688
+      texY: 0.1405896
+      texDX: 0.3046875
+      texDY: 0.2494331
     - id: 79
       width: 45
       height: 50
-      advanceX: 3328
+      sizeX: 45
+      sizeY: 50
+      advanceX: 52
       advanceY: 0
       bearingX: 4
       bearingY: 49
-      texX: 412
+      texX: 0.8046875
       texY: 0
+      texDX: 0.8925781
+      texDY: 0.1133787
     - id: 80
       width: 31
       height: 48
-      advanceX: 2560
+      sizeX: 31
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 394
-      texY: 183
+      texX: 0.7695313
+      texY: 0.414966
+      texDX: 0.8300781
+      texDY: 0.5238096
     - id: 81
       width: 45
       height: 61
-      advanceX: 3328
+      sizeX: 45
+      sizeY: 61
+      advanceX: 52
       advanceY: 0
       bearingX: 4
       bearingY: 49
-      texX: 118
+      texX: 0.2304688
       texY: 0
+      texDX: 0.3183594
+      texDY: 0.138322
     - id: 82
       width: 35
       height: 48
-      advanceX: 2624
+      sizeX: 35
+      sizeY: 48
+      advanceX: 41
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 113
-      texY: 110
+      texX: 0.2207031
+      texY: 0.2494331
+      texDX: 0.2890625
+      texDY: 0.3582766
     - id: 83
       width: 31
       height: 50
-      advanceX: 2368
+      sizeX: 31
+      sizeY: 50
+      advanceX: 37
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 262
-      texY: 155
+      texX: 0.5117188
+      texY: 0.3514739
+      texDX: 0.5722656
+      texDY: 0.4648526
     - id: 84
       width: 37
       height: 48
-      advanceX: 2368
+      sizeX: 37
+      sizeY: 48
+      advanceX: 37
       advanceY: 0
       bearingX: 0
       bearingY: 48
-      texX: 473
-      texY: 87
+      texX: 0.9238281
+      texY: 0.1972789
+      texDX: 0.9960938
+      texDY: 0.3061225
     - id: 85
       width: 37
       height: 49
-      advanceX: 3136
+      sizeX: 37
+      sizeY: 49
+      advanceX: 49
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 435
-      texY: 86
+      texX: 0.8496094
+      texY: 0.1950113
+      texDX: 0.921875
+      texDY: 0.3061225
     - id: 86
       width: 40
       height: 48
-      advanceX: 2560
+      sizeX: 40
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 0
       bearingY: 48
-      texX: 358
-      texY: 50
+      texX: 0.6992188
+      texY: 0.1133787
+      texDX: 0.7773438
+      texDY: 0.2222222
     - id: 87
       width: 62
       height: 48
-      advanceX: 3968
+      sizeX: 62
+      sizeY: 48
+      advanceX: 62
       advanceY: 0
       bearingX: 0
       bearingY: 48
       texX: 0
       texY: 0
+      texDX: 0.1210938
+      texDY: 0.1088435
     - id: 88
       width: 39
       height: 48
-      advanceX: 2496
+      sizeX: 39
+      sizeY: 48
+      advanceX: 39
       advanceY: 0
       bearingX: 0
       bearingY: 48
-      texX: 257
-      texY: 51
+      texX: 0.5019531
+      texY: 0.1156463
+      texDX: 0.578125
+      texDY: 0.2244898
     - id: 89
       width: 38
       height: 48
-      advanceX: 2432
+      sizeX: 38
+      sizeY: 48
+      advanceX: 38
       advanceY: 0
       bearingX: 0
       bearingY: 48
-      texX: 79
-      texY: 55
+      texX: 0.1542969
+      texY: 0.1247166
+      texDX: 0.2285156
+      texDY: 0.2335601
     - id: 90
       width: 34
       height: 48
-      advanceX: 2432
+      sizeX: 34
+      sizeY: 48
+      advanceX: 38
       advanceY: 0
       bearingX: 2
       bearingY: 48
-      texX: 404
-      texY: 135
+      texX: 0.7890625
+      texY: 0.3061225
+      texDX: 0.8554688
+      texDY: 0.414966
     - id: 91
       width: 16
       height: 59
-      advanceX: 1408
+      sizeX: 16
+      sizeY: 59
+      advanceX: 22
       advanceY: 0
       bearingX: 5
       bearingY: 48
-      texX: 371
-      texY: 369
+      texX: 0.7246094
+      texY: 0.8367347
+      texDX: 0.7558594
+      texDY: 0.9705216
     - id: 92
       width: 24
       height: 48
-      advanceX: 1600
+      sizeX: 24
+      sizeY: 48
+      advanceX: 25
       advanceY: 0
       bearingX: 0
       bearingY: 48
-      texX: 448
-      texY: 330
+      texX: 0.875
+      texY: 0.7482993
+      texDX: 0.921875
+      texDY: 0.8571428
     - id: 93
       width: 16
       height: 59
-      advanceX: 1408
+      sizeX: 16
+      sizeY: 59
+      advanceX: 22
       advanceY: 0
       bearingX: 1
       bearingY: 48
-      texX: 473
-      texY: 369
+      texX: 0.9238281
+      texY: 0.8367347
+      texDX: 0.9550781
+      texDY: 0.9705216
     - id: 94
       width: 34
       height: 30
-      advanceX: 2304
+      sizeX: 34
+      sizeY: 30
+      advanceX: 36
       advanceY: 0
       bearingX: 1
       bearingY: 48
-      texX: 195
-      texY: 344
+      texX: 0.3808594
+      texY: 0.7800453
+      texDX: 0.4472656
+      texDY: 0.8480725
     - id: 95
       width: 32
       height: 5
-      advanceX: 1920
+      sizeX: 32
+      sizeY: 5
+      advanceX: 30
       advanceY: 0
       bearingX: -1
       bearingY: -6
-      texX: 198
-      texY: 375
+      texX: 0.3867188
+      texY: 0.8503401
+      texDX: 0.4492188
+      texDY: 0.861678
     - id: 96
       width: 14
       height: 11
-      advanceX: 2496
+      sizeX: 14
+      sizeY: 11
+      advanceX: 39
       advanceY: 0
       bearingX: 12
       bearingY: 52
-      texX: 435
-      texY: 75
+      texX: 0.8496094
+      texY: 0.170068
+      texDX: 0.8769531
+      texDY: 0.1950113
     - id: 97
       width: 29
       height: 37
-      advanceX: 2368
+      sizeX: 29
+      sizeY: 37
+      advanceX: 37
       advanceY: 0
       bearingX: 3
       bearingY: 36
-      texX: 418
-      texY: 332
+      texX: 0.8164063
+      texY: 0.7528344
+      texDX: 0.8730469
+      texDY: 0.8367347
     - id: 98
       width: 33
       height: 52
-      advanceX: 2624
+      sizeX: 33
+      sizeY: 52
+      advanceX: 41
       advanceY: 0
       bearingX: 5
       bearingY: 51
-      texX: 370
-      texY: 104
+      texX: 0.7226563
+      texY: 0.2358277
+      texDX: 0.7871094
+      texDY: 0.3537415
     - id: 99
       width: 27
       height: 38
-      advanceX: 2048
+      sizeX: 27
+      sizeY: 38
+      advanceX: 32
       advanceY: 0
       bearingX: 3
       bearingY: 37
-      texX: 56
-      texY: 342
+      texX: 0.109375
+      texY: 0.7755102
+      texDX: 0.1621094
+      texDY: 0.861678
     - id: 100
       width: 33
       height: 52
-      advanceX: 2624
+      sizeX: 33
+      sizeY: 52
+      advanceX: 41
       advanceY: 0
       bearingX: 3
       bearingY: 51
-      texX: 79
-      texY: 104
+      texX: 0.1542969
+      texY: 0.2358277
+      texDX: 0.21875
+      texDY: 0.3537415
     - id: 101
       width: 32
       height: 38
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 38
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 37
-      texX: 58
-      texY: 304
+      texX: 0.1132813
+      texY: 0.6893424
+      texDX: 0.1757813
+      texDY: 0.7755102
     - id: 102
       width: 26
       height: 51
-      advanceX: 1472
+      sizeX: 26
+      sizeY: 51
+      advanceX: 23
       advanceY: 0
       bearingX: 0
       bearingY: 51
-      texX: 145
-      texY: 299
+      texX: 0.2832031
+      texY: 0.6780046
+      texDX: 0.3339844
+      texDY: 0.7936508
     - id: 103
       width: 35
       height: 53
-      advanceX: 2368
+      sizeX: 35
+      sizeY: 53
+      advanceX: 37
       advanceY: 0
       bearingX: 1
       bearingY: 37
-      texX: 399
-      texY: 51
+      texX: 0.7792969
+      texY: 0.1156463
+      texDX: 0.8476563
+      texDY: 0.2358277
     - id: 104
       width: 31
       height: 51
-      advanceX: 2624
+      sizeX: 31
+      sizeY: 51
+      advanceX: 41
       advanceY: 0
       bearingX: 5
       bearingY: 51
-      texX: 34
-      texY: 153
+      texX: 0.06640625
+      texY: 0.3469388
+      texDX: 0.1269531
+      texDY: 0.462585
     - id: 105
       width: 7
       height: 50
-      advanceX: 1088
+      sizeX: 7
+      sizeY: 50
+      advanceX: 17
       advanceY: 0
       bearingX: 5
       bearingY: 50
-      texX: 504
-      texY: 283
+      texX: 0.984375
+      texY: 0.6417233
+      texDX: 0.9980469
+      texDY: 0.755102
     - id: 106
       width: 16
       height: 66
-      advanceX: 1088
+      sizeX: 16
+      sizeY: 66
+      advanceX: 17
       advanceY: 0
       bearingX: -4
       bearingY: 50
-      texX: 116
-      texY: 333
+      texX: 0.2265625
+      texY: 0.755102
+      texDX: 0.2578125
+      texDY: 0.9047619
     - id: 107
       width: 30
       height: 51
-      advanceX: 2240
+      sizeX: 30
+      sizeY: 51
+      advanceX: 35
       advanceY: 0
       bearingX: 5
       bearingY: 51
-      texX: 363
-      texY: 156
+      texX: 0.7089844
+      texY: 0.3537415
+      texDX: 0.7675781
+      texDY: 0.4693878
     - id: 108
       width: 7
       height: 51
-      advanceX: 1088
+      sizeX: 7
+      sizeY: 51
+      advanceX: 17
       advanceY: 0
       bearingX: 5
       bearingY: 51
-      texX: 71
-      texY: 105
+      texX: 0.1386719
+      texY: 0.2380952
+      texDX: 0.1523438
+      texDY: 0.3537415
     - id: 109
       width: 52
       height: 37
-      advanceX: 3968
+      sizeX: 52
+      sizeY: 37
+      advanceX: 62
       advanceY: 0
       bearingX: 5
       bearingY: 37
-      texX: 458
-      texY: 49
+      texX: 0.8945313
+      texY: 0.1111111
+      texDX: 0.9960938
+      texDY: 0.1950113
     - id: 110
       width: 31
       height: 37
-      advanceX: 2624
+      sizeX: 31
+      sizeY: 37
+      advanceX: 41
       advanceY: 0
       bearingX: 5
       bearingY: 37
-      texX: 473
-      texY: 331
+      texX: 0.9238281
+      texY: 0.7505669
+      texDX: 0.984375
+      texDY: 0.8344671
     - id: 111
       width: 34
       height: 38
-      advanceX: 2560
+      sizeX: 34
+      sizeY: 38
+      advanceX: 40
       advanceY: 0
       bearingX: 3
       bearingY: 37
-      texX: 23
-      texY: 302
+      texX: 0.04492188
+      texY: 0.6848072
+      texDX: 0.1113281
+      texDY: 0.7709751
     - id: 112
       width: 33
       height: 53
-      advanceX: 2624
+      sizeX: 33
+      sizeY: 53
+      advanceX: 41
       advanceY: 0
       bearingX: 5
       bearingY: 37
-      texX: 195
-      texY: 99
+      texX: 0.3808594
+      texY: 0.2244898
+      texDX: 0.4453125
+      texDY: 0.3446712
     - id: 113
       width: 33
       height: 53
-      advanceX: 2624
+      sizeX: 33
+      sizeY: 53
+      advanceX: 41
       advanceY: 0
       bearingX: 3
       bearingY: 37
       texX: 0
-      texY: 100
+      texY: 0.2267574
+      texDX: 0.06445313
+      texDY: 0.3469388
     - id: 114
       width: 22
       height: 37
-      advanceX: 1728
+      sizeX: 22
+      sizeY: 37
+      advanceX: 27
       advanceY: 0
       bearingX: 5
       bearingY: 37
-      texX: 418
-      texY: 370
+      texX: 0.8164063
+      texY: 0.8390023
+      texDX: 0.859375
+      texDY: 0.9229025
     - id: 115
       width: 26
       height: 38
-      advanceX: 2048
+      sizeX: 26
+      sizeY: 38
+      advanceX: 32
       advanceY: 0
       bearingX: 3
       bearingY: 37
-      texX: 133
-      texY: 350
+      texX: 0.2597656
+      texY: 0.7936508
+      texDX: 0.3105469
+      texDY: 0.8798186
     - id: 116
       width: 22
       height: 45
-      advanceX: 1536
+      sizeX: 22
+      sizeY: 45
+      advanceX: 24
       advanceY: 0
       bearingX: 1
       bearingY: 44
-      texX: 298
-      texY: 345
+      texX: 0.5820313
+      texY: 0.7823129
+      texDX: 0.625
+      texDY: 0.8843538
     - id: 117
       width: 31
       height: 37
-      advanceX: 2624
+      sizeX: 31
+      sizeY: 37
+      advanceX: 41
       advanceY: 0
       bearingX: 5
       bearingY: 36
-      texX: 367
-      texY: 331
+      texX: 0.7167969
+      texY: 0.7505669
+      texDX: 0.7773438
+      texDY: 0.8344671
     - id: 118
       width: 34
       height: 36
-      advanceX: 2176
+      sizeX: 34
+      sizeY: 36
+      advanceX: 34
       advanceY: 0
       bearingX: 0
       bearingY: 36
-      texX: 232
-      texY: 302
+      texX: 0.453125
+      texY: 0.6848072
+      texDX: 0.5195313
+      texDY: 0.7664399
     - id: 119
       width: 52
       height: 36
-      advanceX: 3328
+      sizeX: 52
+      sizeY: 36
+      advanceX: 52
       advanceY: 0
       bearingX: 0
       bearingY: 36
-      texX: 164
-      texY: 51
+      texX: 0.3203125
+      texY: 0.1156463
+      texDX: 0.421875
+      texDY: 0.1972789
     - id: 120
       width: 33
       height: 36
-      advanceX: 2240
+      sizeX: 33
+      sizeY: 36
+      advanceX: 35
       advanceY: 0
       bearingX: 1
       bearingY: 36
-      texX: 333
-      texY: 327
+      texX: 0.6503906
+      texY: 0.7414966
+      texDX: 0.7148438
+      texDY: 0.8231293
     - id: 121
       width: 34
       height: 52
-      advanceX: 2176
+      sizeX: 34
+      sizeY: 52
+      advanceX: 34
       advanceY: 0
       bearingX: 0
       bearingY: 36
-      texX: 335
-      texY: 98
+      texX: 0.6542969
+      texY: 0.2222222
+      texDX: 0.7207031
+      texDY: 0.3401361
     - id: 122
       width: 27
       height: 36
-      advanceX: 1984
+      sizeX: 27
+      sizeY: 36
+      advanceX: 31
       advanceY: 0
       bearingX: 2
       bearingY: 36
-      texX: 84
-      texY: 353
+      texX: 0.1640625
+      texY: 0.8004535
+      texDX: 0.2167969
+      texDY: 0.8820862
     - id: 123
       width: 22
       height: 59
-      advanceX: 1600
+      sizeX: 22
+      sizeY: 59
+      advanceX: 25
       advanceY: 0
       bearingX: 2
       bearingY: 48
-      texX: 172
-      texY: 299
+      texX: 0.3359375
+      texY: 0.6780046
+      texDX: 0.3789063
+      texDY: 0.8117914
     - id: 124
       width: 5
       height: 67
-      advanceX: 2368
+      sizeX: 5
+      sizeY: 67
+      advanceX: 37
       advanceY: 0
       bearingX: 16
       bearingY: 51
-      texX: 441
-      texY: 370
+      texX: 0.8613281
+      texY: 0.8390023
+      texDX: 0.8710938
+      texDY: 0.9909297
     - id: 125
       width: 22
       height: 59
-      advanceX: 1600
+      sizeX: 22
+      sizeY: 59
+      advanceX: 25
       advanceY: 0
       bearingX: 2
       bearingY: 48
       texX: 0
-      texY: 302
+      texY: 0.6848072
+      texDX: 0.04296875
+      texDY: 0.8185941
     - id: 126
       width: 32
       height: 9
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 9
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 28
-      texX: 263
-      texY: 374
+      texX: 0.5136719
+      texY: 0.8480726
+      texDX: 0.5761719
+      texDY: 0.8684807
     - id: 127
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 390
-      texY: 283
+      texX: 0.7617188
+      texY: 0.6417233
+      texDX: 0.8164063
+      texDY: 0.7505668
     - id: 128
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 361
-      texY: 279
+      texX: 0.7050781
+      texY: 0.6326531
+      texDX: 0.7597656
+      texDY: 0.7414966
     - id: 129
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 332
-      texY: 255
+      texX: 0.6484375
+      texY: 0.5782313
+      texDX: 0.703125
+      texDY: 0.6870748
     - id: 130
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 58
-      texY: 254
+      texX: 0.1132813
+      texY: 0.5759637
+      texDX: 0.1679688
+      texDY: 0.6848073
     - id: 131
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 174
-      texY: 251
+      texX: 0.3398438
+      texY: 0.569161
+      texDX: 0.3945313
+      texDY: 0.6780045
     - id: 132
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 145
-      texY: 250
+      texX: 0.2832031
+      texY: 0.5668934
+      texDX: 0.3378906
+      texDY: 0.6757369
     - id: 133
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 274
-      texY: 244
+      texX: 0.5351563
+      texY: 0.553288
+      texDX: 0.5898438
+      texDY: 0.6621315
     - id: 134
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 410
-      texY: 235
+      texX: 0.8007813
+      texY: 0.5328798
+      texDX: 0.8554688
+      texDY: 0.6417234
     - id: 135
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 482
-      texY: 234
+      texX: 0.9414063
+      texY: 0.5306122
+      texDX: 0.9960938
+      texDY: 0.6394558
     - id: 136
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 381
-      texY: 231
+      texX: 0.7441406
+      texY: 0.5238096
+      texDX: 0.7988281
+      texDY: 0.6326531
     - id: 137
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 58
-      texY: 205
+      texX: 0.1132813
+      texY: 0.4648526
+      texDX: 0.1679688
+      texDY: 0.5736961
     - id: 138
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 468
-      texY: 282
+      texX: 0.9140625
+      texY: 0.6394558
+      texDX: 0.96875
+      texDY: 0.7482994
     - id: 139
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 29
-      texY: 204
+      texX: 0.05664063
+      texY: 0.462585
+      texDX: 0.1113281
+      texDY: 0.5714285
     - id: 140
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
       texX: 0
-      texY: 204
+      texY: 0.462585
+      texDX: 0.0546875
+      texDY: 0.5714285
     - id: 141
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 294
-      texY: 196
+      texX: 0.5742188
+      texY: 0.4444444
+      texDX: 0.6289063
+      texDY: 0.553288
     - id: 142
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 482
-      texY: 185
+      texX: 0.9414063
+      texY: 0.4195011
+      texDX: 0.9960938
+      texDY: 0.5283446
     - id: 143
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 116
-      texY: 284
+      texX: 0.2265625
+      texY: 0.6439909
+      texDX: 0.28125
+      texDY: 0.7528344
     - id: 144
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 419
-      texY: 284
+      texX: 0.8183594
+      texY: 0.6439909
+      texDX: 0.8730469
+      texDY: 0.7528344
     - id: 145
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 275
-      texY: 293
+      texX: 0.5371094
+      texY: 0.6643991
+      texDX: 0.5917969
+      texDY: 0.7732426
     - id: 146
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 203
-      texY: 296
+      texX: 0.3964844
+      texY: 0.6712018
+      texDX: 0.4511719
+      texDY: 0.7800454
     - id: 147
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 304
-      texY: 297
+      texX: 0.59375
+      texY: 0.6734694
+      texDX: 0.6484375
+      texDY: 0.7823129
     - id: 148
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 216
-      texY: 199
+      texX: 0.421875
+      texY: 0.4512472
+      texDX: 0.4765625
+      texDY: 0.5600907
     - id: 149
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 323
-      texY: 200
+      texX: 0.6308594
+      texY: 0.4535147
+      texDX: 0.6855469
+      texDY: 0.5623583
     - id: 150
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 159
-      texY: 202
+      texX: 0.3105469
+      texY: 0.4580499
+      texDX: 0.3652344
+      texDY: 0.5668935
     - id: 151
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 188
-      texY: 203
+      texX: 0.3671875
+      texY: 0.4603175
+      texDX: 0.421875
+      texDY: 0.569161
     - id: 152
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 245
-      texY: 205
+      texX: 0.4785156
+      texY: 0.4648526
+      texDX: 0.5332031
+      texDY: 0.5736961
     - id: 153
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 87
-      texY: 207
+      texX: 0.1699219
+      texY: 0.4693878
+      texDX: 0.2246094
+      texDY: 0.5782313
     - id: 154
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 352
-      texY: 207
+      texX: 0.6875
+      texY: 0.4693878
+      texDX: 0.7421875
+      texDY: 0.5782313
     - id: 155
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 116
-      texY: 235
+      texX: 0.2265625
+      texY: 0.5328798
+      texDX: 0.28125
+      texDY: 0.6417234
     - id: 156
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 439
-      texY: 236
+      texX: 0.8574219
+      texY: 0.5351474
+      texDX: 0.9121094
+      texDY: 0.6439909
     - id: 157
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 29
-      texY: 253
+      texX: 0.05664063
+      texY: 0.5736961
+      texDX: 0.1113281
+      texDY: 0.6825397
     - id: 158
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 246
-      texY: 254
+      texX: 0.4804688
+      texY: 0.5759637
+      texDX: 0.5351563
+      texDY: 0.6848073
     - id: 159
       width: 28
       height: 48
-      advanceX: 2560
+      sizeX: 28
+      sizeY: 48
+      advanceX: 40
       advanceY: 0
       bearingX: 6
       bearingY: 48
-      texX: 87
-      texY: 256
+      texX: 0.1699219
+      texY: 0.5804989
+      texDX: 0.2246094
+      texDY: 0.6893424
     - id: 160
       width: 0
       height: 0
-      advanceX: 1088
+      sizeX: 0
+      sizeY: 0
+      advanceX: 17
       advanceY: 0
       bearingX: 0
       bearingY: 0
-      texX: 59
-      texY: 49
+      texX: 0.1152344
+      texY: 0.1111111
+      texDX: 0.1152344
+      texDY: 0.1111111
     - id: 161
       width: 9
       height: 49
-      advanceX: 1152
+      sizeX: 9
+      sizeY: 49
+      advanceX: 18
       advanceY: 0
       bearingX: 4
       bearingY: 37
-      texX: 502
+      texX: 0.9804688
       texY: 0
+      texDX: 0.9980469
+      texDY: 0.1111111
     - id: 162
       width: 27
       height: 50
-      advanceX: 2432
+      sizeX: 27
+      sizeY: 50
+      advanceX: 38
       advanceY: 0
       bearingX: 6
       bearingY: 49
-      texX: 454
-      texY: 185
+      texX: 0.8867188
+      texY: 0.4195011
+      texDX: 0.9394531
+      texDY: 0.5328798
     - id: 163
       width: 34
       height: 48
-      advanceX: 2432
+      sizeX: 34
+      sizeY: 48
+      advanceX: 38
       advanceY: 0
       bearingX: 2
       bearingY: 48
-      texX: 474
-      texY: 136
+      texX: 0.9257813
+      texY: 0.30839
+      texDX: 0.9921875
+      texDY: 0.4172336
     - id: 164
       width: 31
       height: 31
-      advanceX: 2432
+      sizeX: 31
+      sizeY: 31
+      advanceX: 38
       advanceY: 0
       bearingX: 4
       bearingY: 39
-      texX: 160
-      texY: 358
+      texX: 0.3125
+      texY: 0.8117914
+      texDX: 0.3730469
+      texDY: 0.8820862
     - id: 165
       width: 37
       height: 48
-      advanceX: 2432
+      sizeX: 37
+      sizeY: 48
+      advanceX: 38
       advanceY: 0
       bearingX: 1
       bearingY: 48
-      texX: 157
-      texY: 87
+      texX: 0.3066406
+      texY: 0.1972789
+      texDX: 0.3789063
+      texDY: 0.3061225
     - id: 166
       width: 5
       height: 67
-      advanceX: 2368
+      sizeX: 5
+      sizeY: 67
+      advanceX: 37
       advanceY: 0
       bearingX: 16
       bearingY: 51
-      texX: 192
-      texY: 374
+      texX: 0.375
+      texY: 0.8480726
+      texDX: 0.3847656
+      texDY: 1
     - id: 167
       width: 27
       height: 51
-      advanceX: 2240
+      sizeX: 27
+      sizeY: 51
+      advanceX: 35
       advanceY: 0
       bearingX: 4
       bearingY: 51
-      texX: 426
-      texY: 184
+      texX: 0.8320313
+      texY: 0.4172336
+      texDX: 0.8847656
+      texDY: 0.5328798
     - id: 168
       width: 19
       height: 6
-      advanceX: 2496
+      sizeX: 19
+      sizeY: 6
+      advanceX: 39
       advanceY: 0
       bearingX: 10
       bearingY: 48
-      texX: 195
-      texY: 88
+      texX: 0.3808594
+      texY: 0.1995465
+      texDX: 0.4179688
+      texDY: 0.2131519
     - id: 169
       width: 50
       height: 50
-      advanceX: 3584
+      sizeX: 50
+      sizeY: 50
+      advanceX: 56
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 164
+      texX: 0.3203125
       texY: 0
+      texDX: 0.4179688
+      texDY: 0.1133787
     - id: 170
       width: 19
       height: 23
-      advanceX: 1536
+      sizeX: 19
+      sizeY: 23
+      advanceX: 24
       advanceY: 0
       bearingX: 2
       bearingY: 48
-      texX: 435
-      texY: 51
+      texX: 0.8496094
+      texY: 0.1156463
+      texDX: 0.8867188
+      texDY: 0.1678005
     - id: 171
       width: 29
       height: 27
-      advanceX: 2112
+      sizeX: 29
+      sizeY: 27
+      advanceX: 33
       advanceY: 0
       bearingX: 2
       bearingY: 31
-      texX: 404
-      texY: 105
+      texX: 0.7890625
+      texY: 0.2380952
+      texDX: 0.8457031
+      texDY: 0.2993197
     - id: 172
       width: 32
       height: 17
-      advanceX: 2432
+      sizeX: 32
+      sizeY: 17
+      advanceX: 38
       advanceY: 0
       bearingX: 3
       bearingY: 26
-      texX: 17
-      texY: 374
+      texX: 0.03320313
+      texY: 0.8480726
+      texDX: 0.09570313
+      texDY: 0.8866214
     - id: 173
       width: 17
       height: 5
-      advanceX: 1408
+      sizeX: 17
+      sizeY: 5
+      advanceX: 22
       advanceY: 0
       bearingX: 2
       bearingY: 20
-      texX: 370
-      texY: 99
+      texX: 0.7226563
+      texY: 0.2244898
+      texDX: 0.7558594
+      texDY: 0.2358277
     - id: 174
       width: 50
       height: 50
-      advanceX: 3584
+      sizeX: 50
+      sizeY: 50
+      advanceX: 56
       advanceY: 0
       bearingX: 3
       bearingY: 49
-      texX: 215
+      texX: 0.4199219
       texY: 0
+      texDX: 0.5175781
+      texDY: 0.1133787
     - id: 175
       width: 35
       height: 5
-      advanceX: 2176
+      sizeX: 35
+      sizeY: 5
+      advanceX: 34
       advanceY: 0
       bearingX: -1
       bearingY: 55
-      texX: 263
-      texY: 384
+      texX: 0.5136719
+      texY: 0.8707483
+      texDX: 0.5820313
+      texDY: 0.8820862

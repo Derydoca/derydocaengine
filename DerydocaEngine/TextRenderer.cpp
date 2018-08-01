@@ -106,13 +106,18 @@ void TextRenderer::updateText()
 	float charWidth = 0.1f;
 	float pointScale = 0.01f;
 
+	// Determine how many chars fit in the next line
+	// Create the mesh data for that
+	// Cause a carriage return
+	// Start again
+
 	int charQuadIndex = 0;
 	for (int i = 0; i < m_text.length(); i++)
 	{
 		// Handle carriage returns
 		if (m_text[i] == CARRIAGE_RETURN_CHAR)
 		{
-			yPos -= 0.65f;
+			yPos -= 50.0f;
 			xPos = 0.0f;
 			continue;
 		}
@@ -124,11 +129,11 @@ void TextRenderer::updateText()
 		}
 
 		TexturePackerImage img = m_fontFace->getCharData(m_text[i]);
-		IntRectangle rect = img.getTexSheetPosition();
-		float minx = (float)rect.getX() / (float)m_texSize.x;
-		float maxx = ((float)rect.getX() + (float)rect.getWidth()) / (float)m_texSize.x;
-		float miny = (float)rect.getY() / (float)m_texSize.y;
-		float maxy = ((float)rect.getY() + (float)rect.getHeight()) / (float)m_texSize.y;
+		Rect rect = img.getTexSheetPosition();
+		float minx = rect.getX();
+		float maxx = rect.getDX();
+		float miny = rect.getY();
+		float maxy = rect.getDY();
 
 		// Set the UV positions
 		m_uvs[charQuadIndex * 4 + 1] = vec2(minx, maxy);
@@ -145,17 +150,18 @@ void TextRenderer::updateText()
 		m_indices[charQuadIndex * 6 + 5] = charQuadIndex * 4 + 3;
 
 		// Set the vertex positions
-		float charYMin = yPos + ((img.getBearingY()) * pointScale);
-		float charYMax = yPos - (((img.getHeight() - img.getBearingY())) * pointScale);
-		float charXMin = xPos + ((img.getBearingX()) * pointScale);
-		float charXMax = xPos + (((img.getBearingX() + img.getWidth())) * pointScale);
+		float charXMin = xPos + img.getBearingX();
+		float charXMax = xPos + img.getBearingX() + img.getSizeX();
+
+		float charYMax = yPos - img.getSizeY() + img.getBearingY();
+		float charYMin = yPos + img.getBearingY();
 		m_verts[charQuadIndex * 4 + 0] = vec3(charXMin, charYMin, 0);
 		m_verts[charQuadIndex * 4 + 1] = vec3(charXMin, charYMax, 0);
 		m_verts[charQuadIndex * 4 + 2] = vec3(charXMax, charYMax, 0);
 		m_verts[charQuadIndex * 4 + 3] = vec3(charXMax, charYMin, 0);
 
-		xPos += ((img.getAdvanceX() / 64.0f) * pointScale);
-		yPos += ((img.getAdvanceY() / 64.0f) * pointScale);
+		xPos += img.getAdvanceX();
+		yPos += img.getAdvanceY();
 
 		charQuadIndex++;
 	}

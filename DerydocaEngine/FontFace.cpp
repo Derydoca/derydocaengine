@@ -80,7 +80,17 @@ void FontFace::loadFromFontFile(string filePath)
 			}
 		}
 
-		packer.addImage(i, m_face->glyph->bitmap.width, m_face->glyph->bitmap.rows, m_face->glyph->bitmap_left, m_face->glyph->bitmap_top, m_face->glyph->advance.x, m_face->glyph->advance.y, m_face->glyph->bitmap.buffer);
+		packer.addImage(
+			i,
+			m_face->glyph->metrics.width / 64.0f,
+			m_face->glyph->metrics.height / 64.0f,
+			m_face->glyph->metrics.horiBearingX / 64.0f,
+			m_face->glyph->metrics.horiBearingY/ 64.0f,
+			m_face->glyph->metrics.horiAdvance / 64.0f,
+			0.0f,
+			m_face->glyph->bitmap.buffer,
+			m_face->glyph->bitmap.width,
+			m_face->glyph->bitmap.rows);
 	}
 
 	// Pack the images
@@ -133,14 +143,18 @@ void FontFace::loadFromSerializedFile(string filePath)
 		int id = charNode["id"].as<int>();
 		int w = charNode["width"].as<int>();
 		int h = charNode["height"].as<int>();
-		int ax = charNode["advanceX"].as<int>();
-		int ay = charNode["advanceY"].as<int>();
-		int bx = charNode["bearingX"].as<int>();
-		int by = charNode["bearingY"].as<int>();
-		int tx = charNode["texX"].as<int>();
-		int ty = charNode["texY"].as<int>();
-		TexturePackerImage img(id, w, h, 1, bx, by, ax, ay);
-		img.setTextureSheetRectangle(tx, ty, w, h);
+		float sx = charNode["sizeX"].as<float>();
+		float sy = charNode["sizeY"].as<float>();
+		float ax = charNode["advanceX"].as<float>();
+		float ay = charNode["advanceY"].as<float>();
+		float bx = charNode["bearingX"].as<float>();
+		float by = charNode["bearingY"].as<float>();
+		float tx = charNode["texX"].as<float>();
+		float ty = charNode["texY"].as<float>();
+		float tdx = charNode["texDX"].as<float>();
+		float tdy = charNode["texDY"].as<float>();
+		TexturePackerImage img(id, w, h, 1, sx, sy, bx, by, ax, ay);
+		img.setTextureSheetRectangle(tx, ty, tdx, tdy);
 		m_charImages.emplace(id, img);
 	}
 
@@ -172,13 +186,17 @@ void FontFace::saveToSerializedFile(string filePath)
 		charNode["id"] = charImage.second.getID();
 		charNode["width"] = charImage.second.getWidth();
 		charNode["height"] = charImage.second.getHeight();
+		charNode["sizeX"] = charImage.second.getSizeX();
+		charNode["sizeY"] = charImage.second.getSizeY();
 		charNode["advanceX"] = charImage.second.getAdvanceX();
 		charNode["advanceY"] = charImage.second.getAdvanceY();
 		charNode["bearingX"] = charImage.second.getBearingX();
 		charNode["bearingY"] = charImage.second.getBearingY();
-		IntRectangle texPos = charImage.second.getTexSheetPosition();
+		Rect texPos = charImage.second.getTexSheetPosition();
 		charNode["texX"] = texPos.getX();
 		charNode["texY"] = texPos.getY();
+		charNode["texDX"] = texPos.getDX();
+		charNode["texDY"] = texPos.getDY();
 		charactersNode.push_back(charNode);
 	}
 
