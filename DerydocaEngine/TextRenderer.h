@@ -30,7 +30,6 @@ private:
 	string m_text = "Text";
 	ivec2 m_texSize;
 	Mesh m_mesh;
-	float m_fontSize;
 	vec2 m_bounds = vec2(5.0f, 5.0f);
 
 	MeshRenderer* m_meshRenderer;

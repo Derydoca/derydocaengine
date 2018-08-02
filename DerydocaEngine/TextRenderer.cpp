@@ -65,12 +65,6 @@ void TextRenderer::render(MatrixStack * matrixStack)
 
 void TextRenderer::deserialize(YAML::Node compNode)
 {
-	YAML::Node fontSizeNode = compNode["fontSize"];
-	if (fontSizeNode)
-	{
-		m_fontSize = fontSizeNode.as<float>();
-	}
-
 	YAML::Node textNode = compNode["text"];
 	if (textNode)
 	{
@@ -85,8 +79,16 @@ void TextRenderer::deserialize(YAML::Node compNode)
 
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	if (fontResource->getType() == ResourceType::FontResourceType) {
+		// Load the font size from the file
+		float fontSize = 16.0f;
+		YAML::Node fontSizeNode = compNode["fontSize"];
+		if (fontSizeNode)
+		{
+			fontSize = fontSizeNode.as<float>();
+		}
+
 		m_fontFace = new FontFace();
-		m_fontFace->setFontSize(m_fontSize);
+		m_fontFace->setFontSize(fontSize);
 		m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
 	}
 	else if (fontResource->getType() == ResourceType::RasterFontResourceType)
