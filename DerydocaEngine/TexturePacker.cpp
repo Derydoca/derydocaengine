@@ -105,12 +105,11 @@ void TexturePacker::packImages()
 
 void TexturePacker::freeSubImageData()
 {
-	cout << "FIX THE FREE SUB IMAGE DATA FUNCTION" << endl;
-	/*for (auto imageBuffer : m_imageBuffers)
+	for (auto imageBuffer : m_imageBuffers)
 	{
 		delete[] imageBuffer.second;
 	}
-	m_imageBuffers.empty();*/
+	m_imageBuffers.clear();
 }
 
 bool TexturePacker::isPointFree(int x, int y)
