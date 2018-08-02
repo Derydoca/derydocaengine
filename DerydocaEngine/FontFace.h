@@ -31,6 +31,7 @@ public:
 			return m_charImages.at(charCode);
 		}
 	};
+	float getLineHeight() const { return m_lineHeight; }
 	void setFontSize(int fontSize) { m_fontSize = fontSize; }
 
 	void loadFromFontFile(string filePath);
@@ -46,5 +47,6 @@ private:
 	unsigned char* m_imageBuffer;
 	ivec2 m_imageBufferSize;
 	bool m_textureDirty = false;
+	float m_lineHeight = 50.0f;
 };
 

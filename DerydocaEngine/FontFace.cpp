@@ -51,6 +51,8 @@ void FontFace::loadFromFontFile(string filePath)
 		return;
 	}
 
+	m_lineHeight = m_face->height / 64.0f;
+
 	error = FT_Set_Char_Size(m_face, 0, (int)(m_fontSize * 64.0f), m_dotsPerInch.x, m_dotsPerInch.y);
 
 	TexturePacker packer = TexturePacker();
@@ -122,6 +124,7 @@ void FontFace::loadFromSerializedFile(string filePath)
 	m_fontSize = font["fontSize"].as<float>();
 	m_imageBufferSize.x = font["width"].as<int>();
 	m_imageBufferSize.y = font["height"].as<int>();
+	m_lineHeight = font["lineHeight"].as<float>();
 	
 	// Load the image
 	string imageUuid = font["image"].as<string>();
@@ -172,6 +175,7 @@ void FontFace::saveToSerializedFile(string filePath)
 	font["fontSize"] = m_fontSize;
 	font["width"] = m_imageBufferSize.x;
 	font["height"] = m_imageBufferSize.y;
+	font["lineHeight"] = m_lineHeight;
 	string imageFileName = filePath + ".bmp";
 	stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
 	ObjectLibrary::getInstance().updateMetaFiles(imageFileName);

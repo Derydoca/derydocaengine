@@ -107,7 +107,6 @@ void TextRenderer::updateText()
 	float yPos = 0.0f;
 	float charWidth = 0.1f;
 	float pointScale = 0.01f;
-	float lineHeight = 55.0f;
 
 	char* filteredString = new char[m_text.length()];
 	vector<LineExtent*> lineExtents;
@@ -214,7 +213,7 @@ void TextRenderer::updateText()
 		}
 
 		xPos = 0.0f;
-		yPos -= lineHeight;
+		yPos -= m_fontFace->getLineHeight();
 
 		delete extent;
 	}

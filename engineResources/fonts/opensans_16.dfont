@@ -2,6 +2,7 @@ Font:
   fontSize: 16
   width: 512
   height: 441
+  lineHeight: 43.57813
   image: 42b3fc16-04b2-4635-82fe-283347f04d1d
   characters:
     - id: 32
