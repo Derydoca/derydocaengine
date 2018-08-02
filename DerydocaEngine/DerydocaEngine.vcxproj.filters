@@ -201,6 +201,7 @@
     <ClCompile Include="RasterFontFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
+    <ClCompile Include="FrameStats.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -454,6 +455,7 @@
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h" />
+    <ClInclude Include="FrameStats.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

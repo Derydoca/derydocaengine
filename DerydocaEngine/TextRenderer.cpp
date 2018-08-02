@@ -142,7 +142,7 @@ void TextRenderer::updateText()
 		TexturePackerImage img = m_fontFace->getCharData(m_text[i]);
 		lineWidth += img.getAdvanceX();
 
-		if (lineWidth > m_bounds.x)
+		if (m_bounds.x > 0 && lineWidth > m_bounds.x)
 		{
 			// End of line
 			lineExtent->setEnd(filteredStringIndex);

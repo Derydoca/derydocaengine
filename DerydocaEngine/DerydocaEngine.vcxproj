@@ -231,6 +231,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="EngineSettings.cpp" />
     <ClCompile Include="FileType.cpp" />
     <ClCompile Include="FontFace.cpp" />
+    <ClCompile Include="FrameStats.cpp" />
     <ClCompile Include="GameComponentFactory.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GammaCorrectionFilter.cpp" />
@@ -322,6 +323,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="FileType.h" />
     <ClInclude Include="FontFace.h" />
+    <ClInclude Include="FrameStats.h" />
     <ClInclude Include="GameComponentFactory.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GammaCorrectionFilter.h" />
