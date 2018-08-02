@@ -51,6 +51,11 @@ void FontFace::loadFromFontFile(string filePath)
 		return;
 	}
 
+	m_name = m_face->family_name;
+	if (m_face->style_name != nullptr)
+	{
+		m_style = m_face->style_name;
+	}
 	m_lineHeight = m_face->height / 64.0f;
 
 	error = FT_Set_Char_Size(m_face, 0, (int)(m_fontSize * 64.0f), m_dotsPerInch.x, m_dotsPerInch.y);
@@ -123,6 +128,8 @@ void FontFace::loadFromSerializedFile(string filePath)
 
 	Node font = file["Font"];
 
+	m_name = font["name"].as<string>();
+	m_style = font["style"].as<string>();
 	m_fontSize = font["fontSize"].as<float>();
 	m_imageBufferSize.x = font["width"].as<int>();
 	m_imageBufferSize.y = font["height"].as<int>();
@@ -174,6 +181,8 @@ void FontFace::saveToSerializedFile(string filePath)
 
 	Node font = root["Font"];
 
+	font["name"] = m_name;
+	font["style"] = m_style;
 	font["fontSize"] = m_fontSize;
 	font["width"] = m_imageBufferSize.x;
 	font["height"] = m_imageBufferSize.y;

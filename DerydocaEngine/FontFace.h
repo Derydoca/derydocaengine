@@ -48,5 +48,7 @@ private:
 	ivec2 m_imageBufferSize;
 	bool m_textureDirty = false;
 	float m_lineHeight = 50.0f;
+	string m_name = "";
+	string m_style = "";
 };
 

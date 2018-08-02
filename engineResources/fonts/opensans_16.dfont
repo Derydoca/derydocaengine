@@ -1,4 +1,6 @@
 Font:
+  name: Open Sans
+  style: Regular
   fontSize: 16
   width: 512
   height: 1350
