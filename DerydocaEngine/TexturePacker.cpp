@@ -14,7 +14,7 @@ TexturePacker::~TexturePacker()
 	freeSubImageData();
 }
 
-void TexturePacker::addImage(int id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height)
+void TexturePacker::addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height)
 {
 	TexturePackerImage image(id, width, height, 1, sizeX, sizeY, bearingX, bearingY, advanceX, advanceY);
 	m_images.push_back(image);

@@ -57,20 +57,21 @@ void FontFace::loadFromFontFile(string filePath)
 
 	TexturePacker packer = TexturePacker();
 
-	for (int i = 32; i < 176; i++)
-	//for (int i = 65; i < 122; i++)
+	for(unsigned long i = 0; i < m_face->num_glyphs; i++)
 	{
 		FT_ULong charCode = i;
 		FT_UInt glyph_index = FT_Get_Char_Index(m_face, charCode);
 		if (glyph_index == 0)
 		{
 			cout << "Unable to get character index from char code " << charCode << "." << endl;
+			continue;
 		}
 
 		error = FT_Load_Glyph(m_face, glyph_index, FT_LOAD_DEFAULT);
 		if (error)
 		{
 			cout << "Unable to load glyph at index " << glyph_index << ". Error: " << error;
+			continue;
 		}
 
 		if (m_face->glyph->format != FT_GLYPH_FORMAT_BITMAP)
@@ -79,6 +80,7 @@ void FontFace::loadFromFontFile(string filePath)
 			if (error)
 			{
 				cout << "Unable to render glyph." << endl;
+				continue;
 			}
 		}
 
@@ -143,7 +145,7 @@ void FontFace::loadFromSerializedFile(string filePath)
 	for (int i = 0; i < charactersNode.size(); i++)
 	{
 		Node charNode = charactersNode[i];
-		int id = charNode["id"].as<int>();
+		int id = charNode["id"].as<unsigned long>();
 		int w = charNode["width"].as<int>();
 		int h = charNode["height"].as<int>();
 		float sx = charNode["sizeX"].as<float>();

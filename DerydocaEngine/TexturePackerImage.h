@@ -8,10 +8,10 @@ struct TexturePackerImage
 {
 public:
 	TexturePackerImage() {};
-	TexturePackerImage(int id, int width, int height, int channels, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY);
+	TexturePackerImage(unsigned long id, int width, int height, int channels, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY);
 	~TexturePackerImage();
 
-	int getID() const { return m_id; }
+	unsigned long getID() const { return m_id; }
 	int getWidth() const { return m_width; }
 	int getHeight() const { return m_height; }
 	//int getChannels() const { return m_channels; }
@@ -26,7 +26,7 @@ public:
 	void setTextureSheetRectangle(float x, float y, float width, float height);
 
 private:
-	int m_id;
+	unsigned long m_id;
 	int m_width;
 	int m_height;
 	//int m_channels;

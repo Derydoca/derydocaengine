@@ -2,7 +2,7 @@
 #include "TexturePackerImage.h"
 #include <string>
 
-TexturePackerImage::TexturePackerImage(int id, int width, int height, int channels, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY)
+TexturePackerImage::TexturePackerImage(unsigned long id, int width, int height, int channels, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY)
 {
 	m_id = id;
 	m_width = width;
