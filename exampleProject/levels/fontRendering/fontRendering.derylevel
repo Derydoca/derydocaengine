@@ -17,7 +17,7 @@ Scene:
             material: 75a01949-631c-4027-a413-9148261668d9
             font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
             text: "Look! A working FPS counter!"
-            bounds: [635.0, 1000.0]
+            bounds: [350.0, 1000.0]
 
             
   - Type: GameObject

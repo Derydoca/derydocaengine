@@ -57,10 +57,16 @@ Mesh::~Mesh()
 
 void Mesh::RefreshVbo()
 {
-	glGenVertexArrays(1, &m_vertexArrayObject);
+	if (!m_vertexArrayObject)
+	{
+		glGenVertexArrays(1, &m_vertexArrayObject);
+	}
 	glBindVertexArray(m_vertexArrayObject);
 
-	glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+	if (!m_vertexArrayBuffers[0])
+	{
+		glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+	}
 
 	// Initialize the vert positions
 	if (m_positions != nullptr)

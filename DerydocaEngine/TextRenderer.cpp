@@ -100,51 +100,60 @@ void TextRenderer::deserialize(YAML::Node compNode)
 
 void TextRenderer::updateText()
 {
+	// If no texture exists, return prematurely
 	if (m_texSize.x == 0 || m_texSize.y == 0)
 	{
 		return;
 	}
 
-	float xPos = 0.0f;
-	float yPos = 0.0f;
-	float charWidth = 0.1f;
-	float pointScale = 0.01f;
+	// Store the current pen position
+	float penX = 0.0f;
+	float penY = 0.0f;
 
+	// Store a character array of the size of the string so that we can store only the characters that are output to the screen
 	char* filteredString = new char[m_text.length()];
+
+	// Store a vector of line extent information to store the start and end of each line in the filtered string
 	vector<LineExtent*> lineExtents;
 
+	// Keep track of the head of where we are writing to the filtered string
 	int filteredStringIndex = 0;
+
+	// Bookkeeping variable to track the current line length so we can break it when it extend's the x-boundary
 	float lineWidth = 0.0f;
 
 	// Create a line extent object to be inserted into the lineExtents array when a full line is completed
 	LineExtent* lineExtent = new LineExtent(0);
-	lineExtent->setStart(0);
 
+	// Iterate through each character in the string
 	for (size_t i = 0; i < m_text.length(); i++)
 	{
 		char c = m_text[i];
 
+		// If this character is a carriage return, end the line and move to the next character
 		if (c == CARRIAGE_RETURN_CHAR)
 		{
-			// End of line
 			lineExtent->setEnd(filteredStringIndex);
 			lineExtents.push_back(lineExtent);
 			lineExtent = new LineExtent(filteredStringIndex);
 			lineWidth = 0.0f;
 			continue;
 		}
+		// Skip the character if it is a non-renderable character
 		else if (c <= 31 || c == DEL_CHAR)
 		{
-			// Skip char
 			continue;
 		}
 
+		// Load the character image info
 		TexturePackerImage img = m_fontFace->getCharData(m_text[i]);
+
+		// Increment the line width by the size of this character
 		lineWidth += img.getAdvanceX();
 
+		// If the x boundary is defined and the line width is greater than the bounds, end the line and start a new one
 		if (m_bounds.x > 0 && lineWidth > m_bounds.x)
 		{
-			// End of line
 			lineExtent->setEnd(filteredStringIndex);
 			lineExtents.push_back(lineExtent);
 			lineExtent = new LineExtent(filteredStringIndex);
@@ -198,28 +207,29 @@ void TextRenderer::updateText()
 			m_indices[charQuadIndex * 6 + 5] = charQuadIndex * 4 + 3;
 
 			// Set the vertex positions
-			float charXMin = xPos + img.getBearingX();
-			float charXMax = xPos + img.getBearingX() + img.getSizeX();
+			float charXMin = penX + img.getBearingX();
+			float charXMax = penX + img.getBearingX() + img.getSizeX();
 
-			float charYMax = yPos - img.getSizeY() + img.getBearingY();
-			float charYMin = yPos + img.getBearingY();
+			float charYMax = penY - img.getSizeY() + img.getBearingY();
+			float charYMin = penY + img.getBearingY();
 			m_verts[charQuadIndex * 4 + 0] = vec3(charXMin, charYMin, 0);
 			m_verts[charQuadIndex * 4 + 1] = vec3(charXMin, charYMax, 0);
 			m_verts[charQuadIndex * 4 + 2] = vec3(charXMax, charYMax, 0);
 			m_verts[charQuadIndex * 4 + 3] = vec3(charXMax, charYMin, 0);
 
-			xPos += img.getAdvanceX();
-			yPos += img.getAdvanceY();
+			penX += img.getAdvanceX();
+			penY += img.getAdvanceY();
 
 			charQuadIndex++;
 		}
 
-		xPos = 0.0f;
-		yPos -= m_fontFace->getLineHeight();
+		penX = 0.0f;
+		penY -= m_fontFace->getLineHeight();
 
 		delete extent;
 	}
 
+	lineExtents.clear();
 	delete[] filteredString;
 
 	m_mesh.load(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
