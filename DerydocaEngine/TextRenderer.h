@@ -31,7 +31,8 @@ private:
 	ivec2 m_texSize;
 	Mesh m_mesh;
 	vec2 m_bounds;
-
+	Color* m_vertexColors;
+	Color m_textColor;
 	MeshRenderer* m_meshRenderer;
 };
 

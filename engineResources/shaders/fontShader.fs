@@ -2,6 +2,7 @@
 
 in vec3 Position;
 in vec2 TexCoord;
+in vec4 Color;
 
 uniform sampler2D CharacterSheet;
 
@@ -16,5 +17,5 @@ void main()
         discard;
     }
 
-    FragColor = vec4(1.0);
+    FragColor = Color;
 }

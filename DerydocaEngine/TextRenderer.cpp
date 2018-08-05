@@ -77,6 +77,12 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_bounds = boundsNode.as<vec2>();
 	}
 
+	YAML::Node colorNode = compNode["color"];
+	if (colorNode)
+	{
+		m_textColor = colorNode.as<Color>();
+	}
+
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	if (fontResource->getType() == ResourceType::FontResourceType) {
 		// Load the font size from the file
@@ -170,6 +176,7 @@ void TextRenderer::updateText()
 	delete[] m_verts;
 	delete[] m_uvs;
 	delete[] m_indices;
+	delete[] m_vertexColors;
 
 	int charCount = lineExtents.back()->getEnd();
 	int vertCount = charCount * 4;
@@ -178,6 +185,7 @@ void TextRenderer::updateText()
 	m_verts = new vec3[vertCount];
 	m_uvs = new vec2[vertCount];
 	m_indices = new unsigned int[indicesCount];
+	m_vertexColors = new Color[vertCount];
 
 	int charQuadIndex = 0;
 	for (int lineIndex = 0; lineIndex < lineExtents.size(); lineIndex++)
@@ -217,6 +225,12 @@ void TextRenderer::updateText()
 			m_verts[charQuadIndex * 4 + 2] = vec3(charXMax, charYMax, 0);
 			m_verts[charQuadIndex * 4 + 3] = vec3(charXMax, charYMin, 0);
 
+			// Set the vertex colors
+			m_vertexColors[charQuadIndex * 4 + 0] = m_textColor;
+			m_vertexColors[charQuadIndex * 4 + 1] = m_textColor;
+			m_vertexColors[charQuadIndex * 4 + 2] = m_textColor;
+			m_vertexColors[charQuadIndex * 4 + 3] = m_textColor;
+
 			penX += img.getAdvanceX();
 			penY += img.getAdvanceY();
 
@@ -233,5 +247,6 @@ void TextRenderer::updateText()
 	delete[] filteredString;
 
 	m_mesh.load(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
+	m_mesh.loadVertexColorBuffer(vertCount, m_vertexColors);
 	m_meshRenderer->setMesh(&m_mesh);
 }

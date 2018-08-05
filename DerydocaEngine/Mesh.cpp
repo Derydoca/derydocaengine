@@ -44,6 +44,27 @@ void Mesh::load(unsigned int numVertices, glm::vec3* positions, glm::vec3* norma
 	RefreshVbo();
 }
 
+void Mesh::loadVertexColorBuffer(unsigned int numVertices, Color * colorBuffer)
+{
+	glBindVertexArray(m_vertexArrayObject);
+
+	// Ensure that we have generated a buffer for this mesh
+	if (!m_vertexArrayBuffers[COLOR_VB])
+	{
+		glGenBuffers(1, &m_vertexArrayBuffers[COLOR_VB]);
+	}
+
+	m_colors = colorBuffer;
+
+	// Upload the buffer to the GPU
+	glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
+	glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), m_colors, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(5);
+	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glBindVertexArray(0);
+}
+
 Mesh::~Mesh()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayObject);

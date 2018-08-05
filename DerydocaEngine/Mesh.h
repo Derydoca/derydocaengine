@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "MeshFlags.h"
+#include "Color.h"
 
 struct aiMesh;
 
@@ -16,6 +17,7 @@ public:
 	void load(const std::string& fileName);
 	void load(const std::string& fileName, unsigned int meshIndex);
 	void load(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
+	void loadVertexColorBuffer(unsigned int numVertices, Color* colorBuffer);
 	void draw();
 	void setFlags(MeshFlags flags) { m_flags = flags; }
 	GLuint getVao() const { return m_vertexArrayObject; }
@@ -35,6 +37,7 @@ private:
 		TEXCOORD_VB,
 		NORMAL_VB,
 		INDEX_VB,
+		COLOR_VB,
 		NUM_BUFFERS
 	};
 
@@ -43,6 +46,7 @@ private:
 	glm::vec3* m_tangents;
 	glm::vec3* m_bitangents;
 	glm::vec2* m_texCoords;
+	Color* m_colors;
 	unsigned int m_numVertices;
 	unsigned int* m_indices;
 	unsigned int m_numIndices;

@@ -18,6 +18,7 @@ Scene:
             font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
             text: "Look! A working FPS counter!"
             bounds: [350.0, 1000.0]
+            color: [1.0, 0.0, 0.0, 1.0]
 
             
   - Type: GameObject
@@ -40,6 +41,7 @@ Scene:
             font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
             text: "FPS: ???"
             bounds: [0, 0]
+            color: [1.0, 1.0, 0.5, 1.0]
             
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa

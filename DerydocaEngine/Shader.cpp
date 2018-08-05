@@ -59,6 +59,7 @@ Shader::Shader(const std::string& fileName)
 	glBindAttribLocation(m_program, 2, "VertexNormal");
 	glBindAttribLocation(m_program, 3, "VertexTangent");
 	glBindAttribLocation(m_program, 4, "VertexBitangent");
+	glBindAttribLocation(m_program, 5, "VertexColor");
 
 	// Bind the output color to 0
 	glBindFragDataLocation(m_program, 0, "FragColor");
@@ -115,6 +116,7 @@ Shader::Shader(const std::string & fileName, int varyingsCount, const char * con
 	glBindAttribLocation(m_program, 2, "VertexNormal");
 	glBindAttribLocation(m_program, 3, "VertexTangent");
 	glBindAttribLocation(m_program, 4, "VertexBitangent");
+	glBindAttribLocation(m_program, 5, "VertexColor");
 
 	// Bind the output color to 0
 	glBindFragDataLocation(m_program, 0, "FragColor");
