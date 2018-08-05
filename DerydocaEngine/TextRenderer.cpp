@@ -83,6 +83,12 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_textColor = colorNode.as<Color>();
 	}
 
+	YAML::Node overflowWrapNode = compNode["overflowWrap"];
+	if (overflowWrapNode)
+	{
+		m_overflowWrap = static_cast<OverflowWrap>(overflowWrapNode.as<int>());
+	}
+
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	if (fontResource->getType() == ResourceType::FontResourceType) {
 		// Load the font size from the file
@@ -118,6 +124,7 @@ void TextRenderer::updateText()
 
 	// Store a character array of the size of the string so that we can store only the characters that are output to the screen
 	char* filteredString = new char[m_text.length()];
+	memset(filteredString, 0, m_text.length());
 
 	// Store a vector of line extent information to store the start and end of each line in the filtered string
 	vector<LineExtent*> lineExtents;
@@ -131,18 +138,21 @@ void TextRenderer::updateText()
 	// Create a line extent object to be inserted into the lineExtents array when a full line is completed
 	LineExtent* lineExtent = new LineExtent(0);
 
+	bool lookingForNextLineBreak = false;
+
 	// Iterate through each character in the string
 	for (size_t i = 0; i < m_text.length(); i++)
 	{
 		char c = m_text[i];
 
 		// If this character is a carriage return, end the line and move to the next character
-		if (c == CARRIAGE_RETURN_CHAR)
+		if (c == CARRIAGE_RETURN_CHAR || (lookingForNextLineBreak && (c == ' ' || c == '-')))
 		{
 			lineExtent->setEnd(filteredStringIndex);
 			lineExtents.push_back(lineExtent);
 			lineExtent = new LineExtent(filteredStringIndex);
 			lineWidth = 0.0f;
+			lookingForNextLineBreak = false;
 			continue;
 		}
 		// Skip the character if it is a non-renderable character
@@ -158,12 +168,43 @@ void TextRenderer::updateText()
 		lineWidth += img.getAdvanceX();
 
 		// If the x boundary is defined and the line width is greater than the bounds, end the line and start a new one
-		if (m_bounds.x > 0 && lineWidth > m_bounds.x)
+		if (!lookingForNextLineBreak && m_bounds.x > 0 && lineWidth > m_bounds.x)
 		{
-			lineExtent->setEnd(filteredStringIndex);
-			lineExtents.push_back(lineExtent);
-			lineExtent = new LineExtent(filteredStringIndex);
-			lineWidth = 0.0f;
+			// Find the location where the line should break at depending on the formatting rules
+			int lineBreakPos = filteredStringIndex;
+			if (m_overflowWrap != OverflowWrap::BreakAll)
+			{
+				// Find the previous breakable character
+				lineBreakPos = findPrevBreakChar(m_text.c_str(), filteredStringIndex);
+				
+				// Correct the position difference if there were any characters that were skipped (non-renderable chars, tabs, etc.)
+				lineBreakPos -= i - filteredStringIndex;
+
+				// If the previous breakable character is before or at the position of this line's start position
+				//  we will continue looking through the string while ignoring the bounds and look for the next
+				//  breakable character
+				if (lineBreakPos <= lineExtent->getStart())
+				{
+					if (m_overflowWrap == OverflowWrap::Normal)
+					{
+						lookingForNextLineBreak = true;
+					}
+					else
+					{
+						lineBreakPos = filteredStringIndex;
+					}
+				}
+
+			}
+
+			// Do not break this line if we are looking for the next line break character
+			if (!lookingForNextLineBreak)
+			{
+				lineExtent->setEnd(lineBreakPos);
+				lineExtents.push_back(lineExtent);
+				lineExtent = new LineExtent(lineBreakPos);
+				lineWidth = 0.0f;
+			}
 		}
 
 		filteredString[filteredStringIndex++] = c;
@@ -249,4 +290,35 @@ void TextRenderer::updateText()
 	m_mesh.load(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
 	m_mesh.loadVertexColorBuffer(vertCount, m_vertexColors);
 	m_meshRenderer->setMesh(&m_mesh);
+}
+
+int TextRenderer::findNextBreakChar(const char* str, int startIndex)
+{
+	int i = startIndex;
+	bool continueLooking = true;
+	while (continueLooking)
+	{
+		char c = str[i];
+		if (c == 0 || c == ' ' || c == '-')
+		{
+			return i;
+		}
+		i++;
+	}
+	return i - 1;
+}
+
+int TextRenderer::findPrevBreakChar(const char* str, int startIndex)
+{
+	for (int i = startIndex; i > 0; i--)
+	{
+		char c = str[i];
+
+		if (c == ' ' || c == '-')
+		{
+			return i + 1;
+		}
+	}
+
+	return 0;
 }

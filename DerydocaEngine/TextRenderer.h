@@ -5,6 +5,13 @@
 #include "FontFace.h"
 #include "MeshRenderer.h"
 
+enum OverflowWrap
+{
+	Normal = 0,
+	BreakWord = 1,
+	BreakAll = 2,
+};
+
 class TextRenderer : public GameComponent
 {
 public:
@@ -34,5 +41,9 @@ private:
 	Color* m_vertexColors;
 	Color m_textColor;
 	MeshRenderer* m_meshRenderer;
+	OverflowWrap m_overflowWrap;
+
+	int findNextBreakChar(const char* str, int startIndex);
+	int findPrevBreakChar(const char* str, int startIndex);
 };
 
