@@ -15,11 +15,27 @@ Scene:
         - Type: TextRenderer
           Properties:
             material: 75a01949-631c-4027-a413-9148261668d9
-            font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
+            font: 6aeda909-35c6-49a0-a161-ab9fa33087b0
+            #font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
             text: "This text has short words and long words like supercalifragilisticexpialidocious which tests the text wrapping rules."
             bounds: [500.0, 1000.0]
             color: [1.0, 0.0, 0.0, 1.0]
-            overflowWrap: 0
+            overflowWrap: 2
+            align: 0
+
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ab31eb6ba
+    Properties:
+      Name: Bright Cube
+      Transform:
+        Position: [0.75, -1.5, -1.25]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.75, 1.5, 0.1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
 
             
   - Type: GameObject
@@ -39,10 +55,11 @@ Scene:
         - Type: TextRenderer
           Properties:
             material: 75a01949-631c-4027-a413-9148261668d9
-            font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
+            font: 6aeda909-35c6-49a0-a161-ab9fa33087b0
             text: "FPS: ???"
-            bounds: [0, 0]
+            bounds: [10000, 0]
             color: [1.0, 1.0, 0.5, 1.0]
+            overflowWrap: 2
             overflowWrap: 0
             
   - Type: GameObject

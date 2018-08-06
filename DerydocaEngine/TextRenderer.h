@@ -12,6 +12,14 @@ enum OverflowWrap
 	BreakAll = 2,
 };
 
+enum TextAlign
+{
+	Left = 0,
+	Center = 1,
+	Right = 2,
+	Justify = 3,
+};
+
 class TextRenderer : public GameComponent
 {
 public:
@@ -42,6 +50,7 @@ private:
 	Color m_textColor;
 	MeshRenderer* m_meshRenderer;
 	OverflowWrap m_overflowWrap;
+	TextAlign m_align;
 
 	int findNextBreakChar(const char* str, int startIndex);
 	int findPrevBreakChar(const char* str, int startIndex);

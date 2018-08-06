@@ -5,16 +5,16 @@
 const int CARRIAGE_RETURN_CHAR = 13;
 const int DEL_CHAR = 127;
 
-struct LineExtent
+struct LineProperties
 {
 public:
-	LineExtent()
+	LineProperties()
 	{
 		m_start = 0;
 		m_end = 0;
 	}
 
-	LineExtent(int start)
+	LineProperties(int start)
 	{
 		m_start = start;
 		m_end = start;
@@ -22,11 +22,17 @@ public:
 
 	int getStart() const { return m_start; }
 	int getEnd() const { return m_end; }
+	float getWidth() const { return m_width; }
+	float getStartAdjust() const { return m_startAdjust; }
 	void setStart(int start) { m_start = start; }
 	void setEnd(int end) { m_end = end; }
+	void setWidth(float width) { m_width = width; }
+	void setStartAdjust(float startAdjust) { m_startAdjust = startAdjust; }
 private:
 	int m_start;
 	int m_end;
+	float m_width;
+	float m_startAdjust;
 };
 
 TextRenderer::TextRenderer()
@@ -89,6 +95,12 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_overflowWrap = static_cast<OverflowWrap>(overflowWrapNode.as<int>());
 	}
 
+	YAML::Node alignNode = compNode["align"];
+	if (alignNode)
+	{
+		m_align = static_cast<TextAlign>(alignNode.as<int>());
+	}
+
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	if (fontResource->getType() == ResourceType::FontResourceType) {
 		// Load the font size from the file
@@ -127,111 +139,217 @@ void TextRenderer::updateText()
 	memset(filteredString, 0, m_text.length());
 
 	// Store a vector of line extent information to store the start and end of each line in the filtered string
-	vector<LineExtent*> lineExtents;
+	vector<LineProperties*> allLineProperties;
 
 	// Keep track of the head of where we are writing to the filtered string
 	int filteredStringIndex = 0;
 
 	// Bookkeeping variable to track the current line length so we can break it when it extend's the x-boundary
 	float lineWidth = 0.0f;
+	float adjustedLineWidth = 0.0f;
+	float lineStartAdjust = 0.0f;
+	int lastBreakableIndex = 0;
+	float lastNonWhitespaceWidth = 0.0f;
+	float nextLineWidthStart = 0.0f;
+	float nextStartAdjust = 0.0f;
+	bool lookingForNextLineBreak = false;
+	int lineEndPosition = 0;
 
 	// Create a line extent object to be inserted into the lineExtents array when a full line is completed
-	LineExtent* lineExtent = new LineExtent(0);
+	LineProperties* lineProperties = new LineProperties(0);
 
-	bool lookingForNextLineBreak = false;
+	bool lastLineBreakWasForced = false;
 
-	// Iterate through each character in the string
 	for (size_t i = 0; i < m_text.length(); i++)
 	{
 		char c = m_text[i];
+		bool addChar = true;
+		bool endOfLine = false;
 
-		// If this character is a carriage return, end the line and move to the next character
-		if (c == CARRIAGE_RETURN_CHAR || (lookingForNextLineBreak && (c == ' ' || c == '-')))
+		if (c == CARRIAGE_RETURN_CHAR)
 		{
-			lineExtent->setEnd(filteredStringIndex);
-			lineExtents.push_back(lineExtent);
-			lineExtent = new LineExtent(filteredStringIndex);
-			lineWidth = 0.0f;
-			lookingForNextLineBreak = false;
-			continue;
-		}
-		// Skip the character if it is a non-renderable character
-		else if (c <= 31 || c == DEL_CHAR)
-		{
-			continue;
+			addChar = false;
+			endOfLine = true;
+			lastLineBreakWasForced = false;
+			nextLineWidthStart = 0.0f;
 		}
 
-		// Load the character image info
-		TexturePackerImage img = m_fontFace->getCharData(m_text[i]);
-
-		// Increment the line width by the size of this character
-		lineWidth += img.getAdvanceX();
-
-		// If the x boundary is defined and the line width is greater than the bounds, end the line and start a new one
-		if (!lookingForNextLineBreak && m_bounds.x > 0 && lineWidth > m_bounds.x)
+		if (addChar)
 		{
-			// Find the location where the line should break at depending on the formatting rules
-			int lineBreakPos = filteredStringIndex;
-			if (m_overflowWrap != OverflowWrap::BreakAll)
+			TexturePackerImage img = m_fontFace->getCharData(c);
+
+			bool isCharWhitespace = img.getWidth() == 0;
+			bool isCharBreakable = c == ' ' || c == '-';
+
+			if (isCharBreakable)
 			{
-				// Find the previous breakable character
-				lineBreakPos = findPrevBreakChar(m_text.c_str(), filteredStringIndex);
-				
-				// Correct the position difference if there were any characters that were skipped (non-renderable chars, tabs, etc.)
-				lineBreakPos -= i - filteredStringIndex;
+				lastBreakableIndex = i;
 
-				// If the previous breakable character is before or at the position of this line's start position
-				//  we will continue looking through the string while ignoring the bounds and look for the next
-				//  breakable character
-				if (lineBreakPos <= lineExtent->getStart())
+				if (lookingForNextLineBreak)
 				{
-					if (m_overflowWrap == OverflowWrap::Normal)
+					endOfLine = true;
+				}
+			}
+
+			if(isCharWhitespace)
+			{
+				if (lineWidth <= 0.0f)
+				{
+					if (lastLineBreakWasForced)
 					{
-						lookingForNextLineBreak = true;
+						adjustedLineWidth -= img.getAdvanceX();
+						lineStartAdjust -= img.getAdvanceX();
 					}
-					else
+				}
+				else
+				{
+					nextStartAdjust -= img.getAdvanceX();
+				}
+			}
+			else
+			{
+				nextStartAdjust = 0.0f;
+			}
+			adjustedLineWidth += img.getAdvanceX();
+
+			lineWidth += img.getAdvanceX();
+
+			if (!isCharWhitespace)
+			{
+				lastNonWhitespaceWidth = lineWidth;
+			}
+
+			if (!lookingForNextLineBreak && adjustedLineWidth > m_bounds.x)
+			{
+				endOfLine = true;
+
+				if (m_overflowWrap == OverflowWrap::BreakAll)
+				{
+					endOfLine = true;
+					lastLineBreakWasForced = true;
+					lineEndPosition = filteredStringIndex;
+					if (!isCharWhitespace)
 					{
-						lineBreakPos = filteredStringIndex;
+						nextLineWidthStart = img.getAdvanceX();
+					}
+				}
+				else
+				{
+					lineEndPosition = lastBreakableIndex;
+
+					if (lineEndPosition <= lineProperties->getStart())
+					{
+						if (m_overflowWrap == OverflowWrap::Normal)
+						{
+							lookingForNextLineBreak = true;
+						}
+						else
+						{
+							lineEndPosition = filteredStringIndex;
+						}
 					}
 				}
 
+				/*switch (m_overflowWrap)
+				{
+				case Normal:
+					endOfLine = true;
+					lastLineBreakWasForced = true;
+					nextLineWidthStart = lineWidth - lastNonWhitespaceWidth;
+					lineEndPosition = lastBreakableIndex;
+					if (nextLineWidthStart <= lineProperties->getStart())
+					{
+						lookingForNextLineBreak = true;
+					}
+					break;
+				case BreakWord:
+					break;
+				case BreakAll:
+					break;
+				default:
+					break;
+				}*/
 			}
 
-			// Do not break this line if we are looking for the next line break character
 			if (!lookingForNextLineBreak)
 			{
-				lineExtent->setEnd(lineBreakPos);
-				lineExtents.push_back(lineExtent);
-				lineExtent = new LineExtent(lineBreakPos);
-				lineWidth = 0.0f;
+
 			}
+
+			filteredString[filteredStringIndex++] = c;
 		}
 
-		filteredString[filteredStringIndex++] = c;
+		if (endOfLine)
+		{
+			lineProperties->setEnd(lineEndPosition);
+			lineProperties->setWidth(lastLineBreakWasForced ? lastNonWhitespaceWidth : adjustedLineWidth);
+			lineProperties->setStartAdjust(lineStartAdjust);
+			allLineProperties.push_back(lineProperties);
+			lineProperties = new LineProperties(lineEndPosition);
+
+			lineWidth = nextLineWidthStart;
+			adjustedLineWidth = nextLineWidthStart;
+			lineStartAdjust = nextStartAdjust;
+			nextLineWidthStart = 0.0f;
+			nextStartAdjust = 0.0f;
+			lastBreakableIndex = 0;
+			lastNonWhitespaceWidth = 0.0f;
+			lookingForNextLineBreak = false;
+		}
 	}
 
 	// Add the final line extent
-	lineExtent->setEnd(filteredStringIndex);
-	lineExtents.push_back(lineExtent);
+	lineProperties->setEnd(filteredStringIndex);
+	lineProperties->setWidth(lineWidth);
+	lineProperties->setStartAdjust(lineStartAdjust);
+	allLineProperties.push_back(lineProperties);
 
 	delete[] m_verts;
 	delete[] m_uvs;
 	delete[] m_indices;
 	delete[] m_vertexColors;
 
-	int charCount = lineExtents.back()->getEnd();
+	int charCount = allLineProperties.back()->getEnd();
 	int vertCount = charCount * 4;
 	int indicesCount = charCount * 6;
-	
+
 	m_verts = new vec3[vertCount];
 	m_uvs = new vec2[vertCount];
 	m_indices = new unsigned int[indicesCount];
 	m_vertexColors = new Color[vertCount];
 
 	int charQuadIndex = 0;
-	for (int lineIndex = 0; lineIndex < lineExtents.size(); lineIndex++)
+	for (int lineIndex = 0; lineIndex < allLineProperties.size(); lineIndex++)
 	{
-		LineExtent* extent = lineExtents[lineIndex];
+		LineProperties* extent = allLineProperties[lineIndex];
+		float extraCharAdvance = 0.0f;
+
+		switch (m_align)
+		{
+		case Center:
+			penX = (m_bounds.x - extent->getWidth()) / 2.0f;
+			break;
+		case Right:
+			penX = m_bounds.x - extent->getWidth();
+			break;
+		case Justify:
+			penX = 0.0f;
+			if (m_bounds.x != 0)
+			{
+				int textLength = (extent->getEnd() - extent->getStart());
+				if (textLength != 0)
+				{
+					extraCharAdvance = (m_bounds.x - extent->getWidth()) / textLength;
+				}
+			}
+			break;
+		default:
+			penX = 0.0f;
+			break;
+		}
+
+		penX += extent->getStartAdjust();
+
 		for (int charIndex = extent->getStart(); charIndex < extent->getEnd(); charIndex++)
 		{
 			TexturePackerImage img = m_fontFace->getCharData(filteredString[charIndex]);
@@ -272,19 +390,18 @@ void TextRenderer::updateText()
 			m_vertexColors[charQuadIndex * 4 + 2] = m_textColor;
 			m_vertexColors[charQuadIndex * 4 + 3] = m_textColor;
 
-			penX += img.getAdvanceX();
+			penX += img.getAdvanceX() + extraCharAdvance;
 			penY += img.getAdvanceY();
 
 			charQuadIndex++;
 		}
 
-		penX = 0.0f;
 		penY -= m_fontFace->getLineHeight();
 
 		delete extent;
 	}
 
-	lineExtents.clear();
+	allLineProperties.clear();
 	delete[] filteredString;
 
 	m_mesh.load(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
