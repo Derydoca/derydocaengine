@@ -135,174 +135,144 @@ void TextRenderer::updateText()
 	float penY = 0.0f;
 
 	// Store a character array of the size of the string so that we can store only the characters that are output to the screen
-	char* filteredString = new char[m_text.length()];
-	memset(filteredString, 0, m_text.length());
+	char* filteredText = new char[m_text.length()];
 
 	// Store a vector of line extent information to store the start and end of each line in the filtered string
 	vector<LineProperties*> allLineProperties;
 
 	// Keep track of the head of where we are writing to the filtered string
-	int filteredStringIndex = 0;
-
-	// Bookkeeping variable to track the current line length so we can break it when it extend's the x-boundary
-	float lineWidth = 0.0f;
-	float adjustedLineWidth = 0.0f;
-	float lineStartAdjust = 0.0f;
-	int lastBreakableIndex = 0;
-	float lastNonWhitespaceWidth = 0.0f;
-	float nextLineWidthStart = 0.0f;
-	float nextStartAdjust = 0.0f;
-	bool lookingForNextLineBreak = false;
-	int lineEndPosition = 0;
+	int filteredTextIndex = 0;
 
 	// Create a line extent object to be inserted into the lineExtents array when a full line is completed
 	LineProperties* lineProperties = new LineProperties(0);
 
-	bool lastLineBreakWasForced = false;
+	bool continueLookingForLines = true;
+	int sourceTextIndex = 0;
+	float currentLineWidth = 0.0f;
+	float currentLineStartAdjust = 0.0f;
+	float lastBreakableWidth = 0.0f;
+	int lastBreakableSourceIndex = 0;
+	int lastBreakableFilteredIndex = 0;
+	bool lookingForNextLineBreak = false;
+	int newLineSourceTextIndex = 0;
+	int newLineFilteredTextIndex = 0;
 
-	for (size_t i = 0; i < m_text.length(); i++)
+	while (continueLookingForLines)
 	{
-		char c = m_text[i];
+		int endChar = 0;
 		bool addChar = true;
-		bool endOfLine = false;
-
+		char c = m_text[sourceTextIndex];
+		
 		if (c == CARRIAGE_RETURN_CHAR)
 		{
+			endChar = filteredTextIndex;
 			addChar = false;
-			endOfLine = true;
-			lastLineBreakWasForced = false;
-			nextLineWidthStart = 0.0f;
+			newLineSourceTextIndex = sourceTextIndex;
+			newLineFilteredTextIndex = filteredTextIndex;
 		}
 
 		if (addChar)
 		{
 			TexturePackerImage img = m_fontFace->getCharData(c);
+			bool isWhitespace = img.getWidth() == 0.0f;
+			bool isBreakable = c == ' ' || c == '-';
 
-			bool isCharWhitespace = img.getWidth() == 0;
-			bool isCharBreakable = c == ' ' || c == '-';
-
-			if (isCharBreakable)
+			if (isBreakable)
 			{
-				lastBreakableIndex = i;
+				lastBreakableFilteredIndex = filteredTextIndex;
+				lastBreakableSourceIndex = sourceTextIndex;
+				lastBreakableWidth = currentLineWidth;
 
 				if (lookingForNextLineBreak)
 				{
-					endOfLine = true;
+					endChar = filteredTextIndex + 1;
+					newLineSourceTextIndex = sourceTextIndex + 1;
+					newLineFilteredTextIndex = filteredTextIndex + 1;
 				}
 			}
 
-			if(isCharWhitespace)
+			if (isWhitespace && currentLineWidth == 0.0f)
 			{
-				if (lineWidth <= 0.0f)
+				currentLineStartAdjust -= img.getAdvanceX();
+			}
+			
+			if (!lookingForNextLineBreak && m_bounds.x > 0 && (currentLineWidth + img.getAdvanceX() + currentLineStartAdjust) > m_bounds.x)
+			{
+				if (m_overflowWrap == OverflowWrap::BreakAll)
 				{
-					if (lastLineBreakWasForced)
-					{
-						adjustedLineWidth -= img.getAdvanceX();
-						lineStartAdjust -= img.getAdvanceX();
-					}
+					endChar = filteredTextIndex;
+					newLineSourceTextIndex = sourceTextIndex;
+					newLineFilteredTextIndex = filteredTextIndex;
 				}
 				else
 				{
-					nextStartAdjust -= img.getAdvanceX();
+					if (lastBreakableFilteredIndex > lineProperties->getStart())
+					{
+						endChar = lastBreakableFilteredIndex;
+						currentLineWidth = lastBreakableWidth;
+						newLineSourceTextIndex = lastBreakableSourceIndex;
+						newLineFilteredTextIndex = lastBreakableFilteredIndex;
+					}
+					else if (m_overflowWrap == OverflowWrap::Normal)
+					{
+						lookingForNextLineBreak = true;
+						currentLineWidth += img.getAdvanceX();
+					}
+					else
+					{
+						endChar = filteredTextIndex;
+						newLineSourceTextIndex = sourceTextIndex;
+						newLineFilteredTextIndex = filteredTextIndex;
+					}
 				}
 			}
 			else
 			{
-				nextStartAdjust = 0.0f;
+				currentLineWidth += img.getAdvanceX();
 			}
-			adjustedLineWidth += img.getAdvanceX();
 
-			lineWidth += img.getAdvanceX();
-
-			if (!isCharWhitespace)
+			if (endChar > 0 && isWhitespace)
 			{
-				lastNonWhitespaceWidth = lineWidth;
+				currentLineWidth -= img.getAdvanceX();
 			}
-
-			if (!lookingForNextLineBreak && adjustedLineWidth > m_bounds.x)
-			{
-				endOfLine = true;
-
-				if (m_overflowWrap == OverflowWrap::BreakAll)
-				{
-					endOfLine = true;
-					lastLineBreakWasForced = true;
-					lineEndPosition = filteredStringIndex;
-					if (!isCharWhitespace)
-					{
-						nextLineWidthStart = img.getAdvanceX();
-					}
-				}
-				else
-				{
-					lineEndPosition = lastBreakableIndex;
-
-					if (lineEndPosition <= lineProperties->getStart())
-					{
-						if (m_overflowWrap == OverflowWrap::Normal)
-						{
-							lookingForNextLineBreak = true;
-						}
-						else
-						{
-							lineEndPosition = filteredStringIndex;
-						}
-					}
-				}
-
-				/*switch (m_overflowWrap)
-				{
-				case Normal:
-					endOfLine = true;
-					lastLineBreakWasForced = true;
-					nextLineWidthStart = lineWidth - lastNonWhitespaceWidth;
-					lineEndPosition = lastBreakableIndex;
-					if (nextLineWidthStart <= lineProperties->getStart())
-					{
-						lookingForNextLineBreak = true;
-					}
-					break;
-				case BreakWord:
-					break;
-				case BreakAll:
-					break;
-				default:
-					break;
-				}*/
-			}
-
-			if (!lookingForNextLineBreak)
-			{
-
-			}
-
-			filteredString[filteredStringIndex++] = c;
 		}
 
-		if (endOfLine)
+		// Force ending the line when we are processing the last character in the string
+		if (sourceTextIndex == m_text.length())
 		{
-			lineProperties->setEnd(lineEndPosition);
-			lineProperties->setWidth(lastLineBreakWasForced ? lastNonWhitespaceWidth : adjustedLineWidth);
-			lineProperties->setStartAdjust(lineStartAdjust);
-			allLineProperties.push_back(lineProperties);
-			lineProperties = new LineProperties(lineEndPosition);
+			endChar = filteredTextIndex;
+			addChar = false;
+			continueLookingForLines = false;
+			newLineFilteredTextIndex = filteredTextIndex;
+			newLineSourceTextIndex = m_text.size();
+		}
 
-			lineWidth = nextLineWidthStart;
-			adjustedLineWidth = nextLineWidthStart;
-			lineStartAdjust = nextStartAdjust;
-			nextLineWidthStart = 0.0f;
-			nextStartAdjust = 0.0f;
-			lastBreakableIndex = 0;
-			lastNonWhitespaceWidth = 0.0f;
+		if (addChar)
+		{
+			filteredText[filteredTextIndex++] = c;
+		}
+
+		if (endChar > 0)
+		{
+			lineProperties->setEnd(endChar);
+			lineProperties->setWidth(currentLineWidth);
+			lineProperties->setStartAdjust(currentLineStartAdjust);
+			allLineProperties.push_back(lineProperties);
+
+			lineProperties = new LineProperties(endChar);
+			currentLineWidth = 0.0f;
+			currentLineStartAdjust = 0.0f;
+			endChar = 0;
 			lookingForNextLineBreak = false;
+
+			sourceTextIndex = newLineSourceTextIndex;
+			filteredTextIndex = newLineFilteredTextIndex;
+		}
+		else
+		{
+			sourceTextIndex++;
 		}
 	}
-
-	// Add the final line extent
-	lineProperties->setEnd(filteredStringIndex);
-	lineProperties->setWidth(lineWidth);
-	lineProperties->setStartAdjust(lineStartAdjust);
-	allLineProperties.push_back(lineProperties);
 
 	delete[] m_verts;
 	delete[] m_uvs;
@@ -327,10 +297,10 @@ void TextRenderer::updateText()
 		switch (m_align)
 		{
 		case Center:
-			penX = (m_bounds.x - extent->getWidth()) / 2.0f;
+			penX = (m_bounds.x - extent->getWidth() - extent->getStartAdjust()) / 2.0f;
 			break;
 		case Right:
-			penX = m_bounds.x - extent->getWidth();
+			penX = m_bounds.x - extent->getWidth() - extent->getStartAdjust();
 			break;
 		case Justify:
 			penX = 0.0f;
@@ -352,7 +322,7 @@ void TextRenderer::updateText()
 
 		for (int charIndex = extent->getStart(); charIndex < extent->getEnd(); charIndex++)
 		{
-			TexturePackerImage img = m_fontFace->getCharData(filteredString[charIndex]);
+			TexturePackerImage img = m_fontFace->getCharData(filteredText[charIndex]);
 			Rect rect = img.getTexSheetPosition();
 			float minx = rect.getX();
 			float maxx = rect.getDX();
@@ -402,7 +372,7 @@ void TextRenderer::updateText()
 	}
 
 	allLineProperties.clear();
-	delete[] filteredString;
+	delete[] filteredText;
 
 	m_mesh.load(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
 	m_mesh.loadVertexColorBuffer(vertCount, m_vertexColors);
