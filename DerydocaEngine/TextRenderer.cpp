@@ -170,6 +170,16 @@ void TextRenderer::updateText()
 			newLineSourceTextIndex = sourceTextIndex;
 			newLineFilteredTextIndex = filteredTextIndex;
 		}
+		else if (c == 0)
+		{
+			// Force ending the line when we are processing the last character in the string
+			endChar = filteredTextIndex;
+			addChar = false;
+			continueLookingForLines = false;
+			newLineFilteredTextIndex = filteredTextIndex;
+			newLineSourceTextIndex = m_text.size();
+		}
+
 
 		if (addChar)
 		{
@@ -235,16 +245,6 @@ void TextRenderer::updateText()
 			{
 				currentLineWidth -= img.getAdvanceX();
 			}
-		}
-
-		// Force ending the line when we are processing the last character in the string
-		if (sourceTextIndex == m_text.length())
-		{
-			endChar = filteredTextIndex;
-			addChar = false;
-			continueLookingForLines = false;
-			newLineFilteredTextIndex = filteredTextIndex;
-			newLineSourceTextIndex = m_text.size();
 		}
 
 		if (addChar)

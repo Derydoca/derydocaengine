@@ -15,13 +15,12 @@ Scene:
         - Type: TextRenderer
           Properties:
             material: 75a01949-631c-4027-a413-9148261668d9
-            #font: 6aeda909-35c6-49a0-a161-ab9fa33087b0
             font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
-            text: "This text has short words and long words like supercalifragilisticexpialidocious which tests the text wrapping rules."
+            text: "This text has short words and long words like supercalifragilisticexpialidocious which tests the text wrapping and alignment rules."
             bounds: [500.0, 1000.0]
             color: [1.0, 0.0, 0.0, 1.0]
             overflowWrap: 0
-            align: 2
+            align: 1
 
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
