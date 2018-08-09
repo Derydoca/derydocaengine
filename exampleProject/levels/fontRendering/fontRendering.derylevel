@@ -20,7 +20,7 @@ Scene:
             bounds: [500.0, 1000.0]
             color: [1.0, 0.0, 0.0, 1.0]
             overflowWrap: 0
-            align: 1
+            horizontalAlign: 1
 
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa

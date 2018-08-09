@@ -14,9 +14,9 @@ enum OverflowWrap
 
 enum TextAlign
 {
-	Left = 0,
+	Start = 0,
 	Center = 1,
-	Right = 2,
+	End = 2,
 	Justify = 3,
 };
 
@@ -50,7 +50,7 @@ private:
 	Color m_textColor;
 	MeshRenderer* m_meshRenderer;
 	OverflowWrap m_overflowWrap;
-	TextAlign m_align;
+	TextAlign m_horizontalAlign;
 
 	int findNextBreakChar(const char* str, int startIndex);
 	int findPrevBreakChar(const char* str, int startIndex);

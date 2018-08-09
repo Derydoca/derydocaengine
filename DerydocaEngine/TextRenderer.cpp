@@ -95,10 +95,10 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_overflowWrap = static_cast<OverflowWrap>(overflowWrapNode.as<int>());
 	}
 
-	YAML::Node alignNode = compNode["align"];
-	if (alignNode)
+	YAML::Node horizontalAlignNode = compNode["horizontalAlign"];
+	if (horizontalAlignNode)
 	{
-		m_align = static_cast<TextAlign>(alignNode.as<int>());
+		m_horizontalAlign = static_cast<TextAlign>(horizontalAlignNode.as<int>());
 	}
 
 	auto fontResource = getResource<Resource*>(compNode, "font");
@@ -294,12 +294,12 @@ void TextRenderer::updateText()
 		LineProperties* extent = allLineProperties[lineIndex];
 		float extraCharAdvance = 0.0f;
 
-		switch (m_align)
+		switch (m_horizontalAlign)
 		{
 		case Center:
 			penX = (m_bounds.x - extent->getWidth() - extent->getStartAdjust()) / 2.0f;
 			break;
-		case Right:
+		case End:
 			penX = m_bounds.x - extent->getWidth() - extent->getStartAdjust();
 			break;
 		case Justify:
