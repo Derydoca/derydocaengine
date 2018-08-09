@@ -51,6 +51,7 @@ private:
 	MeshRenderer* m_meshRenderer;
 	OverflowWrap m_overflowWrap;
 	TextAlign m_horizontalAlign;
+	TextAlign m_verticalAlign;
 
 	int findNextBreakChar(const char* str, int startIndex);
 	int findPrevBreakChar(const char* str, int startIndex);

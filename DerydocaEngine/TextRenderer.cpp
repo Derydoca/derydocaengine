@@ -101,6 +101,12 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_horizontalAlign = static_cast<TextAlign>(horizontalAlignNode.as<int>());
 	}
 
+	YAML::Node verticalAlignNode = compNode["verticalAlign"];
+	if (verticalAlignNode)
+	{
+		m_verticalAlign = static_cast<TextAlign>(verticalAlignNode.as<int>());
+	}
+
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	if (fontResource->getType() == ResourceType::FontResourceType) {
 		// Load the font size from the file
@@ -288,6 +294,34 @@ void TextRenderer::updateText()
 	m_indices = new unsigned int[indicesCount];
 	m_vertexColors = new Color[vertCount];
 
+	float lineHeight = 0.0f;
+	switch (m_verticalAlign)
+	{
+	case Start:
+		lineHeight = m_fontFace->getLineHeight();
+		penY = 0.0f;
+		break;
+	case Center:
+		lineHeight = m_fontFace->getLineHeight();
+		penY = -(m_bounds.y - (allLineProperties.size() * lineHeight) / 2);
+		break;
+	case End:
+		lineHeight = m_fontFace->getLineHeight();
+		penY = -(m_bounds.y - (allLineProperties.size() * lineHeight));
+		break;
+	case Justify:
+		if (allLineProperties.size() != 0)
+		{
+			lineHeight = (m_bounds.y - m_fontFace->getLineHeight()) / allLineProperties.size();
+		}
+		else
+		{
+			lineHeight = m_fontFace->getLineHeight();
+		}
+		penY = 0.0f;
+		break;
+	}
+
 	int charQuadIndex = 0;
 	for (int lineIndex = 0; lineIndex < allLineProperties.size(); lineIndex++)
 	{
@@ -366,7 +400,7 @@ void TextRenderer::updateText()
 			charQuadIndex++;
 		}
 
-		penY -= m_fontFace->getLineHeight();
+		penY -= lineHeight;
 
 		delete extent;
 	}
