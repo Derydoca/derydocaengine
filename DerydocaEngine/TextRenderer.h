@@ -20,6 +20,36 @@ enum TextAlign
 	Justify = 3,
 };
 
+struct LineProperties
+{
+public:
+	LineProperties()
+	{
+		m_start = 0;
+		m_end = 0;
+	}
+
+	LineProperties(int start)
+	{
+		m_start = start;
+		m_end = start;
+	}
+
+	int getStart() const { return m_start; }
+	int getEnd() const { return m_end; }
+	float getWidth() const { return m_width; }
+	float getStartAdjust() const { return m_startAdjust; }
+	void setStart(int start) { m_start = start; }
+	void setEnd(int end) { m_end = end; }
+	void setWidth(float width) { m_width = width; }
+	void setStartAdjust(float startAdjust) { m_startAdjust = startAdjust; }
+private:
+	int m_start;
+	int m_end;
+	float m_width;
+	float m_startAdjust;
+};
+
 class TextRenderer : public GameComponent
 {
 public:
@@ -30,8 +60,6 @@ public:
 
 	virtual void init();
 	virtual void postInit();
-	virtual void update(float deltaTime);
-	virtual void render(MatrixStack* matrixStack);
 	virtual void deserialize(YAML::Node compNode);
 
 	void setText(string text) { m_text = text; }
@@ -43,7 +71,6 @@ private:
 	unsigned int* m_indices;
 	vec2* m_uvs;
 	string m_text = "Text";
-	ivec2 m_texSize;
 	Mesh m_mesh;
 	vec2 m_bounds;
 	Color* m_vertexColors;
@@ -53,7 +80,8 @@ private:
 	TextAlign m_horizontalAlign;
 	TextAlign m_verticalAlign;
 
-	int findNextBreakChar(const char* str, int startIndex);
-	int findPrevBreakChar(const char* str, int startIndex);
+	static void calculateVerticalAlignmentProperties(TextAlign alignment, int numberOfLines, float verticalBoundSize, float fontLineHeight, float* penY, float* newLineHeight);
+	static void calculateHorizontalAlignmentProperties(TextAlign alignment, float horizontalBoundSize, float lineWidth, int numChars, float lineStartAdjust, float* penX, float* extraCharAdvance);
+	static vector<LineProperties*> processTextToLines(string text, OverflowWrap overflowWrap, FontFace* fontFace, float horizontalBoundSize, char*& filteredText);
 };
 

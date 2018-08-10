@@ -5,36 +5,6 @@
 const int CARRIAGE_RETURN_CHAR = 13;
 const int DEL_CHAR = 127;
 
-struct LineProperties
-{
-public:
-	LineProperties()
-	{
-		m_start = 0;
-		m_end = 0;
-	}
-
-	LineProperties(int start)
-	{
-		m_start = start;
-		m_end = start;
-	}
-
-	int getStart() const { return m_start; }
-	int getEnd() const { return m_end; }
-	float getWidth() const { return m_width; }
-	float getStartAdjust() const { return m_startAdjust; }
-	void setStart(int start) { m_start = start; }
-	void setEnd(int end) { m_end = end; }
-	void setWidth(float width) { m_width = width; }
-	void setStartAdjust(float startAdjust) { m_startAdjust = startAdjust; }
-private:
-	int m_start;
-	int m_end;
-	float m_width;
-	float m_startAdjust;
-};
-
 TextRenderer::TextRenderer()
 {
 }
@@ -54,19 +24,9 @@ void TextRenderer::postInit()
 	{
 		Texture* fontTexture = m_fontFace->getTexture();
 		m_meshRenderer->getMaterial()->setTexture("CharacterSheet", fontTexture);
-		m_texSize = ivec2(fontTexture->getWidth(), fontTexture->getHeight());
 	}
 
 	updateText();
-}
-
-void TextRenderer::update(float deltaTime)
-{
-}
-
-void TextRenderer::render(MatrixStack * matrixStack)
-{
-	m_meshRenderer->render(matrixStack);
 }
 
 void TextRenderer::deserialize(YAML::Node compNode)
@@ -130,244 +90,63 @@ void TextRenderer::deserialize(YAML::Node compNode)
 
 void TextRenderer::updateText()
 {
-	// If no texture exists, return prematurely
-	if (m_texSize.x == 0 || m_texSize.y == 0)
-	{
-		return;
-	}
-
 	// Store the current pen position
 	float penX = 0.0f;
 	float penY = 0.0f;
 
-	// Store a character array of the size of the string so that we can store only the characters that are output to the screen
-	char* filteredText = new char[m_text.length()];
+	// This will store only renderable characters so that it is simpler to convert the text to quads
+	char* filteredText = nullptr;
+	// Get line properties from the source string
+	vector<LineProperties*> allLineProperties = processTextToLines(m_text, m_overflowWrap, m_fontFace, m_bounds.x, filteredText);
 
-	// Store a vector of line extent information to store the start and end of each line in the filtered string
-	vector<LineProperties*> allLineProperties;
-
-	// Keep track of the head of where we are writing to the filtered string
-	int filteredTextIndex = 0;
-
-	// Create a line extent object to be inserted into the lineExtents array when a full line is completed
-	LineProperties* lineProperties = new LineProperties(0);
-
-	bool continueLookingForLines = true;
-	int sourceTextIndex = 0;
-	float currentLineWidth = 0.0f;
-	float currentLineStartAdjust = 0.0f;
-	float lastBreakableWidth = 0.0f;
-	int lastBreakableSourceIndex = 0;
-	int lastBreakableFilteredIndex = 0;
-	bool lookingForNextLineBreak = false;
-	int newLineSourceTextIndex = 0;
-	int newLineFilteredTextIndex = 0;
-
-	while (continueLookingForLines)
-	{
-		int endChar = 0;
-		bool addChar = true;
-		char c = m_text[sourceTextIndex];
-		
-		if (c == CARRIAGE_RETURN_CHAR)
-		{
-			endChar = filteredTextIndex;
-			addChar = false;
-			newLineSourceTextIndex = sourceTextIndex;
-			newLineFilteredTextIndex = filteredTextIndex;
-		}
-		else if (c == 0)
-		{
-			// Force ending the line when we are processing the last character in the string
-			endChar = filteredTextIndex;
-			addChar = false;
-			continueLookingForLines = false;
-			newLineFilteredTextIndex = filteredTextIndex;
-			newLineSourceTextIndex = m_text.size();
-		}
-
-
-		if (addChar)
-		{
-			TexturePackerImage img = m_fontFace->getCharData(c);
-			bool isWhitespace = img.getWidth() == 0.0f;
-			bool isBreakable = c == ' ' || c == '-';
-
-			if (isBreakable)
-			{
-				lastBreakableFilteredIndex = filteredTextIndex;
-				lastBreakableSourceIndex = sourceTextIndex;
-				lastBreakableWidth = currentLineWidth;
-
-				if (lookingForNextLineBreak)
-				{
-					endChar = filteredTextIndex + 1;
-					newLineSourceTextIndex = sourceTextIndex + 1;
-					newLineFilteredTextIndex = filteredTextIndex + 1;
-				}
-			}
-
-			if (isWhitespace && currentLineWidth == 0.0f)
-			{
-				currentLineStartAdjust -= img.getAdvanceX();
-			}
-			
-			if (!lookingForNextLineBreak && m_bounds.x > 0 && (currentLineWidth + img.getAdvanceX() + currentLineStartAdjust) > m_bounds.x)
-			{
-				if (m_overflowWrap == OverflowWrap::BreakAll)
-				{
-					endChar = filteredTextIndex;
-					newLineSourceTextIndex = sourceTextIndex;
-					newLineFilteredTextIndex = filteredTextIndex;
-				}
-				else
-				{
-					if (lastBreakableFilteredIndex > lineProperties->getStart())
-					{
-						endChar = lastBreakableFilteredIndex;
-						currentLineWidth = lastBreakableWidth;
-						newLineSourceTextIndex = lastBreakableSourceIndex;
-						newLineFilteredTextIndex = lastBreakableFilteredIndex;
-					}
-					else if (m_overflowWrap == OverflowWrap::Normal)
-					{
-						lookingForNextLineBreak = true;
-						currentLineWidth += img.getAdvanceX();
-					}
-					else
-					{
-						endChar = filteredTextIndex;
-						newLineSourceTextIndex = sourceTextIndex;
-						newLineFilteredTextIndex = filteredTextIndex;
-					}
-				}
-			}
-			else
-			{
-				currentLineWidth += img.getAdvanceX();
-			}
-
-			if (endChar > 0 && isWhitespace)
-			{
-				currentLineWidth -= img.getAdvanceX();
-			}
-		}
-
-		if (addChar)
-		{
-			filteredText[filteredTextIndex++] = c;
-		}
-
-		if (endChar > 0)
-		{
-			lineProperties->setEnd(endChar);
-			lineProperties->setWidth(currentLineWidth);
-			lineProperties->setStartAdjust(currentLineStartAdjust);
-			allLineProperties.push_back(lineProperties);
-
-			lineProperties = new LineProperties(endChar);
-			currentLineWidth = 0.0f;
-			currentLineStartAdjust = 0.0f;
-			endChar = 0;
-			lookingForNextLineBreak = false;
-
-			sourceTextIndex = newLineSourceTextIndex;
-			filteredTextIndex = newLineFilteredTextIndex;
-		}
-		else
-		{
-			sourceTextIndex++;
-		}
-	}
-
+	// Clean up the old data
 	delete[] m_verts;
 	delete[] m_uvs;
 	delete[] m_indices;
 	delete[] m_vertexColors;
 
+	// Calculate the number of mesh elements we need
 	int charCount = allLineProperties.back()->getEnd();
 	int vertCount = charCount * 4;
 	int indicesCount = charCount * 6;
 
+	// Allocate space for our mesh elements
 	m_verts = new vec3[vertCount];
 	m_uvs = new vec2[vertCount];
 	m_indices = new unsigned int[indicesCount];
 	m_vertexColors = new Color[vertCount];
 
+	// Calculate the information we need for vertical alignment
 	float lineHeight = 0.0f;
-	switch (m_verticalAlign)
-	{
-	case Start:
-		lineHeight = m_fontFace->getLineHeight();
-		penY = 0.0f;
-		break;
-	case Center:
-		lineHeight = m_fontFace->getLineHeight();
-		penY = -(m_bounds.y - (allLineProperties.size() * lineHeight) / 2);
-		break;
-	case End:
-		lineHeight = m_fontFace->getLineHeight();
-		penY = -(m_bounds.y - (allLineProperties.size() * lineHeight));
-		break;
-	case Justify:
-		if (allLineProperties.size() != 0)
-		{
-			lineHeight = (m_bounds.y - m_fontFace->getLineHeight()) / allLineProperties.size();
-		}
-		else
-		{
-			lineHeight = m_fontFace->getLineHeight();
-		}
-		penY = 0.0f;
-		break;
-	}
+	calculateVerticalAlignmentProperties(m_verticalAlign, allLineProperties.size(), m_bounds.y, m_fontFace->getLineHeight(), &penY, &lineHeight);
 
+	// Keep reference to the quad that we are currently building
 	int charQuadIndex = 0;
+
+	// Iterate through all lines of the text
 	for (int lineIndex = 0; lineIndex < allLineProperties.size(); lineIndex++)
 	{
-		LineProperties* extent = allLineProperties[lineIndex];
+		LineProperties* lineProperties = allLineProperties[lineIndex];
+
+		// Calculate the information we need for horizontal alignment
 		float extraCharAdvance = 0.0f;
+		calculateHorizontalAlignmentProperties(m_horizontalAlign, m_bounds.x, lineProperties->getWidth(), lineProperties->getEnd() - lineProperties->getStart(), lineProperties->getStartAdjust(), &penX, &extraCharAdvance);
 
-		switch (m_horizontalAlign)
+		// Adjust the x position based on the line's start adjustment
+		penX += lineProperties->getStartAdjust();
+
+		// Iterate through each character in the line
+		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 		{
-		case Center:
-			penX = (m_bounds.x - extent->getWidth() - extent->getStartAdjust()) / 2.0f;
-			break;
-		case End:
-			penX = m_bounds.x - extent->getWidth() - extent->getStartAdjust();
-			break;
-		case Justify:
-			penX = 0.0f;
-			if (m_bounds.x != 0)
-			{
-				int textLength = (extent->getEnd() - extent->getStart());
-				if (textLength != 0)
-				{
-					extraCharAdvance = (m_bounds.x - extent->getWidth()) / textLength;
-				}
-			}
-			break;
-		default:
-			penX = 0.0f;
-			break;
-		}
-
-		penX += extent->getStartAdjust();
-
-		for (int charIndex = extent->getStart(); charIndex < extent->getEnd(); charIndex++)
-		{
+			// Get the character image information
 			TexturePackerImage img = m_fontFace->getCharData(filteredText[charIndex]);
-			Rect rect = img.getTexSheetPosition();
-			float minx = rect.getX();
-			float maxx = rect.getDX();
-			float miny = rect.getY();
-			float maxy = rect.getDY();
 
 			// Set the UV positions
-			m_uvs[charQuadIndex * 4 + 1] = vec2(minx, maxy);
-			m_uvs[charQuadIndex * 4 + 0] = vec2(minx, miny);
-			m_uvs[charQuadIndex * 4 + 3] = vec2(maxx, miny);
-			m_uvs[charQuadIndex * 4 + 2] = vec2(maxx, maxy);
+			Rect rect = img.getTexSheetPosition();
+			m_uvs[charQuadIndex * 4 + 1] = vec2(rect.getX(), rect.getDY());
+			m_uvs[charQuadIndex * 4 + 0] = vec2(rect.getX(), rect.getY());
+			m_uvs[charQuadIndex * 4 + 3] = vec2(rect.getDX(), rect.getY());
+			m_uvs[charQuadIndex * 4 + 2] = vec2(rect.getDX(), rect.getDY());
 
 			// Set the indices to draw the two triangles
 			m_indices[charQuadIndex * 6 + 0] = charQuadIndex * 4 + 0;
@@ -380,7 +159,6 @@ void TextRenderer::updateText()
 			// Set the vertex positions
 			float charXMin = penX + img.getBearingX();
 			float charXMax = penX + img.getBearingX() + img.getSizeX();
-
 			float charYMax = penY - img.getSizeY() + img.getBearingY();
 			float charYMin = penY + img.getBearingY();
 			m_verts[charQuadIndex * 4 + 0] = vec3(charXMin, charYMin, 0);
@@ -394,52 +172,271 @@ void TextRenderer::updateText()
 			m_vertexColors[charQuadIndex * 4 + 2] = m_textColor;
 			m_vertexColors[charQuadIndex * 4 + 3] = m_textColor;
 
+			// Advance the pen position
 			penX += img.getAdvanceX() + extraCharAdvance;
 			penY += img.getAdvanceY();
 
+			// Continue on to the next char
 			charQuadIndex++;
 		}
 
+		// Move the pen line down an entire line height
 		penY -= lineHeight;
 
-		delete extent;
+		// Clean up the line property data as it is no longer needed
+		delete lineProperties;
 	}
 
+	// Clean up artifacts from the text rendering
 	allLineProperties.clear();
 	delete[] filteredText;
 
+	// Load the mesh data
 	m_mesh.load(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
 	m_mesh.loadVertexColorBuffer(vertCount, m_vertexColors);
 	m_meshRenderer->setMesh(&m_mesh);
 }
 
-int TextRenderer::findNextBreakChar(const char* str, int startIndex)
+void TextRenderer::calculateVerticalAlignmentProperties(TextAlign alignment, int numberOfLines, float verticalBoundSize, float fontLineHeight, float * penY, float * newLineHeight)
 {
-	int i = startIndex;
-	bool continueLooking = true;
-	while (continueLooking)
+	switch (alignment)
 	{
-		char c = str[i];
-		if (c == 0 || c == ' ' || c == '-')
-		{
-			return i;
-		}
-		i++;
+	case Start:
+		// Calculate top alignment
+		*newLineHeight = fontLineHeight;
+		*penY = 0.0f;
+		break;
+	case Center:
+		// Calculate center alignment
+		*newLineHeight = fontLineHeight;
+		*penY = -(verticalBoundSize - (numberOfLines * *newLineHeight) / 2);
+		break;
+	case End:
+		// Calculate bottom alignment
+		*newLineHeight = fontLineHeight;
+		*penY = -(verticalBoundSize - (numberOfLines * *newLineHeight));
+		break;
+	case Justify:
+		// Calculate justified alignment
+		*newLineHeight = numberOfLines ? (verticalBoundSize - fontLineHeight) / numberOfLines : fontLineHeight;
+		*penY = 0.0f;
+		break;
+	default:
+		*newLineHeight = fontLineHeight;
+		*penY = 0.0f;
 	}
-	return i - 1;
 }
 
-int TextRenderer::findPrevBreakChar(const char* str, int startIndex)
+void TextRenderer::calculateHorizontalAlignmentProperties(TextAlign alignment, float horizontalBoundSize, float lineWidth, int numChars, float lineStartAdjust, float * penX, float* extraCharAdvance)
 {
-	for (int i = startIndex; i > 0; i--)
+	switch (alignment)
 	{
-		char c = str[i];
-
-		if (c == ' ' || c == '-')
+	case Center:
+		// Calculate left alignment
+		*penX = (horizontalBoundSize - lineWidth - lineStartAdjust) / 2.0f;
+		break;
+	case End:
+		// Calculate right alignment
+		*penX = horizontalBoundSize - lineWidth - lineStartAdjust;
+		break;
+	case Justify:
+		// Calculate justified alignment
+		*penX = 0.0f;
+		if (horizontalBoundSize != 0 && numChars != 0)
 		{
-			return i + 1;
+			*extraCharAdvance = (horizontalBoundSize - lineWidth) / numChars;
+		}
+		break;
+	default:
+		*penX = 0.0f;
+		break;
+	}
+}
+
+vector<LineProperties*> TextRenderer::processTextToLines(string text, OverflowWrap overflowWrap, FontFace* fontFace, float horizontalBoundSize, char*& filteredText)
+{
+	// Create an array to store the filtered text. This will never excede the length of the source text.
+	filteredText = new char[text.length()];
+
+	// Indices of where the read/write head is of the current character being processed
+	int filteredTextIndex = 0;
+	int sourceTextIndex = 0;
+
+	// Toggle boolean for breaking out of the process loop
+	bool continueLookingForLines = true;
+
+	// Information about the current line that will later be stored in the line's properties
+	float currentLineWidth = 0.0f;
+	float currentLineStartAdjust = 0.0f;
+
+	// Remember if the current line started via a forced line break
+	bool isLineAForcedBreak = false;
+
+	// Information about the last breakable line position
+	float lastBreakableWidth = 0.0f;
+	int lastBreakableSourceIndex = 0;
+	int lastBreakableFilteredIndex = 0;
+
+	// Used for Normal overflow wrap when a line exceedes the bounds
+	bool lookingForNextLineBreak = false;
+
+	// Indices of where the next line of text will begin
+	int newLineSourceTextIndex = 0;
+	int newLineFilteredTextIndex = 0;
+
+	// Keep information about all of the line properties
+	vector<LineProperties*> allLineProperties;
+
+	// Start the first line at position zero
+	LineProperties* lineProperties = new LineProperties(0);
+
+	while (continueLookingForLines)
+	{
+		int filteredTextEndIndex = 0;
+		bool addCharacterToFilteredText = true;
+		char c = text[sourceTextIndex];
+
+		// If the current character is a carriage return, end the line
+		if (c == CARRIAGE_RETURN_CHAR)
+		{
+			filteredTextEndIndex = filteredTextIndex;
+			isLineAForcedBreak = false;
+			addCharacterToFilteredText = false;
+			newLineSourceTextIndex = sourceTextIndex + 1;
+			newLineFilteredTextIndex = filteredTextIndex;
+		}
+		// If the current character is a null-terminator, end the line and stop the process
+		else if (c == 0)
+		{
+			filteredTextEndIndex = filteredTextIndex;
+			isLineAForcedBreak = true;
+			addCharacterToFilteredText = false;
+			continueLookingForLines = false;
+			newLineFilteredTextIndex = filteredTextIndex;
+			newLineSourceTextIndex = text.size();
+		}
+
+		// If we are still adding this character to the filtered text
+		if (addCharacterToFilteredText)
+		{
+			// Get the character image information
+			TexturePackerImage img = fontFace->getCharData(c);
+			bool isWhitespace = img.getWidth() == 0.0f;
+			bool isBreakable = c == ' ' || c == '-';
+
+			// If the character can break the line, store information about this position
+			if (isBreakable)
+			{
+				lastBreakableFilteredIndex = filteredTextIndex;
+				lastBreakableSourceIndex = sourceTextIndex;
+				lastBreakableWidth = currentLineWidth;
+
+				// If we are looking for a line break, end the line
+				if (lookingForNextLineBreak)
+				{
+					filteredTextEndIndex = filteredTextIndex + 1;
+					isLineAForcedBreak = true;
+					newLineSourceTextIndex = sourceTextIndex + 1;
+					newLineFilteredTextIndex = filteredTextIndex + 1;
+				}
+			}
+
+			// If this line of text starts with whitespace and this line was started by a forced line break
+			if (isLineAForcedBreak && isWhitespace && currentLineWidth == 0.0f)
+			{
+				currentLineStartAdjust -= img.getAdvanceX();
+			}
+
+			// Check to see if this next character will break the horizontal boundary
+			if (!lookingForNextLineBreak && horizontalBoundSize > 0 && (currentLineWidth + img.getAdvanceX() + currentLineStartAdjust) > horizontalBoundSize)
+			{
+				// If the overflow wrap is set to break on all characters, end the line here
+				if (overflowWrap == OverflowWrap::BreakAll)
+				{
+					filteredTextEndIndex = filteredTextIndex;
+					isLineAForcedBreak = true;
+					newLineSourceTextIndex = sourceTextIndex;
+					newLineFilteredTextIndex = filteredTextIndex;
+				}
+				// Otherwise...
+				else
+				{
+					// If the last breakable index is not at the start of this line, end it there
+					if (lastBreakableFilteredIndex > lineProperties->getStart())
+					{
+						filteredTextEndIndex = lastBreakableFilteredIndex;
+						isLineAForcedBreak = true;
+						currentLineWidth = lastBreakableWidth;
+						newLineSourceTextIndex = lastBreakableSourceIndex;
+						newLineFilteredTextIndex = lastBreakableFilteredIndex;
+					}
+					// Otherwise, we need to find the next available breakable spot
+					// If the overflow is set to Normal, ignore the bounds check until we find a breakable character
+					else if (overflowWrap == OverflowWrap::Normal)
+					{
+						lookingForNextLineBreak = true;
+						currentLineWidth += img.getAdvanceX();
+					}
+					// Otherwise, break the word at the current index
+					else
+					{
+						filteredTextEndIndex = filteredTextIndex;
+						isLineAForcedBreak = true;
+						newLineSourceTextIndex = sourceTextIndex;
+						newLineFilteredTextIndex = filteredTextIndex;
+					}
+				}
+			}
+			// If this character does not break the horizontal boundary, increase the line's width
+			else
+			{
+				currentLineWidth += img.getAdvanceX();
+			}
+
+			// Remove the trailing whitespace if there is any
+			if (filteredTextEndIndex > 0 && isWhitespace)
+			{
+				currentLineWidth -= img.getAdvanceX();
+			}
+		}
+
+		// Add the character to the filtered text if we are still sure we want to add it
+		if (addCharacterToFilteredText)
+		{
+			filteredText[filteredTextIndex++] = c;
+		}
+
+		// If an end index has been defined for this line, lets end it
+		if (filteredTextEndIndex > 0)
+		{
+			// Store the line properties
+			lineProperties->setEnd(filteredTextEndIndex);
+			lineProperties->setWidth(currentLineWidth);
+			lineProperties->setStartAdjust(currentLineStartAdjust);
+
+			// Add this line to the line collection
+			allLineProperties.push_back(lineProperties);
+
+			// Create a new line starting at the end of the last line
+			lineProperties = new LineProperties(filteredTextEndIndex);
+
+			// Reset temporary line variables
+			currentLineWidth = 0.0f;
+			currentLineStartAdjust = 0.0f;
+			filteredTextEndIndex = 0;
+			lookingForNextLineBreak = false;
+
+			// Reset the read/write indices to where the new line is starting at
+			sourceTextIndex = newLineSourceTextIndex;
+			filteredTextIndex = newLineFilteredTextIndex;
+		}
+		// If we are not adding the character to the filtered text, increment the source text index
+		else
+		{
+			sourceTextIndex++;
 		}
 	}
 
-	return 0;
+	// Serve up all of the line information we found
+	return allLineProperties;
 }
