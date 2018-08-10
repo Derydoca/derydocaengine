@@ -33,13 +33,17 @@ Texture * FontFace::getTexture()
 
 void FontFace::loadFromFontFile(string filePath)
 {
-	FT_Error error = FT_Init_FreeType(&m_library);
+	// Initialize FreeType
+	FT_Library freeTypeLibrary;
+	FT_Error error = FT_Init_FreeType(&freeTypeLibrary);
 	if (error)
 	{
 		cout << "An error occurred while attempting to initialize FreeType. Error: " << error << endl;
 	}
 
-	error = FT_New_Face(m_library, filePath.c_str(), 0, &m_face);
+	// Load the font file
+	FT_Face fontFace;
+	error = FT_New_Face(freeTypeLibrary, filePath.c_str(), 0, &fontFace);
 	if (error == FT_Err_Unknown_File_Format)
 	{
 		cout << "Unable to load the font because it is of an unknown file format. File: " << filePath << endl;
@@ -51,37 +55,43 @@ void FontFace::loadFromFontFile(string filePath)
 		return;
 	}
 
-	m_name = m_face->family_name;
-	if (m_face->style_name != nullptr)
+	// Store information about the font
+	m_name = fontFace->family_name;
+	if (fontFace->style_name != nullptr)
 	{
-		m_style = m_face->style_name;
+		m_style = fontFace->style_name;
 	}
-	m_lineHeight = m_face->height / 64.0f;
+	m_lineHeight = fontFace->height / 64.0f;
 
-	error = FT_Set_Char_Size(m_face, 0, (int)(m_fontSize * 64.0f), m_dotsPerInch.x, m_dotsPerInch.y);
+	// Set the font size
+	error = FT_Set_Char_Size(fontFace, 0, (int)(m_fontSize * 64.0f), m_dotsPerInch.x, m_dotsPerInch.y);
 
+	// Create a texture packer to save all of the glyphs into one texture
 	TexturePacker packer = TexturePacker();
 
-	for(unsigned long i = 0; i < m_face->num_glyphs; i++)
+	// For every character that exists in the font face
+	for(unsigned long i = 0; i < fontFace->num_glyphs; i++)
 	{
-		FT_ULong charCode = i;
-		FT_UInt glyph_index = FT_Get_Char_Index(m_face, charCode);
+		// Get the character index
+		FT_UInt glyph_index = FT_Get_Char_Index(fontFace, i);
 		if (glyph_index == 0)
 		{
-			cout << "Unable to get character index from char code " << charCode << "." << endl;
+			cout << "Unable to get character index from char code " << i << "." << endl;
 			continue;
 		}
 
-		error = FT_Load_Glyph(m_face, glyph_index, FT_LOAD_DEFAULT);
+		// Get the character glyph data
+		error = FT_Load_Glyph(fontFace, glyph_index, FT_LOAD_DEFAULT);
 		if (error)
 		{
 			cout << "Unable to load glyph at index " << glyph_index << ". Error: " << error;
 			continue;
 		}
 
-		if (m_face->glyph->format != FT_GLYPH_FORMAT_BITMAP)
+		// If the glyph format is not bitmap, then render the glyph so we get a bitmap to store in the texture
+		if (fontFace->glyph->format != FT_GLYPH_FORMAT_BITMAP)
 		{
-			error = FT_Render_Glyph(m_face->glyph, FT_RENDER_MODE_NORMAL);
+			error = FT_Render_Glyph(fontFace->glyph, FT_RENDER_MODE_NORMAL);
 			if (error)
 			{
 				cout << "Unable to render glyph." << endl;
@@ -89,17 +99,18 @@ void FontFace::loadFromFontFile(string filePath)
 			}
 		}
 
+		// Add the glyph to the texture packer
 		packer.addImage(
 			i,
-			m_face->glyph->metrics.width / 64.0f,
-			m_face->glyph->metrics.height / 64.0f,
-			m_face->glyph->metrics.horiBearingX / 64.0f,
-			m_face->glyph->metrics.horiBearingY/ 64.0f,
-			m_face->glyph->metrics.horiAdvance / 64.0f,
+			fontFace->glyph->metrics.width / 64.0f,
+			fontFace->glyph->metrics.height / 64.0f,
+			fontFace->glyph->metrics.horiBearingX / 64.0f,
+			fontFace->glyph->metrics.horiBearingY/ 64.0f,
+			fontFace->glyph->metrics.horiAdvance / 64.0f,
 			0.0f,
-			m_face->glyph->bitmap.buffer,
-			m_face->glyph->bitmap.width,
-			m_face->glyph->bitmap.rows);
+			fontFace->glyph->bitmap.buffer,
+			fontFace->glyph->bitmap.width,
+			fontFace->glyph->bitmap.rows);
 	}
 
 	// Pack the images
@@ -128,6 +139,7 @@ void FontFace::loadFromSerializedFile(string filePath)
 
 	Node font = file["Font"];
 
+	// Load general font information
 	m_name = font["name"].as<string>();
 	m_style = font["style"].as<string>();
 	m_fontSize = font["fontSize"].as<float>();
@@ -148,6 +160,7 @@ void FontFace::loadFromSerializedFile(string filePath)
 	}
 	delete[] imageData;
 
+	// Load all character data
 	Node charactersNode = font["characters"];
 	for (int i = 0; i < charactersNode.size(); i++)
 	{
@@ -181,6 +194,7 @@ void FontFace::saveToSerializedFile(string filePath)
 
 	Node font = root["Font"];
 
+	// Save the general font data
 	font["name"] = m_name;
 	font["style"] = m_style;
 	font["fontSize"] = m_fontSize;
@@ -193,8 +207,8 @@ void FontFace::saveToSerializedFile(string filePath)
 	Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 	font["image"] = boost::lexical_cast<string>(imageResource->getId());
 
+	// Save the character information
 	Node charactersNode = font["characters"];
-
 	for (auto charImage : m_charImages)
 	{
 		Node charNode;

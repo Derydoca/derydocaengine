@@ -38,8 +38,6 @@ public:
 	void loadFromSerializedFile(string filePath);
 	void saveToSerializedFile(string filePath);
 private:
-	FT_Library m_library;
-	FT_Face m_face;
 	ivec2 m_dotsPerInch = ivec2(300, 300);
 	float m_fontSize = 16.0;
 	Texture m_texture;
