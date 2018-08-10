@@ -14,13 +14,6 @@ struct TexturePackerTextureData
 
 	int getWidth() const { return m_data[0].size(); }
 	int getHeight() const { return m_data.size(); }
-	unsigned char get(int x, int y) const {
-		if (y < 0 || y >= (int)m_data.size() || x < 0 || x >= (int)m_data[0].size())
-		{
-			return 0;
-		}
-		return m_data[y][x];
-	}
 	Texture* allocTexture();
 	unsigned char* allocImageBuffer();
 private:
