@@ -150,6 +150,7 @@ void TexturePacker::packImages()
 
 void TexturePacker::freeSubImageData()
 {
+	// Delete all image buffer data
 	for (auto imageBuffer : m_imageBuffers)
 	{
 		delete[] imageBuffer.second;
@@ -159,12 +160,17 @@ void TexturePacker::freeSubImageData()
 
 int TexturePacker::getIntersectingImageXAdvance(vector<IntRect> imageBounds, IntRect rect)
 {
+	// For each image boundary
 	for (auto imageBoundary : imageBounds)
 	{
+		// If it is overlapping with the rectangle
 		if (IntRect::IsRectOverlapping(imageBoundary, rect))
 		{
+			// Return the number of pixels we can advance to be in front of this intersecting image boundary
 			return imageBoundary.getDx() - rect.getX();
 		}
 	}
+
+	// If no intersections were found, return an invalid value so it can be tested against
 	return -1;
 }
