@@ -23,7 +23,7 @@ public:
 	float getAdvanceY() const { return m_advanceY; }
 	Rect getTexSheetPosition() { return m_texSheetPosition; }
 
-	void setTextureSheetRectangle(float x, float y, float width, float height);
+	void setTextureSheetRectangle(float x, float y, float dx, float dy);
 
 private:
 	unsigned long m_id;

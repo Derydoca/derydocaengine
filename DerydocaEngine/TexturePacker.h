@@ -4,7 +4,7 @@
 #include "Rectangle.h"
 #include "TexturePackerImage.h"
 #include "TexturePackerTextureData.h"
-#include "IntRectangle.h"
+#include "IntRect.h"
 
 using namespace std;
 
@@ -19,20 +19,17 @@ public:
 	void addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height);
 	void packImages();
 	bool getIsDirty() const { return m_isDirty; }
-	Texture* allocTexture() { return dest.allocTexture(); };
-	unsigned char* allocImageBuffer() { return dest.allocImageBuffer(); }
+	Texture* allocTexture() { return m_packedImageData.allocTexture(); };
+	unsigned char* allocImageBuffer() { return m_packedImageData.allocImageBuffer(); }
 	void freeSubImageData();
 	vector<TexturePackerImage> getSubImageData() { return m_images; }
-	int getWidth() const { return dest.getWidth(); }
-	int getHeight() const { return dest.getHeight(); }
+	int getWidth() const { return m_packedImageData.getWidth(); }
+	int getHeight() const { return m_packedImageData.getHeight(); }
 private:
-	const int IMAGE_SIZE = 512;
 	vector<TexturePackerImage> m_images;
 	map<unsigned long, unsigned char*> m_imageBuffers;
 	bool m_isDirty;
-	TexturePackerTextureData dest;
-	vector<IntRectangle> m_imageBounds;
+	TexturePackerTextureData m_packedImageData;
 
-	bool isPointFree(int x, int y);
-	bool isRectFree(int x, int y, int w, int h);
+	int getIntersectingImageXAdvance(vector<IntRect> imageBounds, IntRect rect);
 };

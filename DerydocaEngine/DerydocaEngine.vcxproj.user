@@ -13,7 +13,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerWorkingDirectory>..\builds\Win32\Release</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-processFont C:\Users\Derrick\Documents\GitHub\derydocaengine0\engineResources\fonts\FiraCode-Medium.ttf 16 C:\Users\Derrick\Documents\GitHub\derydocaengine0\engineResources\fonts\FiraCode-Medium.dfont</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-processFont C:\Users\derrickc\Documents\GitHub\derydocaengine\engineResources\fonts\FiraCode-Medium.ttf 16 C:\Users\derrickc\Documents\GitHub\derydocaengine\engineResources\fonts\FiraCode-Medium.dfont</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>..\builds\Win32\Debug</LocalDebuggerWorkingDirectory>

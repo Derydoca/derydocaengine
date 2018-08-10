@@ -202,6 +202,7 @@
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
     <ClCompile Include="FrameStats.cpp" />
+    <ClCompile Include="IntRect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -456,6 +457,7 @@
     </ClInclude>
     <ClInclude Include="Rect.h" />
     <ClInclude Include="FrameStats.h" />
+    <ClInclude Include="IntRect.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

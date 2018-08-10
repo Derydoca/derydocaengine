@@ -239,6 +239,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="ImageFileSerializer.cpp" />
     <ClCompile Include="ImageProjector.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="IntRect.cpp" />
     <ClCompile Include="IntRectangle.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
@@ -333,6 +334,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ImageFileSerializer.h" />
     <ClInclude Include="ImageProjector.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="IntRect.h" />
     <ClInclude Include="IntRectangle.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />

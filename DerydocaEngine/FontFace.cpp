@@ -76,7 +76,6 @@ void FontFace::loadFromFontFile(string filePath)
 		FT_UInt glyph_index = FT_Get_Char_Index(fontFace, i);
 		if (glyph_index == 0)
 		{
-			cout << "Unable to get character index from char code " << i << "." << endl;
 			continue;
 		}
 

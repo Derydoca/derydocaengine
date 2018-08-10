@@ -4,6 +4,12 @@
 #include <iostream>
 #include "Texture.h"
 
+// Method for sorting images
+bool compareTexturePackerImageBySize(TexturePackerImage lhs, TexturePackerImage rhs)
+{
+	return lhs.getWidth() > rhs.getWidth();
+}
+
 TexturePacker::TexturePacker()
 {
 	m_isDirty = false;
@@ -16,9 +22,11 @@ TexturePacker::~TexturePacker()
 
 void TexturePacker::addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height)
 {
+	// Store the image
 	TexturePackerImage image(id, width, height, 1, sizeX, sizeY, bearingX, bearingY, advanceX, advanceY);
 	m_images.push_back(image);
-	m_isDirty = true;
+
+	// Store the image data in the image buffers object
 	unsigned char* buffer = m_imageBuffers[id];
 	delete[] buffer;
 	int imageBufferSize = width * height;
@@ -28,11 +36,9 @@ void TexturePacker::addImage(unsigned long id, float sizeX, float sizeY, float b
 		newBuffer[i] = imageBuffer[i];
 	}
 	m_imageBuffers[id] = newBuffer;
-}
 
-bool compareTexturePackerImageBySize(TexturePackerImage lhs, TexturePackerImage rhs)
-{
-	return lhs.getWidth() * lhs.getHeight() > rhs.getWidth() * rhs.getHeight();
+	// Note that the texture packer data is dirty
+	m_isDirty = true;
 }
 
 void TexturePacker::packImages()
@@ -43,44 +49,83 @@ void TexturePacker::packImages()
 		return;
 	}
 
-	m_imageBounds.clear();
-	dest.Resize(IMAGE_SIZE, 1);
+	// Store a vector of rectangles representing the location and size of images that have been placed
+	vector<IntRect> imageBounds;
 
+	// Figure out an image width that should contain all glyphs without issue
+	int textureSheetWidth = 128;
+	{
+		float totalGlyphArea = 0.0f;
+		for (auto image : m_images)
+		{
+			totalGlyphArea += (float)image.getWidth() * image.getHeight();
+		}
+		while (textureSheetWidth * textureSheetWidth < totalGlyphArea)
+		{
+			textureSheetWidth = textureSheetWidth * 2;
+		}
+	}
+
+	// Clear the packed image data
+	m_packedImageData.Resize(textureSheetWidth, 1);
+
+	// Sort all of the images
 	sort(m_images.begin(), m_images.end(), compareTexturePackerImageBySize);
 
 	// Create a temporary image location array
-	IntRectangle* imageLocations = new IntRectangle[m_images.size()];
+	IntRect* imageLocations = new IntRect[m_images.size()];
 
+	// For each image
 	for (size_t i = 0; i < m_images.size(); i++)
 	{
 		int imageWidth = m_images[i].getWidth();
 		int imageHeight = m_images[i].getHeight();
 
-		assert(imageWidth <= IMAGE_SIZE);
+		IntRect imgRect;
+
+		assert(imageWidth <= textureSheetWidth);
 
 		bool found = false;
 
-		for (int scanPosY = 0; scanPosY < 2048 && !found; scanPosY++)
+		// Find a place for the image by progressively looking farther down the image after scanning the current line
+		for (int scanPosY = 0; scanPosY < textureSheetWidth * 2 && !found; scanPosY++)
 		{
-			if (scanPosY + imageHeight > dest.getHeight())
-			{
-				dest.Resize(IMAGE_SIZE, scanPosY + imageHeight);
-			}
+			imgRect.setY(scanPosY);
+			imgRect.setDy(scanPosY + imageHeight);
 
-			for (int scanPosX = 0; scanPosX < IMAGE_SIZE - m_images[i].getWidth() && !found; scanPosX++)
+			// Scan through each X location in the line
+			for (int scanPosX = 0; scanPosX < textureSheetWidth - imageWidth && !found; scanPosX++)
 			{
-				bool valid = isPointFree(scanPosX, scanPosY) && isRectFree(scanPosX, scanPosY, imageWidth, imageHeight);
+				imgRect.setX(scanPosX);
+				imgRect.setDx(scanPosX + imageWidth);
 
-				if (valid)
+				// This x,y location is valid if there is nothing obstructing the placement
+				int spaceToSkip = getIntersectingImageXAdvance(imageBounds, imgRect);
+
+				// If it is valid
+				if (spaceToSkip < 0)
 				{
-					dest.AddImage(scanPosX, scanPosY, &m_images[i], m_imageBuffers[m_images[i].getID()]);
-					m_imageBounds.push_back(IntRectangle(scanPosX, scanPosY, imageWidth, imageHeight));
+					// If the image placed at this position will exceede the size of the image, resize it so there is room to fit
+					if (scanPosY + imageHeight > m_packedImageData.getHeight())
+					{
+						m_packedImageData.Resize(textureSheetWidth, scanPosY + imageHeight);
+					}
+
+					// Add the image
+					m_packedImageData.AddImage(scanPosX, scanPosY, &m_images[i], m_imageBuffers[m_images[i].getID()]);
+
+					// Remember where this is located at
+					imageBounds.push_back(IntRect(scanPosX, scanPosY, scanPosX + imageWidth, scanPosY + imageHeight));
 
 					// Store the location of the image so that we can calculate the normalized position
-					imageLocations[i] = IntRectangle(scanPosX, scanPosY, imageWidth, imageHeight);
+					imageLocations[i] = IntRect(scanPosX, scanPosY, scanPosX + imageWidth, scanPosY + imageHeight);
 
 					found = true;
 					cout << "Placed image " << i + 1 << "/" << m_images.size() << endl;
+				}
+				else
+				{
+					scanPosX += spaceToSkip - 1;
 				}
 			}
 		}
@@ -89,12 +134,12 @@ void TexturePacker::packImages()
 	// Convert the image positions to normalized values and store it with the image data
 	for (size_t i = 0; i < m_images.size(); i++)
 	{
-		IntRectangle loc = imageLocations[i];
-		float x = (float)loc.getX() / dest.getWidth();
-		float y = (float)loc.getY() / dest.getHeight();
-		float w = (float)loc.getWidth() / dest.getWidth();
-		float h = (float)loc.getHeight() / dest.getHeight();
-		m_images[i].setTextureSheetRectangle(x, y, x + w, y + h);
+		IntRect loc = imageLocations[i];
+		float x = (float)loc.getX() / m_packedImageData.getWidth();
+		float y = (float)loc.getY() / m_packedImageData.getHeight();
+		float dx = (float)loc.getDx() / m_packedImageData.getWidth();
+		float dy = (float)loc.getDy() / m_packedImageData.getHeight();
+		m_images[i].setTextureSheetRectangle(x, y, dx, dy);
 	}
 
 	// Delete the temporary image locations array
@@ -112,26 +157,14 @@ void TexturePacker::freeSubImageData()
 	m_imageBuffers.clear();
 }
 
-bool TexturePacker::isPointFree(int x, int y)
+int TexturePacker::getIntersectingImageXAdvance(vector<IntRect> imageBounds, IntRect rect)
 {
-	for (auto rect : m_imageBounds)
+	for (auto imageBoundary : imageBounds)
 	{
-		if (IntRectangle::IsPointInRect(rect, x, y))
+		if (IntRect::IsRectOverlapping(imageBoundary, rect))
 		{
-			return false;
+			return imageBoundary.getDx() - rect.getX();
 		}
 	}
-	return true;
-}
-
-bool TexturePacker::isRectFree(int x, int y, int w, int h)
-{
-	for (auto rect : m_imageBounds)
-	{
-		if (IntRectangle::IsRectOverlapping(rect, IntRectangle(x, y, w, h)))
-		{
-			return false;
-		}
-	}
-	return true;
+	return -1;
 }
