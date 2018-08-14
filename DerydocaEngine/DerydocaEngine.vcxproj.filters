@@ -116,7 +116,6 @@
     <ClCompile Include="FileSerializerLibrary.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="FileType.cpp" />
     <ClCompile Include="ResourceSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
@@ -132,7 +131,6 @@
     <ClCompile Include="GameComponentFactory.cpp">
       <Filter>Game Components</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="ImageFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
@@ -151,35 +149,12 @@
     <ClCompile Include="ShaderResourceSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="CommandLineArgs.cpp" />
     <ClCompile Include="ShaderLibrary.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
-    <ClCompile Include="ImageProjector.cpp" />
-    <ClCompile Include="EdgeDetectionFilter.cpp" />
-    <ClCompile Include="GaussianBlurFilter.cpp" />
-    <ClCompile Include="BloomFilter.cpp" />
-    <ClCompile Include="GammaCorrectionFilter.cpp" />
-    <ClCompile Include="MultisampleSwitch.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
-    <ClCompile Include="MeshAdjacencyCalculator.cpp" />
-    <ClCompile Include="BezierCurveRenderer.cpp" />
-    <ClCompile Include="TessellatingQuad.cpp" />
-    <ClCompile Include="BezierPatchMesh.cpp" />
-    <ClCompile Include="BezierPatchMeshFileLoader.cpp" />
     <ClCompile Include="BezierPatchMeshFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
-    <ClCompile Include="TessellatedMeshRenderer.cpp" />
-    <ClCompile Include="NoiseTexture.cpp" />
-    <ClCompile Include="WoodSliceTexture.cpp" />
-    <ClCompile Include="NightVisionFilter.cpp" />
-    <ClCompile Include="WaveDisplacement.cpp" />
-    <ClCompile Include="ParticleFountain.cpp" />
-    <ClCompile Include="ParticleContinuousFountain.cpp" />
-    <ClCompile Include="ParticleInstanced.cpp" />
     <ClCompile Include="TexturePacker.cpp">
       <Filter>TexturePacker</Filter>
     </ClCompile>
@@ -189,7 +164,6 @@
     <ClCompile Include="TexturePackerTextureData.cpp">
       <Filter>TexturePacker</Filter>
     </ClCompile>
-    <ClCompile Include="IntRectangle.cpp" />
     <ClCompile Include="LevelFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
@@ -199,13 +173,95 @@
     <ClCompile Include="RasterFontFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="FrameStats.cpp" />
-    <ClCompile Include="IntRect.cpp" />
     <ClCompile Include="TextRenderer.cpp">
       <Filter>Game Components</Filter>
     </ClCompile>
     <ClCompile Include="FontFace.cpp">
       <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierCurveRenderer.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPatchMesh.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPatchMeshFileLoader.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPatchMeshResourceSerializer.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="BloomFilter.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="EdgeDetectionFilter.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameStats.cpp">
+      <Filter>Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GammaCorrectionFilter.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianBlurFilter.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageProjector.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshAdjacencyCalculator.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="MultisampleSwitch.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="NightVisionFilter.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="NoiseTexture.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContinuousFountain.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleFountain.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleInstanced.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveDisplacement.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="WoodSliceTexture.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderSubroutineSwitcher.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="TessellatingQuad.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="TessellatedMeshRenderer.cpp">
+      <Filter>Shader Cookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="IntRect.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="IntRectangle.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="FileType.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandLineArgs.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -359,7 +415,6 @@
     <ClInclude Include="FileSerializerLibrary.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
-    <ClInclude Include="FileType.h" />
     <ClInclude Include="ResourceSerializer.h">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClInclude>
@@ -378,7 +433,6 @@
     <ClInclude Include="DisplayManager.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h" />
     <ClInclude Include="ImageFileSerializer.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
@@ -403,42 +457,12 @@
     <ClInclude Include="ShaderResourceSerializer.h">
       <Filter>Engine\ResourceSerializers</Filter>
     </ClInclude>
-    <ClInclude Include="CommandLineArgs.h" />
     <ClInclude Include="ShaderLibrary.h">
       <Filter>Engine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderSubroutineSwitcher.h" />
-    <ClInclude Include="ImageProjector.h" />
-    <ClInclude Include="TextureParameters.h" />
-    <ClInclude Include="EdgeDetectionFilter.h" />
-    <ClInclude Include="GaussianBlurFilter.h" />
-    <ClInclude Include="BloomFilter.h" />
-    <ClInclude Include="RenderPass.h" />
-    <ClInclude Include="GammaCorrectionFilter.h" />
-    <ClInclude Include="MultisampleSwitch.h" />
-    <ClInclude Include="stb_image.h" />
-    <ClInclude Include="stb_image_write.h" />
-    <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="MeshFlags.h" />
-    <ClInclude Include="MeshAdjacencyCalculator.h" />
-    <ClInclude Include="BezierCurveRenderer.h" />
-    <ClInclude Include="TessellatingQuad.h" />
-    <ClInclude Include="BezierPatchMesh.h" />
-    <ClInclude Include="BezierPatchMeshFileLoader.h" />
     <ClInclude Include="BezierPatchMeshFileSerializer.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
-    <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
-    <ClInclude Include="TessellatedMeshRenderer.h" />
-    <ClInclude Include="Projection.h" />
-    <ClInclude Include="NoiseTexture.h" />
-    <ClInclude Include="WoodSliceTexture.h" />
-    <ClInclude Include="NightVisionFilter.h" />
-    <ClInclude Include="WaveDisplacement.h" />
-    <ClInclude Include="ParticleFountain.h" />
-    <ClInclude Include="ParticleContinuousFountain.h" />
-    <ClInclude Include="ParticleInstanced.h" />
-    <ClInclude Include="IntRectangle.h" />
     <ClInclude Include="TexturePacker.h">
       <Filter>TexturePacker</Filter>
     </ClInclude>
@@ -457,14 +481,116 @@
     <ClInclude Include="RasterFontFileSerializer.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h" />
-    <ClInclude Include="FrameStats.h" />
-    <ClInclude Include="IntRect.h" />
     <ClInclude Include="TextRenderer.h">
       <Filter>Game Components</Filter>
     </ClInclude>
     <ClInclude Include="FontFace.h">
       <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierCurveRenderer.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPatchMesh.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPatchMeshFileLoader.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPatchMeshResourceSerializer.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="BloomFilter.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="EdgeDetectionFilter.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameStats.h">
+      <Filter>Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GammaCorrectionFilter.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianBlurFilter.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageProjector.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshAdjacencyCalculator.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="MultisampleSwitch.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="NightVisionFilter.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="NoiseTexture.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContinuousFountain.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleFountain.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleInstanced.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="WoodSliceTexture.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveDisplacement.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderSubroutineSwitcher.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="TessellatingQuad.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="TessellatedMeshRenderer.h">
+      <Filter>Shader Cookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFlags.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPass.h">
+      <Filter>Engine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="IntRect.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IntRectangle.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="FileType.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureParameters.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandLineArgs.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image_write.h">
+      <Filter>Third Party</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -497,6 +623,12 @@
     </Filter>
     <Filter Include="Engine\UI">
       <UniqueIdentifier>{a84ac1a5-2e0c-4297-a074-986ebec1c8cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Cookbook">
+      <UniqueIdentifier>{5b82a275-1631-4c19-b79f-5bc532c894a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Third Party">
+      <UniqueIdentifier>{4d0b2468-5cec-4cd5-9860-20bc68f256f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
