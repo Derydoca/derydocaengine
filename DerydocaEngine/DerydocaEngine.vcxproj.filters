@@ -180,7 +180,6 @@
     <ClCompile Include="ParticleFountain.cpp" />
     <ClCompile Include="ParticleContinuousFountain.cpp" />
     <ClCompile Include="ParticleInstanced.cpp" />
-    <ClCompile Include="FontFace.cpp" />
     <ClCompile Include="TexturePacker.cpp">
       <Filter>TexturePacker</Filter>
     </ClCompile>
@@ -190,7 +189,6 @@
     <ClCompile Include="TexturePackerTextureData.cpp">
       <Filter>TexturePacker</Filter>
     </ClCompile>
-    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="IntRectangle.cpp" />
     <ClCompile Include="LevelFileSerializer.cpp">
       <Filter>Engine\FileSerializers</Filter>
@@ -203,6 +201,12 @@
     </ClCompile>
     <ClCompile Include="FrameStats.cpp" />
     <ClCompile Include="IntRect.cpp" />
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FontFace.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -434,7 +438,6 @@
     <ClInclude Include="ParticleFountain.h" />
     <ClInclude Include="ParticleContinuousFountain.h" />
     <ClInclude Include="ParticleInstanced.h" />
-    <ClInclude Include="FontFace.h" />
     <ClInclude Include="IntRectangle.h" />
     <ClInclude Include="TexturePacker.h">
       <Filter>TexturePacker</Filter>
@@ -445,7 +448,6 @@
     <ClInclude Include="TexturePackerTextureData.h">
       <Filter>TexturePacker</Filter>
     </ClInclude>
-    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="LevelFileSerializer.h">
       <Filter>Engine\FileSerializers</Filter>
     </ClInclude>
@@ -458,6 +460,12 @@
     <ClInclude Include="Rect.h" />
     <ClInclude Include="FrameStats.h" />
     <ClInclude Include="IntRect.h" />
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FontFace.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
@@ -486,6 +494,9 @@
     </Filter>
     <Filter Include="TexturePacker">
       <UniqueIdentifier>{792a8148-58f8-4c2a-a2c9-68f368699d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{a84ac1a5-2e0c-4297-a074-986ebec1c8cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
