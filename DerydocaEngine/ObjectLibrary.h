@@ -2,7 +2,7 @@
 #include <string>
 #include <map>
 #include "Resource.h"
-#include "boost/uuid/uuid.hpp"
+#include <boost/uuid/uuid.hpp>
 
 class GameComponent;
 class ResourceTypeSerializer;

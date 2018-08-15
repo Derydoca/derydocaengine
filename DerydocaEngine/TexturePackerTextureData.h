@@ -12,8 +12,8 @@ struct TexturePackerTextureData
 
 	void Fill(int sx, int sy, int ex, int ey, unsigned char value);
 
-	int getWidth() const { return m_data[0].size(); }
-	int getHeight() const { return m_data.size(); }
+	int getWidth() const { return (int)m_data[0].size(); }
+	int getHeight() const { return (int)m_data.size(); }
 	Texture* allocTexture();
 	unsigned char* allocImageBuffer();
 private:

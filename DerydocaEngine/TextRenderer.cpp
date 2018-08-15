@@ -118,13 +118,13 @@ void TextRenderer::updateText()
 
 	// Calculate the information we need for vertical alignment
 	float lineHeight = 0.0f;
-	calculateVerticalAlignmentProperties(m_verticalAlign, allLineProperties.size(), m_bounds.y, m_fontFace->getLineHeight(), &penY, &lineHeight);
+	calculateVerticalAlignmentProperties(m_verticalAlign, (int)allLineProperties.size(), m_bounds.y, m_fontFace->getLineHeight(), &penY, &lineHeight);
 
 	// Keep reference to the quad that we are currently building
 	int charQuadIndex = 0;
 
 	// Iterate through all lines of the text
-	for (int lineIndex = 0; lineIndex < allLineProperties.size(); lineIndex++)
+	for (size_t lineIndex = 0; lineIndex < allLineProperties.size(); lineIndex++)
 	{
 		LineProperties* lineProperties = allLineProperties[lineIndex];
 
@@ -313,7 +313,7 @@ vector<LineProperties*> TextRenderer::processTextToLines(string text, OverflowWr
 			addCharacterToFilteredText = false;
 			continueLookingForLines = false;
 			newLineFilteredTextIndex = filteredTextIndex;
-			newLineSourceTextIndex = text.size();
+			newLineSourceTextIndex = (int)text.size();
 		}
 
 		// If we are still adding this character to the filtered text

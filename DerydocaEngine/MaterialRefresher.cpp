@@ -10,15 +10,15 @@ MaterialRefresher::~MaterialRefresher()
 {
 }
 
-bool getLastModifiedTime(LPCSTR filePath, FILETIME &time)
+bool getLastModifiedTime(std::string filePath, std::time_t &time)
 {
-	WIN32_FILE_ATTRIBUTE_DATA fileInfo = { 0 };
-	if (GetFileAttributesEx(filePath, GetFileExInfoStandard, &fileInfo))
+	if (!boost::filesystem::exists(filePath))
 	{
-		time = fileInfo.ftLastWriteTime;
-		return true;
+		return false;
 	}
-	return false;
+
+	time = boost::filesystem::last_write_time(filePath);
+	return true;
 }
 
 void MaterialRefresher::init()
@@ -85,13 +85,13 @@ void MaterialRefresher::refreshMaterial()
 
 bool MaterialRefresher::isShaderSourceUpdated()
 {
-	FILETIME tempFileTime;
+	time_t tempFileTime;
 
 	// Check the vertex shader
 	if (
 		m_vertexShaderExists &&
 		getLastModifiedTime(m_vertexShaderPath.c_str(), tempFileTime) &&
-		CompareFileTime(&tempFileTime, &m_vertexShaderModifiedTime) != 0) {
+		difftime(tempFileTime, m_vertexShaderModifiedTime) != 0) {
 		return true;
 	}
 
@@ -99,7 +99,7 @@ bool MaterialRefresher::isShaderSourceUpdated()
 	if (
 		m_fragmentShaderExists &&
 		getLastModifiedTime(m_fragmentShaderPath.c_str(), tempFileTime) &&
-		CompareFileTime(&tempFileTime, &m_fragmentShaderModifiedTime) != 0) {
+		difftime(tempFileTime, m_fragmentShaderModifiedTime) != 0) {
 		return true;
 	}
 
@@ -107,7 +107,7 @@ bool MaterialRefresher::isShaderSourceUpdated()
 	if (
 		m_geometryShaderExists &&
 		getLastModifiedTime(m_geometryShaderPath.c_str(), tempFileTime) &&
-		CompareFileTime(&tempFileTime, &m_geometryShaderModifiedTime) != 0) {
+		difftime(tempFileTime, m_geometryShaderModifiedTime) != 0) {
 		return true;
 	}
 
@@ -115,7 +115,7 @@ bool MaterialRefresher::isShaderSourceUpdated()
 	if (
 		m_tessEvalShaderExists &&
 		getLastModifiedTime(m_tessEvalShaderPath.c_str(), tempFileTime) &&
-		CompareFileTime(&tempFileTime, &m_tessEvalShaderModifiedTime) != 0) {
+		difftime(tempFileTime, m_tessEvalShaderModifiedTime) != 0) {
 		return true;
 	}
 
@@ -123,7 +123,7 @@ bool MaterialRefresher::isShaderSourceUpdated()
 	if (
 		m_tessControlShaderExists &&
 		getLastModifiedTime(m_tessControlShaderPath.c_str(), tempFileTime) &&
-		CompareFileTime(&tempFileTime, &m_tessControlShaderModifiedTime) != 0) {
+		difftime(tempFileTime, m_tessControlShaderModifiedTime) != 0) {
 		return true;
 	}
 

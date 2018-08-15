@@ -14,7 +14,7 @@ This is being written in Visual Studio 2017. For anyone who wants to use another
 *  GLM (0.9.8.5) - For all the complex math made to make games
 *  stb_image - For image loading
 *  yaml-cpp (0.6.0) - For configuration files and serialized objects
-*  OculusSDK (1.4.0) - For future use
+*  Boost (1.68.0) - For keeping the project cross-platform
 
 ## Acknowledgements
 

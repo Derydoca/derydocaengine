@@ -88,8 +88,8 @@ public:
 		}
 	}
 	Display* getDisplay() { return m_display; }
-	float getDisplayWidth() { return m_renderTexture != nullptr ? m_renderTexture->getWidth() : m_display->getWidth(); }
-	float getDisplayHeight() { return m_renderTexture != nullptr ? m_renderTexture->getHeight() : m_display->getHeight(); }
+	float getDisplayWidth() { return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)m_display->getWidth(); }
+	float getDisplayHeight() { return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)m_display->getHeight(); }
 	void setRenderTexture(RenderTexture* renderTexture) { m_renderTexture = renderTexture; }
 	void init();
 	void setDisplayRect(float x, float y, float w, float h);

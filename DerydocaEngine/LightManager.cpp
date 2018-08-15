@@ -99,7 +99,7 @@ void LightManager::bindLightsToShader(MatrixStack* matrixStack, Transform* objec
 	// Set the shadow jitter texture size
 	shader->setVec3("ShadowJitterTexSize", m_shadowJitterTextureSize);
 
-	shader->setInt("LightCount", lights.size());
+	shader->setInt("LightCount", (int)lights.size());
 }
 
 void LightManager::renderShadowMaps(Transform* objectTransform)

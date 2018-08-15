@@ -32,7 +32,7 @@ public:
 		}
 	};
 	float getLineHeight() const { return m_lineHeight; }
-	void setFontSize(int fontSize) { m_fontSize = fontSize; }
+	void setFontSize(float fontSize) { m_fontSize = fontSize; }
 
 	void loadFromFontFile(string filePath);
 	void loadFromSerializedFile(string filePath);

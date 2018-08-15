@@ -3,7 +3,7 @@
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
 #include "ObjectLibrary.h"
-#include "boost\uuid\uuid.hpp"
+#include <boost\uuid\uuid.hpp>
 #include <vector>
 #include "Material.h"
 #include "Projection.h"

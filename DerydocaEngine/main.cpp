@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 
 		FontFace face;
 		face.loadFromFontFile(processArgs[0]);
-		face.setFontSize(atof(processArgs[1].c_str()));
+		face.setFontSize((float)atof(processArgs[1].c_str()));
 		face.saveToSerializedFile(processArgs[2]);
 	}
 

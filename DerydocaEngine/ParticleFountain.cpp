@@ -105,7 +105,7 @@ void ParticleFountain::initBuffers()
 	float velocity, theta, phi;
 
 	GLfloat* data = new GLfloat[m_numParticles * 3];
-	for (GLuint i = 0; i < m_numParticles; i++)
+	for (int i = 0; i < m_numParticles; i++)
 	{
 		// Pick the direction of the particles
 		theta = mix(0.0f, glm::pi<float>() / m_angle, randFloat());
@@ -133,7 +133,7 @@ void ParticleFountain::initBuffers()
 	float time = 0.0f;
 	float rate = 0.00075f;
 
-	for (unsigned int i = 0; i < m_numParticles; i++)
+	for (int i = 0; i < m_numParticles; i++)
 	{
 		data[i] = time;
 		time += rate;

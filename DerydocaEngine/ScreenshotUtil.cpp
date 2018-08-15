@@ -1,7 +1,7 @@
 #include <chrono>
 #include <ctime>
 #include "ScreenshotUtil.h"
-#include "boost/date_time/posix_time/posix_time.hpp"
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "stb_image.h"
 #include "stb_image_write.h"
 

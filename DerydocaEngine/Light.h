@@ -80,6 +80,6 @@ private:
 	Projection m_projection;
 	glm::mat4 m_shadowBias;
 	ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;
-	float m_shadowSoftness = 0.01;
+	float m_shadowSoftness = 0.01f;
 };
 

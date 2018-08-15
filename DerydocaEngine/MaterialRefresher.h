@@ -1,8 +1,8 @@
 #pragma once
+#include <boost/filesystem.hpp>
 #include "GameComponent.h"
 #include "MeshRenderer.h"
 #include "TessellatedMeshRenderer.h"
-#include <windows.h>
 
 /*
 This will monitor the material source code and recompile/reapply the shader to the object that it is attached to whenever it changes.
@@ -33,10 +33,10 @@ private:
 	std::string m_geometryShaderPath;
 	std::string m_tessEvalShaderPath;
 	std::string m_tessControlShaderPath;
-	FILETIME m_vertexShaderModifiedTime;
-	FILETIME m_fragmentShaderModifiedTime;
-	FILETIME m_geometryShaderModifiedTime;
-	FILETIME m_tessEvalShaderModifiedTime;
-	FILETIME m_tessControlShaderModifiedTime;
+	std::time_t m_vertexShaderModifiedTime;
+	std::time_t m_fragmentShaderModifiedTime;
+	std::time_t m_geometryShaderModifiedTime;
+	std::time_t m_tessEvalShaderModifiedTime;
+	std::time_t m_tessControlShaderModifiedTime;
 };
 

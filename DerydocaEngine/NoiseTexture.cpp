@@ -128,8 +128,8 @@ void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool 
 					c *= persist;
 					d *= persist;
 
-					float xmix = 1.0 - x / xRange;
-					float ymix = 1.0 - y / yRange;
+					float xmix = 1.0f - x / xRange;
+					float ymix = 1.0f - y / yRange;
 					float x1 = mix(a, b, xmix);
 					float x2 = mix(c, d, xmix);
 

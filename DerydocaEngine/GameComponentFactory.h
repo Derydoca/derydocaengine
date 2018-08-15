@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include <string>
 #include <map>
-#include "boost\function.hpp"
+#include <boost\function.hpp>
 
 using namespace std;
 

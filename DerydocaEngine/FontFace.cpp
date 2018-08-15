@@ -70,7 +70,7 @@ void FontFace::loadFromFontFile(string filePath)
 	TexturePacker packer = TexturePacker();
 
 	// For every character that exists in the font face
-	for(unsigned long i = 0; i < fontFace->num_glyphs; i++)
+	for(long i = 0; i < fontFace->num_glyphs; i++)
 	{
 		// Get the character index
 		FT_UInt glyph_index = FT_Get_Char_Index(fontFace, i);
@@ -161,7 +161,7 @@ void FontFace::loadFromSerializedFile(string filePath)
 
 	// Load all character data
 	Node charactersNode = font["characters"];
-	for (int i = 0; i < charactersNode.size(); i++)
+	for (size_t i = 0; i < charactersNode.size(); i++)
 	{
 		Node charNode = charactersNode[i];
 		int id = charNode["id"].as<unsigned long>();
