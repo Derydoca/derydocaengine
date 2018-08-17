@@ -284,6 +284,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TessellatedMeshRenderer.cpp" />
@@ -391,6 +392,8 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="SpriteReference.h" />
+    <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="StringUtils.h" />

@@ -263,6 +263,9 @@
     <ClCompile Include="CommandLineArgs.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -591,6 +594,12 @@
     </ClInclude>
     <ClInclude Include="stb_image_write.h">
       <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteReference.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

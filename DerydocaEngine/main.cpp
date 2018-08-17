@@ -9,6 +9,7 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 #include "FontFace.h"
+#include "SpriteSheet.h"
 
 using namespace std;
 
@@ -41,6 +42,27 @@ int main(int argc, char* argv[])
 		face.loadFromFontFile(processArgs[0]);
 		face.setFontSize((float)atof(processArgs[1].c_str()));
 		face.saveToSerializedFile(processArgs[2]);
+	}
+
+	if (args.keyExists("processSpriteSheet"))
+	{
+		vector<string> processArgs = args.getValues("processSpriteSheet");
+		if (processArgs.size() != 2)
+		{
+			cout << "Unable to process sprite sheet. Incorrect argument count." << endl;
+			return 0;
+		}
+
+		EngineSettings* settings = new EngineSettings(".\\engineSettings.yaml");
+
+		// Load the project file
+		ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), processArgs[0]);
+
+		// Process the sprite sheet
+		SpriteSheet ss;
+		ss.LoadFromDisk(processArgs[1]);
+		ss.updateTexture();
+		ss.saveToDisk(processArgs[1]);
 	}
 
 	// Get the project path for the engine

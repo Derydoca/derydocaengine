@@ -7,7 +7,7 @@ TexturePackerImage::TexturePackerImage(unsigned long id, int width, int height, 
 	m_id = id;
 	m_width = width;
 	m_height = height;
-	//m_channels = channels;
+	m_channels = channels;
 	m_sizeX = sizeX;
 	m_sizeY = sizeY;
 	m_bearingX = bearingX;

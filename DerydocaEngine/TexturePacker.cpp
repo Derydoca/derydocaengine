@@ -10,8 +10,10 @@ bool compareTexturePackerImageBySize(TexturePackerImage lhs, TexturePackerImage 
 	return lhs.getWidth() > rhs.getWidth();
 }
 
-TexturePacker::TexturePacker()
+TexturePacker::TexturePacker(int channels)
 {
+	assert(channels > 0);
+	m_packedImageData = TexturePackerTextureData(channels);
 	m_isDirty = false;
 }
 
@@ -20,16 +22,16 @@ TexturePacker::~TexturePacker()
 	freeSubImageData();
 }
 
-void TexturePacker::addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height)
+void TexturePacker::addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height, int channels)
 {
 	// Store the image
-	TexturePackerImage image(id, width, height, 1, sizeX, sizeY, bearingX, bearingY, advanceX, advanceY);
+	TexturePackerImage image(id, width, height, channels, sizeX, sizeY, bearingX, bearingY, advanceX, advanceY);
 	m_images.push_back(image);
 
 	// Store the image data in the image buffers object
 	unsigned char* buffer = m_imageBuffers[id];
 	delete[] buffer;
-	int imageBufferSize = width * height;
+	int imageBufferSize = width * height * channels;
 	unsigned char* newBuffer = new unsigned char[imageBufferSize];
 	for (int i = 0; i < imageBufferSize; i++)
 	{
@@ -94,7 +96,7 @@ void TexturePacker::packImages()
 			imgRect.setDy(scanPosY + imageHeight);
 
 			// Scan through each X location in the line
-			for (int scanPosX = 0; scanPosX < textureSheetWidth - imageWidth && !found; scanPosX++)
+			for (int scanPosX = 0; scanPosX <= textureSheetWidth - imageWidth && !found; scanPosX++)
 			{
 				imgRect.setX(scanPosX);
 				imgRect.setDx(scanPosX + imageWidth);

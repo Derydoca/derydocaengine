@@ -24,7 +24,7 @@ Texture * FontFace::getTexture()
 	// Upload the texture to the GPU if the image buffer has changed and has not been submitted
 	if (m_textureDirty)
 	{
-		m_texture.updateBuffer(m_imageBuffer, m_imageBufferSize.x, m_imageBufferSize.y, GL_RED, nullptr);
+		m_texture.updateBuffer(m_imageBuffer, m_imageBufferSize.x, m_imageBufferSize.y, 1, nullptr);
 		m_textureDirty = false;
 	}
 
@@ -67,7 +67,7 @@ void FontFace::loadFromFontFile(string filePath)
 	error = FT_Set_Char_Size(fontFace, 0, (int)(m_fontSize * 64.0f), m_dotsPerInch.x, m_dotsPerInch.y);
 
 	// Create a texture packer to save all of the glyphs into one texture
-	TexturePacker packer = TexturePacker();
+	TexturePacker packer = TexturePacker(1);
 
 	// For every character that exists in the font face
 	for(long i = 0; i < fontFace->num_glyphs; i++)
@@ -109,7 +109,8 @@ void FontFace::loadFromFontFile(string filePath)
 			0.0f,
 			fontFace->glyph->bitmap.buffer,
 			fontFace->glyph->bitmap.width,
-			fontFace->glyph->bitmap.rows);
+			fontFace->glyph->bitmap.rows,
+			1);
 	}
 
 	// Pack the images

@@ -13,10 +13,10 @@ class Texture;
 class TexturePacker
 {
 public:
-	TexturePacker();
+	TexturePacker(int channels);
 	~TexturePacker();
 
-	void addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height);
+	void addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height, int channels);
 	void packImages();
 	bool getIsDirty() const { return m_isDirty; }
 	Texture* allocTexture() { return m_packedImageData.allocTexture(); };
@@ -25,6 +25,7 @@ public:
 	vector<TexturePackerImage> getSubImageData() { return m_images; }
 	int getWidth() const { return m_packedImageData.getWidth(); }
 	int getHeight() const { return m_packedImageData.getHeight(); }
+	int getChannels() const { return m_packedImageData.getChannels(); }
 private:
 	vector<TexturePackerImage> m_images;
 	map<unsigned long, unsigned char*> m_imageBuffers;

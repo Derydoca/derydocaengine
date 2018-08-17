@@ -14,7 +14,7 @@ public:
 	unsigned long getID() const { return m_id; }
 	int getWidth() const { return m_width; }
 	int getHeight() const { return m_height; }
-	//int getChannels() const { return m_channels; }
+	int getChannels() const { return m_channels; }
 	float getSizeX() const { return m_sizeX; }
 	float getSizeY() const { return m_sizeY; }
 	float getBearingX() const { return m_bearingX; }
@@ -29,7 +29,7 @@ private:
 	unsigned long m_id;
 	int m_width;
 	int m_height;
-	//int m_channels;
+	int m_channels;
 	float m_sizeX;
 	float m_sizeY;
 	float m_advanceX;

@@ -121,7 +121,7 @@ void Texture::bind(unsigned int unit)
 	glBindTexture(m_textureType, m_texture);
 }
 
-void Texture::updateBuffer(GLubyte * data, int width, int height, GLint pixelFormat, TextureParameters* params)
+void Texture::updateBuffer(GLubyte * data, int width, int height, int channels, TextureParameters* params)
 {
 	m_width = width;
 	m_height = height;
@@ -137,6 +137,8 @@ void Texture::updateBuffer(GLubyte * data, int width, int height, GLint pixelFor
 		wrapModeS = params->getWrapModeS();
 		wrapModeT = params->getWrapModeT();
 	}
+
+	GLint pixelFormat = ChannelsToPixelFormat(channels);
 
 	if (pixelFormat == GL_RED)
 	{
