@@ -9,12 +9,12 @@ Mesh::Mesh() {
 
 }
 
-void Mesh::load(const std::string& fileName)
+void Mesh::loadFromFile(const std::string& fileName)
 {
-	load(fileName, 0);
+	loadFromFile(fileName, 0);
 }
 
-void Mesh::load(const std::string & fileName, unsigned int meshIndex)
+void Mesh::loadFromFile(const std::string & fileName, unsigned int meshIndex)
 {
 	const aiScene* aiModel = aiImportFile(fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -32,7 +32,7 @@ void Mesh::load(const std::string & fileName, unsigned int meshIndex)
 	RefreshVbo();
 }
 
-void Mesh::load(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices)
+void Mesh::loadMeshComponentDataDEPRECATED(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices)
 {
 	m_positions = positions;
 	m_numVertices = numVertices;
@@ -42,6 +42,62 @@ void Mesh::load(unsigned int numVertices, glm::vec3* positions, glm::vec3* norma
 	m_texCoords = texCoords;
 
 	RefreshVbo();
+}
+
+void Mesh::loadMeshComponentData(
+	MeshComponents meshComponentFlags,
+	unsigned int numVertices,
+	glm::vec3 * positions,
+	glm::vec3 * tangents,
+	glm::vec3 * bitangents,
+	glm::vec2 * texCoords,
+	glm::vec3 * normals,
+	unsigned int numIndices,
+	unsigned int * indices,
+	Color * colors)
+{
+	m_numVertices = numVertices;
+	
+	if (meshComponentFlags & MeshComponents::Positions)
+	{
+		m_positions = positions;
+	}
+
+	if (meshComponentFlags & MeshComponents::Tangents)
+	{
+		m_tangents = tangents;
+	}
+
+	if (meshComponentFlags & MeshComponents::Bitangents)
+	{
+		m_tangents = bitangents;
+	}
+
+	if (meshComponentFlags & MeshComponents::TexCoords)
+	{
+		m_texCoords = texCoords;
+	}
+
+	if (meshComponentFlags & MeshComponents::Normals)
+	{
+		m_normals = normals;
+	}
+
+	if (meshComponentFlags & MeshComponents::Indices)
+	{
+		// numIndices must be assigned when updating index data
+		assert(numIndices);
+
+		m_numIndices = numIndices;
+		m_indices = indices;
+	}
+
+	if (meshComponentFlags & MeshComponents::Colors)
+	{
+		m_colors = colors;
+	}
+
+	UpdateVbo(meshComponentFlags);
 }
 
 void Mesh::loadVertexColorBuffer(unsigned int numVertices, Color * colorBuffer)
@@ -139,6 +195,83 @@ void Mesh::RefreshVbo()
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices, GL_STATIC_DRAW);
+	}
+
+	glBindVertexArray(0);
+}
+
+void Mesh::UpdateVbo(MeshComponents meshComponentFlags)
+{
+	if (!m_vertexArrayObject)
+	{
+		glGenVertexArrays(1, &m_vertexArrayObject);
+	}
+	glBindVertexArray(m_vertexArrayObject);
+
+	if (!m_vertexArrayBuffers[0])
+	{
+		glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
+	}
+
+	// Initialize the vert positions
+	if ((meshComponentFlags & MeshComponents::Positions) && m_positions != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_positions, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	// Initialize the texture coordinates buffer
+	if ((meshComponentFlags & MeshComponents::TexCoords) && m_texCoords != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec2), m_texCoords, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	// Initialize the normals buffer
+	if ((meshComponentFlags & MeshComponents::Normals) && m_normals != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_normals, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	// Initialize the tangents buffer
+	if ((meshComponentFlags & MeshComponents::Tangents) && m_tangents != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_tangents, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	// Initialize the bitangents buffer
+	if ((meshComponentFlags & MeshComponents::Bitangents) && m_bitangents != nullptr)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_bitangents, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(4);
+		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	// Initialize the indices buffer
+	if ((meshComponentFlags & MeshComponents::Indices) && m_indices != nullptr)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices, GL_STATIC_DRAW);
+	}
+
+	if ((meshComponentFlags & MeshComponents::Colors) && m_colors != nullptr)
+	{
+		// Upload the buffer to the GPU
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), m_colors, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(5);
+		glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
 	}
 
 	glBindVertexArray(0);

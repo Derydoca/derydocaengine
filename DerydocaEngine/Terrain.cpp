@@ -105,7 +105,7 @@ void Terrain::updateMesh()
 	}
 
 	m_mesh = new Mesh();
-	m_mesh->load(numVerts, positions, normals, texCoords, indices, numIndices);
+	m_mesh->loadMeshComponentDataDEPRECATED(numVerts, positions, normals, texCoords, indices, numIndices);
 }
 
 void Terrain::setTextureSlot(int slot, Texture * texture)

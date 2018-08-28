@@ -9,6 +9,7 @@
 
 SpriteSheet::SpriteSheet()
 {
+	m_sprites = map<int, SpriteReference>();
 }
 
 SpriteSheet::~SpriteSheet()
@@ -30,6 +31,7 @@ void SpriteSheet::updateTexture()
 		unsigned char* spriteImageBuffer = stbi_load(spriteImageResource->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
 		sprite.setWidth(imgw);
 		sprite.setHeight(imgh);
+		sprite.setType(SpriteType::Sprite);
 		packer.addImage(sprite.getId(), (float)imgw, (float)imgh, 0, 0, 0, 0, spriteImageBuffer, imgw, imgh, imgch);
 		delete[] spriteImageBuffer;
 
@@ -37,6 +39,20 @@ void SpriteSheet::updateTexture()
 	}
 
 	packer.packImages();
+
+	vector<TexturePackerImage> packedImages = packer.getSubImageData();
+	for (auto img : packedImages)
+	{
+		auto spriteMapRecord = m_sprites.find(img.getID());
+
+		if (spriteMapRecord == m_sprites.end())
+		{
+			continue;
+		}
+
+		auto tex = img.getTexSheetPosition();
+		(*spriteMapRecord).second.setTexPosition(tex.getX(), tex.getY(), tex.getDX(), tex.getDY());
+	}
 
 	delete[] m_imageBuffer;
 	m_imageBuffer = packer.allocImageBuffer();
@@ -56,8 +72,8 @@ void SpriteSheet::saveToDisk(string filePath)
 	using namespace YAML;
 
 	// Save the image to disk and process it by the object library
-	string imageFileName = filePath + ".bmp";
-	stbi_write_bmp(imageFileName.c_str(), m_texture.getWidth(), m_texture.getHeight(), 4, m_imageBuffer);
+	string imageFileName = filePath + ".tga";
+	stbi_write_tga(imageFileName.c_str(), m_texture.getWidth(), m_texture.getHeight(), 4, m_imageBuffer);
 	ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
 	Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 

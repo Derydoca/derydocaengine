@@ -30,6 +30,7 @@
 #include "ParticleInstanced.h"
 #include "TextRenderer.h"
 #include "FrameStats.h"
+#include "SpriteRenderer.h"
 
 // Registers a class to the instance generator map
 #define REGINSTANCE(TYPE) \
@@ -90,6 +91,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(ParticleInstanced);
 	REGINSTANCE(TextRenderer);
 	REGINSTANCE(FrameStats);
+	REGINSTANCE(SpriteRenderer);
 }
 
 GameComponentFactory::~GameComponentFactory()

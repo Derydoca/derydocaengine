@@ -19,6 +19,17 @@ public:
 	void LoadFromDisk(std::string filePath);
 
 	Texture* getTexture() { return &m_texture; }
+	SpriteReference* getSpriteReference(unsigned int id)
+	{
+		auto spriteMapRecord = m_sprites.find(id);
+
+		if (spriteMapRecord == m_sprites.end())
+		{
+			return nullptr;
+		}
+
+		return &(*spriteMapRecord).second;
+	}
 private:
 	map<int, SpriteReference> m_sprites;
 	unsigned char* m_imageBuffer;

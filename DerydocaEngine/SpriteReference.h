@@ -47,7 +47,7 @@ public:
 	void setTextureId(string textureId) { m_textureId = textureId; }
 private:
 	unsigned long m_id;
-	SpriteType m_type;
+	SpriteType m_type = SpriteType::Sprite;
 	float m_sliceTop = 0.0f;
 	float m_sliceRight = 1.0f;
 	float m_sliceBottom = 1.0f;

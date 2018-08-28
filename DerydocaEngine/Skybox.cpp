@@ -55,7 +55,7 @@ void Skybox::buildMesh(float size)
 	};
 
 	m_mesh = new Mesh();
-	m_mesh->load(
+	m_mesh->loadMeshComponentDataDEPRECATED(
 		8,
 		positions,
 		nullptr,

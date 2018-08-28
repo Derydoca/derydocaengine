@@ -40,6 +40,10 @@ FileType pathToFileType(std::string str)
 	{
 		return IgnoredFileType;
 	}
+	else if (extension == "dsprites")
+	{
+		return SpriteSheetFileType;
+	}
 	else
 	{
 		return UnknownFileType;

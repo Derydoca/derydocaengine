@@ -9,14 +9,37 @@
 
 struct aiMesh;
 
+enum MeshComponents {
+	None = 0x0,
+	Positions = 0x1,
+	Tangents = 0x2,
+	Bitangents = 0x4,
+	TexCoords = 0x8,
+	Normals = 0x16,
+	Indices = 0x32,
+	Colors = 0x64,
+	All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors
+};
+
 class Mesh
 {
 public:
 	Mesh();
 	~Mesh();
-	void load(const std::string& fileName);
-	void load(const std::string& fileName, unsigned int meshIndex);
-	void load(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
+	void loadFromFile(const std::string& fileName);
+	void loadFromFile(const std::string& fileName, unsigned int meshIndex);
+	void loadMeshComponentDataDEPRECATED(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
+	void loadMeshComponentData(
+		MeshComponents meshComponentFlags,
+		unsigned int numVertices,
+		glm::vec3 * positions = 0,
+		glm::vec3 * tangents = 0,
+		glm::vec3 * bitangents = 0,
+		glm::vec2 * texCoords = 0,
+		glm::vec3 * normals = 0,
+		unsigned int numIndices = 0,
+		unsigned int * indices = 0,
+		Color * colors = 0);
 	void loadVertexColorBuffer(unsigned int numVertices, Color* colorBuffer);
 	void draw();
 	void setFlags(MeshFlags flags) { m_flags = flags; }
@@ -24,12 +47,6 @@ public:
 	unsigned int getNumIndices() const { return m_numIndices; }
 
 private:
-	Mesh(const Mesh& other) {}
-	void operator=(const Mesh& other) {}
-
-	void RefreshVbo();
-	void ProcessAiMesh(aiMesh* mesh, int uvIndex);
-
 	enum {
 		POSITION_VB,
 		TANGENT_VB,
@@ -40,6 +57,13 @@ private:
 		COLOR_VB,
 		NUM_BUFFERS
 	};
+
+	Mesh(const Mesh& other) {}
+	void operator=(const Mesh& other) {}
+
+	void RefreshVbo();
+	void UpdateVbo(MeshComponents meshComponentFlags);
+	void ProcessAiMesh(aiMesh* mesh, int uvIndex);
 
 	glm::vec3* m_positions;
 	glm::vec3* m_normals;

@@ -1,15 +1,41 @@
 SpriteSheet:
-  Texture: 96db934a-1504-47b3-8298-f99fd6188961
+  Texture: 2492a12b-9269-4e67-bc78-e0f4da4bf9eb
   Sprites:
     - Id: 1
-      Texture: fd27609f-cf5a-4cf4-99fe-236d05e2e404
-      Width: 256
-      Height: 256
+      Texture: f7087017-d7d2-4d5e-8a53-448d4d08190c
+      Width: 32
+      Height: 32
       TexX: 0
       TexY: 0
-      TexDX: 1
+      TexDX: 0.25
       TexDY: 1
-      Type: -858993460
+      Type: 1
+      SliceTop: 0.3
+      SliceRight: 0.7
+      SliceBottom: 0.7
+      SliceLeft: 0.3
+    - Id: 2
+      Texture: 1f2ce41a-788a-4344-86b6-3c7aaf5d0ad1
+      Width: 32
+      Height: 32
+      TexX: 0.25
+      TexY: 0
+      TexDX: 0.5
+      TexDY: 1
+      Type: 0
+      SliceTop: 0
+      SliceRight: 1
+      SliceBottom: 1
+      SliceLeft: 0
+    - Id: 3
+      Texture: 10f63e7b-e91f-466f-9a6f-b7221695091c
+      Width: 18
+      Height: 27
+      TexX: 0.5
+      TexY: 0
+      TexDX: 0.640625
+      TexDY: 0.84375
+      Type: 0
       SliceTop: 0
       SliceRight: 1
       SliceBottom: 1

@@ -20,7 +20,7 @@ void * MeshResourceSerializer::deserialize(Resource * resource)
 
 	Mesh* m = new Mesh();
 	m->setFlags(mr->getFlags());
-	m->load(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
+	m->loadFromFile(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
 
 	return m;
 }

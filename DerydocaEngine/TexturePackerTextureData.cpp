@@ -2,6 +2,8 @@
 #include <assert.h>
 #include "TexturePackerTextureData.h"
 #include "Texture.h"
+#include <climits>
+#include <algorithm>
 
 void TexturePackerTextureData::Resize(int x, int y)
 {
@@ -17,22 +19,25 @@ void TexturePackerTextureData::AddImage(int xPos, int yPos, TexturePackerImage *
 	assert(image->getWidth() + xPos <= (int)m_data[0].size());
 	assert(image->getHeight() + yPos <= (int)m_data.size());
 
-	int channelsToRead = image->getChannels();
-	if (channelsToRead > m_channels)
-	{
-		channelsToRead = m_channels;
-	}
-
+	int channelsToRead = min(image->getChannels(), m_channels);
+	
 	for (int y = 0; y < image->getHeight(); y++)
 	{
 		for (int x = 0; x < image->getWidth(); x++)
 		{
-			for (int c = 0; c < channelsToRead; c++)
+			for (int c = 0; c < m_channels; c++)
 			{
 				int dataX = y + yPos;
 				int dataY = ((x + xPos) * m_channels) + c;
 
-				m_data[dataX][dataY] = imageBuffer[(y * image->getWidth() * image->getChannels()) + (x * image->getChannels()) + c];
+				if (c < channelsToRead)
+				{
+					m_data[dataX][dataY] = imageBuffer[(y * image->getWidth() * image->getChannels()) + (x * image->getChannels()) + c];
+				}
+				else
+				{
+					m_data[dataX][dataY] = UCHAR_MAX;
+				}
 			}
 		}
 	}

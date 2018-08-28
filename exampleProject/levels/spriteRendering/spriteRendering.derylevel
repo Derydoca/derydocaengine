@@ -1,0 +1,110 @@
+Scene:
+  - Type: GameObject
+    ID: aaaaaaaa-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: UI Container
+      Transform:
+        Position: [0, 0, -1]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.003, 0.003, 0.003]
+
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: UI Circle
+      Parent: aaaaaaaa-9421-4226-8a26-680ad31eb6aa
+      Transform:
+        Position: [36, -4, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+        - Type: SpriteRenderer
+          Properties:
+            shader: b87ce577-1711-40ad-bf7a-2a5ff3214a46
+            spriteSheet: 7db95fb4-622a-4c6c-a9e7-30ade44e43b1
+            spriteId: 2
+            size: [0.0, 0.0]
+            color: [1.0, 0.0, 0.0, 1.0]
+
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: UI Caret
+      Parent: aaaaaaaa-9421-4226-8a26-680ad31eb6aa
+      Transform:
+        Position: [36, -40, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+        - Type: SpriteRenderer
+          Properties:
+            shader: b87ce577-1711-40ad-bf7a-2a5ff3214a46
+            spriteSheet: 7db95fb4-622a-4c6c-a9e7-30ade44e43b1
+            spriteId: 3
+            size: [0.0, 0.0]
+            color: [1.0, 1.0, 1.0, 1.0]
+
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: UI Slice Sprite Square
+      Parent: aaaaaaaa-9421-4226-8a26-680ad31eb6aa
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+        - Type: SpriteRenderer
+          Properties:
+            shader: b87ce577-1711-40ad-bf7a-2a5ff3214a46
+            spriteSheet: 7db95fb4-622a-4c6c-a9e7-30ade44e43b1
+            spriteId: 1
+            size: [1000.0, 100.0]
+            color: [0.2, 1.0, 0.2, 1.0]
+
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Squirrel 1
+      Transform:
+        Position: [0, 0, -2]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            Material: f6e7235c-ec43-48f0-b189-d89b40f10089
+            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+        - Type: Rotator
+          Properties:
+            rotationSpeed: 30.0
+        - Type: MaterialRefresher
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    Properties:
+      Name: Point Light 1
+      Transform:
+        Position: [2, 0.5, -1]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [1.0, 1.0, 1.0, 1.0]
+            type: 1
+  - Type: GameObject
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    Properties:
+      Name: Point Light 2
+      Transform:
+        Position: [-2, 0.5, 1]
+        Rotation: [0, 0, 0, 1]
+        Scale: [0.05, 0.05, 0.05]
+      Components:
+        - Type: Light
+          Properties:
+            color: [1.0, 0.2, 0.2, 1.0]
+            type: 1

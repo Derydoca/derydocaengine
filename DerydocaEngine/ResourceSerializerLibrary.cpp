@@ -5,6 +5,7 @@
 #include "CubemapResourceSerializer.h"
 #include "ShaderResourceSerializer.h"
 #include "BezierPatchMeshResourceSerializer.h"
+#include "SpriteSheetResourceSerializer.h"
 
 ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType type)
 {
@@ -28,6 +29,7 @@ ResourceSerializerLibrary::ResourceSerializerLibrary()
 	registerSerializer(new CubemapResourceSerializer());
 	registerSerializer(new ShaderResourceSerializer());
 	registerSerializer(new BezierPatchMeshResourceSerializer());
+	registerSerializer(new SpriteSheetResourceSerializer());
 }
 
 ResourceSerializerLibrary::~ResourceSerializerLibrary()

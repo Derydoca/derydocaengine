@@ -192,7 +192,7 @@ void TextRenderer::updateText()
 	delete[] filteredText;
 
 	// Load the mesh data
-	m_mesh.load(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
+	m_mesh.loadMeshComponentDataDEPRECATED(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
 	m_mesh.loadVertexColorBuffer(vertCount, m_vertexColors);
 	m_meshRenderer->setMesh(&m_mesh);
 }
