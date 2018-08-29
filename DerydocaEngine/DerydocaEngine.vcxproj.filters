@@ -269,6 +269,7 @@
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSheetFileSerializer.cpp" />
     <ClCompile Include="SpriteSheetResourceSerializer.cpp" />
+    <ClCompile Include="RendererComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -607,6 +608,7 @@
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SpriteSheetFileSerializer.h" />
     <ClInclude Include="SpriteSheetResourceSerializer.h" />
+    <ClInclude Include="RendererComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">

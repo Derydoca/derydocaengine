@@ -18,7 +18,6 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
-        - Type: MeshRenderer
         - Type: SpriteRenderer
           Properties:
             shader: b87ce577-1711-40ad-bf7a-2a5ff3214a46
@@ -37,7 +36,6 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
-        - Type: MeshRenderer
         - Type: SpriteRenderer
           Properties:
             shader: b87ce577-1711-40ad-bf7a-2a5ff3214a46
@@ -56,7 +54,6 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
-        - Type: MeshRenderer
         - Type: SpriteRenderer
           Properties:
             shader: b87ce577-1711-40ad-bf7a-2a5ff3214a46

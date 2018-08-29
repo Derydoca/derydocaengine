@@ -1,45 +1,43 @@
 #pragma once
 #include <glm/glm.hpp>
-#include "GameComponent.h"
+#include "RendererComponent.h"
 #include "MeshRenderer.h"
 #include "Color.h"
 #include "SpriteSheet.h"
 
 using namespace glm;
 
-class SpriteRenderer : public GameComponent
+class SpriteRenderer : public RendererComponent
 {
 public:
 	GENINSTANCE(SpriteRenderer);
 
-	SpriteRenderer();
-	~SpriteRenderer();
+	void postInit();
+	void deserialize(YAML::Node compNode);
 
-	virtual void init();
-	virtual void postInit();
-	virtual void deserialize(YAML::Node compNode);
+	Color getColor() const { return m_color; }
+	void setColor(Color color) {
+		if (color == m_color)
+		{
+			return;
+		}
+
+		m_color = color;
+		markComponentAsDirty(MeshComponents::Colors);
+	}
 private:
-	MeshRenderer * m_meshRenderer;
 	Color m_color;
 	SpriteSheet* m_spriteSheet;
-	Material* m_material;
-	Mesh m_mesh;
-	vec3* m_meshVerts;
-	vec2* m_meshUvs;
-	Color* m_meshColors;
-	unsigned int* m_meshIndices;
-	MeshComponents m_dirtyMeshComponents;
 	SpriteReference* m_sprite;
 	vec2 m_size;
-	int m_numVerts;
 
-	void updateMesh();
-	void updateMeshVerts();
-	void updateMeshUVs();
-	void updateMeshColors();
-	void updateMeshIndices();
+	vec3* generateVertices();
+	vec2* generateTexCoords();
+	Color* generateVertexColors();
+	unsigned int* generateTriangleIndices();
 
-	int getNumVertsFromSpriteType() {
+	unsigned int getNumVertices()
+	{
 		switch (m_sprite->getType())
 		{
 		case SpriteType::Sprite:
@@ -50,7 +48,8 @@ private:
 			return 0;
 		}
 	}
-	unsigned int getNumIndicesFromSpriteType()
+
+	unsigned int getNumIndices()
 	{
 		switch (m_sprite->getType())
 		{
@@ -62,5 +61,6 @@ private:
 			return 0;
 		}
 	}
+
 };
 
