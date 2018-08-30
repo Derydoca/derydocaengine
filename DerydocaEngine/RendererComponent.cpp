@@ -3,6 +3,11 @@
 
 void RendererComponent::updateMesh()
 {
+	if (m_dirtyComponents == MeshComponents::None)
+	{
+		return;
+	}
+
 	if (!m_mesh)
 	{
 		m_mesh = new Mesh();
@@ -11,7 +16,7 @@ void RendererComponent::updateMesh()
 	if (m_dirtyComponents & MeshComponents::Positions)
 	{
 		m_vertices = generateVertices();
-		m_numVertices = getNumVertices();
+		m_numVertices = generateNumVertices();
 	}
 	if (m_dirtyComponents & MeshComponents::TexCoords)
 	{
@@ -24,7 +29,7 @@ void RendererComponent::updateMesh()
 	if (m_dirtyComponents & MeshComponents::Indices)
 	{
 		m_triangleIndices = generateTriangleIndices();
-		m_numIndices = getNumIndices();
+		m_numIndices = generateNumIndices();
 	}
 	if (m_dirtyComponents & MeshComponents::Tangents)
 	{

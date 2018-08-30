@@ -5,7 +5,6 @@ void SpriteRenderer::postInit()
 	if (m_spriteSheet)
 	{
 		Texture* spriteSheetTexture = m_spriteSheet->getTexture();
-		setMaterial(m_material);
 		getMaterial()->setTexture("SpriteSheet", spriteSheetTexture);
 		markComponentAsDirty(MeshComponents::All);
 	}
@@ -15,8 +14,9 @@ void SpriteRenderer::deserialize(YAML::Node compNode)
 {
 	m_spriteSheet = loadResource<SpriteSheet*>(compNode, "spriteSheet");
 	Shader* shader = loadResource<Shader*>(compNode, "shader");
-	m_material = new Material();
-	m_material->setShader(shader);
+	Material* material = new Material();
+	material->setShader(shader);
+	setMaterial(material);
 
 	YAML::Node sizeNode = compNode["size"];
 	if (sizeNode)
@@ -41,7 +41,7 @@ void SpriteRenderer::deserialize(YAML::Node compNode)
 vec3 * SpriteRenderer::generateVertices()
 {
 	// Get the number of verts we will need for this mesh
-	int numVerts = getNumVertices();
+	int numVerts = generateNumVertices();
 	if (!numVerts)
 	{
 		return nullptr;
@@ -96,7 +96,7 @@ vec3 * SpriteRenderer::generateVertices()
 vec2 * SpriteRenderer::generateTexCoords()
 {
 	// Get the number of verts we will need for this mesh
-	int numVerts = getNumVertices();
+	int numVerts = generateNumVertices();
 	if (!numVerts)
 	{
 		return nullptr;
@@ -153,7 +153,7 @@ vec2 * SpriteRenderer::generateTexCoords()
 Color * SpriteRenderer::generateVertexColors()
 {
 	// Get the number of verts we will need for this mesh
-	int numVerts = getNumVertices();
+	int numVerts = generateNumVertices();
 	if (!numVerts)
 	{
 		return nullptr;

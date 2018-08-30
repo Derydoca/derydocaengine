@@ -8,13 +8,9 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [0.003, 0.003, 0.003]
       Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 75a01949-631c-4027-a413-9148261668d9
-            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
         - Type: TextRenderer
           Properties:
-            material: 75a01949-631c-4027-a413-9148261668d9
+            shader: 17c209d8-34ff-45ba-a1aa-d6dfb7bc59b7
             font: bae470a9-6fc3-4ac7-8a87-08bc59b3898b
             text: "This text has short words and long words like supercalifragilisticexpialidocious which tests the text wrapping and alignment rules."
             bounds: [500.0, 800.0]
@@ -32,14 +28,10 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [0.003, 0.003, 0.003]
       Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 75a01949-631c-4027-a413-9148261668d9
-            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
         - Type: FrameStats
         - Type: TextRenderer
           Properties:
-            material: 75a01949-631c-4027-a413-9148261668d9
+            shader: 17c209d8-34ff-45ba-a1aa-d6dfb7bc59b7
             font: 6aeda909-35c6-49a0-a161-ab9fa33087b0
             text: "FPS: ???"
             bounds: [10000, 0]

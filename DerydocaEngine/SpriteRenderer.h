@@ -36,7 +36,7 @@ private:
 	Color* generateVertexColors();
 	unsigned int* generateTriangleIndices();
 
-	unsigned int getNumVertices()
+	unsigned int generateNumVertices()
 	{
 		switch (m_sprite->getType())
 		{
@@ -49,7 +49,7 @@ private:
 		}
 	}
 
-	unsigned int getNumIndices()
+	unsigned int generateNumIndices()
 	{
 		switch (m_sprite->getType())
 		{

@@ -85,9 +85,6 @@ void Mesh::loadMeshComponentData(
 
 	if (meshComponentFlags & MeshComponents::Indices)
 	{
-		// numIndices must be assigned when updating index data
-		assert(numIndices);
-
 		m_numIndices = numIndices;
 		m_indices = indices;
 	}

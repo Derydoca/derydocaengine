@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "GameComponent.h"
+#include "RendererComponent.h"
 #include "Material.h"
 #include "FontFace.h"
 #include "MeshRenderer.h"
@@ -50,35 +50,76 @@ private:
 	float m_startAdjust;
 };
 
-class TextRenderer : public GameComponent
+class TextRenderer : public RendererComponent
 {
 public:
 	GENINSTANCE(TextRenderer);
 
-	TextRenderer();
-	~TextRenderer();
-
-	virtual void init();
 	virtual void postInit();
 	virtual void deserialize(YAML::Node compNode);
 
-	void setText(string text) { m_text = text; }
-	void updateText();
+	void setText(string text)
+	{
+		m_text = text;
+		m_lines = processTextToLines(m_text, m_overflowWrap, m_fontFace, m_bounds.x, m_filteredText);
+		int newVertCount = generateNumVertices();
+		int currentVertCount = getNumVertices();
+		if (newVertCount != currentVertCount)
+		{
+			markComponentAsDirty(DIRTY_COMPONENTS_ON_INDICES_CHANGED);
+		}
+		markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
+	}
+	string getText() { return m_text; }
+	void setColor(Color color)
+	{
+		if (m_textColor == color)
+		{
+			return;
+		}
+
+		m_textColor = color;
+		markComponentAsDirty(MeshComponents::Colors);
+	}
+
+	virtual vec3* generateVertices();
+	virtual vec2* generateTexCoords();
+	virtual Color* generateVertexColors();
+	virtual unsigned int* generateTriangleIndices();
+	virtual unsigned int generateNumVertices()
+	{
+		if (m_lines.size() == 0)
+		{
+			return 0;
+		}
+		int charCount = m_lines.back()->getEnd();
+		return charCount * 4;
+	}
+	virtual unsigned int generateNumIndices()
+	{
+		if (m_lines.size() == 0)
+		{
+			return 0;
+		}
+		int charCount = m_lines.back()->getEnd();
+		return charCount * 6;
+	}
+
 private:
+	const MeshComponents DIRTY_COMPONENTS_ON_TEXT_CHANGE = (MeshComponents)(MeshComponents::Positions | MeshComponents::TexCoords);
+	const MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (MeshComponents)(MeshComponents::Colors | MeshComponents::Indices);
+
 	Material* m_material;
 	FontFace* m_fontFace;
-	vec3* m_verts;
-	unsigned int* m_indices;
-	vec2* m_uvs;
 	string m_text = "Text";
-	Mesh m_mesh;
 	vec2 m_bounds;
-	Color* m_vertexColors;
 	Color m_textColor;
-	MeshRenderer* m_meshRenderer;
 	OverflowWrap m_overflowWrap;
 	TextAlign m_horizontalAlign;
 	TextAlign m_verticalAlign;
+	vector<LineProperties*> m_lines;
+	char* m_filteredText;
+	bool m_textDirty = true;
 
 	static void calculateVerticalAlignmentProperties(TextAlign alignment, int numberOfLines, float verticalBoundSize, float fontLineHeight, float* penY, float* newLineHeight);
 	static void calculateHorizontalAlignmentProperties(TextAlign alignment, float horizontalBoundSize, float lineWidth, int numChars, float lineStartAdjust, float* penX, float* extraCharAdvance);

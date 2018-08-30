@@ -18,6 +18,8 @@ protected:
 
 	void render(MatrixStack* matrixStack);
 	void renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform);
+	unsigned int getNumVertices() const { return m_numVertices; }
+	unsigned int getNumIndices() const { return m_numIndices; }
 
 	virtual vec3* generateVertices() = 0;
 	virtual vec2* generateTexCoords() { return nullptr; }
@@ -26,9 +28,10 @@ protected:
 	virtual vec3* generateTangents() { return nullptr; }
 	virtual vec3* generateBitangents() { return nullptr; }
 	virtual vec3* generateNormals() { return nullptr; }
-	virtual unsigned int getNumVertices() { return 0; }
-	virtual unsigned int getNumIndices() { return 0; }
+	virtual unsigned int generateNumVertices() { return 0; }
+	virtual unsigned int generateNumIndices() { return 0; }
 
+private:
 	Mesh * m_mesh;
 	Material * m_material;
 	MeshComponents m_dirtyComponents;

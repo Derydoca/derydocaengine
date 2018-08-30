@@ -5,38 +5,19 @@
 const int CARRIAGE_RETURN_CHAR = 13;
 const int DEL_CHAR = 127;
 
-TextRenderer::TextRenderer()
-{
-}
-
-TextRenderer::~TextRenderer()
-{
-}
-
-void TextRenderer::init()
-{
-	m_meshRenderer = getComponent<MeshRenderer>();
-}
-
 void TextRenderer::postInit()
 {
-	if (m_fontFace && m_meshRenderer)
+	if (m_fontFace)
 	{
 		Texture* fontTexture = m_fontFace->getTexture();
-		m_meshRenderer->getMaterial()->setTexture("CharacterSheet", fontTexture);
+		getMaterial()->setTexture("CharacterSheet", fontTexture);
+		markComponentAsDirty(DIRTY_COMPONENTS_ON_INDICES_CHANGED);
+		markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
 	}
-
-	updateText();
 }
 
 void TextRenderer::deserialize(YAML::Node compNode)
 {
-	YAML::Node textNode = compNode["text"];
-	if (textNode)
-	{
-		m_text = textNode.as<string>();
-	}
-
 	YAML::Node boundsNode = compNode["bounds"];
 	if (boundsNode)
 	{
@@ -67,6 +48,14 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_verticalAlign = static_cast<TextAlign>(verticalAlignNode.as<int>());
 	}
 
+	YAML::Node shaderNode = compNode["shader"];
+	if (shaderNode)
+	{
+		setMaterial(new Material());
+		Shader* shader = loadResource<Shader*>(compNode, "shader");
+		getMaterial()->setShader(shader);
+	}
+
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	if (fontResource->getType() == ResourceType::FontResourceType) {
 		// Load the font size from the file
@@ -86,47 +75,33 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_fontFace = new FontFace();
 		m_fontFace->loadFromSerializedFile(fontResource->getSourceFilePath());
 	}
+
+	YAML::Node textNode = compNode["text"];
+	if (textNode)
+	{
+		setText(textNode.as<string>());
+	}
 }
 
-void TextRenderer::updateText()
+vec3 * TextRenderer::generateVertices()
 {
 	// Store the current pen position
 	float penX = 0.0f;
 	float penY = 0.0f;
 
-	// This will store only renderable characters so that it is simpler to convert the text to quads
-	char* filteredText = nullptr;
-	// Get line properties from the source string
-	vector<LineProperties*> allLineProperties = processTextToLines(m_text, m_overflowWrap, m_fontFace, m_bounds.x, filteredText);
-
-	// Clean up the old data
-	delete[] m_verts;
-	delete[] m_uvs;
-	delete[] m_indices;
-	delete[] m_vertexColors;
-
-	// Calculate the number of mesh elements we need
-	int charCount = allLineProperties.back()->getEnd();
-	int vertCount = charCount * 4;
-	int indicesCount = charCount * 6;
-
-	// Allocate space for our mesh elements
-	m_verts = new vec3[vertCount];
-	m_uvs = new vec2[vertCount];
-	m_indices = new unsigned int[indicesCount];
-	m_vertexColors = new Color[vertCount];
-
 	// Calculate the information we need for vertical alignment
 	float lineHeight = 0.0f;
-	calculateVerticalAlignmentProperties(m_verticalAlign, (int)allLineProperties.size(), m_bounds.y, m_fontFace->getLineHeight(), &penY, &lineHeight);
+	calculateVerticalAlignmentProperties(m_verticalAlign, (int)m_lines.size(), m_bounds.y, m_fontFace->getLineHeight(), &penY, &lineHeight);
 
 	// Keep reference to the quad that we are currently building
 	int charQuadIndex = 0;
 
+	vec3* vertices = new vec3[generateNumVertices()];
+
 	// Iterate through all lines of the text
-	for (size_t lineIndex = 0; lineIndex < allLineProperties.size(); lineIndex++)
+	for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
 	{
-		LineProperties* lineProperties = allLineProperties[lineIndex];
+		LineProperties* lineProperties = m_lines[lineIndex];
 
 		// Calculate the information we need for horizontal alignment
 		float extraCharAdvance = 0.0f;
@@ -139,38 +114,17 @@ void TextRenderer::updateText()
 		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 		{
 			// Get the character image information
-			TexturePackerImage img = m_fontFace->getCharData(filteredText[charIndex]);
-
-			// Set the UV positions
-			Rect rect = img.getTexSheetPosition();
-			m_uvs[charQuadIndex * 4 + 1] = vec2(rect.getX(), rect.getDY());
-			m_uvs[charQuadIndex * 4 + 0] = vec2(rect.getX(), rect.getY());
-			m_uvs[charQuadIndex * 4 + 3] = vec2(rect.getDX(), rect.getY());
-			m_uvs[charQuadIndex * 4 + 2] = vec2(rect.getDX(), rect.getDY());
-
-			// Set the indices to draw the two triangles
-			m_indices[charQuadIndex * 6 + 0] = charQuadIndex * 4 + 0;
-			m_indices[charQuadIndex * 6 + 1] = charQuadIndex * 4 + 1;
-			m_indices[charQuadIndex * 6 + 2] = charQuadIndex * 4 + 2;
-			m_indices[charQuadIndex * 6 + 3] = charQuadIndex * 4 + 0;
-			m_indices[charQuadIndex * 6 + 4] = charQuadIndex * 4 + 2;
-			m_indices[charQuadIndex * 6 + 5] = charQuadIndex * 4 + 3;
+			TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 			// Set the vertex positions
 			float charXMin = penX + img.getBearingX();
 			float charXMax = penX + img.getBearingX() + img.getSizeX();
 			float charYMax = penY - img.getSizeY() + img.getBearingY();
 			float charYMin = penY + img.getBearingY();
-			m_verts[charQuadIndex * 4 + 0] = vec3(charXMin, charYMin, 0);
-			m_verts[charQuadIndex * 4 + 1] = vec3(charXMin, charYMax, 0);
-			m_verts[charQuadIndex * 4 + 2] = vec3(charXMax, charYMax, 0);
-			m_verts[charQuadIndex * 4 + 3] = vec3(charXMax, charYMin, 0);
-
-			// Set the vertex colors
-			m_vertexColors[charQuadIndex * 4 + 0] = m_textColor;
-			m_vertexColors[charQuadIndex * 4 + 1] = m_textColor;
-			m_vertexColors[charQuadIndex * 4 + 2] = m_textColor;
-			m_vertexColors[charQuadIndex * 4 + 3] = m_textColor;
+			vertices[charQuadIndex * 4 + 0] = vec3(charXMin, charYMin, 0);
+			vertices[charQuadIndex * 4 + 1] = vec3(charXMin, charYMax, 0);
+			vertices[charQuadIndex * 4 + 2] = vec3(charXMax, charYMax, 0);
+			vertices[charQuadIndex * 4 + 3] = vec3(charXMax, charYMin, 0);
 
 			// Advance the pen position
 			penX += img.getAdvanceX() + extraCharAdvance;
@@ -182,19 +136,105 @@ void TextRenderer::updateText()
 
 		// Move the pen line down an entire line height
 		penY -= lineHeight;
-
-		// Clean up the line property data as it is no longer needed
-		delete lineProperties;
 	}
 
-	// Clean up artifacts from the text rendering
-	allLineProperties.clear();
-	delete[] filteredText;
+	return vertices;
+}
 
-	// Load the mesh data
-	m_mesh.loadMeshComponentDataDEPRECATED(vertCount, m_verts, nullptr, m_uvs, m_indices, indicesCount);
-	m_mesh.loadVertexColorBuffer(vertCount, m_vertexColors);
-	m_meshRenderer->setMesh(&m_mesh);
+vec2 * TextRenderer::generateTexCoords()
+{
+	// Keep reference to the quad that we are currently building
+	int charQuadIndex = 0;
+
+	vec2* texCoords = new vec2[generateNumVertices()];
+
+	// Iterate through all lines of the text
+	for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
+	{
+		LineProperties* lineProperties = m_lines[lineIndex];
+
+		// Iterate through each character in the line
+		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
+		{
+			// Get the character image information
+			TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+
+			// Set the UV positions
+			Rect rect = img.getTexSheetPosition();
+			texCoords[charQuadIndex * 4 + 1] = vec2(rect.getX(), rect.getDY());
+			texCoords[charQuadIndex * 4 + 0] = vec2(rect.getX(), rect.getY());
+			texCoords[charQuadIndex * 4 + 3] = vec2(rect.getDX(), rect.getY());
+			texCoords[charQuadIndex * 4 + 2] = vec2(rect.getDX(), rect.getDY());
+
+			// Continue on to the next char
+			charQuadIndex++;
+		}
+	}
+
+	return texCoords;
+}
+
+Color * TextRenderer::generateVertexColors()
+{
+	// Keep reference to the quad that we are currently building
+	int charQuadIndex = 0;
+
+	Color* vertexColors = new Color[generateNumVertices()];
+
+	// Iterate through all lines of the text
+	for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
+	{
+		LineProperties* lineProperties = m_lines[lineIndex];
+
+		// Iterate through each character in the line
+		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
+		{
+			// Set the vertex colors
+			vertexColors[charQuadIndex * 4 + 0] = m_textColor;
+			vertexColors[charQuadIndex * 4 + 1] = m_textColor;
+			vertexColors[charQuadIndex * 4 + 2] = m_textColor;
+			vertexColors[charQuadIndex * 4 + 3] = m_textColor;
+
+			// Continue on to the next char
+			charQuadIndex++;
+		}
+	}
+
+	return vertexColors;
+}
+
+unsigned int * TextRenderer::generateTriangleIndices()
+{
+	// Keep reference to the quad that we are currently building
+	int charQuadIndex = 0;
+
+	unsigned int* triangleIndices = new unsigned int[generateNumIndices()];
+
+	// Iterate through all lines of the text
+	for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
+	{
+		LineProperties* lineProperties = m_lines[lineIndex];
+
+		// Iterate through each character in the line
+		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
+		{
+			// Get the character image information
+			TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+
+			// Set the indices to draw the two triangles
+			triangleIndices[charQuadIndex * 6 + 0] = charQuadIndex * 4 + 0;
+			triangleIndices[charQuadIndex * 6 + 1] = charQuadIndex * 4 + 1;
+			triangleIndices[charQuadIndex * 6 + 2] = charQuadIndex * 4 + 2;
+			triangleIndices[charQuadIndex * 6 + 3] = charQuadIndex * 4 + 0;
+			triangleIndices[charQuadIndex * 6 + 4] = charQuadIndex * 4 + 2;
+			triangleIndices[charQuadIndex * 6 + 5] = charQuadIndex * 4 + 3;
+
+			// Continue on to the next char
+			charQuadIndex++;
+		}
+	}
+
+	return triangleIndices;
 }
 
 void TextRenderer::calculateVerticalAlignmentProperties(TextAlign alignment, int numberOfLines, float verticalBoundSize, float fontLineHeight, float * penY, float * newLineHeight)

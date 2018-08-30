@@ -19,5 +19,4 @@ void FrameStats::update(float deltaTime)
 	ostringstream s;
 	s << "FPS: " << fps;
 	m_textRenderer->setText(s.str());
-	m_textRenderer->updateText();
 }
