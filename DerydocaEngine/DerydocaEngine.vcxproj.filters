@@ -266,10 +266,18 @@
     <ClCompile Include="SpriteSheet.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp" />
-    <ClCompile Include="SpriteSheetFileSerializer.cpp" />
-    <ClCompile Include="SpriteSheetResourceSerializer.cpp" />
-    <ClCompile Include="RendererComponent.cpp" />
+    <ClCompile Include="RendererComponent.cpp">
+      <Filter>Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Game Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheetFileSerializer.cpp">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheetResourceSerializer.cpp">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WasdMover.h">
@@ -605,10 +613,18 @@
     <ClInclude Include="SpriteSheet.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h" />
-    <ClInclude Include="SpriteSheetFileSerializer.h" />
-    <ClInclude Include="SpriteSheetResourceSerializer.h" />
-    <ClInclude Include="RendererComponent.h" />
+    <ClInclude Include="RendererComponent.h">
+      <Filter>Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Game Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheetFileSerializer.h">
+      <Filter>Engine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheetResourceSerializer.h">
+      <Filter>Engine\ResourceSerializers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Components">
