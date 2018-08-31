@@ -38,6 +38,18 @@ public:
 		Resource* resource = getResource(uuid);
 		return static_cast<resourceType*>(resource);
 	}
+
+	template<class resourceObjectType>
+	resourceObjectType* getResourceObject(boost::uuids::uuid id)
+	{
+		Resource* resource = getResource(id);
+		if (resource == nullptr)
+		{
+			return nullptr;
+		}
+
+		return static_cast<resourceObjectType*>(resource->getResourceObject());
+	}
 private:
 	ObjectLibrary() {}
 	~ObjectLibrary() {}

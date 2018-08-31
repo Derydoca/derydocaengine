@@ -48,13 +48,9 @@ void TextRenderer::deserialize(YAML::Node compNode)
 		m_verticalAlign = static_cast<TextAlign>(verticalAlignNode.as<int>());
 	}
 
-	YAML::Node shaderNode = compNode["shader"];
-	if (shaderNode)
-	{
-		setMaterial(new Material());
-		Shader* shader = loadResource<Shader*>(compNode, "shader");
-		getMaterial()->setShader(shader);
-	}
+	setMaterial(new Material());
+	Shader* shader = getResourceObject<Shader>(compNode, "shader");
+	getMaterial()->setShader(shader);
 
 	auto fontResource = getResource<Resource*>(compNode, "font");
 	if (fontResource->getType() == ResourceType::FontResourceType) {

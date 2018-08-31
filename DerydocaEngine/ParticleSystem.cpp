@@ -82,9 +82,9 @@ void ParticleSystem::deserialize(YAML::Node compNode)
 		m_size2 = 0.25f;
 	}
 
-	m_texture = loadResource<Texture*>(compNode, "texture");
+	m_texture = getResourceObject<Texture>(compNode, "texture");
 
-	Shader* shader = loadResource<Shader*>(compNode, "shader");
+	Shader* shader = getResourceObject<Shader>(compNode, "shader");
 	m_material = new Material();
 	m_material->setShader(shader);
 	m_material->setFloat("Size2", m_size2);

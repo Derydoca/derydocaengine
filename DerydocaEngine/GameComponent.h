@@ -83,33 +83,23 @@ protected:
 	}
 
 	template<typename T>
-	inline T loadResource(YAML::Node node, std::string resourceName)
+	inline T* getResourceObject(uuid resourceId)
 	{
-		Resource * resource = getResource(node, resourceName);
-		if (resource)
-		{
-			return (T)resource->getResourceObject();
-		}
-		else
-		{
-			return nullptr;
-		}
+		return ObjectLibrary::getInstance().getResourceObject<T>(resourceId);
 	}
 
 	template<typename T>
-	inline T loadResource(std::string resourceName)
+	inline T* getResourceObject(YAML::Node node, std::string resourceName)
 	{
-		boost::uuids::string_generator gen;
-		uuid id = gen(resourceName);
-		Resource * resource = ObjectLibrary::getInstance().getResource(id);
-		if (resource)
-		{
-			return (T)resource->getResourceObject();
-		}
-		else
+		YAML::Node resourceIdNode = node[resourceName];
+		if (resourceIdNode == nullptr || !resourceIdNode.IsScalar())
 		{
 			return nullptr;
 		}
+
+		uuid resourceId = resourceIdNode.as<uuid>();
+
+		return getResourceObject<T>(resourceId);
 	}
 
 	template<typename T>

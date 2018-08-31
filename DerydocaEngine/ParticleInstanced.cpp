@@ -63,7 +63,7 @@ void ParticleInstanced::deserialize(YAML::Node compNode)
 		m_angle = angleNode.as<float>();
 	}
 
-	Shader* shader = loadResource<Shader*>(compNode, "shader");
+	Shader* shader = getResourceObject<Shader>(compNode, "shader");
 	assert(shader);
 	m_material = new Material();
 	m_material->setShader(shader);
@@ -73,7 +73,7 @@ void ParticleInstanced::deserialize(YAML::Node compNode)
 	m_material->setVec4("Material.Ks", vec4(0.7f, 0.7f, 0.7f, 1.0f));
 	m_material->setFloat("Material.Shininess", 50.0f);
 
-	m_mesh = loadResource<Mesh*>(compNode, "mesh");
+	m_mesh = getResourceObject<Mesh>(compNode, "mesh");
 }
 
 void ParticleInstanced::render(MatrixStack * matrixStack)

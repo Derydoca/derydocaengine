@@ -29,7 +29,7 @@ void* Resource::getResourceObject() {
 		}
 
 		// Load the object from the related object loader and return it
-		return loader->deserialize(this);
+		m_resourceObject = loader->deserialize(this);
 	}
 
 	return m_resourceObject;

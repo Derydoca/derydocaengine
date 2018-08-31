@@ -70,7 +70,7 @@ void BezierCurveRenderer::deserialize(YAML::Node compNode)
 		m_lineColor = Color(1.0, 1.0, 1.0, 1.0);
 	}
 
-	Shader* shader = loadResource<Shader*>(compNode, "shader");
+	Shader* shader = getResourceObject<Shader>(compNode, "shader");
 	m_material = new Material();
 	m_material->setShader(shader);
 }

@@ -73,8 +73,8 @@ void TessellatedMeshRenderer::deserialize(YAML::Node compNode)
 		m_maxDynamicTessLevel = maxDynamicTessLevelNode.as<float>();
 	}
 
-	m_material = loadResource<Material*>(compNode, "material");
-	m_mesh = loadResource<BezierPatchMesh*>(compNode, "bezierPatchMesh");
+	m_material = getResourceObject<Material>(compNode, "material");
+	m_mesh = getResourceObject<BezierPatchMesh>(compNode, "bezierPatchMesh");
 }
 
 void TessellatedMeshRenderer::render(MatrixStack * matrixStack)

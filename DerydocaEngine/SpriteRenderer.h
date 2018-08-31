@@ -4,6 +4,7 @@
 #include "MeshRenderer.h"
 #include "Color.h"
 #include "SpriteSheet.h"
+#include "Shader.h"
 
 using namespace glm;
 

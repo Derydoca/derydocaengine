@@ -21,10 +21,10 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::deserialize(YAML::Node compNode)
 {
-	auto material = loadResource<Material*>(compNode, "Material");
+	auto material = getResourceObject<Material>(compNode, "Material");
 	setMaterial(material);
 
-	auto mesh = loadResource<Mesh*>(compNode, "Mesh");
+	auto mesh = getResourceObject<Mesh>(compNode, "Mesh");
 	setMesh(mesh);
 
 	YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];

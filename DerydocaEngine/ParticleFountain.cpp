@@ -62,13 +62,13 @@ void ParticleFountain::deserialize(YAML::Node compNode)
 		m_angle = angleNode.as<float>();
 	}
 
-	Shader* shader = loadResource<Shader*>(compNode, "shader");
+	Shader* shader = getResourceObject<Shader>(compNode, "shader");
 	assert(shader);
 	m_material = new Material();
 	m_material->setShader(shader);
 	m_material->setFloat("ParticleLifetime", m_lifetime);
 
-	Texture* m_tex = loadResource<Texture*>(compNode, "texture");
+	Texture* m_tex = getResourceObject<Texture>(compNode, "texture");
 	m_material->setTexture("ParticleTex", m_tex);
 }
 

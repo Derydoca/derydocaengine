@@ -145,7 +145,9 @@ void Light::generateShadowMap()
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	Shader* shadowMapShader = loadResource<Shader*>("05cdcea1-2312-4e30-828c-68717d484274");
+	boost::uuids::string_generator gen;
+	uuid shaderId = gen("05cdcea1-2312-4e30-828c-68717d484274");
+	Shader* shadowMapShader = getResourceObject<Shader>(shaderId);
 	delete m_shadowMapMaterial;
 	m_shadowMapMaterial = new Material();
 	m_shadowMapMaterial->setShader(shadowMapShader);

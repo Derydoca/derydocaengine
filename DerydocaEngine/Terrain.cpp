@@ -136,7 +136,7 @@ void Terrain::deserialize(YAML::Node node)
 		loadTerrainFromTexture(heightmapResource->getSourceFilePath(), unitScale, heightScale);
 		if (node["material"])
 		{
-			Material* material = loadResource<Material*>(node, "material");
+			Material* material = getResourceObject<Material>(node, "material");
 			m_meshRenderer->setMaterial(material);
 		}
 	}

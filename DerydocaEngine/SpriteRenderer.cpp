@@ -1,4 +1,6 @@
 #include "SpriteRenderer.h"
+#include "ObjectLibrary.h"
+#include "YamlTools.h"
 
 void SpriteRenderer::postInit()
 {
@@ -12,25 +14,27 @@ void SpriteRenderer::postInit()
 
 void SpriteRenderer::deserialize(YAML::Node compNode)
 {
-	m_spriteSheet = loadResource<SpriteSheet*>(compNode, "spriteSheet");
-	Shader* shader = loadResource<Shader*>(compNode, "shader");
+	using namespace YAML;
+
+	m_spriteSheet = getResourceObject<SpriteSheet>(compNode, "spriteSheet");
+	Shader* shader = getResourceObject<Shader>(compNode, "shader");
 	Material* material = new Material();
 	material->setShader(shader);
 	setMaterial(material);
 
-	YAML::Node sizeNode = compNode["size"];
+	Node sizeNode = compNode["size"];
 	if (sizeNode)
 	{
 		m_size = sizeNode.as<vec2>();
 	}
 
-	YAML::Node colorNode = compNode["color"];
+	Node colorNode = compNode["color"];
 	if (colorNode)
 	{
 		m_color = colorNode.as<Color>();
 	}
 
-	YAML::Node spriteIdNode = compNode["spriteId"];
+	Node spriteIdNode = compNode["spriteId"];
 	if (spriteIdNode)
 	{
 		unsigned int spriteId = spriteIdNode.as<unsigned int>();

@@ -61,7 +61,7 @@ void TessellatingQuad::deserialize(YAML::Node compNode)
 		m_outer = outerNode.as<int>();
 	}
 
-	m_material = loadResource<Material*>(compNode, "material");
+	m_material = getResourceObject<Material>(compNode, "material");
 }
 
 void TessellatingQuad::render(MatrixStack * matrixStack)

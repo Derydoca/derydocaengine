@@ -163,7 +163,7 @@ void Camera::deserialize(YAML::Node node)
 		int height = renderTextureNode["Height"].as<int>();
 		m_renderTexture = new RenderTexture(width, height);
 
-		Shader* postProcessingShader = loadResource<Shader*>(renderTextureNode, "PostProcessShader");
+		Shader* postProcessingShader = getResourceObject<Shader>(renderTextureNode, "PostProcessShader");
 		m_postProcessMaterial = new Material();
 		m_postProcessMaterial->setShader(postProcessingShader);
 	}
