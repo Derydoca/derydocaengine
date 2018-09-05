@@ -11,8 +11,8 @@ public:
 		return instance;
 	}
 
-	FileTypeSerializer * getTypeSerializer(std::string sourceFilePath);
-	FileTypeSerializer * getTypeSerializer(FileType type);
+	FileTypeSerializer * getTypeSerializer(std::string const& sourceFilePath);
+	FileTypeSerializer * getTypeSerializer(FileType const& type);
 
 	void operator=(FileSerializerLibrary const&) = delete;
 private:
@@ -20,7 +20,7 @@ private:
 	~FileSerializerLibrary();
 	FileSerializerLibrary(FileSerializerLibrary const&);
 
-	void registerTypeSerializer(FileTypeSerializer* serializer);
+	void registerTypeSerializer(FileTypeSerializer* const& serializer);
 
 	std::map<FileType, FileTypeSerializer*> m_typeSerializers;
 };

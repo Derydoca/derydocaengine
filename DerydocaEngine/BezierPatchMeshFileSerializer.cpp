@@ -8,7 +8,7 @@ BezierPatchMeshFileSerializer::~BezierPatchMeshFileSerializer()
 {
 }
 
-YAML::Node BezierPatchMeshFileSerializer::generateResourceNodes(std::string filePath)
+YAML::Node BezierPatchMeshFileSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -25,7 +25,7 @@ FileType BezierPatchMeshFileSerializer::getFileType()
 	return FileType::BezierPatchMeshType;
 }
 
-Resource * BezierPatchMeshFileSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * BezierPatchMeshFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	Resource* r = new Resource();
 	r->setType(BezierPatchMeshResourceType);

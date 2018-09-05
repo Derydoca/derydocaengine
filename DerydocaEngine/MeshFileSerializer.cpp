@@ -5,7 +5,7 @@
 
 using namespace std;
 
-static MeshFlags stringToFlag(string flagString)
+static MeshFlags stringToFlag(string const& flagString)
 {
 	if (flagString == "load_adjacent")
 	{
@@ -28,7 +28,7 @@ FileType MeshSerializer::getFileType()
 	return FileType::MeshFileType;
 }
 
-YAML::Node MeshSerializer::generateResourceNodes(std::string filePath)
+YAML::Node MeshSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -58,7 +58,7 @@ YAML::Node MeshSerializer::generateResourceNodes(std::string filePath)
 	return resources;
 }
 
-Resource * MeshSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * MeshSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	// If the type field is missing, then it cannot be loaded
 	if (!resourceNode["Type"])
@@ -95,7 +95,7 @@ Resource * MeshSerializer::loadResourceFromMeta(YAML::Node resourceNode)
 	return nullptr;
 }
 
-bool MeshSerializer::findMeshResourceNode(YAML::Node root, unsigned int index, aiString name, YAML::Node& resourceNode)
+bool MeshSerializer::findMeshResourceNode(YAML::Node const& root, unsigned int const& index, aiString const& name, YAML::Node & resourceNode)
 {
 	for (unsigned int i = 0; i < root.size(); i++)
 	{

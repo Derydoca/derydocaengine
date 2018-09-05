@@ -6,7 +6,7 @@
 
 using namespace boost::filesystem;
 
-YAML::Node ShaderFileSerializer::generateResourceNodes(std::string filePath)
+YAML::Node ShaderFileSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -23,7 +23,7 @@ FileType ShaderFileSerializer::getFileType()
 	return FileType::ShaderFileType;
 }
 
-Resource * ShaderFileSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * ShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	ShaderResource* resource = new ShaderResource();
 
@@ -32,7 +32,7 @@ Resource * ShaderFileSerializer::loadResourceFromMeta(YAML::Node resourceNode)
 	return resource;
 }
 
-void ShaderFileSerializer::postLoadInitialize(Resource* resource)
+void ShaderFileSerializer::postLoadInitialize(Resource* const& resource)
 {
 	ShaderResource* shaderResource = (ShaderResource*)resource;
 	path vertexShaderPath(shaderResource->getVertexShaderLocation());

@@ -17,7 +17,7 @@ DebugVisualizer::~DebugVisualizer()
 	delete(m_shader);
 }
 
-void DebugVisualizer::draw(glm::mat4 worldMatrix)
+void DebugVisualizer::draw(const glm::mat4& worldMatrix)
 {
 	/*for (int i = 0; i < m_lineCount; i++)
 	{

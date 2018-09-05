@@ -8,7 +8,7 @@ ImageFileSerializer::~ImageFileSerializer()
 {
 }
 
-YAML::Node ImageFileSerializer::generateResourceNodes(std::string filePath)
+YAML::Node ImageFileSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -25,7 +25,7 @@ FileType ImageFileSerializer::getFileType()
 	return FileType::ImageFileType;
 }
 
-Resource * ImageFileSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * ImageFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	// Create a material resource type
 	Resource* r = new Resource();

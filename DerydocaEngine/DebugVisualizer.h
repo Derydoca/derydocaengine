@@ -12,7 +12,7 @@ public:
 	DebugVisualizer();
 	~DebugVisualizer();
 
-	void draw(glm::mat4 worldMatrix);
+	void draw(const glm::mat4& worldMatrix);
 
 	void postRender();
 private:

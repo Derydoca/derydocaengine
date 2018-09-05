@@ -8,7 +8,7 @@ FontFileSerializer::~FontFileSerializer()
 {
 }
 
-YAML::Node FontFileSerializer::generateResourceNodes(std::string filePath)
+YAML::Node FontFileSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -25,7 +25,7 @@ FileType FontFileSerializer::getFileType()
 	return FileType::FontType;
 }
 
-Resource * FontFileSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	Resource* r = new Resource();
 	r->setType(FontResourceType);

@@ -7,8 +7,8 @@ public:
 	ShaderFileSerializer() {};
 	~ShaderFileSerializer() {};
 
-	YAML::Node generateResourceNodes(std::string filePath);
+	YAML::Node generateResourceNodes(std::string const& filePath);
 	FileType getFileType();
-	Resource* loadResourceFromMeta(YAML::Node resourceNode);
-	void postLoadInitialize(Resource* resource);
+	Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
+	void postLoadInitialize(Resource* const& resource);
 };

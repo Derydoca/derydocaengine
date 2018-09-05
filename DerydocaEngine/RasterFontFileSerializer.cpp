@@ -8,7 +8,7 @@ RasterFontFileSerializer::~RasterFontFileSerializer()
 {
 }
 
-YAML::Node RasterFontFileSerializer::generateResourceNodes(std::string filePath)
+YAML::Node RasterFontFileSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -25,7 +25,7 @@ FileType RasterFontFileSerializer::getFileType()
 	return FileType::RasterFontType;
 }
 
-Resource * RasterFontFileSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * RasterFontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	Resource* r = new Resource();
 	r->setType(RasterFontResourceType);

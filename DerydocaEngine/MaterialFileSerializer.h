@@ -7,8 +7,8 @@ public:
 	MaterialSerializer();
 	~MaterialSerializer();
 
-	YAML::Node generateResourceNodes(std::string filePath);
+	YAML::Node generateResourceNodes(std::string const& filePath);
 	virtual FileType getFileType();
-	Resource* loadResourceFromMeta(YAML::Node resourceNode);
+	Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
 };
 

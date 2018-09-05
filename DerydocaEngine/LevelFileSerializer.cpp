@@ -1,6 +1,6 @@
 #include "LevelFileSerializer.h"
 
-YAML::Node LevelFileSerializer::generateResourceNodes(std::string filePath)
+YAML::Node LevelFileSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -17,7 +17,7 @@ FileType LevelFileSerializer::getFileType()
 	return FileType::LevelFileType;
 }
 
-Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	Resource* r = new Resource();
 	r->setType(LevelResourceType);

@@ -10,8 +10,8 @@ public:
 	SpriteSheetFileSerializer();
 	~SpriteSheetFileSerializer();
 
-	Node generateResourceNodes(string filePath);
+	Node generateResourceNodes(string const& filePath);
 	FileType getFileType();
-	Resource* loadResourceFromMeta(Node resourceNode);
+	Resource* loadResourceFromMeta(Node const& resourceNode);
 };
 

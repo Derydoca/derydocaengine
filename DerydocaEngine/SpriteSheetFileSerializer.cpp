@@ -11,7 +11,7 @@ SpriteSheetFileSerializer::~SpriteSheetFileSerializer()
 {
 }
 
-Node SpriteSheetFileSerializer::generateResourceNodes(string filePath)
+Node SpriteSheetFileSerializer::generateResourceNodes(string const& filePath)
 {
 	YAML::Node resources;
 
@@ -28,7 +28,7 @@ FileType SpriteSheetFileSerializer::getFileType()
 	return FileType::SpriteSheetFileType;
 }
 
-Resource * SpriteSheetFileSerializer::loadResourceFromMeta(Node resourceNode)
+Resource * SpriteSheetFileSerializer::loadResourceFromMeta(Node const& resourceNode)
 {
 	Resource* r = new Resource();
 	r->setType(ResourceType::SpriteSheetType);

@@ -17,7 +17,7 @@ FileType MaterialSerializer::getFileType()
 	return FileType::MaterialFileType;
 }
 
-YAML::Node MaterialSerializer::generateResourceNodes(std::string filePath)
+YAML::Node MaterialSerializer::generateResourceNodes(std::string const& filePath)
 {
 	YAML::Node resources;
 
@@ -61,7 +61,7 @@ YAML::Node MaterialSerializer::generateResourceNodes(std::string filePath)
 	return resources;
 }
 
-Resource * MaterialSerializer::loadResourceFromMeta(YAML::Node resourceNode)
+Resource * MaterialSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 {
 	// Get the resource type
 	YAML::Node resourceTypeNode = resourceNode["Type"];

@@ -10,7 +10,7 @@
 #include "RasterFontFileSerializer.h"
 #include "SpriteSheetFileSerializer.h"
 
-FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string sourceFilePath)
+FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string const& sourceFilePath)
 {
 	// Determine the resource type from the file path
 	FileType type = pathToFileType(sourceFilePath);
@@ -19,7 +19,7 @@ FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string source
 	return getTypeSerializer(type);
 }
 
-FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(FileType type)
+FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(FileType const& type)
 {
 	// Return the associated serializer for the resource type specified
 	auto search = m_typeSerializers.find(type);
@@ -33,7 +33,7 @@ FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(FileType type)
 	}
 }
 
-void FileSerializerLibrary::registerTypeSerializer(FileTypeSerializer * serializer)
+void FileSerializerLibrary::registerTypeSerializer(FileTypeSerializer * const& serializer)
 {
 	// Add this serializer to the list of serializers
 	m_typeSerializers.insert(std::pair<FileType, FileTypeSerializer*>(serializer->getFileType(), serializer));

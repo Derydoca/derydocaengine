@@ -10,11 +10,11 @@ public:
 	MeshSerializer();
 	~MeshSerializer();
 
-	YAML::Node generateResourceNodes(std::string filePath);
+	YAML::Node generateResourceNodes(std::string const& filePath);
 	FileType getFileType();
-	Resource* loadResourceFromMeta(YAML::Node resourceNode);
+	Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
 
 private:
-	bool findMeshResourceNode(YAML::Node root, unsigned int index, aiString name, YAML::Node& resourceNode);
+	bool findMeshResourceNode(YAML::Node const& root, unsigned int const& index, aiString const& name, YAML::Node & resourceNode);
 };
 
