@@ -13,9 +13,9 @@ public:
 	~NoiseTexture();
 
 	virtual void init();
-	virtual void deserialize(YAML::Node compNode);
+	virtual void deserialize(YAML::Node const& compNode);
 
-	void generateNoiseTexture(float baseFreq, float persistence, bool periodic, bool seamless);
+	void generateNoiseTexture(float const& baseFreq, float const& persistence, bool const& periodic, bool const& seamless);
 private:
 	int m_width = 256;
 	int m_height = 256;

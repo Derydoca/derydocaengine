@@ -62,7 +62,7 @@ void BloomFilter::init()
 	updateShader();
 }
 
-void BloomFilter::deserialize(YAML::Node compNode)
+void BloomFilter::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node lumThreshNode = compNode["lumThresh"];
 	if (lumThreshNode)
@@ -71,12 +71,12 @@ void BloomFilter::deserialize(YAML::Node compNode)
 	}
 }
 
-void BloomFilter::update(float deltaTime)
+void BloomFilter::update(float const& deltaTime)
 {
 	updateShader();
 }
 
-float BloomFilter::gauss(float x, float sigma2)
+float BloomFilter::gauss(float const& x, float const& sigma2)
 {
 	double coeff = 1.0 / (glm::two_pi<double>() * sigma2);
 	double expon = -(x*x) / (2.0 * sigma2);

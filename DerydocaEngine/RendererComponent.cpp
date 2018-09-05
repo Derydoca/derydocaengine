@@ -60,7 +60,7 @@ void RendererComponent::updateMesh()
 	m_dirtyComponents = MeshComponents::None;
 }
 
-void RendererComponent::render(MatrixStack * matrixStack)
+void RendererComponent::render(MatrixStack * const& matrixStack)
 {
 	if (m_dirtyComponents != MeshComponents::None)
 	{
@@ -76,7 +76,7 @@ void RendererComponent::render(MatrixStack * matrixStack)
 	m_material->unbind();
 }
 
-void RendererComponent::renderMesh(MatrixStack * matrixStack, Material * material, Projection projection, Transform * projectionTransform)
+void RendererComponent::renderMesh(MatrixStack * const& matrixStack, Material * const& material, Projection const& projection, Transform * const& projectionTransform)
 {
 	m_material->bind();
 	m_material->getShader()->update(matrixStack, projection, projectionTransform);

@@ -38,7 +38,7 @@ void TessellatingQuad::init()
 	cout << "Max patch vertices: " << maxVerts << endl;
 }
 
-void TessellatingQuad::deserialize(YAML::Node compNode)
+void TessellatingQuad::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node controlPointsNode = compNode["controlPoints"];
 	if (controlPointsNode)
@@ -64,7 +64,7 @@ void TessellatingQuad::deserialize(YAML::Node compNode)
 	m_material = getResourceObject<Material>(compNode, "material");
 }
 
-void TessellatingQuad::render(MatrixStack * matrixStack)
+void TessellatingQuad::render(MatrixStack * const& matrixStack)
 {
 	m_material->bind();
 	m_material->getShader()->updateViaActiveCamera(matrixStack);

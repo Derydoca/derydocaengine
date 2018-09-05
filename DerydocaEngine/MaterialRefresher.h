@@ -15,7 +15,7 @@ public:
 	~MaterialRefresher();
 
 	void init();
-	void update(float deltaTime);
+	void update(float const& deltaTime);
 	void refreshMaterial();
 private:
 	bool isShaderSourceUpdated();

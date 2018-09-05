@@ -11,7 +11,7 @@ ParticleContinuousFountain::~ParticleContinuousFountain()
 	delete m_material;
 }
 
-void ParticleContinuousFountain::update(float deltaTime)
+void ParticleContinuousFountain::update(float const& deltaTime)
 {
 	m_time += deltaTime;
 	m_lastDeltaTime = deltaTime;
@@ -36,7 +36,7 @@ void ParticleContinuousFountain::preRender()
 	m_material->setVec3("EmitterPosition", m_trans->getWorldPos());
 }
 
-void ParticleContinuousFountain::deserialize(YAML::Node compNode)
+void ParticleContinuousFountain::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node numParticlesNode = compNode["numParticles"];
 	if (numParticlesNode)
@@ -130,7 +130,7 @@ void ParticleContinuousFountain::deserialize(YAML::Node compNode)
 	m_material->setTexture("ParticleTex", m_tex);
 }
 
-void ParticleContinuousFountain::render(MatrixStack * matrixStack)
+void ParticleContinuousFountain::render(MatrixStack * const& matrixStack)
 {
 	m_material->bind();
 	m_material->getShader()->updateViaActiveCamera(matrixStack);
@@ -308,7 +308,7 @@ float ParticleContinuousFountain::randFloat()
 	return (float)rand() / RAND_MAX;
 }
 
-void ParticleContinuousFountain::updateParticlePositions(float deltaTime)
+void ParticleContinuousFountain::updateParticlePositions(float const& deltaTime)
 {
 	m_material->setSubroutine(GL_VERTEX_SHADER, m_updateSub);
 

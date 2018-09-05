@@ -9,7 +9,7 @@ CameraManager::~CameraManager()
 {
 }
 
-void CameraManager::render(GameObject* rootObject)
+void CameraManager::render(GameObject* const& rootObject)
 {
 	for each (Camera* cam in m_cameras)
 	{

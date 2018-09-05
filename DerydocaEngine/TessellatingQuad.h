@@ -12,8 +12,8 @@ public:
 	~TessellatingQuad();
 
 	virtual void init();
-	virtual void deserialize(YAML::Node compNode);
-	void render(MatrixStack* matrixStack);
+	virtual void deserialize(YAML::Node const& compNode);
+	void render(MatrixStack* const& matrixStack);
 private:
 	float m_controlPoints[8];
 	GLuint m_vao;

@@ -16,7 +16,7 @@ void TextRenderer::postInit()
 	}
 }
 
-void TextRenderer::deserialize(YAML::Node compNode)
+void TextRenderer::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node boundsNode = compNode["bounds"];
 	if (boundsNode)
@@ -233,7 +233,7 @@ unsigned int * TextRenderer::generateTriangleIndices()
 	return triangleIndices;
 }
 
-void TextRenderer::calculateVerticalAlignmentProperties(TextAlign alignment, int numberOfLines, float verticalBoundSize, float fontLineHeight, float * penY, float * newLineHeight)
+void TextRenderer::calculateVerticalAlignmentProperties(TextAlign const& alignment, int const& numberOfLines, float const& verticalBoundSize, float const& fontLineHeight, float * const& penY, float * const& newLineHeight)
 {
 	switch (alignment)
 	{
@@ -263,7 +263,7 @@ void TextRenderer::calculateVerticalAlignmentProperties(TextAlign alignment, int
 	}
 }
 
-void TextRenderer::calculateHorizontalAlignmentProperties(TextAlign alignment, float horizontalBoundSize, float lineWidth, int numChars, float lineStartAdjust, float * penX, float* extraCharAdvance)
+void TextRenderer::calculateHorizontalAlignmentProperties(TextAlign const& alignment, float const& horizontalBoundSize, float const& lineWidth, int const& numChars, float const& lineStartAdjust, float * const& penX, float* const& extraCharAdvance)
 {
 	switch (alignment)
 	{
@@ -289,7 +289,7 @@ void TextRenderer::calculateHorizontalAlignmentProperties(TextAlign alignment, f
 	}
 }
 
-vector<LineProperties*> TextRenderer::processTextToLines(string text, OverflowWrap overflowWrap, FontFace* fontFace, float horizontalBoundSize, char*& filteredText)
+vector<LineProperties*> TextRenderer::processTextToLines(string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText)
 {
 	// Create an array to store the filtered text. This will never excede the length of the source text.
 	filteredText = new char[text.length()];

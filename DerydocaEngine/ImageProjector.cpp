@@ -21,7 +21,7 @@ void ImageProjector::init()
 	
 }
 
-void ImageProjector::deserialize(YAML::Node compNode)
+void ImageProjector::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node focalPointNode = compNode["focalPoint"];
 	if (focalPointNode)
@@ -82,7 +82,7 @@ void ImageProjector::deserialize(YAML::Node compNode)
 	setProjectionGraphic();
 }
 
-void ImageProjector::update(float deltaTime)
+void ImageProjector::update(float const& deltaTime)
 {
 	if (m_dirty)
 	{

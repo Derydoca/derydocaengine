@@ -25,7 +25,7 @@ Camera::Camera()
 	setClearColor(Color(0.5, 0.0, 0.0));
 }
 
-Camera::Camera(float fov, float aspect, float zNear, float zFar)
+Camera::Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar)
 {
 	m_projection.setFov(fov);
 	m_projection.setAspectRatio(aspect);
@@ -64,7 +64,7 @@ void Camera::init()
 	}
 }
 
-void Camera::setDisplayRect(float x, float y, float w, float h)
+void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
 {
 	m_displayRect->setX(x);
 	m_displayRect->setY(x);
@@ -72,7 +72,7 @@ void Camera::setDisplayRect(float x, float y, float w, float h)
 	m_displayRect->setHeight(x);
 }
 
-void Camera::setRenderingMode(RenderingMode mode)
+void Camera::setRenderingMode(RenderingMode const& mode)
 {
 	m_renderingMode = mode;
 
@@ -116,13 +116,13 @@ void Camera::setRenderingMode(RenderingMode mode)
 	}
 }
 
-void Camera::resize(int width, int height)
+void Camera::resize(int const& width, int const& height)
 {
 	m_projection.setAspectRatio(width, height);
 	m_projection.recalculateProjectionMatrix();
 }
 
-void Camera::createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int width, int height)
+void Camera::createGBufTex(GLenum const& textureUnit, GLenum const& format, GLuint &texid, int const& width, int const& height)
 {
 	glActiveTexture(textureUnit);
 	glGenTextures(1, &texid);
@@ -133,19 +133,19 @@ void Camera::createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
 }
 
-void Camera::setProjectionMode(ProjectionMode mode)
+void Camera::setProjectionMode(ProjectionMode const& mode)
 {
 	m_projection.setProjectionMode(mode);
 	m_projection.recalculateProjectionMatrix();
 }
 
-void Camera::setOrthoSize(float size)
+void Camera::setOrthoSize(float const& size)
 {
 	m_orthoSize = size;
 	m_projection.recalculateProjectionMatrix();
 }
 
-void Camera::deserialize(YAML::Node node)
+void Camera::deserialize(YAML::Node const& node)
 {
 	float fov = node["fov"].as<float>();
 	float zNear = node["zNear"].as<float>();
@@ -191,7 +191,7 @@ void Camera::clear()
 	}
 }
 
-void Camera::renderRoot(GameObject* gameObject)
+void Camera::renderRoot(GameObject* const& gameObject)
 {
 	LightManager::getInstance().renderShadowMaps(gameObject->getTransform());
 
@@ -266,7 +266,7 @@ void Camera::renderRoot(GameObject* gameObject)
 	}
 }
 
-void Camera::setIdentityMatricies(Shader* shader)
+void Camera::setIdentityMatricies(Shader* const& shader)
 {
 	mat4 m = mat4(1.0);
 	mat4 v = mat4(1.0);

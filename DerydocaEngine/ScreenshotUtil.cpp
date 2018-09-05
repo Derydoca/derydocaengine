@@ -8,7 +8,7 @@
 using namespace boost::posix_time;
 using namespace std;
 
-string convertTimeToString(ptime now)
+string convertTimeToString(ptime const& now)
 {
 	static std::locale loc(std::wcout.getloc(), new time_facet("%Y%m%d%H%M%S"));
 	std::basic_stringstream<char> wss;
@@ -21,7 +21,7 @@ ScreenshotUtil::ScreenshotUtil()
 {
 }
 
-ScreenshotUtil::ScreenshotUtil(Display* display, Keyboard* keyboard) :
+ScreenshotUtil::ScreenshotUtil(Display* const& display, Keyboard* const& keyboard) :
 	m_display(display),
 	m_keyboard(keyboard)
 {

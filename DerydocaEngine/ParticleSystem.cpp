@@ -2,9 +2,9 @@
 #include "LightManager.h"
 #include "Shader.h"
 
-static float RandomFloat(float min, float max);
+static float RandomFloat(float const& min, float const& max);
 
-static float RandomFloat(float min, float max)
+static float RandomFloat(float const& min, float const& max)
 {
 	float r = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 	return (r * (-min + max)) + min;
@@ -50,7 +50,7 @@ void ParticleSystem::init()
 	glBindVertexArray(0);
 }
 
-void ParticleSystem::deserialize(YAML::Node compNode)
+void ParticleSystem::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node numParticlesNode = compNode["numParticles"];
 	if (numParticlesNode)
@@ -90,7 +90,7 @@ void ParticleSystem::deserialize(YAML::Node compNode)
 	m_material->setFloat("Size2", m_size2);
 }
 
-void ParticleSystem::render(MatrixStack* matrixStack)
+void ParticleSystem::render(MatrixStack* const& matrixStack)
 {
 	glDisable(GL_DEPTH_TEST);
 	assert(getGameObject());

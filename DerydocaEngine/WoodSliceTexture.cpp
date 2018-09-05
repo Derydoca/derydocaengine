@@ -14,7 +14,7 @@ void WoodSliceTexture::init()
 	m_meshRenderer = getComponent<MeshRenderer>();
 }
 
-void WoodSliceTexture::deserialize(YAML::Node compNode)
+void WoodSliceTexture::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node slicePositionNode = compNode["slicePosition"];
 	if (slicePositionNode)

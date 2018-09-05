@@ -13,7 +13,7 @@ public:
 	~NightVisionFilter();
 
 	virtual void init();
-	virtual void deserialize(YAML::Node compNode);
+	virtual void deserialize(YAML::Node const& compNode);
 private:
 	float m_radius = 100.0f;
 	Camera* m_postProcessCamera;

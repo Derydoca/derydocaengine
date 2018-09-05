@@ -12,18 +12,18 @@ class Terrain : public GameComponent
 public:
 	GENINSTANCE(Terrain);
 	Terrain();
-	Terrain(const std::string& fileName, float unitScale, float heightScale);
-	Terrain(int width, int depth, float unitScale, float heightScale);
+	Terrain(const std::string& fileName, float const& unitScale, float const& heightScale);
+	Terrain(int const& width, int const& depth, float const& unitScale, float const& heightScale);
 	~Terrain();
 
 	void draw();
 	void updateMesh();
 
-	void setTextureSlot(int slot, Texture* texture);
+	void setTextureSlot(int const& slot, Texture* const& texture);
 	void init();
 
-	void render(MatrixStack* matrixStack);
-	void deserialize(YAML::Node node);
+	void render(MatrixStack* const& matrixStack);
+	void deserialize(YAML::Node const& node);
 private:
 	int m_width;
 	int m_depth;
@@ -33,6 +33,6 @@ private:
 	Mesh* m_mesh;
 	MeshRenderer* m_meshRenderer;
 
-	void loadTerrainFromTexture(const std::string& fileName, float unitScale, float heightScale);
+	void loadTerrainFromTexture(const std::string & fileName, float const& unitScale, float const& heightScale);
 };
 

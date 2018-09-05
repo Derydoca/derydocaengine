@@ -39,10 +39,10 @@ public:
 	int getEnd() const { return m_end; }
 	float getWidth() const { return m_width; }
 	float getStartAdjust() const { return m_startAdjust; }
-	void setStart(int start) { m_start = start; }
-	void setEnd(int end) { m_end = end; }
-	void setWidth(float width) { m_width = width; }
-	void setStartAdjust(float startAdjust) { m_startAdjust = startAdjust; }
+	void setStart(int const& start) { m_start = start; }
+	void setEnd(int const& end) { m_end = end; }
+	void setWidth(float const& width) { m_width = width; }
+	void setStartAdjust(float const& startAdjust) { m_startAdjust = startAdjust; }
 private:
 	int m_start;
 	int m_end;
@@ -56,9 +56,9 @@ public:
 	GENINSTANCE(TextRenderer);
 
 	virtual void postInit();
-	virtual void deserialize(YAML::Node compNode);
+	virtual void deserialize(YAML::Node const& compNode);
 
-	void setText(string text)
+	void setText(string const& text)
 	{
 		m_text = text;
 		m_lines = processTextToLines(m_text, m_overflowWrap, m_fontFace, m_bounds.x, m_filteredText);
@@ -71,7 +71,7 @@ public:
 		markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
 	}
 	string getText() { return m_text; }
-	void setColor(Color color)
+	void setColor(Color const& color)
 	{
 		if (m_textColor == color)
 		{
@@ -121,8 +121,8 @@ private:
 	char* m_filteredText;
 	bool m_textDirty = true;
 
-	static void calculateVerticalAlignmentProperties(TextAlign alignment, int numberOfLines, float verticalBoundSize, float fontLineHeight, float* penY, float* newLineHeight);
-	static void calculateHorizontalAlignmentProperties(TextAlign alignment, float horizontalBoundSize, float lineWidth, int numChars, float lineStartAdjust, float* penX, float* extraCharAdvance);
-	static vector<LineProperties*> processTextToLines(string text, OverflowWrap overflowWrap, FontFace* fontFace, float horizontalBoundSize, char*& filteredText);
+	static void calculateVerticalAlignmentProperties(TextAlign const& alignment, int const& numberOfLines, float const& verticalBoundSize, float const& fontLineHeight, float* const& penY, float* const& newLineHeight);
+	static void calculateHorizontalAlignmentProperties(TextAlign const& alignment, float const& horizontalBoundSize, float const& lineWidth, int const& numChars, float const& lineStartAdjust, float* const& penX, float* const& extraCharAdvance);
+	static vector<LineProperties*> processTextToLines(string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText);
 };
 

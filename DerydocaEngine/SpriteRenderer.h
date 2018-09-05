@@ -14,10 +14,10 @@ public:
 	GENINSTANCE(SpriteRenderer);
 
 	void postInit();
-	void deserialize(YAML::Node compNode);
+	void deserialize(YAML::Node const& compNode);
 
 	Color getColor() const { return m_color; }
-	void setColor(Color color) {
+	void setColor(Color const& color) {
 		if (color == m_color)
 		{
 			return;

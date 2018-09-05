@@ -37,7 +37,7 @@ void BezierCurveRenderer::init()
 	m_material->setColorRGBA("LineColor", m_lineColor);
 }
 
-void BezierCurveRenderer::deserialize(YAML::Node compNode)
+void BezierCurveRenderer::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node controlPointsNode = compNode["controlPoints"];
 	if (controlPointsNode)
@@ -75,7 +75,7 @@ void BezierCurveRenderer::deserialize(YAML::Node compNode)
 	m_material->setShader(shader);
 }
 
-void BezierCurveRenderer::render(MatrixStack * matrixStack)
+void BezierCurveRenderer::render(MatrixStack * const& matrixStack)
 {
 	m_material->bind();
 	m_material->getShader()->updateViaActiveCamera(matrixStack);

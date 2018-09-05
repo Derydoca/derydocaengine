@@ -22,7 +22,7 @@ glm::mat4 Light::getViewMatrix()
 	return glm::mat4();
 }
 
-glm::mat4 Light::getShadowMatrix(mat4 objectModelMatrix)
+glm::mat4 Light::getShadowMatrix(mat4 const& objectModelMatrix)
 {
 	glm::mat4 model = getGameObject()->getTransform()->getModel();
 	return (m_shadowBias * m_projection.getProjectionMatrix() * m_projection.getViewMatrix(model)) * objectModelMatrix;
@@ -35,7 +35,7 @@ void Light::init()
 	}
 }
 
-void Light::deserialize(YAML::Node node)
+void Light::deserialize(YAML::Node const& node)
 {
 	Color lightColor = node["color"].as<Color>();
 	setColor(&lightColor);
@@ -86,7 +86,7 @@ void Light::deserialize(YAML::Node node)
 	}
 }
 
-void Light::renderShadowMap(GameObject* gameObject)
+void Light::renderShadowMap(GameObject* const& gameObject)
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_shadowFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);

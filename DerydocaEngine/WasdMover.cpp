@@ -16,7 +16,7 @@ void WasdMover::init()
 	m_transform = getGameObject()->getTransform();
 }
 
-void WasdMover::update(float deltaTime) {
+void WasdMover::update(float const& deltaTime) {
 
 	// Set the mouse to relative mode when the right mouse button is down
 	if (m_mouse->isKeyDownFrame(2)) {
@@ -99,7 +99,7 @@ void WasdMover::update(float deltaTime) {
 	}
 }
 
-void WasdMover::deserialize(YAML::Node node)
+void WasdMover::deserialize(YAML::Node const& node)
 {
 	m_moveSpeed = node["moveSpeed"].as<float>();
 	m_mouseSensitivityX = node["mouseSensitivityX"].as<float>();

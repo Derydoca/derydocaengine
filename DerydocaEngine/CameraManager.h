@@ -11,9 +11,9 @@ public:
 	}
 
 	inline std::list<Camera*> getCameras() { return m_cameras; }
-	void addCamera(Camera* camera) { m_cameras.push_back(camera); }
-	void removeCamera(Camera* camera) { m_cameras.remove(camera); }
-	void render(GameObject* rootObject);
+	void addCamera(Camera* const& camera) { m_cameras.push_back(camera); }
+	void removeCamera(Camera* const& camera) { m_cameras.remove(camera); }
+	void render(GameObject* const& rootObject);
 	Camera* getCurrentCamera() { return m_currentCamera; }
 
 	void operator=(CameraManager const&) = delete;

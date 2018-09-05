@@ -35,13 +35,13 @@ public:
 	Light();
 	~Light();
 
-	void setLightType(LightType type) { m_lightType = type; }
+	void setLightType(LightType const& type) { m_lightType = type; }
 	LightType getLightType() { return m_lightType; }
 
 	glm::mat4 getProjectionMatrix();
 	glm::mat4 getViewMatrix();
 
-	void setColor(Color* color)
+	void setColor(Color* const& color)
 	{
 		m_color.r = color->r;
 		m_color.g = color->g;
@@ -53,15 +53,15 @@ public:
 	float getSpotlightCutoff() { return m_spotlightCutoff; }
 	GLuint getShadowMap() { return m_depthTexture; }
 	bool isCastingShadows() { return m_castShadows; }
-	bool setCastingShadows(bool castShadows) { m_castShadows = castShadows; }
+	bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
 	Projection getProjection() { return m_projection; }
-	glm::mat4 getShadowMatrix(mat4 objectModelMatrix);
+	glm::mat4 getShadowMatrix(mat4 const& objectModelMatrix);
 	float getShadowSoftness() const { return m_shadowSoftness; }
 
 	void init();
-	void deserialize(YAML::Node node);
+	void deserialize(YAML::Node const& node);
 
-	void renderShadowMap(GameObject* gameObject);
+	void renderShadowMap(GameObject* const& gameObject);
 private:
 	void generateShadowMap();
 	GLint getShadowMapFilterTypeEnum();

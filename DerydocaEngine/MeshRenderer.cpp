@@ -9,7 +9,7 @@ MeshRenderer::MeshRenderer()
 {
 }
 
-MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) :
+MeshRenderer::MeshRenderer(Mesh* const& mesh, Material* const& material) :
 	m_mesh(mesh),
 	m_material(material)
 {
@@ -19,7 +19,7 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-void MeshRenderer::deserialize(YAML::Node compNode)
+void MeshRenderer::deserialize(YAML::Node const& compNode)
 {
 	auto material = getResourceObject<Material>(compNode, "Material");
 	setMaterial(material);
@@ -48,7 +48,7 @@ void MeshRenderer::init()
 {
 }
 
-void MeshRenderer::render(MatrixStack* matrixStack)
+void MeshRenderer::render(MatrixStack* const& matrixStack)
 {
 	assert(getGameObject());
 
@@ -61,7 +61,7 @@ void MeshRenderer::render(MatrixStack* matrixStack)
 	m_material->unbind();
 }
 
-void MeshRenderer::renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform)
+void MeshRenderer::renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform)
 {
 	material->bind();
 	material->getShader()->update(matrixStack, projection, projectionTransform);

@@ -12,7 +12,7 @@ void SpriteRenderer::postInit()
 	}
 }
 
-void SpriteRenderer::deserialize(YAML::Node compNode)
+void SpriteRenderer::deserialize(YAML::Node const& compNode)
 {
 	using namespace YAML;
 

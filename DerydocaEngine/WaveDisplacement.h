@@ -9,9 +9,9 @@ public:
 	~WaveDisplacement();
 
 	virtual void init();
-	virtual void update(float deltaTime);
+	virtual void update(float const& deltaTime);
 	virtual void preRender();
-	virtual void deserialize(YAML::Node compNode);
+	virtual void deserialize(YAML::Node const& compNode);
 private:
 	float m_k = 1.0f;
 	float m_velocity = 1.0f;

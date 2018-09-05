@@ -33,7 +33,7 @@ void NoiseTexture::init()
 	generateNoiseTexture(m_baseFrequency, m_persistence, m_periodic, m_seamless);
 }
 
-void NoiseTexture::deserialize(YAML::Node compNode)
+void NoiseTexture::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node widthNode = compNode["width"];
 	if (widthNode)
@@ -78,7 +78,7 @@ void NoiseTexture::deserialize(YAML::Node compNode)
 	}
 }
 
-void NoiseTexture::generateNoiseTexture(float baseFreq, float persistence, bool periodic, bool seamless)
+void NoiseTexture::generateNoiseTexture(float const& baseFreq, float const& persistence, bool const& periodic, bool const& seamless)
 {
 	GLubyte* textureData = new GLubyte[m_width * m_height * 4];
 

@@ -17,10 +17,10 @@ public:
 	~ParticleContinuousFountain();
 
 	virtual void init();
-	virtual void update(float deltaTime);
+	virtual void update(float const& deltaTime);
 	virtual void preRender();
-	virtual void deserialize(YAML::Node compNode);
-	virtual void render(MatrixStack* matrixStack);
+	virtual void deserialize(YAML::Node const& compNode);
+	virtual void render(MatrixStack* const& matrixStack);
 private:
 	int m_numParticles = 1000;
 	Material* m_material;
@@ -49,7 +49,7 @@ private:
 
 	void initBuffers();
 	float randFloat();
-	void updateParticlePositions(float deltaTime);
+	void updateParticlePositions(float const& deltaTime);
 	void renderParticles();
 	vec3 getVelocityFromCone();
 	vec3 getVelocityFromCube();

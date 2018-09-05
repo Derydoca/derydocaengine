@@ -23,7 +23,7 @@ void NightVisionFilter::init()
 	m_postProcessCamera->getPostProcessMaterial()->setFloat("Radius", m_radius);
 }
 
-void NightVisionFilter::deserialize(YAML::Node compNode)
+void NightVisionFilter::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node radiusNode = compNode["radius"];
 	if (radiusNode)

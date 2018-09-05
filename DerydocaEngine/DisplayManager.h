@@ -11,9 +11,9 @@ public:
 		return instance;
 	}
 
-	void addDisplay(Display* display) { m_displays.push_back(display); }
+	void addDisplay(Display* const& display) { m_displays.push_back(display); }
 
-	Display* getDisplay(size_t index) {
+	Display* getDisplay(size_t const& index) {
 		if (index >= m_displays.size())
 		{
 			return nullptr;

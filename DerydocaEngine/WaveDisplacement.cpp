@@ -26,7 +26,7 @@ void WaveDisplacement::init()
 	m_material->setFloat("Amp", m_amplitude);
 }
 
-void WaveDisplacement::update(float deltaTime)
+void WaveDisplacement::update(float const& deltaTime)
 {
 	m_time += deltaTime;
 }
@@ -37,7 +37,7 @@ void WaveDisplacement::preRender()
 	m_material->setFloat("Time", m_time);
 }
 
-void WaveDisplacement::deserialize(YAML::Node compNode)
+void WaveDisplacement::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node kNode = compNode["k"];
 	if (kNode)

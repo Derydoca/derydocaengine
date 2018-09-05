@@ -12,7 +12,7 @@ class WasdMover : public GameComponent
 public:
 	GENINSTANCE(WasdMover);
 	WasdMover();
-	WasdMover(Keyboard* keyboard, Mouse* mouse) :
+	WasdMover(Keyboard* const& keyboard, Mouse* const& mouse) :
 		m_keyboard(keyboard),
 		m_mouse(mouse),
 		m_moveSpeed(5.0f),
@@ -27,9 +27,9 @@ public:
 	~WasdMover();
 	
 	void init();
-	void update(float deltaTime);
+	void update(float const& deltaTime);
 
-	void deserialize(YAML::Node node);
+	void deserialize(YAML::Node const& node);
 private:
 	Transform* m_transform;
 	Keyboard* m_keyboard;

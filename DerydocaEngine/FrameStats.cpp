@@ -13,7 +13,7 @@ void FrameStats::postInit()
 	m_textRenderer = getComponent<TextRenderer>();
 }
 
-void FrameStats::update(float deltaTime)
+void FrameStats::update(float const& deltaTime)
 {
 	float fps = 1.0f / deltaTime;
 	ostringstream s;

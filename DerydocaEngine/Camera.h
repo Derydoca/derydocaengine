@@ -40,7 +40,7 @@ public:
 	};
 
 	Camera();
-	Camera(float fov, float aspect, float zNear, float zFar);
+	Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar);
 	~Camera();
 
 	inline RenderTexture* getRenderTexture() const { return m_renderTexture; }
@@ -50,30 +50,30 @@ public:
 
 	@clearMode Clear mode to switch to
 	*/
-	void setClearMode(ClearMode clearMode) { m_clearMode = clearMode; }
+	void setClearMode(ClearMode const& clearMode) { m_clearMode = clearMode; }
 
 	/*
 	Sets the clear color
 
 	@clearColor Color to use when clearing the camera
 	*/
-	void setClearColor(Color clearColor) { m_clearColor = clearColor; }
+	void setClearColor(Color const& clearColor) { m_clearColor = clearColor; }
 
 	/*
 	Sets the skybox material
 
 	@skyboxMaterial Material to use for the skybox
 	*/
-	void setSkybox(Material* skyboxMaterial) { m_skyboxMaterial = skyboxMaterial; }
+	void setSkybox(Material* const& skyboxMaterial) { m_skyboxMaterial = skyboxMaterial; }
 
 	/*
 	Renders the root node through this camera
 
 	@root Root game object to render all of its children
 	*/
-	void renderRoot(GameObject* root);
+	void renderRoot(GameObject* const& root);
 
-	void setDisplay(Display* display)
+	void setDisplay(Display* const& display)
 	{
 		if (m_display != nullptr)
 		{
@@ -90,18 +90,18 @@ public:
 	Display* getDisplay() { return m_display; }
 	float getDisplayWidth() { return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)m_display->getWidth(); }
 	float getDisplayHeight() { return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)m_display->getHeight(); }
-	void setRenderTexture(RenderTexture* renderTexture) { m_renderTexture = renderTexture; }
+	void setRenderTexture(RenderTexture* const& renderTexture) { m_renderTexture = renderTexture; }
 	void init();
-	void setDisplayRect(float x, float y, float w, float h);
-	void setRenderingMode(RenderingMode mode);
-	void resize(int width, int height);
+	void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
+	void setRenderingMode(RenderingMode const& mode);
+	void resize(int const& width, int const& height);
 
-	void createGBufTex(GLenum textureUnit, GLenum format, GLuint &texid, int width, int height);
+	void createGBufTex(GLenum const& textureUnit, GLenum const& format, GLuint & texid, int const& width, int const& height);
 
-	void setProjectionMode(ProjectionMode mode);
-	void setOrthoSize(float size);
-	float getOrthoSize(float size) { return m_orthoSize; }
-	void deserialize(YAML::Node node);
+	void setProjectionMode(ProjectionMode const& mode);
+	void setOrthoSize(float const& size);
+	float getOrthoSize(float const& size) { return m_orthoSize; }
+	void deserialize(YAML::Node const& node);
 	Shader* getPostProcessShader() const { return m_postProcessMaterial->getShader(); }
 	Material* getPostProcessMaterial() { return m_postProcessMaterial; }
 	Projection getProjection() const { return m_projection; }
@@ -125,6 +125,6 @@ private:
 	Projection m_projection;
 
 	void clear();
-	void setIdentityMatricies(Shader* shader);
+	void setIdentityMatricies(Shader* const& shader);
 };
 

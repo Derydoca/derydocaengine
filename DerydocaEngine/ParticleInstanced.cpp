@@ -12,7 +12,7 @@ ParticleInstanced::~ParticleInstanced()
 	delete m_material;
 }
 
-void ParticleInstanced::update(float deltaTime)
+void ParticleInstanced::update(float const& deltaTime)
 {
 	m_time += deltaTime;
 
@@ -37,7 +37,7 @@ void ParticleInstanced::preRender()
 	m_material->setVec3("Gravity", m_gravity);
 }
 
-void ParticleInstanced::deserialize(YAML::Node compNode)
+void ParticleInstanced::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node numParticlesNode = compNode["numParticles"];
 	if (numParticlesNode)
@@ -76,7 +76,7 @@ void ParticleInstanced::deserialize(YAML::Node compNode)
 	m_mesh = getResourceObject<Mesh>(compNode, "mesh");
 }
 
-void ParticleInstanced::render(MatrixStack * matrixStack)
+void ParticleInstanced::render(MatrixStack * const& matrixStack)
 {
 	m_material->bind();
 	m_material->getShader()->updateViaActiveCamera(matrixStack);

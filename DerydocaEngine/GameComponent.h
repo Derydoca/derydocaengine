@@ -22,14 +22,14 @@ public:
 	GameComponent() {}
 	virtual void init() {}
 	virtual void postInit() {}
-	virtual void update(float deltaTime) {}
+	virtual void update(float const& deltaTime) {}
 	virtual void preRender() {}
-	virtual void render(MatrixStack* matrixStack) {}
-	virtual void renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform) {}
+	virtual void render(MatrixStack* const& matrixStack) {}
+	virtual void renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform) {}
 	virtual void postRender() {}
-	inline void setGameObject(GameObject* gameObject) { m_gameObject = gameObject; }
+	inline void setGameObject(GameObject* const& gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }
-	virtual void deserialize(YAML::Node compNode) { };
+	virtual void deserialize(YAML::Node const& compNode) { };
 
 	template<typename T>
 	inline T* getComponent()
@@ -62,13 +62,13 @@ public:
 
 protected:
 	template<typename T>
-	inline T getResource(YAML::Node node, std::string resourceName)
+	inline T getResource(YAML::Node const& node, std::string const& resourceName)
 	{
 		Resource* resource = getResource(node, resourceName);
 		return static_cast<T>(resource);
 	}
 
-	inline Resource* getResource(YAML::Node node, std::string resourceName)
+	inline Resource* getResource(YAML::Node const& node, std::string const& resourceName)
 	{
 		YAML::Node resourceNode = node[resourceName];
 
@@ -83,13 +83,13 @@ protected:
 	}
 
 	template<typename T>
-	inline T* getResourceObject(uuid resourceId)
+	inline T* getResourceObject(uuid const& resourceId)
 	{
 		return ObjectLibrary::getInstance().getResourceObject<T>(resourceId);
 	}
 
 	template<typename T>
-	inline T* getResourceObject(YAML::Node node, std::string resourceName)
+	inline T* getResourceObject(YAML::Node const& node, std::string const& resourceName)
 	{
 		YAML::Node resourceIdNode = node[resourceName];
 		if (resourceIdNode == nullptr || !resourceIdNode.IsScalar())
@@ -103,7 +103,7 @@ protected:
 	}
 
 	template<typename T>
-	inline std::vector<T> loadComponents(YAML::Node node, std::string componentCollectionName)
+	inline std::vector<T> loadComponents(YAML::Node const& node, std::string const& componentCollectionName)
 	{
 		vector<T> objectArr = vector<T>();
 

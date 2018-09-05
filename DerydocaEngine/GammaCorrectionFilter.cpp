@@ -21,7 +21,7 @@ void GammaCorrectionFilter::init()
 	}
 }
 
-void GammaCorrectionFilter::deserialize(YAML::Node compNode)
+void GammaCorrectionFilter::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node lumThreshNode = compNode["lumThresh"];
 	if (lumThreshNode)
@@ -30,7 +30,7 @@ void GammaCorrectionFilter::deserialize(YAML::Node compNode)
 	}
 }
 
-void GammaCorrectionFilter::update(float deltaTime)
+void GammaCorrectionFilter::update(float const& deltaTime)
 {
 	updateShader();
 }

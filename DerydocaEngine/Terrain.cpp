@@ -8,12 +8,12 @@ Terrain::Terrain()
 	m_heightScale = 0.1f;
 }
 
-Terrain::Terrain(const std::string & fileName, float unitScale, float heightScale)
+Terrain::Terrain(const std::string & fileName, float const& unitScale, float const& heightScale)
 {
 	loadTerrainFromTexture(fileName, unitScale, heightScale);
 }
 
-Terrain::Terrain(int width, int depth, float unitScale, float heightScale) :
+Terrain::Terrain(int const& width, int const& depth, float const& unitScale, float const& heightScale) :
 	m_width(width),
 	m_depth(depth),
 	m_unitScale(unitScale),
@@ -108,7 +108,7 @@ void Terrain::updateMesh()
 	m_mesh->loadMeshComponentDataDEPRECATED(numVerts, positions, normals, texCoords, indices, numIndices);
 }
 
-void Terrain::setTextureSlot(int slot, Texture * texture)
+void Terrain::setTextureSlot(int const& slot, Texture * const& texture)
 {
 	m_meshRenderer->getMaterial()->setTextureSlot(slot, texture);
 }
@@ -118,12 +118,12 @@ void Terrain::init()
 	m_meshRenderer->setGameObject(getGameObject());
 }
 
-void Terrain::render(MatrixStack * matrixStack)
+void Terrain::render(MatrixStack * const& matrixStack)
 {
 	m_meshRenderer->render(matrixStack);
 }
 
-void Terrain::deserialize(YAML::Node node)
+void Terrain::deserialize(YAML::Node const& node)
 {
 	YAML::Node heightmapNode = node["heightmap"];
 	if (heightmapNode)
@@ -142,7 +142,7 @@ void Terrain::deserialize(YAML::Node node)
 	}
 }
 
-void Terrain::loadTerrainFromTexture(const std::string & fileName, float unitScale, float heightScale)
+void Terrain::loadTerrainFromTexture(const std::string & fileName, float const& unitScale, float const& heightScale)
 {
 	m_unitScale = unitScale;
 	m_heightScale = heightScale;

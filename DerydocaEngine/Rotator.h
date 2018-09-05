@@ -9,11 +9,11 @@ public:
 	Rotator(float rotationSpeed);
 	~Rotator();
 
-	void update(float deltaTime);
+	void update(float const& deltaTime);
 
-	void deserialize(YAML::Node node);
+	void deserialize(YAML::Node const& node);
 
-	inline void setSpeed(float rotSpeed) { m_rotSpeed = rotSpeed; }
+	inline void setSpeed(float const& rotSpeed) { m_rotSpeed = rotSpeed; }
 	inline float getSpeed() const { return m_rotSpeed; }
 private:
 	float m_rotVal;

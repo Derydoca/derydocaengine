@@ -11,7 +11,7 @@ ParticleFountain::~ParticleFountain()
 	delete m_material;
 }
 
-void ParticleFountain::update(float deltaTime)
+void ParticleFountain::update(float const& deltaTime)
 {
 	m_time += deltaTime;
 
@@ -36,7 +36,7 @@ void ParticleFountain::preRender()
 	m_material->setFloat("Time", m_time);
 }
 
-void ParticleFountain::deserialize(YAML::Node compNode)
+void ParticleFountain::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node numParticlesNode = compNode["numParticles"];
 	if (numParticlesNode)
@@ -72,7 +72,7 @@ void ParticleFountain::deserialize(YAML::Node compNode)
 	m_material->setTexture("ParticleTex", m_tex);
 }
 
-void ParticleFountain::render(MatrixStack * matrixStack)
+void ParticleFountain::render(MatrixStack * const& matrixStack)
 {
 	glDisable(GL_DEPTH_TEST);
 	m_material->bind();

@@ -10,7 +10,7 @@ MaterialRefresher::~MaterialRefresher()
 {
 }
 
-bool getLastModifiedTime(std::string filePath, std::time_t &time)
+bool getLastModifiedTime(std::string const& filePath, std::time_t &time)
 {
 	if (!boost::filesystem::exists(filePath))
 	{
@@ -56,7 +56,7 @@ void MaterialRefresher::init()
 	m_tessControlShaderExists = getLastModifiedTime(m_tessControlShaderPath.c_str(), m_tessControlShaderModifiedTime);
 }
 
-void MaterialRefresher::update(float deltaTime)
+void MaterialRefresher::update(float const& deltaTime)
 {
 	if (isShaderSourceUpdated()) {
 		refreshMaterial();

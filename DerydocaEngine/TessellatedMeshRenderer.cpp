@@ -35,7 +35,7 @@ void TessellatedMeshRenderer::init()
 	glPatchParameteri(GL_PATCH_VERTICES, 16);
 }
 
-void TessellatedMeshRenderer::deserialize(YAML::Node compNode)
+void TessellatedMeshRenderer::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node tessellationLevelNode = compNode["tessellationLevel"];
 	if (tessellationLevelNode)
@@ -77,7 +77,7 @@ void TessellatedMeshRenderer::deserialize(YAML::Node compNode)
 	m_mesh = getResourceObject<BezierPatchMesh>(compNode, "bezierPatchMesh");
 }
 
-void TessellatedMeshRenderer::render(MatrixStack * matrixStack)
+void TessellatedMeshRenderer::render(MatrixStack * const& matrixStack)
 {
 	m_material->bind();
 	m_material->getShader()->updateViaActiveCamera(matrixStack);
@@ -88,7 +88,7 @@ void TessellatedMeshRenderer::render(MatrixStack * matrixStack)
 	glFinish();
 }
 
-void TessellatedMeshRenderer::renderMesh(MatrixStack * matrixStack, Material * material, Projection projection, Transform * projectionTransform)
+void TessellatedMeshRenderer::renderMesh(MatrixStack * const& matrixStack, Material * const& material, Projection const& projection, Transform * const& projectionTransform)
 {
 	// Consider an alternate to using the same material as what is being used to render to screen
 	//  The calculations may be excessive for a shadow calc

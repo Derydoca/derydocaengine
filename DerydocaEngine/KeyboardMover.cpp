@@ -6,7 +6,7 @@ KeyboardMover::KeyboardMover()
 {
 }
 
-KeyboardMover::KeyboardMover(Keyboard * keyboard, float movementSpeed, int keyForward, int keyBackward, int keyLeft, int keyRight, int keyUp, int keyDown) :
+KeyboardMover::KeyboardMover(Keyboard * const& keyboard, float const& movementSpeed, int const& keyForward, int const& keyBackward, int const& keyLeft, int const& keyRight, int const& keyUp, int const& keyDown) :
 	m_keyboard(keyboard),
 	m_movementSpeed(movementSpeed),
 	m_keyForward(keyForward),
@@ -27,7 +27,7 @@ void KeyboardMover::init()
 	m_transform = getGameObject()->getTransform();
 }
 
-void KeyboardMover::update(float deltaTime)
+void KeyboardMover::update(float const& deltaTime)
 {
 	float frameSpeed = m_movementSpeed * deltaTime;
 	glm::vec3 frameMovement = glm::vec3(0);
@@ -66,7 +66,7 @@ void KeyboardMover::update(float deltaTime)
 	m_transform->translate(frameMovement);
 }
 
-void KeyboardMover::deserialize(YAML::Node node)
+void KeyboardMover::deserialize(YAML::Node const& node)
 {
 	m_movementSpeed = node["movementSpeed"].as<float>();
 	m_keyForward = node["keyForward"].as<int>();

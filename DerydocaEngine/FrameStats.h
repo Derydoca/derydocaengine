@@ -10,7 +10,7 @@ public:
 	~FrameStats();
 
 	virtual void postInit();
-	virtual void update(float deltaTime);
+	virtual void update(float const& deltaTime);
 private:
 	TextRenderer * m_textRenderer;
 };

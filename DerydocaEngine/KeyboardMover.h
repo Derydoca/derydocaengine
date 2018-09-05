@@ -9,20 +9,20 @@ public:
 	GENINSTANCE(KeyboardMover);
 	KeyboardMover();
 	KeyboardMover(
-		Keyboard* keyboard,
-		float movementSpeed,
-		int keyForward,
-		int keyBackward,
-		int keyLeft,
-		int keyRight,
-		int keyUp,
-		int keyDown);
+		Keyboard* const& keyboard,
+		float const& movementSpeed,
+		int const& keyForward,
+		int const& keyBackward,
+		int const& keyLeft,
+		int const& keyRight,
+		int const& keyUp,
+		int const& keyDown);
 	~KeyboardMover();
 
 	void init();
-	void update(float deltaTime);
+	void update(float const& deltaTime);
 
-	void deserialize(YAML::Node node);
+	void deserialize(YAML::Node const& node);
 private:
 	Transform* m_transform;
 	Keyboard* m_keyboard;

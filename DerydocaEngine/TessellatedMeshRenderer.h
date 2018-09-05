@@ -13,9 +13,9 @@ public:
 	~TessellatedMeshRenderer();
 
 	virtual void init();
-	virtual void deserialize(YAML::Node compNode);
-	void render(MatrixStack* matrixStack);
-	void renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform);
+	virtual void deserialize(YAML::Node const& compNode);
+	void render(MatrixStack* const& matrixStack);
+	void renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform);
 
 	Material* getMaterial() const { return m_material; }
 private:

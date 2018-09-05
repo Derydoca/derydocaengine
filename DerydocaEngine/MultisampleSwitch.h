@@ -11,9 +11,9 @@ public:
 	~MultisampleSwitch();
 
 	virtual void init();
-	virtual void update(float deltaTime);
+	virtual void update(float const& deltaTime);
 
-	void setEnableMultisample(bool enable);
+	void setEnableMultisample(bool const& enable);
 private:
 	Keyboard* m_keyboard;
 	bool m_enableMultisample;

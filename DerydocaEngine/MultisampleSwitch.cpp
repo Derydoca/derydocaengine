@@ -33,7 +33,7 @@ void MultisampleSwitch::init()
 	}
 }
 
-void MultisampleSwitch::update(float deltaTime)
+void MultisampleSwitch::update(float const& deltaTime)
 {
 	if (m_keyboard->isKeyDownFrame(SDLK_l))
 	{
@@ -41,7 +41,7 @@ void MultisampleSwitch::update(float deltaTime)
 	}
 }
 
-void MultisampleSwitch::setEnableMultisample(bool enable)
+void MultisampleSwitch::setEnableMultisample(bool const& enable)
 {
 	if (!m_msaaSupported)
 	{

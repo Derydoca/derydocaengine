@@ -10,7 +10,7 @@ public:
 	~WoodSliceTexture();
 
 	virtual void init();
-	virtual void deserialize(YAML::Node compNode);
+	virtual void deserialize(YAML::Node const& compNode);
 	virtual void preRender();
 private:
 	Transform m_sliceMatrixTransform;

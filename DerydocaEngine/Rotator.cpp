@@ -15,13 +15,13 @@ Rotator::~Rotator()
 {
 }
 
-void Rotator::update(float deltaTime)
+void Rotator::update(float const& deltaTime)
 {
 	m_rotVal += deltaTime * m_rotSpeed;
 	getGameObject()->getTransform()->setEulerAngles(glm::vec3(0, m_rotVal, 0));
 }
 
-void Rotator::deserialize(YAML::Node node)
+void Rotator::deserialize(YAML::Node const& node)
 {
 	m_rotSpeed = node["rotationSpeed"].as<float>();
 }

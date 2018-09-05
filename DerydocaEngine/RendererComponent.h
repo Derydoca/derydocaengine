@@ -8,16 +8,16 @@ class RendererComponent : public GameComponent
 {
 public:
 	Material* getMaterial() const { return m_material; }
-	void setMaterial(Material* material) { m_material = material; }
+	void setMaterial(Material* const& material) { m_material = material; }
 protected:
 	void updateMesh();
-	void markComponentAsDirty(MeshComponents component)
+	void markComponentAsDirty(MeshComponents const& component)
 	{
 		m_dirtyComponents = (MeshComponents)(m_dirtyComponents | component);
 	}
 
-	void render(MatrixStack* matrixStack);
-	void renderMesh(MatrixStack* matrixStack, Material* material, Projection projection, Transform* projectionTransform);
+	void render(MatrixStack* const& matrixStack);
+	void renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform);
 	unsigned int getNumVertices() const { return m_numVertices; }
 	unsigned int getNumIndices() const { return m_numIndices; }
 

@@ -17,8 +17,8 @@ public:
 	~ParticleSystem();
 
 	virtual void init();
-	virtual void deserialize(YAML::Node compNode);
-	void render(MatrixStack* matrixStack);
+	virtual void deserialize(YAML::Node const& compNode);
+	void render(MatrixStack* const& matrixStack);
 private:
 	unsigned int m_numParticles;
 	float m_size2;

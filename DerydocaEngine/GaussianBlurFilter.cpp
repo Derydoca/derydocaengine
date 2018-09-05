@@ -46,16 +46,16 @@ void GaussianBlurFilter::init()
 	updateShader();
 }
 
-void GaussianBlurFilter::deserialize(YAML::Node compNode)
+void GaussianBlurFilter::deserialize(YAML::Node const& compNode)
 {
 }
 
-void GaussianBlurFilter::update(float deltaTime)
+void GaussianBlurFilter::update(float const& deltaTime)
 {
 	updateShader();
 }
 
-float GaussianBlurFilter::gauss(float x, float sigma2)
+float GaussianBlurFilter::gauss(float const& x, float const& sigma2)
 {
 	double coeff = 1.0 / (glm::two_pi<double>() * sigma2);
 	double expon = -(x*x) / (2.0 * sigma2);

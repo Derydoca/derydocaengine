@@ -25,7 +25,7 @@ void EdgeDetectionFilter::init()
 	updateShader();
 }
 
-void EdgeDetectionFilter::deserialize(YAML::Node compNode)
+void EdgeDetectionFilter::deserialize(YAML::Node const& compNode)
 {
 	YAML::Node edgeThresholdNode = compNode["edgeThreshold"];
 	if (edgeThresholdNode)
@@ -35,7 +35,7 @@ void EdgeDetectionFilter::deserialize(YAML::Node compNode)
 
 }
 
-void EdgeDetectionFilter::update(float deltaTime)
+void EdgeDetectionFilter::update(float const& deltaTime)
 {
 	updateShader();
 }
