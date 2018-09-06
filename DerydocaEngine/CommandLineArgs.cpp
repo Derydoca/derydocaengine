@@ -1,18 +1,15 @@
 #include "CommandLineArgs.h"
 
-
-
-CommandLineArgs::CommandLineArgs(int argc, char* argv[])
+CommandLineArgs::CommandLineArgs(int const& argc, char* argv[])
 {
 	processArguments(argc, argv);
 }
-
 
 CommandLineArgs::~CommandLineArgs()
 {
 }
 
-void CommandLineArgs::processArguments(int argc, char * argv[])
+void CommandLineArgs::processArguments(int const& argc, char * argv[])
 {
 	// Extract the path to the executable
 	if (argc > 0)
@@ -46,12 +43,12 @@ void CommandLineArgs::processArguments(int argc, char * argv[])
 	}
 }
 
-bool CommandLineArgs::keyExists(string key)
+bool CommandLineArgs::keyExists(string const& key)
 {
 	return m_arguments.find(key) != m_arguments.end();
 }
 
-vector<string> CommandLineArgs::getValues(string key)
+vector<string> CommandLineArgs::getValues(string const& key)
 {
 	if (!keyExists(key))
 	{

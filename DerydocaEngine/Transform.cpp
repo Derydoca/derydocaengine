@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include "GameObject.h"
 
-glm::mat4 Transform::getWorldModel()
+glm::mat4 Transform::getWorldModel() const 
 {
 	// Start off with the object's local model
 	glm::mat4 worldModel = getModel();
@@ -26,7 +26,7 @@ glm::mat4 Transform::getWorldModel()
 	return worldModel;
 }
 
-glm::vec3 Transform::getWorldPos()
+glm::vec3 Transform::getWorldPos() const 
 {
 	// Start off with the object's local position
 	glm::vec4 pos = glm::vec4(m_pos, 1);
@@ -55,7 +55,7 @@ glm::vec3 Transform::getWorldPos()
 	return worldPos;
 }
 
-void Transform::translate(glm::vec3 & delta)
+void Transform::translate(glm::vec3 const& delta)
 {
 	m_pos.x += delta.x;
 	m_pos.y += delta.y;

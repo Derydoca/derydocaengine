@@ -16,4 +16,4 @@ enum FileType
 	SpriteSheetFileType,
 };
 
-FileType pathToFileType(std::string str);
+FileType pathToFileType(std::string const& str);

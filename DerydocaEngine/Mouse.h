@@ -10,8 +10,8 @@ public:
 	~Mouse();
 	void init();
 	void update();
-	Key* getKey(int keyIndex) { return &m_keys[keyIndex]; }
-	void setRelative(bool isRelative)
+	Key* getKey(int const& keyIndex) { return &m_keys[keyIndex]; }
+	void setRelative(bool const& isRelative)
 	{
 		// Set the mouse to relative mode and flush the first relative move so that the first query isn't incorrect
 		SDL_SetRelativeMouseMode((SDL_bool)isRelative);
@@ -19,9 +19,9 @@ public:
 			SDL_GetRelativeMouseState(nullptr, nullptr);
 		}
 	}
-	bool isKeyDown(int keycode);
-	bool isKeyDownFrame(int keycode);
-	bool isKeyUpFrame(int keycode);
+	bool isKeyDown(int const& keycode) const;
+	bool isKeyDownFrame(int const& keycode) const;
+	bool isKeyUpFrame(int const& keycode) const;
 
 	inline glm::ivec2 getDifferential() {
 		if (m_isLocked)

@@ -10,7 +10,7 @@ CubemapResourceSerializer::~CubemapResourceSerializer()
 {
 }
 
-void* CubemapResourceSerializer::deserialize(Resource * resource)
+void* CubemapResourceSerializer::deserialize(Resource * const& resource)
 {
 	CubemapResource* cubemapResource = (CubemapResource*)resource;
 

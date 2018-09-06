@@ -7,7 +7,7 @@ public:
 	MeshResourceSerializer();
 	~MeshResourceSerializer();
 
-	void* deserialize(Resource* resource);
+	void* deserialize(Resource* const& resource);
 	ResourceType getResourceType();
 };
 

@@ -7,7 +7,7 @@
 #include "BezierPatchMeshResourceSerializer.h"
 #include "SpriteSheetResourceSerializer.h"
 
-ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType type)
+ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType const& type)
 {
 	// Return the associated serializer for the resource type specified
 	auto search = m_serializers.find(type);
@@ -41,7 +41,7 @@ ResourceSerializerLibrary::~ResourceSerializerLibrary()
 	}
 }
 
-void ResourceSerializerLibrary::registerSerializer(ResourceSerializer * serializer)
+void ResourceSerializerLibrary::registerSerializer(ResourceSerializer * const& serializer)
 {
 	// Add this serializer to the list of serializers
 	m_serializers.insert(std::pair<ResourceType, ResourceSerializer*>(serializer->getResourceType(), serializer));

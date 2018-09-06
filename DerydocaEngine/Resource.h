@@ -9,16 +9,16 @@ struct Resource
 {
 public:
 	Resource();
-	Resource(uuid id, std::string sourceFilePath, std::string metaFilePath, ResourceType type);
+	Resource(uuid const& id, std::string const& sourceFilePath, std::string const& metaFilePath, ResourceType const& type);
 
-	void setId(uuid id) { m_id = id; }
-	void setFilePaths(std::string sourceFilePath, std::string metaFilePath) { m_sourceFilePath = sourceFilePath; m_metaFilePath = metaFilePath; }
-	void setType(ResourceType type) { m_type = type; }
+	void setId(uuid const& id) { m_id = id; }
+	void setFilePaths(std::string const& sourceFilePath, std::string const& metaFilePath) { m_sourceFilePath = sourceFilePath; m_metaFilePath = metaFilePath; }
+	void setType(ResourceType const& type) { m_type = type; }
 
-	uuid getId() { return m_id; }
-	ResourceType getType() { return m_type; }
-	std::string getSourceFilePath() { return m_sourceFilePath; }
-	std::string getMetaFilePath() { return m_metaFilePath; }
+	uuid getId() const { return m_id; }
+	ResourceType getType() const { return m_type; }
+	std::string getSourceFilePath() const { return m_sourceFilePath; }
+	std::string getMetaFilePath() const { return m_metaFilePath; }
 	void* getResourceObject();
 protected:
 	uuid m_id;

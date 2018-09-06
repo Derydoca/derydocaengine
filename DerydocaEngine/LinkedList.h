@@ -10,7 +10,7 @@ public:
 	~LinkedList() {
 	}
 
-	void add(LinkedListNode<T>* node) {
+	void add(LinkedListNode<T>* const& node) {
 		// If the head is set, find the tail and add the node to it
 		if (m_head != NULL) {
 			// Get the tail
@@ -28,7 +28,7 @@ public:
 		}
 	}
 
-	void add(T* nodeData) {
+	void add(T* const& nodeData) {
 		LinkedListNode<T>* node = new LinkedListNode<T>(nodeData);
 		add(node);
 	}

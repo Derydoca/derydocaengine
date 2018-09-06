@@ -11,12 +11,12 @@ using namespace std;
 class ResourceSerializer
 {
 public:
-	virtual void* deserialize(Resource* resource) = 0;
+	virtual void* deserialize(Resource* const& resource) = 0;
 	virtual ResourceType getResourceType() = 0;
 
 protected:
 	template<typename T>
-	inline T loadResource(YAML::Node node, std::string resourceName)
+	inline T loadResource(YAML::Node const& node, std::string const& resourceName)
 	{
 		YAML::Node resourceIdNode = node[resourceName];
 		if (!resourceIdNode)
@@ -36,7 +36,7 @@ protected:
 		}
 	}
 
-	std::string getSourceFilePath(YAML::Node node, std::string resourceName)
+	std::string getSourceFilePath(YAML::Node const& node, std::string const& resourceName)
 	{
 		boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
 		Resource * resource = ObjectLibrary::getInstance().getResource(id);

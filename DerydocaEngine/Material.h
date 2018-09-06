@@ -16,18 +16,18 @@ public:
 
 	inline void setShader(Shader* shader) { m_shader = shader; }
 	inline Shader* getShader() const { return m_shader; }
-	void setBool(const std::string name, bool value);
-	void setInt(const std::string name, int value);
-	void setTexture(const std::string name, Texture* texture);
-	void setTextureSlot(int slot, Texture* texture);
-	void setFloat(const std::string name, float value);
-	void setVec3(const std::string name, glm::vec3 value);
-	void setVec4(const std::string name, glm::vec4 value);
-	void setColorRGB(const std::string name, Color value);
-	void setColorRGBA(const std::string name, Color value);
-	void setMat3(const std::string name, glm::mat3 value);
-	void setMat4(const std::string name, glm::mat4 value);
-	void setSubroutine(const GLuint program, const GLuint value);
+	void setBool(std::string const& name, bool const& value);
+	void setInt(std::string const& name, int const& value);
+	void setTexture(std::string const& name, Texture* const& texture);
+	void setTextureSlot(int const& slot, Texture* const& texture);
+	void setFloat(std::string const& name, float const& value);
+	void setVec3(std::string const& name, glm::vec3 const& value);
+	void setVec4(std::string const& name, glm::vec4 const& value);
+	void setColorRGB(std::string const& name, Color const& value);
+	void setColorRGBA(std::string const& name, Color const& value);
+	void setMat3(std::string const& name, glm::mat3 const& value);
+	void setMat4(std::string const& name, glm::mat4 const& value);
+	void setSubroutine(GLuint const& program, GLuint const& value);
 	void bind();
 	void unbind();
 private:

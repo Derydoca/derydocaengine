@@ -10,7 +10,7 @@ public:
 	~BezierPatchMesh();
 
 	int getNumPatches() const { return m_numPatches; }
-	void loadPatchData(int numPatches, float* patchData);
+	void loadPatchData(int const& numPatches, float* const& patchData);
 	float* getPatchData() const { return m_patchData; }
 private:
 	int m_numPatches;

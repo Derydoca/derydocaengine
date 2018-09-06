@@ -11,7 +11,7 @@ public:
 		return instance;
 	}
 
-	ResourceSerializer * getSerializer(ResourceType type);
+	ResourceSerializer * getSerializer(ResourceType const& type);
 
 	void operator=(ResourceSerializerLibrary const&) = delete;
 private:
@@ -19,7 +19,7 @@ private:
 	~ResourceSerializerLibrary();
 	ResourceSerializerLibrary(ResourceSerializerLibrary const&);
 
-	void registerSerializer(ResourceSerializer * serializer);
+	void registerSerializer(ResourceSerializer * const& serializer);
 
 	std::map<ResourceType, ResourceSerializer *> m_serializers;
 };

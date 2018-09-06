@@ -6,13 +6,13 @@ class RenderTexture : public Texture
 {
 public:
 	RenderTexture();
-	RenderTexture(int width, int height);
+	RenderTexture(int const& width, int const& height);
 	~RenderTexture();
 
-	void bind(unsigned int unit);
+	void bind(unsigned int const& unit);
 	void bindAsRenderTexture();
 	float getAspectRatio();
-	void initializeTexture(int width, int height);
+	void initializeTexture(int const& width, int const& height);
 private:
 	GLuint m_framebuffer;
 	GLuint m_depthbuffer;

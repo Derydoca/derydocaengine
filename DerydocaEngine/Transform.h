@@ -16,21 +16,21 @@ public:
 	{
 	}
 
-	Transform(const glm::vec3& pos) :
+	Transform(glm::vec3 const& pos) :
 		m_pos(pos),
 		m_quat(glm::fquat()),
 		m_scale(glm::vec3(1,1,1))
 	{
 	}
 
-	Transform(const glm::vec3& pos, const glm::vec3& rot, const glm::vec3& scale) :
+	Transform(glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) :
 		m_pos(pos),
 		m_scale(scale)
 	{
 		setEulerAngles(rot);
 	}
 
-	Transform(const glm::vec3& pos, const glm::fquat& quat, const glm::vec3& scale) :
+	Transform(glm::vec3 const& pos, glm::fquat const& quat, glm::vec3 const& scale) :
 		m_pos(pos),
 		m_quat(quat),
 		m_scale(scale)
@@ -43,21 +43,21 @@ public:
 	inline glm::mat4 getTranslationMatrix() const { return glm::translate(m_pos); }
 	inline glm::mat4 getRotationMatrix() const { return glm::mat4_cast(m_quat); }
 	inline glm::mat4 getScaleMatrix() const { return glm::scale(m_scale); }
-	glm::mat4 getWorldModel();
+	glm::mat4 getWorldModel() const;
 
-	glm::vec3 getWorldPos();
-	inline glm::vec3& getPos() { return m_pos; }
-	inline glm::fquat& getQuat() { return m_quat; }
-	inline glm::vec3& getScale() { return m_scale; }
+	glm::vec3 getWorldPos() const;
+	inline glm::vec3 getPos() const { return m_pos; }
+	inline glm::fquat getQuat() const { return m_quat; }
+	inline glm::vec3 getScale() const { return m_scale; }
 	GameObject* getGameObject() const { return m_gameObject; }
 
-	inline void setPos(const glm::vec3& pos) { m_pos = pos; }
-	inline void setEulerAngles(const glm::vec3& euler) { m_quat = glm::fquat(euler * 0.0174533f); }
-	inline void setQuat(const glm::fquat& quat) { m_quat = quat; }
-	inline void setScale(const glm::vec3& scale) { m_scale = scale; }
+	inline void setPos(glm::vec3 const& pos) { m_pos = pos; }
+	inline void setEulerAngles(glm::vec3 const& euler) { m_quat = glm::fquat(euler * 0.0174533f); }
+	inline void setQuat(glm::fquat const& quat) { m_quat = quat; }
+	inline void setScale(glm::vec3 const& scale) { m_scale = scale; }
 	void setGameObject(GameObject* object) { m_gameObject = object; }
 
-	void translate(glm::vec3& delta);
+	void translate(glm::vec3 const& delta);
 private:
 	glm::vec3 m_pos;
 	glm::vec3 m_scale;

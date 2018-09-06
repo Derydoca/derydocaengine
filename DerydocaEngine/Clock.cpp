@@ -15,7 +15,7 @@ Clock::Clock() :
 	m_lastFrameCycle = m_timeCycles;
 }
 
-Clock::Clock(Uint64 startCycle) :
+Clock::Clock(Uint64 const& startCycle) :
 	m_timeCycles(startCycle),
 	m_timeScale(1.0f),
 	m_paused(false)
@@ -24,7 +24,7 @@ Clock::Clock(Uint64 startCycle) :
 	m_lastFrameCycle = m_timeCycles;
 }
 
-float Clock::calcDeltaSeconds(const Clock & other)
+float Clock::calcDeltaSeconds(Clock const& other)
 {
 	Uint64 dt = m_timeCycles - other.m_timeCycles;
 	return cyclesToSeconds(dt);
@@ -42,7 +42,7 @@ void Clock::update()
 	}
 }
 
-void Clock::update(float dtRealSeconds)
+void Clock::update(float const& dtRealSeconds)
 {
 	if (!m_paused) {
 		Uint64 dtScaledCycles = secondsToCycles(dtRealSeconds * m_timeScale);

@@ -46,7 +46,7 @@ BezierPatchMesh * BezierPatchMeshFileLoader::Load(const char * filePath)
 	return bpm;
 }
 
-bool BezierPatchMeshFileLoader::loadPatchData(istream& fileStream, int patch, float * patchData)
+bool BezierPatchMeshFileLoader::loadPatchData(istream & fileStream, int const& patch, float * const& patchData)
 {
 	string line;
 	

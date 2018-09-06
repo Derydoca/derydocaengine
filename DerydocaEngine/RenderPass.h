@@ -14,12 +14,12 @@ public:
 		m_renderTexture = nullptr;
 	}
 
-	RenderPass(string name) : RenderPass()
+	RenderPass(string const& name) : RenderPass()
 	{
 		m_name = name;
 	}
 
-	RenderPass(string name, RenderTexture* renderTexture, string renderTextureName)
+	RenderPass(string const& name, RenderTexture* const& renderTexture, string const& renderTextureName)
 	{
 		assert(renderTexture != nullptr);
 
@@ -28,7 +28,7 @@ public:
 		m_renderTextureName = renderTextureName;
 	}
 
-	RenderPass(RenderPass* pass, int index)
+	RenderPass(RenderPass* const& pass, int const& index)
 	{
 		m_name = pass->getName();
 		m_shaderSubroutineIndex = index;

@@ -9,7 +9,7 @@ SpriteSheetResourceSerializer::~SpriteSheetResourceSerializer()
 {
 }
 
-void * SpriteSheetResourceSerializer::deserialize(Resource * resource)
+void * SpriteSheetResourceSerializer::deserialize(Resource * const& resource)
 {
 	SpriteSheet* ss = new SpriteSheet();
 	ss->LoadFromDisk(resource->getSourceFilePath());

@@ -7,7 +7,7 @@ RenderTexture::RenderTexture()
 
 }
 
-RenderTexture::RenderTexture(int width, int height)
+RenderTexture::RenderTexture(int const& width, int const& height)
 {
 	initializeTexture(width, height);
 }
@@ -19,7 +19,7 @@ RenderTexture::~RenderTexture()
 	if(m_framebuffer) glDeleteFramebuffers(1, &m_framebuffer);
 }
 
-void RenderTexture::initializeTexture(int width, int height)
+void RenderTexture::initializeTexture(int const& width, int const& height)
 {
 	m_width = width;
 	m_height = height;
@@ -45,7 +45,7 @@ void RenderTexture::initializeTexture(int width, int height)
 	}
 }
 
-void RenderTexture::bind(unsigned int unit)
+void RenderTexture::bind(unsigned int const& unit)
 {
 	assert(unit >= 0 && unit <= 31);
 

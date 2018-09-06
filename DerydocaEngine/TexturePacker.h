@@ -13,10 +13,21 @@ class Texture;
 class TexturePacker
 {
 public:
-	TexturePacker(int channels);
+	TexturePacker(int const& channels);
 	~TexturePacker();
 
-	void addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height, int channels);
+	void addImage(
+		unsigned long const& id, 
+		float const& sizeX, 
+		float const& sizeY, 
+		float const& bearingX, 
+		float const& bearingY, 
+		float const& advanceX, 
+		float const& advanceY, 
+		unsigned char* const& imageBuffer, 
+		int const& width, 
+		int const& height, 
+		int const& channels);
 	void packImages();
 	bool getIsDirty() const { return m_isDirty; }
 	Texture* allocTexture() { return m_packedImageData.allocTexture(); };

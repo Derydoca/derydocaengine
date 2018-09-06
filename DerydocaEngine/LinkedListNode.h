@@ -33,7 +33,7 @@ public:
 		setPrev(NULL);
 		setNext(NULL);
 	}
-	void addPrev(LinkedListNode* other)
+	void addPrev(LinkedListNode* const& other)
 	{
 		if (m_prev == NULL) {
 			other->setNext(this);
@@ -45,7 +45,7 @@ public:
 		}
 		setPrev(other);
 	}
-	void addNext(LinkedListNode* other)
+	void addNext(LinkedListNode* const& other)
 	{
 		if (m_next == NULL) {
 			other->setPrev(this);
@@ -58,8 +58,8 @@ public:
 		setNext(other);
 	}
 protected:
-	void setPrev(LinkedListNode* other) { m_prev = other; }
-	void setNext(LinkedListNode* other) { m_next = other; }
+	void setPrev(LinkedListNode* const& other) { m_prev = other; }
+	void setNext(LinkedListNode* const& other) { m_next = other; }
 private:
 	T* m_data;
 	LinkedListNode* m_prev;

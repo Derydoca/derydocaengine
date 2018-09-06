@@ -13,11 +13,11 @@ public:
 		return instance;
 	}
 
-	void addLight(Light* light) { m_lights.push_back(light); }
-	void removeLight(Light* light) { m_lights.remove(light); }
+	void addLight(Light* const& light) { m_lights.push_back(light); }
+	void removeLight(Light* const& light) { m_lights.remove(light); }
 
-	void bindLightsToShader(MatrixStack* matrixStack, Transform* objectTransform, Shader* shader);
-	void renderShadowMaps(Transform* objectTransform);
+	void bindLightsToShader(MatrixStack* const& matrixStack, Transform* const& objectTransform, Shader* const& shader);
+	void renderShadowMaps(Transform* const& objectTransform);
 
 	void operator=(LightManager const&) = delete;
 private:
@@ -25,8 +25,8 @@ private:
 	LightManager(LightManager const&);
 	~LightManager();
 
-	void buildOffsetTex(int texSize, int samplesU, int samplesV);
-	std::list<Light*> getLights(Transform* objectTransform);
+	void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
+	std::list<Light*> getLights(Transform* const& objectTransform);
 
 	const int MAX_LIGHTS = 10;
 

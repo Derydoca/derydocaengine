@@ -11,7 +11,7 @@ TextureResourceSerializer::~TextureResourceSerializer()
 {
 }
 
-void * TextureResourceSerializer::deserialize(Resource * resource)
+void * TextureResourceSerializer::deserialize(Resource * const& resource)
 {
 	std::string sourceFilePath = resource->getSourceFilePath();
 

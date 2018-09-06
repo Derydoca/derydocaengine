@@ -1,6 +1,6 @@
 #include "ButtonState.h"
 
-ButtonState::ButtonState(unsigned int initialState) :
+ButtonState::ButtonState(unsigned int const& initialState) :
 	m_currentState(initialState),
 	m_downStates(0),
 	m_upStates(0)
@@ -11,7 +11,7 @@ ButtonState::~ButtonState()
 {
 }
 
-void ButtonState::update(unsigned int currentState)
+void ButtonState::update(unsigned int const& currentState)
 {
 	unsigned int changedStates = currentState ^ m_currentState;
 	m_downStates = changedStates & currentState;

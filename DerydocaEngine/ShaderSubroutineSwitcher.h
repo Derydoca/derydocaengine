@@ -14,9 +14,9 @@ public:
 	~ShaderSubroutineSwitcher();
 
 	virtual void init();
-	virtual void deserialize(YAML::Node compNode);
+	virtual void deserialize(YAML::Node const& compNode);
 private:
-	void setSubroutine(GLuint program, string subroutineName);
+	void setSubroutine(GLuint const& program, string const& subroutineName);
 
 	string m_subroutineName;
 };

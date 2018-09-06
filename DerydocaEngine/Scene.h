@@ -10,6 +10,6 @@ class GameObject;
 
 class Scene {
 public:
-	virtual void setUp(GameObject* root) {}
-	virtual void tearDown(GameObject* root) {}
+	virtual void setUp(GameObject* const& root) {}
+	virtual void tearDown(GameObject* const& root) {}
 };

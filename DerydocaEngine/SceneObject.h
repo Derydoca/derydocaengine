@@ -5,7 +5,7 @@
 class SceneObject
 {
 public:
-	SceneObject(boost::uuids::uuid id, std::string type, YAML::Node propertiesNode) :
+	SceneObject(boost::uuids::uuid const& id, std::string const& type, YAML::Node const& propertiesNode) :
 		m_id(id),
 		m_type(type),
 		m_properties(propertiesNode)
@@ -14,12 +14,12 @@ public:
 
 	~SceneObject() {}
 
-	boost::uuids::uuid getId() { return m_id; }
-	std::string getType() { return m_type; }
-	YAML::Node getProperties() { return m_properties; }
-	bool isObjectCreated() { return m_objectReference != 0; }
-	GameObject* getGameObject() { return m_objectReference; }
-	void setObjectReference(GameObject* reference) { m_objectReference = reference; }
+	boost::uuids::uuid getId() const { return m_id; }
+	std::string getType() const { return m_type; }
+	YAML::Node getProperties() const { return m_properties; }
+	bool isObjectCreated() const { return m_objectReference != 0; }
+	GameObject* getGameObject() const { return m_objectReference; }
+	void setObjectReference(GameObject* const& reference) { m_objectReference = reference; }
 private:
 	boost::uuids::uuid m_id;
 	std::string m_type;

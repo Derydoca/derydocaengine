@@ -7,6 +7,6 @@ public:
 	CubemapResourceSerializer();
 	~CubemapResourceSerializer();
 
-	void* deserialize(Resource* resource);
+	void* deserialize(Resource* const& resource);
 	ResourceType getResourceType();
 };

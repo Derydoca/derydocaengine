@@ -1,7 +1,7 @@
 #include "FileType.h"
 #include "StringUtils.h"
 
-FileType pathToFileType(std::string str)
+FileType pathToFileType(std::string const& str)
 {
 	std::string extension = getFileExtension(str);
 	if (extension == "derymaterial")

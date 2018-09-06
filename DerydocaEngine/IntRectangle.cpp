@@ -1,6 +1,6 @@
 #include "IntRectangle.h"
 
-bool IntRectangle::IsRectOverlapping(IntRectangle r1, IntRectangle r2)
+bool IntRectangle::IsRectOverlapping(IntRectangle & r1, IntRectangle & r2)
 {
 	int r1l = r1.getX();
 	int r1r = r1.getX() + r1.getWidth();
@@ -15,7 +15,7 @@ bool IntRectangle::IsRectOverlapping(IntRectangle r1, IntRectangle r2)
 	return r1l < r2r && r1r > r2l && r1t > r2b && r1b < r2t;
 }
 
-bool IntRectangle::IsPointInRect(IntRectangle rect, int x, int y)
+bool IntRectangle::IsPointInRect(IntRectangle & rect, int const& x, int const& y)
 {
 	if (x < rect.getX() || y < rect.getY() || x > rect.getX() + rect.getWidth() || y > rect.getHeight() + rect.getY())
 	{

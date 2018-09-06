@@ -7,6 +7,6 @@ public:
 	ShaderResourceSerializer() {}
 	~ShaderResourceSerializer() {}
 
-	void* deserialize(Resource* resource);
+	void* deserialize(Resource* const& resource);
 	ResourceType getResourceType();
 };

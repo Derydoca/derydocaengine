@@ -13,39 +13,39 @@
 class Shader
 {
 public:
-	Shader(const std::string& fileName);
-	Shader(const std::string& fileName, int count, const char *const * varyings);
+	Shader(std::string const& fileName);
+	Shader(std::string const& fileName, int const& count, const char *const * varyings);
 	~Shader();
 
 	void bind();
-	void update(const MatrixStack * matrixStack, Projection projection, Transform* trans);
-	void update(const glm::mat4 matrix);
-	void updateViaActiveCamera(const MatrixStack * matrixStack);
+	void update(MatrixStack * const& matrixStack, Projection const& projection, Transform* const& trans);
+	void update(glm::mat4 const& matrix);
+	void updateViaActiveCamera(MatrixStack * const& matrixStack);
 
-	void setFloat(std::string name, float val);
-	void setFloatArray(std::string name, float* arrayLocation, unsigned int arrayLength);
-	void setColorRGB(std::string name, Color color);
-	void setColorRGBA(std::string name, Color color);
-	void setInt(std::string name, int val);
-	void setIntArray(std::string name, int* arrayLocation, unsigned int arrayLength);
-	void setVec3(std::string name, glm::vec3 val);
-	void setVec4(std::string name, glm::vec4 val);
-	void setMat3(std::string name, glm::mat3 val);
-	void setMat4(std::string name, glm::mat4 val);
-	void setTexture(std::string name, int textureUnit, Texture* handle);
-	void setTexture(std::string name, int textureUnit, GLenum textureType, GLuint handle);
+	void setFloat(std::string const& name, float const& val);
+	void setFloatArray(std::string const& name, float* const& arrayLocation, unsigned int const& arrayLength);
+	void setColorRGB(std::string const& name, Color const& color);
+	void setColorRGBA(std::string const& name, Color const& color);
+	void setInt(std::string const& name, int const& val);
+	void setIntArray(std::string const& name, int* const& arrayLocation, unsigned int const& arrayLength);
+	void setVec3(std::string const& name, glm::vec3 const& val);
+	void setVec4(std::string const& name, glm::vec4 const& val);
+	void setMat3(std::string const& name, glm::mat3 const& val);
+	void setMat4(std::string const& name, glm::mat4 const& val);
+	void setTexture(std::string const& name, int const& textureUnit, Texture* const& handle);
+	void setTexture(std::string const& name, int const& textureUnit, GLenum const& textureType, GLuint const& handle);
 
-	void clearFloat(std::string name);
-	void clearFloatArray(std::string name, unsigned int arrayLength);
-	void clearColorRGB(std::string name);
-	void clearColorRGBA(std::string name);
-	void clearInt(std::string name);
-	void clearIntArray(std::string name, unsigned int arrayLength);
-	void clearVec3(std::string name);
-	void clearVec4(std::string name);
-	void clearMat3(std::string name);
-	void clearMat4(std::string name);
-	void clearTexture(std::string name, int textureUnit, GLenum textureType);
+	void clearFloat(std::string const& name);
+	void clearFloatArray(std::string const& name, unsigned int const& arrayLength);
+	void clearColorRGB(std::string const& name);
+	void clearColorRGBA(std::string const& name);
+	void clearInt(std::string const& name);
+	void clearIntArray(std::string const& name, unsigned int const& arrayLength);
+	void clearVec3(std::string const& name);
+	void clearVec4(std::string const& name);
+	void clearMat3(std::string const& name);
+	void clearMat4(std::string const& name);
+	void clearTexture(std::string const& name, int const& textureUnit, GLenum const& textureType);
 
 	std::string GetLoadPath() const { return m_loadPath; }
 	std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
@@ -54,18 +54,18 @@ public:
 	std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 	std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 
-	GLuint getSubroutineIndex(GLuint program, std::string subroutineName);
-	void setSubroutine(GLuint program, GLuint subroutineIndex);
+	GLuint getSubroutineIndex(GLuint const& program, std::string const& subroutineName);
+	void setSubroutine(GLuint const& program, GLuint const& subroutineIndex);
 
-	void setSubPasses(GLuint program, RenderPass* renderPasses, int numPasses);
+	void setSubPasses(GLuint const& program, RenderPass* const& renderPasses, int const& numPasses);
 
-	void renderMesh(Mesh* mesh, RenderTexture* renderTexture);
+	void renderMesh(Mesh* const& mesh, RenderTexture* const& renderTexture);
 private:
 	static const unsigned int NUM_SHADERS = 5;
-	Shader(const Shader& other) {}
-	void operator=(const Shader& other) {}
-	int getUniformName(std::string stringName);
-	void setTransformFeedbackVaryings(int count, const char *const * varyings);
+	Shader(Shader const& other) {}
+	void operator=(Shader const& other) {}
+	int getUniformName(std::string const& stringName);
+	void setTransformFeedbackVaryings(int const& count, const char *const * varyings);
 
 	enum {
 		TRANSFORM_MVP = 0,

@@ -2,7 +2,7 @@
 #include "ObjectLibrary.h"
 #include "ShaderResource.h"
 
-Shader * ShaderLibrary::find(uuid shaderId)
+Shader * ShaderLibrary::find(uuid const& shaderId)
 {
 	// Look through the list of already loaded shaders
 	auto it = m_shaders.find(shaderId);
@@ -40,7 +40,7 @@ Shader * ShaderLibrary::find(uuid shaderId)
 	return shader;
 }
 
-Shader * ShaderLibrary::find(string shaderPath)
+Shader * ShaderLibrary::find(string const& shaderPath)
 {
 	// Find the uuid associated with the path
 	auto it = m_shaderPaths.find(shaderPath);
@@ -56,7 +56,7 @@ Shader * ShaderLibrary::find(string shaderPath)
 	return find(it->second);
 }
 
-void ShaderLibrary::registerShaderName(string shaderPath, uuid shaderUuid)
+void ShaderLibrary::registerShaderName(string const& shaderPath, uuid const& shaderUuid)
 {
 	m_shaderPaths.insert(pair<string, uuid>(shaderPath, shaderUuid));
 }

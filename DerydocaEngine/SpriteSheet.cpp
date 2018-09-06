@@ -59,7 +59,7 @@ void SpriteSheet::updateTexture()
 	m_texture.updateBuffer(m_imageBuffer, packer.getWidth(), packer.getHeight(), packer.getChannels(), nullptr);
 }
 
-void SpriteSheet::addSprite(string textureId)
+void SpriteSheet::addSprite(string const& textureId)
 {
 	SpriteReference sprite = SpriteReference(++m_largestId);
 	sprite.setTextureId(textureId);
@@ -67,7 +67,7 @@ void SpriteSheet::addSprite(string textureId)
 	m_sprites[m_largestId] = sprite;
 }
 
-void SpriteSheet::saveToDisk(string filePath)
+void SpriteSheet::saveToDisk(string const& filePath)
 {
 	using namespace YAML;
 
@@ -118,7 +118,7 @@ void SpriteSheet::saveToDisk(string filePath)
 	file.close();
 }
 
-void SpriteSheet::LoadFromDisk(string filePath)
+void SpriteSheet::LoadFromDisk(string const& filePath)
 {
 	using namespace YAML;
 

@@ -14,7 +14,7 @@ using namespace std;
 class EngineSettings
 {
 public:
-	EngineSettings(string configFilePath);
+	EngineSettings(string const& configFilePath);
 	~EngineSettings();
 
 	int getWidth() const { return m_width; }

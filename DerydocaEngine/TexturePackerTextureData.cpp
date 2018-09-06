@@ -5,7 +5,7 @@
 #include <climits>
 #include <algorithm>
 
-void TexturePackerTextureData::Resize(int x, int y)
+void TexturePackerTextureData::Resize(int const& x, int const& y)
 {
 	m_data.resize(y);
 	for (int i = 0; i < y; i++)
@@ -14,7 +14,7 @@ void TexturePackerTextureData::Resize(int x, int y)
 	}
 }
 
-void TexturePackerTextureData::AddImage(int xPos, int yPos, TexturePackerImage * image, unsigned char* imageBuffer)
+void TexturePackerTextureData::AddImage(int const& xPos, int const& yPos, TexturePackerImage * const& image, unsigned char* const& imageBuffer)
 {
 	assert(image->getWidth() + xPos <= (int)m_data[0].size());
 	assert(image->getHeight() + yPos <= (int)m_data.size());
@@ -43,7 +43,7 @@ void TexturePackerTextureData::AddImage(int xPos, int yPos, TexturePackerImage *
 	}
 }
 
-void TexturePackerTextureData::Fill(int sx, int sy, int ex, int ey, unsigned char value)
+void TexturePackerTextureData::Fill(int const& sx, int const& sy, int const& ex, int const& ey, unsigned char const& value)
 {
 	for (int y = sy; y < ey; y++)
 	{

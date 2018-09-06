@@ -13,19 +13,19 @@ class GameObject
 {
 public:
 	GameObject();
-	GameObject(std::string name);
+	GameObject(std::string const& name);
 	~GameObject();
 
 	void init();
 	void postInit();
-	void update(float deltaTime);
-	void render(MatrixStack* matrixStack);
-	void renderMesh(MatrixStack* matrixStack, Material* renderMesh, Projection projection, Transform* projectionTransform);
+	void update(float const& deltaTime);
+	void render(MatrixStack* const& matrixStack);
+	void renderMesh(MatrixStack* const& matrixStack, Material* const& renderMesh, Projection const& projection, Transform* const& projectionTransform);
 	void preRender();
 	void postRender();
 
-	void addChild(GameObject* gameObject);
-	void addComponent(GameComponent* component);
+	void addChild(GameObject* const& gameObject);
+	void addComponent(GameComponent* const& component);
 
 	inline Transform* getTransform() { return &m_transform; }
 	inline std::vector<GameObject*> getChildren() const { return m_children; }

@@ -14,10 +14,10 @@ public:
 		return instance;
 	}
 
-	GameComponent * CreateGameComponent(string gameComponentType);
+	GameComponent * CreateGameComponent(string const& gameComponentType);
 private:
 	map<string, std::function<GameComponent*()>> m_instanceGenerators;
-	void registerInstanceGenerator(string gameComponentType, std::function<GameComponent*()> instanceGenerator);
+	void registerInstanceGenerator(string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator);
 
 	GameComponentFactory();
 	~GameComponentFactory();

@@ -5,15 +5,15 @@
 struct MeshResource : public Resource
 {
 public:
-	MeshResource();
+	MeshResource() {}
 
-	void setMeshIndex(unsigned int meshIndex) { m_meshIndex = meshIndex; }
-	void setMeshName(std::string meshName) { m_meshName = meshName; }
+	void setMeshIndex(unsigned int const& meshIndex) { m_meshIndex = meshIndex; }
+	void setMeshName(std::string const& meshName) { m_meshName = meshName; }
 
 	unsigned int getMeshIndex() { return m_meshIndex; }
 	std::string getMeshName() { return m_meshName; }
 	MeshFlags getFlags() { return m_flags; }
-	void setFlag(MeshFlags flag) {
+	void setFlag(MeshFlags const& flag) {
 		m_flags = (MeshFlags)(m_flags | flag);
 	}
 private:

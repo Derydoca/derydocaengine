@@ -14,6 +14,6 @@ public:
 
 	BezierPatchMesh* Load(const char* filePath);
 private:
-	bool loadPatchData(istream& fileStream, int patch, float* patchData);
+	bool loadPatchData(istream & fileStream, int const& patch, float* const& patchData);
 };
 

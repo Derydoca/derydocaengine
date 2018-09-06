@@ -9,9 +9,9 @@ public:
 	ShadowMap();
 	~ShadowMap();
 
-	void bind(unsigned int unit);
+	void bind(unsigned int const& unit);
 	void bindAsRenderTexture();
-	void intializeTexture(int size);
+	void intializeTexture(int const& size);
 private:
 	GLuint m_shadowFramebuffer;
 };

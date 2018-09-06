@@ -21,7 +21,7 @@ void Keyboard::update()
 	m_tick++;
 }
 
-bool Keyboard::isKeyDown(int keycode)
+bool Keyboard::isKeyDown(int const& keycode)
 {	
 	if (keycode >= m_numkeys) {
 		return false;
@@ -29,7 +29,7 @@ bool Keyboard::isKeyDown(int keycode)
 	return m_keys[keycode].isDown();
 }
 
-bool Keyboard::isKeyDownFrame(int keycode)
+bool Keyboard::isKeyDownFrame(int const& keycode)
 {
 	if (keycode >= m_numkeys) {
 		return false;
@@ -38,7 +38,7 @@ bool Keyboard::isKeyDownFrame(int keycode)
 	return key.isDown() && key.getStateChangeTick() == m_tick;
 }
 
-bool Keyboard::isKeyUpFrame(int keycode)
+bool Keyboard::isKeyUpFrame(int const& keycode)
 {
 	if (keycode >= m_numkeys) {
 		return false;
@@ -47,7 +47,7 @@ bool Keyboard::isKeyUpFrame(int keycode)
 	return !key.isDown() && key.getStateChangeTick() == m_tick;
 }
 
-void Keyboard::setKeyState(int keycode, bool isDown)
+void Keyboard::setKeyState(int const& keycode, bool const& isDown)
 {
 	if (keycode >= m_numkeys) {
 		return;

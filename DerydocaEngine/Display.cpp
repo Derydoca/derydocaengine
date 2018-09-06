@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Display::Display(int width, int height, const std::string& title)
+Display::Display(int const& width, int const& height, std::string const& title)
 {
 	DisplayManager::getInstance().addDisplay(this);
 
@@ -89,7 +89,7 @@ void Display::bindAsRenderTarget()
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }
 
-void Display::windowSizeChanged(int width, int height)
+void Display::windowSizeChanged(int const& width, int const& height)
 {
 	m_width = width;
 	m_height = height;
@@ -100,7 +100,7 @@ void Display::windowSizeChanged(int width, int height)
 	}
 }
 
-void Display::init(int width, int height, const std::string & title)
+void Display::init(int const& width, int const& height, std::string const& title)
 {
 }
 

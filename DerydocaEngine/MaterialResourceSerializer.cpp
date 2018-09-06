@@ -11,7 +11,7 @@ MaterialResourceSerializer::~MaterialResourceSerializer()
 {
 }
 
-void * MaterialResourceSerializer::deserialize(Resource * resource)
+void * MaterialResourceSerializer::deserialize(Resource * const& resource)
 {
 	// Load the yaml file
 	YAML::Node root = YAML::LoadFile(resource->getSourceFilePath());

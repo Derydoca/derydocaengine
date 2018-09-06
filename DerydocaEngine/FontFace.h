@@ -21,7 +21,7 @@ public:
 	~FontFace();
 
 	Texture* getTexture();
-	TexturePackerImage getCharData(int charCode) const {
+	TexturePackerImage getCharData(int const& charCode) const {
 		if (m_charImages.find(charCode) == m_charImages.end())
 		{
 			return m_charImages.at(MISSING_CHAR_CODE);
@@ -32,11 +32,11 @@ public:
 		}
 	};
 	float getLineHeight() const { return m_lineHeight; }
-	void setFontSize(float fontSize) { m_fontSize = fontSize; }
+	void setFontSize(float const& fontSize) { m_fontSize = fontSize; }
 
-	void loadFromFontFile(string filePath);
-	void loadFromSerializedFile(string filePath);
-	void saveToSerializedFile(string filePath);
+	void loadFromFontFile(string const& filePath);
+	void loadFromSerializedFile(string const& filePath);
+	void saveToSerializedFile(string const& filePath);
 private:
 	ivec2 m_dotsPerInch = ivec2(300, 300);
 	float m_fontSize = 16.0;

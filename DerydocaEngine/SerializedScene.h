@@ -8,14 +8,14 @@ public:
 	SerializedScene();
 	~SerializedScene();
 
-	void setUp(GameObject* root);
-	void tearDown(GameObject* root);
+	void setUp(GameObject* const& root);
+	void tearDown(GameObject* const& root);
 
-	void LoadFromFile(std::string filePath);
-	void SaveToFile(std::string filePath);
+	void LoadFromFile(std::string const& filePath);
+	void SaveToFile(std::string const& filePath);
 private:
 	std::vector<SceneObject*> m_sceneObjects;
 
-	SceneObject* findNode(boost::uuids::uuid id);
+	SceneObject* findNode(boost::uuids::uuid const& id);
 };
 

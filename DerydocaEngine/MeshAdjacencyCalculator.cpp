@@ -11,7 +11,7 @@ MeshAdjacencyCalculator::~MeshAdjacencyCalculator()
 {
 }
 
-void MeshAdjacencyCalculator::buildAdjacencyList(const aiMesh * mesh, unsigned int* indices)
+void MeshAdjacencyCalculator::buildAdjacencyList(aiMesh * const& mesh, unsigned int* const& indices)
 {
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 	{

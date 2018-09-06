@@ -26,23 +26,23 @@ class Mesh
 public:
 	Mesh();
 	~Mesh();
-	void loadFromFile(const std::string& fileName);
-	void loadFromFile(const std::string& fileName, unsigned int meshIndex);
-	void loadMeshComponentDataDEPRECATED(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices);
+	void loadFromFile(std::string const& fileName);
+	void loadFromFile(std::string const& fileName, unsigned int const& meshIndex);
+	void loadMeshComponentDataDEPRECATED(unsigned int const& numVertices, glm::vec3* const& positions, glm::vec3* const& normals, glm::vec2* const& texCoords, unsigned int* const& indices, unsigned int const& numIndices);
 	void loadMeshComponentData(
-		MeshComponents meshComponentFlags,
-		unsigned int numVertices,
-		glm::vec3 * positions = 0,
-		glm::vec3 * tangents = 0,
-		glm::vec3 * bitangents = 0,
-		glm::vec2 * texCoords = 0,
-		glm::vec3 * normals = 0,
-		unsigned int numIndices = 0,
-		unsigned int * indices = 0,
-		Color * colors = 0);
-	void loadVertexColorBuffer(unsigned int numVertices, Color* colorBuffer);
+		MeshComponents const& meshComponentFlags,
+		unsigned int const& numVertices,
+		glm::vec3 * const& positions = 0,
+		glm::vec3 * const& tangents = 0,
+		glm::vec3 * const& bitangents = 0,
+		glm::vec2 * const& texCoords = 0,
+		glm::vec3 * const& normals = 0,
+		unsigned int const& numIndices = 0,
+		unsigned int * const& indices = 0,
+		Color * const& colors = 0);
+	void loadVertexColorBuffer(unsigned int const& numVertices, Color* const& colorBuffer);
 	void draw();
-	void setFlags(MeshFlags flags) { m_flags = flags; }
+	void setFlags(MeshFlags const& flags) { m_flags = flags; }
 	GLuint getVao() const { return m_vertexArrayObject; }
 	unsigned int getNumIndices() const { return m_numIndices; }
 
@@ -58,12 +58,12 @@ private:
 		NUM_BUFFERS
 	};
 
-	Mesh(const Mesh& other) {}
-	void operator=(const Mesh& other) {}
+	Mesh(Mesh const& other) {}
+	void operator=(Mesh const& other) {}
 
 	void RefreshVbo();
-	void UpdateVbo(MeshComponents meshComponentFlags);
-	void ProcessAiMesh(aiMesh* mesh, int uvIndex);
+	void UpdateVbo(MeshComponents const& meshComponentFlags);
+	void ProcessAiMesh(aiMesh* const& mesh, int const& uvIndex);
 
 	glm::vec3* m_positions;
 	glm::vec3* m_normals;

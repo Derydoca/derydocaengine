@@ -10,7 +10,7 @@ ShadowMap::~ShadowMap()
 {
 }
 
-void ShadowMap::intializeTexture(int size)
+void ShadowMap::intializeTexture(int const& size)
 {
 	m_width = size;
 	m_height = size;
@@ -33,7 +33,7 @@ void ShadowMap::intializeTexture(int size)
 	glDrawBuffer(GL_NONE);
 }
 
-void ShadowMap::bind(unsigned int unit)
+void ShadowMap::bind(unsigned int const& unit)
 {
 
 }

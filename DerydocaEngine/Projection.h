@@ -16,19 +16,19 @@ enum ProjectionMode {
 struct Projection
 {
 public:
-	mat4 getInverseViewProjectionMatrix(mat4 transformModelMatrix) const { return m_projectionMatrix * inverse(transformModelMatrix); }
-	mat4 getViewMatrix(mat4 transformModelMatrix) { return inverse(transformModelMatrix); }
-	mat4 getProjectionMatrix() { return m_projectionMatrix; }
-	inline glm::mat4 getViewProjectionMatrix(mat4 transformModelMatrix) const { return m_projectionMatrix * transformModelMatrix; }
+	mat4 getInverseViewProjectionMatrix(mat4 const& transformModelMatrix) const { return m_projectionMatrix * inverse(transformModelMatrix); }
+	mat4 getViewMatrix(mat4 const& transformModelMatrix) const { return inverse(transformModelMatrix); }
+	mat4 getProjectionMatrix() const { return m_projectionMatrix; }
+	inline glm::mat4 getViewProjectionMatrix(mat4 const& transformModelMatrix) const { return m_projectionMatrix * transformModelMatrix; }
 
 	/*
 	Gets a matrix representing the camera's rotation and projection.
 
 	@return Rotation projection matrix
 	*/
-	mat4 getRotationProjection(fquat quaternionRotation) const { return m_projectionMatrix * inverse(mat4_cast(quaternionRotation)); }
+	mat4 getRotationProjection(fquat const& quaternionRotation) const { return m_projectionMatrix * inverse(mat4_cast(quaternionRotation)); }
 
-	void setProjectionMode(ProjectionMode mode) { m_projectionMode = mode; }
+	void setProjectionMode(ProjectionMode const& mode) { m_projectionMode = mode; }
 
 	void recalculateProjectionMatrix()
 	{
@@ -46,11 +46,11 @@ public:
 		}
 	}
 
-	void setFov(float fov) { m_fov = fov; }
-	void setAspectRatio(float aspectRatio) { m_aspect = aspectRatio; }
-	void setAspectRatio(int width, int height) { m_aspect = (float)width / (float)(height != 0 ? height: 1); }
-	void setZNear(float zNear) { m_zNear = zNear; }
-	void setZFar(float zFar) { m_zFar = zFar; }
+	void setFov(float const& fov) { m_fov = fov; }
+	void setAspectRatio(float const& aspectRatio) { m_aspect = aspectRatio; }
+	void setAspectRatio(int const& width, int const& height) { m_aspect = (float)width / (float)(height != 0 ? height: 1); }
+	void setZNear(float const& zNear) { m_zNear = zNear; }
+	void setZFar(float const& zFar) { m_zFar = zFar; }
 
 	float getFov() const { return m_fov; }
 	float getAspectRatio() const { return m_aspect; }

@@ -1,5 +1,5 @@
 #pragma once
 #include <string>
 
-bool endsWith(const std::string& string, const std::string& suffix);
-std::string getFileExtension(std::string path);
+bool endsWith(std::string const& string, std::string const& suffix);
+std::string getFileExtension(std::string const& path);

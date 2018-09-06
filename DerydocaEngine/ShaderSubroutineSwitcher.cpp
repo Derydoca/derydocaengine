@@ -7,7 +7,6 @@ ShaderSubroutineSwitcher::ShaderSubroutineSwitcher()
 {
 }
 
-
 ShaderSubroutineSwitcher::~ShaderSubroutineSwitcher()
 {
 }
@@ -17,12 +16,12 @@ void ShaderSubroutineSwitcher::init()
 	setSubroutine(GL_VERTEX_SHADER, m_subroutineName);
 }
 
-void ShaderSubroutineSwitcher::deserialize(YAML::Node compNode)
+void ShaderSubroutineSwitcher::deserialize(YAML::Node const& compNode)
 {
 	m_subroutineName = compNode["SubroutineName"].as<string>();
 }
 
-void ShaderSubroutineSwitcher::setSubroutine(GLuint program, string subroutineName)
+void ShaderSubroutineSwitcher::setSubroutine(GLuint const& program, string const& subroutineName)
 {
 	if (subroutineName.empty())
 	{

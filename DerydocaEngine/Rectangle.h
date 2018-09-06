@@ -12,7 +12,7 @@ public:
 		m_height = 1.0f;
 	}
 
-	Rectangle(float x, float y, float width, float height) :
+	Rectangle(float const& x, float const& y, float const& width, float const& height) :
 		m_x(x),
 		m_y(y),
 		m_width(width),
@@ -20,14 +20,14 @@ public:
 	{
 	}
 
-	float getX() { return m_x; }
-	float getY() { return m_y; }
-	float getWidth() { return m_width; }
-	float getHeight() { return m_height; }
-	void setX(float x) { m_x = x; }
-	void setY(float y) { m_y = y; }
-	void setWidth(float w) { m_width = w; }
-	void setHeight(float h) { m_height = h; }
+	float getX() const { return m_x; }
+	float getY() const { return m_y; }
+	float getWidth() const { return m_width; }
+	float getHeight() const { return m_height; }
+	void setX(float const& x) { m_x = x; }
+	void setY(float const& y) { m_y = y; }
+	void setWidth(float const& w) { m_width = w; }
+	void setHeight(float const& h) { m_height = h; }
 private:
 	float m_x, m_y, m_width, m_height;
 };

@@ -10,7 +10,7 @@ bool compareTexturePackerImageBySize(TexturePackerImage lhs, TexturePackerImage 
 	return lhs.getWidth() > rhs.getWidth();
 }
 
-TexturePacker::TexturePacker(int channels)
+TexturePacker::TexturePacker(int const& channels)
 {
 	assert(channels > 0);
 	m_packedImageData = TexturePackerTextureData(channels);
@@ -22,7 +22,18 @@ TexturePacker::~TexturePacker()
 	freeSubImageData();
 }
 
-void TexturePacker::addImage(unsigned long id, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY, unsigned char* imageBuffer, int width, int height, int channels)
+void TexturePacker::addImage(
+	unsigned long const& id,
+	float const& sizeX, 
+	float const& sizeY, 
+	float const& bearingX, 
+	float const& bearingY, 
+	float const& advanceX, 
+	float const& advanceY, 
+	unsigned char* const& imageBuffer,
+	int const& width, 
+	int const& height, 
+	int const& channels)
 {
 	// Store the image
 	TexturePackerImage image(id, width, height, channels, sizeX, sizeY, bearingX, bearingY, advanceX, advanceY);

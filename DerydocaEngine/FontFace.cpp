@@ -31,7 +31,7 @@ Texture * FontFace::getTexture()
 	return &m_texture;
 }
 
-void FontFace::loadFromFontFile(string filePath)
+void FontFace::loadFromFontFile(string const& filePath)
 {
 	// Initialize FreeType
 	FT_Library freeTypeLibrary;
@@ -131,7 +131,7 @@ void FontFace::loadFromFontFile(string filePath)
 	}
 }
 
-void FontFace::loadFromSerializedFile(string filePath)
+void FontFace::loadFromSerializedFile(string const& filePath)
 {
 	using namespace YAML;
 
@@ -186,7 +186,7 @@ void FontFace::loadFromSerializedFile(string filePath)
 	m_textureDirty = true;
 }
 
-void FontFace::saveToSerializedFile(string filePath)
+void FontFace::saveToSerializedFile(string const& filePath)
 {
 	using namespace YAML;
 

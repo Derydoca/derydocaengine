@@ -17,21 +17,21 @@ public:
 	}
 	void operator=(ObjectLibrary const&) = delete;
 
-	void initialize(std::string engineResourcesPath, std::string projectPath);
+	void initialize(std::string const& engineResourcesPath, std::string const& projectPath);
 	std::string getMetaExtension() const { return m_metaExtension; }
-	Resource* getResource(std::string uuidString);
-	Resource* getResource(boost::uuids::uuid uuid);
-	GameComponent* getComponent(boost::uuids::uuid id);
-	Resource* getMetaFile(std::string sourceFilePath);
-	void updateMetaFilesDirectory(std::string directory);
-	void updateMetaFiles(std::string file);
-	void loadDirectory(std::string directory);
-	void loadFile(std::string sourceFilePath);
+	Resource* getResource(std::string const& uuidString);
+	Resource* getResource(boost::uuids::uuid const& uuid);
+	GameComponent* getComponent(boost::uuids::uuid const& id);
+	Resource* getMetaFile(std::string const& sourceFilePath);
+	void updateMetaFilesDirectory(std::string const& directory);
+	void updateMetaFiles(std::string const& file);
+	void loadDirectory(std::string const& directory);
+	void loadFile(std::string const& sourceFilePath);
 
-	void registerComponent(boost::uuids::uuid id, GameComponent* component);
+	void registerComponent(boost::uuids::uuid const& id, GameComponent* const& component);
 
 	template<class resourceType>
-	resourceType getResource(std::string uuidString)
+	resourceType getResource(std::string const& uuidString)
 	{
 		boost::uuids::string_generator gen;
 		boost::uuids::uuid uuid = gen(uuidString);
@@ -40,7 +40,7 @@ public:
 	}
 
 	template<class resourceObjectType>
-	resourceObjectType* getResourceObject(boost::uuids::uuid id)
+	resourceObjectType* getResourceObject(boost::uuids::uuid const& id)
 	{
 		Resource* resource = getResource(id);
 		if (resource == nullptr)
@@ -55,8 +55,8 @@ private:
 	~ObjectLibrary() {}
 	ObjectLibrary(ObjectLibrary const&) {}
 
-	bool createMetaFile(std::string sourceFilePath, std::string metaFilePath);
-	void registerResource(Resource* resource);
+	bool createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath);
+	void registerResource(Resource* const& resource);
 
 	const std::string m_metaExtension = ".derymeta";
 	std::map<boost::uuids::uuid, Resource*> m_resources;

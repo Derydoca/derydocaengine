@@ -86,9 +86,6 @@
     <ClCompile Include="MaterialRefresher.cpp">
       <Filter>Game Components</Filter>
     </ClCompile>
-    <ClCompile Include="MeshResource.cpp">
-      <Filter>Engine\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>Engine\Resources</Filter>
     </ClCompile>
@@ -115,9 +112,6 @@
     </ClCompile>
     <ClCompile Include="FileSerializerLibrary.cpp">
       <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="MaterialResourceSerializer.cpp">
       <Filter>Engine\ResourceSerializers</Filter>

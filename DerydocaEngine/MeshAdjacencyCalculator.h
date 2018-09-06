@@ -8,7 +8,7 @@
 class MeshAdjacencyEdge
 {
 public:
-	MeshAdjacencyEdge(unsigned int index1, unsigned int index2)
+	MeshAdjacencyEdge(unsigned int const& index1, unsigned int const& index2)
 	{
 		if (index1 < index2)
 		{
@@ -23,7 +23,7 @@ public:
 	}
 	~MeshAdjacencyEdge() {}
 
-	bool operator < (const MeshAdjacencyEdge& o) const
+	bool operator < (MeshAdjacencyEdge const& o) const
 	{
 		if (m_index1 != o.m_index1)
 		{
@@ -39,7 +39,7 @@ public:
 		}
 	}
 
-	bool sharesIndex(unsigned int index) { return m_index1 == index || m_index2 == index; }
+	bool sharesIndex(unsigned int const& index) const { return m_index1 == index || m_index2 == index; }
 private:
 	unsigned int m_index1;
 	unsigned int m_index2;
@@ -51,9 +51,9 @@ public:
 	MeshAdjacencyFace() {}
 	~MeshAdjacencyFace() {}
 
-	unsigned int getIndex(int i) const { return m_indices[i]; }
-	void setIndex(int i, unsigned int value) { m_indices[i] = value; }
-	unsigned int getOppositeIndex(MeshAdjacencyEdge e) const
+	unsigned int getIndex(int const& i) const { return m_indices[i]; }
+	void setIndex(int const& i, unsigned int const& value) { m_indices[i] = value; }
+	unsigned int getOppositeIndex(MeshAdjacencyEdge const& e) const
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -74,8 +74,8 @@ public:
 	MeshAdjacencyNeighbors() {}
 	~MeshAdjacencyNeighbors() {}
 
-	unsigned int getOther(unsigned int faceIndex) { return m_neighbors[0] == faceIndex ? m_neighbors[1] : m_neighbors[0];}
-	void addNeighbor(unsigned int faceIndex)
+	unsigned int getOther(unsigned int const& faceIndex) { return m_neighbors[0] == faceIndex ? m_neighbors[1] : m_neighbors[0];}
+	void addNeighbor(unsigned int const& faceIndex)
 	{
 		m_neighbors[m_currentNeighbor] = faceIndex;
 		m_currentNeighbor = (m_currentNeighbor + 1) % 2;
@@ -91,7 +91,7 @@ public:
 	MeshAdjacencyCalculator();
 	~MeshAdjacencyCalculator();
 
-	void buildAdjacencyList(const aiMesh* mesh, unsigned int* indices);
+	void buildAdjacencyList(aiMesh* const& mesh, unsigned int* const& indices);
 private:
 	std::vector<MeshAdjacencyFace> m_uniqueFaces;
 	std::map<aiVector3D, unsigned int> m_posMap;

@@ -10,7 +10,7 @@ BezierPatchMeshResourceSerializer::~BezierPatchMeshResourceSerializer()
 {
 }
 
-void * BezierPatchMeshResourceSerializer::deserialize(Resource * resource)
+void * BezierPatchMeshResourceSerializer::deserialize(Resource * const& resource)
 {
 	BezierPatchMeshFileLoader loader;
 	BezierPatchMesh* mesh = loader.Load(resource->getSourceFilePath().c_str());

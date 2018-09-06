@@ -10,7 +10,7 @@ BezierPatchMesh::~BezierPatchMesh()
 	delete[] m_patchData;
 }
 
-void BezierPatchMesh::loadPatchData(int numPatches, float * patchData)
+void BezierPatchMesh::loadPatchData(int const& numPatches, float * const& patchData)
 {
 	// Clear out any old data
 	clearPatchData();

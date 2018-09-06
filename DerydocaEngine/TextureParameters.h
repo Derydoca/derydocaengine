@@ -16,10 +16,10 @@ public:
 	TextureWrapMode getWrapModeS() const { return m_wrapS; }
 	TextureWrapMode getWrapModeT() const { return m_wrapT; }
 
-	void setWrapModeS(const TextureWrapMode mode) { m_wrapS = mode; }
-	void setWrapModeT(const TextureWrapMode mode) { m_wrapT = mode; }
+	void setWrapModeS(TextureWrapMode const& mode) { m_wrapS = mode; }
+	void setWrapModeT(TextureWrapMode const& mode) { m_wrapT = mode; }
 
-	inline GLenum textureWrapModeToOpenGL(TextureWrapMode mode)
+	inline GLenum textureWrapModeToOpenGL(TextureWrapMode const& mode)
 	{
 		switch (mode)
 		{

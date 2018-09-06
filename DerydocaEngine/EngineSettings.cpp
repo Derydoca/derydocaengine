@@ -1,7 +1,7 @@
 #include "EngineSettings.h"
 #include <iostream>
 
-EngineSettings::EngineSettings(string configFilePath)
+EngineSettings::EngineSettings(string const& configFilePath)
 {
 	m_settingsFilePath = boost::filesystem::absolute(configFilePath);
 

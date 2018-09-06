@@ -7,7 +7,7 @@ Skybox::Skybox()
 	buildMesh(100.0f);
 }
 
-Skybox::Skybox(float size)
+Skybox::Skybox(float const& size)
 {
 	buildMesh(size);
 }
@@ -16,7 +16,7 @@ Skybox::~Skybox()
 {
 }
 
-void Skybox::buildMesh(float size)
+void Skybox::buildMesh(float const& size)
 {
 	glm::vec3* positions = new glm::vec3[8]();
 	positions[0] = glm::vec3(-size, size, size);

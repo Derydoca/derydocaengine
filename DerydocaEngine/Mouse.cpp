@@ -33,7 +33,7 @@ void Mouse::update()
 	}
 }
 
-bool Mouse::isKeyDown(int keycode)
+bool Mouse::isKeyDown(int const& keycode) const 
 {
 	if (keycode >= 5) {
 		return false;
@@ -41,7 +41,7 @@ bool Mouse::isKeyDown(int keycode)
 	return m_keys[keycode].isDown();
 }
 
-bool Mouse::isKeyDownFrame(int keycode)
+bool Mouse::isKeyDownFrame(int const& keycode) const 
 {
 	if (keycode >= 5) {
 		return false;
@@ -50,7 +50,7 @@ bool Mouse::isKeyDownFrame(int keycode)
 	return key.isDown() && key.getStateChangeTick() == m_tick;
 }
 
-bool Mouse::isKeyUpFrame(int keycode)
+bool Mouse::isKeyUpFrame(int const& keycode) const 
 {
 	if (keycode >= 5) {
 		return false;

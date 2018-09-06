@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void LightManager::bindLightsToShader(MatrixStack* matrixStack, Transform* objectTransform, Shader* shader)
+void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform* const& objectTransform, Shader* const& shader)
 {
 	assert(objectTransform);
 	assert(shader);
@@ -102,7 +102,7 @@ void LightManager::bindLightsToShader(MatrixStack* matrixStack, Transform* objec
 	shader->setInt("LightCount", (int)lights.size());
 }
 
-void LightManager::renderShadowMaps(Transform* objectTransform)
+void LightManager::renderShadowMaps(Transform* const& objectTransform)
 {
 	// Get a list of lights that will affect the object being sent in
 	std::list<Light*> lights = getLights(objectTransform);
@@ -127,7 +127,7 @@ LightManager::~LightManager()
 {
 }
 
-std::list<Light*> LightManager::getLights(Transform * objectTransform)
+std::list<Light*> LightManager::getLights(Transform * const& objectTransform)
 {
 	// Create a list to store the lights
 	std::list<Light*> lights = std::list<Light*>();
@@ -157,7 +157,7 @@ float jitter()
 	return ((float)rand() / RAND_MAX) - 0.5f;
 }
 
-void LightManager::buildOffsetTex(int texSize, int samplesU, int samplesV)
+void LightManager::buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV)
 {
 	int size = texSize;
 	int samples = samplesU * samplesV;

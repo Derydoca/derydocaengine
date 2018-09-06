@@ -2,7 +2,7 @@
 #include "ShaderLibrary.h"
 #include "ShaderResource.h"
 
-void * ShaderResourceSerializer::deserialize(Resource * resource)
+void * ShaderResourceSerializer::deserialize(Resource * const& resource)
 {
 	ShaderResource* shaderResource = (ShaderResource*)resource;
 	Shader* shader = new Shader(shaderResource->getRawShaderName());

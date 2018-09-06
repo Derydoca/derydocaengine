@@ -18,10 +18,10 @@ public:
 	}
 	void operator=(ObjectLibrary const&) = delete;
 
-	Shader* find(uuid shaderId);
-	Shader* find(string shaderPath);
+	Shader* find(uuid const& shaderId);
+	Shader* find(string const& shaderPath);
 
-	void registerShaderName(string shaderPath, uuid shaderUuid);
+	void registerShaderName(string const& shaderPath, uuid const& shaderUuid);
 private:
 	ShaderLibrary() {}
 	~ShaderLibrary() {}

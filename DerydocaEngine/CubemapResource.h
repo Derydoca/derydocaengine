@@ -7,7 +7,7 @@ public:
 	CubemapResource() {}
 	~CubemapResource() {}
 
-	void setSlot(unsigned int slot) { m_slot = slot; }
+	void setSlot(unsigned int const& slot) { m_slot = slot; }
 
 	unsigned int getSlot() { return m_slot; }
 private:

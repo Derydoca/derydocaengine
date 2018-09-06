@@ -13,7 +13,7 @@ MeshResourceSerializer::~MeshResourceSerializer()
 {
 }
 
-void * MeshResourceSerializer::deserialize(Resource * resource)
+void * MeshResourceSerializer::deserialize(Resource * const& resource)
 {
 	MeshResource* mr = (MeshResource*)resource;
 	auto file = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);

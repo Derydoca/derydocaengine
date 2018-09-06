@@ -7,6 +7,6 @@ public:
 	TextureResourceSerializer();
 	~TextureResourceSerializer();
 
-	void* deserialize(Resource* resource);
+	void* deserialize(Resource* const& resource);
 	ResourceType getResourceType();
 };

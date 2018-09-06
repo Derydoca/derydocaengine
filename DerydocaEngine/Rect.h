@@ -11,7 +11,7 @@ public:
 		m_dy = 1.0f;
 	}
 
-	Rect(float x, float y, float dx, float dy) :
+	Rect(float const& x, float const& y, float const& dx, float const& dy) :
 		m_x(x),
 		m_y(y),
 		m_dx(dx),
@@ -19,21 +19,21 @@ public:
 	{
 	}
 
-	float getX() { return m_x; }
-	float getY() { return m_y; }
-	float getDX() { return m_dx; }
-	float getDY() { return m_dy; }
-	void set(float x, float y, float dx, float dy)
+	float getX() const { return m_x; }
+	float getY() const { return m_y; }
+	float getDX() const { return m_dx; }
+	float getDY() const { return m_dy; }
+	void set(float const& x, float const& y, float const& dx, float const& dy)
 	{
 		m_x = x;
 		m_y = y;
 		m_dx = dx;
 		m_dy = dy;
 	}
-	void setX(float x) { m_x = x; }
-	void setY(float y) { m_y = y; }
-	void setDX(float w) { m_dx = w; }
-	void setDY(float h) { m_dy = h; }
+	void setX(float const& x) { m_x = x; }
+	void setY(float const& y) { m_y = y; }
+	void setDX(float const& w) { m_dx = w; }
+	void setDY(float const& h) { m_dy = h; }
 private:
 	float m_x, m_y, m_dx, m_dy;
 };

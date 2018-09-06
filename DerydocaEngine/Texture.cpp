@@ -9,13 +9,13 @@ Texture::Texture()
 	m_textureType = GL_TEXTURE_2D;
 }
 
-Texture::Texture(const std::string& fileName)
+Texture::Texture(std::string const& fileName)
 	: Texture(fileName, nullptr)
 {
 
 }
 
-Texture::Texture(const std::string& fileName, TextureParameters* params)
+Texture::Texture(std::string const& fileName, TextureParameters* const& params)
 {
 	// Set the texture type
 	m_textureType = GL_TEXTURE_2D;
@@ -63,7 +63,7 @@ Texture::Texture(const std::string& fileName, TextureParameters* params)
 	stbi_image_free(data);
 }
 
-Texture::Texture(const std::string & xpos, const std::string & xneg, const std::string & ypos, const std::string & yneg, const std::string & zpos, const std::string & zneg)
+Texture::Texture(std::string const& xpos, std::string const& xneg, std::string const& ypos, std::string const& yneg, std::string const& zpos, std::string const& zneg)
 {
 	// Set the texture type
 	m_textureType = GL_TEXTURE_CUBE_MAP;
@@ -113,7 +113,7 @@ Texture::~Texture()
 	glDeleteTextures(1, &m_texture);
 }
 
-void Texture::bind(unsigned int unit)
+void Texture::bind(unsigned int const& unit)
 {
 	assert(unit >= 0 && unit <= 31);
 
@@ -121,7 +121,7 @@ void Texture::bind(unsigned int unit)
 	glBindTexture(m_textureType, m_texture);
 }
 
-void Texture::updateBuffer(GLubyte * data, int width, int height, int channels, TextureParameters* params)
+void Texture::updateBuffer(GLubyte * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params)
 {
 	m_width = width;
 	m_height = height;

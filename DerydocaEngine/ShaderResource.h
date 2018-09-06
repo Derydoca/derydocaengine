@@ -10,9 +10,9 @@ public:
 	ShaderResource() {}
 	~ShaderResource() {}
 
-	void setRawShaderName(string rawShaderName) { m_rawShaderName = rawShaderName; }
-	void setFragmentShaderSource(string fragmentShaderSource) { m_fragmentShaderSource = fragmentShaderSource; }
-	void setGeometryShaderSource(string geometryShaderSource) { m_geometryShaderSource = geometryShaderSource; }
+	void setRawShaderName(string const& rawShaderName) { m_rawShaderName = rawShaderName; }
+	void setFragmentShaderSource(string const& fragmentShaderSource) { m_fragmentShaderSource = fragmentShaderSource; }
+	void setGeometryShaderSource(string const& geometryShaderSource) { m_geometryShaderSource = geometryShaderSource; }
 
 	string getRawShaderName() const { return m_rawShaderName; }
 	string getVertexShaderLocation() const { return m_sourceFilePath; }

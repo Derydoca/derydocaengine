@@ -17,7 +17,7 @@
 #include "ShaderLibrary.h"
 #include <boost\filesystem.hpp>
 
-int Editor::Run(std::string projectPath, std::string levelIdentifier)
+int Editor::Run(std::string const& projectPath, std::string const& levelIdentifier)
 {
 	EngineSettings* settings = new EngineSettings(".\\engineSettings.yaml"); 
 	

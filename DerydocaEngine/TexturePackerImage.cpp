@@ -2,7 +2,17 @@
 #include "TexturePackerImage.h"
 #include <string>
 
-TexturePackerImage::TexturePackerImage(unsigned long id, int width, int height, int channels, float sizeX, float sizeY, float bearingX, float bearingY, float advanceX, float advanceY)
+TexturePackerImage::TexturePackerImage(
+	unsigned long const& id,
+	int const& width, 
+	int const& height, 
+	int const& channels, 
+	float const& sizeX, 
+	float const& sizeY, 
+	float const& bearingX, 
+	float const& bearingY, 
+	float const& advanceX, 
+	float const& advanceY)
 {
 	m_id = id;
 	m_width = width;
@@ -21,7 +31,7 @@ TexturePackerImage::~TexturePackerImage()
 {
 }
 
-void TexturePackerImage::setTextureSheetRectangle(float x, float y, float dx, float dy)
+void TexturePackerImage::setTextureSheetRectangle(float const& x, float const& y, float const& dx, float const& dy)
 {
 	m_texSheetPosition.setX(x);
 	m_texSheetPosition.setY(y);

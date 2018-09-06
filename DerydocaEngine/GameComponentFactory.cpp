@@ -36,7 +36,7 @@
 #define REGINSTANCE(TYPE) \
 	registerInstanceGenerator(#TYPE, TYPE::generateInstance);
 
-GameComponent * GameComponentFactory::CreateGameComponent(string gameComponentType)
+GameComponent * GameComponentFactory::CreateGameComponent(string const& gameComponentType)
 {
 	// Find a generator function that matches the type passed
 	auto it = m_instanceGenerators.find(gameComponentType);
@@ -54,7 +54,7 @@ GameComponent * GameComponentFactory::CreateGameComponent(string gameComponentTy
 	return nullptr;
 }
 
-void GameComponentFactory::registerInstanceGenerator(string gameComponentType, std::function<GameComponent*()> instanceGenerator)
+void GameComponentFactory::registerInstanceGenerator(string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator)
 {
 	m_instanceGenerators[gameComponentType] = instanceGenerator;
 }

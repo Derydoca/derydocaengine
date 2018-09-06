@@ -8,19 +8,19 @@ class Texture
 {
 public:
 	Texture();
-	Texture(const std::string& fileName);
-	Texture(const std::string& fileName, TextureParameters* params);
-	Texture(const std::string& xpos, const std::string& xneg, const std::string& ypos, const std::string& yneg, const std::string& zpos, const std::string& zneg);
+	Texture(std::string const& fileName);
+	Texture(std::string const& fileName, TextureParameters* const& params);
+	Texture(std::string const& xpos, std::string const& xneg, std::string const& ypos, std::string const& yneg, std::string const& zpos, std::string const& zneg);
 	~Texture();
 
-	void bind(unsigned int unit);
+	void bind(unsigned int const& unit);
 	int getWidth() { return m_width; }
 	int getHeight() { return m_height; }
 	GLenum getTextureType() const { return m_textureType; }
 	GLuint getTextureId() const { return m_texture; }
-	void updateBuffer(GLubyte * data, int width, int height, int channels, TextureParameters* params);
+	void updateBuffer(GLubyte * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params);
 
-	static GLenum ChannelsToPixelFormat(int numChannels)
+	static GLenum ChannelsToPixelFormat(int const& numChannels)
 	{
 		switch (numChannels)
 		{
@@ -39,7 +39,7 @@ protected:
 	GLuint m_texture;
 	GLenum m_textureType;
 private:
-	Texture(const Texture& other) {}
-	void operator=(const Texture& other) {}
+	Texture(Texture const& other) {}
+	void operator=(Texture const& other) {}
 };
 

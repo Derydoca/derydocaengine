@@ -13,7 +13,7 @@ SerializedScene::~SerializedScene()
 {
 }
 
-void SerializedScene::setUp(GameObject * root)
+void SerializedScene::setUp(GameObject * const& root)
 {
 	// Initialize the components
 	for (size_t i = 0; i < m_sceneObjects.size(); i++)
@@ -139,11 +139,11 @@ void SerializedScene::setUp(GameObject * root)
 	}
 }
 
-void SerializedScene::tearDown(GameObject * root)
+void SerializedScene::tearDown(GameObject * const& root)
 {
 }
 
-void SerializedScene::LoadFromFile(std::string filePath)
+void SerializedScene::LoadFromFile(std::string const& filePath)
 {
 	cout << "Loading scene: " << filePath << endl;
 	YAML::Node file = YAML::LoadFile(filePath);
@@ -195,7 +195,7 @@ void SerializedScene::LoadFromFile(std::string filePath)
 	}
 }
 
-void SerializedScene::SaveToFile(std::string filePath)
+void SerializedScene::SaveToFile(std::string const& filePath)
 {
 	YAML::Node root;
 
@@ -256,7 +256,7 @@ void SerializedScene::SaveToFile(std::string filePath)
 	file.close();
 }
 
-SceneObject * SerializedScene::findNode(boost::uuids::uuid id)
+SceneObject * SerializedScene::findNode(boost::uuids::uuid const& id)
 {
 	for (size_t i = 0; i < m_sceneObjects.size(); i++)
 	{

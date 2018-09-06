@@ -16,7 +16,7 @@ public:
 	{
 	}
 
-	SpriteReference(unsigned long id)
+	SpriteReference(unsigned long const& id)
 	{
 		m_id = id;
 	}
@@ -36,15 +36,15 @@ public:
 	Rect getTexPosition() const { return m_texPosition; }
 	string getTextureId() const { return m_textureId; }
 
-	void setType(SpriteType type) { m_type = type; }
-	void setSliceTop(float sliceTop) { m_sliceTop = sliceTop; }
-	void setSliceRight(float sliceRight) { m_sliceRight = sliceRight; }
-	void setSliceBottom(float sliceBottom) { m_sliceBottom = sliceBottom; }
-	void setSliceLeft(float sliceLeft) { m_sliceLeft = sliceLeft; }
-	void setWidth(int width) { m_width = width; }
-	void setHeight(int height) { m_height = height; }
-	void setTexPosition(float x, float y, float dx, float dy) { m_texPosition.set(x, y, dx, dy); }
-	void setTextureId(string textureId) { m_textureId = textureId; }
+	void setType(SpriteType const& type) { m_type = type; }
+	void setSliceTop(float const& sliceTop) { m_sliceTop = sliceTop; }
+	void setSliceRight(float const& sliceRight) { m_sliceRight = sliceRight; }
+	void setSliceBottom(float const& sliceBottom) { m_sliceBottom = sliceBottom; }
+	void setSliceLeft(float const& sliceLeft) { m_sliceLeft = sliceLeft; }
+	void setWidth(int const& width) { m_width = width; }
+	void setHeight(int const& height) { m_height = height; }
+	void setTexPosition(float const& x, float const& y, float const& dx, float const& dy) { m_texPosition.set(x, y, dx, dy); }
+	void setTextureId(string const& textureId) { m_textureId = textureId; }
 private:
 	unsigned long m_id;
 	SpriteType m_type = SpriteType::Sprite;

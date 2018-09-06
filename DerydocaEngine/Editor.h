@@ -4,5 +4,5 @@
 class Editor
 {
 public:
-	int Run(std::string projectPath, std::string scenePath);
+	int Run(std::string const& projectPath, std::string const& scenePath);
 };

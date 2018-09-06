@@ -18,8 +18,8 @@ public:
 	virtual void deserialize(YAML::Node const& compNode);
 	virtual void update(float const& deltaTime);
 
-	void inline setFocalPoint(const vec3 const& focalPoint) { m_focalPoint = focalPoint; m_dirty = true; }
-	void inline setUpVector(const vec3 const& upVector) { m_upVector = upVector; m_dirty = true; }
+	void inline setFocalPoint(vec3 const& focalPoint) { m_focalPoint = focalPoint; m_dirty = true; }
+	void inline setUpVector(vec3 const& upVector) { m_upVector = upVector; m_dirty = true; }
 private:
 	bool m_dirty = true;
 	vec3 m_focalPoint;

@@ -5,12 +5,12 @@ class Skybox
 {
 public:
 	Skybox();
-	Skybox(float size);
+	Skybox(float const& size);
 	~Skybox();
 
-	Mesh* getMesh() { return m_mesh; };
+	Mesh* getMesh() const { return m_mesh; };
 private:
-	void buildMesh(float size);
+	void buildMesh(float const& size);
 
 	Mesh* m_mesh;
 };

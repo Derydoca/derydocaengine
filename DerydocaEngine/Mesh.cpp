@@ -9,12 +9,12 @@ Mesh::Mesh() {
 
 }
 
-void Mesh::loadFromFile(const std::string& fileName)
+void Mesh::loadFromFile(std::string const& fileName)
 {
 	loadFromFile(fileName, 0);
 }
 
-void Mesh::loadFromFile(const std::string & fileName, unsigned int meshIndex)
+void Mesh::loadFromFile(std::string const& fileName, unsigned int const& meshIndex)
 {
 	const aiScene* aiModel = aiImportFile(fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
@@ -32,7 +32,7 @@ void Mesh::loadFromFile(const std::string & fileName, unsigned int meshIndex)
 	RefreshVbo();
 }
 
-void Mesh::loadMeshComponentDataDEPRECATED(unsigned int numVertices, glm::vec3* positions, glm::vec3* normals, glm::vec2* texCoords, unsigned int* indices, unsigned int numIndices)
+void Mesh::loadMeshComponentDataDEPRECATED(unsigned int const& numVertices, glm::vec3* const& positions, glm::vec3* const& normals, glm::vec2* const& texCoords, unsigned int* const& indices, unsigned int const& numIndices)
 {
 	m_positions = positions;
 	m_numVertices = numVertices;
@@ -45,16 +45,16 @@ void Mesh::loadMeshComponentDataDEPRECATED(unsigned int numVertices, glm::vec3* 
 }
 
 void Mesh::loadMeshComponentData(
-	MeshComponents meshComponentFlags,
-	unsigned int numVertices,
-	glm::vec3 * positions,
-	glm::vec3 * tangents,
-	glm::vec3 * bitangents,
-	glm::vec2 * texCoords,
-	glm::vec3 * normals,
-	unsigned int numIndices,
-	unsigned int * indices,
-	Color * colors)
+	MeshComponents const& meshComponentFlags,
+	unsigned int const& numVertices,
+	glm::vec3 * const& positions,
+	glm::vec3 * const& tangents,
+	glm::vec3 * const& bitangents,
+	glm::vec2 * const& texCoords,
+	glm::vec3 * const& normals,
+	unsigned int const& numIndices,
+	unsigned int * const& indices,
+	Color * const& colors)
 {
 	m_numVertices = numVertices;
 	
@@ -97,7 +97,7 @@ void Mesh::loadMeshComponentData(
 	UpdateVbo(meshComponentFlags);
 }
 
-void Mesh::loadVertexColorBuffer(unsigned int numVertices, Color * colorBuffer)
+void Mesh::loadVertexColorBuffer(unsigned int const& numVertices, Color * const& colorBuffer)
 {
 	glBindVertexArray(m_vertexArrayObject);
 
@@ -197,7 +197,7 @@ void Mesh::RefreshVbo()
 	glBindVertexArray(0);
 }
 
-void Mesh::UpdateVbo(MeshComponents meshComponentFlags)
+void Mesh::UpdateVbo(MeshComponents const& meshComponentFlags)
 {
 	if (!m_vertexArrayObject)
 	{
@@ -274,7 +274,7 @@ void Mesh::UpdateVbo(MeshComponents meshComponentFlags)
 	glBindVertexArray(0);
 }
 
-void Mesh::ProcessAiMesh(aiMesh * mesh, int uvIndex)
+void Mesh::ProcessAiMesh(aiMesh * const& mesh, int const& uvIndex)
 {
 
 	m_numVertices = mesh->mNumVertices;

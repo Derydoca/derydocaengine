@@ -11,7 +11,7 @@ public:
 	};
 	~MatrixStack() { }
 
-	void push(glm::mat4 matrix) {
+	void push(glm::mat4 const& matrix) {
 		glm::mat4 newMatrix = getMatrix() * matrix;
 		m_matrixStack.push(newMatrix);
 	}

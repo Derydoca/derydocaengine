@@ -14,12 +14,12 @@ public:
 	~SpriteSheet();
 
 	void updateTexture();
-	void addSprite(string textureId);
-	void saveToDisk(std::string filePath);
-	void LoadFromDisk(std::string filePath);
+	void addSprite(string const& textureId);
+	void saveToDisk(std::string const& filePath);
+	void LoadFromDisk(std::string const& filePath);
 
 	Texture* getTexture() { return &m_texture; }
-	SpriteReference* getSpriteReference(unsigned int id)
+	SpriteReference* getSpriteReference(unsigned int const& id)
 	{
 		auto spriteMapRecord = m_sprites.find(id);
 

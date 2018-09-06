@@ -12,7 +12,7 @@
 using namespace boost::filesystem;
 using namespace std;
 
-void ObjectLibrary::initialize(string engineResourcesPath, string projectPath)
+void ObjectLibrary::initialize(string const& engineResourcesPath, string const& projectPath)
 {
 	cout << "Updating meta files for the project: " << projectPath << endl;
 	updateMetaFilesDirectory(projectPath);
@@ -23,14 +23,14 @@ void ObjectLibrary::initialize(string engineResourcesPath, string projectPath)
 	loadDirectory(engineResourcesPath);
 }
 
-Resource * ObjectLibrary::getResource(std::string uuidString)
+Resource * ObjectLibrary::getResource(std::string const& uuidString)
 {
 	boost::uuids::string_generator gen;
 	boost::uuids::uuid uuid = gen(uuidString);
 	return getResource(uuid);
 }
 
-Resource * ObjectLibrary::getResource(boost::uuids::uuid uuid)
+Resource * ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
 {
 	// Find a resource with a matching uuid
 	auto search = m_resources.find(uuid);
@@ -46,7 +46,7 @@ Resource * ObjectLibrary::getResource(boost::uuids::uuid uuid)
 	}
 }
 
-GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid id)
+GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
 {
 	auto search = m_sceneComponents.find(id);
 	if (search != m_sceneComponents.end())
@@ -57,7 +57,7 @@ GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid id)
 	return nullptr;
 }
 
-Resource* ObjectLibrary::getMetaFile(std::string sourceFilePath)
+Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 {
 	string metaFilePath = sourceFilePath + m_metaExtension;
 
@@ -116,7 +116,7 @@ Resource* ObjectLibrary::getMetaFile(std::string sourceFilePath)
 	return nullptr;
 }
 
-void ObjectLibrary::updateMetaFilesDirectory(std::string directory)
+void ObjectLibrary::updateMetaFilesDirectory(std::string const& directory)
 {
 	directory_iterator it{ directory };
 	while (it != directory_iterator{})
@@ -136,7 +136,7 @@ void ObjectLibrary::updateMetaFilesDirectory(std::string directory)
 	}
 }
 
-void ObjectLibrary::updateMetaFiles(std::string sourceFilePath)
+void ObjectLibrary::updateMetaFiles(std::string const& sourceFilePath)
 {
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
@@ -152,12 +152,12 @@ void ObjectLibrary::updateMetaFiles(std::string sourceFilePath)
 	}
 }
 
-void ObjectLibrary::registerComponent(boost::uuids::uuid id, GameComponent * component)
+void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, GameComponent * const& component)
 {
 	m_sceneComponents.insert(std::pair<uuid, GameComponent*>(id, component));
 }
 
-void ObjectLibrary::loadDirectory(std::string directory)
+void ObjectLibrary::loadDirectory(std::string const& directory)
 {
 	directory_iterator it{ directory };
 	while (it != directory_iterator{})
@@ -177,7 +177,7 @@ void ObjectLibrary::loadDirectory(std::string directory)
 	}
 }
 
-bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaFilePath)
+bool ObjectLibrary::createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath)
 {
 	FileType fileType = pathToFileType(sourceFilePath);
 
@@ -215,13 +215,13 @@ bool ObjectLibrary::createMetaFile(std::string sourceFilePath, std::string metaF
 	return true;
 }
 
-void ObjectLibrary::registerResource(Resource* resource)
+void ObjectLibrary::registerResource(Resource* const& resource)
 {
 	// Load the resource into the map
 	m_resources.insert(std::pair<boost::uuids::uuid, Resource*>(resource->getId(), resource));
 }
 
-void ObjectLibrary::loadFile(std::string sourceFilePath)
+void ObjectLibrary::loadFile(std::string const& sourceFilePath)
 {
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 

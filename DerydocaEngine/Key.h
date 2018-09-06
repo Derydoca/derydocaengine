@@ -11,8 +11,8 @@ public:
 	}
 	~Key() {}
 
-	inline bool isDown() { return m_isDown; }
-	void setState(bool isDown, unsigned long tick) {
+	inline bool isDown() const { return m_isDown; }
+	void setState(bool const& isDown, unsigned long const& tick) {
 
 		if (m_prevDownState != isDown)
 		{

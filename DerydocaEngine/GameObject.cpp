@@ -5,12 +5,11 @@ GameObject::GameObject()
 	m_transform.setGameObject(this);
 }
 
-GameObject::GameObject(std::string name)
+GameObject::GameObject(std::string const& name)
 {
 	m_transform.setGameObject(this);
 	setName(name);
 }
-
 
 GameObject::~GameObject()
 {
@@ -29,7 +28,7 @@ GameObject::~GameObject()
 	m_children.clear();
 }
 
-void GameObject::render(MatrixStack* matrixStack) {
+void GameObject::render(MatrixStack* const& matrixStack) {
 	matrixStack->push(m_transform.getModel());
 
 	for each (GameComponent* c in m_components)
@@ -45,7 +44,7 @@ void GameObject::render(MatrixStack* matrixStack) {
 	matrixStack->pop();
 }
 
-void GameObject::renderMesh(MatrixStack * matrixStack, Material * material, Projection projection, Transform* projectionTransform)
+void GameObject::renderMesh(MatrixStack * const& matrixStack, Material * const& material, Projection const& projection, Transform* const& projectionTransform)
 {
 	matrixStack->push(m_transform.getModel());
 
@@ -88,7 +87,7 @@ void GameObject::postInit()
 	}
 }
 
-void GameObject::update(float deltaTime) {
+void GameObject::update(float const& deltaTime) {
 	for each (GameComponent* c in m_components)
 	{
 		c->update(deltaTime);
@@ -124,13 +123,13 @@ void GameObject::postRender() {
 	}
 }
 
-void GameObject::addChild(GameObject* gameObject)
+void GameObject::addChild(GameObject* const& gameObject)
 {
 	m_children.push_back(gameObject);
 	gameObject->m_parent = this;
 }
 
-void GameObject::addComponent(GameComponent* component)
+void GameObject::addComponent(GameComponent* const& component)
 {
 	m_components.push_back(component);
 	component->setGameObject(this);

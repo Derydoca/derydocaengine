@@ -1,7 +1,7 @@
 #include "StringUtils.h"
 #include <boost/algorithm/string.hpp>
 
-bool endsWith(const std::string& string, const std::string& suffix)
+bool endsWith(std::string const& string, std::string const& suffix)
 {
 	// If the suffix is longer than the string then there is no way it could end in that string
 	if (suffix.length() > string.length())
@@ -23,7 +23,7 @@ bool endsWith(const std::string& string, const std::string& suffix)
 	return true;
 }
 
-std::string getFileExtension(std::string path)
+std::string getFileExtension(std::string const& path)
 {
 	// Find the last instance of a period in the string
 	size_t strScanIndex;
