@@ -11,6 +11,7 @@ using namespace std;
 class ResourceSerializer
 {
 public:
+	virtual ~ResourceSerializer() {}
 	virtual void* deserialize(Resource* const& resource) = 0;
 	virtual ResourceType getResourceType() = 0;
 

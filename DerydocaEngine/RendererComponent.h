@@ -7,6 +7,7 @@
 class RendererComponent : public GameComponent
 {
 public:
+	virtual ~RendererComponent() {}
 	Material* getMaterial() const { return m_material; }
 	void setMaterial(Material* const& material) { m_material = material; }
 protected:

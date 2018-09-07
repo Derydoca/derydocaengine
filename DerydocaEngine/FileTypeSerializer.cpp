@@ -8,6 +8,5 @@ boost::uuids::uuid generateUuid()
 {
 	boost::uuids::random_generator gen;
 	boost::uuids::uuid id = gen();
-	//delete(&gen);
 	return id;
 }

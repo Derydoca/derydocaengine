@@ -11,6 +11,7 @@
 class FileTypeSerializer
 {
 public:
+	virtual ~FileTypeSerializer() {}
 	virtual YAML::Node generateResourceNodes(std::string const& filePath) = 0;
 	virtual FileType getFileType() = 0;
 	virtual Resource* loadResourceFromMeta(YAML::Node const& resourceNode) = 0;

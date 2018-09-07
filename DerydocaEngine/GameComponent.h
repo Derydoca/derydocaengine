@@ -20,6 +20,7 @@ class Camera;
 class GameComponent {
 public:
 	GameComponent() {}
+	virtual ~GameComponent() {}
 	virtual void init() {}
 	virtual void postInit() {}
 	virtual void update(float const& deltaTime) {}
