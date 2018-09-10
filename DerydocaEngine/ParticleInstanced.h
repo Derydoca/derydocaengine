@@ -24,7 +24,7 @@ private:
 	float m_velocityMin = 1.25f;
 	float m_velocityMax = 1.5f;
 	float m_angle = 6.0f;
-	vec3 m_gravity = vec3(0.0f, -0.2f, 0.0f);
+	glm::vec3 m_gravity = glm::vec3(0.0f, -0.2f, 0.0f);
 	GLuint m_initVel;
 	GLuint m_startTime;
 	Keyboard* m_keyboard;

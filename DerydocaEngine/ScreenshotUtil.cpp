@@ -5,12 +5,11 @@
 #include "stb_image.h"
 #include "stb_image_write.h"
 
-using namespace boost::posix_time;
-using namespace std;
+namespace t = boost::posix_time;
 
-string convertTimeToString(ptime const& now)
+std::string convertTimeToString(t::ptime const& now)
 {
-	static std::locale loc(std::wcout.getloc(), new time_facet("%Y%m%d%H%M%S"));
+	static std::locale loc(std::wcout.getloc(), new t::time_facet("%Y%m%d%H%M%S"));
 	std::basic_stringstream<char> wss;
 	wss.imbue(loc);
 	wss << now;
@@ -40,8 +39,8 @@ void ScreenshotUtil::postRender()
 		std::chrono::system_clock::time_point p = std::chrono::system_clock::now();
 		std::time_t t = std::chrono::system_clock::to_time_t(p);
 		
-		ptime now = second_clock::universal_time();
-		string timestamp = convertTimeToString(now);
+		t::ptime now = t::second_clock::universal_time();
+		std::string timestamp = convertTimeToString(now);
 
 		std::string file = "c:/test/ss_" + timestamp + ".png";
 
@@ -60,11 +59,11 @@ void ScreenshotUtil::postRender()
 		// Give some feedback
 		if (result == 0)
 		{
-			cout << "Unable to save screenshot" << endl;
+			std::cout << "Unable to save screenshot\n";
 		}
 		else
 		{
-			cout << "Screenshot saved!" << endl;
+			std::cout << "Screenshot saved!\n";
 		}
 	}
 }

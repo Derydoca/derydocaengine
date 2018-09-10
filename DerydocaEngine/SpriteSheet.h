@@ -5,8 +5,6 @@
 #include "TexturePacker.h"
 #include "Texture.h"
 
-using namespace std;
-
 class SpriteSheet
 {
 public:
@@ -14,7 +12,7 @@ public:
 	~SpriteSheet();
 
 	void updateTexture();
-	void addSprite(string const& textureId);
+	void addSprite(std::string const& textureId);
 	void saveToDisk(std::string const& filePath);
 	void LoadFromDisk(std::string const& filePath);
 
@@ -31,7 +29,7 @@ public:
 		return &(*spriteMapRecord).second;
 	}
 private:
-	map<int, SpriteReference> m_sprites;
+	std::map<int, SpriteReference> m_sprites;
 	unsigned char* m_imageBuffer;
 	unsigned int m_largestId;
 	Texture m_texture;

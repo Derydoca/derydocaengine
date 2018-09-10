@@ -3,9 +3,7 @@
 #include "Mesh.h"
 #include <iostream>
 
-using namespace std;
-
-static MeshFlags stringToFlag(string const& flagString)
+static MeshFlags stringToFlag(std::string const& flagString)
 {
 	if (flagString == "load_adjacent")
 	{
@@ -84,7 +82,7 @@ Resource * MeshSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 		{
 			for (size_t i = 0; i < flagsNode.size(); i++)
 			{
-				meshResource->setFlag(stringToFlag(flagsNode[0].as<string>()));
+				meshResource->setFlag(stringToFlag(flagsNode[0].as<std::string>()));
 			}
 		}
 

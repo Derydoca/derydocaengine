@@ -17,7 +17,7 @@ void * MaterialResourceSerializer::deserialize(Resource * const& resource)
 	YAML::Node root = YAML::LoadFile(resource->getSourceFilePath());
 
 	// Load the shader specified in the file
-	uuid shaderId = root["Shader"].as<uuid>();
+	boost::uuids::uuid shaderId = root["Shader"].as<boost::uuids::uuid>();
 	Shader* shader = ShaderLibrary::getInstance().find(shaderId);
 
 	// Create a material with the shader we created
@@ -41,19 +41,19 @@ void * MaterialResourceSerializer::deserialize(Resource * const& resource)
 		else if (paramType == "Color")
 		{
 			Color paramValue = parameters[i]["Value"].as<Color>();
-			std::string paramName = parameters[i]["Name"].as<string>();
+			std::string paramName = parameters[i]["Name"].as<std::string>();
 			material->setColorRGBA(paramName, paramValue);
 		}
 		else if (paramType == "Float")
 		{
 			float paramValue = parameters[i]["Value"].as<float>();
-			std::string paramName = parameters[i]["Name"].as<string>();
+			std::string paramName = parameters[i]["Name"].as<std::string>();
 			material->setFloat(paramName, paramValue);
 		}
 		else if (paramType == "Bool")
 		{
 			bool paramValue = parameters[i]["Value"].as<bool>();
-			std::string paramName = parameters[i]["Name"].as<string>();
+			std::string paramName = parameters[i]["Name"].as<std::string>();
 			material->setBool(paramName, paramValue);
 		}
 	}

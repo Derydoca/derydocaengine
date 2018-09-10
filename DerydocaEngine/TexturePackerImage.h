@@ -2,8 +2,6 @@
 #include <glm/glm.hpp>
 #include "Rect.h"
 
-using namespace std;
-
 struct TexturePackerImage
 {
 public:

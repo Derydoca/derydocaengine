@@ -68,9 +68,9 @@ void ParticleInstanced::deserialize(YAML::Node const& compNode)
 	m_material = new Material();
 	m_material->setShader(shader);
 	m_material->setFloat("ParticleLifetime", m_lifetime);
-	m_material->setVec4("Material.Kd", vec4(1.0f, 1.0f, 1.0f, 1.0f));
-	m_material->setVec4("Material.Ka", vec4(0.05f, 0.05f, 0.0f, 1.0f));
-	m_material->setVec4("Material.Ks", vec4(0.7f, 0.7f, 0.7f, 1.0f));
+	m_material->setVec4("Material.Kd", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	m_material->setVec4("Material.Ka", glm::vec4(0.05f, 0.05f, 0.0f, 1.0f));
+	m_material->setVec4("Material.Ks", glm::vec4(0.7f, 0.7f, 0.7f, 1.0f));
 	m_material->setFloat("Material.Shininess", 50.0f);
 
 	m_mesh = getResourceObject<Mesh>(compNode, "mesh");
@@ -100,7 +100,7 @@ void ParticleInstanced::initBuffers()
 	glBufferData(GL_ARRAY_BUFFER, m_numParticles * sizeof(float), NULL, GL_STATIC_DRAW);
 
 	// Fill the first velocity buffer with random velocities
-	vec3 v(0.0f);
+	glm::vec3 v(0.0f);
 	float velocity;
 	float theta;
 	float phi;
@@ -108,14 +108,14 @@ void ParticleInstanced::initBuffers()
 	GLfloat* data = new GLfloat[m_numParticles * 3];
 	for (int i = 0; i < m_numParticles; i++)
 	{
-		theta = mix(0.0f, pi<float>() / m_angle, randFloat());
-		phi = mix(0.0f, two_pi<float>(), randFloat());
+		theta = glm::mix(0.0f, glm::pi<float>() / m_angle, randFloat());
+		phi = glm::mix(0.0f, glm::two_pi<float>(), randFloat());
 
 		v.x = sinf(theta) * cosf(phi);
 		v.y = cosf(theta);
 		v.z = sinf(theta) * sinf(phi);
 
-		velocity = mix(m_velocityMin, m_velocityMax, randFloat());
+		velocity = glm::mix(m_velocityMin, m_velocityMax, randFloat());
 		v = normalize(v) * velocity;
 
 		data[3 * i + 0] = v.x;

@@ -18,14 +18,14 @@ void ShaderSubroutineSwitcher::init()
 
 void ShaderSubroutineSwitcher::deserialize(YAML::Node const& compNode)
 {
-	m_subroutineName = compNode["SubroutineName"].as<string>();
+	m_subroutineName = compNode["SubroutineName"].as<std::string>();
 }
 
-void ShaderSubroutineSwitcher::setSubroutine(GLuint const& program, string const& subroutineName)
+void ShaderSubroutineSwitcher::setSubroutine(GLuint const& program, std::string const& subroutineName)
 {
 	if (subroutineName.empty())
 	{
-		cout << "Unable to set the subroutine for this component because a subroutine name was not supplied." << endl;
+		std::cout << "Unable to set the subroutine for this component because a subroutine name was not supplied.\n";
 		return;
 	}
 
@@ -33,7 +33,7 @@ void ShaderSubroutineSwitcher::setSubroutine(GLuint const& program, string const
 	MeshRenderer* mr = getComponent<MeshRenderer>();
 	if (mr == nullptr)
 	{
-		cout << "No mesh renderer found for ShaderSubroutineSwitcher object.";
+		std::cout << "No mesh renderer found for ShaderSubroutineSwitcher object.\n";
 		return;
 	}
 	// Get the shader attached to the mesh renderer
@@ -41,7 +41,7 @@ void ShaderSubroutineSwitcher::setSubroutine(GLuint const& program, string const
 	Shader* shader = material->getShader();
 	if (shader == nullptr)
 	{
-		cout << "Unable to set the subroutine for this component because it does not have a shader assigned to it." << endl;
+		std::cout << "Unable to set the subroutine for this component because it does not have a shader assigned to it.\n";
 		return;
 	}
 

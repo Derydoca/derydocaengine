@@ -9,7 +9,7 @@
 
 SpriteSheet::SpriteSheet()
 {
-	m_sprites = map<int, SpriteReference>();
+	m_sprites = std::map<int, SpriteReference>();
 }
 
 SpriteSheet::~SpriteSheet()
@@ -40,7 +40,7 @@ void SpriteSheet::updateTexture()
 
 	packer.packImages();
 
-	vector<TexturePackerImage> packedImages = packer.getSubImageData();
+	std::vector<TexturePackerImage> packedImages = packer.getSubImageData();
 	for (auto img : packedImages)
 	{
 		auto spriteMapRecord = m_sprites.find(img.getID());
@@ -59,7 +59,7 @@ void SpriteSheet::updateTexture()
 	m_texture.updateBuffer(m_imageBuffer, packer.getWidth(), packer.getHeight(), packer.getChannels(), nullptr);
 }
 
-void SpriteSheet::addSprite(string const& textureId)
+void SpriteSheet::addSprite(std::string const& textureId)
 {
 	SpriteReference sprite = SpriteReference(++m_largestId);
 	sprite.setTextureId(textureId);
@@ -67,27 +67,25 @@ void SpriteSheet::addSprite(string const& textureId)
 	m_sprites[m_largestId] = sprite;
 }
 
-void SpriteSheet::saveToDisk(string const& filePath)
+void SpriteSheet::saveToDisk(std::string const& filePath)
 {
-	using namespace YAML;
-
 	// Save the image to disk and process it by the object library
-	string imageFileName = filePath + ".tga";
+	std::string imageFileName = filePath + ".tga";
 	stbi_write_tga(imageFileName.c_str(), m_texture.getWidth(), m_texture.getHeight(), 4, m_imageBuffer);
 	ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
 	Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 
 	// Create the root and add all root level data
-	Node root = Node();
-	Node spriteSheetNode = root["SpriteSheet"];
-	spriteSheetNode["Texture"] = boost::lexical_cast<string>(imageResource->getId());
+	YAML::Node root = YAML::Node();
+	YAML::Node spriteSheetNode = root["SpriteSheet"];
+	spriteSheetNode["Texture"] = boost::lexical_cast<std::string>(imageResource->getId());
 
 	// Add all sprite data to a parent "Sprites" node
-	Node spritesNode = spriteSheetNode["Sprites"];
+	YAML::Node spritesNode = spriteSheetNode["Sprites"];
 	for (auto sprite : m_sprites)
 	{
 		// Create the sprite node
-		Node spriteNode;
+		YAML::Node spriteNode;
 		Rect tex = sprite.second.getTexPosition();
 		spriteNode["Id"] = sprite.second.getId();
 		spriteNode["Texture"] = sprite.second.getTextureId();
@@ -118,18 +116,16 @@ void SpriteSheet::saveToDisk(string const& filePath)
 	file.close();
 }
 
-void SpriteSheet::LoadFromDisk(string const& filePath)
+void SpriteSheet::LoadFromDisk(std::string const& filePath)
 {
-	using namespace YAML;
-
-	Node file = YAML::LoadFile(filePath);
-	Node spriteSheetNode = file["SpriteSheet"];
+	YAML::Node file = YAML::LoadFile(filePath);
+	YAML::Node spriteSheetNode = file["SpriteSheet"];
 
 	bool hasBeenProcessed = spriteSheetNode["Texture"];
 
 	if (hasBeenProcessed)
 	{
-		string textureUuid = spriteSheetNode["Texture"].as<string>();
+		std::string textureUuid = spriteSheetNode["Texture"].as<std::string>();
 		Resource *r = ObjectLibrary::getInstance().getResource(textureUuid);
 		int imgw, imgh, imgch;
 		m_imageBuffer = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
@@ -138,15 +134,15 @@ void SpriteSheet::LoadFromDisk(string const& filePath)
 
 	// Add all sprite data to a parent "Sprites" node
 	int nextId = 0;
-	Node spritesNode = spriteSheetNode["Sprites"];
+	YAML::Node spritesNode = spriteSheetNode["Sprites"];
 	for (size_t i = 0; i < spritesNode.size(); i++)
 	{
-		Node spriteNode = spritesNode[i];
+		YAML::Node spriteNode = spritesNode[i];
 
 		int spriteId = hasBeenProcessed ? spriteNode["Id"].as<int>() : ++nextId;
 
 		SpriteReference sprite = SpriteReference(spriteId);
-		sprite.setTextureId(spriteNode["Texture"].as<string>());
+		sprite.setTextureId(spriteNode["Texture"].as<std::string>());
 		if (hasBeenProcessed)
 		{
 			sprite.setWidth(spriteNode["Width"].as<int>());

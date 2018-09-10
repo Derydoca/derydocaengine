@@ -4,8 +4,6 @@
 #include <fstream>
 #include <string>
 
-using namespace std;
-
 class BezierPatchMeshFileLoader
 {
 public:
@@ -14,6 +12,6 @@ public:
 
 	BezierPatchMesh* Load(const char* filePath);
 private:
-	bool loadPatchData(istream & fileStream, int const& patch, float* const& patchData);
+	bool loadPatchData(std::istream & fileStream, int const& patch, float* const& patchData);
 };
 

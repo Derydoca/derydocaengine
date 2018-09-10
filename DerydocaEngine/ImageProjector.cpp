@@ -26,17 +26,17 @@ void ImageProjector::deserialize(YAML::Node const& compNode)
 	YAML::Node focalPointNode = compNode["focalPoint"];
 	if (focalPointNode)
 	{
-		m_focalPoint = focalPointNode.as<vec3>();
+		m_focalPoint = focalPointNode.as<glm::vec3>();
 	}
 
 	YAML::Node upVectorNode = compNode["upVector"];
 	if (upVectorNode)
 	{
-		m_upVector = upVectorNode.as<vec3>();
+		m_upVector = upVectorNode.as<glm::vec3>();
 	}
 	else
 	{
-		m_upVector = vec3(0.0f, 1.0f, 0.0);
+		m_upVector = glm::vec3(0.0f, 1.0f, 0.0);
 	}
 
 	YAML::Node fovNode = compNode["fov"];
@@ -111,9 +111,9 @@ void ImageProjector::updateProjectionMatrix()
 	}
 
 	// Create the projection matrix
-	mat4 projView = lookAt(getGameObject()->getTransform()->getWorldPos(), m_focalPoint, m_upVector);
-	mat4 projProj = perspective(glm::radians(m_fov), aspectRatio, m_zNear, m_zFar);
-	mat4 projScaleTrans = glm::translate(mat4(), vec3(0.5f)) * glm::scale(mat4(), vec3(0.5f));
+	glm::mat4 projView = lookAt(getGameObject()->getTransform()->getWorldPos(), m_focalPoint, m_upVector);
+	glm::mat4 projProj = glm::perspective(glm::radians(m_fov), aspectRatio, m_zNear, m_zFar);
+	glm::mat4 projScaleTrans = glm::translate(glm::mat4(), glm::vec3(0.5f)) * glm::scale(glm::mat4(), glm::vec3(0.5f));
 
 	// Store it locally
 	m_projectorMatrix = projScaleTrans * projProj * projView;

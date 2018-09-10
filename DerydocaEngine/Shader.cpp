@@ -14,8 +14,6 @@
 	} \
 }
 
-using namespace std;
-
 static void CheckShaderError(GLuint const& shader, GLuint const& flag, bool const& isProgram, std::string const& errorMessage);
 static std::string LoadShader(std::string const& fileName);
 static bool CheckIfShaderExists(std::string const& fileName);
@@ -364,7 +362,7 @@ void Shader::renderMesh(Mesh * const& mesh, RenderTexture* const& m_renderTextur
 			{
 				// Render to the screen
 				glBindFramebuffer(GL_FRAMEBUFFER, 0);
-				//cout << "No proper render target was supplied!" << endl;
+				//cout << "No proper render target was supplied!\n";
 			}
 
 			// TODO: Add viewport suport
@@ -403,7 +401,7 @@ static GLuint CreateShader(std::string const& text, GLenum const& shaderType) {
 	GLuint shader = glCreateShader(shaderType);
 
 	if (shader == 0) {
-		std::cerr << "Error: Shader creation failed!" << std::endl;
+		std::cerr << "Error: Shader creation failed!\n";
 	}
 
 	const GLchar* shaderSourceStrings[1];
@@ -434,7 +432,7 @@ static std::string LoadShader(std::string const& fileName) {
 		}
 	}
 	else {
-		std::cerr << "Unable to load shader: " << fileName << std::endl;
+		std::cerr << "Unable to load shader: " << fileName << "\n";
 	}
 
 	return output;
@@ -465,7 +463,7 @@ static void CheckShaderError(GLuint const& shader, GLuint const& flag, bool cons
 			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 		}
 
-		std::cerr << errorMessage << ": '" << std::endl << error << "'" << std::endl;
+		std::cerr << errorMessage << ": '\n" << error << "'\n";
 	}
 }
 
@@ -521,12 +519,12 @@ void Shader::clearVec4(std::string const& name)
 
 void Shader::clearMat3(std::string const& name)
 {
-	glUniformMatrix3fv(getUniformName(name), 1, GL_FALSE, &mat3()[0][0]);
+	glUniformMatrix3fv(getUniformName(name), 1, GL_FALSE, &glm::mat3()[0][0]);
 }
 
 void Shader::clearMat4(std::string const& name)
 {
-	glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, &mat4()[0][0]);
+	glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, &glm::mat4()[0][0]);
 }
 
 void Shader::clearTexture(std::string const& name, int const& textureUnit, GLenum const& textureType)

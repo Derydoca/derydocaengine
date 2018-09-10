@@ -4,8 +4,6 @@
 #include "RenderTexture.h"
 #include "MeshRenderer.h"
 
-using namespace std;
-
 class EdgeDetectionFilter : public GameComponent
 {
 public:

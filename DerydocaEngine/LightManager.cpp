@@ -2,8 +2,6 @@
 #include "CameraManager.h"
 #include "glm\glm.hpp"
 
-using namespace std;
-
 void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform* const& objectTransform, Shader* const& shader)
 {
 	assert(objectTransform);
@@ -176,7 +174,7 @@ void LightManager::buildOffsetTex(int const& texSize, int const& samplesU, int c
 				x2 = (k + 1) % samplesU;
 				y2 = (samples - 1 - k - 1) / samplesU;
 
-				vec4 v;
+				glm::vec4 v;
 				// Center on grid and jitter
 				v.x = (x1 + 0.5f) + jitter();
 				v.y = (y1 + 0.5f) + jitter();

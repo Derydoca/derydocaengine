@@ -31,14 +31,14 @@ Texture * FontFace::getTexture()
 	return &m_texture;
 }
 
-void FontFace::loadFromFontFile(string const& filePath)
+void FontFace::loadFromFontFile(std::string const& filePath)
 {
 	// Initialize FreeType
 	FT_Library freeTypeLibrary;
 	FT_Error error = FT_Init_FreeType(&freeTypeLibrary);
 	if (error)
 	{
-		cout << "An error occurred while attempting to initialize FreeType. Error: " << error << endl;
+		std::cout << "An error occurred while attempting to initialize FreeType. Error: " << error << "\n";
 	}
 
 	// Load the font file
@@ -46,12 +46,12 @@ void FontFace::loadFromFontFile(string const& filePath)
 	error = FT_New_Face(freeTypeLibrary, filePath.c_str(), 0, &fontFace);
 	if (error == FT_Err_Unknown_File_Format)
 	{
-		cout << "Unable to load the font because it is of an unknown file format. File: " << filePath << endl;
+		std::cout << "Unable to load the font because it is of an unknown file format. File: " << filePath << "\n";
 		return;
 	}
 	else if (error)
 	{
-		cout << "Unable to load the font. Error: " << error << endl;
+		std::cout << "Unable to load the font. Error: " << error << "\n";
 		return;
 	}
 
@@ -83,7 +83,7 @@ void FontFace::loadFromFontFile(string const& filePath)
 		error = FT_Load_Glyph(fontFace, glyph_index, FT_LOAD_DEFAULT);
 		if (error)
 		{
-			cout << "Unable to load glyph at index " << glyph_index << ". Error: " << error;
+			std::cout << "Unable to load glyph at index " << glyph_index << ". Error: " << error;
 			continue;
 		}
 
@@ -93,7 +93,7 @@ void FontFace::loadFromFontFile(string const& filePath)
 			error = FT_Render_Glyph(fontFace->glyph, FT_RENDER_MODE_NORMAL);
 			if (error)
 			{
-				cout << "Unable to render glyph." << endl;
+				std::cout << "Unable to render glyph.\n";
 				continue;
 			}
 		}
@@ -123,7 +123,7 @@ void FontFace::loadFromFontFile(string const& filePath)
 	m_textureDirty = true;
 
 	// Load the character image data map
-	vector<TexturePackerImage> images = packer.getSubImageData();
+	std::vector<TexturePackerImage> images = packer.getSubImageData();
 	m_charImages.clear();
 	for (auto image : images)
 	{
@@ -131,24 +131,22 @@ void FontFace::loadFromFontFile(string const& filePath)
 	}
 }
 
-void FontFace::loadFromSerializedFile(string const& filePath)
+void FontFace::loadFromSerializedFile(std::string const& filePath)
 {
-	using namespace YAML;
+	YAML::Node file = YAML::LoadFile(filePath);
 
-	Node file = YAML::LoadFile(filePath);
-
-	Node font = file["Font"];
+	YAML::Node font = file["Font"];
 
 	// Load general font information
-	m_name = font["name"].as<string>();
-	m_style = font["style"].as<string>();
+	m_name = font["name"].as<std::string>();
+	m_style = font["style"].as<std::string>();
 	m_fontSize = font["fontSize"].as<float>();
 	m_imageBufferSize.x = font["width"].as<int>();
 	m_imageBufferSize.y = font["height"].as<int>();
 	m_lineHeight = font["lineHeight"].as<float>();
 	
 	// Load the image
-	string imageUuid = font["image"].as<string>();
+	std::string imageUuid = font["image"].as<std::string>();
 	Resource* r = ObjectLibrary::getInstance().getResource(imageUuid);
 	int imgw, imgh, imgch;
 	unsigned char* imageData = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
@@ -161,10 +159,10 @@ void FontFace::loadFromSerializedFile(string const& filePath)
 	delete[] imageData;
 
 	// Load all character data
-	Node charactersNode = font["characters"];
+	YAML::Node charactersNode = font["characters"];
 	for (size_t i = 0; i < charactersNode.size(); i++)
 	{
-		Node charNode = charactersNode[i];
+		YAML::Node charNode = charactersNode[i];
 		int id = charNode["id"].as<unsigned long>();
 		int w = charNode["width"].as<int>();
 		int h = charNode["height"].as<int>();
@@ -186,13 +184,11 @@ void FontFace::loadFromSerializedFile(string const& filePath)
 	m_textureDirty = true;
 }
 
-void FontFace::saveToSerializedFile(string const& filePath)
+void FontFace::saveToSerializedFile(std::string const& filePath)
 {
-	using namespace YAML;
+	YAML::Node root = YAML::Node();
 
-	Node root = Node();
-
-	Node font = root["Font"];
+	YAML::Node font = root["Font"];
 
 	// Save the general font data
 	font["name"] = m_name;
@@ -201,17 +197,17 @@ void FontFace::saveToSerializedFile(string const& filePath)
 	font["width"] = m_imageBufferSize.x;
 	font["height"] = m_imageBufferSize.y;
 	font["lineHeight"] = m_lineHeight;
-	string imageFileName = filePath + ".bmp";
+	std::string imageFileName = filePath + ".bmp";
 	stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
 	ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
 	Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
-	font["image"] = boost::lexical_cast<string>(imageResource->getId());
+	font["image"] = boost::lexical_cast<std::string>(imageResource->getId());
 
 	// Save the character information
-	Node charactersNode = font["characters"];
+	YAML::Node charactersNode = font["characters"];
 	for (auto charImage : m_charImages)
 	{
-		Node charNode;
+		YAML::Node charNode;
 		charNode["id"] = charImage.second.getID();
 		charNode["width"] = charImage.second.getWidth();
 		charNode["height"] = charImage.second.getHeight();

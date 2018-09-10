@@ -2,8 +2,6 @@
 #include <glm/gtc/noise.hpp>
 #include "MeshRenderer.h"
 
-using namespace glm;
-
 NoiseTexture::NoiseTexture()
 {
 	m_texture = new Texture();
@@ -50,7 +48,7 @@ void NoiseTexture::deserialize(YAML::Node const& compNode)
 	YAML::Node textureNameNode = compNode["textureName"];
 	if (textureNameNode)
 	{
-		m_textureName = textureNameNode.as<string>();
+		m_textureName = textureNameNode.as<std::string>();
 	}
 
 	YAML::Node baseFrequencyNode = compNode["baseFrequency"];
@@ -103,10 +101,10 @@ void NoiseTexture::generateNoiseTexture(float const& baseFreq, float const& pers
 				{
 					float a, b, c, d;
 
-					vec2 aPos = vec2(x, y) * freq;
-					vec2 bPos = vec2(x + xRange, y) * freq;
-					vec2 cPos = vec2(x, y + yRange) * freq;
-					vec2 dPos = vec2(x + xRange, y + yRange) * freq;
+					glm::vec2 aPos = glm::vec2(x, y) * freq;
+					glm::vec2 bPos = glm::vec2(x + xRange, y) * freq;
+					glm::vec2 cPos = glm::vec2(x, y + yRange) * freq;
+					glm::vec2 dPos = glm::vec2(x + xRange, y + yRange) * freq;
 
 					if (periodic)
 					{
@@ -117,10 +115,10 @@ void NoiseTexture::generateNoiseTexture(float const& baseFreq, float const& pers
 					}
 					else
 					{
-						a = perlin(aPos, vec2(freq));
-						b = perlin(bPos, vec2(freq));
-						c = perlin(cPos, vec2(freq));
-						d = perlin(dPos, vec2(freq));
+						a = perlin(aPos, glm::vec2(freq));
+						b = perlin(bPos, glm::vec2(freq));
+						c = perlin(cPos, glm::vec2(freq));
+						d = perlin(dPos, glm::vec2(freq));
 					}
 
 					a *= persist;
@@ -130,17 +128,17 @@ void NoiseTexture::generateNoiseTexture(float const& baseFreq, float const& pers
 
 					float xmix = 1.0f - x / xRange;
 					float ymix = 1.0f - y / yRange;
-					float x1 = mix(a, b, xmix);
-					float x2 = mix(c, d, xmix);
+					float x1 = glm::mix(a, b, xmix);
+					float x2 = glm::mix(c, d, xmix);
 
-					val = mix(x1, x2, ymix);
+					val = glm::mix(x1, x2, ymix);
 				}
 				else
 				{
 					glm::vec2 p(x * freq, y * freq);
 					if (periodic)
 					{
-						val = glm::perlin(p, vec2(freq));
+						val = glm::perlin(p, glm::vec2(freq));
 					}
 					else
 					{

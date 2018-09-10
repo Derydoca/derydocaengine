@@ -2,7 +2,7 @@
 #include "ObjectLibrary.h"
 #include "ShaderResource.h"
 
-Shader * ShaderLibrary::find(uuid const& shaderId)
+Shader * ShaderLibrary::find(boost::uuids::uuid const& shaderId)
 {
 	// Look through the list of already loaded shaders
 	auto it = m_shaders.find(shaderId);
@@ -18,7 +18,7 @@ Shader * ShaderLibrary::find(uuid const& shaderId)
 	Resource* resource = ObjectLibrary::getInstance().getResource(shaderId);
 	if (resource == nullptr)
 	{
-		cout << "Unable to find a resource with the ID of '" << shaderId << "'." << endl;
+		std::cout << "Unable to find a resource with the ID of '" << shaderId << "'.\n";
 		return nullptr;
 	}
 
@@ -26,7 +26,7 @@ Shader * ShaderLibrary::find(uuid const& shaderId)
 	ShaderResource* shaderResource = static_cast<ShaderResource*>(resource);
 	if (shaderResource == nullptr)
 	{
-		cout << "The resource with ID of '" << shaderId << "' is not a shader." << endl;
+		std::cout << "The resource with ID of '" << shaderId << "' is not a shader.\n";
 		return nullptr;
 	}
 
@@ -40,7 +40,7 @@ Shader * ShaderLibrary::find(uuid const& shaderId)
 	return shader;
 }
 
-Shader * ShaderLibrary::find(string const& shaderPath)
+Shader * ShaderLibrary::find(std::string const& shaderPath)
 {
 	// Find the uuid associated with the path
 	auto it = m_shaderPaths.find(shaderPath);
@@ -48,7 +48,7 @@ Shader * ShaderLibrary::find(string const& shaderPath)
 	// If it could not be found, return with a null shader
 	if (it == m_shaderPaths.end())
 	{
-		cout << "Unable to find a shader uuid associated with the path '" << shaderPath << "'." << endl;
+		std::cout << "Unable to find a shader uuid associated with the path '" << shaderPath << "'.\n";
 		return nullptr;
 	}
 
@@ -56,7 +56,7 @@ Shader * ShaderLibrary::find(string const& shaderPath)
 	return find(it->second);
 }
 
-void ShaderLibrary::registerShaderName(string const& shaderPath, uuid const& shaderUuid)
+void ShaderLibrary::registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid)
 {
-	m_shaderPaths.insert(pair<string, uuid>(shaderPath, shaderUuid));
+	m_shaderPaths.insert(std::pair<std::string, boost::uuids::uuid>(shaderPath, shaderUuid));
 }

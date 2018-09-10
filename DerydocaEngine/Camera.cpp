@@ -9,8 +9,6 @@
 #include "ShaderLibrary.h"
 #include "LightManager.h"
 
-using namespace glm;
-
 Camera::Camera()
 {
 	CameraManager::getInstance().addCamera(this);
@@ -268,15 +266,15 @@ void Camera::renderRoot(GameObject* const& gameObject)
 
 void Camera::setIdentityMatricies(Shader* const& shader)
 {
-	mat4 m = mat4(1.0);
-	mat4 v = mat4(1.0);
-	mat4 p = mat4(1.0);
-	mat4 mv = v * m;
-	mat4 mvp = p * v * m;
+	glm::mat4 m = glm::mat4(1.0);
+	glm::mat4 v = glm::mat4(1.0);
+	glm::mat4 p = glm::mat4(1.0);
+	glm::mat4 mv = v * m;
+	glm::mat4 mvp = p * v * m;
 
 	shader->bind();
 
 	shader->setMat4("ModelViewMatrix", mv);
-	shader->setMat3("NormalMatrix", mat3(mv[0], vec3(mv[1]), vec3(mv[2])));
+	shader->setMat3("NormalMatrix", glm::mat3(mv[0], glm::vec3(mv[1]), glm::vec3(mv[2])));
 	shader->setMat4("MVP", mvp);
 }

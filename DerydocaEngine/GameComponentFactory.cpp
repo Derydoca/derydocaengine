@@ -36,7 +36,7 @@
 #define REGINSTANCE(TYPE) \
 	registerInstanceGenerator(#TYPE, TYPE::generateInstance);
 
-GameComponent * GameComponentFactory::CreateGameComponent(string const& gameComponentType)
+GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gameComponentType)
 {
 	// Find a generator function that matches the type passed
 	auto it = m_instanceGenerators.find(gameComponentType);
@@ -50,11 +50,11 @@ GameComponent * GameComponentFactory::CreateGameComponent(string const& gameComp
 	}
 
 	// Otherwise we cannot create a game object and have to return null
-	cout << "Unable to create a game object of type '" << gameComponentType << "' because no instance generator exists for it." << endl;
+	std::cout << "Unable to create a game object of type '" << gameComponentType << "' because no instance generator exists for it.\n";
 	return nullptr;
 }
 
-void GameComponentFactory::registerInstanceGenerator(string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator)
+void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator)
 {
 	m_instanceGenerators[gameComponentType] = instanceGenerator;
 }

@@ -6,8 +6,6 @@
 #include "TexturePackerTextureData.h"
 #include "IntRect.h"
 
-using namespace std;
-
 class Texture;
 
 class TexturePacker
@@ -33,15 +31,15 @@ public:
 	Texture* allocTexture() { return m_packedImageData.allocTexture(); };
 	unsigned char* allocImageBuffer() { return m_packedImageData.allocImageBuffer(); }
 	void freeSubImageData();
-	vector<TexturePackerImage> getSubImageData() { return m_images; }
+	std::vector<TexturePackerImage> getSubImageData() { return m_images; }
 	int getWidth() const { return m_packedImageData.getWidth(); }
 	int getHeight() const { return m_packedImageData.getHeight(); }
 	int getChannels() const { return m_packedImageData.getChannels(); }
 private:
-	vector<TexturePackerImage> m_images;
-	map<unsigned long, unsigned char*> m_imageBuffers;
+	std::vector<TexturePackerImage> m_images;
+	std::map<unsigned long, unsigned char*> m_imageBuffers;
 	bool m_isDirty;
 	TexturePackerTextureData m_packedImageData;
 
-	int getIntersectingImageXAdvance(vector<IntRect> imageBounds, IntRect rect);
+	int getIntersectingImageXAdvance(std::vector<IntRect> imageBounds, IntRect rect);
 };

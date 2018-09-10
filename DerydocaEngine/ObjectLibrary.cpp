@@ -9,17 +9,16 @@
 #include "YamlTools.h"
 #include "FileType.h"
 
-using namespace boost::filesystem;
-using namespace std;
+namespace fs = boost::filesystem;
 
-void ObjectLibrary::initialize(string const& engineResourcesPath, string const& projectPath)
+void ObjectLibrary::initialize(std::string const& engineResourcesPath, std::string const& projectPath)
 {
-	cout << "Updating meta files for the project: " << projectPath << endl;
+	std::cout << "Updating meta files for the project: " << projectPath << "\n";
 	updateMetaFilesDirectory(projectPath);
-	cout << "Loading project files: " << engineResourcesPath << endl;
+	std::cout << "Loading project files: " << engineResourcesPath << "\n";
 	loadDirectory(projectPath);
 
-	cout << "Loading engine files: " << engineResourcesPath << endl;
+	std::cout << "Loading engine files: " << engineResourcesPath << "\n";
 	loadDirectory(engineResourcesPath);
 }
 
@@ -59,14 +58,14 @@ GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
 
 Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 {
-	string metaFilePath = sourceFilePath + m_metaExtension;
+	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 	// Load the meta file
 	YAML::Node file = YAML::LoadFile(metaFilePath);
 	YAML::Node resourcesNode = file["Resources"];
 	if (!resourcesNode)
 	{
-		cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!" << endl;
+		std::cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!\n";
 		return nullptr;
 	}
 
@@ -78,7 +77,7 @@ Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 		// If no ID node is defined, exit out because it is required
 		if (!resourceNode["ID"])
 		{
-			cout << "A node was skipped because it was missing an ID parameter." << endl;
+			std::cout << "A node was skipped because it was missing an ID parameter.\n";
 			continue;
 		}
 
@@ -91,7 +90,7 @@ Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 		// If the serializer could not be found, continue onto the next resource
 		if (serializer == nullptr)
 		{
-			cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!" << endl;
+			std::cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!\n";
 			continue;
 		}
 
@@ -101,7 +100,7 @@ Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 		// If no resource could be parsed from the node, continue on
 		if (resource == nullptr)
 		{
-			cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!" << endl;
+			std::cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!\n";
 			continue;
 		}
 
@@ -118,8 +117,8 @@ Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 
 void ObjectLibrary::updateMetaFilesDirectory(std::string const& directory)
 {
-	directory_iterator it{ directory };
-	while (it != directory_iterator{})
+	fs::directory_iterator it{ directory };
+	while (it != fs::directory_iterator{})
 	{
 		if (is_directory(it->path()))
 		{
@@ -141,7 +140,7 @@ void ObjectLibrary::updateMetaFiles(std::string const& sourceFilePath)
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 	// If the meta file does not exist
-	if (!exists(metaFilePath))
+	if (!fs::exists(metaFilePath))
 	{
 		// Create the meta file
 		if (!createMetaFile(sourceFilePath, metaFilePath))
@@ -154,13 +153,13 @@ void ObjectLibrary::updateMetaFiles(std::string const& sourceFilePath)
 
 void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, GameComponent * const& component)
 {
-	m_sceneComponents.insert(std::pair<uuid, GameComponent*>(id, component));
+	m_sceneComponents.insert(std::pair<boost::uuids::uuid, GameComponent*>(id, component));
 }
 
 void ObjectLibrary::loadDirectory(std::string const& directory)
 {
-	directory_iterator it{ directory };
-	while (it != directory_iterator{})
+	fs::directory_iterator it{ directory };
+	while (it != fs::directory_iterator{})
 	{
 		if (is_directory(it->path()))
 		{
@@ -193,7 +192,7 @@ bool ObjectLibrary::createMetaFile(std::string const& sourceFilePath, std::strin
 	// If the serializer was not found, abort and return false
 	if (serializer == nullptr)
 	{
-		cout << "The file '" << sourceFilePath.c_str() << "' does not have a serializer associated with it." << endl;
+		std::cout << "The file '" << sourceFilePath.c_str() << "' does not have a serializer associated with it.\n";
 		return false;
 	}
 
@@ -226,7 +225,7 @@ void ObjectLibrary::loadFile(std::string const& sourceFilePath)
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 	// If the meta file does not exist, skip loading this resource
-	if (!exists(metaFilePath))
+	if (!fs::exists(metaFilePath))
 	{
 		return;
 	}
@@ -236,7 +235,7 @@ void ObjectLibrary::loadFile(std::string const& sourceFilePath)
 	YAML::Node resourcesNode = file["Resources"];
 	if (!resourcesNode)
 	{
-		cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!" << endl;
+		std::cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!\n";
 	}
 
 	// Go through all the resource nodes in the file
@@ -247,7 +246,7 @@ void ObjectLibrary::loadFile(std::string const& sourceFilePath)
 		// If no ID node is defined, exit out because it is required
 		if (!resourceNode["ID"])
 		{
-			cout << "A node was skipped because it was missing an ID parameter." << endl;
+			std::cout << "A node was skipped because it was missing an ID parameter.\n";
 			continue;
 		}
 
@@ -260,7 +259,7 @@ void ObjectLibrary::loadFile(std::string const& sourceFilePath)
 		// If the serializer could not be found, continue onto the next resource
 		if (serializer == nullptr)
 		{
-			cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!" << endl;
+			std::cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!\n";
 			continue;
 		}
 
@@ -270,7 +269,7 @@ void ObjectLibrary::loadFile(std::string const& sourceFilePath)
 		// If no resource could be parsed from the node, continue on
 		if (resource == nullptr)
 		{
-			cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!" << endl;
+			std::cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!\n";
 			continue;
 		}
 

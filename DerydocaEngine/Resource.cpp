@@ -7,7 +7,7 @@ Resource::Resource()
 
 }
 
-Resource::Resource(uuid const& id, std::string const& sourceFilePath, std::string const& metaFilePath, ResourceType const& type) :
+Resource::Resource(boost::uuids::uuid const& id, std::string const& sourceFilePath, std::string const& metaFilePath, ResourceType const& type) :
 	m_id(id),
 	m_sourceFilePath(sourceFilePath),
 	m_metaFilePath(metaFilePath)

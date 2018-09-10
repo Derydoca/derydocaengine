@@ -101,22 +101,22 @@ void ParticleFountain::initBuffers()
 	glBufferData(GL_ARRAY_BUFFER, m_numParticles * sizeof(float), NULL, GL_STATIC_DRAW);
 
 	// Fill the first buffer with random velocities
-	vec3 v(0.0f);
+	glm::vec3 v(0.0f);
 	float velocity, theta, phi;
 
 	GLfloat* data = new GLfloat[m_numParticles * 3];
 	for (int i = 0; i < m_numParticles; i++)
 	{
 		// Pick the direction of the particles
-		theta = mix(0.0f, glm::pi<float>() / m_angle, randFloat());
-		phi = mix(0.0f, glm::two_pi<float>(), randFloat());
+		theta = glm::mix(0.0f, glm::pi<float>() / m_angle, randFloat());
+		phi = glm::mix(0.0f, glm::two_pi<float>(), randFloat());
 
 		v.x = sinf(theta) * cosf(phi);
 		v.y = cosf(theta);
 		v.z = sinf(theta) * sinf(phi);
 
 		// Scale to set the magnitude of the velocity
-		velocity = mix(m_velocityMin, m_velocityMax, randFloat());
+		velocity = glm::mix(m_velocityMin, m_velocityMax, randFloat());
 		v = normalize(v) * velocity;
 
 		data[3 * i] = v.x;

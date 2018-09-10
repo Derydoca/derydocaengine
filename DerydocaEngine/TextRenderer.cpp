@@ -21,7 +21,7 @@ void TextRenderer::deserialize(YAML::Node const& compNode)
 	YAML::Node boundsNode = compNode["bounds"];
 	if (boundsNode)
 	{
-		m_bounds = boundsNode.as<vec2>();
+		m_bounds = boundsNode.as<glm::vec2>();
 	}
 
 	YAML::Node colorNode = compNode["color"];
@@ -75,11 +75,11 @@ void TextRenderer::deserialize(YAML::Node const& compNode)
 	YAML::Node textNode = compNode["text"];
 	if (textNode)
 	{
-		setText(textNode.as<string>());
+		setText(textNode.as<std::string>());
 	}
 }
 
-vec3 * TextRenderer::generateVertices()
+glm::vec3 * TextRenderer::generateVertices()
 {
 	// Store the current pen position
 	float penX = 0.0f;
@@ -92,7 +92,7 @@ vec3 * TextRenderer::generateVertices()
 	// Keep reference to the quad that we are currently building
 	int charQuadIndex = 0;
 
-	vec3* vertices = new vec3[generateNumVertices()];
+	glm::vec3* vertices = new glm::vec3[generateNumVertices()];
 
 	// Iterate through all lines of the text
 	for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
@@ -117,10 +117,10 @@ vec3 * TextRenderer::generateVertices()
 			float charXMax = penX + img.getBearingX() + img.getSizeX();
 			float charYMax = penY - img.getSizeY() + img.getBearingY();
 			float charYMin = penY + img.getBearingY();
-			vertices[charQuadIndex * 4 + 0] = vec3(charXMin, charYMin, 0);
-			vertices[charQuadIndex * 4 + 1] = vec3(charXMin, charYMax, 0);
-			vertices[charQuadIndex * 4 + 2] = vec3(charXMax, charYMax, 0);
-			vertices[charQuadIndex * 4 + 3] = vec3(charXMax, charYMin, 0);
+			vertices[charQuadIndex * 4 + 0] = glm::vec3(charXMin, charYMin, 0);
+			vertices[charQuadIndex * 4 + 1] = glm::vec3(charXMin, charYMax, 0);
+			vertices[charQuadIndex * 4 + 2] = glm::vec3(charXMax, charYMax, 0);
+			vertices[charQuadIndex * 4 + 3] = glm::vec3(charXMax, charYMin, 0);
 
 			// Advance the pen position
 			penX += img.getAdvanceX() + extraCharAdvance;
@@ -137,12 +137,12 @@ vec3 * TextRenderer::generateVertices()
 	return vertices;
 }
 
-vec2 * TextRenderer::generateTexCoords()
+glm::vec2 * TextRenderer::generateTexCoords()
 {
 	// Keep reference to the quad that we are currently building
 	int charQuadIndex = 0;
 
-	vec2* texCoords = new vec2[generateNumVertices()];
+	glm::vec2* texCoords = new glm::vec2[generateNumVertices()];
 
 	// Iterate through all lines of the text
 	for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
@@ -157,10 +157,10 @@ vec2 * TextRenderer::generateTexCoords()
 
 			// Set the UV positions
 			Rect rect = img.getTexSheetPosition();
-			texCoords[charQuadIndex * 4 + 1] = vec2(rect.getX(), rect.getDY());
-			texCoords[charQuadIndex * 4 + 0] = vec2(rect.getX(), rect.getY());
-			texCoords[charQuadIndex * 4 + 3] = vec2(rect.getDX(), rect.getY());
-			texCoords[charQuadIndex * 4 + 2] = vec2(rect.getDX(), rect.getDY());
+			texCoords[charQuadIndex * 4 + 1] = glm::vec2(rect.getX(), rect.getDY());
+			texCoords[charQuadIndex * 4 + 0] = glm::vec2(rect.getX(), rect.getY());
+			texCoords[charQuadIndex * 4 + 3] = glm::vec2(rect.getDX(), rect.getY());
+			texCoords[charQuadIndex * 4 + 2] = glm::vec2(rect.getDX(), rect.getDY());
 
 			// Continue on to the next char
 			charQuadIndex++;
@@ -289,7 +289,7 @@ void TextRenderer::calculateHorizontalAlignmentProperties(TextAlign const& align
 	}
 }
 
-vector<LineProperties*> TextRenderer::processTextToLines(string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText)
+std::vector<LineProperties*> TextRenderer::processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText)
 {
 	// Create an array to store the filtered text. This will never excede the length of the source text.
 	filteredText = new char[text.length()];
@@ -321,7 +321,7 @@ vector<LineProperties*> TextRenderer::processTextToLines(string const& text, Ove
 	int newLineFilteredTextIndex = 0;
 
 	// Keep information about all of the line properties
-	vector<LineProperties*> allLineProperties;
+	std::vector<LineProperties*> allLineProperties;
 
 	// Start the first line at position zero
 	LineProperties* lineProperties = new LineProperties(0);

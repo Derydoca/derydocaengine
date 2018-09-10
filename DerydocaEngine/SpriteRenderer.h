@@ -6,8 +6,6 @@
 #include "SpriteSheet.h"
 #include "Shader.h"
 
-using namespace glm;
-
 class SpriteRenderer : public RendererComponent
 {
 public:
@@ -30,10 +28,10 @@ private:
 	Color m_color;
 	SpriteSheet* m_spriteSheet;
 	SpriteReference* m_sprite;
-	vec2 m_size;
+	glm::vec2 m_size;
 
-	vec3* generateVertices();
-	vec2* generateTexCoords();
+	glm::vec3* generateVertices();
+	glm::vec2* generateTexCoords();
 	Color* generateVertexColors();
 	unsigned int* generateTriangleIndices();
 

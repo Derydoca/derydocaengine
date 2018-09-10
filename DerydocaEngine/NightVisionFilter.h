@@ -2,8 +2,6 @@
 #include "GameComponent.h"
 #include "Camera.h"
 
-using namespace std;
-
 class NightVisionFilter : public GameComponent
 {
 public:

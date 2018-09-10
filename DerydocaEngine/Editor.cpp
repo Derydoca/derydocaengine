@@ -77,7 +77,7 @@ int Editor::Run(std::string const& projectPath, std::string const& levelIdentifi
 
 		if (levelResource == nullptr)
 		{
-			cout << "No level resource with the ID of '" << levelIdentifier << "' could be found." << endl;
+			std::cout << "No level resource with the ID of '" << levelIdentifier << "' could be found.\n";
 		}
 		else
 		{

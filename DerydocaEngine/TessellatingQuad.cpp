@@ -2,8 +2,6 @@
 #include <iostream>
 #include "Shader.h"
 
-using namespace std;
-
 TessellatingQuad::TessellatingQuad()
 {
 }
@@ -35,7 +33,7 @@ void TessellatingQuad::init()
 
 	GLint maxVerts;
 	glGetIntegerv(GL_MAX_PATCH_VERTICES, &maxVerts);
-	cout << "Max patch vertices: " << maxVerts << endl;
+	std::cout << "Max patch vertices: " << maxVerts << "\n";
 }
 
 void TessellatingQuad::deserialize(YAML::Node const& compNode)

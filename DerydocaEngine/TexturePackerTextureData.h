@@ -31,5 +31,5 @@ struct TexturePackerTextureData
 	unsigned char* allocImageBuffer();
 private:
 	int m_channels;
-	vector<vector<unsigned char>> m_data;
+	std::vector<std::vector<unsigned char>> m_data;
 };

@@ -1,12 +1,9 @@
 #include "BloomFilter.h"
 #include "Shader.h"
 
-using namespace std;
-
 BloomFilter::BloomFilter()
 {
 }
-
 
 BloomFilter::~BloomFilter()
 {
@@ -19,7 +16,7 @@ void BloomFilter::init()
 	m_postProcessCamera = getComponent<Camera>();
 	if (m_postProcessCamera == nullptr)
 	{
-		cout << "No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component." << endl;
+		std::cout << "No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.\n";
 		return;
 	}
 

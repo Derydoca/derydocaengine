@@ -3,9 +3,7 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
-using argumentCollection = map<string, vector<string>>;
+using argumentCollection = std::map<std::string, std::vector<std::string>>;
 
 class CommandLineArgs
 {
@@ -13,13 +11,13 @@ public:
 	CommandLineArgs(int const& argc, char* argv[]);
 	~CommandLineArgs();
 
-	string getExecutablePath() const { return m_executablePath; }
-	bool keyExists(string const& key);
-	vector<string> getValues(string const& key);
+	std::string getExecutablePath() const { return m_executablePath; }
+	bool keyExists(std::string const& key);
+	std::vector<std::string> getValues(std::string const& key);
 private:
 	void processArguments(int const& argc, char* argv[]);
 
-	string m_executablePath;
+	std::string m_executablePath;
 	argumentCollection m_arguments;
 };
 

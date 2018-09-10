@@ -11,15 +11,13 @@
 #include "FontFace.h"
 #include "SpriteSheet.h"
 
-using namespace std;
-
 int main(int argc, char* argv[])
 {
 	CommandLineArgs args = CommandLineArgs(argc, argv);
 	
 	if (args.keyExists("processDirectory"))
 	{
-		vector<string> directoriesToProcess = args.getValues("processDirectory");
+		std::vector<std::string> directoriesToProcess = args.getValues("processDirectory");
 
 		for (auto it = directoriesToProcess.begin(); it != directoriesToProcess.end(); ++it)
 		{
@@ -31,10 +29,10 @@ int main(int argc, char* argv[])
 
 	if (args.keyExists("processFont"))
 	{
-		vector<string> processArgs = args.getValues("processFont");
+		std::vector<std::string> processArgs = args.getValues("processFont");
 		if (processArgs.size() != 3)
 		{
-			cout << "Unable to process font file. Incorrect argument count." << endl;
+			std::cout << "Unable to process font file. Incorrect argument count.\n";
 			return 0;
 		}
 
@@ -46,10 +44,10 @@ int main(int argc, char* argv[])
 
 	if (args.keyExists("processSpriteSheet"))
 	{
-		vector<string> processArgs = args.getValues("processSpriteSheet");
+		std::vector<std::string> processArgs = args.getValues("processSpriteSheet");
 		if (processArgs.size() != 2)
 		{
-			cout << "Unable to process sprite sheet. Incorrect argument count." << endl;
+			std::cout << "Unable to process sprite sheet. Incorrect argument count.\n";
 			return 0;
 		}
 
@@ -66,17 +64,17 @@ int main(int argc, char* argv[])
 	}
 
 	// Get the project path for the engine
-	vector<string> projectArgs = args.getValues("project");
+	std::vector<std::string> projectArgs = args.getValues("project");
 	if (projectArgs.size() == 0)
 	{
 		// If no project path was provided, the engine must exit
-		cout << "No project was specified. Please supply the argument -project [MyProjectPath]" << endl;
+		std::cout << "No project was specified. Please supply the argument -project [MyProjectPath]\n";
 		return 0;
 	}
 
 	// Get the path for the scene to load
-	vector<string> sceneArgs = args.getValues("scene");
-	string levelIdentifier;
+	std::vector<std::string> sceneArgs = args.getValues("scene");
+	std::string levelIdentifier;
 	if (sceneArgs.size() > 0)
 	{
 		levelIdentifier = sceneArgs.front();

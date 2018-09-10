@@ -55,7 +55,7 @@ public:
 	bool isCastingShadows() { return m_castShadows; }
 	bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
 	Projection getProjection() { return m_projection; }
-	glm::mat4 getShadowMatrix(mat4 const& objectModelMatrix);
+	glm::mat4 getShadowMatrix(glm::mat4 const& objectModelMatrix);
 	float getShadowSoftness() const { return m_shadowSoftness; }
 
 	void init();

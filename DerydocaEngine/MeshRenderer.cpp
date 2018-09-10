@@ -31,14 +31,14 @@ void MeshRenderer::deserialize(YAML::Node const& compNode)
 	if (renderTextureSourceNode && renderTextureSourceNode.IsScalar())
 	{
 		// Get the name that should be used to bind this texture to the shader
-		string renderTextureName = "RenderTexture";
+		std::string renderTextureName = "RenderTexture";
 		YAML::Node renderTextureNameNode = compNode["RenderTextureName"];
 		if (renderTextureNameNode != nullptr && renderTextureNameNode.IsScalar())
 		{
-			renderTextureName = renderTextureNameNode.as<string>();
+			renderTextureName = renderTextureNameNode.as<std::string>();
 		}
 
-		uuid renderTextureCameraId = renderTextureSourceNode.as<uuid>();
+		boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
 		m_meshRendererCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
 		material->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
 	}

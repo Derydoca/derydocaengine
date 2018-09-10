@@ -13,14 +13,14 @@ BezierPatchMesh * BezierPatchMeshFileLoader::Load(const char * filePath)
 	int numPatches;
 	float* patchData = nullptr;
 
-	ifstream file(filePath);
-	string line;
+	std::ifstream file(filePath);
+	std::string line;
 	if (file.is_open())
 	{
 		// Get the number of patches from the first line in the file
 		if (!getline(file, line))
 		{
-			cout << "Unable to read first line of file!" << endl;
+			std::cout << "Unable to read first line of file!\n";
 		}
 		numPatches = stoi(line, nullptr, 10);
 
@@ -31,13 +31,13 @@ BezierPatchMesh * BezierPatchMeshFileLoader::Load(const char * filePath)
 		{
 			if (!loadPatchData(file, patchIndex, patchData))
 			{
-				cout << "Unable to load file due to issue with patch " << patchIndex << "." << endl;
+				std::cout << "Unable to load file due to issue with patch " << patchIndex << ".\n";
 			}
 		}
 	}
 	else
 	{
-		cout << "Unable to open file: " << filePath << endl;
+		std::cout << "Unable to open file: " << filePath << "\n";
 	}
 
 	BezierPatchMesh* bpm = new BezierPatchMesh();
@@ -46,16 +46,16 @@ BezierPatchMesh * BezierPatchMeshFileLoader::Load(const char * filePath)
 	return bpm;
 }
 
-bool BezierPatchMeshFileLoader::loadPatchData(istream & fileStream, int const& patch, float * const& patchData)
+bool BezierPatchMeshFileLoader::loadPatchData(std::istream & fileStream, int const& patch, float * const& patchData)
 {
-	string line;
+	std::string line;
 	
 	// Skip the first line of patch information for now until I understand more of what those values do
 	while (line != "3 3")
 	{
 		if (!getline(fileStream, line))
 		{
-			cout << "Unable to read first line of patch!" << endl;
+			std::cout << "Unable to read first line of patch!\n";
 			return false;
 		}
 	}
@@ -67,7 +67,7 @@ bool BezierPatchMeshFileLoader::loadPatchData(istream & fileStream, int const& p
 		for (int vectorComponentIndex = 0; vectorComponentIndex < BezierPatchMesh::FLOATS_PER_VECTOR; vectorComponentIndex++)
 		{
 			// Read the component from the file
-			string componentAsString;
+			std::string componentAsString;
 			fileStream >> componentAsString;
 	
 			// Convert the component to a float
@@ -75,7 +75,7 @@ bool BezierPatchMeshFileLoader::loadPatchData(istream & fileStream, int const& p
 	
 			// Load the component into the patch data
 			//int patchDataIndex = patch * BezierPatchMesh::FLOATS_PER_PATCH + vectorIndex * BezierPatchMesh::FLOATS_PER_VECTOR + vectorComponentIndex;
-			//cout << patchDataIndex << ": " << component << endl;
+			//cout << patchDataIndex << ": " << component << "\n";
 			patchData[patchDataIndex++] = component;
 		}
 	}

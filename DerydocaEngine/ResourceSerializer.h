@@ -6,8 +6,6 @@
 #include "ObjectLibrary.h"
 #include <iostream>
 
-using namespace std;
-
 class ResourceSerializer
 {
 public:
@@ -22,7 +20,7 @@ protected:
 		YAML::Node resourceIdNode = node[resourceName];
 		if (!resourceIdNode)
 		{
-			cout << "Unable to load resource because the ID node of '" << resourceName << "' could not be found." << endl;
+			std::cout << "Unable to load resource because the ID node of '" << resourceName << "' could not be found.\n";
 			return nullptr;
 		}
 		boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
@@ -43,7 +41,7 @@ protected:
 		Resource * resource = ObjectLibrary::getInstance().getResource(id);
 		if(!resource)
 		{
-			cout << "Unable to get the source file path of '" << resourceName << "' from the asset with ID of '" << boost::uuids::to_string(id) << "'." << endl;
+			std::cout << "Unable to get the source file path of '" << resourceName << "' from the asset with ID of '" << boost::uuids::to_string(id) << "'.\n";
 			return "";
 		}
 		return resource->getSourceFilePath();

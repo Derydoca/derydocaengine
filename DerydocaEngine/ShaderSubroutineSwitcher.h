@@ -3,8 +3,6 @@
 #include "GameComponent.h"
 #include "Material.h"
 
-using namespace std;
-
 class ShaderSubroutineSwitcher : public GameComponent
 {
 public:
@@ -16,8 +14,8 @@ public:
 	virtual void init();
 	virtual void deserialize(YAML::Node const& compNode);
 private:
-	void setSubroutine(GLuint const& program, string const& subroutineName);
+	void setSubroutine(GLuint const& program, std::string const& subroutineName);
 
-	string m_subroutineName;
+	std::string m_subroutineName;
 };
 

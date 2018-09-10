@@ -3,8 +3,6 @@
 #include "GL\glew.h"
 #include <iostream>
 
-using namespace std;
-
 MultisampleSwitch::MultisampleSwitch()
 {
 	m_keyboard = InputManager::getInstance().getKeyboard();
@@ -25,11 +23,11 @@ void MultisampleSwitch::init()
 
 	if (m_msaaSupported)
 	{
-		cout << "MSAA: Buffers = " << bufs << ", samples = " << samples << endl;
+		std::cout << "MSAA: Buffers = " << bufs << ", samples = " << samples << "\n";
 	}
 	else
 	{
-		cout << "MSAA is not supported!" << endl;
+		std::cout << "MSAA is not supported!\n";
 	}
 }
 
@@ -58,5 +56,5 @@ void MultisampleSwitch::setEnableMultisample(bool const& enable)
 		glDisable(GL_MULTISAMPLE);
 	}
 
-	cout << "Multisampling Enabled: " << m_enableMultisample << endl;
+	std::cout << "Multisampling Enabled: " << m_enableMultisample << "\n";
 }

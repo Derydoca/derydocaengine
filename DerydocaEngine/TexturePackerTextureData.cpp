@@ -19,7 +19,7 @@ void TexturePackerTextureData::AddImage(int const& xPos, int const& yPos, Textur
 	assert(image->getWidth() + xPos <= (int)m_data[0].size());
 	assert(image->getHeight() + yPos <= (int)m_data.size());
 
-	int channelsToRead = min(image->getChannels(), m_channels);
+	int channelsToRead = glm::min(image->getChannels(), m_channels);
 	
 	for (int y = 0; y < image->getHeight(); y++)
 	{

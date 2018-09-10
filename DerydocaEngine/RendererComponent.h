@@ -22,13 +22,13 @@ protected:
 	unsigned int getNumVertices() const { return m_numVertices; }
 	unsigned int getNumIndices() const { return m_numIndices; }
 
-	virtual vec3* generateVertices() = 0;
-	virtual vec2* generateTexCoords() { return nullptr; }
+	virtual glm::vec3* generateVertices() = 0;
+	virtual glm::vec2* generateTexCoords() { return nullptr; }
 	virtual Color* generateVertexColors() { return nullptr; }
 	virtual unsigned int* generateTriangleIndices() = 0;
-	virtual vec3* generateTangents() { return nullptr; }
-	virtual vec3* generateBitangents() { return nullptr; }
-	virtual vec3* generateNormals() { return nullptr; }
+	virtual glm::vec3* generateTangents() { return nullptr; }
+	virtual glm::vec3* generateBitangents() { return nullptr; }
+	virtual glm::vec3* generateNormals() { return nullptr; }
 	virtual unsigned int generateNumVertices() { return 0; }
 	virtual unsigned int generateNumIndices() { return 0; }
 
@@ -36,11 +36,11 @@ private:
 	Mesh * m_mesh;
 	Material * m_material;
 	MeshComponents m_dirtyComponents;
-	vec3* m_vertices = nullptr;
-	vec3* m_tangents = nullptr;
-	vec3* m_bitangents = nullptr;
-	vec3* m_normals = nullptr;
-	vec2* m_texCoords = nullptr;
+	glm::vec3* m_vertices = nullptr;
+	glm::vec3* m_tangents = nullptr;
+	glm::vec3* m_bitangents = nullptr;
+	glm::vec3* m_normals = nullptr;
+	glm::vec2* m_texCoords = nullptr;
 	Color* m_vertexColors = nullptr;
 	unsigned int* m_triangleIndices = nullptr;
 	unsigned int m_numVertices = 0;

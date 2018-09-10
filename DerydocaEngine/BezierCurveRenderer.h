@@ -4,8 +4,6 @@
 #include "glm\glm.hpp"
 #include "material.h"
 
-using namespace glm;
-
 class BezierCurveRenderer : public GameComponent
 {
 public:

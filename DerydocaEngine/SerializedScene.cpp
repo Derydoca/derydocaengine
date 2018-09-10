@@ -94,7 +94,7 @@ void SerializedScene::setUp(GameObject * const& root)
 		if (parentObjectIdNode)
 		{
 			// If it is parented to another game object, set the relationship
-			uuid parentId = parentObjectIdNode.as<uuid>();
+			boost::uuids::uuid parentId = parentObjectIdNode.as<boost::uuids::uuid>();
 			SceneObject* parentSceneObject = findNode(parentId);
 			GameObject* parentGo = parentSceneObject->getGameObject();
 			parentGo->addChild(go);
@@ -133,7 +133,7 @@ void SerializedScene::setUp(GameObject * const& root)
 			YAML::Node componentIdNode = compNode["ID"];
 			if (componentIdNode)
 			{
-				ObjectLibrary::getInstance().registerComponent(componentIdNode.as<uuid>(), component);
+				ObjectLibrary::getInstance().registerComponent(componentIdNode.as<boost::uuids::uuid>(), component);
 			}
 		}
 	}
@@ -145,7 +145,7 @@ void SerializedScene::tearDown(GameObject * const& root)
 
 void SerializedScene::LoadFromFile(std::string const& filePath)
 {
-	cout << "Loading scene: " << filePath << endl;
+	std::cout << "Loading scene: " << filePath << "\n";
 	YAML::Node file = YAML::LoadFile(filePath);
 	YAML::Node scene = file["Scene"];
 	for (unsigned i = 0; i < scene.size(); i++)
@@ -157,31 +157,31 @@ void SerializedScene::LoadFromFile(std::string const& filePath)
 
 		if (!typeNode)
 		{
-			cout << "Skipping scene node " << i << " because type is not defined." << endl;
+			std::cout << "Skipping scene node " << i << " because type is not defined.\n";
 			continue;
 		}
 
 		if (!typeNode.IsScalar())
 		{
-			cout << "Skipping scene node " << i << " because type is not a scalar.\n" << endl;
+			std::cout << "Skipping scene node " << i << " because type is not a scalar.\n";
 			continue;
 		}
 
 		if (!typeNode.IsScalar())
 		{
-			cout << "Skipping scene node " << i << " because type is not a scalar.\n" << endl;
+			std::cout << "Skipping scene node " << i << " because type is not a scalar.\n";
 			continue;
 		}
 
 		if (!idNode || !idNode.IsScalar())
 		{
-			cout << "Skipping scene node " << i << " because it does not contain a valid ID.\n" << endl;
+			std::cout << "Skipping scene node " << i << " because it does not contain a valid ID.\n";
 			continue;
 		}
 
 		if (!propertiesNode)
 		{
-			cout << "Skipping scene node " << i << " because it contains no properties.\n" << endl;
+			std::cout << "Skipping scene node " << i << " because it contains no properties.\n";
 			continue;
 		}
 

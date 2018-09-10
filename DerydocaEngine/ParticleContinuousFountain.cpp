@@ -50,11 +50,11 @@ void ParticleContinuousFountain::deserialize(YAML::Node const& compNode)
 		if (velocityMaxNode.IsScalar())
 		{
 			float vel = velocityMaxNode.as<float>();
-			m_velocityMax = vec3(vel);
+			m_velocityMax = glm::vec3(vel);
 		}
 		else
 		{
-			m_velocityMax = velocityMaxNode.as<vec3>();
+			m_velocityMax = velocityMaxNode.as<glm::vec3>();
 		}
 	}
 
@@ -64,11 +64,11 @@ void ParticleContinuousFountain::deserialize(YAML::Node const& compNode)
 		if(velocityMinNode.IsScalar())
 		{
 			float vel = velocityMinNode.as<float>();
-			m_velocityMin = vec3(vel);
+			m_velocityMin = glm::vec3(vel);
 		}
 		else
 		{
-			m_velocityMin = velocityMinNode.as<vec3>();
+			m_velocityMin = velocityMinNode.as<glm::vec3>();
 		}
 	}
 
@@ -93,13 +93,13 @@ void ParticleContinuousFountain::deserialize(YAML::Node const& compNode)
 	YAML::Node emitterSizeNode = compNode["emitterSize"];
 	if (emitterSizeNode)
 	{
-		m_emitterSize = emitterSizeNode.as<vec3>();
+		m_emitterSize = emitterSizeNode.as<glm::vec3>();
 	}
 
 	YAML::Node accelerationNode = compNode["acceleration"];
 	if (accelerationNode)
 	{
-		m_acceleration = accelerationNode.as<vec3>();
+		m_acceleration = accelerationNode.as<glm::vec3>();
 	}
 
 	YAML::Node particleSizeMinNode = compNode["particleSizeMin"];
@@ -173,7 +173,7 @@ void ParticleContinuousFountain::initBuffers()
 
 	// Fill the position data
 	GLfloat* data = new GLfloat[m_numParticles * 3];
-	vec3 worldPos = m_trans->getWorldPos();
+	glm::vec3 worldPos = m_trans->getWorldPos();
 	for (int i = 0; i < m_numParticles; i++)
 	{
 		data[i * 3 + 0] = worldPos.x;
@@ -182,9 +182,9 @@ void ParticleContinuousFountain::initBuffers()
 
 		if (m_emitterType == ParticleEmitterType::Cube)
 		{
-			data[i * 3 + 0] += mix(m_emitterSize.x / 2, -m_emitterSize.x / 2, randFloat());
-			data[i * 3 + 1] += mix(m_emitterSize.y / 2, -m_emitterSize.y / 2, randFloat());
-			data[i * 3 + 2] += mix(m_emitterSize.z / 2, -m_emitterSize.z / 2, randFloat());
+			data[i * 3 + 0] += glm::mix(m_emitterSize.x / 2, -m_emitterSize.x / 2, randFloat());
+			data[i * 3 + 1] += glm::mix(m_emitterSize.y / 2, -m_emitterSize.y / 2, randFloat());
+			data[i * 3 + 2] += glm::mix(m_emitterSize.z / 2, -m_emitterSize.z / 2, randFloat());
 		}
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, m_posBuf[0]);
@@ -196,7 +196,7 @@ void ParticleContinuousFountain::initBuffers()
 	for (int i = 0; i < m_numParticles; i++)
 	{
 
-		vec3 v = vec3();
+		glm::vec3 v = glm::vec3();
 		switch (m_emitterType)
 		{
 		case ParticleEmitterType::Cone:
@@ -300,7 +300,7 @@ void ParticleContinuousFountain::initBuffers()
 
 	GLint value;
 	glGetIntegerv(GL_MAX_TRANSFORM_FEEDBACK_BUFFERS, &value);
-	cout << "MAX_TRANSFORM_FEEDBACK_BUFFERS = " << value << endl;
+	std::cout << "MAX_TRANSFORM_FEEDBACK_BUFFERS = " << value << "\n";
 }
 
 float ParticleContinuousFountain::randFloat()
@@ -346,16 +346,16 @@ void ParticleContinuousFountain::renderParticles()
 	glEnable(GL_DEPTH_TEST);
 }
 
-vec3 ParticleContinuousFountain::getVelocityFromCone()
+glm::vec3 ParticleContinuousFountain::getVelocityFromCone()
 {
-	vec3 v(0.0f);
-	vec3 velocity;
+	glm::vec3 v(0.0f);
+	glm::vec3 velocity;
 	float theta;
 	float phi;
 
 	// Pick the direction of the particles
-	theta = mix(0.0f, glm::pi<float>() / m_angle, randFloat());
-	phi = mix(0.0f, glm::two_pi<float>(), randFloat());
+	theta = glm::mix(0.0f, glm::pi<float>() / m_angle, randFloat());
+	phi = glm::mix(0.0f, glm::two_pi<float>(), randFloat());
 
 	v.x = sinf(theta) * cosf(phi);
 	v.y = cosf(theta);
@@ -368,7 +368,7 @@ vec3 ParticleContinuousFountain::getVelocityFromCone()
 	return v;
 }
 
-vec3 ParticleContinuousFountain::getVelocityFromCube()
+glm::vec3 ParticleContinuousFountain::getVelocityFromCube()
 {
 	return mix(m_velocityMin, m_velocityMax, randFloat());
 }

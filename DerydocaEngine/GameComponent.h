@@ -84,7 +84,7 @@ protected:
 	}
 
 	template<typename T>
-	inline T* getResourceObject(uuid const& resourceId)
+	inline T* getResourceObject(boost::uuids::uuid const& resourceId)
 	{
 		return ObjectLibrary::getInstance().getResourceObject<T>(resourceId);
 	}
@@ -98,7 +98,7 @@ protected:
 			return nullptr;
 		}
 
-		uuid resourceId = resourceIdNode.as<uuid>();
+		boost::uuids::uuid resourceId = resourceIdNode.as<boost::uuids::uuid>();
 
 		return getResourceObject<T>(resourceId);
 	}
@@ -106,7 +106,7 @@ protected:
 	template<typename T>
 	inline std::vector<T> loadComponents(YAML::Node const& node, std::string const& componentCollectionName)
 	{
-		vector<T> objectArr = vector<T>();
+		std::vector<T> objectArr = std::vector<T>();
 
 		// Get the collection node
 		YAML::Node componentIdCollectionNode = node[componentCollectionName];
@@ -128,7 +128,7 @@ protected:
 			else
 			{
 				// If no component was found, log the issue and continue on
-				cout << "Unable to load the component with ID of '" << id << "' because it was not found in the ObjectLibrary." << endl;
+				std::cout << "Unable to load the component with ID of '" << id << "' because it was not found in the ObjectLibrary.\n";
 			}
 		}
 

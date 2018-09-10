@@ -18,10 +18,10 @@ void CommandLineArgs::processArguments(int const& argc, char * argv[])
 	}
 
 	// Iterate through all of the arguments
-	string currentArgumentKey = "";
+	std::string currentArgumentKey = "";
 	for (int argIndex = 1; argIndex < argc; argIndex++)
 	{
-		string currentArgument = argv[argIndex];
+		std::string currentArgument = argv[argIndex];
 		if (currentArgument[0] == '-')
 		{
 			// If the argument begins with a hyphen
@@ -43,16 +43,16 @@ void CommandLineArgs::processArguments(int const& argc, char * argv[])
 	}
 }
 
-bool CommandLineArgs::keyExists(string const& key)
+bool CommandLineArgs::keyExists(std::string const& key)
 {
 	return m_arguments.find(key) != m_arguments.end();
 }
 
-vector<string> CommandLineArgs::getValues(string const& key)
+std::vector<std::string> CommandLineArgs::getValues(std::string const& key)
 {
 	if (!keyExists(key))
 	{
-		return vector<string>();
+		return std::vector<std::string>();
 	}
 
 	return m_arguments[key];

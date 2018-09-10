@@ -4,8 +4,6 @@
 #include <iostream>
 #include "Camera.h"
 
-using namespace std;
-
 Display::Display(int const& width, int const& height, std::string const& title)
 {
 	DisplayManager::getInstance().addDisplay(this);
@@ -38,7 +36,7 @@ Display::Display(int const& width, int const& height, std::string const& title)
 	GLenum status = glewInit();
 
 	if (status != GLEW_OK) {
-		std::cerr << "Derydoca Engine" << std::endl;
+		std::cerr << "Derydoca Engine\n";
 	}
 
 	m_isClosed = false;
@@ -55,18 +53,18 @@ Display::Display(int const& width, int const& height, std::string const& title)
 	const GLubyte *vendor = glGetString(GL_VENDOR);
 	const GLubyte *version = glGetString(GL_VERSION);
 	const GLubyte *glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
-	cout << "Renderer: " << renderer << endl;
-	cout << "Vendor: " << vendor << endl;
-	cout << "Version: " << version << endl;
-	cout << "GLSL Version: " << glslVersion << endl;
-	cout << "Max Vertex Attributes: " << GL_MAX_VERTEX_ATTRIBS << endl;
+	cout << "Renderer: " << renderer << "\n";
+	cout << "Vendor: " << vendor << "\n";
+	cout << "Version: " << version << "\n";
+	cout << "GLSL Version: " << glslVersion << "\n";
+	cout << "Max Vertex Attributes: " << GL_MAX_VERTEX_ATTRIBS << "\n";
 
 	GLint nExtensions;
 	glGetIntegerv(GL_NUM_EXTENSIONS, &nExtensions);
-	cout << "Supported extensions (" << nExtensions << "):" << endl;
+	cout << "Supported extensions (" << nExtensions << "):" << "\n";
 	for (GLint i = 0; i < nExtensions; i++)
 	{
-		cout << "    " << i << ": " << glGetStringi(GL_EXTENSIONS, i) << endl;
+		cout << "    " << i << ": " << glGetStringi(GL_EXTENSIONS, i) << "\n";
 	}
 */
 

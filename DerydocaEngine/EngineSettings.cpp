@@ -1,7 +1,7 @@
 #include "EngineSettings.h"
 #include <iostream>
 
-EngineSettings::EngineSettings(string const& configFilePath)
+EngineSettings::EngineSettings(std::string const& configFilePath)
 {
 	m_settingsFilePath = boost::filesystem::absolute(configFilePath);
 
@@ -11,7 +11,7 @@ EngineSettings::EngineSettings(string const& configFilePath)
 	YAML::Node engineNode = root["Engine"];
 	if (engineNode)
 	{
-		m_engineResourceDirectory = engineNode["Resources"].as<string>();
+		m_engineResourceDirectory = engineNode["Resources"].as<std::string>();
 	}
 	 
 	YAML::Node windowNode = root["Window"];
@@ -35,7 +35,7 @@ EngineSettings::EngineSettings(string const& configFilePath)
 		YAML::Node skyboxIdNode = cameraNode["Skybox"];
 		if (skyboxIdNode)
 		{
-			m_skyboxId = skyboxIdNode.as<uuid>();
+			m_skyboxId = skyboxIdNode.as<boost::uuids::uuid>();
 			m_isSkyboxDefined = true;
 		}
 

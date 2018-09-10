@@ -25,7 +25,7 @@ const char* GLErrorToString(GLenum err)
 void CheckOpenGLError(char* const& stmt, char* const& fname, int const& line) {
 	GLenum err = glGetError();
 	if (err != GL_NO_ERROR) {
-		std::cerr << "GL ERROR: " << GLErrorToString(err) << std::endl << "    " << fname << " : " << line << std::endl << stmt << std::endl << std::endl;
+		std::cerr << "GL ERROR: " << GLErrorToString(err) << "\n    " << fname << " : " << line << "\n" << stmt << "\n\n";
 		__debugbreak();
 	}
 }

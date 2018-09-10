@@ -1,8 +1,6 @@
 #pragma once
 #include "Rect.h"
 
-using namespace std;
-
 enum SpriteType
 {
 	Sprite = 0,
@@ -34,7 +32,7 @@ public:
 	int getWidth() const { return m_width; }
 	int getHeight() const { return m_height; }
 	Rect getTexPosition() const { return m_texPosition; }
-	string getTextureId() const { return m_textureId; }
+	std::string getTextureId() const { return m_textureId; }
 
 	void setType(SpriteType const& type) { m_type = type; }
 	void setSliceTop(float const& sliceTop) { m_sliceTop = sliceTop; }
@@ -44,7 +42,7 @@ public:
 	void setWidth(int const& width) { m_width = width; }
 	void setHeight(int const& height) { m_height = height; }
 	void setTexPosition(float const& x, float const& y, float const& dx, float const& dy) { m_texPosition.set(x, y, dx, dy); }
-	void setTextureId(string const& textureId) { m_textureId = textureId; }
+	void setTextureId(std::string const& textureId) { m_textureId = textureId; }
 private:
 	unsigned long m_id;
 	SpriteType m_type = SpriteType::Sprite;
@@ -55,5 +53,5 @@ private:
 	int m_width;
 	int m_height;
 	Rect m_texPosition;
-	string m_textureId;
+	std::string m_textureId;
 };

@@ -22,7 +22,7 @@ glm::mat4 Light::getViewMatrix()
 	return glm::mat4();
 }
 
-glm::mat4 Light::getShadowMatrix(mat4 const& objectModelMatrix)
+glm::mat4 Light::getShadowMatrix(glm::mat4 const& objectModelMatrix)
 {
 	glm::mat4 model = getGameObject()->getTransform()->getModel();
 	return (m_shadowBias * m_projection.getProjectionMatrix() * m_projection.getViewMatrix(model)) * objectModelMatrix;
@@ -136,26 +136,26 @@ void Light::generateShadowMap()
 	GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if (result == GL_FRAMEBUFFER_COMPLETE)
 	{
-		cout << "Framebuffer is complete." << endl;
+		std::cout << "Framebuffer is complete.\n";
 	}
 	else
 	{
-		cout << "Framebuffer is not complete." << endl;
+		std::cout << "Framebuffer is not complete.\n";
 	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	boost::uuids::string_generator gen;
-	uuid shaderId = gen("05cdcea1-2312-4e30-828c-68717d484274");
+	boost::uuids::uuid shaderId = gen("05cdcea1-2312-4e30-828c-68717d484274");
 	Shader* shadowMapShader = getResourceObject<Shader>(shaderId);
 	delete m_shadowMapMaterial;
 	m_shadowMapMaterial = new Material();
 	m_shadowMapMaterial->setShader(shadowMapShader);
 
-	m_shadowBias = glm::mat4(vec4(0.5f, 0.0f, 0.0f, 0.0f),
-							 vec4(0.0f, 0.5f, 0.0f, 0.0f),
-							 vec4(0.0f, 0.0f, 0.5f, 0.0f),
-							 vec4(0.5f, 0.5f, 0.5f, 1.0f));
+	m_shadowBias = glm::mat4(glm::vec4(0.5f, 0.0f, 0.0f, 0.0f),
+							 glm::vec4(0.0f, 0.5f, 0.0f, 0.0f),
+							 glm::vec4(0.0f, 0.0f, 0.5f, 0.0f),
+							 glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
 
 	m_projection.setAspectRatio(1.0);
 	m_projection.setFov(70.0f);

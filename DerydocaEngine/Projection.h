@@ -3,8 +3,6 @@
 #include "glm/glm.hpp"
 #include "glm/geometric.hpp"
 
-using namespace glm;
-
 /* Types of projection modes */
 enum ProjectionMode {
 	/* Orthographic projection */
@@ -16,17 +14,17 @@ enum ProjectionMode {
 struct Projection
 {
 public:
-	mat4 getInverseViewProjectionMatrix(mat4 const& transformModelMatrix) const { return m_projectionMatrix * inverse(transformModelMatrix); }
-	mat4 getViewMatrix(mat4 const& transformModelMatrix) const { return inverse(transformModelMatrix); }
-	mat4 getProjectionMatrix() const { return m_projectionMatrix; }
-	inline glm::mat4 getViewProjectionMatrix(mat4 const& transformModelMatrix) const { return m_projectionMatrix * transformModelMatrix; }
+	glm::mat4 getInverseViewProjectionMatrix(glm::mat4 const& transformModelMatrix) const { return m_projectionMatrix * glm::inverse(transformModelMatrix); }
+	glm::mat4 getViewMatrix(glm::mat4 const& transformModelMatrix) const { return glm::inverse(transformModelMatrix); }
+	glm::mat4 getProjectionMatrix() const { return m_projectionMatrix; }
+	inline glm::mat4 getViewProjectionMatrix(glm::mat4 const& transformModelMatrix) const { return m_projectionMatrix * transformModelMatrix; }
 
 	/*
 	Gets a matrix representing the camera's rotation and projection.
 
 	@return Rotation projection matrix
 	*/
-	mat4 getRotationProjection(fquat const& quaternionRotation) const { return m_projectionMatrix * inverse(mat4_cast(quaternionRotation)); }
+	glm::mat4 getRotationProjection(glm::fquat const& quaternionRotation) const { return m_projectionMatrix * glm::inverse(glm::mat4_cast(quaternionRotation)); }
 
 	void setProjectionMode(ProjectionMode const& mode) { m_projectionMode = mode; }
 
@@ -57,7 +55,7 @@ public:
 	float getZNear() const { return m_zNear; }
 	float getZFar() const { return m_zFar; }
 private:
-	mat4 m_projectionMatrix;
+	glm::mat4 m_projectionMatrix;
 	ProjectionMode m_projectionMode = Perspective;
 	float m_fov;
 	float m_aspect;

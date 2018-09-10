@@ -24,15 +24,15 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::init()
 {
 	// Create the array of particles
-	m_particleLocations = new vec3[m_numParticles];
+	m_particleLocations = new glm::vec3[m_numParticles];
 
 	// Set positions to randomly generated positions within the volume size;
-	for (uint i = 0; i < m_numParticles; i++)
+	for (glm::uint i = 0; i < m_numParticles; i++)
 	{
 		float posx = RandomFloat(-m_volumeSize.x / 2, m_volumeSize.x / 2);
 		float posy = RandomFloat(-m_volumeSize.y / 2, m_volumeSize.y / 2);
 		float posz = RandomFloat(-m_volumeSize.z / 2, m_volumeSize.z / 2);
-		m_particleLocations[i] = vec3(posx, posy, posz);
+		m_particleLocations[i] = glm::vec3(posx, posy, posz);
 	}
 
 	glGenBuffers(1, m_vertexArrayBuffers);
@@ -65,11 +65,11 @@ void ParticleSystem::deserialize(YAML::Node const& compNode)
 	YAML::Node volumeSizeNode = compNode["volumeSize"];
 	if (volumeSizeNode)
 	{
-		m_volumeSize = volumeSizeNode.as<vec3>();
+		m_volumeSize = volumeSizeNode.as<glm::vec3>();
 	}
 	else
 	{
-		m_volumeSize = vec3(1.0);
+		m_volumeSize = glm::vec3(1.0);
 	}
 
 	YAML::Node size2Node = compNode["size2"];

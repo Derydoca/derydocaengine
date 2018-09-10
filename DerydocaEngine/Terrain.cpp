@@ -128,7 +128,7 @@ void Terrain::deserialize(YAML::Node const& node)
 	YAML::Node heightmapNode = node["heightmap"];
 	if (heightmapNode)
 	{
-		uuid heightmapResourceId = heightmapNode.as<uuid>();
+		boost::uuids::uuid heightmapResourceId = heightmapNode.as<boost::uuids::uuid>();
 		Resource* heightmapResource = ObjectLibrary::getInstance().getResource(heightmapResourceId);
 
 		float unitScale = node["unitScale"].as<float>();

@@ -8,9 +8,6 @@
 #include "TexturePackerImage.h"
 #include "Texture.h"
 
-using namespace std;
-using namespace glm;
-
 class Texture;
 const int MISSING_CHAR_CODE = 95;
 
@@ -34,19 +31,19 @@ public:
 	float getLineHeight() const { return m_lineHeight; }
 	void setFontSize(float const& fontSize) { m_fontSize = fontSize; }
 
-	void loadFromFontFile(string const& filePath);
-	void loadFromSerializedFile(string const& filePath);
-	void saveToSerializedFile(string const& filePath);
+	void loadFromFontFile(std::string const& filePath);
+	void loadFromSerializedFile(std::string const& filePath);
+	void saveToSerializedFile(std::string const& filePath);
 private:
-	ivec2 m_dotsPerInch = ivec2(300, 300);
+	glm::ivec2 m_dotsPerInch = glm::ivec2(300, 300);
 	float m_fontSize = 16.0;
 	Texture m_texture;
-	map<int, TexturePackerImage> m_charImages;
+	std::map<int, TexturePackerImage> m_charImages;
 	unsigned char* m_imageBuffer;
-	ivec2 m_imageBufferSize;
+	glm::ivec2 m_imageBufferSize;
 	bool m_textureDirty = false;
 	float m_lineHeight = 50.0f;
-	string m_name = "";
-	string m_style = "";
+	std::string m_name = "";
+	std::string m_style = "";
 };
 

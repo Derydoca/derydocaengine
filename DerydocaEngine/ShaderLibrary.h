@@ -4,9 +4,8 @@
 #include <string>
 #include <boost/uuid/uuid.hpp>
 
-using namespace std;
-using shaderMap = map<uuid, Shader*>;
-using shaderPathMap = map<string, uuid>;
+using shaderMap = std::map<boost::uuids::uuid, Shader*>;
+using shaderPathMap = std::map<std::string, boost::uuids::uuid>;
 
 class ShaderLibrary
 {
@@ -18,10 +17,10 @@ public:
 	}
 	void operator=(ObjectLibrary const&) = delete;
 
-	Shader* find(uuid const& shaderId);
-	Shader* find(string const& shaderPath);
+	Shader* find(boost::uuids::uuid const& shaderId);
+	Shader* find(std::string const& shaderPath);
 
-	void registerShaderName(string const& shaderPath, uuid const& shaderUuid);
+	void registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid);
 private:
 	ShaderLibrary() {}
 	~ShaderLibrary() {}

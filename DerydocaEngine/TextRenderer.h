@@ -58,7 +58,7 @@ public:
 	virtual void postInit();
 	virtual void deserialize(YAML::Node const& compNode);
 
-	void setText(string const& text)
+	void setText(std::string const& text)
 	{
 		m_text = text;
 		m_lines = processTextToLines(m_text, m_overflowWrap, m_fontFace, m_bounds.x, m_filteredText);
@@ -70,7 +70,7 @@ public:
 		}
 		markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
 	}
-	string getText() { return m_text; }
+	std::string getText() { return m_text; }
 	void setColor(Color const& color)
 	{
 		if (m_textColor == color)
@@ -82,8 +82,8 @@ public:
 		markComponentAsDirty(MeshComponents::Colors);
 	}
 
-	virtual vec3* generateVertices();
-	virtual vec2* generateTexCoords();
+	virtual glm::vec3* generateVertices();
+	virtual glm::vec2* generateTexCoords();
 	virtual Color* generateVertexColors();
 	virtual unsigned int* generateTriangleIndices();
 	virtual unsigned int generateNumVertices()
@@ -111,18 +111,18 @@ private:
 
 	Material* m_material;
 	FontFace* m_fontFace;
-	string m_text = "Text";
-	vec2 m_bounds;
+	std::string m_text = "Text";
+	glm::vec2 m_bounds;
 	Color m_textColor;
 	OverflowWrap m_overflowWrap;
 	TextAlign m_horizontalAlign;
 	TextAlign m_verticalAlign;
-	vector<LineProperties*> m_lines;
+	std::vector<LineProperties*> m_lines;
 	char* m_filteredText;
 	bool m_textDirty = true;
 
 	static void calculateVerticalAlignmentProperties(TextAlign const& alignment, int const& numberOfLines, float const& verticalBoundSize, float const& fontLineHeight, float* const& penY, float* const& newLineHeight);
 	static void calculateHorizontalAlignmentProperties(TextAlign const& alignment, float const& horizontalBoundSize, float const& lineWidth, int const& numChars, float const& lineStartAdjust, float* const& penX, float* const& extraCharAdvance);
-	static vector<LineProperties*> processTextToLines(string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText);
+	static std::vector<LineProperties*> processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText);
 };
 

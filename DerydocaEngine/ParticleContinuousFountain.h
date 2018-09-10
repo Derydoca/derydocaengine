@@ -26,11 +26,11 @@ private:
 	Material* m_material;
 	float m_time = 0.0f;
 	float m_lifetime = 5.0f;
-	vec3 m_velocityMin = vec3(1.25f);
-	vec3 m_velocityMax = vec3(1.5f);
+	glm::vec3 m_velocityMin = glm::vec3(1.25f);
+	glm::vec3 m_velocityMax = glm::vec3(1.5f);
 	float m_angle = 6.0f;
 	float m_lastDeltaTime = 0.0f;
-	vec3 m_acceleration = vec3(0.0f, -0.4f, 0.0f);
+	glm::vec3 m_acceleration = glm::vec3(0.0f, -0.4f, 0.0f);
 	GLuint m_posBuf[2];
 	GLuint m_velBuf[2];
 	GLuint m_startTime[2];
@@ -43,7 +43,7 @@ private:
 	GLuint m_renderSub;
 	Transform* m_trans;
 	ParticleEmitterType m_emitterType;
-	vec3 m_emitterSize = vec3(1.0, 1.0, 1.0);
+	glm::vec3 m_emitterSize = glm::vec3(1.0, 1.0, 1.0);
 	float m_particleSizeMin = 10.0f;
 	float m_particleSizeMax = 10.0f;
 
@@ -51,6 +51,6 @@ private:
 	float randFloat();
 	void updateParticlePositions(float const& deltaTime);
 	void renderParticles();
-	vec3 getVelocityFromCone();
-	vec3 getVelocityFromCube();
+	glm::vec3 getVelocityFromCone();
+	glm::vec3 getVelocityFromCube();
 };

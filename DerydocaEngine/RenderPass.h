@@ -2,8 +2,6 @@
 #include <string>
 #include "RenderTexture.h"
 
-using namespace std;
-
 struct RenderPass
 {
 public:
@@ -14,12 +12,12 @@ public:
 		m_renderTexture = nullptr;
 	}
 
-	RenderPass(string const& name) : RenderPass()
+	RenderPass(std::string const& name) : RenderPass()
 	{
 		m_name = name;
 	}
 
-	RenderPass(string const& name, RenderTexture* const& renderTexture, string const& renderTextureName)
+	RenderPass(std::string const& name, RenderTexture* const& renderTexture, std::string const& renderTextureName)
 	{
 		assert(renderTexture != nullptr);
 
@@ -36,15 +34,15 @@ public:
 		m_renderTextureName = pass->getRenderTextureName();
 	}
 
-	string getName() const { return m_name; }
+	std::string getName() const { return m_name; }
 	int getShaderSubroutineIndex() const { return m_shaderSubroutineIndex; }
 	RenderTexture* getRenderTexture() const { return m_renderTexture; }
-	string getRenderTextureName() const { return m_renderTextureName; }
+	std::string getRenderTextureName() const { return m_renderTextureName; }
 
 	bool hasRenderTextureAssigned() const { return m_renderTexture != nullptr; }
 private:
-	string m_name;
+	std::string m_name;
 	int m_shaderSubroutineIndex;
 	RenderTexture* m_renderTexture = nullptr;
-	string m_renderTextureName;
+	std::string m_renderTextureName;
 };

@@ -63,7 +63,7 @@ void TexturePacker::packImages()
 	}
 
 	// Store a vector of rectangles representing the location and size of images that have been placed
-	vector<IntRect> imageBounds;
+	std::vector<IntRect> imageBounds;
 
 	// Figure out an image width that should contain all glyphs without issue
 	int textureSheetWidth = 128;
@@ -134,7 +134,7 @@ void TexturePacker::packImages()
 					imageLocations[i] = IntRect(scanPosX, scanPosY, scanPosX + imageWidth, scanPosY + imageHeight);
 
 					found = true;
-					cout << "Placed image " << i + 1 << "/" << m_images.size() << endl;
+					std::cout << "Placed image " << i + 1 << "/" << m_images.size() << "\n";
 				}
 				else
 				{
@@ -171,7 +171,7 @@ void TexturePacker::freeSubImageData()
 	m_imageBuffers.clear();
 }
 
-int TexturePacker::getIntersectingImageXAdvance(vector<IntRect> imageBounds, IntRect rect)
+int TexturePacker::getIntersectingImageXAdvance(std::vector<IntRect> imageBounds, IntRect rect)
 {
 	// For each image boundary
 	for (auto imageBoundary : imageBounds)

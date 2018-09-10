@@ -56,7 +56,7 @@ Texture::Texture(std::string const& fileName, TextureParameters* const& params)
 	}
 	else
 	{
-		std::cout << "Failed to load texture" << std::endl;
+		std::cout << "Failed to load texture\n";
 	}
 
 	// Free up our memory
@@ -92,7 +92,7 @@ Texture::Texture(std::string const& xpos, std::string const& xneg, std::string c
 		}
 		else
 		{
-			std::cout << "Failed to load texture for cubemap" << std::endl;
+			std::cout << "Failed to load texture for cubemap\n";
 		}
 		// Free up our memory
 		stbi_image_free(data);

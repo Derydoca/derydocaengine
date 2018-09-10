@@ -4,8 +4,6 @@
 #include <map>
 #include <boost\function.hpp>
 
-using namespace std;
-
 class GameComponentFactory
 {
 public:
@@ -14,10 +12,10 @@ public:
 		return instance;
 	}
 
-	GameComponent * CreateGameComponent(string const& gameComponentType);
+	GameComponent * CreateGameComponent(std::string const& gameComponentType);
 private:
-	map<string, std::function<GameComponent*()>> m_instanceGenerators;
-	void registerInstanceGenerator(string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator);
+	std::map<std::string, std::function<GameComponent*()>> m_instanceGenerators;
+	void registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator);
 
 	GameComponentFactory();
 	~GameComponentFactory();
