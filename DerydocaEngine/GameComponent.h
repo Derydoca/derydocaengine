@@ -1,19 +1,20 @@
 #pragma once
 
-#include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
 #include "ObjectLibrary.h"
 #include <boost\uuid\uuid.hpp>
 #include <vector>
-#include "Material.h"
-#include "Projection.h"
 #include <iostream>
 
+struct Projection;
 struct Resource;
+struct Transform;
 
 class GameObject;
 class MatrixStack;
 class Camera;
+class Material;
+class YAML::Node;
 
 #define GENINSTANCE(TYPE) \
 	static GameComponent* generateInstance() { return new TYPE(); }

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameComponent.h"
 #include "Keyboard.h"
+#include "Material.h"
 
 class ParticleFountain : public GameComponent
 {

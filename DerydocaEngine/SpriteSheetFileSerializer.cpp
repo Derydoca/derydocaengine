@@ -1,6 +1,5 @@
 #include "SpriteSheetFileSerializer.h"
-
-
+#include "Resource.h"
 
 SpriteSheetFileSerializer::SpriteSheetFileSerializer()
 {

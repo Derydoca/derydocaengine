@@ -2,9 +2,10 @@
 #include "ResourceType.h"
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
-#include "Resource.h"
 #include "ObjectLibrary.h"
 #include <iostream>
+
+struct Resource;
 
 class ResourceSerializer
 {

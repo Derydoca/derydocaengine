@@ -1,4 +1,5 @@
 #include "LevelFileSerializer.h"
+#include "Resource.h"
 
 YAML::Node LevelFileSerializer::generateResourceNodes(std::string const& filePath)
 {

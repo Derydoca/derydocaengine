@@ -1,4 +1,5 @@
 #include "BezierPatchMeshFileSerializer.h"
+#include "Resource.h"
 
 BezierPatchMeshFileSerializer::BezierPatchMeshFileSerializer()
 {

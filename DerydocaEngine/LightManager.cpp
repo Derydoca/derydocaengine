@@ -1,6 +1,8 @@
 #include "LightManager.h"
 #include "CameraManager.h"
 #include "glm\glm.hpp"
+#include "GameObject.h"
+#include "Camera.h"
 
 void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform* const& objectTransform, Shader* const& shader)
 {

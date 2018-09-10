@@ -11,6 +11,7 @@
 #include "Rectangle.h"
 #include "Projection.h"
 #include "MatrixStack.h"
+#include <yaml-cpp/yaml.h>
 
 class MatrixStack;
 

@@ -1,12 +1,11 @@
 #pragma once
 #include <string>
-#include "Resource.h"
+#include <boost/uuid/uuid.hpp>
 #include "FileType.h"
 #include "yaml-cpp\yaml.h"
-#include <vector>
 #include "YamlTools.h"
 
-#include <boost/uuid/uuid.hpp>
+struct Resource;
 
 class FileTypeSerializer
 {

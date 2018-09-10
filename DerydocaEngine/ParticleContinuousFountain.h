@@ -1,5 +1,8 @@
 #pragma once
 #include "GameComponent.h"
+#include "Material.h"
+
+class YAML::Node;
 
 class ParticleContinuousFountain : public GameComponent
 {

@@ -1,4 +1,5 @@
 #include "FontFileSerializer.h"
+#include "Resource.h"
 
 FontFileSerializer::FontFileSerializer()
 {

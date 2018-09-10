@@ -4,10 +4,9 @@
 #undef main
 #include <string>
 #include <GL/glew.h>
-#include <vector>
-#include "Keyboard.h"
 
 class Camera;
+class Keyboard;
 
 class Display
 {

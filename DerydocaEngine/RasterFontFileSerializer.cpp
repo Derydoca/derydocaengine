@@ -1,4 +1,5 @@
 #include "RasterFontFileSerializer.h"
+#include "Resource.h"
 
 RasterFontFileSerializer::RasterFontFileSerializer()
 {

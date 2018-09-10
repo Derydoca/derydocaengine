@@ -1,4 +1,5 @@
 #include "ImageFileSerializer.h"
+#include "Resource.h"
 
 ImageFileSerializer::ImageFileSerializer()
 {
