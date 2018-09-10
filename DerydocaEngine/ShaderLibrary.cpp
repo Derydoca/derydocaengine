@@ -1,6 +1,7 @@
 #include "ShaderLibrary.h"
 #include "ObjectLibrary.h"
 #include "ShaderResource.h"
+#include <iostream>
 
 Shader * ShaderLibrary::find(boost::uuids::uuid const& shaderId)
 {

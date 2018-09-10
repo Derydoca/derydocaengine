@@ -1,15 +1,14 @@
 #include "FontFace.h"
-#include <iostream>
 #include "TexturePacker.h"
 #include "Texture.h"
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
-#include <iostream>
 #include <fstream>
 #include "stb_image.h"
 #include "stb_image_write.h"
 #include "ObjectLibrary.h"
 #include "ObjectLibrary.h"
+#include <iostream>
 
 FontFace::FontFace()
 {

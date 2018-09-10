@@ -1,7 +1,6 @@
 #pragma once
 #include "Key.h"
 #include <sdl2\SDL.h>
-#include <iostream>
 
 class Keyboard
 {

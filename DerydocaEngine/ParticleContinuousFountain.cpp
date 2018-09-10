@@ -1,6 +1,7 @@
 #include "ParticleContinuousFountain.h"
 #include "Shader.h"
 #include "ShaderResource.h"
+#include <iostream>
 
 ParticleContinuousFountain::ParticleContinuousFountain()
 {

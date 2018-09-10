@@ -1,5 +1,6 @@
 #include "GaussianBlurFilter.h"
 #include "Shader.h"
+#include <iostream>
 
 GaussianBlurFilter::GaussianBlurFilter()
 {

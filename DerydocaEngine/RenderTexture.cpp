@@ -1,5 +1,4 @@
 #include "RenderTexture.h"
-#include <iostream>
 #include <cassert>
 
 RenderTexture::RenderTexture()

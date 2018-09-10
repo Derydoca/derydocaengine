@@ -1,7 +1,6 @@
 #include "MeshFileSerializer.h"
 #include "MeshResource.h"
 #include "Mesh.h"
-#include <iostream>
 
 static MeshFlags stringToFlag(std::string const& flagString)
 {

@@ -1,6 +1,5 @@
 #pragma once
 #include "BezierPatchMesh.h"
-#include <iostream>
 #include <fstream>
 #include <string>
 

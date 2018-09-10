@@ -1,11 +1,9 @@
 #include "NightVisionFilter.h"
-
-
+#include <iostream>
 
 NightVisionFilter::NightVisionFilter()
 {
 }
-
 
 NightVisionFilter::~NightVisionFilter()
 {

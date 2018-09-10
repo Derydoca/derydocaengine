@@ -1,6 +1,5 @@
 #include "Shader.h"
 #include <fstream>
-#include <iostream>
 #include <sys/stat.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "CameraManager.h"

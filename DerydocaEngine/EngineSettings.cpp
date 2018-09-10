@@ -1,5 +1,4 @@
 #include "EngineSettings.h"
-#include <iostream>
 
 EngineSettings::EngineSettings(std::string const& configFilePath)
 {

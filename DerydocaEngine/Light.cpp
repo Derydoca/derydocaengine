@@ -1,5 +1,6 @@
 #include "Light.h"
 #include "LightManager.h"
+#include <iostream>
 
 Light::Light()
 {

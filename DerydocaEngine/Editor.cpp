@@ -15,6 +15,7 @@
 #include "CubemapResource.h"
 #include "Skybox.h"
 #include "ShaderLibrary.h"
+#include <iostream>
 #include <boost\filesystem.hpp>
 
 int Editor::Run(std::string const& projectPath, std::string const& levelIdentifier)

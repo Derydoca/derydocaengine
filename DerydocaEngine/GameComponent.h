@@ -7,6 +7,7 @@
 #include <vector>
 #include "Material.h"
 #include "Projection.h"
+#include <iostream>
 
 struct Resource;
 

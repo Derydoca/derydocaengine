@@ -1,5 +1,6 @@
 #include "GammaCorrectionFilter.h"
 #include "Shader.h"
+#include <iostream>
 
 GammaCorrectionFilter::GammaCorrectionFilter()
 {

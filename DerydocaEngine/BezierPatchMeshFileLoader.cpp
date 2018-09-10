@@ -1,4 +1,5 @@
 #include "BezierPatchMeshFileLoader.h"
+#include <iostream>
 
 BezierPatchMeshFileLoader::BezierPatchMeshFileLoader()
 {

@@ -1,7 +1,6 @@
 #include "Display.h"
 #include "DisplayManager.h"
 #include "InputManager.h"
-#include <iostream>
 #include "Camera.h"
 
 Display::Display(int const& width, int const& height, std::string const& title)

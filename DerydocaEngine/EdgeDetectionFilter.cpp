@@ -3,6 +3,7 @@
 #include "RenderTexture.h"
 #include "MeshRenderer.h"
 #include "Shader.h"
+#include <iostream>
 
 EdgeDetectionFilter::EdgeDetectionFilter()
 {

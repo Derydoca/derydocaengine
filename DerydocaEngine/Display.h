@@ -4,7 +4,6 @@
 #undef main
 #include <string>
 #include <GL/glew.h>
-#include <iostream>
 #include <vector>
 #include "Keyboard.h"
 
