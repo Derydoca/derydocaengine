@@ -1,13 +1,17 @@
 #pragma once
 #include "FileTypeSerializer.h"
 
-class LevelFileSerializer : public FileTypeSerializer
-{
-public:
-	LevelFileSerializer() {};
-	~LevelFileSerializer() {};
+namespace DerydocaEngine::FileSerializers {
 
-	YAML::Node generateResourceNodes(std::string const& filePath);
-	FileType getFileType();
-	Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
-};
+	class LevelFileSerializer : public FileTypeSerializer
+	{
+	public:
+		LevelFileSerializer() {};
+		~LevelFileSerializer() {};
+
+		YAML::Node generateResourceNodes(std::string const& filePath);
+		FileType getFileType();
+		Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
+	};
+
+}

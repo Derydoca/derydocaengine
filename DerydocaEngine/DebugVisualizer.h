@@ -5,24 +5,27 @@
 #include "Shader.h"
 #include "GameComponent.h"
 
-class DebugVisualizer : public GameComponent
-{
-public:
-	GENINSTANCE(DebugVisualizer);
-	DebugVisualizer();
-	~DebugVisualizer();
+namespace DerydocaEngine::Debug {
 
-	void draw(glm::mat4 const& worldMatrix);
+	class DebugVisualizer : public GameComponent
+	{
+	public:
+		GENINSTANCE(DebugVisualizer);
+		DebugVisualizer();
+		~DebugVisualizer();
 
-	void postRender();
-private:
-	void clear();
-	
-	DebugLine* m_lines;
-	int m_lineCount;
+		void draw(glm::mat4 const& worldMatrix);
 
-	DebugLine m_testLine;
+		void postRender();
+	private:
+		void clear();
 
-	Shader* m_shader;
-};
+		DebugLine* m_lines;
+		int m_lineCount;
 
+		DebugLine m_testLine;
+
+		Shader* m_shader;
+	};
+
+}

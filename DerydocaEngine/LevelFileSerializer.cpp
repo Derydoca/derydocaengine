@@ -1,26 +1,30 @@
 #include "LevelFileSerializer.h"
 #include "Resource.h"
 
-YAML::Node LevelFileSerializer::generateResourceNodes(std::string const& filePath)
-{
-	YAML::Node resources;
+namespace DerydocaEngine::FileSerializers {
 
-	YAML::Node levelResource;
-	levelResource["ID"] = generateUuid();
+	YAML::Node LevelFileSerializer::generateResourceNodes(std::string const& filePath)
+	{
+		YAML::Node resources;
 
-	resources.push_back(levelResource);
+		YAML::Node levelResource;
+		levelResource["ID"] = generateUuid();
 
-	return resources;
-}
+		resources.push_back(levelResource);
 
-FileType LevelFileSerializer::getFileType()
-{
-	return FileType::LevelFileType;
-}
+		return resources;
+	}
 
-Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-{
-	Resource* r = new Resource();
-	r->setType(LevelResourceType);
-	return r;
+	FileType LevelFileSerializer::getFileType()
+	{
+		return FileType::LevelFileType;
+	}
+
+	Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	{
+		Resource* r = new Resource();
+		r->setType(LevelResourceType);
+		return r;
+	}
+
 }

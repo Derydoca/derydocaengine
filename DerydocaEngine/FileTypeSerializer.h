@@ -7,14 +7,18 @@
 
 struct Resource;
 
-class FileTypeSerializer
-{
-public:
-	virtual ~FileTypeSerializer() {}
-	virtual YAML::Node generateResourceNodes(std::string const& filePath) = 0;
-	virtual FileType getFileType() = 0;
-	virtual Resource* loadResourceFromMeta(YAML::Node const& resourceNode) = 0;
-	virtual void postLoadInitialize(Resource* const& resource) {}
+namespace DerydocaEngine::FileSerializers {
 
-	friend boost::uuids::uuid generateUuid();
-};
+	class FileTypeSerializer
+	{
+	public:
+		virtual ~FileTypeSerializer() {}
+		virtual YAML::Node generateResourceNodes(std::string const& filePath) = 0;
+		virtual FileType getFileType() = 0;
+		virtual Resource* loadResourceFromMeta(YAML::Node const& resourceNode) = 0;
+		virtual void postLoadInitialize(Resource* const& resource) {}
+
+		friend boost::uuids::uuid generateUuid();
+	};
+
+}

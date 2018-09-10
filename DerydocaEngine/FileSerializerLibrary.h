@@ -3,25 +3,28 @@
 #include "FileTypeSerializer.h"
 #include "ResourceType.h"
 
-class FileSerializerLibrary
-{
-public:
-	static FileSerializerLibrary& getInstance() {
-		static FileSerializerLibrary instance;
-		return instance;
-	}
+namespace DerydocaEngine::FileSerializers {
 
-	FileTypeSerializer * getTypeSerializer(std::string const& sourceFilePath);
-	FileTypeSerializer * getTypeSerializer(FileType const& type);
+	class FileSerializerLibrary
+	{
+	public:
+		static FileSerializerLibrary& getInstance() {
+			static FileSerializerLibrary instance;
+			return instance;
+		}
 
-	void operator=(FileSerializerLibrary const&) = delete;
-private:
-	FileSerializerLibrary();
-	~FileSerializerLibrary();
-	FileSerializerLibrary(FileSerializerLibrary const&);
+		FileTypeSerializer * getTypeSerializer(std::string const& sourceFilePath);
+		FileTypeSerializer * getTypeSerializer(FileType const& type);
 
-	void registerTypeSerializer(FileTypeSerializer* const& serializer);
+		void operator=(FileSerializerLibrary const&) = delete;
+	private:
+		FileSerializerLibrary();
+		~FileSerializerLibrary();
+		FileSerializerLibrary(FileSerializerLibrary const&);
 
-	std::map<FileType, FileTypeSerializer*> m_typeSerializers;
-};
+		void registerTypeSerializer(FileTypeSerializer* const& serializer);
 
+		std::map<FileType, FileTypeSerializer*> m_typeSerializers;
+	};
+
+}

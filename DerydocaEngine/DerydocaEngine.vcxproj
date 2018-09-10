@@ -223,7 +223,6 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="CommandLineArgs.cpp" />
     <ClCompile Include="CubemapResourceSerializer.cpp" />
-    <ClCompile Include="DebugLine.cpp" />
     <ClCompile Include="DebugVisualizer.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="EdgeDetectionFilter.cpp" />

@@ -1,35 +1,31 @@
 #include "ImageFileSerializer.h"
 #include "Resource.h"
 
-ImageFileSerializer::ImageFileSerializer()
-{
-}
+namespace DerydocaEngine::FileSerializers {
 
-ImageFileSerializer::~ImageFileSerializer()
-{
-}
+	YAML::Node ImageFileSerializer::generateResourceNodes(std::string const& filePath)
+	{
+		YAML::Node resources;
 
-YAML::Node ImageFileSerializer::generateResourceNodes(std::string const& filePath)
-{
-	YAML::Node resources;
+		YAML::Node materialResource;
+		materialResource["ID"] = generateUuid();
 
-	YAML::Node materialResource;
-	materialResource["ID"] = generateUuid();
+		resources.push_back(materialResource);
 
-	resources.push_back(materialResource);
+		return resources;
+	}
 
-	return resources;
-}
+	FileType ImageFileSerializer::getFileType()
+	{
+		return FileType::ImageFileType;
+	}
 
-FileType ImageFileSerializer::getFileType()
-{
-	return FileType::ImageFileType;
-}
+	Resource * ImageFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	{
+		// Create a material resource type
+		Resource* r = new Resource();
+		r->setType(TextureResourceType);
+		return r;
+	}
 
-Resource * ImageFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-{
-	// Create a material resource type
-	Resource* r = new Resource();
-	r->setType(TextureResourceType);
-	return r;
 }

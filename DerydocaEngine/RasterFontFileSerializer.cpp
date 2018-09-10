@@ -1,34 +1,30 @@
 #include "RasterFontFileSerializer.h"
 #include "Resource.h"
 
-RasterFontFileSerializer::RasterFontFileSerializer()
-{
-}
+namespace DerydocaEngine::FileSerializers {
 
-RasterFontFileSerializer::~RasterFontFileSerializer()
-{
-}
+	YAML::Node RasterFontFileSerializer::generateResourceNodes(std::string const& filePath)
+	{
+		YAML::Node resources;
 
-YAML::Node RasterFontFileSerializer::generateResourceNodes(std::string const& filePath)
-{
-	YAML::Node resources;
+		YAML::Node levelResource;
+		levelResource["ID"] = generateUuid();
 
-	YAML::Node levelResource;
-	levelResource["ID"] = generateUuid();
+		resources.push_back(levelResource);
 
-	resources.push_back(levelResource);
+		return resources;
+	}
 
-	return resources;
-}
+	FileType RasterFontFileSerializer::getFileType()
+	{
+		return FileType::RasterFontType;
+	}
 
-FileType RasterFontFileSerializer::getFileType()
-{
-	return FileType::RasterFontType;
-}
+	Resource * RasterFontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	{
+		Resource* r = new Resource();
+		r->setType(RasterFontResourceType);
+		return r;
+	}
 
-Resource * RasterFontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-{
-	Resource* r = new Resource();
-	r->setType(RasterFontResourceType);
-	return r;
 }

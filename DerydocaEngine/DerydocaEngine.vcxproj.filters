@@ -59,9 +59,6 @@
     <ClCompile Include="RenderTexture.cpp">
       <Filter>Engine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="DebugLine.cpp">
-      <Filter>Engine\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="DebugVisualizer.cpp">
       <Filter>Engine\Debug</Filter>
     </ClCompile>

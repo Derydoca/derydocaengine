@@ -1,14 +1,17 @@
 #pragma once
 #include "FileTypeSerializer.h"
 
-class RasterFontFileSerializer : public FileTypeSerializer
-{
-public:
-	RasterFontFileSerializer();
-	~RasterFontFileSerializer();
+namespace DerydocaEngine::FileSerializers {
 
-	YAML::Node generateResourceNodes(std::string const& filePath);
-	FileType getFileType();
-	Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
-};
+	class RasterFontFileSerializer : public FileTypeSerializer
+	{
+	public:
+		RasterFontFileSerializer() {}
+		~RasterFontFileSerializer() {}
 
+		YAML::Node generateResourceNodes(std::string const& filePath);
+		FileType getFileType();
+		Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
+	};
+
+}

@@ -1,35 +1,30 @@
 #include "SpriteSheetFileSerializer.h"
 #include "Resource.h"
 
-SpriteSheetFileSerializer::SpriteSheetFileSerializer()
-{
-}
+namespace DerydocaEngine::FileSerializers {
 
+	YAML::Node SpriteSheetFileSerializer::generateResourceNodes(std::string const& filePath)
+	{
+		YAML::Node resources;
 
-SpriteSheetFileSerializer::~SpriteSheetFileSerializer()
-{
-}
+		YAML::Node spriteSheetResource;
+		spriteSheetResource["ID"] = generateUuid();
 
-YAML::Node SpriteSheetFileSerializer::generateResourceNodes(std::string const& filePath)
-{
-	YAML::Node resources;
+		resources.push_back(spriteSheetResource);
 
-	YAML::Node spriteSheetResource;
-	spriteSheetResource["ID"] = generateUuid();
+		return resources;
+	}
 
-	resources.push_back(spriteSheetResource);
+	FileType SpriteSheetFileSerializer::getFileType()
+	{
+		return FileType::SpriteSheetFileType;
+	}
 
-	return resources;
-}
+	Resource * SpriteSheetFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	{
+		Resource* r = new Resource();
+		r->setType(ResourceType::SpriteSheetType);
+		return r;
+	}
 
-FileType SpriteSheetFileSerializer::getFileType()
-{
-	return FileType::SpriteSheetFileType;
-}
-
-Resource * SpriteSheetFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-{
-	Resource* r = new Resource();
-	r->setType(ResourceType::SpriteSheetType);
-	return r;
 }

@@ -1,34 +1,30 @@
 #include "FontFileSerializer.h"
 #include "Resource.h"
 
-FontFileSerializer::FontFileSerializer()
-{
-}
+namespace DerydocaEngine::FileSerializers {
 
-FontFileSerializer::~FontFileSerializer()
-{
-}
+	YAML::Node FontFileSerializer::generateResourceNodes(std::string const& filePath)
+	{
+		YAML::Node resources;
 
-YAML::Node FontFileSerializer::generateResourceNodes(std::string const& filePath)
-{
-	YAML::Node resources;
+		YAML::Node levelResource;
+		levelResource["ID"] = generateUuid();
 
-	YAML::Node levelResource;
-	levelResource["ID"] = generateUuid();
+		resources.push_back(levelResource);
 
-	resources.push_back(levelResource);
+		return resources;
+	}
 
-	return resources;
-}
+	FileType FontFileSerializer::getFileType()
+	{
+		return FileType::FontType;
+	}
 
-FileType FontFileSerializer::getFileType()
-{
-	return FileType::FontType;
-}
+	Resource * FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	{
+		Resource* r = new Resource();
+		r->setType(FontResourceType);
+		return r;
+	}
 
-Resource * FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-{
-	Resource* r = new Resource();
-	r->setType(FontResourceType);
-	return r;
 }

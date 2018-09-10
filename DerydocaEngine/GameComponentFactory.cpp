@@ -69,7 +69,7 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(ScreenshotUtil);
 	REGINSTANCE(Terrain);
 	REGINSTANCE(WasdMover);
-	REGINSTANCE(DebugVisualizer);
+	REGINSTANCE(DerydocaEngine::Debug::DebugVisualizer);
 	REGINSTANCE(Light);
 	REGINSTANCE(ShaderSubroutineSwitcher);
 	REGINSTANCE(ImageProjector);
