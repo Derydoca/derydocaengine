@@ -110,7 +110,7 @@ glm::vec3 * TextRenderer::generateVertices()
 		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 		{
 			// Get the character image information
-			TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+			DerydocaEngine::Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 			// Set the vertex positions
 			float charXMin = penX + img.getBearingX();
@@ -153,7 +153,7 @@ glm::vec2 * TextRenderer::generateTexCoords()
 		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 		{
 			// Get the character image information
-			TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+			DerydocaEngine::Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 			// Set the UV positions
 			Rect rect = img.getTexSheetPosition();
@@ -215,7 +215,7 @@ unsigned int * TextRenderer::generateTriangleIndices()
 		for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 		{
 			// Get the character image information
-			TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+			DerydocaEngine::Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 			// Set the indices to draw the two triangles
 			triangleIndices[charQuadIndex * 6 + 0] = charQuadIndex * 4 + 0;
@@ -356,7 +356,7 @@ std::vector<LineProperties*> TextRenderer::processTextToLines(std::string const&
 		if (addCharacterToFilteredText)
 		{
 			// Get the character image information
-			TexturePackerImage img = fontFace->getCharData(c);
+			DerydocaEngine::Utilities::TexturePackerImage img = fontFace->getCharData(c);
 			bool isWhitespace = img.getWidth() == 0.0f;
 			bool isBreakable = c == ' ' || c == '-';
 

@@ -18,7 +18,7 @@ SpriteSheet::~SpriteSheet()
 
 void SpriteSheet::updateTexture()
 {
-	TexturePacker packer = TexturePacker(4);
+	DerydocaEngine::Utilities::TexturePacker packer = DerydocaEngine::Utilities::TexturePacker(4);
 	ObjectLibrary* ObjLib = &ObjectLibrary::getInstance();
 	
 	for (auto spriteMapItem : m_sprites)
@@ -40,7 +40,7 @@ void SpriteSheet::updateTexture()
 
 	packer.packImages();
 
-	std::vector<TexturePackerImage> packedImages = packer.getSubImageData();
+	std::vector<DerydocaEngine::Utilities::TexturePackerImage> packedImages = packer.getSubImageData();
 	for (auto img : packedImages)
 	{
 		auto spriteMapRecord = m_sprites.find(img.getID());

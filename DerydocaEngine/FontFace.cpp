@@ -66,7 +66,7 @@ void FontFace::loadFromFontFile(std::string const& filePath)
 	error = FT_Set_Char_Size(fontFace, 0, (int)(m_fontSize * 64.0f), m_dotsPerInch.x, m_dotsPerInch.y);
 
 	// Create a texture packer to save all of the glyphs into one texture
-	TexturePacker packer = TexturePacker(1);
+	DerydocaEngine::Utilities::TexturePacker packer = DerydocaEngine::Utilities::TexturePacker(1);
 
 	// For every character that exists in the font face
 	for(long i = 0; i < fontFace->num_glyphs; i++)
@@ -122,7 +122,7 @@ void FontFace::loadFromFontFile(std::string const& filePath)
 	m_textureDirty = true;
 
 	// Load the character image data map
-	std::vector<TexturePackerImage> images = packer.getSubImageData();
+	std::vector<DerydocaEngine::Utilities::TexturePackerImage> images = packer.getSubImageData();
 	m_charImages.clear();
 	for (auto image : images)
 	{
@@ -175,7 +175,7 @@ void FontFace::loadFromSerializedFile(std::string const& filePath)
 		float ty = charNode["texY"].as<float>();
 		float tdx = charNode["texDX"].as<float>();
 		float tdy = charNode["texDY"].as<float>();
-		TexturePackerImage img(id, w, h, 1, sx, sy, bx, by, ax, ay);
+		DerydocaEngine::Utilities::TexturePackerImage img(id, w, h, 1, sx, sy, bx, by, ax, ay);
 		img.setTextureSheetRectangle(tx, ty, tdx, tdy);
 		m_charImages.emplace(id, img);
 	}
