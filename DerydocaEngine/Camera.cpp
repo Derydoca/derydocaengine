@@ -102,7 +102,7 @@ void Camera::setRenderingMode(RenderingMode const& mode)
 
 		GLenum drawBuffers[] = { GL_NONE, GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
 		glDrawBuffers(4, drawBuffers);
-		
+
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		// TODO: Find a better way to get the shader so the ID is not hard-coded

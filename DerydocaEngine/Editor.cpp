@@ -36,7 +36,7 @@ int Editor::Run(std::string const& projectPath, std::string const& levelIdentifi
 #pragma region Editor specific game objects
 
 	// Keep this here as a simple way to grab screenshots of the engine
-	ScreenshotUtil* screenshotUtil = new ScreenshotUtil(display, InputManager::getInstance().getKeyboard());
+	DerydocaEngine::Components::ScreenshotUtil* screenshotUtil = new DerydocaEngine::Components::ScreenshotUtil(display, InputManager::getInstance().getKeyboard());
 	sceneRoot->addComponent(screenshotUtil);
 
 	// This is the editor camera
@@ -65,7 +65,7 @@ int Editor::Run(std::string const& projectPath, std::string const& levelIdentifi
 		editorCamera->setClearColor(Color(0.5, 0, 0));
 	}
 	editorCameraObject->addComponent(editorCamera);
-	editorCameraObject->addComponent(new WasdMover(InputManager::getInstance().getKeyboard(), InputManager::getInstance().getMouse()));
+	editorCameraObject->addComponent(new DerydocaEngine::Components::WasdMover(InputManager::getInstance().getKeyboard(), InputManager::getInstance().getMouse()));
 	sceneRoot->addChild(editorCameraObject);
 
 #pragma endregion

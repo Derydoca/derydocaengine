@@ -71,15 +71,15 @@ void GameComponentFactory::registerInstanceGenerator(std::string const& gameComp
 GameComponentFactory::GameComponentFactory()
 {
 	REGINSTANCE(Camera);
-	REGINSTANCE(MeshRenderer);
-	REGINSTANCE(KeyboardMover);
-	REGINSTANCE(MaterialRefresher);
-	REGINSTANCE(Rotator);
-	REGINSTANCE(ScreenshotUtil);
-	REGINSTANCE(Terrain);
-	REGINSTANCE(WasdMover);
+	REGINSTANCE(DerydocaEngine::Components::MeshRenderer);
+	REGINSTANCE(DerydocaEngine::Components::KeyboardMover);
+	REGINSTANCE(DerydocaEngine::Components::MaterialRefresher);
+	REGINSTANCE(DerydocaEngine::Components::Rotator);
+	REGINSTANCE(DerydocaEngine::Components::ScreenshotUtil);
+	REGINSTANCE(DerydocaEngine::Components::Terrain);
+	REGINSTANCE(DerydocaEngine::Components::WasdMover);
 	REGINSTANCE(DerydocaEngine::Debug::DebugVisualizer);
-	REGINSTANCE(Light);
+	REGINSTANCE(DerydocaEngine::Components::Light);
 	REGINSTANCE(DerydocaEngine::Ext::ShaderSubroutineSwitcher);
 	REGINSTANCE(DerydocaEngine::Ext::ImageProjector);
 	REGINSTANCE(DerydocaEngine::Ext::EdgeDetectionFilter);
@@ -98,9 +98,9 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(DerydocaEngine::Ext::ParticleFountain);
 	REGINSTANCE(DerydocaEngine::Ext::ParticleContinuousFountain);
 	REGINSTANCE(DerydocaEngine::Ext::ParticleInstanced);
-	REGINSTANCE(TextRenderer);
-	REGINSTANCE(FrameStats);
-	REGINSTANCE(SpriteRenderer);
+	REGINSTANCE(DerydocaEngine::Components::TextRenderer);
+	REGINSTANCE(DerydocaEngine::Components::FrameStats);
+	REGINSTANCE(DerydocaEngine::Components::SpriteRenderer);
 }
 
 GameComponentFactory::~GameComponentFactory()

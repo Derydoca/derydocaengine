@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 
 	void NoiseTexture::init()
 	{
-		MeshRenderer* mr = getComponent<MeshRenderer>();
+		DerydocaEngine::Components::MeshRenderer* mr = getComponent<DerydocaEngine::Components::MeshRenderer>();
 		if (mr)
 		{
 			m_material = mr->getMaterial();

@@ -7,7 +7,7 @@ namespace DerydocaEngine::Ext
 	void WaveDisplacement::init()
 	{
 		// Get reference to the material on this object
-		MeshRenderer* mr = getComponent<MeshRenderer>();
+		DerydocaEngine::Components::MeshRenderer* mr = getComponent<DerydocaEngine::Components::MeshRenderer>();
 		assert(mr);
 		if (mr)
 		{

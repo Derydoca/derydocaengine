@@ -10,7 +10,7 @@ void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform
 	assert(shader);
 
 	// Get a list of lights that will affect the object being sent in
-	std::list<Light*> lights = getLights(objectTransform);
+	std::list<DerydocaEngine::Components::Light*> lights = getLights(objectTransform);
 
 	// Cache some things
 	Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
@@ -19,11 +19,11 @@ void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform
 
 	// Loop through each light and bind them to the shader
 	int lightIndex = 0;
-	for each (Light* light in lights)
+	for each (DerydocaEngine::Components::Light* light in lights)
 	{
-		Light::LightType lightType = light->getLightType();
+		DerydocaEngine::Components::Light::LightType lightType = light->getLightType();
 
-		if (lightType == Light::Directional || lightType == Light::Spotlight)
+		if (lightType == DerydocaEngine::Components::Light::Directional || lightType == DerydocaEngine::Components::Light::Spotlight)
 		{
 			// Set the light direction
 			std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
@@ -31,7 +31,7 @@ void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform
 			shader->setVec3(typeName, lightDirection);
 		}
 
-		if (lightType == Light::Spotlight)
+		if (lightType == DerydocaEngine::Components::Light::Spotlight)
 		{
 			// Set the spotlight exponent
 			std::string exponentName = "Lights[" + std::to_string(lightIndex) + "].Exponent";
@@ -105,9 +105,9 @@ void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform
 void LightManager::renderShadowMaps(Transform* const& objectTransform)
 {
 	// Get a list of lights that will affect the object being sent in
-	std::list<Light*> lights = getLights(objectTransform);
+	std::list<DerydocaEngine::Components::Light*> lights = getLights(objectTransform);
 
-	for each (Light* light in lights)
+	for each (DerydocaEngine::Components::Light* light in lights)
 	{
 		if (light->isCastingShadows())
 		{
@@ -127,14 +127,14 @@ LightManager::~LightManager()
 {
 }
 
-std::list<Light*> LightManager::getLights(Transform * const& objectTransform)
+std::list<DerydocaEngine::Components::Light*> LightManager::getLights(Transform * const& objectTransform)
 {
 	// Create a list to store the lights
-	std::list<Light*> lights = std::list<Light*>();
+	std::list<DerydocaEngine::Components::Light*> lights = std::list<DerydocaEngine::Components::Light*>();
 
 	// Go through each light
 	int numLights = 0;
-	for each (Light* light in m_lights)
+	for each (DerydocaEngine::Components::Light* light in m_lights)
 	{
 		// TODO: Only include lights that would potentially effect this object
 

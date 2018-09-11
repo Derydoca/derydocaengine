@@ -7,39 +7,43 @@
 #include "GameComponent.h"
 #include "GameObject.h"
 
-class WasdMover : public GameComponent
+namespace DerydocaEngine::Components
 {
-public:
-	GENINSTANCE(WasdMover);
-	WasdMover();
-	WasdMover(Keyboard* const& keyboard, Mouse* const& mouse) :
-		m_keyboard(keyboard),
-		m_mouse(mouse),
-		m_moveSpeed(5.0f),
-		m_mouseSensitivityX(0.005f),
-		m_mouseSensitivityY(0.005f),
-		m_fastMoveMultiplier(2.0f),
-		m_slowMoveMultiplier(0.5f),
-		m_minXRot(-glm::half_pi<float>()),
-		m_maxXRot(glm::half_pi<float>())
+
+	class WasdMover : public GameComponent
 	{
-	}
-	~WasdMover();
-	
-	void init();
-	void update(float const& deltaTime);
+	public:
+		GENINSTANCE(WasdMover);
+		WasdMover();
+		WasdMover(Keyboard* const& keyboard, Mouse* const& mouse) :
+			m_keyboard(keyboard),
+			m_mouse(mouse),
+			m_moveSpeed(5.0f),
+			m_mouseSensitivityX(0.005f),
+			m_mouseSensitivityY(0.005f),
+			m_fastMoveMultiplier(2.0f),
+			m_slowMoveMultiplier(0.5f),
+			m_minXRot(-glm::half_pi<float>()),
+			m_maxXRot(glm::half_pi<float>())
+		{
+		}
+		~WasdMover();
 
-	void deserialize(YAML::Node const& node);
-private:
-	Transform* m_transform;
-	Keyboard* m_keyboard;
-	Mouse* m_mouse;
-	float m_moveSpeed;
-	float m_mouseSensitivityX, m_mouseSensitivityY;
-	float m_fastMoveMultiplier;
-	float m_slowMoveMultiplier;
-	glm::vec3 m_localMomentum;
-	glm::vec2 m_eulerRot;
-	float m_minXRot, m_maxXRot;
-};
+		void init();
+		void update(float const& deltaTime);
 
+		void deserialize(YAML::Node const& node);
+	private:
+		Transform * m_transform;
+		Keyboard* m_keyboard;
+		Mouse* m_mouse;
+		float m_moveSpeed;
+		float m_mouseSensitivityX, m_mouseSensitivityY;
+		float m_fastMoveMultiplier;
+		float m_slowMoveMultiplier;
+		glm::vec3 m_localMomentum;
+		glm::vec2 m_eulerRot;
+		float m_minXRot, m_maxXRot;
+	};
+
+}

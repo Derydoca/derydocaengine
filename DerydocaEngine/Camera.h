@@ -2,7 +2,6 @@
 
 #include "Transform.h"
 #include "GameComponent.h"
-#include "GameObject.h"
 #include "Skybox.h"
 #include "Color.h"
 #include "Material.h"
@@ -12,8 +11,7 @@
 #include "Projection.h"
 #include "MatrixStack.h"
 #include <yaml-cpp/yaml.h>
-
-class MatrixStack;
+#include "GameObject.h"
 
 /*
 Object used for rendering the world to screen.
@@ -107,7 +105,7 @@ public:
 	Material* getPostProcessMaterial() { return m_postProcessMaterial; }
 	Projection getProjection() const { return m_projection; }
 private:
-	Transform* m_transform;
+	Transform * m_transform;
 	Color m_clearColor;
 	Skybox* m_skybox;
 	ClearMode m_clearMode = NoClear;
@@ -128,4 +126,3 @@ private:
 	void clear();
 	void setIdentityMatricies(Shader* const& shader);
 };
-

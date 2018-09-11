@@ -7,79 +7,83 @@
 #include "Transform.h"
 #include "Projection.h"
 
-class Light : public GameComponent
+namespace DerydocaEngine::Components
 {
-public:
-	GENINSTANCE(Light);
 
-	/* Defines a light's type */
-	enum LightType
+	class Light : public GameComponent
 	{
-		/* A orthagonal light infinitely far away */
-		Directional = 0,
-		/* A light radiating in all directions */
-		Point = 1,
-		/* A light projected in a frustum */
-		Spotlight = 2,
+	public:
+		GENINSTANCE(Light);
+
+		/* Defines a light's type */
+		enum LightType
+		{
+			/* A orthagonal light infinitely far away */
+			Directional = 0,
+			/* A light radiating in all directions */
+			Point = 1,
+			/* A light projected in a frustum */
+			Spotlight = 2,
+		};
+
+		/* Defines how a light's shadowmap is filtered between texels */
+		enum ShadowMapFilterType
+		{
+			/* Hard shadowing with visible aliasing */
+			Nearest = 0,
+			/* Linearly interpolate between texels for smooth shadow edges */
+			Linear = 1
+		};
+
+		Light();
+		~Light();
+
+		void setLightType(LightType const& type) { m_lightType = type; }
+		LightType getLightType() { return m_lightType; }
+
+		glm::mat4 getProjectionMatrix();
+		glm::mat4 getViewMatrix();
+
+		void setColor(Color* const& color)
+		{
+			m_color.r = color->r;
+			m_color.g = color->g;
+			m_color.b = color->b;
+			m_color.a = color->a;
+		}
+		Color getColor() { return m_color; }
+		float getSpotlightExponent() { return m_spotlightExponent; }
+		float getSpotlightCutoff() { return m_spotlightCutoff; }
+		GLuint getShadowMap() { return m_depthTexture; }
+		bool isCastingShadows() { return m_castShadows; }
+		bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
+		Projection getProjection() { return m_projection; }
+		glm::mat4 getShadowMatrix(glm::mat4 const& objectModelMatrix);
+		float getShadowSoftness() const { return m_shadowSoftness; }
+
+		void init();
+		void deserialize(YAML::Node const& node);
+
+		void renderShadowMap(GameObject* const& gameObject);
+	private:
+		void generateShadowMap();
+		GLint getShadowMapFilterTypeEnum();
+
+		LightType m_lightType = Point;
+		Color m_color = Color(1, 1, 1, 1);
+		float m_spotlightExponent;
+		float m_spotlightCutoff;
+		bool m_castShadows = false;
+		int m_shadowMapHeight = 512;
+		int m_shadowMapWidth = 512;
+		GLuint m_depthTexture;
+		GLuint m_shadowFBO;
+		MatrixStack m_matrixStack;
+		Material* m_shadowMapMaterial;
+		Projection m_projection;
+		glm::mat4 m_shadowBias;
+		ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;
+		float m_shadowSoftness = 0.01f;
 	};
 
-	/* Defines how a light's shadowmap is filtered between texels */
-	enum ShadowMapFilterType
-	{
-		/* Hard shadowing with visible aliasing */
-		Nearest = 0,
-		/* Linearly interpolate between texels for smooth shadow edges */
-		Linear = 1
-	};
-
-	Light();
-	~Light();
-
-	void setLightType(LightType const& type) { m_lightType = type; }
-	LightType getLightType() { return m_lightType; }
-
-	glm::mat4 getProjectionMatrix();
-	glm::mat4 getViewMatrix();
-
-	void setColor(Color* const& color)
-	{
-		m_color.r = color->r;
-		m_color.g = color->g;
-		m_color.b = color->b;
-		m_color.a = color->a;
-	}
-	Color getColor() { return m_color; }
-	float getSpotlightExponent() { return m_spotlightExponent; }
-	float getSpotlightCutoff() { return m_spotlightCutoff; }
-	GLuint getShadowMap() { return m_depthTexture; }
-	bool isCastingShadows() { return m_castShadows; }
-	bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
-	Projection getProjection() { return m_projection; }
-	glm::mat4 getShadowMatrix(glm::mat4 const& objectModelMatrix);
-	float getShadowSoftness() const { return m_shadowSoftness; }
-
-	void init();
-	void deserialize(YAML::Node const& node);
-
-	void renderShadowMap(GameObject* const& gameObject);
-private:
-	void generateShadowMap();
-	GLint getShadowMapFilterTypeEnum();
-
-	LightType m_lightType = Point;
-	Color m_color = Color(1, 1, 1, 1);
-	float m_spotlightExponent;
-	float m_spotlightCutoff;
-	bool m_castShadows = false;
-	int m_shadowMapHeight = 512;
-	int m_shadowMapWidth = 512;
-	GLuint m_depthTexture;
-	GLuint m_shadowFBO;
-	MatrixStack m_matrixStack;
-	Material* m_shadowMapMaterial;
-	Projection m_projection;
-	glm::mat4 m_shadowBias;
-	ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;
-	float m_shadowSoftness = 0.01f;
-};
-
+}

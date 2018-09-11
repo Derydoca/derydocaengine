@@ -1,22 +1,19 @@
 #include "FrameStats.h"
 
-FrameStats::FrameStats()
+namespace DerydocaEngine::Components
 {
-}
 
-FrameStats::~FrameStats()
-{
-}
+	void FrameStats::postInit()
+	{
+		m_textRenderer = getComponent<DerydocaEngine::Components::TextRenderer>();
+	}
 
-void FrameStats::postInit()
-{
-	m_textRenderer = getComponent<TextRenderer>();
-}
+	void FrameStats::update(float const& deltaTime)
+	{
+		float fps = 1.0f / deltaTime;
+		std::ostringstream s;
+		s << "FPS: " << fps;
+		m_textRenderer->setText(s.str());
+	}
 
-void FrameStats::update(float const& deltaTime)
-{
-	float fps = 1.0f / deltaTime;
-	std::ostringstream s;
-	s << "FPS: " << fps;
-	m_textRenderer->setText(s.str());
 }
