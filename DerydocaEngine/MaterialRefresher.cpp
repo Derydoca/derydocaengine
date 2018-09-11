@@ -33,7 +33,7 @@ void MaterialRefresher::init()
 	else
 	{
 		m_usingMeshRenderer = false;
-		m_tessMeshRenderer = getComponent<TessellatedMeshRenderer>();
+		m_tessMeshRenderer = getComponent<DerydocaEngine::Ext::TessellatedMeshRenderer>();
 		material = m_tessMeshRenderer->getMaterial();
 	}
 	assert(material);

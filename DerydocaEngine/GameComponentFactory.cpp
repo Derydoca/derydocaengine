@@ -56,7 +56,16 @@ GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gam
 
 void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator)
 {
-	m_instanceGenerators[gameComponentType] = instanceGenerator;
+	size_t scopeOperatorLoc = gameComponentType.find_last_of(':');
+	if (scopeOperatorLoc > 0)
+	{
+		std::string typeWithoutNamespace = gameComponentType.substr(scopeOperatorLoc + 1);
+		m_instanceGenerators[typeWithoutNamespace] = instanceGenerator;
+	}
+	else
+	{
+		m_instanceGenerators[gameComponentType] = instanceGenerator;
+	}
 }
 
 GameComponentFactory::GameComponentFactory()
@@ -71,24 +80,24 @@ GameComponentFactory::GameComponentFactory()
 	REGINSTANCE(WasdMover);
 	REGINSTANCE(DerydocaEngine::Debug::DebugVisualizer);
 	REGINSTANCE(Light);
-	REGINSTANCE(ShaderSubroutineSwitcher);
-	REGINSTANCE(ImageProjector);
-	REGINSTANCE(EdgeDetectionFilter);
-	REGINSTANCE(GaussianBlurFilter);
-	REGINSTANCE(BloomFilter);
-	REGINSTANCE(GammaCorrectionFilter);
-	REGINSTANCE(MultisampleSwitch);
-	REGINSTANCE(ParticleSystem);
-	REGINSTANCE(BezierCurveRenderer);
-	REGINSTANCE(TessellatingQuad);
-	REGINSTANCE(TessellatedMeshRenderer);
-	REGINSTANCE(NoiseTexture);
-	REGINSTANCE(WoodSliceTexture);
-	REGINSTANCE(NightVisionFilter);
-	REGINSTANCE(WaveDisplacement);
-	REGINSTANCE(ParticleFountain);
-	REGINSTANCE(ParticleContinuousFountain);
-	REGINSTANCE(ParticleInstanced);
+	REGINSTANCE(DerydocaEngine::Ext::ShaderSubroutineSwitcher);
+	REGINSTANCE(DerydocaEngine::Ext::ImageProjector);
+	REGINSTANCE(DerydocaEngine::Ext::EdgeDetectionFilter);
+	REGINSTANCE(DerydocaEngine::Ext::GaussianBlurFilter);
+	REGINSTANCE(DerydocaEngine::Ext::BloomFilter);
+	REGINSTANCE(DerydocaEngine::Ext::GammaCorrectionFilter);
+	REGINSTANCE(DerydocaEngine::Ext::MultisampleSwitch);
+	REGINSTANCE(DerydocaEngine::Ext::ParticleSystem);
+	REGINSTANCE(DerydocaEngine::Ext::BezierCurveRenderer);
+	REGINSTANCE(DerydocaEngine::Ext::TessellatingQuad);
+	REGINSTANCE(DerydocaEngine::Ext::TessellatedMeshRenderer);
+	REGINSTANCE(DerydocaEngine::Ext::NoiseTexture);
+	REGINSTANCE(DerydocaEngine::Ext::WoodSliceTexture);
+	REGINSTANCE(DerydocaEngine::Ext::NightVisionFilter);
+	REGINSTANCE(DerydocaEngine::Ext::WaveDisplacement);
+	REGINSTANCE(DerydocaEngine::Ext::ParticleFountain);
+	REGINSTANCE(DerydocaEngine::Ext::ParticleContinuousFountain);
+	REGINSTANCE(DerydocaEngine::Ext::ParticleInstanced);
 	REGINSTANCE(TextRenderer);
 	REGINSTANCE(FrameStats);
 	REGINSTANCE(SpriteRenderer);

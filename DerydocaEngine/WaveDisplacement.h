@@ -1,22 +1,27 @@
 #pragma once
 #include "GameComponent.h"
-class WaveDisplacement : public GameComponent
+
+namespace DerydocaEngine::Ext
 {
-public:
-	GENINSTANCE(WaveDisplacement);
 
-	WaveDisplacement();
-	~WaveDisplacement();
+	class WaveDisplacement : public GameComponent
+	{
+	public:
+		GENINSTANCE(WaveDisplacement);
 
-	virtual void init();
-	virtual void update(float const& deltaTime);
-	virtual void preRender();
-	virtual void deserialize(YAML::Node const& compNode);
-private:
-	float m_k = 1.0f;
-	float m_velocity = 1.0f;
-	float m_amplitude = 0.5f;
-	float m_time = 0.0f;
-	Material* m_material;
-};
+		WaveDisplacement() {}
+		~WaveDisplacement() {}
 
+		virtual void init();
+		virtual void update(float const& deltaTime);
+		virtual void preRender();
+		virtual void deserialize(YAML::Node const& compNode);
+	private:
+		float m_k = 1.0f;
+		float m_velocity = 1.0f;
+		float m_amplitude = 0.5f;
+		float m_time = 0.0f;
+		Material* m_material;
+	};
+
+}

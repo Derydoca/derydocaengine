@@ -21,7 +21,7 @@ private:
 	bool isShaderSourceUpdated();
 	bool m_usingMeshRenderer = true;
 	MeshRenderer* m_meshRenderer;
-	TessellatedMeshRenderer* m_tessMeshRenderer;
+	DerydocaEngine::Ext::TessellatedMeshRenderer* m_tessMeshRenderer;
 	bool m_vertexShaderExists = false;
 	bool m_fragmentShaderExists = false;
 	bool m_geometryShaderExists = false;

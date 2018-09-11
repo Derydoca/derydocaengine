@@ -3,32 +3,37 @@
 #include "Keyboard.h"
 #include "Material.h"
 
-class ParticleFountain : public GameComponent
+namespace DerydocaEngine::Ext
 {
-public:
-	GENINSTANCE(ParticleFountain);
 
-	ParticleFountain();
-	~ParticleFountain();
+	class ParticleFountain : public GameComponent
+	{
+	public:
+		GENINSTANCE(ParticleFountain);
 
-	virtual void init();
-	virtual void update(float const& deltaTime);
-	virtual void preRender();
-	virtual void deserialize(YAML::Node const& compNode);
-	virtual void render(MatrixStack* const& matrixStack);
-private:
-	int m_numParticles = 1000;
-	Material* m_material;
-	float m_time = 0.0f;
-	float m_lifetime = 5.0f;
-	float m_velocityMin = 1.25f;
-	float m_velocityMax = 1.5f;
-	float m_angle = 6.0f;
-	GLuint m_vao;
-	GLuint m_initVel;
-	GLuint m_startTime;
-	Keyboard* m_keyboard;
+		ParticleFountain();
+		~ParticleFountain();
 
-	void initBuffers();
-	float randFloat();
-};
+		virtual void init();
+		virtual void update(float const& deltaTime);
+		virtual void preRender();
+		virtual void deserialize(YAML::Node const& compNode);
+		virtual void render(MatrixStack* const& matrixStack);
+	private:
+		int m_numParticles = 1000;
+		Material* m_material;
+		float m_time = 0.0f;
+		float m_lifetime = 5.0f;
+		float m_velocityMin = 1.25f;
+		float m_velocityMax = 1.5f;
+		float m_angle = 6.0f;
+		GLuint m_vao;
+		GLuint m_initVel;
+		GLuint m_startTime;
+		Keyboard* m_keyboard;
+
+		void initBuffers();
+		float randFloat();
+	};
+
+}

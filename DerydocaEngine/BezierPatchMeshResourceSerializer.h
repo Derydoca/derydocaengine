@@ -1,12 +1,17 @@
 #pragma once
 #include "MaterialResourceSerializer.h"
-class BezierPatchMeshResourceSerializer : public MaterialResourceSerializer
+
+namespace DerydocaEngine::Ext
 {
-public:
-	BezierPatchMeshResourceSerializer();
-	~BezierPatchMeshResourceSerializer();
 
-	void* deserialize(Resource* const& resource);
-	ResourceType getResourceType();
-};
+	class BezierPatchMeshResourceSerializer : public MaterialResourceSerializer
+	{
+	public:
+		BezierPatchMeshResourceSerializer() {}
+		~BezierPatchMeshResourceSerializer() {}
 
+		void* deserialize(Resource* const& resource);
+		ResourceType getResourceType();
+	};
+
+}

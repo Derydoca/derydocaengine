@@ -3,19 +3,23 @@
 #include "GameComponent.h"
 #include "Material.h"
 
-class ShaderSubroutineSwitcher : public GameComponent
+namespace DerydocaEngine::Ext
 {
-public:
-	GENINSTANCE(ShaderSubroutineSwitcher);
 
-	ShaderSubroutineSwitcher();
-	~ShaderSubroutineSwitcher();
+	class ShaderSubroutineSwitcher : public GameComponent
+	{
+	public:
+		GENINSTANCE(ShaderSubroutineSwitcher);
 
-	virtual void init();
-	virtual void deserialize(YAML::Node const& compNode);
-private:
-	void setSubroutine(GLuint const& program, std::string const& subroutineName);
+		ShaderSubroutineSwitcher() {}
+		~ShaderSubroutineSwitcher() {}
 
-	std::string m_subroutineName;
-};
+		virtual void init();
+		virtual void deserialize(YAML::Node const& compNode);
+	private:
+		void setSubroutine(GLuint const& program, std::string const& subroutineName);
 
+		std::string m_subroutineName;
+	};
+
+}

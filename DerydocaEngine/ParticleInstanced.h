@@ -3,34 +3,38 @@
 #include "Mesh.h"
 #include "Keyboard.h"
 
-class ParticleInstanced : public GameComponent
+namespace DerydocaEngine::Ext
 {
-public:
-	GENINSTANCE(ParticleInstanced);
 
-	ParticleInstanced();
-	~ParticleInstanced();
+	class ParticleInstanced : public GameComponent
+	{
+	public:
+		GENINSTANCE(ParticleInstanced);
 
-	virtual void init();
-	virtual void update(float const& deltaTime);
-	virtual void preRender();
-	virtual void deserialize(YAML::Node const& compNode);
-	virtual void render(MatrixStack* const& matrixStack);
-private:
-	int m_numParticles = 1000;
-	Material* m_material;
-	float m_time = 0.0f;
-	float m_lifetime = 5.0f;
-	float m_velocityMin = 1.25f;
-	float m_velocityMax = 1.5f;
-	float m_angle = 6.0f;
-	glm::vec3 m_gravity = glm::vec3(0.0f, -0.2f, 0.0f);
-	GLuint m_initVel;
-	GLuint m_startTime;
-	Keyboard* m_keyboard;
-	Mesh* m_mesh;
+		ParticleInstanced();
+		~ParticleInstanced();
 
-	void initBuffers();
-	float randFloat();
-};
+		virtual void init();
+		virtual void update(float const& deltaTime);
+		virtual void preRender();
+		virtual void deserialize(YAML::Node const& compNode);
+		virtual void render(MatrixStack* const& matrixStack);
+	private:
+		int m_numParticles = 1000;
+		Material* m_material;
+		float m_time = 0.0f;
+		float m_lifetime = 5.0f;
+		float m_velocityMin = 1.25f;
+		float m_velocityMax = 1.5f;
+		float m_angle = 6.0f;
+		glm::vec3 m_gravity = glm::vec3(0.0f, -0.2f, 0.0f);
+		GLuint m_initVel;
+		GLuint m_startTime;
+		Keyboard* m_keyboard;
+		Mesh* m_mesh;
 
+		void initBuffers();
+		float randFloat();
+	};
+
+}

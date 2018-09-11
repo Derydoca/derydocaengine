@@ -5,49 +5,45 @@
 #include "Shader.h"
 #include <iostream>
 
-EdgeDetectionFilter::EdgeDetectionFilter()
+namespace DerydocaEngine::Ext
 {
-}
 
-
-EdgeDetectionFilter::~EdgeDetectionFilter()
-{
-}
-
-void EdgeDetectionFilter::init()
-{
-	m_postProcessCamera = getComponent<Camera>();
-	if (m_postProcessCamera == nullptr)
+	void EdgeDetectionFilter::init()
 	{
-		std::cout << "No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.\n";
-		return;
+		m_postProcessCamera = getComponent<Camera>();
+		if (m_postProcessCamera == nullptr)
+		{
+			std::cout << "No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.\n";
+			return;
+		}
+
+		updateShader();
 	}
 
-	updateShader();
-}
-
-void EdgeDetectionFilter::deserialize(YAML::Node const& compNode)
-{
-	YAML::Node edgeThresholdNode = compNode["edgeThreshold"];
-	if (edgeThresholdNode)
+	void EdgeDetectionFilter::deserialize(YAML::Node const& compNode)
 	{
-		m_edgeThreshold = edgeThresholdNode.as<float>();
+		YAML::Node edgeThresholdNode = compNode["edgeThreshold"];
+		if (edgeThresholdNode)
+		{
+			m_edgeThreshold = edgeThresholdNode.as<float>();
+		}
+
 	}
 
-}
-
-void EdgeDetectionFilter::update(float const& deltaTime)
-{
-	updateShader();
-}
-
-void EdgeDetectionFilter::updateShader()
-{
-	Shader* shader = m_postProcessCamera->getPostProcessShader();
-	if (shader == nullptr)
+	void EdgeDetectionFilter::update(float const& deltaTime)
 	{
-		return;
+		updateShader();
 	}
 
-	shader->setFloat("EdgeThreshold", m_edgeThreshold);
+	void EdgeDetectionFilter::updateShader()
+	{
+		Shader* shader = m_postProcessCamera->getPostProcessShader();
+		if (shader == nullptr)
+		{
+			return;
+		}
+
+		shader->setFloat("EdgeThreshold", m_edgeThreshold);
+	}
+
 }

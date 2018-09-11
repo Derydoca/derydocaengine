@@ -2,22 +2,26 @@
 #include "GameComponent.h"
 #include "Camera.h"
 
-class GaussianBlurFilter : public GameComponent
+namespace DerydocaEngine::Ext
 {
-public:
-	GENINSTANCE(GaussianBlurFilter);
 
-	GaussianBlurFilter();
-	~GaussianBlurFilter();
+	class GaussianBlurFilter : public GameComponent
+	{
+	public:
+		GENINSTANCE(GaussianBlurFilter);
 
-	virtual void init();
-	virtual void deserialize(YAML::Node const& compNode);
-	virtual void update(float const& deltaTime);
-private:
-	Camera* m_postProcessCamera;
-	float m_weights [5];
+		GaussianBlurFilter() {}
+		~GaussianBlurFilter() {}
 
-	float gauss(float const& x, float const& sigma2);
-	void updateShader();
-};
+		virtual void init();
+		virtual void deserialize(YAML::Node const& compNode);
+		virtual void update(float const& deltaTime);
+	private:
+		Camera * m_postProcessCamera;
+		float m_weights[5];
 
+		float gauss(float const& x, float const& sigma2);
+		void updateShader();
+	};
+
+}

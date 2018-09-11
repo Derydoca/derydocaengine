@@ -2,21 +2,25 @@
 #include "GameComponent.h"
 #include "Keyboard.h"
 
-class MultisampleSwitch : public GameComponent
+namespace DerydocaEngine::Ext
 {
-public:
-	GENINSTANCE(MultisampleSwitch);
 
-	MultisampleSwitch();
-	~MultisampleSwitch();
+	class MultisampleSwitch : public GameComponent
+	{
+	public:
+		GENINSTANCE(MultisampleSwitch);
 
-	virtual void init();
-	virtual void update(float const& deltaTime);
+		MultisampleSwitch();
+		~MultisampleSwitch();
 
-	void setEnableMultisample(bool const& enable);
-private:
-	Keyboard* m_keyboard;
-	bool m_enableMultisample;
-	bool m_msaaSupported;
-};
+		virtual void init();
+		virtual void update(float const& deltaTime);
 
+		void setEnableMultisample(bool const& enable);
+	private:
+		Keyboard * m_keyboard;
+		bool m_enableMultisample;
+		bool m_msaaSupported;
+	};
+
+}

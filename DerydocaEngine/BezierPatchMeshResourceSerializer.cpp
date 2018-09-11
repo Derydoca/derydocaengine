@@ -2,22 +2,19 @@
 #include "BezierPatchMeshFileLoader.h"
 #include "Resource.h"
 
-BezierPatchMeshResourceSerializer::BezierPatchMeshResourceSerializer()
+namespace DerydocaEngine::Ext
 {
-}
 
-BezierPatchMeshResourceSerializer::~BezierPatchMeshResourceSerializer()
-{
-}
+	void * BezierPatchMeshResourceSerializer::deserialize(Resource * const& resource)
+	{
+		BezierPatchMeshFileLoader loader;
+		BezierPatchMesh* mesh = loader.Load(resource->getSourceFilePath().c_str());
+		return mesh;
+	}
 
-void * BezierPatchMeshResourceSerializer::deserialize(Resource * const& resource)
-{
-	BezierPatchMeshFileLoader loader;
-	BezierPatchMesh* mesh = loader.Load(resource->getSourceFilePath().c_str());
-	return mesh;
-}
+	ResourceType BezierPatchMeshResourceSerializer::getResourceType()
+	{
+		return ResourceType::BezierPatchMeshResourceType;
+	}
 
-ResourceType BezierPatchMeshResourceSerializer::getResourceType()
-{
-	return ResourceType::BezierPatchMeshResourceType;
 }

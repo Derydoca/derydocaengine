@@ -313,7 +313,7 @@ void Mesh::ProcessAiMesh(aiMesh * const& mesh, int const& uvIndex)
 	{
 		if (m_flags & MeshFlags::load_adjacent)
 		{
-			MeshAdjacencyCalculator mac;
+			DerydocaEngine::Ext::MeshAdjacencyCalculator mac;
 			m_numIndices = mesh->mNumFaces * 3 * 2;
 			delete[] m_indices;
 			m_indices = new unsigned int[m_numIndices];

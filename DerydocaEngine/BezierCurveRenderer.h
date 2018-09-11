@@ -4,24 +4,28 @@
 #include "glm\glm.hpp"
 #include "material.h"
 
-class BezierCurveRenderer : public GameComponent
+namespace DerydocaEngine::Ext
 {
-public:
-	GENINSTANCE(BezierCurveRenderer);
 
-	BezierCurveRenderer();
-	~BezierCurveRenderer();
+	class BezierCurveRenderer : public GameComponent
+	{
+	public:
+		GENINSTANCE(BezierCurveRenderer);
 
-	virtual void init();
-	virtual void deserialize(YAML::Node const& compNode);
-	void render(MatrixStack* const& matrixStack);
-private:
-	float m_controlPoints[8];
-	GLuint m_vao;
-	GLuint m_vbo;
-	Material* m_material;
-	int m_numSegments = 8;
-	int m_numStrips = 1;
-	Color m_lineColor;
-};
+		BezierCurveRenderer();
+		~BezierCurveRenderer();
 
+		virtual void init();
+		virtual void deserialize(YAML::Node const& compNode);
+		void render(MatrixStack* const& matrixStack);
+	private:
+		float m_controlPoints[8];
+		GLuint m_vao;
+		GLuint m_vbo;
+		Material* m_material;
+		int m_numSegments = 8;
+		int m_numStrips = 1;
+		Color m_lineColor;
+	};
+
+}

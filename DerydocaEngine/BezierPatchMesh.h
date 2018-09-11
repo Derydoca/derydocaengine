@@ -1,21 +1,26 @@
 #pragma once
-class BezierPatchMesh
+
+namespace DerydocaEngine::Ext
 {
-public:
-	const static int FLOATS_PER_VECTOR = 3;
-	const static int VECTORS_PER_PATCH = 16;
-	const static int FLOATS_PER_PATCH = VECTORS_PER_PATCH * FLOATS_PER_VECTOR;
 
-	BezierPatchMesh();
-	~BezierPatchMesh();
+	class BezierPatchMesh
+	{
+	public:
+		const static int FLOATS_PER_VECTOR = 3;
+		const static int VECTORS_PER_PATCH = 16;
+		const static int FLOATS_PER_PATCH = VECTORS_PER_PATCH * FLOATS_PER_VECTOR;
 
-	int getNumPatches() const { return m_numPatches; }
-	void loadPatchData(int const& numPatches, float* const& patchData);
-	float* getPatchData() const { return m_patchData; }
-private:
-	int m_numPatches;
-	float* m_patchData;
+		BezierPatchMesh();
+		~BezierPatchMesh();
 
-	void clearPatchData();
-};
+		int getNumPatches() const { return m_numPatches; }
+		void loadPatchData(int const& numPatches, float* const& patchData);
+		float* getPatchData() const { return m_patchData; }
+	private:
+		int m_numPatches;
+		float* m_patchData;
 
+		void clearPatchData();
+	};
+
+}
