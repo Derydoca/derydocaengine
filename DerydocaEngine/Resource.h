@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include "ResourceType.h"
 #include <boost/uuid/uuid.hpp>
+#include "ResourceType.h"
 
 struct Resource
 {

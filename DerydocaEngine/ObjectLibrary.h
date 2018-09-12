@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <map>
-#include "Resource.h"
 #include <boost/uuid/uuid.hpp>
+#include "Resource.h"
 
 class GameComponent;
 class ResourceTypeSerializer;

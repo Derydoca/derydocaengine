@@ -1,11 +1,10 @@
 #pragma once
+#include <iostream>
 #include "ResourceType.h"
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
 #include "ObjectLibrary.h"
-#include <iostream>
-
-struct Resource;
+#include "Resource.h"
 
 class ResourceSerializer
 {
