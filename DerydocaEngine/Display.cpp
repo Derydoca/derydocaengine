@@ -3,6 +3,9 @@
 #include "InputManager.h"
 #include "Camera.h"
 
+#include <sdl2/SDL.h>
+#undef main
+
 Display::Display(int const& width, int const& height, std::string const& title)
 {
 	DisplayManager::getInstance().addDisplay(this);

@@ -1,10 +1,9 @@
 #pragma once
-
-#include <sdl2/SDL.h>
-#undef main
 #include <string>
 #include <GL/glew.h>
 
+typedef void *SDL_GLContext;
+struct SDL_Window;
 class Camera;
 class Keyboard;
 
