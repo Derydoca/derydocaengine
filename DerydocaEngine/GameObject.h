@@ -1,12 +1,12 @@
 #pragma once
-
 #include <vector>
 #include "Transform.h"
-#include "GameComponent.h"
-#include "Camera.h"
-#include "MatrixStack.h"
-#include "Material.h"
-#include "Projection.h"
+
+struct Projection;
+struct Transform;
+class GameComponent;
+class MatrixStack;
+class Material;
 
 class GameObject
 {

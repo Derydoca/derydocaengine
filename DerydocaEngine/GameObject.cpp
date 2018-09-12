@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "GameComponent.h"
+#include "MatrixStack.h"
 
 GameObject::GameObject()
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include <yaml-cpp\yaml.h>
+#include <boost\uuid\uuid.hpp>
 #include "GameObject.h"
 
 class SceneObject

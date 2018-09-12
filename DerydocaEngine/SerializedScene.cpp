@@ -5,6 +5,7 @@
 #include "YamlTools.h"
 #include "GameComponentFactory.h"
 #include <iostream>
+#include "GameComponent.h"
 
 SerializedScene::SerializedScene()
 {
