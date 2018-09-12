@@ -2,7 +2,8 @@
 
 #include <string>
 #include <GL/glew.h>
-#include "TextureParameters.h"
+
+struct TextureParameters;
 
 class Texture
 {

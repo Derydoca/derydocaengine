@@ -1,5 +1,5 @@
 #pragma once
-#include "GL\glew.h"
+#include <GL\glew.h>
 #include "Texture.h"
 
 class RenderTexture : public Texture

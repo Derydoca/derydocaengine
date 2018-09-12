@@ -1,9 +1,9 @@
 #pragma once
 #include <map>
-#include "Color.h"
-#include "glm\glm.hpp"
+#include <glm\glm.hpp>
 #include <gl\glew.h>
 
+struct Color;
 class Shader;
 class Texture;
 class RenderTexture;

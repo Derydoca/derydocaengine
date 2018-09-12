@@ -2,6 +2,7 @@
 #include <cassert>
 #include <iostream>
 #include "stb_image.h"
+#include "TextureParameters.h"
 
 Texture::Texture()
 {
