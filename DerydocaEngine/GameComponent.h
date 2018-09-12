@@ -1,10 +1,10 @@
 #pragma once
 
-#include "YamlTools.h"
-#include "ObjectLibrary.h"
 #include <boost\uuid\uuid.hpp>
-#include <vector>
 #include <iostream>
+#include <vector>
+#include "ObjectLibrary.h"
+#include "YamlTools.h"
 
 struct Projection;
 struct Resource;
