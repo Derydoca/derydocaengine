@@ -1,17 +1,17 @@
 #pragma once
-
-#include "Transform.h"
-#include "GameComponent.h"
-#include "Skybox.h"
-#include "Color.h"
-#include "Material.h"
-#include "RenderTexture.h"
-#include "Display.h"
-#include "Rectangle.h"
-#include "Projection.h"
-#include "MatrixStack.h"
-#include <yaml-cpp/yaml.h>
 #include "GameObject.h"
+
+#include <yaml-cpp/yaml.h>
+#include "Color.h"
+#include "GameComponent.h"
+#include "Material.h"
+#include "MatrixStack.h"
+#include "Projection.h"
+#include "RenderTexture.h"
+#include "Rectangle.h"
+#include "Skybox.h"
+
+class Display;
 
 /*
 Object used for rendering the world to screen.
@@ -72,23 +72,10 @@ public:
 	*/
 	void renderRoot(GameObject* const& root);
 
-	void setDisplay(Display* const& display)
-	{
-		if (m_display != nullptr)
-		{
-			m_display->unregisterCamera();
-		}
-
-		m_display = display;
-
-		if (m_display != nullptr)
-		{
-			m_display->registerCamera(this);
-		}
-	}
+	void setDisplay(Display* const& display);
 	Display* getDisplay() { return m_display; }
-	float getDisplayWidth() { return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)m_display->getWidth(); }
-	float getDisplayHeight() { return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)m_display->getHeight(); }
+	float getDisplayWidth();
+	float getDisplayHeight();
 	void setRenderTexture(RenderTexture* const& renderTexture) { m_renderTexture = renderTexture; }
 	void init();
 	void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
