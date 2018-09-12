@@ -1,7 +1,5 @@
 #pragma once
-#include "Transform.h"
 #include "glm/glm.hpp"
-#include "glm/geometric.hpp"
 
 /* Types of projection modes */
 enum ProjectionMode {
