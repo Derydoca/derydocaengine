@@ -2,595 +2,487 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="WasdMover.cpp">
-      <Filter>Game Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenshotUtil.cpp">
-      <Filter>Game Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Rotator.cpp">
-      <Filter>Game Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Game Components</Filter>
-    </ClCompile>
     <ClCompile Include="ButtonState.cpp">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClCompile>
     <ClCompile Include="Clock.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="Display.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="EngineSettings.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="Skybox.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTexture.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugVisualizer.cpp">
-      <Filter>Engine\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowMap.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Engine\Rendering</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardMover.cpp">
-      <Filter>Game Components</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialRefresher.cpp">
-      <Filter>Game Components</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
-      <Filter>Engine\Resources</Filter>
+      <Filter>To Be Namespaced\Resources</Filter>
     </ClCompile>
     <ClCompile Include="ObjectLibrary.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="StringUtils.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="SerializedScene.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="FileTypeSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="FileSerializerLibrary.cpp">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="MaterialResourceSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="MeshResourceSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="ResourceSerializerLibrary.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="GameComponentFactory.cpp">
-      <Filter>Game Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="TextureResourceSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="CubemapResourceSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="Editor.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="ShaderResourceSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderLibrary.cpp">
-      <Filter>Engine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="BezierPatchMeshFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="TexturePacker.cpp">
-      <Filter>TexturePacker</Filter>
+      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClCompile>
     <ClCompile Include="TexturePackerImage.cpp">
-      <Filter>TexturePacker</Filter>
+      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClCompile>
     <ClCompile Include="TexturePackerTextureData.cpp">
-      <Filter>TexturePacker</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="FontFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="RasterFontFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
-      <Filter>Game Components</Filter>
+      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClCompile>
     <ClCompile Include="FontFace.cpp">
-      <Filter>Engine\UI</Filter>
+      <Filter>To Be Namespaced\UI</Filter>
     </ClCompile>
     <ClCompile Include="BezierCurveRenderer.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="BezierPatchMesh.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="BezierPatchMeshFileLoader.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="BezierPatchMeshResourceSerializer.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="BloomFilter.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="EdgeDetectionFilter.cpp">
-      <Filter>Shader Cookbook</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameStats.cpp">
-      <Filter>Game Components</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="GammaCorrectionFilter.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="GaussianBlurFilter.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="ImageProjector.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="MeshAdjacencyCalculator.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="MultisampleSwitch.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="NightVisionFilter.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="NoiseTexture.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="ParticleContinuousFountain.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="ParticleFountain.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="ParticleInstanced.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="WaveDisplacement.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="WoodSliceTexture.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="ShaderSubroutineSwitcher.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="TessellatingQuad.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="TessellatedMeshRenderer.cpp">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClCompile>
     <ClCompile Include="IntRect.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="IntRectangle.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="FileType.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="CommandLineArgs.cpp">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheet.cpp">
-      <Filter>Engine\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="RendererComponent.cpp">
-      <Filter>Game Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Game Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheetFileSerializer.cpp">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced\UI</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheetResourceSerializer.cpp">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameStats.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardMover.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialRefresher.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererComponent.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Rotator.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenshotUtil.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WasdMover.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponentFactory.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugVisualizer.cpp">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="BezierPatchMeshFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSerializerLibrary.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTypeSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="FontFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="RasterFontFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheetFileSerializer.cpp">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLibrary.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>To Be Namespaced</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>To Be Namespaced</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WasdMover.h">
-      <Filter>Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenshotUtil.h">
-      <Filter>Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Rotator.h">
-      <Filter>Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Game Components</Filter>
-    </ClInclude>
     <ClInclude Include="ButtonState.h">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
     <ClInclude Include="Key.h">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
     <ClInclude Include="Keyboard.h">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
     <ClInclude Include="Mouse.h">
-      <Filter>Input</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
     <ClInclude Include="Clock.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="MatrixStack.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Display.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="GameComponent.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="EngineSettings.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Skybox.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="LinkedListNode.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="YamlTools.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderTexture.h">
-      <Filter>Engine\Rendering</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Rectangle.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugLine.h">
-      <Filter>Engine\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugVisualizer.h">
-      <Filter>Engine\Debug</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="GLError.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadowMap.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardMover.h">
-      <Filter>Game Components</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="LightManager.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialRefresher.h">
-      <Filter>Game Components</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="MeshResource.h">
-      <Filter>Engine\Resources</Filter>
+      <Filter>To Be Namespaced\Resources</Filter>
     </ClInclude>
     <ClInclude Include="ResourceType.h">
-      <Filter>Engine\Resources</Filter>
+      <Filter>To Be Namespaced\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Engine\Resources</Filter>
+      <Filter>To Be Namespaced\Resources</Filter>
     </ClInclude>
     <ClInclude Include="ObjectLibrary.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="StringUtils.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="SerializedScene.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="SceneObject.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="FileTypeSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="FileSerializerLibrary.h">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="ResourceSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="MaterialResourceSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="MeshResourceSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceSerializerLibrary.h">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameComponentFactory.h">
-      <Filter>Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="DisplayManager.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="TextureResourceSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="CubemapResourceSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="CubemapResource.h">
-      <Filter>Engine\Resources</Filter>
+      <Filter>To Be Namespaced\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Editor.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="ShaderResource.h">
-      <Filter>Engine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced\Resources</Filter>
     </ClInclude>
     <ClInclude Include="ShaderResourceSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderLibrary.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="BezierPatchMeshFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="TexturePacker.h">
-      <Filter>TexturePacker</Filter>
+      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClInclude>
     <ClInclude Include="TexturePackerImage.h">
-      <Filter>TexturePacker</Filter>
+      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClInclude>
     <ClInclude Include="TexturePackerTextureData.h">
-      <Filter>TexturePacker</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="FontFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="RasterFontFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextRenderer.h">
-      <Filter>Game Components</Filter>
+      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClInclude>
     <ClInclude Include="FontFace.h">
-      <Filter>Engine\UI</Filter>
+      <Filter>To Be Namespaced\UI</Filter>
     </ClInclude>
     <ClInclude Include="BezierCurveRenderer.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="BezierPatchMesh.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="BezierPatchMeshFileLoader.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="BezierPatchMeshResourceSerializer.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="BloomFilter.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="EdgeDetectionFilter.h">
-      <Filter>Shader Cookbook</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameStats.h">
-      <Filter>Game Components</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="GammaCorrectionFilter.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="GaussianBlurFilter.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="ImageProjector.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="MeshAdjacencyCalculator.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="MultisampleSwitch.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="NightVisionFilter.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="NoiseTexture.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="ParticleContinuousFountain.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="ParticleFountain.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="ParticleInstanced.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="WoodSliceTexture.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="WaveDisplacement.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="ShaderSubroutineSwitcher.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="TessellatingQuad.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="TessellatedMeshRenderer.h">
-      <Filter>Shader Cookbook</Filter>
+      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshFlags.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Projection.h">
-      <Filter>Engine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderPass.h">
-      <Filter>Engine\Rendering</Filter>
+      <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
     <ClInclude Include="IntRect.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="IntRectangle.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="FileType.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="TextureParameters.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="CommandLineArgs.h">
-      <Filter>Engine</Filter>
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Third Party</Filter>
@@ -599,60 +491,168 @@
       <Filter>Third Party</Filter>
     </ClInclude>
     <ClInclude Include="SpriteReference.h">
-      <Filter>Engine\UI</Filter>
+      <Filter>To Be Namespaced\UI</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheet.h">
-      <Filter>Engine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="RendererComponent.h">
-      <Filter>Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Game Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheetFileSerializer.h">
-      <Filter>Engine\FileSerializers</Filter>
+      <Filter>To Be Namespaced\UI</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheetResourceSerializer.h">
-      <Filter>Engine\ResourceSerializers</Filter>
+      <Filter>To Be Namespaced\ResourceSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameStats.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WasdMover.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardMover.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialRefresher.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererComponent.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotator.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenshotUtil.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponentFactory.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugLine.h">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugVisualizer.h">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="BezierPatchMeshFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSerializerLibrary.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTypeSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="FontFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterFontFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheetFileSerializer.h">
+      <Filter>DerydocaEngine\FileSerializers</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayManager.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFlags.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="Projection.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderPass.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTexture.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderLibrary.h">
+      <Filter>To Be Namespaced</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>To Be Namespaced</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Game Components">
-      <UniqueIdentifier>{6de40de1-1620-4246-9a36-f184d4e2e99a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{9e9a0417-56b9-440e-8db7-c98e7c5dc0ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{d5f7487a-6aba-493d-9dc7-f8f6a078d052}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Rendering">
-      <UniqueIdentifier>{bdeaa5cf-a63b-493b-9757-72bcfc291a9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Debug">
-      <UniqueIdentifier>{927235fe-be96-458a-8f36-9cbd90f48ec7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Resources">
-      <UniqueIdentifier>{39a6eafb-ac19-4fe7-93a3-831a7932737e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\FileSerializers">
-      <UniqueIdentifier>{2986fdc5-b7d0-41f8-ac17-50fcd646a29b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ResourceSerializers">
-      <UniqueIdentifier>{7eac81a0-a90a-4d89-85dd-89c2d08d44f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TexturePacker">
-      <UniqueIdentifier>{792a8148-58f8-4c2a-a2c9-68f368699d87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\UI">
-      <UniqueIdentifier>{a84ac1a5-2e0c-4297-a074-986ebec1c8cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shader Cookbook">
-      <UniqueIdentifier>{5b82a275-1631-4c19-b79f-5bc532c894a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Third Party">
       <UniqueIdentifier>{4d0b2468-5cec-4cd5-9860-20bc68f256f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext">
+      <UniqueIdentifier>{5b82a275-1631-4c19-b79f-5bc532c894a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="To Be Namespaced">
+      <UniqueIdentifier>{d5f7487a-6aba-493d-9dc7-f8f6a078d052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="To Be Namespaced\Resources">
+      <UniqueIdentifier>{39a6eafb-ac19-4fe7-93a3-831a7932737e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="To Be Namespaced\ResourceSerializers">
+      <UniqueIdentifier>{7eac81a0-a90a-4d89-85dd-89c2d08d44f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="To Be Namespaced\UI">
+      <UniqueIdentifier>{a84ac1a5-2e0c-4297-a074-986ebec1c8cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="To Be Namespaced\Input">
+      <UniqueIdentifier>{9e9a0417-56b9-440e-8db7-c98e7c5dc0ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="To Be Namespaced\TexturePacker">
+      <UniqueIdentifier>{792a8148-58f8-4c2a-a2c9-68f368699d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine">
+      <UniqueIdentifier>{8a96ec53-358e-4171-8093-2897131244a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Components">
+      <UniqueIdentifier>{f9dca820-4483-4eca-8944-fed01e0d29ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Debug">
+      <UniqueIdentifier>{844921ae-5486-491d-a1db-4d0d749b83bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\FileSerializers">
+      <UniqueIdentifier>{8a7abadd-a412-47d5-9817-5b62b77bfb9c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
