@@ -17,6 +17,7 @@
 #include "ShaderLibrary.h"
 #include <iostream>
 #include <boost\filesystem.hpp>
+#include "Material.h"
 
 int Editor::Run(std::string const& projectPath, std::string const& levelIdentifier)
 {

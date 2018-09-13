@@ -8,6 +8,7 @@
 #include "Shader.h"
 #include "ShaderLibrary.h"
 #include "LightManager.h"
+#include "Material.h"
 
 Camera::Camera()
 {
@@ -165,6 +166,11 @@ void Camera::deserialize(YAML::Node const& node)
 		m_postProcessMaterial = new Material();
 		m_postProcessMaterial->setShader(postProcessingShader);
 	}
+}
+
+Shader * Camera::getPostProcessShader() const
+{
+	return m_postProcessMaterial->getShader();
 }
 
 void Camera::clear()

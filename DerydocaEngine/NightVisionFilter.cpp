@@ -1,5 +1,6 @@
 #include "NightVisionFilter.h"
 #include <iostream>
+#include "Material.h"
 
 namespace DerydocaEngine::Ext
 {

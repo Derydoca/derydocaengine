@@ -4,7 +4,6 @@
 #include <yaml-cpp/yaml.h>
 #include "Color.h"
 #include "GameComponent.h"
-#include "Material.h"
 #include "MatrixStack.h"
 #include "Projection.h"
 #include "RenderTexture.h"
@@ -12,6 +11,8 @@
 #include "Skybox.h"
 
 class Display;
+class Material;
+class Shader;
 
 /*
 Object used for rendering the world to screen.
@@ -88,7 +89,7 @@ public:
 	void setOrthoSize(float const& size);
 	float getOrthoSize(float const& size) { return m_orthoSize; }
 	void deserialize(YAML::Node const& node);
-	Shader* getPostProcessShader() const { return m_postProcessMaterial->getShader(); }
+	Shader* getPostProcessShader() const;
 	Material* getPostProcessMaterial() { return m_postProcessMaterial; }
 	Projection getProjection() const { return m_projection; }
 private:
