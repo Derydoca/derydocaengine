@@ -1,17 +1,18 @@
 #pragma once
 #include "GameObject.h"
 
+#include <GL/glew.h>
 #include <yaml-cpp/yaml.h>
 #include "Color.h"
 #include "GameComponent.h"
 #include "MatrixStack.h"
 #include "Projection.h"
-#include "RenderTexture.h"
 #include "Rectangle.h"
 #include "Skybox.h"
 
 class Display;
 class Material;
+class RenderTexture;
 class Shader;
 
 /*

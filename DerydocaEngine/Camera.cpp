@@ -9,6 +9,7 @@
 #include "ShaderLibrary.h"
 #include "LightManager.h"
 #include "Material.h"
+#include "RenderTexture.h"
 
 Camera::Camera()
 {

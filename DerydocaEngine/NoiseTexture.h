@@ -2,6 +2,8 @@
 #include "GameComponent.h"
 #include "Material.h"
 
+class Texture;
+
 namespace DerydocaEngine::Ext
 {
 

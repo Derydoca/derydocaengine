@@ -2,6 +2,7 @@
 #include <glm/gtc/noise.hpp>
 #include "MeshRenderer.h"
 #include "TextureParameters.h"
+#include "Texture.h"
 
 namespace DerydocaEngine::Ext
 {
