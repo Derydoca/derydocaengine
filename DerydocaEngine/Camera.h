@@ -7,13 +7,14 @@
 #include "GameComponent.h"
 #include "MatrixStack.h"
 #include "Projection.h"
-#include "Rectangle.h"
-#include "Skybox.h"
 
+struct Rectangle;
 class Display;
 class Material;
+class Mesh;
 class RenderTexture;
 class Shader;
+class Skybox;
 
 /*
 Object used for rendering the world to screen.

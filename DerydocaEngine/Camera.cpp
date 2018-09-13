@@ -10,6 +10,9 @@
 #include "LightManager.h"
 #include "Material.h"
 #include "RenderTexture.h"
+#include "Rectangle.h"
+#include "Skybox.h"
+#include "Mesh.h"
 
 Camera::Camera()
 {
