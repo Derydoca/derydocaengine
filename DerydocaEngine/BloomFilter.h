@@ -1,6 +1,7 @@
 #pragma once
 #include "GameComponent.h"
 #include "RenderTexture.h"
+#include "Camera.h"
 
 namespace DerydocaEngine::Ext
 {
@@ -18,7 +19,7 @@ namespace DerydocaEngine::Ext
 		virtual void update(float const& deltaTime);
 	private:
 		float m_lumThresh;
-		Camera* m_postProcessCamera;
+		DerydocaEngine::Components::Camera* m_postProcessCamera;
 		float m_weights[10];
 		RenderTexture* m_blurTex;
 		RenderTexture* m_blurTex2;

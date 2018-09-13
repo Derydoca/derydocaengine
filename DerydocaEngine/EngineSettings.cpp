@@ -42,7 +42,7 @@ EngineSettings::EngineSettings(std::string const& configFilePath)
 		if (renderingModeNode)
 		{
 			int rm = renderingModeNode.as<int>();
-			m_renderingMode = static_cast<Camera::RenderingMode>(rm);
+			m_renderingMode = static_cast<DerydocaEngine::Components::Camera::RenderingMode>(rm);
 		}
 	}
 	else

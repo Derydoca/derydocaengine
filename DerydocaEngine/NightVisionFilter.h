@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(YAML::Node const& compNode);
 	private:
 		float m_radius = 100.0f;
-		Camera* m_postProcessCamera;
+		DerydocaEngine::Components::Camera* m_postProcessCamera;
 	};
 
 }

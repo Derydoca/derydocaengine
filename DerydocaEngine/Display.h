@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
 #include <GL/glew.h>
+#include "Camera.h"
 
 typedef void *SDL_GLContext;
 struct SDL_Window;
-class Camera;
 class Keyboard;
 
 class Display
@@ -23,7 +23,7 @@ public:
 	inline SDL_Window* getWindow() const { return m_window; }
 
 	void bindAsRenderTarget();
-	void registerCamera(Camera* const& cam) { m_camera = cam; }
+	void registerCamera(DerydocaEngine::Components::Camera* const& cam) { m_camera = cam; }
 	void unregisterCamera() { m_camera = nullptr; }
 private:
 	Display(Display const& other) {}
@@ -37,6 +37,6 @@ private:
 	int m_width;
 	int m_height;
 	Keyboard* m_keyboard;
-	Camera* m_camera;
+	DerydocaEngine::Components::Camera* m_camera;
 };
 

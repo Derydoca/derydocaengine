@@ -10,11 +10,11 @@ public:
 		return instance;
 	}
 
-	inline std::list<Camera*> getCameras() { return m_cameras; }
-	void addCamera(Camera* const& camera) { m_cameras.push_back(camera); }
-	void removeCamera(Camera* const& camera) { m_cameras.remove(camera); }
+	inline std::list<DerydocaEngine::Components::Camera*> getCameras() { return m_cameras; }
+	void addCamera(DerydocaEngine::Components::Camera* const& camera) { m_cameras.push_back(camera); }
+	void removeCamera(DerydocaEngine::Components::Camera* const& camera) { m_cameras.remove(camera); }
 	void render(GameObject* const& rootObject);
-	Camera* getCurrentCamera() { return m_currentCamera; }
+	DerydocaEngine::Components::Camera* getCurrentCamera() { return m_currentCamera; }
 
 	void operator=(CameraManager const&) = delete;
 private:
@@ -23,6 +23,6 @@ private:
 
 	CameraManager(CameraManager const&);
 
-	std::list<Camera*> m_cameras;
-	Camera* m_currentCamera;
+	std::list<DerydocaEngine::Components::Camera*> m_cameras;
+	DerydocaEngine::Components::Camera* m_currentCamera;
 };

@@ -20,7 +20,7 @@ public:
 	float getFOV() const { return m_fov; }
 	boost::uuids::uuid getSkyboxId() { return m_skyboxId; }
 	std::string getEngineResourceDirectory() const { return m_engineResourceDirectory; }
-	Camera::RenderingMode getCamRenderMode() { return m_renderingMode; }
+	DerydocaEngine::Components::Camera::RenderingMode getCamRenderMode() { return m_renderingMode; }
 
 	bool isSkyboxDefined() { return m_isSkyboxDefined; }
 private:
@@ -28,7 +28,7 @@ private:
 	int m_height;
 	glm::vec3 m_camPos;
 	float m_fov;
-	Camera::RenderingMode m_renderingMode;
+	DerydocaEngine::Components::Camera::RenderingMode m_renderingMode;
 	boost::uuids::uuid m_skyboxId;
 	bool m_isSkyboxDefined = false;
 	std::string m_engineResourceDirectory;

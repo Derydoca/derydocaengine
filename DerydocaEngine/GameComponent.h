@@ -12,7 +12,6 @@ struct Transform;
 
 class GameObject;
 class MatrixStack;
-class Camera;
 class Material;
 class YAML::Node;
 

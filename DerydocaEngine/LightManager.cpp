@@ -13,7 +13,7 @@ void LightManager::bindLightsToShader(MatrixStack* const& matrixStack, Transform
 	std::list<DerydocaEngine::Components::Light*> lights = getLights(objectTransform);
 
 	// Cache some things
-	Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
+	DerydocaEngine::Components::Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
 	glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
 	glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
 

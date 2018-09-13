@@ -214,7 +214,7 @@ void Shader::update(glm::mat4 const& matrix)
 
 void Shader::updateViaActiveCamera(MatrixStack * const& matrixStack)
 {
-	Camera* camera = CameraManager::getInstance().getCurrentCamera();
+	DerydocaEngine::Components::Camera* camera = CameraManager::getInstance().getCurrentCamera();
 
 	update(matrixStack, camera->getProjection(), camera->getGameObject()->getTransform());
 

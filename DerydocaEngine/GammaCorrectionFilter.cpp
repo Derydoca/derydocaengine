@@ -8,7 +8,7 @@ namespace DerydocaEngine::Ext
 
 	void GammaCorrectionFilter::init()
 	{
-		m_postProcessCamera = getComponent<Camera>();
+		m_postProcessCamera = getComponent<DerydocaEngine::Components::Camera>();
 		if (m_postProcessCamera == nullptr)
 		{
 			std::cout << "No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.\n";

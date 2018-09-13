@@ -26,7 +26,7 @@ namespace DerydocaEngine::Ext
 		}
 		else
 		{
-			Camera* cam = getComponent<Camera>();
+			DerydocaEngine::Components::Camera* cam = getComponent<DerydocaEngine::Components::Camera>();
 			if (cam)
 			{
 				m_material = cam->getPostProcessMaterial();

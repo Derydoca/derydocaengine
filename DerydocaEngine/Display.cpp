@@ -1,7 +1,6 @@
 #include "Display.h"
 #include "DisplayManager.h"
 #include "InputManager.h"
-#include "Camera.h"
 
 #include <sdl2/SDL.h>
 #undef main

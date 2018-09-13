@@ -44,7 +44,7 @@ int Editor::Run(std::string const& projectPath, std::string const& levelIdentifi
 	GameObject* editorCameraObject = new GameObject("__editorCamera");
 	Transform* editorCameraTransform = editorCameraObject->getTransform();
 	editorCameraTransform->setPos(settings->getCamPos());
-	Camera* editorCamera = new Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
+	DerydocaEngine::Components::Camera* editorCamera = new DerydocaEngine::Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
 	editorCamera->setDisplay(display);
 	editorCamera->setRenderingMode(settings->getCamRenderMode());
 	if (settings->isSkyboxDefined())
@@ -57,12 +57,12 @@ int Editor::Run(std::string const& projectPath, std::string const& levelIdentifi
 		skyboxMaterial->setShader(skyboxShader);
 		skyboxMaterial->setTextureSlot(0, skyboxTexture);
 		editorCamera->setSkybox(skyboxMaterial);
-		editorCamera->setClearMode(Camera::ClearMode::SkyboxClear);
+		editorCamera->setClearMode(DerydocaEngine::Components::Camera::ClearMode::SkyboxClear);
 	}
 	else
 	{
 		// By default, clear the screen with a deep red
-		editorCamera->setClearMode(Camera::ClearMode::ColorClear);
+		editorCamera->setClearMode(DerydocaEngine::Components::Camera::ClearMode::ColorClear);
 		editorCamera->setClearColor(Color(0.5, 0, 0));
 	}
 	editorCameraObject->addComponent(editorCamera);

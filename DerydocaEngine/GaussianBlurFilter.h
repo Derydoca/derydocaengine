@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(YAML::Node const& compNode);
 		virtual void update(float const& deltaTime);
 	private:
-		Camera * m_postProcessCamera;
+		DerydocaEngine::Components::Camera * m_postProcessCamera;
 		float m_weights[5];
 
 		float gauss(float const& x, float const& sigma2);

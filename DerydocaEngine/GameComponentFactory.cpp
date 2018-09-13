@@ -70,7 +70,7 @@ void GameComponentFactory::registerInstanceGenerator(std::string const& gameComp
 
 GameComponentFactory::GameComponentFactory()
 {
-	REGINSTANCE(Camera);
+	REGINSTANCE(DerydocaEngine::Components::Camera);
 	REGINSTANCE(DerydocaEngine::Components::MeshRenderer);
 	REGINSTANCE(DerydocaEngine::Components::KeyboardMover);
 	REGINSTANCE(DerydocaEngine::Components::MaterialRefresher);

@@ -11,7 +11,7 @@ CameraManager::~CameraManager()
 
 void CameraManager::render(GameObject* const& rootObject)
 {
-	for each (Camera* cam in m_cameras)
+	for each (DerydocaEngine::Components::Camera* cam in m_cameras)
 	{
 		m_currentCamera = cam;
 		cam->renderRoot(rootObject);

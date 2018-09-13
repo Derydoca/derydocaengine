@@ -18,7 +18,7 @@ namespace DerydocaEngine::Components
 		void render(MatrixStack* const& matrixStack);
 		void renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform);
 		Material* getMaterial() { return m_material; }
-		Camera* getMeshRendererCamera() { return m_meshRendererCamera; }
+		DerydocaEngine::Components::Camera* getMeshRendererCamera() { return m_meshRendererCamera; }
 
 		void deserialize(YAML::Node const& compNode);
 
@@ -28,7 +28,7 @@ namespace DerydocaEngine::Components
 	private:
 		Mesh * m_mesh;
 		Material* m_material;
-		Camera* m_meshRendererCamera;
+		DerydocaEngine::Components::Camera* m_meshRendererCamera;
 	};
 
 }
