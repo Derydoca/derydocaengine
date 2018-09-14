@@ -1,8 +1,13 @@
 #pragma once
 #include <string>
 
-class Editor
+namespace DerydocaEngine::Execution
 {
-public:
-	int Run(std::string const& projectPath, std::string const& scenePath);
-};
+
+	class Editor
+	{
+	public:
+		int Run(std::string const& projectPath, std::string const& scenePath);
+	};
+
+}

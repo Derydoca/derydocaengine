@@ -155,9 +155,6 @@
     <ClCompile Include="FileType.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="CommandLineArgs.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteSheet.cpp">
       <Filter>To Be Namespaced\UI</Filter>
     </ClCompile>
@@ -268,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="Clock.cpp">
       <Filter>DerydocaEngine\Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandLineArgs.cpp">
+      <Filter>DerydocaEngine\Execution</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -478,9 +478,6 @@
     <ClInclude Include="Rect.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="CommandLineArgs.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Third Party</Filter>
     </ClInclude>
@@ -616,6 +613,9 @@
     <ClInclude Include="Clock.h">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClInclude>
+    <ClInclude Include="CommandLineArgs.h">
+      <Filter>DerydocaEngine\Execution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -656,6 +656,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Timing">
       <UniqueIdentifier>{8e73d9d7-2b1f-4b22-b157-6dae032dbd4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Execution">
+      <UniqueIdentifier>{6381d05b-6d2d-4058-8429-6216f7abf7cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
