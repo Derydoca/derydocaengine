@@ -18,7 +18,7 @@ void * MeshResourceSerializer::deserialize(Resource * const& resource)
 	MeshResource* mr = (MeshResource*)resource;
 	auto file = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-	Mesh* m = new Mesh();
+	DerydocaEngine::Rendering::Mesh* m = new DerydocaEngine::Rendering::Mesh();
 	m->setFlags(mr->getFlags());
 	m->loadFromFile(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
 

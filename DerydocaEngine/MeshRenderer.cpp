@@ -12,7 +12,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	MeshRenderer::MeshRenderer(Mesh* const& mesh, Rendering::Material* const& material) :
+	MeshRenderer::MeshRenderer(Rendering::Mesh* const& mesh, Rendering::Material* const& material) :
 		m_mesh(mesh),
 		m_material(material)
 	{
@@ -27,7 +27,7 @@ namespace DerydocaEngine::Components
 		auto material = getResourceObject<Rendering::Material>(compNode, "Material");
 		setMaterial(material);
 
-		auto mesh = getResourceObject<Mesh>(compNode, "Mesh");
+		auto mesh = getResourceObject<Rendering::Mesh>(compNode, "Mesh");
 		setMesh(mesh);
 
 		YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];

@@ -1,6 +1,8 @@
 #pragma once
 
-class Mesh;
+namespace DerydocaEngine::Rendering {
+	class Mesh;
+}
 
 class Skybox
 {
@@ -9,10 +11,10 @@ public:
 	Skybox(float const& size);
 	~Skybox();
 
-	Mesh* getMesh() const { return m_mesh; };
+	DerydocaEngine::Rendering::Mesh* getMesh() const { return m_mesh; };
 private:
 	void buildMesh(float const& size);
 
-	Mesh* m_mesh;
+	DerydocaEngine::Rendering::Mesh* m_mesh;
 };
 

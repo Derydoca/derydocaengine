@@ -10,8 +10,10 @@
 
 struct Rectangle;
 class Display;
-class DerydocaEngine::Rendering::Material;
-class Mesh;
+namespace DerydocaEngine::Rendering {
+	class Material;
+	class Mesh;
+}
 class RenderTexture;
 class Shader;
 class Skybox;
@@ -108,7 +110,7 @@ namespace DerydocaEngine::Components
 		RenderTexture* m_renderTexture;
 		Display* m_display;
 		Rectangle* m_displayRect;
-		Mesh* m_quad;
+		Rendering::Mesh* m_quad;
 		Rendering::Material* m_postProcessMaterial;
 		float m_orthoSize = 10.0f;
 		GLuint m_deferredFBO;

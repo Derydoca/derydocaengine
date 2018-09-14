@@ -331,7 +331,7 @@ void Shader::setSubPasses(GLuint const& program, RenderPass* const& renderPasses
 	}
 }
 
-void Shader::renderMesh(Mesh * const& mesh, RenderTexture* const& m_renderTexture)
+void Shader::renderMesh(DerydocaEngine::Rendering::Mesh * const& mesh, RenderTexture* const& m_renderTexture)
 {
 	if (m_numPasses <= 0)
 	{

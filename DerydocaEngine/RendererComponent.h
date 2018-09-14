@@ -15,9 +15,9 @@ namespace DerydocaEngine::Components
 		void setMaterial(Rendering::Material* const& material) { m_material = material; }
 	protected:
 		void updateMesh();
-		void markComponentAsDirty(MeshComponents const& component)
+		void markComponentAsDirty(Rendering::MeshComponents const& component)
 		{
-			m_dirtyComponents = (MeshComponents)(m_dirtyComponents | component);
+			m_dirtyComponents = (Rendering::MeshComponents)(m_dirtyComponents | component);
 		}
 
 		void render(MatrixStack* const& matrixStack);
@@ -36,9 +36,9 @@ namespace DerydocaEngine::Components
 		virtual unsigned int generateNumIndices() { return 0; }
 
 	private:
-		Mesh * m_mesh;
+		Rendering::Mesh * m_mesh;
 		Rendering::Material * m_material;
-		MeshComponents m_dirtyComponents;
+		Rendering::MeshComponents m_dirtyComponents;
 		glm::vec3* m_vertices = nullptr;
 		glm::vec3* m_tangents = nullptr;
 		glm::vec3* m_bitangents = nullptr;

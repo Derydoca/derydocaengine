@@ -59,7 +59,7 @@ public:
 
 	void setSubPasses(GLuint const& program, RenderPass* const& renderPasses, int const& numPasses);
 
-	void renderMesh(Mesh* const& mesh, RenderTexture* const& renderTexture);
+	void renderMesh(DerydocaEngine::Rendering::Mesh* const& mesh, RenderTexture* const& renderTexture);
 private:
 	static const unsigned int NUM_SHADERS = 5;
 	Shader(Shader const& other) {}

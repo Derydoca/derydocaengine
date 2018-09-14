@@ -53,7 +53,7 @@ void Skybox::buildMesh(float const& size)
 		3, 7, 6
 	};
 
-	m_mesh = new Mesh();
+	m_mesh = new DerydocaEngine::Rendering::Mesh();
 	m_mesh->loadMeshComponentDataDEPRECATED(
 		8,
 		positions,

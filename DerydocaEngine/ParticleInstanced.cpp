@@ -76,7 +76,7 @@ namespace DerydocaEngine::Ext
 		m_material->setVec4("Material.Ks", glm::vec4(0.7f, 0.7f, 0.7f, 1.0f));
 		m_material->setFloat("Material.Shininess", 50.0f);
 
-		m_mesh = getResourceObject<Mesh>(compNode, "mesh");
+		m_mesh = getResourceObject<Rendering::Mesh>(compNode, "mesh");
 	}
 
 	void ParticleInstanced::render(MatrixStack * const& matrixStack)

@@ -31,7 +31,7 @@ namespace DerydocaEngine::Ext
 		GLuint m_initVel;
 		GLuint m_startTime;
 		Keyboard* m_keyboard;
-		Mesh* m_mesh;
+		Rendering::Mesh* m_mesh;
 
 		void initBuffers();
 		float randFloat();

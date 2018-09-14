@@ -107,7 +107,7 @@ namespace DerydocaEngine::Components
 			}
 		}
 
-		m_mesh = new Mesh();
+		m_mesh = new Rendering::Mesh();
 		m_mesh->loadMeshComponentDataDEPRECATED(numVerts, positions, normals, texCoords, indices, numIndices);
 	}
 

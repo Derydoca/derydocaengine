@@ -23,9 +23,6 @@
     <ClCompile Include="Transform.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="LightManager.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>To Be Namespaced\Resources</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     <ClCompile Include="EngineSettings.cpp">
       <Filter>DerydocaEngine\Settings</Filter>
     </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h">
@@ -317,9 +317,6 @@
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="GLError.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="LightManager.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="MeshResource.h">
@@ -615,6 +612,9 @@
     </ClInclude>
     <ClInclude Include="EngineSettings.h">
       <Filter>DerydocaEngine\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,43 +6,43 @@ namespace DerydocaEngine::Components
 
 	void RendererComponent::updateMesh()
 	{
-		if (m_dirtyComponents == MeshComponents::None)
+		if (m_dirtyComponents == Rendering::MeshComponents::None)
 		{
 			return;
 		}
 
 		if (!m_mesh)
 		{
-			m_mesh = new Mesh();
+			m_mesh = new Rendering::Mesh();
 		}
 
-		if (m_dirtyComponents & MeshComponents::Positions)
+		if (m_dirtyComponents & Rendering::MeshComponents::Positions)
 		{
 			m_vertices = generateVertices();
 			m_numVertices = generateNumVertices();
 		}
-		if (m_dirtyComponents & MeshComponents::TexCoords)
+		if (m_dirtyComponents & Rendering::MeshComponents::TexCoords)
 		{
 			m_texCoords = generateTexCoords();
 		}
-		if (m_dirtyComponents & MeshComponents::Colors)
+		if (m_dirtyComponents & Rendering::MeshComponents::Colors)
 		{
 			m_vertexColors = generateVertexColors();
 		}
-		if (m_dirtyComponents & MeshComponents::Indices)
+		if (m_dirtyComponents & Rendering::MeshComponents::Indices)
 		{
 			m_triangleIndices = generateTriangleIndices();
 			m_numIndices = generateNumIndices();
 		}
-		if (m_dirtyComponents & MeshComponents::Tangents)
+		if (m_dirtyComponents & Rendering::MeshComponents::Tangents)
 		{
 			m_tangents = generateTangents();
 		}
-		if (m_dirtyComponents & MeshComponents::Bitangents)
+		if (m_dirtyComponents & Rendering::MeshComponents::Bitangents)
 		{
 			m_bitangents = generateBitangents();
 		}
-		if (m_dirtyComponents & MeshComponents::Normals)
+		if (m_dirtyComponents & Rendering::MeshComponents::Normals)
 		{
 			m_normals = generateNormals();
 		}
@@ -60,12 +60,12 @@ namespace DerydocaEngine::Components
 			m_vertexColors
 		);
 
-		m_dirtyComponents = MeshComponents::None;
+		m_dirtyComponents = Rendering::MeshComponents::None;
 	}
 
 	void RendererComponent::render(MatrixStack * const& matrixStack)
 	{
-		if (m_dirtyComponents != MeshComponents::None)
+		if (m_dirtyComponents != Rendering::MeshComponents::None)
 		{
 			updateMesh();
 		}

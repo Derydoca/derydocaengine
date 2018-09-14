@@ -82,7 +82,7 @@ namespace DerydocaEngine::Components
 			}
 
 			m_textColor = color;
-			markComponentAsDirty(MeshComponents::Colors);
+			markComponentAsDirty(Rendering::MeshComponents::Colors);
 		}
 
 		virtual glm::vec3* generateVertices();
@@ -109,8 +109,8 @@ namespace DerydocaEngine::Components
 		}
 
 	private:
-		const MeshComponents DIRTY_COMPONENTS_ON_TEXT_CHANGE = (MeshComponents)(MeshComponents::Positions | MeshComponents::TexCoords);
-		const MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (MeshComponents)(MeshComponents::Colors | MeshComponents::Indices);
+		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_TEXT_CHANGE = (Rendering::MeshComponents)(Rendering::MeshComponents::Positions | Rendering::MeshComponents::TexCoords);
+		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (Rendering::MeshComponents)(Rendering::MeshComponents::Colors | Rendering::MeshComponents::Indices);
 
 		Rendering::Material* m_material;
 		UI::FontFace* m_fontFace;

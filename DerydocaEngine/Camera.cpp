@@ -59,7 +59,7 @@ namespace DerydocaEngine::Components
 		MeshResource* quadResource = (MeshResource*)ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71");
 		if (quadResource != nullptr)
 		{
-			m_quad = (Mesh*)quadResource->getResourceObject();
+			m_quad = (Rendering::Mesh*)quadResource->getResourceObject();
 		}
 
 		m_transform = getGameObject()->getTransform();

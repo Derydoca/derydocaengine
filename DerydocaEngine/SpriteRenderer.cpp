@@ -11,7 +11,7 @@ namespace DerydocaEngine::Components
 		{
 			Texture* spriteSheetTexture = m_spriteSheet->getTexture();
 			getMaterial()->setTexture("SpriteSheet", spriteSheetTexture);
-			markComponentAsDirty(MeshComponents::All);
+			markComponentAsDirty(Rendering::MeshComponents::All);
 		}
 	}
 

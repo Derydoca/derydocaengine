@@ -25,7 +25,7 @@ namespace DerydocaEngine::Components
 			}
 
 			m_color = color;
-			markComponentAsDirty(MeshComponents::Colors);
+			markComponentAsDirty(Rendering::MeshComponents::Colors);
 		}
 	private:
 		Color m_color;
