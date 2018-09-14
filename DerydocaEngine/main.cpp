@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 		ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), processArgs[0]);
 
 		// Process the sprite sheet
-		SpriteSheet ss;
+		DerydocaEngine::UI::SpriteSheet ss;
 		ss.LoadFromDisk(processArgs[1]);
 		ss.updateTexture();
 		ss.saveToDisk(processArgs[1]);

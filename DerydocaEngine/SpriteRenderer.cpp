@@ -17,7 +17,7 @@ namespace DerydocaEngine::Components
 
 	void SpriteRenderer::deserialize(YAML::Node const& compNode)
 	{
-		m_spriteSheet = getResourceObject<SpriteSheet>(compNode, "spriteSheet");
+		m_spriteSheet = getResourceObject<UI::SpriteSheet>(compNode, "spriteSheet");
 		Shader* shader = getResourceObject<Shader>(compNode, "shader");
 		Material* material = new Material();
 		material->setShader(shader);
@@ -67,7 +67,7 @@ namespace DerydocaEngine::Components
 		vertices[3] = glm::vec3(c3, r3, 0.0f);
 
 		// If this is a nine-slice sprite, set the positions for the remaining verts
-		if (m_sprite->getType() == SpriteType::NineSlice)
+		if (m_sprite->getType() == UI::SpriteType::NineSlice)
 		{
 			float c1 = c0 + (m_sprite->getWidth() * m_sprite->getSliceLeft());
 			float c2 = c3 - (m_sprite->getWidth() * (1 - m_sprite->getSliceRight()));
@@ -121,7 +121,7 @@ namespace DerydocaEngine::Components
 		texCoords[3] = glm::vec2(c3, r3);
 
 		// If this is a nine-slice sprite, set the UVs for the remaining verts
-		if (m_sprite->getType() == SpriteType::NineSlice)
+		if (m_sprite->getType() == UI::SpriteType::NineSlice)
 		{
 			float texw = c3 - c0;
 			float texh = r3 - r0;
@@ -178,12 +178,12 @@ namespace DerydocaEngine::Components
 	{
 		switch (m_sprite->getType())
 		{
-		case SpriteType::Sprite:
+		case UI::SpriteType::Sprite:
 			return new unsigned int[2 * 3]{
 				0, 2, 1,
 				1, 2, 3
 			};
-		case SpriteType::NineSlice:
+		case UI::SpriteType::NineSlice:
 			return new unsigned int[18 * 3]{
 				0, 6, 4, // Row 1 triangles
 				4, 6, 7,

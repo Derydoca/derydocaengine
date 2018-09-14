@@ -29,8 +29,8 @@ namespace DerydocaEngine::Components
 		}
 	private:
 		Color m_color;
-		SpriteSheet* m_spriteSheet;
-		SpriteReference* m_sprite;
+		DerydocaEngine::UI::SpriteSheet* m_spriteSheet;
+		DerydocaEngine::UI::SpriteReference* m_sprite;
 		glm::vec2 m_size;
 
 		glm::vec3* generateVertices();
@@ -42,9 +42,9 @@ namespace DerydocaEngine::Components
 		{
 			switch (m_sprite->getType())
 			{
-			case SpriteType::Sprite:
+			case DerydocaEngine::UI::SpriteType::Sprite:
 				return 4;
-			case SpriteType::NineSlice:
+			case DerydocaEngine::UI::SpriteType::NineSlice:
 				return 16;
 			default:
 				return 0;
@@ -55,9 +55,9 @@ namespace DerydocaEngine::Components
 		{
 			switch (m_sprite->getType())
 			{
-			case SpriteType::Sprite:
+			case DerydocaEngine::UI::SpriteType::Sprite:
 				return 2 * 3;
-			case SpriteType::NineSlice:
+			case DerydocaEngine::UI::SpriteType::NineSlice:
 				return 18 * 3;
 			default:
 				return 0;

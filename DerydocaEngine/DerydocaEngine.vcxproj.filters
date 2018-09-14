@@ -62,9 +62,6 @@
     <ClCompile Include="ShaderResourceSerializer.cpp">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="FontFace.cpp">
-      <Filter>To Be Namespaced\UI</Filter>
-    </ClCompile>
     <ClCompile Include="BezierCurveRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     <ClCompile Include="TexturePacker.cpp">
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="FontFace.cpp">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h">
@@ -378,9 +378,6 @@
     </ClInclude>
     <ClInclude Include="ShaderResourceSerializer.h">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="FontFace.h">
-      <Filter>To Be Namespaced\UI</Filter>
     </ClInclude>
     <ClInclude Include="BezierCurveRenderer.h">
       <Filter>Ext</Filter>
@@ -616,6 +613,9 @@
     <ClInclude Include="TexturePacker.h">
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="FontFace.h">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -659,6 +659,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Utilities">
       <UniqueIdentifier>{5f2f50a1-f520-4ac5-bd3b-edef331f3275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\UI">
+      <UniqueIdentifier>{8c249674-05d7-4e86-9ede-a8bc21052dbf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

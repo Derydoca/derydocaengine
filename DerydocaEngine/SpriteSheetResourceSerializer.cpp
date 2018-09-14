@@ -11,7 +11,7 @@ SpriteSheetResourceSerializer::~SpriteSheetResourceSerializer()
 
 void * SpriteSheetResourceSerializer::deserialize(Resource * const& resource)
 {
-	SpriteSheet* ss = new SpriteSheet();
+	DerydocaEngine::UI::SpriteSheet* ss = new DerydocaEngine::UI::SpriteSheet();
 	ss->LoadFromDisk(resource->getSourceFilePath());
 	return ss;
 }
