@@ -27,8 +27,8 @@ int Editor::Run(std::string const& projectPath, std::string const& levelIdentifi
 	ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), projectPath);
 
 	// Initialize the clock to this machine
-	Clock::init();
-	Clock* clock = new Clock();
+	DerydocaEngine::Timing::Clock::init();
+	DerydocaEngine::Timing::Clock* clock = new DerydocaEngine::Timing::Clock();
 
 	Display* display = new Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 
