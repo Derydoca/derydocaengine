@@ -112,7 +112,7 @@ namespace DerydocaEngine::Components
 		const MeshComponents DIRTY_COMPONENTS_ON_TEXT_CHANGE = (MeshComponents)(MeshComponents::Positions | MeshComponents::TexCoords);
 		const MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (MeshComponents)(MeshComponents::Colors | MeshComponents::Indices);
 
-		Material* m_material;
+		Rendering::Material* m_material;
 		UI::FontFace* m_fontFace;
 		std::string m_text = "Text";
 		glm::vec2 m_bounds;

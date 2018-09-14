@@ -12,7 +12,9 @@ struct Transform;
 
 class GameObject;
 class MatrixStack;
-class Material;
+namespace DerydocaEngine::Rendering {
+	class Material;
+}
 class YAML::Node;
 
 #define GENINSTANCE(TYPE) \
@@ -27,7 +29,7 @@ public:
 	virtual void update(float const& deltaTime) {}
 	virtual void preRender() {}
 	virtual void render(MatrixStack* const& matrixStack) {}
-	virtual void renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform) {}
+	virtual void renderMesh(MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform) {}
 	virtual void postRender() {}
 	inline void setGameObject(GameObject* const& gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }

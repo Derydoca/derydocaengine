@@ -170,7 +170,7 @@ namespace DerydocaEngine::Components
 			m_renderTexture = new RenderTexture(width, height);
 
 			Shader* postProcessingShader = getResourceObject<Shader>(renderTextureNode, "PostProcessShader");
-			m_postProcessMaterial = new Material();
+			m_postProcessMaterial = new Rendering::Material();
 			m_postProcessMaterial->setShader(postProcessingShader);
 		}
 	}

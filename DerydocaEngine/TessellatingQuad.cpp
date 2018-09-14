@@ -54,7 +54,7 @@ namespace DerydocaEngine::Ext
 			m_outer = outerNode.as<int>();
 		}
 
-		m_material = getResourceObject<Material>(compNode, "material");
+		m_material = getResourceObject<Rendering::Material>(compNode, "material");
 	}
 
 	void TessellatingQuad::render(MatrixStack * const& matrixStack)

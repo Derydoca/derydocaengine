@@ -68,7 +68,7 @@ namespace DerydocaEngine::Ext
 			m_maxDynamicTessLevel = maxDynamicTessLevelNode.as<float>();
 		}
 
-		m_material = getResourceObject<Material>(compNode, "material");
+		m_material = getResourceObject<Rendering::Material>(compNode, "material");
 		m_mesh = getResourceObject<DerydocaEngine::Ext::BezierPatchMesh>(compNode, "bezierPatchMesh");
 	}
 
@@ -83,7 +83,7 @@ namespace DerydocaEngine::Ext
 		glFinish();
 	}
 
-	void TessellatedMeshRenderer::renderMesh(MatrixStack * const& matrixStack, Material * const& material, Projection const& projection, Transform * const& projectionTransform)
+	void TessellatedMeshRenderer::renderMesh(MatrixStack * const& matrixStack, Rendering::Material * const& material, Projection const& projection, Transform * const& projectionTransform)
 	{
 		// Consider an alternate to using the same material as what is being used to render to screen
 		//  The calculations may be excessive for a shadow calc

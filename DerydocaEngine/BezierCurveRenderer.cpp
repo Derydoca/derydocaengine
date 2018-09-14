@@ -74,7 +74,7 @@ namespace DerydocaEngine::Ext
 		}
 
 		Shader* shader = getResourceObject<Shader>(compNode, "shader");
-		m_material = new Material();
+		m_material = new Rendering::Material();
 		m_material->setShader(shader);
 	}
 

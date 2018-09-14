@@ -51,7 +51,7 @@ namespace DerydocaEngine::Components
 			m_verticalAlign = static_cast<TextAlign>(verticalAlignNode.as<int>());
 		}
 
-		setMaterial(new Material());
+		setMaterial(new Rendering::Material());
 		Shader* shader = getResourceObject<Shader>(compNode, "shader");
 		getMaterial()->setShader(shader);
 

@@ -27,7 +27,7 @@ namespace DerydocaEngine::Ext
 		glm::vec3 m_volumeSize;
 		glm::vec3* m_particleLocations;
 		Texture* m_texture;
-		Material* m_material;
+		Rendering::Material* m_material;
 	};
 
 }

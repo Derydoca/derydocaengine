@@ -79,7 +79,7 @@ namespace DerydocaEngine::Components
 		GLuint m_depthTexture;
 		GLuint m_shadowFBO;
 		MatrixStack m_matrixStack;
-		Material* m_shadowMapMaterial;
+		Rendering::Material* m_shadowMapMaterial;
 		Projection m_projection;
 		glm::mat4 m_shadowBias;
 		ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;

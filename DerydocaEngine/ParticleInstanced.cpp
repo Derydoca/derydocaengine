@@ -68,7 +68,7 @@ namespace DerydocaEngine::Ext
 
 		Shader* shader = getResourceObject<Shader>(compNode, "shader");
 		assert(shader);
-		m_material = new Material();
+		m_material = new Rendering::Material();
 		m_material->setShader(shader);
 		m_material->setFloat("ParticleLifetime", m_lifetime);
 		m_material->setVec4("Material.Kd", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));

@@ -18,14 +18,14 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(YAML::Node const& compNode);
 		void render(MatrixStack* const& matrixStack);
-		void renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform);
+		void renderMesh(MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform);
 
-		Material* getMaterial() const { return m_material; }
+		Rendering::Material* getMaterial() const { return m_material; }
 	private:
 		DerydocaEngine::Ext::BezierPatchMesh * m_mesh;
 		GLuint m_vao;
 		GLuint m_vbo;
-		Material* m_material;
+		Rendering::Material* m_material;
 		int m_tessellationLevel = 4;
 		bool m_useDynamicTessellation = false;
 		float m_minDynamicTessLevel = 2;

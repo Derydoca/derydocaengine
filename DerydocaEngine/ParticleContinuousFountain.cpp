@@ -123,7 +123,7 @@ namespace DerydocaEngine::Ext
 		assert(shaderResource);
 		Shader* shader = new Shader(shaderResource->getRawShaderName(), 3, outputNames);
 		assert(shader);
-		m_material = new Material();
+		m_material = new Rendering::Material();
 		m_material->setShader(shader);
 		m_material->setFloat("ParticleLifetime", m_lifetime);
 		m_material->setVec3("Accel", m_acceleration);

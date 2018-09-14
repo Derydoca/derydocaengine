@@ -29,7 +29,7 @@ namespace DerydocaEngine::Ext
 		virtual void render(MatrixStack* const& matrixStack);
 	private:
 		int m_numParticles = 1000;
-		Material* m_material;
+		Rendering::Material* m_material;
 		float m_time = 0.0f;
 		float m_lifetime = 5.0f;
 		glm::vec3 m_velocityMin = glm::vec3(1.25f);

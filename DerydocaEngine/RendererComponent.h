@@ -11,8 +11,8 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		virtual ~RendererComponent() {}
-		Material* getMaterial() const { return m_material; }
-		void setMaterial(Material* const& material) { m_material = material; }
+		Rendering::Material* getMaterial() const { return m_material; }
+		void setMaterial(Rendering::Material* const& material) { m_material = material; }
 	protected:
 		void updateMesh();
 		void markComponentAsDirty(MeshComponents const& component)
@@ -21,7 +21,7 @@ namespace DerydocaEngine::Components
 		}
 
 		void render(MatrixStack* const& matrixStack);
-		void renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform);
+		void renderMesh(MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform);
 		unsigned int getNumVertices() const { return m_numVertices; }
 		unsigned int getNumIndices() const { return m_numIndices; }
 
@@ -37,7 +37,7 @@ namespace DerydocaEngine::Components
 
 	private:
 		Mesh * m_mesh;
-		Material * m_material;
+		Rendering::Material * m_material;
 		MeshComponents m_dirtyComponents;
 		glm::vec3* m_vertices = nullptr;
 		glm::vec3* m_tangents = nullptr;

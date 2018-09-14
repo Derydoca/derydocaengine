@@ -21,7 +21,7 @@ void * MaterialResourceSerializer::deserialize(Resource * const& resource)
 	Shader* shader = ShaderLibrary::getInstance().find(shaderId);
 
 	// Create a material with the shader we created
-	Material* material = new Material();
+	DerydocaEngine::Rendering::Material* material = new DerydocaEngine::Rendering::Material();
 	material->setShader(shader);
 
 	// Assign all material parameters to the material

@@ -153,7 +153,7 @@ namespace DerydocaEngine::Components
 		boost::uuids::uuid shaderId = gen("05cdcea1-2312-4e30-828c-68717d484274");
 		Shader* shadowMapShader = getResourceObject<Shader>(shaderId);
 		delete m_shadowMapMaterial;
-		m_shadowMapMaterial = new Material();
+		m_shadowMapMaterial = new Rendering::Material();
 		m_shadowMapMaterial->setShader(shadowMapShader);
 
 		m_shadowBias = glm::mat4(glm::vec4(0.5f, 0.0f, 0.0f, 0.0f),

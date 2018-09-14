@@ -21,7 +21,7 @@ namespace DerydocaEngine::Ext
 		float m_velocity = 1.0f;
 		float m_amplitude = 0.5f;
 		float m_time = 0.0f;
-		Material* m_material;
+		Rendering::Material* m_material;
 	};
 
 }

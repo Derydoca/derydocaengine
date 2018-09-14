@@ -56,7 +56,7 @@ namespace DerydocaEngine::Execution
 			Shader* skyboxShader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\cubemapShader");
 			CubemapResource* cubemapResource = (CubemapResource*)ObjectLibrary::getInstance().getResource(settings->getSkyboxId());
 			Texture* skyboxTexture = (Texture*)cubemapResource->getResourceObject();
-			Material* skyboxMaterial = new Material();
+			Rendering::Material* skyboxMaterial = new Rendering::Material();
 			skyboxMaterial->setShader(skyboxShader);
 			skyboxMaterial->setTextureSlot(0, skyboxTexture);
 			editorCamera->setSkybox(skyboxMaterial);

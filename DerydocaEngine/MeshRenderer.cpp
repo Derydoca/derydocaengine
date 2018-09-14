@@ -12,7 +12,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	MeshRenderer::MeshRenderer(Mesh* const& mesh, Material* const& material) :
+	MeshRenderer::MeshRenderer(Mesh* const& mesh, Rendering::Material* const& material) :
 		m_mesh(mesh),
 		m_material(material)
 	{
@@ -24,7 +24,7 @@ namespace DerydocaEngine::Components
 
 	void MeshRenderer::deserialize(YAML::Node const& compNode)
 	{
-		auto material = getResourceObject<Material>(compNode, "Material");
+		auto material = getResourceObject<Rendering::Material>(compNode, "Material");
 		setMaterial(material);
 
 		auto mesh = getResourceObject<Mesh>(compNode, "Mesh");
@@ -64,7 +64,7 @@ namespace DerydocaEngine::Components
 		m_material->unbind();
 	}
 
-	void MeshRenderer::renderMesh(MatrixStack* const& matrixStack, Material* const& material, Projection const& projection, Transform* const& projectionTransform)
+	void MeshRenderer::renderMesh(MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform)
 	{
 		material->bind();
 		material->getShader()->update(matrixStack, projection, projectionTransform);

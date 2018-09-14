@@ -21,7 +21,7 @@ namespace DerydocaEngine::Ext
 		float m_controlPoints[8];
 		GLuint m_vao;
 		GLuint m_vbo;
-		Material* m_material;
+		Rendering::Material* m_material;
 		int m_inner = 4;
 		int m_outer = 4;
 		Color m_lineColor;

@@ -93,7 +93,7 @@ namespace DerydocaEngine::Ext
 			// Update all shaders with the new projection matrix
 			for (DerydocaEngine::Components::MeshRenderer* const& meshRenderer : m_meshRenderers)
 			{
-				Material* mat = meshRenderer->getMaterial();
+				Rendering::Material* mat = meshRenderer->getMaterial();
 				if (!mat)
 				{
 					continue;
@@ -129,7 +129,7 @@ namespace DerydocaEngine::Ext
 		// Update all shaders with the new projection matrix
 		for (DerydocaEngine::Components::MeshRenderer* const& meshRenderer : m_meshRenderers)
 		{
-			Material* mat = meshRenderer->getMaterial();
+			Rendering::Material* mat = meshRenderer->getMaterial();
 			if (!mat)
 			{
 				continue;

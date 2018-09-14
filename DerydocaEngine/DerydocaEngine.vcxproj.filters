@@ -140,9 +140,6 @@
     <ClCompile Include="FileType.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteSheet.cpp">
-      <Filter>To Be Namespaced\UI</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteSheetResourceSerializer.cpp">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
@@ -267,6 +264,9 @@
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="FontFace.cpp">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheet.cpp">
       <Filter>DerydocaEngine\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -469,12 +469,6 @@
     <ClInclude Include="stb_image_write.h">
       <Filter>Third Party</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteReference.h">
-      <Filter>To Be Namespaced\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheet.h">
-      <Filter>To Be Namespaced\UI</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteSheetResourceSerializer.h">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
@@ -616,6 +610,12 @@
     <ClInclude Include="FontFace.h">
       <Filter>DerydocaEngine\UI</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteReference.h">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -632,9 +632,6 @@
     </Filter>
     <Filter Include="To Be Namespaced\ResourceSerializers">
       <UniqueIdentifier>{7eac81a0-a90a-4d89-85dd-89c2d08d44f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="To Be Namespaced\UI">
-      <UniqueIdentifier>{a84ac1a5-2e0c-4297-a074-986ebec1c8cf}</UniqueIdentifier>
     </Filter>
     <Filter Include="To Be Namespaced\Input">
       <UniqueIdentifier>{9e9a0417-56b9-440e-8db7-c98e7c5dc0ca}</UniqueIdentifier>

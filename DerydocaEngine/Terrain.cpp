@@ -40,7 +40,7 @@ namespace DerydocaEngine::Components
 		Terrain::updateMesh();
 
 		Shader* shader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
-		Material* mat = new Material();
+		Rendering::Material* mat = new Rendering::Material();
 		mat->setShader(shader);
 
 		m_meshRenderer = new DerydocaEngine::Components::MeshRenderer(m_mesh, mat);
@@ -139,7 +139,7 @@ namespace DerydocaEngine::Components
 			loadTerrainFromTexture(heightmapResource->getSourceFilePath(), unitScale, heightScale);
 			if (node["material"])
 			{
-				Material* material = getResourceObject<Material>(node, "material");
+				Rendering::Material* material = getResourceObject<Rendering::Material>(node, "material");
 				m_meshRenderer->setMaterial(material);
 			}
 		}
@@ -172,7 +172,7 @@ namespace DerydocaEngine::Components
 		Terrain::updateMesh();
 
 		Shader* shader = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
-		Material* mat = new Material();
+		Rendering::Material* mat = new Rendering::Material();
 		mat->setShader(shader);
 
 		m_meshRenderer = new DerydocaEngine::Components::MeshRenderer(m_mesh, mat);
