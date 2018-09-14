@@ -13,7 +13,7 @@
 
 int main(int argc, char* argv[])
 {
-	CommandLineArgs args = CommandLineArgs(argc, argv);
+	DerydocaEngine::Execution::CommandLineArgs args = DerydocaEngine::Execution::CommandLineArgs(argc, argv);
 	
 	if (args.keyExists("processDirectory"))
 	{

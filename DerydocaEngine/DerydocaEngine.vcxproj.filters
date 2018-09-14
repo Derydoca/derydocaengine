@@ -11,9 +11,6 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>To Be Namespaced\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Clock.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="Display.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>DerydocaEngine\Timing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h">
@@ -282,9 +282,6 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>To Be Namespaced\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Clock.h">
-      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="MatrixStack.h">
       <Filter>To Be Namespaced</Filter>
@@ -616,6 +613,9 @@
     <ClInclude Include="ShadowMap.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>DerydocaEngine\Timing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -653,6 +653,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\FileSerializers">
       <UniqueIdentifier>{8a7abadd-a412-47d5-9817-5b62b77bfb9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Timing">
+      <UniqueIdentifier>{8e73d9d7-2b1f-4b22-b157-6dae032dbd4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
