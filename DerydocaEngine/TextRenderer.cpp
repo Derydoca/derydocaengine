@@ -65,13 +65,13 @@ namespace DerydocaEngine::Components
 				fontSize = fontSizeNode.as<float>();
 			}
 
-			m_fontFace = new FontFace();
+			m_fontFace = new UI::FontFace();
 			m_fontFace->setFontSize(fontSize);
 			m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
 		}
 		else if (fontResource->getType() == ResourceType::RasterFontResourceType)
 		{
-			m_fontFace = new FontFace();
+			m_fontFace = new UI::FontFace();
 			m_fontFace->loadFromSerializedFile(fontResource->getSourceFilePath());
 		}
 
@@ -292,7 +292,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	std::vector<LineProperties*> TextRenderer::processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText)
+	std::vector<LineProperties*> TextRenderer::processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, UI::FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText)
 	{
 		// Create an array to store the filtered text. This will never excede the length of the source text.
 		filteredText = new char[text.length()];

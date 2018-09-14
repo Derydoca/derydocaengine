@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 			return 0;
 		}
 
-		FontFace face;
+		DerydocaEngine::UI::FontFace face;
 		face.loadFromFontFile(processArgs[0]);
 		face.setFontSize((float)atof(processArgs[1].c_str()));
 		face.saveToSerializedFile(processArgs[2]);

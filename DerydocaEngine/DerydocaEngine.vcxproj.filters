@@ -59,20 +59,8 @@
     <ClCompile Include="CubemapResourceSerializer.cpp">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
-    <ClCompile Include="Editor.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="ShaderResourceSerializer.cpp">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="TexturePacker.cpp">
-      <Filter>To Be Namespaced\TexturePacker</Filter>
-    </ClCompile>
-    <ClCompile Include="TexturePackerImage.cpp">
-      <Filter>To Be Namespaced\TexturePacker</Filter>
-    </ClCompile>
-    <ClCompile Include="TexturePackerTextureData.cpp">
-      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClCompile>
     <ClCompile Include="FontFace.cpp">
       <Filter>To Be Namespaced\UI</Filter>
@@ -269,6 +257,18 @@
     <ClCompile Include="CommandLineArgs.cpp">
       <Filter>DerydocaEngine\Execution</Filter>
     </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>DerydocaEngine\Execution</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturePackerTextureData.cpp">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturePackerImage.cpp">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturePacker.cpp">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h">
@@ -373,23 +373,11 @@
     <ClInclude Include="CubemapResource.h">
       <Filter>To Be Namespaced\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Editor.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderResource.h">
       <Filter>To Be Namespaced\Resources</Filter>
     </ClInclude>
     <ClInclude Include="ShaderResourceSerializer.h">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="TexturePacker.h">
-      <Filter>To Be Namespaced\TexturePacker</Filter>
-    </ClInclude>
-    <ClInclude Include="TexturePackerImage.h">
-      <Filter>To Be Namespaced\TexturePacker</Filter>
-    </ClInclude>
-    <ClInclude Include="TexturePackerTextureData.h">
-      <Filter>To Be Namespaced\TexturePacker</Filter>
     </ClInclude>
     <ClInclude Include="FontFace.h">
       <Filter>To Be Namespaced\UI</Filter>
@@ -616,6 +604,18 @@
     <ClInclude Include="CommandLineArgs.h">
       <Filter>DerydocaEngine\Execution</Filter>
     </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>DerydocaEngine\Execution</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturePackerTextureData.h">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturePackerImage.h">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturePacker.h">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -639,9 +639,6 @@
     <Filter Include="To Be Namespaced\Input">
       <UniqueIdentifier>{9e9a0417-56b9-440e-8db7-c98e7c5dc0ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="To Be Namespaced\TexturePacker">
-      <UniqueIdentifier>{792a8148-58f8-4c2a-a2c9-68f368699d87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DerydocaEngine">
       <UniqueIdentifier>{8a96ec53-358e-4171-8093-2897131244a7}</UniqueIdentifier>
     </Filter>
@@ -659,6 +656,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Execution">
       <UniqueIdentifier>{6381d05b-6d2d-4058-8429-6216f7abf7cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Utilities">
+      <UniqueIdentifier>{5f2f50a1-f520-4ac5-bd3b-edef331f3275}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

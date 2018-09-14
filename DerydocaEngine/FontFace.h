@@ -9,41 +9,46 @@
 #include "Texture.h"
 
 class Texture;
-const int MISSING_CHAR_CODE = 95;
 
-class FontFace
+namespace DerydocaEngine::UI
 {
-public:
-	FontFace();
-	~FontFace();
 
-	Texture* getTexture();
-	DerydocaEngine::Utilities::TexturePackerImage getCharData(int const& charCode) const {
-		if (m_charImages.find(charCode) == m_charImages.end())
-		{
-			return m_charImages.at(MISSING_CHAR_CODE);
-		}
-		else
-		{
-			return m_charImages.at(charCode);
-		}
+	const int MISSING_CHAR_CODE = 95;
+
+	class FontFace
+	{
+	public:
+		FontFace();
+		~FontFace();
+
+		Texture* getTexture();
+		DerydocaEngine::Utilities::TexturePackerImage getCharData(int const& charCode) const {
+			if (m_charImages.find(charCode) == m_charImages.end())
+			{
+				return m_charImages.at(MISSING_CHAR_CODE);
+			}
+			else
+			{
+				return m_charImages.at(charCode);
+			}
+		};
+		float getLineHeight() const { return m_lineHeight; }
+		void setFontSize(float const& fontSize) { m_fontSize = fontSize; }
+
+		void loadFromFontFile(std::string const& filePath);
+		void loadFromSerializedFile(std::string const& filePath);
+		void saveToSerializedFile(std::string const& filePath);
+	private:
+		glm::ivec2 m_dotsPerInch = glm::ivec2(300, 300);
+		float m_fontSize = 16.0;
+		Texture m_texture;
+		std::map<int, DerydocaEngine::Utilities::TexturePackerImage> m_charImages;
+		unsigned char* m_imageBuffer;
+		glm::ivec2 m_imageBufferSize;
+		bool m_textureDirty = false;
+		float m_lineHeight = 50.0f;
+		std::string m_name = "";
+		std::string m_style = "";
 	};
-	float getLineHeight() const { return m_lineHeight; }
-	void setFontSize(float const& fontSize) { m_fontSize = fontSize; }
 
-	void loadFromFontFile(std::string const& filePath);
-	void loadFromSerializedFile(std::string const& filePath);
-	void saveToSerializedFile(std::string const& filePath);
-private:
-	glm::ivec2 m_dotsPerInch = glm::ivec2(300, 300);
-	float m_fontSize = 16.0;
-	Texture m_texture;
-	std::map<int, DerydocaEngine::Utilities::TexturePackerImage> m_charImages;
-	unsigned char* m_imageBuffer;
-	glm::ivec2 m_imageBufferSize;
-	bool m_textureDirty = false;
-	float m_lineHeight = 50.0f;
-	std::string m_name = "";
-	std::string m_style = "";
-};
-
+}

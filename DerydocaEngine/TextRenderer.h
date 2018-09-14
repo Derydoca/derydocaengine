@@ -113,7 +113,7 @@ namespace DerydocaEngine::Components
 		const MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (MeshComponents)(MeshComponents::Colors | MeshComponents::Indices);
 
 		Material* m_material;
-		FontFace* m_fontFace;
+		UI::FontFace* m_fontFace;
 		std::string m_text = "Text";
 		glm::vec2 m_bounds;
 		Color m_textColor;
@@ -126,7 +126,7 @@ namespace DerydocaEngine::Components
 
 		static void calculateVerticalAlignmentProperties(TextAlign const& alignment, int const& numberOfLines, float const& verticalBoundSize, float const& fontLineHeight, float* const& penY, float* const& newLineHeight);
 		static void calculateHorizontalAlignmentProperties(TextAlign const& alignment, float const& horizontalBoundSize, float const& lineWidth, int const& numChars, float const& lineStartAdjust, float* const& penX, float* const& extraCharAdvance);
-		static std::vector<LineProperties*> processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText);
+		static std::vector<LineProperties*> processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, UI::FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText);
 	};
 
 }
