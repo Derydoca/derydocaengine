@@ -215,12 +215,6 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="RenderTexture.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -268,6 +262,12 @@
     </ClCompile>
     <ClCompile Include="LightManager.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -553,13 +553,7 @@
     <ClInclude Include="DisplayManager.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="MeshFlags.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
@@ -615,6 +609,12 @@
     </ClInclude>
     <ClInclude Include="LightManager.h">
       <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
