@@ -7,12 +7,12 @@ namespace DerydocaEngine::Components
 
 	Light::Light()
 	{
-		LightManager::getInstance().addLight(this);
+		Rendering::LightManager::getInstance().addLight(this);
 	}
 
 	Light::~Light()
 	{
-		LightManager::getInstance().removeLight(this);
+		Rendering::LightManager::getInstance().removeLight(this);
 		delete m_shadowMapMaterial;
 	}
 

@@ -4,33 +4,38 @@
 #include "Transform.h"
 #include "Shader.h"
 
-class LightManager
+namespace DerydocaEngine::Rendering
 {
-public:
-	static LightManager& getInstance()
+
+	class LightManager
 	{
-		static LightManager instance;
-		return instance;
-	}
+	public:
+		static LightManager& getInstance()
+		{
+			static LightManager instance;
+			return instance;
+		}
 
-	void addLight(DerydocaEngine::Components::Light* const& light) { m_lights.push_back(light); }
-	void removeLight(DerydocaEngine::Components::Light* const& light) { m_lights.remove(light); }
+		void addLight(DerydocaEngine::Components::Light* const& light) { m_lights.push_back(light); }
+		void removeLight(DerydocaEngine::Components::Light* const& light) { m_lights.remove(light); }
 
-	void bindLightsToShader(MatrixStack* const& matrixStack, Transform* const& objectTransform, Shader* const& shader);
-	void renderShadowMaps(Transform* const& objectTransform);
+		void bindLightsToShader(MatrixStack* const& matrixStack, Transform* const& objectTransform, Shader* const& shader);
+		void renderShadowMaps(Transform* const& objectTransform);
 
-	void operator=(LightManager const&) = delete;
-private:
-	LightManager();
-	LightManager(LightManager const&);
-	~LightManager();
+		void operator=(LightManager const&) = delete;
+	private:
+		LightManager();
+		LightManager(LightManager const&);
+		~LightManager();
 
-	void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
-	std::list<DerydocaEngine::Components::Light*> getLights(Transform* const& objectTransform);
+		void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
+		std::list<DerydocaEngine::Components::Light*> getLights(Transform* const& objectTransform);
 
-	const int MAX_LIGHTS = 10;
+		const int MAX_LIGHTS = 10;
 
-	std::list<DerydocaEngine::Components::Light*> m_lights;
-	GLuint m_shadowJitterTexture;
-	glm::vec3 m_shadowJitterTextureSize;
-};
+		std::list<DerydocaEngine::Components::Light*> m_lights;
+		GLuint m_shadowJitterTexture;
+		glm::vec3 m_shadowJitterTextureSize;
+	};
+
+}

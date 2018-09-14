@@ -204,7 +204,7 @@ namespace DerydocaEngine::Components
 
 	void Camera::renderRoot(GameObject* const& gameObject)
 	{
-		LightManager::getInstance().renderShadowMaps(gameObject->getTransform());
+		Rendering::LightManager::getInstance().renderShadowMaps(gameObject->getTransform());
 
 		int textureW, textureH = 1;
 
@@ -272,7 +272,7 @@ namespace DerydocaEngine::Components
 			m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
 			m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
 			m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
-			LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
+			Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
 			m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
 		}
 	}
