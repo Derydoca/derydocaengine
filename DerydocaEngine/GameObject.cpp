@@ -30,7 +30,7 @@ GameObject::~GameObject()
 	m_children.clear();
 }
 
-void GameObject::render(MatrixStack* const& matrixStack) {
+void GameObject::render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {
 	matrixStack->push(m_transform.getModel());
 
 	for each (GameComponent* c in m_components)
@@ -46,7 +46,7 @@ void GameObject::render(MatrixStack* const& matrixStack) {
 	matrixStack->pop();
 }
 
-void GameObject::renderMesh(MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, Projection const& projection, Transform* const& projectionTransform)
+void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, Projection const& projection, Transform* const& projectionTransform)
 {
 	matrixStack->push(m_transform.getModel());
 

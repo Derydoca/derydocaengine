@@ -121,7 +121,7 @@ namespace DerydocaEngine::Components
 		m_meshRenderer->setGameObject(getGameObject());
 	}
 
-	void Terrain::render(MatrixStack * const& matrixStack)
+	void Terrain::render(Rendering::MatrixStack * const& matrixStack)
 	{
 		m_meshRenderer->render(matrixStack);
 	}

@@ -20,8 +20,8 @@ namespace DerydocaEngine::Components
 			m_dirtyComponents = (Rendering::MeshComponents)(m_dirtyComponents | component);
 		}
 
-		void render(MatrixStack* const& matrixStack);
-		void renderMesh(MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform);
+		void render(Rendering::MatrixStack* const& matrixStack);
+		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform);
 		unsigned int getNumVertices() const { return m_numVertices; }
 		unsigned int getNumIndices() const { return m_numIndices; }
 

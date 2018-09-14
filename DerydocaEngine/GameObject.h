@@ -5,9 +5,9 @@
 struct Projection;
 struct Transform;
 class GameComponent;
-class MatrixStack;
 namespace DerydocaEngine::Rendering {
 	class Material;
+	class MatrixStack;
 }
 
 class GameObject
@@ -20,8 +20,8 @@ public:
 	void init();
 	void postInit();
 	void update(float const& deltaTime);
-	void render(MatrixStack* const& matrixStack);
-	void renderMesh(MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& renderMesh, Projection const& projection, Transform* const& projectionTransform);
+	void render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack);
+	void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& renderMesh, Projection const& projection, Transform* const& projectionTransform);
 	void preRender();
 	void postRender();
 

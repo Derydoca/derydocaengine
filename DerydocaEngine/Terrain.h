@@ -25,7 +25,7 @@ namespace DerydocaEngine::Components
 		void setTextureSlot(int const& slot, Texture* const& texture);
 		void init();
 
-		void render(MatrixStack* const& matrixStack);
+		void render(Rendering::MatrixStack* const& matrixStack);
 		void deserialize(YAML::Node const& node);
 	private:
 		int m_width;

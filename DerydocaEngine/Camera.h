@@ -106,7 +106,7 @@ namespace DerydocaEngine::Components
 		ClearMode m_clearMode = NoClear;
 		RenderingMode m_renderingMode;
 		Rendering::Material* m_skyboxMaterial;
-		MatrixStack m_matrixStack;
+		Rendering::MatrixStack m_matrixStack;
 		RenderTexture* m_renderTexture;
 		Display* m_display;
 		Rectangle* m_displayRect;

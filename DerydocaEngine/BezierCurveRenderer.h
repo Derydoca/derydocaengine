@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 
 		virtual void init();
 		virtual void deserialize(YAML::Node const& compNode);
-		void render(MatrixStack* const& matrixStack);
+		void render(Rendering::MatrixStack* const& matrixStack);
 	private:
 		float m_controlPoints[8];
 		GLuint m_vao;

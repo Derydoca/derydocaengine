@@ -301,12 +301,6 @@
     <ClInclude Include="Skybox.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedListNode.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -616,6 +610,12 @@
     <ClInclude Include="MeshRenderer.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>DerydocaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedListNode.h">
+      <Filter>DerydocaEngine\DataStructures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -665,6 +665,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Settings">
       <UniqueIdentifier>{6118eef6-bc27-4334-8342-5bdc8c6a1373}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\DataStructures">
+      <UniqueIdentifier>{4337cc73-5993-4698-bd20-4cd1b2990217}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

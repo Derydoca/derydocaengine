@@ -15,8 +15,8 @@ namespace DerydocaEngine::Components
 			MeshRenderer();
 		MeshRenderer(Rendering::Mesh* const& mesh, Rendering::Material* const& material);
 		~MeshRenderer();
-		void render(MatrixStack* const& matrixStack);
-		void renderMesh(MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform);
+		void render(Rendering::MatrixStack* const& matrixStack);
+		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform);
 		Rendering::Material* getMaterial() { return m_material; }
 		DerydocaEngine::Components::Camera* getMeshRendererCamera() { return m_meshRendererCamera; }
 

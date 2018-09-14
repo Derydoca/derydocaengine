@@ -93,7 +93,7 @@ namespace DerydocaEngine::Ext
 		m_material->setFloat("Size2", m_size2);
 	}
 
-	void ParticleSystem::render(MatrixStack* const& matrixStack)
+	void ParticleSystem::render(Rendering::MatrixStack* const& matrixStack)
 	{
 		glDisable(GL_DEPTH_TEST);
 		assert(getGameObject());

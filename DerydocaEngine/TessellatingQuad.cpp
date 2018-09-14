@@ -57,7 +57,7 @@ namespace DerydocaEngine::Ext
 		m_material = getResourceObject<Rendering::Material>(compNode, "material");
 	}
 
-	void TessellatingQuad::render(MatrixStack * const& matrixStack)
+	void TessellatingQuad::render(Rendering::MatrixStack * const& matrixStack)
 	{
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);

@@ -78,7 +78,7 @@ namespace DerydocaEngine::Components
 		int m_shadowMapWidth = 512;
 		GLuint m_depthTexture;
 		GLuint m_shadowFBO;
-		MatrixStack m_matrixStack;
+		Rendering::MatrixStack m_matrixStack;
 		Rendering::Material* m_shadowMapMaterial;
 		Projection m_projection;
 		glm::mat4 m_shadowBias;

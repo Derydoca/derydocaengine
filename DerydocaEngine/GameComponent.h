@@ -11,9 +11,9 @@ struct Resource;
 struct Transform;
 
 class GameObject;
-class MatrixStack;
 namespace DerydocaEngine::Rendering {
 	class Material;
+	class MatrixStack;
 }
 class YAML::Node;
 
@@ -28,8 +28,8 @@ public:
 	virtual void postInit() {}
 	virtual void update(float const& deltaTime) {}
 	virtual void preRender() {}
-	virtual void render(MatrixStack* const& matrixStack) {}
-	virtual void renderMesh(MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform) {}
+	virtual void render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {}
+	virtual void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform) {}
 	virtual void postRender() {}
 	inline void setGameObject(GameObject* const& gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }

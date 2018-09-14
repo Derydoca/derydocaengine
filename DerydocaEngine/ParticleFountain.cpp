@@ -75,7 +75,7 @@ namespace DerydocaEngine::Ext
 		m_material->setTexture("ParticleTex", m_tex);
 	}
 
-	void ParticleFountain::render(MatrixStack * const& matrixStack)
+	void ParticleFountain::render(Rendering::MatrixStack * const& matrixStack)
 	{
 		glDisable(GL_DEPTH_TEST);
 		m_material->bind();
