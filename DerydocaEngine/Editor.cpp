@@ -24,7 +24,7 @@ namespace DerydocaEngine::Execution
 
 	int Editor::Run(std::string const& projectPath, std::string const& levelIdentifier)
 	{
-		EngineSettings* settings = new EngineSettings(".\\engineSettings.yaml");
+		Settings::EngineSettings* settings = new Settings::EngineSettings(".\\engineSettings.yaml");
 
 		// Load the project file
 		ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), projectPath);

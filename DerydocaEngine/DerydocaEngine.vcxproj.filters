@@ -221,9 +221,6 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -268,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="SpriteSheet.cpp">
       <Filter>DerydocaEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -559,9 +559,6 @@
     <ClInclude Include="DisplayManager.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -616,6 +613,9 @@
     <ClInclude Include="SpriteSheet.h">
       <Filter>DerydocaEngine\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -659,6 +659,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\UI">
       <UniqueIdentifier>{8c249674-05d7-4e86-9ede-a8bc21052dbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Rendering">
+      <UniqueIdentifier>{8040a872-6ad7-4414-bd12-2ad0f81703a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

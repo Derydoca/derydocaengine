@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 			return 0;
 		}
 
-		EngineSettings* settings = new EngineSettings(".\\engineSettings.yaml");
+		DerydocaEngine::Settings::EngineSettings* settings = new DerydocaEngine::Settings::EngineSettings(".\\engineSettings.yaml");
 
 		// Load the project file
 		ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), processArgs[0]);
