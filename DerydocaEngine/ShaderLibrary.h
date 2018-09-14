@@ -4,7 +4,7 @@
 #include <string>
 #include <boost/uuid/uuid.hpp>
 
-using shaderMap = std::map<boost::uuids::uuid, Shader*>;
+using shaderMap = std::map<boost::uuids::uuid, DerydocaEngine::Rendering::Shader*>;
 using shaderPathMap = std::map<std::string, boost::uuids::uuid>;
 
 class ShaderLibrary
@@ -17,8 +17,8 @@ public:
 	}
 	void operator=(ObjectLibrary const&) = delete;
 
-	Shader* find(boost::uuids::uuid const& shaderId);
-	Shader* find(std::string const& shaderPath);
+	DerydocaEngine::Rendering::Shader* find(boost::uuids::uuid const& shaderId);
+	DerydocaEngine::Rendering::Shader* find(std::string const& shaderPath);
 
 	void registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid);
 private:

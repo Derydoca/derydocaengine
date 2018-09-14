@@ -19,7 +19,7 @@ namespace DerydocaEngine::Rendering
 		void addLight(DerydocaEngine::Components::Light* const& light) { m_lights.push_back(light); }
 		void removeLight(DerydocaEngine::Components::Light* const& light) { m_lights.remove(light); }
 
-		void bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Transform* const& objectTransform, Shader* const& shader);
+		void bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Transform* const& objectTransform, Rendering::Shader* const& shader);
 		void renderShadowMaps(Transform* const& objectTransform);
 
 		void operator=(LightManager const&) = delete;

@@ -25,7 +25,7 @@ namespace DerydocaEngine::Debug {
 
 		DebugLine m_testLine;
 
-		Shader* m_shader;
+		Rendering::Shader* m_shader;
 	};
 
 }

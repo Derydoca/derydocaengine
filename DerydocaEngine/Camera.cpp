@@ -169,13 +169,13 @@ namespace DerydocaEngine::Components
 			int height = renderTextureNode["Height"].as<int>();
 			m_renderTexture = new RenderTexture(width, height);
 
-			Shader* postProcessingShader = getResourceObject<Shader>(renderTextureNode, "PostProcessShader");
+			Rendering::Shader* postProcessingShader = getResourceObject<Rendering::Shader>(renderTextureNode, "PostProcessShader");
 			m_postProcessMaterial = new Rendering::Material();
 			m_postProcessMaterial->setShader(postProcessingShader);
 		}
 	}
 
-	Shader * Camera::getPostProcessShader() const
+	Rendering::Shader * Camera::getPostProcessShader() const
 	{
 		return m_postProcessMaterial->getShader();
 	}
@@ -244,7 +244,7 @@ namespace DerydocaEngine::Components
 			m_postProcessMaterial->bind();
 
 			// Load the shader with matricies that will transform the quad to take up the entire buffer
-			Shader* postProcessShader = m_postProcessMaterial->getShader();
+			Rendering::Shader* postProcessShader = m_postProcessMaterial->getShader();
 			setIdentityMatricies(postProcessShader);
 
 			postProcessShader->setInt("Width", m_renderTexture->getWidth());
@@ -302,7 +302,7 @@ namespace DerydocaEngine::Components
 		return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)m_display->getHeight();
 	}
 
-	void Camera::setIdentityMatricies(Shader* const& shader)
+	void Camera::setIdentityMatricies(Rendering::Shader* const& shader)
 	{
 		glm::mat4 m = glm::mat4(1.0);
 		glm::mat4 v = glm::mat4(1.0);

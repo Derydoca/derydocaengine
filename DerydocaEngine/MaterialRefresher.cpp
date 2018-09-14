@@ -33,7 +33,7 @@ namespace DerydocaEngine::Components
 		}
 		assert(material);
 
-		Shader* shader = material->getShader();
+		Rendering::Shader* shader = material->getShader();
 		assert(shader);
 
 		m_shaderLoadPath = shader->GetLoadPath();
@@ -69,11 +69,11 @@ namespace DerydocaEngine::Components
 
 		printf("Unloading the previous material.\n");
 		Rendering::Material* mat = m_usingMeshRenderer ? m_meshRenderer->getMaterial() : m_tessMeshRenderer->getMaterial();
-		Shader* oldShader = mat->getShader();
+		Rendering::Shader* oldShader = mat->getShader();
 		delete(oldShader);
 
 		printf("Reloading new material.\n");
-		Shader* newShader = new Shader(m_shaderLoadPath);
+		Rendering::Shader* newShader = new Rendering::Shader(m_shaderLoadPath);
 		mat->setShader(newShader);
 		printf("Material reload finished.\n");
 	}

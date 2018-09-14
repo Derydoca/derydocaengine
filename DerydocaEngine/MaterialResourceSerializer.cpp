@@ -18,7 +18,7 @@ void * MaterialResourceSerializer::deserialize(Resource * const& resource)
 
 	// Load the shader specified in the file
 	boost::uuids::uuid shaderId = root["Shader"].as<boost::uuids::uuid>();
-	Shader* shader = ShaderLibrary::getInstance().find(shaderId);
+	DerydocaEngine::Rendering::Shader* shader = ShaderLibrary::getInstance().find(shaderId);
 
 	// Create a material with the shader we created
 	DerydocaEngine::Rendering::Material* material = new DerydocaEngine::Rendering::Material();

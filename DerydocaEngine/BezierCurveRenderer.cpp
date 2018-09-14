@@ -73,7 +73,7 @@ namespace DerydocaEngine::Ext
 			m_lineColor = Color(1.0, 1.0, 1.0, 1.0);
 		}
 
-		Shader* shader = getResourceObject<Shader>(compNode, "shader");
+		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
 		m_material = new Rendering::Material();
 		m_material->setShader(shader);
 	}

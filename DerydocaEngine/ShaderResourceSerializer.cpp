@@ -5,7 +5,7 @@
 void * ShaderResourceSerializer::deserialize(Resource * const& resource)
 {
 	ShaderResource* shaderResource = (ShaderResource*)resource;
-	Shader* shader = new Shader(shaderResource->getRawShaderName());
+	DerydocaEngine::Rendering::Shader* shader = new DerydocaEngine::Rendering::Shader(shaderResource->getRawShaderName());
 	return shader;
 }
 

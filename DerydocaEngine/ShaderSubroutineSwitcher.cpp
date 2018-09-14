@@ -33,7 +33,7 @@ namespace DerydocaEngine::Ext
 		}
 		// Get the shader attached to the mesh renderer
 		Rendering::Material* material = mr->getMaterial();
-		Shader* shader = material->getShader();
+		Rendering::Shader* shader = material->getShader();
 		if (shader == nullptr)
 		{
 			std::cout << "Unable to set the subroutine for this component because it does not have a shader assigned to it.\n";

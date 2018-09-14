@@ -3,7 +3,7 @@
 #include "ShaderResource.h"
 #include <iostream>
 
-Shader * ShaderLibrary::find(boost::uuids::uuid const& shaderId)
+DerydocaEngine::Rendering::Shader * ShaderLibrary::find(boost::uuids::uuid const& shaderId)
 {
 	// Look through the list of already loaded shaders
 	auto it = m_shaders.find(shaderId);
@@ -32,7 +32,7 @@ Shader * ShaderLibrary::find(boost::uuids::uuid const& shaderId)
 	}
 
 	// Load the shader from the resource object
-	Shader* shader = (Shader*)shaderResource->getResourceObject();
+	DerydocaEngine::Rendering::Shader* shader = (DerydocaEngine::Rendering::Shader*)shaderResource->getResourceObject();
 
 	// Add it to the library
 	m_shaders[shaderId] = shader;
@@ -41,7 +41,7 @@ Shader * ShaderLibrary::find(boost::uuids::uuid const& shaderId)
 	return shader;
 }
 
-Shader * ShaderLibrary::find(std::string const& shaderPath)
+DerydocaEngine::Rendering::Shader * ShaderLibrary::find(std::string const& shaderPath)
 {
 	// Find the uuid associated with the path
 	auto it = m_shaderPaths.find(shaderPath);

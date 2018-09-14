@@ -4,7 +4,9 @@
 #include <gl\glew.h>
 
 struct Color;
-class Shader;
+namespace DerydocaEngine::Rendering {
+	class Shader;
+}
 class Texture;
 class RenderTexture;
 
@@ -18,7 +20,7 @@ namespace DerydocaEngine::Rendering
 		~Material();
 
 		inline void setShader(Shader* shader) { m_shader = shader; }
-		inline Shader* getShader() const { return m_shader; }
+		inline Rendering::Shader* getShader() const { return m_shader; }
 		void setBool(std::string const& name, bool const& value);
 		void setInt(std::string const& name, int const& value);
 		void setTexture(std::string const& name, Texture* const& texture);

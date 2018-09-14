@@ -283,9 +283,6 @@
     <ClInclude Include="Mouse.h">
       <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
-    <ClInclude Include="MatrixStack.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="Display.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -615,6 +612,9 @@
     </ClInclude>
     <ClInclude Include="LinkedListNode.h">
       <Filter>DerydocaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixStack.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

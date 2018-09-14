@@ -49,7 +49,7 @@ namespace DerydocaEngine::Ext
 		m_blurTex = new RenderTexture(width, height);
 		m_blurTex2 = new RenderTexture(width, height);
 
-		Shader* shader = m_postProcessCamera->getPostProcessShader();
+		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
 		if (shader != nullptr)
 		{
 			RenderPass subPassNames[3] =
@@ -87,7 +87,7 @@ namespace DerydocaEngine::Ext
 
 	void BloomFilter::updateShader()
 	{
-		Shader* shader = m_postProcessCamera->getPostProcessShader();
+		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
 		if (shader == nullptr)
 		{
 			return;

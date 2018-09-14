@@ -13,9 +13,9 @@ class Display;
 namespace DerydocaEngine::Rendering {
 	class Material;
 	class Mesh;
+	class Shader;
 }
 class RenderTexture;
-class Shader;
 class Skybox;
 
 namespace DerydocaEngine::Components
@@ -96,7 +96,7 @@ namespace DerydocaEngine::Components
 		void setOrthoSize(float const& size);
 		float getOrthoSize(float const& size) { return m_orthoSize; }
 		void deserialize(YAML::Node const& node);
-		Shader* getPostProcessShader() const;
+		Rendering::Shader* getPostProcessShader() const;
 		Rendering::Material* getPostProcessMaterial() { return m_postProcessMaterial; }
 		Projection getProjection() const { return m_projection; }
 	private:
@@ -115,11 +115,11 @@ namespace DerydocaEngine::Components
 		float m_orthoSize = 10.0f;
 		GLuint m_deferredFBO;
 		GLuint m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
-		Shader* m_deferredRendererCompositor;
+		Rendering::Shader* m_deferredRendererCompositor;
 		Projection m_projection;
 
 		void clear();
-		void setIdentityMatricies(Shader* const& shader);
+		void setIdentityMatricies(Rendering::Shader* const& shader);
 	};
 
 }

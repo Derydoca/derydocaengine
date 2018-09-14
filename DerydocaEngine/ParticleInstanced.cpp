@@ -66,7 +66,7 @@ namespace DerydocaEngine::Ext
 			m_angle = angleNode.as<float>();
 		}
 
-		Shader* shader = getResourceObject<Shader>(compNode, "shader");
+		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
 		assert(shader);
 		m_material = new Rendering::Material();
 		m_material->setShader(shader);
