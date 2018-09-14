@@ -218,9 +218,6 @@
     <ClCompile Include="RenderTexture.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="ShaderLibrary.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -268,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="MeshRenderer.cpp">
       <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -556,9 +556,6 @@
     <ClInclude Include="RenderTexture.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderLibrary.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -614,6 +611,9 @@
       <Filter>DerydocaEngine\DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="MatrixStack.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

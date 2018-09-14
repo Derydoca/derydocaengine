@@ -63,7 +63,7 @@ namespace DerydocaEngine::FileSerializers {
 		}
 
 		// Store the shader name in the library
-		ShaderLibrary::getInstance().registerShaderName(shaderResource->getRawShaderName(), shaderResource->getId());
+		Rendering::ShaderLibrary::getInstance().registerShaderName(shaderResource->getRawShaderName(), shaderResource->getId());
 	}
 
 }

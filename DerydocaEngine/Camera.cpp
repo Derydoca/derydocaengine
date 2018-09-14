@@ -114,7 +114,7 @@ namespace DerydocaEngine::Components
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 			// TODO: Find a better way to get the shader so the ID is not hard-coded
-			m_deferredRendererCompositor = ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\deferredRenderCompositorShader");
+			m_deferredRendererCompositor = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\deferredRenderCompositorShader");
 		}
 		else
 		{
