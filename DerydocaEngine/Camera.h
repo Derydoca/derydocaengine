@@ -13,9 +13,9 @@ class Display;
 namespace DerydocaEngine::Rendering {
 	class Material;
 	class Mesh;
+	class RenderTexture;
 	class Shader;
 }
-class RenderTexture;
 class Skybox;
 
 namespace DerydocaEngine::Components
@@ -50,7 +50,7 @@ namespace DerydocaEngine::Components
 		Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar);
 		~Camera();
 
-		inline RenderTexture* getRenderTexture() const { return m_renderTexture; }
+		inline Rendering::RenderTexture* getRenderTexture() const { return m_renderTexture; }
 
 		/*
 		Sets the clear mode
@@ -84,7 +84,7 @@ namespace DerydocaEngine::Components
 		Display* getDisplay() { return m_display; }
 		float getDisplayWidth();
 		float getDisplayHeight();
-		void setRenderTexture(RenderTexture* const& renderTexture) { m_renderTexture = renderTexture; }
+		void setRenderTexture(Rendering::RenderTexture* const& renderTexture) { m_renderTexture = renderTexture; }
 		void init();
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
 		void setRenderingMode(RenderingMode const& mode);
@@ -107,7 +107,7 @@ namespace DerydocaEngine::Components
 		RenderingMode m_renderingMode;
 		Rendering::Material* m_skyboxMaterial;
 		Rendering::MatrixStack m_matrixStack;
-		RenderTexture* m_renderTexture;
+		Rendering::RenderTexture* m_renderTexture;
 		Display* m_display;
 		Rectangle* m_displayRect;
 		Rendering::Mesh* m_quad;

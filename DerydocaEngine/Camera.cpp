@@ -167,7 +167,7 @@ namespace DerydocaEngine::Components
 		{
 			int width = renderTextureNode["Width"].as<int>();
 			int height = renderTextureNode["Height"].as<int>();
-			m_renderTexture = new RenderTexture(width, height);
+			m_renderTexture = new Rendering::RenderTexture(width, height);
 
 			Rendering::Shader* postProcessingShader = getResourceObject<Rendering::Shader>(renderTextureNode, "PostProcessShader");
 			m_postProcessMaterial = new Rendering::Material();

@@ -17,7 +17,7 @@ public:
 		m_name = name;
 	}
 
-	RenderPass(std::string const& name, RenderTexture* const& renderTexture, std::string const& renderTextureName)
+	RenderPass(std::string const& name, DerydocaEngine::Rendering::RenderTexture* const& renderTexture, std::string const& renderTextureName)
 	{
 		assert(renderTexture != nullptr);
 
@@ -36,13 +36,13 @@ public:
 
 	std::string getName() const { return m_name; }
 	int getShaderSubroutineIndex() const { return m_shaderSubroutineIndex; }
-	RenderTexture* getRenderTexture() const { return m_renderTexture; }
+	DerydocaEngine::Rendering::RenderTexture* getRenderTexture() const { return m_renderTexture; }
 	std::string getRenderTextureName() const { return m_renderTextureName; }
 
 	bool hasRenderTextureAssigned() const { return m_renderTexture != nullptr; }
 private:
 	std::string m_name;
 	int m_shaderSubroutineIndex;
-	RenderTexture* m_renderTexture = nullptr;
+	DerydocaEngine::Rendering::RenderTexture* m_renderTexture = nullptr;
 	std::string m_renderTextureName;
 };
