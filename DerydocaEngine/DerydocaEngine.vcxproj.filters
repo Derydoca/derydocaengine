@@ -215,9 +215,6 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="RenderTexture.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="ShadowMap.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -267,6 +264,9 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="ShaderLibrary.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
@@ -553,9 +553,6 @@
     <ClInclude Include="RenderPass.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="RenderTexture.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="ShadowMap.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -614,6 +611,9 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="ShaderLibrary.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTexture.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

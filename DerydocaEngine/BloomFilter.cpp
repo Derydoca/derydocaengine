@@ -52,10 +52,10 @@ namespace DerydocaEngine::Ext
 		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
 		if (shader != nullptr)
 		{
-			RenderPass subPassNames[3] =
+			Rendering::RenderPass subPassNames[3] =
 			{
-				RenderPass("lumThreshPass", m_blurTex, "BlurTex"),
-				RenderPass("blurY", m_blurTex2, "BlurTex2"),
+				Rendering::RenderPass("lumThreshPass", m_blurTex, "BlurTex"),
+				Rendering::RenderPass("blurY", m_blurTex2, "BlurTex2"),
 				"blurX"
 			};
 			shader->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 3);
