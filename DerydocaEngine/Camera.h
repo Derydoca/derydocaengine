@@ -15,8 +15,8 @@ namespace DerydocaEngine::Rendering {
 	class Mesh;
 	class RenderTexture;
 	class Shader;
+	class Skybox;
 }
-class Skybox;
 
 namespace DerydocaEngine::Components
 {
@@ -102,7 +102,7 @@ namespace DerydocaEngine::Components
 	private:
 		Transform * m_transform;
 		Color m_clearColor;
-		Skybox* m_skybox;
+		Rendering::Skybox* m_skybox;
 		ClearMode m_clearMode = NoClear;
 		RenderingMode m_renderingMode;
 		Rendering::Material* m_skyboxMaterial;

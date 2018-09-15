@@ -21,7 +21,7 @@ namespace DerydocaEngine::Components
 	{
 		Rendering::CameraManager::getInstance().addCamera(this);
 
-		m_skybox = new Skybox();
+		m_skybox = new Rendering::Skybox();
 		m_displayRect = new Rectangle(0, 0, 1, 1);
 
 		setDisplay(DisplayManager::getInstance().getDisplay(0));
@@ -41,7 +41,7 @@ namespace DerydocaEngine::Components
 
 		Rendering::CameraManager::getInstance().addCamera(this);
 
-		m_skybox = new Skybox();
+		m_skybox = new Rendering::Skybox();
 		m_displayRect = new Rectangle();
 	}
 

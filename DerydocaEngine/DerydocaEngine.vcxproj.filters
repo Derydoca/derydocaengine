@@ -17,9 +17,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="Skybox.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -212,9 +209,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="ShadowMap.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -269,6 +263,12 @@
     <ClCompile Include="RenderTexture.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h">
@@ -293,9 +293,6 @@
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="Skybox.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
@@ -538,9 +535,6 @@
     <ClInclude Include="Texture.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="DisplayManager.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -614,6 +608,12 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="RenderPass.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

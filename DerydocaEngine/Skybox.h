@@ -4,17 +4,21 @@ namespace DerydocaEngine::Rendering {
 	class Mesh;
 }
 
-class Skybox
+namespace DerydocaEngine::Rendering
 {
-public:
-	Skybox();
-	Skybox(float const& size);
-	~Skybox();
 
-	DerydocaEngine::Rendering::Mesh* getMesh() const { return m_mesh; };
-private:
-	void buildMesh(float const& size);
+	class Skybox
+	{
+	public:
+		Skybox();
+		Skybox(float const& size);
+		~Skybox();
 
-	DerydocaEngine::Rendering::Mesh* m_mesh;
-};
+		Mesh* getMesh() const { return m_mesh; };
+	private:
+		void buildMesh(float const& size);
 
+		Mesh* m_mesh;
+	};
+
+}
