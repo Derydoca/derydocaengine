@@ -19,7 +19,7 @@ namespace DerydocaEngine::Components
 
 	Camera::Camera()
 	{
-		CameraManager::getInstance().addCamera(this);
+		Rendering::CameraManager::getInstance().addCamera(this);
 
 		m_skybox = new Skybox();
 		m_displayRect = new Rectangle(0, 0, 1, 1);
@@ -39,7 +39,7 @@ namespace DerydocaEngine::Components
 		m_projection.setZFar(zFar);
 		m_projection.recalculateProjectionMatrix();
 
-		CameraManager::getInstance().addCamera(this);
+		Rendering::CameraManager::getInstance().addCamera(this);
 
 		m_skybox = new Skybox();
 		m_displayRect = new Rectangle();
@@ -51,7 +51,7 @@ namespace DerydocaEngine::Components
 		delete m_skybox;
 		delete m_renderTexture;
 		delete m_postProcessMaterial;
-		CameraManager::getInstance().removeCamera(this);
+		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
 	void Camera::init()
