@@ -4,14 +4,14 @@
 
 namespace DerydocaEngine::FileSerializers {
 
-	static MeshFlags stringToFlag(std::string const& flagString)
+	static Rendering::MeshFlags stringToFlag(std::string const& flagString)
 	{
 		if (flagString == "load_adjacent")
 		{
-			return MeshFlags::load_adjacent;
+			return Rendering::MeshFlags::load_adjacent;
 		}
 
-		return (MeshFlags)0;
+		return (Rendering::MeshFlags)0;
 	}
 
 	FileType MeshSerializer::getFileType()

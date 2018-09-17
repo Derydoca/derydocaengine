@@ -1,6 +1,11 @@
 #pragma once
 
-enum MeshFlags
+namespace DerydocaEngine::Rendering
 {
-	load_adjacent = 0b00000001
-};
+
+	enum MeshFlags
+	{
+		load_adjacent = 0b00000001
+	};
+
+}
