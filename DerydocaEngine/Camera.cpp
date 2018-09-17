@@ -24,7 +24,7 @@ namespace DerydocaEngine::Components
 		m_skybox = new Rendering::Skybox();
 		m_displayRect = new Rectangle(0, 0, 1, 1);
 
-		setDisplay(DisplayManager::getInstance().getDisplay(0));
+		setDisplay(Rendering::DisplayManager::getInstance().getDisplay(0));
 		m_projection.setAspectRatio(m_display->getAspectRatio());
 		m_projection.recalculateProjectionMatrix();
 		setClearMode(ClearMode::ColorClear);

@@ -2,32 +2,36 @@
 #include <vector>
 #include "Display.h"
 
-class DisplayManager
+namespace DerydocaEngine::Rendering
 {
-public:
-	static DisplayManager& getInstance()
+
+	class DisplayManager
 	{
-		static DisplayManager instance;
-		return instance;
-	}
-
-	void addDisplay(DerydocaEngine::Rendering::Display* const& display) { m_displays.push_back(display); }
-
-	DerydocaEngine::Rendering::Display* getDisplay(size_t const& index) {
-		if (index >= m_displays.size())
+	public:
+		static DisplayManager& getInstance()
 		{
-			return nullptr;
+			static DisplayManager instance;
+			return instance;
 		}
-		return m_displays[index];
-	}
 
-	void operator=(DisplayManager const&) = delete;
-private:
-	DisplayManager() {}
-	~DisplayManager() {}
+		void addDisplay(DerydocaEngine::Rendering::Display* const& display) { m_displays.push_back(display); }
 
-	DisplayManager(DisplayManager const&);
+		DerydocaEngine::Rendering::Display* getDisplay(size_t const& index) {
+			if (index >= m_displays.size())
+			{
+				return nullptr;
+			}
+			return m_displays[index];
+		}
 
-	std::vector<DerydocaEngine::Rendering::Display*> m_displays;
-};
+		void operator=(DisplayManager const&) = delete;
+	private:
+		DisplayManager() {}
+		~DisplayManager() {}
 
+		DisplayManager(DisplayManager const&);
+
+		std::vector<DerydocaEngine::Rendering::Display*> m_displays;
+	};
+
+}
