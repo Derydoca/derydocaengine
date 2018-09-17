@@ -6,12 +6,12 @@
 #include "ObjectLibrary.h"
 #include "YamlTools.h"
 
-struct Projection;
 struct Resource;
 struct Transform;
 
 class GameObject;
 namespace DerydocaEngine::Rendering {
+	struct Projection;
 	class Material;
 	class MatrixStack;
 }
@@ -29,7 +29,7 @@ public:
 	virtual void update(float const& deltaTime) {}
 	virtual void preRender() {}
 	virtual void render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {}
-	virtual void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform) {}
+	virtual void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& material, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform) {}
 	virtual void postRender() {}
 	inline void setGameObject(GameObject* const& gameObject) { m_gameObject = gameObject; }
 	inline GameObject* getGameObject() { return m_gameObject; }

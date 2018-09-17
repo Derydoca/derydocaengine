@@ -2,10 +2,10 @@
 #include <vector>
 #include "Transform.h"
 
-struct Projection;
 struct Transform;
 class GameComponent;
 namespace DerydocaEngine::Rendering {
+	struct Projection;
 	class Material;
 	class MatrixStack;
 }
@@ -21,7 +21,7 @@ public:
 	void postInit();
 	void update(float const& deltaTime);
 	void render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack);
-	void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& renderMesh, Projection const& projection, Transform* const& projectionTransform);
+	void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& renderMesh, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform);
 	void preRender();
 	void postRender();
 

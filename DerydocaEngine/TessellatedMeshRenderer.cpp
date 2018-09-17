@@ -83,7 +83,7 @@ namespace DerydocaEngine::Ext
 		glFinish();
 	}
 
-	void TessellatedMeshRenderer::renderMesh(Rendering::MatrixStack * const& matrixStack, Rendering::Material * const& material, Projection const& projection, Transform * const& projectionTransform)
+	void TessellatedMeshRenderer::renderMesh(Rendering::MatrixStack * const& matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Transform * const& projectionTransform)
 	{
 		// Consider an alternate to using the same material as what is being used to render to screen
 		//  The calculations may be excessive for a shadow calc

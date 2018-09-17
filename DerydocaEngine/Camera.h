@@ -92,13 +92,13 @@ namespace DerydocaEngine::Components
 
 		void createGBufTex(GLenum const& textureUnit, GLenum const& format, GLuint & texid, int const& width, int const& height);
 
-		void setProjectionMode(ProjectionMode const& mode);
+		void setProjectionMode(Rendering::ProjectionMode const& mode);
 		void setOrthoSize(float const& size);
 		float getOrthoSize(float const& size) { return m_orthoSize; }
 		void deserialize(YAML::Node const& node);
 		Rendering::Shader* getPostProcessShader() const;
 		Rendering::Material* getPostProcessMaterial() { return m_postProcessMaterial; }
-		Projection getProjection() const { return m_projection; }
+		Rendering::Projection getProjection() const { return m_projection; }
 	private:
 		Transform * m_transform;
 		Color m_clearColor;
@@ -116,7 +116,7 @@ namespace DerydocaEngine::Components
 		GLuint m_deferredFBO;
 		GLuint m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
 		Rendering::Shader* m_deferredRendererCompositor;
-		Projection m_projection;
+		Rendering::Projection m_projection;
 
 		void clear();
 		void setIdentityMatricies(Rendering::Shader* const& shader);

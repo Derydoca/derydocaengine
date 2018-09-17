@@ -79,7 +79,7 @@ namespace DerydocaEngine::Components
 		m_material->unbind();
 	}
 
-	void RendererComponent::renderMesh(Rendering::MatrixStack * const& matrixStack, Rendering::Material * const& material, Projection const& projection, Transform * const& projectionTransform)
+	void RendererComponent::renderMesh(Rendering::MatrixStack * const& matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Transform * const& projectionTransform)
 	{
 		m_material->bind();
 		m_material->getShader()->update(matrixStack, projection, projectionTransform);

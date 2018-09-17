@@ -57,7 +57,7 @@ namespace DerydocaEngine::Components
 		GLuint getShadowMap() { return m_depthTexture; }
 		bool isCastingShadows() { return m_castShadows; }
 		bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
-		Projection getProjection() { return m_projection; }
+		Rendering::Projection getProjection() { return m_projection; }
 		glm::mat4 getShadowMatrix(glm::mat4 const& objectModelMatrix);
 		float getShadowSoftness() const { return m_shadowSoftness; }
 
@@ -80,7 +80,7 @@ namespace DerydocaEngine::Components
 		GLuint m_shadowFBO;
 		Rendering::MatrixStack m_matrixStack;
 		Rendering::Material* m_shadowMapMaterial;
-		Projection m_projection;
+		Rendering::Projection m_projection;
 		glm::mat4 m_shadowBias;
 		ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;
 		float m_shadowSoftness = 0.01f;

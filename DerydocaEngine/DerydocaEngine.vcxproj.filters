@@ -532,9 +532,6 @@
     <ClInclude Include="Texture.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="MeshFlags.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="Projection.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -614,6 +611,9 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="DisplayManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshFlags.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

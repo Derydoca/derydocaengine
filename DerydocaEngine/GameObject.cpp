@@ -46,7 +46,7 @@ void GameObject::render(DerydocaEngine::Rendering::MatrixStack* const& matrixSta
 	matrixStack->pop();
 }
 
-void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, Projection const& projection, Transform* const& projectionTransform)
+void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform)
 {
 	matrixStack->push(m_transform.getModel());
 

@@ -21,7 +21,7 @@ namespace DerydocaEngine::Components
 		}
 
 		void render(Rendering::MatrixStack* const& matrixStack);
-		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Projection const& projection, Transform* const& projectionTransform);
+		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
 		unsigned int getNumVertices() const { return m_numVertices; }
 		unsigned int getNumIndices() const { return m_numIndices; }
 

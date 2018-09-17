@@ -139,7 +139,7 @@ namespace DerydocaEngine::Components
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
 	}
 
-	void Camera::setProjectionMode(ProjectionMode const& mode)
+	void Camera::setProjectionMode(Rendering::ProjectionMode const& mode)
 	{
 		m_projection.setProjectionMode(mode);
 		m_projection.recalculateProjectionMatrix();
