@@ -3,16 +3,20 @@
 
 class Shader;
 
-class ShadowMap : public Texture
+namespace DerydocaEngine::Rendering
 {
-public:
-	ShadowMap();
-	~ShadowMap();
 
-	void bind(unsigned int const& unit);
-	void bindAsRenderTexture();
-	void intializeTexture(int const& size);
-private:
-	GLuint m_shadowFramebuffer;
-};
+	class ShadowMap : public Texture
+	{
+	public:
+		ShadowMap();
+		~ShadowMap();
 
+		void bind(unsigned int const& unit);
+		void bindAsRenderTexture();
+		void intializeTexture(int const& size);
+	private:
+		GLuint m_shadowFramebuffer;
+	};
+
+}
