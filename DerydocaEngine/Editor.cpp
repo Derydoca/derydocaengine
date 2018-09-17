@@ -33,7 +33,7 @@ namespace DerydocaEngine::Execution
 		DerydocaEngine::Timing::Clock::init();
 		DerydocaEngine::Timing::Clock* clock = new DerydocaEngine::Timing::Clock();
 
-		Display* display = new Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
+		Rendering::Display* display = new Rendering::Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 
 		GameObject* sceneRoot = new GameObject();
 

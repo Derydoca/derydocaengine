@@ -277,7 +277,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Camera::setDisplay(Display * const & display)
+	void Camera::setDisplay(Rendering::Display * const & display)
 	{
 		if (m_display != nullptr)
 		{

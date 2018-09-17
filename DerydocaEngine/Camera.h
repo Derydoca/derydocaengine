@@ -9,8 +9,8 @@
 #include "Projection.h"
 
 struct Rectangle;
-class Display;
 namespace DerydocaEngine::Rendering {
+	class Display;
 	class Material;
 	class Mesh;
 	class RenderTexture;
@@ -80,8 +80,8 @@ namespace DerydocaEngine::Components
 		*/
 		void renderRoot(GameObject* const& root);
 
-		void setDisplay(Display* const& display);
-		Display* getDisplay() { return m_display; }
+		void setDisplay(Rendering::Display* const& display);
+		Rendering::Display* getDisplay() { return m_display; }
 		float getDisplayWidth();
 		float getDisplayHeight();
 		void setRenderTexture(Rendering::RenderTexture* const& renderTexture) { m_renderTexture = renderTexture; }
@@ -108,7 +108,7 @@ namespace DerydocaEngine::Components
 		Rendering::Material* m_skyboxMaterial;
 		Rendering::MatrixStack m_matrixStack;
 		Rendering::RenderTexture* m_renderTexture;
-		Display* m_display;
+		Rendering::Display* m_display;
 		Rectangle* m_displayRect;
 		Rendering::Mesh* m_quad;
 		Rendering::Material* m_postProcessMaterial;

@@ -11,9 +11,9 @@ public:
 		return instance;
 	}
 
-	void addDisplay(Display* const& display) { m_displays.push_back(display); }
+	void addDisplay(DerydocaEngine::Rendering::Display* const& display) { m_displays.push_back(display); }
 
-	Display* getDisplay(size_t const& index) {
+	DerydocaEngine::Rendering::Display* getDisplay(size_t const& index) {
 		if (index >= m_displays.size())
 		{
 			return nullptr;
@@ -28,6 +28,6 @@ private:
 
 	DisplayManager(DisplayManager const&);
 
-	std::vector<Display*> m_displays;
+	std::vector<DerydocaEngine::Rendering::Display*> m_displays;
 };
 

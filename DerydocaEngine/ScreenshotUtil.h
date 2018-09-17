@@ -12,13 +12,13 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(ScreenshotUtil);
 		ScreenshotUtil();
-		ScreenshotUtil(Display* const& display, Keyboard* const& keyboard);
+		ScreenshotUtil(Rendering::Display* const& display, Keyboard* const& keyboard);
 		~ScreenshotUtil();
 
 		void postRender();
 	private:
 		Keyboard * m_keyboard;
-		Display* m_display;
+		Rendering::Display* m_display;
 	};
 
 }
