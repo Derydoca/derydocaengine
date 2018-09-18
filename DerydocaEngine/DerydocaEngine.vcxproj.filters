@@ -29,9 +29,6 @@
     <ClCompile Include="SerializedScene.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="MaterialResourceSerializer.cpp">
       <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
@@ -118,9 +115,6 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>To Be Namespaced\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="IntRectangle.cpp">
-      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="FileType.cpp">
       <Filter>To Be Namespaced</Filter>
@@ -269,6 +263,9 @@
     <ClCompile Include="IntRect.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
+    <ClCompile Include="IntRectangle.cpp">
+      <Filter>DerydocaEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h">
@@ -317,9 +314,6 @@
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="SerializedScene.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="SceneObject.h">
@@ -423,9 +417,6 @@
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>To Be Namespaced\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="IntRectangle.h">
-      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="FileType.h">
       <Filter>To Be Namespaced</Filter>
@@ -614,6 +605,9 @@
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
     <ClInclude Include="IntRect.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="IntRectangle.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
   </ItemGroup>
