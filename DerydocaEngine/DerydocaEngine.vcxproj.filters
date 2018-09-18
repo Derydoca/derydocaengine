@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>To Be Namespaced\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>To Be Namespaced\Input</Filter>
     </ClCompile>
@@ -266,12 +263,12 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Key.h">
-      <Filter>To Be Namespaced\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Keyboard.h">
       <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
     <ClInclude Include="Mouse.h">
@@ -608,6 +605,9 @@
       <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
       <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
   </ItemGroup>
