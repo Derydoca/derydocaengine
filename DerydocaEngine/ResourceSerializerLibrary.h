@@ -2,25 +2,29 @@
 #include <map>
 #include "ResourceSerializer.h"
 
-class ResourceSerializerLibrary
+namespace DerydocaEngine::Resources::Serializers
 {
-public:
-	static ResourceSerializerLibrary& getInstance()
+
+	class ResourceSerializerLibrary
 	{
-		static ResourceSerializerLibrary instance;
-		return instance;
-	}
+	public:
+		static ResourceSerializerLibrary& getInstance()
+		{
+			static ResourceSerializerLibrary instance;
+			return instance;
+		}
 
-	ResourceSerializer * getSerializer(ResourceType const& type);
+		ResourceSerializer * getSerializer(ResourceType const& type);
 
-	void operator=(ResourceSerializerLibrary const&) = delete;
-private:
-	ResourceSerializerLibrary();
-	~ResourceSerializerLibrary();
-	ResourceSerializerLibrary(ResourceSerializerLibrary const&);
+		void operator=(ResourceSerializerLibrary const&) = delete;
+	private:
+		ResourceSerializerLibrary();
+		~ResourceSerializerLibrary();
+		ResourceSerializerLibrary(ResourceSerializerLibrary const&);
 
-	void registerSerializer(ResourceSerializer * const& serializer);
+		void registerSerializer(ResourceSerializer * const& serializer);
 
-	std::map<ResourceType, ResourceSerializer *> m_serializers;
-};
+		std::map<ResourceType, ResourceSerializer *> m_serializers;
+	};
 
+}
