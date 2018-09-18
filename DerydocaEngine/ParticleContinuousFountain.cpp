@@ -130,7 +130,7 @@ namespace DerydocaEngine::Ext
 		m_material->setFloat("MinParticleSize", m_particleSizeMin);
 		m_material->setFloat("MaxParticleSize", m_particleSizeMax);
 
-		Texture* m_tex = getResourceObject<Texture>(compNode, "texture");
+		Rendering::Texture* m_tex = getResourceObject<Rendering::Texture>(compNode, "texture");
 		m_material->setTexture("ParticleTex", m_tex);
 	}
 

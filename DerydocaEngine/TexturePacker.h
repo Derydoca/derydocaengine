@@ -6,7 +6,9 @@
 #include "TexturePackerTextureData.h"
 #include "IntRect.h"
 
-class Texture;
+namespace DerydocaEngine::Rendering {
+	class Texture;
+}
 
 namespace DerydocaEngine::Utilities
 {
@@ -31,7 +33,7 @@ namespace DerydocaEngine::Utilities
 			int const& channels);
 		void packImages();
 		bool getIsDirty() const { return m_isDirty; }
-		Texture* allocTexture() { return m_packedImageData.allocTexture(); };
+		Rendering::Texture* allocTexture() { return m_packedImageData.allocTexture(); };
 		unsigned char* allocImageBuffer() { return m_packedImageData.allocImageBuffer(); }
 		void freeSubImageData();
 		std::vector<TexturePackerImage> getSubImageData() { return m_images; }

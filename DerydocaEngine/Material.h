@@ -6,8 +6,8 @@
 struct Color;
 namespace DerydocaEngine::Rendering {
 	class Shader;
+	class Texture;
 }
-class Texture;
 class RenderTexture;
 
 namespace DerydocaEngine::Rendering

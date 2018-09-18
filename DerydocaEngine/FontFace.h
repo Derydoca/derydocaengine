@@ -21,7 +21,7 @@ namespace DerydocaEngine::UI
 		FontFace();
 		~FontFace();
 
-		Texture* getTexture();
+		Rendering::Texture* getTexture();
 		DerydocaEngine::Utilities::TexturePackerImage getCharData(int const& charCode) const {
 			if (m_charImages.find(charCode) == m_charImages.end())
 			{
@@ -41,7 +41,7 @@ namespace DerydocaEngine::UI
 	private:
 		glm::ivec2 m_dotsPerInch = glm::ivec2(300, 300);
 		float m_fontSize = 16.0;
-		Texture m_texture;
+		Rendering::Texture m_texture;
 		std::map<int, DerydocaEngine::Utilities::TexturePackerImage> m_charImages;
 		unsigned char* m_imageBuffer;
 		glm::ivec2 m_imageBufferSize;

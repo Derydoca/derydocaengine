@@ -31,7 +31,7 @@ void * MaterialResourceSerializer::deserialize(Resource * const& resource)
 		std::string paramType = parameters[i]["Type"].as<std::string>();
 		if (paramType == "Texture")
 		{
-			auto texture = loadResource<Texture*>(parameters[i], "ID");
+			auto texture = loadResource<DerydocaEngine::Rendering::Texture*>(parameters[i], "ID");
 			YAML::Node nameNode = parameters[i]["Name"];
 			if (texture != nullptr && nameNode)
 			{

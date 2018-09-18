@@ -28,7 +28,7 @@ namespace DerydocaEngine::Ext
 		float m_fov;
 		float m_zNear;
 		float m_zFar;
-		Texture* m_projectorTexture;
+		Rendering::Texture* m_projectorTexture;
 		std::vector<DerydocaEngine::Components::MeshRenderer*> m_meshRenderers;
 
 		void updateProjectionMatrix();

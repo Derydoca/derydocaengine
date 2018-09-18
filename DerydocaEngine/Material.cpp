@@ -24,7 +24,7 @@ namespace DerydocaEngine::Rendering
 		m_intValues[name] = value;
 	}
 
-	void Material::setTexture(std::string const& name, Texture* const& texture)
+	void Material::setTexture(std::string const & name, Texture * const & texture)
 	{
 		m_textures[name] = texture;
 	}

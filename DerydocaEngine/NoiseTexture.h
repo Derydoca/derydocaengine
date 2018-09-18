@@ -24,7 +24,7 @@ namespace DerydocaEngine::Ext
 		int m_height = 256;
 		std::string m_textureName = "NoiseTexture";
 		Rendering::Material* m_material = nullptr;
-		Texture* m_texture = nullptr;
+		Rendering::Texture* m_texture = nullptr;
 		float m_baseFrequency = 4.0;
 		float m_persistence = 1.0;
 		bool m_periodic = false;

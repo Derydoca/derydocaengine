@@ -9,7 +9,7 @@ namespace DerydocaEngine::Components
 	{
 		if (m_spriteSheet)
 		{
-			Texture* spriteSheetTexture = m_spriteSheet->getTexture();
+			Rendering::Texture* spriteSheetTexture = m_spriteSheet->getTexture();
 			getMaterial()->setTexture("SpriteSheet", spriteSheetTexture);
 			markComponentAsDirty(Rendering::MeshComponents::All);
 		}

@@ -49,7 +49,7 @@ void* CubemapResourceSerializer::deserialize(Resource * const& resource)
 		std::string zNegImage = getSourceFilePath(parameterNode, "ZNeg");
 
 		// Create the cubemap texture and return the object
-		Texture* cubemapTexture = new Texture(xPosImage, xNegImage, yPosImage, yNegImage, zPosImage, zNegImage);
+		DerydocaEngine::Rendering::Texture* cubemapTexture = new DerydocaEngine::Rendering::Texture(xPosImage, xNegImage, yPosImage, yNegImage, zPosImage, zNegImage);
 		return cubemapTexture;
 	}
 

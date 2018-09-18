@@ -54,13 +54,13 @@ namespace DerydocaEngine::Utilities
 		}
 	}
 
-	Texture * TexturePackerTextureData::allocTexture()
+	Rendering::Texture * TexturePackerTextureData::allocTexture()
 	{
 		// Create the image buffer
 		unsigned char* dataBuffer = allocImageBuffer();
 
 		// Load it into a texture
-		Texture* tex = new Texture();
+		Rendering::Texture* tex = new Rendering::Texture();
 		tex->updateBuffer(dataBuffer, getWidth(), getHeight(), getChannels(), nullptr);
 
 		// Free up the memory we used

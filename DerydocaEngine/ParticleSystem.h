@@ -26,7 +26,7 @@ namespace DerydocaEngine::Ext
 		GLuint m_vertexArrayBuffers[1];
 		glm::vec3 m_volumeSize;
 		glm::vec3* m_particleLocations;
-		Texture* m_texture;
+		Rendering::Texture* m_texture;
 		Rendering::Material* m_material;
 	};
 

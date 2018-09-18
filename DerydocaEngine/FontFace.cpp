@@ -21,7 +21,7 @@ namespace DerydocaEngine::UI
 	{
 	}
 
-	Texture * FontFace::getTexture()
+	Rendering::Texture * FontFace::getTexture()
 	{
 		// Upload the texture to the GPU if the image buffer has changed and has not been submitted
 		if (m_textureDirty)

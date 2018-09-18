@@ -111,7 +111,7 @@ namespace DerydocaEngine::Components
 		m_mesh->loadMeshComponentDataDEPRECATED(numVerts, positions, normals, texCoords, indices, numIndices);
 	}
 
-	void Terrain::setTextureSlot(int const& slot, Texture * const& texture)
+	void Terrain::setTextureSlot(int const& slot, Rendering::Texture * const& texture)
 	{
 		m_meshRenderer->getMaterial()->setTextureSlot(slot, texture);
 	}

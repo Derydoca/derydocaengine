@@ -19,7 +19,7 @@ namespace DerydocaEngine::UI
 		void saveToDisk(std::string const& filePath);
 		void LoadFromDisk(std::string const& filePath);
 
-		Texture* getTexture() { return &m_texture; }
+		Rendering::Texture* getTexture() { return &m_texture; }
 		SpriteReference* getSpriteReference(unsigned int const& id)
 		{
 			auto spriteMapRecord = m_sprites.find(id);
@@ -35,7 +35,7 @@ namespace DerydocaEngine::UI
 		std::map<int, SpriteReference> m_sprites;
 		unsigned char* m_imageBuffer;
 		unsigned int m_largestId;
-		Texture m_texture;
+		Rendering::Texture m_texture;
 	};
 
 }

@@ -206,9 +206,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="ShadowMap.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -267,6 +264,9 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Display.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
@@ -532,9 +532,6 @@
     <ClInclude Include="Texture.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="ShadowMap.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="Clock.h">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClInclude>
@@ -614,6 +611,9 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>

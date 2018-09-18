@@ -3,7 +3,9 @@
 #include <assert.h>
 #include "TexturePackerImage.h"
 
-class Texture;
+namespace DerydocaEngine::Rendering {
+	class Texture;
+}
 
 namespace DerydocaEngine::Utilities
 {
@@ -30,7 +32,7 @@ namespace DerydocaEngine::Utilities
 		int getWidth() const { return (int)m_data[0].size() / m_channels; }
 		int getHeight() const { return (int)m_data.size(); }
 		int getChannels() const { return m_channels; }
-		Texture* allocTexture();
+		Rendering::Texture* allocTexture();
 		unsigned char* allocImageBuffer();
 	private:
 		int m_channels;

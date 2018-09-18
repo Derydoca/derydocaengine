@@ -9,7 +9,7 @@ namespace DerydocaEngine::Ext
 
 	NoiseTexture::NoiseTexture()
 	{
-		m_texture = new Texture();
+		m_texture = new Rendering::Texture();
 	}
 
 	NoiseTexture::~NoiseTexture()

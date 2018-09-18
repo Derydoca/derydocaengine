@@ -22,7 +22,7 @@ namespace DerydocaEngine::Components
 		void draw();
 		void updateMesh();
 
-		void setTextureSlot(int const& slot, Texture* const& texture);
+		void setTextureSlot(int const& slot, Rendering::Texture* const& texture);
 		void init();
 
 		void render(Rendering::MatrixStack* const& matrixStack);

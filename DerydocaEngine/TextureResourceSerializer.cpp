@@ -15,7 +15,7 @@ void * TextureResourceSerializer::deserialize(Resource * const& resource)
 {
 	std::string sourceFilePath = resource->getSourceFilePath();
 
-	Texture* texture = new Texture(sourceFilePath);
+	DerydocaEngine::Rendering::Texture* texture = new DerydocaEngine::Rendering::Texture(sourceFilePath);
 
 	return texture;
 }

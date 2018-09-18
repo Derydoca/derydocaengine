@@ -85,7 +85,7 @@ namespace DerydocaEngine::Ext
 			m_size2 = 0.25f;
 		}
 
-		m_texture = getResourceObject<Texture>(compNode, "texture");
+		m_texture = getResourceObject<Rendering::Texture>(compNode, "texture");
 
 		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
 		m_material = new Rendering::Material();

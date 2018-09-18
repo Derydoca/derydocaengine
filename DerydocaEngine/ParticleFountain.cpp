@@ -71,7 +71,7 @@ namespace DerydocaEngine::Ext
 		m_material->setShader(shader);
 		m_material->setFloat("ParticleLifetime", m_lifetime);
 
-		Texture* m_tex = getResourceObject<Texture>(compNode, "texture");
+		Rendering::Texture* m_tex = getResourceObject<Rendering::Texture>(compNode, "texture");
 		m_material->setTexture("ParticleTex", m_tex);
 	}
 
