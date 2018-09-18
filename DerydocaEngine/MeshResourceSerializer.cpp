@@ -5,27 +5,32 @@
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 
-MeshResourceSerializer::MeshResourceSerializer()
+namespace DerydocaEngine::Resources::Serializers
 {
-}
 
-MeshResourceSerializer::~MeshResourceSerializer()
-{
-}
+	MeshResourceSerializer::MeshResourceSerializer()
+	{
+	}
 
-void * MeshResourceSerializer::deserialize(Resource * const& resource)
-{
-	MeshResource* mr = (MeshResource*)resource;
-	auto file = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+	MeshResourceSerializer::~MeshResourceSerializer()
+	{
+	}
 
-	DerydocaEngine::Rendering::Mesh* m = new DerydocaEngine::Rendering::Mesh();
-	m->setFlags(mr->getFlags());
-	m->loadFromFile(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
+	void * MeshResourceSerializer::deserialize(Resource * const& resource)
+	{
+		MeshResource* mr = (MeshResource*)resource;
+		auto file = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-	return m;
-}
+		DerydocaEngine::Rendering::Mesh* m = new DerydocaEngine::Rendering::Mesh();
+		m->setFlags(mr->getFlags());
+		m->loadFromFile(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
 
-ResourceType MeshResourceSerializer::getResourceType()
-{
-	return ResourceType::MeshResourceType;
+		return m;
+	}
+
+	ResourceType MeshResourceSerializer::getResourceType()
+	{
+		return ResourceType::MeshResourceType;
+	}
+
 }

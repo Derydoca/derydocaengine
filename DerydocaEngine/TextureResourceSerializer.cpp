@@ -2,25 +2,29 @@
 #include "Texture.h"
 #include "Resource.h"
 
-TextureResourceSerializer::TextureResourceSerializer()
+namespace DerydocaEngine::Resources::Serializers
 {
-}
 
+	TextureResourceSerializer::TextureResourceSerializer()
+	{
+	}
 
-TextureResourceSerializer::~TextureResourceSerializer()
-{
-}
+	TextureResourceSerializer::~TextureResourceSerializer()
+	{
+	}
 
-void * TextureResourceSerializer::deserialize(Resource * const& resource)
-{
-	std::string sourceFilePath = resource->getSourceFilePath();
+	void * TextureResourceSerializer::deserialize(Resource * const& resource)
+	{
+		std::string sourceFilePath = resource->getSourceFilePath();
 
-	DerydocaEngine::Rendering::Texture* texture = new DerydocaEngine::Rendering::Texture(sourceFilePath);
+		DerydocaEngine::Rendering::Texture* texture = new DerydocaEngine::Rendering::Texture(sourceFilePath);
 
-	return texture;
-}
+		return texture;
+	}
 
-ResourceType TextureResourceSerializer::getResourceType()
-{
-	return ResourceType::TextureResourceType;
+	ResourceType TextureResourceSerializer::getResourceType()
+	{
+		return ResourceType::TextureResourceType;
+	}
+
 }

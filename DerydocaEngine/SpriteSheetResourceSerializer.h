@@ -1,13 +1,17 @@
 #pragma once
 #include "ResourceSerializer.h"
 
-class SpriteSheetResourceSerializer : public ResourceSerializer
+namespace DerydocaEngine::Resources::Serializers
 {
-public:
-	SpriteSheetResourceSerializer();
-	~SpriteSheetResourceSerializer();
 
-	void* deserialize(Resource* const& resource);
-	ResourceType getResourceType();
-};
+	class SpriteSheetResourceSerializer : public ResourceSerializer
+	{
+	public:
+		SpriteSheetResourceSerializer();
+		~SpriteSheetResourceSerializer();
 
+		void* deserialize(Resource* const& resource);
+		ResourceType getResourceType();
+	};
+
+}

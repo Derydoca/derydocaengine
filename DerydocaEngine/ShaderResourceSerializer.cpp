@@ -2,14 +2,19 @@
 #include "ShaderLibrary.h"
 #include "ShaderResource.h"
 
-void * ShaderResourceSerializer::deserialize(Resource * const& resource)
+namespace DerydocaEngine::Resources::Serializers
 {
-	ShaderResource* shaderResource = (ShaderResource*)resource;
-	DerydocaEngine::Rendering::Shader* shader = new DerydocaEngine::Rendering::Shader(shaderResource->getRawShaderName());
-	return shader;
-}
 
-ResourceType ShaderResourceSerializer::getResourceType()
-{
-	return ResourceType::ShaderResourceType;
+	void * ShaderResourceSerializer::deserialize(Resource * const& resource)
+	{
+		ShaderResource* shaderResource = (ShaderResource*)resource;
+		DerydocaEngine::Rendering::Shader* shader = new DerydocaEngine::Rendering::Shader(shaderResource->getRawShaderName());
+		return shader;
+	}
+
+	ResourceType ShaderResourceSerializer::getResourceType()
+	{
+		return ResourceType::ShaderResourceType;
+	}
+
 }

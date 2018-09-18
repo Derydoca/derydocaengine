@@ -20,7 +20,7 @@ void* Resource::getResourceObject() {
 	if (m_resourceObject == 0)
 	{
 		// Find the loader that should be used
-		ResourceSerializer* loader = DerydocaEngine::Resources::Serializers::ResourceSerializerLibrary::getInstance().getSerializer(getType());
+		DerydocaEngine::Resources::Serializers::ResourceSerializer* loader = DerydocaEngine::Resources::Serializers::ResourceSerializerLibrary::getInstance().getSerializer(getType());
 
 		// If the loader could not be found, return null
 		if (loader == nullptr)

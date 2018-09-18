@@ -4,7 +4,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class BezierPatchMeshResourceSerializer : public MaterialResourceSerializer
+	class BezierPatchMeshResourceSerializer : public Resources::Serializers::MaterialResourceSerializer
 	{
 	public:
 		BezierPatchMeshResourceSerializer() {}

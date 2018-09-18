@@ -1,12 +1,17 @@
 #pragma once
 #include "ResourceSerializer.h"
 
-class ShaderResourceSerializer : public ResourceSerializer
+namespace DerydocaEngine::Resources::Serializers
 {
-public:
-	ShaderResourceSerializer() {}
-	~ShaderResourceSerializer() {}
 
-	void* deserialize(Resource* const& resource);
-	ResourceType getResourceType();
-};
+	class ShaderResourceSerializer : public ResourceSerializer
+	{
+	public:
+		ShaderResourceSerializer() {}
+		~ShaderResourceSerializer() {}
+
+		void* deserialize(Resource* const& resource);
+		ResourceType getResourceType();
+	};
+
+}

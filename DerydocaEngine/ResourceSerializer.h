@@ -6,45 +6,49 @@
 #include "ObjectLibrary.h"
 #include "Resource.h"
 
-class ResourceSerializer
+namespace DerydocaEngine::Resources::Serializers
 {
-public:
-	virtual ~ResourceSerializer() {}
-	virtual void* deserialize(Resource* const& resource) = 0;
-	virtual ResourceType getResourceType() = 0;
 
-protected:
-	template<typename T>
-	inline T loadResource(YAML::Node const& node, std::string const& resourceName)
+	class ResourceSerializer
 	{
-		YAML::Node resourceIdNode = node[resourceName];
-		if (!resourceIdNode)
-		{
-			std::cout << "Unable to load resource because the ID node of '" << resourceName << "' could not be found.\n";
-			return nullptr;
-		}
-		boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
-		Resource * resource = ObjectLibrary::getInstance().getResource(id);
-		if (resource)
-		{
-			return (T)resource->getResourceObject();
-		}
-		else
-		{
-			return nullptr;
-		}
-	}
+	public:
+		virtual ~ResourceSerializer() {}
+		virtual void* deserialize(Resource* const& resource) = 0;
+		virtual ResourceType getResourceType() = 0;
 
-	std::string getSourceFilePath(YAML::Node const& node, std::string const& resourceName)
-	{
-		boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
-		Resource * resource = ObjectLibrary::getInstance().getResource(id);
-		if(!resource)
+	protected:
+		template<typename T>
+		inline T loadResource(YAML::Node const& node, std::string const& resourceName)
 		{
-			std::cout << "Unable to get the source file path of '" << resourceName << "' from the asset with ID of '" << boost::uuids::to_string(id) << "'.\n";
-			return "";
+			YAML::Node resourceIdNode = node[resourceName];
+			if (!resourceIdNode)
+			{
+				std::cout << "Unable to load resource because the ID node of '" << resourceName << "' could not be found.\n";
+				return nullptr;
+			}
+			boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
+			Resource * resource = ObjectLibrary::getInstance().getResource(id);
+			if (resource)
+			{
+				return (T)resource->getResourceObject();
+			}
+			else
+			{
+				return nullptr;
+			}
 		}
-		return resource->getSourceFilePath();
-	}
-};
 
+		std::string getSourceFilePath(YAML::Node const& node, std::string const& resourceName)
+		{
+			boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
+			Resource * resource = ObjectLibrary::getInstance().getResource(id);
+			if (!resource)
+			{
+				std::cout << "Unable to get the source file path of '" << resourceName << "' from the asset with ID of '" << boost::uuids::to_string(id) << "'.\n";
+				return "";
+			}
+			return resource->getSourceFilePath();
+		}
+	};
+
+}
