@@ -424,9 +424,6 @@
     <ClInclude Include="TextureParameters.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Third Party</Filter>
     </ClInclude>
@@ -608,6 +605,9 @@
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
     <ClInclude Include="IntRectangle.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
   </ItemGroup>

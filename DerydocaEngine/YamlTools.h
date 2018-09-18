@@ -264,8 +264,8 @@ namespace YAML {
 
 	// Add support for Rectangles
 	template<>
-	struct convert<Rectangle> {
-		static Node encode(Rectangle& rect)
+	struct convert<DerydocaEngine::Rectangle> {
+		static Node encode(DerydocaEngine::Rectangle& rect)
 		{
 			Node node;
 			node.push_back(rect.getX());
@@ -275,7 +275,7 @@ namespace YAML {
 			return node;
 		}
 
-		static bool decode(const Node& node, Rectangle& rect)
+		static bool decode(const Node& node, DerydocaEngine::Rectangle& rect)
 		{
 			if (!node.IsSequence() || node.size() != 4) {
 				return false;
