@@ -292,8 +292,8 @@ namespace YAML {
 
 	// Add support for IntRectangles
 	template<>
-	struct convert<IntRectangle> {
-		static Node encode(IntRectangle& rect)
+	struct convert<DerydocaEngine::IntRectangle> {
+		static Node encode(DerydocaEngine::IntRectangle& rect)
 		{
 			Node node;
 			node.push_back(rect.getX());
@@ -303,7 +303,7 @@ namespace YAML {
 			return node;
 		}
 
-		static bool decode(const Node& node, IntRectangle& rect)
+		static bool decode(const Node& node, DerydocaEngine::IntRectangle& rect)
 		{
 			if (!node.IsSequence() || node.size() != 4) {
 				return false;
