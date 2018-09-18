@@ -15,7 +15,7 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(WasdMover);
 		WasdMover();
-		WasdMover(Keyboard* const& keyboard, Mouse* const& mouse) :
+		WasdMover(Input::Keyboard* const& keyboard, Mouse* const& mouse) :
 			m_keyboard(keyboard),
 			m_mouse(mouse),
 			m_moveSpeed(5.0f),
@@ -35,7 +35,7 @@ namespace DerydocaEngine::Components
 		void deserialize(YAML::Node const& node);
 	private:
 		Transform * m_transform;
-		Keyboard* m_keyboard;
+		Input::Keyboard* m_keyboard;
 		Mouse* m_mouse;
 		float m_moveSpeed;
 		float m_mouseSensitivityX, m_mouseSensitivityY;

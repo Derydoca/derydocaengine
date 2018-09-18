@@ -110,9 +110,6 @@
     <ClCompile Include="TessellatedMeshRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>To Be Namespaced\Input</Filter>
-    </ClCompile>
     <ClCompile Include="FileType.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -266,6 +263,9 @@
     <ClCompile Include="ButtonState.cpp">
       <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Key.h">
@@ -408,9 +408,6 @@
     </ClInclude>
     <ClInclude Include="TessellatedMeshRenderer.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
     <ClInclude Include="FileType.h">
       <Filter>To Be Namespaced</Filter>
@@ -608,6 +605,9 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="ButtonState.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
       <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
   </ItemGroup>

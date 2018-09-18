@@ -30,7 +30,7 @@ namespace DerydocaEngine::Ext
 		GLuint m_vao;
 		GLuint m_initVel;
 		GLuint m_startTime;
-		Keyboard* m_keyboard;
+		Input::Keyboard* m_keyboard;
 
 		void initBuffers();
 		float randFloat();

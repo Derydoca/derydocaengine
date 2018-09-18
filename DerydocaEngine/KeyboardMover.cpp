@@ -9,7 +9,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	KeyboardMover::KeyboardMover(Keyboard * const& keyboard, float const& movementSpeed, int const& keyForward, int const& keyBackward, int const& keyLeft, int const& keyRight, int const& keyUp, int const& keyDown) :
+	KeyboardMover::KeyboardMover(Input::Keyboard * const& keyboard, float const& movementSpeed, int const& keyForward, int const& keyBackward, int const& keyLeft, int const& keyRight, int const& keyUp, int const& keyDown) :
 		m_keyboard(keyboard),
 		m_movementSpeed(movementSpeed),
 		m_keyForward(keyForward),

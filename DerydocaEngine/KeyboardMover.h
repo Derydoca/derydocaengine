@@ -12,7 +12,7 @@ namespace DerydocaEngine::Components
 		GENINSTANCE(KeyboardMover);
 		KeyboardMover();
 		KeyboardMover(
-			Keyboard* const& keyboard,
+			Input::Keyboard* const& keyboard,
 			float const& movementSpeed,
 			int const& keyForward,
 			int const& keyBackward,
@@ -28,7 +28,7 @@ namespace DerydocaEngine::Components
 		void deserialize(YAML::Node const& node);
 	private:
 		Transform * m_transform;
-		Keyboard* m_keyboard;
+		Input::Keyboard* m_keyboard;
 		float m_movementSpeed;
 		int m_keyForward;
 		int m_keyBackward;

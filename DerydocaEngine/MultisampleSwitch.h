@@ -18,7 +18,7 @@ namespace DerydocaEngine::Ext
 
 		void setEnableMultisample(bool const& enable);
 	private:
-		Keyboard * m_keyboard;
+		Input::Keyboard * m_keyboard;
 		bool m_enableMultisample;
 		bool m_msaaSupported;
 	};

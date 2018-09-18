@@ -23,7 +23,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	ScreenshotUtil::ScreenshotUtil(Rendering::Display* const& display, Keyboard* const& keyboard) :
+	ScreenshotUtil::ScreenshotUtil(Rendering::Display* const& display, Input::Keyboard* const& keyboard) :
 		m_display(display),
 		m_keyboard(keyboard)
 	{

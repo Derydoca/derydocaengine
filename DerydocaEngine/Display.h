@@ -5,7 +5,9 @@
 
 typedef void *SDL_GLContext;
 struct SDL_Window;
-class Keyboard;
+namespace DerydocaEngine::Input {
+	class Keyboard;
+}
 
 namespace DerydocaEngine::Rendering
 {
@@ -39,7 +41,7 @@ namespace DerydocaEngine::Rendering
 		bool m_isClosed;
 		int m_width;
 		int m_height;
-		Keyboard* m_keyboard;
+		Input::Keyboard* m_keyboard;
 		Components::Camera* m_camera;
 	};
 
