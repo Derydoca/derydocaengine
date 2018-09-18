@@ -40,7 +40,7 @@ void * MaterialResourceSerializer::deserialize(Resource * const& resource)
 		}
 		else if (paramType == "Color")
 		{
-			Color paramValue = parameters[i]["Value"].as<Color>();
+			DerydocaEngine::Color paramValue = parameters[i]["Value"].as<DerydocaEngine::Color>();
 			std::string paramName = parameters[i]["Name"].as<std::string>();
 			material->setColorRGBA(paramName, paramValue);
 		}

@@ -3,10 +3,13 @@
 #include <glm\glm.hpp>
 #include <gl\glew.h>
 
-struct Color;
-namespace DerydocaEngine::Rendering {
-	class Shader;
-	class Texture;
+namespace DerydocaEngine
+{
+	struct Color;
+	namespace Rendering {
+		class Shader;
+		class Texture;
+	}
 }
 class RenderTexture;
 

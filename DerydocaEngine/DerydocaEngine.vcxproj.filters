@@ -206,9 +206,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="Clock.cpp">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClCompile>
@@ -269,6 +266,9 @@
     <ClCompile Include="ShadowMap.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ButtonState.h">
@@ -290,9 +290,6 @@
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="YamlTools.h">
@@ -529,9 +526,6 @@
     <ClInclude Include="Light.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="Clock.h">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClInclude>
@@ -615,6 +609,12 @@
     </ClInclude>
     <ClInclude Include="ShadowMap.h">
       <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>DerydocaEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

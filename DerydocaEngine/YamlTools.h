@@ -212,8 +212,8 @@ namespace YAML {
 
 	// Add support for Colors
 	template<>
-	struct convert<Color> {
-		static Node encode(const Color& color) {
+	struct convert<DerydocaEngine::Color> {
+		static Node encode(const DerydocaEngine::Color& color) {
 			Node node;
 			node.push_back(color.r);
 			node.push_back(color.g);
@@ -222,7 +222,7 @@ namespace YAML {
 			return node;
 		}
 
-		static bool decode(const Node& node, Color& color) {
+		static bool decode(const Node& node, DerydocaEngine::Color& color) {
 			if (!node.IsSequence() || node.size() < 3) {
 				return false;
 			}
