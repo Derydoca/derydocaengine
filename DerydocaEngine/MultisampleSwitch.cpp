@@ -8,7 +8,7 @@ namespace DerydocaEngine::Ext
 
 	MultisampleSwitch::MultisampleSwitch()
 	{
-		m_keyboard = InputManager::getInstance().getKeyboard();
+		m_keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	MultisampleSwitch::~MultisampleSwitch()

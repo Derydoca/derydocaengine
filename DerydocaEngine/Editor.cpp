@@ -40,7 +40,7 @@ namespace DerydocaEngine::Execution
 #pragma region Editor specific game objects
 
 		// Keep this here as a simple way to grab screenshots of the engine
-		DerydocaEngine::Components::ScreenshotUtil* screenshotUtil = new DerydocaEngine::Components::ScreenshotUtil(display, InputManager::getInstance().getKeyboard());
+		DerydocaEngine::Components::ScreenshotUtil* screenshotUtil = new DerydocaEngine::Components::ScreenshotUtil(display, Input::InputManager::getInstance().getKeyboard());
 		sceneRoot->addComponent(screenshotUtil);
 
 		// This is the editor camera
@@ -69,7 +69,7 @@ namespace DerydocaEngine::Execution
 			editorCamera->setClearColor(Color(0.5, 0, 0));
 		}
 		editorCameraObject->addComponent(editorCamera);
-		editorCameraObject->addComponent(new DerydocaEngine::Components::WasdMover(InputManager::getInstance().getKeyboard(), InputManager::getInstance().getMouse()));
+		editorCameraObject->addComponent(new DerydocaEngine::Components::WasdMover(Input::InputManager::getInstance().getKeyboard(), Input::InputManager::getInstance().getMouse()));
 		sceneRoot->addChild(editorCameraObject);
 
 #pragma endregion
@@ -117,7 +117,7 @@ namespace DerydocaEngine::Execution
 			display->update();
 
 			// Update the mouse inputs
-			InputManager::getInstance().getMouse()->update();
+			Input::InputManager::getInstance().getMouse()->update();
 
 			// Pause the code execution if we are running faster than our capped frame rate
 			unsigned long msToWait = (unsigned long)(minFrameTime - clock->getRenderTimeMS());

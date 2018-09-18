@@ -28,7 +28,7 @@ namespace DerydocaEngine::Ext
 	{
 		initBuffers();
 
-		m_keyboard = InputManager::getInstance().getKeyboard();
+		m_keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	void ParticleFountain::preRender()

@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ButtonState.cpp">
-      <Filter>To Be Namespaced\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>To Be Namespaced\Input</Filter>
     </ClCompile>
@@ -266,11 +263,11 @@
     <ClCompile Include="IntRectangle.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
+    <ClCompile Include="ButtonState.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ButtonState.h">
-      <Filter>To Be Namespaced\Input</Filter>
-    </ClInclude>
     <ClInclude Include="Key.h">
       <Filter>To Be Namespaced\Input</Filter>
     </ClInclude>
@@ -610,6 +607,9 @@
     <ClInclude Include="TextureParameters.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="ButtonState.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -662,6 +662,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\DataStructures">
       <UniqueIdentifier>{4337cc73-5993-4698-bd20-4cd1b2990217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Input">
+      <UniqueIdentifier>{0e88ceeb-781a-4c77-a221-fad015f8b550}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

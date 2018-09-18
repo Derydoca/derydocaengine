@@ -1,18 +1,23 @@
 #include "InputManager.h"
 
-InputManager::InputManager()
+namespace DerydocaEngine::Input
 {
 
-	m_keyboard = new Keyboard();
-	m_keyboard->init();
+	InputManager::InputManager()
+	{
 
-	m_mouse = new Mouse();
-	m_mouse->init();
+		m_keyboard = new Keyboard();
+		m_keyboard->init();
 
-}
+		m_mouse = new Mouse();
+		m_mouse->init();
 
-InputManager::~InputManager()
-{
-	delete m_keyboard;
-	delete m_mouse;
+	}
+
+	InputManager::~InputManager()
+	{
+		delete m_keyboard;
+		delete m_mouse;
+	}
+
 }

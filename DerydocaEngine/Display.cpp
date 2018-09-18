@@ -72,7 +72,7 @@ namespace DerydocaEngine::Rendering
 		}
 	*/
 
-		m_keyboard = InputManager::getInstance().getKeyboard();
+		m_keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	Display::~Display()

@@ -6,8 +6,8 @@ namespace DerydocaEngine::Components
 
 	WasdMover::WasdMover()
 	{
-		m_mouse = InputManager::getInstance().getMouse();
-		m_keyboard = InputManager::getInstance().getKeyboard();
+		m_mouse = Input::InputManager::getInstance().getMouse();
+		m_keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	WasdMover::~WasdMover()
