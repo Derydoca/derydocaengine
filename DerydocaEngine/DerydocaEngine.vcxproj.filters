@@ -268,9 +268,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Key.h">
-      <Filter>To Be Namespaced\Input</Filter>
-    </ClInclude>
     <ClInclude Include="GameComponent.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -610,6 +607,9 @@
     <ClInclude Include="Mouse.h">
       <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -626,9 +626,6 @@
     </Filter>
     <Filter Include="To Be Namespaced\ResourceSerializers">
       <UniqueIdentifier>{7eac81a0-a90a-4d89-85dd-89c2d08d44f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="To Be Namespaced\Input">
-      <UniqueIdentifier>{9e9a0417-56b9-440e-8db7-c98e7c5dc0ca}</UniqueIdentifier>
     </Filter>
     <Filter Include="DerydocaEngine">
       <UniqueIdentifier>{8a96ec53-358e-4171-8093-2897131244a7}</UniqueIdentifier>

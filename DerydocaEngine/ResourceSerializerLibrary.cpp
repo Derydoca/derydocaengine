@@ -26,7 +26,7 @@ ResourceSerializerLibrary::ResourceSerializerLibrary()
 	registerSerializer(new MaterialResourceSerializer());
 	registerSerializer(new MeshResourceSerializer());
 	registerSerializer(new TextureResourceSerializer());
-	registerSerializer(new CubemapResourceSerializer());
+	registerSerializer(new DerydocaEngine::Resources::Serializers::CubemapResourceSerializer());
 	registerSerializer(new ShaderResourceSerializer());
 	registerSerializer(new DerydocaEngine::Ext::BezierPatchMeshResourceSerializer());
 	registerSerializer(new SpriteSheetResourceSerializer());
