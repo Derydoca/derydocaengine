@@ -3,7 +3,9 @@
 #include <string>
 #include <GL/glew.h>
 
-struct TextureParameters;
+namespace DerydocaEngine::Rendering {
+	struct TextureParameters;
+}
 
 namespace DerydocaEngine::Rendering
 {

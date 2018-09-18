@@ -72,9 +72,9 @@ namespace DerydocaEngine::Ext
 		}
 
 		// Load the projector texture with flags to disable all wrapping
-		TextureParameters textureParams;
-		textureParams.setWrapModeS(TextureWrapMode::CLAMP_TO_BORDER);
-		textureParams.setWrapModeT(TextureWrapMode::CLAMP_TO_BORDER);
+		Rendering::TextureParameters textureParams;
+		textureParams.setWrapModeS(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
+		textureParams.setWrapModeT(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
 		Resource* projectorTextureResource = getResource(compNode, "texture");
 		m_projectorTexture = new Rendering::Texture(projectorTextureResource->getSourceFilePath(), &textureParams);
 

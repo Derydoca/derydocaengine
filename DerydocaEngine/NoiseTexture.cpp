@@ -169,9 +169,9 @@ namespace DerydocaEngine::Ext
 			}
 		}
 
-		TextureParameters texParams;
-		texParams.setWrapModeS(TextureWrapMode::REPEAT);
-		texParams.setWrapModeT(TextureWrapMode::REPEAT);
+		Rendering::TextureParameters texParams;
+		texParams.setWrapModeS(Rendering::TextureWrapMode::REPEAT);
+		texParams.setWrapModeT(Rendering::TextureWrapMode::REPEAT);
 		m_texture->updateBuffer(textureData, m_width, m_height, 4, &texParams);
 
 		m_material->setTexture(m_textureName, m_texture);

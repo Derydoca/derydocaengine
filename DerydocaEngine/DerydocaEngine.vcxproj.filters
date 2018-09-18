@@ -292,9 +292,6 @@
     <ClInclude Include="YamlTools.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="GLError.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -608,6 +605,9 @@
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
   </ItemGroup>
