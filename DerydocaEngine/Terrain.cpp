@@ -43,7 +43,7 @@ namespace DerydocaEngine::Components
 		Rendering::Material* mat = new Rendering::Material();
 		mat->setShader(shader);
 
-		m_meshRenderer = new DerydocaEngine::Components::MeshRenderer(m_mesh, mat);
+		m_meshRenderer = new MeshRenderer(m_mesh, mat);
 	}
 
 	Terrain::~Terrain()
@@ -175,7 +175,7 @@ namespace DerydocaEngine::Components
 		Rendering::Material* mat = new Rendering::Material();
 		mat->setShader(shader);
 
-		m_meshRenderer = new DerydocaEngine::Components::MeshRenderer(m_mesh, mat);
+		m_meshRenderer = new MeshRenderer(m_mesh, mat);
 	}
 
 }

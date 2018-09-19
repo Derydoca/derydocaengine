@@ -35,8 +35,8 @@ namespace DerydocaEngine::Components
 		virtual void postInit() {}
 		virtual void update(float const& deltaTime) {}
 		virtual void preRender() {}
-		virtual void render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {}
-		virtual void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& material, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform) {}
+		virtual void render(Rendering::MatrixStack* const& matrixStack) {}
+		virtual void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform) {}
 		virtual void postRender() {}
 		inline void setGameObject(GameObject* const& gameObject) { m_gameObject = gameObject; }
 		inline GameObject* getGameObject() { return m_gameObject; }
@@ -75,11 +75,11 @@ namespace DerydocaEngine::Components
 		template<typename T>
 		inline T getResource(YAML::Node const& node, std::string const& resourceName)
 		{
-			DerydocaEngine::Resources::Resource* resource = getResource(node, resourceName);
+			Resources::Resource* resource = getResource(node, resourceName);
 			return static_cast<T>(resource);
 		}
 
-		inline DerydocaEngine::Resources::Resource* getResource(YAML::Node const& node, std::string const& resourceName)
+		inline Resources::Resource* getResource(YAML::Node const& node, std::string const& resourceName)
 		{
 			YAML::Node resourceNode = node[resourceName];
 
@@ -89,7 +89,7 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
-			DerydocaEngine::Resources::Resource * resource = ObjectLibrary::getInstance().getResource(id);
+			Resources::Resource * resource = ObjectLibrary::getInstance().getResource(id);
 			return resource;
 		}
 

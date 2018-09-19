@@ -113,7 +113,7 @@ namespace DerydocaEngine::Components
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Get the character image information
-				DerydocaEngine::Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 				// Set the vertex positions
 				float charXMin = penX + img.getBearingX();
@@ -156,7 +156,7 @@ namespace DerydocaEngine::Components
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Get the character image information
-				DerydocaEngine::Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 				// Set the UV positions
 				Rect rect = img.getTexSheetPosition();
@@ -218,7 +218,7 @@ namespace DerydocaEngine::Components
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Get the character image information
-				DerydocaEngine::Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 				// Set the indices to draw the two triangles
 				triangleIndices[charQuadIndex * 6 + 0] = charQuadIndex * 4 + 0;
@@ -359,7 +359,7 @@ namespace DerydocaEngine::Components
 			if (addCharacterToFilteredText)
 			{
 				// Get the character image information
-				DerydocaEngine::Utilities::TexturePackerImage img = fontFace->getCharData(c);
+				Utilities::TexturePackerImage img = fontFace->getCharData(c);
 				bool isWhitespace = img.getWidth() == 0.0f;
 				bool isBreakable = c == ' ' || c == '-';
 

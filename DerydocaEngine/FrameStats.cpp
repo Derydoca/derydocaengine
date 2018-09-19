@@ -5,7 +5,7 @@ namespace DerydocaEngine::Components
 
 	void FrameStats::postInit()
 	{
-		m_textRenderer = getComponent<DerydocaEngine::Components::TextRenderer>();
+		m_textRenderer = getComponent<TextRenderer>();
 	}
 
 	void FrameStats::update(float const& deltaTime)

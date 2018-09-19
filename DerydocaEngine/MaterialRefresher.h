@@ -23,8 +23,8 @@ namespace DerydocaEngine::Components
 	private:
 		bool isShaderSourceUpdated();
 		bool m_usingMeshRenderer = true;
-		DerydocaEngine::Components::MeshRenderer* m_meshRenderer;
-		DerydocaEngine::Ext::TessellatedMeshRenderer* m_tessMeshRenderer;
+		MeshRenderer* m_meshRenderer;
+		Ext::TessellatedMeshRenderer* m_tessMeshRenderer;
 		bool m_vertexShaderExists = false;
 		bool m_fragmentShaderExists = false;
 		bool m_geometryShaderExists = false;

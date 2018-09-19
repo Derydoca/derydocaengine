@@ -39,7 +39,7 @@ namespace DerydocaEngine::Components
 #define REGINSTANCE(TYPE) \
 	registerInstanceGenerator(#TYPE, TYPE::generateInstance);
 
-	DerydocaEngine::Components::GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gameComponentType)
+	GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gameComponentType)
 	{
 		// Find a generator function that matches the type passed
 		auto it = m_instanceGenerators.find(gameComponentType);
@@ -48,7 +48,7 @@ namespace DerydocaEngine::Components
 		if (it != m_instanceGenerators.end())
 		{
 			// Generate it and serve it up
-			DerydocaEngine::Components::GameComponent* newGameComponent = it->second();
+			GameComponent* newGameComponent = it->second();
 			return newGameComponent;
 		}
 
@@ -57,7 +57,7 @@ namespace DerydocaEngine::Components
 		return nullptr;
 	}
 
-	void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, std::function<DerydocaEngine::Components::GameComponent*()> const& instanceGenerator)
+	void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator)
 	{
 		size_t scopeOperatorLoc = gameComponentType.find_last_of(':');
 		if (scopeOperatorLoc > 0)
@@ -73,37 +73,37 @@ namespace DerydocaEngine::Components
 
 	GameComponentFactory::GameComponentFactory()
 	{
-		REGINSTANCE(DerydocaEngine::Components::Camera);
-		REGINSTANCE(DerydocaEngine::Components::MeshRenderer);
-		REGINSTANCE(DerydocaEngine::Components::KeyboardMover);
-		REGINSTANCE(DerydocaEngine::Components::MaterialRefresher);
-		REGINSTANCE(DerydocaEngine::Components::Rotator);
-		REGINSTANCE(DerydocaEngine::Components::ScreenshotUtil);
-		REGINSTANCE(DerydocaEngine::Components::Terrain);
-		REGINSTANCE(DerydocaEngine::Components::WasdMover);
-		REGINSTANCE(DerydocaEngine::Debug::DebugVisualizer);
-		REGINSTANCE(DerydocaEngine::Components::Light);
-		REGINSTANCE(DerydocaEngine::Ext::ShaderSubroutineSwitcher);
-		REGINSTANCE(DerydocaEngine::Ext::ImageProjector);
-		REGINSTANCE(DerydocaEngine::Ext::EdgeDetectionFilter);
-		REGINSTANCE(DerydocaEngine::Ext::GaussianBlurFilter);
-		REGINSTANCE(DerydocaEngine::Ext::BloomFilter);
-		REGINSTANCE(DerydocaEngine::Ext::GammaCorrectionFilter);
-		REGINSTANCE(DerydocaEngine::Ext::MultisampleSwitch);
-		REGINSTANCE(DerydocaEngine::Ext::ParticleSystem);
-		REGINSTANCE(DerydocaEngine::Ext::BezierCurveRenderer);
-		REGINSTANCE(DerydocaEngine::Ext::TessellatingQuad);
-		REGINSTANCE(DerydocaEngine::Ext::TessellatedMeshRenderer);
-		REGINSTANCE(DerydocaEngine::Ext::NoiseTexture);
-		REGINSTANCE(DerydocaEngine::Ext::WoodSliceTexture);
-		REGINSTANCE(DerydocaEngine::Ext::NightVisionFilter);
-		REGINSTANCE(DerydocaEngine::Ext::WaveDisplacement);
-		REGINSTANCE(DerydocaEngine::Ext::ParticleFountain);
-		REGINSTANCE(DerydocaEngine::Ext::ParticleContinuousFountain);
-		REGINSTANCE(DerydocaEngine::Ext::ParticleInstanced);
-		REGINSTANCE(DerydocaEngine::Components::TextRenderer);
-		REGINSTANCE(DerydocaEngine::Components::FrameStats);
-		REGINSTANCE(DerydocaEngine::Components::SpriteRenderer);
+		REGINSTANCE(Camera);
+		REGINSTANCE(FrameStats);
+		REGINSTANCE(KeyboardMover);
+		REGINSTANCE(Light);
+		REGINSTANCE(MeshRenderer);
+		REGINSTANCE(MaterialRefresher);
+		REGINSTANCE(Rotator);
+		REGINSTANCE(ScreenshotUtil);
+		REGINSTANCE(SpriteRenderer);
+		REGINSTANCE(Terrain);
+		REGINSTANCE(TextRenderer);
+		REGINSTANCE(WasdMover);
+		REGINSTANCE(Debug::DebugVisualizer);
+		REGINSTANCE(Ext::BezierCurveRenderer);
+		REGINSTANCE(Ext::BloomFilter);
+		REGINSTANCE(Ext::EdgeDetectionFilter);
+		REGINSTANCE(Ext::GammaCorrectionFilter);
+		REGINSTANCE(Ext::GaussianBlurFilter);
+		REGINSTANCE(Ext::ImageProjector);
+		REGINSTANCE(Ext::MultisampleSwitch);
+		REGINSTANCE(Ext::NightVisionFilter);
+		REGINSTANCE(Ext::NoiseTexture);
+		REGINSTANCE(Ext::ParticleContinuousFountain);
+		REGINSTANCE(Ext::ParticleFountain);
+		REGINSTANCE(Ext::ParticleInstanced);
+		REGINSTANCE(Ext::ParticleSystem);
+		REGINSTANCE(Ext::ShaderSubroutineSwitcher);
+		REGINSTANCE(Ext::TessellatedMeshRenderer);
+		REGINSTANCE(Ext::TessellatingQuad);
+		REGINSTANCE(Ext::WaveDisplacement);
+		REGINSTANCE(Ext::WoodSliceTexture);
 	}
 
 	GameComponentFactory::~GameComponentFactory()

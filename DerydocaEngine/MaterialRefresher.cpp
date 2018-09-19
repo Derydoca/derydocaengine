@@ -18,7 +18,7 @@ namespace DerydocaEngine::Components
 
 	void MaterialRefresher::init()
 	{
-		m_meshRenderer = getComponent<DerydocaEngine::Components::MeshRenderer>();
+		m_meshRenderer = getComponent<MeshRenderer>();
 		Rendering::Material* material = nullptr;
 		if (m_meshRenderer != nullptr)
 		{
@@ -28,7 +28,7 @@ namespace DerydocaEngine::Components
 		else
 		{
 			m_usingMeshRenderer = false;
-			m_tessMeshRenderer = getComponent<DerydocaEngine::Ext::TessellatedMeshRenderer>();
+			m_tessMeshRenderer = getComponent<Ext::TessellatedMeshRenderer>();
 			material = m_tessMeshRenderer->getMaterial();
 		}
 		assert(material);

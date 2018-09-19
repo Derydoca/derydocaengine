@@ -102,37 +102,37 @@
       <Filter>DerydocaEngine\Debug</Filter>
     </ClCompile>
     <ClCompile Include="BezierPatchMeshFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="FileSerializerLibrary.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="FileTypeSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="FontFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="ImageFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="LevelFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="MaterialFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="MeshFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="RasterFontFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="ShaderFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheetFileSerializer.cpp">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>DerydocaEngine\Components</Filter>
@@ -377,37 +377,37 @@
       <Filter>DerydocaEngine\Debug</Filter>
     </ClInclude>
     <ClInclude Include="BezierPatchMeshFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="FileSerializerLibrary.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="FileTypeSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="FontFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="ImageFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="LevelFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="MaterialFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="MeshFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="RasterFontFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="ShaderFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheetFileSerializer.h">
-      <Filter>DerydocaEngine\FileSerializers</Filter>
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>DerydocaEngine\Components</Filter>
@@ -627,9 +627,6 @@
     <Filter Include="DerydocaEngine\Debug">
       <UniqueIdentifier>{844921ae-5486-491d-a1db-4d0d749b83bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DerydocaEngine\FileSerializers">
-      <UniqueIdentifier>{8a7abadd-a412-47d5-9817-5b62b77bfb9c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DerydocaEngine\Timing">
       <UniqueIdentifier>{8e73d9d7-2b1f-4b22-b157-6dae032dbd4c}</UniqueIdentifier>
     </Filter>
@@ -668,6 +665,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Helpers">
       <UniqueIdentifier>{4fd287b8-538b-46c4-8c8e-33e14a0e70c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Files\Serializers">
+      <UniqueIdentifier>{8a7abadd-a412-47d5-9817-5b62b77bfb9c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

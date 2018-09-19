@@ -15,7 +15,7 @@ namespace DerydocaEngine::Components
 		virtual void postInit();
 		virtual void update(float const& deltaTime);
 	private:
-		DerydocaEngine::Components::TextRenderer * m_textRenderer;
+		TextRenderer * m_textRenderer;
 	};
 
 }
