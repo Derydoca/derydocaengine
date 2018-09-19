@@ -45,7 +45,7 @@ DerydocaEngine::Resources::Resource * ObjectLibrary::getResource(boost::uuids::u
 	}
 }
 
-GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
+DerydocaEngine::Components::GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
 {
 	auto search = m_sceneComponents.find(id);
 	if (search != m_sceneComponents.end())
@@ -151,9 +151,9 @@ void ObjectLibrary::updateMetaFiles(std::string const& sourceFilePath)
 	}
 }
 
-void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, GameComponent * const& component)
+void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, DerydocaEngine::Components::GameComponent * const& component)
 {
-	m_sceneComponents.insert(std::pair<boost::uuids::uuid, GameComponent*>(id, component));
+	m_sceneComponents.insert(std::pair<boost::uuids::uuid, DerydocaEngine::Components::GameComponent*>(id, component));
 }
 
 void ObjectLibrary::loadDirectory(std::string const& directory)

@@ -7,7 +7,7 @@
 
 namespace DerydocaEngine::Debug {
 
-	class DebugVisualizer : public GameComponent
+	class DebugVisualizer : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(DebugVisualizer);

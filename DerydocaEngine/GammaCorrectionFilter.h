@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class GammaCorrectionFilter : public GameComponent
+	class GammaCorrectionFilter : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(GammaCorrectionFilter);

@@ -3,11 +3,15 @@
 #include "Transform.h"
 
 struct Transform;
-class GameComponent;
-namespace DerydocaEngine::Rendering {
-	struct Projection;
-	class Material;
-	class MatrixStack;
+namespace DerydocaEngine {
+	namespace Components {
+		class GameComponent;
+	}
+	namespace Rendering {
+		struct Projection;
+		class Material;
+		class MatrixStack;
+	}
 }
 
 class GameObject
@@ -26,11 +30,11 @@ public:
 	void postRender();
 
 	void addChild(GameObject* const& gameObject);
-	void addComponent(GameComponent* const& component);
+	void addComponent(DerydocaEngine::Components::GameComponent* const& component);
 
 	inline Transform* getTransform() { return &m_transform; }
 	inline std::vector<GameObject*> getChildren() const { return m_children; }
-	inline std::vector<GameComponent*> getComponents() const { return m_components; }
+	inline std::vector<DerydocaEngine::Components::GameComponent*> getComponents() const { return m_components; }
 
 	inline GameObject* getParent() const { return m_parent; }
 	inline std::string getName() const { return m_name; }
@@ -41,6 +45,6 @@ private:
 	Transform m_transform;
 	GameObject* m_parent;
 	std::vector<GameObject*> m_children;
-	std::vector<GameComponent*> m_components;
+	std::vector<DerydocaEngine::Components::GameComponent*> m_components;
 };
 

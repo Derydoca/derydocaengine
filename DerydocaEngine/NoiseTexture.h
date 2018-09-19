@@ -7,7 +7,7 @@ class Texture;
 namespace DerydocaEngine::Ext
 {
 
-	class NoiseTexture : public GameComponent
+	class NoiseTexture : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(NoiseTexture);

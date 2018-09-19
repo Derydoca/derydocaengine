@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class ParticleFountain : public GameComponent
+	class ParticleFountain : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(ParticleFountain);

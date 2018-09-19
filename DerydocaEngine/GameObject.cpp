@@ -33,7 +33,7 @@ GameObject::~GameObject()
 void GameObject::render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {
 	matrixStack->push(m_transform.getModel());
 
-	for each (GameComponent* c in m_components)
+	for each (DerydocaEngine::Components::GameComponent* c in m_components)
 	{
 		c->render(matrixStack);
 	}
@@ -50,7 +50,7 @@ void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matr
 {
 	matrixStack->push(m_transform.getModel());
 
-	for each (GameComponent* c in m_components)
+	for each (DerydocaEngine::Components::GameComponent* c in m_components)
 	{
 		c->renderMesh(matrixStack, material, projection, projectionTransform);
 	}
@@ -65,7 +65,7 @@ void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matr
 
 void GameObject::init()
 {
-	for each (GameComponent* c in m_components)
+	for each (DerydocaEngine::Components::GameComponent* c in m_components)
 	{
 		c->init();
 	}
@@ -78,7 +78,7 @@ void GameObject::init()
 
 void GameObject::postInit()
 {
-	for each (GameComponent* c in m_components)
+	for each (DerydocaEngine::Components::GameComponent* c in m_components)
 	{
 		c->postInit();
 	}
@@ -90,7 +90,7 @@ void GameObject::postInit()
 }
 
 void GameObject::update(float const& deltaTime) {
-	for each (GameComponent* c in m_components)
+	for each (DerydocaEngine::Components::GameComponent* c in m_components)
 	{
 		c->update(deltaTime);
 	}
@@ -102,7 +102,7 @@ void GameObject::update(float const& deltaTime) {
 }
 
 void GameObject::preRender() {
-	for each (GameComponent* c in m_components)
+	for each (DerydocaEngine::Components::GameComponent* c in m_components)
 	{
 		c->preRender();
 	}
@@ -114,7 +114,7 @@ void GameObject::preRender() {
 }
 
 void GameObject::postRender() {
-	for each (GameComponent* c in m_components)
+	for each (DerydocaEngine::Components::GameComponent* c in m_components)
 	{
 		c->postRender();
 	}
@@ -131,7 +131,7 @@ void GameObject::addChild(GameObject* const& gameObject)
 	gameObject->m_parent = this;
 }
 
-void GameObject::addComponent(GameComponent* const& component)
+void GameObject::addComponent(DerydocaEngine::Components::GameComponent* const& component)
 {
 	m_components.push_back(component);
 	component->setGameObject(this);

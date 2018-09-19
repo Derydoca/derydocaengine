@@ -7,7 +7,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class BezierCurveRenderer : public GameComponent
+	class BezierCurveRenderer : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(BezierCurveRenderer);

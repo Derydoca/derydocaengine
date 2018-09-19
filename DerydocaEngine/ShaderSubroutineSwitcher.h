@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class ShaderSubroutineSwitcher : public GameComponent
+	class ShaderSubroutineSwitcher : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(ShaderSubroutineSwitcher);

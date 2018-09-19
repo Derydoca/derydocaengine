@@ -7,7 +7,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class EdgeDetectionFilter : public GameComponent
+	class EdgeDetectionFilter : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(EdgeDetectionFilter);

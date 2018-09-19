@@ -36,7 +36,7 @@
 #define REGINSTANCE(TYPE) \
 	registerInstanceGenerator(#TYPE, TYPE::generateInstance);
 
-GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gameComponentType)
+DerydocaEngine::Components::GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gameComponentType)
 {
 	// Find a generator function that matches the type passed
 	auto it = m_instanceGenerators.find(gameComponentType);
@@ -45,7 +45,7 @@ GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gam
 	if (it != m_instanceGenerators.end())
 	{
 		// Generate it and serve it up
-		GameComponent* newGameComponent = it->second();
+		DerydocaEngine::Components::GameComponent* newGameComponent = it->second();
 		return newGameComponent;
 	}
 
@@ -54,7 +54,7 @@ GameComponent * GameComponentFactory::CreateGameComponent(std::string const& gam
 	return nullptr;
 }
 
-void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator)
+void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, std::function<DerydocaEngine::Components::GameComponent*()> const& instanceGenerator)
 {
 	size_t scopeOperatorLoc = gameComponentType.find_last_of(':');
 	if (scopeOperatorLoc > 0)

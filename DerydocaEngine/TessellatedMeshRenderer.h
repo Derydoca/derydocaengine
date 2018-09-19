@@ -7,7 +7,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class TessellatedMeshRenderer : public GameComponent
+	class TessellatedMeshRenderer : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(TessellatedMeshRenderer);

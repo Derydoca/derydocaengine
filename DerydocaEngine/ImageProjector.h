@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class ImageProjector : public GameComponent
+	class ImageProjector : public Components::GameComponent
 	{
 	public:
 		GENINSTANCE(ImageProjector);

@@ -12,10 +12,10 @@ public:
 		return instance;
 	}
 
-	GameComponent * CreateGameComponent(std::string const& gameComponentType);
+	DerydocaEngine::Components::GameComponent * CreateGameComponent(std::string const& gameComponentType);
 private:
-	std::map<std::string, std::function<GameComponent*()>> m_instanceGenerators;
-	void registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator);
+	std::map<std::string, std::function<DerydocaEngine::Components::GameComponent*()>> m_instanceGenerators;
+	void registerInstanceGenerator(std::string const& gameComponentType, std::function<DerydocaEngine::Components::GameComponent*()> const& instanceGenerator);
 
 	GameComponentFactory();
 	~GameComponentFactory();

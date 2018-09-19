@@ -115,7 +115,7 @@ void SerializedScene::setUp(GameObject * const& root)
 			std::string compType = compNode["Type"].as<std::string>();
 
 			// Create a game component based on the component type provided
-			GameComponent* component = GameComponentFactory::getInstance().CreateGameComponent(compType);
+			DerydocaEngine::Components::GameComponent* component = GameComponentFactory::getInstance().CreateGameComponent(compType);
 
 			// If no component was created, the component type is not supported so we should continue
 			if (component == nullptr)

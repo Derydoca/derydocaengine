@@ -7,7 +7,7 @@ class YAML::Node;
 namespace DerydocaEngine::Ext
 {
 
-	class ParticleContinuousFountain : public GameComponent
+	class ParticleContinuousFountain : public Components::GameComponent
 	{
 	public:
 		enum ParticleEmitterType
