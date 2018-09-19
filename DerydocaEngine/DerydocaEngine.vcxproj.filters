@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ObjectLibrary.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="StringUtils.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -266,15 +263,12 @@
     <ClCompile Include="Transform.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectLibrary.cpp">
+      <Filter>DerydocaEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="YamlTools.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="GLError.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectLibrary.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="StringUtils.h">
@@ -610,6 +604,12 @@
     <ClInclude Include="Transform.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="GLError.h">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectLibrary.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -668,6 +668,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Files">
       <UniqueIdentifier>{80ffd5f8-9de8-41d9-a9a2-f995ce536f52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Helpers">
+      <UniqueIdentifier>{4fd287b8-538b-46c4-8c8e-33e14a0e70c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -11,32 +11,37 @@
 #include "Rectangle.h"
 #include "IntRectangle.h"
 
-class YamlTools {
-public:
+namespace DerydocaEngine
+{
 
-	static int getIntSafe(YAML::Node node, std::string name, int defaultValue = 0) {
-		if (node[name])
-		{
-			return node[name].as<std::int32_t>();
-		}
-		else
-		{
-			return defaultValue;
-		}
-	}
+	class YamlTools {
+	public:
 
-	static float getFloatSafe(YAML::Node node, std::string name, float defaultValue = 0) {
-		if (node[name])
-		{
-			return node[name].as<std::float_t>();
+		static int getIntSafe(YAML::Node node, std::string name, int defaultValue = 0) {
+			if (node[name])
+			{
+				return node[name].as<std::int32_t>();
+			}
+			else
+			{
+				return defaultValue;
+			}
 		}
-		else
-		{
-			return defaultValue;
-		}
-	}
 
-};
+		static float getFloatSafe(YAML::Node node, std::string name, float defaultValue = 0) {
+			if (node[name])
+			{
+				return node[name].as<std::float_t>();
+			}
+			else
+			{
+				return defaultValue;
+			}
+		}
+
+	};
+
+}
 
 namespace YAML {
 

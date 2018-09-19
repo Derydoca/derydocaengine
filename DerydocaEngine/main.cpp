@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 
 		for (auto it = directoriesToProcess.begin(); it != directoriesToProcess.end(); ++it)
 		{
-			ObjectLibrary::getInstance().updateMetaFilesDirectory(it->c_str());
+			DerydocaEngine::ObjectLibrary::getInstance().updateMetaFilesDirectory(it->c_str());
 		}
 
 		return 0;
@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 		DerydocaEngine::Settings::EngineSettings* settings = new DerydocaEngine::Settings::EngineSettings(".\\engineSettings.yaml");
 
 		// Load the project file
-		ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), processArgs[0]);
+		DerydocaEngine::ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), processArgs[0]);
 
 		// Process the sprite sheet
 		DerydocaEngine::UI::SpriteSheet ss;
