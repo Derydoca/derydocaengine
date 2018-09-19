@@ -20,10 +20,10 @@ namespace DerydocaEngine::FileSerializers {
 		return FileType::LevelFileType;
 	}
 
-	Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	Resources::Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		Resource* r = new Resource();
-		r->setType(LevelResourceType);
+		Resources::Resource* r = new Resources::Resource();
+		r->setType(Resources::LevelResourceType);
 		return r;
 	}
 

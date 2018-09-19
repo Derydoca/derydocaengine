@@ -20,10 +20,10 @@ namespace DerydocaEngine::FileSerializers {
 		return FileType::FontType;
 	}
 
-	Resource * FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	Resources::Resource * FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		Resource* r = new Resource();
-		r->setType(FontResourceType);
+		Resources::Resource* r = new Resources::Resource();
+		r->setType(Resources::FontResourceType);
 		return r;
 	}
 

@@ -5,16 +5,16 @@
 namespace DerydocaEngine::Ext
 {
 
-	void * BezierPatchMeshResourceSerializer::deserialize(Resource * const& resource)
+	void * BezierPatchMeshResourceSerializer::deserialize(Resources::Resource * const& resource)
 	{
 		BezierPatchMeshFileLoader loader;
 		BezierPatchMesh* mesh = loader.Load(resource->getSourceFilePath().c_str());
 		return mesh;
 	}
 
-	ResourceType BezierPatchMeshResourceSerializer::getResourceType()
+	Resources::ResourceType BezierPatchMeshResourceSerializer::getResourceType()
 	{
-		return ResourceType::BezierPatchMeshResourceType;
+		return Resources::ResourceType::BezierPatchMeshResourceType;
 	}
 
 }

@@ -2,22 +2,27 @@
 #include "Resource.h"
 #include <string>
 
-struct ShaderResource : public Resource
+namespace DerydocaEngine::Resources
 {
-public:
-	ShaderResource() {}
-	~ShaderResource() {}
 
-	void setRawShaderName(std::string const& rawShaderName) { m_rawShaderName = rawShaderName; }
-	void setFragmentShaderSource(std::string const& fragmentShaderSource) { m_fragmentShaderSource = fragmentShaderSource; }
-	void setGeometryShaderSource(std::string const& geometryShaderSource) { m_geometryShaderSource = geometryShaderSource; }
+	struct ShaderResource : public Resource
+	{
+	public:
+		ShaderResource() {}
+		~ShaderResource() {}
 
-	std::string getRawShaderName() const { return m_rawShaderName; }
-	std::string getVertexShaderLocation() const { return m_sourceFilePath; }
-	std::string getFragmentShaderSource() const { return m_fragmentShaderSource; }
-	std::string getGeometryShaderSource() const { return m_geometryShaderSource; }
-private:
-	std::string m_rawShaderName;
-	std::string m_fragmentShaderSource;
-	std::string m_geometryShaderSource;
-};
+		void setRawShaderName(std::string const& rawShaderName) { m_rawShaderName = rawShaderName; }
+		void setFragmentShaderSource(std::string const& fragmentShaderSource) { m_fragmentShaderSource = fragmentShaderSource; }
+		void setGeometryShaderSource(std::string const& geometryShaderSource) { m_geometryShaderSource = geometryShaderSource; }
+
+		std::string getRawShaderName() const { return m_rawShaderName; }
+		std::string getVertexShaderLocation() const { return m_sourceFilePath; }
+		std::string getFragmentShaderSource() const { return m_fragmentShaderSource; }
+		std::string getGeometryShaderSource() const { return m_geometryShaderSource; }
+	private:
+		std::string m_rawShaderName;
+		std::string m_fragmentShaderSource;
+		std::string m_geometryShaderSource;
+	};
+
+}

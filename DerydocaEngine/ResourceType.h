@@ -1,17 +1,21 @@
 #pragma once
 
-enum ResourceType
+namespace DerydocaEngine::Resources
 {
-	UnknownResourceType,
-	MaterialResourceType,
-	MeshResourceType,
-	TextureResourceType,
-	CubemapResourceType,
-	LevelResourceType,
-	ShaderResourceType,
-	BezierPatchMeshResourceType,
-	FontResourceType,
-	RasterFontResourceType,
-	SpriteSheetType,
-};
- 
+
+	enum ResourceType
+	{
+		UnknownResourceType,
+		MaterialResourceType,
+		MeshResourceType,
+		TextureResourceType,
+		CubemapResourceType,
+		LevelResourceType,
+		ShaderResourceType,
+		BezierPatchMeshResourceType,
+		FontResourceType,
+		RasterFontResourceType,
+		SpriteSheetType,
+	};
+
+}

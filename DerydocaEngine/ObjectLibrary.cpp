@@ -22,14 +22,14 @@ void ObjectLibrary::initialize(std::string const& engineResourcesPath, std::stri
 	loadDirectory(engineResourcesPath);
 }
 
-Resource * ObjectLibrary::getResource(std::string const& uuidString)
+DerydocaEngine::Resources::Resource * ObjectLibrary::getResource(std::string const& uuidString)
 {
 	boost::uuids::string_generator gen;
 	boost::uuids::uuid uuid = gen(uuidString);
 	return getResource(uuid);
 }
 
-Resource * ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
+DerydocaEngine::Resources::Resource * ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
 {
 	// Find a resource with a matching uuid
 	auto search = m_resources.find(uuid);
@@ -56,7 +56,7 @@ GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
 	return nullptr;
 }
 
-Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
+DerydocaEngine::Resources::Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 {
 	std::string metaFilePath = sourceFilePath + m_metaExtension;
 
@@ -95,7 +95,7 @@ Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 		}
 
 		// Load the resource object
-		Resource* resource = serializer->loadResourceFromMeta(resourceNode);
+		DerydocaEngine::Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
 
 		// If no resource could be parsed from the node, continue on
 		if (resource == nullptr)
@@ -214,10 +214,10 @@ bool ObjectLibrary::createMetaFile(std::string const& sourceFilePath, std::strin
 	return true;
 }
 
-void ObjectLibrary::registerResource(Resource* const& resource)
+void ObjectLibrary::registerResource(DerydocaEngine::Resources::Resource* const& resource)
 {
 	// Load the resource into the map
-	m_resources.insert(std::pair<boost::uuids::uuid, Resource*>(resource->getId(), resource));
+	m_resources.insert(std::pair<boost::uuids::uuid, DerydocaEngine::Resources::Resource*>(resource->getId(), resource));
 }
 
 void ObjectLibrary::loadFile(std::string const& sourceFilePath)
@@ -264,7 +264,7 @@ void ObjectLibrary::loadFile(std::string const& sourceFilePath)
 		}
 
 		// Load the resource object
-		Resource* resource = serializer->loadResourceFromMeta(resourceNode);
+		DerydocaEngine::Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
 
 		// If no resource could be parsed from the node, continue on
 		if (resource == nullptr)

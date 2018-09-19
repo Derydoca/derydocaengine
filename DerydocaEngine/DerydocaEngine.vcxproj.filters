@@ -8,9 +8,6 @@
     <ClCompile Include="Transform.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>To Be Namespaced\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectLibrary.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -19,24 +16,6 @@
     </ClCompile>
     <ClCompile Include="SerializedScene.cpp">
       <Filter>To Be Namespaced</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialResourceSerializer.cpp">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshResourceSerializer.cpp">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceSerializerLibrary.cpp">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureResourceSerializer.cpp">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="CubemapResourceSerializer.cpp">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderResourceSerializer.cpp">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="BezierCurveRenderer.cpp">
       <Filter>Ext</Filter>
@@ -106,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="FileType.cpp">
       <Filter>To Be Namespaced</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheetResourceSerializer.cpp">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClCompile>
     <ClCompile Include="FrameStats.cpp">
       <Filter>DerydocaEngine\Components</Filter>
@@ -266,6 +242,30 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="CubemapResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSerializerLibrary.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheetResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponent.h">
@@ -283,15 +283,6 @@
     <ClInclude Include="GLError.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="MeshResource.h">
-      <Filter>To Be Namespaced\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceType.h">
-      <Filter>To Be Namespaced\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>To Be Namespaced\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectLibrary.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -306,33 +297,6 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceSerializer.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialResourceSerializer.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshResourceSerializer.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceSerializerLibrary.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureResourceSerializer.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="CubemapResourceSerializer.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
-    </ClInclude>
-    <ClInclude Include="CubemapResource.h">
-      <Filter>To Be Namespaced\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderResource.h">
-      <Filter>To Be Namespaced\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderResourceSerializer.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="BezierCurveRenderer.h">
       <Filter>Ext</Filter>
@@ -408,9 +372,6 @@
     </ClInclude>
     <ClInclude Include="stb_image_write.h">
       <Filter>Third Party</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheetResourceSerializer.h">
-      <Filter>To Be Namespaced\ResourceSerializers</Filter>
     </ClInclude>
     <ClInclude Include="FrameStats.h">
       <Filter>DerydocaEngine\Components</Filter>
@@ -610,6 +571,45 @@
     <ClInclude Include="Key.h">
       <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
+    <ClInclude Include="CubemapResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSerializerLibrary.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheetResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="CubemapResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceType.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -620,12 +620,6 @@
     </Filter>
     <Filter Include="To Be Namespaced">
       <UniqueIdentifier>{d5f7487a-6aba-493d-9dc7-f8f6a078d052}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="To Be Namespaced\Resources">
-      <UniqueIdentifier>{39a6eafb-ac19-4fe7-93a3-831a7932737e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="To Be Namespaced\ResourceSerializers">
-      <UniqueIdentifier>{7eac81a0-a90a-4d89-85dd-89c2d08d44f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="DerydocaEngine">
       <UniqueIdentifier>{8a96ec53-358e-4171-8093-2897131244a7}</UniqueIdentifier>
@@ -662,6 +656,12 @@
     </Filter>
     <Filter Include="DerydocaEngine\Input">
       <UniqueIdentifier>{0e88ceeb-781a-4c77-a221-fad015f8b550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Resources">
+      <UniqueIdentifier>{6479263b-5d0a-4c35-a9e8-57abb4bfb249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Resources\Serializers">
+      <UniqueIdentifier>{0f247322-a589-4383-8cf0-a46483495add}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

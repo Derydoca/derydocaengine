@@ -119,7 +119,7 @@ namespace DerydocaEngine::Ext
 		}
 
 		const char * outputNames[] = { "Position", "Velocity", "StartTime" };
-		ShaderResource* shaderResource = getResource<ShaderResource*>(compNode, "shader");
+		Resources::ShaderResource* shaderResource = getResource<Resources::ShaderResource*>(compNode, "shader");
 		assert(shaderResource);
 		Rendering::Shader* shader = new Rendering::Shader(shaderResource->getRawShaderName(), 3, outputNames);
 		assert(shader);

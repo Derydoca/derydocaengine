@@ -68,11 +68,11 @@ protected:
 	template<typename T>
 	inline T getResource(YAML::Node const& node, std::string const& resourceName)
 	{
-		Resource* resource = getResource(node, resourceName);
+		DerydocaEngine::Resources::Resource* resource = getResource(node, resourceName);
 		return static_cast<T>(resource);
 	}
 
-	inline Resource* getResource(YAML::Node const& node, std::string const& resourceName)
+	inline DerydocaEngine::Resources::Resource* getResource(YAML::Node const& node, std::string const& resourceName)
 	{
 		YAML::Node resourceNode = node[resourceName];
 
@@ -82,7 +82,7 @@ protected:
 		}
 
 		boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
-		Resource * resource = ObjectLibrary::getInstance().getResource(id);
+		DerydocaEngine::Resources::Resource * resource = ObjectLibrary::getInstance().getResource(id);
 		return resource;
 	}
 

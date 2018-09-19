@@ -10,8 +10,8 @@ namespace DerydocaEngine::Ext
 		BezierPatchMeshResourceSerializer() {}
 		~BezierPatchMeshResourceSerializer() {}
 
-		void* deserialize(Resource* const& resource);
-		ResourceType getResourceType();
+		void* deserialize(Resources::Resource* const& resource);
+		Resources::ResourceType getResourceType();
 	};
 
 }

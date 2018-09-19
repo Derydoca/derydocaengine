@@ -25,18 +25,18 @@ namespace DerydocaEngine::FileSerializers {
 		return FileType::ShaderFileType;
 	}
 
-	Resource * ShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	Resources::Resource * ShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		ShaderResource* resource = new ShaderResource();
+		Resources::ShaderResource* resource = new Resources::ShaderResource();
 
-		resource->setType(ShaderResourceType);
+		resource->setType(Resources::ShaderResourceType);
 
 		return resource;
 	}
 
-	void ShaderFileSerializer::postLoadInitialize(Resource* const& resource)
+	void ShaderFileSerializer::postLoadInitialize(Resources::Resource* const& resource)
 	{
-		ShaderResource* shaderResource = (ShaderResource*)resource;
+		Resources::ShaderResource* shaderResource = (Resources::ShaderResource*)resource;
 		fs::path vertexShaderPath(shaderResource->getVertexShaderLocation());
 
 		// Get the path that this exists for

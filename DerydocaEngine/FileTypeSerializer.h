@@ -5,7 +5,9 @@
 #include "yaml-cpp\yaml.h"
 #include "YamlTools.h"
 
-struct Resource;
+namespace DerydocaEngine::Resources {
+	struct Resource;
+}
 
 namespace DerydocaEngine::FileSerializers {
 
@@ -15,8 +17,8 @@ namespace DerydocaEngine::FileSerializers {
 		virtual ~FileTypeSerializer() {}
 		virtual YAML::Node generateResourceNodes(std::string const& filePath) = 0;
 		virtual FileType getFileType() = 0;
-		virtual Resource* loadResourceFromMeta(YAML::Node const& resourceNode) = 0;
-		virtual void postLoadInitialize(Resource* const& resource) {}
+		virtual Resources::Resource* loadResourceFromMeta(YAML::Node const& resourceNode) = 0;
+		virtual void postLoadInitialize(Resources::Resource* const& resource) {}
 
 		friend boost::uuids::uuid generateUuid();
 	};

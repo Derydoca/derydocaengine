@@ -20,10 +20,10 @@ namespace DerydocaEngine::FileSerializers {
 		return FileType::SpriteSheetFileType;
 	}
 
-	Resource * SpriteSheetFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	Resources::Resource * SpriteSheetFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		Resource* r = new Resource();
-		r->setType(ResourceType::SpriteSheetType);
+		Resources::Resource* r = new Resources::Resource();
+		r->setType(Resources::ResourceType::SpriteSheetType);
 		return r;
 	}
 

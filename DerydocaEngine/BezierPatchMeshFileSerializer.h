@@ -11,7 +11,7 @@ namespace DerydocaEngine::FileSerializers {
 
 		YAML::Node generateResourceNodes(std::string const& filePath);
 		FileType getFileType();
-		Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
+		Resources::Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
 	};
 
 	// Based on http://www.holmes3d.net/graphics/roffview/tools/patchoff/

@@ -55,8 +55,8 @@ namespace DerydocaEngine::Components
 		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
 		getMaterial()->setShader(shader);
 
-		auto fontResource = getResource<Resource*>(compNode, "font");
-		if (fontResource->getType() == ResourceType::FontResourceType) {
+		auto fontResource = getResource<Resources::Resource*>(compNode, "font");
+		if (fontResource->getType() == Resources::ResourceType::FontResourceType) {
 			// Load the font size from the file
 			float fontSize = 16.0f;
 			YAML::Node fontSizeNode = compNode["fontSize"];
@@ -69,7 +69,7 @@ namespace DerydocaEngine::Components
 			m_fontFace->setFontSize(fontSize);
 			m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
 		}
-		else if (fontResource->getType() == ResourceType::RasterFontResourceType)
+		else if (fontResource->getType() == Resources::ResourceType::RasterFontResourceType)
 		{
 			m_fontFace = new UI::FontFace();
 			m_fontFace->loadFromSerializedFile(fontResource->getSourceFilePath());

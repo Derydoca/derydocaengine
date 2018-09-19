@@ -75,7 +75,7 @@ namespace DerydocaEngine::Ext
 		Rendering::TextureParameters textureParams;
 		textureParams.setWrapModeS(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
 		textureParams.setWrapModeT(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
-		Resource* projectorTextureResource = getResource(compNode, "texture");
+		Resources::Resource* projectorTextureResource = getResource(compNode, "texture");
 		m_projectorTexture = new Rendering::Texture(projectorTextureResource->getSourceFilePath(), &textureParams);
 
 		// Load references to all mesh renderers this shader affects

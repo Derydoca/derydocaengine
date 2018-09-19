@@ -55,7 +55,7 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	Resource * MaterialSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	Resources::Resource * MaterialSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
 		// Get the resource type
 		YAML::Node resourceTypeNode = resourceNode["Type"];
@@ -72,8 +72,8 @@ namespace DerydocaEngine::FileSerializers {
 		// Create a material resource type
 		if (resourceType == "Cubemap")
 		{
-			CubemapResource* r = new CubemapResource();
-			r->setType(CubemapResourceType);
+			Resources::CubemapResource* r = new Resources::CubemapResource();
+			r->setType(Resources::CubemapResourceType);
 			if (resourceNode["Slot"])
 			{
 				r->setSlot(resourceNode["Slot"].as<int>());
@@ -82,8 +82,8 @@ namespace DerydocaEngine::FileSerializers {
 		}
 		else
 		{
-			Resource* r = new Resource();
-			r->setType(MaterialResourceType);
+			Resources::Resource* r = new Resources::Resource();
+			r->setType(Resources::MaterialResourceType);
 			return r;
 		}
 	}

@@ -20,10 +20,10 @@ namespace DerydocaEngine::FileSerializers {
 		return FileType::BezierPatchMeshType;
 	}
 
-	Resource * BezierPatchMeshFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	Resources::Resource * BezierPatchMeshFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		Resource* r = new Resource();
-		r->setType(BezierPatchMeshResourceType);
+		Resources::Resource* r = new Resources::Resource();
+		r->setType(Resources::BezierPatchMeshResourceType);
 		return r;
 	}
 

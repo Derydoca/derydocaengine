@@ -49,7 +49,7 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	Resource * MeshSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	Resources::Resource * MeshSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
 		// If the type field is missing, then it cannot be loaded
 		if (!resourceNode["Type"])
@@ -65,10 +65,10 @@ namespace DerydocaEngine::FileSerializers {
 		if (type == "Mesh")
 		{
 			// If it is a mesh, make a mesh resource
-			MeshResource* meshResource = new MeshResource();
+			Resources::MeshResource* meshResource = new Resources::MeshResource();
 			meshResource->setMeshIndex(resourceNode["Index"].as<unsigned int>());
 			meshResource->setMeshName(resourceNode["Name"].as<std::string>());
-			meshResource->setType(MeshResourceType);
+			meshResource->setType(Resources::MeshResourceType);
 
 			YAML::Node flagsNode = resourceNode["Flags"];
 			if (flagsNode && flagsNode.IsSequence())

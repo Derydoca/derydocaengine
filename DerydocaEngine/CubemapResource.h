@@ -1,15 +1,20 @@
 #pragma once
 #include "Resource.h"
 
-struct CubemapResource : public Resource
+namespace DerydocaEngine::Resources
 {
-public:
-	CubemapResource() {}
-	~CubemapResource() {}
 
-	void setSlot(unsigned int const& slot) { m_slot = slot; }
+	struct CubemapResource : public Resource
+	{
+	public:
+		CubemapResource() {}
+		~CubemapResource() {}
 
-	unsigned int getSlot() { return m_slot; }
-private:
-	unsigned int m_slot;
-};
+		void setSlot(unsigned int const& slot) { m_slot = slot; }
+
+		unsigned int getSlot() { return m_slot; }
+	private:
+		unsigned int m_slot;
+	};
+
+}
