@@ -30,8 +30,8 @@ namespace DerydocaEngine::Execution
 		ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), projectPath);
 
 		// Initialize the clock to this machine
-		DerydocaEngine::Timing::Clock::init();
-		DerydocaEngine::Timing::Clock* clock = new DerydocaEngine::Timing::Clock();
+		Timing::Clock::init();
+		Timing::Clock* clock = new Timing::Clock();
 
 		Rendering::Display* display = new Rendering::Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 
@@ -40,36 +40,36 @@ namespace DerydocaEngine::Execution
 #pragma region Editor specific game objects
 
 		// Keep this here as a simple way to grab screenshots of the engine
-		DerydocaEngine::Components::ScreenshotUtil* screenshotUtil = new DerydocaEngine::Components::ScreenshotUtil(display, Input::InputManager::getInstance().getKeyboard());
+		Components::ScreenshotUtil* screenshotUtil = new Components::ScreenshotUtil(display, Input::InputManager::getInstance().getKeyboard());
 		sceneRoot->addComponent(screenshotUtil);
 
 		// This is the editor camera
 		GameObject* editorCameraObject = new GameObject("__editorCamera");
 		Components::Transform* editorCameraTransform = editorCameraObject->getTransform();
 		editorCameraTransform->setPos(settings->getCamPos());
-		DerydocaEngine::Components::Camera* editorCamera = new DerydocaEngine::Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
+		Components::Camera* editorCamera = new Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
 		editorCamera->setDisplay(display);
 		editorCamera->setRenderingMode(settings->getCamRenderMode());
 		if (settings->isSkyboxDefined())
 		{
 			// If a skybox is defined, build the skybox material and assign it to the editor camera
-			DerydocaEngine::Rendering::Shader* skyboxShader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\cubemapShader");
+			Rendering::Shader* skyboxShader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\cubemapShader");
 			Resources::CubemapResource* cubemapResource = (Resources::CubemapResource*)ObjectLibrary::getInstance().getResource(settings->getSkyboxId());
 			Rendering::Texture* skyboxTexture = (Rendering::Texture*)cubemapResource->getResourceObject();
 			Rendering::Material* skyboxMaterial = new Rendering::Material();
 			skyboxMaterial->setShader(skyboxShader);
 			skyboxMaterial->setTextureSlot(0, skyboxTexture);
 			editorCamera->setSkybox(skyboxMaterial);
-			editorCamera->setClearMode(DerydocaEngine::Components::Camera::ClearMode::SkyboxClear);
+			editorCamera->setClearMode(Components::Camera::ClearMode::SkyboxClear);
 		}
 		else
 		{
 			// By default, clear the screen with a deep red
-			editorCamera->setClearMode(DerydocaEngine::Components::Camera::ClearMode::ColorClear);
+			editorCamera->setClearMode(Components::Camera::ClearMode::ColorClear);
 			editorCamera->setClearColor(Color(0.5, 0, 0));
 		}
 		editorCameraObject->addComponent(editorCamera);
-		editorCameraObject->addComponent(new DerydocaEngine::Components::WasdMover(Input::InputManager::getInstance().getKeyboard(), Input::InputManager::getInstance().getMouse()));
+		editorCameraObject->addComponent(new Components::WasdMover(Input::InputManager::getInstance().getKeyboard(), Input::InputManager::getInstance().getMouse()));
 		sceneRoot->addChild(editorCameraObject);
 
 #pragma endregion
