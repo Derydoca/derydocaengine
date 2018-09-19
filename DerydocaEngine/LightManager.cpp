@@ -7,7 +7,7 @@
 namespace DerydocaEngine::Rendering
 {
 
-	void LightManager::bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Transform* const& objectTransform, Rendering::Shader* const& shader)
+	void LightManager::bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Components::Transform* const& objectTransform, Rendering::Shader* const& shader)
 	{
 		assert(objectTransform);
 		assert(shader);
@@ -105,7 +105,7 @@ namespace DerydocaEngine::Rendering
 		shader->setInt("LightCount", (int)lights.size());
 	}
 
-	void LightManager::renderShadowMaps(Transform* const& objectTransform)
+	void LightManager::renderShadowMaps(Components::Transform* const& objectTransform)
 	{
 		// Get a list of lights that will affect the object being sent in
 		std::list<DerydocaEngine::Components::Light*> lights = getLights(objectTransform);
@@ -130,7 +130,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	std::list<DerydocaEngine::Components::Light*> LightManager::getLights(Transform * const& objectTransform)
+	std::list<DerydocaEngine::Components::Light*> LightManager::getLights(Components::Transform * const& objectTransform)
 	{
 		// Create a list to store the lights
 		std::list<DerydocaEngine::Components::Light*> lights = std::list<DerydocaEngine::Components::Light*>();

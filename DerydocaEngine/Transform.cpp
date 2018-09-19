@@ -1,63 +1,68 @@
 #include "Transform.h"
 #include "GameObject.h"
 
-glm::mat4 Transform::getWorldModel() const 
+namespace DerydocaEngine::Components
 {
-	// Start off with the object's local model
-	glm::mat4 worldModel = getModel();
 
-	if (this->m_gameObject != NULL)
+	glm::mat4 Transform::getWorldModel() const
 	{
-		// Temporary storage object for recursive iteration
-		DerydocaEngine::GameObject* currentGameObject = this->m_gameObject->getParent();
+		// Start off with the object's local model
+		glm::mat4 worldModel = getModel();
 
-		// Recursively transform the position by all parent objects
-		while (currentGameObject != NULL)
+		if (this->m_gameObject != NULL)
 		{
-			// Transform the position by the transform's matrix
-			worldModel = currentGameObject->getTransform()->getModel() * worldModel;
+			// Temporary storage object for recursive iteration
+			DerydocaEngine::GameObject* currentGameObject = this->m_gameObject->getParent();
 
-			// Get the parent transform and start the loop over again
-			currentGameObject = currentGameObject->getParent();
+			// Recursively transform the position by all parent objects
+			while (currentGameObject != NULL)
+			{
+				// Transform the position by the transform's matrix
+				worldModel = currentGameObject->getTransform()->getModel() * worldModel;
+
+				// Get the parent transform and start the loop over again
+				currentGameObject = currentGameObject->getParent();
+			}
 		}
+
+		// Return the world position
+		return worldModel;
 	}
 
-	// Return the world position
-	return worldModel;
-}
-
-glm::vec3 Transform::getWorldPos() const 
-{
-	// Start off with the object's local position
-	glm::vec4 pos = glm::vec4(m_pos, 1);
-
-	if (this->m_gameObject != NULL)
+	glm::vec3 Transform::getWorldPos() const
 	{
-		// Temporary storage object for recursive iteration
-		DerydocaEngine::GameObject* currentGameObject = this->m_gameObject->getParent();
+		// Start off with the object's local position
+		glm::vec4 pos = glm::vec4(m_pos, 1);
 
-		// Recursively transform the position by all parent objects
-		while (currentGameObject != NULL)
+		if (this->m_gameObject != NULL)
 		{
-			// Transform the position by the transform's matrix
-			pos = currentGameObject->getTransform()->getModel() * pos;
+			// Temporary storage object for recursive iteration
+			DerydocaEngine::GameObject* currentGameObject = this->m_gameObject->getParent();
 
-			// Get the parent transform and start the loop over again
-			currentGameObject = currentGameObject->getParent();
+			// Recursively transform the position by all parent objects
+			while (currentGameObject != NULL)
+			{
+				// Transform the position by the transform's matrix
+				pos = currentGameObject->getTransform()->getModel() * pos;
+
+				// Get the parent transform and start the loop over again
+				currentGameObject = currentGameObject->getParent();
+			}
 		}
+
+		// Return the world position
+		glm::vec3 worldPos;
+		worldPos.x = pos.x;
+		worldPos.y = pos.y;
+		worldPos.z = pos.z;
+		return worldPos;
 	}
 
-	// Return the world position
-	glm::vec3 worldPos;
-	worldPos.x = pos.x;
-	worldPos.y = pos.y;
-	worldPos.z = pos.z;
-	return worldPos;
-}
+	void Transform::translate(glm::vec3 const& delta)
+	{
+		m_pos.x += delta.x;
+		m_pos.y += delta.y;
+		m_pos.z += delta.z;
+	}
 
-void Transform::translate(glm::vec3 const& delta)
-{
-	m_pos.x += delta.x;
-	m_pos.y += delta.y;
-	m_pos.z += delta.z;
 }

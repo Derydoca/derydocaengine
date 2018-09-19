@@ -77,9 +77,6 @@
     <ClCompile Include="TessellatedMeshRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="FileType.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="FrameStats.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
@@ -266,6 +263,9 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
+    <ClCompile Include="FileType.cpp">
+      <Filter>DerydocaEngine\Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -348,9 +348,6 @@
     </ClInclude>
     <ClInclude Include="TessellatedMeshRenderer.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="FileType.h">
-      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Third Party</Filter>
@@ -609,6 +606,9 @@
     </ClInclude>
     <ClInclude Include="SceneObject.h">
       <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="FileType.h">
+      <Filter>DerydocaEngine\Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

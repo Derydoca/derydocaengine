@@ -48,7 +48,7 @@ namespace DerydocaEngine::Scenes
 			GameObject* go = new GameObject(name);
 
 			// Set the transform component
-			Transform* trans = go->getTransform();
+			Components::Transform* trans = go->getTransform();
 			YAML::Node transformNode = properties["Transform"];
 
 			// Get the position

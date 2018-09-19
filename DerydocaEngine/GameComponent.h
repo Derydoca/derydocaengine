@@ -7,10 +7,12 @@
 #include "YamlTools.h"
 
 struct Resource;
-struct Transform;
 
 namespace DerydocaEngine {
 	class GameObject;
+	namespace Components {
+		struct Transform;
+	}
 	namespace Rendering {
 		struct Projection;
 		class Material;

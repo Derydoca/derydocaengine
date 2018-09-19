@@ -174,7 +174,7 @@ namespace DerydocaEngine::Rendering
 		printf("    %f   %f   %f\n", matPtr[6], matPtr[7], matPtr[8]);
 	}
 
-	void Shader::update(MatrixStack * const& matrixStack, Projection const& projection, Transform* const& trans)
+	void Shader::update(MatrixStack * const& matrixStack, Projection const& projection, Components::Transform* const& trans)
 	{
 		glm::mat4 modelMatrix = matrixStack->getMatrix();
 		glm::mat4 transformModelMatrix = trans->getModel();

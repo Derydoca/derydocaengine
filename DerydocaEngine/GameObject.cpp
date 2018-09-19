@@ -49,7 +49,7 @@ namespace DerydocaEngine
 		matrixStack->pop();
 	}
 
-	void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform)
+	void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, DerydocaEngine::Rendering::Projection const& projection, Components::Transform* const& projectionTransform)
 	{
 		matrixStack->push(m_transform.getModel());
 

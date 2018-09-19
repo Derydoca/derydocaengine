@@ -45,7 +45,7 @@ namespace DerydocaEngine::Execution
 
 		// This is the editor camera
 		GameObject* editorCameraObject = new GameObject("__editorCamera");
-		Transform* editorCameraTransform = editorCameraObject->getTransform();
+		Components::Transform* editorCameraTransform = editorCameraObject->getTransform();
 		editorCameraTransform->setPos(settings->getCamPos());
 		DerydocaEngine::Components::Camera* editorCamera = new DerydocaEngine::Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
 		editorCamera->setDisplay(display);

@@ -19,8 +19,8 @@ namespace DerydocaEngine::Rendering
 		void addLight(DerydocaEngine::Components::Light* const& light) { m_lights.push_back(light); }
 		void removeLight(DerydocaEngine::Components::Light* const& light) { m_lights.remove(light); }
 
-		void bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Transform* const& objectTransform, Rendering::Shader* const& shader);
-		void renderShadowMaps(Transform* const& objectTransform);
+		void bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Components::Transform* const& objectTransform, Rendering::Shader* const& shader);
+		void renderShadowMaps(Components::Transform* const& objectTransform);
 
 		void operator=(LightManager const&) = delete;
 	private:
@@ -29,7 +29,7 @@ namespace DerydocaEngine::Rendering
 		~LightManager();
 
 		void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
-		std::list<DerydocaEngine::Components::Light*> getLights(Transform* const& objectTransform);
+		std::list<DerydocaEngine::Components::Light*> getLights(Components::Transform* const& objectTransform);
 
 		const int MAX_LIGHTS = 10;
 
