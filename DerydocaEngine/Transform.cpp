@@ -9,7 +9,7 @@ glm::mat4 Transform::getWorldModel() const
 	if (this->m_gameObject != NULL)
 	{
 		// Temporary storage object for recursive iteration
-		GameObject* currentGameObject = this->m_gameObject->getParent();
+		DerydocaEngine::GameObject* currentGameObject = this->m_gameObject->getParent();
 
 		// Recursively transform the position by all parent objects
 		while (currentGameObject != NULL)
@@ -34,7 +34,7 @@ glm::vec3 Transform::getWorldPos() const
 	if (this->m_gameObject != NULL)
 	{
 		// Temporary storage object for recursive iteration
-		GameObject* currentGameObject = this->m_gameObject->getParent();
+		DerydocaEngine::GameObject* currentGameObject = this->m_gameObject->getParent();
 
 		// Recursively transform the position by all parent objects
 		while (currentGameObject != NULL)

@@ -9,11 +9,13 @@
 struct Resource;
 struct Transform;
 
-class GameObject;
-namespace DerydocaEngine::Rendering {
-	struct Projection;
-	class Material;
-	class MatrixStack;
+namespace DerydocaEngine {
+	class GameObject;
+	namespace Rendering {
+		struct Projection;
+		class Material;
+		class MatrixStack;
+	}
 }
 class YAML::Node;
 

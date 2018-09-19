@@ -14,37 +14,41 @@ namespace DerydocaEngine {
 	}
 }
 
-class GameObject
+namespace DerydocaEngine
 {
-public:
-	GameObject();
-	GameObject(std::string const& name);
-	~GameObject();
 
-	void init();
-	void postInit();
-	void update(float const& deltaTime);
-	void render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack);
-	void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& renderMesh, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform);
-	void preRender();
-	void postRender();
+	class GameObject
+	{
+	public:
+		GameObject();
+		GameObject(std::string const& name);
+		~GameObject();
 
-	void addChild(GameObject* const& gameObject);
-	void addComponent(DerydocaEngine::Components::GameComponent* const& component);
+		void init();
+		void postInit();
+		void update(float const& deltaTime);
+		void render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack);
+		void renderMesh(DerydocaEngine::Rendering::MatrixStack* const& matrixStack, DerydocaEngine::Rendering::Material* const& renderMesh, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform);
+		void preRender();
+		void postRender();
 
-	inline Transform* getTransform() { return &m_transform; }
-	inline std::vector<GameObject*> getChildren() const { return m_children; }
-	inline std::vector<DerydocaEngine::Components::GameComponent*> getComponents() const { return m_components; }
+		void addChild(GameObject* const& gameObject);
+		void addComponent(DerydocaEngine::Components::GameComponent* const& component);
 
-	inline GameObject* getParent() const { return m_parent; }
-	inline std::string getName() const { return m_name; }
+		inline Transform* getTransform() { return &m_transform; }
+		inline std::vector<GameObject*> getChildren() const { return m_children; }
+		inline std::vector<DerydocaEngine::Components::GameComponent*> getComponents() const { return m_components; }
 
-	inline void setName(std::string name) { m_name = name; }
-private:
-	std::string m_name;
-	Transform m_transform;
-	GameObject* m_parent;
-	std::vector<GameObject*> m_children;
-	std::vector<DerydocaEngine::Components::GameComponent*> m_components;
-};
+		inline GameObject* getParent() const { return m_parent; }
+		inline std::string getName() const { return m_name; }
 
+		inline void setName(std::string name) { m_name = name; }
+	private:
+		std::string m_name;
+		Transform m_transform;
+		GameObject* m_parent;
+		std::vector<GameObject*> m_children;
+		std::vector<DerydocaEngine::Components::GameComponent*> m_components;
+	};
+
+}

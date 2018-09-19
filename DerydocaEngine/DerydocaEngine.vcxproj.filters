@@ -289,9 +289,6 @@
     <ClInclude Include="SceneObject.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="BezierCurveRenderer.h">
       <Filter>Ext</Filter>
     </ClInclude>
@@ -608,6 +605,9 @@
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="SerializedScene.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
       <Filter>DerydocaEngine\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

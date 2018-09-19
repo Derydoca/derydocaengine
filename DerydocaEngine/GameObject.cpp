@@ -2,137 +2,142 @@
 #include "GameComponent.h"
 #include "MatrixStack.h"
 
-GameObject::GameObject()
+namespace DerydocaEngine
 {
-	m_transform.setGameObject(this);
-}
 
-GameObject::GameObject(std::string const& name)
-{
-	m_transform.setGameObject(this);
-	setName(name);
-}
-
-GameObject::~GameObject()
-{
-	// Delete all of the components attached to this object
-	for (auto it = m_components.begin(); it != m_components.end(); ++it)
+	GameObject::GameObject()
 	{
-		delete(*it);
-	}
-	m_components.clear();
-
-	// Delete all of the children of this object
-	for (auto it = m_children.begin(); it != m_children.end(); ++it)
-	{
-		delete(*it);
-	}
-	m_children.clear();
-}
-
-void GameObject::render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {
-	matrixStack->push(m_transform.getModel());
-
-	for each (DerydocaEngine::Components::GameComponent* c in m_components)
-	{
-		c->render(matrixStack);
+		m_transform.setGameObject(this);
 	}
 
-	for each (GameObject* go in m_children)
+	GameObject::GameObject(std::string const& name)
 	{
-		go->render(matrixStack);
+		m_transform.setGameObject(this);
+		setName(name);
 	}
 
-	matrixStack->pop();
-}
-
-void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform)
-{
-	matrixStack->push(m_transform.getModel());
-
-	for each (DerydocaEngine::Components::GameComponent* c in m_components)
+	GameObject::~GameObject()
 	{
-		c->renderMesh(matrixStack, material, projection, projectionTransform);
+		// Delete all of the components attached to this object
+		for (auto it = m_components.begin(); it != m_components.end(); ++it)
+		{
+			delete(*it);
+		}
+		m_components.clear();
+
+		// Delete all of the children of this object
+		for (auto it = m_children.begin(); it != m_children.end(); ++it)
+		{
+			delete(*it);
+		}
+		m_children.clear();
 	}
 
-	for each (GameObject* go in m_children)
-	{
-		go->renderMesh(matrixStack, material, projection, projectionTransform);
+	void GameObject::render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {
+		matrixStack->push(m_transform.getModel());
+
+		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		{
+			c->render(matrixStack);
+		}
+
+		for each (GameObject* go in m_children)
+		{
+			go->render(matrixStack);
+		}
+
+		matrixStack->pop();
 	}
 
-	matrixStack->pop();
-}
-
-void GameObject::init()
-{
-	for each (DerydocaEngine::Components::GameComponent* c in m_components)
+	void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, DerydocaEngine::Rendering::Projection const& projection, Transform* const& projectionTransform)
 	{
-		c->init();
+		matrixStack->push(m_transform.getModel());
+
+		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		{
+			c->renderMesh(matrixStack, material, projection, projectionTransform);
+		}
+
+		for each (GameObject* go in m_children)
+		{
+			go->renderMesh(matrixStack, material, projection, projectionTransform);
+		}
+
+		matrixStack->pop();
 	}
 
-	for each (GameObject* go in m_children)
+	void GameObject::init()
 	{
-		go->init();
-	}
-}
+		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		{
+			c->init();
+		}
 
-void GameObject::postInit()
-{
-	for each (DerydocaEngine::Components::GameComponent* c in m_components)
-	{
-		c->postInit();
-	}
-
-	for each (GameObject* go in m_children)
-	{
-		go->postInit();
-	}
-}
-
-void GameObject::update(float const& deltaTime) {
-	for each (DerydocaEngine::Components::GameComponent* c in m_components)
-	{
-		c->update(deltaTime);
+		for each (GameObject* go in m_children)
+		{
+			go->init();
+		}
 	}
 
-	for each (GameObject* go in m_children)
+	void GameObject::postInit()
 	{
-		go->update(deltaTime);
-	}
-}
+		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		{
+			c->postInit();
+		}
 
-void GameObject::preRender() {
-	for each (DerydocaEngine::Components::GameComponent* c in m_components)
-	{
-		c->preRender();
-	}
-
-	for each (GameObject* go in m_children)
-	{
-		go->preRender();
-	}
-}
-
-void GameObject::postRender() {
-	for each (DerydocaEngine::Components::GameComponent* c in m_components)
-	{
-		c->postRender();
+		for each (GameObject* go in m_children)
+		{
+			go->postInit();
+		}
 	}
 
-	for each (GameObject* go in m_children)
-	{
-		go->postRender();
+	void GameObject::update(float const& deltaTime) {
+		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		{
+			c->update(deltaTime);
+		}
+
+		for each (GameObject* go in m_children)
+		{
+			go->update(deltaTime);
+		}
 	}
-}
 
-void GameObject::addChild(GameObject* const& gameObject)
-{
-	m_children.push_back(gameObject);
-	gameObject->m_parent = this;
-}
+	void GameObject::preRender() {
+		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		{
+			c->preRender();
+		}
 
-void GameObject::addComponent(DerydocaEngine::Components::GameComponent* const& component)
-{
-	m_components.push_back(component);
-	component->setGameObject(this);
+		for each (GameObject* go in m_children)
+		{
+			go->preRender();
+		}
+	}
+
+	void GameObject::postRender() {
+		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		{
+			c->postRender();
+		}
+
+		for each (GameObject* go in m_children)
+		{
+			go->postRender();
+		}
+	}
+
+	void GameObject::addChild(GameObject* const& gameObject)
+	{
+		m_children.push_back(gameObject);
+		gameObject->m_parent = this;
+	}
+
+	void GameObject::addComponent(DerydocaEngine::Components::GameComponent* const& component)
+	{
+		m_components.push_back(component);
+		component->setGameObject(this);
+	}
+
 }

@@ -4,7 +4,9 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-class GameObject;
+namespace DerydocaEngine {
+	class GameObject;
+}
 
 struct Transform
 {
@@ -50,18 +52,18 @@ public:
 	inline glm::vec3 getPos() const { return m_pos; }
 	inline glm::fquat getQuat() const { return m_quat; }
 	inline glm::vec3 getScale() const { return m_scale; }
-	GameObject* getGameObject() const { return m_gameObject; }
+	DerydocaEngine::GameObject* getGameObject() const { return m_gameObject; }
 
 	inline void setPos(glm::vec3 const& pos) { m_pos = pos; }
 	inline void setEulerAngles(glm::vec3 const& euler) { m_quat = glm::fquat(euler * 0.0174533f); }
 	inline void setQuat(glm::fquat const& quat) { m_quat = quat; }
 	inline void setScale(glm::vec3 const& scale) { m_scale = scale; }
-	void setGameObject(GameObject* object) { m_gameObject = object; }
+	void setGameObject(DerydocaEngine::GameObject* object) { m_gameObject = object; }
 
 	void translate(glm::vec3 const& delta);
 private:
 	glm::vec3 m_pos;
 	glm::vec3 m_scale;
 	glm::fquat m_quat;
-	GameObject* m_gameObject;
+	DerydocaEngine::GameObject* m_gameObject;
 };

@@ -1,6 +1,8 @@
 #pragma once
 
-class GameObject;
+namespace DerydocaEngine {
+	class GameObject;
+}
 
 namespace DerydocaEngine::Scenes
 {
