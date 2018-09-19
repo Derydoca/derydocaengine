@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Transform.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectLibrary.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
@@ -266,11 +263,11 @@
     <ClCompile Include="FileType.cpp">
       <Filter>DerydocaEngine\Files</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Transform.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="YamlTools.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
@@ -609,6 +606,9 @@
     </ClInclude>
     <ClInclude Include="FileType.h">
       <Filter>DerydocaEngine\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
