@@ -283,9 +283,6 @@
     <ClInclude Include="StringUtils.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="BezierCurveRenderer.h">
       <Filter>Ext</Filter>
     </ClInclude>
@@ -610,6 +607,9 @@
     <ClInclude Include="GameObject.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -665,6 +665,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Scenes">
       <UniqueIdentifier>{7b9d2442-2680-408b-b93b-516bba0b14e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Files">
+      <UniqueIdentifier>{80ffd5f8-9de8-41d9-a9a2-f995ce536f52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@ namespace DerydocaEngine::FileSerializers {
 		}
 
 		FileTypeSerializer * getTypeSerializer(std::string const& sourceFilePath);
-		FileTypeSerializer * getTypeSerializer(FileType const& type);
+		FileTypeSerializer * getTypeSerializer(Files::FileType const& type);
 
 		void operator=(FileSerializerLibrary const&) = delete;
 	private:
@@ -24,7 +24,7 @@ namespace DerydocaEngine::FileSerializers {
 
 		void registerTypeSerializer(FileTypeSerializer* const& serializer);
 
-		std::map<FileType, FileTypeSerializer*> m_typeSerializers;
+		std::map<Files::FileType, FileTypeSerializer*> m_typeSerializers;
 	};
 
 }

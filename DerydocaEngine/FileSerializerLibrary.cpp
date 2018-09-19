@@ -15,13 +15,13 @@ namespace DerydocaEngine::FileSerializers {
 	FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string const& sourceFilePath)
 	{
 		// Determine the resource type from the file path
-		FileType type = pathToFileType(sourceFilePath);
+		Files::FileType type = Files::pathToFileType(sourceFilePath);
 
 		// Return the serializer associated to that type
 		return getTypeSerializer(type);
 	}
 
-	FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(FileType const& type)
+	FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(Files::FileType const& type)
 	{
 		// Return the associated serializer for the resource type specified
 		auto search = m_typeSerializers.find(type);
@@ -38,7 +38,7 @@ namespace DerydocaEngine::FileSerializers {
 	void FileSerializerLibrary::registerTypeSerializer(FileTypeSerializer * const& serializer)
 	{
 		// Add this serializer to the list of serializers
-		m_typeSerializers.insert(std::pair<FileType, FileTypeSerializer*>(serializer->getFileType(), serializer));
+		m_typeSerializers.insert(std::pair<Files::FileType, FileTypeSerializer*>(serializer->getFileType(), serializer));
 	}
 
 	FileSerializerLibrary::FileSerializerLibrary()
@@ -58,7 +58,7 @@ namespace DerydocaEngine::FileSerializers {
 	FileSerializerLibrary::~FileSerializerLibrary()
 	{
 		// Delete all type serializers
-		for (std::map<FileType, FileTypeSerializer*>::iterator it = m_typeSerializers.begin(); it != m_typeSerializers.end(); ++it)
+		for (std::map<Files::FileType, FileTypeSerializer*>::iterator it = m_typeSerializers.begin(); it != m_typeSerializers.end(); ++it)
 		{
 			delete(it->second);
 		}

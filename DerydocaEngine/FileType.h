@@ -1,19 +1,24 @@
 #pragma once
 #include <string>
 
-enum FileType
+namespace DerydocaEngine::Files
 {
-	UnknownFileType,
-	IgnoredFileType,
-	MaterialFileType,
-	MeshFileType,
-	ImageFileType,
-	LevelFileType,
-	ShaderFileType,
-	BezierPatchMeshType,
-	FontType,
-	RasterFontType,
-	SpriteSheetFileType,
-};
 
-FileType pathToFileType(std::string const& str);
+	enum FileType
+	{
+		UnknownFileType,
+		IgnoredFileType,
+		MaterialFileType,
+		MeshFileType,
+		ImageFileType,
+		LevelFileType,
+		ShaderFileType,
+		BezierPatchMeshType,
+		FontType,
+		RasterFontType,
+		SpriteSheetFileType,
+	};
+
+	FileType pathToFileType(std::string const& str);
+
+}

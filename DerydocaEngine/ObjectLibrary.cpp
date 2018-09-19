@@ -178,10 +178,10 @@ void ObjectLibrary::loadDirectory(std::string const& directory)
 
 bool ObjectLibrary::createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath)
 {
-	FileType fileType = pathToFileType(sourceFilePath);
+	DerydocaEngine::Files::FileType fileType = DerydocaEngine::Files::pathToFileType(sourceFilePath);
 
 	// If this is a file type we are expected to ignore, lets ignore it
-	if (fileType == FileType::IgnoredFileType)
+	if (fileType == DerydocaEngine::Files::FileType::IgnoredFileType)
 	{
 		return false;
 	}

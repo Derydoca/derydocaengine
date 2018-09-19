@@ -14,9 +14,9 @@ namespace DerydocaEngine::FileSerializers {
 		return (Rendering::MeshFlags)0;
 	}
 
-	FileType MeshSerializer::getFileType()
+	Files::FileType MeshSerializer::getFileType()
 	{
-		return FileType::MeshFileType;
+		return Files::FileType::MeshFileType;
 	}
 
 	YAML::Node MeshSerializer::generateResourceNodes(std::string const& filePath)

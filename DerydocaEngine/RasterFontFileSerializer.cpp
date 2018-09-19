@@ -15,9 +15,9 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	FileType RasterFontFileSerializer::getFileType()
+	Files::FileType RasterFontFileSerializer::getFileType()
 	{
-		return FileType::RasterFontType;
+		return Files::FileType::RasterFontType;
 	}
 
 	Resources::Resource * RasterFontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)

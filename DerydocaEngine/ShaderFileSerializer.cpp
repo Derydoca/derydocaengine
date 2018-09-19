@@ -20,9 +20,9 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	FileType ShaderFileSerializer::getFileType()
+	Files::FileType ShaderFileSerializer::getFileType()
 	{
-		return FileType::ShaderFileType;
+		return Files::FileType::ShaderFileType;
 	}
 
 	Resources::Resource * ShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)

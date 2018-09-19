@@ -6,9 +6,9 @@
 
 namespace DerydocaEngine::FileSerializers {
 
-	FileType MaterialSerializer::getFileType()
+	Files::FileType MaterialSerializer::getFileType()
 	{
-		return FileType::MaterialFileType;
+		return Files::FileType::MaterialFileType;
 	}
 
 	YAML::Node MaterialSerializer::generateResourceNodes(std::string const& filePath)

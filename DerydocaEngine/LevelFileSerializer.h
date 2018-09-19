@@ -10,7 +10,7 @@ namespace DerydocaEngine::FileSerializers {
 		~LevelFileSerializer() {};
 
 		YAML::Node generateResourceNodes(std::string const& filePath);
-		FileType getFileType();
+		Files::FileType getFileType();
 		Resources::Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
 	};
 

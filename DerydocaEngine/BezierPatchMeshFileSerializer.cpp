@@ -15,9 +15,9 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	FileType BezierPatchMeshFileSerializer::getFileType()
+	Files::FileType BezierPatchMeshFileSerializer::getFileType()
 	{
-		return FileType::BezierPatchMeshType;
+		return Files::FileType::BezierPatchMeshType;
 	}
 
 	Resources::Resource * BezierPatchMeshFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)

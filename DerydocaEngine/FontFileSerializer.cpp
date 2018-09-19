@@ -15,9 +15,9 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	FileType FontFileSerializer::getFileType()
+	Files::FileType FontFileSerializer::getFileType()
 	{
-		return FileType::FontType;
+		return Files::FileType::FontType;
 	}
 
 	Resources::Resource * FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)

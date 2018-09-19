@@ -15,9 +15,9 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	FileType SpriteSheetFileSerializer::getFileType()
+	Files::FileType SpriteSheetFileSerializer::getFileType()
 	{
-		return FileType::SpriteSheetFileType;
+		return Files::FileType::SpriteSheetFileType;
 	}
 
 	Resources::Resource * SpriteSheetFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)

@@ -15,9 +15,9 @@ namespace DerydocaEngine::FileSerializers {
 		return resources;
 	}
 
-	FileType LevelFileSerializer::getFileType()
+	Files::FileType LevelFileSerializer::getFileType()
 	{
-		return FileType::LevelFileType;
+		return Files::FileType::LevelFileType;
 	}
 
 	Resources::Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
