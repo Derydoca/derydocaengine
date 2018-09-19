@@ -2,7 +2,7 @@
 #include "MeshResource.h"
 #include "Mesh.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	static Rendering::MeshFlags stringToFlag(std::string const& flagString)
 	{

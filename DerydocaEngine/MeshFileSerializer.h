@@ -4,7 +4,7 @@
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	class MeshSerializer : public FileTypeSerializer
 	{

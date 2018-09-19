@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="StringUtils.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="BezierCurveRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -266,14 +263,11 @@
     <ClCompile Include="ObjectLibrary.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="YamlTools.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="StringUtils.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
     <ClInclude Include="BezierCurveRenderer.h">
       <Filter>Ext</Filter>
     </ClInclude>
@@ -610,6 +604,12 @@
     <ClInclude Include="ObjectLibrary.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
+    <ClInclude Include="YamlTools.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -617,9 +617,6 @@
     </Filter>
     <Filter Include="Ext">
       <UniqueIdentifier>{5b82a275-1631-4c19-b79f-5bc532c894a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="To Be Namespaced">
-      <UniqueIdentifier>{d5f7487a-6aba-493d-9dc7-f8f6a078d052}</UniqueIdentifier>
     </Filter>
     <Filter Include="DerydocaEngine">
       <UniqueIdentifier>{8a96ec53-358e-4171-8093-2897131244a7}</UniqueIdentifier>

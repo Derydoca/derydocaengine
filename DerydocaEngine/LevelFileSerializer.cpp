@@ -1,7 +1,7 @@
 #include "LevelFileSerializer.h"
 #include "Resource.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	YAML::Node LevelFileSerializer::generateResourceNodes(std::string const& filePath)
 	{

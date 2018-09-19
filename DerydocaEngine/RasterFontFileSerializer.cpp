@@ -1,7 +1,7 @@
 #include "RasterFontFileSerializer.h"
 #include "Resource.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	YAML::Node RasterFontFileSerializer::generateResourceNodes(std::string const& filePath)
 	{

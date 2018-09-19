@@ -4,7 +4,7 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	boost::uuids::uuid generateUuid()
 	{

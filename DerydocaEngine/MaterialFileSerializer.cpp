@@ -4,7 +4,7 @@
 #include "Shader.h"
 #include "CubemapResource.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	Files::FileType MaterialSerializer::getFileType()
 	{

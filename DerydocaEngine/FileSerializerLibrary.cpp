@@ -10,7 +10,7 @@
 #include "RasterFontFileSerializer.h"
 #include "SpriteSheetFileSerializer.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	FileTypeSerializer * FileSerializerLibrary::getTypeSerializer(std::string const& sourceFilePath)
 	{

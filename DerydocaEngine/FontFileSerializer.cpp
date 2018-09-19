@@ -1,7 +1,7 @@
 #include "FontFileSerializer.h"
 #include "Resource.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	YAML::Node FontFileSerializer::generateResourceNodes(std::string const& filePath)
 	{

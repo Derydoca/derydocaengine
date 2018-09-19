@@ -6,7 +6,7 @@
 
 namespace fs = boost::filesystem;
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	YAML::Node ShaderFileSerializer::generateResourceNodes(std::string const& filePath)
 	{

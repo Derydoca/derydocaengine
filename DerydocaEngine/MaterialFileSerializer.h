@@ -1,7 +1,7 @@
 #pragma once
 #include "FileTypeSerializer.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	class MaterialSerializer : public FileTypeSerializer
 	{

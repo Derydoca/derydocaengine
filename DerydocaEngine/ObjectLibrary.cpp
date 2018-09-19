@@ -88,7 +88,7 @@ namespace DerydocaEngine
 			boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
 
 			// Find the serializer related to this source file object
-			auto serializer = DerydocaEngine::FileSerializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+			auto serializer = DerydocaEngine::Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
 
 			// If the serializer could not be found, continue onto the next resource
 			if (serializer == nullptr)
@@ -190,7 +190,7 @@ namespace DerydocaEngine
 		}
 
 		// Find the serializer for this file type
-		auto serializer = DerydocaEngine::FileSerializers::FileSerializerLibrary::getInstance().getTypeSerializer(fileType);
+		auto serializer = DerydocaEngine::Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(fileType);
 
 		// If the serializer was not found, abort and return false
 		if (serializer == nullptr)
@@ -257,7 +257,7 @@ namespace DerydocaEngine
 			boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
 
 			// Find the serializer related to this source file object
-			auto serializer = DerydocaEngine::FileSerializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+			auto serializer = DerydocaEngine::Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
 
 			// If the serializer could not be found, continue onto the next resource
 			if (serializer == nullptr)

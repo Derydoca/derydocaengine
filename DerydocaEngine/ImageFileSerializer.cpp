@@ -1,7 +1,7 @@
 #include "ImageFileSerializer.h"
 #include "Resource.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	YAML::Node ImageFileSerializer::generateResourceNodes(std::string const& filePath)
 	{

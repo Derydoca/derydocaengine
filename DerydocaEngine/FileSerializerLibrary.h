@@ -3,7 +3,7 @@
 #include "FileTypeSerializer.h"
 #include "ResourceType.h"
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	class FileSerializerLibrary
 	{

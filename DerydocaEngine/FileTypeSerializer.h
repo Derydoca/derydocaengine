@@ -9,7 +9,7 @@ namespace DerydocaEngine::Resources {
 	struct Resource;
 }
 
-namespace DerydocaEngine::FileSerializers {
+namespace DerydocaEngine::Files::Serializers {
 
 	class FileTypeSerializer
 	{
