@@ -14,9 +14,6 @@
     <ClCompile Include="StringUtils.cpp">
       <Filter>To Be Namespaced</Filter>
     </ClCompile>
-    <ClCompile Include="SerializedScene.cpp">
-      <Filter>To Be Namespaced</Filter>
-    </ClCompile>
     <ClCompile Include="BezierCurveRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -115,9 +112,6 @@
     </ClCompile>
     <ClCompile Include="WasdMover.cpp">
       <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GameComponentFactory.cpp">
-      <Filter>To Be Namespaced</Filter>
     </ClCompile>
     <ClCompile Include="DebugVisualizer.cpp">
       <Filter>DerydocaEngine\Debug</Filter>
@@ -266,6 +260,12 @@
     <ClCompile Include="Resource.cpp">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponentFactory.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializedScene.cpp">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -284,9 +284,6 @@
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="StringUtils.h">
-      <Filter>To Be Namespaced</Filter>
-    </ClInclude>
-    <ClInclude Include="SerializedScene.h">
       <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="SceneObject.h">
@@ -399,9 +396,6 @@
     </ClInclude>
     <ClInclude Include="TextRenderer.h">
       <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GameComponentFactory.h">
-      <Filter>To Be Namespaced</Filter>
     </ClInclude>
     <ClInclude Include="DebugLine.h">
       <Filter>DerydocaEngine\Debug</Filter>
@@ -610,6 +604,12 @@
     <ClInclude Include="GameComponent.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="GameComponentFactory.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializedScene.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -662,6 +662,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Resources\Serializers">
       <UniqueIdentifier>{0f247322-a589-4383-8cf0-a46483495add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Scenes">
+      <UniqueIdentifier>{7b9d2442-2680-408b-b93b-516bba0b14e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

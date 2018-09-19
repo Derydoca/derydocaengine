@@ -75,7 +75,7 @@ namespace DerydocaEngine::Execution
 #pragma endregion
 
 		// If a scene was provided, load it
-		SerializedScene* scene = nullptr;
+		Scenes::SerializedScene* scene = nullptr;
 		if (!levelIdentifier.empty())
 		{
 			Resources::Resource* levelResource = ObjectLibrary::getInstance().getResource(levelIdentifier);
@@ -86,7 +86,7 @@ namespace DerydocaEngine::Execution
 			}
 			else
 			{
-				scene = new SerializedScene();
+				scene = new Scenes::SerializedScene();
 				scene->LoadFromFile(levelResource->getSourceFilePath());
 				scene->setUp(sceneRoot);
 			}
