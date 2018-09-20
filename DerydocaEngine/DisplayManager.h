@@ -14,9 +14,9 @@ namespace DerydocaEngine::Rendering
 			return instance;
 		}
 
-		void addDisplay(DerydocaEngine::Rendering::Display* const& display) { m_displays.push_back(display); }
+		void addDisplay(Display* const& display) { m_displays.push_back(display); }
 
-		DerydocaEngine::Rendering::Display* getDisplay(size_t const& index) {
+		Display* getDisplay(size_t const& index) {
 			if (index >= m_displays.size())
 			{
 				return nullptr;
@@ -31,7 +31,7 @@ namespace DerydocaEngine::Rendering
 
 		DisplayManager(DisplayManager const&);
 
-		std::vector<DerydocaEngine::Rendering::Display*> m_displays;
+		std::vector<Display*> m_displays;
 	};
 
 }

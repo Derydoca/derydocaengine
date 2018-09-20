@@ -16,8 +16,8 @@ namespace DerydocaEngine::Rendering
 			return instance;
 		}
 
-		void addLight(DerydocaEngine::Components::Light* const& light) { m_lights.push_back(light); }
-		void removeLight(DerydocaEngine::Components::Light* const& light) { m_lights.remove(light); }
+		void addLight(Components::Light* const& light) { m_lights.push_back(light); }
+		void removeLight(Components::Light* const& light) { m_lights.remove(light); }
 
 		void bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Components::Transform* const& objectTransform, Rendering::Shader* const& shader);
 		void renderShadowMaps(Components::Transform* const& objectTransform);
@@ -29,11 +29,11 @@ namespace DerydocaEngine::Rendering
 		~LightManager();
 
 		void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
-		std::list<DerydocaEngine::Components::Light*> getLights(Components::Transform* const& objectTransform);
+		std::list<Components::Light*> getLights(Components::Transform* const& objectTransform);
 
 		const int MAX_LIGHTS = 10;
 
-		std::list<DerydocaEngine::Components::Light*> m_lights;
+		std::list<Components::Light*> m_lights;
 		GLuint m_shadowJitterTexture;
 		glm::vec3 m_shadowJitterTextureSize;
 	};

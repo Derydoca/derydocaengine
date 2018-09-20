@@ -316,7 +316,7 @@ namespace DerydocaEngine::Rendering
 		{
 			if (m_flags & MeshFlags::load_adjacent)
 			{
-				DerydocaEngine::Ext::MeshAdjacencyCalculator mac;
+				Ext::MeshAdjacencyCalculator mac;
 				m_numIndices = mesh->mNumFaces * 3 * 2;
 				delete[] m_indices;
 				m_indices = new unsigned int[m_numIndices];
