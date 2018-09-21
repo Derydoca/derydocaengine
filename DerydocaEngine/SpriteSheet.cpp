@@ -21,7 +21,7 @@ namespace DerydocaEngine::UI
 
 	void SpriteSheet::updateTexture()
 	{
-		DerydocaEngine::Utilities::TexturePacker packer = DerydocaEngine::Utilities::TexturePacker(4);
+		Utilities::TexturePacker packer = Utilities::TexturePacker(4);
 		ObjectLibrary* ObjLib = &ObjectLibrary::getInstance();
 
 		for (auto spriteMapItem : m_sprites)
@@ -43,7 +43,7 @@ namespace DerydocaEngine::UI
 
 		packer.packImages();
 
-		std::vector<DerydocaEngine::Utilities::TexturePackerImage> packedImages = packer.getSubImageData();
+		std::vector<Utilities::TexturePackerImage> packedImages = packer.getSubImageData();
 		for (auto img : packedImages)
 		{
 			auto spriteMapRecord = m_sprites.find(img.getID());
