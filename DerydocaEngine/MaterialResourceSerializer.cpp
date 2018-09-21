@@ -21,10 +21,10 @@ namespace DerydocaEngine::Resources::Serializers
 
 		// Load the shader specified in the file
 		boost::uuids::uuid shaderId = root["Shader"].as<boost::uuids::uuid>();
-		DerydocaEngine::Rendering::Shader* shader = DerydocaEngine::Rendering::ShaderLibrary::getInstance().find(shaderId);
+		Rendering::Shader* shader = Rendering::ShaderLibrary::getInstance().find(shaderId);
 
 		// Create a material with the shader we created
-		DerydocaEngine::Rendering::Material* material = new DerydocaEngine::Rendering::Material();
+		Rendering::Material* material = new Rendering::Material();
 		material->setShader(shader);
 
 		// Assign all material parameters to the material
@@ -34,7 +34,7 @@ namespace DerydocaEngine::Resources::Serializers
 			std::string paramType = parameters[i]["Type"].as<std::string>();
 			if (paramType == "Texture")
 			{
-				auto texture = loadResource<DerydocaEngine::Rendering::Texture*>(parameters[i], "ID");
+				auto texture = loadResource<Rendering::Texture*>(parameters[i], "ID");
 				YAML::Node nameNode = parameters[i]["Name"];
 				if (texture != nullptr && nameNode)
 				{
@@ -43,7 +43,7 @@ namespace DerydocaEngine::Resources::Serializers
 			}
 			else if (paramType == "Color")
 			{
-				DerydocaEngine::Color paramValue = parameters[i]["Value"].as<DerydocaEngine::Color>();
+				Color paramValue = parameters[i]["Value"].as<Color>();
 				std::string paramName = parameters[i]["Name"].as<std::string>();
 				material->setColorRGBA(paramName, paramValue);
 			}

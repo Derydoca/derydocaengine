@@ -15,14 +15,14 @@ namespace DerydocaEngine::Resources
 
 		unsigned int getMeshIndex() { return m_meshIndex; }
 		std::string getMeshName() { return m_meshName; }
-		DerydocaEngine::Rendering::MeshFlags getFlags() { return m_flags; }
-		void setFlag(DerydocaEngine::Rendering::MeshFlags const& flag) {
-			m_flags = (DerydocaEngine::Rendering::MeshFlags)(m_flags | flag);
+		Rendering::MeshFlags getFlags() { return m_flags; }
+		void setFlag(Rendering::MeshFlags const& flag) {
+			m_flags = (Rendering::MeshFlags)(m_flags | flag);
 		}
 	private:
 		unsigned int m_meshIndex;
 		std::string m_meshName;
-		DerydocaEngine::Rendering::MeshFlags m_flags{};
+		Rendering::MeshFlags m_flags{};
 	};
 
 }

@@ -14,7 +14,7 @@ namespace DerydocaEngine::Resources::Serializers
 
 	void * SpriteSheetResourceSerializer::deserialize(Resource * const& resource)
 	{
-		DerydocaEngine::UI::SpriteSheet* ss = new DerydocaEngine::UI::SpriteSheet();
+		UI::SpriteSheet* ss = new UI::SpriteSheet();
 		ss->LoadFromDisk(resource->getSourceFilePath());
 		return ss;
 	}

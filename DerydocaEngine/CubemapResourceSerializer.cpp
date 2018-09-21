@@ -52,7 +52,7 @@ namespace DerydocaEngine::Resources::Serializers
 			std::string zNegImage = getSourceFilePath(parameterNode, "ZNeg");
 
 			// Create the cubemap texture and return the object
-			DerydocaEngine::Rendering::Texture* cubemapTexture = new DerydocaEngine::Rendering::Texture(xPosImage, xNegImage, yPosImage, yNegImage, zPosImage, zNegImage);
+			Rendering::Texture* cubemapTexture = new Rendering::Texture(xPosImage, xNegImage, yPosImage, yNegImage, zPosImage, zNegImage);
 			return cubemapTexture;
 		}
 

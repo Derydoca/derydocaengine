@@ -21,7 +21,7 @@ namespace DerydocaEngine::Resources::Serializers
 		MeshResource* mr = (MeshResource*)resource;
 		auto file = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-		DerydocaEngine::Rendering::Mesh* m = new DerydocaEngine::Rendering::Mesh();
+		Rendering::Mesh* m = new Rendering::Mesh();
 		m->setFlags(mr->getFlags());
 		m->loadFromFile(resource->getSourceFilePath().c_str(), mr->getMeshIndex());
 

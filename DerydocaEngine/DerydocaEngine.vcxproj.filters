@@ -239,9 +239,6 @@
     <ClCompile Include="SpriteSheetResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="TextureResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClCompile>
@@ -265,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="StringUtils.cpp">
       <Filter>DerydocaEngine\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

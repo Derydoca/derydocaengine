@@ -17,7 +17,7 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 		std::string sourceFilePath = resource->getSourceFilePath();
 
-		DerydocaEngine::Rendering::Texture* texture = new DerydocaEngine::Rendering::Texture(sourceFilePath);
+		Rendering::Texture* texture = new Rendering::Texture(sourceFilePath);
 
 		return texture;
 	}
