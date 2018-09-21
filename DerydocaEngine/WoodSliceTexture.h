@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 		virtual void preRender();
 	private:
 		Components::Transform m_sliceMatrixTransform;
-		DerydocaEngine::Components::MeshRenderer* m_meshRenderer;
+		Components::MeshRenderer* m_meshRenderer;
 	};
 
 }

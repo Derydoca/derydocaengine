@@ -16,7 +16,7 @@ namespace DerydocaEngine::Ext
 		glGenBuffers(1, &m_vbo);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, m_mesh->getNumPatches() * DerydocaEngine::Ext::BezierPatchMesh::FLOATS_PER_PATCH * sizeof(float), m_mesh->getPatchData(), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH * sizeof(float), m_mesh->getPatchData(), GL_STATIC_DRAW);
 
 		glGenVertexArrays(1, &m_vao);
 		glBindVertexArray(m_vao);
@@ -69,7 +69,7 @@ namespace DerydocaEngine::Ext
 		}
 
 		m_material = getResourceObject<Rendering::Material>(compNode, "material");
-		m_mesh = getResourceObject<DerydocaEngine::Ext::BezierPatchMesh>(compNode, "bezierPatchMesh");
+		m_mesh = getResourceObject<BezierPatchMesh>(compNode, "bezierPatchMesh");
 	}
 
 	void TessellatedMeshRenderer::render(Rendering::MatrixStack * const& matrixStack)
@@ -78,7 +78,7 @@ namespace DerydocaEngine::Ext
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
 		glBindVertexArray(m_vao);
 		glPatchParameteri(GL_PATCH_VERTICES, 16);
-		glDrawArrays(GL_PATCHES, 0, m_mesh->getNumPatches() * DerydocaEngine::Ext::BezierPatchMesh::FLOATS_PER_PATCH);
+		glDrawArrays(GL_PATCHES, 0, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH);
 
 		glFinish();
 	}
@@ -91,7 +91,7 @@ namespace DerydocaEngine::Ext
 		m_material->getShader()->update(matrixStack, projection, projectionTransform);
 		glBindVertexArray(m_vao);
 		glPatchParameteri(GL_PATCH_VERTICES, 16);
-		glDrawArrays(GL_PATCHES, 0, m_mesh->getNumPatches() * DerydocaEngine::Ext::BezierPatchMesh::FLOATS_PER_PATCH);
+		glDrawArrays(GL_PATCHES, 0, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH);
 
 		glFinish();
 	}

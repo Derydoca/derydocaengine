@@ -6,7 +6,7 @@ namespace DerydocaEngine::Ext
 
 	void WoodSliceTexture::init()
 	{
-		m_meshRenderer = getComponent<DerydocaEngine::Components::MeshRenderer>();
+		m_meshRenderer = getComponent<Components::MeshRenderer>();
 	}
 
 	void WoodSliceTexture::deserialize(YAML::Node const& compNode)

@@ -22,7 +22,7 @@ namespace DerydocaEngine::Ext
 
 		Rendering::Material* getMaterial() const { return m_material; }
 	private:
-		DerydocaEngine::Ext::BezierPatchMesh * m_mesh;
+		BezierPatchMesh * m_mesh;
 		GLuint m_vao;
 		GLuint m_vbo;
 		Rendering::Material* m_material;

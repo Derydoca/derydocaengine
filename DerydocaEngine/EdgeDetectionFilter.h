@@ -22,7 +22,7 @@ namespace DerydocaEngine::Ext
 		void updateShader();
 
 		float m_edgeThreshold;
-		DerydocaEngine::Components::Camera* m_postProcessCamera;
+		Components::Camera* m_postProcessCamera;
 	};
 
 }

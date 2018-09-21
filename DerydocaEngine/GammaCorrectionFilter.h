@@ -19,7 +19,7 @@ namespace DerydocaEngine::Ext
 		virtual void update(float const& deltaTime);
 	private:
 		float m_gamma = 2.0;
-		DerydocaEngine::Components::Camera* m_postProcessCamera;
+		Components::Camera* m_postProcessCamera;
 
 		void updateShader();
 	};

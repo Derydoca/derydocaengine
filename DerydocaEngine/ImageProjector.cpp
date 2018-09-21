@@ -79,7 +79,7 @@ namespace DerydocaEngine::Ext
 		m_projectorTexture = new Rendering::Texture(projectorTextureResource->getSourceFilePath(), &textureParams);
 
 		// Load references to all mesh renderers this shader affects
-		m_meshRenderers = loadComponents<DerydocaEngine::Components::MeshRenderer*>(compNode, "affectedMeshRenderers");
+		m_meshRenderers = loadComponents<Components::MeshRenderer*>(compNode, "affectedMeshRenderers");
 
 		setProjectionGraphic();
 	}
@@ -91,7 +91,7 @@ namespace DerydocaEngine::Ext
 			updateProjectionMatrix();
 
 			// Update all shaders with the new projection matrix
-			for (DerydocaEngine::Components::MeshRenderer* const& meshRenderer : m_meshRenderers)
+			for (Components::MeshRenderer* const& meshRenderer : m_meshRenderers)
 			{
 				Rendering::Material* mat = meshRenderer->getMaterial();
 				if (!mat)

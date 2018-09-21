@@ -25,7 +25,7 @@ namespace DerydocaEngine::Ext
 		}
 
 		// Get the shader from the attached mesh renderer
-		DerydocaEngine::Components::MeshRenderer* mr = getComponent<DerydocaEngine::Components::MeshRenderer>();
+		Components::MeshRenderer* mr = getComponent<Components::MeshRenderer>();
 		if (mr == nullptr)
 		{
 			std::cout << "No mesh renderer found for ShaderSubroutineSwitcher object.\n";
