@@ -45,7 +45,7 @@ namespace DerydocaEngine::Settings
 			if (renderingModeNode)
 			{
 				int rm = renderingModeNode.as<int>();
-				m_renderingMode = static_cast<DerydocaEngine::Components::Camera::RenderingMode>(rm);
+				m_renderingMode = static_cast<Components::Camera::RenderingMode>(rm);
 			}
 		}
 		else
