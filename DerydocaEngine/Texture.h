@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <GL/glew.h>
 
 namespace DerydocaEngine::Rendering {
 	struct TextureParameters;
@@ -14,39 +13,28 @@ namespace DerydocaEngine::Rendering
 	{
 	public:
 		Texture();
-		Texture(std::string const& fileName);
-		Texture(std::string const& fileName, TextureParameters* const& params);
+		Texture(std::string const& fileName, TextureParameters* const& params = nullptr);
 		Texture(std::string const& xpos, std::string const& xneg, std::string const& ypos, std::string const& yneg, std::string const& zpos, std::string const& zneg);
 		~Texture();
 
-		void bind(unsigned int const& unit);
-		int getWidth() { return m_width; }
-		int getHeight() { return m_height; }
-		GLenum getTextureType() const { return m_textureType; }
-		GLuint getTextureId() const { return m_texture; }
-		void updateBuffer(GLubyte * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params);
+		void bind(unsigned int const& unit) const;
+		int getWidth() const { return m_width; }
+		int getHeight() const { return m_height; }
+		unsigned int getTextureType() const { return m_textureType; }
+		unsigned int getRendererId() const { return m_rendererId; }
+		void updateBuffer(unsigned char * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params);
 
-		static GLenum ChannelsToPixelFormat(int const& numChannels)
-		{
-			switch (numChannels)
-			{
-			case 1:
-				return GL_RED;
-			case 2:
-				return GL_RG;
-			case 3:
-				return GL_RGB;
-			default:
-				return GL_RGBA;
-			}
-		}
+		unsigned int channelsToPixelFormat(int const& numChannels) const;
 	protected:
-		int m_width, m_height;
-		GLuint m_texture;
-		GLenum m_textureType;
+		unsigned int m_rendererId;
+		int m_width;
+		int m_height;
+		unsigned int m_textureType;
 	private:
 		Texture(Texture const& other) {}
-		void operator=(Texture const& other) {}
+		void operator=(Texture const& other) {};
+
+		void deleteTexture();
 	};
 
 }

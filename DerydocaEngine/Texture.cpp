@@ -1,5 +1,6 @@
 #include "Texture.h"
 #include <cassert>
+#include <GL/glew.h>
 #include <iostream>
 #include "stb_image.h"
 #include "TextureParameters.h"
@@ -7,61 +8,32 @@
 namespace DerydocaEngine::Rendering
 {
 
-	Texture::Texture()
+	Texture::Texture() :
+		m_rendererId(0),
+		m_width(0),
+		m_height(0),
+		m_textureType(0)
 	{
-		m_texture = 0;
 		m_textureType = GL_TEXTURE_2D;
 	}
 
-	Texture::Texture(std::string const& fileName)
-		: Texture(fileName, nullptr)
+	Texture::Texture(std::string const& fileName, TextureParameters* const& params) :
+		m_rendererId(0),
+		m_width(0),
+		m_height(0),
+		m_textureType(0)
 	{
-
-	}
-
-	Texture::Texture(std::string const& fileName, TextureParameters* const& params)
-	{
-		// Set the texture type
-		m_textureType = GL_TEXTURE_2D;
-
-		// Get the wrap modes
-		TextureWrapMode wrapModeS = TextureWrapMode::REPEAT;
-		TextureWrapMode wrapModeT = TextureWrapMode::REPEAT;
-		if (params != nullptr)
-		{
-			wrapModeS = params->getWrapModeS();
-			wrapModeT = params->getWrapModeT();
-		}
-
 		// Load the image data
 		int w, h, bpp;
 		stbi_set_flip_vertically_on_load(true);
 		unsigned char* data = stbi_load(fileName.c_str(), &w, &h, &bpp, 0);
-
-		// Create the texture handle and set parameters for it
-		glGenTextures(1, &m_texture);
-		glBindTexture(m_textureType, m_texture);
-		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, params->textureWrapModeToOpenGL(wrapModeS));
-		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, params->textureWrapModeToOpenGL(wrapModeT));
-		glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		// If the data was loaded
-		if (data)
+		if (!data)
 		{
-			// Load the image in OpenGL and generate mipmaps
-			GLenum pixelFormat = GL_RGB;
-			if (bpp == 4)
-			{
-				pixelFormat = GL_RGBA;
-			}
-			glTexImage2D(GL_TEXTURE_2D, 0, pixelFormat, w, h, 0, pixelFormat, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
+			std::cout << "Unable to load image.\n";
+			return;
 		}
-		else
-		{
-			std::cout << "Failed to load texture\n";
-		}
+
+		updateBuffer(data, w, h, bpp, params);
 
 		// Free up our memory
 		stbi_image_free(data);
@@ -73,11 +45,11 @@ namespace DerydocaEngine::Rendering
 		m_textureType = GL_TEXTURE_CUBE_MAP;
 
 		// Create the texture handle and set parameters for it
-		glGenTextures(1, &m_texture);
-		glBindTexture(m_textureType, m_texture);
+		glGenTextures(1, &m_rendererId);
+		glBindTexture(m_textureType, m_rendererId);
 
 		// Store the list of sides in a string array so we can easily iterate over them
-		std::string* cubemapSourceImages = new std::string[6]{ xpos, xneg, ypos, yneg, zpos, zneg };
+		std::string cubemapSourceImages[] = { xpos, xneg, ypos, yneg, zpos, zneg };
 
 		// Loop through each side of the cubemap
 		int w, h, bpp;
@@ -108,24 +80,20 @@ namespace DerydocaEngine::Rendering
 			glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
-
-		delete[] cubemapSourceImages;
 	}
 
 	Texture::~Texture()
 	{
-		glDeleteTextures(1, &m_texture);
+		deleteTexture();
 	}
 
-	void Texture::bind(unsigned int const& unit)
+	void Texture::bind(unsigned int const& unit) const
 	{
-		assert(unit >= 0 && unit <= 31);
-
 		glActiveTexture(GL_TEXTURE0 + unit);
-		glBindTexture(m_textureType, m_texture);
+		glBindTexture(m_textureType, m_rendererId);
 	}
 
-	void Texture::updateBuffer(GLubyte * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params)
+	void Texture::updateBuffer(unsigned char * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params)
 	{
 		m_width = width;
 		m_height = height;
@@ -142,21 +110,50 @@ namespace DerydocaEngine::Rendering
 			wrapModeT = params->getWrapModeT();
 		}
 
-		GLint pixelFormat = ChannelsToPixelFormat(channels);
+		GLint pixelFormat = channelsToPixelFormat(channels);
 
 		if (pixelFormat == GL_RED)
 		{
 			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		}
 
+		// delete the old texture if there was one already loaded
+		deleteTexture();
+		
 		// Create the texture handle and set parameters for it
-		glGenTextures(1, &m_texture);
-		glBindTexture(m_textureType, m_texture);
+		glGenTextures(1, &m_rendererId);
+		glBindTexture(m_textureType, m_rendererId);
 		glTexImage2D(m_textureType, 0, pixelFormat, width, height, 0, pixelFormat, GL_UNSIGNED_BYTE, data);
 		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, params->textureWrapModeToOpenGL(wrapModeS));
 		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, params->textureWrapModeToOpenGL(wrapModeT));
 		glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glGenerateMipmap(m_textureType);
+	}
+
+	unsigned int Texture::channelsToPixelFormat(int const & numChannels) const
+	{
+		switch (numChannels)
+		{
+		case 1:
+			return GL_RED;
+		case 2:
+			return GL_RG;
+		case 3:
+			return GL_RGB;
+		default:
+			return GL_RGBA;
+		}
+	}
+
+	void Texture::deleteTexture()
+	{
+		if (m_rendererId)
+		{
+			glDeleteTextures(1, &m_rendererId);
+			m_rendererId = 0;
+		}
 	}
 
 }

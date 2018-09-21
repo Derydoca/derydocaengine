@@ -279,7 +279,6 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="ShaderResourceSerializer.cpp" />
     <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
-    <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -295,6 +294,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="TexturePacker.cpp" />
     <ClCompile Include="TexturePackerImage.cpp" />
     <ClCompile Include="TexturePackerTextureData.cpp" />
+    <ClCompile Include="TextureParameters.cpp" />
     <ClCompile Include="TextureResourceSerializer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="WasdMover.cpp" />
@@ -390,7 +390,6 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="ShaderResourceSerializer.h" />
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
-    <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SpriteReference.h" />
     <ClInclude Include="SpriteRenderer.h" />

@@ -197,9 +197,6 @@
     <ClCompile Include="Display.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="ShadowMap.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
@@ -265,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="TextureResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureParameters.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -494,9 +494,6 @@
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Projection.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadowMap.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">

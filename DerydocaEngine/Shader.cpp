@@ -294,7 +294,7 @@ namespace DerydocaEngine::Rendering
 	void Shader::setTexture(std::string const& name, int const& textureUnit, Texture* const& texture)
 	{
 		glActiveTexture(GL_TEXTURE0 + textureUnit);
-		glBindTexture(texture->getTextureType(), texture->getTextureId());
+		glBindTexture(texture->getTextureType(), texture->getRendererId());
 		glUniform1i(getUniformName(name), textureUnit);
 	}
 
