@@ -33,10 +33,10 @@ namespace DerydocaEngine
 		m_children.clear();
 	}
 
-	void GameObject::render(DerydocaEngine::Rendering::MatrixStack* const& matrixStack) {
+	void GameObject::render(Rendering::MatrixStack* const& matrixStack) {
 		matrixStack->push(m_transform.getModel());
 
-		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		for each (Components::GameComponent* c in m_components)
 		{
 			c->render(matrixStack);
 		}
@@ -49,11 +49,11 @@ namespace DerydocaEngine
 		matrixStack->pop();
 	}
 
-	void GameObject::renderMesh(DerydocaEngine::Rendering::MatrixStack * const& matrixStack, DerydocaEngine::Rendering::Material * const& material, DerydocaEngine::Rendering::Projection const& projection, Components::Transform* const& projectionTransform)
+	void GameObject::renderMesh(Rendering::MatrixStack * const& matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Components::Transform* const& projectionTransform)
 	{
 		matrixStack->push(m_transform.getModel());
 
-		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		for each (Components::GameComponent* c in m_components)
 		{
 			c->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
@@ -68,7 +68,7 @@ namespace DerydocaEngine
 
 	void GameObject::init()
 	{
-		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		for each (Components::GameComponent* c in m_components)
 		{
 			c->init();
 		}
@@ -81,7 +81,7 @@ namespace DerydocaEngine
 
 	void GameObject::postInit()
 	{
-		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		for each (Components::GameComponent* c in m_components)
 		{
 			c->postInit();
 		}
@@ -93,7 +93,7 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::update(float const& deltaTime) {
-		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		for each (Components::GameComponent* c in m_components)
 		{
 			c->update(deltaTime);
 		}
@@ -105,7 +105,7 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::preRender() {
-		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		for each (Components::GameComponent* c in m_components)
 		{
 			c->preRender();
 		}
@@ -117,7 +117,7 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::postRender() {
-		for each (DerydocaEngine::Components::GameComponent* c in m_components)
+		for each (Components::GameComponent* c in m_components)
 		{
 			c->postRender();
 		}
@@ -134,7 +134,7 @@ namespace DerydocaEngine
 		gameObject->m_parent = this;
 	}
 
-	void GameObject::addComponent(DerydocaEngine::Components::GameComponent* const& component)
+	void GameObject::addComponent(Components::GameComponent* const& component)
 	{
 		m_components.push_back(component);
 		component->setGameObject(this);

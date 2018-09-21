@@ -25,14 +25,14 @@ namespace DerydocaEngine
 		loadDirectory(engineResourcesPath);
 	}
 
-	DerydocaEngine::Resources::Resource * ObjectLibrary::getResource(std::string const& uuidString)
+	Resources::Resource * ObjectLibrary::getResource(std::string const& uuidString)
 	{
 		boost::uuids::string_generator gen;
 		boost::uuids::uuid uuid = gen(uuidString);
 		return getResource(uuid);
 	}
 
-	DerydocaEngine::Resources::Resource * ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
+	Resources::Resource * ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
 	{
 		// Find a resource with a matching uuid
 		auto search = m_resources.find(uuid);
@@ -48,7 +48,7 @@ namespace DerydocaEngine
 		}
 	}
 
-	DerydocaEngine::Components::GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
+	Components::GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
 	{
 		auto search = m_sceneComponents.find(id);
 		if (search != m_sceneComponents.end())
@@ -59,7 +59,7 @@ namespace DerydocaEngine
 		return nullptr;
 	}
 
-	DerydocaEngine::Resources::Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
+	Resources::Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 	{
 		std::string metaFilePath = sourceFilePath + m_metaExtension;
 
@@ -88,7 +88,7 @@ namespace DerydocaEngine
 			boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
 
 			// Find the serializer related to this source file object
-			auto serializer = DerydocaEngine::Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+			auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
 
 			// If the serializer could not be found, continue onto the next resource
 			if (serializer == nullptr)
@@ -98,7 +98,7 @@ namespace DerydocaEngine
 			}
 
 			// Load the resource object
-			DerydocaEngine::Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
+			Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
 
 			// If no resource could be parsed from the node, continue on
 			if (resource == nullptr)
@@ -154,9 +154,9 @@ namespace DerydocaEngine
 		}
 	}
 
-	void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, DerydocaEngine::Components::GameComponent * const& component)
+	void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, Components::GameComponent * const& component)
 	{
-		m_sceneComponents.insert(std::pair<boost::uuids::uuid, DerydocaEngine::Components::GameComponent*>(id, component));
+		m_sceneComponents.insert(std::pair<boost::uuids::uuid, Components::GameComponent*>(id, component));
 	}
 
 	void ObjectLibrary::loadDirectory(std::string const& directory)
@@ -181,16 +181,16 @@ namespace DerydocaEngine
 
 	bool ObjectLibrary::createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath)
 	{
-		DerydocaEngine::Files::FileType fileType = DerydocaEngine::Files::pathToFileType(sourceFilePath);
+		Files::FileType fileType = Files::pathToFileType(sourceFilePath);
 
 		// If this is a file type we are expected to ignore, lets ignore it
-		if (fileType == DerydocaEngine::Files::FileType::IgnoredFileType)
+		if (fileType == Files::FileType::IgnoredFileType)
 		{
 			return false;
 		}
 
 		// Find the serializer for this file type
-		auto serializer = DerydocaEngine::Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(fileType);
+		auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(fileType);
 
 		// If the serializer was not found, abort and return false
 		if (serializer == nullptr)
@@ -217,10 +217,10 @@ namespace DerydocaEngine
 		return true;
 	}
 
-	void ObjectLibrary::registerResource(DerydocaEngine::Resources::Resource* const& resource)
+	void ObjectLibrary::registerResource(Resources::Resource* const& resource)
 	{
 		// Load the resource into the map
-		m_resources.insert(std::pair<boost::uuids::uuid, DerydocaEngine::Resources::Resource*>(resource->getId(), resource));
+		m_resources.insert(std::pair<boost::uuids::uuid, Resources::Resource*>(resource->getId(), resource));
 	}
 
 	void ObjectLibrary::loadFile(std::string const& sourceFilePath)
@@ -257,7 +257,7 @@ namespace DerydocaEngine
 			boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
 
 			// Find the serializer related to this source file object
-			auto serializer = DerydocaEngine::Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
+			auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
 
 			// If the serializer could not be found, continue onto the next resource
 			if (serializer == nullptr)
@@ -267,7 +267,7 @@ namespace DerydocaEngine
 			}
 
 			// Load the resource object
-			DerydocaEngine::Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
+			Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
 
 			// If no resource could be parsed from the node, continue on
 			if (resource == nullptr)
