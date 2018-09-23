@@ -1,8 +1,15 @@
 #pragma once
 #include <sdl2\SDL.h>
-#include "Keyboard.h"
-#include "Display.h"
 #include "GameComponent.h"
+
+namespace DerydocaEngine {
+	namespace Input {
+		class Keyboard;
+	}
+	namespace Rendering {
+		class Display;
+	}
+}
 
 namespace DerydocaEngine::Components
 {
@@ -17,7 +24,7 @@ namespace DerydocaEngine::Components
 
 		void postRender();
 	private:
-		Input::Keyboard * m_keyboard;
+		Input::Keyboard* m_keyboard;
 		Rendering::Display* m_display;
 	};
 

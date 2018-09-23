@@ -1,9 +1,11 @@
 #include "ScreenshotUtil.h"
 
-#include <GL/glew.h>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <chrono>
 #include <ctime>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <GL/glew.h>
+#include "Display.h"
+#include "Keyboard.h"
 #include "stb_image.h"
 #include "stb_image_write.h"
 
