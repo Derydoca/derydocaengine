@@ -1,4 +1,7 @@
 #pragma once
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 namespace DerydocaEngine::Rendering
 {
@@ -26,23 +29,8 @@ namespace DerydocaEngine::Rendering
 		*/
 		glm::mat4 getRotationProjection(glm::fquat const& quaternionRotation) const { return m_projectionMatrix * glm::inverse(glm::mat4_cast(quaternionRotation)); }
 
+		void recalculateProjectionMatrix();
 		void setProjectionMode(ProjectionMode const& mode) { m_projectionMode = mode; }
-
-		void recalculateProjectionMatrix()
-		{
-			switch (m_projectionMode)
-			{
-			case ProjectionMode::Orthographic:
-				m_projectionMatrix = glm::mat4(); //glm::ortho(-m_orthoSize, m_orthoSize, -m_orthoSize, m_orthoSize, m_zNear, m_zFar);
-				break;
-			case ProjectionMode::Perspective:
-				m_projectionMatrix = glm::perspective(m_fov * (glm::pi<float>() / 180), m_aspect, m_zNear, m_zFar);
-				break;
-			default:
-				m_projectionMatrix = glm::mat4();
-				break;
-			}
-		}
 
 		void setFov(float const& fov) { m_fov = fov; }
 		void setAspectRatio(float const& aspectRatio) { m_aspect = aspectRatio; }

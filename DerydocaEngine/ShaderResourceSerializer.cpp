@@ -1,4 +1,6 @@
 #include "ShaderResourceSerializer.h"
+
+#include "Shader.h"
 #include "ShaderLibrary.h"
 #include "ShaderResource.h"
 

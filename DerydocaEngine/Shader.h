@@ -1,13 +1,21 @@
 #pragma once
-#include <string>
 #include <map>
-#include "Transform.h"
-#include "Camera.h"
+#include <string>
 #include "Color.h"
-#include "Texture.h"
-#include "Mesh.h"
-#include "RenderPass.h"
 #include "Projection.h"
+
+namespace DerydocaEngine {
+	namespace Components {
+		struct Transform;
+	}
+	namespace Rendering {
+		class MatrixStack;
+		class Mesh;
+		struct RenderPass;
+		class RenderTexture;
+		class Texture;
+	}
+}
 
 namespace DerydocaEngine::Rendering
 {

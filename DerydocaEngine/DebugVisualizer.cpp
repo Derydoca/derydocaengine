@@ -1,6 +1,7 @@
 #include "DebugVisualizer.h"
 
 #include <GL/glew.h>
+#include "Camera.h"
 #include "CameraManager.h"
 #include "ShaderLibrary.h"
 

@@ -266,6 +266,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="ParticleFountain.cpp" />
     <ClCompile Include="ParticleInstanced.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Projection.cpp" />
     <ClCompile Include="RasterFontFileSerializer.cpp" />
     <ClCompile Include="RendererComponent.cpp" />
     <ClCompile Include="RenderTexture.cpp" />

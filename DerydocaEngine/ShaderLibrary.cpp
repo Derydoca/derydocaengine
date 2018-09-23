@@ -1,7 +1,10 @@
 #include "ShaderLibrary.h"
-#include "ObjectLibrary.h"
-#include "ShaderResource.h"
+
+#include <boost/uuid/uuid_io.hpp>
 #include <iostream>
+#include "ObjectLibrary.h"
+#include "Shader.h"
+#include "ShaderResource.h"
 
 namespace DerydocaEngine::Rendering
 {
