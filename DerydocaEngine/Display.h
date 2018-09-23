@@ -1,11 +1,15 @@
 #pragma once
 #include <string>
-#include "Camera.h"
 
 typedef void *SDL_GLContext;
 struct SDL_Window;
-namespace DerydocaEngine::Input {
-	class Keyboard;
+namespace DerydocaEngine {
+	namespace Components {
+		class Camera;
+	}
+	namespace Input {
+		class Keyboard;
+	}
 }
 
 namespace DerydocaEngine::Rendering
