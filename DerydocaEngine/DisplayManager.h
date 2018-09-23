@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
-#include "Display.h"
+
+namespace DerydocaEngine::Rendering {
+	class Display;
+}
 
 namespace DerydocaEngine::Rendering
 {
@@ -14,20 +17,14 @@ namespace DerydocaEngine::Rendering
 			return instance;
 		}
 
-		void addDisplay(Display* const& display) { m_displays.push_back(display); }
+		void addDisplay(Display* const& display);
 
-		Display* getDisplay(size_t const& index) {
-			if (index >= m_displays.size())
-			{
-				return nullptr;
-			}
-			return m_displays[index];
-		}
+		Display* getDisplay(size_t const& index) const;
 
 		void operator=(DisplayManager const&) = delete;
 	private:
-		DisplayManager() {}
-		~DisplayManager() {}
+		DisplayManager();
+		~DisplayManager();
 
 		DisplayManager(DisplayManager const&);
 

@@ -1,20 +1,21 @@
 #include "Camera.h"
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 #include "CameraManager.h"
-#include "Shader.h"
-#include "MatrixStack.h"
+#include "Display.h"
 #include "DisplayManager.h"
-#include "MeshResource.h"
-#include "glm\glm.hpp"
-#include "Shader.h"
-#include "ShaderLibrary.h"
 #include "LightManager.h"
 #include "Material.h"
-#include "RenderTexture.h"
-#include "Rectangle.h"
-#include "Skybox.h"
+#include "MatrixStack.h"
 #include "Mesh.h"
+#include "MeshResource.h"
+#include "Rectangle.h"
+#include "RenderTexture.h"
+#include "Shader.h"
+#include "Shader.h"
+#include "ShaderLibrary.h"
+#include "Skybox.h"
 
 namespace DerydocaEngine::Components
 {
