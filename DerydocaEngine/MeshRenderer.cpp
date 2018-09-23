@@ -6,6 +6,7 @@
 #include "LightManager.h"
 #include "Material.h"
 #include "Mesh.h"
+#include "RenderTexture.h"
 #include "ShaderLibrary.h"
 #include "Texture.h"
 #include "Transform.h"

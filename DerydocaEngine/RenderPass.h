@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
-#include "RenderTexture.h"
+
+namespace DerydocaEngine::Rendering {
+	class RenderTexture;
+}
 
 namespace DerydocaEngine::Rendering
 {

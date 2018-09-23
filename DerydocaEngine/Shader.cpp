@@ -1,11 +1,12 @@
 #include "Shader.h"
 
 #include <fstream>
-#include <sys/stat.h>
 #include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
+#include <sys/stat.h>
 #include "CameraManager.h"
 #include "GLError.h"
+#include "RenderTexture.h"
 
 namespace DerydocaEngine::Rendering
 {
