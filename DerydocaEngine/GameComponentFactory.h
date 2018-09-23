@@ -2,10 +2,11 @@
 #include "GameObject.h"
 #include <string>
 #include <map>
-#include <boost\function.hpp>
 
 namespace DerydocaEngine::Components
 {
+
+	typedef GameComponent* (*gameComponentInstanceGenerator)();
 
 	class GameComponentFactory
 	{
@@ -17,8 +18,8 @@ namespace DerydocaEngine::Components
 
 		GameComponent * CreateGameComponent(std::string const& gameComponentType);
 	private:
-		std::map<std::string, std::function<GameComponent*()>> m_instanceGenerators;
-		void registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator);
+		std::map<std::string, gameComponentInstanceGenerator> m_instanceGenerators;
+		void registerInstanceGenerator(std::string const& gameComponentType, gameComponentInstanceGenerator const& instanceGenerator);
 
 		GameComponentFactory();
 		~GameComponentFactory();

@@ -57,7 +57,7 @@ namespace DerydocaEngine::Components
 		return nullptr;
 	}
 
-	void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, std::function<GameComponent*()> const& instanceGenerator)
+	void GameComponentFactory::registerInstanceGenerator(std::string const& gameComponentType, gameComponentInstanceGenerator const& instanceGenerator)
 	{
 		size_t scopeOperatorLoc = gameComponentType.find_last_of(':');
 		if (scopeOperatorLoc > 0)
