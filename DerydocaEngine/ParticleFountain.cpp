@@ -1,6 +1,8 @@
 #include "ParticleFountain.h"
-#include "Shader.h"
+
+#include <GL\glew.h>
 #include "InputManager.h"
+#include "Shader.h"
 
 namespace DerydocaEngine::Ext
 {

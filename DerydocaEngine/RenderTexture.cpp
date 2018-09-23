@@ -1,4 +1,6 @@
 #include "RenderTexture.h"
+
+#include <GL/glew.h>
 #include <cassert>
 
 namespace DerydocaEngine::Rendering
@@ -40,7 +42,8 @@ namespace DerydocaEngine::Rendering
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthbuffer);
 
 		glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_rendererId, 0);
-		glDrawBuffers(1, m_drawBuffers);
+		GLenum colorAttachments[] = { GL_COLOR_ATTACHMENT0 };
+		glDrawBuffers(1, colorAttachments);
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 			printf("UNABLE TO CREATE RENDER TEXTURE!");

@@ -1,7 +1,9 @@
 #include "BloomFilter.h"
-#include "Shader.h"
+
+#include <GL/glew.h>
 #include <iostream>
 #include "Material.h"
+#include "Shader.h"
 
 namespace DerydocaEngine::Ext
 {

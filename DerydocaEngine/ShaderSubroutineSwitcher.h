@@ -1,5 +1,4 @@
 #pragma once
-#include <gl\glew.h>
 #include "GameComponent.h"
 #include "Material.h"
 
@@ -17,7 +16,7 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(YAML::Node const& compNode);
 	private:
-		void setSubroutine(GLuint const& program, std::string const& subroutineName);
+		void setSubroutine(unsigned int const& program, std::string const& subroutineName);
 
 		std::string m_subroutineName;
 	};

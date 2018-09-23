@@ -1,4 +1,6 @@
 #include "LightManager.h"
+
+#include <GL\glew.h>
 #include "CameraManager.h"
 #include "glm\glm.hpp"
 #include "GameObject.h"

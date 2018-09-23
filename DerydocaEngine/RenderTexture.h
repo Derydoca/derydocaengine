@@ -1,5 +1,4 @@
 #pragma once
-#include <GL\glew.h>
 #include "Texture.h"
 
 namespace DerydocaEngine::Rendering
@@ -17,10 +16,8 @@ namespace DerydocaEngine::Rendering
 		float getAspectRatio();
 		void initializeTexture(int const& width, int const& height);
 	private:
-		GLuint m_framebuffer;
-		GLuint m_depthbuffer;
-
-		GLenum m_drawBuffers[1] = { GL_COLOR_ATTACHMENT0 };
+		unsigned int m_framebuffer;
+		unsigned int m_depthbuffer;
 	};
 
 }

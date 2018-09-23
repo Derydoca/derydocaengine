@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <GL/glew.h>
 #include "Camera.h"
 
 typedef void *SDL_GLContext;

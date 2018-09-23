@@ -27,9 +27,9 @@ namespace DerydocaEngine::Ext
 		float m_velocityMin = 1.25f;
 		float m_velocityMax = 1.5f;
 		float m_angle = 6.0f;
-		GLuint m_vao;
-		GLuint m_initVel;
-		GLuint m_startTime;
+		unsigned int m_vao;
+		unsigned int m_initVel;
+		unsigned int m_startTime;
 		Input::Keyboard* m_keyboard;
 
 		void initBuffers();

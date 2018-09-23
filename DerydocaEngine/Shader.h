@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <GL/glew.h>
 #include <map>
 #include "Transform.h"
 #include "Camera.h"
@@ -36,7 +35,7 @@ namespace DerydocaEngine::Rendering
 		void setMat3(std::string const& name, glm::mat3 const& val);
 		void setMat4(std::string const& name, glm::mat4 const& val);
 		void setTexture(std::string const& name, int const& textureUnit, Texture* const& handle);
-		void setTexture(std::string const& name, int const& textureUnit, GLenum const& textureType, GLuint const& handle);
+		void setTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType, unsigned int const& handle);
 
 		void clearFloat(std::string const& name);
 		void clearFloatArray(std::string const& name, unsigned int const& arrayLength);
@@ -48,7 +47,7 @@ namespace DerydocaEngine::Rendering
 		void clearVec4(std::string const& name);
 		void clearMat3(std::string const& name);
 		void clearMat4(std::string const& name);
-		void clearTexture(std::string const& name, int const& textureUnit, GLenum const& textureType);
+		void clearTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType);
 
 		std::string GetLoadPath() const { return m_loadPath; }
 		std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
@@ -57,10 +56,10 @@ namespace DerydocaEngine::Rendering
 		std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 		std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 
-		GLuint getSubroutineIndex(GLuint const& program, std::string const& subroutineName);
-		void setSubroutine(GLuint const& program, GLuint const& subroutineIndex);
+		unsigned int getSubroutineIndex(unsigned int const& program, std::string const& subroutineName);
+		void setSubroutine(unsigned int const& program, unsigned int const& subroutineIndex);
 
-		void setSubPasses(GLuint const& program, RenderPass* const& renderPasses, int const& numPasses);
+		void setSubPasses(unsigned int const& program, RenderPass* const& renderPasses, int const& numPasses);
 
 		void renderMesh(Mesh* const& mesh, RenderTexture* const& renderTexture);
 	private:
@@ -80,9 +79,9 @@ namespace DerydocaEngine::Rendering
 			NUM_UNIFORMS
 		};
 
-		GLuint m_program;
-		GLuint m_shaders[NUM_SHADERS];
-		GLint m_uniforms[NUM_UNIFORMS];
+		unsigned int m_rendererId;
+		unsigned int m_shaders[NUM_SHADERS];
+		int m_uniforms[NUM_UNIFORMS];
 		std::string m_loadPath;
 		std::map<std::string, int> m_uniformLookup;
 		int m_numPasses;

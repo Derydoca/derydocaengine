@@ -235,6 +235,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GammaCorrectionFilter.cpp" />
     <ClCompile Include="GaussianBlurFilter.cpp" />
+    <ClCompile Include="GLError.cpp" />
     <ClCompile Include="ImageFileSerializer.cpp" />
     <ClCompile Include="ImageProjector.cpp" />
     <ClCompile Include="InputManager.cpp" />

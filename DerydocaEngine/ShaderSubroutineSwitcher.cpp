@@ -1,4 +1,6 @@
 #include "ShaderSubroutineSwitcher.h"
+
+#include <gl\glew.h>
 #include <iostream>
 #include "MeshRenderer.h"
 #include "Shader.h"
@@ -16,7 +18,7 @@ namespace DerydocaEngine::Ext
 		m_subroutineName = compNode["SubroutineName"].as<std::string>();
 	}
 
-	void ShaderSubroutineSwitcher::setSubroutine(GLuint const& program, std::string const& subroutineName)
+	void ShaderSubroutineSwitcher::setSubroutine(unsigned int const& program, std::string const& subroutineName)
 	{
 		if (subroutineName.empty())
 		{

@@ -1,6 +1,8 @@
 #include "Light.h"
-#include "LightManager.h"
+
+#include <GL\glew.h>
 #include <iostream>
+#include "LightManager.h"
 
 namespace DerydocaEngine::Components
 {
@@ -168,7 +170,7 @@ namespace DerydocaEngine::Components
 		m_projection.recalculateProjectionMatrix();
 	}
 
-	GLint Light::getShadowMapFilterTypeEnum()
+	int Light::getShadowMapFilterTypeEnum()
 	{
 		switch (m_shadowMapFilterType)
 		{

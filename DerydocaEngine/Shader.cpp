@@ -1,6 +1,8 @@
 #include "Shader.h"
+
 #include <fstream>
 #include <sys/stat.h>
+#include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "CameraManager.h"
 #include "GLError.h"
@@ -16,10 +18,10 @@ namespace DerydocaEngine::Rendering
 	} \
 }
 
-	static void CheckShaderError(GLuint const& shader, GLuint const& flag, bool const& isProgram, std::string const& errorMessage);
+	static void CheckShaderError(unsigned int const& shader, unsigned int const& flag, bool const& isProgram, std::string const& errorMessage);
 	static std::string LoadShader(std::string const& fileName);
 	static bool CheckIfShaderExists(std::string const& fileName);
-	static GLuint CreateShader(std::string const& text, GLenum const& shaderType);
+	static unsigned int CreateShader(std::string const& text, unsigned int const& shaderType);
 
 	Shader::Shader(std::string const& fileName)
 	{
@@ -35,8 +37,8 @@ namespace DerydocaEngine::Rendering
 		LOAD_SHADER_IF_EXISTS(4, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
 
 		// Create the program
-		m_program = glCreateProgram();
-		if (0 == m_program)
+		m_rendererId = glCreateProgram();
+		if (0 == m_rendererId)
 		{
 			fprintf(stderr, "Error creating program object..\n");
 			__debugbreak();
@@ -50,32 +52,32 @@ namespace DerydocaEngine::Rendering
 				continue;
 			}
 
-			glAttachShader(m_program, m_shaders[i]);
+			glAttachShader(m_rendererId, m_shaders[i]);
 		}
 
 		// Get the vertex attribute locations
-		glBindAttribLocation(m_program, 0, "VertexPosition");
-		glBindAttribLocation(m_program, 1, "VertexTexCoord");
-		glBindAttribLocation(m_program, 2, "VertexNormal");
-		glBindAttribLocation(m_program, 3, "VertexTangent");
-		glBindAttribLocation(m_program, 4, "VertexBitangent");
-		glBindAttribLocation(m_program, 5, "VertexColor");
+		glBindAttribLocation(m_rendererId, 0, "VertexPosition");
+		glBindAttribLocation(m_rendererId, 1, "VertexTexCoord");
+		glBindAttribLocation(m_rendererId, 2, "VertexNormal");
+		glBindAttribLocation(m_rendererId, 3, "VertexTangent");
+		glBindAttribLocation(m_rendererId, 4, "VertexBitangent");
+		glBindAttribLocation(m_rendererId, 5, "VertexColor");
 
 		// Bind the output color to 0
-		glBindFragDataLocation(m_program, 0, "FragColor");
+		glBindFragDataLocation(m_rendererId, 0, "FragColor");
 
 		// Link the program
-		glLinkProgram(m_program);
-		CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed: ");
+		glLinkProgram(m_rendererId);
+		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed: ");
 
-		glValidateProgram(m_program);
-		CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
+		glValidateProgram(m_rendererId);
+		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-		m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_program, "MVP");
-		m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_program, "ModelViewMatrix");
-		m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_program, "NormalMatrix");
-		m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_program, "ProjectionMatrix");
-		m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_program, "ModelMatrix");
+		m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_rendererId, "MVP");
+		m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_rendererId, "ModelViewMatrix");
+		m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_rendererId, "NormalMatrix");
+		m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_rendererId, "ProjectionMatrix");
+		m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_rendererId, "ModelMatrix");
 	}
 
 	Shader::Shader(std::string const& fileName, int const& varyingsCount, const char * const * varyings)
@@ -92,8 +94,8 @@ namespace DerydocaEngine::Rendering
 		LOAD_SHADER_IF_EXISTS(4, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
 
 		// Create the program
-		m_program = glCreateProgram();
-		if (0 == m_program)
+		m_rendererId = glCreateProgram();
+		if (0 == m_rendererId)
 		{
 			fprintf(stderr, "Error creating program object..\n");
 			__debugbreak();
@@ -107,52 +109,52 @@ namespace DerydocaEngine::Rendering
 				continue;
 			}
 
-			glAttachShader(m_program, m_shaders[i]);
+			glAttachShader(m_rendererId, m_shaders[i]);
 		}
 
 		// Get the vertex attribute locations
-		glBindAttribLocation(m_program, 0, "VertexPosition");
-		glBindAttribLocation(m_program, 1, "VertexTexCoord");
-		glBindAttribLocation(m_program, 2, "VertexNormal");
-		glBindAttribLocation(m_program, 3, "VertexTangent");
-		glBindAttribLocation(m_program, 4, "VertexBitangent");
-		glBindAttribLocation(m_program, 5, "VertexColor");
+		glBindAttribLocation(m_rendererId, 0, "VertexPosition");
+		glBindAttribLocation(m_rendererId, 1, "VertexTexCoord");
+		glBindAttribLocation(m_rendererId, 2, "VertexNormal");
+		glBindAttribLocation(m_rendererId, 3, "VertexTangent");
+		glBindAttribLocation(m_rendererId, 4, "VertexBitangent");
+		glBindAttribLocation(m_rendererId, 5, "VertexColor");
 
 		// Bind the output color to 0
-		glBindFragDataLocation(m_program, 0, "FragColor");
+		glBindFragDataLocation(m_rendererId, 0, "FragColor");
 
 		// Bind the varyings
 		setTransformFeedbackVaryings(varyingsCount, varyings);
 
 		// Link the program
-		glLinkProgram(m_program);
-		CheckShaderError(m_program, GL_LINK_STATUS, true, "Error: Program linking failed: ");
+		glLinkProgram(m_rendererId);
+		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed: ");
 
-		glValidateProgram(m_program);
-		CheckShaderError(m_program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
+		glValidateProgram(m_rendererId);
+		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-		m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_program, "MVP");
-		m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_program, "ModelViewMatrix");
-		m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_program, "NormalMatrix");
-		m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_program, "ProjectionMatrix");
-		m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_program, "ModelMatrix");
+		m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_rendererId, "MVP");
+		m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_rendererId, "ModelViewMatrix");
+		m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_rendererId, "NormalMatrix");
+		m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_rendererId, "ProjectionMatrix");
+		m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_rendererId, "ModelMatrix");
 	}
 
 	Shader::~Shader()
 	{
 		for (unsigned int i = 0; i < NUM_SHADERS; i++) {
-			glDetachShader(m_program, m_shaders[i]);
+			glDetachShader(m_rendererId, m_shaders[i]);
 			glDeleteShader(m_shaders[i]);
 		}
 
-		glDeleteProgram(m_program);
+		glDeleteProgram(m_rendererId);
 
 		delete[] m_renderPasses;
 	}
 
 	void Shader::bind()
 	{
-		glUseProgram(m_program);
+		glUseProgram(m_rendererId);
 	}
 
 	void printMatrix(std::string const& matName, glm::mat4 const& mat)
@@ -298,7 +300,7 @@ namespace DerydocaEngine::Rendering
 		glUniform1i(getUniformName(name), textureUnit);
 	}
 
-	void Shader::setTexture(std::string const& name, int const& textureUnit, GLenum const& textureType, GLuint const& textureId)
+	void Shader::setTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType, unsigned int const& textureId)
 	{
 		glActiveTexture(GL_TEXTURE0 + textureUnit);
 		glBindTexture(textureType, textureId);
@@ -308,20 +310,20 @@ namespace DerydocaEngine::Rendering
 
 	void Shader::setTransformFeedbackVaryings(int const& count, const char *const * varyings)
 	{
-		glTransformFeedbackVaryings(m_program, count, varyings, GL_SEPARATE_ATTRIBS);
+		glTransformFeedbackVaryings(m_rendererId, count, varyings, GL_SEPARATE_ATTRIBS);
 	}
 
-	GLuint Shader::getSubroutineIndex(GLuint const& program, std::string const& subroutineName)
+	unsigned int Shader::getSubroutineIndex(unsigned int const& program, std::string const& subroutineName)
 	{
-		return glGetSubroutineIndex(m_program, program, subroutineName.c_str());
+		return glGetSubroutineIndex(m_rendererId, program, subroutineName.c_str());
 	}
 
-	void Shader::setSubroutine(GLuint const& program, GLuint const& subroutineIndex)
+	void Shader::setSubroutine(unsigned int const& program, unsigned int const& subroutineIndex)
 	{
 		glUniformSubroutinesuiv(program, 1, &subroutineIndex);
 	}
 
-	void Shader::setSubPasses(GLuint const& program, RenderPass* const& renderPasses, int const& numPasses)
+	void Shader::setSubPasses(unsigned int const& program, RenderPass* const& renderPasses, int const& numPasses)
 	{
 		m_numPasses = numPasses;
 
@@ -393,13 +395,13 @@ namespace DerydocaEngine::Rendering
 		}
 		else
 		{
-			int uniformName = glGetUniformLocation(m_program, stringName.c_str());
+			int uniformName = glGetUniformLocation(m_rendererId, stringName.c_str());
 			m_uniformLookup[stringName] = uniformName;
 			return uniformName;
 		}
 	}
 
-	static GLuint CreateShader(std::string const& text, GLenum const& shaderType) {
+	static unsigned int CreateShader(std::string const& text, unsigned int const& shaderType) {
 		GLuint shader = glCreateShader(shaderType);
 
 		if (shader == 0) {
@@ -446,7 +448,7 @@ namespace DerydocaEngine::Rendering
 		return (stat(fileName.c_str(), &buffer) == 0);
 	}
 
-	static void CheckShaderError(GLuint const& shader, GLuint const& flag, bool const& isProgram, std::string const& errorMessage) {
+	static void CheckShaderError(unsigned int const& shader, unsigned int const& flag, bool const& isProgram, std::string const& errorMessage) {
 		GLint success = 0;
 		GLchar error[1024] = { 0 };
 
@@ -529,7 +531,7 @@ namespace DerydocaEngine::Rendering
 		glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, &glm::mat4()[0][0]);
 	}
 
-	void Shader::clearTexture(std::string const& name, int const& textureUnit, GLenum const& textureType)
+	void Shader::clearTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType)
 	{
 		glActiveTexture(GL_TEXTURE0 + textureUnit);
 		glBindTexture(textureType, 0);

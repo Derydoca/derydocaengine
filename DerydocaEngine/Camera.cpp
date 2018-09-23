@@ -1,4 +1,6 @@
 #include "Camera.h"
+
+#include <GL/glew.h>
 #include "CameraManager.h"
 #include "Shader.h"
 #include "MatrixStack.h"
@@ -128,7 +130,7 @@ namespace DerydocaEngine::Components
 		m_projection.recalculateProjectionMatrix();
 	}
 
-	void Camera::createGBufTex(GLenum const& textureUnit, GLenum const& format, GLuint &texid, int const& width, int const& height)
+	void Camera::createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int &texid, int const& width, int const& height)
 	{
 		glActiveTexture(textureUnit);
 		glGenTextures(1, &texid);

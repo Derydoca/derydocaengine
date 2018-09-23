@@ -1,6 +1,5 @@
 #pragma once
 #include "GameComponent.h"
-#include <GL\glew.h>
 #include "Material.h"
 #include "BezierPatchMesh.h"
 
@@ -23,8 +22,8 @@ namespace DerydocaEngine::Ext
 		Rendering::Material* getMaterial() const { return m_material; }
 	private:
 		BezierPatchMesh * m_mesh;
-		GLuint m_vao;
-		GLuint m_vbo;
+		unsigned int m_vao;
+		unsigned int m_vbo;
 		Rendering::Material* m_material;
 		int m_tessellationLevel = 4;
 		bool m_useDynamicTessellation = false;

@@ -1,4 +1,6 @@
 #include "TessellatingQuad.h"
+
+#include <GL\glew.h>
 #include <iostream>
 #include "Shader.h"
 

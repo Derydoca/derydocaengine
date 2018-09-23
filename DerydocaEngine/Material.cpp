@@ -1,4 +1,6 @@
 #include "Material.h"
+
+#include <gl\glew.h>
 #include "Shader.h"
 #include "Texture.h"
 #include "Color.h"
@@ -69,7 +71,7 @@ namespace DerydocaEngine::Rendering
 		m_mat4Values[name] = value;
 	}
 
-	void Material::setSubroutine(GLuint const& program, GLuint const& value)
+	void Material::setSubroutine(unsigned int const& program, unsigned int const& value)
 	{
 		m_subroutineValues[program] = value;
 	}

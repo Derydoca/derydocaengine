@@ -54,7 +54,7 @@ namespace DerydocaEngine::Components
 		Color getColor() { return m_color; }
 		float getSpotlightExponent() { return m_spotlightExponent; }
 		float getSpotlightCutoff() { return m_spotlightCutoff; }
-		GLuint getShadowMap() { return m_depthTexture; }
+		unsigned int getShadowMap() { return m_depthTexture; }
 		bool isCastingShadows() { return m_castShadows; }
 		bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
 		Rendering::Projection getProjection() { return m_projection; }
@@ -67,7 +67,7 @@ namespace DerydocaEngine::Components
 		void renderShadowMap(GameObject* const& gameObject);
 	private:
 		void generateShadowMap();
-		GLint getShadowMapFilterTypeEnum();
+		int getShadowMapFilterTypeEnum();
 
 		LightType m_lightType = Point;
 		Color m_color = Color(1, 1, 1, 1);
@@ -76,8 +76,8 @@ namespace DerydocaEngine::Components
 		bool m_castShadows = false;
 		int m_shadowMapHeight = 512;
 		int m_shadowMapWidth = 512;
-		GLuint m_depthTexture;
-		GLuint m_shadowFBO;
+		unsigned int m_depthTexture;
+		unsigned int m_shadowFBO;
 		Rendering::MatrixStack m_matrixStack;
 		Rendering::Material* m_shadowMapMaterial;
 		Rendering::Projection m_projection;

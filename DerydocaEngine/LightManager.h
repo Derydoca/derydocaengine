@@ -34,7 +34,7 @@ namespace DerydocaEngine::Rendering
 		const int MAX_LIGHTS = 10;
 
 		std::list<Components::Light*> m_lights;
-		GLuint m_shadowJitterTexture;
+		unsigned int m_shadowJitterTexture;
 		glm::vec3 m_shadowJitterTextureSize;
 	};
 

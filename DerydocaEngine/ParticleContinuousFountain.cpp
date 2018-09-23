@@ -1,7 +1,9 @@
 #include "ParticleContinuousFountain.h"
+
+#include <GL\glew.h>
+#include <iostream>
 #include "Shader.h"
 #include "ShaderResource.h"
-#include <iostream>
 
 namespace DerydocaEngine::Ext
 {

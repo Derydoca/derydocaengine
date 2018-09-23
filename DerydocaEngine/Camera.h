@@ -1,6 +1,5 @@
 #pragma once
 
-#include <GL/glew.h>
 #include <yaml-cpp/yaml.h>
 #include "Color.h"
 #include "GameComponent.h"
@@ -90,7 +89,7 @@ namespace DerydocaEngine::Components
 		void setRenderingMode(RenderingMode const& mode);
 		void resize(int const& width, int const& height);
 
-		void createGBufTex(GLenum const& textureUnit, GLenum const& format, GLuint & texid, int const& width, int const& height);
+		void createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int & texid, int const& width, int const& height);
 
 		void setProjectionMode(Rendering::ProjectionMode const& mode);
 		void setOrthoSize(float const& size);
@@ -113,8 +112,8 @@ namespace DerydocaEngine::Components
 		Rendering::Mesh* m_quad;
 		Rendering::Material* m_postProcessMaterial;
 		float m_orthoSize = 10.0f;
-		GLuint m_deferredFBO;
-		GLuint m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
+		unsigned int m_deferredFBO;
+		unsigned int m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
 		Rendering::Shader* m_deferredRendererCompositor;
 		Rendering::Projection m_projection;
 

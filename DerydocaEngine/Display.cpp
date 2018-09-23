@@ -1,4 +1,6 @@
 #include "Display.h"
+
+#include <GL/glew.h>
 #include "DisplayManager.h"
 #include "InputManager.h"
 

@@ -266,6 +266,9 @@
     <ClCompile Include="TextureParameters.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="GLError.cpp">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BezierCurveRenderer.h">

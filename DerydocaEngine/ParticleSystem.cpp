@@ -1,4 +1,6 @@
 #include "ParticleSystem.h"
+
+#include <GL\glew.h>
 #include "LightManager.h"
 #include "Shader.h"
 

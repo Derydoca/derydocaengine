@@ -1,7 +1,9 @@
 #include "ParticleInstanced.h"
-#include "Shader.h"
+
+#include <GL\glew.h>
 #include "InputManager.h"
 #include "LightManager.h"
+#include "Shader.h"
 
 namespace DerydocaEngine::Ext
 {

@@ -1,4 +1,5 @@
 #include "Texture.h"
+
 #include <cassert>
 #include <GL/glew.h>
 #include <iostream>

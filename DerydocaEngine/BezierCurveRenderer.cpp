@@ -1,4 +1,6 @@
 #include "BezierCurveRenderer.h"
+
+#include <GL/glew.h>
 #include "YamlTools.h"
 #include "Shader.h"
 

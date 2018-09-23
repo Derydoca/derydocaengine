@@ -28,8 +28,8 @@ namespace DerydocaEngine::Ext
 		float m_velocityMax = 1.5f;
 		float m_angle = 6.0f;
 		glm::vec3 m_gravity = glm::vec3(0.0f, -0.2f, 0.0f);
-		GLuint m_initVel;
-		GLuint m_startTime;
+		unsigned int m_initVel;
+		unsigned int m_startTime;
 		Input::Keyboard* m_keyboard;
 		Rendering::Mesh* m_mesh;
 

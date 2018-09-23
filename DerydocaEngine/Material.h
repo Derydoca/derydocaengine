@@ -1,7 +1,9 @@
 #pragma once
 #include <map>
-#include <glm\glm.hpp>
-#include <gl\glew.h>
+#include <glm\mat3x3.hpp>
+#include <glm\mat4x4.hpp>
+#include <glm\vec3.hpp>
+#include <glm\vec4.hpp>
 
 namespace DerydocaEngine
 {
@@ -35,7 +37,7 @@ namespace DerydocaEngine::Rendering
 		void setColorRGBA(std::string const& name, Color const& value);
 		void setMat3(std::string const& name, glm::mat3 const& value);
 		void setMat4(std::string const& name, glm::mat4 const& value);
-		void setSubroutine(GLuint const& program, GLuint const& value);
+		void setSubroutine(unsigned int const& program, unsigned int const& value);
 		void bind();
 		void unbind();
 	private:
@@ -50,7 +52,7 @@ namespace DerydocaEngine::Rendering
 		std::map<std::string, glm::vec4> m_vec4Values;
 		std::map<std::string, glm::mat3> m_mat3Values;
 		std::map<std::string, glm::mat4> m_mat4Values;
-		std::map<GLuint, GLuint> m_subroutineValues;
+		std::map<unsigned int, unsigned int> m_subroutineValues;
 	};
 
 }

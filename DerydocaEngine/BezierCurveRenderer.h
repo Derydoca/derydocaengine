@@ -1,5 +1,4 @@
 #pragma once
-#include <GL/glew.h>
 #include "GameComponent.h"
 #include "glm\glm.hpp"
 #include "material.h"
@@ -20,8 +19,8 @@ namespace DerydocaEngine::Ext
 		void render(Rendering::MatrixStack* const& matrixStack);
 	private:
 		float m_controlPoints[8];
-		GLuint m_vao;
-		GLuint m_vbo;
+		unsigned int m_vao;
+		unsigned int m_vbo;
 		Rendering::Material* m_material;
 		int m_numSegments = 8;
 		int m_numStrips = 1;

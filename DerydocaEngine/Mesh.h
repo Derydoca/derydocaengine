@@ -1,7 +1,6 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include <GL/glew.h>
 #include <string>
 #include <vector>
 #include "MeshFlags.h"
@@ -46,7 +45,7 @@ namespace DerydocaEngine::Rendering
 		void loadVertexColorBuffer(unsigned int const& numVertices, Color* const& colorBuffer);
 		void draw();
 		void setFlags(MeshFlags const& flags) { m_flags = flags; }
-		GLuint getVao() const { return m_vertexArrayObject; }
+		unsigned int getVao() const { return m_vertexArrayObject; }
 		unsigned int getNumIndices() const { return m_numIndices; }
 
 	private:
@@ -77,8 +76,8 @@ namespace DerydocaEngine::Rendering
 		unsigned int m_numVertices;
 		unsigned int* m_indices;
 		unsigned int m_numIndices;
-		GLuint m_vertexArrayObject;
-		GLuint m_vertexArrayBuffers[NUM_BUFFERS];
+		unsigned int m_vertexArrayObject;
+		unsigned int m_vertexArrayBuffers[NUM_BUFFERS];
 		MeshFlags m_flags{};
 	};
 
