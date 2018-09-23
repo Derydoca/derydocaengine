@@ -1,11 +1,15 @@
 #pragma once
-#include "glm\glm.hpp"
+
+#include <glm\mat4x4.hpp>
 #include "GameComponent.h"
 #include "Color.h"
 #include "MatrixStack.h"
-#include "Material.h"
 #include "Transform.h"
 #include "Projection.h"
+
+namespace DerydocaEngine::Rendering {
+	class Material;
+}
 
 namespace DerydocaEngine::Components
 {
