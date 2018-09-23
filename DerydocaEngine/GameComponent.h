@@ -3,7 +3,7 @@
 #include <boost\uuid\uuid.hpp>
 #include <iostream>
 #include <vector>
-#include "GameObject.h";
+#include "GameObject.h"
 #include "ObjectLibrary.h"
 #include "YamlTools.h"
 

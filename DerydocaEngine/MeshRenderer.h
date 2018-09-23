@@ -4,7 +4,7 @@
 namespace DerydocaEngine {
 	namespace Components {
 		class Camera;
-		class Transform;
+		struct Transform;
 	}
 	namespace Rendering {
 		class Material;
