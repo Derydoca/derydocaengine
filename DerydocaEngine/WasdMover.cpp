@@ -1,5 +1,8 @@
 #include "WasdMover.h"
+
 #include "InputManager.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 
 namespace DerydocaEngine::Components
 {

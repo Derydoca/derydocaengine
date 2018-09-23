@@ -1,11 +1,14 @@
 #pragma once
 #include <glm\glm.hpp>
 #include "Transform.h"
-#include "Keyboard.h"
-#include "Mouse.h"
-#include "Key.h"
 #include "GameComponent.h"
-#include "GameObject.h"
+
+namespace DerydocaEngine {
+	namespace Input {
+		class Keyboard;
+		class Mouse;
+	}
+}
 
 namespace DerydocaEngine::Components
 {
