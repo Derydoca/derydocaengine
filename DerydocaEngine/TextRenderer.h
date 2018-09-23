@@ -1,9 +1,11 @@
 #pragma once
 #include <string>
-#include "RendererComponent.h"
-#include "Material.h"
 #include "FontFace.h"
-#include "MeshRenderer.h"
+#include "RendererComponent.h"
+
+namespace DerydocaEngine::Rendering {
+	class Material;
+}
 
 namespace DerydocaEngine::Components
 {

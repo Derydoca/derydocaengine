@@ -1,4 +1,6 @@
 #include "TextRenderer.h"
+
+#include "Material.h"
 #include "TexturePackerImage.h"
 #include "YamlTools.h"
 
