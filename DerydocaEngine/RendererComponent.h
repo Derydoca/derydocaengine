@@ -1,8 +1,9 @@
 #pragma once
+#include <glm\vec2.hpp>
+#include <glm\vec3.hpp>
+#include "Color.h"
 #include "GameComponent.h"
 #include "Mesh.h"
-#include "Color.h"
-#include <glm\glm.hpp>
 
 namespace DerydocaEngine::Components
 {
