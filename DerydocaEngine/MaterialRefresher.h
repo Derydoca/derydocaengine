@@ -1,8 +1,14 @@
 #pragma once
-#include <boost/filesystem.hpp>
 #include "GameComponent.h"
-#include "MeshRenderer.h"
-#include "TessellatedMeshRenderer.h"
+
+namespace DerydocaEngine {
+	namespace Components {
+		class MeshRenderer;
+	}
+	namespace Ext {
+		class TessellatedMeshRenderer;
+	}
+}
 
 namespace DerydocaEngine::Components
 {

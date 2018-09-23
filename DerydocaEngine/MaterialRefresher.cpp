@@ -1,6 +1,10 @@
 #include "MaterialRefresher.h"
+
+#include <boost/filesystem.hpp>
 #include "Material.h"
+#include "MeshRenderer.h"
 #include "Shader.h"
+#include "TessellatedMeshRenderer.h"
 
 namespace DerydocaEngine::Components
 {
