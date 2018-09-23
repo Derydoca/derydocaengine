@@ -1,10 +1,9 @@
 #pragma once
-#include <glm/glm.hpp>
-#include "RendererComponent.h"
-#include "MeshRenderer.h"
+#include <glm\vec2.hpp>
+#include <glm\vec3.hpp>
 #include "Color.h"
+#include "RendererComponent.h"
 #include "SpriteSheet.h"
-#include "Shader.h"
 
 namespace DerydocaEngine::Components
 {

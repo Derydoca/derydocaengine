@@ -1,7 +1,7 @@
 #include "SpriteRenderer.h"
 
 #include "Material.h"
-#include "ObjectLibrary.h"
+#include "Shader.h"
 #include "YamlTools.h"
 
 namespace DerydocaEngine::Components
