@@ -1,5 +1,4 @@
 #pragma once
-#include <sdl2\SDL.h>
 #include "GameComponent.h"
 
 namespace DerydocaEngine {
