@@ -1,4 +1,6 @@
 #include "Terrain.h"
+
+#include "Material.h"
 #include "ShaderLibrary.h"
 #include "stb_image.h"
 

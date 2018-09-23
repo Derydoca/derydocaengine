@@ -1,4 +1,6 @@
 #include "WoodSliceTexture.h"
+
+#include "Material.h"
 #include "YamlTools.h"
 
 namespace DerydocaEngine::Ext

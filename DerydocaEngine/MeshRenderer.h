@@ -1,9 +1,16 @@
 #pragma once
 #include "GameComponent.h"
-#include "Mesh.h"
-#include "Material.h"
-#include "Camera.h"
-#include "Transform.h"
+
+namespace DerydocaEngine {
+	namespace Components {
+		class Camera;
+		class Transform;
+	}
+	namespace Rendering {
+		class Material;
+		class Mesh;
+	}
+}
 
 namespace DerydocaEngine::Components
 {

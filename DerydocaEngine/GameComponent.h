@@ -3,13 +3,13 @@
 #include <boost\uuid\uuid.hpp>
 #include <iostream>
 #include <vector>
+#include "GameObject.h";
 #include "ObjectLibrary.h"
 #include "YamlTools.h"
 
 struct Resource;
 
 namespace DerydocaEngine {
-	class GameObject;
 	namespace Components {
 		struct Transform;
 	}

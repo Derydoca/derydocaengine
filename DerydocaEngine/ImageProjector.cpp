@@ -1,10 +1,12 @@
 #include "ImageProjector.h"
+
 #include "GameObject.h"
-#include "YamlTools.h"
+#include "Material.h"
 #include "ObjectLibrary.h"
 #include "Resource.h"
 #include "Texture.h"
 #include "TextureParameters.h"
+#include "YamlTools.h"
 
 namespace DerydocaEngine::Ext
 {

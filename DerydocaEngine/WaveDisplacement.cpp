@@ -1,4 +1,6 @@
 #include "WaveDisplacement.h"
+
+#include "Material.h"
 #include "MeshRenderer.h"
 
 namespace DerydocaEngine::Ext

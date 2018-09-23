@@ -1,4 +1,6 @@
 #include "SpriteRenderer.h"
+
+#include "Material.h"
 #include "ObjectLibrary.h"
 #include "YamlTools.h"
 

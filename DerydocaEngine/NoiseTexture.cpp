@@ -2,6 +2,7 @@
 
 #include <GL\glew.h>
 #include <glm/gtc/noise.hpp>
+#include "Camera.h"
 #include "MeshRenderer.h"
 #include "Texture.h"
 #include "TextureParameters.h"
