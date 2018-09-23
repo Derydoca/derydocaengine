@@ -1,6 +1,12 @@
 #pragma once
 #include <list>
-#include "Camera.h"
+
+namespace DerydocaEngine {
+	class GameObject;
+	namespace Components {
+		class Camera;
+	}
+}
 
 namespace DerydocaEngine::Rendering
 {

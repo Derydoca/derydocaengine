@@ -1,4 +1,6 @@
 #include "CameraManager.h"
+
+#include "Camera.h"
 #include "GameObject.h"
 
 namespace DerydocaEngine::Rendering
