@@ -1,10 +1,13 @@
 #include "LightManager.h"
 
 #include <GL\glew.h>
-#include "CameraManager.h"
-#include "glm\glm.hpp"
-#include "GameObject.h"
+#include <glm\glm.hpp>
 #include "Camera.h"
+#include "CameraManager.h"
+#include "GameObject.h"
+#include "Light.h"
+#include "Shader.h"
+#include "Transform.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -132,7 +135,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	std::list<Components::Light*> LightManager::getLights(Components::Transform * const& objectTransform)
+	std::list<Components::Light*> LightManager::getLights(Components::Transform * const& objectTransform) const
 	{
 		// Create a list to store the lights
 		std::list<Components::Light*> lights = std::list<Components::Light*>();

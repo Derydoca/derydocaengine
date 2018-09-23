@@ -2,6 +2,7 @@
 
 #include "LightManager.h"
 #include "Material.h"
+#include "Shader.h"
 
 namespace DerydocaEngine::Components
 {
