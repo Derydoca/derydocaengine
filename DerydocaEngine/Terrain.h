@@ -1,11 +1,16 @@
 #pragma once
-#include "Mesh.h"
-#include "Camera.h"
-#include "MatrixStack.h"
 #include "GameComponent.h"
-#include "MeshRenderer.h"
-#include "GameObject.h"
-#include "Texture.h"
+#include "MatrixStack.h"
+#include "Mesh.h"
+
+namespace DerydocaEngine {
+	namespace Components {
+		class MeshRenderer;
+	}
+	namespace Rendering {
+		class Texture;
+	}
+}
 
 namespace DerydocaEngine::Components
 {
