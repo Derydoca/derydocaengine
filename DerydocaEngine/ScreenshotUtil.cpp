@@ -6,6 +6,7 @@
 #include <GL/glew.h>
 #include "Display.h"
 #include "Keyboard.h"
+#include "sdl2\SDL.h"
 #include "stb_image.h"
 #include "stb_image_write.h"
 

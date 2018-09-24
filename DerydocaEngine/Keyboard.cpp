@@ -1,12 +1,13 @@
 #include "Keyboard.h"
 
+#include "sdl2\SDL.h"
+
 namespace DerydocaEngine::Input
 {
 
 	Keyboard::Keyboard()
 	{
 	}
-
 
 	Keyboard::~Keyboard()
 	{
@@ -22,7 +23,7 @@ namespace DerydocaEngine::Input
 		m_tick++;
 	}
 
-	bool Keyboard::isKeyDown(int const& keycode)
+	bool Keyboard::isKeyDown(int const& keycode) const
 	{
 		if (keycode >= m_numkeys) {
 			return false;
@@ -30,7 +31,7 @@ namespace DerydocaEngine::Input
 		return m_keys[keycode].isDown();
 	}
 
-	bool Keyboard::isKeyDownFrame(int const& keycode)
+	bool Keyboard::isKeyDownFrame(int const& keycode) const
 	{
 		if (keycode >= m_numkeys) {
 			return false;
@@ -39,7 +40,7 @@ namespace DerydocaEngine::Input
 		return key.isDown() && key.getStateChangeTick() == m_tick;
 	}
 
-	bool Keyboard::isKeyUpFrame(int const& keycode)
+	bool Keyboard::isKeyUpFrame(int const& keycode) const
 	{
 		if (keycode >= m_numkeys) {
 			return false;

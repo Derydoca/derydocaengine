@@ -1,6 +1,5 @@
 #pragma once
 #include "Key.h"
-#include <sdl2\SDL.h>
 
 namespace DerydocaEngine::Input
 {
@@ -13,9 +12,9 @@ namespace DerydocaEngine::Input
 
 		void init();
 		void update();
-		bool isKeyDown(int const& keycode);
-		bool isKeyDownFrame(int const& keycode);
-		bool isKeyUpFrame(int const& keycode);
+		bool isKeyDown(int const& keycode) const;
+		bool isKeyDownFrame(int const& keycode) const;
+		bool isKeyUpFrame(int const& keycode) const;
 		void setKeyState(int const& keycode, bool const& isDown);
 	private:
 		const int m_numkeys = 512;

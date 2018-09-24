@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "sdl2\SDL.h"
 
 namespace DerydocaEngine::Components
 {

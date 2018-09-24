@@ -1,7 +1,9 @@
 #include "MultisampleSwitch.h"
-#include "InputManager.h"
-#include "GL\glew.h"
+
 #include <iostream>
+#include "GL\glew.h"
+#include "InputManager.h"
+#include "sdl2\SDL.h"
 
 namespace DerydocaEngine::Ext
 {

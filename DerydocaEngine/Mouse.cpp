@@ -1,5 +1,7 @@
 #include "Mouse.h"
 
+#include "sdl2\SDL.h"
+
 namespace DerydocaEngine::Input
 {
 
@@ -36,9 +38,18 @@ namespace DerydocaEngine::Input
 		}
 	}
 
+	void Mouse::setRelative(bool const & isRelative)
+	{
+		// Set the mouse to relative mode and flush the first relative move so that the first query isn't incorrect
+		SDL_SetRelativeMouseMode((SDL_bool)isRelative);
+		if (isRelative) {
+			SDL_GetRelativeMouseState(nullptr, nullptr);
+		}
+	}
+
 	bool Mouse::isKeyDown(int const& keycode) const
 	{
-		if (keycode >= 5) {
+		if (keycode < 0 || keycode >= 5) {
 			return false;
 		}
 		return m_keys[keycode].isDown();
@@ -46,7 +57,7 @@ namespace DerydocaEngine::Input
 
 	bool Mouse::isKeyDownFrame(int const& keycode) const
 	{
-		if (keycode >= 5) {
+		if (keycode < 0 || keycode >= 5) {
 			return false;
 		}
 		Key key = m_keys[keycode];
@@ -55,11 +66,17 @@ namespace DerydocaEngine::Input
 
 	bool Mouse::isKeyUpFrame(int const& keycode) const
 	{
-		if (keycode >= 5) {
+		if (keycode < 0 || keycode >= 5) {
 			return false;
 		}
 		Key key = m_keys[keycode];
 		return !key.isDown() && key.getStateChangeTick() == m_tick;
+	}
+
+	glm::ivec2 Mouse::getRelativeMovement() const {
+		glm::ivec2 diff;
+		SDL_GetRelativeMouseState(&diff.x, &diff.y);
+		return diff;
 	}
 
 }

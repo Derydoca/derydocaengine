@@ -15,8 +15,8 @@ namespace DerydocaEngine::Input
 			return instance;
 		}
 
-		Keyboard* getKeyboard() { return m_keyboard; }
-		Mouse* getMouse() { return m_mouse; }
+		Keyboard* getKeyboard() { return &m_keyboard; }
+		Mouse* getMouse() { return &m_mouse; }
 
 		void operator=(InputManager const&) = delete;
 	private:
@@ -25,8 +25,8 @@ namespace DerydocaEngine::Input
 
 		InputManager(InputManager const&);
 
-		Keyboard* m_keyboard;
-		Mouse* m_mouse;
+		Keyboard m_keyboard;
+		Mouse m_mouse;
 	};
 
 }

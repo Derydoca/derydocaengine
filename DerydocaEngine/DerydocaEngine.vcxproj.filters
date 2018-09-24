@@ -275,6 +275,9 @@
     <ClCompile Include="Projection.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BezierCurveRenderer.h">

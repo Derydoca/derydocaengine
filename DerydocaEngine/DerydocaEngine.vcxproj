@@ -242,6 +242,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IntRect.cpp" />
     <ClCompile Include="IntRectangle.cpp" />
+    <ClCompile Include="Key.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardMover.cpp" />
     <ClCompile Include="LevelFileSerializer.cpp" />

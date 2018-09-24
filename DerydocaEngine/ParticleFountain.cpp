@@ -3,6 +3,7 @@
 #include <GL\glew.h>
 #include "InputManager.h"
 #include "Shader.h"
+#include "sdl2\SDL.h"
 
 namespace DerydocaEngine::Ext
 {
