@@ -1,6 +1,4 @@
 #pragma once
-#include <sdl2\SDL.h>
-#include "glm\glm.hpp"
 
 namespace DerydocaEngine::Timing
 {
@@ -8,12 +6,11 @@ namespace DerydocaEngine::Timing
 	class Clock
 	{
 	public:
-		//Clock(float startTimeSeconds = 0.0f);
 		Clock();
-		Clock(Uint64 const& startCycle);
+		Clock(unsigned long long int const& startCycle);
 		~Clock();
 
-		inline Uint64 getTimeCycles() const { return m_timeCycles; }
+		inline unsigned long long int getTimeCycles() const { return m_timeCycles; }
 		inline void setPaused(bool const& wantPaused) { m_paused = wantPaused; }
 		inline bool isPaused() const { return m_paused; };
 		inline void setTimeScale(float const& scale) { m_timeScale = scale; }
@@ -21,35 +18,32 @@ namespace DerydocaEngine::Timing
 		inline float getDeltaTime() const { if (m_deltaTime < 0) { return 0.01f; } return m_deltaTime; }
 		inline float getTime() const { return cyclesToSeconds(m_timeCycles); }
 
-		static void init() { s_cyclesPerSecond = (float)SDL_GetPerformanceFrequency(); }
+		static void init();
 		float calcDeltaSeconds(Clock const& other);
 		void update();
 		void update(float const& dtRealSeconds);
 		void singleStep();
 
-		static inline Uint64 secondsToCycles(float const& timeSeconds) {
-			return (Uint64)(timeSeconds * s_cyclesPerSecond);
+		static inline unsigned long long int secondsToCycles(float const& timeSeconds) {
+			return (unsigned long long int)(timeSeconds * s_cyclesPerSecond);
 		}
 
-		static inline float cyclesToSeconds(Uint64 const& timeCycles) {
+		static inline float cyclesToSeconds(unsigned long long int const& timeCycles) {
 			return (float)timeCycles / s_cyclesPerSecond;
 		}
 
-		Uint64 getRenderTimeMS() {
-			Uint64 ticks = SDL_GetPerformanceCounter() - m_lastFrameCycle;
-			return (int)(cyclesToSeconds(ticks) / 1000);
-		}
+		unsigned long long int getRenderTimeMS();
 
 	private:
 
 		static float s_cyclesPerSecond;
 
-		Uint64 m_timeCycles;
+		unsigned long long int m_timeCycles;
 		float m_timeScale;
 		bool m_paused;
 		float m_deltaTime;
-		Uint64 m_startCycle;
-		Uint64 m_lastFrameCycle;
+		unsigned long long int m_startCycle;
+		unsigned long long int m_lastFrameCycle;
 
 	};
 

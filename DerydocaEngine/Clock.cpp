@@ -1,5 +1,7 @@
 #include "Clock.h"
 
+#include <sdl2\SDL.h>
+
 namespace DerydocaEngine::Timing
 {
 
@@ -18,13 +20,18 @@ namespace DerydocaEngine::Timing
 		m_lastFrameCycle = m_timeCycles;
 	}
 
-	Clock::Clock(Uint64 const& startCycle) :
+	Clock::Clock(unsigned long long int const& startCycle) :
 		m_timeCycles(startCycle),
 		m_timeScale(1.0f),
 		m_paused(false)
 	{
 		m_startCycle = m_timeCycles;
 		m_lastFrameCycle = m_timeCycles;
+	}
+
+	void Clock::init()
+	{
+		s_cyclesPerSecond = (float)SDL_GetPerformanceFrequency();
 	}
 
 	float Clock::calcDeltaSeconds(Clock const& other)
@@ -61,6 +68,12 @@ namespace DerydocaEngine::Timing
 			Uint64 dtScaledCycles = secondsToCycles((1.0f / 30.0f) * m_timeScale);
 			m_timeCycles += dtScaledCycles;
 		}
+	}
+
+	unsigned long long int Clock::getRenderTimeMS()
+	{
+		unsigned long long int ticks = SDL_GetPerformanceCounter() - m_lastFrameCycle;
+		return (int)(cyclesToSeconds(ticks) / 1000);
 	}
 
 }

@@ -1,23 +1,24 @@
 #include "Editor.h"
 
-#include "Display.h"
+#include <boost\filesystem.hpp>
+#include <iostream>
+#include <sdl2\SDL.h>
+#include "Camera.h"
+#include "CameraManager.h"
 #include "Clock.h"
+#include "CubemapResource.h"
+#include "Display.h"
 #include "EngineSettings.h"
 #include "GameObject.h"
-#include "CameraManager.h"
 #include "InputManager.h"
-#include "Transform.h"
-#include "Camera.h"
-#include "WasdMover.h"
-#include "SerializedScene.h"
-#include "ObjectLibrary.h"
-#include "ScreenshotUtil.h"
-#include "CubemapResource.h"
-#include "Skybox.h"
-#include "ShaderLibrary.h"
-#include <iostream>
-#include <boost\filesystem.hpp>
 #include "Material.h"
+#include "ObjectLibrary.h"
+#include "SerializedScene.h"
+#include "ScreenshotUtil.h"
+#include "ShaderLibrary.h"
+#include "Skybox.h"
+#include "Transform.h"
+#include "WasdMover.h"
 
 namespace DerydocaEngine::Execution
 {
