@@ -3,12 +3,10 @@
 #include "Material.h"
 #include "BezierPatchMesh.h"
 
-#include "GameComponentFactory.h"
-
 namespace DerydocaEngine::Ext
 {
 
-	class TessellatedMeshRenderer : public Components::GameComponent, Components::SelfRegister<TessellatedMeshRenderer>
+	class TessellatedMeshRenderer : public Components::GameComponent, private Components::SelfRegister<TessellatedMeshRenderer>
 	{
 	public:
 		GENINSTANCE(TessellatedMeshRenderer);
