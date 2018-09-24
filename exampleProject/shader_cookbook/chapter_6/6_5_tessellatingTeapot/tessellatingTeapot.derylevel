@@ -13,7 +13,6 @@ Scene:
             material: dc8679a6-0ed9-4057-bdcb-1ff0bdcc827e
             bezierPatchMesh: 0d648145-3b5d-45f4-bea8-fe2d25648b20
             tessellationLevel: 2
-        - Type: MaterialRefresher
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
@@ -28,7 +27,6 @@ Scene:
             material: dc8679a6-0ed9-4057-bdcb-1ff0bdcc827e
             bezierPatchMesh: 0d648145-3b5d-45f4-bea8-fe2d25648b20
             tessellationLevel: 8
-        - Type: MaterialRefresher
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
@@ -43,4 +41,3 @@ Scene:
             material: dc8679a6-0ed9-4057-bdcb-1ff0bdcc827e
             bezierPatchMesh: 0d648145-3b5d-45f4-bea8-fe2d25648b20
             tessellationLevel: 16
-        - Type: MaterialRefresher

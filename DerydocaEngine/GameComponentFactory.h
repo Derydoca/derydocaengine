@@ -1,28 +1,23 @@
 #pragma once
-#include "GameObject.h"
+#include "GameComponent.h"
 #include <string>
 #include <map>
 
-namespace DerydocaEngine::Components
-{
+namespace DerydocaEngine::Components {
 
 	typedef GameComponent* (*gameComponentInstanceGenerator)();
 
 	class GameComponentFactory
 	{
 	public:
-		static GameComponentFactory& getInstance() {
-			static GameComponentFactory instance;
-			return instance;
-		}
+		GameComponentFactory() = delete;
 
-		GameComponent * CreateGameComponent(std::string const& gameComponentType);
+		static bool registerGenerator(const std::string& name, const gameComponentInstanceGenerator& funcCreate);
+
+		static GameComponent* generate(const std::string& name);
+
 	private:
-		std::map<std::string, gameComponentInstanceGenerator> m_instanceGenerators;
-		void registerInstanceGenerator(std::string const& gameComponentType, gameComponentInstanceGenerator const& instanceGenerator);
-
-		GameComponentFactory();
-		~GameComponentFactory();
+		static std::map<std::string, gameComponentInstanceGenerator> s_methods;
 	};
 
 }

@@ -3,16 +3,19 @@
 #include "Material.h"
 #include "BezierPatchMesh.h"
 
+#include "GameComponentFactory.h"
+
 namespace DerydocaEngine::Ext
 {
 
-	class TessellatedMeshRenderer : public Components::GameComponent
+	class TessellatedMeshRenderer : public Components::GameComponent, Components::SelfRegister<TessellatedMeshRenderer>
 	{
 	public:
 		GENINSTANCE(TessellatedMeshRenderer);
 
 		TessellatedMeshRenderer() {}
 		~TessellatedMeshRenderer() {}
+		void __forceRegistration() { s_isRegistered; };
 
 		virtual void init();
 		virtual void deserialize(YAML::Node const& compNode);

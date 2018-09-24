@@ -24,8 +24,19 @@ class YAML::Node;
 namespace DerydocaEngine::Components
 {
 
+	template <typename T>
+	class SelfRegister
+	{
+	protected:
+		static bool s_isRegistered;
+	};
+
+	template <typename T>
+	bool SelfRegister<T>::s_isRegistered = DerydocaEngine::Components::GameComponentFactory::registerGenerator(T::getClassName(), T::generateInstance);
+
 #define GENINSTANCE(TYPE) \
-	static GameComponent* generateInstance() { return new TYPE(); }
+	static GameComponent* generateInstance() { return new TYPE(); }\
+	static std::string getClassName() { return #TYPE; }
 
 	class GameComponent {
 	public:
