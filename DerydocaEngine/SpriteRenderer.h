@@ -8,7 +8,7 @@
 namespace DerydocaEngine::Components
 {
 
-	class SpriteRenderer : public RendererComponent
+	class SpriteRenderer : public RendererComponent, Components::SelfRegister<SpriteRenderer>
 	{
 	public:
 		GENINSTANCE(SpriteRenderer);

@@ -4,7 +4,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class WaveDisplacement : public Components::GameComponent
+	class WaveDisplacement : public Components::GameComponent, Components::SelfRegister<WaveDisplacement>
 	{
 	public:
 		GENINSTANCE(WaveDisplacement);

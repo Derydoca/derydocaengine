@@ -13,7 +13,7 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Components
 {
 
-	class ScreenshotUtil : public GameComponent
+	class ScreenshotUtil : public GameComponent, SelfRegister<ScreenshotUtil>
 	{
 	public:
 		GENINSTANCE(ScreenshotUtil);

@@ -4,7 +4,7 @@
 namespace DerydocaEngine::Components
 {
 
-	class Rotator : public GameComponent
+	class Rotator : public GameComponent, SelfRegister<Rotator>
 	{
 	public:
 		GENINSTANCE(Rotator);

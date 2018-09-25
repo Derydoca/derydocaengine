@@ -14,7 +14,7 @@ namespace DerydocaEngine::Rendering {
 namespace DerydocaEngine::Components
 {
 
-	class Light : public GameComponent
+	class Light : public GameComponent, SelfRegister<Light>
 	{
 	public:
 		GENINSTANCE(Light);

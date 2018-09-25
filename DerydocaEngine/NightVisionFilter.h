@@ -5,7 +5,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class NightVisionFilter : public Components::GameComponent
+	class NightVisionFilter : public Components::GameComponent, Components::SelfRegister<NightVisionFilter>
 	{
 	public:
 		GENINSTANCE(NightVisionFilter);

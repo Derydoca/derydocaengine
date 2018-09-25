@@ -23,7 +23,7 @@ namespace DerydocaEngine::Components
 	/*
 	Object used for rendering the world to screen.
 	*/
-	class Camera : public GameComponent
+	class Camera : public GameComponent, SelfRegister<Camera>
 	{
 	public:
 		GENINSTANCE(Camera);

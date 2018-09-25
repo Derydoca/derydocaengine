@@ -15,7 +15,7 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Components
 {
 
-	class MeshRenderer : public GameComponent
+	class MeshRenderer : public GameComponent, SelfRegister<MeshRenderer>
 	{
 	public:
 		GENINSTANCE(MeshRenderer)

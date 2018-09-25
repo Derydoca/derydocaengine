@@ -6,7 +6,7 @@
 
 namespace DerydocaEngine::Debug {
 
-	class DebugVisualizer : public Components::GameComponent
+	class DebugVisualizer : public Components::GameComponent, Components::SelfRegister<DebugVisualizer>
 	{
 	public:
 		GENINSTANCE(DebugVisualizer);

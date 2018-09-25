@@ -5,7 +5,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class TessellatingQuad : public Components::GameComponent
+	class TessellatingQuad : public Components::GameComponent, Components::SelfRegister<TessellatingQuad>
 	{
 	public:
 		GENINSTANCE(TessellatingQuad);

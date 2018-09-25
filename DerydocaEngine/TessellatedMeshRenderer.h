@@ -13,7 +13,6 @@ namespace DerydocaEngine::Ext
 
 		TessellatedMeshRenderer() {}
 		~TessellatedMeshRenderer() {}
-		void __forceRegistration() { s_isRegistered; };
 
 		virtual void init();
 		virtual void deserialize(YAML::Node const& compNode);

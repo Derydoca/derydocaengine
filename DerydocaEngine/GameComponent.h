@@ -33,11 +33,12 @@ namespace DerydocaEngine::Components
 	};
 
 	template <typename T>
-	bool SelfRegister<T>::s_isRegistered = DerydocaEngine::Components::GameComponentFactory::registerGenerator(T::getClassName(), T::generateInstance);
+	bool SelfRegister<T>::s_isRegistered = DerydocaEngine::Components::GameComponentFactory::getInstance().registerGenerator(T::getClassName(), T::generateInstance);
 
 #define GENINSTANCE(TYPE) \
 	static GameComponent* generateInstance() { return new TYPE(); }\
-	static std::string getClassName() { return #TYPE; }
+	static std::string getClassName() { return #TYPE; }\
+	void __forceRegistration() { s_isRegistered; };
 
 	class GameComponent {
 	public:

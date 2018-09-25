@@ -5,7 +5,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class MultisampleSwitch : public Components::GameComponent
+	class MultisampleSwitch : public Components::GameComponent, Components::SelfRegister<MultisampleSwitch>
 	{
 	public:
 		GENINSTANCE(MultisampleSwitch);

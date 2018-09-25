@@ -5,7 +5,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class GaussianBlurFilter : public Components::GameComponent
+	class GaussianBlurFilter : public Components::GameComponent, Components::SelfRegister<GaussianBlurFilter>
 	{
 	public:
 		GENINSTANCE(GaussianBlurFilter);

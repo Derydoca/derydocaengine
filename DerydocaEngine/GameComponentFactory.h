@@ -10,14 +10,20 @@ namespace DerydocaEngine::Components {
 	class GameComponentFactory
 	{
 	public:
-		GameComponentFactory() = delete;
+		static GameComponentFactory& getInstance() {
+			static GameComponentFactory instance;
+			return instance;
+		}
 
-		static bool registerGenerator(const std::string& name, const gameComponentInstanceGenerator& funcCreate);
-
-		static GameComponent* generate(const std::string& name);
+		bool registerGenerator(const std::string& name, const gameComponentInstanceGenerator& funcCreate);
+		GameComponent* generate(const std::string& name);
 
 	private:
-		static std::map<std::string, gameComponentInstanceGenerator> s_methods;
+		GameComponentFactory();
+		GameComponentFactory(GameComponentFactory const&);
+		~GameComponentFactory();
+
+		std::map<std::string, gameComponentInstanceGenerator> s_methods;
 	};
 
 }

@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class BloomFilter : Components::GameComponent
+	class BloomFilter : Components::GameComponent, Components::SelfRegister<BloomFilter>
 	{
 	public:
 		GENINSTANCE(BloomFilter);

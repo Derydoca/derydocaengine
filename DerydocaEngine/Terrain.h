@@ -15,7 +15,7 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Components
 {
 
-	class Terrain : public GameComponent
+	class Terrain : public GameComponent, SelfRegister<Terrain>
 	{
 	public:
 		GENINSTANCE(Terrain);

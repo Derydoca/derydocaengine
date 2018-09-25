@@ -3,8 +3,6 @@
 namespace DerydocaEngine::Components
 {
 
-	std::map<std::string, gameComponentInstanceGenerator> GameComponentFactory::s_methods;
-
 	bool GameComponentFactory::registerGenerator(const std::string& name, const gameComponentInstanceGenerator& funcCreate)
 	{
 		auto it = s_methods.find(name);
@@ -24,6 +22,14 @@ namespace DerydocaEngine::Components
 		}
 
 		return nullptr;
+	}
+
+	GameComponentFactory::GameComponentFactory()
+	{
+	}
+
+	GameComponentFactory::~GameComponentFactory()
+	{
 	}
 
 }

@@ -13,7 +13,7 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Components
 {
 
-	class WasdMover : public GameComponent
+	class WasdMover : public GameComponent, SelfRegister<WasdMover>
 	{
 	public:
 		GENINSTANCE(WasdMover);

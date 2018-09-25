@@ -7,7 +7,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class ParticleSystem : public Components::GameComponent
+	class ParticleSystem : public Components::GameComponent, Components::SelfRegister<ParticleSystem>
 	{
 	public:
 		GENINSTANCE(ParticleSystem);

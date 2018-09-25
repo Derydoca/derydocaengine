@@ -5,7 +5,7 @@
 namespace DerydocaEngine::Components
 {
 
-	class FrameStats : public GameComponent
+	class FrameStats : public GameComponent, SelfRegister<FrameStats>
 	{
 	public:
 		GENINSTANCE(FrameStats);

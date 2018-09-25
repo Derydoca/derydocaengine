@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Components
 {
 
-	class KeyboardMover : public GameComponent
+	class KeyboardMover : public GameComponent, SelfRegister<KeyboardMover>
 	{
 	public:
 		GENINSTANCE(KeyboardMover);

@@ -5,7 +5,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class WoodSliceTexture : public Components::GameComponent
+	class WoodSliceTexture : public Components::GameComponent, Components::SelfRegister<WoodSliceTexture>
 	{
 	public:
 		GENINSTANCE(WoodSliceTexture);

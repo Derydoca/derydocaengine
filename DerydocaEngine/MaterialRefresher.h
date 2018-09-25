@@ -16,7 +16,7 @@ namespace DerydocaEngine::Components
 	/*
 	This will monitor the material source code and recompile/reapply the shader to the object that it is attached to whenever it changes.
 	*/
-	class MaterialRefresher : public GameComponent
+	class MaterialRefresher : public GameComponent, SelfRegister<MaterialRefresher>
 	{
 	public:
 		GENINSTANCE(MaterialRefresher);

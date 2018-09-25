@@ -55,7 +55,7 @@ namespace DerydocaEngine::Components
 		float m_startAdjust;
 	};
 
-	class TextRenderer : public RendererComponent
+	class TextRenderer : public RendererComponent, Components::SelfRegister<TextRenderer>
 	{
 	public:
 		GENINSTANCE(TextRenderer);
