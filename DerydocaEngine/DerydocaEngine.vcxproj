@@ -92,6 +92,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\local\boost_1_68_0\lib32-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -159,6 +160,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -189,6 +191,8 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -211,12 +215,17 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationData.cpp" />
+    <ClCompile Include="AssimpUtils.cpp" />
     <ClCompile Include="BezierCurveRenderer.cpp" />
     <ClCompile Include="BezierPatchMesh.cpp" />
     <ClCompile Include="BezierPatchMeshFileLoader.cpp" />
     <ClCompile Include="BezierPatchMeshFileSerializer.cpp" />
     <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
     <ClCompile Include="BloomFilter.cpp" />
+    <ClCompile Include="Bone.cpp" />
+    <ClCompile Include="Keyframe.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
@@ -306,12 +315,16 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="WoodSliceTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationChannel.h" />
+    <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="AssimpUtils.h" />
     <ClInclude Include="BezierCurveRenderer.h" />
     <ClInclude Include="BezierPatchMesh.h" />
     <ClInclude Include="BezierPatchMeshFileLoader.h" />
     <ClInclude Include="BezierPatchMeshFileSerializer.h" />
     <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
     <ClInclude Include="BloomFilter.h" />
+    <ClInclude Include="Bone.h" />
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
@@ -344,6 +357,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardMover.h" />
+    <ClInclude Include="Keyframe.h" />
     <ClInclude Include="LevelFileSerializer.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightManager.h" />
@@ -394,6 +408,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="ShaderResourceSerializer.h" />
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SpriteReference.h" />
     <ClInclude Include="SpriteRenderer.h" />

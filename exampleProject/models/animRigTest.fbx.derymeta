@@ -1,0 +1,9 @@
+Resources:
+  - ID: a15da919-3c84-40c6-b44c-e1686ad3ded5
+    Type: Mesh
+    Index: 0
+    Name: Cube.001
+    Skeleton: 18152614-427c-467c-8ddb-7749dbbd0095
+  - ID: 18152614-427c-467c-8ddb-7749dbbd0095
+    Type: Skeleton
+    Name: MeshArmature

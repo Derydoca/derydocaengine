@@ -2,10 +2,11 @@
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <string>
-#include "MeshFlags.h"
 #include "Color.h"
+#include "MeshFlags.h"
 
 struct aiMesh;
+struct aiScene;
 
 namespace DerydocaEngine::Rendering
 {
@@ -19,7 +20,9 @@ namespace DerydocaEngine::Rendering
 		Normals = 0x16,
 		Indices = 0x32,
 		Colors = 0x64,
-		All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors
+		BoneIndices = 0x128,
+		BoneWeights = 0x256,
+		All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors | BoneIndices | BoneWeights
 	};
 
 	class Mesh
@@ -56,6 +59,8 @@ namespace DerydocaEngine::Rendering
 			NORMAL_VB,
 			INDEX_VB,
 			COLOR_VB,
+			BONE_INDICES_VB,
+			BONE_WEIGHTS_VB,
 			NUM_BUFFERS
 		};
 
@@ -65,6 +70,7 @@ namespace DerydocaEngine::Rendering
 		void RefreshVbo();
 		void UpdateVbo(MeshComponents const& meshComponentFlags);
 		void ProcessAiMesh(aiMesh* const& mesh, int const& uvIndex);
+		void ProcessSkeletalData(const aiScene* scene);
 
 		glm::vec3* m_positions;
 		glm::vec3* m_normals;

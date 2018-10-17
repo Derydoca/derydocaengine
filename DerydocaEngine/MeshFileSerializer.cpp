@@ -1,6 +1,8 @@
 #include "MeshFileSerializer.h"
-#include "MeshResource.h"
+
+#include "AssimpUtils.h"
 #include "Mesh.h"
+#include "MeshResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -23,11 +25,15 @@ namespace DerydocaEngine::Files::Serializers {
 	{
 		YAML::Node resources;
 
-		auto file = aiImportFile(filePath.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+		const aiScene* scene = aiImportFile(filePath.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-		for (unsigned int i = 0; i < file->mNumMeshes; i++)
+		std::map<std::string, std::shared_ptr<Animation::Skeleton>> skeletons;
+
+		std::map<std::string, boost::uuids::uuid> skeletonIdMap;
+
+		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
-			aiMesh* mesh = file->mMeshes[i];
+			aiMesh* mesh = scene->mMeshes[i];
 
 			// Try to find a matching node that already exists in the file
 			YAML::Node resourceNode;
@@ -42,10 +48,32 @@ namespace DerydocaEngine::Files::Serializers {
 			resourceNode["Index"] = i;
 			resourceNode["Name"] = mesh->mName.C_Str();
 
+			if (mesh->HasBones())
+			{
+				std::shared_ptr<Animation::Skeleton> skeleton = Helpers::AssimpUtils::getSkeleton(scene, i);
+
+				if (skeletons.find(skeleton->getName()) == skeletons.end())
+				{
+					skeletons.emplace(skeleton->getName(), skeleton);
+					skeletonIdMap.emplace(skeleton->getName(), generateUuid());
+				}
+				resourceNode["Skeleton"] = skeletonIdMap[skeleton->getName()];
+			}
+
 			// Add it to the resource node
 			resources.push_back(resourceNode);
 		}
 
+		for each (auto skeleton in skeletons)
+		{
+			YAML::Node skeletonResourceNode;
+			skeletonResourceNode["ID"] = skeletonIdMap[skeleton.second->getName()];
+			skeletonResourceNode["Type"] = "Skeleton";
+			skeletonResourceNode["Name"] = skeleton.second->getName();
+		
+			resources.push_back(skeletonResourceNode);
+		}
+		
 		return resources;
 	}
 

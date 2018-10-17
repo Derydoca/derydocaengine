@@ -4,7 +4,13 @@
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
+
+#include "AssimpUtils.h"
 #include "MeshAdjacencyCalculator.h"
+
+// TODO: Move this some place configurable
+int MaxBonesPerVertex = 4;
+const int EngineMaxBonesPerVertex = 4;
 
 namespace DerydocaEngine::Rendering
 {
@@ -32,6 +38,7 @@ namespace DerydocaEngine::Rendering
 		aiMesh* mesh = aiModel->mMeshes[meshIndex];
 
 		ProcessAiMesh(mesh, uvIndex);
+		ProcessSkeletalData(aiModel);
 
 		RefreshVbo();
 	}
@@ -353,6 +360,65 @@ namespace DerydocaEngine::Rendering
 				m_bitangents[i] = glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z);
 			}
 		}
+
+	}
+
+	void Mesh::ProcessSkeletalData(const aiScene* scene)
+	{
+		// TODO: Do not hard code mesh 0
+		aiMesh* mesh = scene->mMeshes[0];
+
+		glm::mat4 rootTransform = Helpers::AssimpUtils::aiMatToGlm(scene->mRootNode->mTransformation.Inverse());
+
+		// Create buffers that will store the bone indices and bone weights
+		unsigned int numVertexBones = mesh->mNumVertices * EngineMaxBonesPerVertex;
+		unsigned int* vertexBones = new unsigned int[numVertexBones];
+		float* vertexBoneWeights = new float[numVertexBones];
+
+		for (unsigned int i = 0; i < mesh->mNumBones; i++)
+		{
+			aiBone* bone = mesh->mBones[i];
+			bool boneHasWeight = false;
+
+			for (unsigned int w = 0; w < bone->mNumWeights; w++)
+			{
+				aiVertexWeight vertWeight = bone->mWeights[w];
+				int vertexIndex = vertWeight.mVertexId;
+
+				// Pull data from the weights and load it into the bone weight map
+				unsigned int bufferOffset = vertWeight.mVertexId * EngineMaxBonesPerVertex;
+				float* boneVertWeights = vertexBoneWeights + bufferOffset;
+				for (int weightIndex = 0; weightIndex < EngineMaxBonesPerVertex; weightIndex++)
+				{
+					if (boneVertWeights[weightIndex] <= 0)
+					{
+						unsigned int* vertBones = vertexBones + bufferOffset;
+
+						boneVertWeights[weightIndex] = vertWeight.mWeight;
+						vertBones[weightIndex] = i;
+
+						boneHasWeight = true;
+
+						break;
+					}
+				}
+
+			}
+		}
+		delete[] vertexBones;
+		delete[] vertexBoneWeights;
+
+		// Initialize the vertex bone index data
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
+		glBufferData(GL_ARRAY_BUFFER, numVertexBones * sizeof(unsigned int), vertexBones, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(6);
+		glVertexAttribIPointer(6, 4, GL_UNSIGNED_INT, 0, 0);
+
+		// Initialize the vertex bone weight data
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
+		glBufferData(GL_ARRAY_BUFFER, numVertexBones * sizeof(float), vertexBoneWeights, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(7);
+		glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
 	}
 

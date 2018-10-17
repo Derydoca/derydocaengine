@@ -278,6 +278,21 @@
     <ClCompile Include="Key.cpp">
       <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyframe.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationData.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Bone.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpUtils.cpp">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BezierCurveRenderer.h">
@@ -619,6 +634,24 @@
     <ClInclude Include="StringUtils.h">
       <Filter>DerydocaEngine\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Bone.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationData.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyframe.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationChannel.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpUtils.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
@@ -677,6 +710,9 @@
     </Filter>
     <Filter Include="DerydocaEngine\Files\Serializers">
       <UniqueIdentifier>{8a7abadd-a412-47d5-9817-5b62b77bfb9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DerydocaEngine\Animation">
+      <UniqueIdentifier>{d664e67d-1cdc-4456-a683-8c7be079d6eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
