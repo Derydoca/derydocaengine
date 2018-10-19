@@ -1,4 +1,5 @@
 #include "AssimpUtils.h"
+#include "AnimationChannel.h"
 
 namespace DerydocaEngine::Helpers::AssimpUtils {
 
@@ -37,7 +38,7 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 			{
 				aiNode* childNode = boneNode->mChildren[i];
 				aiBone* b = findBone(mesh, childNode->mName);
-				glm::mat4 offset = aiMatToGlm((b == nullptr) ? childNode->mTransformation : b->mOffsetMatrix);
+				glm::mat4 offset = aiToGlm((b == nullptr) ? childNode->mTransformation : b->mOffsetMatrix);
 				Animation::Bone childBone(boneIndex++, childNode->mName.data, offset);
 
 				std::vector<Animation::Bone> childBones = childrenToBones(mesh, childNode, boneIndex, skeletonMap);
@@ -51,9 +52,19 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 		return bones;
 	}
 
-	glm::mat4 aiMatToGlm(const aiMatrix4x4 & aiMatrix)
+	glm::mat4 aiToGlm(const aiMatrix4x4 & matrix)
 	{
-		return glm::transpose(glm::make_mat4(&aiMatrix.a1));
+		return glm::transpose(glm::make_mat4(&matrix.a1));
+	}
+
+	glm::vec3 aiToGlm(const aiVector3D & vec)
+	{
+		return glm::vec3(vec.x, vec.y, vec.z);
+	}
+
+	glm::quat aiToGlm(const aiQuaternion & quat)
+	{
+		return glm::quat(quat.w, quat.x, quat.y, quat.z);
 	}
 
 	aiBone* findBone(const aiMesh*& mesh, const aiString& name)
@@ -190,7 +201,7 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 
 		// Build the bones of the skeleton
 		unsigned int boneIndex = 0;
-		Animation::Bone rootBone = Animation::Bone(boneIndex++, rootNode->mName.data, aiMatToGlm(rootNode->mTransformation));
+		Animation::Bone rootBone = Animation::Bone(boneIndex++, rootNode->mName.data, aiToGlm(rootNode->mTransformation));
 		std::vector<Animation::Bone> childBones = childrenToBones(mesh, rootNode, boneIndex, skeletonNodeMap);
 		rootBone.setChildBones(childBones);
 
@@ -218,6 +229,75 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 			aiNode* n = node->mParent;
 			scanNodeParents(n, func);
 		}
+	}
+
+	std::shared_ptr<Animation::AnimationData> getAnimation(const aiScene *& scene, unsigned int animationIndex) {
+		assert(scene->HasAnimations() && animationIndex < scene->mNumAnimations);
+
+		// Get the animation from Assimp
+		aiAnimation* aiAnim = scene->mAnimations[animationIndex];
+
+		// Figure out how many ticks per second there are
+		double ticksPerSecond = aiAnim->mTicksPerSecond;
+		if (ticksPerSecond == 0)
+		{
+			ticksPerSecond = 15.0;
+		}
+
+		// Create a vector of channels with memory allocated for the number of total channels needed
+		std::vector<Animation::AnimationChannel> channels;
+		channels.reserve(aiAnim->mNumChannels);
+
+		// For each channel in the Assimp animation
+		for (unsigned int i = 0; i < aiAnim->mNumChannels; i++)
+		{
+			// Get the channel from Assimp
+			aiNodeAnim* aiChannel = aiAnim->mChannels[i];
+
+			// Store the position key data
+			std::vector<Animation::AnimationKey<glm::vec3>> positionKeys;
+			positionKeys.reserve(aiChannel->mNumPositionKeys);
+			for (unsigned int j = 0; j < aiChannel->mNumPositionKeys; j++)
+			{
+				aiVectorKey aiKey = aiChannel->mPositionKeys[j];
+				glm::vec3 value = aiToGlm(aiKey.mValue);
+				double time = aiKey.mTime / ticksPerSecond;
+				positionKeys.push_back(Animation::AnimationKey(time, value));
+			}
+
+			// Store the rotation key data
+			std::vector<Animation::AnimationKey<glm::quat>> rotationKeys;
+			rotationKeys.reserve(aiChannel->mNumRotationKeys);
+			for (unsigned int j = 0; j < aiChannel->mNumRotationKeys; j++)
+			{
+				aiQuatKey aiKey = aiChannel->mRotationKeys[j];
+				glm::quat value = aiToGlm(aiKey.mValue);
+				double time = aiKey.mTime / ticksPerSecond;
+				rotationKeys.push_back(Animation::AnimationKey(time, value));
+			}
+
+			// Store the scale key data
+			std::vector<Animation::AnimationKey<glm::vec3>> scaleKeys;
+			scaleKeys.reserve(aiChannel->mNumScalingKeys);
+			for (unsigned int j = 0; j < aiChannel->mNumScalingKeys; j++)
+			{
+				aiVectorKey aiKey = aiChannel->mScalingKeys[j];
+				glm::vec3 value = aiToGlm(aiKey.mValue);
+				double time = aiKey.mTime / ticksPerSecond;
+				scaleKeys.push_back(Animation::AnimationKey(time, value));
+			}
+
+			// Create the channel and add it to the channels list
+			Animation::AnimationChannel channel(aiChannel->mNodeName.data, positionKeys, rotationKeys, scaleKeys);
+			channels.push_back(channel);
+		}
+
+		// Calculate the duration of the animation in seconds
+		double duration = aiAnim->mDuration / ticksPerSecond;
+
+		// Create the animation object and return it
+		std::shared_ptr<Animation::AnimationData> animation = std::make_shared<Animation::AnimationData>(Animation::AnimationData(aiAnim->mName.data, duration, channels));
+		return animation;
 	}
 
 }

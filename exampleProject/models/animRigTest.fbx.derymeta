@@ -1,9 +1,12 @@
 Resources:
-  - ID: a15da919-3c84-40c6-b44c-e1686ad3ded5
+  - ID: 1ee47de3-1953-4093-9ebc-b61c2771102f
     Type: Mesh
     Index: 0
     Name: Cube.001
-    Skeleton: 18152614-427c-467c-8ddb-7749dbbd0095
-  - ID: 18152614-427c-467c-8ddb-7749dbbd0095
+    Skeleton: fe805b7e-1579-4629-8abb-6c89f63f4fae
+  - ID: fe805b7e-1579-4629-8abb-6c89f63f4fae
     Type: Skeleton
     Name: MeshArmature
+  - ID: e9d70d40-7ad0-439a-a023-a875090b6e8f
+    Type: Animation
+    Name: AnimStack::MeshArmature|Action

@@ -281,9 +281,6 @@
     <ClCompile Include="Skeleton.cpp">
       <Filter>DerydocaEngine\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Keyframe.cpp">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="AnimationData.cpp">
       <Filter>DerydocaEngine\Animation</Filter>
     </ClCompile>
@@ -640,9 +637,6 @@
     <ClInclude Include="AnimationData.h">
       <Filter>DerydocaEngine\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Keyframe.h">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="Skeleton.h">
       <Filter>DerydocaEngine\Animation</Filter>
     </ClInclude>
@@ -651,6 +645,9 @@
     </ClInclude>
     <ClInclude Include="AssimpUtils.h">
       <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationKey.h">
+      <Filter>DerydocaEngine\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

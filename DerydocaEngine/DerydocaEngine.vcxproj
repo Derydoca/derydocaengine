@@ -224,7 +224,6 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="BezierPatchMeshResourceSerializer.cpp" />
     <ClCompile Include="BloomFilter.cpp" />
     <ClCompile Include="Bone.cpp" />
-    <ClCompile Include="Keyframe.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="ButtonState.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -317,6 +316,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
   <ItemGroup>
     <ClInclude Include="AnimationChannel.h" />
     <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="AnimationKey.h" />
     <ClInclude Include="AssimpUtils.h" />
     <ClInclude Include="BezierCurveRenderer.h" />
     <ClInclude Include="BezierPatchMesh.h" />
@@ -357,7 +357,6 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="Key.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="KeyboardMover.h" />
-    <ClInclude Include="Keyframe.h" />
     <ClInclude Include="LevelFileSerializer.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightManager.h" />

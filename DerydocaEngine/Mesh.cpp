@@ -368,7 +368,7 @@ namespace DerydocaEngine::Rendering
 		// TODO: Do not hard code mesh 0
 		aiMesh* mesh = scene->mMeshes[0];
 
-		glm::mat4 rootTransform = Helpers::AssimpUtils::aiMatToGlm(scene->mRootNode->mTransformation.Inverse());
+		glm::mat4 rootTransform = Helpers::AssimpUtils::aiToGlm(scene->mRootNode->mTransformation.Inverse());
 
 		// Create buffers that will store the bone indices and bone weights
 		unsigned int numVertexBones = mesh->mNumVertices * EngineMaxBonesPerVertex;

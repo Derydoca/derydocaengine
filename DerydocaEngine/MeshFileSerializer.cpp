@@ -73,6 +73,16 @@ namespace DerydocaEngine::Files::Serializers {
 		
 			resources.push_back(skeletonResourceNode);
 		}
+
+		for (unsigned int i = 0; i < scene->mNumAnimations; i++)
+		{
+			YAML::Node animationResourceNode;
+			animationResourceNode["ID"] = generateUuid();
+			animationResourceNode["Type"] = "Animation";
+			animationResourceNode["Name"] = std::string(scene->mAnimations[i]->mName.data);
+
+			resources.push_back(animationResourceNode);
+		}
 		
 		return resources;
 	}

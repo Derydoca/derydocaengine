@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include <glm/mat4x4.hpp>
+#include "AnimationChannel.h"
 #include "Bone.h"
-#include "Keyframe.h"
 #include "Skeleton.h"
 
 namespace DerydocaEngine::Animation {
@@ -10,19 +10,19 @@ namespace DerydocaEngine::Animation {
 	class AnimationData {
 	public:
 		AnimationData();
-		AnimationData(const std::string& name, const float duration, const std::vector<Keyframe>& keyframes);
+		AnimationData(const std::string& name, const double duration, const std::vector<AnimationChannel>& channels);
 
-		float getDuration() const { return m_duration; }
+		double getDuration() const { return m_duration; }
 		std::string getName() const { return m_name; }
-		void populateSkeletonTransforms(float time, const Skeleton& skeleton, std::vector<glm::mat4>& skeletonTransforms);
+		const unsigned int getBoneId(std::string boneName);
+		const AnimationChannel& getChannel(unsigned int boneId);
+		const AnimationChannel& getChannel(std::string boneName);
 
 	private:
 		std::string m_name;
-		float m_duration;
-		std::vector<Keyframe> m_keyframes;
+		double m_duration;
+		std::vector<AnimationChannel> m_channels;
 
-		size_t getPriorKeyframeIndex(float animationTime) const;
-		void loadSkeletonTransforms(float animationTime, const Bone& bone, const glm::mat4& parentTransform, std::vector<glm::mat4>& skeletonTransforms) const;
 	};
 
 }
