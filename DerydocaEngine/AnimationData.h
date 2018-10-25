@@ -35,7 +35,7 @@ namespace DerydocaEngine::Animation {
 			{
 				if (animationTime < animationKeys[i + 1].time)
 				{
-					return i;
+					return (unsigned int)i;
 				}
 			}
 

@@ -52,7 +52,7 @@ namespace DerydocaEngine::Animation {
 	void AnimationData::loadPose(float time, std::vector<glm::mat4>& boneTransforms, const std::shared_ptr<Skeleton>& skeleton)
 	{
 		// Convert the animation time into the range of the animation duration
-		float animationTime = fmod(time, m_duration);
+		float animationTime = (float)fmod(time, m_duration);
 
 		// Recursively set the bone positions
 		const glm::mat4 parentTransform;
@@ -87,7 +87,7 @@ namespace DerydocaEngine::Animation {
 		// Recursively load all child bones
 		for (size_t i = 0; i < bone->getNumChildren(); i++)
 		{
-			loadPose(animationTime, boneTransforms, globalInverseTransform, bone->getChildBone(i), globalTransformation);
+			loadPose(animationTime, boneTransforms, globalInverseTransform, bone->getChildBone((unsigned int)i), globalTransformation);
 		}
 	}
 
