@@ -86,6 +86,20 @@ namespace DerydocaEngine::Components
 
 	protected:
 		template<typename T>
+		inline std::shared_ptr<T> getResourcePointer(const YAML::Node& node, const std::string& resourceName)
+		{
+			YAML::Node resourceIdNode = node[resourceName];
+			if (resourceIdNode == nullptr || !resourceIdNode.IsScalar())
+			{
+				return nullptr;
+			}
+
+			boost::uuids::uuid resourceId = resourceIdNode.as<boost::uuids::uuid>();
+
+			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
+		}
+
+		template<typename T>
 		inline T getResource(YAML::Node const& node, std::string const& resourceName)
 		{
 			Resources::Resource* resource = getResource(node, resourceName);

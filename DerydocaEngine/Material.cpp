@@ -71,6 +71,11 @@ namespace DerydocaEngine::Rendering
 		m_mat4Values[name] = value;
 	}
 
+	void Material::setMat4Array(std::string const & name, std::vector<glm::mat4> matrixArray)
+	{
+		m_mat4ArrayValues[name] = matrixArray;
+	}
+
 	void Material::setSubroutine(unsigned int const& program, unsigned int const& value)
 	{
 		m_subroutineValues[program] = value;
@@ -123,6 +128,11 @@ namespace DerydocaEngine::Rendering
 		for (auto const& x : m_mat4Values)
 		{
 			m_shader->setMat4(x.first, x.second);
+		}
+
+		for (auto const& x : m_mat4ArrayValues)
+		{
+			m_shader->setMat4Array(x.first, x.second);
 		}
 
 		for (auto const& x : m_subroutineValues)

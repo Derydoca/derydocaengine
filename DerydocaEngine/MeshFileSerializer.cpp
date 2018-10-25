@@ -3,6 +3,8 @@
 #include "AssimpUtils.h"
 #include "Mesh.h"
 #include "MeshResource.h"
+#include "SkeletonResource.h"
+#include "AnimationResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -106,6 +108,11 @@ namespace DerydocaEngine::Files::Serializers {
 			Resources::MeshResource* meshResource = new Resources::MeshResource();
 			meshResource->setMeshIndex(resourceNode["Index"].as<unsigned int>());
 			meshResource->setMeshName(resourceNode["Name"].as<std::string>());
+			YAML::Node skeletonNode = resourceNode["Skeleton"];
+			if (skeletonNode)
+			{
+				meshResource->setSkeletonId(skeletonNode.as<boost::uuids::uuid>());
+			}
 			meshResource->setType(Resources::MeshResourceType);
 
 			YAML::Node flagsNode = resourceNode["Flags"];
@@ -118,6 +125,22 @@ namespace DerydocaEngine::Files::Serializers {
 			}
 
 			return meshResource;
+		}
+		else if (type == "Skeleton")
+		{
+			Resources::SkeletonResource* skeletonResource = new Resources::SkeletonResource();
+			skeletonResource->setName(resourceNode["Name"].as<std::string>());
+			skeletonResource->setType(Resources::SkeletonResourceType);
+
+			return skeletonResource;
+		}
+		else if (type == "Animation")
+		{
+			Resources::AnimationResource* animationResource = new Resources::AnimationResource();
+			animationResource->setName(resourceNode["Name"].as<std::string>());
+			animationResource->setType(Resources::AnimationResourceType);
+
+			return animationResource;
 		}
 
 		// If we are here, then the type was not defined and we have no way to convert it into a resource type

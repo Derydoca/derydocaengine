@@ -1,12 +1,9 @@
 #include "Mesh.h"
 
 #include <GL/glew.h>
-#include "assimp\cimport.h"
-#include "assimp\scene.h"
-#include "assimp\postprocess.h"
 
-#include "AssimpUtils.h"
 #include "MeshAdjacencyCalculator.h"
+#include "GLError.h"
 
 // TODO: Move this some place configurable
 int MaxBonesPerVertex = 4;
@@ -19,39 +16,38 @@ namespace DerydocaEngine::Rendering
 
 	}
 
-	void Mesh::loadFromFile(std::string const& fileName)
+	Mesh::Mesh(
+		unsigned int numVertices,
+		unsigned int numIndices,
+		glm::vec3 * positions,
+		unsigned int * indices,
+		glm::vec3 * normals,
+		glm::vec2 * texCoords,
+		glm::vec3 * tangents,
+		glm::vec3 * bitangents,
+		Color* colors,
+		int * boneIndices,
+		float * boneWeights) :
+		m_vertexArrayObject(0),
+		m_numVertices(numVertices),
+		m_numIndices(numIndices),
+		m_positions(positions),
+		m_indices(indices),
+		m_normals(normals),
+		m_texCoords(texCoords),
+		m_tangents(tangents),
+		m_bitangents(bitangents),
+		m_colors(colors),
+		m_boneIndices(boneIndices),
+		m_boneWeights(boneWeights)
 	{
-		loadFromFile(fileName, 0);
-	}
-
-	void Mesh::loadFromFile(std::string const& fileName, unsigned int const& meshIndex)
-	{
-		const aiScene* aiModel = aiImportFile(fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
-
-		int uvIndex = 0;
-
-		if (meshIndex >= aiModel->mNumMeshes)
+		// Initialize the buffer handles
+		for (size_t i = 0; i < NUM_BUFFERS; i++)
 		{
-			return;
+			m_vertexArrayBuffers[i] = 0;
 		}
 
-		aiMesh* mesh = aiModel->mMeshes[meshIndex];
-
-		ProcessAiMesh(mesh, uvIndex);
-		ProcessSkeletalData(aiModel);
-
-		RefreshVbo();
-	}
-
-	void Mesh::loadMeshComponentDataDEPRECATED(unsigned int const& numVertices, glm::vec3* const& positions, glm::vec3* const& normals, glm::vec2* const& texCoords, unsigned int* const& indices, unsigned int const& numIndices)
-	{
-		m_positions = positions;
-		m_numVertices = numVertices;
-		m_indices = indices;
-		m_numIndices = numIndices;
-		m_normals = normals;
-		m_texCoords = texCoords;
-
+		// Upload to the GPU
 		RefreshVbo();
 	}
 
@@ -65,7 +61,9 @@ namespace DerydocaEngine::Rendering
 		glm::vec3 * const& normals,
 		unsigned int const& numIndices,
 		unsigned int * const& indices,
-		Color * const& colors)
+		Color * const& colors,
+		int* boneIndices,
+		float* boneWeights)
 	{
 		m_numVertices = numVertices;
 
@@ -105,28 +103,17 @@ namespace DerydocaEngine::Rendering
 			m_colors = colors;
 		}
 
-		UpdateVbo(meshComponentFlags);
-	}
-
-	void Mesh::loadVertexColorBuffer(unsigned int const& numVertices, Color * const& colorBuffer)
-	{
-		glBindVertexArray(m_vertexArrayObject);
-
-		// Ensure that we have generated a buffer for this mesh
-		if (!m_vertexArrayBuffers[COLOR_VB])
+		if (meshComponentFlags & MeshComponents::BoneIndices)
 		{
-			glGenBuffers(1, &m_vertexArrayBuffers[COLOR_VB]);
+			m_boneIndices = boneIndices;
 		}
 
-		m_colors = colorBuffer;
+		if (meshComponentFlags & MeshComponents::BoneWeights)
+		{
+			m_boneWeights = boneWeights;
+		}
 
-		// Upload the buffer to the GPU
-		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
-		glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), m_colors, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(5);
-		glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
-
-		glBindVertexArray(0);
+		RefreshVbo();
 	}
 
 	Mesh::~Mesh()
@@ -138,6 +125,8 @@ namespace DerydocaEngine::Rendering
 		delete[] m_tangents;
 		delete[] m_indices;
 		delete[] m_bitangents;
+		delete[] m_boneIndices;
+		delete[] m_boneWeights;
 	}
 
 	void Mesh::RefreshVbo()
@@ -203,6 +192,24 @@ namespace DerydocaEngine::Rendering
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices, GL_STATIC_DRAW);
+		}
+
+		// Initialize the bone index buffer
+		if (m_boneIndices)
+		{
+			GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]));
+			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(int), m_boneIndices, GL_STATIC_DRAW));
+			GL_CHECK(glEnableVertexAttribArray(6));
+			GL_CHECK(glVertexAttribIPointer(6, 4, GL_INT, 0, 0));
+		}
+
+		// Initialize the bone weight buffer
+		if (m_boneWeights)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(7);
+			glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
 		glBindVertexArray(0);
@@ -282,144 +289,25 @@ namespace DerydocaEngine::Rendering
 			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
+		// Initialize the bone index buffer
+		if ((meshComponentFlags & MeshComponents::BoneIndices) && m_boneIndices != nullptr)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(int), m_boneIndices, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(6);
+			glVertexAttribIPointer(6, 4, GL_INT, 0, 0);
+		}
+
+		// Initialize the bone weight buffer
+		if ((meshComponentFlags & MeshComponents::BoneWeights) && m_boneWeights != nullptr)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(7);
+			glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, 0, 0);
+		}
+
 		glBindVertexArray(0);
-	}
-
-	void Mesh::ProcessAiMesh(aiMesh * const& mesh, int const& uvIndex)
-	{
-
-		m_numVertices = mesh->mNumVertices;
-
-		if (mesh->HasPositions())
-		{
-			delete[] m_positions;
-			m_positions = new glm::vec3[m_numVertices];
-			for (unsigned int i = 0; i < m_numVertices; i++)
-			{
-				m_positions[i] = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
-			}
-		}
-
-		if (mesh->HasTextureCoords(uvIndex))
-		{
-			delete[] m_texCoords;
-			m_texCoords = new glm::vec2[m_numVertices];
-			for (unsigned int i = 0; i < m_numVertices; i++)
-			{
-				m_texCoords[i] = glm::vec2(mesh->mTextureCoords[uvIndex][i].x, mesh->mTextureCoords[uvIndex][i].y);
-			}
-		}
-
-		if (mesh->HasNormals())
-		{
-			delete[] m_normals;
-			m_normals = new glm::vec3[m_numVertices];
-			for (unsigned int i = 0; i < m_numVertices; i++)
-			{
-				m_normals[i] = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
-			}
-		}
-
-		if (mesh->HasFaces())
-		{
-			if (m_flags & MeshFlags::load_adjacent)
-			{
-				Ext::MeshAdjacencyCalculator mac;
-				m_numIndices = mesh->mNumFaces * 3 * 2;
-				delete[] m_indices;
-				m_indices = new unsigned int[m_numIndices];
-				mac.buildAdjacencyList(mesh, m_indices);
-			}
-			else
-			{
-				m_numIndices = mesh->mNumFaces * 3;
-				delete[] m_indices;
-				m_indices = new unsigned int[m_numIndices];
-				for (unsigned int i = 0; i < mesh->mNumFaces; i++)
-				{
-					m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
-					m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
-					m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
-				}
-			}
-		}
-
-		if (mesh->HasTangentsAndBitangents())
-		{
-			delete[] m_tangents;
-			m_tangents = new glm::vec3[m_numVertices];
-			for (unsigned int i = 0; i < m_numVertices; i++)
-			{
-				m_tangents[i] = glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
-			}
-
-			delete[] m_bitangents;
-			m_bitangents = new glm::vec3[m_numVertices];
-			for (unsigned int i = 0; i < m_numVertices; i++)
-			{
-				m_bitangents[i] = glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z);
-			}
-		}
-
-	}
-
-	void Mesh::ProcessSkeletalData(const aiScene* scene)
-	{
-		// TODO: Do not hard code mesh 0
-		aiMesh* mesh = scene->mMeshes[0];
-
-		glm::mat4 rootTransform = Helpers::AssimpUtils::aiToGlm(scene->mRootNode->mTransformation.Inverse());
-
-		// Create buffers that will store the bone indices and bone weights
-		unsigned int numVertexBones = mesh->mNumVertices * EngineMaxBonesPerVertex;
-		unsigned int* vertexBones = new unsigned int[numVertexBones];
-		float* vertexBoneWeights = new float[numVertexBones];
-
-		for (unsigned int i = 0; i < mesh->mNumBones; i++)
-		{
-			aiBone* bone = mesh->mBones[i];
-			bool boneHasWeight = false;
-
-			for (unsigned int w = 0; w < bone->mNumWeights; w++)
-			{
-				aiVertexWeight vertWeight = bone->mWeights[w];
-				int vertexIndex = vertWeight.mVertexId;
-
-				// Pull data from the weights and load it into the bone weight map
-				unsigned int bufferOffset = vertWeight.mVertexId * EngineMaxBonesPerVertex;
-				float* boneVertWeights = vertexBoneWeights + bufferOffset;
-				for (int weightIndex = 0; weightIndex < EngineMaxBonesPerVertex; weightIndex++)
-				{
-					if (boneVertWeights[weightIndex] <= 0)
-					{
-						unsigned int* vertBones = vertexBones + bufferOffset;
-
-						boneVertWeights[weightIndex] = vertWeight.mWeight;
-						vertBones[weightIndex] = i;
-
-						boneHasWeight = true;
-
-						break;
-					}
-				}
-
-			}
-		}
-		delete[] vertexBones;
-		delete[] vertexBoneWeights;
-
-		// Initialize the vertex bone index data
-		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
-		glBufferData(GL_ARRAY_BUFFER, numVertexBones * sizeof(unsigned int), vertexBones, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(6);
-		glVertexAttribIPointer(6, 4, GL_UNSIGNED_INT, 0, 0);
-
-		// Initialize the vertex bone weight data
-		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
-		glBufferData(GL_ARRAY_BUFFER, numVertexBones * sizeof(float), vertexBoneWeights, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(7);
-		glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, 0, 0);
-
 	}
 
 	void Mesh::draw()

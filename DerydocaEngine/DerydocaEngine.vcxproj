@@ -216,6 +216,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimationData.cpp" />
+    <ClCompile Include="AnimationResourceSerializer.cpp" />
     <ClCompile Include="AssimpUtils.cpp" />
     <ClCompile Include="BezierCurveRenderer.cpp" />
     <ClCompile Include="BezierPatchMesh.cpp" />
@@ -291,6 +292,8 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="ShaderLibrary.cpp" />
     <ClCompile Include="ShaderResourceSerializer.cpp" />
     <ClCompile Include="ShaderSubroutineSwitcher.cpp" />
+    <ClCompile Include="SkeletonResourceSerializer.cpp" />
+    <ClCompile Include="SkinnedMeshRenderer.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
@@ -317,6 +320,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="AnimationChannel.h" />
     <ClInclude Include="AnimationData.h" />
     <ClInclude Include="AnimationKey.h" />
+    <ClInclude Include="AnimationResourceSerializer.h" />
     <ClInclude Include="AssimpUtils.h" />
     <ClInclude Include="BezierCurveRenderer.h" />
     <ClInclude Include="BezierPatchMesh.h" />
@@ -349,6 +353,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="GaussianBlurFilter.h" />
     <ClInclude Include="GLError.h" />
     <ClInclude Include="GameComponent.h" />
+    <ClInclude Include="AnimationResource.h" />
     <ClInclude Include="ImageFileSerializer.h" />
     <ClInclude Include="ImageProjector.h" />
     <ClInclude Include="InputManager.h" />
@@ -408,6 +413,9 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="ShaderResourceSerializer.h" />
     <ClInclude Include="ShaderSubroutineSwitcher.h" />
     <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="SkeletonResource.h" />
+    <ClInclude Include="SkeletonResourceSerializer.h" />
+    <ClInclude Include="SkinnedMeshRenderer.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SpriteReference.h" />
     <ClInclude Include="SpriteRenderer.h" />

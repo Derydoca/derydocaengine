@@ -13,7 +13,7 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 		return (*it).second;
 	}
 
-	std::vector<Animation::Bone> childrenToBones(const aiMesh*& mesh, aiNode*& boneNode, unsigned int& boneIndex, const std::map<std::string, bool>& skeletonMap)
+	std::vector<std::shared_ptr<Animation::Bone>> childrenToBones(const aiMesh*& mesh, aiNode*& boneNode, unsigned int& boneIndex, const std::map<std::string, bool>& skeletonMap)
 	{
 		// Get the number of child bones so that we only allocate once for the bone vector
 		unsigned int numBones = 0;
@@ -27,7 +27,7 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 		};
 
 		// Create the vector of bones
-		std::vector<Animation::Bone> bones(numBones);
+		std::vector<std::shared_ptr<Animation::Bone>> bones(numBones);
 
 		// Create each individual bone in the vector
 		unsigned int childBoneCount = 0;
@@ -38,11 +38,11 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 			{
 				aiNode* childNode = boneNode->mChildren[i];
 				aiBone* b = findBone(mesh, childNode->mName);
-				glm::mat4 offset = aiToGlm((b == nullptr) ? childNode->mTransformation : b->mOffsetMatrix);
-				Animation::Bone childBone(boneIndex++, childNode->mName.data, offset);
+				glm::mat4 offset = (b == nullptr) ? aiToGlm(childNode->mTransformation) : aiToGlm(b->mOffsetMatrix);
+				std::shared_ptr<Animation::Bone> childBone = std::make_shared<Animation::Bone>(boneIndex++, childNode->mName.data, offset);
 
-				std::vector<Animation::Bone> childBones = childrenToBones(mesh, childNode, boneIndex, skeletonMap);
-				childBone.setChildBones(childBones);
+				const std::vector<std::shared_ptr<Animation::Bone>> childBones = childrenToBones(mesh, childNode, boneIndex, skeletonMap);
+				childBone->setChildBones(childBones);
 
 				bones[childBoneCount++] = childBone;
 			}
@@ -87,12 +87,14 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 	{
 		aiNode* n = nullptr;
 
+		// Try to find the node in the current node's list of children
 		n = node->FindNode(name);
 		if (n != nullptr)
 		{
 			return n;
 		}
 
+		// If no node was found, recursively search down
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
 		{
 			n = findNode(node, name);
@@ -111,8 +113,8 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 
 		assert(scene->HasMeshes() && meshIndex < scene->mNumMeshes);
 
+		// Get the mesh
 		const aiMesh* mesh = scene->mMeshes[meshIndex];
-
 		assert(mesh->HasBones());
 
 		// Find the node for the specified mesh
@@ -201,12 +203,12 @@ namespace DerydocaEngine::Helpers::AssimpUtils {
 
 		// Build the bones of the skeleton
 		unsigned int boneIndex = 0;
-		Animation::Bone rootBone = Animation::Bone(boneIndex++, rootNode->mName.data, aiToGlm(rootNode->mTransformation));
-		std::vector<Animation::Bone> childBones = childrenToBones(mesh, rootNode, boneIndex, skeletonNodeMap);
-		rootBone.setChildBones(childBones);
+		std::shared_ptr<Animation::Bone> rootBone = std::make_shared<Animation::Bone>(boneIndex++, rootNode->mName.data, aiToGlm(rootNode->mTransformation));
+		std::vector<std::shared_ptr<Animation::Bone>> childBones = childrenToBones(mesh, rootNode, boneIndex, skeletonNodeMap);
+		rootBone->setChildBones(childBones);
 
 		// Create the skeleton object
-		std::shared_ptr<Animation::Skeleton> skeleton = std::make_shared<Animation::Skeleton>(Animation::Skeleton(rootBone, glm::mat4()));
+		std::shared_ptr<Animation::Skeleton> skeleton = std::make_shared<Animation::Skeleton>(Animation::Skeleton(rootBone, aiToGlm(scene->mRootNode->mTransformation)));
 
 		// Return the generated skeleton
 		return skeleton;

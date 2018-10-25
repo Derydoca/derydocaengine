@@ -290,6 +290,15 @@
     <ClCompile Include="AssimpUtils.cpp">
       <Filter>DerydocaEngine\Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="SkinnedMeshRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BezierCurveRenderer.h">
@@ -648,6 +657,21 @@
     </ClInclude>
     <ClInclude Include="AnimationKey.h">
       <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnedMeshRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

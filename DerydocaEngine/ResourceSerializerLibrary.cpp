@@ -6,6 +6,8 @@
 #include "ShaderResourceSerializer.h"
 #include "BezierPatchMeshResourceSerializer.h"
 #include "SpriteSheetResourceSerializer.h"
+#include "AnimationResourceSerializer.h"
+#include "SkeletonResourceSerializer.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {
@@ -33,6 +35,8 @@ namespace DerydocaEngine::Resources::Serializers
 		registerSerializer(new ShaderResourceSerializer());
 		registerSerializer(new Ext::BezierPatchMeshResourceSerializer());
 		registerSerializer(new SpriteSheetResourceSerializer());
+		registerSerializer(new AnimationResourceSerializer());
+		registerSerializer(new SkeletonResourceSerializer());
 	}
 
 	ResourceSerializerLibrary::~ResourceSerializerLibrary()

@@ -38,4 +38,24 @@ namespace DerydocaEngine::Resources
 		return m_resourceObject;
 	}
 
+	std::shared_ptr<void> Resource::getResourceObjectPointer()
+	{
+		if (m_resourceObjectPointer == 0)
+		{
+			// Find the loader that should be used
+			Serializers::ResourceSerializer* loader = Serializers::ResourceSerializerLibrary::getInstance().getSerializer(getType());
+
+			// If the loader could not be found, return null
+			if (loader == nullptr)
+			{
+				return nullptr;
+			}
+
+			// Load the object from the related object loader and return it
+			m_resourceObjectPointer = loader->deserializePointer(this);
+		}
+
+		return m_resourceObjectPointer;
+	}
+
 }

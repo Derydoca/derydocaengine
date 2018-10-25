@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <string>
+#include <vector>
 #include "Color.h"
 #include "Projection.h"
 
@@ -42,6 +43,7 @@ namespace DerydocaEngine::Rendering
 		void setVec4(std::string const& name, glm::vec4 const& val);
 		void setMat3(std::string const& name, glm::mat3 const& val);
 		void setMat4(std::string const& name, glm::mat4 const& val);
+		void setMat4Array(std::string const& name, std::vector<glm::mat4> const& valArray);
 		void setTexture(std::string const& name, int const& textureUnit, Texture* const& handle);
 		void setTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType, unsigned int const& handle);
 

@@ -1,6 +1,7 @@
 #pragma once
-#include <string>
 #include <map>
+#include <memory>
+#include <string>
 #include <boost/uuid/uuid.hpp>
 #include "Resource.h"
 
@@ -53,6 +54,19 @@ namespace DerydocaEngine
 			}
 
 			return static_cast<resourceObjectType*>(resource->getResourceObject());
+		}
+
+		template<class resourceObjectType>
+		std::shared_ptr<resourceObjectType> getResourceObjectPointer(boost::uuids::uuid const& id)
+		{
+			Resources::Resource* resource = getResource(id);
+			if (resource == nullptr)
+			{
+				return nullptr;
+			}
+
+			std::shared_ptr<resourceObjectType> pointer = std::static_pointer_cast<resourceObjectType>(resource->getResourceObjectPointer());
+			return pointer;
 		}
 	private:
 		ObjectLibrary() {}

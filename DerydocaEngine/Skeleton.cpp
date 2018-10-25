@@ -7,23 +7,26 @@ namespace DerydocaEngine::Animation {
 	{
 	}
 
-	Skeleton::Skeleton(const Bone& rootBone, const glm::mat4& rootTransform) :
+	Skeleton::Skeleton(const std::shared_ptr<Bone>& rootBone, const glm::mat4& rootTransform) :
 		m_rootTransform(rootTransform),
-		m_rootBone(std::make_shared<Bone>(rootBone))
+		m_rootBone(rootBone)
 	{
 		RebuildBoneMaps();
 	}
 
-	const Bone* Skeleton::getBone(const unsigned int boneId) {
-		return m_boneIdMap[boneId];
+	const std::shared_ptr<Bone> Skeleton::getBone(unsigned int boneId) const
+	{
+		auto it = m_boneIdMap.find(boneId);
+
+		return it != m_boneIdMap.end() ? (*it).second : nullptr;
 	}
 
-	const Bone* Skeleton::getBone(const std::string & boneName)
+	const std::shared_ptr<Bone> Skeleton::getBone(const std::string & boneName) const
 	{
 		return getBone(getBoneID(boneName));
 	}
 
-	unsigned int Skeleton::getBoneID(const std::string& boneName)
+	unsigned int Skeleton::getBoneID(const std::string& boneName) const
 	{
 		// Find the element
 		auto it = m_boneNameToIDMap.find(boneName);
@@ -38,21 +41,21 @@ namespace DerydocaEngine::Animation {
 		return -1;
 	}
 
-	void Skeleton::AddBonesToMap(const Bone& bone)
+	void Skeleton::AddBonesToMap(const std::shared_ptr<Bone>& bone)
 	{
-		m_boneNameToIDMap[bone.getName()] = bone.getID();
-		for (unsigned int i = 0; i < bone.getNumChildren(); i++)
+		m_boneNameToIDMap[bone->getName()] = bone->getID();
+		for (unsigned int i = 0; i < bone->getNumChildren(); i++)
 		{
-			AddBonesToMap(bone[i]);
+			AddBonesToMap(bone->getChildBone(i));
 		}
 	}
 
-	void Skeleton::AddBonesToIdMap(const Bone & bone)
+	void Skeleton::AddBonesToIdMap(const std::shared_ptr<Bone> & bone)
 	{
-		m_boneIdMap[bone.getID()] = &bone;
-		for (unsigned int i = 0; i < bone.getNumChildren(); i++)
+		m_boneIdMap[bone->getID()] = bone;
+		for (unsigned int i = 0; i < bone->getNumChildren(); i++)
 		{
-			AddBonesToIdMap(bone[i]);
+			AddBonesToIdMap(bone->getChildBone(i));
 		}
 	}
 
@@ -60,11 +63,11 @@ namespace DerydocaEngine::Animation {
 	{
 		// Load the bone index map
 		m_boneNameToIDMap.clear();
-		AddBonesToMap(*m_rootBone);
+		AddBonesToMap(m_rootBone);
 
 		// Load the bone ID map
 		m_boneIdMap.clear();
-		AddBonesToIdMap(*m_rootBone);
+		AddBonesToIdMap(m_rootBone);
 	}
 
 }

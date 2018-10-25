@@ -69,6 +69,8 @@ namespace DerydocaEngine::Rendering
 		glBindAttribLocation(m_rendererId, 3, "VertexTangent");
 		glBindAttribLocation(m_rendererId, 4, "VertexBitangent");
 		glBindAttribLocation(m_rendererId, 5, "VertexColor");
+		glBindAttribLocation(m_rendererId, 6, "VertexBoneIndices");
+		glBindAttribLocation(m_rendererId, 7, "VertexBoneWeights");
 
 		// Bind the output color to 0
 		glBindFragDataLocation(m_rendererId, 0, "FragColor");
@@ -126,6 +128,8 @@ namespace DerydocaEngine::Rendering
 		glBindAttribLocation(m_rendererId, 3, "VertexTangent");
 		glBindAttribLocation(m_rendererId, 4, "VertexBitangent");
 		glBindAttribLocation(m_rendererId, 5, "VertexColor");
+		glBindAttribLocation(m_rendererId, 6, "VertexBoneIndices");
+		glBindAttribLocation(m_rendererId, 7, "VertexBoneWeights");
 
 		// Bind the output color to 0
 		glBindFragDataLocation(m_rendererId, 0, "FragColor");
@@ -298,6 +302,14 @@ namespace DerydocaEngine::Rendering
 	void Shader::setMat4(std::string const& name, glm::mat4 const& val)
 	{
 		glUniformMatrix4fv(getUniformName(name), 1, GL_FALSE, &val[0][0]);
+	}
+
+	void Shader::setMat4Array(std::string const & name, std::vector<glm::mat4> const & valArray)
+	{
+		GLsizei size = (GLsizei)valArray.size();
+		glm::mat4 first = valArray[0];
+		GLfloat* dataPointer = &first[0][0];
+		glUniformMatrix4fv(getUniformName(name), size, GL_FALSE, glm::value_ptr(valArray.at(0)));
 	}
 
 	void Shader::setTexture(std::string const& name, int const& textureUnit, Texture* const& texture)

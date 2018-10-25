@@ -2,11 +2,10 @@
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <string>
+
 #include "Color.h"
 #include "MeshFlags.h"
-
-struct aiMesh;
-struct aiScene;
+#include "Skeleton.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -29,10 +28,19 @@ namespace DerydocaEngine::Rendering
 	{
 	public:
 		Mesh();
+		Mesh(
+			unsigned int numVertices,
+			unsigned int numIndices,
+			glm::vec3* positions,
+			unsigned int* indices,
+			glm::vec3* normals,
+			glm::vec2* texCoords,
+			glm::vec3* tangents,
+			glm::vec3* bitangents,
+			Color* colors,
+			int* boneIndices,
+			float* boneWeights);
 		~Mesh();
-		void loadFromFile(std::string const& fileName);
-		void loadFromFile(std::string const& fileName, unsigned int const& meshIndex);
-		void loadMeshComponentDataDEPRECATED(unsigned int const& numVertices, glm::vec3* const& positions, glm::vec3* const& normals, glm::vec2* const& texCoords, unsigned int* const& indices, unsigned int const& numIndices);
 		void loadMeshComponentData(
 			MeshComponents const& meshComponentFlags,
 			unsigned int const& numVertices,
@@ -43,12 +51,15 @@ namespace DerydocaEngine::Rendering
 			glm::vec3 * const& normals = 0,
 			unsigned int const& numIndices = 0,
 			unsigned int * const& indices = 0,
-			Color * const& colors = 0);
-		void loadVertexColorBuffer(unsigned int const& numVertices, Color* const& colorBuffer);
+			Color * const& colors = 0,
+			int* boneIndices = 0,
+			float* boneWeights = 0);
 		void draw();
 		void setFlags(MeshFlags const& flags) { m_flags = flags; }
 		unsigned int getVao() const { return m_vertexArrayObject; }
 		unsigned int getNumIndices() const { return m_numIndices; }
+		std::shared_ptr<Animation::Skeleton> getSkeleton() { return m_skeleton; }
+		void setSkeleton(std::shared_ptr<Animation::Skeleton> skeleton) { m_skeleton = skeleton; }
 
 	private:
 		enum {
@@ -69,20 +80,21 @@ namespace DerydocaEngine::Rendering
 
 		void RefreshVbo();
 		void UpdateVbo(MeshComponents const& meshComponentFlags);
-		void ProcessAiMesh(aiMesh* const& mesh, int const& uvIndex);
-		void ProcessSkeletalData(const aiScene* scene);
 
-		glm::vec3* m_positions;
-		glm::vec3* m_normals;
-		glm::vec3* m_tangents;
-		glm::vec3* m_bitangents;
-		glm::vec2* m_texCoords;
-		Color* m_colors;
-		unsigned int m_numVertices;
-		unsigned int* m_indices;
-		unsigned int m_numIndices;
 		unsigned int m_vertexArrayObject;
 		unsigned int m_vertexArrayBuffers[NUM_BUFFERS];
+		unsigned int m_numVertices;
+		unsigned int m_numIndices;
+		glm::vec3* m_positions;
+		unsigned int* m_indices;
+		glm::vec3* m_normals;
+		glm::vec2* m_texCoords;
+		glm::vec3* m_tangents;
+		glm::vec3* m_bitangents;
+		Color* m_colors;
+		int* m_boneIndices;
+		float* m_boneWeights;
+		std::shared_ptr<Animation::Skeleton> m_skeleton;
 		MeshFlags m_flags{};
 	};
 

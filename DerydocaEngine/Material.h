@@ -4,6 +4,7 @@
 #include <glm\mat4x4.hpp>
 #include <glm\vec3.hpp>
 #include <glm\vec4.hpp>
+#include <vector>
 
 namespace DerydocaEngine
 {
@@ -37,6 +38,7 @@ namespace DerydocaEngine::Rendering
 		void setColorRGBA(std::string const& name, Color const& value);
 		void setMat3(std::string const& name, glm::mat3 const& value);
 		void setMat4(std::string const& name, glm::mat4 const& value);
+		void setMat4Array(std::string const& name, std::vector<glm::mat4> matrixArray);
 		void setSubroutine(unsigned int const& program, unsigned int const& value);
 		void bind();
 		void unbind();
@@ -52,6 +54,7 @@ namespace DerydocaEngine::Rendering
 		std::map<std::string, glm::vec4> m_vec4Values;
 		std::map<std::string, glm::mat3> m_mat3Values;
 		std::map<std::string, glm::mat4> m_mat4Values;
+		std::map<std::string, std::vector<glm::mat4>> m_mat4ArrayValues;
 		std::map<unsigned int, unsigned int> m_subroutineValues;
 	};
 

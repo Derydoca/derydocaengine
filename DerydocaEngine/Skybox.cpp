@@ -56,15 +56,7 @@ namespace DerydocaEngine::Rendering
 			3, 7, 6
 		};
 
-		m_mesh = new Mesh();
-		m_mesh->loadMeshComponentDataDEPRECATED(
-			8,
-			positions,
-			nullptr,
-			nullptr,
-			indices,
-			36
-		);
+		m_mesh = new Mesh(8, 36, positions, indices, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr);
 	}
 
 }

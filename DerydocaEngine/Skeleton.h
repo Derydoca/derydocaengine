@@ -9,21 +9,23 @@ namespace DerydocaEngine::Animation {
 	class Skeleton {
 	public:
 		Skeleton();
-		Skeleton(const Bone& rootBone, const glm::mat4& rootTransform);
+		Skeleton(const std::shared_ptr<Bone>& rootBone, const glm::mat4& rootTransform);
 
+		const glm::mat4& getGlobalInverseTransform() const { return m_rootTransform; }
 		std::string getName() const { return m_rootBone->getName(); }
 		size_t getNumBones() const { return  m_rootBone->getTotalBoneCount(); }
-		const Bone* getBone(const unsigned int boneIndex);
-		const Bone* getBone(const std::string& boneName);
-		unsigned int getBoneID(const std::string& boneName);
+		const std::shared_ptr<Bone> getRootBone() const { return m_rootBone; };
+		const std::shared_ptr<Bone> getBone(unsigned int boneIndex) const;
+		const std::shared_ptr<Bone> getBone(const std::string& boneName) const;
+		unsigned int getBoneID(const std::string& boneName) const;
 	private:
 		std::map<std::string, unsigned int> m_boneNameToIDMap;
-		std::map<unsigned int, const Bone*> m_boneIdMap;
+		std::map<unsigned int, std::shared_ptr<Bone>> m_boneIdMap;
 		std::shared_ptr<Bone> m_rootBone;
 		glm::mat4 m_rootTransform;
 
-		void AddBonesToMap(const Bone& bone);
-		void AddBonesToIdMap(const Bone& bone);
+		void AddBonesToMap(const std::shared_ptr<Bone>& bone);
+		void AddBonesToIdMap(const std::shared_ptr<Bone>& bone);
 		void RebuildBoneMaps();
 	};
 

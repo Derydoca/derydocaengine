@@ -21,12 +21,14 @@ namespace DerydocaEngine::Resources
 		std::string getSourceFilePath() const { return m_sourceFilePath; }
 		std::string getMetaFilePath() const { return m_metaFilePath; }
 		void* getResourceObject();
+		std::shared_ptr<void> getResourceObjectPointer();
 	protected:
 		boost::uuids::uuid m_id;
 		ResourceType m_type;
 		std::string m_sourceFilePath;
 		std::string m_metaFilePath;
 		void* m_resourceObject = 0;
+		std::shared_ptr<void> m_resourceObjectPointer;
 	};
 
 }
