@@ -38,7 +38,7 @@ namespace DerydocaEngine::Rendering
 			glm::vec3* tangents,
 			glm::vec3* bitangents,
 			Color* colors,
-			int* boneIndices,
+			unsigned int* boneIndices,
 			float* boneWeights);
 		~Mesh();
 		void loadMeshComponentData(
@@ -52,7 +52,7 @@ namespace DerydocaEngine::Rendering
 			unsigned int const& numIndices = 0,
 			unsigned int * const& indices = 0,
 			Color * const& colors = 0,
-			int* boneIndices = 0,
+			unsigned int* boneIndices = 0,
 			float* boneWeights = 0);
 		void draw();
 		void setFlags(MeshFlags const& flags) { m_flags = flags; }
@@ -92,7 +92,7 @@ namespace DerydocaEngine::Rendering
 		glm::vec3* m_tangents;
 		glm::vec3* m_bitangents;
 		Color* m_colors;
-		int* m_boneIndices;
+		unsigned int* m_boneIndices;
 		float* m_boneWeights;
 		std::shared_ptr<Animation::Skeleton> m_skeleton;
 		MeshFlags m_flags{};

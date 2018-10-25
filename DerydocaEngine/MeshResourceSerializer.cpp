@@ -62,7 +62,7 @@ namespace DerydocaEngine::Resources::Serializers
 		unsigned int* m_indices = nullptr;
 		glm::vec3* m_tangents = nullptr;
 		glm::vec3* m_bitangents = nullptr;
-		int* m_boneIndices = nullptr;
+		unsigned int* m_boneIndices = nullptr;
 		float* m_boneWeights = nullptr;
 		Rendering::MeshFlags m_flags = mr->getFlags();
 
@@ -159,11 +159,11 @@ namespace DerydocaEngine::Resources::Serializers
 		}
 	}
 
-	void MeshResourceSerializer::ProcessBoneData(aiMesh * mesh, int * &m_boneIndices, float * &m_boneWeights, const std::shared_ptr<Animation::Skeleton>& skeleton)
+	void MeshResourceSerializer::ProcessBoneData(aiMesh * mesh, unsigned int * &m_boneIndices, float * &m_boneWeights, const std::shared_ptr<Animation::Skeleton>& skeleton)
 	{
 		// Create buffers that will store the bone indices and bone weights
 		unsigned int numTotalBoneElements = mesh->mNumVertices * EngineMaxBonesPerVertex;
-		m_boneIndices = new int[numTotalBoneElements];
+		m_boneIndices = new unsigned int[numTotalBoneElements];
 		for (unsigned int i = 0; i < numTotalBoneElements; i++)
 		{
 			m_boneIndices[i] = -1;

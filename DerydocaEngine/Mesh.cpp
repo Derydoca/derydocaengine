@@ -26,7 +26,7 @@ namespace DerydocaEngine::Rendering
 		glm::vec3 * tangents,
 		glm::vec3 * bitangents,
 		Color* colors,
-		int * boneIndices,
+		unsigned int* boneIndices,
 		float * boneWeights) :
 		m_vertexArrayObject(0),
 		m_numVertices(numVertices),
@@ -62,7 +62,7 @@ namespace DerydocaEngine::Rendering
 		unsigned int const& numIndices,
 		unsigned int * const& indices,
 		Color * const& colors,
-		int* boneIndices,
+		unsigned int* boneIndices,
 		float* boneWeights)
 	{
 		m_numVertices = numVertices;
@@ -198,7 +198,7 @@ namespace DerydocaEngine::Rendering
 		if (m_boneIndices)
 		{
 			GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]));
-			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(int), m_boneIndices, GL_STATIC_DRAW));
+			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW));
 			GL_CHECK(glEnableVertexAttribArray(6));
 			GL_CHECK(glVertexAttribIPointer(6, 4, GL_INT, 0, 0));
 		}
@@ -293,7 +293,7 @@ namespace DerydocaEngine::Rendering
 		if ((meshComponentFlags & MeshComponents::BoneIndices) && m_boneIndices != nullptr)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(int), m_boneIndices, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW);
 			glEnableVertexAttribArray(6);
 			glVertexAttribIPointer(6, 4, GL_INT, 0, 0);
 		}

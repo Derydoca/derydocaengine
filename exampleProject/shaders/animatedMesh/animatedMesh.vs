@@ -2,8 +2,8 @@
 
 in vec3 VertexPosition;
 in vec3 VertexNormal;
-in ivec4 VertexBoneIndices;
-in vec4 VertexBoneWeights;
+in uint VertexBoneIndices[4];
+in float VertexBoneWeights[4];
 
 out vec4 Color;
 
@@ -36,11 +36,10 @@ vec4 ads(int lightIndex, vec4 position, vec3 norm)
 
 void main()
 {
-    
-    mat4 boneTransform = BoneMatrices[VertexBoneIndices.x] * VertexBoneWeights.x;
-    boneTransform += BoneMatrices[VertexBoneIndices.y] * VertexBoneWeights.y;
-    boneTransform += BoneMatrices[VertexBoneIndices.z] * VertexBoneWeights.z;
-    boneTransform += BoneMatrices[VertexBoneIndices.w] * VertexBoneWeights.w;
+    mat4 boneTransform = BoneMatrices[VertexBoneIndices[0]] * VertexBoneWeights[0];
+    boneTransform += BoneMatrices[VertexBoneIndices[1]] * VertexBoneWeights[1];
+    boneTransform += BoneMatrices[VertexBoneIndices[2]] * VertexBoneWeights[2];
+    boneTransform += BoneMatrices[VertexBoneIndices[3]] * VertexBoneWeights[3];
 
     vec3 eyeNorm = normalize(NormalMatrix * (boneTransform * vec4(VertexNormal, 0.0)).xyz);
     vec4 eyePosition = ModelViewMatrix * vec4(VertexPosition, 1.0);
