@@ -37,7 +37,6 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Mesh> m_mesh;
 		Rendering::Material* m_material;
 		Camera* m_SkinnedMeshRendererCamera;
-		//std::shared_ptr<Animation::Skeleton> m_skeleton;
 		std::shared_ptr<Animation::AnimationData> m_animation;
 		float m_time = 0.0f;
 	};

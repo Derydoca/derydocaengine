@@ -20,7 +20,7 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(MeshRenderer)
 			MeshRenderer();
-		MeshRenderer(Rendering::Mesh* const& mesh, Rendering::Material* const& material);
+		MeshRenderer(std::shared_ptr<Rendering::Mesh> const& mesh, Rendering::Material* const& material);
 		~MeshRenderer();
 		void render(Rendering::MatrixStack* const& matrixStack);
 		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
@@ -30,10 +30,10 @@ namespace DerydocaEngine::Components
 		void deserialize(YAML::Node const& compNode);
 
 		void init();
-		void setMesh(Rendering::Mesh* const& mesh) { m_mesh = mesh; }
+		void setMesh(std::shared_ptr<Rendering::Mesh> const& mesh) { m_mesh = mesh; }
 		void setMaterial(Rendering::Material* const& material) { m_material = material; }
 	private:
-		Rendering::Mesh * m_mesh;
+		std::shared_ptr<Rendering::Mesh> m_mesh;
 		Rendering::Material* m_material;
 		Camera* m_meshRendererCamera;
 	};

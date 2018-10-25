@@ -30,10 +30,7 @@ namespace DerydocaEngine::Components
 		setMaterial(material);
 
 		m_mesh = getResourcePointer<Rendering::Mesh>(compNode, "Mesh");
-/*
-		Resources::Resource* r = getResource(compNode, "Skeleton");
-		m_skeleton = getResourcePointer<Animation::Skeleton>(compNode, "Skeleton");
-*/
+
 		m_animation = getResourcePointer<Animation::AnimationData>(compNode, "Animation");
 
 		YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];

@@ -52,7 +52,6 @@ namespace DerydocaEngine::Components
 
 	Terrain::~Terrain()
 	{
-		delete m_mesh;
 		delete m_heightData;
 		delete m_meshRenderer;
 	}
@@ -111,7 +110,7 @@ namespace DerydocaEngine::Components
 			}
 		}
 
-		m_mesh = new Rendering::Mesh(numVerts, numIndices, positions, indices, normals, texCoords, nullptr, nullptr, nullptr, nullptr, nullptr);
+		m_mesh = std::make_shared<Rendering::Mesh>(numVerts, numIndices, positions, indices, normals, texCoords, nullptr, nullptr, nullptr, nullptr, nullptr);
 	}
 
 	void Terrain::setTextureSlot(int const& slot, Rendering::Texture * const& texture)
