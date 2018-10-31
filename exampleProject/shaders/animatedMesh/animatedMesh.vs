@@ -36,8 +36,8 @@ vec4 ads(int lightIndex, vec4 position, vec3 norm)
 
 void main()
 {
-    mat4 boneTransform;
-    for(int i = 0; i < 4; i++)
+    mat4 boneTransform = BoneMatrices[VertexBoneIndices[0]] * VertexBoneWeights[0];
+    for(int i = 1; i < 4; i++)
     {
         int boneIndex = VertexBoneIndices[i];
         if(boneIndex > 0)
