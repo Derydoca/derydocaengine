@@ -2,8 +2,8 @@
 
 in vec3 VertexPosition;
 in vec3 VertexNormal;
-in uint VertexBoneIndices[4];
-in float VertexBoneWeights[4];
+in ivec4 VertexBoneIndices;
+in vec4 VertexBoneWeights;
 
 out vec4 Color;
 
@@ -13,7 +13,7 @@ struct LightInfo {
 };
 uniform LightInfo Lights[10];
 
-const uint MaxBoneCount = 100;
+const uint MaxBoneCount = 150;
 uniform mat4 BoneMatrices[MaxBoneCount];
 
 uniform vec4 Kd;
@@ -36,17 +36,22 @@ vec4 ads(int lightIndex, vec4 position, vec3 norm)
 
 void main()
 {
-    mat4 boneTransform = BoneMatrices[VertexBoneIndices[0]] * VertexBoneWeights[0];
-    boneTransform += BoneMatrices[VertexBoneIndices[1]] * VertexBoneWeights[1];
-    boneTransform += BoneMatrices[VertexBoneIndices[2]] * VertexBoneWeights[2];
-    boneTransform += BoneMatrices[VertexBoneIndices[3]] * VertexBoneWeights[3];
+    mat4 boneTransform;
+    for(int i = 0; i < 4; i++)
+    {
+        int boneIndex = VertexBoneIndices[i];
+        if(boneIndex > 0)
+        {
+            boneTransform += BoneMatrices[boneIndex] * VertexBoneWeights[i];
+        }
+    }
 
     vec3 eyeNorm = normalize(NormalMatrix * (boneTransform * vec4(VertexNormal, 0.0)).xyz);
     vec4 eyePosition = ModelViewMatrix * vec4(VertexPosition, 1.0);
     Color = vec4(0.0);
     for(int i = 0; i < 10; i++)
     {
-        Color += ads(i, eyePosition, eyeNorm);
+       Color += ads(i, eyePosition, eyeNorm);
     }
     gl_Position = MVP * (boneTransform * vec4(VertexPosition, 1.0));
 }

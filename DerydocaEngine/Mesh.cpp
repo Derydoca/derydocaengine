@@ -5,10 +5,6 @@
 #include "MeshAdjacencyCalculator.h"
 #include "GLError.h"
 
-// TODO: Move this some place configurable
-int MaxBonesPerVertex = 4;
-const int EngineMaxBonesPerVertex = 4;
-
 namespace DerydocaEngine::Rendering
 {
 
@@ -198,18 +194,18 @@ namespace DerydocaEngine::Rendering
 		if (m_boneIndices)
 		{
 			GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]));
-			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW));
+			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW));
 			GL_CHECK(glEnableVertexAttribArray(6));
-			GL_CHECK(glVertexAttribIPointer(6, 4, GL_INT, 0, 0));
+			GL_CHECK(glVertexAttribIPointer(6, Rendering::Mesh::MAX_BONES, GL_UNSIGNED_INT, 0, 0));
 		}
 
 		// Initialize the bone weight buffer
 		if (m_boneWeights)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
 			glEnableVertexAttribArray(7);
-			glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, 0, 0);
+			glVertexAttribPointer(7, Rendering::Mesh::MAX_BONES, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
 		glBindVertexArray(0);
@@ -292,19 +288,19 @@ namespace DerydocaEngine::Rendering
 		// Initialize the bone index buffer
 		if ((meshComponentFlags & MeshComponents::BoneIndices) && m_boneIndices != nullptr)
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW);
-			glEnableVertexAttribArray(6);
-			glVertexAttribIPointer(6, 4, GL_INT, 0, 0);
+			GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]));
+			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW));
+			GL_CHECK(glEnableVertexAttribArray(6));
+			GL_CHECK(glVertexAttribIPointer(6, Rendering::Mesh::MAX_BONES, GL_UNSIGNED_INT, 0, 0));
 		}
 
 		// Initialize the bone weight buffer
 		if ((meshComponentFlags & MeshComponents::BoneWeights) && m_boneWeights != nullptr)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * MaxBonesPerVertex * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
 			glEnableVertexAttribArray(7);
-			glVertexAttribPointer(7, 4, GL_FLOAT, GL_FALSE, 0, 0);
+			glVertexAttribPointer(7, Rendering::Mesh::MAX_BONES, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
 		glBindVertexArray(0);

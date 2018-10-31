@@ -5,6 +5,7 @@
 #include "MeshRenderer.h"
 #include "Shader.h"
 #include "TessellatedMeshRenderer.h"
+#include "SkinnedMeshRenderer.h"
 
 namespace DerydocaEngine::Components
 {
@@ -26,14 +27,23 @@ namespace DerydocaEngine::Components
 		Rendering::Material* material = nullptr;
 		if (m_meshRenderer != nullptr)
 		{
-			m_usingMeshRenderer = true;
+			m_rendererType = 0;
 			material = m_meshRenderer->getMaterial();
 		}
 		else
 		{
-			m_usingMeshRenderer = false;
-			m_tessMeshRenderer = getComponent<Ext::TessellatedMeshRenderer>();
-			material = m_tessMeshRenderer->getMaterial();
+			m_skinnedMeshRenderer = getComponent<SkinnedMeshRenderer>();
+			if (m_skinnedMeshRenderer != nullptr)
+			{
+				m_rendererType = 1;
+				material = m_skinnedMeshRenderer->getMaterial();
+			}
+			else
+			{
+				m_rendererType = 2;
+				m_tessMeshRenderer = getComponent<Ext::TessellatedMeshRenderer>();
+				material = m_tessMeshRenderer->getMaterial();
+			}
 		}
 		assert(material);
 
@@ -72,7 +82,21 @@ namespace DerydocaEngine::Components
 		m_tessControlShaderExists = getLastModifiedTime(m_tessControlShaderPath.c_str(), m_tessControlShaderModifiedTime);
 
 		printf("Unloading the previous material.\n");
-		Rendering::Material* mat = m_usingMeshRenderer ? m_meshRenderer->getMaterial() : m_tessMeshRenderer->getMaterial();
+		Rendering::Material* mat = nullptr;
+		switch(m_rendererType)
+		{
+		case 0:
+			mat = m_meshRenderer->getMaterial();
+			break;
+		case 1:
+			mat = m_skinnedMeshRenderer->getMaterial();
+			break;
+		case 2:
+			mat = m_tessMeshRenderer->getMaterial();
+			break;
+		default:
+			break;
+		}
 		Rendering::Shader* oldShader = mat->getShader();
 		delete(oldShader);
 

@@ -4,6 +4,7 @@
 namespace DerydocaEngine {
 	namespace Components {
 		class MeshRenderer;
+		class SkinnedMeshRenderer;
 	}
 	namespace Ext {
 		class TessellatedMeshRenderer;
@@ -28,8 +29,9 @@ namespace DerydocaEngine::Components
 		void refreshMaterial();
 	private:
 		bool isShaderSourceUpdated();
-		bool m_usingMeshRenderer = true;
+		int m_rendererType = 0;
 		MeshRenderer* m_meshRenderer;
+		SkinnedMeshRenderer* m_skinnedMeshRenderer;
 		Ext::TessellatedMeshRenderer* m_tessMeshRenderer;
 		bool m_vertexShaderExists = false;
 		bool m_fragmentShaderExists = false;

@@ -6,13 +6,14 @@ Scene:
       Transform:
         Position: [0, 0, -2]
         Rotation: [0, 0, 0, 1]
-        Scale: [0.003, 0.003, 0.003]
+        Scale: [0.01, 0.01, 0.01]
       Components:
         - Type: SkinnedMeshRenderer
           Properties:
             Material: 87c86317-36ce-430f-80b6-e29e1ba172b8
-            Mesh: 1ee47de3-1953-4093-9ebc-b61c2771102f
-            Animation: e9d70d40-7ad0-439a-a023-a875090b6e8f
+            Mesh: 276e1146-08d9-41d3-9ae6-8c0b963f1d6e
+            Animation: e5ee135d-5735-4383-b3d4-40083025518c
+        - Type: MaterialRefresher
 
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2

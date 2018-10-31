@@ -61,6 +61,8 @@ namespace DerydocaEngine::Rendering
 		std::shared_ptr<Animation::Skeleton> getSkeleton() { return m_skeleton; }
 		void setSkeleton(std::shared_ptr<Animation::Skeleton> skeleton) { m_skeleton = skeleton; }
 
+		static const int MAX_BONES = 4;
+
 	private:
 		enum {
 			POSITION_VB,

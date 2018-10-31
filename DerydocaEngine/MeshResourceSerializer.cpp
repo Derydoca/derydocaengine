@@ -9,10 +9,6 @@
 
 namespace DerydocaEngine::Resources::Serializers
 {
-	// TODO: Move this some place configurable
-	int MaxBonesPerVertex = 4;
-	const int EngineMaxBonesPerVertex = 4;
-
 	MeshResourceSerializer::MeshResourceSerializer()
 	{
 	}
@@ -162,13 +158,13 @@ namespace DerydocaEngine::Resources::Serializers
 	void MeshResourceSerializer::ProcessBoneData(aiMesh * mesh, unsigned int * &m_boneIndices, float * &m_boneWeights, const std::shared_ptr<Animation::Skeleton>& skeleton)
 	{
 		// Create buffers that will store the bone indices and bone weights
-		unsigned int numTotalBoneElements = mesh->mNumVertices * EngineMaxBonesPerVertex;
+		unsigned int numTotalBoneElements = mesh->mNumVertices * Rendering::Mesh::MAX_BONES;
 		m_boneIndices = new unsigned int[numTotalBoneElements];
 		for (unsigned int i = 0; i < numTotalBoneElements; i++)
 		{
 			m_boneIndices[i] = -1;
 		}
-		m_boneWeights = new float[numTotalBoneElements];
+		m_boneWeights = new float[numTotalBoneElements] { };
 
 		// For each bone in the source mesh file
 		for (unsigned int i = 0; i < mesh->mNumBones; i++)
@@ -185,10 +181,10 @@ namespace DerydocaEngine::Resources::Serializers
 				int vertexIndex = vertWeight.mVertexId;
 
 				// Pull data from the weights and load it into the bone weight map
-				unsigned int bufferOffset = vertWeight.mVertexId * EngineMaxBonesPerVertex;
+				unsigned int bufferOffset = vertWeight.mVertexId * Rendering::Mesh::MAX_BONES;
 
 				// For each vertex associated with the weight
-				for (int weightIndex = 0; weightIndex < EngineMaxBonesPerVertex; weightIndex++)
+				for (int weightIndex = 0; weightIndex < Rendering::Mesh::MAX_BONES; weightIndex++)
 				{
 					if (m_boneWeights[bufferOffset + weightIndex] <= 0)
 					{
@@ -198,7 +194,6 @@ namespace DerydocaEngine::Resources::Serializers
 						break;
 					}
 				}
-
 			}
 		}
 	}

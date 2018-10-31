@@ -28,7 +28,18 @@ namespace DerydocaEngine::Resources::Serializers
 		AnimationResource* ar = (AnimationResource*)resource;
 		auto scene = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
-		return Helpers::AssimpUtils::getAnimation(scene, 0);
+		unsigned int animIndex = 0;
+		for (unsigned int i = 0; i < scene->mNumAnimations; i++)
+		{
+			std::string animName = scene->mAnimations[i]->mName.data;
+			if (animName == ar->getName())
+			{
+				animIndex = i;
+				break;
+			}
+		}
+
+		return Helpers::AssimpUtils::getAnimation(scene, animIndex);
 	}
 
 	ResourceType AnimationResourceSerializer::getResourceType()
