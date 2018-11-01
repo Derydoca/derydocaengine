@@ -52,6 +52,8 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::init()
 	{
+		m_boneMatrices.resize(m_mesh->getSkeleton()->getNumBones());
+		m_animation->optimizeForSkeleton(m_mesh->getSkeleton());
 	}
 
 	void SkinnedMeshRenderer::render(Rendering::MatrixStack* const& matrixStack)
@@ -60,11 +62,8 @@ namespace DerydocaEngine::Components
 
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
-
-		std::vector<glm::mat4> boneMatrices;
-		boneMatrices.resize(m_mesh->getSkeleton()->getNumBones());
-		m_animation->loadPose(m_time, boneMatrices, m_mesh->getSkeleton());
-		m_material->setMat4Array("BoneMatrices", boneMatrices);
+		m_animation->loadPose(m_time, m_boneMatrices, m_mesh->getSkeleton());
+		m_material->setMat4Array("BoneMatrices", m_boneMatrices);
 
 		Rendering::LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());
 

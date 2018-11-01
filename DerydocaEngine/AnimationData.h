@@ -13,10 +13,11 @@ namespace DerydocaEngine::Animation {
 
 		double getDuration() const { return m_duration; }
 		std::string getName() const { return m_name; }
-		const unsigned int getBoneId(std::string boneName);
+		const unsigned int getBoneId(const std::string & boneName);
 		const AnimationChannel* getChannel(unsigned int boneId);
-		const AnimationChannel* getChannel(std::string boneName);
+		const AnimationChannel* getChannel(const std::string & boneName);
 		void loadPose(float time, std::vector<glm::mat4>& boneTransforms, const std::shared_ptr<Skeleton>& skeleton);
+		void optimizeForSkeleton(const std::shared_ptr<Skeleton>& skeleton);
 
 	private:
 		std::string m_name;
@@ -27,15 +28,16 @@ namespace DerydocaEngine::Animation {
 		void calcInterpolatedScale(glm::vec3& scale, const float animationTime, const AnimationChannel* channel);
 		void calcInterpolatedRotation(glm::quat & rotation, const float animationTime, const AnimationChannel* channel);
 		void calcInterpolatedTranslation(glm::vec3 & position, const float animationTime, const AnimationChannel* channel);
+		void optimizeForSkeleton(const std::shared_ptr<Bone> bone);
 
 		template <typename T>
-		unsigned int getPrevIndex(std::vector<AnimationKey<T>> animationKeys, float animationTime)
+		size_t getPrevIndex(const std::vector<AnimationKey<T>> & animationKeys, float animationTime)
 		{
 			for (size_t i = 0; i < animationKeys.size() - 1; i++)
 			{
 				if (animationTime < animationKeys[i + 1].time)
 				{
-					return (unsigned int)i;
+					return i;
 				}
 			}
 
