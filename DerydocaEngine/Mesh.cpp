@@ -18,7 +18,7 @@ namespace DerydocaEngine::Rendering
 		std::vector<glm::vec3> positions,
 		std::vector<unsigned int> indices,
 		std::vector<glm::vec3> normals,
-		glm::vec2 * texCoords,
+		std::vector<glm::vec2> texCoords,
 		glm::vec3 * tangents,
 		glm::vec3 * bitangents,
 		Color* colors,
@@ -80,7 +80,7 @@ namespace DerydocaEngine::Rendering
 
 		if (meshComponentFlags & MeshComponents::TexCoords)
 		{
-			m_texCoords = texCoords;
+			//m_texCoords = texCoords;
 		}
 
 		if (meshComponentFlags & MeshComponents::Normals)
@@ -116,7 +116,7 @@ namespace DerydocaEngine::Rendering
 	{
 		glDeleteVertexArrays(1, &m_vertexArrayObject);
 		//delete[] m_positions;
-		delete[] m_texCoords;
+		//delete[] m_texCoords;
 		//delete[] m_normals;
 		delete[] m_tangents;
 		//delete[] m_indices;
@@ -148,10 +148,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the texture coordinates buffer
-		if (m_texCoords != nullptr)
+		if (m_texCoords.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec2), m_texCoords, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -234,10 +234,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the texture coordinates buffer
-		if ((meshComponentFlags & MeshComponents::TexCoords) && m_texCoords != nullptr)
+		if ((meshComponentFlags & MeshComponents::TexCoords) && m_texCoords.size())
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec2), m_texCoords, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 		}

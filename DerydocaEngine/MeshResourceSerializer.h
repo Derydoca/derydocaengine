@@ -25,7 +25,7 @@ namespace DerydocaEngine::Resources::Serializers
 			std::vector<glm::vec3> &m_positions,
 			unsigned int m_numVertices,
 			int uvIndex,
-			glm::vec2 * &m_texCoords,
+			std::vector<glm::vec2> &m_texCoords,
 			std::vector<glm::vec3> &m_normals,
 			DerydocaEngine::Rendering::MeshFlags m_flags,
 			unsigned int &m_numIndices,

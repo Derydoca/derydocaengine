@@ -34,7 +34,7 @@ namespace DerydocaEngine::Rendering
 			std::vector<glm::vec3> positions,
 			std::vector<unsigned int> indices,
 			std::vector<glm::vec3> normals,
-			glm::vec2* texCoords,
+			std::vector<glm::vec2> texCoords,
 			glm::vec3* tangents,
 			glm::vec3* bitangents,
 			Color* colors,
@@ -90,7 +90,7 @@ namespace DerydocaEngine::Rendering
 		std::vector<glm::vec3> m_positions;
 		std::vector<unsigned int> m_indices;
 		std::vector<glm::vec3> m_normals;
-		glm::vec2* m_texCoords;
+		std::vector<glm::vec2> m_texCoords;
 		glm::vec3* m_tangents;
 		glm::vec3* m_bitangents;
 		Color* m_colors;

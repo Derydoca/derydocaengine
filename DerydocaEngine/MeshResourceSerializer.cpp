@@ -57,7 +57,7 @@ namespace DerydocaEngine::Resources::Serializers
 		std::vector<glm::vec3> m_positions;
 		unsigned int m_numIndices = 0;
 		std::vector<glm::vec3> m_normals;
-		glm::vec2* m_texCoords = nullptr;
+		std::vector<glm::vec2> m_texCoords;
 		std::vector<unsigned int> m_indices;
 		glm::vec3* m_tangents = nullptr;
 		glm::vec3* m_bitangents = nullptr;
@@ -88,7 +88,7 @@ namespace DerydocaEngine::Resources::Serializers
 		//delete m_positions;
 		//delete m_indices;
 		//delete m_normals;
-		delete m_texCoords;
+		//delete m_texCoords;
 		delete m_tangents;
 		delete m_bitangents;
 		delete m_boneIndices;
@@ -106,7 +106,7 @@ namespace DerydocaEngine::Resources::Serializers
 		std::vector<glm::vec3> &m_positions,
 		unsigned int m_numVertices,
 		int uvIndex,
-		glm::vec2 * &m_texCoords,
+		std::vector<glm::vec2> &m_texCoords,
 		std::vector<glm::vec3> &m_normals,
 		DerydocaEngine::Rendering::MeshFlags m_flags,
 		unsigned int &m_numIndices,
@@ -125,10 +125,10 @@ namespace DerydocaEngine::Resources::Serializers
 
 		if (mesh->HasTextureCoords(uvIndex))
 		{
-			m_texCoords = new glm::vec2[m_numVertices];
+			m_texCoords.reserve(m_numVertices);
 			for (unsigned int i = 0; i < m_numVertices; i++)
 			{
-				m_texCoords[i] = glm::vec2(mesh->mTextureCoords[uvIndex][i].x, mesh->mTextureCoords[uvIndex][i].y);
+				m_texCoords.push_back(glm::vec2(mesh->mTextureCoords[uvIndex][i].x, mesh->mTextureCoords[uvIndex][i].y));
 			}
 		}
 

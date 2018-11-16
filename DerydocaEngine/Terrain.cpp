@@ -68,7 +68,7 @@ namespace DerydocaEngine::Components
 		int numVerts = m_width * m_depth;
 		std::vector<glm::vec3> positions(numVerts);
 		std::vector<glm::vec3> normals(numVerts);
-		glm::vec2* texCoords = new glm::vec2[numVerts];
+		std::vector<glm::vec2> texCoords(numVerts);
 		for (int z = 0; z < m_depth; z++)
 		{
 			for (int x = 0; x < m_width; x++)
