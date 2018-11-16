@@ -1,0 +1,6 @@
+Resources:
+  - Type: Material
+    ID: 756d48ce-6c45-4bf5-ac46-5a2e9a277042
+  - Type: Cubemap
+    Slot: 0
+    ID: d9218190-18cb-4be4-8294-da570ceee433
