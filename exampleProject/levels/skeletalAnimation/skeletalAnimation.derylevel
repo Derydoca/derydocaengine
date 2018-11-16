@@ -13,34 +13,6 @@ Scene:
             Material: 87c86317-36ce-430f-80b6-e29e1ba172b8
             Mesh: 276e1146-08d9-41d3-9ae6-8c0b963f1d6e
             Animation: e5ee135d-5735-4383-b3d4-40083025518c
-  - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
-    Properties:
-      Name: Animating Mesh
-      Transform:
-        Position: [0, 0, -3]
-        Rotation: [0, 0, 0, 1]
-        Scale: [0.01, 0.01, 0.01]
-      Components:
-        - Type: SkinnedMeshRenderer
-          Properties:
-            Material: 87c86317-36ce-430f-80b6-e29e1ba172b8
-            Mesh: 276e1146-08d9-41d3-9ae6-8c0b963f1d6e
-            Animation: e5ee135d-5735-4383-b3d4-40083025518c
-  - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
-    Properties:
-      Name: Animating Mesh
-      Transform:
-        Position: [0, 0, -4]
-        Rotation: [0, 0, 0, 1]
-        Scale: [0.01, 0.01, 0.01]
-      Components:
-        - Type: SkinnedMeshRenderer
-          Properties:
-            Material: 87c86317-36ce-430f-80b6-e29e1ba172b8
-            Mesh: 276e1146-08d9-41d3-9ae6-8c0b963f1d6e
-            Animation: e5ee135d-5735-4383-b3d4-40083025518c
 
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2

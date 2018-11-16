@@ -14,8 +14,10 @@ namespace DerydocaEngine::Ext
 	{
 	}
 
-	void MeshAdjacencyCalculator::buildAdjacencyList(aiMesh * const& mesh, unsigned int* const& indices)
+	void MeshAdjacencyCalculator::buildAdjacencyList(aiMesh * const& mesh, std::vector<unsigned int> & indices)
 	{
+		indices = std::vector<unsigned int>(mesh->mNumFaces * 3 * 2);
+
 		for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 		{
 			const aiFace& face = mesh->mFaces[i];

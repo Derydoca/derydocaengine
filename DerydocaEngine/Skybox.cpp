@@ -20,17 +20,18 @@ namespace DerydocaEngine::Rendering
 
 	void Skybox::buildMesh(float const& size)
 	{
-		glm::vec3* positions = new glm::vec3[8]();
-		positions[0] = glm::vec3(-size, size, size);
-		positions[1] = glm::vec3(size, size, size);
-		positions[2] = glm::vec3(size, size, -size);
-		positions[3] = glm::vec3(-size, size, -size);
-		positions[4] = glm::vec3(-size, -size, size);
-		positions[5] = glm::vec3(size, -size, size);
-		positions[6] = glm::vec3(size, -size, -size);
-		positions[7] = glm::vec3(-size, -size, -size);
+		std::vector<glm::vec3> positions = {
+			glm::vec3(-size, size, size),
+			glm::vec3(size, size, size),
+			glm::vec3(size, size, -size),
+			glm::vec3(-size, size, -size),
+			glm::vec3(-size, -size, size),
+			glm::vec3(size, -size, size),
+			glm::vec3(size, -size, -size),
+			glm::vec3(-size, -size, -size)
+		};
 
-		unsigned int indices[36] = {
+		std::vector<unsigned int> indices = {
 			// Top
 			2, 1, 0,
 			3, 2, 0,
@@ -56,7 +57,7 @@ namespace DerydocaEngine::Rendering
 			3, 7, 6
 		};
 
-		m_mesh = new Mesh(8, 36, positions, indices, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr);
+		m_mesh = new Mesh(8, 36, positions, indices, std::vector<glm::vec3>(), nullptr, nullptr, nullptr, nullptr, nullptr, nullptr);
 	}
 
 }

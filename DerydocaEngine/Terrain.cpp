@@ -66,8 +66,8 @@ namespace DerydocaEngine::Components
 
 		// Build the list of verts
 		int numVerts = m_width * m_depth;
-		glm::vec3* positions = new glm::vec3[numVerts];
-		glm::vec3* normals = new glm::vec3[numVerts];
+		std::vector<glm::vec3> positions(numVerts);
+		std::vector<glm::vec3> normals(numVerts);
 		glm::vec2* texCoords = new glm::vec2[numVerts];
 		for (int z = 0; z < m_depth; z++)
 		{
@@ -95,7 +95,7 @@ namespace DerydocaEngine::Components
 
 		// Build the list of triangles
 		unsigned int numIndices = (((m_width - 1) * (m_depth - 1)) * 2) * 6;
-		unsigned int* indices = new unsigned int[numIndices];
+		std::vector<unsigned int> indices(numIndices);
 		for (int z = 0; z < m_depth - 1; z++)
 		{
 			for (int x = 0; x < m_width - 1; x++)

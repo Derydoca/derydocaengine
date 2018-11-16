@@ -94,7 +94,7 @@ namespace DerydocaEngine::Ext
 		MeshAdjacencyCalculator();
 		~MeshAdjacencyCalculator();
 
-		void buildAdjacencyList(aiMesh* const& mesh, unsigned int* const& indices);
+		void buildAdjacencyList(aiMesh* const& mesh, std::vector<unsigned int> & indices);
 	private:
 		std::vector<MeshAdjacencyFace> m_uniqueFaces;
 		std::map<aiVector3D, unsigned int> m_posMap;

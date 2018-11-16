@@ -15,9 +15,9 @@ namespace DerydocaEngine::Rendering
 	Mesh::Mesh(
 		unsigned int numVertices,
 		unsigned int numIndices,
-		glm::vec3 * positions,
-		unsigned int * indices,
-		glm::vec3 * normals,
+		std::vector<glm::vec3> positions,
+		std::vector<unsigned int> indices,
+		std::vector<glm::vec3> normals,
 		glm::vec2 * texCoords,
 		glm::vec3 * tangents,
 		glm::vec3 * bitangents,
@@ -65,7 +65,7 @@ namespace DerydocaEngine::Rendering
 
 		if (meshComponentFlags & MeshComponents::Positions)
 		{
-			m_positions = positions;
+			//m_positions = positions;
 		}
 
 		if (meshComponentFlags & MeshComponents::Tangents)
@@ -85,13 +85,13 @@ namespace DerydocaEngine::Rendering
 
 		if (meshComponentFlags & MeshComponents::Normals)
 		{
-			m_normals = normals;
+			//m_normals = std::vector<glm::vec3>(normals);
 		}
 
 		if (meshComponentFlags & MeshComponents::Indices)
 		{
 			m_numIndices = numIndices;
-			m_indices = indices;
+			//m_indices = indices;
 		}
 
 		if (meshComponentFlags & MeshComponents::Colors)
@@ -115,11 +115,11 @@ namespace DerydocaEngine::Rendering
 	Mesh::~Mesh()
 	{
 		glDeleteVertexArrays(1, &m_vertexArrayObject);
-		delete[] m_positions;
+		//delete[] m_positions;
 		delete[] m_texCoords;
-		delete[] m_normals;
+		//delete[] m_normals;
 		delete[] m_tangents;
-		delete[] m_indices;
+		//delete[] m_indices;
 		delete[] m_bitangents;
 		delete[] m_boneIndices;
 		delete[] m_boneWeights;
@@ -139,10 +139,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the vert positions
-		if (m_positions != nullptr)
+		if (m_positions.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_positions, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -157,10 +157,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the normals buffer
-		if (m_normals != nullptr)
+		if (m_normals.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_normals, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(2);
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -184,10 +184,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the indices buffer
-		if (m_indices != nullptr)
+		if (m_indices.size() > 0)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices, GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
 		}
 
 		// Initialize the bone index buffer
@@ -225,10 +225,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the vert positions
-		if ((meshComponentFlags & MeshComponents::Positions) && m_positions != nullptr)
+		if ((meshComponentFlags & MeshComponents::Positions) && m_positions.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_positions, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -243,10 +243,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the normals buffer
-		if ((meshComponentFlags & MeshComponents::Normals) && m_normals != nullptr)
+		if ((meshComponentFlags & MeshComponents::Normals) && m_normals.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_normals, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(2);
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -270,10 +270,10 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the indices buffer
-		if ((meshComponentFlags & MeshComponents::Indices) && m_indices != nullptr)
+		if ((meshComponentFlags & MeshComponents::Indices) && m_indices.size() > 0)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), m_indices, GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
 		}
 
 		if ((meshComponentFlags & MeshComponents::Colors) && m_colors != nullptr)
