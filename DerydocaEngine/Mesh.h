@@ -35,8 +35,8 @@ namespace DerydocaEngine::Rendering
 			std::vector<unsigned int> indices,
 			std::vector<glm::vec3> normals,
 			std::vector<glm::vec2> texCoords,
-			glm::vec3* tangents,
-			glm::vec3* bitangents,
+			std::vector<glm::vec3> tangents,
+			std::vector<glm::vec3> bitangents,
 			Color* colors,
 			unsigned int* boneIndices,
 			float* boneWeights);
@@ -91,8 +91,8 @@ namespace DerydocaEngine::Rendering
 		std::vector<unsigned int> m_indices;
 		std::vector<glm::vec3> m_normals;
 		std::vector<glm::vec2> m_texCoords;
-		glm::vec3* m_tangents;
-		glm::vec3* m_bitangents;
+		std::vector<glm::vec3> m_tangents;
+		std::vector<glm::vec3> m_bitangents;
 		Color* m_colors;
 		unsigned int* m_boneIndices;
 		float* m_boneWeights;

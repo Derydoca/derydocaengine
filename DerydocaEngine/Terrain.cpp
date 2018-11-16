@@ -110,7 +110,18 @@ namespace DerydocaEngine::Components
 			}
 		}
 
-		m_mesh = std::make_shared<Rendering::Mesh>(numVerts, numIndices, positions, indices, normals, texCoords, nullptr, nullptr, nullptr, nullptr, nullptr);
+		m_mesh = std::make_shared<Rendering::Mesh>(
+			numVerts,
+			numIndices,
+			positions,
+			indices,
+			normals,
+			texCoords,
+			std::vector<glm::vec3>(),
+			std::vector<glm::vec3>(),
+			nullptr,
+			nullptr,
+			nullptr);
 	}
 
 	void Terrain::setTextureSlot(int const& slot, Rendering::Texture * const& texture)

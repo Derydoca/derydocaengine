@@ -30,9 +30,13 @@ namespace DerydocaEngine::Resources::Serializers
 			DerydocaEngine::Rendering::MeshFlags m_flags,
 			unsigned int &m_numIndices,
 			std::vector<unsigned int> &m_indices,
-			glm::vec3 * &m_tangents,
-			glm::vec3 * &m_bitangents);
-		void ProcessBoneData(aiMesh * mesh, unsigned int * &m_boneIndices, float * &m_boneWeights, const std::shared_ptr<Animation::Skeleton>& skeleton);
+			std::vector<glm::vec3> &m_tangents,
+			std::vector<glm::vec3> &m_bitangents);
+		void ProcessBoneData(
+			aiMesh * mesh,
+			unsigned int * &m_boneIndices,
+			float * &m_boneWeights,
+			const std::shared_ptr<Animation::Skeleton>& skeleton);
 		ResourceType getResourceType();
 
 	private:

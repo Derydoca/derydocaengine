@@ -19,8 +19,8 @@ namespace DerydocaEngine::Rendering
 		std::vector<unsigned int> indices,
 		std::vector<glm::vec3> normals,
 		std::vector<glm::vec2> texCoords,
-		glm::vec3 * tangents,
-		glm::vec3 * bitangents,
+		std::vector<glm::vec3> tangents,
+		std::vector<glm::vec3> bitangents,
 		Color* colors,
 		unsigned int* boneIndices,
 		float * boneWeights) :
@@ -70,12 +70,12 @@ namespace DerydocaEngine::Rendering
 
 		if (meshComponentFlags & MeshComponents::Tangents)
 		{
-			m_tangents = tangents;
+			//m_tangents = tangents;
 		}
 
 		if (meshComponentFlags & MeshComponents::Bitangents)
 		{
-			m_tangents = bitangents;
+			//m_bitangents = bitangents;
 		}
 
 		if (meshComponentFlags & MeshComponents::TexCoords)
@@ -118,9 +118,9 @@ namespace DerydocaEngine::Rendering
 		//delete[] m_positions;
 		//delete[] m_texCoords;
 		//delete[] m_normals;
-		delete[] m_tangents;
+		//delete[] m_tangents;
 		//delete[] m_indices;
-		delete[] m_bitangents;
+		//delete[] m_bitangents;
 		delete[] m_boneIndices;
 		delete[] m_boneWeights;
 	}
@@ -166,19 +166,19 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the tangents buffer
-		if (m_tangents != nullptr)
+		if (m_tangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_tangents, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(3);
 			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
 		// Initialize the bitangents buffer
-		if (m_bitangents != nullptr)
+		if (m_bitangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_bitangents, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -252,19 +252,19 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Initialize the tangents buffer
-		if ((meshComponentFlags & MeshComponents::Tangents) && m_tangents != nullptr)
+		if ((meshComponentFlags & MeshComponents::Tangents) && m_tangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_tangents, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(3);
 			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
 		// Initialize the bitangents buffer
-		if ((meshComponentFlags & MeshComponents::Bitangents) && m_bitangents != nullptr)
+		if ((meshComponentFlags & MeshComponents::Bitangents) && m_bitangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), m_bitangents, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}

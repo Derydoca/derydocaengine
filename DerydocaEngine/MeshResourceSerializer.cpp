@@ -59,8 +59,8 @@ namespace DerydocaEngine::Resources::Serializers
 		std::vector<glm::vec3> m_normals;
 		std::vector<glm::vec2> m_texCoords;
 		std::vector<unsigned int> m_indices;
-		glm::vec3* m_tangents = nullptr;
-		glm::vec3* m_bitangents = nullptr;
+		std::vector<glm::vec3> m_tangents;
+		std::vector<glm::vec3> m_bitangents;
 		unsigned int* m_boneIndices = nullptr;
 		float* m_boneWeights = nullptr;
 		Rendering::MeshFlags m_flags = mr->getFlags();
@@ -89,8 +89,8 @@ namespace DerydocaEngine::Resources::Serializers
 		//delete m_indices;
 		//delete m_normals;
 		//delete m_texCoords;
-		delete m_tangents;
-		delete m_bitangents;
+		//delete m_tangents;
+		//delete m_bitangents;
 		delete m_boneIndices;
 		delete m_boneWeights;
 
@@ -111,8 +111,8 @@ namespace DerydocaEngine::Resources::Serializers
 		DerydocaEngine::Rendering::MeshFlags m_flags,
 		unsigned int &m_numIndices,
 		std::vector<unsigned int> &m_indices,
-		glm::vec3 * &m_tangents,
-		glm::vec3 * &m_bitangents)
+		std::vector<glm::vec3> &m_tangents,
+		std::vector<glm::vec3> &m_bitangents)
 	{
 		if (mesh->HasPositions())
 		{
@@ -164,16 +164,16 @@ namespace DerydocaEngine::Resources::Serializers
 
 		if (mesh->HasTangentsAndBitangents())
 		{
-			m_tangents = new glm::vec3[m_numVertices];
+			m_tangents.reserve(m_numVertices);
 			for (unsigned int i = 0; i < m_numVertices; i++)
 			{
-				m_tangents[i] = glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z);
+				m_tangents.push_back(glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z));
 			}
 
-			m_bitangents = new glm::vec3[m_numVertices];
+			m_bitangents.reserve(m_numVertices);
 			for (unsigned int i = 0; i < m_numVertices; i++)
 			{
-				m_bitangents[i] = glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z);
+				m_bitangents.push_back(glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z));
 			}
 		}
 	}

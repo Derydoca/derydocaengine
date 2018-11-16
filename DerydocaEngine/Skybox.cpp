@@ -57,7 +57,18 @@ namespace DerydocaEngine::Rendering
 			3, 7, 6
 		};
 
-		m_mesh = new Mesh(8, 36, positions, indices, std::vector<glm::vec3>(), std::vector<glm::vec2>(), nullptr, nullptr, nullptr, nullptr, nullptr);
+		m_mesh = new Mesh(
+			8,
+			36,
+			positions,
+			indices,
+			std::vector<glm::vec3>(),
+			std::vector<glm::vec2>(),
+			std::vector<glm::vec3>(),
+			std::vector<glm::vec3>(),
+			nullptr,
+			nullptr,
+			nullptr);
 	}
 
 }
