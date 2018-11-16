@@ -1,5 +1,6 @@
 #include "AnimationResourceSerializer.h"
 
+#include "assimp\Importer.hpp"
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
@@ -25,8 +26,10 @@ namespace DerydocaEngine::Resources::Serializers
 
 	std::shared_ptr<void> AnimationResourceSerializer::deserializePointer(Resource * const & resource)
 	{
+		Assimp::Importer importer;
+
 		AnimationResource* ar = (AnimationResource*)resource;
-		auto scene = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+		const aiScene* scene = importer.ReadFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 		unsigned int animIndex = 0;
 		for (unsigned int i = 0; i < scene->mNumAnimations; i++)

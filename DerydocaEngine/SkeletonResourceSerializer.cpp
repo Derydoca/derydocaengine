@@ -1,5 +1,6 @@
 #include "SkeletonResourceSerializer.h"
 
+#include "assimp\Importer.hpp"
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
@@ -26,7 +27,8 @@ namespace DerydocaEngine::Resources::Serializers
 	std::shared_ptr<void> SkeletonResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		SkeletonResource* sr = (SkeletonResource*)resource;
-		auto scene = aiImportFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+		Assimp::Importer importer;
+		auto scene = importer.ReadFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 		return Helpers::AssimpUtils::getSkeleton(scene, 0);
 	}

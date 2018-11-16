@@ -39,6 +39,7 @@ namespace DerydocaEngine::Components
 		Camera* m_SkinnedMeshRendererCamera;
 		std::shared_ptr<Animation::AnimationData> m_animation;
 		float m_time = 0.0f;
+		std::vector<glm::mat4> m_boneMatrices;
 	};
 
 }

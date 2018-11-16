@@ -14,7 +14,7 @@ namespace DerydocaEngine::Animation {
 		const std::shared_ptr<Bone> getChildBone(unsigned int index) const { return m_children[index]; }
 		unsigned int getTotalBoneCount();
 		unsigned int getID() const { return m_id; }
-		std::string getName() const { return m_name; }
+		const std::string& getName() const { return m_name; }
 		size_t getNumChildren() const { return m_children.size(); }
 		glm::mat4 getOffset() const { return m_offset; }
 

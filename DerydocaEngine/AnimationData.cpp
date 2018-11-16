@@ -1,8 +1,10 @@
 #include "AnimationData.h"
 
+#include <algorithm>
 #include <glm/gtx/matrix_interpolation.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace DerydocaEngine::Animation {
 	AnimationData::AnimationData() :
@@ -19,7 +21,7 @@ namespace DerydocaEngine::Animation {
 	{
 	}
 
-	const unsigned int AnimationData::getBoneId(std::string boneName)
+	const unsigned int AnimationData::getBoneId(const std::string& boneName)
 	{
 		// Return the index of the first channel that has a matching name
 		for (size_t i = 0; i < m_channels.size(); i++)
@@ -39,7 +41,7 @@ namespace DerydocaEngine::Animation {
 		return &m_channels[boneId];
 	}
 
-	const AnimationChannel* AnimationData::getChannel(std::string boneName)
+	const AnimationChannel* AnimationData::getChannel(const std::string & boneName)
 	{
 		// Get the channel ID
 		unsigned int boneId = getBoneId(boneName);
@@ -63,19 +65,19 @@ namespace DerydocaEngine::Animation {
 	{
 		// Calculate the transformation of the current bone
 		glm::mat4 boneTransform = bone->getOffset();
-		const AnimationChannel* channel = getChannel(bone->getName());
+		const AnimationChannel* channel = getChannel(bone->getID());
 		if (channel)
 		{
-			glm::vec3 scale;
-			calcInterpolatedScale(scale, animationTime, channel);
+			glm::vec3 translation;
+			calcInterpolatedTranslation(translation, animationTime, channel);
 
 			glm::quat rotation;
 			calcInterpolatedRotation(rotation, animationTime, channel);
 
-			glm::vec3 translation;
-			calcInterpolatedTranslation(translation, animationTime, channel);
+			glm::vec3 scale;
+			calcInterpolatedScale(scale, animationTime, channel);
 
-			boneTransform = glm::translate(translation) * glm::mat4_cast(rotation) * glm::scale(scale);
+			boneTransform = glm::translate(translation) * glm::toMat4(rotation) * glm::scale(scale);
 		}
 
 		// Combine the bone's transform with all parent transforms that have come before it
@@ -87,6 +89,7 @@ namespace DerydocaEngine::Animation {
 		// Recursively load all child bones
 		for (size_t i = 0; i < bone->getNumChildren(); i++)
 		{
+			//glm::mat4 globalTransformation;
 			loadPose(animationTime, boneTransforms, globalInverseTransform, bone->getChildBone((unsigned int)i), globalTransformation);
 		}
 	}
@@ -103,8 +106,8 @@ namespace DerydocaEngine::Animation {
 			break;
 		default:
 			// Get the indices surrounding the current playhead
-			unsigned int scalingIndex = getPrevIndex(channel->scaleKeys, animationTime);
-			unsigned int nextScalingIndex = scalingIndex + 1;
+			size_t scalingIndex = getPrevIndex(channel->scaleKeys, animationTime);
+			size_t nextScalingIndex = scalingIndex + 1;
 			assert(nextScalingIndex < channel->scaleKeys.size());
 			
 			// Get the amount of time that exists between the two different animation keys
@@ -135,8 +138,8 @@ namespace DerydocaEngine::Animation {
 			break;
 		default:
 			// Get the indices surrounding the current playhead
-			unsigned int prevIndex = getPrevIndex(channel->rotationKeys, animationTime);
-			unsigned int nextIndex = prevIndex + 1;
+			size_t prevIndex = getPrevIndex(channel->rotationKeys, animationTime);
+			size_t nextIndex = prevIndex + 1;
 			assert(nextIndex < channel->rotationKeys.size());
 
 			// Get the amount of time that exists between the two different animation keys
@@ -166,8 +169,8 @@ namespace DerydocaEngine::Animation {
 			break;
 		default:
 			// Get the indices surrounding the current playhead
-			unsigned int prevIndex = getPrevIndex(channel->positionKeys, animationTime);
-			unsigned int nextIndex = prevIndex + 1;
+			size_t prevIndex = getPrevIndex(channel->positionKeys, animationTime);
+			size_t nextIndex = prevIndex + 1;
 			assert(nextIndex < channel->positionKeys.size());
 
 			// Get the amount of time that exists between the two different animation keys
@@ -183,6 +186,30 @@ namespace DerydocaEngine::Animation {
 			glm::vec3 delta = end - start;
 			position = start + factor * delta;
 			break;
+		}
+	}
+
+	void AnimationData::optimizeForSkeleton(const std::shared_ptr<Skeleton>& skeleton)
+	{
+		const std::shared_ptr<Bone> rootBone = skeleton->getRootBone();
+		optimizeForSkeleton(rootBone);
+
+		std::sort(m_channels.begin(), m_channels.end());
+	}
+
+	void AnimationData::optimizeForSkeleton(const std::shared_ptr<Bone> bone)
+	{
+		for (size_t i = 0; i < m_channels.size(); i++)
+		{
+			if (m_channels[i].boneName == bone->getName())
+			{
+				m_channels[i].id = bone->getID();
+			}
+		}
+
+		for (unsigned int i = 0; i < bone->getNumChildren(); i++)
+		{
+			optimizeForSkeleton(bone->getChildBone(i));
 		}
 	}
 

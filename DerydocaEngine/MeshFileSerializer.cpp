@@ -1,5 +1,6 @@
 #include "MeshFileSerializer.h"
 
+#include <assimp/Importer.hpp>
 #include "AssimpUtils.h"
 #include "Mesh.h"
 #include "MeshResource.h"
@@ -27,7 +28,9 @@ namespace DerydocaEngine::Files::Serializers {
 	{
 		YAML::Node resources;
 
-		const aiScene* scene = aiImportFile(filePath.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
+		Assimp::Importer importer;
+
+		const aiScene* scene = importer.ReadFile(filePath.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 		std::map<std::string, std::shared_ptr<Animation::Skeleton>> skeletons;
 

@@ -29,6 +29,15 @@ namespace DerydocaEngine::Animation {
 		std::vector<AnimationKey<glm::vec3>> positionKeys;
 		std::vector<AnimationKey<glm::quat>> rotationKeys;
 		std::vector<AnimationKey<glm::vec3>> scaleKeys;
+
+		bool operator>(const AnimationChannel & other)
+		{
+			return id > other.id;
+		}
+		bool operator<(const AnimationChannel & other)
+		{
+			return id < other.id;
+		}
 	};
 
 }
