@@ -37,21 +37,21 @@ namespace DerydocaEngine::Rendering
 			std::vector<glm::vec2> texCoords,
 			std::vector<glm::vec3> tangents,
 			std::vector<glm::vec3> bitangents,
-			Color* colors,
+			std::vector<Color> colors,
 			unsigned int* boneIndices,
 			float* boneWeights);
 		~Mesh();
 		void loadMeshComponentData(
 			MeshComponents const& meshComponentFlags,
 			unsigned int const& numVertices,
-			glm::vec3 * const& positions = 0,
-			glm::vec3 * const& tangents = 0,
-			glm::vec3 * const& bitangents = 0,
-			glm::vec2 * const& texCoords = 0,
-			glm::vec3 * const& normals = 0,
+			std::vector<glm::vec3> const& positions = std::vector<glm::vec3>(),
+			std::vector<glm::vec3> const& tangents = std::vector<glm::vec3>(),
+			std::vector<glm::vec3> const& bitangents = std::vector<glm::vec3>(),
+			std::vector<glm::vec2> const& texCoords = std::vector<glm::vec2>(),
+			std::vector<glm::vec3> const& normals = std::vector<glm::vec3>(),
 			unsigned int const& numIndices = 0,
-			unsigned int * const& indices = 0,
-			Color * const& colors = 0,
+			std::vector<unsigned int> const& indices = std::vector<unsigned int>(),
+			std::vector<Color> const& colors = std::vector<Color>(),
 			unsigned int* boneIndices = 0,
 			float* boneWeights = 0);
 		void draw();
@@ -93,7 +93,7 @@ namespace DerydocaEngine::Rendering
 		std::vector<glm::vec2> m_texCoords;
 		std::vector<glm::vec3> m_tangents;
 		std::vector<glm::vec3> m_bitangents;
-		Color* m_colors;
+		std::vector<Color> m_colors;
 		unsigned int* m_boneIndices;
 		float* m_boneWeights;
 		std::shared_ptr<Animation::Skeleton> m_skeleton;

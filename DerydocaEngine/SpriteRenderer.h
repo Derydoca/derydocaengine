@@ -32,10 +32,10 @@ namespace DerydocaEngine::Components
 		UI::SpriteReference* m_sprite;
 		glm::vec2 m_size;
 
-		glm::vec3* generateVertices();
-		glm::vec2* generateTexCoords();
-		Color* generateVertexColors();
-		unsigned int* generateTriangleIndices();
+		std::vector<glm::vec3> generateVertices();
+		std::vector<glm::vec2> generateTexCoords();
+		std::vector<Color> generateVertexColors();
+		std::vector<unsigned int> generateTriangleIndices();
 
 		unsigned int generateNumVertices()
 		{

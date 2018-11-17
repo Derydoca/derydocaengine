@@ -26,13 +26,13 @@ namespace DerydocaEngine::Components
 		unsigned int getNumVertices() const { return m_numVertices; }
 		unsigned int getNumIndices() const { return m_numIndices; }
 
-		virtual glm::vec3* generateVertices() = 0;
-		virtual glm::vec2* generateTexCoords() { return nullptr; }
-		virtual Color* generateVertexColors() { return nullptr; }
-		virtual unsigned int* generateTriangleIndices() = 0;
-		virtual glm::vec3* generateTangents() { return nullptr; }
-		virtual glm::vec3* generateBitangents() { return nullptr; }
-		virtual glm::vec3* generateNormals() { return nullptr; }
+		virtual std::vector<glm::vec3> generateVertices() = 0;
+		virtual std::vector<glm::vec2> generateTexCoords() { return std::vector<glm::vec2>(); }
+		virtual std::vector<Color> generateVertexColors() { return std::vector<Color>(); }
+		virtual std::vector<unsigned int> generateTriangleIndices() = 0;
+		virtual std::vector<glm::vec3> generateTangents() { return std::vector<glm::vec3>(); }
+		virtual std::vector<glm::vec3> generateBitangents() { return std::vector<glm::vec3>(); }
+		virtual std::vector<glm::vec3> generateNormals() { return std::vector<glm::vec3>(); }
 		virtual unsigned int generateNumVertices() { return 0; }
 		virtual unsigned int generateNumIndices() { return 0; }
 
@@ -40,13 +40,13 @@ namespace DerydocaEngine::Components
 		Rendering::Mesh * m_mesh;
 		Rendering::Material * m_material;
 		Rendering::MeshComponents m_dirtyComponents;
-		glm::vec3* m_vertices = nullptr;
-		glm::vec3* m_tangents = nullptr;
-		glm::vec3* m_bitangents = nullptr;
-		glm::vec3* m_normals = nullptr;
-		glm::vec2* m_texCoords = nullptr;
-		Color* m_vertexColors = nullptr;
-		unsigned int* m_triangleIndices = nullptr;
+		std::vector<glm::vec3> m_vertices;
+		std::vector<glm::vec3> m_tangents;
+		std::vector<glm::vec3> m_bitangents;
+		std::vector<glm::vec3> m_normals;
+		std::vector<glm::vec2> m_texCoords;
+		std::vector<Color> m_vertexColors;
+		std::vector<unsigned int> m_triangleIndices;
 		unsigned int m_numVertices = 0;
 		unsigned int m_numIndices = 0;
 	};

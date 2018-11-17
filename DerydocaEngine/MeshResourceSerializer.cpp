@@ -81,7 +81,7 @@ namespace DerydocaEngine::Resources::Serializers
 				m_texCoords,
 				m_tangents,
 				m_bitangents,
-				nullptr,
+				std::vector<Color>(),
 				m_boneIndices,
 				m_boneWeights);
 

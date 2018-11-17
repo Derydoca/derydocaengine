@@ -84,7 +84,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	glm::vec3 * TextRenderer::generateVertices()
+	std::vector<glm::vec3> TextRenderer::generateVertices()
 	{
 		// Store the current pen position
 		float penX = 0.0f;
@@ -97,7 +97,8 @@ namespace DerydocaEngine::Components
 		// Keep reference to the quad that we are currently building
 		int charQuadIndex = 0;
 
-		glm::vec3* vertices = new glm::vec3[generateNumVertices()];
+		std::vector<glm::vec3> vertices;
+		vertices.reserve(generateNumVertices());
 
 		// Iterate through all lines of the text
 		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
@@ -122,10 +123,10 @@ namespace DerydocaEngine::Components
 				float charXMax = penX + img.getBearingX() + img.getSizeX();
 				float charYMax = penY - img.getSizeY() + img.getBearingY();
 				float charYMin = penY + img.getBearingY();
-				vertices[charQuadIndex * 4 + 0] = glm::vec3(charXMin, charYMin, 0);
-				vertices[charQuadIndex * 4 + 1] = glm::vec3(charXMin, charYMax, 0);
-				vertices[charQuadIndex * 4 + 2] = glm::vec3(charXMax, charYMax, 0);
-				vertices[charQuadIndex * 4 + 3] = glm::vec3(charXMax, charYMin, 0);
+				vertices.push_back(glm::vec3(charXMin, charYMin, 0));
+				vertices.push_back(glm::vec3(charXMin, charYMax, 0));
+				vertices.push_back(glm::vec3(charXMax, charYMax, 0));
+				vertices.push_back(glm::vec3(charXMax, charYMin, 0));
 
 				// Advance the pen position
 				penX += img.getAdvanceX() + extraCharAdvance;
@@ -142,12 +143,13 @@ namespace DerydocaEngine::Components
 		return vertices;
 	}
 
-	glm::vec2 * TextRenderer::generateTexCoords()
+	std::vector<glm::vec2> TextRenderer::generateTexCoords()
 	{
 		// Keep reference to the quad that we are currently building
 		int charQuadIndex = 0;
 
-		glm::vec2* texCoords = new glm::vec2[generateNumVertices()];
+		std::vector<glm::vec2> texCoords;
+		texCoords.reserve(generateNumVertices());
 
 		// Iterate through all lines of the text
 		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
@@ -162,10 +164,10 @@ namespace DerydocaEngine::Components
 
 				// Set the UV positions
 				Rect rect = img.getTexSheetPosition();
-				texCoords[charQuadIndex * 4 + 1] = glm::vec2(rect.getX(), rect.getDY());
-				texCoords[charQuadIndex * 4 + 0] = glm::vec2(rect.getX(), rect.getY());
-				texCoords[charQuadIndex * 4 + 3] = glm::vec2(rect.getDX(), rect.getY());
-				texCoords[charQuadIndex * 4 + 2] = glm::vec2(rect.getDX(), rect.getDY());
+				texCoords.push_back(glm::vec2(rect.getX(), rect.getY()));
+				texCoords.push_back(glm::vec2(rect.getX(), rect.getDY()));
+				texCoords.push_back(glm::vec2(rect.getDX(), rect.getDY()));
+				texCoords.push_back(glm::vec2(rect.getDX(), rect.getY()));
 
 				// Continue on to the next char
 				charQuadIndex++;
@@ -175,12 +177,13 @@ namespace DerydocaEngine::Components
 		return texCoords;
 	}
 
-	Color * TextRenderer::generateVertexColors()
+	std::vector<Color> TextRenderer::generateVertexColors()
 	{
 		// Keep reference to the quad that we are currently building
 		int charQuadIndex = 0;
 
-		Color* vertexColors = new Color[generateNumVertices()];
+		std::vector<Color> vertexColors;
+		vertexColors.reserve(generateNumVertices());
 
 		// Iterate through all lines of the text
 		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
@@ -191,10 +194,10 @@ namespace DerydocaEngine::Components
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Set the vertex colors
-				vertexColors[charQuadIndex * 4 + 0] = m_textColor;
-				vertexColors[charQuadIndex * 4 + 1] = m_textColor;
-				vertexColors[charQuadIndex * 4 + 2] = m_textColor;
-				vertexColors[charQuadIndex * 4 + 3] = m_textColor;
+				vertexColors.push_back(m_textColor);
+				vertexColors.push_back(m_textColor);
+				vertexColors.push_back(m_textColor);
+				vertexColors.push_back(m_textColor);
 
 				// Continue on to the next char
 				charQuadIndex++;
@@ -204,12 +207,13 @@ namespace DerydocaEngine::Components
 		return vertexColors;
 	}
 
-	unsigned int * TextRenderer::generateTriangleIndices()
+	std::vector<unsigned int> TextRenderer::generateTriangleIndices()
 	{
 		// Keep reference to the quad that we are currently building
 		int charQuadIndex = 0;
 
-		unsigned int* triangleIndices = new unsigned int[generateNumIndices()];
+		std::vector<unsigned int> triangleIndices;
+		triangleIndices.reserve(generateNumIndices());
 
 		// Iterate through all lines of the text
 		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
@@ -223,12 +227,12 @@ namespace DerydocaEngine::Components
 				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 				// Set the indices to draw the two triangles
-				triangleIndices[charQuadIndex * 6 + 0] = charQuadIndex * 4 + 0;
-				triangleIndices[charQuadIndex * 6 + 1] = charQuadIndex * 4 + 1;
-				triangleIndices[charQuadIndex * 6 + 2] = charQuadIndex * 4 + 2;
-				triangleIndices[charQuadIndex * 6 + 3] = charQuadIndex * 4 + 0;
-				triangleIndices[charQuadIndex * 6 + 4] = charQuadIndex * 4 + 2;
-				triangleIndices[charQuadIndex * 6 + 5] = charQuadIndex * 4 + 3;
+				triangleIndices.push_back(charQuadIndex * 4 + 0);
+				triangleIndices.push_back(charQuadIndex * 4 + 1);
+				triangleIndices.push_back(charQuadIndex * 4 + 2);
+				triangleIndices.push_back(charQuadIndex * 4 + 0);
+				triangleIndices.push_back(charQuadIndex * 4 + 2);
+				triangleIndices.push_back(charQuadIndex * 4 + 3);
 
 				// Continue on to the next char
 				charQuadIndex++;

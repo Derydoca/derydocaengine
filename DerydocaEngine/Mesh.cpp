@@ -21,7 +21,7 @@ namespace DerydocaEngine::Rendering
 		std::vector<glm::vec2> texCoords,
 		std::vector<glm::vec3> tangents,
 		std::vector<glm::vec3> bitangents,
-		Color* colors,
+		std::vector<Color> colors,
 		unsigned int* boneIndices,
 		float * boneWeights) :
 		m_vertexArrayObject(0),
@@ -50,14 +50,14 @@ namespace DerydocaEngine::Rendering
 	void Mesh::loadMeshComponentData(
 		MeshComponents const& meshComponentFlags,
 		unsigned int const& numVertices,
-		glm::vec3 * const& positions,
-		glm::vec3 * const& tangents,
-		glm::vec3 * const& bitangents,
-		glm::vec2 * const& texCoords,
-		glm::vec3 * const& normals,
+		std::vector<glm::vec3> const& positions,
+		std::vector<glm::vec3> const& tangents,
+		std::vector<glm::vec3> const& bitangents,
+		std::vector<glm::vec2> const& texCoords,
+		std::vector<glm::vec3> const& normals,
 		unsigned int const& numIndices,
-		unsigned int * const& indices,
-		Color * const& colors,
+		std::vector<unsigned int> const& indices,
+		std::vector<Color> const& colors,
 		unsigned int* boneIndices,
 		float* boneWeights)
 	{
@@ -65,33 +65,33 @@ namespace DerydocaEngine::Rendering
 
 		if (meshComponentFlags & MeshComponents::Positions)
 		{
-			//m_positions = positions;
+			m_positions = positions;
 		}
 
 		if (meshComponentFlags & MeshComponents::Tangents)
 		{
-			//m_tangents = tangents;
+			m_tangents = tangents;
 		}
 
 		if (meshComponentFlags & MeshComponents::Bitangents)
 		{
-			//m_bitangents = bitangents;
+			m_bitangents = bitangents;
 		}
 
 		if (meshComponentFlags & MeshComponents::TexCoords)
 		{
-			//m_texCoords = texCoords;
+			m_texCoords = texCoords;
 		}
 
 		if (meshComponentFlags & MeshComponents::Normals)
 		{
-			//m_normals = std::vector<glm::vec3>(normals);
+			m_normals = normals;
 		}
 
 		if (meshComponentFlags & MeshComponents::Indices)
 		{
 			m_numIndices = numIndices;
-			//m_indices = indices;
+			m_indices = indices;
 		}
 
 		if (meshComponentFlags & MeshComponents::Colors)
@@ -190,6 +190,16 @@ namespace DerydocaEngine::Rendering
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
 		}
 
+		// Initialize the color buffer
+		if (m_colors.size() > 0)
+		{
+			// Upload the buffer to the GPU
+			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(5);
+			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
+		}
+
 		// Initialize the bone index buffer
 		if (m_boneIndices)
 		{
@@ -276,11 +286,12 @@ namespace DerydocaEngine::Rendering
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
 		}
 
-		if ((meshComponentFlags & MeshComponents::Colors) && m_colors != nullptr)
+		// Initialize the color buffer
+		if ((meshComponentFlags & MeshComponents::Colors) && m_colors.size() > 0)
 		{
 			// Upload the buffer to the GPU
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), m_colors, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(5);
 			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
 		}

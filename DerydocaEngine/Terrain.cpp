@@ -119,7 +119,7 @@ namespace DerydocaEngine::Components
 			texCoords,
 			std::vector<glm::vec3>(),
 			std::vector<glm::vec3>(),
-			nullptr,
+			std::vector<Color>(),
 			nullptr,
 			nullptr);
 	}
