@@ -8,20 +8,17 @@
 namespace DerydocaEngine::Rendering
 {
 
-	Mesh::Mesh() {
-
-	}
-
 	Mesh::Mesh(
-		std::vector<glm::vec3> positions,
-		std::vector<unsigned int> indices,
-		std::vector<glm::vec3> normals,
-		std::vector<glm::vec2> texCoords,
-		std::vector<glm::vec3> tangents,
-		std::vector<glm::vec3> bitangents,
-		std::vector<Color> colors,
-		std::vector<Animation::VertexBoneWeights> boneWeights) :
+		const std::vector<glm::vec3>& positions,
+		const std::vector<unsigned int>& indices,
+		const std::vector<glm::vec3>& normals,
+		const std::vector<glm::vec2>& texCoords,
+		const std::vector<glm::vec3>& tangents,
+		const std::vector<glm::vec3>& bitangents,
+		const std::vector<Color>& colors,
+		const std::vector<Animation::VertexBoneWeights> boneWeights) :
 		m_vertexArrayObject(0),
+		m_vertexArrayBuffers(),
 		m_positions(positions),
 		m_indices(indices),
 		m_normals(normals),
@@ -29,32 +26,50 @@ namespace DerydocaEngine::Rendering
 		m_tangents(tangents),
 		m_bitangents(bitangents),
 		m_colors(colors),
-		m_boneWeights(boneWeights)
+		m_boneWeights(boneWeights),
+		m_skeleton()
 	{
-		// Initialize the buffer handles
-		for (size_t i = 0; i < NUM_BUFFERS; i++)
-		{
-			m_vertexArrayBuffers[i] = 0;
-		}
+		// Zero out all buffer handles
+		m_vertexArrayBuffers.fill(0);
 
-		// Upload to the GPU
-		RefreshVbo();
+		// Generate VAO and VBOs
+		generateVao();
+		bind();
+		generateBuffers();
+
+		// Upload mesh component data to the GPU
+		uploadToGpu(MeshComponents::All);
 	}
 
 	void Mesh::loadMeshComponentData(
-		MeshComponents const& meshComponentFlags,
-		std::vector<glm::vec3> const& positions,
-		std::vector<glm::vec3> const& tangents,
-		std::vector<glm::vec3> const& bitangents,
-		std::vector<glm::vec2> const& texCoords,
-		std::vector<glm::vec3> const& normals,
-		std::vector<unsigned int> const& indices,
-		std::vector<Color> const& colors,
-		std::vector<Animation::VertexBoneWeights> boneWeights)
+		const MeshComponents& meshComponentFlags,
+		const std::vector<glm::vec3>& positions,
+		const std::vector<unsigned int>& indices,
+		const std::vector<glm::vec3>& normals,
+		const std::vector<glm::vec2>& texCoords,
+		const std::vector<glm::vec3>& tangents,
+		const std::vector<glm::vec3>& bitangents,
+		const std::vector<Color>& colors,
+		const std::vector<Animation::VertexBoneWeights> boneWeights)
 	{
 		if (meshComponentFlags & MeshComponents::Positions)
 		{
 			m_positions = positions;
+		}
+
+		if (meshComponentFlags & MeshComponents::Indices)
+		{
+			m_indices = indices;
+		}
+
+		if (meshComponentFlags & MeshComponents::Normals)
+		{
+			m_normals = normals;
+		}
+
+		if (meshComponentFlags & MeshComponents::TexCoords)
+		{
+			m_texCoords = texCoords;
 		}
 
 		if (meshComponentFlags & MeshComponents::Tangents)
@@ -67,21 +82,6 @@ namespace DerydocaEngine::Rendering
 			m_bitangents = bitangents;
 		}
 
-		if (meshComponentFlags & MeshComponents::TexCoords)
-		{
-			m_texCoords = texCoords;
-		}
-
-		if (meshComponentFlags & MeshComponents::Normals)
-		{
-			m_normals = normals;
-		}
-
-		if (meshComponentFlags & MeshComponents::Indices)
-		{
-			m_indices = indices;
-		}
-
 		if (meshComponentFlags & MeshComponents::Colors)
 		{
 			m_colors = colors;
@@ -92,7 +92,7 @@ namespace DerydocaEngine::Rendering
 			m_boneWeights = boneWeights;
 		}
 
-		RefreshVbo();
+		uploadToGpu(meshComponentFlags);
 	}
 
 	Mesh::~Mesh()
@@ -100,198 +100,160 @@ namespace DerydocaEngine::Rendering
 		glDeleteVertexArrays(1, &m_vertexArrayObject);
 	}
 
-	void Mesh::RefreshVbo()
+	void Mesh::uploadToGpu(const MeshComponents& meshComponentFlags)
 	{
-		if (!m_vertexArrayObject)
-		{
-			glGenVertexArrays(1, &m_vertexArrayObject);
-		}
-		glBindVertexArray(m_vertexArrayObject);
+		assert(m_vertexArrayObject != 0);
 
-		if (!m_vertexArrayBuffers[0])
-		{
-			glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
-		}
-
-		// Initialize the vert positions
-		if (m_positions.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_positions.size() * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the texture coordinates buffer
-		if (m_texCoords.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_texCoords.size() * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the normals buffer
-		if (m_normals.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_normals.size() * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(2);
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the tangents buffer
-		if (m_tangents.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_tangents.size() * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(3);
-			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the bitangents buffer
-		if (m_bitangents.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_bitangents.size() * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(4);
-			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the indices buffer
-		if (m_indices.size() > 0)
-		{
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
-		}
-
-		// Initialize the color buffer
-		if (m_colors.size() > 0)
-		{
-			// Upload the buffer to the GPU
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_colors.size() * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(5);
-			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the bone index and weight buffers
-		if (m_boneWeights.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(6);
-			glVertexAttribIPointer(6, Animation::MAX_BONES, GL_UNSIGNED_INT, sizeof(Animation::VertexBoneWeights), 0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(7);
-			glVertexAttribPointer(7, Animation::MAX_BONES, GL_FLOAT, GL_FALSE, sizeof(Animation::VertexBoneWeights), (void*)(sizeof(unsigned int) * Animation::MAX_BONES));
-		}
-
-		glBindVertexArray(0);
-	}
-
-	void Mesh::UpdateVbo(MeshComponents const& meshComponentFlags)
-	{
-		if (!m_vertexArrayObject)
-		{
-			glGenVertexArrays(1, &m_vertexArrayObject);
-		}
-		glBindVertexArray(m_vertexArrayObject);
-
-		if (!m_vertexArrayBuffers[0])
-		{
-			glGenBuffers(NUM_BUFFERS, m_vertexArrayBuffers);
-		}
+		bind();
 
 		// Initialize the vert positions
 		if ((meshComponentFlags & MeshComponents::Positions) && m_positions.size() > 0)
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_positions.size() * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the texture coordinates buffer
-		if ((meshComponentFlags & MeshComponents::TexCoords) && m_texCoords.size())
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_texCoords.size() * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the normals buffer
-		if ((meshComponentFlags & MeshComponents::Normals) && m_normals.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_normals.size() * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(2);
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the tangents buffer
-		if ((meshComponentFlags & MeshComponents::Tangents) && m_tangents.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_tangents.size() * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(3);
-			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		}
-
-		// Initialize the bitangents buffer
-		if ((meshComponentFlags & MeshComponents::Bitangents) && m_bitangents.size() > 0)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_bitangents.size() * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(4);
-			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
+			uploadPositions();
 		}
 
 		// Initialize the indices buffer
 		if ((meshComponentFlags & MeshComponents::Indices) && m_indices.size() > 0)
 		{
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
+			uploadIndices();
+		}
+
+		// Initialize the normals buffer
+		if ((meshComponentFlags & MeshComponents::Normals) && m_normals.size() > 0)
+		{
+			uploadNormals();
+		}
+
+		// Initialize the texture coordinates buffer
+		if ((meshComponentFlags & MeshComponents::TexCoords) && m_texCoords.size() > 0)
+		{
+			uploadTexCoords();
+		}
+
+		// Initialize the tangents buffer
+		if ((meshComponentFlags & MeshComponents::Tangents) && m_tangents.size() > 0)
+		{
+			uploadTangents();
+		}
+
+		// Initialize the bitangents buffer
+		if ((meshComponentFlags & MeshComponents::Bitangents) && m_bitangents.size() > 0)
+		{
+			uploadBitangents();
 		}
 
 		// Initialize the color buffer
 		if ((meshComponentFlags & MeshComponents::Colors) && m_colors.size() > 0)
 		{
-			// Upload the buffer to the GPU
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_colors.size() * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(5);
-			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
+			uploadColors();
 		}
 
 		// Initialize the bone index and weight buffers
-		if ((meshComponentFlags & (MeshComponents::BoneIndices | MeshComponents::BoneWeights)) && m_boneWeights.size() > 0)
+		if ((meshComponentFlags & MeshComponents::BoneWeights) && m_boneWeights.size() > 0)
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(6);
-			glVertexAttribIPointer(6, Animation::MAX_BONES, GL_UNSIGNED_INT, sizeof(Animation::VertexBoneWeights), 0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
-			glEnableVertexAttribArray(7);
-			glVertexAttribPointer(7, Animation::MAX_BONES, GL_FLOAT, GL_FALSE, sizeof(Animation::VertexBoneWeights), (void*)(sizeof(unsigned int) * Animation::MAX_BONES));
+			uploadBoneWeights();
 		}
 
-		glBindVertexArray(0);
+		unbind();
 	}
 
 	void Mesh::draw()
 	{
-		glBindVertexArray(m_vertexArrayObject);
+		bind();
 
 		GLenum mode = m_flags & MeshFlags::load_adjacent ? GL_TRIANGLES_ADJACENCY : GL_TRIANGLES;
 		glDrawElementsBaseVertex(mode, static_cast<int>(getNumIndices()), GL_UNSIGNED_INT, 0, 0);
 
+		unbind();
+	}
+
+	void Mesh::uploadPositions()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_positions.size() * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	void Mesh::uploadTexCoords()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_texCoords.size() * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	void Mesh::uploadNormals()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_normals.size() * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	void Mesh::uploadTangents()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_tangents.size() * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	void Mesh::uploadBitangents()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_bitangents.size() * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(4);
+		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	void Mesh::uploadIndices()
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
+	}
+
+	void Mesh::uploadColors()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_colors.size() * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(5);
+		glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
+	}
+
+	void Mesh::uploadBoneWeights()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(6);
+		glVertexAttribIPointer(6, Animation::MAX_BONES, GL_UNSIGNED_INT, sizeof(Animation::VertexBoneWeights), 0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
+		glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
+		glEnableVertexAttribArray(7);
+		glVertexAttribPointer(7, Animation::MAX_BONES, GL_FLOAT, GL_FALSE, sizeof(Animation::VertexBoneWeights), (void*)(sizeof(unsigned int) * Animation::MAX_BONES));
+	}
+
+	void Mesh::bind()
+	{
+		assert(m_vertexArrayObject != 0);
+		glBindVertexArray(m_vertexArrayObject);
+	}
+
+	void Mesh::unbind()
+	{
 		glBindVertexArray(0);
+	}
+
+	void Mesh::generateVao()
+	{
+		assert(m_vertexArrayObject == 0);
+		glGenVertexArrays(1, &m_vertexArrayObject);
+	}
+
+	void Mesh::generateBuffers()
+	{
+		glGenBuffers(NUM_BUFFERS, &m_vertexArrayBuffers[0]);
 	}
 
 }

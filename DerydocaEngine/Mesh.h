@@ -20,42 +20,42 @@ namespace DerydocaEngine::Rendering
 		Normals = 0x16,
 		Indices = 0x32,
 		Colors = 0x64,
-		BoneIndices = 0x128,
-		BoneWeights = 0x256,
-		All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors | BoneIndices | BoneWeights
+		BoneWeights = 0x128,
+		All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors | BoneWeights
 	};
 
 	class Mesh
 	{
 	public:
-		Mesh();
 		Mesh(
-			std::vector<glm::vec3> positions,
-			std::vector<unsigned int> indices,
-			std::vector<glm::vec3> normals,
-			std::vector<glm::vec2> texCoords,
-			std::vector<glm::vec3> tangents,
-			std::vector<glm::vec3> bitangents,
-			std::vector<Color> colors,
-			std::vector<Animation::VertexBoneWeights> boneWeights);
+			const std::vector<glm::vec3>& positions = std::vector<glm::vec3>(),
+			const std::vector<unsigned int>& indices = std::vector<unsigned int>(),
+			const std::vector<glm::vec3>& normals = std::vector<glm::vec3>(),
+			const std::vector<glm::vec2>& texCoords = std::vector<glm::vec2>(),
+			const std::vector<glm::vec3>& tangents = std::vector<glm::vec3>(),
+			const std::vector<glm::vec3>& bitangents = std::vector<glm::vec3>(),
+			const std::vector<Color>& colors = std::vector<Color>(),
+			const std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
+
 		~Mesh();
+
 		void loadMeshComponentData(
-			MeshComponents const& meshComponentFlags,
-			std::vector<glm::vec3> const& positions = std::vector<glm::vec3>(),
-			std::vector<glm::vec3> const& tangents = std::vector<glm::vec3>(),
-			std::vector<glm::vec3> const& bitangents = std::vector<glm::vec3>(),
-			std::vector<glm::vec2> const& texCoords = std::vector<glm::vec2>(),
-			std::vector<glm::vec3> const& normals = std::vector<glm::vec3>(),
-			std::vector<unsigned int> const& indices = std::vector<unsigned int>(),
-			std::vector<Color> const& colors = std::vector<Color>(),
-			std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
+			const MeshComponents& meshComponentFlags,
+			const std::vector<glm::vec3>& positions = std::vector<glm::vec3>(),
+			const std::vector<unsigned int>& indices = std::vector<unsigned int>(),
+			const std::vector<glm::vec3>& normals = std::vector<glm::vec3>(),
+			const std::vector<glm::vec2>& texCoords = std::vector<glm::vec2>(),
+			const std::vector<glm::vec3>& tangents = std::vector<glm::vec3>(),
+			const std::vector<glm::vec3>& bitangents = std::vector<glm::vec3>(),
+			const std::vector<Color>& colors = std::vector<Color>(),
+			const std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
 		void draw();
-		void setFlags(MeshFlags const& flags) { m_flags = flags; }
+		void setFlags(const MeshFlags& flags) { m_flags = flags; }
 		unsigned int getVao() const { return m_vertexArrayObject; }
 		size_t getNumVertices() const { return m_positions.size(); }
 		size_t getNumIndices() const { return m_indices.size(); }
 		std::shared_ptr<Animation::Skeleton> getSkeleton() { return m_skeleton; }
-		void setSkeleton(std::shared_ptr<Animation::Skeleton> skeleton) { m_skeleton = skeleton; }
+		void setSkeleton(const std::shared_ptr<Animation::Skeleton> skeleton) { m_skeleton = skeleton; }
 
 	private:
 		enum {
@@ -74,11 +74,22 @@ namespace DerydocaEngine::Rendering
 		Mesh(Mesh const& other) {}
 		void operator=(Mesh const& other) {}
 
-		void RefreshVbo();
-		void UpdateVbo(MeshComponents const& meshComponentFlags);
+		void uploadToGpu(MeshComponents const& meshComponentFlags);
+		void uploadPositions();
+		void uploadTexCoords();
+		void uploadNormals();
+		void uploadTangents();
+		void uploadBitangents();
+		void uploadIndices();
+		void uploadColors();
+		void uploadBoneWeights();
+		void bind();
+		void unbind();
+		void generateVao();
+		void generateBuffers();
 
 		unsigned int m_vertexArrayObject;
-		unsigned int m_vertexArrayBuffers[NUM_BUFFERS];
+		std::array<unsigned int, NUM_BUFFERS> m_vertexArrayBuffers;
 		std::vector<glm::vec3> m_positions;
 		std::vector<unsigned int> m_indices;
 		std::vector<glm::vec3> m_normals;

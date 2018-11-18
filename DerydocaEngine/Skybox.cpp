@@ -57,15 +57,7 @@ namespace DerydocaEngine::Rendering
 			3, 7, 6
 		};
 
-		m_mesh = new Mesh(
-			positions,
-			indices,
-			std::vector<glm::vec3>(),
-			std::vector<glm::vec2>(),
-			std::vector<glm::vec3>(),
-			std::vector<glm::vec3>(),
-			std::vector<Color>(),
-			std::vector<Animation::VertexBoneWeights>());
+		m_mesh = new Mesh(positions, indices);
 	}
 
 }

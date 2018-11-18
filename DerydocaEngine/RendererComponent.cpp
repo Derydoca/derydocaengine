@@ -51,11 +51,11 @@ namespace DerydocaEngine::Components
 		m_mesh->loadMeshComponentData(
 			m_dirtyComponents,
 			m_vertices,
+			m_triangleIndices,
+			m_normals,
+			m_texCoords,
 			m_tangents,
 			m_bitangents,
-			m_texCoords,
-			m_normals,
-			m_triangleIndices,
 			m_vertexColors
 		);
 
