@@ -60,9 +60,7 @@ namespace DerydocaEngine::Components
 			m_normals,
 			m_numIndices,
 			m_triangleIndices,
-			m_vertexColors,
-			nullptr,
-			nullptr
+			m_vertexColors
 		);
 
 		m_dirtyComponents = Rendering::MeshComponents::None;

@@ -22,8 +22,7 @@ namespace DerydocaEngine::Rendering
 		std::vector<glm::vec3> tangents,
 		std::vector<glm::vec3> bitangents,
 		std::vector<Color> colors,
-		unsigned int* boneIndices,
-		float * boneWeights) :
+		std::vector<Animation::VertexBoneWeights> boneWeights) :
 		m_vertexArrayObject(0),
 		m_numVertices(numVertices),
 		m_numIndices(numIndices),
@@ -34,7 +33,6 @@ namespace DerydocaEngine::Rendering
 		m_tangents(tangents),
 		m_bitangents(bitangents),
 		m_colors(colors),
-		m_boneIndices(boneIndices),
 		m_boneWeights(boneWeights)
 	{
 		// Initialize the buffer handles
@@ -58,8 +56,7 @@ namespace DerydocaEngine::Rendering
 		unsigned int const& numIndices,
 		std::vector<unsigned int> const& indices,
 		std::vector<Color> const& colors,
-		unsigned int* boneIndices,
-		float* boneWeights)
+		std::vector<Animation::VertexBoneWeights> boneWeights)
 	{
 		m_numVertices = numVertices;
 
@@ -99,11 +96,6 @@ namespace DerydocaEngine::Rendering
 			m_colors = colors;
 		}
 
-		if (meshComponentFlags & MeshComponents::BoneIndices)
-		{
-			m_boneIndices = boneIndices;
-		}
-
 		if (meshComponentFlags & MeshComponents::BoneWeights)
 		{
 			m_boneWeights = boneWeights;
@@ -115,14 +107,6 @@ namespace DerydocaEngine::Rendering
 	Mesh::~Mesh()
 	{
 		glDeleteVertexArrays(1, &m_vertexArrayObject);
-		//delete[] m_positions;
-		//delete[] m_texCoords;
-		//delete[] m_normals;
-		//delete[] m_tangents;
-		//delete[] m_indices;
-		//delete[] m_bitangents;
-		delete[] m_boneIndices;
-		delete[] m_boneWeights;
 	}
 
 	void Mesh::RefreshVbo()
@@ -200,22 +184,18 @@ namespace DerydocaEngine::Rendering
 			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
-		// Initialize the bone index buffer
-		if (m_boneIndices)
+		// Initialize the bone index and weight buffers
+		if (m_boneWeights.size() > 0)
 		{
-			GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]));
-			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW));
-			GL_CHECK(glEnableVertexAttribArray(6));
-			GL_CHECK(glVertexAttribIPointer(6, Rendering::Mesh::MAX_BONES, GL_UNSIGNED_INT, 0, 0));
-		}
+			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
+			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(6);
+			glVertexAttribIPointer(6, Animation::MAX_BONES, GL_UNSIGNED_INT, sizeof(Animation::VertexBoneWeights), 0);
 
-		// Initialize the bone weight buffer
-		if (m_boneWeights)
-		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(7);
-			glVertexAttribPointer(7, Rendering::Mesh::MAX_BONES, GL_FLOAT, GL_FALSE, 0, 0);
+			glVertexAttribPointer(7, Animation::MAX_BONES, GL_FLOAT, GL_FALSE, sizeof(Animation::VertexBoneWeights), (void*)(sizeof(unsigned int) * Animation::MAX_BONES));
 		}
 
 		glBindVertexArray(0);
@@ -296,22 +276,18 @@ namespace DerydocaEngine::Rendering
 			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
 		}
 
-		// Initialize the bone index buffer
-		if ((meshComponentFlags & MeshComponents::BoneIndices) && m_boneIndices != nullptr)
+		// Initialize the bone index and weight buffers
+		if ((meshComponentFlags & (MeshComponents::BoneIndices | MeshComponents::BoneWeights)) && m_boneWeights.size() > 0)
 		{
-			GL_CHECK(glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]));
-			GL_CHECK(glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(unsigned int), m_boneIndices, GL_STATIC_DRAW));
-			GL_CHECK(glEnableVertexAttribArray(6));
-			GL_CHECK(glVertexAttribIPointer(6, Rendering::Mesh::MAX_BONES, GL_UNSIGNED_INT, 0, 0));
-		}
+			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_INDICES_VB]);
+			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
+			glEnableVertexAttribArray(6);
+			glVertexAttribIPointer(6, Animation::MAX_BONES, GL_UNSIGNED_INT, sizeof(Animation::VertexBoneWeights), 0);
 
-		// Initialize the bone weight buffer
-		if ((meshComponentFlags & MeshComponents::BoneWeights) && m_boneWeights != nullptr)
-		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BONE_WEIGHTS_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * Mesh::MAX_BONES * sizeof(float), m_boneWeights, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_boneWeights.size() * sizeof(Animation::VertexBoneWeights), &m_boneWeights[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(7);
-			glVertexAttribPointer(7, Rendering::Mesh::MAX_BONES, GL_FLOAT, GL_FALSE, 0, 0);
+			glVertexAttribPointer(7, Animation::MAX_BONES, GL_FLOAT, GL_FALSE, sizeof(Animation::VertexBoneWeights), (void*)(sizeof(unsigned int) * Animation::MAX_BONES));
 		}
 
 		glBindVertexArray(0);

@@ -329,6 +329,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClInclude Include="BezierPatchMeshResourceSerializer.h" />
     <ClInclude Include="BloomFilter.h" />
     <ClInclude Include="Bone.h" />
+    <ClInclude Include="VertexBoneWeights.h" />
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />

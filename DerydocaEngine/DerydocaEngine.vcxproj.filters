@@ -673,6 +673,9 @@
     <ClInclude Include="SkeletonResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="VertexBoneWeights.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

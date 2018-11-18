@@ -3,6 +3,7 @@
 #include <glm/vec3.hpp>
 #include <vector>
 
+#include "VertexBoneWeights.h"
 #include "ResourceSerializer.h"
 #include "MeshFlags.h"
 #include "Skeleton.h"
@@ -34,8 +35,7 @@ namespace DerydocaEngine::Resources::Serializers
 			std::vector<glm::vec3> &m_bitangents);
 		void ProcessBoneData(
 			aiMesh * mesh,
-			unsigned int * &m_boneIndices,
-			float * &m_boneWeights,
+			std::vector<Animation::VertexBoneWeights> &m_boneWeights,
 			const std::shared_ptr<Animation::Skeleton>& skeleton);
 		ResourceType getResourceType();
 

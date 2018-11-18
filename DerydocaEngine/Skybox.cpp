@@ -67,8 +67,7 @@ namespace DerydocaEngine::Rendering
 			std::vector<glm::vec3>(),
 			std::vector<glm::vec3>(),
 			std::vector<Color>(),
-			nullptr,
-			nullptr);
+			std::vector<Animation::VertexBoneWeights>());
 	}
 
 }

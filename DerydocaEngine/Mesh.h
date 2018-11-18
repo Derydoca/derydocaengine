@@ -3,6 +3,7 @@
 #include <glm/vec3.hpp>
 #include <string>
 
+#include "VertexBoneWeights.h"
 #include "Color.h"
 #include "MeshFlags.h"
 #include "Skeleton.h"
@@ -38,8 +39,7 @@ namespace DerydocaEngine::Rendering
 			std::vector<glm::vec3> tangents,
 			std::vector<glm::vec3> bitangents,
 			std::vector<Color> colors,
-			unsigned int* boneIndices,
-			float* boneWeights);
+			std::vector<Animation::VertexBoneWeights> boneWeights);
 		~Mesh();
 		void loadMeshComponentData(
 			MeshComponents const& meshComponentFlags,
@@ -52,16 +52,13 @@ namespace DerydocaEngine::Rendering
 			unsigned int const& numIndices = 0,
 			std::vector<unsigned int> const& indices = std::vector<unsigned int>(),
 			std::vector<Color> const& colors = std::vector<Color>(),
-			unsigned int* boneIndices = 0,
-			float* boneWeights = 0);
+			std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
 		void draw();
 		void setFlags(MeshFlags const& flags) { m_flags = flags; }
 		unsigned int getVao() const { return m_vertexArrayObject; }
 		unsigned int getNumIndices() const { return m_numIndices; }
 		std::shared_ptr<Animation::Skeleton> getSkeleton() { return m_skeleton; }
 		void setSkeleton(std::shared_ptr<Animation::Skeleton> skeleton) { m_skeleton = skeleton; }
-
-		static const int MAX_BONES = 4;
 
 	private:
 		enum {
@@ -94,8 +91,7 @@ namespace DerydocaEngine::Rendering
 		std::vector<glm::vec3> m_tangents;
 		std::vector<glm::vec3> m_bitangents;
 		std::vector<Color> m_colors;
-		unsigned int* m_boneIndices;
-		float* m_boneWeights;
+		std::vector<Animation::VertexBoneWeights> m_boneWeights;
 		std::shared_ptr<Animation::Skeleton> m_skeleton;
 		MeshFlags m_flags{};
 	};

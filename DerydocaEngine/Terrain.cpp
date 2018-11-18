@@ -120,8 +120,7 @@ namespace DerydocaEngine::Components
 			std::vector<glm::vec3>(),
 			std::vector<glm::vec3>(),
 			std::vector<Color>(),
-			nullptr,
-			nullptr);
+			std::vector<Animation::VertexBoneWeights>());
 	}
 
 	void Terrain::setTextureSlot(int const& slot, Rendering::Texture * const& texture)

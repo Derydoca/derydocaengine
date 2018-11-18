@@ -61,15 +61,14 @@ namespace DerydocaEngine::Resources::Serializers
 		std::vector<unsigned int> m_indices;
 		std::vector<glm::vec3> m_tangents;
 		std::vector<glm::vec3> m_bitangents;
-		unsigned int* m_boneIndices = nullptr;
-		float* m_boneWeights = nullptr;
+		std::vector<Animation::VertexBoneWeights> m_boneWeights;
 		Rendering::MeshFlags m_flags = mr->getFlags();
 
 		ProcessMeshData(mesh, m_positions, m_numVertices, uvIndex, m_texCoords, m_normals, m_flags, m_numIndices, m_indices, m_tangents, m_bitangents);
 
 		if (mesh->mNumBones > 0)
 		{
-			ProcessBoneData(mesh, m_boneIndices, m_boneWeights, skeleton);
+			ProcessBoneData(mesh, m_boneWeights, skeleton);
 		}
 
 		std::shared_ptr<Rendering::Mesh> m = std::make_shared<Rendering::Mesh>(
@@ -82,17 +81,7 @@ namespace DerydocaEngine::Resources::Serializers
 				m_tangents,
 				m_bitangents,
 				std::vector<Color>(),
-				m_boneIndices,
 				m_boneWeights);
-
-		//delete m_positions;
-		//delete m_indices;
-		//delete m_normals;
-		//delete m_texCoords;
-		//delete m_tangents;
-		//delete m_bitangents;
-		delete m_boneIndices;
-		delete m_boneWeights;
 
 		m->setSkeleton(skeleton);
 
@@ -178,16 +167,13 @@ namespace DerydocaEngine::Resources::Serializers
 		}
 	}
 
-	void MeshResourceSerializer::ProcessBoneData(aiMesh * mesh, unsigned int * &m_boneIndices, float * &m_boneWeights, const std::shared_ptr<Animation::Skeleton>& skeleton)
+	void MeshResourceSerializer::ProcessBoneData(
+		aiMesh * mesh,
+		std::vector<Animation::VertexBoneWeights> &m_boneWeights,
+		const std::shared_ptr<Animation::Skeleton>& skeleton)
 	{
 		// Create buffers that will store the bone indices and bone weights
-		unsigned int numTotalBoneElements = mesh->mNumVertices * Rendering::Mesh::MAX_BONES;
-		m_boneIndices = new unsigned int[numTotalBoneElements];
-		for (unsigned int i = 0; i < numTotalBoneElements; i++)
-		{
-			m_boneIndices[i] = -1;
-		}
-		m_boneWeights = new float[numTotalBoneElements] { };
+		m_boneWeights = std::vector<Animation::VertexBoneWeights>(mesh->mNumVertices);
 
 		// For each bone in the source mesh file
 		for (unsigned int i = 0; i < mesh->mNumBones; i++)
@@ -203,16 +189,16 @@ namespace DerydocaEngine::Resources::Serializers
 				aiVertexWeight vertWeight = bone->mWeights[w];
 				int vertexIndex = vertWeight.mVertexId;
 
-				// Pull data from the weights and load it into the bone weight map
-				unsigned int bufferOffset = vertWeight.mVertexId * Rendering::Mesh::MAX_BONES;
+				// Get the bone weight object
+				Animation::VertexBoneWeights& boneWeight = m_boneWeights[vertWeight.mVertexId];
 
 				// For each vertex associated with the weight
-				for (int weightIndex = 0; weightIndex < Rendering::Mesh::MAX_BONES; weightIndex++)
+				for (int weightIndex = 0; weightIndex < Animation::MAX_BONES; weightIndex++)
 				{
-					if (m_boneWeights[bufferOffset + weightIndex] <= 0)
+					if (boneWeight.weights[weightIndex] <= 0)
 					{
-						m_boneWeights[bufferOffset + weightIndex] = vertWeight.mWeight;
-						m_boneIndices[bufferOffset + weightIndex] = boneIndex;
+						boneWeight.boneIds[weightIndex] = boneIndex;
+						boneWeight.weights[weightIndex] = vertWeight.mWeight;
 
 						break;
 					}
