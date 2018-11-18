@@ -24,12 +24,10 @@ namespace DerydocaEngine::Resources::Serializers
 		void ProcessMeshData(
 			aiMesh * &mesh,
 			std::vector<glm::vec3> &m_positions,
-			unsigned int m_numVertices,
 			int uvIndex,
 			std::vector<glm::vec2> &m_texCoords,
 			std::vector<glm::vec3> &m_normals,
 			DerydocaEngine::Rendering::MeshFlags m_flags,
-			unsigned int &m_numIndices,
 			std::vector<unsigned int> &m_indices,
 			std::vector<glm::vec3> &m_tangents,
 			std::vector<glm::vec3> &m_bitangents);

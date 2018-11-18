@@ -111,8 +111,6 @@ namespace DerydocaEngine::Components
 		}
 
 		m_mesh = std::make_shared<Rendering::Mesh>(
-			numVerts,
-			numIndices,
 			positions,
 			indices,
 			normals,

@@ -91,7 +91,7 @@ namespace DerydocaEngine::Components
 		virtual std::vector<glm::vec2> generateTexCoords();
 		virtual std::vector<Color> generateVertexColors();
 		virtual std::vector<unsigned int> generateTriangleIndices();
-		virtual unsigned int generateNumVertices()
+		int generateNumVertices()
 		{
 			if (m_lines.size() == 0)
 			{

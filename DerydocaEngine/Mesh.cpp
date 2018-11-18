@@ -13,8 +13,6 @@ namespace DerydocaEngine::Rendering
 	}
 
 	Mesh::Mesh(
-		unsigned int numVertices,
-		unsigned int numIndices,
 		std::vector<glm::vec3> positions,
 		std::vector<unsigned int> indices,
 		std::vector<glm::vec3> normals,
@@ -24,8 +22,6 @@ namespace DerydocaEngine::Rendering
 		std::vector<Color> colors,
 		std::vector<Animation::VertexBoneWeights> boneWeights) :
 		m_vertexArrayObject(0),
-		m_numVertices(numVertices),
-		m_numIndices(numIndices),
 		m_positions(positions),
 		m_indices(indices),
 		m_normals(normals),
@@ -47,19 +43,15 @@ namespace DerydocaEngine::Rendering
 
 	void Mesh::loadMeshComponentData(
 		MeshComponents const& meshComponentFlags,
-		unsigned int const& numVertices,
 		std::vector<glm::vec3> const& positions,
 		std::vector<glm::vec3> const& tangents,
 		std::vector<glm::vec3> const& bitangents,
 		std::vector<glm::vec2> const& texCoords,
 		std::vector<glm::vec3> const& normals,
-		unsigned int const& numIndices,
 		std::vector<unsigned int> const& indices,
 		std::vector<Color> const& colors,
 		std::vector<Animation::VertexBoneWeights> boneWeights)
 	{
-		m_numVertices = numVertices;
-
 		if (meshComponentFlags & MeshComponents::Positions)
 		{
 			m_positions = positions;
@@ -87,7 +79,6 @@ namespace DerydocaEngine::Rendering
 
 		if (meshComponentFlags & MeshComponents::Indices)
 		{
-			m_numIndices = numIndices;
 			m_indices = indices;
 		}
 
@@ -126,7 +117,7 @@ namespace DerydocaEngine::Rendering
 		if (m_positions.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_positions.size() * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -135,7 +126,7 @@ namespace DerydocaEngine::Rendering
 		if (m_texCoords.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_texCoords.size() * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -144,7 +135,7 @@ namespace DerydocaEngine::Rendering
 		if (m_normals.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_normals.size() * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(2);
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -153,7 +144,7 @@ namespace DerydocaEngine::Rendering
 		if (m_tangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_tangents.size() * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(3);
 			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -162,7 +153,7 @@ namespace DerydocaEngine::Rendering
 		if (m_bitangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_bitangents.size() * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -171,7 +162,7 @@ namespace DerydocaEngine::Rendering
 		if (m_indices.size() > 0)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
 		}
 
 		// Initialize the color buffer
@@ -179,7 +170,7 @@ namespace DerydocaEngine::Rendering
 		{
 			// Upload the buffer to the GPU
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_colors.size() * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(5);
 			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -218,7 +209,7 @@ namespace DerydocaEngine::Rendering
 		if ((meshComponentFlags & MeshComponents::Positions) && m_positions.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[POSITION_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_positions.size() * sizeof(glm::vec3), &m_positions[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -227,7 +218,7 @@ namespace DerydocaEngine::Rendering
 		if ((meshComponentFlags & MeshComponents::TexCoords) && m_texCoords.size())
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TEXCOORD_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_texCoords.size() * sizeof(glm::vec2), &m_texCoords[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -236,7 +227,7 @@ namespace DerydocaEngine::Rendering
 		if ((meshComponentFlags & MeshComponents::Normals) && m_normals.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[NORMAL_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_normals.size() * sizeof(glm::vec3), &m_normals[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(2);
 			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -245,7 +236,7 @@ namespace DerydocaEngine::Rendering
 		if ((meshComponentFlags & MeshComponents::Tangents) && m_tangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[TANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_tangents.size() * sizeof(glm::vec3), &m_tangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(3);
 			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -254,7 +245,7 @@ namespace DerydocaEngine::Rendering
 		if ((meshComponentFlags & MeshComponents::Bitangents) && m_bitangents.size() > 0)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[BITANGENT_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_bitangents.size() * sizeof(glm::vec3), &m_bitangents[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -263,7 +254,7 @@ namespace DerydocaEngine::Rendering
 		if ((meshComponentFlags & MeshComponents::Indices) && m_indices.size() > 0)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_numIndices * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
 		}
 
 		// Initialize the color buffer
@@ -271,7 +262,7 @@ namespace DerydocaEngine::Rendering
 		{
 			// Upload the buffer to the GPU
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[COLOR_VB]);
-			glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, m_colors.size() * sizeof(Color), &m_colors[0], GL_STATIC_DRAW);
 			glEnableVertexAttribArray(5);
 			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 0, 0);
 		}
@@ -298,7 +289,7 @@ namespace DerydocaEngine::Rendering
 		glBindVertexArray(m_vertexArrayObject);
 
 		GLenum mode = m_flags & MeshFlags::load_adjacent ? GL_TRIANGLES_ADJACENCY : GL_TRIANGLES;
-		glDrawElementsBaseVertex(mode, m_numIndices, GL_UNSIGNED_INT, 0, 0);
+		glDrawElementsBaseVertex(mode, static_cast<int>(getNumIndices()), GL_UNSIGNED_INT, 0, 0);
 
 		glBindVertexArray(0);
 	}

@@ -58,8 +58,6 @@ namespace DerydocaEngine::Rendering
 		};
 
 		m_mesh = new Mesh(
-			8,
-			36,
 			positions,
 			indices,
 			std::vector<glm::vec3>(),

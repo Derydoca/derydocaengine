@@ -23,8 +23,8 @@ namespace DerydocaEngine::Components
 
 		void render(Rendering::MatrixStack* const& matrixStack);
 		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
-		unsigned int getNumVertices() const { return m_numVertices; }
-		unsigned int getNumIndices() const { return m_numIndices; }
+		int getNumVertices() const { return static_cast<int>(m_vertices.size()); }
+		int getNumIndices() const { return static_cast<int>(m_triangleIndices.size()); }
 
 		virtual std::vector<glm::vec3> generateVertices() = 0;
 		virtual std::vector<glm::vec2> generateTexCoords() { return std::vector<glm::vec2>(); }
@@ -33,8 +33,6 @@ namespace DerydocaEngine::Components
 		virtual std::vector<glm::vec3> generateTangents() { return std::vector<glm::vec3>(); }
 		virtual std::vector<glm::vec3> generateBitangents() { return std::vector<glm::vec3>(); }
 		virtual std::vector<glm::vec3> generateNormals() { return std::vector<glm::vec3>(); }
-		virtual unsigned int generateNumVertices() { return 0; }
-		virtual unsigned int generateNumIndices() { return 0; }
 
 	private:
 		Rendering::Mesh * m_mesh;
@@ -47,8 +45,6 @@ namespace DerydocaEngine::Components
 		std::vector<glm::vec2> m_texCoords;
 		std::vector<Color> m_vertexColors;
 		std::vector<unsigned int> m_triangleIndices;
-		unsigned int m_numVertices = 0;
-		unsigned int m_numIndices = 0;
 	};
 
 }

@@ -90,7 +90,7 @@ namespace DerydocaEngine::Ext
 		Rendering::LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());
 
 		glBindVertexArray(m_mesh->getVao());
-		glDrawElementsInstanced(GL_TRIANGLES, m_mesh->getNumIndices(), GL_UNSIGNED_INT, 0, m_numParticles);
+		glDrawElementsInstanced(GL_TRIANGLES, static_cast<int>(m_mesh->getNumIndices()), GL_UNSIGNED_INT, 0, m_numParticles);
 	}
 
 	void ParticleInstanced::initBuffers()

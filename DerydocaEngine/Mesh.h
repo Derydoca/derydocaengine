@@ -30,8 +30,6 @@ namespace DerydocaEngine::Rendering
 	public:
 		Mesh();
 		Mesh(
-			unsigned int numVertices,
-			unsigned int numIndices,
 			std::vector<glm::vec3> positions,
 			std::vector<unsigned int> indices,
 			std::vector<glm::vec3> normals,
@@ -43,20 +41,19 @@ namespace DerydocaEngine::Rendering
 		~Mesh();
 		void loadMeshComponentData(
 			MeshComponents const& meshComponentFlags,
-			unsigned int const& numVertices,
 			std::vector<glm::vec3> const& positions = std::vector<glm::vec3>(),
 			std::vector<glm::vec3> const& tangents = std::vector<glm::vec3>(),
 			std::vector<glm::vec3> const& bitangents = std::vector<glm::vec3>(),
 			std::vector<glm::vec2> const& texCoords = std::vector<glm::vec2>(),
 			std::vector<glm::vec3> const& normals = std::vector<glm::vec3>(),
-			unsigned int const& numIndices = 0,
 			std::vector<unsigned int> const& indices = std::vector<unsigned int>(),
 			std::vector<Color> const& colors = std::vector<Color>(),
 			std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
 		void draw();
 		void setFlags(MeshFlags const& flags) { m_flags = flags; }
 		unsigned int getVao() const { return m_vertexArrayObject; }
-		unsigned int getNumIndices() const { return m_numIndices; }
+		size_t getNumVertices() const { return m_positions.size(); }
+		size_t getNumIndices() const { return m_indices.size(); }
 		std::shared_ptr<Animation::Skeleton> getSkeleton() { return m_skeleton; }
 		void setSkeleton(std::shared_ptr<Animation::Skeleton> skeleton) { m_skeleton = skeleton; }
 
@@ -82,8 +79,6 @@ namespace DerydocaEngine::Rendering
 
 		unsigned int m_vertexArrayObject;
 		unsigned int m_vertexArrayBuffers[NUM_BUFFERS];
-		unsigned int m_numVertices;
-		unsigned int m_numIndices;
 		std::vector<glm::vec3> m_positions;
 		std::vector<unsigned int> m_indices;
 		std::vector<glm::vec3> m_normals;

@@ -22,7 +22,6 @@ namespace DerydocaEngine::Components
 		if (m_dirtyComponents & Rendering::MeshComponents::Positions)
 		{
 			m_vertices = generateVertices();
-			m_numVertices = generateNumVertices();
 		}
 		if (m_dirtyComponents & Rendering::MeshComponents::TexCoords)
 		{
@@ -35,7 +34,6 @@ namespace DerydocaEngine::Components
 		if (m_dirtyComponents & Rendering::MeshComponents::Indices)
 		{
 			m_triangleIndices = generateTriangleIndices();
-			m_numIndices = generateNumIndices();
 		}
 		if (m_dirtyComponents & Rendering::MeshComponents::Tangents)
 		{
@@ -52,13 +50,11 @@ namespace DerydocaEngine::Components
 
 		m_mesh->loadMeshComponentData(
 			m_dirtyComponents,
-			m_numVertices,
 			m_vertices,
 			m_tangents,
 			m_bitangents,
 			m_texCoords,
 			m_normals,
-			m_numIndices,
 			m_triangleIndices,
 			m_vertexColors
 		);

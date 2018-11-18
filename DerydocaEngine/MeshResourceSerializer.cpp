@@ -53,9 +53,7 @@ namespace DerydocaEngine::Resources::Serializers
 
 		aiMesh* mesh = aiScene->mMeshes[meshIndex];
 
-		unsigned int m_numVertices = mesh->mNumVertices;
 		std::vector<glm::vec3> m_positions;
-		unsigned int m_numIndices = 0;
 		std::vector<glm::vec3> m_normals;
 		std::vector<glm::vec2> m_texCoords;
 		std::vector<unsigned int> m_indices;
@@ -64,7 +62,7 @@ namespace DerydocaEngine::Resources::Serializers
 		std::vector<Animation::VertexBoneWeights> m_boneWeights;
 		Rendering::MeshFlags m_flags = mr->getFlags();
 
-		ProcessMeshData(mesh, m_positions, m_numVertices, uvIndex, m_texCoords, m_normals, m_flags, m_numIndices, m_indices, m_tangents, m_bitangents);
+		ProcessMeshData(mesh, m_positions, uvIndex, m_texCoords, m_normals, m_flags, m_indices, m_tangents, m_bitangents);
 
 		if (mesh->mNumBones > 0)
 		{
@@ -72,8 +70,6 @@ namespace DerydocaEngine::Resources::Serializers
 		}
 
 		std::shared_ptr<Rendering::Mesh> m = std::make_shared<Rendering::Mesh>(
-				m_numVertices,
-				m_numIndices,
 				m_positions,
 				m_indices,
 				m_normals,
@@ -93,20 +89,18 @@ namespace DerydocaEngine::Resources::Serializers
 	void MeshResourceSerializer::ProcessMeshData(
 		aiMesh * &mesh,
 		std::vector<glm::vec3> &m_positions,
-		unsigned int m_numVertices,
 		int uvIndex,
 		std::vector<glm::vec2> &m_texCoords,
 		std::vector<glm::vec3> &m_normals,
 		DerydocaEngine::Rendering::MeshFlags m_flags,
-		unsigned int &m_numIndices,
 		std::vector<unsigned int> &m_indices,
 		std::vector<glm::vec3> &m_tangents,
 		std::vector<glm::vec3> &m_bitangents)
 	{
 		if (mesh->HasPositions())
 		{
-			m_positions.reserve(m_numVertices);
-			for (unsigned int i = 0; i < m_numVertices; i++)
+			m_positions.reserve(mesh->mNumVertices);
+			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 			{
 				m_positions.push_back(glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
 			}
@@ -114,8 +108,8 @@ namespace DerydocaEngine::Resources::Serializers
 
 		if (mesh->HasTextureCoords(uvIndex))
 		{
-			m_texCoords.reserve(m_numVertices);
-			for (unsigned int i = 0; i < m_numVertices; i++)
+			m_texCoords.reserve(mesh->mNumVertices);
+			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 			{
 				m_texCoords.push_back(glm::vec2(mesh->mTextureCoords[uvIndex][i].x, mesh->mTextureCoords[uvIndex][i].y));
 			}
@@ -123,8 +117,8 @@ namespace DerydocaEngine::Resources::Serializers
 
 		if (mesh->HasNormals())
 		{
-			m_normals.reserve(m_numVertices);
-			for (unsigned int i = 0; i < m_numVertices; i++)
+			m_normals.reserve(mesh->mNumVertices);
+			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 			{
 				m_normals.push_back(glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
 			}
@@ -135,13 +129,11 @@ namespace DerydocaEngine::Resources::Serializers
 			if (m_flags & Rendering::MeshFlags::load_adjacent)
 			{
 				Ext::MeshAdjacencyCalculator mac;
-				m_numIndices = mesh->mNumFaces * 3 * 2;
 				mac.buildAdjacencyList(mesh, m_indices);
 			}
 			else
 			{
-				m_numIndices = mesh->mNumFaces * 3;
-				m_indices = std::vector<unsigned int>(m_numIndices);
+				m_indices = std::vector<unsigned int>(mesh->mNumFaces * 3);
 				for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 				{
 					m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
@@ -153,14 +145,14 @@ namespace DerydocaEngine::Resources::Serializers
 
 		if (mesh->HasTangentsAndBitangents())
 		{
-			m_tangents.reserve(m_numVertices);
-			for (unsigned int i = 0; i < m_numVertices; i++)
+			m_tangents.reserve(mesh->mNumVertices);
+			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 			{
 				m_tangents.push_back(glm::vec3(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z));
 			}
 
-			m_bitangents.reserve(m_numVertices);
-			for (unsigned int i = 0; i < m_numVertices; i++)
+			m_bitangents.reserve(mesh->mNumVertices);
+			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 			{
 				m_bitangents.push_back(glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z));
 			}
