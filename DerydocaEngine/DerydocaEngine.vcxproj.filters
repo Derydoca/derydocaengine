@@ -1,679 +1,673 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="BezierCurveRenderer.cpp">
+    <ClCompile Include="src\AnimationData.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AssimpUtils.cpp">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BezierCurveRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="BezierPatchMesh.cpp">
+    <ClCompile Include="src\BezierPatchMesh.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="BezierPatchMeshFileLoader.cpp">
+    <ClCompile Include="src\BezierPatchMeshFileLoader.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="BezierPatchMeshResourceSerializer.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="BloomFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="EdgeDetectionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="GammaCorrectionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="GaussianBlurFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageProjector.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshAdjacencyCalculator.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="MultisampleSwitch.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="NightVisionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="NoiseTexture.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleContinuousFountain.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleFountain.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleInstanced.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSystem.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="WaveDisplacement.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="WoodSliceTexture.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderSubroutineSwitcher.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="TessellatingQuad.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="TessellatedMeshRenderer.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameStats.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardMover.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialRefresher.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RendererComponent.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Rotator.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenshotUtil.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="WasdMover.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugVisualizer.cpp">
-      <Filter>DerydocaEngine\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="BezierPatchMeshFileSerializer.cpp">
+    <ClCompile Include="src\BezierPatchMeshFileSerializer.cpp">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="FileSerializerLibrary.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClCompile Include="src\BezierPatchMeshResourceSerializer.cpp">
+      <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="FileTypeSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClCompile Include="src\BloomFilter.cpp">
+      <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="FontFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClCompile Include="src\Bone.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="ImageFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClCompile Include="src\ButtonState.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
-    <ClCompile Include="LevelFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="RasterFontFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheetFileSerializer.cpp">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="src\Camera.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
+    <ClCompile Include="src\CameraManager.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Clock.cpp">
+    <ClCompile Include="src\Clock.cpp">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClCompile>
-    <ClCompile Include="CommandLineArgs.cpp">
-      <Filter>DerydocaEngine\Execution</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor.cpp">
-      <Filter>DerydocaEngine\Execution</Filter>
-    </ClCompile>
-    <ClCompile Include="TexturePackerTextureData.cpp">
-      <Filter>DerydocaEngine\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="TexturePackerImage.cpp">
-      <Filter>DerydocaEngine\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="TexturePacker.cpp">
-      <Filter>DerydocaEngine\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="FontFace.cpp">
-      <Filter>DerydocaEngine\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheet.cpp">
-      <Filter>DerydocaEngine\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSettings.cpp">
-      <Filter>DerydocaEngine\Settings</Filter>
-    </ClCompile>
-    <ClCompile Include="LightManager.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderLibrary.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTexture.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Skybox.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Display.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="IntRect.cpp">
-      <Filter>DerydocaEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="IntRectangle.cpp">
-      <Filter>DerydocaEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonState.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="CubemapResourceSerializer.cpp">
+    <ClCompile Include="src\CubemapResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="MaterialResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceSerializerLibrary.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteSheetResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="GameComponentFactory.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SerializedScene.cpp">
-      <Filter>DerydocaEngine\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>DerydocaEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="FileType.cpp">
-      <Filter>DerydocaEngine\Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectLibrary.cpp">
-      <Filter>DerydocaEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="StringUtils.cpp">
-      <Filter>DerydocaEngine\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureParameters.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="GLError.cpp">
+    <ClCompile Include="src\DebugVisualizer.cpp">
       <Filter>DerydocaEngine\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="DisplayManager.cpp">
+    <ClCompile Include="src\Display.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Projection.cpp">
+    <ClCompile Include="src\DisplayManager.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Key.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
+    <ClCompile Include="src\EdgeDetectionFilter.cpp">
+      <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClCompile Include="src\Editor.cpp">
+      <Filter>DerydocaEngine\Execution</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationData.cpp">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClCompile Include="src\EngineSettings.cpp">
+      <Filter>DerydocaEngine\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="Bone.cpp">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClCompile Include="src\FileSerializerLibrary.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="AssimpUtils.cpp">
-      <Filter>DerydocaEngine\Helpers</Filter>
+    <ClCompile Include="src\FileType.cpp">
+      <Filter>DerydocaEngine\Files</Filter>
     </ClCompile>
-    <ClCompile Include="SkinnedMeshRenderer.cpp">
+    <ClCompile Include="src\FileTypeSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FontFace.cpp">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FontFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameStats.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationResourceSerializer.cpp">
+    <ClCompile Include="src\GameComponentFactory.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>DerydocaEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GammaCorrectionFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GaussianBlurFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GLError.cpp">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImageFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImageProjector.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputManager.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntRect.cpp">
+      <Filter>DerydocaEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntRectangle.cpp">
+      <Filter>DerydocaEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Key.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Keyboard.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\KeyboardMover.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LevelFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LightManager.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Material.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MaterialFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MaterialRefresher.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MaterialResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="SkeletonResourceSerializer.cpp">
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshAdjacencyCalculator.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mouse.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MultisampleSwitch.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NightVisionFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NoiseTexture.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ObjectLibrary.cpp">
+      <Filter>DerydocaEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleContinuousFountain.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleFountain.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleInstanced.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParticleSystem.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Projection.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RasterFontFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RendererComponent.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderTexture.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resource.cpp">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceSerializerLibrary.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rotator.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScreenshotUtil.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SerializedScene.cpp">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderLibrary.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderSubroutineSwitcher.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Skeleton.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SkeletonResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SkinnedMeshRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Skybox.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteSheet.cpp">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteSheetFileSerializer.cpp">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteSheetResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StringUtils.cpp">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Terrain.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TessellatedMeshRenderer.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TessellatingQuad.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TexturePacker.cpp">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TexturePackerImage.cpp">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TexturePackerTextureData.cpp">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureParameters.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transform.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WasdMover.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WaveDisplacement.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WoodSliceTexture.cpp">
+      <Filter>Ext</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BezierCurveRenderer.h">
+    <ClInclude Include="src\YamlTools.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationChannel.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationData.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationKey.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssimpUtils.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BezierCurveRenderer.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="BezierPatchMesh.h">
+    <ClInclude Include="src\BezierPatchMesh.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="BezierPatchMeshFileLoader.h">
+    <ClInclude Include="src\BezierPatchMeshFileLoader.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="BezierPatchMeshResourceSerializer.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="BloomFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="EdgeDetectionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="GammaCorrectionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="GaussianBlurFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageProjector.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshAdjacencyCalculator.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="MultisampleSwitch.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="NightVisionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="NoiseTexture.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleContinuousFountain.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleFountain.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleInstanced.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleSystem.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="WoodSliceTexture.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="WaveDisplacement.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderSubroutineSwitcher.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="TessellatingQuad.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="TessellatedMeshRenderer.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Third Party</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image_write.h">
-      <Filter>Third Party</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameStats.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="WasdMover.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardMover.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialRefresher.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RendererComponent.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Rotator.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenshotUtil.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugLine.h">
-      <Filter>DerydocaEngine\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugVisualizer.h">
-      <Filter>DerydocaEngine\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="BezierPatchMeshFileSerializer.h">
+    <ClInclude Include="src\BezierPatchMeshFileSerializer.h">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="FileSerializerLibrary.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClInclude Include="src\BezierPatchMeshResourceSerializer.h">
+      <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="FileTypeSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClInclude Include="src\BloomFilter.h">
+      <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="FontFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClInclude Include="src\Bone.h">
+      <Filter>DerydocaEngine\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="ImageFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    <ClInclude Include="src\ButtonState.h">
+      <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="LevelFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="RasterFontFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheetFileSerializer.h">
-      <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="src\Camera.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>DerydocaEngine\Components</Filter>
+    <ClInclude Include="src\CameraManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Clock.h">
+    <ClInclude Include="src\Clock.h">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClInclude>
-    <ClInclude Include="CommandLineArgs.h">
-      <Filter>DerydocaEngine\Execution</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor.h">
-      <Filter>DerydocaEngine\Execution</Filter>
-    </ClInclude>
-    <ClInclude Include="TexturePackerTextureData.h">
-      <Filter>DerydocaEngine\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="TexturePackerImage.h">
-      <Filter>DerydocaEngine\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="TexturePacker.h">
-      <Filter>DerydocaEngine\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="FontFace.h">
-      <Filter>DerydocaEngine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteReference.h">
-      <Filter>DerydocaEngine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheet.h">
-      <Filter>DerydocaEngine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSettings.h">
-      <Filter>DerydocaEngine\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="LightManager.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>DerydocaEngine\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedListNode.h">
-      <Filter>DerydocaEngine\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="MatrixStack.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderLibrary.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderTexture.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderPass.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Skybox.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Display.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="DisplayManager.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshFlags.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Projection.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
+    <ClInclude Include="src\Color.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
-    <ClInclude Include="IntRect.h">
-      <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="IntRectangle.h">
-      <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureParameters.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonState.h">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Key.h">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="CubemapResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MaterialResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceSerializerLibrary.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteSheetResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="CubemapResource.h">
+    <ClInclude Include="src\CubemapResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="MeshResource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
+    <ClInclude Include="src\CubemapResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceType.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderResource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="GameComponent.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GameComponentFactory.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SerializedScene.h">
-      <Filter>DerydocaEngine\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>DerydocaEngine\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>DerydocaEngine\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="FileType.h">
-      <Filter>DerydocaEngine\Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GLError.h">
+    <ClInclude Include="src\DebugLine.h">
       <Filter>DerydocaEngine\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectLibrary.h">
-      <Filter>DerydocaEngine</Filter>
+    <ClInclude Include="src\DebugVisualizer.h">
+      <Filter>DerydocaEngine\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="YamlTools.h">
-      <Filter>DerydocaEngine\Helpers</Filter>
+    <ClInclude Include="src\Display.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="StringUtils.h">
-      <Filter>DerydocaEngine\Helpers</Filter>
+    <ClInclude Include="src\DisplayManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Bone.h">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClInclude Include="src\EdgeDetectionFilter.h">
+      <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationData.h">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClInclude Include="src\Editor.h">
+      <Filter>DerydocaEngine\Execution</Filter>
     </ClInclude>
-    <ClInclude Include="Skeleton.h">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClInclude Include="src\EngineSettings.h">
+      <Filter>DerydocaEngine\Settings</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationChannel.h">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClInclude Include="src\FileSerializerLibrary.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="AssimpUtils.h">
-      <Filter>DerydocaEngine\Helpers</Filter>
+    <ClInclude Include="src\FileType.h">
+      <Filter>DerydocaEngine\Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationKey.h">
-      <Filter>DerydocaEngine\Animation</Filter>
+    <ClInclude Include="src\FileTypeSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="SkinnedMeshRenderer.h">
+    <ClInclude Include="src\FontFace.h">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FontFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameStats.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationResourceSerializer.h">
+    <ClInclude Include="src\GameComponent.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameComponentFactory.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GammaCorrectionFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GaussianBlurFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GLError.h">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImageFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ImageProjector.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputManager.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IntRect.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IntRectangle.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Key.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Keyboard.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\KeyboardMover.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LevelFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LightManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LinkedList.h">
+      <Filter>DerydocaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LinkedListNode.h">
+      <Filter>DerydocaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Material.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MaterialFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MaterialRefresher.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MaterialResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationResource.h">
+    <ClInclude Include="src\MatrixStack.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshAdjacencyCalculator.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshFlags.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="SkeletonResourceSerializer.h">
+    <ClInclude Include="src\MeshResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="SkeletonResource.h">
+    <ClInclude Include="src\Mouse.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MultisampleSwitch.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NightVisionFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NoiseTexture.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectLibrary.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleContinuousFountain.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleFountain.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleInstanced.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleSystem.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Projection.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RasterFontFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rect.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rectangle.h">
+      <Filter>DerydocaEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RendererComponent.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderPass.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderTexture.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resource.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBoneWeights.h">
+    <ClInclude Include="src\ResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceSerializerLibrary.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceType.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rotator.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneObject.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScreenshotUtil.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SerializedScene.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderLibrary.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShaderSubroutineSwitcher.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Skeleton.h">
       <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SkeletonResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SkeletonResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SkinnedMeshRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Skybox.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteReference.h">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteSheet.h">
+      <Filter>DerydocaEngine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteSheetFileSerializer.h">
+      <Filter>DerydocaEngine\Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteSheetResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StringUtils.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Terrain.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TessellatedMeshRenderer.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TessellatingQuad.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TexturePacker.h">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TexturePackerImage.h">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TexturePackerTextureData.h">
+      <Filter>DerydocaEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureParameters.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Transform.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VertexBoneWeights.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WasdMover.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WaveDisplacement.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WoodSliceTexture.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\stb_image.h">
+      <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\stb_image_write.h">
+      <Filter>Third Party</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

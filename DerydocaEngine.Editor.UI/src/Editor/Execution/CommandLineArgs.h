@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 
-namespace DerydocaEngine::Execution
+namespace DerydocaEngine::Editor::Execution
 {
 
 	using argumentCollection = std::map<std::string, std::vector<std::string>>;

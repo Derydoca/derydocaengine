@@ -1,6 +1,6 @@
 #include "SpriteSheet.h"
-#include "stb_image.h"
-#include "stb_image_write.h"
+#include "vendor/stb_image.h"
+#include "vendor/stb_image_write.h"
 #include "ObjectLibrary.h"
 #include "YamlTools.h"
 #include <yaml-cpp/yaml.h>

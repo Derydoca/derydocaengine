@@ -3,7 +3,7 @@
 #include <cassert>
 #include <GL/glew.h>
 #include <iostream>
-#include "stb_image.h"
+#include "vendor/stb_image.h"
 #include "TextureParameters.h"
 
 namespace DerydocaEngine::Rendering

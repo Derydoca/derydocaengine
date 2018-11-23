@@ -3,7 +3,7 @@
 #include "Material.h"
 #include "MeshRenderer.h"
 #include "ShaderLibrary.h"
-#include "stb_image.h"
+#include "vendor/stb_image.h"
 #include "Texture.h"
 
 namespace DerydocaEngine::Components
