@@ -5,7 +5,7 @@
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 #include "AssimpUtils.h"
-#include "Skeleton.h"
+#include "Animation\Skeleton.h"
 #include "SkeletonResource.h"
 
 namespace DerydocaEngine::Resources::Serializers

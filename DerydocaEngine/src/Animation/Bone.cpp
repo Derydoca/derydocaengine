@@ -1,4 +1,4 @@
-#include "Bone.h"
+#include "Animation\Bone.h"
 
 namespace DerydocaEngine::Animation {
 	Bone::Bone() :

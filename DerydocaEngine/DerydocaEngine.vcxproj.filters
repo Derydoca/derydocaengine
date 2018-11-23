@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\AnimationData.cpp">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="src\AnimationResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
@@ -27,9 +24,6 @@
     </ClCompile>
     <ClCompile Include="src\BloomFilter.cpp">
       <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Bone.cpp">
-      <Filter>DerydocaEngine\Animation</Filter>
     </ClCompile>
     <ClCompile Include="src\ButtonState.cpp">
       <Filter>DerydocaEngine\Input</Filter>
@@ -226,9 +220,6 @@
     <ClCompile Include="src\ShaderSubroutineSwitcher.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\Skeleton.cpp">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="src\SkeletonResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
@@ -295,19 +286,19 @@
     <ClCompile Include="src\WoodSliceTexture.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
+    <ClCompile Include="src\Animation\AnimationData.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Bone.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Skeleton.cpp">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\YamlTools.h">
       <Filter>DerydocaEngine\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimationChannel.h">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimationData.h">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimationKey.h">
-      <Filter>DerydocaEngine\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\AnimationResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
@@ -335,9 +326,6 @@
     </ClInclude>
     <ClInclude Include="src\BloomFilter.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Bone.h">
-      <Filter>DerydocaEngine\Animation</Filter>
     </ClInclude>
     <ClInclude Include="src\ButtonState.h">
       <Filter>DerydocaEngine\Input</Filter>
@@ -585,9 +573,6 @@
     <ClInclude Include="src\ShaderSubroutineSwitcher.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\Skeleton.h">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="src\SkeletonResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
@@ -651,9 +636,6 @@
     <ClInclude Include="src\Transform.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
-    <ClInclude Include="src\VertexBoneWeights.h">
-      <Filter>DerydocaEngine\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="src\WasdMover.h">
       <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
@@ -668,6 +650,24 @@
     </ClInclude>
     <ClInclude Include="src\vendor\stb_image_write.h">
       <Filter>Third Party</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\AnimationChannel.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\AnimationData.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\AnimationKey.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\Bone.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\Skeleton.h">
+      <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\VertexBoneWeights.h">
+      <Filter>DerydocaEngine\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

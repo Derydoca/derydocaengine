@@ -7,8 +7,8 @@
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 
-#include "AnimationData.h"
-#include "Skeleton.h"
+#include "Animation\AnimationData.h"
+#include "Animation\Skeleton.h"
 
 namespace DerydocaEngine::Helpers::AssimpUtils
 {

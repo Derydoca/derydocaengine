@@ -190,7 +190,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\AnimationData.cpp" />
+    <ClCompile Include="src\Animation\AnimationData.cpp" />
     <ClCompile Include="src\AnimationResourceSerializer.cpp" />
     <ClCompile Include="src\AssimpUtils.cpp" />
     <ClCompile Include="src\BezierCurveRenderer.cpp" />
@@ -199,8 +199,8 @@
     <ClCompile Include="src\BezierPatchMeshFileSerializer.cpp" />
     <ClCompile Include="src\BezierPatchMeshResourceSerializer.cpp" />
     <ClCompile Include="src\BloomFilter.cpp" />
-    <ClCompile Include="src\Bone.cpp" />
-    <ClCompile Include="src\Skeleton.cpp" />
+    <ClCompile Include="src\Animation\Bone.cpp" />
+    <ClCompile Include="src\Animation\Skeleton.cpp" />
     <ClCompile Include="src\ButtonState.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\CameraManager.cpp" />
@@ -290,9 +290,9 @@
     <ClCompile Include="src\WoodSliceTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AnimationChannel.h" />
-    <ClInclude Include="src\AnimationData.h" />
-    <ClInclude Include="src\AnimationKey.h" />
+    <ClInclude Include="src\Animation\AnimationChannel.h" />
+    <ClInclude Include="src\Animation\AnimationData.h" />
+    <ClInclude Include="src\Animation\AnimationKey.h" />
     <ClInclude Include="src\AnimationResourceSerializer.h" />
     <ClInclude Include="src\AssimpUtils.h" />
     <ClInclude Include="src\BezierCurveRenderer.h" />
@@ -301,8 +301,8 @@
     <ClInclude Include="src\BezierPatchMeshFileSerializer.h" />
     <ClInclude Include="src\BezierPatchMeshResourceSerializer.h" />
     <ClInclude Include="src\BloomFilter.h" />
-    <ClInclude Include="src\Bone.h" />
-    <ClInclude Include="src\VertexBoneWeights.h" />
+    <ClInclude Include="src\Animation\Bone.h" />
+    <ClInclude Include="src\Animation\VertexBoneWeights.h" />
     <ClInclude Include="src\ButtonState.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CameraManager.h" />
@@ -385,7 +385,7 @@
     <ClInclude Include="src\ShaderResource.h" />
     <ClInclude Include="src\ShaderResourceSerializer.h" />
     <ClInclude Include="src\ShaderSubroutineSwitcher.h" />
-    <ClInclude Include="src\Skeleton.h" />
+    <ClInclude Include="src\Animation\Skeleton.h" />
     <ClInclude Include="src\SkeletonResource.h" />
     <ClInclude Include="src\SkeletonResourceSerializer.h" />
     <ClInclude Include="src\SkinnedMeshRenderer.h" />

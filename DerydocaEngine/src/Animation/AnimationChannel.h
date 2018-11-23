@@ -2,7 +2,7 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/vec3.hpp>
 #include <vector>
-#include "AnimationKey.h"
+#include "Animation\AnimationKey.h"
 
 namespace DerydocaEngine::Animation {
 

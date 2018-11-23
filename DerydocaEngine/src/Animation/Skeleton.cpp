@@ -1,4 +1,4 @@
-#include "Skeleton.h"
+#include "Animation\Skeleton.h"
 
 namespace DerydocaEngine::Animation {
 	Skeleton::Skeleton() :

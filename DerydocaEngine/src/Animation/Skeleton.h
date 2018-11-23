@@ -2,7 +2,7 @@
 #include <glm/mat4x4.hpp>
 #include <map>
 #include <vector>
-#include "Bone.h"
+#include "Animation\Bone.h"
 
 namespace DerydocaEngine::Animation {
 

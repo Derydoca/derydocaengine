@@ -1,7 +1,7 @@
 #pragma once
-#include "AnimationData.h"
+#include "Animation\AnimationData.h"
 #include "GameComponent.h"
-#include "Skeleton.h"
+#include "Animation\Skeleton.h"
 
 namespace DerydocaEngine {
 	namespace Components {

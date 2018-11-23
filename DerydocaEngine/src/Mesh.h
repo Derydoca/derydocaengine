@@ -3,10 +3,10 @@
 #include <glm/vec3.hpp>
 #include <string>
 
-#include "VertexBoneWeights.h"
+#include "Animation\VertexBoneWeights.h"
 #include "Color.h"
 #include "MeshFlags.h"
-#include "Skeleton.h"
+#include "Animation\Skeleton.h"
 
 namespace DerydocaEngine::Rendering
 {

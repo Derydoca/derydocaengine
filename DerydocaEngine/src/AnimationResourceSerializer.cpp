@@ -4,7 +4,7 @@
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
-#include "AnimationData.h"
+#include "Animation\AnimationData.h"
 #include "AnimationResource.h"
 #include "AssimpUtils.h"
 
