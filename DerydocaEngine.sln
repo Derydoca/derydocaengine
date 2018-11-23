@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.UI", "DerydocaEngine.Editor.UI\DerydocaEngine.Editor.UI.vcxproj", "{0E76525C-9706-43CD-801C-FDACA8F6C5E4}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine", "DerydocaEngine\DerydocaEngine.vcxproj", "{D0307648-A7A9-413C-A47C-D21474B321D1}"
 EndProject
 Global
@@ -21,6 +23,14 @@ Global
 		{D0307648-A7A9-413C-A47C-D21474B321D1}.Release|Win32.Build.0 = Release|Win32
 		{D0307648-A7A9-413C-A47C-D21474B321D1}.Release|x64.ActiveCfg = Release|x64
 		{D0307648-A7A9-413C-A47C-D21474B321D1}.Release|x64.Build.0 = Release|x64
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Debug|Win32.Build.0 = Debug|Win32
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Debug|x64.ActiveCfg = Debug|x64
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Debug|x64.Build.0 = Debug|x64
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Release|Win32.ActiveCfg = Release|Win32
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Release|Win32.Build.0 = Release|Win32
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Release|x64.ActiveCfg = Release|x64
+		{0E76525C-9706-43CD-801C-FDACA8F6C5E4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
