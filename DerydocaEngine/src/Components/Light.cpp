@@ -1,4 +1,4 @@
-#include "Light.h"
+#include "Components\Light.h"
 
 #include <GL\glew.h>
 #include <iostream>

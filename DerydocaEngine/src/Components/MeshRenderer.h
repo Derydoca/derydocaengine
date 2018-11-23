@@ -1,7 +1,5 @@
 #pragma once
-#include "Animation\AnimationData.h"
-#include "GameComponent.h"
-#include "Animation\Skeleton.h"
+#include "Components\GameComponent.h"
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -17,29 +15,27 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Components
 {
 
-	class SkinnedMeshRenderer : public GameComponent, SelfRegister<SkinnedMeshRenderer>
+	class MeshRenderer : public GameComponent, SelfRegister<MeshRenderer>
 	{
 	public:
-		GENINSTANCE(SkinnedMeshRenderer)
-		SkinnedMeshRenderer();
-		~SkinnedMeshRenderer();
+		GENINSTANCE(MeshRenderer)
+			MeshRenderer();
+		MeshRenderer(std::shared_ptr<Rendering::Mesh> const& mesh, Rendering::Material* const& material);
+		~MeshRenderer();
 		void render(Rendering::MatrixStack* const& matrixStack);
 		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
-		virtual void update(float const& deltaTime) { m_time += deltaTime; }
 		Rendering::Material* getMaterial() { return m_material; }
-		Camera* getSkinnedMeshRendererCamera() { return m_SkinnedMeshRendererCamera; }
+		Camera* getMeshRendererCamera() { return m_meshRendererCamera; }
 
 		void deserialize(YAML::Node const& compNode);
 
 		void init();
+		void setMesh(std::shared_ptr<Rendering::Mesh> const& mesh) { m_mesh = mesh; }
 		void setMaterial(Rendering::Material* const& material) { m_material = material; }
 	private:
 		std::shared_ptr<Rendering::Mesh> m_mesh;
 		Rendering::Material* m_material;
-		Camera* m_SkinnedMeshRendererCamera;
-		std::shared_ptr<Animation::AnimationData> m_animation;
-		float m_time = 0.0f;
-		std::vector<glm::mat4> m_boneMatrices;
+		Camera* m_meshRendererCamera;
 	};
 
 }

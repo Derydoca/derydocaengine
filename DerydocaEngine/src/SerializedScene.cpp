@@ -3,9 +3,9 @@
 #include <fstream>
 #include "ObjectLibrary.h"
 #include "YamlTools.h"
-#include "GameComponentFactory.h"
+#include "Components\GameComponentFactory.h"
 #include <iostream>
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 
 namespace DerydocaEngine::Scenes
 {

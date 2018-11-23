@@ -1,7 +1,7 @@
 #include "Display.h"
 
 #include <GL/glew.h>
-#include "Camera.h"
+#include "Components\Camera.h"
 #include "DisplayManager.h"
 #include "InputManager.h"
 

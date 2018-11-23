@@ -1,6 +1,6 @@
 #pragma once
-#include "GameComponent.h"
-#include "Camera.h"
+#include "Components\GameComponent.h"
+#include "Components\Camera.h"
 
 namespace DerydocaEngine::Ext
 {

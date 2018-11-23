@@ -1,7 +1,7 @@
 #pragma once
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "Texture.h"
-#include "MeshRenderer.h"
+#include "Components\MeshRenderer.h"
 
 namespace DerydocaEngine::Ext
 {

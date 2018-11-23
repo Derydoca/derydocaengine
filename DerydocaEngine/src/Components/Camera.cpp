@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "Components\Camera.h"
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>

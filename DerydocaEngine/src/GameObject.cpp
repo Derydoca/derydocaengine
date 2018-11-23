@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "MatrixStack.h"
 
 namespace DerydocaEngine

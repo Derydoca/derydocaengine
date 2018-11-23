@@ -2,7 +2,7 @@
 #include <glm\vec2.hpp>
 #include <glm\vec3.hpp>
 #include "Color.h"
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "Mesh.h"
 
 namespace DerydocaEngine::Components

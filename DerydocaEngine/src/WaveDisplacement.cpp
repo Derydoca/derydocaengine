@@ -1,7 +1,7 @@
 #include "WaveDisplacement.h"
 
 #include "Material.h"
-#include "MeshRenderer.h"
+#include "Components\MeshRenderer.h"
 
 namespace DerydocaEngine::Ext
 {

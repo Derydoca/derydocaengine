@@ -2,7 +2,7 @@
 
 #include <boost/filesystem.hpp>
 #include "Material.h"
-#include "MeshRenderer.h"
+#include "Components\MeshRenderer.h"
 #include "Shader.h"
 #include "TessellatedMeshRenderer.h"
 #include "SkinnedMeshRenderer.h"

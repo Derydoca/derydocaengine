@@ -1,6 +1,6 @@
 #pragma once
 #include <glm\glm.hpp>
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "Texture.h"
 #include "Material.h"
 

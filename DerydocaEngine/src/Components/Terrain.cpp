@@ -1,7 +1,7 @@
 #include "Terrain.h"
 
 #include "Material.h"
-#include "MeshRenderer.h"
+#include "Components\MeshRenderer.h"
 #include "ShaderLibrary.h"
 #include "vendor/stb_image.h"
 #include "Texture.h"

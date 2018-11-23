@@ -1,7 +1,7 @@
 #pragma once
 #include <glm\glm.hpp>
-#include "Transform.h"
-#include "GameComponent.h"
+#include "Components\Transform.h"
+#include "Components\GameComponent.h"
 
 namespace DerydocaEngine {
 	namespace Input {

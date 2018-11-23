@@ -2,7 +2,7 @@
 
 #include <yaml-cpp/yaml.h>
 #include "Color.h"
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "GameObject.h"
 #include "MatrixStack.h"
 #include "Projection.h"

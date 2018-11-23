@@ -1,5 +1,5 @@
 #pragma once
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "glm\glm.hpp"
 #include "material.h"
 

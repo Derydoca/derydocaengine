@@ -2,7 +2,7 @@
 #include <glm\glm.hpp>
 #include "DebugLine.h"
 #include "Shader.h"
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 
 namespace DerydocaEngine::Debug {
 

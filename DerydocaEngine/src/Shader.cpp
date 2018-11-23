@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <sys/stat.h>
-#include "Camera.h"
+#include "Components\Camera.h"
 #include "CameraManager.h"
 #include "GLError.h"
 #include "MatrixStack.h"
@@ -12,7 +12,7 @@
 #include "RenderPass.h"
 #include "RenderTexture.h"
 #include "Texture.h"
-#include "Transform.h"
+#include "Components\Transform.h"
 
 namespace DerydocaEngine::Rendering
 {

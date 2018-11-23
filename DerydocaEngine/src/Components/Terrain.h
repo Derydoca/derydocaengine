@@ -1,5 +1,5 @@
 #pragma once
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "MatrixStack.h"
 #include "Mesh.h"
 

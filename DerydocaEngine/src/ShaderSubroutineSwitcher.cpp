@@ -2,7 +2,7 @@
 
 #include <gl\glew.h>
 #include <iostream>
-#include "MeshRenderer.h"
+#include "Components\MeshRenderer.h"
 #include "Shader.h"
 
 namespace DerydocaEngine::Ext

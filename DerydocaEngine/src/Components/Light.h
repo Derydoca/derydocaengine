@@ -1,10 +1,10 @@
 #pragma once
 
 #include <glm\mat4x4.hpp>
-#include "GameComponent.h"
+#include "Components\GameComponent.h"
 #include "Color.h"
 #include "MatrixStack.h"
-#include "Transform.h"
+#include "Components\Transform.h"
 #include "Projection.h"
 
 namespace DerydocaEngine::Rendering {

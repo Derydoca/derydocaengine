@@ -28,9 +28,6 @@
     <ClCompile Include="src\ButtonState.cpp">
       <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\CameraManager.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
@@ -73,12 +70,6 @@
     <ClCompile Include="src\FontFileSerializer.cpp">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="src\FrameStats.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameComponentFactory.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObject.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
@@ -112,14 +103,8 @@
     <ClCompile Include="src\Keyboard.cpp">
       <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\KeyboardMover.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\LevelFileSerializer.cpp">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Light.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\LightManager.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -129,9 +114,6 @@
     </ClCompile>
     <ClCompile Include="src\MaterialFileSerializer.cpp">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MaterialRefresher.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\MaterialResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
@@ -144,9 +126,6 @@
     </ClCompile>
     <ClCompile Include="src\MeshFileSerializer.cpp">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MeshRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\MeshResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
@@ -184,9 +163,6 @@
     <ClCompile Include="src\RasterFontFileSerializer.cpp">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="src\RendererComponent.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\RenderTexture.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
@@ -195,12 +171,6 @@
     </ClCompile>
     <ClCompile Include="src\ResourceSerializerLibrary.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rotator.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ScreenshotUtil.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\SerializedScene.cpp">
       <Filter>DerydocaEngine\Scenes</Filter>
@@ -223,14 +193,8 @@
     <ClCompile Include="src\SkeletonResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="src\SkinnedMeshRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\Skybox.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SpriteRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\SpriteSheet.cpp">
       <Filter>DerydocaEngine\UI</Filter>
@@ -244,17 +208,11 @@
     <ClCompile Include="src\StringUtils.cpp">
       <Filter>DerydocaEngine\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="src\Terrain.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\TessellatedMeshRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="src\TessellatingQuad.cpp">
       <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TextRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Texture.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -274,12 +232,6 @@
     <ClCompile Include="src\TextureResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="src\Transform.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WasdMover.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\WaveDisplacement.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -294,6 +246,54 @@
     </ClCompile>
     <ClCompile Include="src\Animation\Skeleton.cpp">
       <Filter>DerydocaEngine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Camera.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\FrameStats.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\GameComponentFactory.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\KeyboardMover.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Light.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\MaterialRefresher.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\MeshRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\RendererComponent.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Rotator.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\ScreenshotUtil.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\SkinnedMeshRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\SpriteRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Terrain.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\TextRenderer.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Transform.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\WasdMover.cpp">
+      <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,9 +329,6 @@
     </ClInclude>
     <ClInclude Include="src\ButtonState.h">
       <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\CameraManager.h">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -384,15 +381,6 @@
     <ClInclude Include="src\FontFileSerializer.h">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="src\FrameStats.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameComponent.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameComponentFactory.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObject.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
@@ -426,14 +414,8 @@
     <ClInclude Include="src\Keyboard.h">
       <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="src\KeyboardMover.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\LevelFileSerializer.h">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\LightManager.h">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -449,9 +431,6 @@
     </ClInclude>
     <ClInclude Include="src\MaterialFileSerializer.h">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MaterialRefresher.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\MaterialResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
@@ -470,9 +449,6 @@
     </ClInclude>
     <ClInclude Include="src\MeshFlags.h">
       <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MeshRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
@@ -519,9 +495,6 @@
     <ClInclude Include="src\Rectangle.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\RendererComponent.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\RenderPass.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
@@ -540,17 +513,11 @@
     <ClInclude Include="src\ResourceType.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rotator.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\Scene.h">
       <Filter>DerydocaEngine\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\SceneObject.h">
       <Filter>DerydocaEngine\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ScreenshotUtil.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\SerializedScene.h">
       <Filter>DerydocaEngine\Scenes</Filter>
@@ -579,17 +546,11 @@
     <ClInclude Include="src\SkeletonResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="src\SkinnedMeshRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\Skybox.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\SpriteReference.h">
       <Filter>DerydocaEngine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SpriteRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\SpriteSheet.h">
       <Filter>DerydocaEngine\UI</Filter>
@@ -603,17 +564,11 @@
     <ClInclude Include="src\StringUtils.h">
       <Filter>DerydocaEngine\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="src\Terrain.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
     <ClInclude Include="src\TessellatedMeshRenderer.h">
       <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="src\TessellatingQuad.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TextRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Texture.h">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -632,12 +587,6 @@
     </ClInclude>
     <ClInclude Include="src\TextureResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Transform.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WasdMover.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\WaveDisplacement.h">
       <Filter>Ext</Filter>
@@ -668,6 +617,57 @@
     </ClInclude>
     <ClInclude Include="src\Animation\VertexBoneWeights.h">
       <Filter>DerydocaEngine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Camera.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\FrameStats.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\GameComponent.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\GameComponentFactory.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\KeyboardMover.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Light.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\MaterialRefresher.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\MeshRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\RendererComponent.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Rotator.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\ScreenshotUtil.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\SkinnedMeshRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\SpriteRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Terrain.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\TextRenderer.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Transform.h">
+      <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\WasdMover.h">
+      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

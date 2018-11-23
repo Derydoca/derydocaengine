@@ -1,6 +1,6 @@
-#include "MeshRenderer.h"
+#include "SkinnedMeshRenderer.h"
 
-#include "Camera.h"
+#include "Components\Camera.h"
 #include "CameraManager.h"
 #include "GameObject.h"
 #include "LightManager.h"
@@ -9,33 +9,29 @@
 #include "RenderTexture.h"
 #include "Shader.h"
 #include "ShaderLibrary.h"
+#include "SkeletonResourceSerializer.h"
 #include "Texture.h"
-#include "Transform.h"
+#include "Components\Transform.h"
 
 namespace DerydocaEngine::Components
 {
 
-	MeshRenderer::MeshRenderer()
+	SkinnedMeshRenderer::SkinnedMeshRenderer()
 	{
 	}
 
-	MeshRenderer::MeshRenderer(std::shared_ptr<Rendering::Mesh> const& mesh, Rendering::Material* const& material) :
-		m_mesh(mesh),
-		m_material(material)
+	SkinnedMeshRenderer::~SkinnedMeshRenderer()
 	{
 	}
 
-	MeshRenderer::~MeshRenderer()
-	{
-	}
-
-	void MeshRenderer::deserialize(YAML::Node const& compNode)
+	void SkinnedMeshRenderer::deserialize(YAML::Node const& compNode)
 	{
 		auto material = getResourceObject<Rendering::Material>(compNode, "Material");
 		setMaterial(material);
 
-		auto mesh = getResourcePointer<Rendering::Mesh>(compNode, "Mesh");
-		setMesh(mesh);
+		m_mesh = getResourcePointer<Rendering::Mesh>(compNode, "Mesh");
+
+		m_animation = getResourcePointer<Animation::AnimationData>(compNode, "Animation");
 
 		YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];
 		if (renderTextureSourceNode && renderTextureSourceNode.IsScalar())
@@ -49,21 +45,26 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
-			m_meshRendererCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
-			material->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
+			m_SkinnedMeshRendererCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
+			material->setTexture(renderTextureName, m_SkinnedMeshRendererCamera->getRenderTexture());
 		}
 	}
 
-	void MeshRenderer::init()
+	void SkinnedMeshRenderer::init()
 	{
+		m_boneMatrices.resize(m_mesh->getSkeleton()->getNumBones());
+		m_animation->optimizeForSkeleton(m_mesh->getSkeleton());
 	}
 
-	void MeshRenderer::render(Rendering::MatrixStack* const& matrixStack)
+	void SkinnedMeshRenderer::render(Rendering::MatrixStack* const& matrixStack)
 	{
 		assert(getGameObject());
 
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
+		m_animation->loadPose(m_time, m_boneMatrices, m_mesh->getSkeleton());
+		m_material->setMat4Array("BoneMatrices", m_boneMatrices);
+
 		Rendering::LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());
 
 		m_mesh->draw();
@@ -71,7 +72,7 @@ namespace DerydocaEngine::Components
 		m_material->unbind();
 	}
 
-	void MeshRenderer::renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform)
+	void SkinnedMeshRenderer::renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform)
 	{
 		material->bind();
 		material->getShader()->update(matrixStack, projection, projectionTransform);

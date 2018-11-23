@@ -6,7 +6,7 @@
 #include <string>
 #include "glm/glm.hpp"
 #include "YamlTools.h"
-#include "Camera.h"
+#include "Components\Camera.h"
 
 namespace DerydocaEngine::Settings
 {

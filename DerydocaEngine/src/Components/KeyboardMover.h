@@ -1,7 +1,7 @@
 #pragma once
 #include "Keyboard.h"
-#include "GameComponent.h"
-#include "Transform.h"
+#include "Components\GameComponent.h"
+#include "Components\Transform.h"
 
 namespace DerydocaEngine::Components
 {

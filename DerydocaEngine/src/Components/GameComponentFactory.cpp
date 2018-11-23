@@ -1,4 +1,4 @@
-#include "GameComponentFactory.h"
+#include "Components\GameComponentFactory.h"
 
 namespace DerydocaEngine::Components
 {

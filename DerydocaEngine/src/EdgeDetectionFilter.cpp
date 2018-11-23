@@ -1,7 +1,7 @@
 #include "EdgeDetectionFilter.h"
-#include "Camera.h"
+#include "Components\Camera.h"
 #include "RenderTexture.h"
-#include "MeshRenderer.h"
+#include "Components\MeshRenderer.h"
 #include "Shader.h"
 #include <iostream>
 

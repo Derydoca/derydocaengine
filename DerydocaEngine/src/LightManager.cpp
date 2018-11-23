@@ -2,12 +2,12 @@
 
 #include <GL\glew.h>
 #include <glm\glm.hpp>
-#include "Camera.h"
+#include "Components\Camera.h"
 #include "CameraManager.h"
 #include "GameObject.h"
-#include "Light.h"
+#include "Components\Light.h"
 #include "Shader.h"
-#include "Transform.h"
+#include "Components\Transform.h"
 
 namespace DerydocaEngine::Rendering
 {
