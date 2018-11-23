@@ -37,9 +37,6 @@
     <ClCompile Include="src\CubemapResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="src\DebugVisualizer.cpp">
-      <Filter>DerydocaEngine\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="src\Display.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
@@ -78,9 +75,6 @@
     </ClCompile>
     <ClCompile Include="src\GaussianBlurFilter.cpp">
       <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GLError.cpp">
-      <Filter>DerydocaEngine\Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\ImageFileSerializer.cpp">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
@@ -295,6 +289,12 @@
     <ClCompile Include="src\Components\WasdMover.cpp">
       <Filter>DerydocaEngine\Components</Filter>
     </ClCompile>
+    <ClCompile Include="src\Debug\DebugVisualizer.cpp">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Debug\GLError.cpp">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\YamlTools.h">
@@ -345,12 +345,6 @@
     <ClInclude Include="src\CubemapResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="src\DebugLine.h">
-      <Filter>DerydocaEngine\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DebugVisualizer.h">
-      <Filter>DerydocaEngine\Debug</Filter>
-    </ClInclude>
     <ClInclude Include="src\Display.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
@@ -389,9 +383,6 @@
     </ClInclude>
     <ClInclude Include="src\GaussianBlurFilter.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GLError.h">
-      <Filter>DerydocaEngine\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\ImageFileSerializer.h">
       <Filter>DerydocaEngine\Files\Serializers</Filter>
@@ -668,6 +659,15 @@
     </ClInclude>
     <ClInclude Include="src\DataStructures\LinkedList.h">
       <Filter>DerydocaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Debug\DebugLine.h">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Debug\DebugVisualizer.h">
+      <Filter>DerydocaEngine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Debug\GLError.h">
+      <Filter>DerydocaEngine\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

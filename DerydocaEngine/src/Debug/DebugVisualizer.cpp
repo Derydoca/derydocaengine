@@ -1,4 +1,4 @@
-#include "DebugVisualizer.h"
+#include "Debug\DebugVisualizer.h"
 
 #include <GL/glew.h>
 #include "Components\Camera.h"

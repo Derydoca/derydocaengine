@@ -1,6 +1,6 @@
 #pragma once
 #include <glm\glm.hpp>
-#include "DebugLine.h"
+#include "Debug\DebugLine.h"
 #include "Shader.h"
 #include "Components\GameComponent.h"
 

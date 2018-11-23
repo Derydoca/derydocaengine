@@ -206,7 +206,7 @@
     <ClCompile Include="src\CameraManager.cpp" />
     <ClCompile Include="src\Clock.cpp" />
     <ClCompile Include="src\CubemapResourceSerializer.cpp" />
-    <ClCompile Include="src\DebugVisualizer.cpp" />
+    <ClCompile Include="src\Debug\DebugVisualizer.cpp" />
     <ClCompile Include="src\Display.cpp" />
     <ClCompile Include="src\DisplayManager.cpp" />
     <ClCompile Include="src\EdgeDetectionFilter.cpp" />
@@ -219,7 +219,7 @@
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\GammaCorrectionFilter.cpp" />
     <ClCompile Include="src\GaussianBlurFilter.cpp" />
-    <ClCompile Include="src\GLError.cpp" />
+    <ClCompile Include="src\Debug\GLError.cpp" />
     <ClCompile Include="src\ImageFileSerializer.cpp" />
     <ClCompile Include="src\ImageProjector.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
@@ -310,8 +310,8 @@
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\CubemapResource.h" />
     <ClInclude Include="src\CubemapResourceSerializer.h" />
-    <ClInclude Include="src\DebugLine.h" />
-    <ClInclude Include="src\DebugVisualizer.h" />
+    <ClInclude Include="src\Debug\DebugLine.h" />
+    <ClInclude Include="src\Debug\DebugVisualizer.h" />
     <ClInclude Include="src\Display.h" />
     <ClInclude Include="src\DisplayManager.h" />
     <ClInclude Include="src\EdgeDetectionFilter.h" />
@@ -324,7 +324,7 @@
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\GammaCorrectionFilter.h" />
     <ClInclude Include="src\GaussianBlurFilter.h" />
-    <ClInclude Include="src\GLError.h" />
+    <ClInclude Include="src\Debug\GLError.h" />
     <ClInclude Include="src\Components\GameComponent.h" />
     <ClInclude Include="src\AnimationResource.h" />
     <ClInclude Include="src\ImageFileSerializer.h" />

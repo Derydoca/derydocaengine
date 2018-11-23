@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include "Components\Camera.h"
 #include "CameraManager.h"
-#include "GLError.h"
+#include "Debug\DebugVisualizer.h"
 #include "MatrixStack.h"
 #include "Mesh.h"
 #include "RenderPass.h"

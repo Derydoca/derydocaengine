@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 #include "MeshAdjacencyCalculator.h"
-#include "GLError.h"
+#include "Debug\DebugVisualizer.h"
 
 namespace DerydocaEngine::Rendering
 {
