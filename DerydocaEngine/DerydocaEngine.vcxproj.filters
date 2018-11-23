@@ -420,12 +420,6 @@
     <ClInclude Include="src\LightManager.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\LinkedList.h">
-      <Filter>DerydocaEngine\DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\LinkedListNode.h">
-      <Filter>DerydocaEngine\DataStructures</Filter>
-    </ClInclude>
     <ClInclude Include="src\Material.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
@@ -668,6 +662,12 @@
     </ClInclude>
     <ClInclude Include="src\Components\WasdMover.h">
       <Filter>DerydocaEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\LinkedListNode.h">
+      <Filter>DerydocaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\LinkedList.h">
+      <Filter>DerydocaEngine\DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

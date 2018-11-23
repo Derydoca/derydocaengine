@@ -338,8 +338,8 @@
     <ClInclude Include="src\LevelFileSerializer.h" />
     <ClInclude Include="src\Components\Light.h" />
     <ClInclude Include="src\LightManager.h" />
-    <ClInclude Include="src\LinkedList.h" />
-    <ClInclude Include="src\LinkedListNode.h" />
+    <ClInclude Include="src\DataStructures\LinkedList.h" />
+    <ClInclude Include="src\DataStructures\LinkedListNode.h" />
     <ClInclude Include="src\Material.h" />
     <ClInclude Include="src\Components\MaterialRefresher.h" />
     <ClInclude Include="src\MaterialFileSerializer.h" />
