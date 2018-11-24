@@ -1,17 +1,18 @@
 #pragma once
-#include "FileTypeSerializer.h"
+#include "Files\Serializers\FileTypeSerializer.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
-	class FontFileSerializer : public FileTypeSerializer
+	class ShaderFileSerializer : public FileTypeSerializer
 	{
 	public:
-		FontFileSerializer() {}
-		~FontFileSerializer() {}
+		ShaderFileSerializer() {};
+		~ShaderFileSerializer() {};
 
 		YAML::Node generateResourceNodes(std::string const& filePath);
 		Files::FileType getFileType();
 		Resources::Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
+		void postLoadInitialize(Resources::Resource* const& resource);
 	};
 
 }

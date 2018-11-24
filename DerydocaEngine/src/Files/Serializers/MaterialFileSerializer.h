@@ -1,5 +1,5 @@
 #pragma once
-#include "FileTypeSerializer.h"
+#include "Files\Serializers\FileTypeSerializer.h"
 
 namespace DerydocaEngine::Files::Serializers {
 

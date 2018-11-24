@@ -1,13 +1,13 @@
 #pragma once
-#include "FileTypeSerializer.h"
+#include "Files\Serializers\FileTypeSerializer.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
-	class SpriteSheetFileSerializer : public FileTypeSerializer
+	class RasterFontFileSerializer : public FileTypeSerializer
 	{
 	public:
-		SpriteSheetFileSerializer() {}
-		~SpriteSheetFileSerializer() {}
+		RasterFontFileSerializer() {}
+		~RasterFontFileSerializer() {}
 
 		YAML::Node generateResourceNodes(std::string const& filePath);
 		Files::FileType getFileType();

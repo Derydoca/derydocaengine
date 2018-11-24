@@ -1,4 +1,4 @@
-#include "FileType.h"
+#include "Files\FileType.h"
 #include "StringUtils.h"
 
 namespace DerydocaEngine::Files

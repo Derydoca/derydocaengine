@@ -1,14 +1,15 @@
-#include "FileSerializerLibrary.h"
+#include "Files\Serializers\FileSerializerLibrary.h"
 
-#include "MaterialFileSerializer.h"
-#include "MeshFileSerializer.h"
-#include "ImageFileSerializer.h"
-#include "LevelFileSerializer.h"
-#include "ShaderFileSerializer.h"
-#include "BezierPatchMeshFileSerializer.h"
-#include "FontFileSerializer.h"
-#include "RasterFontFileSerializer.h"
-#include "SpriteSheetFileSerializer.h"
+#include "Files\Serializers\BezierPatchMeshFileSerializer.h"
+#include "Files\Serializers\FileTypeSerializer.h"
+#include "Files\Serializers\FontFileSerializer.h"
+#include "Files\Serializers\ImageFileSerializer.h"
+#include "Files\Serializers\LevelFileSerializer.h"
+#include "Files\Serializers\MaterialFileSerializer.h"
+#include "Files\Serializers\MeshFileSerializer.h"
+#include "Files\Serializers\RasterFontFileSerializer.h"
+#include "Files\Serializers\ShaderFileSerializer.h"
+#include "Files\Serializers\SpriteSheetFileSerializer.h"
 
 namespace DerydocaEngine::Files::Serializers {
 

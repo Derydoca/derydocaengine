@@ -1,5 +1,5 @@
 #include "Resource.h"
-#include "FileSerializerLibrary.h"
+#include "Files\Serializers\FileSerializerLibrary.h"
 #include "ResourceSerializerLibrary.h"
 
 namespace DerydocaEngine::Resources

@@ -1,4 +1,4 @@
-#include "BezierPatchMeshFileSerializer.h"
+#include "Files\Serializers\BezierPatchMeshFileSerializer.h"
 #include "Resource.h"
 
 namespace DerydocaEngine::Files::Serializers {

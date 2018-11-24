@@ -1,4 +1,4 @@
-#include "RasterFontFileSerializer.h"
+#include "Files\Serializers\RasterFontFileSerializer.h"
 #include "Resource.h"
 
 namespace DerydocaEngine::Files::Serializers {

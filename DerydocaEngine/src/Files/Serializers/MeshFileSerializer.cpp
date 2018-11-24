@@ -1,4 +1,4 @@
-#include "MeshFileSerializer.h"
+#include "Files\Serializers\MeshFileSerializer.h"
 
 #include <assimp/Importer.hpp>
 #include "AssimpUtils.h"

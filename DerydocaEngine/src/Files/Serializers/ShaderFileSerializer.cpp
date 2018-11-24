@@ -1,4 +1,4 @@
-#include "ShaderFileSerializer.h"
+#include "Files\Serializers\ShaderFileSerializer.h"
 #include "ShaderResource.h"
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/convenience.hpp>
