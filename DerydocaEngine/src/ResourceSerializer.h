@@ -2,7 +2,7 @@
 #include <iostream>
 #include "ResourceType.h"
 #include "yaml-cpp\yaml.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 #include "ObjectLibrary.h"
 #include "Resource.h"
 

@@ -2,7 +2,7 @@
 #include "vendor/stb_image.h"
 #include "vendor/stb_image_write.h"
 #include "ObjectLibrary.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 #include <yaml-cpp/yaml.h>
 #include <boost/lexical_cast.hpp>
 #include <fstream>

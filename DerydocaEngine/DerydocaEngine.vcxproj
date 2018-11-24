@@ -192,7 +192,7 @@
   <ItemGroup>
     <ClCompile Include="src\Animation\AnimationData.cpp" />
     <ClCompile Include="src\AnimationResourceSerializer.cpp" />
-    <ClCompile Include="src\AssimpUtils.cpp" />
+    <ClCompile Include="src\Helpers\AssimpUtils.cpp" />
     <ClCompile Include="src\BezierCurveRenderer.cpp" />
     <ClCompile Include="src\BezierPatchMesh.cpp" />
     <ClCompile Include="src\BezierPatchMeshFileLoader.cpp" />
@@ -271,7 +271,7 @@
     <ClCompile Include="src\SpriteSheet.cpp" />
     <ClCompile Include="src\Files\Serializers\SpriteSheetFileSerializer.cpp" />
     <ClCompile Include="src\SpriteSheetResourceSerializer.cpp" />
-    <ClCompile Include="src\StringUtils.cpp" />
+    <ClCompile Include="src\Helpers\StringUtils.cpp" />
     <ClCompile Include="src\Components\Terrain.cpp" />
     <ClCompile Include="src\TessellatedMeshRenderer.cpp" />
     <ClCompile Include="src\TessellatingQuad.cpp" />
@@ -293,7 +293,7 @@
     <ClInclude Include="src\Animation\AnimationData.h" />
     <ClInclude Include="src\Animation\AnimationKey.h" />
     <ClInclude Include="src\AnimationResourceSerializer.h" />
-    <ClInclude Include="src\AssimpUtils.h" />
+    <ClInclude Include="src\Helpers\AssimpUtils.h" />
     <ClInclude Include="src\BezierCurveRenderer.h" />
     <ClInclude Include="src\BezierPatchMesh.h" />
     <ClInclude Include="src\BezierPatchMeshFileLoader.h" />
@@ -395,7 +395,7 @@
     <ClInclude Include="src\SpriteSheetResourceSerializer.h" />
     <ClInclude Include="src\vendor\stb_image_write.h" />
     <ClInclude Include="src\vendor\stb_image.h" />
-    <ClInclude Include="src\StringUtils.h" />
+    <ClInclude Include="src\Helpers\StringUtils.h" />
     <ClInclude Include="src\Components\Terrain.h" />
     <ClInclude Include="src\TessellatedMeshRenderer.h" />
     <ClInclude Include="src\TessellatingQuad.h" />
@@ -411,7 +411,7 @@
     <ClInclude Include="src\Components\WasdMover.h" />
     <ClInclude Include="src\WaveDisplacement.h" />
     <ClInclude Include="src\WoodSliceTexture.h" />
-    <ClInclude Include="src\YamlTools.h" />
+    <ClInclude Include="src\Helpers\YamlTools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

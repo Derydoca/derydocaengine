@@ -2,7 +2,7 @@
 
 #include "Material.h"
 #include "Shader.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 
 namespace DerydocaEngine::Components
 {

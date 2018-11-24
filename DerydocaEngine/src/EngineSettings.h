@@ -5,7 +5,7 @@
 #include <boost\uuid\uuid.hpp>
 #include <string>
 #include "glm/glm.hpp"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 #include "Components\Camera.h"
 
 namespace DerydocaEngine::Settings

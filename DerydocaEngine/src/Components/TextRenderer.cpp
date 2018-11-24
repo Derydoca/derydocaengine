@@ -2,7 +2,7 @@
 
 #include "Material.h"
 #include "TexturePackerImage.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 
 namespace DerydocaEngine::Components
 {

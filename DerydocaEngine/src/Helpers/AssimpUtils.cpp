@@ -1,4 +1,4 @@
-#include "AssimpUtils.h"
+#include "Helpers\AssimpUtils.h"
 #include "Animation\AnimationChannel.h"
 
 namespace DerydocaEngine::Helpers::AssimpUtils {

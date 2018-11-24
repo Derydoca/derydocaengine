@@ -2,7 +2,7 @@
 #include "TexturePacker.h"
 #include "Texture.h"
 #include "yaml-cpp\yaml.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 #include <fstream>
 #include "vendor/stb_image.h"
 #include "vendor/stb_image_write.h"

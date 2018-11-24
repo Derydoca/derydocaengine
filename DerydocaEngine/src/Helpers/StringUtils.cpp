@@ -1,4 +1,4 @@
-#include "StringUtils.h"
+#include "Helpers\StringUtils.h"
 #include <boost/algorithm/string.hpp>
 
 namespace DerydocaEngine

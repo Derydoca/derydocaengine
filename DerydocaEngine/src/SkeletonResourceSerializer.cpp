@@ -4,7 +4,7 @@
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
-#include "AssimpUtils.h"
+#include "Helpers\AssimpUtils.h"
 #include "Animation\Skeleton.h"
 #include "SkeletonResource.h"
 

@@ -1,7 +1,7 @@
 #include "BezierCurveRenderer.h"
 
 #include <GL/glew.h>
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 #include "Shader.h"
 
 namespace DerydocaEngine::Ext

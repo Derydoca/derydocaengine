@@ -6,7 +6,7 @@
 #include "assimp\postprocess.h"
 #include "Animation\AnimationData.h"
 #include "AnimationResource.h"
-#include "AssimpUtils.h"
+#include "Helpers\AssimpUtils.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {

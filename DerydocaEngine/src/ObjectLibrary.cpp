@@ -4,9 +4,9 @@
 #include <boost\filesystem.hpp>
 #include <boost\uuid\uuid_generators.hpp>
 #include "Files\Serializers\FileSerializerLibrary.h"
-#include "StringUtils.h"
+#include "Helpers\StringUtils.h"
 #include "yaml-cpp\yaml.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 #include "Files\FileType.h"
 
 namespace DerydocaEngine

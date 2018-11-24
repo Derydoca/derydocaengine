@@ -1,5 +1,5 @@
 #include "Files\FileType.h"
-#include "StringUtils.h"
+#include "Helpers\StringUtils.h"
 
 namespace DerydocaEngine::Files
 {

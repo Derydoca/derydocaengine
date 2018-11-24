@@ -6,7 +6,7 @@
 #include "Resource.h"
 #include "Texture.h"
 #include "TextureParameters.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 
 namespace DerydocaEngine::Ext
 {

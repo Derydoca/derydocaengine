@@ -3,7 +3,7 @@
 #include <boost/uuid/uuid.hpp>
 #include "Files\FileType.h"
 #include "yaml-cpp\yaml.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 
 namespace DerydocaEngine::Resources {
 	struct Resource;

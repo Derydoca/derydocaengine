@@ -6,7 +6,7 @@
 #include "Components\GameComponentFactory.h"
 #include "GameObject.h"
 #include "ObjectLibrary.h"
-#include "YamlTools.h"
+#include "Helpers\YamlTools.h"
 
 struct Resource;
 

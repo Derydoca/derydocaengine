@@ -4,9 +4,6 @@
     <ClCompile Include="src\AnimationResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="src\AssimpUtils.cpp">
-      <Filter>DerydocaEngine\Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="src\BezierCurveRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -160,9 +157,6 @@
     <ClCompile Include="src\SpriteSheetResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
-    <ClCompile Include="src\StringUtils.cpp">
-      <Filter>DerydocaEngine\Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="src\TessellatedMeshRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -292,19 +286,19 @@
     <ClCompile Include="src\Files\FileType.cpp">
       <Filter>DerydocaEngine\Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Helpers\AssimpUtils.cpp">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helpers\StringUtils.cpp">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\YamlTools.h">
-      <Filter>DerydocaEngine\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="src\AnimationResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\AnimationResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AssimpUtils.h">
-      <Filter>DerydocaEngine\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="src\BezierCurveRenderer.h">
       <Filter>Ext</Filter>
@@ -504,9 +498,6 @@
     <ClInclude Include="src\SpriteSheetResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
-    <ClInclude Include="src\StringUtils.h">
-      <Filter>DerydocaEngine\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="src\TessellatedMeshRenderer.h">
       <Filter>Ext</Filter>
     </ClInclude>
@@ -662,6 +653,15 @@
     </ClInclude>
     <ClInclude Include="src\Files\FileType.h">
       <Filter>DerydocaEngine\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helpers\AssimpUtils.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helpers\StringUtils.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helpers\YamlTools.h">
+      <Filter>DerydocaEngine\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

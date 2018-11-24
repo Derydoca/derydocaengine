@@ -1,7 +1,7 @@
 #include "Files\Serializers\MeshFileSerializer.h"
 
 #include <assimp/Importer.hpp>
-#include "AssimpUtils.h"
+#include "Helpers\AssimpUtils.h"
 #include "Mesh.h"
 #include "MeshResource.h"
 #include "SkeletonResource.h"
