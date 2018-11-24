@@ -16,9 +16,6 @@
     <ClCompile Include="src\BloomFilter.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\Clock.cpp">
-      <Filter>DerydocaEngine\Timing</Filter>
-    </ClCompile>
     <ClCompile Include="src\EdgeDetectionFilter.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -292,6 +289,9 @@
     <ClCompile Include="src\Settings\EngineSettings.cpp">
       <Filter>DerydocaEngine\Settings</Filter>
     </ClCompile>
+    <ClCompile Include="src\Timing\Clock.cpp">
+      <Filter>DerydocaEngine\Timing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BezierCurveRenderer.h">
@@ -308,9 +308,6 @@
     </ClInclude>
     <ClInclude Include="src\BloomFilter.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Clock.h">
-      <Filter>DerydocaEngine\Timing</Filter>
     </ClInclude>
     <ClInclude Include="src\Color.h">
       <Filter>DerydocaEngine</Filter>
@@ -662,6 +659,9 @@
     </ClInclude>
     <ClInclude Include="src\Settings\EngineSettings.h">
       <Filter>DerydocaEngine\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Timing\Clock.h">
+      <Filter>DerydocaEngine\Timing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

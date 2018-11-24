@@ -204,7 +204,7 @@
     <ClCompile Include="src\Input\ButtonState.cpp" />
     <ClCompile Include="src\Components\Camera.cpp" />
     <ClCompile Include="src\Rendering\CameraManager.cpp" />
-    <ClCompile Include="src\Clock.cpp" />
+    <ClCompile Include="src\Timing\Clock.cpp" />
     <ClCompile Include="src\Resources\Serializers\CubemapResourceSerializer.cpp" />
     <ClCompile Include="src\Debug\DebugVisualizer.cpp" />
     <ClCompile Include="src\Rendering\Display.cpp" />
@@ -305,7 +305,7 @@
     <ClInclude Include="src\Input\ButtonState.h" />
     <ClInclude Include="src\Components\Camera.h" />
     <ClInclude Include="src\Rendering\CameraManager.h" />
-    <ClInclude Include="src\Clock.h" />
+    <ClInclude Include="src\Timing\Clock.h" />
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\Resources\CubemapResource.h" />
     <ClInclude Include="src\Resources\Serializers\CubemapResourceSerializer.h" />

@@ -5,7 +5,7 @@
 #include <sdl2\SDL.h>
 #include "Components\Camera.h"
 #include "Rendering\CameraManager.h"
-#include "Clock.h"
+#include "Timing\Clock.h"
 #include "Resources\CubemapResource.h"
 #include "Rendering\Display.h"
 #include "Settings\EngineSettings.h"
