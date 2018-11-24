@@ -1,8 +1,8 @@
-#include "Display.h"
+#include "Rendering\Display.h"
 
 #include <GL/glew.h>
 #include "Components\Camera.h"
-#include "DisplayManager.h"
+#include "Rendering\DisplayManager.h"
 #include "Input\InputManager.h"
 
 #include <sdl2/SDL.h>

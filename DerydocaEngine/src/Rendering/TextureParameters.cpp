@@ -1,4 +1,4 @@
-#include "TextureParameters.h"
+#include "Rendering\TextureParameters.h"
 
 #include <GL/glew.h>
 

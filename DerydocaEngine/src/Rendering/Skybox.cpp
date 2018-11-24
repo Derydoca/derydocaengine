@@ -1,5 +1,5 @@
-#include "Skybox.h"
-#include "Mesh.h"
+#include "Rendering\Skybox.h"
+#include "Rendering\Mesh.h"
 
 namespace DerydocaEngine::Rendering
 {

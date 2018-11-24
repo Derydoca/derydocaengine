@@ -4,7 +4,7 @@
 #include <chrono>
 #include <ctime>
 #include <GL/glew.h>
-#include "Display.h"
+#include "Rendering\Display.h"
 #include "Input\Keyboard.h"
 #include "sdl2\SDL.h"
 #include "vendor/stb_image.h"

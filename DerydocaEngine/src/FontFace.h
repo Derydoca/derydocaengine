@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include "Rectangle.h"
 #include "TexturePackerImage.h"
-#include "Texture.h"
+#include "Rendering\Texture.h"
 
 class Texture;
 

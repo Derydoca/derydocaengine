@@ -2,8 +2,8 @@
 
 #include <GL/glew.h>
 #include "Components\Camera.h"
-#include "CameraManager.h"
-#include "ShaderLibrary.h"
+#include "Rendering\CameraManager.h"
+#include "Rendering\ShaderLibrary.h"
 
 namespace DerydocaEngine::Debug {
 

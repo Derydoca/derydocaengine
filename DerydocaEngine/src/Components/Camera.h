@@ -4,8 +4,8 @@
 #include "Color.h"
 #include "Components\GameComponent.h"
 #include "GameObject.h"
-#include "MatrixStack.h"
-#include "Projection.h"
+#include "Rendering\MatrixStack.h"
+#include "Rendering\Projection.h"
 
 struct Rectangle;
 namespace DerydocaEngine::Rendering {

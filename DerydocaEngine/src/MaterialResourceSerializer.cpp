@@ -1,7 +1,7 @@
 #include "MaterialResourceSerializer.h"
-#include "Material.h"
+#include "Rendering\Material.h"
 #include "Resource.h"
-#include "ShaderLibrary.h"
+#include "Rendering\ShaderLibrary.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {

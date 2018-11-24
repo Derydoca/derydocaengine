@@ -1,4 +1,4 @@
-#include "RenderTexture.h"
+#include "Rendering\RenderTexture.h"
 
 #include <GL/glew.h>
 #include <cassert>

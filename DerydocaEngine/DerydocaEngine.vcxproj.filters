@@ -19,20 +19,11 @@
     <ClCompile Include="src\BloomFilter.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\CameraManager.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="src\Clock.cpp">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClCompile>
     <ClCompile Include="src\CubemapResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Display.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DisplayManager.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\EdgeDetectionFilter.cpp">
       <Filter>Ext</Filter>
@@ -61,17 +52,8 @@
     <ClCompile Include="src\IntRectangle.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
-    <ClCompile Include="src\LightManager.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Material.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="src\MaterialResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mesh.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\MeshAdjacencyCalculator.cpp">
       <Filter>Ext</Filter>
@@ -103,12 +85,6 @@
     <ClCompile Include="src\ParticleSystem.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\Projection.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RenderTexture.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="src\Resource.cpp">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClCompile>
@@ -118,12 +94,6 @@
     <ClCompile Include="src\SerializedScene.cpp">
       <Filter>DerydocaEngine\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\Shader.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ShaderLibrary.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="src\ShaderResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
@@ -132,9 +102,6 @@
     </ClCompile>
     <ClCompile Include="src\SkeletonResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Skybox.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\SpriteSheet.cpp">
       <Filter>DerydocaEngine\UI</Filter>
@@ -148,9 +115,6 @@
     <ClCompile Include="src\TessellatingQuad.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\Texture.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="src\TexturePacker.cpp">
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClCompile>
@@ -159,9 +123,6 @@
     </ClCompile>
     <ClCompile Include="src\TexturePackerTextureData.cpp">
       <Filter>DerydocaEngine\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TextureParameters.cpp">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\TextureResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
@@ -292,6 +253,45 @@
     <ClCompile Include="src\Input\Mouse.cpp">
       <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rendering\CameraManager.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Display.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\DisplayManager.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\LightManager.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Material.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Mesh.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Projection.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\RenderTexture.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Shader.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\ShaderLibrary.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Skybox.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Texture.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\TextureParameters.cpp">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AnimationResource.h">
@@ -315,9 +315,6 @@
     <ClInclude Include="src\BloomFilter.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\CameraManager.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\Clock.h">
       <Filter>DerydocaEngine\Timing</Filter>
     </ClInclude>
@@ -329,12 +326,6 @@
     </ClInclude>
     <ClInclude Include="src\CubemapResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Display.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DisplayManager.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\EdgeDetectionFilter.h">
       <Filter>Ext</Filter>
@@ -363,20 +354,8 @@
     <ClInclude Include="src\IntRectangle.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\LightManager.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Material.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\MaterialResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MatrixStack.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mesh.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshAdjacencyCalculator.h">
       <Filter>Ext</Filter>
@@ -414,20 +393,11 @@
     <ClInclude Include="src\ParticleSystem.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\Projection.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\Rect.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\Rectangle.h">
       <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RenderPass.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RenderTexture.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\Resource.h">
       <Filter>DerydocaEngine\Resources</Filter>
@@ -450,12 +420,6 @@
     <ClInclude Include="src\SerializedScene.h">
       <Filter>DerydocaEngine\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shader.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ShaderLibrary.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\ShaderResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
@@ -470,9 +434,6 @@
     </ClInclude>
     <ClInclude Include="src\SkeletonResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Skybox.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\SpriteReference.h">
       <Filter>DerydocaEngine\UI</Filter>
@@ -489,9 +450,6 @@
     <ClInclude Include="src\TessellatingQuad.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\Texture.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="src\TexturePacker.h">
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClInclude>
@@ -500,9 +458,6 @@
     </ClInclude>
     <ClInclude Include="src\TexturePackerTextureData.h">
       <Filter>DerydocaEngine\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TextureParameters.h">
-      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\TextureResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
@@ -662,6 +617,51 @@
     </ClInclude>
     <ClInclude Include="src\Input\Mouse.h">
       <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\CameraManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Display.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\DisplayManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\LightManager.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Material.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Mesh.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\MatrixStack.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Projection.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\RenderPass.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\RenderTexture.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Shader.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\ShaderLibrary.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Skybox.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Texture.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\TextureParameters.h">
+      <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

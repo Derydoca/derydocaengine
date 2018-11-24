@@ -1,7 +1,7 @@
 #pragma once
 #include <assert.h>
 #include "TexturePackerTextureData.h"
-#include "Texture.h"
+#include "Rendering\Texture.h"
 #include <climits>
 #include <algorithm>
 

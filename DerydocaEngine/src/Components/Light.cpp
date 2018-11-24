@@ -2,8 +2,8 @@
 
 #include <GL\glew.h>
 #include <iostream>
-#include "LightManager.h"
-#include "Material.h"
+#include "Rendering\LightManager.h"
+#include "Rendering\Material.h"
 
 namespace DerydocaEngine::Components
 {

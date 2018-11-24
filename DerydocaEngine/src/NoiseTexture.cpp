@@ -4,8 +4,8 @@
 #include <glm/gtc/noise.hpp>
 #include "Components\Camera.h"
 #include "Components\MeshRenderer.h"
-#include "Texture.h"
-#include "TextureParameters.h"
+#include "Rendering\Texture.h"
+#include "Rendering\TextureParameters.h"
 
 namespace DerydocaEngine::Ext
 {

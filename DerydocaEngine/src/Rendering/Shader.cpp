@@ -1,17 +1,17 @@
-#include "Shader.h"
+#include "Rendering\Shader.h"
 
 #include <fstream>
 #include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <sys/stat.h>
 #include "Components\Camera.h"
-#include "CameraManager.h"
+#include "Rendering\CameraManager.h"
 #include "Debug\DebugVisualizer.h"
-#include "MatrixStack.h"
-#include "Mesh.h"
-#include "RenderPass.h"
-#include "RenderTexture.h"
-#include "Texture.h"
+#include "Rendering\MatrixStack.h"
+#include "Rendering\Mesh.h"
+#include "Rendering\RenderPass.h"
+#include "Rendering\RenderTexture.h"
+#include "Rendering\Texture.h"
 #include "Components\Transform.h"
 
 namespace DerydocaEngine::Rendering

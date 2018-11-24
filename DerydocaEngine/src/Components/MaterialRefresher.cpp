@@ -1,9 +1,9 @@
 #include "MaterialRefresher.h"
 
 #include <boost/filesystem.hpp>
-#include "Material.h"
+#include "Rendering\Material.h"
 #include "Components\MeshRenderer.h"
-#include "Shader.h"
+#include "Rendering\Shader.h"
 #include "TessellatedMeshRenderer.h"
 #include "SkinnedMeshRenderer.h"
 

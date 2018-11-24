@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Color.h"
-#include "Projection.h"
+#include "Rendering\Projection.h"
 
 namespace DerydocaEngine {
 	namespace Components {

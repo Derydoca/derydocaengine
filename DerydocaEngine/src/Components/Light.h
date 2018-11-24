@@ -3,9 +3,9 @@
 #include <glm\mat4x4.hpp>
 #include "Components\GameComponent.h"
 #include "Color.h"
-#include "MatrixStack.h"
+#include "Rendering\MatrixStack.h"
 #include "Components\Transform.h"
-#include "Projection.h"
+#include "Rendering\Projection.h"
 
 namespace DerydocaEngine::Rendering {
 	class Material;

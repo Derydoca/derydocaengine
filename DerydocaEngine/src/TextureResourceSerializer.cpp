@@ -1,5 +1,5 @@
 #include "TextureResourceSerializer.h"
-#include "Texture.h"
+#include "Rendering\Texture.h"
 #include "Resource.h"
 
 namespace DerydocaEngine::Resources::Serializers

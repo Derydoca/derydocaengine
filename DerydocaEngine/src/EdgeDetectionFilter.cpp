@@ -1,8 +1,8 @@
 #include "EdgeDetectionFilter.h"
 #include "Components\Camera.h"
-#include "RenderTexture.h"
+#include "Rendering\RenderTexture.h"
 #include "Components\MeshRenderer.h"
-#include "Shader.h"
+#include "Rendering\Shader.h"
 #include <iostream>
 
 namespace DerydocaEngine::Ext

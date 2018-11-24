@@ -1,8 +1,8 @@
 #pragma once
 #include <glm\glm.hpp>
 #include "Components\GameComponent.h"
-#include "Texture.h"
-#include "Material.h"
+#include "Rendering\Texture.h"
+#include "Rendering\Material.h"
 
 namespace DerydocaEngine::Ext
 {

@@ -1,8 +1,8 @@
-#include "Material.h"
+#include "Rendering\Material.h"
 
 #include <gl\glew.h>
-#include "Shader.h"
-#include "Texture.h"
+#include "Rendering\Shader.h"
+#include "Rendering\Texture.h"
 #include "Color.h"
 
 namespace DerydocaEngine::Rendering

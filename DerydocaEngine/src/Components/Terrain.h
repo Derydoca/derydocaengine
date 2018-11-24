@@ -1,7 +1,7 @@
 #pragma once
 #include "Components\GameComponent.h"
-#include "MatrixStack.h"
-#include "Mesh.h"
+#include "Rendering\MatrixStack.h"
+#include "Rendering\Mesh.h"
 
 namespace DerydocaEngine {
 	namespace Components {

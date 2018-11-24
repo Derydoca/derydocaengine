@@ -1,8 +1,8 @@
 #include "ParticleSystem.h"
 
 #include <GL\glew.h>
-#include "LightManager.h"
-#include "Shader.h"
+#include "Rendering\LightManager.h"
+#include "Rendering\Shader.h"
 
 namespace DerydocaEngine::Ext
 {

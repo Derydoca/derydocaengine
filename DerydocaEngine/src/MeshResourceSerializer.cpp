@@ -1,6 +1,6 @@
 #include "MeshResourceSerializer.h"
 #include "MeshResource.h"
-#include "Mesh.h"
+#include "Rendering\Mesh.h"
 #include "assimp\importer.hpp"
 #include "assimp\cimport.h"
 #include "assimp\scene.h"

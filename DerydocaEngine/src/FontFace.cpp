@@ -1,6 +1,6 @@
 #include "FontFace.h"
 #include "TexturePacker.h"
-#include "Texture.h"
+#include "Rendering\Texture.h"
 #include "yaml-cpp\yaml.h"
 #include "Helpers\YamlTools.h"
 #include <fstream>

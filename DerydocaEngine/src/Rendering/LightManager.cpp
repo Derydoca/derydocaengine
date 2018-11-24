@@ -1,12 +1,12 @@
-#include "LightManager.h"
+#include "Rendering\LightManager.h"
 
 #include <GL\glew.h>
 #include <glm\glm.hpp>
 #include "Components\Camera.h"
-#include "CameraManager.h"
+#include "Rendering\CameraManager.h"
 #include "GameObject.h"
 #include "Components\Light.h"
-#include "Shader.h"
+#include "Rendering\Shader.h"
 #include "Components\Transform.h"
 
 namespace DerydocaEngine::Rendering

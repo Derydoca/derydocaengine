@@ -1,6 +1,6 @@
-#include "DisplayManager.h"
+#include "Rendering\DisplayManager.h"
 
-#include "Display.h"
+#include "Rendering\Display.h"
 
 namespace DerydocaEngine::Rendering
 {

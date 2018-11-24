@@ -1,7 +1,7 @@
 #include "Files\Serializers\MaterialFileSerializer.h"
 #include <yaml-cpp\yaml.h>
-#include "Material.h"
-#include "Shader.h"
+#include "Rendering\Material.h"
+#include "Rendering\Shader.h"
 #include "CubemapResource.h"
 
 namespace DerydocaEngine::Files::Serializers {

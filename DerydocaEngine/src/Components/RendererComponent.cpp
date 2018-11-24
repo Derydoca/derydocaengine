@@ -1,8 +1,8 @@
 #include "RendererComponent.h"
 
-#include "LightManager.h"
-#include "Material.h"
-#include "Shader.h"
+#include "Rendering\LightManager.h"
+#include "Rendering\Material.h"
+#include "Rendering\Shader.h"
 
 namespace DerydocaEngine::Components
 {

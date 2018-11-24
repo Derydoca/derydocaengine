@@ -2,9 +2,9 @@
 
 #include <GL/glew.h>
 #include <iostream>
-#include "Material.h"
-#include "RenderPass.h"
-#include "Shader.h"
+#include "Rendering\Material.h"
+#include "Rendering\RenderPass.h"
+#include "Rendering\Shader.h"
 
 namespace DerydocaEngine::Ext
 {

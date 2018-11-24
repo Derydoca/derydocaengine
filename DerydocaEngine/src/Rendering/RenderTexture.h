@@ -1,5 +1,5 @@
 #pragma once
-#include "Texture.h"
+#include "Rendering\Texture.h"
 
 namespace DerydocaEngine::Rendering
 {

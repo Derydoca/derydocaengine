@@ -1,6 +1,6 @@
 #include "CubemapResourceSerializer.h"
 #include "CubemapResource.h"
-#include "Texture.h"
+#include "Rendering\Texture.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {

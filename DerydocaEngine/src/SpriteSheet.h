@@ -3,7 +3,7 @@
 #include <map>
 #include "SpriteReference.h"
 #include "TexturePacker.h"
-#include "Texture.h"
+#include "Rendering\Texture.h"
 
 namespace DerydocaEngine::UI
 {

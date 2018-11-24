@@ -1,10 +1,10 @@
 #include "Terrain.h"
 
-#include "Material.h"
+#include "Rendering\Material.h"
 #include "Components\MeshRenderer.h"
-#include "ShaderLibrary.h"
+#include "Rendering\ShaderLibrary.h"
 #include "vendor/stb_image.h"
-#include "Texture.h"
+#include "Rendering\Texture.h"
 
 namespace DerydocaEngine::Components
 {

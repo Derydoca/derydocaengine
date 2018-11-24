@@ -1,6 +1,6 @@
 #pragma once
 #include "Components\GameComponent.h"
-#include "Mesh.h"
+#include "Rendering\Mesh.h"
 #include "Input\Keyboard.h"
 
 namespace DerydocaEngine::Ext

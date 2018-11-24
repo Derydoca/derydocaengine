@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <assert.h>
 #include <iostream>
-#include "Texture.h"
+#include "Rendering\Texture.h"
 
 namespace DerydocaEngine::Utilities
 {

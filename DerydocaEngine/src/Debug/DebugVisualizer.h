@@ -1,7 +1,7 @@
 #pragma once
 #include <glm\glm.hpp>
 #include "Debug\DebugLine.h"
-#include "Shader.h"
+#include "Rendering\Shader.h"
 #include "Components\GameComponent.h"
 
 namespace DerydocaEngine::Debug {

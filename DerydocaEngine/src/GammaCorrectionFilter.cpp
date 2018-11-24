@@ -1,7 +1,7 @@
 #include "GammaCorrectionFilter.h"
-#include "Shader.h"
+#include "Rendering\Shader.h"
 #include <iostream>
-#include "Material.h"
+#include "Rendering\Material.h"
 
 namespace DerydocaEngine::Ext
 {

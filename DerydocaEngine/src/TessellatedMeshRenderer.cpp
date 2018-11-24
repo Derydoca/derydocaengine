@@ -1,7 +1,7 @@
 #include "TessellatedMeshRenderer.h"
 
 #include <GL\glew.h>
-#include "Shader.h"
+#include "Rendering\Shader.h"
 
 namespace DerydocaEngine::Ext
 {

@@ -1,15 +1,15 @@
 #include "Components\MeshRenderer.h"
 
 #include "Components\Camera.h"
-#include "CameraManager.h"
+#include "Rendering\CameraManager.h"
 #include "GameObject.h"
-#include "LightManager.h"
-#include "Material.h"
-#include "Mesh.h"
-#include "RenderTexture.h"
-#include "Shader.h"
-#include "ShaderLibrary.h"
-#include "Texture.h"
+#include "Rendering\LightManager.h"
+#include "Rendering\Material.h"
+#include "Rendering\Mesh.h"
+#include "Rendering\RenderTexture.h"
+#include "Rendering\Shader.h"
+#include "Rendering\ShaderLibrary.h"
+#include "Rendering\Texture.h"
 #include "Components\Transform.h"
 
 namespace DerydocaEngine::Components

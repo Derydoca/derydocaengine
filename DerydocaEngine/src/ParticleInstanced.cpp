@@ -2,9 +2,9 @@
 
 #include <GL\glew.h>
 #include "Input\InputManager.h"
-#include "LightManager.h"
-#include "Material.h"
-#include "Shader.h"
+#include "Rendering\LightManager.h"
+#include "Rendering\Material.h"
+#include "Rendering\Shader.h"
 #include "sdl2\SDL.h"
 
 namespace DerydocaEngine::Ext

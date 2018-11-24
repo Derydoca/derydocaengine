@@ -1,6 +1,6 @@
 #pragma once
 #include "Components\GameComponent.h"
-#include "Material.h"
+#include "Rendering\Material.h"
 #include "BezierPatchMesh.h"
 
 namespace DerydocaEngine::Ext

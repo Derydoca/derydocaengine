@@ -2,7 +2,7 @@
 
 #include <assimp/Importer.hpp>
 #include "Helpers\AssimpUtils.h"
-#include "Mesh.h"
+#include "Rendering\Mesh.h"
 #include "MeshResource.h"
 #include "SkeletonResource.h"
 #include "AnimationResource.h"
