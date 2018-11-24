@@ -2,6 +2,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid.hpp>
 #include "Resource.h"
 

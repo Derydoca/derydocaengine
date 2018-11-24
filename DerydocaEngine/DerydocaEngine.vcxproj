@@ -210,7 +210,6 @@
     <ClCompile Include="src\Display.cpp" />
     <ClCompile Include="src\DisplayManager.cpp" />
     <ClCompile Include="src\EdgeDetectionFilter.cpp" />
-    <ClCompile Include="src\Editor.cpp" />
     <ClCompile Include="src\EngineSettings.cpp" />
     <ClCompile Include="src\FileType.cpp" />
     <ClCompile Include="src\FontFace.cpp" />
@@ -315,7 +314,6 @@
     <ClInclude Include="src\Display.h" />
     <ClInclude Include="src\DisplayManager.h" />
     <ClInclude Include="src\EdgeDetectionFilter.h" />
-    <ClInclude Include="src\Editor.h" />
     <ClInclude Include="src\EngineSettings.h" />
     <ClInclude Include="src\FileType.h" />
     <ClInclude Include="src\FontFace.h" />

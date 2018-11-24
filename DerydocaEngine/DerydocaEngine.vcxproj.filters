@@ -46,9 +46,6 @@
     <ClCompile Include="src\EdgeDetectionFilter.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\Editor.cpp">
-      <Filter>DerydocaEngine\Execution</Filter>
-    </ClCompile>
     <ClCompile Include="src\EngineSettings.cpp">
       <Filter>DerydocaEngine\Settings</Filter>
     </ClCompile>
@@ -353,9 +350,6 @@
     </ClInclude>
     <ClInclude Include="src\EdgeDetectionFilter.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Editor.h">
-      <Filter>DerydocaEngine\Execution</Filter>
     </ClInclude>
     <ClInclude Include="src\EngineSettings.h">
       <Filter>DerydocaEngine\Settings</Filter>

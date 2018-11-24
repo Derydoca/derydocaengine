@@ -1,4 +1,4 @@
-#include "Editor.h"
+#include "Editor\UI\EditorWindow.h"
 
 #include <boost\filesystem.hpp>
 #include <iostream>
@@ -20,10 +20,10 @@
 #include "Components\Transform.h"
 #include "Components\WasdMover.h"
 
-namespace DerydocaEngine::Execution
+namespace DerydocaEngine::Editor::UI
 {
 
-	int Editor::Run(std::string const& projectPath, std::string const& levelIdentifier)
+	int EditorWindow::Run(std::string const& projectPath, std::string const& levelIdentifier)
 	{
 		Settings::EngineSettings* settings = new Settings::EngineSettings(".\\engineSettings.yaml");
 

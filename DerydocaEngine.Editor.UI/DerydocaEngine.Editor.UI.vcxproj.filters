@@ -3,8 +3,10 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Editor\Execution\CommandLineArgs.cpp" />
+    <ClCompile Include="src\Editor\UI\EditorWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor\Execution\CommandLineArgs.h" />
+    <ClInclude Include="src\Editor\UI\EditorWindow.h" />
   </ItemGroup>
 </Project>

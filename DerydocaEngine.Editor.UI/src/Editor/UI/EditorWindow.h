@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
 
-namespace DerydocaEngine::Execution
+namespace DerydocaEngine::Editor::UI
 {
 
-	class Editor
+	class EditorWindow
 	{
 	public:
 		int Run(std::string const& projectPath, std::string const& scenePath);

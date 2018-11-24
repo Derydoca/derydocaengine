@@ -224,6 +224,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Editor\UI\EditorWindow.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Editor\Execution\CommandLineArgs.cpp" />
   </ItemGroup>
@@ -233,6 +234,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Editor\UI\EditorWindow.h" />
     <ClInclude Include="src\Editor\Execution\CommandLineArgs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
