@@ -210,7 +210,7 @@
     <ClCompile Include="src\Rendering\Display.cpp" />
     <ClCompile Include="src\Rendering\DisplayManager.cpp" />
     <ClCompile Include="src\EdgeDetectionFilter.cpp" />
-    <ClCompile Include="src\EngineSettings.cpp" />
+    <ClCompile Include="src\Settings\EngineSettings.cpp" />
     <ClCompile Include="src\Files\FileType.cpp" />
     <ClCompile Include="src\FontFace.cpp" />
     <ClCompile Include="src\Components\FrameStats.cpp" />
@@ -314,7 +314,7 @@
     <ClInclude Include="src\Rendering\Display.h" />
     <ClInclude Include="src\Rendering\DisplayManager.h" />
     <ClInclude Include="src\EdgeDetectionFilter.h" />
-    <ClInclude Include="src\EngineSettings.h" />
+    <ClInclude Include="src\Settings\EngineSettings.h" />
     <ClInclude Include="src\Files\FileType.h" />
     <ClInclude Include="src\FontFace.h" />
     <ClInclude Include="src\Components\FrameStats.h" />

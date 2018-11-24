@@ -22,9 +22,6 @@
     <ClCompile Include="src\EdgeDetectionFilter.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\EngineSettings.cpp">
-      <Filter>DerydocaEngine\Settings</Filter>
-    </ClCompile>
     <ClCompile Include="src\FontFace.cpp">
       <Filter>DerydocaEngine\UI</Filter>
     </ClCompile>
@@ -292,6 +289,9 @@
     <ClCompile Include="src\Scenes\SerializedScene.cpp">
       <Filter>DerydocaEngine\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\Settings\EngineSettings.cpp">
+      <Filter>DerydocaEngine\Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BezierCurveRenderer.h">
@@ -317,9 +317,6 @@
     </ClInclude>
     <ClInclude Include="src\EdgeDetectionFilter.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\EngineSettings.h">
-      <Filter>DerydocaEngine\Settings</Filter>
     </ClInclude>
     <ClInclude Include="src\FontFace.h">
       <Filter>DerydocaEngine\UI</Filter>
@@ -662,6 +659,9 @@
     </ClInclude>
     <ClInclude Include="src\Scenes\SerializedScene.h">
       <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Settings\EngineSettings.h">
+      <Filter>DerydocaEngine\Settings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

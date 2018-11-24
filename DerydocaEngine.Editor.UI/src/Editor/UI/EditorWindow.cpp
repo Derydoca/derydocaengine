@@ -8,7 +8,7 @@
 #include "Clock.h"
 #include "Resources\CubemapResource.h"
 #include "Rendering\Display.h"
-#include "EngineSettings.h"
+#include "Settings\EngineSettings.h"
 #include "GameObject.h"
 #include "Input\InputManager.h"
 #include "Rendering\Material.h"
