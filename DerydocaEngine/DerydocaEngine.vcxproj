@@ -258,7 +258,7 @@
     <ClCompile Include="src\Files\Serializers\FileTypeSerializer.cpp" />
     <ClCompile Include="src\Components\Rotator.cpp" />
     <ClCompile Include="src\Components\ScreenshotUtil.cpp" />
-    <ClCompile Include="src\SerializedScene.cpp" />
+    <ClCompile Include="src\Scenes\SerializedScene.cpp" />
     <ClCompile Include="src\Rendering\Shader.cpp" />
     <ClCompile Include="src\Files\Serializers\ShaderFileSerializer.cpp" />
     <ClCompile Include="src\Rendering\ShaderLibrary.cpp" />
@@ -373,10 +373,10 @@
     <ClInclude Include="src\Resources\Serializers\ResourceSerializerLibrary.h" />
     <ClInclude Include="src\Resources\ResourceType.h" />
     <ClInclude Include="src\Components\Rotator.h" />
-    <ClInclude Include="src\Scene.h" />
-    <ClInclude Include="src\SceneObject.h" />
+    <ClInclude Include="src\Scenes\Scene.h" />
+    <ClInclude Include="src\Scenes\SceneObject.h" />
     <ClInclude Include="src\Components\ScreenshotUtil.h" />
-    <ClInclude Include="src\SerializedScene.h" />
+    <ClInclude Include="src\Scenes\SerializedScene.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
     <ClInclude Include="src\Files\Serializers\ShaderFileSerializer.h" />
     <ClInclude Include="src\Rendering\ShaderLibrary.h" />

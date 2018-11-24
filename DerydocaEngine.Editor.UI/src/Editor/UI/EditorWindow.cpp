@@ -13,7 +13,7 @@
 #include "Input\InputManager.h"
 #include "Rendering\Material.h"
 #include "ObjectLibrary.h"
-#include "SerializedScene.h"
+#include "Scenes\SerializedScene.h"
 #include "Components\ScreenshotUtil.h"
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Skybox.h"

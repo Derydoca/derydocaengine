@@ -73,9 +73,6 @@
     <ClCompile Include="src\ParticleSystem.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\SerializedScene.cpp">
-      <Filter>DerydocaEngine\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="src\ShaderSubroutineSwitcher.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -292,6 +289,9 @@
     <ClCompile Include="src\Resources\Resource.cpp">
       <Filter>DerydocaEngine\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="src\Scenes\SerializedScene.cpp">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BezierCurveRenderer.h">
@@ -377,15 +377,6 @@
     </ClInclude>
     <ClInclude Include="src\Rectangle.h">
       <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene.h">
-      <Filter>DerydocaEngine\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SceneObject.h">
-      <Filter>DerydocaEngine\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SerializedScene.h">
-      <Filter>DerydocaEngine\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\ShaderSubroutineSwitcher.h">
       <Filter>Ext</Filter>
@@ -662,6 +653,15 @@
     </ClInclude>
     <ClInclude Include="src\Resources\SkeletonResource.h">
       <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\Scene.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\SceneObject.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\SerializedScene.h">
+      <Filter>DerydocaEngine\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
