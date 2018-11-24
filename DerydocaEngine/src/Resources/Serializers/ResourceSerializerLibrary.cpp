@@ -4,7 +4,7 @@
 #include "Resources\Serializers\TextureResourceSerializer.h"
 #include "Resources\Serializers\CubemapResourceSerializer.h"
 #include "Resources\Serializers\ShaderResourceSerializer.h"
-#include "BezierPatchMeshResourceSerializer.h"
+#include "Ext\BezierPatchMeshResourceSerializer.h"
 #include "Resources\Serializers\SpriteSheetResourceSerializer.h"
 #include "Resources\Serializers\AnimationResourceSerializer.h"
 #include "Resources\Serializers\SkeletonResourceSerializer.h"

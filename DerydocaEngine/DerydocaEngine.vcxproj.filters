@@ -1,35 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\BezierCurveRenderer.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BezierPatchMesh.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BezierPatchMeshFileLoader.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BezierPatchMeshResourceSerializer.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BloomFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EdgeDetectionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
     <ClCompile Include="src\GameObject.cpp">
       <Filter>DerydocaEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GammaCorrectionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GaussianBlurFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ImageProjector.cpp">
-      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="src\IntRect.cpp">
       <Filter>DerydocaEngine</Filter>
@@ -40,44 +13,8 @@
     <ClCompile Include="src\MeshAdjacencyCalculator.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\MultisampleSwitch.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\NightVisionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\NoiseTexture.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
     <ClCompile Include="src\ObjectLibrary.cpp">
       <Filter>DerydocaEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ParticleContinuousFountain.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ParticleFountain.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ParticleInstanced.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ParticleSystem.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ShaderSubroutineSwitcher.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TessellatedMeshRenderer.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TessellatingQuad.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WaveDisplacement.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WoodSliceTexture.cpp">
-      <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="src\Animation\AnimationData.cpp">
       <Filter>DerydocaEngine\Animation</Filter>
@@ -292,40 +229,76 @@
     <ClCompile Include="src\Utilities\TexturePackerTextureData.cpp">
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="src\Ext\GammaCorrectionFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\GaussianBlurFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\ImageProjector.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\EdgeDetectionFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\BloomFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\BezierPatchMeshResourceSerializer.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\BezierPatchMeshFileLoader.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\BezierPatchMesh.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\BezierCurveRenderer.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\MultisampleSwitch.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\NightVisionFilter.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\NoiseTexture.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\ParticleContinuousFountain.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\ParticleFountain.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\ParticleInstanced.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\ParticleSystem.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\ShaderSubroutineSwitcher.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\TessellatedMeshRenderer.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\TessellatingQuad.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\WaveDisplacement.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\WoodSliceTexture.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\BezierCurveRenderer.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BezierPatchMesh.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BezierPatchMeshFileLoader.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BezierPatchMeshResourceSerializer.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BloomFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
     <ClInclude Include="src\Color.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\EdgeDetectionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
     <ClInclude Include="src\GameObject.h">
       <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GammaCorrectionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GaussianBlurFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ImageProjector.h">
-      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="src\IntRect.h">
       <Filter>DerydocaEngine</Filter>
@@ -339,50 +312,14 @@
     <ClInclude Include="src\MeshFlags.h">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="src\MultisampleSwitch.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\NightVisionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\NoiseTexture.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
     <ClInclude Include="src\ObjectLibrary.h">
       <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParticleContinuousFountain.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParticleFountain.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParticleInstanced.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParticleSystem.h">
-      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="src\Rect.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\Rectangle.h">
       <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ShaderSubroutineSwitcher.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TessellatedMeshRenderer.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TessellatingQuad.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WaveDisplacement.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WoodSliceTexture.h">
-      <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="src\vendor\stb_image.h">
       <Filter>Third Party</Filter>
@@ -662,6 +599,69 @@
     </ClInclude>
     <ClInclude Include="src\Utilities\TexturePackerTextureData.h">
       <Filter>DerydocaEngine\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\GammaCorrectionFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\GaussianBlurFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\ImageProjector.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\EdgeDetectionFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BloomFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BezierPatchMeshResourceSerializer.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BezierPatchMeshFileLoader.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BezierPatchMesh.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BezierCurveRenderer.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\MultisampleSwitch.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\NightVisionFilter.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\NoiseTexture.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\ParticleContinuousFountain.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\ParticleFountain.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\ParticleInstanced.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\ParticleSystem.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\ShaderSubroutineSwitcher.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\TessellatedMeshRenderer.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\TessellatingQuad.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\WaveDisplacement.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\WoodSliceTexture.h">
+      <Filter>Ext</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
