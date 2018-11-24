@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <assert.h>
-#include "TexturePackerImage.h"
+#include "Utilities\TexturePackerImage.h"
 
 namespace DerydocaEngine::Rendering {
 	class Texture;

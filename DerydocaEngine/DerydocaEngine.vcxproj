@@ -212,7 +212,7 @@
     <ClCompile Include="src\EdgeDetectionFilter.cpp" />
     <ClCompile Include="src\Settings\EngineSettings.cpp" />
     <ClCompile Include="src\Files\FileType.cpp" />
-    <ClCompile Include="src\FontFace.cpp" />
+    <ClCompile Include="src\UI\FontFace.cpp" />
     <ClCompile Include="src\Components\FrameStats.cpp" />
     <ClCompile Include="src\Components\GameComponentFactory.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -268,7 +268,7 @@
     <ClCompile Include="src\Components\SkinnedMeshRenderer.cpp" />
     <ClCompile Include="src\Rendering\Skybox.cpp" />
     <ClCompile Include="src\Components\SpriteRenderer.cpp" />
-    <ClCompile Include="src\SpriteSheet.cpp" />
+    <ClCompile Include="src\UI\SpriteSheet.cpp" />
     <ClCompile Include="src\Files\Serializers\SpriteSheetFileSerializer.cpp" />
     <ClCompile Include="src\Resources\Serializers\SpriteSheetResourceSerializer.cpp" />
     <ClCompile Include="src\Helpers\StringUtils.cpp" />
@@ -278,9 +278,9 @@
     <ClCompile Include="src\Files\Serializers\FontFileSerializer.cpp" />
     <ClCompile Include="src\Components\TextRenderer.cpp" />
     <ClCompile Include="src\Rendering\Texture.cpp" />
-    <ClCompile Include="src\TexturePacker.cpp" />
-    <ClCompile Include="src\TexturePackerImage.cpp" />
-    <ClCompile Include="src\TexturePackerTextureData.cpp" />
+    <ClCompile Include="src\Utilities\TexturePacker.cpp" />
+    <ClCompile Include="src\Utilities\TexturePackerImage.cpp" />
+    <ClCompile Include="src\Utilities\TexturePackerTextureData.cpp" />
     <ClCompile Include="src\Rendering\TextureParameters.cpp" />
     <ClCompile Include="src\Resources\Serializers\TextureResourceSerializer.cpp" />
     <ClCompile Include="src\Components\Transform.cpp" />
@@ -316,7 +316,7 @@
     <ClInclude Include="src\EdgeDetectionFilter.h" />
     <ClInclude Include="src\Settings\EngineSettings.h" />
     <ClInclude Include="src\Files\FileType.h" />
-    <ClInclude Include="src\FontFace.h" />
+    <ClInclude Include="src\UI\FontFace.h" />
     <ClInclude Include="src\Components\FrameStats.h" />
     <ClInclude Include="src\Components\GameComponentFactory.h" />
     <ClInclude Include="src\GameObject.h" />
@@ -388,9 +388,9 @@
     <ClInclude Include="src\Resources\Serializers\SkeletonResourceSerializer.h" />
     <ClInclude Include="src\Components\SkinnedMeshRenderer.h" />
     <ClInclude Include="src\Rendering\Skybox.h" />
-    <ClInclude Include="src\SpriteReference.h" />
+    <ClInclude Include="src\UI\SpriteReference.h" />
     <ClInclude Include="src\Components\SpriteRenderer.h" />
-    <ClInclude Include="src\SpriteSheet.h" />
+    <ClInclude Include="src\UI\SpriteSheet.h" />
     <ClInclude Include="src\Files\Serializers\SpriteSheetFileSerializer.h" />
     <ClInclude Include="src\Resources\Serializers\SpriteSheetResourceSerializer.h" />
     <ClInclude Include="src\vendor\stb_image_write.h" />
@@ -402,9 +402,9 @@
     <ClInclude Include="src\Files\Serializers\FontFileSerializer.h" />
     <ClInclude Include="src\Components\TextRenderer.h" />
     <ClInclude Include="src\Rendering\Texture.h" />
-    <ClInclude Include="src\TexturePacker.h" />
-    <ClInclude Include="src\TexturePackerImage.h" />
-    <ClInclude Include="src\TexturePackerTextureData.h" />
+    <ClInclude Include="src\Utilities\TexturePacker.h" />
+    <ClInclude Include="src\Utilities\TexturePackerImage.h" />
+    <ClInclude Include="src\Utilities\TexturePackerTextureData.h" />
     <ClInclude Include="src\Rendering\TextureParameters.h" />
     <ClInclude Include="src\Resources\Serializers\TextureResourceSerializer.h" />
     <ClInclude Include="src\Components\Transform.h" />

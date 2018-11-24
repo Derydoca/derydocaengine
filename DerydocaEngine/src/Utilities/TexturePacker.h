@@ -2,8 +2,8 @@
 #include <vector>
 #include <map>
 #include "Rectangle.h"
-#include "TexturePackerImage.h"
-#include "TexturePackerTextureData.h"
+#include "Utilities\TexturePackerImage.h"
+#include "Utilities\TexturePackerTextureData.h"
 #include "IntRect.h"
 
 namespace DerydocaEngine::Rendering {

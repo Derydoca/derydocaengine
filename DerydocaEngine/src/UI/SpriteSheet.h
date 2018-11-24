@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include <map>
-#include "SpriteReference.h"
-#include "TexturePacker.h"
+#include "UI\SpriteReference.h"
+#include "Utilities\TexturePacker.h"
 #include "Rendering\Texture.h"
 
 namespace DerydocaEngine::UI

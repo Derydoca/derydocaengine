@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "FontFace.h"
+#include "UI\FontFace.h"
 #include "RendererComponent.h"
 
 namespace DerydocaEngine::Rendering {

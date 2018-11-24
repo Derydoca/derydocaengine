@@ -5,7 +5,7 @@
 #include FT_FREETYPE_H
 #include <glm/glm.hpp>
 #include "Rectangle.h"
-#include "TexturePackerImage.h"
+#include "Utilities\TexturePackerImage.h"
 #include "Rendering\Texture.h"
 
 class Texture;

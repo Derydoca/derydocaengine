@@ -3,7 +3,7 @@
 #include <glm\vec3.hpp>
 #include "Color.h"
 #include "RendererComponent.h"
-#include "SpriteSheet.h"
+#include "UI\Spritesheet.h"
 
 namespace DerydocaEngine::Components
 {

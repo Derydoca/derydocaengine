@@ -1,7 +1,7 @@
 #include "TextRenderer.h"
 
 #include "Rendering\Material.h"
-#include "TexturePackerImage.h"
+#include "Utilities\TexturePackerImage.h"
 #include "Helpers\YamlTools.h"
 
 namespace DerydocaEngine::Components

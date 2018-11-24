@@ -1,5 +1,5 @@
-#include "FontFace.h"
-#include "TexturePacker.h"
+#include "UI\FontFace.h"
+#include "Utilities\TexturePacker.h"
 #include "Rendering\Texture.h"
 #include "yaml-cpp\yaml.h"
 #include "Helpers\YamlTools.h"

@@ -1,5 +1,5 @@
 #include "Resources\Serializers\SpriteSheetResourceSerializer.h"
-#include "SpriteSheet.h"
+#include "UI\Spritesheet.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {
