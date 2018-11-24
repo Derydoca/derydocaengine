@@ -3,7 +3,7 @@
 #include <GL\glew.h>
 #include <iostream>
 #include "Rendering\Shader.h"
-#include "ShaderResource.h"
+#include "Resources\ShaderResource.h"
 
 namespace DerydocaEngine::Ext
 {

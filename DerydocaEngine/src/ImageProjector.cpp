@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Rendering\Material.h"
 #include "ObjectLibrary.h"
-#include "Resource.h"
+#include "Resources\Resource.h"
 #include "Rendering\Texture.h"
 #include "Rendering\TextureParameters.h"
 #include "Helpers\YamlTools.h"

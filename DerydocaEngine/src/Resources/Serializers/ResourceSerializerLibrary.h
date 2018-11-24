@@ -1,6 +1,6 @@
 #pragma once
 #include <map>
-#include "ResourceSerializer.h"
+#include "Resources\Serializers\ResourceSerializer.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {

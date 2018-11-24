@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Animation\VertexBoneWeights.h"
-#include "ResourceSerializer.h"
+#include "Resources\Serializers\ResourceSerializer.h"
 #include "MeshFlags.h"
 #include "Animation\Skeleton.h"
 

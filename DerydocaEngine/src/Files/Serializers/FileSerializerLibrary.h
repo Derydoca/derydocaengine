@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include "Files\Serializers\FileTypeSerializer.h"
-#include "ResourceType.h"
+#include "Resources\ResourceType.h"
 
 namespace DerydocaEngine::Files::Serializers {
 

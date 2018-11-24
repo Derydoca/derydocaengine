@@ -1,13 +1,13 @@
-#include "ResourceSerializerLibrary.h"
-#include "MaterialResourceSerializer.h"
-#include "MeshResourceSerializer.h"
-#include "TextureResourceSerializer.h"
-#include "CubemapResourceSerializer.h"
-#include "ShaderResourceSerializer.h"
+#include "Resources\Serializers\ResourceSerializerLibrary.h"
+#include "Resources\Serializers\MaterialResourceSerializer.h"
+#include "Resources\Serializers\MeshResourceSerializer.h"
+#include "Resources\Serializers\TextureResourceSerializer.h"
+#include "Resources\Serializers\CubemapResourceSerializer.h"
+#include "Resources\Serializers\ShaderResourceSerializer.h"
 #include "BezierPatchMeshResourceSerializer.h"
-#include "SpriteSheetResourceSerializer.h"
-#include "AnimationResourceSerializer.h"
-#include "SkeletonResourceSerializer.h"
+#include "Resources\Serializers\SpriteSheetResourceSerializer.h"
+#include "Resources\Serializers\AnimationResourceSerializer.h"
+#include "Resources\Serializers\SkeletonResourceSerializer.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {

@@ -1,8 +1,8 @@
-#include "ShaderResourceSerializer.h"
+#include "Resources\Serializers\ShaderResourceSerializer.h"
 
 #include "Rendering\Shader.h"
 #include "Rendering\ShaderLibrary.h"
-#include "ShaderResource.h"
+#include "Resources\ShaderResource.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {

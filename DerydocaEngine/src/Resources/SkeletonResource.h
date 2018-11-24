@@ -1,5 +1,5 @@
 #pragma once
-#include "Resource.h"
+#include "Resources\Resource.h"
 
 namespace DerydocaEngine::Resources
 {

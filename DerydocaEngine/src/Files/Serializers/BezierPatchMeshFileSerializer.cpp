@@ -1,5 +1,5 @@
 #include "Files\Serializers\BezierPatchMeshFileSerializer.h"
-#include "Resource.h"
+#include "Resources\Resource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 

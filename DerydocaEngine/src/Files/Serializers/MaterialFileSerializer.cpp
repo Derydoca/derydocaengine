@@ -2,7 +2,7 @@
 #include <yaml-cpp\yaml.h>
 #include "Rendering\Material.h"
 #include "Rendering\Shader.h"
-#include "CubemapResource.h"
+#include "Resources\CubemapResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 

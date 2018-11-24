@@ -1,18 +1,17 @@
 #pragma once
-#include "ResourceSerializer.h"
+#include "Resources\Serializers\ResourceSerializer.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	class SkeletonResourceSerializer : public ResourceSerializer
+	class AnimationResourceSerializer : public ResourceSerializer
 	{
 	public:
-		SkeletonResourceSerializer();
-		~SkeletonResourceSerializer();
+		AnimationResourceSerializer();
+		~AnimationResourceSerializer();
 
 		void* deserialize(Resource* const& resource);
 		virtual std::shared_ptr<void> deserializePointer(Resource* const& resource);
-
 		ResourceType getResourceType();
 	};
 

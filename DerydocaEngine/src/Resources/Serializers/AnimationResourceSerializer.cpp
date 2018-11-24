@@ -1,11 +1,11 @@
-#include "AnimationResourceSerializer.h"
+#include "Resources\Serializers\AnimationResourceSerializer.h"
 
 #include "assimp\Importer.hpp"
 #include "assimp\cimport.h"
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 #include "Animation\AnimationData.h"
-#include "AnimationResource.h"
+#include "Resources\AnimationResource.h"
 #include "Helpers\AssimpUtils.h"
 
 namespace DerydocaEngine::Resources::Serializers

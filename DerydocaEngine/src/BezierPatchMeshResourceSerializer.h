@@ -1,5 +1,5 @@
 #pragma once
-#include "MaterialResourceSerializer.h"
+#include "Resources\Serializers\MaterialResourceSerializer.h"
 
 namespace DerydocaEngine::Ext
 {

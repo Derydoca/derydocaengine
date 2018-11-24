@@ -4,7 +4,7 @@
 #include <iostream>
 #include "ObjectLibrary.h"
 #include "Rendering\Shader.h"
-#include "ShaderResource.h"
+#include "Resources\ShaderResource.h"
 
 namespace DerydocaEngine::Rendering
 {

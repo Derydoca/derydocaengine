@@ -6,7 +6,7 @@
 #include "Components\Camera.h"
 #include "Rendering\CameraManager.h"
 #include "Clock.h"
-#include "CubemapResource.h"
+#include "Resources\CubemapResource.h"
 #include "Rendering\Display.h"
 #include "EngineSettings.h"
 #include "GameObject.h"

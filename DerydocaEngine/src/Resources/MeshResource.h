@@ -1,6 +1,6 @@
 #pragma once
 #include <boost\uuid\uuid.hpp>
-#include "Resource.h"
+#include "Resources\Resource.h"
 #include "MeshFlags.h"
 
 namespace DerydocaEngine::Resources

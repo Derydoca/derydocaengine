@@ -9,7 +9,7 @@
 #include "Rendering\Material.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Mesh.h"
-#include "MeshResource.h"
+#include "Resources\MeshResource.h"
 #include "Rectangle.h"
 #include "Rendering\RenderTexture.h"
 #include "Rendering\Shader.h"

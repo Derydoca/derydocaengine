@@ -9,7 +9,7 @@
 #include "Rendering\RenderTexture.h"
 #include "Rendering\Shader.h"
 #include "Rendering\ShaderLibrary.h"
-#include "SkeletonResourceSerializer.h"
+#include "Resources\Serializers\SkeletonResourceSerializer.h"
 #include "Rendering\Texture.h"
 #include "Components\Transform.h"
 

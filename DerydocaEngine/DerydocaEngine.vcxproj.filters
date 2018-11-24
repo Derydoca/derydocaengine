@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\AnimationResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
     <ClCompile Include="src\BezierCurveRenderer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -21,9 +18,6 @@
     </ClCompile>
     <ClCompile Include="src\Clock.cpp">
       <Filter>DerydocaEngine\Timing</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CubemapResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="src\EdgeDetectionFilter.cpp">
       <Filter>Ext</Filter>
@@ -52,14 +46,8 @@
     <ClCompile Include="src\IntRectangle.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
-    <ClCompile Include="src\MaterialResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
     <ClCompile Include="src\MeshAdjacencyCalculator.cpp">
       <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MeshResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="src\MultisampleSwitch.cpp">
       <Filter>Ext</Filter>
@@ -85,29 +73,14 @@
     <ClCompile Include="src\ParticleSystem.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\Resource.cpp">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ResourceSerializerLibrary.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
     <ClCompile Include="src\SerializedScene.cpp">
       <Filter>DerydocaEngine\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ShaderResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="src\ShaderSubroutineSwitcher.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\SkeletonResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
     <ClCompile Include="src\SpriteSheet.cpp">
       <Filter>DerydocaEngine\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SpriteSheetResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="src\TessellatedMeshRenderer.cpp">
       <Filter>Ext</Filter>
@@ -123,9 +96,6 @@
     </ClCompile>
     <ClCompile Include="src\TexturePackerTextureData.cpp">
       <Filter>DerydocaEngine\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TextureResourceSerializer.cpp">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClCompile>
     <ClCompile Include="src\WaveDisplacement.cpp">
       <Filter>Ext</Filter>
@@ -292,14 +262,38 @@
     <ClCompile Include="src\Rendering\TextureParameters.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\AnimationResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\CubemapResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\MaterialResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\MeshResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\ResourceSerializerLibrary.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\ShaderResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\SkeletonResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\SpriteSheetResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\TextureResourceSerializer.cpp">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Resource.cpp">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AnimationResource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AnimationResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
     <ClInclude Include="src\BezierCurveRenderer.h">
       <Filter>Ext</Filter>
     </ClInclude>
@@ -320,12 +314,6 @@
     </ClInclude>
     <ClInclude Include="src\Color.h">
       <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CubemapResource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CubemapResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="src\EdgeDetectionFilter.h">
       <Filter>Ext</Filter>
@@ -354,20 +342,11 @@
     <ClInclude Include="src\IntRectangle.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\MaterialResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
     <ClInclude Include="src\MeshAdjacencyCalculator.h">
       <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshFlags.h">
       <Filter>DerydocaEngine\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MeshResource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MeshResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="src\MultisampleSwitch.h">
       <Filter>Ext</Filter>
@@ -399,18 +378,6 @@
     <ClInclude Include="src\Rectangle.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Resource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ResourceSerializerLibrary.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ResourceType.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
     <ClInclude Include="src\Scene.h">
       <Filter>DerydocaEngine\Scenes</Filter>
     </ClInclude>
@@ -420,29 +387,14 @@
     <ClInclude Include="src\SerializedScene.h">
       <Filter>DerydocaEngine\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\ShaderResource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ShaderResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
     <ClInclude Include="src\ShaderSubroutineSwitcher.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SkeletonResource.h">
-      <Filter>DerydocaEngine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SkeletonResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="src\SpriteReference.h">
       <Filter>DerydocaEngine\UI</Filter>
     </ClInclude>
     <ClInclude Include="src\SpriteSheet.h">
       <Filter>DerydocaEngine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SpriteSheetResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="src\TessellatedMeshRenderer.h">
       <Filter>Ext</Filter>
@@ -458,9 +410,6 @@
     </ClInclude>
     <ClInclude Include="src\TexturePackerTextureData.h">
       <Filter>DerydocaEngine\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TextureResourceSerializer.h">
-      <Filter>DerydocaEngine\Resources\Serializers</Filter>
     </ClInclude>
     <ClInclude Include="src\WaveDisplacement.h">
       <Filter>Ext</Filter>
@@ -662,6 +611,57 @@
     </ClInclude>
     <ClInclude Include="src\Rendering\TextureParameters.h">
       <Filter>DerydocaEngine\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\AnimationResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\CubemapResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\MaterialResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\MeshResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\ResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\ResourceSerializerLibrary.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\ShaderResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\SkeletonResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\SpriteSheetResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\TextureResourceSerializer.h">
+      <Filter>DerydocaEngine\Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\AnimationResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\CubemapResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\MeshResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Resource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\ResourceType.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\ShaderResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\SkeletonResource.h">
+      <Filter>DerydocaEngine\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

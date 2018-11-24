@@ -1,6 +1,6 @@
 #include "BezierPatchMeshResourceSerializer.h"
 #include "BezierPatchMeshFileLoader.h"
-#include "Resource.h"
+#include "Resources\Resource.h"
 
 namespace DerydocaEngine::Ext
 {

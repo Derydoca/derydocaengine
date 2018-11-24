@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <boost/uuid/uuid.hpp>
-#include "ResourceType.h"
+#include "Resources\ResourceType.h"
 
 namespace DerydocaEngine::Resources
 {

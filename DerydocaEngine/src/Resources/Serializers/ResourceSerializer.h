@@ -1,10 +1,10 @@
 #pragma once
 #include <iostream>
-#include "ResourceType.h"
+#include "Resources\ResourceType.h"
 #include "yaml-cpp\yaml.h"
 #include "Helpers\YamlTools.h"
 #include "ObjectLibrary.h"
-#include "Resource.h"
+#include "Resources\Resource.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {

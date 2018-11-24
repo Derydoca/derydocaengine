@@ -4,7 +4,7 @@
 #include <string>
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid.hpp>
-#include "Resource.h"
+#include "Resources\Resource.h"
 
 namespace DerydocaEngine::Components {
 	class GameComponent;

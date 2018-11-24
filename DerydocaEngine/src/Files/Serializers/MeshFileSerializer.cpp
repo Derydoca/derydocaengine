@@ -3,9 +3,9 @@
 #include <assimp/Importer.hpp>
 #include "Helpers\AssimpUtils.h"
 #include "Rendering\Mesh.h"
-#include "MeshResource.h"
-#include "SkeletonResource.h"
-#include "AnimationResource.h"
+#include "Resources\MeshResource.h"
+#include "Resources\SkeletonResource.h"
+#include "Resources\AnimationResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 

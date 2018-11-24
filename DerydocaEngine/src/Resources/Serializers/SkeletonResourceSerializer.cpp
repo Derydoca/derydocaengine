@@ -1,4 +1,4 @@
-#include "SkeletonResourceSerializer.h"
+#include "Resources\Serializers\SkeletonResourceSerializer.h"
 
 #include "assimp\Importer.hpp"
 #include "assimp\cimport.h"
@@ -6,7 +6,7 @@
 #include "assimp\postprocess.h"
 #include "Helpers\AssimpUtils.h"
 #include "Animation\Skeleton.h"
-#include "SkeletonResource.h"
+#include "Resources\SkeletonResource.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {
