@@ -1,5 +1,5 @@
 #pragma once
-#include "Keyboard.h"
+#include "Input\Keyboard.h"
 #include "Components\GameComponent.h"
 #include "Components\Transform.h"
 

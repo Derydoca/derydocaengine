@@ -19,9 +19,6 @@
     <ClCompile Include="src\BloomFilter.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\ButtonState.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClCompile>
     <ClCompile Include="src\CameraManager.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
     </ClCompile>
@@ -58,20 +55,11 @@
     <ClCompile Include="src\ImageProjector.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\InputManager.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClCompile>
     <ClCompile Include="src\IntRect.cpp">
       <Filter>DerydocaEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\IntRectangle.cpp">
       <Filter>DerydocaEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Key.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Keyboard.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
     <ClCompile Include="src\LightManager.cpp">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -90,9 +78,6 @@
     </ClCompile>
     <ClCompile Include="src\MeshResourceSerializer.cpp">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mouse.cpp">
-      <Filter>DerydocaEngine\Input</Filter>
     </ClCompile>
     <ClCompile Include="src\MultisampleSwitch.cpp">
       <Filter>Ext</Filter>
@@ -292,6 +277,21 @@
     <ClCompile Include="src\Helpers\StringUtils.cpp">
       <Filter>DerydocaEngine\Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="src\Input\ButtonState.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\InputManager.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Key.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Keyboard.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Mouse.cpp">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AnimationResource.h">
@@ -314,9 +314,6 @@
     </ClInclude>
     <ClInclude Include="src\BloomFilter.h">
       <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ButtonState.h">
-      <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
     <ClInclude Include="src\CameraManager.h">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -360,20 +357,11 @@
     <ClInclude Include="src\ImageProjector.h">
       <Filter>Ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\InputManager.h">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
     <ClInclude Include="src\IntRect.h">
       <Filter>DerydocaEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\IntRectangle.h">
       <Filter>DerydocaEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Key.h">
-      <Filter>DerydocaEngine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Keyboard.h">
-      <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
     <ClInclude Include="src\LightManager.h">
       <Filter>DerydocaEngine\Rendering</Filter>
@@ -401,9 +389,6 @@
     </ClInclude>
     <ClInclude Include="src\MeshResourceSerializer.h">
       <Filter>DerydocaEngine\Resources\Serializers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mouse.h">
-      <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
     <ClInclude Include="src\MultisampleSwitch.h">
       <Filter>Ext</Filter>
@@ -662,6 +647,21 @@
     </ClInclude>
     <ClInclude Include="src\Helpers\YamlTools.h">
       <Filter>DerydocaEngine\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\ButtonState.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\InputManager.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Key.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Keyboard.h">
+      <Filter>DerydocaEngine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Mouse.h">
+      <Filter>DerydocaEngine\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

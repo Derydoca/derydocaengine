@@ -1,7 +1,7 @@
 #include "ParticleFountain.h"
 
 #include <GL\glew.h>
-#include "InputManager.h"
+#include "Input\InputManager.h"
 #include "Shader.h"
 #include "sdl2\SDL.h"
 

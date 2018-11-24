@@ -1,7 +1,7 @@
 #pragma once
 #include "Components\GameComponent.h"
 #include "Mesh.h"
-#include "Keyboard.h"
+#include "Input\Keyboard.h"
 
 namespace DerydocaEngine::Ext
 {

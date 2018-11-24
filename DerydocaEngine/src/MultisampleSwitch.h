@@ -1,6 +1,6 @@
 #pragma once
 #include "Components\GameComponent.h"
-#include "Keyboard.h"
+#include "Input\Keyboard.h"
 
 namespace DerydocaEngine::Ext
 {

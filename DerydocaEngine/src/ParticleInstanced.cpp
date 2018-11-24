@@ -1,7 +1,7 @@
 #include "ParticleInstanced.h"
 
 #include <GL\glew.h>
-#include "InputManager.h"
+#include "Input\InputManager.h"
 #include "LightManager.h"
 #include "Material.h"
 #include "Shader.h"

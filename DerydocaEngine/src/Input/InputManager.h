@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "Keyboard.h"
-#include "Mouse.h"
+#include "Input\Keyboard.h"
+#include "Input\Mouse.h"
 
 namespace DerydocaEngine::Input
 {

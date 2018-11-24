@@ -201,7 +201,7 @@
     <ClCompile Include="src\BloomFilter.cpp" />
     <ClCompile Include="src\Animation\Bone.cpp" />
     <ClCompile Include="src\Animation\Skeleton.cpp" />
-    <ClCompile Include="src\ButtonState.cpp" />
+    <ClCompile Include="src\Input\ButtonState.cpp" />
     <ClCompile Include="src\Components\Camera.cpp" />
     <ClCompile Include="src\CameraManager.cpp" />
     <ClCompile Include="src\Clock.cpp" />
@@ -221,11 +221,11 @@
     <ClCompile Include="src\Debug\GLError.cpp" />
     <ClCompile Include="src\Files\Serializers\ImageFileSerializer.cpp" />
     <ClCompile Include="src\ImageProjector.cpp" />
-    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\Input\InputManager.cpp" />
     <ClCompile Include="src\IntRect.cpp" />
     <ClCompile Include="src\IntRectangle.cpp" />
-    <ClCompile Include="src\Key.cpp" />
-    <ClCompile Include="src\Keyboard.cpp" />
+    <ClCompile Include="src\Input\Key.cpp" />
+    <ClCompile Include="src\Input\Keyboard.cpp" />
     <ClCompile Include="src\Components\KeyboardMover.cpp" />
     <ClCompile Include="src\Files\Serializers\LevelFileSerializer.cpp" />
     <ClCompile Include="src\Components\Light.cpp" />
@@ -239,7 +239,7 @@
     <ClCompile Include="src\Components\MeshRenderer.cpp" />
     <ClCompile Include="src\Files\Serializers\MeshFileSerializer.cpp" />
     <ClCompile Include="src\MeshResourceSerializer.cpp" />
-    <ClCompile Include="src\Mouse.cpp" />
+    <ClCompile Include="src\Input\Mouse.cpp" />
     <ClCompile Include="src\MultisampleSwitch.cpp" />
     <ClCompile Include="src\NightVisionFilter.cpp" />
     <ClCompile Include="src\NoiseTexture.cpp" />
@@ -302,7 +302,7 @@
     <ClInclude Include="src\BloomFilter.h" />
     <ClInclude Include="src\Animation\Bone.h" />
     <ClInclude Include="src\Animation\VertexBoneWeights.h" />
-    <ClInclude Include="src\ButtonState.h" />
+    <ClInclude Include="src\Input\ButtonState.h" />
     <ClInclude Include="src\Components\Camera.h" />
     <ClInclude Include="src\CameraManager.h" />
     <ClInclude Include="src\Clock.h" />
@@ -327,11 +327,11 @@
     <ClInclude Include="src\AnimationResource.h" />
     <ClInclude Include="src\Files\Serializers\ImageFileSerializer.h" />
     <ClInclude Include="src\ImageProjector.h" />
-    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\Input\InputManager.h" />
     <ClInclude Include="src\IntRect.h" />
     <ClInclude Include="src\IntRectangle.h" />
-    <ClInclude Include="src\Key.h" />
-    <ClInclude Include="src\Keyboard.h" />
+    <ClInclude Include="src\Input\Key.h" />
+    <ClInclude Include="src\Input\Keyboard.h" />
     <ClInclude Include="src\Components\KeyboardMover.h" />
     <ClInclude Include="src\Files\Serializers\LevelFileSerializer.h" />
     <ClInclude Include="src\Components\Light.h" />
@@ -350,7 +350,7 @@
     <ClInclude Include="src\MeshResource.h" />
     <ClInclude Include="src\Files\Serializers\MeshFileSerializer.h" />
     <ClInclude Include="src\MeshResourceSerializer.h" />
-    <ClInclude Include="src\Mouse.h" />
+    <ClInclude Include="src\Input\Mouse.h" />
     <ClInclude Include="src\MultisampleSwitch.h" />
     <ClInclude Include="src\NightVisionFilter.h" />
     <ClInclude Include="src\NoiseTexture.h" />

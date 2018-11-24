@@ -1,6 +1,6 @@
 #pragma once
 #include <glm/vec2.hpp>
-#include "Key.h"
+#include "Input\Key.h"
 
 namespace DerydocaEngine::Input
 {

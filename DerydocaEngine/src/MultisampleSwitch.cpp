@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "GL\glew.h"
-#include "InputManager.h"
+#include "Input\InputManager.h"
 #include "sdl2\SDL.h"
 
 namespace DerydocaEngine::Ext

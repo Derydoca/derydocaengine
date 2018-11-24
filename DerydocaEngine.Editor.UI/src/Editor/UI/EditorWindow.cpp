@@ -10,7 +10,7 @@
 #include "Display.h"
 #include "EngineSettings.h"
 #include "GameObject.h"
-#include "InputManager.h"
+#include "Input\InputManager.h"
 #include "Material.h"
 #include "ObjectLibrary.h"
 #include "SerializedScene.h"

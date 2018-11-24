@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include "Components\Camera.h"
 #include "DisplayManager.h"
-#include "InputManager.h"
+#include "Input\InputManager.h"
 
 #include <sdl2/SDL.h>
 #undef main
