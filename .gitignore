@@ -1,21 +1,7 @@
 # Exclude all builds of the application
-builds/*
 bin/*
 bin-int/*
 packages/*
-
-# Do not include any build artifacts
-DerydocaEngine/Debug/*
-DerydocaEngine/Debug/DerydocaEngine.tlog/*.tlog
-DerydocaEngine/Release/*
-DerydocaEngine/x64/Debug/*
-DerydocaEngine/x64/Release/*
-
-DerydocaEngine.Editor.UI/Debug/*
-DerydocaEngine.Editor.UI/Debug/DerydocaEngine.tlog/*.tlog
-DerydocaEngine.Editor.UI/Release/*
-DerydocaEngine.Editor.UI/x64/Debug/*
-DerydocaEngine.Editor.UI/x64/Release/*
 
 # Exclude the hidden visual studio file
 .vs/*
