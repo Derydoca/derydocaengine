@@ -21,6 +21,6 @@
     <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene a643126f-caf7-4fe7-8460-569373a3dd73</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup>
-    <ShowAllFiles>false</ShowAllFiles>
+    <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
 </Project>

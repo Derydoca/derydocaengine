@@ -4,7 +4,7 @@
 #include "Rendering\Material.h"
 #include "Components\MeshRenderer.h"
 #include "Rendering\Shader.h"
-#include "Ext\TessellatedMeshRenderer.h"
+#include "ComponentsExt\TessellatedMeshRenderer.h"
 #include "SkinnedMeshRenderer.h"
 
 namespace DerydocaEngine::Components

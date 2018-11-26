@@ -25,54 +25,6 @@
     <ClCompile Include="src\Animation\Skeleton.cpp">
       <Filter>DerydocaEngine\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="src\Components\Camera.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\FrameStats.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\GameComponentFactory.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\KeyboardMover.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Light.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\MaterialRefresher.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\MeshRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\RendererComponent.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Rotator.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\ScreenshotUtil.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\SkinnedMeshRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\SpriteRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Terrain.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\TextRenderer.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Transform.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\WasdMover.cpp">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClCompile>
     <ClCompile Include="src\Debug\DebugVisualizer.cpp">
       <Filter>DerydocaEngine\Debug</Filter>
     </ClCompile>
@@ -229,21 +181,6 @@
     <ClCompile Include="src\Utilities\TexturePackerTextureData.cpp">
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="src\Ext\GammaCorrectionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\GaussianBlurFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\ImageProjector.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\EdgeDetectionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\BloomFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
     <ClCompile Include="src\Ext\BezierPatchMeshResourceSerializer.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
@@ -251,45 +188,6 @@
       <Filter>Ext</Filter>
     </ClCompile>
     <ClCompile Include="src\Ext\BezierPatchMesh.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\BezierCurveRenderer.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\MultisampleSwitch.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\NightVisionFilter.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\NoiseTexture.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\ParticleContinuousFountain.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\ParticleFountain.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\ParticleInstanced.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\ParticleSystem.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\ShaderSubroutineSwitcher.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\TessellatedMeshRenderer.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\TessellatingQuad.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\WaveDisplacement.cpp">
-      <Filter>Ext</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Ext\WoodSliceTexture.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
   </ItemGroup>
@@ -344,57 +242,6 @@
     </ClInclude>
     <ClInclude Include="src\Animation\VertexBoneWeights.h">
       <Filter>DerydocaEngine\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Camera.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\FrameStats.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\GameComponent.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\GameComponentFactory.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\KeyboardMover.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Light.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\MaterialRefresher.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\MeshRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\RendererComponent.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Rotator.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\ScreenshotUtil.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\SkinnedMeshRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\SpriteRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Terrain.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\TextRenderer.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\Transform.h">
-      <Filter>DerydocaEngine\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Components\WasdMover.h">
-      <Filter>DerydocaEngine\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\DataStructures\LinkedListNode.h">
       <Filter>DerydocaEngine\DataStructures</Filter>
@@ -600,21 +447,6 @@
     <ClInclude Include="src\Utilities\TexturePackerTextureData.h">
       <Filter>DerydocaEngine\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ext\GammaCorrectionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\GaussianBlurFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\ImageProjector.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\EdgeDetectionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\BloomFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
     <ClInclude Include="src\Ext\BezierPatchMeshResourceSerializer.h">
       <Filter>Ext</Filter>
     </ClInclude>
@@ -622,45 +454,6 @@
       <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="src\Ext\BezierPatchMesh.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\BezierCurveRenderer.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\MultisampleSwitch.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\NightVisionFilter.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\NoiseTexture.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\ParticleContinuousFountain.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\ParticleFountain.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\ParticleInstanced.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\ParticleSystem.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\ShaderSubroutineSwitcher.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\TessellatedMeshRenderer.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\TessellatingQuad.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\WaveDisplacement.h">
-      <Filter>Ext</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Ext\WoodSliceTexture.h">
       <Filter>Ext</Filter>
     </ClInclude>
   </ItemGroup>

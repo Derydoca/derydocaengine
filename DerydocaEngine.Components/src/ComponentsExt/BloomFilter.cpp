@@ -59,7 +59,7 @@ namespace DerydocaEngine::Ext
 			{
 				Rendering::RenderPass("lumThreshPass", m_blurTex, "BlurTex"),
 				Rendering::RenderPass("blurY", m_blurTex2, "BlurTex2"),
-				"blurX"
+				Rendering::RenderPass("blurX")
 			};
 			shader->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 3);
 		}

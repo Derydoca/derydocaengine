@@ -1,7 +1,7 @@
 #pragma once
 #include "Components\GameComponent.h"
 #include "Rendering\Material.h"
-#include "BezierPatchMesh.h"
+#include "Ext\BezierPatchMesh.h"
 
 namespace DerydocaEngine::Ext
 {

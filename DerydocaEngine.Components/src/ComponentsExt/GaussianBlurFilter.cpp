@@ -36,7 +36,7 @@ namespace DerydocaEngine::Ext
 		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
 		if (shader != nullptr)
 		{
-			Rendering::RenderPass subPasses[2] = { "pass1", "pass2" };
+			Rendering::RenderPass subPasses[2] = { Rendering::RenderPass("pass1"), Rendering::RenderPass("pass2") };
 			shader->setSubPasses(GL_FRAGMENT_SHADER, subPasses, 2);
 		}
 
