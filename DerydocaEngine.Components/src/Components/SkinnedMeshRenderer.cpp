@@ -56,7 +56,7 @@ namespace DerydocaEngine::Components
 		m_animation->optimizeForSkeleton(m_mesh->getSkeleton());
 	}
 
-	void SkinnedMeshRenderer::render(Rendering::MatrixStack* const& matrixStack)
+	void SkinnedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack)
 	{
 		assert(getGameObject());
 
@@ -72,7 +72,7 @@ namespace DerydocaEngine::Components
 		m_material->unbind();
 	}
 
-	void SkinnedMeshRenderer::renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform)
+	void SkinnedMeshRenderer::renderMesh(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform)
 	{
 		material->bind();
 		material->getShader()->update(matrixStack, projection, projectionTransform);

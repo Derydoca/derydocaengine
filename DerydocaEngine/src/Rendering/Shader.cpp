@@ -187,7 +187,7 @@ namespace DerydocaEngine::Rendering
 		printf("    %f   %f   %f\n", matPtr[6], matPtr[7], matPtr[8]);
 	}
 
-	void Shader::update(MatrixStack * const& matrixStack, Projection const& projection, Components::Transform* const& trans)
+	void Shader::update(std::shared_ptr<MatrixStack> const& matrixStack, Projection const& projection, Components::Transform* const& trans)
 	{
 		glm::mat4 modelMatrix = matrixStack->getMatrix();
 		glm::mat4 transformModelMatrix = trans->getModel();
@@ -228,7 +228,7 @@ namespace DerydocaEngine::Rendering
 		glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, &matrix[0][0]);
 	}
 
-	void Shader::updateViaActiveCamera(MatrixStack * const& matrixStack)
+	void Shader::updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack)
 	{
 		Components::Camera* camera = CameraManager::getInstance().getCurrentCamera();
 

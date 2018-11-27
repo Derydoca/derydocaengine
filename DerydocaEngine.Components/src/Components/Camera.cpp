@@ -20,12 +20,29 @@
 namespace DerydocaEngine::Components
 {
 
-	Camera::Camera()
+	Camera::Camera() :
+		m_transform(),
+		m_clearColor(),
+		m_skybox(new Rendering::Skybox()),
+		m_clearMode(Camera::NoClear),
+		m_renderingMode(Camera::RenderingMode::Forward),
+		m_skyboxMaterial(nullptr),
+		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
+		m_renderTexture(nullptr),
+		m_display(nullptr),
+		m_displayRect(new Rectangle(0, 0, 1, 1)),
+		m_quad(nullptr),
+		m_postProcessMaterial(nullptr),
+		m_orthoSize(10.0f),
+		m_deferredFBO(0),
+		m_gbuffDepth(0),
+		m_gbuffPos(0),
+		m_gbuffNorm(0),
+		m_gbuffColor(0),
+		m_deferredRendererCompositor(0),
+		m_projection()
 	{
 		Rendering::CameraManager::getInstance().addCamera(this);
-
-		m_skybox = new Rendering::Skybox();
-		m_displayRect = new Rectangle(0, 0, 1, 1);
 
 		setDisplay(Rendering::DisplayManager::getInstance().getDisplay(0));
 		m_projection.setAspectRatio(m_display->getAspectRatio());
@@ -34,7 +51,27 @@ namespace DerydocaEngine::Components
 		setClearColor(Color(0.5, 0.0, 0.0));
 	}
 
-	Camera::Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar)
+	Camera::Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar) :
+		m_transform(),
+		m_clearColor(),
+		m_skybox(new Rendering::Skybox()),
+		m_clearMode(Camera::NoClear),
+		m_renderingMode(Camera::RenderingMode::Forward),
+		m_skyboxMaterial(nullptr),
+		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
+		m_renderTexture(nullptr),
+		m_display(nullptr),
+		m_displayRect(new Rectangle(0, 0, 1, 1)),
+		m_quad(nullptr),
+		m_postProcessMaterial(nullptr),
+		m_orthoSize(10.0f),
+		m_deferredFBO(0),
+		m_gbuffDepth(0),
+		m_gbuffPos(0),
+		m_gbuffNorm(0),
+		m_gbuffColor(0),
+		m_deferredRendererCompositor(0),
+		m_projection()
 	{
 		m_projection.setFov(fov);
 		m_projection.setAspectRatio(aspect);
@@ -43,9 +80,6 @@ namespace DerydocaEngine::Components
 		m_projection.recalculateProjectionMatrix();
 
 		Rendering::CameraManager::getInstance().addCamera(this);
-
-		m_skybox = new Rendering::Skybox();
-		m_displayRect = new Rectangle();
 	}
 
 	Camera::~Camera()
@@ -237,7 +271,7 @@ namespace DerydocaEngine::Components
 		glEnable(GL_DEPTH_TEST);
 		clear();
 		gameObject->preRender();
-		gameObject->render(&m_matrixStack);
+		gameObject->render(m_matrixStack);
 
 		// Postprocessing happens here
 		if (m_renderTexture != nullptr && m_postProcessMaterial != nullptr)

@@ -65,6 +65,11 @@ namespace DerydocaEngine::Components
 		*/
 		void setClearColor(Color const& clearColor) { m_clearColor = clearColor; }
 
+		void setProjection(Rendering::Projection projection)
+		{
+			m_projection = projection;
+		}
+
 		/*
 		Sets the skybox material
 
@@ -105,7 +110,7 @@ namespace DerydocaEngine::Components
 		ClearMode m_clearMode = NoClear;
 		RenderingMode m_renderingMode;
 		Rendering::Material* m_skyboxMaterial;
-		Rendering::MatrixStack m_matrixStack;
+		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		Rendering::RenderTexture* m_renderTexture;
 		Rendering::Display* m_display;
 		Rectangle* m_displayRect;

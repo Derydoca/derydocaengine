@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <vector>
 #include "Components\Transform.h"
 
@@ -27,7 +28,7 @@ namespace DerydocaEngine
 		void init();
 		void postInit();
 		void update(float const& deltaTime);
-		void render(Rendering::MatrixStack* const& matrixStack);
+		void render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack);
 		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& renderMesh, Rendering::Projection const& projection, Components::Transform* const& projectionTransform);
 		void preRender();
 		void postRender();

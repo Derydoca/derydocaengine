@@ -21,8 +21,8 @@ namespace DerydocaEngine::Components
 			m_dirtyComponents = (Rendering::MeshComponents)(m_dirtyComponents | component);
 		}
 
-		void render(Rendering::MatrixStack* const& matrixStack);
-		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
+		virtual void render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack);
+		virtual void renderMesh(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
 		int getNumVertices() const { return static_cast<int>(m_vertices.size()); }
 		int getNumIndices() const { return static_cast<int>(m_triangleIndices.size()); }
 

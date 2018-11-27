@@ -29,9 +29,9 @@ namespace DerydocaEngine::Rendering
 		~Shader();
 
 		void bind();
-		void update(MatrixStack * const& matrixStack, Projection const& projection, Components::Transform* const& trans);
+		void update(std::shared_ptr<MatrixStack> const& matrixStack, Projection const& projection, Components::Transform* const& trans);
 		void update(glm::mat4 const& matrix);
-		void updateViaActiveCamera(MatrixStack * const& matrixStack);
+		void updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack);
 
 		void setFloat(std::string const& name, float const& val);
 		void setFloatArray(std::string const& name, float* const& arrayLocation, unsigned int const& arrayLength);

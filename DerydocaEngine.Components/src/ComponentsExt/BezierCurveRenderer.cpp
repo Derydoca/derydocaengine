@@ -80,7 +80,7 @@ namespace DerydocaEngine::Ext
 		m_material->setShader(shader);
 	}
 
-	void BezierCurveRenderer::render(Rendering::MatrixStack * const& matrixStack)
+	void BezierCurveRenderer::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack)
 	{
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);

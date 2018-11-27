@@ -33,7 +33,7 @@ namespace DerydocaEngine
 		m_children.clear();
 	}
 
-	void GameObject::render(Rendering::MatrixStack* const& matrixStack) {
+	void GameObject::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack) {
 		matrixStack->push(m_transform.getModel());
 
 		for each (Components::GameComponent* c in m_components)

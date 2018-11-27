@@ -62,7 +62,7 @@ namespace DerydocaEngine::Components
 		m_dirtyComponents = Rendering::MeshComponents::None;
 	}
 
-	void RendererComponent::render(Rendering::MatrixStack * const& matrixStack)
+	void RendererComponent::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack)
 	{
 		if (m_dirtyComponents != Rendering::MeshComponents::None)
 		{
@@ -78,7 +78,7 @@ namespace DerydocaEngine::Components
 		m_material->unbind();
 	}
 
-	void RendererComponent::renderMesh(Rendering::MatrixStack * const& matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Transform * const& projectionTransform)
+	void RendererComponent::renderMesh(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Transform * const& projectionTransform)
 	{
 		m_material->bind();
 		m_material->getShader()->update(matrixStack, projection, projectionTransform);

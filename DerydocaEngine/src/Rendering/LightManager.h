@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/vec3.hpp>
 #include <list>
+#include <memory>
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -26,7 +27,7 @@ namespace DerydocaEngine::Rendering
 		}
 
 		void addLight(Components::Light* const& light) { m_lights.push_back(light); }
-		void bindLightsToShader(Rendering::MatrixStack* const& matrixStack, Components::Transform* const& objectTransform, Rendering::Shader* const& shader);
+		void bindLightsToShader(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, Components::Transform* const& objectTransform, Rendering::Shader* const& shader);
 		void removeLight(Components::Light* const& light) { m_lights.remove(light); }
 		void renderShadowMaps(Components::Transform* const& objectTransform);
 
