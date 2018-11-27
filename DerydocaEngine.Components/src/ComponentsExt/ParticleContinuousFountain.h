@@ -26,7 +26,7 @@ namespace DerydocaEngine::Ext
 		virtual void update(float const& deltaTime);
 		virtual void preRender();
 		virtual void deserialize(YAML::Node const& compNode);
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack);
+		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
 	private:
 		int m_numParticles = 1000;
 		Rendering::Material* m_material;

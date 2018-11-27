@@ -136,7 +136,7 @@ namespace DerydocaEngine::Ext
 		m_material->setTexture("ParticleTex", m_tex);
 	}
 
-	void ParticleContinuousFountain::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack)
+	void ParticleContinuousFountain::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);

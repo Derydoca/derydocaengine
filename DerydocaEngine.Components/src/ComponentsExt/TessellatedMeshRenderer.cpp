@@ -74,7 +74,7 @@ namespace DerydocaEngine::Ext
 		m_mesh = getResourceObject<BezierPatchMesh>(compNode, "bezierPatchMesh");
 	}
 
-	void TessellatedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack)
+	void TessellatedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
@@ -85,7 +85,7 @@ namespace DerydocaEngine::Ext
 		glFinish();
 	}
 
-	void TessellatedMeshRenderer::renderMesh(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Components::Transform * const& projectionTransform)
+	void TessellatedMeshRenderer::renderMesh(std::shared_ptr<Rendering::MatrixStack> const matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Components::Transform * const& projectionTransform)
 	{
 		// Consider an alternate to using the same material as what is being used to render to screen
 		//  The calculations may be excessive for a shadow calc

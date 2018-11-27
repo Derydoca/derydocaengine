@@ -23,8 +23,8 @@ namespace DerydocaEngine::Components
 		GENINSTANCE(SkinnedMeshRenderer)
 		SkinnedMeshRenderer();
 		~SkinnedMeshRenderer();
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack);
-		virtual void renderMesh(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
+		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
+		virtual void renderMesh(std::shared_ptr<Rendering::MatrixStack> const matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
 		virtual void update(float const& deltaTime) { m_time += deltaTime; }
 		Rendering::Material* getMaterial() { return m_material; }
 		Camera* getSkinnedMeshRendererCamera() { return m_SkinnedMeshRendererCamera; }

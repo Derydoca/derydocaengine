@@ -8,7 +8,22 @@
 namespace DerydocaEngine::Components
 {
 
-	Light::Light()
+	Light::Light() :
+		m_lightType(LightType::Point),
+		m_color(1, 1, 1, 1),
+		m_spotlightExponent(0.0f),
+		m_spotlightCutoff(0.0f),
+		m_castShadows(false),
+		m_shadowMapHeight(512),
+		m_shadowMapWidth(512),
+		m_depthTexture(0),
+		m_shadowFBO(0),
+		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
+		m_shadowMapMaterial(nullptr),
+		m_projection(),
+		m_shadowBias(),
+		m_shadowMapFilterType(ShadowMapFilterType::Nearest),
+		m_shadowSoftness(0.01f)
 	{
 		Rendering::LightManager::getInstance().addLight(this);
 	}
@@ -106,7 +121,7 @@ namespace DerydocaEngine::Components
 		// Draw all meshes with the shadow map shader to the framebuffer
 		m_shadowMapMaterial->bind();
 		Transform* trans = getGameObject()->getTransform();
-		gameObject->renderMesh(&m_matrixStack, m_shadowMapMaterial, m_projection, trans);
+		gameObject->renderMesh(m_matrixStack, m_shadowMapMaterial, m_projection, trans);
 
 		glCullFace(GL_BACK);
 		glPolygonOffset(0.0f, 0.0f);

@@ -73,21 +73,21 @@ namespace DerydocaEngine::Components
 		void generateShadowMap();
 		int getShadowMapFilterTypeEnum();
 
-		LightType m_lightType = Point;
-		Color m_color = Color(1, 1, 1, 1);
+		LightType m_lightType;
+		Color m_color;
 		float m_spotlightExponent;
 		float m_spotlightCutoff;
-		bool m_castShadows = false;
-		int m_shadowMapHeight = 512;
-		int m_shadowMapWidth = 512;
+		bool m_castShadows;
+		int m_shadowMapHeight;
+		int m_shadowMapWidth;
 		unsigned int m_depthTexture;
 		unsigned int m_shadowFBO;
-		Rendering::MatrixStack m_matrixStack;
+		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		Rendering::Material* m_shadowMapMaterial;
 		Rendering::Projection m_projection;
 		glm::mat4 m_shadowBias;
-		ShadowMapFilterType m_shadowMapFilterType = ShadowMapFilterType::Nearest;
-		float m_shadowSoftness = 0.01f;
+		ShadowMapFilterType m_shadowMapFilterType;
+		float m_shadowSoftness;
 	};
 
 }

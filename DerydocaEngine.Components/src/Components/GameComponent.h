@@ -48,8 +48,12 @@ namespace DerydocaEngine::Components
 		virtual void postInit() {}
 		virtual void update(float const& deltaTime) {}
 		virtual void preRender() {}
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack) {}
-		virtual void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform) {}
+		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack) {}
+		virtual void renderMesh(
+			std::shared_ptr<Rendering::MatrixStack> const matrixStack,
+			Rendering::Material* const& material,
+			Rendering::Projection const& projection,
+			Transform* const& projectionTransform) {}
 		virtual void postRender() {}
 		inline void setGameObject(GameObject* const& gameObject) { m_gameObject = gameObject; }
 		inline GameObject* getGameObject() { return m_gameObject; }

@@ -83,7 +83,7 @@ namespace DerydocaEngine::Ext
 		m_mesh = getResourceObject<Rendering::Mesh>(compNode, "mesh");
 	}
 
-	void ParticleInstanced::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack)
+	void ParticleInstanced::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);

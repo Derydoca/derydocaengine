@@ -29,7 +29,12 @@ namespace DerydocaEngine
 		void postInit();
 		void update(float const& deltaTime);
 		void render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack);
-		void renderMesh(Rendering::MatrixStack* const& matrixStack, Rendering::Material* const& renderMesh, Rendering::Projection const& projection, Components::Transform* const& projectionTransform);
+		void renderMesh(
+			std::shared_ptr<Rendering::MatrixStack> const matrixStack,
+			Rendering::Material* const& renderMesh,
+			Rendering::Projection const& projection,
+			Components::Transform* const& projectionTransform
+		);
 		void preRender();
 		void postRender();
 
