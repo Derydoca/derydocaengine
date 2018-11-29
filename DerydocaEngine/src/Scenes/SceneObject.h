@@ -22,13 +22,13 @@ namespace DerydocaEngine::Scenes
 		std::string getType() const { return m_type; }
 		YAML::Node getProperties() const { return m_properties; }
 		bool isObjectCreated() const { return m_objectReference != 0; }
-		GameObject* getGameObject() const { return m_objectReference; }
-		void setObjectReference(GameObject* const& reference) { m_objectReference = reference; }
+		std::shared_ptr<GameObject> getGameObject() const { return m_objectReference; }
+		void setObjectReference(std::shared_ptr<GameObject> const reference) { m_objectReference = reference; }
 	private:
 		boost::uuids::uuid m_id;
 		std::string m_type;
 		YAML::Node m_properties;
-		GameObject* m_objectReference;
+		std::shared_ptr<GameObject> m_objectReference;
 	};
 
 }

@@ -68,7 +68,7 @@ namespace DerydocaEngine::Components
 		void init();
 		void deserialize(YAML::Node const& node);
 
-		void renderShadowMap(GameObject* const& gameObject);
+		void renderShadowMap(const GameObject* gameObject);
 	private:
 		void generateShadowMap();
 		int getShadowMapFilterTypeEnum();

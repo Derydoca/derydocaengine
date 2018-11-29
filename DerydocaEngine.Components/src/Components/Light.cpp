@@ -108,7 +108,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Light::renderShadowMap(GameObject* const& gameObject)
+	void Light::renderShadowMap(const GameObject* gameObject)
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_shadowFBO);
 		glClear(GL_DEPTH_BUFFER_BIT);

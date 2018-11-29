@@ -29,7 +29,11 @@ namespace DerydocaEngine::Rendering
 		~Shader();
 
 		void bind();
-		void update(std::shared_ptr<MatrixStack> const& matrixStack, Projection const& projection, Components::Transform* const& trans);
+		void update(
+			const std::shared_ptr<MatrixStack>& matrixStack,
+			const Projection& projection,
+			const Components::Transform* trans
+		);
 		void update(glm::mat4 const& matrix);
 		void updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack);
 
@@ -71,7 +75,7 @@ namespace DerydocaEngine::Rendering
 
 		void setSubPasses(unsigned int const& program, RenderPass* const& renderPasses, int const& numPasses);
 
-		void renderMesh(Mesh* const& mesh, RenderTexture* const& renderTexture);
+		void renderMesh(const std::shared_ptr<Mesh> mesh, RenderTexture* renderTexture);
 	private:
 		static const unsigned int NUM_SHADERS = 5;
 		Shader(Shader const& other) {}

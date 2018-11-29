@@ -14,7 +14,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	void CameraManager::render(GameObject* const& rootObject)
+	void CameraManager::render(std::shared_ptr<GameObject> const rootObject)
 	{
 		for each (Components::Camera* cam in m_cameras)
 		{

@@ -23,7 +23,12 @@ namespace DerydocaEngine::Components
 		MeshRenderer(std::shared_ptr<Rendering::Mesh> const& mesh, Rendering::Material* const& material);
 		~MeshRenderer();
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
-		virtual void renderMesh(std::shared_ptr<Rendering::MatrixStack> const matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform);
+		virtual void renderMesh(
+			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
+			Rendering::Material*& material,
+			const Rendering::Projection& projection,
+			const Transform*& projectionTransform
+		);
 		Rendering::Material* getMaterial() { return m_material; }
 		Camera* getMeshRendererCamera() { return m_meshRendererCamera; }
 

@@ -187,7 +187,10 @@ namespace DerydocaEngine::Rendering
 		printf("    %f   %f   %f\n", matPtr[6], matPtr[7], matPtr[8]);
 	}
 
-	void Shader::update(std::shared_ptr<MatrixStack> const& matrixStack, Projection const& projection, Components::Transform* const& trans)
+	void Shader::update(
+		const std::shared_ptr<MatrixStack>& matrixStack,
+		const Projection& projection,
+		const Components::Transform* trans)
 	{
 		glm::mat4 modelMatrix = matrixStack->getMatrix();
 		glm::mat4 transformModelMatrix = trans->getModel();
@@ -355,7 +358,7 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	void Shader::renderMesh(Mesh * const& mesh, RenderTexture* const& m_renderTexture)
+	void Shader::renderMesh(const std::shared_ptr<Mesh> mesh, RenderTexture* m_renderTexture)
 	{
 		if (m_numPasses <= 0)
 		{

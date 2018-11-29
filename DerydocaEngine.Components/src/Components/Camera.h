@@ -82,7 +82,7 @@ namespace DerydocaEngine::Components
 
 		@root Root game object to render all of its children
 		*/
-		void renderRoot(GameObject* const& root);
+		void renderRoot(const std::shared_ptr<GameObject> root);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }
@@ -104,7 +104,7 @@ namespace DerydocaEngine::Components
 		Rendering::Material* getPostProcessMaterial() { return m_postProcessMaterial; }
 		Rendering::Projection getProjection() const { return m_projection; }
 	private:
-		Transform * m_transform;
+		const Transform * m_transform;
 		Color m_clearColor;
 		Rendering::Skybox* m_skybox;
 		ClearMode m_clearMode = NoClear;
@@ -114,7 +114,7 @@ namespace DerydocaEngine::Components
 		Rendering::RenderTexture* m_renderTexture;
 		Rendering::Display* m_display;
 		Rectangle* m_displayRect;
-		Rendering::Mesh* m_quad;
+		std::shared_ptr<Rendering::Mesh> m_quad;
 		Rendering::Material* m_postProcessMaterial;
 		float m_orthoSize = 10.0f;
 		unsigned int m_deferredFBO;

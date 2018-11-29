@@ -71,7 +71,12 @@ namespace DerydocaEngine::Components
 		m_material->unbind();
 	}
 
-	void MeshRenderer::renderMesh(std::shared_ptr<Rendering::MatrixStack> const matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Transform* const& projectionTransform)
+	void MeshRenderer::renderMesh(
+		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
+		Rendering::Material*& material,
+		const Rendering::Projection& projection,
+		const Transform*& projectionTransform
+	)
 	{
 		material->bind();
 		material->getShader()->update(matrixStack, projection, projectionTransform);

@@ -3,6 +3,7 @@
 #include <glm/mat4x4.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <memory>
 
 namespace DerydocaEngine {
 	class GameObject;

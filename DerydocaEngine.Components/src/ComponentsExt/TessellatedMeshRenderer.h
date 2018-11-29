@@ -17,7 +17,12 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(YAML::Node const& compNode);
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
-		virtual void renderMesh(std::shared_ptr<Rendering::MatrixStack> const matrixStack, Rendering::Material* const& material, Rendering::Projection const& projection, Components::Transform* const& projectionTransform);
+		virtual void renderMesh(
+			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
+			Rendering::Material*& material,
+			const Rendering::Projection& projection,
+			const Components::Transform*& projectionTransform
+		);
 
 		Rendering::Material* getMaterial() const { return m_material; }
 	private:

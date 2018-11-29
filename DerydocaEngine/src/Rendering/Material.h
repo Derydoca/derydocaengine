@@ -40,7 +40,7 @@ namespace DerydocaEngine::Rendering
 		void setMat4(std::string const& name, glm::mat4 const& value);
 		void setMat4Array(std::string const& name, std::vector<glm::mat4> matrixArray);
 		void setSubroutine(unsigned int const& program, unsigned int const& value);
-		void bind();
+		void bind() const;
 		void unbind();
 	private:
 		Shader* m_shader;

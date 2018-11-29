@@ -9,7 +9,6 @@
 #include "Resources\CubemapResource.h"
 #include "Rendering\Display.h"
 #include "Settings\EngineSettings.h"
-#include "GameObject.h"
 #include "Input\InputManager.h"
 #include "Rendering\Material.h"
 #include "ObjectLibrary.h"
@@ -36,16 +35,16 @@ namespace DerydocaEngine::Editor::UI
 
 		Rendering::Display* display = new Rendering::Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 
-		GameObject* sceneRoot = new GameObject();
+		m_sceneRoot = GameObject::generate("__SCENE_ROOT__");
 
 #pragma region Editor specific game objects
 
 		// Keep this here as a simple way to grab screenshots of the engine
 		Components::ScreenshotUtil* screenshotUtil = new Components::ScreenshotUtil(display, Input::InputManager::getInstance().getKeyboard());
-		sceneRoot->addComponent(screenshotUtil);
+		m_sceneRoot->addComponent(screenshotUtil);
 
 		// This is the editor camera
-		GameObject* editorCameraObject = new GameObject("__editorCamera");
+		std::shared_ptr<GameObject> editorCameraObject = GameObject::generate("__editorCamera");
 		Components::Transform* editorCameraTransform = editorCameraObject->getTransform();
 		editorCameraTransform->setPos(settings->getCamPos());
 		Components::Camera* editorCamera = new Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
@@ -71,7 +70,7 @@ namespace DerydocaEngine::Editor::UI
 		}
 		editorCameraObject->addComponent(editorCamera);
 		editorCameraObject->addComponent(new Components::WasdMover(Input::InputManager::getInstance().getKeyboard(), Input::InputManager::getInstance().getMouse()));
-		sceneRoot->addChild(editorCameraObject);
+		m_sceneRoot->addChild(editorCameraObject);
 
 #pragma endregion
 
@@ -89,7 +88,7 @@ namespace DerydocaEngine::Editor::UI
 			{
 				scene = new Scenes::SerializedScene();
 				scene->LoadFromFile(levelResource->getSourceFilePath());
-				scene->setUp(sceneRoot);
+				scene->setUp(m_sceneRoot);
 			}
 		}
 
@@ -97,22 +96,22 @@ namespace DerydocaEngine::Editor::UI
 		unsigned long minFrameTime = 1000 / 60;
 
 		// Initialize all components in the scene before rendering anything
-		sceneRoot->init();
+		m_sceneRoot->init();
 
 		// Run the post initialization routine on all components
-		sceneRoot->postInit();
+		m_sceneRoot->postInit();
 
 		// Render loop
 		while (!display->isClosed()) {
 
 			// Tick the clock forward the number of ms it took since the last frame rendered
-			sceneRoot->update(clock->getDeltaTime());
+			m_sceneRoot->update(clock->getDeltaTime());
 
 			// Render all scene objects
-			Rendering::CameraManager::getInstance().render(sceneRoot);
+			Rendering::CameraManager::getInstance().render(m_sceneRoot);
 
 			// Let the scene objects do whatever it is they need to do after rendering has completed this frame
-			sceneRoot->postRender();
+			m_sceneRoot->postRender();
 
 			// Let the display respond to any input events
 			display->update();
@@ -134,11 +133,10 @@ namespace DerydocaEngine::Editor::UI
 		// Clean up the scene
 		if (scene != nullptr)
 		{
-			scene->tearDown(sceneRoot);
+			scene->tearDown(m_sceneRoot);
 		}
 
 		// Clean up all other objects
-		delete sceneRoot;
 		delete display;
 		delete settings;
 		delete clock;

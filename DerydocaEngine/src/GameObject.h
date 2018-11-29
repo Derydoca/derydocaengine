@@ -18,42 +18,46 @@ namespace DerydocaEngine {
 namespace DerydocaEngine
 {
 
-	class GameObject
+	class GameObject: public std::enable_shared_from_this<GameObject>
 	{
 	public:
+		static std::shared_ptr<GameObject> generate(std::string name = "")
+		{
+			return std::make_shared<GameObject>();
+		}
 		GameObject();
-		GameObject(std::string const& name);
+		GameObject(const std::string& name);
 		~GameObject();
 
 		void init();
 		void postInit();
-		void update(float const& deltaTime);
-		void render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack);
+		void update(const float& deltaTime);
+		void render(const std::shared_ptr<Rendering::MatrixStack>& matrixStack);
 		void renderMesh(
-			std::shared_ptr<Rendering::MatrixStack> const matrixStack,
-			Rendering::Material* const& renderMesh,
-			Rendering::Projection const& projection,
-			Components::Transform* const& projectionTransform
-		);
+			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
+			Rendering::Material*& renderMesh,
+			const Rendering::Projection& projection,
+			const Components::Transform* projectionTransform
+		) const;
 		void preRender();
 		void postRender();
 
-		void addChild(GameObject* const& gameObject);
+		void addChild(const std::shared_ptr<GameObject> gameObject);
 		void addComponent(Components::GameComponent* const& component);
 
 		inline Components::Transform* getTransform() { return &m_transform; }
-		inline std::vector<GameObject*> getChildren() const { return m_children; }
+		inline std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
 		inline std::vector<Components::GameComponent*> getComponents() const { return m_components; }
 
-		inline GameObject* getParent() const { return m_parent; }
+		inline std::shared_ptr<GameObject> getParent() const { return m_parent; }
 		inline std::string getName() const { return m_name; }
 
 		inline void setName(std::string name) { m_name = name; }
 	private:
 		std::string m_name;
 		Components::Transform m_transform;
-		GameObject* m_parent;
-		std::vector<GameObject*> m_children;
+		std::shared_ptr<GameObject> m_parent;
+		std::vector<std::shared_ptr<GameObject>> m_children;
 		std::vector<Components::GameComponent*> m_components;
 	};
 

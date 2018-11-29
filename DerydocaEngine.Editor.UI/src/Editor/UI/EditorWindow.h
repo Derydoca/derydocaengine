@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "GameObject.h"
 
 namespace DerydocaEngine::Editor::UI
 {
@@ -7,7 +8,9 @@ namespace DerydocaEngine::Editor::UI
 	class EditorWindow
 	{
 	public:
-		int Run(std::string const& projectPath, std::string const& scenePath);
+		int Run(const std::string& projectPath, const std::string& scenePath);
+	private:
+		std::shared_ptr<GameObject> m_sceneRoot;
 	};
 
 }

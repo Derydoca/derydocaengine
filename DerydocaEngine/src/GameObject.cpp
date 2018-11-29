@@ -5,15 +5,24 @@
 namespace DerydocaEngine
 {
 
-	GameObject::GameObject()
+	GameObject::GameObject() :
+		m_name(""),
+		m_transform(),
+		m_parent(),
+		m_children(),
+		m_components()
 	{
 		m_transform.setGameObject(this);
 	}
 
-	GameObject::GameObject(std::string const& name)
+	GameObject::GameObject(const std::string& name) :
+		m_name(name),
+		m_transform(),
+		m_parent(),
+		m_children(),
+		m_components()
 	{
 		m_transform.setGameObject(this);
-		setName(name);
 	}
 
 	GameObject::~GameObject()
@@ -25,15 +34,10 @@ namespace DerydocaEngine
 		}
 		m_components.clear();
 
-		// Delete all of the children of this object
-		for (auto it = m_children.begin(); it != m_children.end(); ++it)
-		{
-			delete(*it);
-		}
 		m_children.clear();
 	}
 
-	void GameObject::render(std::shared_ptr<Rendering::MatrixStack> const& matrixStack) {
+	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack>& matrixStack) {
 		matrixStack->push(m_transform.getModel());
 
 		for each (Components::GameComponent* c in m_components)
@@ -41,7 +45,7 @@ namespace DerydocaEngine
 			c->render(matrixStack);
 		}
 
-		for each (GameObject* go in m_children)
+		for each (std::shared_ptr<GameObject> go in m_children)
 		{
 			go->render(matrixStack);
 		}
@@ -49,7 +53,12 @@ namespace DerydocaEngine
 		matrixStack->pop();
 	}
 
-	void GameObject::renderMesh(std::shared_ptr<Rendering::MatrixStack> const matrixStack, Rendering::Material * const& material, Rendering::Projection const& projection, Components::Transform* const& projectionTransform)
+	void GameObject::renderMesh(
+		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
+		Rendering::Material*& material,
+		const Rendering::Projection& projection,
+		const Components::Transform* projectionTransform
+	) const
 	{
 		matrixStack->push(m_transform.getModel());
 
@@ -58,7 +67,7 @@ namespace DerydocaEngine
 			c->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
 
-		for each (GameObject* go in m_children)
+		for each (std::shared_ptr<GameObject> go in m_children)
 		{
 			go->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
@@ -73,7 +82,7 @@ namespace DerydocaEngine
 			c->init();
 		}
 
-		for each (GameObject* go in m_children)
+		for each (std::shared_ptr<GameObject> go in m_children)
 		{
 			go->init();
 		}
@@ -86,19 +95,19 @@ namespace DerydocaEngine
 			c->postInit();
 		}
 
-		for each (GameObject* go in m_children)
+		for each (std::shared_ptr<GameObject> go in m_children)
 		{
 			go->postInit();
 		}
 	}
 
-	void GameObject::update(float const& deltaTime) {
+	void GameObject::update(const float& deltaTime) {
 		for each (Components::GameComponent* c in m_components)
 		{
 			c->update(deltaTime);
 		}
 
-		for each (GameObject* go in m_children)
+		for each (std::shared_ptr<GameObject> go in m_children)
 		{
 			go->update(deltaTime);
 		}
@@ -110,7 +119,7 @@ namespace DerydocaEngine
 			c->preRender();
 		}
 
-		for each (GameObject* go in m_children)
+		for each (std::shared_ptr<GameObject> go in m_children)
 		{
 			go->preRender();
 		}
@@ -122,22 +131,23 @@ namespace DerydocaEngine
 			c->postRender();
 		}
 
-		for each (GameObject* go in m_children)
+		for each (std::shared_ptr<GameObject> go in m_children)
 		{
 			go->postRender();
 		}
 	}
 
-	void GameObject::addChild(GameObject* const& gameObject)
+	void GameObject::addChild(const std::shared_ptr<GameObject> gameObject)
 	{
 		m_children.push_back(gameObject);
-		gameObject->m_parent = this;
+		auto shared_this = shared_from_this();
+		gameObject->m_parent = shared_this;
 	}
 
 	void GameObject::addComponent(Components::GameComponent* const& component)
 	{
 		m_components.push_back(component);
-		component->setGameObject(this);
+		component->setGameObject(shared_from_this());
 	}
 
 }

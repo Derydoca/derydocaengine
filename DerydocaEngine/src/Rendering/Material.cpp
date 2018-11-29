@@ -81,7 +81,7 @@ namespace DerydocaEngine::Rendering
 		m_subroutineValues[program] = value;
 	}
 
-	void Material::bind()
+	void Material::bind() const
 	{
 		assert(m_shader);
 

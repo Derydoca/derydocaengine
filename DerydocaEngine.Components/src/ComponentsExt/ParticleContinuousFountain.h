@@ -47,7 +47,7 @@ namespace DerydocaEngine::Ext
 		unsigned int m_drawBuf = 1;
 		unsigned int m_updateSub;
 		unsigned int m_renderSub;
-		Components::Transform* m_trans;
+		const Components::Transform* m_trans;
 		ParticleEmitterType m_emitterType;
 		glm::vec3 m_emitterSize = glm::vec3(1.0, 1.0, 1.0);
 		float m_particleSizeMin = 10.0f;

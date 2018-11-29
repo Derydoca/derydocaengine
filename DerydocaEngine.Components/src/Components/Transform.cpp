@@ -12,7 +12,7 @@ namespace DerydocaEngine::Components
 		if (this->m_gameObject != NULL)
 		{
 			// Temporary storage object for recursive iteration
-			GameObject* currentGameObject = this->m_gameObject->getParent();
+			std::shared_ptr<GameObject> currentGameObject = this->m_gameObject->getParent();
 
 			// Recursively transform the position by all parent objects
 			while (currentGameObject != NULL)
@@ -37,7 +37,7 @@ namespace DerydocaEngine::Components
 		if (this->m_gameObject != NULL)
 		{
 			// Temporary storage object for recursive iteration
-			GameObject* currentGameObject = this->m_gameObject->getParent();
+			std::shared_ptr<GameObject> currentGameObject = this->m_gameObject->getParent();
 
 			// Recursively transform the position by all parent objects
 			while (currentGameObject != NULL)

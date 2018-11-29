@@ -50,20 +50,20 @@ namespace DerydocaEngine::Components
 		virtual void preRender() {}
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack) {}
 		virtual void renderMesh(
-			std::shared_ptr<Rendering::MatrixStack> const matrixStack,
-			Rendering::Material* const& material,
-			Rendering::Projection const& projection,
-			Transform* const& projectionTransform) {}
+			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
+			Rendering::Material*& material,
+			const Rendering::Projection& projection,
+			const Transform*& projectionTransform) {}
 		virtual void postRender() {}
-		inline void setGameObject(GameObject* const& gameObject) { m_gameObject = gameObject; }
-		inline GameObject* getGameObject() { return m_gameObject; }
+		inline void setGameObject(const std::shared_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
+		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject; }
 		virtual void deserialize(YAML::Node const& compNode) { };
 
 		template<typename T>
 		inline T* getComponent()
 		{
 			// Get the game object that this component belongs to
-			GameObject* gameObject = getGameObject();
+			std::shared_ptr<GameObject> gameObject = getGameObject();
 			if (gameObject == nullptr)
 			{
 				return nullptr;
@@ -178,7 +178,7 @@ namespace DerydocaEngine::Components
 		}
 
 	private:
-		GameObject* m_gameObject;
+		std::shared_ptr<GameObject> m_gameObject;
 	};
 
 }

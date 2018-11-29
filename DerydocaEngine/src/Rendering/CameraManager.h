@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <memory>
 
 namespace DerydocaEngine {
 	class GameObject;
@@ -22,7 +23,7 @@ namespace DerydocaEngine::Rendering
 		inline std::list<Components::Camera*> getCameras() { return m_cameras; }
 		void addCamera(Components::Camera* const& camera) { m_cameras.push_back(camera); }
 		void removeCamera(Components::Camera* const& camera) { m_cameras.remove(camera); }
-		void render(GameObject* const& rootObject);
+		void render(std::shared_ptr<GameObject> const rootObject);
 		Components::Camera* getCurrentCamera() { return m_currentCamera; }
 
 		void operator=(CameraManager const&) = delete;

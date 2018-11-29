@@ -96,7 +96,7 @@ namespace DerydocaEngine::Components
 		Resources::MeshResource* quadResource = (Resources::MeshResource*)ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71");
 		if (quadResource != nullptr)
 		{
-			m_quad = (Rendering::Mesh*)quadResource->getResourceObject();
+			m_quad = std::static_pointer_cast<Rendering::Mesh>(quadResource->getResourceObjectPointer());
 		}
 
 		m_transform = getGameObject()->getTransform();
@@ -239,7 +239,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Camera::renderRoot(GameObject* const& gameObject)
+	void Camera::renderRoot(const std::shared_ptr<GameObject> gameObject)
 	{
 		Rendering::LightManager::getInstance().renderShadowMaps(gameObject->getTransform());
 

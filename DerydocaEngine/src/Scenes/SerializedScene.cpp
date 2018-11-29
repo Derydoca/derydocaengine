@@ -18,7 +18,7 @@ namespace DerydocaEngine::Scenes
 	{
 	}
 
-	void SerializedScene::setUp(GameObject * const& root)
+	void SerializedScene::setUp(std::shared_ptr<GameObject> const root)
 	{
 		// Initialize the components
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)
@@ -45,7 +45,7 @@ namespace DerydocaEngine::Scenes
 			}
 
 			// Create the game object with the name found in the file
-			GameObject* go = new GameObject(name);
+			std::shared_ptr<GameObject> go = GameObject::generate(name);
 
 			// Set the transform component
 			Components::Transform* trans = go->getTransform();
@@ -92,7 +92,7 @@ namespace DerydocaEngine::Scenes
 			}
 
 			YAML::Node properties = sceneObject->getProperties();
-			GameObject* go = sceneObject->getGameObject();
+			std::shared_ptr<GameObject> go = sceneObject->getGameObject();
 
 			// Determine if this game object is parented to another game object
 			YAML::Node parentObjectIdNode = properties["Parent"];
@@ -101,7 +101,7 @@ namespace DerydocaEngine::Scenes
 				// If it is parented to another game object, set the relationship
 				boost::uuids::uuid parentId = parentObjectIdNode.as<boost::uuids::uuid>();
 				SceneObject* parentSceneObject = findNode(parentId);
-				GameObject* parentGo = parentSceneObject->getGameObject();
+				std::shared_ptr<GameObject> parentGo = parentSceneObject->getGameObject();
 				parentGo->addChild(go);
 			}
 			else
@@ -144,7 +144,7 @@ namespace DerydocaEngine::Scenes
 		}
 	}
 
-	void SerializedScene::tearDown(GameObject * const& root)
+	void SerializedScene::tearDown(std::shared_ptr<GameObject> const root)
 	{
 	}
 

@@ -11,8 +11,8 @@ namespace DerydocaEngine::Scenes
 		SerializedScene();
 		~SerializedScene();
 
-		void setUp(GameObject* const& root);
-		void tearDown(GameObject* const& root);
+		virtual void setUp(std::shared_ptr<GameObject> const root);
+		virtual void tearDown(std::shared_ptr<GameObject> const root);
 
 		void LoadFromFile(std::string const& filePath);
 		void SaveToFile(std::string const& filePath);
