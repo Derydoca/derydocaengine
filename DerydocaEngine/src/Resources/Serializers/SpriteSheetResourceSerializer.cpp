@@ -14,7 +14,12 @@ namespace DerydocaEngine::Resources::Serializers
 
 	void * SpriteSheetResourceSerializer::deserialize(Resource * const& resource)
 	{
-		UI::SpriteSheet* ss = new UI::SpriteSheet();
+		return nullptr;
+	}
+
+	std::shared_ptr<void> SpriteSheetResourceSerializer::deserializePointer(Resource * const & resource)
+	{
+		std::shared_ptr<UI::SpriteSheet> ss = std::make_shared<UI::SpriteSheet>();
 		ss->LoadFromDisk(resource->getSourceFilePath());
 		return ss;
 	}

@@ -28,7 +28,7 @@ namespace DerydocaEngine::Components
 		}
 	private:
 		Color m_color;
-		UI::SpriteSheet* m_spriteSheet;
+		std::shared_ptr<UI::SpriteSheet> m_spriteSheet;
 		UI::SpriteReference* m_sprite;
 		glm::vec2 m_size;
 

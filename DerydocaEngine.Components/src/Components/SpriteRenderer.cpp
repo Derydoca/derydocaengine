@@ -19,7 +19,7 @@ namespace DerydocaEngine::Components
 
 	void SpriteRenderer::deserialize(YAML::Node const& compNode)
 	{
-		m_spriteSheet = getResourceObject<UI::SpriteSheet>(compNode, "spriteSheet");
+		m_spriteSheet = getResourcePointer<UI::SpriteSheet>(compNode, "spriteSheet");
 		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
 		auto material = std::make_shared<Rendering::Material>();
 		material->setShader(shader);
