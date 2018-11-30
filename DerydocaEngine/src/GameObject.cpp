@@ -107,7 +107,7 @@ namespace DerydocaEngine
 
 	void GameObject::renderMesh(
 		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-		Rendering::Material*& material,
+		std::shared_ptr<Rendering::Material> material,
 		const Rendering::Projection& projection,
 		std::shared_ptr<Components::Transform> projectionTransform
 	) const

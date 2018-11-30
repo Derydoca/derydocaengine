@@ -24,7 +24,7 @@ namespace DerydocaEngine::Components
 	void MaterialRefresher::init()
 	{
 		m_meshRenderer = getComponent<MeshRenderer>();
-		Rendering::Material* material = nullptr;
+		std::shared_ptr<Rendering::Material> material;
 		if (m_meshRenderer != nullptr)
 		{
 			m_rendererType = 0;
@@ -82,7 +82,7 @@ namespace DerydocaEngine::Components
 		m_tessControlShaderExists = getLastModifiedTime(m_tessControlShaderPath.c_str(), m_tessControlShaderModifiedTime);
 
 		printf("Unloading the previous material.\n");
-		Rendering::Material* mat = nullptr;
+		std::shared_ptr<Rendering::Material> mat = nullptr;
 		switch(m_rendererType)
 		{
 		case 0:

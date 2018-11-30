@@ -114,7 +114,7 @@ namespace DerydocaEngine::Components
 		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_TEXT_CHANGE = (Rendering::MeshComponents)(Rendering::MeshComponents::Positions | Rendering::MeshComponents::TexCoords);
 		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (Rendering::MeshComponents)(Rendering::MeshComponents::Colors | Rendering::MeshComponents::Indices);
 
-		Rendering::Material* m_material;
+		std::shared_ptr<Rendering::Material> m_material;
 		UI::FontFace* m_fontFace;
 		std::string m_text = "Text";
 		glm::vec2 m_bounds;

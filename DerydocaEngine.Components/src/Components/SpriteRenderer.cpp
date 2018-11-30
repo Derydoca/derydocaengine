@@ -21,7 +21,7 @@ namespace DerydocaEngine::Components
 	{
 		m_spriteSheet = getResourceObject<UI::SpriteSheet>(compNode, "spriteSheet");
 		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
-		Rendering::Material* material = new Rendering::Material();
+		auto material = std::make_shared<Rendering::Material>();
 		material->setShader(shader);
 		setMaterial(material);
 

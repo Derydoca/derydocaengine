@@ -83,7 +83,7 @@ namespace DerydocaEngine::Components
 		unsigned int m_depthTexture;
 		unsigned int m_shadowFBO;
 		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
-		Rendering::Material* m_shadowMapMaterial;
+		std::shared_ptr<Rendering::Material> m_shadowMapMaterial;
 		Rendering::Projection m_projection;
 		glm::mat4 m_shadowBias;
 		ShadowMapFilterType m_shadowMapFilterType;

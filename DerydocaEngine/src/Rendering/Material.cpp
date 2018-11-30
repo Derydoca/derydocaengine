@@ -8,7 +8,18 @@
 namespace DerydocaEngine::Rendering
 {
 
-	Material::Material()
+	Material::Material() :
+		m_texture(nullptr),
+		m_boolValues(),
+		m_intValues(),
+		m_textures(),
+		m_floatValues(),
+		m_vec3Values(),
+		m_vec4Values(),
+		m_mat3Values(),
+		m_mat4Values(),
+		m_mat4ArrayValues(),
+		m_subroutineValues()
 	{
 	}
 

@@ -13,7 +13,6 @@ namespace DerydocaEngine::Ext
 
 	BezierCurveRenderer::~BezierCurveRenderer()
 	{
-		delete m_material;
 	}
 
 	void BezierCurveRenderer::init()
@@ -76,7 +75,7 @@ namespace DerydocaEngine::Ext
 		}
 
 		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
-		m_material = new Rendering::Material();
+		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);
 	}
 

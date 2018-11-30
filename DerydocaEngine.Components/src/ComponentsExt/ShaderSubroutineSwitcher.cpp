@@ -34,7 +34,7 @@ namespace DerydocaEngine::Ext
 			return;
 		}
 		// Get the shader attached to the mesh renderer
-		Rendering::Material* material = mr->getMaterial();
+		std::shared_ptr<Rendering::Material> material = mr->getMaterial();
 		Rendering::Shader* shader = material->getShader();
 		if (shader == nullptr)
 		{

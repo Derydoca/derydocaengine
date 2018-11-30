@@ -70,7 +70,7 @@ namespace DerydocaEngine::Ext
 			m_maxDynamicTessLevel = maxDynamicTessLevelNode.as<float>();
 		}
 
-		m_material = getResourceObject<Rendering::Material>(compNode, "material");
+		m_material = getResourcePointer<Rendering::Material>(compNode, "material");
 		m_mesh = getResourceObject<BezierPatchMesh>(compNode, "bezierPatchMesh");
 	}
 
@@ -87,7 +87,7 @@ namespace DerydocaEngine::Ext
 
 	void TessellatedMeshRenderer::renderMesh(
 		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-		Rendering::Material*& material,
+		std::shared_ptr<Rendering::Material> material,
 		const Rendering::Projection& projection,
 		const std::shared_ptr<Components::Transform> projectionTransform
 	)

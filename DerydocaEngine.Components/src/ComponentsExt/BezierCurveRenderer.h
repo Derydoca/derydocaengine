@@ -21,7 +21,7 @@ namespace DerydocaEngine::Ext
 		float m_controlPoints[8];
 		unsigned int m_vao;
 		unsigned int m_vbo;
-		Rendering::Material* m_material;
+		std::shared_ptr<Rendering::Material> m_material;
 		int m_numSegments = 8;
 		int m_numStrips = 1;
 		Color m_lineColor;

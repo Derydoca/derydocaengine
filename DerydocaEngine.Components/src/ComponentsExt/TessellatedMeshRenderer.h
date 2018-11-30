@@ -19,17 +19,17 @@ namespace DerydocaEngine::Ext
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-			Rendering::Material*& material,
+			std::shared_ptr<Rendering::Material> material,
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Components::Transform> projectionTransform
 		);
 
-		Rendering::Material* getMaterial() const { return m_material; }
+		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
 	private:
 		BezierPatchMesh * m_mesh;
 		unsigned int m_vao;
 		unsigned int m_vbo;
-		Rendering::Material* m_material;
+		std::shared_ptr<Rendering::Material> m_material;
 		int m_tessellationLevel = 4;
 		bool m_useDynamicTessellation = false;
 		float m_minDynamicTessLevel = 2;

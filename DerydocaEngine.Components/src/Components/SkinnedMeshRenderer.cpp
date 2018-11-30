@@ -26,7 +26,7 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::deserialize(YAML::Node const& compNode)
 	{
-		auto material = getResourceObject<Rendering::Material>(compNode, "Material");
+		auto material = getResourcePointer<Rendering::Material>(compNode, "Material");
 		setMaterial(material);
 
 		m_mesh = getResourcePointer<Rendering::Mesh>(compNode, "Mesh");
@@ -74,7 +74,7 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::renderMesh(
 		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-		Rendering::Material*& material,
+		std::shared_ptr<Rendering::Material> material,
 		const Rendering::Projection& projection,
 		const std::shared_ptr<Transform> projectionTransform
 	)

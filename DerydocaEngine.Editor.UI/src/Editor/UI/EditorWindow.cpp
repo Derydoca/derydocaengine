@@ -56,7 +56,7 @@ namespace DerydocaEngine::Editor::UI
 			Rendering::Shader* skyboxShader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\cubemapShader");
 			Resources::CubemapResource* cubemapResource = (Resources::CubemapResource*)ObjectLibrary::getInstance().getResource(settings->getSkyboxId());
 			Rendering::Texture* skyboxTexture = (Rendering::Texture*)cubemapResource->getResourceObject();
-			Rendering::Material* skyboxMaterial = new Rendering::Material();
+			std::shared_ptr<Rendering::Material> skyboxMaterial = std::make_shared<Rendering::Material>();
 			skyboxMaterial->setShader(skyboxShader);
 			skyboxMaterial->setTextureSlot(0, skyboxTexture);
 			editorCamera->setSkybox(skyboxMaterial);

@@ -26,13 +26,13 @@ namespace DerydocaEngine::Components
 		m_skybox(new Rendering::Skybox()),
 		m_clearMode(Camera::NoClear),
 		m_renderingMode(Camera::RenderingMode::Forward),
-		m_skyboxMaterial(nullptr),
+		m_skyboxMaterial(),
 		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
 		m_renderTexture(nullptr),
 		m_display(nullptr),
 		m_displayRect(new Rectangle(0, 0, 1, 1)),
 		m_quad(nullptr),
-		m_postProcessMaterial(nullptr),
+		m_postProcessMaterial(),
 		m_orthoSize(10.0f),
 		m_deferredFBO(0),
 		m_gbuffDepth(0),
@@ -87,7 +87,6 @@ namespace DerydocaEngine::Components
 		delete m_displayRect;
 		delete m_skybox;
 		delete m_renderTexture;
-		delete m_postProcessMaterial;
 		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
@@ -207,7 +206,7 @@ namespace DerydocaEngine::Components
 			m_renderTexture = new Rendering::RenderTexture(width, height);
 
 			Rendering::Shader* postProcessingShader = getResourceObject<Rendering::Shader>(renderTextureNode, "PostProcessShader");
-			m_postProcessMaterial = new Rendering::Material();
+			m_postProcessMaterial = std::make_shared<Rendering::Material>();
 			m_postProcessMaterial->setShader(postProcessingShader);
 		}
 	}

@@ -22,7 +22,6 @@ namespace DerydocaEngine::Ext
 	ParticleSystem::~ParticleSystem()
 	{
 		delete m_particleLocations;
-		delete m_material;
 		glDeleteVertexArrays(1, &m_vao);
 	}
 
@@ -90,7 +89,7 @@ namespace DerydocaEngine::Ext
 		m_texture = getResourceObject<Rendering::Texture>(compNode, "texture");
 
 		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
-		m_material = new Rendering::Material();
+		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);
 		m_material->setFloat("Size2", m_size2);
 	}

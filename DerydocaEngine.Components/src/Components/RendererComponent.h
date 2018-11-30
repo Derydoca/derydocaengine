@@ -12,8 +12,8 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		virtual ~RendererComponent() {}
-		Rendering::Material* getMaterial() const { return m_material; }
-		void setMaterial(Rendering::Material* const& material) { m_material = material; }
+		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
+		void setMaterial(std::shared_ptr<Rendering::Material> material) { m_material = material; }
 	protected:
 		void updateMesh();
 		void markComponentAsDirty(Rendering::MeshComponents const& component)
@@ -24,7 +24,7 @@ namespace DerydocaEngine::Components
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-			Rendering::Material*& material,
+			std::shared_ptr<Rendering::Material> material,
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Transform> projectionTransform
 		);
@@ -41,7 +41,7 @@ namespace DerydocaEngine::Components
 
 	private:
 		Rendering::Mesh * m_mesh;
-		Rendering::Material * m_material;
+		std::shared_ptr<Rendering::Material> m_material;
 		Rendering::MeshComponents m_dirtyComponents;
 		std::vector<glm::vec3> m_vertices;
 		std::vector<glm::vec3> m_tangents;

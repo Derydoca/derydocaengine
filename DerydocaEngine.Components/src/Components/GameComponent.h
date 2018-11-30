@@ -51,7 +51,7 @@ namespace DerydocaEngine::Components
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack) {}
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-			Rendering::Material*& material,
+			std::shared_ptr<Rendering::Material> material,
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Transform> projectionTransform) {}
 		virtual void postRender() {}

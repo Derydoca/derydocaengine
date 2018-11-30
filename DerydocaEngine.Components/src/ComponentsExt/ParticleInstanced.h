@@ -21,7 +21,7 @@ namespace DerydocaEngine::Ext
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
 	private:
 		int m_numParticles = 1000;
-		Rendering::Material* m_material;
+		std::shared_ptr<Rendering::Material> m_material;
 		float m_time = 0.0f;
 		float m_lifetime = 5.0f;
 		float m_velocityMin = 1.25f;
@@ -31,7 +31,7 @@ namespace DerydocaEngine::Ext
 		unsigned int m_initVel;
 		unsigned int m_startTime;
 		Input::Keyboard* m_keyboard;
-		Rendering::Mesh* m_mesh;
+		std::shared_ptr<Rendering::Mesh> m_mesh;
 
 		void initBuffers();
 		float randFloat();

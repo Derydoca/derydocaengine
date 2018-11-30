@@ -14,7 +14,6 @@ namespace DerydocaEngine::Ext
 
 	ParticleContinuousFountain::~ParticleContinuousFountain()
 	{
-		delete m_material;
 	}
 
 	void ParticleContinuousFountain::update(float const& deltaTime)
@@ -125,7 +124,7 @@ namespace DerydocaEngine::Ext
 		assert(shaderResource);
 		Rendering::Shader* shader = new Rendering::Shader(shaderResource->getRawShaderName(), 3, outputNames);
 		assert(shader);
-		m_material = new Rendering::Material();
+		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);
 		m_material->setFloat("ParticleLifetime", m_lifetime);
 		m_material->setVec3("Accel", m_acceleration);

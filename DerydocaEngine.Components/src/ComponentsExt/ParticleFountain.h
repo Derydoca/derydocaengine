@@ -21,7 +21,7 @@ namespace DerydocaEngine::Ext
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
 	private:
 		int m_numParticles = 1000;
-		Rendering::Material* m_material;
+		std::shared_ptr<Rendering::Material> m_material;
 		float m_time = 0.0f;
 		float m_lifetime = 5.0f;
 		float m_velocityMin = 1.25f;

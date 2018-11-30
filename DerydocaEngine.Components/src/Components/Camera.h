@@ -75,7 +75,7 @@ namespace DerydocaEngine::Components
 
 		@skyboxMaterial Material to use for the skybox
 		*/
-		void setSkybox(Rendering::Material* const& skyboxMaterial) { m_skyboxMaterial = skyboxMaterial; }
+		void setSkybox(std::shared_ptr<Rendering::Material> skyboxMaterial) { m_skyboxMaterial = skyboxMaterial; }
 
 		/*
 		Renders the root node through this camera
@@ -101,7 +101,7 @@ namespace DerydocaEngine::Components
 		float getOrthoSize(float const& size) { return m_orthoSize; }
 		void deserialize(YAML::Node const& node);
 		Rendering::Shader* getPostProcessShader() const;
-		Rendering::Material* getPostProcessMaterial() { return m_postProcessMaterial; }
+		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
 		Rendering::Projection getProjection() const { return m_projection; }
 	private:
 		std::shared_ptr<Components::Transform> m_transform;
@@ -109,13 +109,13 @@ namespace DerydocaEngine::Components
 		Rendering::Skybox* m_skybox;
 		ClearMode m_clearMode = NoClear;
 		RenderingMode m_renderingMode;
-		Rendering::Material* m_skyboxMaterial;
+		std::shared_ptr<Rendering::Material> m_skyboxMaterial;
 		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		Rendering::RenderTexture* m_renderTexture;
 		Rendering::Display* m_display;
 		Rectangle* m_displayRect;
 		std::shared_ptr<Rendering::Mesh> m_quad;
-		Rendering::Material* m_postProcessMaterial;
+		std::shared_ptr<Rendering::Material> m_postProcessMaterial;
 		float m_orthoSize = 10.0f;
 		unsigned int m_deferredFBO;
 		unsigned int m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;

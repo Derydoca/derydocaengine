@@ -80,7 +80,7 @@ namespace DerydocaEngine::Components
 
 	void RendererComponent::renderMesh(
 		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-		Rendering::Material*& material,
+		std::shared_ptr<Rendering::Material> material,
 		const Rendering::Projection& projection,
 		const std::shared_ptr<Transform> projectionTransform
 	)

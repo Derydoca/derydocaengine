@@ -31,7 +31,6 @@ namespace DerydocaEngine::Components
 	Light::~Light()
 	{
 		Rendering::LightManager::getInstance().removeLight(this);
-		delete m_shadowMapMaterial;
 	}
 
 	glm::mat4 Light::getProjectionMatrix()
@@ -170,8 +169,7 @@ namespace DerydocaEngine::Components
 		boost::uuids::string_generator gen;
 		boost::uuids::uuid shaderId = gen("05cdcea1-2312-4e30-828c-68717d484274");
 		Rendering::Shader* shadowMapShader = getResourceObject<Rendering::Shader>(shaderId);
-		delete m_shadowMapMaterial;
-		m_shadowMapMaterial = new Rendering::Material();
+		m_shadowMapMaterial = std::make_shared<Rendering::Material>();
 		m_shadowMapMaterial->setShader(shadowMapShader);
 
 		m_shadowBias = glm::mat4(glm::vec4(0.5f, 0.0f, 0.0f, 0.0f),

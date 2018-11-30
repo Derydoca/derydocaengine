@@ -44,7 +44,7 @@ namespace DerydocaEngine::Components
 		Terrain::updateMesh();
 
 		Rendering::Shader* shader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
-		Rendering::Material* mat = new Rendering::Material();
+		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 
 		m_meshRenderer = new MeshRenderer(m_mesh, mat);
@@ -141,7 +141,7 @@ namespace DerydocaEngine::Components
 			loadTerrainFromTexture(heightmapResource->getSourceFilePath(), unitScale, heightScale);
 			if (node["material"])
 			{
-				Rendering::Material* material = getResourceObject<Rendering::Material>(node, "material");
+				std::shared_ptr<Rendering::Material> material = getResourcePointer<Rendering::Material>(node, "material");
 				m_meshRenderer->setMaterial(material);
 			}
 		}
@@ -174,7 +174,7 @@ namespace DerydocaEngine::Components
 		Terrain::updateMesh();
 
 		Rendering::Shader* shader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
-		Rendering::Material* mat = new Rendering::Material();
+		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 
 		m_meshRenderer = new MeshRenderer(m_mesh, mat);

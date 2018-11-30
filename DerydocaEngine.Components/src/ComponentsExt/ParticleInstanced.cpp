@@ -16,7 +16,6 @@ namespace DerydocaEngine::Ext
 
 	ParticleInstanced::~ParticleInstanced()
 	{
-		delete m_material;
 	}
 
 	void ParticleInstanced::update(float const& deltaTime)
@@ -72,7 +71,7 @@ namespace DerydocaEngine::Ext
 
 		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
 		assert(shader);
-		m_material = new Rendering::Material();
+		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);
 		m_material->setFloat("ParticleLifetime", m_lifetime);
 		m_material->setVec4("Material.Kd", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
@@ -80,7 +79,7 @@ namespace DerydocaEngine::Ext
 		m_material->setVec4("Material.Ks", glm::vec4(0.7f, 0.7f, 0.7f, 1.0f));
 		m_material->setFloat("Material.Shininess", 50.0f);
 
-		m_mesh = getResourceObject<Rendering::Mesh>(compNode, "mesh");
+		m_mesh = getResourcePointer<Rendering::Mesh>(compNode, "mesh");
 	}
 
 	void ParticleInstanced::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
