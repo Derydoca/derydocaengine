@@ -37,7 +37,7 @@ namespace DerydocaEngine::Ext
 
 	void EdgeDetectionFilter::updateShader()
 	{
-		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
+		auto shader = m_postProcessCamera->getPostProcessShader();
 		if (shader == nullptr)
 		{
 			return;

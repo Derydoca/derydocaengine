@@ -4,6 +4,7 @@
 #include <glm\mat4x4.hpp>
 #include <glm\vec3.hpp>
 #include <glm\vec4.hpp>
+#include <memory>
 #include <vector>
 
 namespace DerydocaEngine
@@ -25,8 +26,8 @@ namespace DerydocaEngine::Rendering
 		Material();
 		~Material();
 
-		inline void setShader(Shader* shader) { m_shader = shader; }
-		inline Rendering::Shader* getShader() const { return m_shader; }
+		inline void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }
+		inline std::shared_ptr<Rendering::Shader> getShader() const { return m_shader; }
 		void setBool(std::string const& name, bool const& value);
 		void setInt(std::string const& name, int const& value);
 		void setTexture(std::string const& name, Texture* const& texture);
@@ -43,7 +44,7 @@ namespace DerydocaEngine::Rendering
 		void bind() const;
 		void unbind();
 	private:
-		Shader* m_shader;
+		std::shared_ptr<Shader> m_shader;
 		// TODO: Replace this with a BST for multiple textures
 		Texture* m_texture;
 		std::map<std::string, bool> m_boolValues;

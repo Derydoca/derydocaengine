@@ -26,7 +26,7 @@ namespace DerydocaEngine::Resources::Serializers
 
 		// Load the shader specified in the file
 		boost::uuids::uuid shaderId = root["Shader"].as<boost::uuids::uuid>();
-		Rendering::Shader* shader = Rendering::ShaderLibrary::getInstance().find(shaderId);
+		auto shader = Rendering::ShaderLibrary::getInstance().find(shaderId);
 
 		// Create a material with the shader we created
 		auto material = std::make_shared<Rendering::Material>();

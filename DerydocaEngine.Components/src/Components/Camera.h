@@ -100,7 +100,7 @@ namespace DerydocaEngine::Components
 		void setOrthoSize(float const& size);
 		float getOrthoSize(float const& size) { return m_orthoSize; }
 		void deserialize(YAML::Node const& node);
-		Rendering::Shader* getPostProcessShader() const;
+		std::shared_ptr<Rendering::Shader> getPostProcessShader() const;
 		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
 		Rendering::Projection getProjection() const { return m_projection; }
 	private:
@@ -119,11 +119,11 @@ namespace DerydocaEngine::Components
 		float m_orthoSize = 10.0f;
 		unsigned int m_deferredFBO;
 		unsigned int m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
-		Rendering::Shader* m_deferredRendererCompositor;
+		std::shared_ptr<Rendering::Shader> m_deferredRendererCompositor;
 		Rendering::Projection m_projection;
 
 		void clear();
-		void setIdentityMatricies(Rendering::Shader* const& shader);
+		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);
 	};
 
 }

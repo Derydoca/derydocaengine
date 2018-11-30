@@ -27,7 +27,11 @@ namespace DerydocaEngine::Rendering
 		}
 
 		void addLight(Components::Light* const& light) { m_lights.push_back(light); }
-		void bindLightsToShader(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, std::shared_ptr<Components::Transform> const& objectTransform, Rendering::Shader* const& shader);
+		void bindLightsToShader(
+			std::shared_ptr<Rendering::MatrixStack> const& matrixStack,
+			std::shared_ptr<Components::Transform> const& objectTransform,
+			std::shared_ptr<Rendering::Shader> const& shader
+		);
 		void removeLight(Components::Light* const& light) { m_lights.remove(light); }
 		void renderShadowMaps(std::shared_ptr<Components::Transform> const& objectTransform);
 

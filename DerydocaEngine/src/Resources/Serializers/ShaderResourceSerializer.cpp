@@ -9,8 +9,13 @@ namespace DerydocaEngine::Resources::Serializers
 
 	void * ShaderResourceSerializer::deserialize(Resource * const& resource)
 	{
+		return nullptr;
+	}
+
+	std::shared_ptr<void> ShaderResourceSerializer::deserializePointer(Resource * const & resource)
+	{
 		ShaderResource* shaderResource = (ShaderResource*)resource;
-		Rendering::Shader* shader = new Rendering::Shader(shaderResource->getRawShaderName());
+		auto shader = std::make_shared<Rendering::Shader>(shaderResource->getRawShaderName());
 		return shader;
 	}
 

@@ -33,7 +33,7 @@ namespace DerydocaEngine::Ext
 			m_weights[i] = m_weights[i] / sum;
 		}
 
-		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
+		auto shader = m_postProcessCamera->getPostProcessShader();
 		if (shader != nullptr)
 		{
 			Rendering::RenderPass subPasses[2] = { Rendering::RenderPass("pass1"), Rendering::RenderPass("pass2") };
@@ -61,7 +61,7 @@ namespace DerydocaEngine::Ext
 
 	void GaussianBlurFilter::updateShader()
 	{
-		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
+		auto shader = m_postProcessCamera->getPostProcessShader();
 		if (shader == nullptr)
 		{
 			return;

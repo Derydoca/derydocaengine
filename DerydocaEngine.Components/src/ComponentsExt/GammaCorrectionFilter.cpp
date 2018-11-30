@@ -32,7 +32,7 @@ namespace DerydocaEngine::Ext
 
 	void GammaCorrectionFilter::updateShader()
 	{
-		Rendering::Shader* shader = m_postProcessCamera->getPostProcessShader();
+		auto shader = m_postProcessCamera->getPostProcessShader();
 		if (shader == nullptr)
 		{
 			return;

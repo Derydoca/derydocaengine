@@ -54,7 +54,7 @@ namespace DerydocaEngine::Components
 		}
 
 		setMaterial(std::make_shared<Rendering::Material>());
-		Rendering::Shader* shader = getResourceObject<Rendering::Shader>(compNode, "shader");
+		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
 		getMaterial()->setShader(shader);
 
 		auto fontResource = getResource<Resources::Resource*>(compNode, "font");

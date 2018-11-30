@@ -12,7 +12,11 @@
 namespace DerydocaEngine::Rendering
 {
 
-	void LightManager::bindLightsToShader(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, std::shared_ptr<Components::Transform> const& objectTransform, Rendering::Shader* const& shader)
+	void LightManager::bindLightsToShader(
+		std::shared_ptr<Rendering::MatrixStack> const& matrixStack,
+		std::shared_ptr<Components::Transform> const& objectTransform,
+		std::shared_ptr<Rendering::Shader> const& shader
+	)
 	{
 		assert(objectTransform);
 		assert(shader);

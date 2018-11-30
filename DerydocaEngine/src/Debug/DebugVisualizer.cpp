@@ -18,7 +18,6 @@ namespace DerydocaEngine::Debug {
 
 	DebugVisualizer::~DebugVisualizer()
 	{
-		delete(m_shader);
 	}
 
 	void DebugVisualizer::draw(glm::mat4 const& worldMatrix)

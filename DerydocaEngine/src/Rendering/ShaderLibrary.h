@@ -10,7 +10,7 @@ namespace DerydocaEngine::Rendering {
 namespace DerydocaEngine::Rendering
 {
 
-	using shaderMap = std::map<boost::uuids::uuid, Shader*>;
+	using shaderMap = std::map<boost::uuids::uuid, std::shared_ptr<Shader>>;
 	using shaderPathMap = std::map<std::string, boost::uuids::uuid>;
 
 	class ShaderLibrary
@@ -23,8 +23,8 @@ namespace DerydocaEngine::Rendering
 		}
 		void operator=(ShaderLibrary const&) = delete;
 
-		Shader* find(boost::uuids::uuid const& shaderId);
-		Shader* find(std::string const& shaderPath);
+		std::shared_ptr<Shader> find(const boost::uuids::uuid& shaderId);
+		std::shared_ptr<Shader> find(const std::string& shaderPath);
 
 		void registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid);
 	private:

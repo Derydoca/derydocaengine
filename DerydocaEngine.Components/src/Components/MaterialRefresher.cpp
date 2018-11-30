@@ -47,7 +47,7 @@ namespace DerydocaEngine::Components
 		}
 		assert(material);
 
-		Rendering::Shader* shader = material->getShader();
+		auto shader = material->getShader();
 		assert(shader);
 
 		m_shaderLoadPath = shader->GetLoadPath();
@@ -97,11 +97,10 @@ namespace DerydocaEngine::Components
 		default:
 			break;
 		}
-		Rendering::Shader* oldShader = mat->getShader();
-		delete(oldShader);
+		auto oldShader = mat->getShader();
 
 		printf("Reloading new material.\n");
-		Rendering::Shader* newShader = new Rendering::Shader(m_shaderLoadPath);
+		auto newShader = std::make_shared<Rendering::Shader>(m_shaderLoadPath);
 		mat->setShader(newShader);
 		printf("Material reload finished.\n");
 	}

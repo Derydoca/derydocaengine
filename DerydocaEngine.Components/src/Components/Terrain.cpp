@@ -43,7 +43,7 @@ namespace DerydocaEngine::Components
 
 		Terrain::updateMesh();
 
-		Rendering::Shader* shader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
+		auto shader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
 		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 
@@ -173,7 +173,7 @@ namespace DerydocaEngine::Components
 
 		Terrain::updateMesh();
 
-		Rendering::Shader* shader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
+		auto shader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\diffuseFrag");
 		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 

@@ -9,7 +9,7 @@
 namespace DerydocaEngine::Rendering
 {
 
-	Shader * Rendering::ShaderLibrary::find(boost::uuids::uuid const& shaderId)
+	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const boost::uuids::uuid& shaderId)
 	{
 		// Look through the list of already loaded shaders
 		auto it = m_shaders.find(shaderId);
@@ -38,7 +38,7 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Load the shader from the resource object
-		Shader* shader = (Shader*)shaderResource->getResourceObject();
+		auto shader = std::static_pointer_cast<Shader>(shaderResource->getResourceObjectPointer());
 
 		// Add it to the library
 		m_shaders[shaderId] = shader;
@@ -47,7 +47,7 @@ namespace DerydocaEngine::Rendering
 		return shader;
 	}
 
-	Shader * Rendering::ShaderLibrary::find(std::string const& shaderPath)
+	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const std::string& shaderPath)
 	{
 		// Find the uuid associated with the path
 		auto it = m_shaderPaths.find(shaderPath);

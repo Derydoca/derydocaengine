@@ -30,10 +30,15 @@ namespace DerydocaEngine::Rendering
 	static bool CheckIfShaderExists(std::string const& fileName);
 	static unsigned int CreateShader(std::string const& text, unsigned int const& shaderType);
 
-	Shader::Shader(std::string const& fileName)
+	Shader::Shader(std::string const& fileName) :
+		m_rendererId(0),
+		m_shaders(),
+		m_uniforms(),
+		m_loadPath(fileName),
+		m_uniformLookup(),
+		m_numPasses(0),
+		m_renderPasses()
 	{
-		m_loadPath = fileName;
-
 		printf("Loading shader: %s\n", fileName.c_str());
 
 		// Create the shaders
@@ -89,10 +94,15 @@ namespace DerydocaEngine::Rendering
 		m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_rendererId, "ModelMatrix");
 	}
 
-	Shader::Shader(std::string const& fileName, int const& varyingsCount, const char * const * varyings)
+	Shader::Shader(std::string const& fileName, int const& varyingsCount, const char * const * varyings) :
+		m_rendererId(0),
+		m_shaders(),
+		m_uniforms(),
+		m_loadPath(fileName),
+		m_uniformLookup(),
+		m_numPasses(0),
+		m_renderPasses()
 	{
-		m_loadPath = fileName;
-
 		printf("Loading shader: %s\n", fileName.c_str());
 
 		// Create the shaders
