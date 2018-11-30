@@ -34,7 +34,7 @@ namespace DerydocaEngine
 
 		std::shared_ptr<GameObject> getParent() const { return m_parent; }
 
-		Components::Transform* getTransform() { return &m_transform; }
+		std::shared_ptr<Components::Transform> getTransform() { return m_transform; }
 
 		std::string getName() const { return m_name; }
 
@@ -50,9 +50,9 @@ namespace DerydocaEngine
 
 		void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
-			Rendering::Material*& renderMesh,
+			Rendering::Material*& material,
 			const Rendering::Projection& projection,
-			const Components::Transform* projectionTransform
+			std::shared_ptr<Components::Transform> projectionTransform
 		) const;
 
 		void setName(const std::string& name) { m_name = name; }
@@ -61,7 +61,7 @@ namespace DerydocaEngine
 
 	private:
 		std::string m_name;
-		Components::Transform m_transform;
+		std::shared_ptr<Components::Transform> m_transform;
 		std::shared_ptr<GameObject> m_parent;
 		std::vector<std::shared_ptr<GameObject>> m_children;
 		std::vector<Components::GameComponent*> m_components;

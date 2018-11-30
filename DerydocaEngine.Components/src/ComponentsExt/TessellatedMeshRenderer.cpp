@@ -89,7 +89,7 @@ namespace DerydocaEngine::Ext
 		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 		Rendering::Material*& material,
 		const Rendering::Projection& projection,
-		const Components::Transform*& projectionTransform
+		const std::shared_ptr<Components::Transform> projectionTransform
 	)
 	{
 		// Consider an alternate to using the same material as what is being used to render to screen

@@ -104,7 +104,7 @@ namespace DerydocaEngine::Components
 		Rendering::Material* getPostProcessMaterial() { return m_postProcessMaterial; }
 		Rendering::Projection getProjection() const { return m_projection; }
 	private:
-		const Transform * m_transform;
+		std::shared_ptr<Components::Transform> m_transform;
 		Color m_clearColor;
 		Rendering::Skybox* m_skybox;
 		ClearMode m_clearMode = NoClear;

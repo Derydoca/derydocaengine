@@ -82,7 +82,7 @@ namespace DerydocaEngine::Components
 		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 		Rendering::Material*& material,
 		const Rendering::Projection& projection,
-		const Transform*& projectionTransform
+		const std::shared_ptr<Transform> projectionTransform
 	)
 	{
 		m_material->bind();

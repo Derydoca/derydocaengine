@@ -26,7 +26,7 @@ namespace DerydocaEngine::Components
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			Rendering::Material*& material,
 			const Rendering::Projection& projection,
-			const Transform*& projectionTransform
+			const std::shared_ptr<Transform> projectionTransform
 		);
 		int getNumVertices() const { return static_cast<int>(m_vertices.size()); }
 		int getNumIndices() const { return static_cast<int>(m_triangleIndices.size()); }

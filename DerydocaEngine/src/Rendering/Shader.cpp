@@ -190,7 +190,7 @@ namespace DerydocaEngine::Rendering
 	void Shader::update(
 		const std::shared_ptr<MatrixStack>& matrixStack,
 		const Projection& projection,
-		const Components::Transform* trans)
+		const std::shared_ptr<Components::Transform> trans)
 	{
 		glm::mat4 modelMatrix = matrixStack->getMatrix();
 		glm::mat4 transformModelMatrix = trans->getModel();

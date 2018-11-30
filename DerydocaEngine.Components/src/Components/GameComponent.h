@@ -53,7 +53,7 @@ namespace DerydocaEngine::Components
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			Rendering::Material*& material,
 			const Rendering::Projection& projection,
-			const Transform*& projectionTransform) {}
+			const std::shared_ptr<Transform> projectionTransform) {}
 		virtual void postRender() {}
 		inline void setGameObject(const std::shared_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
 		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject; }

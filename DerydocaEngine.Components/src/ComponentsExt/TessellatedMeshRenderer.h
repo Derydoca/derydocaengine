@@ -21,7 +21,7 @@ namespace DerydocaEngine::Ext
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			Rendering::Material*& material,
 			const Rendering::Projection& projection,
-			const Components::Transform*& projectionTransform
+			const std::shared_ptr<Components::Transform> projectionTransform
 		);
 
 		Rendering::Material* getMaterial() const { return m_material; }

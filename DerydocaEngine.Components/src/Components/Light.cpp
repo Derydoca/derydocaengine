@@ -120,7 +120,7 @@ namespace DerydocaEngine::Components
 
 		// Draw all meshes with the shadow map shader to the framebuffer
 		m_shadowMapMaterial->bind();
-		Transform* trans = getGameObject()->getTransform();
+		std::shared_ptr<Components::Transform> trans = getGameObject()->getTransform();
 		gameObject->renderMesh(m_matrixStack, m_shadowMapMaterial, m_projection, trans);
 
 		glCullFace(GL_BACK);

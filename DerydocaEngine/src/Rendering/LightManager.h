@@ -27,9 +27,9 @@ namespace DerydocaEngine::Rendering
 		}
 
 		void addLight(Components::Light* const& light) { m_lights.push_back(light); }
-		void bindLightsToShader(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, Components::Transform* const& objectTransform, Rendering::Shader* const& shader);
+		void bindLightsToShader(std::shared_ptr<Rendering::MatrixStack> const& matrixStack, std::shared_ptr<Components::Transform> const& objectTransform, Rendering::Shader* const& shader);
 		void removeLight(Components::Light* const& light) { m_lights.remove(light); }
-		void renderShadowMaps(Components::Transform* const& objectTransform);
+		void renderShadowMaps(std::shared_ptr<Components::Transform> const& objectTransform);
 
 		void operator=(LightManager const&) = delete;
 	private:
@@ -44,7 +44,7 @@ namespace DerydocaEngine::Rendering
 		~LightManager();
 
 		void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
-		std::list<Components::Light*> getLights(Components::Transform* const& objectTransform) const;
+		std::list<Components::Light*> getLights(std::shared_ptr<Components::Transform> const& objectTransform) const;
 	};
 
 }

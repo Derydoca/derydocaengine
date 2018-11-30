@@ -7,12 +7,12 @@ namespace DerydocaEngine
 
 	GameObject::GameObject(const std::string& name) :
 		m_name(name),
-		m_transform(),
+		m_transform(std::make_shared<Components::Transform>()),
 		m_parent(),
 		m_children(),
 		m_components()
 	{
-		m_transform.setGameObject(this);
+		m_transform->setGameObject(this);
 	}
 
 	GameObject::~GameObject()
@@ -90,7 +90,7 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const {
-		matrixStack->push(m_transform.getModel());
+		matrixStack->push(m_transform->getModel());
 
 		for each (Components::GameComponent* c in m_components)
 		{
@@ -109,10 +109,10 @@ namespace DerydocaEngine
 		const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 		Rendering::Material*& material,
 		const Rendering::Projection& projection,
-		const Components::Transform* projectionTransform
+		std::shared_ptr<Components::Transform> projectionTransform
 	) const
 	{
-		matrixStack->push(m_transform.getModel());
+		matrixStack->push(m_transform->getModel());
 
 		for each (Components::GameComponent* c in m_components)
 		{

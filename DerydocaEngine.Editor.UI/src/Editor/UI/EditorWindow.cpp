@@ -45,7 +45,7 @@ namespace DerydocaEngine::Editor::UI
 
 		// This is the editor camera
 		std::shared_ptr<GameObject> editorCameraObject = std::make_shared<GameObject>("__editorCamera");
-		Components::Transform* editorCameraTransform = editorCameraObject->getTransform();
+		std::shared_ptr<Components::Transform> editorCameraTransform = editorCameraObject->getTransform();
 		editorCameraTransform->setPos(settings->getCamPos());
 		Components::Camera* editorCamera = new Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
 		editorCamera->setDisplay(display);

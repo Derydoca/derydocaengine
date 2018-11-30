@@ -27,7 +27,7 @@ namespace DerydocaEngine::Components
 
 		void deserialize(YAML::Node const& node);
 	private:
-		Transform * m_transform;
+		std::shared_ptr<Transform> m_transform;
 		Input::Keyboard* m_keyboard;
 		float m_movementSpeed;
 		int m_keyForward;

@@ -32,7 +32,7 @@ namespace DerydocaEngine::Rendering
 		void update(
 			const std::shared_ptr<MatrixStack>& matrixStack,
 			const Projection& projection,
-			const Components::Transform* trans
+			const std::shared_ptr<Components::Transform> trans
 		);
 		void update(glm::mat4 const& matrix);
 		void updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack);

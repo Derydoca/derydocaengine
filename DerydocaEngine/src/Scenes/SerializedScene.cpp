@@ -48,7 +48,7 @@ namespace DerydocaEngine::Scenes
 			std::shared_ptr<GameObject> go = std::make_shared<GameObject>(name);
 
 			// Set the transform component
-			Components::Transform* trans = go->getTransform();
+			std::shared_ptr<Components::Transform> trans = go->getTransform();
 			YAML::Node transformNode = properties["Transform"];
 
 			// Get the position
