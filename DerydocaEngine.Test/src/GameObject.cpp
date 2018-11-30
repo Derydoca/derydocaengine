@@ -3,10 +3,19 @@
 #include <memory>
 
 TEST(GameObject, ParentOfChildIsSet_When_ChildIsAdded) {
-	auto gameObjectParent = DerydocaEngine::GameObject::generate("Parent");
-	auto gameObjectChild = DerydocaEngine::GameObject::generate("Child");
+	auto gameObjectParent = std::make_shared<DerydocaEngine::GameObject>("Parent");
+	auto gameObjectChild =  std::make_shared<DerydocaEngine::GameObject>("Child");
 
 	gameObjectParent->addChild(gameObjectChild);
 
 	EXPECT_EQ(gameObjectChild->getParent(), gameObjectParent);
+}
+
+TEST(GameObject, NameIsChanged_When_SetNameIsCalled) {
+	auto gameObject = std::make_shared<DerydocaEngine::GameObject>("Old Name");
+
+	std::string newName = "New name";
+	gameObject->setName(newName);
+
+	EXPECT_EQ(newName, gameObject->getName());
 }

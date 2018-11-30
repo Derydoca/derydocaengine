@@ -17,42 +17,48 @@ namespace DerydocaEngine {
 
 namespace DerydocaEngine
 {
-
 	class GameObject: public std::enable_shared_from_this<GameObject>
 	{
 	public:
-		static std::shared_ptr<GameObject> generate(std::string name = "")
-		{
-			return std::make_shared<GameObject>();
-		}
-		GameObject();
 		GameObject(const std::string& name);
+
 		~GameObject();
 
+		void addChild(const std::shared_ptr<GameObject> gameObject);
+
+		void addComponent(Components::GameComponent* component);
+
+		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
+
+		std::vector<Components::GameComponent*> getComponents() const { return m_components; }
+
+		std::shared_ptr<GameObject> getParent() const { return m_parent; }
+
+		Components::Transform* getTransform() { return &m_transform; }
+
+		std::string getName() const { return m_name; }
+
 		void init();
+
 		void postInit();
-		void update(const float& deltaTime);
-		void render(const std::shared_ptr<Rendering::MatrixStack>& matrixStack);
+
+		void postRender();
+
+		void preRender();
+
+		void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const;
+
 		void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			Rendering::Material*& renderMesh,
 			const Rendering::Projection& projection,
 			const Components::Transform* projectionTransform
 		) const;
-		void preRender();
-		void postRender();
 
-		void addChild(const std::shared_ptr<GameObject> gameObject);
-		void addComponent(Components::GameComponent* const& component);
+		void setName(const std::string& name) { m_name = name; }
 
-		inline Components::Transform* getTransform() { return &m_transform; }
-		inline std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
-		inline std::vector<Components::GameComponent*> getComponents() const { return m_components; }
+		void update(const float& deltaTime);
 
-		inline std::shared_ptr<GameObject> getParent() const { return m_parent; }
-		inline std::string getName() const { return m_name; }
-
-		inline void setName(std::string name) { m_name = name; }
 	private:
 		std::string m_name;
 		Components::Transform m_transform;

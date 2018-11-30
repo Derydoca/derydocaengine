@@ -35,7 +35,7 @@ namespace DerydocaEngine::Editor::UI
 
 		Rendering::Display* display = new Rendering::Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 
-		m_sceneRoot = GameObject::generate("__SCENE_ROOT__");
+		m_sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT__");
 
 #pragma region Editor specific game objects
 
@@ -44,7 +44,7 @@ namespace DerydocaEngine::Editor::UI
 		m_sceneRoot->addComponent(screenshotUtil);
 
 		// This is the editor camera
-		std::shared_ptr<GameObject> editorCameraObject = GameObject::generate("__editorCamera");
+		std::shared_ptr<GameObject> editorCameraObject = std::make_shared<GameObject>("__editorCamera");
 		Components::Transform* editorCameraTransform = editorCameraObject->getTransform();
 		editorCameraTransform->setPos(settings->getCamPos());
 		Components::Camera* editorCamera = new Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);

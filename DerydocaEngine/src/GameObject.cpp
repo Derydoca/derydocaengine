@@ -5,16 +5,6 @@
 namespace DerydocaEngine
 {
 
-	GameObject::GameObject() :
-		m_name(""),
-		m_transform(),
-		m_parent(),
-		m_children(),
-		m_components()
-	{
-		m_transform.setGameObject(this);
-	}
-
 	GameObject::GameObject(const std::string& name) :
 		m_name(name),
 		m_transform(),
@@ -37,7 +27,69 @@ namespace DerydocaEngine
 		m_children.clear();
 	}
 
-	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack>& matrixStack) {
+	void GameObject::addChild(const std::shared_ptr<GameObject> gameObject)
+	{
+		m_children.push_back(gameObject);
+		gameObject->m_parent = shared_from_this();
+	}
+
+	void GameObject::addComponent(Components::GameComponent* component)
+	{
+		m_components.push_back(component);
+		component->setGameObject(shared_from_this());
+	}
+
+	void GameObject::init()
+	{
+		for each (Components::GameComponent* c in m_components)
+		{
+			c->init();
+		}
+
+		for each (std::shared_ptr<GameObject> go in m_children)
+		{
+			go->init();
+		}
+	}
+
+	void GameObject::preRender() {
+		for each (Components::GameComponent* c in m_components)
+		{
+			c->preRender();
+		}
+
+		for each (std::shared_ptr<GameObject> go in m_children)
+		{
+			go->preRender();
+		}
+	}
+
+	void GameObject::postInit()
+	{
+		for each (Components::GameComponent* c in m_components)
+		{
+			c->postInit();
+		}
+
+		for each (std::shared_ptr<GameObject> go in m_children)
+		{
+			go->postInit();
+		}
+	}
+
+	void GameObject::postRender() {
+		for each (Components::GameComponent* c in m_components)
+		{
+			c->postRender();
+		}
+
+		for each (std::shared_ptr<GameObject> go in m_children)
+		{
+			go->postRender();
+		}
+	}
+
+	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const {
 		matrixStack->push(m_transform.getModel());
 
 		for each (Components::GameComponent* c in m_components)
@@ -75,32 +127,6 @@ namespace DerydocaEngine
 		matrixStack->pop();
 	}
 
-	void GameObject::init()
-	{
-		for each (Components::GameComponent* c in m_components)
-		{
-			c->init();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->init();
-		}
-	}
-
-	void GameObject::postInit()
-	{
-		for each (Components::GameComponent* c in m_components)
-		{
-			c->postInit();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->postInit();
-		}
-	}
-
 	void GameObject::update(const float& deltaTime) {
 		for each (Components::GameComponent* c in m_components)
 		{
@@ -111,43 +137,6 @@ namespace DerydocaEngine
 		{
 			go->update(deltaTime);
 		}
-	}
-
-	void GameObject::preRender() {
-		for each (Components::GameComponent* c in m_components)
-		{
-			c->preRender();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->preRender();
-		}
-	}
-
-	void GameObject::postRender() {
-		for each (Components::GameComponent* c in m_components)
-		{
-			c->postRender();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->postRender();
-		}
-	}
-
-	void GameObject::addChild(const std::shared_ptr<GameObject> gameObject)
-	{
-		m_children.push_back(gameObject);
-		auto shared_this = shared_from_this();
-		gameObject->m_parent = shared_this;
-	}
-
-	void GameObject::addComponent(Components::GameComponent* const& component)
-	{
-		m_components.push_back(component);
-		component->setGameObject(shared_from_this());
 	}
 
 }
