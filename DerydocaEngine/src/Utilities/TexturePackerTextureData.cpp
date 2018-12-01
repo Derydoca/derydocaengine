@@ -54,13 +54,13 @@ namespace DerydocaEngine::Utilities
 		}
 	}
 
-	Rendering::Texture * TexturePackerTextureData::allocTexture()
+	std::shared_ptr<Rendering::Texture> TexturePackerTextureData::allocTexture()
 	{
 		// Create the image buffer
 		unsigned char* dataBuffer = allocImageBuffer();
 
 		// Load it into a texture
-		Rendering::Texture* tex = new Rendering::Texture();
+		auto tex = std::make_shared<Rendering::Texture>();
 		tex->updateBuffer(dataBuffer, getWidth(), getHeight(), getChannels(), nullptr);
 
 		// Free up the memory we used

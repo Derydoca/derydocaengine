@@ -113,7 +113,7 @@ namespace DerydocaEngine::Components
 		m_mesh = std::make_shared<Rendering::Mesh>(positions, indices, normals, texCoords);
 	}
 
-	void Terrain::setTextureSlot(int const& slot, Rendering::Texture * const& texture)
+	void Terrain::setTextureSlot(int const& slot, std::shared_ptr<Rendering::Texture> texture)
 	{
 		m_meshRenderer->getMaterial()->setTextureSlot(slot, texture);
 	}

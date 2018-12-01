@@ -25,7 +25,7 @@ namespace DerydocaEngine::Ext
 		unsigned int m_vertexArrayBuffers[1];
 		glm::vec3 m_volumeSize;
 		glm::vec3* m_particleLocations;
-		Rendering::Texture* m_texture;
+		std::shared_ptr<Rendering::Texture> m_texture;
 		std::shared_ptr<Rendering::Material> m_material;
 	};
 

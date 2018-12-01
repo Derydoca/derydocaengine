@@ -15,8 +15,6 @@ namespace DerydocaEngine::Ext
 
 	BloomFilter::~BloomFilter()
 	{
-		delete m_blurTex;
-		delete m_blurTex2;
 	}
 
 	void BloomFilter::init()
@@ -44,13 +42,11 @@ namespace DerydocaEngine::Ext
 		}
 
 		// Create the blur texture
-		Rendering::RenderTexture* cameraRenderTexture = m_postProcessCamera->getRenderTexture();
+		auto cameraRenderTexture = m_postProcessCamera->getRenderTexture();
 		int width = cameraRenderTexture->getWidth();
 		int height = cameraRenderTexture->getHeight();
-		delete m_blurTex;
-		delete m_blurTex2;
-		m_blurTex = new Rendering::RenderTexture(width, height);
-		m_blurTex2 = new Rendering::RenderTexture(width, height);
+		m_blurTex = std::make_shared<Rendering::RenderTexture>(width, height);
+		m_blurTex2 = std::make_shared<Rendering::RenderTexture>(width, height);
 
 		auto shader = m_postProcessCamera->getPostProcessShader();
 		if (shader != nullptr)

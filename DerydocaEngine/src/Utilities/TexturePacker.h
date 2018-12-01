@@ -33,7 +33,7 @@ namespace DerydocaEngine::Utilities
 			int const& channels);
 		void packImages();
 		bool getIsDirty() const { return m_isDirty; }
-		Rendering::Texture* allocTexture() { return m_packedImageData.allocTexture(); };
+		std::shared_ptr<Rendering::Texture> allocTexture() { return m_packedImageData.allocTexture(); };
 		unsigned char* allocImageBuffer() { return m_packedImageData.allocImageBuffer(); }
 		void freeSubImageData();
 		std::vector<TexturePackerImage> getSubImageData() { return m_images; }

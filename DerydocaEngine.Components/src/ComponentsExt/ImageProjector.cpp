@@ -17,7 +17,6 @@ namespace DerydocaEngine::Ext
 
 	ImageProjector::~ImageProjector()
 	{
-		delete m_projectorTexture;
 	}
 
 	void ImageProjector::init()
@@ -78,7 +77,7 @@ namespace DerydocaEngine::Ext
 		textureParams.setWrapModeS(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
 		textureParams.setWrapModeT(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
 		Resources::Resource* projectorTextureResource = getResource(compNode, "texture");
-		m_projectorTexture = new Rendering::Texture(projectorTextureResource->getSourceFilePath(), &textureParams);
+		m_projectorTexture = std::make_shared<Rendering::Texture>(projectorTextureResource->getSourceFilePath(), &textureParams);
 
 		// Load references to all mesh renderers this shader affects
 		m_meshRenderers = loadComponents<Components::MeshRenderer*>(compNode, "affectedMeshRenderers");

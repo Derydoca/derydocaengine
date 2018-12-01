@@ -23,7 +23,7 @@ namespace DerydocaEngine::Rendering
 			m_name = name;
 		}
 
-		RenderPass(std::string const& name, RenderTexture* const& renderTexture, std::string const& renderTextureName)
+		RenderPass(std::string const& name, std::shared_ptr<RenderTexture> renderTexture, std::string const& renderTextureName)
 		{
 			assert(renderTexture != nullptr);
 
@@ -42,14 +42,14 @@ namespace DerydocaEngine::Rendering
 
 		std::string getName() const { return m_name; }
 		int getShaderSubroutineIndex() const { return m_shaderSubroutineIndex; }
-		RenderTexture* getRenderTexture() const { return m_renderTexture; }
+		std::shared_ptr<RenderTexture> getRenderTexture() const { return m_renderTexture; }
 		std::string getRenderTextureName() const { return m_renderTextureName; }
 
 		bool hasRenderTextureAssigned() const { return m_renderTexture != nullptr; }
 	private:
 		std::string m_name;
 		int m_shaderSubroutineIndex;
-		RenderTexture* m_renderTexture = nullptr;
+		std::shared_ptr<RenderTexture> m_renderTexture = nullptr;
 		std::string m_renderTextureName;
 	};
 

@@ -14,7 +14,7 @@ namespace DerydocaEngine::Components
 	{
 		if (m_fontFace)
 		{
-			Rendering::Texture* fontTexture = m_fontFace->getTexture();
+			auto fontTexture = m_fontFace->getTexture();
 			getMaterial()->setTexture("CharacterSheet", fontTexture);
 			markComponentAsDirty(DIRTY_COMPONENTS_ON_INDICES_CHANGED);
 			markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);

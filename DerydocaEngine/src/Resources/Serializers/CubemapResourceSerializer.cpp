@@ -15,6 +15,11 @@ namespace DerydocaEngine::Resources::Serializers
 
 	void* CubemapResourceSerializer::deserialize(Resource * const& resource)
 	{
+		return nullptr;
+	}
+
+	std::shared_ptr<void> CubemapResourceSerializer::deserializePointer(Resource * const & resource)
+	{
 		CubemapResource* cubemapResource = (CubemapResource*)resource;
 
 		// Load the yaml file
@@ -23,7 +28,7 @@ namespace DerydocaEngine::Resources::Serializers
 		YAML::Node materialParamsNode = root["MaterialParameters"];
 		if (!materialParamsNode || !materialParamsNode.IsSequence())
 		{
-			return nullptr;
+			return std::make_shared<Rendering::Texture>();
 		}
 
 		for (unsigned int i = 0; i < materialParamsNode.size(); i++)
@@ -52,12 +57,12 @@ namespace DerydocaEngine::Resources::Serializers
 			std::string zNegImage = getSourceFilePath(parameterNode, "ZNeg");
 
 			// Create the cubemap texture and return the object
-			Rendering::Texture* cubemapTexture = new Rendering::Texture(xPosImage, xNegImage, yPosImage, yNegImage, zPosImage, zNegImage);
+			auto cubemapTexture = std::make_shared<Rendering::Texture>(xPosImage, xNegImage, yPosImage, yNegImage, zPosImage, zNegImage);
 			return cubemapTexture;
 		}
 
 		// If we got this far, the data in the source file is not matching what is expected by the resource
-		return nullptr;
+		return std::make_shared<Rendering::Texture>();
 	}
 
 	ResourceType CubemapResourceSerializer::getResourceType()

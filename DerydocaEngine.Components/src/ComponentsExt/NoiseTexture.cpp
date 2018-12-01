@@ -12,12 +12,11 @@ namespace DerydocaEngine::Ext
 
 	NoiseTexture::NoiseTexture()
 	{
-		m_texture = new Rendering::Texture();
+		m_texture = std::make_shared<Rendering::Texture>();
 	}
 
 	NoiseTexture::~NoiseTexture()
 	{
-		delete m_texture;
 	}
 
 	void NoiseTexture::init()

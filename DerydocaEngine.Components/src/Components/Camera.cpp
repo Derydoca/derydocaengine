@@ -86,7 +86,6 @@ namespace DerydocaEngine::Components
 	{
 		delete m_displayRect;
 		delete m_skybox;
-		delete m_renderTexture;
 		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
@@ -203,7 +202,7 @@ namespace DerydocaEngine::Components
 		{
 			int width = renderTextureNode["Width"].as<int>();
 			int height = renderTextureNode["Height"].as<int>();
-			m_renderTexture = new Rendering::RenderTexture(width, height);
+			m_renderTexture = std::make_shared<Rendering::RenderTexture>(width, height);
 
 			auto postProcessingShader = getResourcePointer<Rendering::Shader>(renderTextureNode, "PostProcessShader");
 			m_postProcessMaterial = std::make_shared<Rendering::Material>();

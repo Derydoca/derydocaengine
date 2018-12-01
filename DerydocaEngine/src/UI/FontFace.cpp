@@ -13,7 +13,17 @@
 namespace DerydocaEngine::UI
 {
 
-	FontFace::FontFace()
+	FontFace::FontFace() :
+		m_dotsPerInch(300, 300),
+		m_fontSize(16.0f),
+		m_texture(std::make_shared<Rendering::Texture>()),
+		m_charImages(),
+		m_imageBuffer(),
+		m_imageBufferSize(0, 0),
+		m_textureDirty(false),
+		m_lineHeight(50.0f),
+		m_name(""),
+		m_style("")
 	{
 	}
 
@@ -21,16 +31,16 @@ namespace DerydocaEngine::UI
 	{
 	}
 
-	Rendering::Texture * FontFace::getTexture()
+	std::shared_ptr<Rendering::Texture> FontFace::getTexture()
 	{
 		// Upload the texture to the GPU if the image buffer has changed and has not been submitted
 		if (m_textureDirty)
 		{
-			m_texture.updateBuffer(m_imageBuffer, m_imageBufferSize.x, m_imageBufferSize.y, 1, nullptr);
+			m_texture->updateBuffer(m_imageBuffer, m_imageBufferSize.x, m_imageBufferSize.y, 1, nullptr);
 			m_textureDirty = false;
 		}
 
-		return &m_texture;
+		return m_texture;
 	}
 
 	void FontFace::loadFromFontFile(std::string const& filePath)

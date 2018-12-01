@@ -10,7 +10,11 @@
 namespace DerydocaEngine::UI
 {
 
-	SpriteSheet::SpriteSheet()
+	SpriteSheet::SpriteSheet() :
+		m_sprites(),
+		m_imageBuffer(),
+		m_largestId(0),
+		m_texture(std::make_shared<Rendering::Texture>())
 	{
 		m_sprites = std::map<int, SpriteReference>();
 	}
@@ -59,7 +63,7 @@ namespace DerydocaEngine::UI
 
 		delete[] m_imageBuffer;
 		m_imageBuffer = packer.allocImageBuffer();
-		m_texture.updateBuffer(m_imageBuffer, packer.getWidth(), packer.getHeight(), packer.getChannels(), nullptr);
+		m_texture->updateBuffer(m_imageBuffer, packer.getWidth(), packer.getHeight(), packer.getChannels(), nullptr);
 	}
 
 	void SpriteSheet::addSprite(std::string const& textureId)
@@ -74,7 +78,7 @@ namespace DerydocaEngine::UI
 	{
 		// Save the image to disk and process it by the object library
 		std::string imageFileName = filePath + ".tga";
-		stbi_write_tga(imageFileName.c_str(), m_texture.getWidth(), m_texture.getHeight(), 4, m_imageBuffer);
+		stbi_write_tga(imageFileName.c_str(), m_texture->getWidth(), m_texture->getHeight(), 4, m_imageBuffer);
 		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
 		Resources::Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 
@@ -132,7 +136,7 @@ namespace DerydocaEngine::UI
 			Resources::Resource *r = ObjectLibrary::getInstance().getResource(textureUuid);
 			int imgw, imgh, imgch;
 			m_imageBuffer = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
-			m_texture.updateBuffer(m_imageBuffer, imgw, imgh, imgch, nullptr);
+			m_texture->updateBuffer(m_imageBuffer, imgw, imgh, imgch, nullptr);
 		}
 
 		// Add all sprite data to a parent "Sprites" node

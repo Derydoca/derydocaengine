@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 #include "Color.h"
@@ -48,7 +49,7 @@ namespace DerydocaEngine::Rendering
 		void setMat3(std::string const& name, glm::mat3 const& val);
 		void setMat4(std::string const& name, glm::mat4 const& val);
 		void setMat4Array(std::string const& name, std::vector<glm::mat4> const& valArray);
-		void setTexture(std::string const& name, int const& textureUnit, Texture* const& handle);
+		void setTexture(std::string const& name, int const& textureUnit, std::shared_ptr<Rendering::Texture> handle);
 		void setTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType, unsigned int const& handle);
 
 		void clearFloat(std::string const& name);
@@ -75,7 +76,7 @@ namespace DerydocaEngine::Rendering
 
 		void setSubPasses(unsigned int const& program, RenderPass* const& renderPasses, int const& numPasses);
 
-		void renderMesh(const std::shared_ptr<Mesh> mesh, RenderTexture* renderTexture);
+		void renderMesh(const std::shared_ptr<Mesh> mesh, std::shared_ptr<RenderTexture> renderTexture);
 	private:
 		static const unsigned int NUM_SHADERS = 5;
 		Shader(Shader const& other) {}

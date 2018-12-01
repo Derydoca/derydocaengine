@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <assert.h>
+#include <memory>
 #include "Utilities\TexturePackerImage.h"
 
 namespace DerydocaEngine::Rendering {
@@ -32,7 +33,7 @@ namespace DerydocaEngine::Utilities
 		int getWidth() const { return (int)m_data[0].size() / m_channels; }
 		int getHeight() const { return (int)m_data.size(); }
 		int getChannels() const { return m_channels; }
-		Rendering::Texture* allocTexture();
+		std::shared_ptr<Rendering::Texture> allocTexture();
 		unsigned char* allocImageBuffer();
 	private:
 		int m_channels;

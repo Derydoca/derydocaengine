@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 #include "Resources\ResourceType.h"
 #include "yaml-cpp\yaml.h"
 #include "Helpers\YamlTools.h"
@@ -36,6 +37,27 @@ namespace DerydocaEngine::Resources::Serializers
 			else
 			{
 				return nullptr;
+			}
+		}
+
+		template<typename T>
+		inline std::shared_ptr<T> loadResourcePointer(YAML::Node const& node, std::string const& resourceName)
+		{
+			YAML::Node resourceIdNode = node[resourceName];
+			if (!resourceIdNode)
+			{
+				std::cout << "Unable to load resource because the ID node of '" << resourceName << "' could not be found.\n";
+				return std::make_shared<T>();
+			}
+			boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
+			Resource * resource = ObjectLibrary::getInstance().getResource(id);
+			if (resource)
+			{
+				return std::static_pointer_cast<T>(resource->getResourceObjectPointer());
+			}
+			else
+			{
+				return std::make_shared<T>();
 			}
 		}
 

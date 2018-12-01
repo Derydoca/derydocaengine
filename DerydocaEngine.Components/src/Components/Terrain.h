@@ -27,7 +27,7 @@ namespace DerydocaEngine::Components
 		void draw();
 		void updateMesh();
 
-		void setTextureSlot(int const& slot, Rendering::Texture* const& texture);
+		void setTextureSlot(int const& slot, std::shared_ptr<Rendering::Texture> texture);
 		void init();
 
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);

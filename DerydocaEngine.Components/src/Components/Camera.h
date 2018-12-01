@@ -49,7 +49,7 @@ namespace DerydocaEngine::Components
 		Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar);
 		~Camera();
 
-		inline Rendering::RenderTexture* getRenderTexture() const { return m_renderTexture; }
+		inline std::shared_ptr<Rendering::RenderTexture> getRenderTexture() const { return m_renderTexture; }
 
 		/*
 		Sets the clear mode
@@ -88,7 +88,7 @@ namespace DerydocaEngine::Components
 		Rendering::Display* getDisplay() { return m_display; }
 		float getDisplayWidth();
 		float getDisplayHeight();
-		void setRenderTexture(Rendering::RenderTexture* const& renderTexture) { m_renderTexture = renderTexture; }
+		void setRenderTexture(std::shared_ptr<Rendering::RenderTexture> renderTexture) { m_renderTexture = renderTexture; }
 		void init();
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
 		void setRenderingMode(RenderingMode const& mode);
@@ -111,7 +111,7 @@ namespace DerydocaEngine::Components
 		RenderingMode m_renderingMode;
 		std::shared_ptr<Rendering::Material> m_skyboxMaterial;
 		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
-		Rendering::RenderTexture* m_renderTexture;
+		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
 		Rendering::Display* m_display;
 		Rectangle* m_displayRect;
 		std::shared_ptr<Rendering::Mesh> m_quad;

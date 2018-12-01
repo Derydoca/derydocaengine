@@ -2,6 +2,7 @@
 
 #include <boost\uuid\uuid.hpp>
 #include <iostream>
+#include <memory>
 #include <vector>
 #include "Components\GameComponentFactory.h"
 #include "GameObject.h"

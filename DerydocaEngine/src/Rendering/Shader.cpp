@@ -325,7 +325,7 @@ namespace DerydocaEngine::Rendering
 		glUniformMatrix4fv(getUniformName(name), size, GL_FALSE, glm::value_ptr(valArray.at(0)));
 	}
 
-	void Shader::setTexture(std::string const& name, int const& textureUnit, Texture* const& texture)
+	void Shader::setTexture(std::string const& name, int const& textureUnit, std::shared_ptr<Rendering::Texture> texture)
 	{
 		glActiveTexture(GL_TEXTURE0 + textureUnit);
 		glBindTexture(texture->getTextureType(), texture->getRendererId());
@@ -368,7 +368,7 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	void Shader::renderMesh(const std::shared_ptr<Mesh> mesh, RenderTexture* m_renderTexture)
+	void Shader::renderMesh(const std::shared_ptr<Mesh> mesh, std::shared_ptr<RenderTexture> m_renderTexture)
 	{
 		if (m_numPasses <= 0)
 		{

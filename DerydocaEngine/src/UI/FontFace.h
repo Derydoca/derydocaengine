@@ -21,7 +21,7 @@ namespace DerydocaEngine::UI
 		FontFace();
 		~FontFace();
 
-		Rendering::Texture* getTexture();
+		std::shared_ptr<Rendering::Texture> getTexture();
 		Utilities::TexturePackerImage getCharData(int const& charCode) const {
 			if (m_charImages.find(charCode) == m_charImages.end())
 			{
@@ -39,16 +39,16 @@ namespace DerydocaEngine::UI
 		void loadFromSerializedFile(std::string const& filePath);
 		void saveToSerializedFile(std::string const& filePath);
 	private:
-		glm::ivec2 m_dotsPerInch = glm::ivec2(300, 300);
-		float m_fontSize = 16.0;
-		Rendering::Texture m_texture;
+		glm::ivec2 m_dotsPerInch;
+		float m_fontSize;
+		std::shared_ptr<Rendering::Texture> m_texture;
 		std::map<int, Utilities::TexturePackerImage> m_charImages;
 		unsigned char* m_imageBuffer;
 		glm::ivec2 m_imageBufferSize;
-		bool m_textureDirty = false;
-		float m_lineHeight = 50.0f;
-		std::string m_name = "";
-		std::string m_style = "";
+		bool m_textureDirty;
+		float m_lineHeight;
+		std::string m_name;
+		std::string m_style;
 	};
 
 }

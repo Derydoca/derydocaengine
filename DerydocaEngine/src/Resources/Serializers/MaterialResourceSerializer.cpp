@@ -1,5 +1,6 @@
 #include "Resources\Serializers\MaterialResourceSerializer.h"
 #include "Rendering\Material.h"
+#include "Rendering\Texture.h"
 #include "Resources\Resource.h"
 #include "Rendering\ShaderLibrary.h"
 
@@ -39,7 +40,8 @@ namespace DerydocaEngine::Resources::Serializers
 			std::string paramType = parameters[i]["Type"].as<std::string>();
 			if (paramType == "Texture")
 			{
-				auto texture = loadResource<Rendering::Texture*>(parameters[i], "ID");
+				auto texture = loadResourcePointer<Rendering::Texture>(parameters[i], "ID");
+
 				YAML::Node nameNode = parameters[i]["Name"];
 				if (texture != nullptr && nameNode)
 				{

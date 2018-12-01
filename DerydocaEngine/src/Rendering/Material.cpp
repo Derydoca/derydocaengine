@@ -37,12 +37,12 @@ namespace DerydocaEngine::Rendering
 		m_intValues[name] = value;
 	}
 
-	void Material::setTexture(std::string const & name, Texture * const & texture)
+	void Material::setTexture(std::string const & name, std::shared_ptr<Texture> texture)
 	{
 		m_textures[name] = texture;
 	}
 
-	void Material::setTextureSlot(int const& slot, Texture * const& texture)
+	void Material::setTextureSlot(int const& slot, std::shared_ptr<Texture> texture)
 	{
 		m_texture = texture;
 	}

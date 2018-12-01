@@ -21,8 +21,8 @@ namespace DerydocaEngine::Ext
 		float m_lumThresh;
 		Components::Camera* m_postProcessCamera;
 		float m_weights[10];
-		Rendering::RenderTexture* m_blurTex;
-		Rendering::RenderTexture* m_blurTex2;
+		std::shared_ptr<Rendering::RenderTexture> m_blurTex;
+		std::shared_ptr<Rendering::RenderTexture> m_blurTex2;
 
 		float gauss(float const& x, float const& sigma2);
 		void updateShader();
