@@ -18,11 +18,6 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	}
 
-	void * MeshResourceSerializer::deserialize(Resource * const& resource)
-	{
-		return nullptr;
-	}
-
 	std::shared_ptr<void> MeshResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		MeshResource* mr = (MeshResource*)resource;

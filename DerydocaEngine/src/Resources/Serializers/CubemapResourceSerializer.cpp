@@ -13,11 +13,6 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	}
 
-	void* CubemapResourceSerializer::deserialize(Resource * const& resource)
-	{
-		return nullptr;
-	}
-
 	std::shared_ptr<void> CubemapResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		CubemapResource* cubemapResource = (CubemapResource*)resource;

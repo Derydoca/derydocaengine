@@ -19,11 +19,6 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	}
 
-	void * AnimationResourceSerializer::deserialize(Resource * const& resource)
-	{
-		return nullptr;
-	}
-
 	std::shared_ptr<void> AnimationResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		Assimp::Importer importer;

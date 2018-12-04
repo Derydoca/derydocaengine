@@ -15,11 +15,6 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	}
 
-	void * MaterialResourceSerializer::deserialize(Resource * const& resource)
-	{
-		return nullptr;
-	}
-
 	std::shared_ptr<void> MaterialResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		// Load the yaml file

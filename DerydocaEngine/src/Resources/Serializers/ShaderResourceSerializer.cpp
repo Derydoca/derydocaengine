@@ -7,11 +7,6 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	void * ShaderResourceSerializer::deserialize(Resource * const& resource)
-	{
-		return nullptr;
-	}
-
 	std::shared_ptr<void> ShaderResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		ShaderResource* shaderResource = (ShaderResource*)resource;

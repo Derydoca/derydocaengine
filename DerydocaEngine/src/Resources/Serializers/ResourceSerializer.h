@@ -14,32 +14,10 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	public:
 		virtual ~ResourceSerializer() {}
-		virtual void* deserialize(Resource* const& resource) = 0;
 		virtual std::shared_ptr<void> deserializePointer(Resource* const& resource) { return nullptr; }
 		virtual ResourceType getResourceType() = 0;
 
 	protected:
-		template<typename T>
-		inline T loadResource(YAML::Node const& node, std::string const& resourceName)
-		{
-			YAML::Node resourceIdNode = node[resourceName];
-			if (!resourceIdNode)
-			{
-				std::cout << "Unable to load resource because the ID node of '" << resourceName << "' could not be found.\n";
-				return nullptr;
-			}
-			boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
-			Resource * resource = ObjectLibrary::getInstance().getResource(id);
-			if (resource)
-			{
-				return (T)resource->getResourceObject();
-			}
-			else
-			{
-				return nullptr;
-			}
-		}
-
 		template<typename T>
 		inline std::shared_ptr<T> loadResourcePointer(YAML::Node const& node, std::string const& resourceName)
 		{

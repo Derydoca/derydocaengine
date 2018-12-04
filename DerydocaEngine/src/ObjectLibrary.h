@@ -46,18 +46,6 @@ namespace DerydocaEngine
 		}
 
 		template<class resourceObjectType>
-		resourceObjectType* getResourceObject(boost::uuids::uuid const& id)
-		{
-			Resources::Resource* resource = getResource(id);
-			if (resource == nullptr)
-			{
-				return nullptr;
-			}
-
-			return static_cast<resourceObjectType*>(resource->getResourceObject());
-		}
-
-		template<class resourceObjectType>
 		std::shared_ptr<resourceObjectType> getResourceObjectPointer(boost::uuids::uuid const& id)
 		{
 			Resources::Resource* resource = getResource(id);

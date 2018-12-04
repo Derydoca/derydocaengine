@@ -19,11 +19,6 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	}
 
-	void * SkeletonResourceSerializer::deserialize(Resource * const& resource)
-	{
-		return nullptr;
-	}
-
 	std::shared_ptr<void> SkeletonResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		SkeletonResource* sr = (SkeletonResource*)resource;
