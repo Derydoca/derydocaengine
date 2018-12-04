@@ -4,7 +4,9 @@
 namespace DerydocaEngine::Ext
 {
 
-	BezierPatchMesh::BezierPatchMesh()
+	BezierPatchMesh::BezierPatchMesh() :
+		m_numPatches(0),
+		m_patchData(nullptr)
 	{
 	}
 

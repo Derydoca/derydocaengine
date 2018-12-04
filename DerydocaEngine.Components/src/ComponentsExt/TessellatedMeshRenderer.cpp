@@ -71,7 +71,7 @@ namespace DerydocaEngine::Ext
 		}
 
 		m_material = getResourcePointer<Rendering::Material>(compNode, "material");
-		m_mesh = getResourceObject<BezierPatchMesh>(compNode, "bezierPatchMesh");
+		m_mesh = getResourcePointer<BezierPatchMesh>(compNode, "bezierPatchMesh");
 	}
 
 	void TessellatedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)

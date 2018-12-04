@@ -26,7 +26,7 @@ namespace DerydocaEngine::Ext
 
 		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
 	private:
-		BezierPatchMesh * m_mesh;
+		std::shared_ptr<BezierPatchMesh> m_mesh;
 		unsigned int m_vao;
 		unsigned int m_vbo;
 		std::shared_ptr<Rendering::Material> m_material;

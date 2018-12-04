@@ -132,26 +132,6 @@ namespace DerydocaEngine::Components
 		}
 
 		template<typename T>
-		inline T* getResourceObject(boost::uuids::uuid const& resourceId)
-		{
-			return ObjectLibrary::getInstance().getResourceObject<T>(resourceId);
-		}
-
-		template<typename T>
-		inline T* getResourceObject(YAML::Node const& node, std::string const& resourceName)
-		{
-			YAML::Node resourceIdNode = node[resourceName];
-			if (resourceIdNode == nullptr || !resourceIdNode.IsScalar())
-			{
-				return nullptr;
-			}
-
-			boost::uuids::uuid resourceId = resourceIdNode.as<boost::uuids::uuid>();
-
-			return getResourceObject<T>(resourceId);
-		}
-
-		template<typename T>
 		inline std::vector<T> loadComponents(YAML::Node const& node, std::string const& componentCollectionName)
 		{
 			std::vector<T> objectArr = std::vector<T>();

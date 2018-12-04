@@ -4,7 +4,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	BezierPatchMesh * BezierPatchMeshFileLoader::Load(const char * filePath)
+	std::shared_ptr<BezierPatchMesh> BezierPatchMeshFileLoader::Load(const char * filePath)
 	{
 		int numPatches;
 		float* patchData = nullptr;
@@ -36,7 +36,7 @@ namespace DerydocaEngine::Ext
 			std::cout << "Unable to open file: " << filePath << "\n";
 		}
 
-		BezierPatchMesh* bpm = new BezierPatchMesh();
+		auto bpm = std::make_shared<BezierPatchMesh>();
 		bpm->loadPatchData(numPatches, patchData);
 		delete(patchData);
 		return bpm;

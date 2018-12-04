@@ -1,6 +1,7 @@
 #pragma once
 #include "BezierPatchMesh.h"
 #include <fstream>
+#include <memory>
 #include <string>
 
 namespace DerydocaEngine::Ext
@@ -12,7 +13,7 @@ namespace DerydocaEngine::Ext
 		BezierPatchMeshFileLoader() {}
 		~BezierPatchMeshFileLoader() {}
 
-		BezierPatchMesh* Load(const char* filePath);
+		std::shared_ptr<BezierPatchMesh> Load(const char* filePath);
 	private:
 		bool loadPatchData(std::istream & fileStream, int const& patch, float* const& patchData);
 	};
