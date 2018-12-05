@@ -14,17 +14,16 @@ namespace DerydocaEngine::Resources::Serializers
 			return instance;
 		}
 
-		ResourceSerializer * getSerializer(ResourceType const& type);
-
-		void operator=(ResourceSerializerLibrary const&) = delete;
+		std::shared_ptr<ResourceSerializer> getSerializer(const ResourceType& type);
 	private:
 		ResourceSerializerLibrary();
 		~ResourceSerializerLibrary();
-		ResourceSerializerLibrary(ResourceSerializerLibrary const&);
 
-		void registerSerializer(ResourceSerializer * const& serializer);
+		ResourceSerializerLibrary(const ResourceSerializerLibrary&);
+		void operator=(const ResourceSerializerLibrary&) = delete;
+		void registerSerializer(std::shared_ptr<ResourceSerializer> serializer);
 
-		std::map<ResourceType, ResourceSerializer *> m_serializers;
+		std::map<ResourceType, std::shared_ptr<ResourceSerializer>> m_serializers;
 	};
 
 }

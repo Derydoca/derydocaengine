@@ -12,7 +12,7 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	ResourceSerializer * ResourceSerializerLibrary::getSerializer(ResourceType const& type)
+	std::shared_ptr<ResourceSerializer> ResourceSerializerLibrary::getSerializer(const ResourceType& type)
 	{
 		// Return the associated serializer for the resource type specified
 		auto search = m_serializers.find(type);
@@ -28,30 +28,25 @@ namespace DerydocaEngine::Resources::Serializers
 
 	ResourceSerializerLibrary::ResourceSerializerLibrary()
 	{
-		registerSerializer(new MaterialResourceSerializer());
-		registerSerializer(new MeshResourceSerializer());
-		registerSerializer(new TextureResourceSerializer());
-		registerSerializer(new CubemapResourceSerializer());
-		registerSerializer(new ShaderResourceSerializer());
-		registerSerializer(new Ext::BezierPatchMeshResourceSerializer());
-		registerSerializer(new SpriteSheetResourceSerializer());
-		registerSerializer(new AnimationResourceSerializer());
-		registerSerializer(new SkeletonResourceSerializer());
+		registerSerializer(std::make_shared<AnimationResourceSerializer>());
+		registerSerializer(std::make_shared<CubemapResourceSerializer>());
+		registerSerializer(std::make_shared<MaterialResourceSerializer>());
+		registerSerializer(std::make_shared<MeshResourceSerializer>());
+		registerSerializer(std::make_shared<ShaderResourceSerializer>());
+		registerSerializer(std::make_shared<SkeletonResourceSerializer>());
+		registerSerializer(std::make_shared<SpriteSheetResourceSerializer>());
+		registerSerializer(std::make_shared<TextureResourceSerializer>());
+		registerSerializer(std::make_shared<Ext::BezierPatchMeshResourceSerializer>());
 	}
 
 	ResourceSerializerLibrary::~ResourceSerializerLibrary()
 	{
-		// Delete all type serializers
-		for (std::map<ResourceType, ResourceSerializer*>::iterator it = m_serializers.begin(); it != m_serializers.end(); ++it)
-		{
-			delete(it->second);
-		}
 	}
 
-	void ResourceSerializerLibrary::registerSerializer(ResourceSerializer * const& serializer)
+	void ResourceSerializerLibrary::registerSerializer(std::shared_ptr<ResourceSerializer> serializer)
 	{
 		// Add this serializer to the list of serializers
-		m_serializers.insert(std::pair<ResourceType, ResourceSerializer*>(serializer->getResourceType(), serializer));
+		m_serializers.insert(std::pair<ResourceType, std::shared_ptr<ResourceSerializer>>(serializer->getResourceType(), serializer));
 	}
 
 }

@@ -24,7 +24,7 @@ namespace DerydocaEngine::Resources
 		if (m_resourceObjectPointer == 0)
 		{
 			// Find the loader that should be used
-			Serializers::ResourceSerializer* loader = Serializers::ResourceSerializerLibrary::getInstance().getSerializer(getType());
+			auto loader = Serializers::ResourceSerializerLibrary::getInstance().getSerializer(getType());
 
 			// If the loader could not be found, return null
 			if (loader == nullptr)
