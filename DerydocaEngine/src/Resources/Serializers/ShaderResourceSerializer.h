@@ -7,11 +7,8 @@ namespace DerydocaEngine::Resources::Serializers
 	class ShaderResourceSerializer : public ResourceSerializer
 	{
 	public:
-		ShaderResourceSerializer() {}
-		~ShaderResourceSerializer() {}
-
 		virtual std::shared_ptr<void> deserializePointer(Resource* const& resource);
-		virtual ResourceType getResourceType();
+		virtual ResourceType getResourceType() { return ResourceType::ShaderResourceType; }
 	};
 
 }

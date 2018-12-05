@@ -11,14 +11,6 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	AnimationResourceSerializer::AnimationResourceSerializer()
-	{
-	}
-
-	AnimationResourceSerializer::~AnimationResourceSerializer()
-	{
-	}
-
 	std::shared_ptr<void> AnimationResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		Assimp::Importer importer;
@@ -38,11 +30,6 @@ namespace DerydocaEngine::Resources::Serializers
 		}
 
 		return Helpers::AssimpUtils::getAnimation(scene, animIndex);
-	}
-
-	ResourceType AnimationResourceSerializer::getResourceType()
-	{
-		return ResourceType::AnimationResourceType;
 	}
 
 }

@@ -11,14 +11,6 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	SkeletonResourceSerializer::SkeletonResourceSerializer()
-	{
-	}
-
-	SkeletonResourceSerializer::~SkeletonResourceSerializer()
-	{
-	}
-
 	std::shared_ptr<void> SkeletonResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		SkeletonResource* sr = (SkeletonResource*)resource;
@@ -26,11 +18,6 @@ namespace DerydocaEngine::Resources::Serializers
 		auto scene = importer.ReadFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 		return Helpers::AssimpUtils::getSkeleton(scene, 0);
-	}
-
-	ResourceType SkeletonResourceSerializer::getResourceType()
-	{
-		return ResourceType::SkeletonResourceType;
 	}
 
 }

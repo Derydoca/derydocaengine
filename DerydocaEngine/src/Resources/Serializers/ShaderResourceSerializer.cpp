@@ -14,9 +14,4 @@ namespace DerydocaEngine::Resources::Serializers
 		return shader;
 	}
 
-	ResourceType ShaderResourceSerializer::getResourceType()
-	{
-		return ResourceType::ShaderResourceType;
-	}
-
 }

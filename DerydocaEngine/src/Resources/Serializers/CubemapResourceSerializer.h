@@ -7,11 +7,8 @@ namespace DerydocaEngine::Resources::Serializers
 	class CubemapResourceSerializer : public ResourceSerializer
 	{
 	public:
-		CubemapResourceSerializer();
-		~CubemapResourceSerializer();
-
 		virtual std::shared_ptr<void> deserializePointer(Resource* const& resource);
-		virtual ResourceType getResourceType();
+		virtual ResourceType getResourceType() { return ResourceType::CubemapResourceType; }
 	};
 
 }

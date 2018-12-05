@@ -5,14 +5,6 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	TextureResourceSerializer::TextureResourceSerializer()
-	{
-	}
-
-	TextureResourceSerializer::~TextureResourceSerializer()
-	{
-	}
-
 	std::shared_ptr<void> TextureResourceSerializer::deserializePointer(Resource * const& resource)
 	{
 		std::string sourceFilePath = resource->getSourceFilePath();
@@ -20,11 +12,6 @@ namespace DerydocaEngine::Resources::Serializers
 		auto texture = std::make_shared<Rendering::Texture>(sourceFilePath);
 
 		return texture; 
-	}
-
-	ResourceType TextureResourceSerializer::getResourceType()
-	{
-		return ResourceType::TextureResourceType;
 	}
 
 }

@@ -7,11 +7,8 @@ namespace DerydocaEngine::Resources::Serializers
 	class MaterialResourceSerializer : public ResourceSerializer
 	{
 	public:
-		MaterialResourceSerializer();
-		~MaterialResourceSerializer();
-
 		virtual std::shared_ptr<void> deserializePointer(Resource* const& resource);
-		virtual ResourceType getResourceType();
+		virtual ResourceType getResourceType() { return ResourceType::MaterialResourceType; }
 	};
 
 }

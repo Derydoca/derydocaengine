@@ -7,14 +7,6 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	MaterialResourceSerializer::MaterialResourceSerializer()
-	{
-	}
-
-	MaterialResourceSerializer::~MaterialResourceSerializer()
-	{
-	}
-
 	std::shared_ptr<void> MaterialResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		// Load the yaml file
@@ -64,11 +56,6 @@ namespace DerydocaEngine::Resources::Serializers
 		}
 
 		return material;
-	}
-
-	ResourceType MaterialResourceSerializer::getResourceType()
-	{
-		return ResourceType::MaterialResourceType;
 	}
 
 }

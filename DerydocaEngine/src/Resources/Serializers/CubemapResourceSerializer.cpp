@@ -5,14 +5,6 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	CubemapResourceSerializer::CubemapResourceSerializer()
-	{
-	}
-
-	CubemapResourceSerializer::~CubemapResourceSerializer()
-	{
-	}
-
 	std::shared_ptr<void> CubemapResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		CubemapResource* cubemapResource = (CubemapResource*)resource;
@@ -58,11 +50,6 @@ namespace DerydocaEngine::Resources::Serializers
 
 		// If we got this far, the data in the source file is not matching what is expected by the resource
 		return std::make_shared<Rendering::Texture>();
-	}
-
-	ResourceType CubemapResourceSerializer::getResourceType()
-	{
-		return CubemapResourceType;
 	}
 
 }

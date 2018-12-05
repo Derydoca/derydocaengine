@@ -10,14 +10,6 @@
 
 namespace DerydocaEngine::Resources::Serializers
 {
-	MeshResourceSerializer::MeshResourceSerializer()
-	{
-	}
-
-	MeshResourceSerializer::~MeshResourceSerializer()
-	{
-	}
-
 	std::shared_ptr<void> MeshResourceSerializer::deserializePointer(Resource * const & resource)
 	{
 		MeshResource* mr = (MeshResource*)resource;
@@ -192,11 +184,6 @@ namespace DerydocaEngine::Resources::Serializers
 				}
 			}
 		}
-	}
-
-	ResourceType MeshResourceSerializer::getResourceType()
-	{
-		return ResourceType::MeshResourceType;
 	}
 
 }

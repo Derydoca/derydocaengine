@@ -16,9 +16,6 @@ namespace DerydocaEngine::Resources::Serializers
 	class MeshResourceSerializer : public ResourceSerializer
 	{
 	public:
-		MeshResourceSerializer();
-		~MeshResourceSerializer();
-
 		virtual std::shared_ptr<void> deserializePointer(Resource* const& resource);
 		void ProcessMeshData(
 			aiMesh * &mesh,
@@ -34,7 +31,7 @@ namespace DerydocaEngine::Resources::Serializers
 			aiMesh * mesh,
 			std::vector<Animation::VertexBoneWeights> &m_boneWeights,
 			const std::shared_ptr<Animation::Skeleton>& skeleton);
-		virtual ResourceType getResourceType();
+		virtual ResourceType getResourceType() { return ResourceType::MeshResourceType; }
 
 	private:
 
