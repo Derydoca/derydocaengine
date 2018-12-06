@@ -5,9 +5,9 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<void> CubemapResourceSerializer::deserializePointer(Resource * const & resource)
+	std::shared_ptr<void> CubemapResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
-		CubemapResource* cubemapResource = (CubemapResource*)resource;
+		auto cubemapResource = std::static_pointer_cast<CubemapResource>(resource);
 
 		// Load the yaml file
 		YAML::Node root = YAML::LoadFile(resource->getSourceFilePath());

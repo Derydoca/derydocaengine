@@ -5,7 +5,13 @@
 namespace DerydocaEngine::Resources
 {
 
-	Resource::Resource()
+	Resource::Resource() :
+		m_id(),
+		m_type(ResourceType::UnknownResourceType),
+		m_sourceFilePath(),
+		m_metaFilePath(),
+		m_resourceObject(nullptr),
+		m_resourceObjectPointer()
 	{
 
 	}
@@ -33,7 +39,7 @@ namespace DerydocaEngine::Resources
 			}
 
 			// Load the object from the related object loader and return it
-			m_resourceObjectPointer = loader->deserializePointer(this);
+			m_resourceObjectPointer = loader->deserializePointer(shared_from_this());
 		}
 
 		return m_resourceObjectPointer;

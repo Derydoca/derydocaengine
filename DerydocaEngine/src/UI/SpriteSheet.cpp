@@ -32,7 +32,7 @@ namespace DerydocaEngine::UI
 		{
 			SpriteReference sprite = spriteMapItem.second;
 
-			Resources::Resource* spriteImageResource = ObjLib->getResource(sprite.getTextureId());
+			auto spriteImageResource = ObjLib->getResource(sprite.getTextureId());
 
 			int imgw, imgh, imgch;
 			unsigned char* spriteImageBuffer = stbi_load(spriteImageResource->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
@@ -80,7 +80,7 @@ namespace DerydocaEngine::UI
 		std::string imageFileName = filePath + ".tga";
 		stbi_write_tga(imageFileName.c_str(), m_texture->getWidth(), m_texture->getHeight(), 4, m_imageBuffer);
 		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
-		Resources::Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
+		auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 
 		// Create the root and add all root level data
 		YAML::Node root = YAML::Node();
@@ -133,7 +133,7 @@ namespace DerydocaEngine::UI
 		if (hasBeenProcessed)
 		{
 			std::string textureUuid = spriteSheetNode["Texture"].as<std::string>();
-			Resources::Resource *r = ObjectLibrary::getInstance().getResource(textureUuid);
+			auto r = ObjectLibrary::getInstance().getResource(textureUuid);
 			int imgw, imgh, imgch;
 			m_imageBuffer = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
 			m_texture->updateBuffer(m_imageBuffer, imgw, imgh, imgch, nullptr);

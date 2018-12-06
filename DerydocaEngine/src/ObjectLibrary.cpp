@@ -25,14 +25,14 @@ namespace DerydocaEngine
 		loadDirectory(engineResourcesPath);
 	}
 
-	Resources::Resource * ObjectLibrary::getResource(std::string const& uuidString)
+	std::shared_ptr<Resources::Resource> ObjectLibrary::getResource(std::string const& uuidString)
 	{
 		boost::uuids::string_generator gen;
 		boost::uuids::uuid uuid = gen(uuidString);
 		return getResource(uuid);
 	}
 
-	Resources::Resource * ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
+	std::shared_ptr<Resources::Resource> ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
 	{
 		// Find a resource with a matching uuid
 		auto search = m_resources.find(uuid);
@@ -59,7 +59,7 @@ namespace DerydocaEngine
 		return nullptr;
 	}
 
-	Resources::Resource* ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
+	std::shared_ptr<Resources::Resource> ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 	{
 		std::string metaFilePath = sourceFilePath + m_metaExtension;
 
@@ -98,7 +98,7 @@ namespace DerydocaEngine
 			}
 
 			// Load the resource object
-			Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
+			std::shared_ptr<Resources::Resource> resource = serializer->loadResourceFromMeta(resourceNode);
 
 			// If no resource could be parsed from the node, continue on
 			if (resource == nullptr)
@@ -217,10 +217,10 @@ namespace DerydocaEngine
 		return true;
 	}
 
-	void ObjectLibrary::registerResource(Resources::Resource* const& resource)
+	void ObjectLibrary::registerResource(std::shared_ptr<Resources::Resource> resource)
 	{
 		// Load the resource into the map
-		m_resources.insert(std::pair<boost::uuids::uuid, Resources::Resource*>(resource->getId(), resource));
+		m_resources.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Resources::Resource>>(resource->getId(), resource));
 	}
 
 	void ObjectLibrary::loadFile(std::string const& sourceFilePath)
@@ -267,7 +267,7 @@ namespace DerydocaEngine
 			}
 
 			// Load the resource object
-			Resources::Resource* resource = serializer->loadResourceFromMeta(resourceNode);
+			std::shared_ptr<Resources::Resource> resource = serializer->loadResourceFromMeta(resourceNode);
 
 			// If no resource could be parsed from the node, continue on
 			if (resource == nullptr)

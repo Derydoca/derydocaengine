@@ -11,7 +11,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 		YAML::Node generateResourceNodes(std::string const& filePath);
 		virtual Files::FileType getFileType();
-		Resources::Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
+		std::shared_ptr<Resources::Resource> loadResourceFromMeta(YAML::Node const& resourceNode);
 	};
 
 }

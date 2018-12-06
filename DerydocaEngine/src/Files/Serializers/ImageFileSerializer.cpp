@@ -20,10 +20,10 @@ namespace DerydocaEngine::Files::Serializers {
 		return Files::FileType::ImageFileType;
 	}
 
-	Resources::Resource * ImageFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	std::shared_ptr<Resources::Resource> ImageFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
 		// Create a material resource type
-		Resources::Resource* r = new Resources::Resource();
+		auto r = std::make_shared<Resources::Resource>();
 		r->setType(Resources::TextureResourceType);
 		return r;
 	}

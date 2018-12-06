@@ -57,7 +57,7 @@ namespace DerydocaEngine::Components
 		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
 		getMaterial()->setShader(shader);
 
-		auto fontResource = getResource<Resources::Resource*>(compNode, "font");
+		auto fontResource = getResource<Resources::Resource>(compNode, "font");
 		if (fontResource->getType() == Resources::ResourceType::FontResourceType) {
 			// Load the font size from the file
 			float fontSize = 16.0f;

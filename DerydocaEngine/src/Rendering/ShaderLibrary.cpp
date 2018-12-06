@@ -20,17 +20,17 @@ namespace DerydocaEngine::Rendering
 			return it->second;
 		}
 
-		// Otherwise, try to load the shader
-		// Get the resource object
-		Resources::Resource* resource = ObjectLibrary::getInstance().getResource(shaderId);
-		if (resource == nullptr)
-		{
-			std::cout << "Unable to find a resource with the ID of '" << shaderId << "'.\n";
-			return nullptr;
-		}
+		//// Otherwise, try to load the shader
+		//// Get the resource object
+		//auto resource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
+		//if (resource == nullptr)
+		//{
+		//	std::cout << "Unable to find a resource with the ID of '" << shaderId << "'.\n";
+		//	return nullptr;
+		//}
 
 		// Convert the resource object to a shader resource object
-		Resources::ShaderResource* shaderResource = static_cast<Resources::ShaderResource*>(resource);
+		std::shared_ptr<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
 		if (shaderResource == nullptr)
 		{
 			std::cout << "The resource with ID of '" << shaderId << "' is not a shader.\n";

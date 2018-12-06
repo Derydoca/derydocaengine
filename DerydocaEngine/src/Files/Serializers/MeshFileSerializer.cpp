@@ -92,7 +92,7 @@ namespace DerydocaEngine::Files::Serializers {
 		return resources;
 	}
 
-	Resources::Resource * MeshSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	std::shared_ptr<Resources::Resource> MeshSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
 		// If the type field is missing, then it cannot be loaded
 		if (!resourceNode["Type"])
@@ -108,7 +108,7 @@ namespace DerydocaEngine::Files::Serializers {
 		if (type == "Mesh")
 		{
 			// If it is a mesh, make a mesh resource
-			Resources::MeshResource* meshResource = new Resources::MeshResource();
+			auto meshResource = std::make_shared<Resources::MeshResource>();
 			meshResource->setMeshIndex(resourceNode["Index"].as<unsigned int>());
 			meshResource->setMeshName(resourceNode["Name"].as<std::string>());
 			YAML::Node skeletonNode = resourceNode["Skeleton"];
@@ -131,7 +131,7 @@ namespace DerydocaEngine::Files::Serializers {
 		}
 		else if (type == "Skeleton")
 		{
-			Resources::SkeletonResource* skeletonResource = new Resources::SkeletonResource();
+			auto skeletonResource = std::make_shared<Resources::SkeletonResource>();
 			skeletonResource->setName(resourceNode["Name"].as<std::string>());
 			skeletonResource->setType(Resources::SkeletonResourceType);
 
@@ -139,7 +139,7 @@ namespace DerydocaEngine::Files::Serializers {
 		}
 		else if (type == "Animation")
 		{
-			Resources::AnimationResource* animationResource = new Resources::AnimationResource();
+			auto animationResource = std::make_shared<Resources::AnimationResource>();
 			animationResource->setName(resourceNode["Name"].as<std::string>());
 			animationResource->setType(Resources::AnimationResourceType);
 

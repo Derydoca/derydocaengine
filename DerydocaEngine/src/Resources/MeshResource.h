@@ -11,8 +11,10 @@ namespace DerydocaEngine::Resources
 	public:
 		MeshResource() :
 			m_hasSkeleton(false),
+			m_skeletonId(),
 			m_meshIndex(0),
-			m_meshName("")
+			m_meshName(),
+			m_flags()
 		{}
 
 		void setMeshIndex(unsigned int const& meshIndex) { m_meshIndex = meshIndex; }

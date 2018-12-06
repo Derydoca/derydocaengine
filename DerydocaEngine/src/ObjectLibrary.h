@@ -25,10 +25,10 @@ namespace DerydocaEngine
 
 		void initialize(std::string const& engineResourcesPath, std::string const& projectPath);
 		std::string getMetaExtension() const { return m_metaExtension; }
-		Resources::Resource* getResource(std::string const& uuidString);
-		Resources::Resource* getResource(boost::uuids::uuid const& uuid);
+		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
+		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
 		Components::GameComponent* getComponent(boost::uuids::uuid const& id);
-		Resources::Resource* getMetaFile(std::string const& sourceFilePath);
+		std::shared_ptr<Resources::Resource> getMetaFile(std::string const& sourceFilePath);
 		void updateMetaFilesDirectory(std::string const& directory);
 		void updateMetaFiles(std::string const& file);
 		void loadDirectory(std::string const& directory);
@@ -37,18 +37,25 @@ namespace DerydocaEngine
 		void registerComponent(boost::uuids::uuid const& id, Components::GameComponent* const& component);
 
 		template<class resourceType>
-		resourceType getResource(std::string const& uuidString)
+		std::shared_ptr<resourceType> getResource(std::string const& uuidString)
 		{
 			boost::uuids::string_generator gen;
 			boost::uuids::uuid uuid = gen(uuidString);
-			Resources::Resource* resource = getResource(uuid);
-			return static_cast<resourceType*>(resource);
+			std::shared_ptr<Resources::Resource> resource = getResource(uuid);
+			return std::static_pointer_cast<resourceType>(resource);
+		}
+
+		template<class resourceType>
+		std::shared_ptr<resourceType> getResource(const boost::uuids::uuid& uuid)
+		{
+			std::shared_ptr<Resources::Resource> resource = getResource(uuid);
+			return std::static_pointer_cast<resourceType>(resource);
 		}
 
 		template<class resourceObjectType>
 		std::shared_ptr<resourceObjectType> getResourceObjectPointer(boost::uuids::uuid const& id)
 		{
-			Resources::Resource* resource = getResource(id);
+			std::shared_ptr<Resources::Resource> resource = getResource(id);
 			if (resource == nullptr)
 			{
 				return nullptr;
@@ -63,10 +70,10 @@ namespace DerydocaEngine
 		ObjectLibrary(ObjectLibrary const&) {}
 
 		bool createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath);
-		void registerResource(Resources::Resource* const& resource);
+		void registerResource(std::shared_ptr<Resources::Resource> resource);
 
 		const std::string m_metaExtension = ".derymeta";
-		std::map<boost::uuids::uuid, Resources::Resource*> m_resources;
+		std::map<boost::uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
 		std::map<boost::uuids::uuid, Components::GameComponent*> m_sceneComponents;
 	};
 

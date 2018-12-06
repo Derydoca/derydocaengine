@@ -20,9 +20,9 @@ namespace DerydocaEngine::Files::Serializers {
 		return Files::FileType::LevelFileType;
 	}
 
-	Resources::Resource * LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	std::shared_ptr<Resources::Resource> LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		Resources::Resource* r = new Resources::Resource();
+		auto r = std::make_shared<Resources::Resource>();
 		r->setType(Resources::LevelResourceType);
 		return r;
 	}

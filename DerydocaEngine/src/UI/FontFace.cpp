@@ -159,7 +159,7 @@ namespace DerydocaEngine::UI
 
 		// Load the image
 		std::string imageUuid = font["image"].as<std::string>();
-		Resources::Resource* r = ObjectLibrary::getInstance().getResource(imageUuid);
+		auto r = ObjectLibrary::getInstance().getResource(imageUuid);
 		int imgw, imgh, imgch;
 		unsigned char* imageData = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
 		delete[] m_imageBuffer;
@@ -212,7 +212,7 @@ namespace DerydocaEngine::UI
 		std::string imageFileName = filePath + ".bmp";
 		stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
 		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
-		Resources::Resource* imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
+		auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 		font["image"] = boost::lexical_cast<std::string>(imageResource->getId());
 
 		// Save the character information

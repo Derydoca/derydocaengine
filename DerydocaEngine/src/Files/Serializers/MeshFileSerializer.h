@@ -14,7 +14,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 		YAML::Node generateResourceNodes(std::string const& filePath);
 		Files::FileType getFileType();
-		Resources::Resource* loadResourceFromMeta(YAML::Node const& resourceNode);
+		std::shared_ptr<Resources::Resource> loadResourceFromMeta(YAML::Node const& resourceNode);
 
 	private:
 		bool findMeshResourceNode(YAML::Node const& root, unsigned int const& index, aiString const& name, YAML::Node & resourceNode);

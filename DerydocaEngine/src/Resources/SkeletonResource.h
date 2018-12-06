@@ -7,7 +7,9 @@ namespace DerydocaEngine::Resources
 	struct SkeletonResource : public Resource
 	{
 	public:
-		SkeletonResource() {}
+		SkeletonResource() :
+			m_name()
+		{}
 
 		void setName(std::string const& animationName) { m_name = m_name; }
 		std::string getName() { return m_name; }

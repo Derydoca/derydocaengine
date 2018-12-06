@@ -134,7 +134,7 @@ namespace DerydocaEngine::Components
 		if (heightmapNode)
 		{
 			boost::uuids::uuid heightmapResourceId = heightmapNode.as<boost::uuids::uuid>();
-			Resources::Resource* heightmapResource = ObjectLibrary::getInstance().getResource(heightmapResourceId);
+			auto heightmapResource = ObjectLibrary::getInstance().getResource(heightmapResourceId);
 
 			float unitScale = node["unitScale"].as<float>();
 			float heightScale = node["heightScale"].as<float>();

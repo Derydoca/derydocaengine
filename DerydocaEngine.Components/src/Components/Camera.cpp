@@ -91,7 +91,7 @@ namespace DerydocaEngine::Components
 
 	void Camera::init()
 	{
-		Resources::MeshResource* quadResource = (Resources::MeshResource*)ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71");
+		auto quadResource = std::static_pointer_cast<Resources::MeshResource>(ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71"));
 		if (quadResource != nullptr)
 		{
 			m_quad = std::static_pointer_cast<Rendering::Mesh>(quadResource->getResourceObjectPointer());

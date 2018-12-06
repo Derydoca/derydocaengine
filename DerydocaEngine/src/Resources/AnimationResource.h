@@ -7,7 +7,9 @@ namespace DerydocaEngine::Resources
 	struct AnimationResource : public Resource
 	{
 	public:
-		AnimationResource() {}
+		AnimationResource() :
+			m_name()
+		{}
 
 		void setName(std::string const& animationName) { m_name = animationName; }
 		std::string getName() { return m_name; }

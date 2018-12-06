@@ -9,6 +9,7 @@ namespace DerydocaEngine::Rendering
 {
 
 	Material::Material() :
+		m_shader(),
 		m_texture(nullptr),
 		m_boolValues(),
 		m_intValues(),

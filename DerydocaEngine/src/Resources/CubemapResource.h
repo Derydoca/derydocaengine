@@ -7,7 +7,9 @@ namespace DerydocaEngine::Resources
 	struct CubemapResource : public Resource
 	{
 	public:
-		CubemapResource() {}
+		CubemapResource() :
+			m_slot(0)
+		{}
 		~CubemapResource() {}
 
 		void setSlot(unsigned int const& slot) { m_slot = slot; }

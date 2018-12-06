@@ -10,9 +10,9 @@
 
 namespace DerydocaEngine::Resources::Serializers
 {
-	std::shared_ptr<void> MeshResourceSerializer::deserializePointer(Resource * const & resource)
+	std::shared_ptr<void> MeshResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
-		MeshResource* mr = (MeshResource*)resource;
+		auto mr = std::static_pointer_cast<MeshResource>(resource);
 
 		std::shared_ptr<Animation::Skeleton> skeleton;
 		if (mr->hasSkeleton())

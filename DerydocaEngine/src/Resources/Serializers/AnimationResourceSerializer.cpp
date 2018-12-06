@@ -11,11 +11,11 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<void> AnimationResourceSerializer::deserializePointer(Resource * const & resource)
+	std::shared_ptr<void> AnimationResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
 		Assimp::Importer importer;
 
-		AnimationResource* ar = (AnimationResource*)resource;
+		auto ar = std::static_pointer_cast<AnimationResource>(resource);
 		const aiScene* scene = importer.ReadFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 		unsigned int animIndex = 0;

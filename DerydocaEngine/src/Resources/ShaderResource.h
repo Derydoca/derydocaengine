@@ -8,7 +8,11 @@ namespace DerydocaEngine::Resources
 	struct ShaderResource : public Resource
 	{
 	public:
-		ShaderResource() {}
+		ShaderResource() :
+			m_rawShaderName(),
+			m_fragmentShaderSource(),
+			m_geometryShaderSource()
+		{}
 		~ShaderResource() {}
 
 		void setRawShaderName(std::string const& rawShaderName) { m_rawShaderName = rawShaderName; }

@@ -14,12 +14,12 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	public:
 		virtual ~ResourceSerializer() {}
-		virtual std::shared_ptr<void> deserializePointer(Resource* const& resource) { return nullptr; }
+		virtual std::shared_ptr<void> deserializePointer(std::shared_ptr<Resource> resource) { return nullptr; }
 		virtual ResourceType getResourceType() = 0;
 
 	protected:
 		template<typename T>
-		inline std::shared_ptr<T> loadResourcePointer(YAML::Node const& node, std::string const& resourceName)
+		inline std::shared_ptr<T> loadResourcePointer(const YAML::Node& node, const std::string& resourceName)
 		{
 			YAML::Node resourceIdNode = node[resourceName];
 			if (!resourceIdNode)
@@ -28,7 +28,7 @@ namespace DerydocaEngine::Resources::Serializers
 				return std::make_shared<T>();
 			}
 			boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
-			Resource * resource = ObjectLibrary::getInstance().getResource(id);
+			std::shared_ptr<Resources::Resource> resource = ObjectLibrary::getInstance().getResource(id);
 			if (resource)
 			{
 				return std::static_pointer_cast<T>(resource->getResourceObjectPointer());
@@ -39,10 +39,10 @@ namespace DerydocaEngine::Resources::Serializers
 			}
 		}
 
-		std::string getSourceFilePath(YAML::Node const& node, std::string const& resourceName)
+		std::string getSourceFilePath(const YAML::Node& node, const std::string& resourceName)
 		{
 			boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
-			Resource * resource = ObjectLibrary::getInstance().getResource(id);
+			auto resource = ObjectLibrary::getInstance().getResource(id);
 			if (!resource)
 			{
 				std::cout << "Unable to get the source file path of '" << resourceName << "' from the asset with ID of '" << boost::uuids::to_string(id) << "'.\n";

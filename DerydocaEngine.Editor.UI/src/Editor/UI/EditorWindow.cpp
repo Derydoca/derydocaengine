@@ -54,9 +54,9 @@ namespace DerydocaEngine::Editor::UI
 		{
 			// If a skybox is defined, build the skybox material and assign it to the editor camera
 			auto skyboxShader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\cubemapShader");
-			Resources::CubemapResource* cubemapResource = (Resources::CubemapResource*)ObjectLibrary::getInstance().getResource(settings->getSkyboxId());
+			auto cubemapResource = std::static_pointer_cast<Resources::CubemapResource>(ObjectLibrary::getInstance().getResource(settings->getSkyboxId()));
 			auto skyboxTexture = std::static_pointer_cast<Rendering::Texture>(cubemapResource->getResourceObjectPointer());
-			std::shared_ptr<Rendering::Material> skyboxMaterial = std::make_shared<Rendering::Material>();
+			auto skyboxMaterial = std::make_shared<Rendering::Material>();
 			skyboxMaterial->setShader(skyboxShader);
 			skyboxMaterial->setTextureSlot(0, skyboxTexture);
 			editorCamera->setSkybox(skyboxMaterial);
@@ -78,7 +78,7 @@ namespace DerydocaEngine::Editor::UI
 		Scenes::SerializedScene* scene = nullptr;
 		if (!levelIdentifier.empty())
 		{
-			Resources::Resource* levelResource = ObjectLibrary::getInstance().getResource(levelIdentifier);
+			auto levelResource = ObjectLibrary::getInstance().getResource(levelIdentifier);
 
 			if (levelResource == nullptr)
 			{

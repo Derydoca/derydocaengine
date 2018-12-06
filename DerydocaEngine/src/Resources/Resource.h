@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Resources
 {
 
-	struct Resource
+	struct Resource : public std::enable_shared_from_this<Resource>
 	{
 	public:
 		Resource();
@@ -26,7 +26,7 @@ namespace DerydocaEngine::Resources
 		ResourceType m_type;
 		std::string m_sourceFilePath;
 		std::string m_metaFilePath;
-		void* m_resourceObject = 0;
+		void* m_resourceObject;
 		std::shared_ptr<void> m_resourceObjectPointer;
 	};
 

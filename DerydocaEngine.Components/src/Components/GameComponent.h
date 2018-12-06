@@ -109,15 +109,16 @@ namespace DerydocaEngine::Components
 
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
 		}
-
+/*
 		template<typename T>
 		inline T getResource(YAML::Node const& node, std::string const& resourceName)
 		{
-			Resources::Resource* resource = getResource(node, resourceName);
+			auto resource = getResource(node, resourceName);
 			return static_cast<T>(resource);
 		}
+*/
 
-		inline Resources::Resource* getResource(YAML::Node const& node, std::string const& resourceName)
+		inline std::shared_ptr<Resources::Resource> getResource(YAML::Node const& node, std::string const& resourceName)
 		{
 			YAML::Node resourceNode = node[resourceName];
 
@@ -127,8 +128,15 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
-			Resources::Resource * resource = ObjectLibrary::getInstance().getResource(id);
+			auto resource = ObjectLibrary::getInstance().getResource(id);
 			return resource;
+		}
+
+		template<typename T>
+		inline std::shared_ptr<T> getResource(YAML::Node const& node, std::string const& resourceName)
+		{
+			auto r = getResource(node, resourceName);
+			return std::static_pointer_cast<T>(r);
 		}
 
 		template<typename T>
