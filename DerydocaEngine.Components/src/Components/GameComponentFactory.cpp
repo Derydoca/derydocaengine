@@ -14,7 +14,7 @@ namespace DerydocaEngine::Components
 		return false;
 	}
 
-	GameComponent * GameComponentFactory::generate(const std::string & name)
+	std::shared_ptr<GameComponent> GameComponentFactory::generate(const std::string & name)
 	{
 		auto it = s_methods.find(name);
 		if (it != s_methods.end()) {

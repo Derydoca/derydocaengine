@@ -13,6 +13,9 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(SpriteRenderer);
 
+		SpriteRenderer();
+		~SpriteRenderer();
+
 		void postInit();
 		void deserialize(YAML::Node const& compNode);
 

@@ -21,18 +21,19 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(MaterialRefresher);
-		MaterialRefresher() {}
-		~MaterialRefresher() {}
+		MaterialRefresher();
+		~MaterialRefresher();
 
 		void init();
 		void update(float const& deltaTime);
 		void refreshMaterial();
 	private:
 		bool isShaderSourceUpdated();
+
 		int m_rendererType = 0;
-		MeshRenderer* m_meshRenderer;
-		SkinnedMeshRenderer* m_skinnedMeshRenderer;
-		Ext::TessellatedMeshRenderer* m_tessMeshRenderer;
+		std::shared_ptr<MeshRenderer> m_meshRenderer;
+		std::shared_ptr<SkinnedMeshRenderer> m_skinnedMeshRenderer;
+		std::shared_ptr<Ext::TessellatedMeshRenderer> m_tessMeshRenderer;
 		bool m_vertexShaderExists = false;
 		bool m_fragmentShaderExists = false;
 		bool m_geometryShaderExists = false;

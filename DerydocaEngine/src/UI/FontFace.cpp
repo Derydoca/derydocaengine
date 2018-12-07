@@ -18,12 +18,12 @@ namespace DerydocaEngine::UI
 		m_fontSize(16.0f),
 		m_texture(std::make_shared<Rendering::Texture>()),
 		m_charImages(),
-		m_imageBuffer(),
+		m_imageBuffer(nullptr),
 		m_imageBufferSize(0, 0),
 		m_textureDirty(false),
 		m_lineHeight(50.0f),
-		m_name(""),
-		m_style("")
+		m_name(),
+		m_style()
 	{
 	}
 

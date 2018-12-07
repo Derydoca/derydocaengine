@@ -9,13 +9,25 @@
 namespace DerydocaEngine::Components
 {
 
-	Terrain::Terrain()
+	Terrain::Terrain() :
+		m_width(1),
+		m_depth(1),
+		m_unitScale(0.1f),
+		m_heightScale(0.1f),
+		m_heightData(nullptr),
+		m_mesh(),
+		m_meshRenderer()
 	{
-		m_unitScale = 0.1f;
-		m_heightScale = 0.1f;
 	}
 
-	Terrain::Terrain(const std::string & fileName, float const& unitScale, float const& heightScale)
+	Terrain::Terrain(const std::string & fileName, float const& unitScale, float const& heightScale) :
+		m_width(1),
+		m_depth(1),
+		m_unitScale(unitScale),
+		m_heightScale(heightScale),
+		m_heightData(nullptr),
+		m_mesh(),
+		m_meshRenderer()
 	{
 		loadTerrainFromTexture(fileName, unitScale, heightScale);
 	}
@@ -24,7 +36,10 @@ namespace DerydocaEngine::Components
 		m_width(width),
 		m_depth(depth),
 		m_unitScale(unitScale),
-		m_heightScale(heightScale)
+		m_heightScale(heightScale),
+		m_heightData(nullptr),
+		m_mesh(),
+		m_meshRenderer()
 	{
 		// Initialize the height map
 		float tHeight = 0.0f;
@@ -47,13 +62,12 @@ namespace DerydocaEngine::Components
 		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 
-		m_meshRenderer = new MeshRenderer(m_mesh, mat);
+		m_meshRenderer = std::make_shared<MeshRenderer>(m_mesh, mat);
 	}
 
 	Terrain::~Terrain()
 	{
 		delete m_heightData;
-		delete m_meshRenderer;
 	}
 
 	void Terrain::draw()
@@ -177,7 +191,7 @@ namespace DerydocaEngine::Components
 		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 
-		m_meshRenderer = new MeshRenderer(m_mesh, mat);
+		m_meshRenderer = std::make_shared<MeshRenderer>(m_mesh, mat);
 	}
 
 }

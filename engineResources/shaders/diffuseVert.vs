@@ -21,7 +21,7 @@ vec3 diffuse(int lightIndex)
     vec3 tnorm = normalize(NormalMatrix * VertexNormal);
     vec4 eyeCoords = ModelViewMatrix * vec4(VertexPosition, 1.0);
     vec3 s = normalize(vec3(Lights[lightIndex].Position - eyeCoords));
-    return Lights[lightIndex].Ld * Kd * max(dot(s, tnorm), 0.0);
+    return (Lights[lightIndex].Ld * Kd * max(dot(s, tnorm), 0.0)).xyz;
 }
 
 void main()

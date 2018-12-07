@@ -17,11 +17,6 @@ namespace DerydocaEngine
 
 	GameObject::~GameObject()
 	{
-		// Delete all of the components attached to this object
-		for (auto it = m_components.begin(); it != m_components.end(); ++it)
-		{
-			delete(*it);
-		}
 		m_components.clear();
 
 		m_children.clear();
@@ -33,7 +28,7 @@ namespace DerydocaEngine
 		gameObject->m_parent = shared_from_this();
 	}
 
-	void GameObject::addComponent(Components::GameComponent* component)
+	void GameObject::addComponent(std::shared_ptr<Components::GameComponent> component)
 	{
 		m_components.push_back(component);
 		component->setGameObject(shared_from_this());
@@ -41,7 +36,7 @@ namespace DerydocaEngine
 
 	void GameObject::init()
 	{
-		for each (Components::GameComponent* c in m_components)
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->init();
 		}
@@ -53,7 +48,7 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::preRender() {
-		for each (Components::GameComponent* c in m_components)
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->preRender();
 		}
@@ -66,7 +61,7 @@ namespace DerydocaEngine
 
 	void GameObject::postInit()
 	{
-		for each (Components::GameComponent* c in m_components)
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->postInit();
 		}
@@ -78,7 +73,7 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::postRender() {
-		for each (Components::GameComponent* c in m_components)
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->postRender();
 		}
@@ -92,7 +87,7 @@ namespace DerydocaEngine
 	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const {
 		matrixStack->push(m_transform->getModel());
 
-		for each (Components::GameComponent* c in m_components)
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->render(matrixStack);
 		}
@@ -114,7 +109,7 @@ namespace DerydocaEngine
 	{
 		matrixStack->push(m_transform->getModel());
 
-		for each (Components::GameComponent* c in m_components)
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
@@ -128,7 +123,7 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::update(const float& deltaTime) {
-		for each (Components::GameComponent* c in m_components)
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->update(deltaTime);
 		}

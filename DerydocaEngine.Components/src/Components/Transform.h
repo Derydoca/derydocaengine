@@ -18,21 +18,25 @@ namespace DerydocaEngine::Components
 
 		Transform() :
 			m_pos(glm::vec3()),
+			m_scale(glm::vec3(1, 1, 1)),
 			m_quat(glm::fquat()),
-			m_scale(glm::vec3(1, 1, 1))
+			m_gameObject()
 		{
 		}
 
 		Transform(glm::vec3 const& pos) :
 			m_pos(pos),
+			m_scale(glm::vec3(1, 1, 1)),
 			m_quat(glm::fquat()),
-			m_scale(glm::vec3(1, 1, 1))
+			m_gameObject()
 		{
 		}
 
 		Transform(glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) :
 			m_pos(pos),
-			m_scale(scale)
+			m_scale(scale),
+			m_quat(),
+			m_gameObject()
 		{
 			setEulerAngles(rot);
 		}
@@ -40,7 +44,8 @@ namespace DerydocaEngine::Components
 		Transform(glm::vec3 const& pos, glm::fquat const& quat, glm::vec3 const& scale) :
 			m_pos(pos),
 			m_quat(quat),
-			m_scale(scale)
+			m_scale(scale),
+			m_gameObject()
 		{
 		}
 

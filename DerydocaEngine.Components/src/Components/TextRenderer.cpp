@@ -10,6 +10,25 @@ namespace DerydocaEngine::Components
 	const int CARRIAGE_RETURN_CHAR = 13;
 	const int DEL_CHAR = 127;
 
+	TextRenderer::TextRenderer() :
+		m_material(),
+		m_fontFace(),
+		m_text(),
+		m_bounds(),
+		m_textColor(1.0f, 1.0f, 1.0f, 1.0f),
+		m_overflowWrap(OverflowWrap::Normal),
+		m_horizontalAlign(TextAlign::Start),
+		m_verticalAlign(TextAlign::Start),
+		m_lines(),
+		m_filteredText(nullptr),
+		m_textDirty(true)
+	{
+	}
+
+	TextRenderer::~TextRenderer()
+	{
+	}
+
 	void TextRenderer::postInit()
 	{
 		if (m_fontFace)
@@ -67,13 +86,13 @@ namespace DerydocaEngine::Components
 				fontSize = fontSizeNode.as<float>();
 			}
 
-			m_fontFace = new UI::FontFace();
+			m_fontFace = std::make_shared<UI::FontFace>();
 			m_fontFace->setFontSize(fontSize);
 			m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
 		}
 		else if (fontResource->getType() == Resources::ResourceType::RasterFontResourceType)
 		{
-			m_fontFace = new UI::FontFace();
+			m_fontFace = std::make_shared<UI::FontFace>();
 			m_fontFace->loadFromSerializedFile(fontResource->getSourceFilePath());
 		}
 
@@ -298,7 +317,13 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	std::vector<LineProperties*> TextRenderer::processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, UI::FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText)
+	std::vector<LineProperties*> TextRenderer::processTextToLines(
+		std::string const& text,
+		OverflowWrap const& overflowWrap,
+		std::shared_ptr<UI::FontFace> fontFace,
+		float const& horizontalBoundSize,
+		char*& filteredText
+	)
 	{
 		// Create an array to store the filtered text. This will never excede the length of the source text.
 		filteredText = new char[text.length()];

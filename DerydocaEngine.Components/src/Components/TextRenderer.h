@@ -60,10 +60,13 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(TextRenderer);
 
+		TextRenderer();
+		~TextRenderer();
+
 		virtual void postInit();
 		virtual void deserialize(YAML::Node const& compNode);
 
-		void setText(std::string const& text)
+		void setText(const std::string& text)
 		{
 			m_text = text;
 			m_lines = processTextToLines(m_text, m_overflowWrap, m_fontFace, m_bounds.x, m_filteredText);
@@ -115,8 +118,8 @@ namespace DerydocaEngine::Components
 		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (Rendering::MeshComponents)(Rendering::MeshComponents::Colors | Rendering::MeshComponents::Indices);
 
 		std::shared_ptr<Rendering::Material> m_material;
-		UI::FontFace* m_fontFace;
-		std::string m_text = "Text";
+		std::shared_ptr<UI::FontFace> m_fontFace;
+		std::string m_text;
 		glm::vec2 m_bounds;
 		Color m_textColor;
 		OverflowWrap m_overflowWrap;
@@ -124,11 +127,17 @@ namespace DerydocaEngine::Components
 		TextAlign m_verticalAlign;
 		std::vector<LineProperties*> m_lines;
 		char* m_filteredText;
-		bool m_textDirty = true;
+		bool m_textDirty;
 
 		static void calculateVerticalAlignmentProperties(TextAlign const& alignment, int const& numberOfLines, float const& verticalBoundSize, float const& fontLineHeight, float* const& penY, float* const& newLineHeight);
 		static void calculateHorizontalAlignmentProperties(TextAlign const& alignment, float const& horizontalBoundSize, float const& lineWidth, int const& numChars, float const& lineStartAdjust, float* const& penX, float* const& extraCharAdvance);
-		static std::vector<LineProperties*> processTextToLines(std::string const& text, OverflowWrap const& overflowWrap, UI::FontFace* const& fontFace, float const& horizontalBoundSize, char*& filteredText);
+		static std::vector<LineProperties*> processTextToLines(
+			std::string const& text,
+			OverflowWrap const& overflowWrap,
+			std::shared_ptr<UI::FontFace> fontFace,
+			float const& horizontalBoundSize,
+			char*& filteredText
+		);
 	};
 
 }

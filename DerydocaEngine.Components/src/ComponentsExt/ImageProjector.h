@@ -29,7 +29,7 @@ namespace DerydocaEngine::Ext
 		float m_zNear;
 		float m_zFar;
 		std::shared_ptr<Rendering::Texture> m_projectorTexture;
-		std::vector<Components::MeshRenderer*> m_meshRenderers;
+		std::vector<std::shared_ptr<Components::MeshRenderer>> m_meshRenderers;
 
 		void updateProjectionMatrix();
 		void setProjectionGraphic();

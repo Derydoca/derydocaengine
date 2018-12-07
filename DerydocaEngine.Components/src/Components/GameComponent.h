@@ -37,13 +37,15 @@ namespace DerydocaEngine::Components
 	bool SelfRegister<T>::s_isRegistered = DerydocaEngine::Components::GameComponentFactory::getInstance().registerGenerator(T::getClassName(), T::generateInstance);
 
 #define GENINSTANCE(TYPE) \
-	static GameComponent* generateInstance() { return new TYPE(); }\
+	static std::shared_ptr<Components::GameComponent> generateInstance() { return std::static_pointer_cast<Components::GameComponent>(std::make_shared<TYPE>()); }\
 	static std::string getClassName() { return #TYPE; }\
 	void __forceRegistration() { s_isRegistered; };
 
 	class GameComponent {
 	public:
-		GameComponent() {}
+		GameComponent() :
+			m_gameObject()
+		{}
 		virtual ~GameComponent() {}
 		virtual void init() {}
 		virtual void postInit() {}
@@ -61,7 +63,7 @@ namespace DerydocaEngine::Components
 		virtual void deserialize(YAML::Node const& compNode) { };
 
 		template<typename T>
-		inline T* getComponent()
+		inline std::shared_ptr<T> getComponent()
 		{
 			// Get the game object that this component belongs to
 			std::shared_ptr<GameObject> gameObject = getGameObject();
@@ -71,12 +73,12 @@ namespace DerydocaEngine::Components
 			}
 
 			// Iterate through all of the components on this game object
-			std::vector<GameComponent*> gameObjectComponents = getGameObject()->getComponents();
-			for (std::vector<GameComponent*>::iterator it = gameObjectComponents.begin(); it != gameObjectComponents.end(); ++it)
+			std::vector<std::shared_ptr<Components::GameComponent>>& gameObjectComponents = getGameObject()->getComponents();
+			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = gameObjectComponents.begin(); it != gameObjectComponents.end(); ++it)
 			{
 				// Attempt to cast this object to the type we want
-				GameComponent* component = *it;
-				T* attemptedCast = dynamic_cast<T*>(component);
+				std::shared_ptr<Components::GameComponent> component = *it;
+				auto attemptedCast = std::dynamic_pointer_cast<T>(component);
 
 				// If the cast worked, return the component
 				if (attemptedCast != nullptr)
@@ -140,9 +142,9 @@ namespace DerydocaEngine::Components
 		}
 
 		template<typename T>
-		inline std::vector<T> loadComponents(YAML::Node const& node, std::string const& componentCollectionName)
+		inline std::vector<std::shared_ptr<T>> loadComponents(YAML::Node const& node, std::string const& componentCollectionName)
 		{
-			std::vector<T> objectArr = std::vector<T>();
+			std::vector<std::shared_ptr<T>> objectArr = std::vector<std::shared_ptr<T>>();
 
 			// Get the collection node
 			YAML::Node componentIdCollectionNode = node[componentCollectionName];
@@ -155,11 +157,11 @@ namespace DerydocaEngine::Components
 			for (size_t componentIndex = 0; componentIndex < componentIdCollectionNode.size(); componentIndex++)
 			{
 				boost::uuids::uuid id = componentIdCollectionNode[componentIndex].as<boost::uuids::uuid>();
-				GameComponent* component = ObjectLibrary::getInstance().getComponent(id);
+				auto component = ObjectLibrary::getInstance().getComponent(id);
 				if (component)
 				{
 					// Add it to the array if we found one
-					objectArr.push_back((T)component);
+					objectArr.push_back(std::static_pointer_cast<T>(component));
 				}
 				else
 				{

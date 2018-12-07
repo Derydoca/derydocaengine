@@ -26,11 +26,11 @@ namespace DerydocaEngine
 
 		void addChild(const std::shared_ptr<GameObject> gameObject);
 
-		void addComponent(Components::GameComponent* component);
+		void addComponent(std::shared_ptr<Components::GameComponent> component);
 
 		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
 
-		std::vector<Components::GameComponent*> getComponents() const { return m_components; }
+		std::vector<std::shared_ptr<Components::GameComponent>>& getComponents() { return m_components; }
 
 		std::shared_ptr<GameObject> getParent() const { return m_parent; }
 
@@ -64,7 +64,7 @@ namespace DerydocaEngine
 		std::shared_ptr<Components::Transform> m_transform;
 		std::shared_ptr<GameObject> m_parent;
 		std::vector<std::shared_ptr<GameObject>> m_children;
-		std::vector<Components::GameComponent*> m_components;
+		std::vector<std::shared_ptr<Components::GameComponent>> m_components;
 	};
 
 }

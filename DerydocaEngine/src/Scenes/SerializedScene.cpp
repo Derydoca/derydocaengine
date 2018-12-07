@@ -118,7 +118,7 @@ namespace DerydocaEngine::Scenes
 				std::string compType = compNode["Type"].as<std::string>();
 
 				// Create a game component based on the component type provided
-				Components::GameComponent* component = Components::GameComponentFactory::getInstance().generate(compType);
+				auto component = Components::GameComponentFactory::getInstance().generate(compType);
 
 				// If no component was created, the component type is not supported so we should continue
 				if (component == nullptr)

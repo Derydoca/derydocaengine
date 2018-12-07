@@ -7,6 +7,18 @@
 namespace DerydocaEngine::Components
 {
 
+	SpriteRenderer::SpriteRenderer() :
+		m_color(1.0f, 1.0f, 1.0f, 1.0f),
+		m_spriteSheet(),
+		m_sprite(nullptr),
+		m_size(0.0f, 0.0f)
+	{
+	}
+
+	SpriteRenderer::~SpriteRenderer()
+	{
+	}
+
 	void SpriteRenderer::postInit()
 	{
 		if (m_spriteSheet)

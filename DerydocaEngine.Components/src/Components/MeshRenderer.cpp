@@ -15,13 +15,17 @@
 namespace DerydocaEngine::Components
 {
 
-	MeshRenderer::MeshRenderer()
+	MeshRenderer::MeshRenderer() :
+		m_mesh(),
+		m_material(),
+		m_meshRendererCamera()
 	{
 	}
 
-	MeshRenderer::MeshRenderer(std::shared_ptr<Rendering::Mesh> const& mesh, std::shared_ptr<Rendering::Material> const& material) :
+	MeshRenderer::MeshRenderer(std::shared_ptr<Rendering::Mesh> mesh, std::shared_ptr<Rendering::Material> material) :
 		m_mesh(mesh),
-		m_material(material)
+		m_material(material),
+		m_meshRendererCamera()
 	{
 	}
 
@@ -49,7 +53,7 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
-			m_meshRendererCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
+			m_meshRendererCamera = ObjectLibrary::getInstance().getComponent<Camera>(renderTextureCameraId);
 			material->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
 		}
 	}

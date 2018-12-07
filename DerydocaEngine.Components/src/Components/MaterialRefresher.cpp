@@ -10,6 +10,33 @@
 namespace DerydocaEngine::Components
 {
 
+	MaterialRefresher::MaterialRefresher() :
+		m_rendererType(0),
+		m_meshRenderer(),
+		m_skinnedMeshRenderer(),
+		m_tessMeshRenderer(),
+		m_vertexShaderExists(false),
+		m_fragmentShaderExists(false),
+		m_geometryShaderExists(false),
+		m_tessEvalShaderExists(false),
+		m_shaderLoadPath(),
+		m_vertexShaderPath(),
+		m_fragmentShaderPath(),
+		m_geometryShaderPath(),
+		m_tessEvalShaderPath(),
+		m_tessControlShaderPath(),
+		m_vertexShaderModifiedTime(),
+		m_fragmentShaderModifiedTime(),
+		m_geometryShaderModifiedTime(),
+		m_tessEvalShaderModifiedTime(),
+		m_tessControlShaderModifiedTime()
+	{
+	}
+
+	MaterialRefresher::~MaterialRefresher()
+	{
+	}
+
 	bool getLastModifiedTime(std::string const& filePath, std::time_t &time)
 	{
 		if (!boost::filesystem::exists(filePath))
@@ -83,7 +110,7 @@ namespace DerydocaEngine::Components
 
 		printf("Unloading the previous material.\n");
 		std::shared_ptr<Rendering::Material> mat = nullptr;
-		switch(m_rendererType)
+		switch (m_rendererType)
 		{
 		case 0:
 			mat = m_meshRenderer->getMaterial();

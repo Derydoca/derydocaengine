@@ -5,7 +5,7 @@
 
 namespace DerydocaEngine::Components {
 
-	typedef GameComponent* (*gameComponentInstanceGenerator)();
+	typedef std::shared_ptr<Components::GameComponent> (*gameComponentInstanceGenerator)();
 
 	class GameComponentFactory
 	{
@@ -16,7 +16,7 @@ namespace DerydocaEngine::Components {
 		}
 
 		bool registerGenerator(const std::string& name, const gameComponentInstanceGenerator& funcCreate);
-		GameComponent* generate(const std::string& name);
+		std::shared_ptr<GameComponent> generate(const std::string& name);
 
 	private:
 		GameComponentFactory();

@@ -40,14 +40,14 @@ namespace DerydocaEngine::Editor::UI
 #pragma region Editor specific game objects
 
 		// Keep this here as a simple way to grab screenshots of the engine
-		Components::ScreenshotUtil* screenshotUtil = new Components::ScreenshotUtil(display, Input::InputManager::getInstance().getKeyboard());
+		auto screenshotUtil = std::make_shared<Components::ScreenshotUtil>(display, Input::InputManager::getInstance().getKeyboard());
 		m_sceneRoot->addComponent(screenshotUtil);
 
 		// This is the editor camera
 		std::shared_ptr<GameObject> editorCameraObject = std::make_shared<GameObject>("__editorCamera");
 		std::shared_ptr<Components::Transform> editorCameraTransform = editorCameraObject->getTransform();
 		editorCameraTransform->setPos(settings->getCamPos());
-		Components::Camera* editorCamera = new Components::Camera(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
+		auto editorCamera = std::make_shared<Components::Camera>(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
 		editorCamera->setDisplay(display);
 		editorCamera->setRenderingMode(settings->getCamRenderMode());
 		if (settings->isSkyboxDefined())
@@ -69,7 +69,7 @@ namespace DerydocaEngine::Editor::UI
 			editorCamera->setClearColor(Color(0.5, 0, 0));
 		}
 		editorCameraObject->addComponent(editorCamera);
-		editorCameraObject->addComponent(new Components::WasdMover(Input::InputManager::getInstance().getKeyboard(), Input::InputManager::getInstance().getMouse()));
+		editorCameraObject->addComponent(std::make_shared<Components::WasdMover>(Input::InputManager::getInstance().getKeyboard(), Input::InputManager::getInstance().getMouse()));
 		m_sceneRoot->addChild(editorCameraObject);
 
 #pragma endregion

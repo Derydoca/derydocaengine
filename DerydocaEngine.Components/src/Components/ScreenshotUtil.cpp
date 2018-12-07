@@ -24,13 +24,15 @@ namespace DerydocaEngine::Components
 		return wss.str();
 	}
 
-	ScreenshotUtil::ScreenshotUtil()
+	ScreenshotUtil::ScreenshotUtil() :
+		m_keyboard(),
+		m_display()
 	{
 	}
 
 	ScreenshotUtil::ScreenshotUtil(Rendering::Display* const& display, Input::Keyboard* const& keyboard) :
-		m_display(display),
-		m_keyboard(keyboard)
+		m_keyboard(keyboard),
+		m_display(display)
 	{
 	}
 

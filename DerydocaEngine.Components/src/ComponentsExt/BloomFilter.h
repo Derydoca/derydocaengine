@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class BloomFilter : Components::GameComponent, Components::SelfRegister<BloomFilter>
+	class BloomFilter : public Components::GameComponent, Components::SelfRegister<BloomFilter>
 	{
 	public:
 		GENINSTANCE(BloomFilter);
@@ -19,7 +19,7 @@ namespace DerydocaEngine::Ext
 		virtual void update(float const& deltaTime);
 	private:
 		float m_lumThresh;
-		Components::Camera* m_postProcessCamera;
+		std::shared_ptr<Components::Camera> m_postProcessCamera;
 		float m_weights[10];
 		std::shared_ptr<Rendering::RenderTexture> m_blurTex;
 		std::shared_ptr<Rendering::RenderTexture> m_blurTex2;

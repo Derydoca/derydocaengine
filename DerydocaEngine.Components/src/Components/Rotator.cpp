@@ -4,11 +4,14 @@
 namespace DerydocaEngine::Components
 {
 
-	Rotator::Rotator()
+	Rotator::Rotator() :
+		m_rotVal(0.0f),
+		m_rotSpeed(1.0f)
 	{
 	}
 
 	Rotator::Rotator(float rotationSpeed) :
+		m_rotVal(0.0f),
 		m_rotSpeed(rotationSpeed)
 	{
 	}

@@ -9,13 +9,13 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(FrameStats);
-		FrameStats() {}
-		~FrameStats() {}
+		FrameStats();
+		~FrameStats();
 
 		virtual void postInit();
 		virtual void update(float const& deltaTime);
 	private:
-		TextRenderer * m_textRenderer;
+		std::shared_ptr<TextRenderer> m_textRenderer;
 	};
 
 }

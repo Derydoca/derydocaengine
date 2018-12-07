@@ -10,7 +10,7 @@ Scene:
       Components:
         - Type: MeshRenderer
           Properties:
-            Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
+            Material: f6e7235c-ec43-48f0-b189-d89b40f10089
             Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
         - Type: Rotator
           Properties:
@@ -27,7 +27,7 @@ Scene:
       Components:
         - Type: MeshRenderer
           Properties:
-            Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
+            Material: f6e7235c-ec43-48f0-b189-d89b40f10089
             Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
         - Type: Rotator
           Properties:
@@ -44,43 +44,43 @@ Scene:
       Components:
         - Type: MeshRenderer
           Properties:
-            Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
+            Material: f6e7235c-ec43-48f0-b189-d89b40f10089
             Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
         - Type: Rotator
           Properties:
             rotationSpeed: 100.0
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31ebaaa
-    Properties:
-      Name: Render Texture Camera
-      Transform:
-        Position: [0, 0.1, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - ID: aaaf98cc-9421-4226-8a26-680ad31ebaaa
-          Type: Camera
-          Properties:
-            fov: 70.0
-            zNear: 0.01
-            zFar: 1000.0
-            RenderTexture:
-              Width: 512
-              Height: 512
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31ebbbb
-    Properties:
-      Name: Render Texture Target Plane
-      Transform:
-        Position: [0, 4, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            RenderTextureSource: aaaf98cc-9421-4226-8a26-680ad31ebaaa
-            Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
-            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
+  # - Type: GameObject
+  #   ID: a2ff98cc-9421-4226-8a26-680ad31ebaaa
+  #   Properties:
+  #     Name: Render Texture Camera
+  #     Transform:
+  #       Position: [0, 0.1, 0]
+  #       Rotation: [0, 0, 0, 1]
+  #       Scale: [1, 1, 1]
+  #     Components:
+  #       - ID: aaaf98cc-9421-4226-8a26-680ad31ebaaa
+  #         Type: Camera
+  #         Properties:
+  #           fov: 70.0
+  #           zNear: 0.01
+  #           zFar: 1000.0
+  #           RenderTexture:
+  #             Width: 512
+  #             Height: 512
+  # - Type: GameObject
+  #   ID: a2ff98cc-9421-4226-8a26-680ad31ebbbb
+  #   Properties:
+  #     Name: Render Texture Target Plane
+  #     Transform:
+  #       Position: [0, 4, 0]
+  #       Rotation: [0, 0, 0, 1]
+  #       Scale: [1, 1, 1]
+  #     Components:
+  #       - Type: MeshRenderer
+  #         Properties:
+  #           RenderTextureSource: aaaf98cc-9421-4226-8a26-680ad31ebaaa
+  #           Material: 72ff98cc-9421-4226-8a26-680ad31eb6aa
+  #           Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6dd
     Properties:

@@ -48,7 +48,7 @@ namespace DerydocaEngine
 		}
 	}
 
-	Components::GameComponent * ObjectLibrary::getComponent(boost::uuids::uuid const& id)
+	std::shared_ptr<Components::GameComponent> ObjectLibrary::getComponent(boost::uuids::uuid const& id)
 	{
 		auto search = m_sceneComponents.find(id);
 		if (search != m_sceneComponents.end())
@@ -154,9 +154,9 @@ namespace DerydocaEngine
 		}
 	}
 
-	void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, Components::GameComponent * const& component)
+	void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, std::shared_ptr<Components::GameComponent> component)
 	{
-		m_sceneComponents.insert(std::pair<boost::uuids::uuid, Components::GameComponent*>(id, component));
+		m_sceneComponents.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Components::GameComponent>>(id, component));
 	}
 
 	void ObjectLibrary::loadDirectory(std::string const& directory)

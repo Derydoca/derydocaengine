@@ -11,7 +11,8 @@ namespace DerydocaEngine::Components
 	class RendererComponent : public GameComponent
 	{
 	public:
-		virtual ~RendererComponent() {}
+		RendererComponent();
+		virtual ~RendererComponent();
 		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
 		void setMaterial(std::shared_ptr<Rendering::Material> material) { m_material = material; }
 	protected:
@@ -40,7 +41,7 @@ namespace DerydocaEngine::Components
 		virtual std::vector<glm::vec3> generateNormals() { return std::vector<glm::vec3>(); }
 
 	private:
-		Rendering::Mesh * m_mesh;
+		std::unique_ptr<Rendering::Mesh> m_mesh;
 		std::shared_ptr<Rendering::Material> m_material;
 		Rendering::MeshComponents m_dirtyComponents;
 		std::vector<glm::vec3> m_vertices;

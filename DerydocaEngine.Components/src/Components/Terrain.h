@@ -39,7 +39,7 @@ namespace DerydocaEngine::Components
 		float m_heightScale;
 		float** m_heightData;
 		std::shared_ptr<Rendering::Mesh> m_mesh;
-		MeshRenderer* m_meshRenderer;
+		std::shared_ptr<MeshRenderer> m_meshRenderer;
 
 		void loadTerrainFromTexture(const std::string & fileName, float const& unitScale, float const& heightScale);
 	};

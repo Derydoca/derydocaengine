@@ -32,7 +32,7 @@ namespace DerydocaEngine::Components
 		);
 		virtual void update(float const& deltaTime) { m_time += deltaTime; }
 		std::shared_ptr<Rendering::Material> getMaterial() { return m_material; }
-		Camera* getSkinnedMeshRendererCamera() { return m_SkinnedMeshRendererCamera; }
+		std::shared_ptr<Camera> getSkinnedMeshRendererCamera() { return m_SkinnedMeshRendererCamera; }
 
 		void deserialize(YAML::Node const& compNode);
 
@@ -41,9 +41,9 @@ namespace DerydocaEngine::Components
 	private:
 		std::shared_ptr<Rendering::Mesh> m_mesh;
 		std::shared_ptr<Rendering::Material> m_material;
-		Camera* m_SkinnedMeshRendererCamera;
+		std::shared_ptr<Camera> m_SkinnedMeshRendererCamera;
 		std::shared_ptr<Animation::AnimationData> m_animation;
-		float m_time = 0.0f;
+		float m_time;
 		std::vector<glm::mat4> m_boneMatrices;
 	};
 

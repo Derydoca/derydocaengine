@@ -27,14 +27,21 @@ namespace DerydocaEngine
 		std::string getMetaExtension() const { return m_metaExtension; }
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
-		Components::GameComponent* getComponent(boost::uuids::uuid const& id);
+		std::shared_ptr<Components::GameComponent> getComponent(boost::uuids::uuid const& id);
 		std::shared_ptr<Resources::Resource> getMetaFile(std::string const& sourceFilePath);
 		void updateMetaFilesDirectory(std::string const& directory);
 		void updateMetaFiles(std::string const& file);
 		void loadDirectory(std::string const& directory);
 		void loadFile(std::string const& sourceFilePath);
 
-		void registerComponent(boost::uuids::uuid const& id, Components::GameComponent* const& component);
+		void registerComponent(boost::uuids::uuid const& id, std::shared_ptr<Components::GameComponent> component);
+
+		template<class GameComponentClass>
+		std::shared_ptr<GameComponentClass> getComponent(boost::uuids::uuid const& id)
+		{
+			auto component = getComponent(id);
+			return std::static_pointer_cast<GameComponentClass>(component);
+		}
 
 		template<class resourceType>
 		std::shared_ptr<resourceType> getResource(std::string const& uuidString)
@@ -74,7 +81,7 @@ namespace DerydocaEngine
 
 		const std::string m_metaExtension = ".derymeta";
 		std::map<boost::uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
-		std::map<boost::uuids::uuid, Components::GameComponent*> m_sceneComponents;
+		std::map<boost::uuids::uuid, std::shared_ptr<Components::GameComponent>> m_sceneComponents;
 	};
 
 }

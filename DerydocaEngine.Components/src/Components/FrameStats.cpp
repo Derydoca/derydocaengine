@@ -3,6 +3,15 @@
 namespace DerydocaEngine::Components
 {
 
+	FrameStats::FrameStats() :
+		m_textRenderer()
+	{
+	}
+
+	FrameStats::~FrameStats()
+	{
+	}
+
 	void FrameStats::postInit()
 	{
 		m_textRenderer = getComponent<TextRenderer>();

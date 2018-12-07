@@ -16,7 +16,13 @@
 namespace DerydocaEngine::Components
 {
 
-	SkinnedMeshRenderer::SkinnedMeshRenderer()
+	SkinnedMeshRenderer::SkinnedMeshRenderer() :
+		m_mesh(),
+		m_material(),
+		m_SkinnedMeshRendererCamera(),
+		m_animation(),
+		m_time(0.0f),
+		m_boneMatrices()
 	{
 	}
 
@@ -45,7 +51,7 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
-			m_SkinnedMeshRendererCamera = (Camera*)ObjectLibrary::getInstance().getComponent(renderTextureCameraId);
+			m_SkinnedMeshRendererCamera = ObjectLibrary::getInstance().getComponent<Camera>(renderTextureCameraId);
 			material->setTexture(renderTextureName, m_SkinnedMeshRendererCamera->getRenderTexture());
 		}
 	}

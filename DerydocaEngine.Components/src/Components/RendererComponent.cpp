@@ -7,6 +7,24 @@
 namespace DerydocaEngine::Components
 {
 
+	RendererComponent::RendererComponent() :
+		m_mesh(),
+		m_material(),
+		m_dirtyComponents(),
+		m_vertices(),
+		m_tangents(),
+		m_bitangents(),
+		m_normals(),
+		m_texCoords(),
+		m_vertexColors(),
+		m_triangleIndices()
+	{
+	}
+
+	RendererComponent::~RendererComponent()
+	{
+	}
+
 	void RendererComponent::updateMesh()
 	{
 		if (m_dirtyComponents == Rendering::MeshComponents::None)
@@ -16,7 +34,7 @@ namespace DerydocaEngine::Components
 
 		if (!m_mesh)
 		{
-			m_mesh = new Rendering::Mesh();
+			m_mesh = std::make_unique<Rendering::Mesh>();
 		}
 
 		if (m_dirtyComponents & Rendering::MeshComponents::Positions)
