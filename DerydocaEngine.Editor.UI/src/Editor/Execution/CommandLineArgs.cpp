@@ -1,3 +1,4 @@
+#include "EditorPch.h"
 #include "CommandLineArgs.h"
 
 namespace DerydocaEngine::Editor::Execution

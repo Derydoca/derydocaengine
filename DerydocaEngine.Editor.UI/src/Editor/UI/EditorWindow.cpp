@@ -1,3 +1,4 @@
+#include "EditorPch.h"
 #include "Editor\UI\EditorWindow.h"
 
 #include <boost\filesystem.hpp>
