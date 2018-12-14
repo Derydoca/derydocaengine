@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "Components\Light.h"
 
 #include <GL\glew.h>

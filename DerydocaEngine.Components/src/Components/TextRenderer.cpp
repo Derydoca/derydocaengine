@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "TextRenderer.h"
 
 #include "Rendering\Material.h"

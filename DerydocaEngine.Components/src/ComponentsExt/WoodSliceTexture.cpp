@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "WoodSliceTexture.h"
 
 #include "Rendering\Material.h"

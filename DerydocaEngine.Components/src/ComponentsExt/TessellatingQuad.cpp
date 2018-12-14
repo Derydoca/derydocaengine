@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "TessellatingQuad.h"
 
 #include <GL\glew.h>

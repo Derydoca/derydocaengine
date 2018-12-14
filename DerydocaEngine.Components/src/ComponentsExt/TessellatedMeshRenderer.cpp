@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "TessellatedMeshRenderer.h"
 
 #include <GL\glew.h>

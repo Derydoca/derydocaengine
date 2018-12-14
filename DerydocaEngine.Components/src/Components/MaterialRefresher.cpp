@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "MaterialRefresher.h"
 
 #include <boost/filesystem.hpp>

@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "BezierCurveRenderer.h"
 
 #include <GL/glew.h>

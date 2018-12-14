@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "FrameStats.h"
 
 namespace DerydocaEngine::Components

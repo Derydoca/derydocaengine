@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "Components\GameComponentFactory.h"
 
 namespace DerydocaEngine::Components

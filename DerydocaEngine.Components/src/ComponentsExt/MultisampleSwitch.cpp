@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "MultisampleSwitch.h"
 
 #include <iostream>

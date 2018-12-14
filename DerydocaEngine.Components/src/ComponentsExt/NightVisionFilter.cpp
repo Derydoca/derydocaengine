@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "NightVisionFilter.h"
 #include <iostream>
 #include "Rendering\Material.h"

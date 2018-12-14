@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "GaussianBlurFilter.h"
 
 #include <GL/glew.h>

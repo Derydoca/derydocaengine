@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "SpriteRenderer.h"
 
 #include "Rendering\Material.h"

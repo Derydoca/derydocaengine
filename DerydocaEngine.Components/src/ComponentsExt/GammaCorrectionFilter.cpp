@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "GammaCorrectionFilter.h"
 #include "Rendering\Shader.h"
 #include <iostream>

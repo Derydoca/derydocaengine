@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "Components\Camera.h"
 
 #include <GL/glew.h>

@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "ShaderSubroutineSwitcher.h"
 
 #include <gl\glew.h>

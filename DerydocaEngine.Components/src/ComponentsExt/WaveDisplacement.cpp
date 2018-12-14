@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "WaveDisplacement.h"
 
 #include "Rendering\Material.h"

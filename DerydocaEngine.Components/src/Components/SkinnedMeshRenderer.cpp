@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "SkinnedMeshRenderer.h"
 
 #include "Components\Camera.h"

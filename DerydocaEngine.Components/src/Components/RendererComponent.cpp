@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "RendererComponent.h"
 
 #include "Rendering\LightManager.h"

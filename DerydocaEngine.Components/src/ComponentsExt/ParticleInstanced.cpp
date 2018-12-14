@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "ParticleInstanced.h"
 
 #include <GL\glew.h>

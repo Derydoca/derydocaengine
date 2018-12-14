@@ -35,6 +35,7 @@
     <ClCompile Include="src\ComponentsExt\TessellatingQuad.cpp" />
     <ClCompile Include="src\ComponentsExt\WaveDisplacement.cpp" />
     <ClCompile Include="src\ComponentsExt\WoodSliceTexture.cpp" />
+    <ClCompile Include="src\EngineComponentsPch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\Camera.h" />
@@ -72,5 +73,6 @@
     <ClInclude Include="src\ComponentsExt\TessellatedMeshRenderer.h" />
     <ClInclude Include="src\ComponentsExt\WoodSliceTexture.h" />
     <ClInclude Include="src\ComponentsExt\WaveDisplacement.h" />
+    <ClInclude Include="src\EngineComponentsPch.h" />
   </ItemGroup>
 </Project>

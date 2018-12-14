@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "NoiseTexture.h"
 
 #include <GL\glew.h>

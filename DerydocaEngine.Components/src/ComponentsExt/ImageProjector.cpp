@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "ImageProjector.h"
 
 #include "GameObject.h"

@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "Components\WasdMover.h"
 
 #include "Input\InputManager.h"

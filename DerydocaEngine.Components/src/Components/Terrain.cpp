@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "Terrain.h"
 
 #include "Rendering\Material.h"

@@ -1,3 +1,4 @@
+#include "EngineComponentsPch.h"
 #include "EdgeDetectionFilter.h"
 #include "Components\Camera.h"
 #include "Rendering\RenderTexture.h"
