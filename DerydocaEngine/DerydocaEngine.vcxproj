@@ -275,6 +275,7 @@
     <ClCompile Include="src\Resources\Serializers\TextureResourceSerializer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DerydocaEngineCommonPch.h" />
     <ClInclude Include="src\EnginePch.h" />
     <ClInclude Include="src\Animation\AnimationChannel.h" />
     <ClInclude Include="src\Animation\AnimationData.h" />

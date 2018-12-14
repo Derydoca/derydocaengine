@@ -458,6 +458,7 @@
       <Filter>Ext</Filter>
     </ClInclude>
     <ClInclude Include="src\EnginePch.h" />
+    <ClInclude Include="src\DerydocaEngineCommonPch.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
