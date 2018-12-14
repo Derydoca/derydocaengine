@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Files\FileType.h"
 #include "Helpers\StringUtils.h"
 

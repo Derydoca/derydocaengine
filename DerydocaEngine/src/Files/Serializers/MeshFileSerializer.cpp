@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Files\Serializers\MeshFileSerializer.h"
 
 #include <assimp/Importer.hpp>

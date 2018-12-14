@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Rendering\LightManager.h"
 
 #include <GL\glew.h>

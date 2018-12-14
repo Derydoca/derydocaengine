@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "BezierPatchMeshResourceSerializer.h"
 #include "BezierPatchMeshFileLoader.h"
 #include "Resources\Resource.h"

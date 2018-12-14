@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Animation\AnimationData.h"
 
 #include <algorithm>

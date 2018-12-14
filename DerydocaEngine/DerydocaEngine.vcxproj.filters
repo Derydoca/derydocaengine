@@ -190,6 +190,7 @@
     <ClCompile Include="src\Ext\BezierPatchMesh.cpp">
       <Filter>Ext</Filter>
     </ClCompile>
+    <ClCompile Include="src\EnginePch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h">
@@ -456,6 +457,7 @@
     <ClInclude Include="src\Ext\BezierPatchMesh.h">
       <Filter>Ext</Filter>
     </ClInclude>
+    <ClInclude Include="src\EnginePch.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

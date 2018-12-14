@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Resources\Serializers\ShaderResourceSerializer.h"
 
 #include "Rendering\Shader.h"

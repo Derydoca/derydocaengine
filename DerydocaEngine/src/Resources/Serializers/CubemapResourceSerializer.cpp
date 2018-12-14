@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Resources\Serializers\CubemapResourceSerializer.h"
 #include "Resources\CubemapResource.h"
 #include "Rendering\Texture.h"

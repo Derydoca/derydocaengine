@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Resources\Serializers\SkeletonResourceSerializer.h"
 
 #include "assimp\Importer.hpp"

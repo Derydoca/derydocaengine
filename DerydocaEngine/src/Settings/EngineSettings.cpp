@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Settings\EngineSettings.h"
 
 namespace DerydocaEngine::Settings

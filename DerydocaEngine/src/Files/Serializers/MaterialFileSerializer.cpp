@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Files\Serializers\MaterialFileSerializer.h"
 #include <yaml-cpp\yaml.h>
 #include "Rendering\Material.h"

@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Resources\Serializers\TextureResourceSerializer.h"
 #include "Rendering\Texture.h"
 #include "Resources\Resource.h"

@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Utilities\TexturePacker.h"
 #include <algorithm>
 #include <assert.h>

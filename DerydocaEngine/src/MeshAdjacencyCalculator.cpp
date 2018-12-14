@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "MeshAdjacencyCalculator.h"
 
 namespace DerydocaEngine::Ext

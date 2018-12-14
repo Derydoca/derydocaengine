@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #pragma once
 #include <assert.h>
 #include "Utilities\TexturePackerTextureData.h"

@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Rendering\Texture.h"
 
 #include <cassert>

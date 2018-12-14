@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Files\Serializers\ImageFileSerializer.h"
 #include "Resources\Resource.h"
 

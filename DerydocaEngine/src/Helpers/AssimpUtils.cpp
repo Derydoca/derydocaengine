@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Helpers\AssimpUtils.h"
 #include "Animation\AnimationChannel.h"
 

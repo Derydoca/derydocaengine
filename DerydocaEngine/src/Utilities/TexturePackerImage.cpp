@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #pragma once
 #include "Utilities\TexturePackerImage.h"
 #include <string>

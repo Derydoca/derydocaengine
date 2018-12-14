@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "BezierPatchMesh.h"
 #include <algorithm>
 

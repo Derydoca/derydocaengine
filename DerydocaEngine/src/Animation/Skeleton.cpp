@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Animation\Skeleton.h"
 
 namespace DerydocaEngine::Animation {

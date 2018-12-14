@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Rendering\ShaderLibrary.h"
 
 #include <boost/uuid/uuid_io.hpp>

@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Files\Serializers\FileTypeSerializer.h"
 
 #include <boost/uuid/uuid_generators.hpp>

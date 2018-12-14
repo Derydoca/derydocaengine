@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Resources\Serializers\ResourceSerializerLibrary.h"
 #include "Resources\Serializers\MaterialResourceSerializer.h"
 #include "Resources\Serializers\MeshResourceSerializer.h"

@@ -1,3 +1,4 @@
+#include "EnginePch.h"
 #include "Files\Serializers\ShaderFileSerializer.h"
 #include "Resources\ShaderResource.h"
 #include <boost/filesystem.hpp>
