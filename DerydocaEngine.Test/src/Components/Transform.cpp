@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineTestPch.h"
 #include "Components\Transform.h"
 
 TEST(Transform, ModelIsIdentity_When_ConstructedWithNoParameters) {

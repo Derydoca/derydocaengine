@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineTestPch.h"
 #include "Color.h"
 
 TEST(Color, ColorIsOpaqueBlack_When_EmptyConstructorIsUsed) {
