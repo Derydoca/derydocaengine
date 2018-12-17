@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include "GameObject.h"
+#include "Resources\Resource.h"
+#include "Scenes\Scene.h"
 
 namespace DerydocaEngine::Editor::UI
 {
@@ -10,16 +12,11 @@ namespace DerydocaEngine::Editor::UI
 	public:
 		int Run(
 			const std::string& projectPath,
-			const std::string& editorComponentsLevelIdentifier,
 			const std::string& levelIdentifier
 		);
 	private:
-		std::shared_ptr<Scenes::SerializedScene> SetUpLevelObject(
-			const std::string& levelIdentifier,
 
-			const std::string& levelType,
-			const std::shared_ptr<GameObject> rootSceneObject
-		);
+		std::time_t m_levelLoadTime;
 	};
 
 }

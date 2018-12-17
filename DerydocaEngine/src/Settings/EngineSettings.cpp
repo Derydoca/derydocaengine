@@ -15,6 +15,12 @@ namespace DerydocaEngine::Settings
 		if (engineNode)
 		{
 			m_engineResourceDirectory = engineNode["Resources"].as<std::string>();
+
+			YAML::Node editorComponentsSceneNode = engineNode["EditorComponentsScene"];
+			if (editorComponentsSceneNode)
+			{
+				m_editorComponentsSceneIdentifier = editorComponentsSceneNode.as<std::string>();
+			}
 		}
 
 		YAML::Node windowNode = root["Window"];
@@ -54,6 +60,7 @@ namespace DerydocaEngine::Settings
 			m_camPos = glm::vec3(0, 0, 0);
 			m_fov = 70.0f;
 		}
+
 	}
 
 	EngineSettings::~EngineSettings()

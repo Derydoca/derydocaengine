@@ -24,6 +24,7 @@ namespace DerydocaEngine::Settings
 		boost::uuids::uuid getSkyboxId() { return m_skyboxId; }
 		std::string getEngineResourceDirectory() const { return m_engineResourceDirectory; }
 		Components::Camera::RenderingMode getCamRenderMode() { return m_renderingMode; }
+		std::string getEditorComponentsSceneIdentifier() const { return m_editorComponentsSceneIdentifier; }
 
 		bool isSkyboxDefined() { return m_isSkyboxDefined; }
 	private:
@@ -36,6 +37,7 @@ namespace DerydocaEngine::Settings
 		bool m_isSkyboxDefined = false;
 		std::string m_engineResourceDirectory;
 		boost::filesystem::path m_settingsFilePath;
+		std::string m_editorComponentsSceneIdentifier;
 	};
 
 }

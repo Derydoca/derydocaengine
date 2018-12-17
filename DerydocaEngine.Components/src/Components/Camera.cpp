@@ -3,6 +3,7 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include "Helpers\YamlTools.h"
 #include "Rendering\CameraManager.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
@@ -24,7 +25,7 @@ namespace DerydocaEngine::Components
 	Camera::Camera() :
 		m_transform(),
 		m_clearColor(),
-		m_skybox(new Rendering::Skybox()),
+		m_skybox(nullptr),
 		m_clearMode(Camera::NoClear),
 		m_renderingMode(Camera::RenderingMode::Forward),
 		m_skyboxMaterial(nullptr),
@@ -55,7 +56,7 @@ namespace DerydocaEngine::Components
 	Camera::Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar) :
 		m_transform(),
 		m_clearColor(),
-		m_skybox(new Rendering::Skybox()),
+		m_skybox(nullptr),
 		m_clearMode(Camera::NoClear),
 		m_renderingMode(Camera::RenderingMode::Forward),
 		m_skyboxMaterial(nullptr),
@@ -86,7 +87,6 @@ namespace DerydocaEngine::Components
 	Camera::~Camera()
 	{
 		delete m_displayRect;
-		delete m_skybox;
 		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
@@ -198,7 +198,7 @@ namespace DerydocaEngine::Components
 		m_projection.setZFar(zFar);
 		m_projection.recalculateProjectionMatrix();
 
-		YAML::Node renderTextureNode = node["RenderTexture"];
+		auto renderTextureNode = node["RenderTexture"];
 		if (renderTextureNode)
 		{
 			int width = renderTextureNode["Width"].as<int>();
@@ -208,6 +208,31 @@ namespace DerydocaEngine::Components
 			auto postProcessingShader = getResourcePointer<Rendering::Shader>(renderTextureNode, "PostProcessShader");
 			m_postProcessMaterial = std::make_shared<Rendering::Material>();
 			m_postProcessMaterial->setShader(postProcessingShader);
+		}
+
+		auto renderingModeNode = node["renderingMode"];
+		if (renderingModeNode)
+		{
+			setRenderingMode(static_cast<RenderingMode>(renderingModeNode.as<int>()));
+		}
+
+		auto clearModeNode = node["clearMode"];
+		if (clearModeNode)
+		{
+			setClearMode(static_cast<ClearMode>(clearModeNode.as<int>()));
+		}
+
+		auto clearColorNode = node["clearColor"];
+		if (clearColorNode)
+		{
+			setClearColor(clearColorNode.as<Color>());
+		}
+
+		auto skyboxNode = node["skybox"];
+		if (skyboxNode)
+		{
+			auto skybox = getResourcePointer<Rendering::Material>(skyboxNode.as<boost::uuids::uuid>());
+			setSkybox(skybox);
 		}
 	}
 

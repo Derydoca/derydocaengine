@@ -106,7 +106,7 @@ namespace DerydocaEngine::Components
 	private:
 		std::shared_ptr<Components::Transform> m_transform;
 		Color m_clearColor;
-		Rendering::Skybox* m_skybox;
+		std::shared_ptr<Rendering::Skybox> m_skybox;
 		ClearMode m_clearMode;
 		RenderingMode m_renderingMode;
 		std::shared_ptr<Rendering::Material> m_skyboxMaterial;

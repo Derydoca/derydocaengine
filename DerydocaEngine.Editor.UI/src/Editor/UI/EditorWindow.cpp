@@ -23,29 +23,49 @@
 namespace DerydocaEngine::Editor::UI
 {
 
-	std::shared_ptr<Scenes::SerializedScene> EditorWindow::SetUpLevelObject(const std::string& levelIdentifier, const std::string& levelType, const std::shared_ptr<GameObject> rootSceneObject)
+	std::shared_ptr<Resources::Resource> getLevelResource(const std::string& levelIdentifier, const std::string& levelType)
 	{
 		// Load the editor components
-		if (!levelIdentifier.empty())
+		if (levelIdentifier.empty())
 		{
 			std::cout << "No editor components level identifier was provided!\n";
 			return nullptr;
 		}
-		auto editorComponentsLevelResource = ObjectLibrary::getInstance().getResource(levelIdentifier);
-		if (editorComponentsLevelResource == nullptr)
+		auto resource = ObjectLibrary::getInstance().getResource(levelIdentifier);
+		if (resource == nullptr)
 		{
 			std::cout << "Unable to find the " << levelType << " level with ID of '" << levelIdentifier << "'!\n";
 			return nullptr;
 		}
 
+		return resource;
+	}
+
+	std::shared_ptr<Scenes::SerializedScene> SetUpLevelObject(
+		const std::shared_ptr<Resources::Resource> levelResource,
+		const std::string& levelType,
+		const std::shared_ptr<GameObject> rootSceneObject
+	)
+	{
 		auto scene = std::make_shared<Scenes::SerializedScene>();
-		scene->LoadFromFile(editorComponentsLevelResource->getSourceFilePath());
+		scene->LoadFromFile(levelResource->getSourceFilePath());
 		scene->setUp(rootSceneObject);
 
 		return scene;
 	}
 
-	int EditorWindow::Run(const std::string& projectPath, const std::string& editorComponentsLevelIdentifier, const std::string& levelIdentifier)
+	bool getLastModifiedTime(std::string const& filePath, std::time_t &time)
+	{
+		if (!boost::filesystem::exists(filePath))
+		{
+			return false;
+		}
+
+		time = boost::filesystem::last_write_time(filePath);
+		return true;
+	}
+
+	int EditorWindow::Run(const std::string& projectPath, const std::string& levelIdentifier)
 	{
 		auto settings = std::make_unique<Settings::EngineSettings>(".\\engineSettings.yaml");
 
@@ -62,10 +82,12 @@ namespace DerydocaEngine::Editor::UI
 		unsigned long minFrameTime = 1000 / 60;
 
 		auto editorSceneRoot = std::make_shared<GameObject>("__EDITOR_SCENE_ROOT__");
-		auto editorScene = SetUpLevelObject(editorComponentsLevelIdentifier, "editor", editorSceneRoot);
+		auto editorSceneResource = getLevelResource(settings->getEditorComponentsSceneIdentifier(), "editor");
+		std::shared_ptr<Scenes::SerializedScene> editorScene = SetUpLevelObject(editorSceneResource, "editor", editorSceneRoot);
 
-		auto sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT__");
-		auto scene = SetUpLevelObject(editorComponentsLevelIdentifier, "main", sceneRoot);
+		std::shared_ptr<GameObject> sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT__");
+		auto levelResource = getLevelResource(levelIdentifier, "editor");
+		std::shared_ptr<Scenes::Scene> scene = SetUpLevelObject(levelResource, "main", sceneRoot);
 
 		// Initialize all components in the scene before rendering anything
 		editorSceneRoot->init();
@@ -74,6 +96,8 @@ namespace DerydocaEngine::Editor::UI
 		// Run the post initialization routine on all components
 		editorSceneRoot->postInit();
 		sceneRoot->postInit();
+
+		std::time_t levelLastModifiedTime;
 
 		// Render loop
 		while (!display->isClosed()) {
@@ -105,6 +129,24 @@ namespace DerydocaEngine::Editor::UI
 				SDL_Delay(msToWait);
 			}
 			clock->update();
+
+			// If the file has been updated since we last loaded it
+			if (getLastModifiedTime(levelResource->getSourceFilePath(), levelLastModifiedTime) &&
+				levelLastModifiedTime > m_levelLoadTime)
+			{
+				// Store the time that we reloaded the level
+				m_levelLoadTime = levelLastModifiedTime;
+
+				// Rebuild the scene components
+				
+				sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT_UPDATED__");
+				scene->tearDown(sceneRoot);
+				scene = SetUpLevelObject(editorSceneResource, "editor", editorSceneRoot);
+
+				// Initialize the new scene
+				sceneRoot->init();
+				sceneRoot->postInit();
+			}
 		}
 
 		// Clean up the scene
