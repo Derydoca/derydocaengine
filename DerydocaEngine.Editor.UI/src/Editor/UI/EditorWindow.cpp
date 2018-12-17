@@ -23,96 +23,72 @@
 namespace DerydocaEngine::Editor::UI
 {
 
-	int EditorWindow::Run(std::string const& projectPath, std::string const& levelIdentifier)
+	std::shared_ptr<Scenes::SerializedScene> EditorWindow::SetUpLevelObject(const std::string& levelIdentifier, const std::string& levelType, const std::shared_ptr<GameObject> rootSceneObject)
 	{
-		Settings::EngineSettings* settings = new Settings::EngineSettings(".\\engineSettings.yaml");
+		// Load the editor components
+		if (!levelIdentifier.empty())
+		{
+			std::cout << "No editor components level identifier was provided!\n";
+			return nullptr;
+		}
+		auto editorComponentsLevelResource = ObjectLibrary::getInstance().getResource(levelIdentifier);
+		if (editorComponentsLevelResource == nullptr)
+		{
+			std::cout << "Unable to find the " << levelType << " level with ID of '" << levelIdentifier << "'!\n";
+			return nullptr;
+		}
+
+		auto scene = std::make_shared<Scenes::SerializedScene>();
+		scene->LoadFromFile(editorComponentsLevelResource->getSourceFilePath());
+		scene->setUp(rootSceneObject);
+
+		return scene;
+	}
+
+	int EditorWindow::Run(const std::string& projectPath, const std::string& editorComponentsLevelIdentifier, const std::string& levelIdentifier)
+	{
+		auto settings = std::make_unique<Settings::EngineSettings>(".\\engineSettings.yaml");
 
 		// Load the project file
 		ObjectLibrary::getInstance().initialize(settings->getEngineResourceDirectory(), projectPath);
 
 		// Initialize the clock to this machine
 		Timing::Clock::init();
-		Timing::Clock* clock = new Timing::Clock();
+		auto clock = std::make_unique<Timing::Clock>();
 
-		Rendering::Display* display = new Rendering::Display(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
-
-		m_sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT__");
-
-#pragma region Editor specific game objects
-
-		// Keep this here as a simple way to grab screenshots of the engine
-		auto screenshotUtil = std::make_shared<Components::ScreenshotUtil>(display, Input::InputManager::getInstance().getKeyboard());
-		m_sceneRoot->addComponent(screenshotUtil);
-
-		// This is the editor camera
-		std::shared_ptr<GameObject> editorCameraObject = std::make_shared<GameObject>("__editorCamera");
-		std::shared_ptr<Components::Transform> editorCameraTransform = editorCameraObject->getTransform();
-		editorCameraTransform->setPos(settings->getCamPos());
-		auto editorCamera = std::make_shared<Components::Camera>(settings->getFOV(), display->getAspectRatio(), 0.01f, 1000.0f);
-		editorCamera->setDisplay(display);
-		editorCamera->setRenderingMode(settings->getCamRenderMode());
-		if (settings->isSkyboxDefined())
-		{
-			// If a skybox is defined, build the skybox material and assign it to the editor camera
-			auto skyboxShader = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\cubemapShader");
-			auto cubemapResource = std::static_pointer_cast<Resources::CubemapResource>(ObjectLibrary::getInstance().getResource(settings->getSkyboxId()));
-			auto skyboxTexture = std::static_pointer_cast<Rendering::Texture>(cubemapResource->getResourceObjectPointer());
-			auto skyboxMaterial = std::make_shared<Rendering::Material>();
-			skyboxMaterial->setShader(skyboxShader);
-			skyboxMaterial->setTextureSlot(0, skyboxTexture);
-			editorCamera->setSkybox(skyboxMaterial);
-			editorCamera->setClearMode(Components::Camera::ClearMode::SkyboxClear);
-		}
-		else
-		{
-			// By default, clear the screen with a deep red
-			editorCamera->setClearMode(Components::Camera::ClearMode::ColorClear);
-			editorCamera->setClearColor(Color(0.5, 0, 0));
-		}
-		editorCameraObject->addComponent(editorCamera);
-		editorCameraObject->addComponent(std::make_shared<Components::WasdMover>(Input::InputManager::getInstance().getKeyboard(), Input::InputManager::getInstance().getMouse()));
-		m_sceneRoot->addChild(editorCameraObject);
-
-#pragma endregion
-
-		// If a scene was provided, load it
-		Scenes::SerializedScene* scene = nullptr;
-		if (!levelIdentifier.empty())
-		{
-			auto levelResource = ObjectLibrary::getInstance().getResource(levelIdentifier);
-
-			if (levelResource == nullptr)
-			{
-				std::cout << "No level resource with the ID of '" << levelIdentifier << "' could be found.\n";
-			}
-			else
-			{
-				scene = new Scenes::SerializedScene();
-				scene->LoadFromFile(levelResource->getSourceFilePath());
-				scene->setUp(m_sceneRoot);
-			}
-		}
+		auto display = std::make_shared<Rendering::Display>(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
 
 		// Divisor defines minimum frames per second
 		unsigned long minFrameTime = 1000 / 60;
 
+		auto editorSceneRoot = std::make_shared<GameObject>("__EDITOR_SCENE_ROOT__");
+		auto editorScene = SetUpLevelObject(editorComponentsLevelIdentifier, "editor", editorSceneRoot);
+
+		auto sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT__");
+		auto scene = SetUpLevelObject(editorComponentsLevelIdentifier, "main", sceneRoot);
+
 		// Initialize all components in the scene before rendering anything
-		m_sceneRoot->init();
+		editorSceneRoot->init();
+		sceneRoot->init();
 
 		// Run the post initialization routine on all components
-		m_sceneRoot->postInit();
+		editorSceneRoot->postInit();
+		sceneRoot->postInit();
 
 		// Render loop
 		while (!display->isClosed()) {
 
 			// Tick the clock forward the number of ms it took since the last frame rendered
-			m_sceneRoot->update(clock->getDeltaTime());
+			editorSceneRoot->update(clock->getDeltaTime());
+			sceneRoot->update(clock->getDeltaTime());
 
 			// Render all scene objects
-			Rendering::CameraManager::getInstance().render(m_sceneRoot);
+			Rendering::CameraManager::getInstance().render(editorSceneRoot);
+			Rendering::CameraManager::getInstance().render(sceneRoot);
 
 			// Let the scene objects do whatever it is they need to do after rendering has completed this frame
-			m_sceneRoot->postRender();
+			editorSceneRoot->postRender();
+			sceneRoot->postRender();
 
 			// Let the display respond to any input events
 			display->update();
@@ -132,16 +108,8 @@ namespace DerydocaEngine::Editor::UI
 		}
 
 		// Clean up the scene
-		if (scene != nullptr)
-		{
-			scene->tearDown(m_sceneRoot);
-		}
-
-		// Clean up all other objects
-		delete display;
-		delete settings;
-		delete clock;
-		delete scene;
+		editorScene->tearDown(editorSceneRoot);
+		scene->tearDown(sceneRoot);
 
 		return 0;
 	}
