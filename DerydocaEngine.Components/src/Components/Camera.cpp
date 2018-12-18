@@ -25,7 +25,7 @@ namespace DerydocaEngine::Components
 	Camera::Camera() :
 		m_transform(),
 		m_clearColor(),
-		m_skybox(nullptr),
+		m_skybox(std::make_shared<Rendering::Skybox>()),
 		m_clearMode(Camera::NoClear),
 		m_renderingMode(Camera::RenderingMode::Forward),
 		m_skyboxMaterial(nullptr),

@@ -107,8 +107,8 @@ namespace DerydocaEngine::Editor::UI
 			sceneRoot->update(clock->getDeltaTime());
 
 			// Render all scene objects
-			Rendering::CameraManager::getInstance().render(editorSceneRoot);
 			Rendering::CameraManager::getInstance().render(sceneRoot);
+			//Rendering::CameraManager::getInstance().render(editorSceneRoot);
 
 			// Let the scene objects do whatever it is they need to do after rendering has completed this frame
 			editorSceneRoot->postRender();

@@ -27,16 +27,16 @@ Scene:
             zFar: 1000.0
             # More serialized fields are necessary for this
             renderingMode: 0
-            skybox: a5dfbc43-582b-46cf-9416-e853b21cae07
-            clearMode: 0
+            skybox: 7a45b523-731d-4540-9da3-39632413a276
+            clearMode: 1
             clearColor: [0.5, 0.0, 0.0]
 
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
       Name: __wasdMover
+      Parent: a1ff00cc-9421-4226-8a26-680ad31eb6a1
       Transform:
-        Parent: a1ff00cc-9421-4226-8a26-680ad31eb6a1
         Position: [0, 0, 0]
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
