@@ -1,15 +1,15 @@
 Scene:
 
-  # - Type: GameObject
-  #   ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
-  #   Properties:
-  #     Name: __screenshotUtil
-  #     Transform:
-  #       Position: [0, 0, 0]
-  #       Rotation: [0, 0, 0, 1]
-  #       Scale: [1, 1, 1]
-  #     Components:
-  #       - Type: ScreenshotUtil
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: __screenshotUtil
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: ScreenshotUtil
 
   - Type: GameObject
     ID: a1ff00cc-9421-4226-8a26-680ad31eb6a1
@@ -30,16 +30,19 @@ Scene:
             skybox: 7a45b523-731d-4540-9da3-39632413a276
             clearMode: 1
             clearColor: [0.5, 0.0, 0.0]
+        - Type: WasdMover
 
   - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: __wasdMover
-      Parent: a1ff00cc-9421-4226-8a26-680ad31eb6a1
+      Name: Cube
       Transform:
-        Position: [0, 0, 0]
+        Position: [0, 0, -5]
         Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
+        Scale: [0.05, 1, 1]
       Components:
-        - Type: WasdMover
+        - Type: MeshRenderer
+          Properties:
+            Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
       

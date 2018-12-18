@@ -130,23 +130,23 @@ namespace DerydocaEngine::Editor::UI
 			}
 			clock->update();
 
-			// If the file has been updated since we last loaded it
-			if (getLastModifiedTime(levelResource->getSourceFilePath(), levelLastModifiedTime) &&
-				levelLastModifiedTime > m_levelLoadTime)
-			{
-				// Store the time that we reloaded the level
-				m_levelLoadTime = levelLastModifiedTime;
+			//// If the file has been updated since we last loaded it
+			//if (getLastModifiedTime(levelResource->getSourceFilePath(), levelLastModifiedTime) &&
+			//	levelLastModifiedTime > m_levelLoadTime)
+			//{
+			//	// Store the time that we reloaded the level
+			//	m_levelLoadTime = levelLastModifiedTime;
 
-				// Rebuild the scene components
-				
-				sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT_UPDATED__");
-				scene->tearDown(sceneRoot);
-				scene = SetUpLevelObject(editorSceneResource, "editor", editorSceneRoot);
+			//	// Rebuild the scene components
+			//	
+			//	sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT_UPDATED__");
+			//	scene->tearDown(sceneRoot);
+			//	scene = SetUpLevelObject(editorSceneResource, "editor", editorSceneRoot);
 
-				// Initialize the new scene
-				sceneRoot->init();
-				sceneRoot->postInit();
-			}
+			//	// Initialize the new scene
+			//	sceneRoot->init();
+			//	sceneRoot->postInit();
+			//}
 		}
 
 		// Clean up the scene

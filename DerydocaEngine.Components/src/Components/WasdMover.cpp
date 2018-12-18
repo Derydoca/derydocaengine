@@ -37,7 +37,6 @@ namespace DerydocaEngine::Components
 
 	void WasdMover::update(float const& deltaTime) {
 
-		m_transform = getGameObject()->getTransform();
 		// Set the mouse to relative mode when the right mouse button is down
 		if (m_mouse->isKeyDownFrame(2)) {
 			m_mouse->setRelative(true);
