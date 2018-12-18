@@ -97,6 +97,11 @@ namespace DerydocaEngine::Editor::UI
 		editorSceneRoot->postInit();
 		sceneRoot->postInit();
 
+		std::vector<std::shared_ptr<GameObject>> roots = {
+			editorSceneRoot,
+			sceneRoot
+		};
+
 		std::time_t levelLastModifiedTime;
 
 		// Render loop
@@ -107,8 +112,7 @@ namespace DerydocaEngine::Editor::UI
 			sceneRoot->update(clock->getDeltaTime());
 
 			// Render all scene objects
-			Rendering::CameraManager::getInstance().render(sceneRoot);
-			//Rendering::CameraManager::getInstance().render(editorSceneRoot);
+			Rendering::CameraManager::getInstance().render(roots);
 
 			// Let the scene objects do whatever it is they need to do after rendering has completed this frame
 			editorSceneRoot->postRender();

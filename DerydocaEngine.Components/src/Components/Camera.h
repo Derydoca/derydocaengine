@@ -82,7 +82,7 @@ namespace DerydocaEngine::Components
 
 		@root Root game object to render all of its children
 		*/
-		void renderRoot(const std::shared_ptr<GameObject> root);
+		void renderRoots(const std::vector<std::shared_ptr<GameObject>> roots);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }

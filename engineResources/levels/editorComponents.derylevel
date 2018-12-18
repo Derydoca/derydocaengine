@@ -25,24 +25,9 @@ Scene:
             fov: 70.0
             zNear: 0.01
             zFar: 1000.0
-            # More serialized fields are necessary for this
             renderingMode: 0
             skybox: 7a45b523-731d-4540-9da3-39632413a276
             clearMode: 1
             clearColor: [0.5, 0.0, 0.0]
         - Type: WasdMover
-
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
-    Properties:
-      Name: Cube
-      Transform:
-        Position: [0, 0, -5]
-        Rotation: [0, 0, 0, 1]
-        Scale: [0.05, 1, 1]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
-            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
-      
+        

@@ -263,9 +263,12 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Camera::renderRoot(const std::shared_ptr<GameObject> gameObject)
+	void Camera::renderRoots(const std::vector<std::shared_ptr<GameObject>> roots)
 	{
-		Rendering::LightManager::getInstance().renderShadowMaps(gameObject->getTransform());
+		for (auto root : roots)
+		{
+			Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
+		}
 
 		int textureW, textureH = 1;
 
@@ -294,8 +297,11 @@ namespace DerydocaEngine::Components
 			(GLint)(textureH * m_displayRect->getHeight()));
 		glEnable(GL_DEPTH_TEST);
 		clear();
-		gameObject->preRender();
-		gameObject->render(m_matrixStack);
+		for (auto root : roots)
+		{
+			root->preRender();
+			root->render(m_matrixStack);
+		}
 
 		// Postprocessing happens here
 		if (m_renderTexture != nullptr && m_postProcessMaterial != nullptr)
