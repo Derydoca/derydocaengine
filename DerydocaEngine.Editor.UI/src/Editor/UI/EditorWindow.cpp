@@ -4,21 +4,14 @@
 #include <boost\filesystem.hpp>
 #include <iostream>
 #include <sdl2\SDL.h>
-#include "Components\Camera.h"
-#include "Rendering\CameraManager.h"
-#include "Timing\Clock.h"
-#include "Resources\CubemapResource.h"
-#include "Rendering\Display.h"
-#include "Settings\EngineSettings.h"
+
 #include "Input\InputManager.h"
-#include "Rendering\Material.h"
 #include "ObjectLibrary.h"
+#include "Rendering\CameraManager.h"
+#include "Rendering\Display.h"
 #include "Scenes\SerializedScene.h"
-#include "Components\ScreenshotUtil.h"
-#include "Rendering\ShaderLibrary.h"
-#include "Rendering\Skybox.h"
-#include "Components\Transform.h"
-#include "Components\WasdMover.h"
+#include "Settings\EngineSettings.h"
+#include "Timing\Clock.h"
 
 namespace DerydocaEngine::Editor::UI
 {
@@ -54,7 +47,7 @@ namespace DerydocaEngine::Editor::UI
 		return scene;
 	}
 
-	bool getLastModifiedTime(std::string const& filePath, std::time_t &time)
+	bool getLastModifiedTime(const std::string& filePath, std::time_t& time)
 	{
 		if (!boost::filesystem::exists(filePath))
 		{
