@@ -28,7 +28,6 @@ Sprite Rendering | -project ..\\..\\exampleProject -scene 3732a923-1023-4f27-bef
 Simple Shaders | -project ..\\..\\exampleProject -scene 957d1174-982a-4808-bbdc-4d80bf4864d7
 Spotlight Shader | -project ..\\..\\exampleProject -scene 5f587048-0b68-430e-9c24-7fca4bc56efc
 Cartoon Shader | -project ..\\..\\exampleProject -scene 681aab0a-9245-44d3-ab29-9787fa3f789c
-Fog Shader | -project ..\\..\\exampleProject -scene 5662c98d-234f-4e94-a935-b2592fae40c8
 Misc Complex Shaders | -project ..\\..\\exampleProject -scene 378512b4-c86c-4207-aec6-4a66608611eb
 Projection Shader | -project ..\\..\\exampleProject -scene b5d9b8f2-1ecb-4c68-b9a7-f4c15210a020
 Postprocessing - Edge Detection | -project ..\\..\\exampleProject -scene 21ba96c7-873c-44aa-8843-c2a07dc4d9f0
