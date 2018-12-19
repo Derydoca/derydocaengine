@@ -90,7 +90,8 @@ namespace DerydocaEngine::Editor::UI
 		editorSceneRoot->postInit();
 		sceneRoot->postInit();
 
-		std::vector<std::shared_ptr<GameObject>> roots = {
+		std::vector<std::shared_ptr<GameObject>> roots =
+		{
 			editorSceneRoot,
 			sceneRoot
 		};
@@ -98,7 +99,8 @@ namespace DerydocaEngine::Editor::UI
 		std::time_t levelLastModifiedTime;
 
 		// Render loop
-		while (!display->isClosed()) {
+		while (!display->isClosed())
+		{
 
 			// Tick the clock forward the number of ms it took since the last frame rendered
 			editorSceneRoot->update(clock->getDeltaTime());
@@ -119,8 +121,10 @@ namespace DerydocaEngine::Editor::UI
 
 			// Pause the code execution if we are running faster than our capped frame rate
 			unsigned long msToWait = (unsigned long)(minFrameTime - clock->getRenderTimeMS());
-			if (msToWait > 0) {
-				if (msToWait > minFrameTime) {
+			if (msToWait > 0)
+			{
+				if (msToWait > minFrameTime)
+				{
 					msToWait = minFrameTime;
 				}
 				SDL_Delay(msToWait);
