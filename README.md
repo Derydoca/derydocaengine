@@ -7,7 +7,7 @@ https://www.derydoca.com
 This is being written in Visual Studio 2017. For anyone who wants to use another compiler, feel free to, however it will be simplest to use the most recent version of Visual Studio.
 
 ## Prerequisites
-The Boost C++ library is required to build this project. The project will look for boost version 1.68.0 in either "C:\local\boost_1_68_0" or "D:\local\boost_1_68_0. You can download it from here: https://dl.bintray.com/boostorg/release/1.68.0/source/
+The Boost C++ library is required to build this project. The project will look for boost version 1.68.0 in either "C:\local\boost_1_68_0" or "D:\local\boost_1_68_0. You can download it from here: https://sourceforge.net/projects/boost/files/boost-binaries/1.68.0/
 
 ## How To Build
 
