@@ -46,7 +46,6 @@ namespace DerydocaEngine::Components
 		};
 
 		Camera();
-		Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar);
 		~Camera();
 
 		inline std::shared_ptr<Rendering::RenderTexture> getRenderTexture() const { return m_renderTexture; }

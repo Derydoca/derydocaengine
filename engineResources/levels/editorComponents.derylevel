@@ -16,7 +16,7 @@ Scene:
     Properties:
       Name: __editorCamera
       Transform:
-        Position: [0, 0, 0]
+        Position: [0, 0, 1.0]
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
@@ -27,7 +27,7 @@ Scene:
             zFar: 1000.0
             renderingMode: 0
             skybox: 7a45b523-731d-4540-9da3-39632413a276
-            clearMode: 1
+            clearMode: 2
             clearColor: [0.5, 0.0, 0.0]
         - Type: WasdMover
         

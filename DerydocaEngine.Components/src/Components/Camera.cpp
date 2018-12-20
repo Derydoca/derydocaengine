@@ -53,37 +53,6 @@ namespace DerydocaEngine::Components
 		setClearColor(Color(0.5, 0.0, 0.0));
 	}
 
-	Camera::Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar) :
-		m_transform(),
-		m_clearColor(),
-		m_skybox(nullptr),
-		m_clearMode(Camera::NoClear),
-		m_renderingMode(Camera::RenderingMode::Forward),
-		m_skyboxMaterial(nullptr),
-		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
-		m_renderTexture(nullptr),
-		m_display(nullptr),
-		m_displayRect(new Rectangle(0, 0, 1, 1)),
-		m_quad(nullptr),
-		m_postProcessMaterial(nullptr),
-		m_orthoSize(10.0f),
-		m_deferredFBO(0),
-		m_gbuffDepth(0),
-		m_gbuffPos(0),
-		m_gbuffNorm(0),
-		m_gbuffColor(0),
-		m_deferredRendererCompositor(0),
-		m_projection()
-	{
-		m_projection.setFov(fov);
-		m_projection.setAspectRatio(aspect);
-		m_projection.setZNear(zNear);
-		m_projection.setZFar(zFar);
-		m_projection.recalculateProjectionMatrix();
-
-		Rendering::CameraManager::getInstance().addCamera(this);
-	}
-
 	Camera::~Camera()
 	{
 		delete m_displayRect;

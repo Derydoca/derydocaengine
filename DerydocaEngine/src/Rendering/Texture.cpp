@@ -19,7 +19,7 @@ namespace DerydocaEngine::Rendering
 		m_textureType = GL_TEXTURE_2D;
 	}
 
-	Texture::Texture(std::string const& fileName, TextureParameters* const& params) :
+	Texture::Texture(const std::string& fileName, const TextureParameters* params) :
 		m_rendererId(0),
 		m_width(0),
 		m_height(0),
@@ -41,11 +41,19 @@ namespace DerydocaEngine::Rendering
 		stbi_image_free(data);
 	}
 
-	Texture::Texture(std::string const& xpos, std::string const& xneg, std::string const& ypos, std::string const& yneg, std::string const& zpos, std::string const& zneg)
+	Texture::Texture(
+		const std::string& xpos,
+		const std::string& xneg,
+		const std::string& ypos,
+		const std::string& yneg,
+		const std::string& zpos,
+		const std::string& zneg
+	) :
+		m_rendererId(0),
+		m_width(0),
+		m_height(0),
+		m_textureType(GL_TEXTURE_CUBE_MAP)
 	{
-		// Set the texture type
-		m_textureType = GL_TEXTURE_CUBE_MAP;
-
 		// Create the texture handle and set parameters for it
 		glGenTextures(1, &m_rendererId);
 		glBindTexture(m_textureType, m_rendererId);
@@ -89,13 +97,19 @@ namespace DerydocaEngine::Rendering
 		deleteTexture();
 	}
 
-	void Texture::bind(unsigned int const& unit) const
+	void Texture::bind(const unsigned int unit) const
 	{
 		glActiveTexture(GL_TEXTURE0 + unit);
 		glBindTexture(m_textureType, m_rendererId);
 	}
 
-	void Texture::updateBuffer(unsigned char * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params)
+	void Texture::updateBuffer(
+		unsigned char * data,
+		const int width,
+		const int height,
+		const int channels,
+		const TextureParameters* params
+	)
 	{
 		m_width = width;
 		m_height = height;
@@ -126,15 +140,15 @@ namespace DerydocaEngine::Rendering
 		glGenTextures(1, &m_rendererId);
 		glBindTexture(m_textureType, m_rendererId);
 		glTexImage2D(m_textureType, 0, pixelFormat, width, height, 0, pixelFormat, GL_UNSIGNED_BYTE, data);
-		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, params->textureWrapModeToOpenGL(wrapModeS));
-		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, params->textureWrapModeToOpenGL(wrapModeT));
+		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, TextureParameters::textureWrapModeToOpenGL(wrapModeS));
+		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, TextureParameters::textureWrapModeToOpenGL(wrapModeT));
 		glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		glGenerateMipmap(m_textureType);
 	}
 
-	unsigned int Texture::channelsToPixelFormat(int const & numChannels) const
+	unsigned int Texture::channelsToPixelFormat(const int numChannels) const
 	{
 		switch (numChannels)
 		{
