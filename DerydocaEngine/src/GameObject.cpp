@@ -48,6 +48,19 @@ namespace DerydocaEngine
 		}
 	}
 
+	void GameObject::preDestroy()
+	{
+		for each (std::shared_ptr<Components::GameComponent> c in m_components)
+		{
+			c->preDestroy();
+		}
+
+		for each (std::shared_ptr<GameObject> go in m_children)
+		{
+			go->preDestroy();
+		}
+	}
+
 	void GameObject::preRender() {
 		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{

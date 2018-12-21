@@ -145,7 +145,6 @@ namespace DerydocaEngine::Editor::UI
 					scene
 				};
 
-
 				// Initialize the new scene
 				scene->getRoot()->init();
 				scene->getRoot()->postInit();

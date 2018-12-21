@@ -46,6 +46,8 @@ namespace DerydocaEngine
 
 		void preRender();
 
+		void preDestroy();
+
 		void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const;
 
 		void renderMesh(

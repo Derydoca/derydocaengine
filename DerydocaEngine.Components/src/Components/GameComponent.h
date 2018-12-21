@@ -51,6 +51,7 @@ namespace DerydocaEngine::Components
 		virtual void postInit() {}
 		virtual void update(float const& deltaTime) {}
 		virtual void preRender() {}
+		virtual void preDestroy() {}
 		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack) {}
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,

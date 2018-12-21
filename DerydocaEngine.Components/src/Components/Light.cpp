@@ -31,7 +31,6 @@ namespace DerydocaEngine::Components
 
 	Light::~Light()
 	{
-		Rendering::LightManager::getInstance().removeLight(this);
 	}
 
 	glm::mat4 Light::getProjectionMatrix()
@@ -106,6 +105,11 @@ namespace DerydocaEngine::Components
 		{
 			m_shadowSoftness = shadowSoftnessNode.as<float>();
 		}
+	}
+
+	void Light::preDestroy()
+	{
+		Rendering::LightManager::getInstance().removeLight(this);
 	}
 
 	void Light::renderShadowMap(const GameObject* gameObject)

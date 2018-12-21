@@ -55,8 +55,6 @@ namespace DerydocaEngine::Components
 
 	Camera::~Camera()
 	{
-		delete m_displayRect;
-		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
 	void Camera::init()
@@ -73,6 +71,12 @@ namespace DerydocaEngine::Components
 		{
 			m_postProcessMaterial->setTexture("RenderTex", m_renderTexture);
 		}
+	}
+
+	void Camera::preDestroy()
+	{
+		delete m_displayRect;
+		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
 	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)

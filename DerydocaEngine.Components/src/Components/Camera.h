@@ -89,10 +89,11 @@ namespace DerydocaEngine::Components
 		float getDisplayWidth();
 		float getDisplayHeight();
 		void setRenderTexture(std::shared_ptr<Rendering::RenderTexture> renderTexture) { m_renderTexture = renderTexture; }
-		void init();
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
 		void setRenderingMode(RenderingMode const& mode);
 		void resize(int const& width, int const& height);
+		virtual void init();
+		virtual void preDestroy();
 
 		void createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int & texid, int const& width, int const& height);
 

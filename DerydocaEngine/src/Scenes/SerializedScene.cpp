@@ -149,6 +149,7 @@ namespace DerydocaEngine::Scenes
 
 	void SerializedScene::tearDown()
 	{
+		m_root->preDestroy();
 		m_root = nullptr;
 	}
 
