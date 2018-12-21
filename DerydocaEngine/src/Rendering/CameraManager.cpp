@@ -15,13 +15,13 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	void CameraManager::render(const std::vector<std::shared_ptr<GameObject>> rootObjects)
+	void CameraManager::render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
 		for each (Components::Camera* cam in m_cameras)
 		{
 			m_currentCamera = cam;
 
-			cam->renderRoots(rootObjects);
+			cam->renderScenes(scenes);
 		}
 	}
 

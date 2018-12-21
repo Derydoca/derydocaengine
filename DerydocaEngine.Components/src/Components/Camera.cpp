@@ -232,10 +232,15 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Camera::renderRoots(const std::vector<std::shared_ptr<GameObject>> roots)
+	void Camera::renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
-		for (auto root : roots)
+		for (auto scene : scenes)
 		{
+			auto root = scene->getRoot();
+			if (root == nullptr)
+			{
+				continue;
+			}
 			Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
 		}
 
@@ -266,8 +271,13 @@ namespace DerydocaEngine::Components
 			(GLint)(textureH * m_displayRect->getHeight()));
 		glEnable(GL_DEPTH_TEST);
 		clear();
-		for (auto root : roots)
+		for (auto scene : scenes)
 		{
+			auto root = scene->getRoot();
+			if (root == nullptr)
+			{
+				continue;
+			}
 			root->preRender();
 			root->render(m_matrixStack);
 		}

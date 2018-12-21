@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Projection.h"
+#include "Scenes\Scene.h"
 
 struct Rectangle;
 namespace DerydocaEngine::Rendering {
@@ -81,7 +82,7 @@ namespace DerydocaEngine::Components
 
 		@root Root game object to render all of its children
 		*/
-		void renderRoots(const std::vector<std::shared_ptr<GameObject>> roots);
+		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }

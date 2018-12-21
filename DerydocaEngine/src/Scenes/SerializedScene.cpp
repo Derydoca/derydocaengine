@@ -19,8 +19,10 @@ namespace DerydocaEngine::Scenes
 	{
 	}
 
-	void SerializedScene::setUp(std::shared_ptr<GameObject> const root)
+	void SerializedScene::setUp()
 	{
+		m_root = std::make_shared<GameObject>("__SCENE_ROOT__");
+
 		// Initialize the components
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)
 		{
@@ -108,7 +110,7 @@ namespace DerydocaEngine::Scenes
 			else
 			{
 				// Otherwise this object should exist on the root of the scene
-				root->addChild(go);
+				m_root->addChild(go);
 			}
 
 			// Iterate through each component
@@ -145,8 +147,9 @@ namespace DerydocaEngine::Scenes
 		}
 	}
 
-	void SerializedScene::tearDown(std::shared_ptr<GameObject> const root)
+	void SerializedScene::tearDown()
 	{
+		m_root = nullptr;
 	}
 
 	void SerializedScene::LoadFromFile(std::string const& filePath)
