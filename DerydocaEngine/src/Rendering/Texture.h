@@ -13,18 +13,31 @@ namespace DerydocaEngine::Rendering
 	{
 	public:
 		Texture();
-		Texture(std::string const& fileName, TextureParameters* const& params = nullptr);
-		Texture(std::string const& xpos, std::string const& xneg, std::string const& ypos, std::string const& yneg, std::string const& zpos, std::string const& zneg);
+		Texture(const std::string& fileName, const TextureParameters* params = nullptr);
+		Texture(
+			const std::string& xpos,
+			const std::string& xneg,
+			const std::string& ypos,
+			const std::string& yneg,
+			const std::string& zpos,
+			const std::string& zneg
+		);
 		~Texture();
 
-		void bind(unsigned int const& unit) const;
+		void bind(const unsigned int unit) const;
 		int getWidth() const { return m_width; }
 		int getHeight() const { return m_height; }
 		unsigned int getTextureType() const { return m_textureType; }
 		unsigned int getRendererId() const { return m_rendererId; }
-		void updateBuffer(unsigned char * const& data, int const& width, int const& height, int const& channels, TextureParameters* const& params);
+		void updateBuffer(
+			unsigned char * data,
+			const int width,
+			const int height,
+			const int channels,
+			const TextureParameters* params
+		);
 
-		unsigned int channelsToPixelFormat(int const& numChannels) const;
+		unsigned int channelsToPixelFormat(const int numChannels) const;
 	protected:
 		unsigned int m_rendererId;
 		int m_width;

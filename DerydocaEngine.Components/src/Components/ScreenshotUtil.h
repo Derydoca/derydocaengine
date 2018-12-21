@@ -18,7 +18,6 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(ScreenshotUtil);
 		ScreenshotUtil();
-		ScreenshotUtil(Rendering::Display* const& display, Input::Keyboard* const& keyboard);
 		~ScreenshotUtil();
 
 		void postRender();

@@ -18,10 +18,10 @@ namespace DerydocaEngine::Rendering
 		TextureWrapMode getWrapModeS() const { return m_wrapS; }
 		TextureWrapMode getWrapModeT() const { return m_wrapT; }
 
-		void setWrapModeS(TextureWrapMode const& mode) { m_wrapS = mode; }
-		void setWrapModeT(TextureWrapMode const& mode) { m_wrapT = mode; }
+		void setWrapModeS(const TextureWrapMode mode) { m_wrapS = mode; }
+		void setWrapModeT(const TextureWrapMode mode) { m_wrapT = mode; }
 
-		unsigned int textureWrapModeToOpenGL(TextureWrapMode const& mode);
+		static unsigned int textureWrapModeToOpenGL(const TextureWrapMode mode);
 	private:
 		TextureWrapMode m_wrapS;
 		TextureWrapMode m_wrapT;

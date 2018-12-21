@@ -6,7 +6,8 @@
 #include <ctime>
 #include <GL/glew.h>
 #include "Rendering\Display.h"
-#include "Input\Keyboard.h"
+#include "Rendering\DisplayManager.h"
+#include "Input\InputManager.h"
 #include "sdl2\SDL.h"
 #include "vendor/stb_image.h"
 #include "vendor/stb_image_write.h"
@@ -16,7 +17,7 @@ namespace t = boost::posix_time;
 namespace DerydocaEngine::Components
 {
 
-	std::string convertTimeToString(t::ptime const& now)
+	std::string convertTimeToString(const t::ptime& now)
 	{
 		static std::locale loc(std::wcout.getloc(), new t::time_facet("%Y%m%d%H%M%S"));
 		std::basic_stringstream<char> wss;
@@ -29,14 +30,9 @@ namespace DerydocaEngine::Components
 		m_keyboard(),
 		m_display()
 	{
+		m_keyboard = Input::InputManager::getInstance().getKeyboard();
+		m_display = Rendering::DisplayManager::getInstance().getDisplay(0);
 	}
-
-	ScreenshotUtil::ScreenshotUtil(Rendering::Display* const& display, Input::Keyboard* const& keyboard) :
-		m_keyboard(keyboard),
-		m_display(display)
-	{
-	}
-
 
 	ScreenshotUtil::~ScreenshotUtil()
 	{

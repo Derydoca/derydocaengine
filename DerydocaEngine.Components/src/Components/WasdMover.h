@@ -18,18 +18,6 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(WasdMover);
 		WasdMover();
-		WasdMover(Input::Keyboard* const& keyboard, Input::Mouse* const& mouse) :
-			m_keyboard(keyboard),
-			m_mouse(mouse),
-			m_moveSpeed(5.0f),
-			m_mouseSensitivityX(0.005f),
-			m_mouseSensitivityY(0.005f),
-			m_fastMoveMultiplier(2.0f),
-			m_slowMoveMultiplier(0.5f),
-			m_minXRot(-glm::half_pi<float>()),
-			m_maxXRot(glm::half_pi<float>())
-		{
-		}
 		~WasdMover();
 
 		void init();

@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 
 // TODO: Find a better way for abstraction. This is tacky.
-unsigned int DerydocaEngine::Rendering::TextureParameters::textureWrapModeToOpenGL(TextureWrapMode const & mode)
+unsigned int DerydocaEngine::Rendering::TextureParameters::textureWrapModeToOpenGL(const TextureWrapMode mode)
 {
 	switch (mode)
 	{
@@ -21,4 +21,4 @@ unsigned int DerydocaEngine::Rendering::TextureParameters::textureWrapModeToOpen
 	default:
 		return GL_REPEAT;
 	}
-};
+}

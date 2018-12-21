@@ -46,7 +46,6 @@ namespace DerydocaEngine::Components
 		};
 
 		Camera();
-		Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar);
 		~Camera();
 
 		inline std::shared_ptr<Rendering::RenderTexture> getRenderTexture() const { return m_renderTexture; }
@@ -82,7 +81,7 @@ namespace DerydocaEngine::Components
 
 		@root Root game object to render all of its children
 		*/
-		void renderRoot(const std::shared_ptr<GameObject> root);
+		void renderRoots(const std::vector<std::shared_ptr<GameObject>> roots);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }
@@ -106,7 +105,7 @@ namespace DerydocaEngine::Components
 	private:
 		std::shared_ptr<Components::Transform> m_transform;
 		Color m_clearColor;
-		Rendering::Skybox* m_skybox;
+		std::shared_ptr<Rendering::Skybox> m_skybox;
 		ClearMode m_clearMode;
 		RenderingMode m_renderingMode;
 		std::shared_ptr<Rendering::Material> m_skyboxMaterial;

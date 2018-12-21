@@ -23,7 +23,7 @@ namespace DerydocaEngine::Rendering
 		inline std::list<Components::Camera*> getCameras() { return m_cameras; }
 		void addCamera(Components::Camera* const& camera) { m_cameras.push_back(camera); }
 		void removeCamera(Components::Camera* const& camera) { m_cameras.remove(camera); }
-		void render(std::shared_ptr<GameObject> const rootObject);
+		void render(const std::vector<std::shared_ptr<GameObject>> rootObjects);
 		Components::Camera* getCurrentCamera() { return m_currentCamera; }
 
 		void operator=(CameraManager const&) = delete;

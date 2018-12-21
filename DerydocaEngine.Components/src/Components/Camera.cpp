@@ -3,6 +3,7 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include "Helpers\YamlTools.h"
 #include "Rendering\CameraManager.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
@@ -24,7 +25,7 @@ namespace DerydocaEngine::Components
 	Camera::Camera() :
 		m_transform(),
 		m_clearColor(),
-		m_skybox(new Rendering::Skybox()),
+		m_skybox(std::make_shared<Rendering::Skybox>()),
 		m_clearMode(Camera::NoClear),
 		m_renderingMode(Camera::RenderingMode::Forward),
 		m_skyboxMaterial(nullptr),
@@ -52,41 +53,9 @@ namespace DerydocaEngine::Components
 		setClearColor(Color(0.5, 0.0, 0.0));
 	}
 
-	Camera::Camera(float const& fov, float const& aspect, float const& zNear, float const& zFar) :
-		m_transform(),
-		m_clearColor(),
-		m_skybox(new Rendering::Skybox()),
-		m_clearMode(Camera::NoClear),
-		m_renderingMode(Camera::RenderingMode::Forward),
-		m_skyboxMaterial(nullptr),
-		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
-		m_renderTexture(nullptr),
-		m_display(nullptr),
-		m_displayRect(new Rectangle(0, 0, 1, 1)),
-		m_quad(nullptr),
-		m_postProcessMaterial(nullptr),
-		m_orthoSize(10.0f),
-		m_deferredFBO(0),
-		m_gbuffDepth(0),
-		m_gbuffPos(0),
-		m_gbuffNorm(0),
-		m_gbuffColor(0),
-		m_deferredRendererCompositor(0),
-		m_projection()
-	{
-		m_projection.setFov(fov);
-		m_projection.setAspectRatio(aspect);
-		m_projection.setZNear(zNear);
-		m_projection.setZFar(zFar);
-		m_projection.recalculateProjectionMatrix();
-
-		Rendering::CameraManager::getInstance().addCamera(this);
-	}
-
 	Camera::~Camera()
 	{
 		delete m_displayRect;
-		delete m_skybox;
 		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
@@ -198,7 +167,7 @@ namespace DerydocaEngine::Components
 		m_projection.setZFar(zFar);
 		m_projection.recalculateProjectionMatrix();
 
-		YAML::Node renderTextureNode = node["RenderTexture"];
+		auto renderTextureNode = node["RenderTexture"];
 		if (renderTextureNode)
 		{
 			int width = renderTextureNode["Width"].as<int>();
@@ -208,6 +177,31 @@ namespace DerydocaEngine::Components
 			auto postProcessingShader = getResourcePointer<Rendering::Shader>(renderTextureNode, "PostProcessShader");
 			m_postProcessMaterial = std::make_shared<Rendering::Material>();
 			m_postProcessMaterial->setShader(postProcessingShader);
+		}
+
+		auto renderingModeNode = node["renderingMode"];
+		if (renderingModeNode)
+		{
+			setRenderingMode(static_cast<RenderingMode>(renderingModeNode.as<int>()));
+		}
+
+		auto clearModeNode = node["clearMode"];
+		if (clearModeNode)
+		{
+			setClearMode(static_cast<ClearMode>(clearModeNode.as<int>()));
+		}
+
+		auto clearColorNode = node["clearColor"];
+		if (clearColorNode)
+		{
+			setClearColor(clearColorNode.as<Color>());
+		}
+
+		auto skyboxNode = node["skybox"];
+		if (skyboxNode)
+		{
+			auto skybox = getResourcePointer<Rendering::Material>(skyboxNode.as<boost::uuids::uuid>());
+			setSkybox(skybox);
 		}
 	}
 
@@ -238,9 +232,12 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Camera::renderRoot(const std::shared_ptr<GameObject> gameObject)
+	void Camera::renderRoots(const std::vector<std::shared_ptr<GameObject>> roots)
 	{
-		Rendering::LightManager::getInstance().renderShadowMaps(gameObject->getTransform());
+		for (auto root : roots)
+		{
+			Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
+		}
 
 		int textureW, textureH = 1;
 
@@ -269,8 +266,11 @@ namespace DerydocaEngine::Components
 			(GLint)(textureH * m_displayRect->getHeight()));
 		glEnable(GL_DEPTH_TEST);
 		clear();
-		gameObject->preRender();
-		gameObject->render(m_matrixStack);
+		for (auto root : roots)
+		{
+			root->preRender();
+			root->render(m_matrixStack);
+		}
 
 		// Postprocessing happens here
 		if (m_renderTexture != nullptr && m_postProcessMaterial != nullptr)

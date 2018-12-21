@@ -2,10 +2,10 @@
 SETLOCAL EnableDelayedExpansion
 
 :: List all possible paths that an executable could be found in, in order of priority
-SET buildDirectories=%~dp0builds\x64\Debug\ %~dp0builds\x64\Release\ %~dp0builds\Win32\Debug\ %~dp0builds\Win32\Release\
+SET buildDirectories=%~dp0bin\x64-Debug\ %~dp0bin\x64-Release\ %~dp0bin\Win32-Debug\ %~dp0bin\Win32-Release\
 
 :: Name of the executable to run
-SET executableName=derydocaengine.exe
+SET executableName=DerydocaEngine.Editor.UI.exe
 
 :: Arguments to pass to the executable
 SET args=-processDirectory %~dp0engineResources %~dp0exampleProject

@@ -10,18 +10,17 @@ namespace DerydocaEngine::Components
 {
 
 	WasdMover::WasdMover() :
-		m_transform(),
 		m_keyboard(nullptr),
 		m_mouse(nullptr),
-		m_moveSpeed(1.0f),
-		m_mouseSensitivityX(1.0f),
-		m_mouseSensitivityY(1.0f),
+		m_moveSpeed(5.0f),
+		m_mouseSensitivityX(0.005f),
+		m_mouseSensitivityY(0.005f),
 		m_fastMoveMultiplier(2.0f),
 		m_slowMoveMultiplier(0.5f),
 		m_localMomentum(),
 		m_eulerRot(),
-		m_minXRot(),
-		m_maxXRot()
+		m_minXRot(-glm::half_pi<float>()),
+		m_maxXRot(glm::half_pi<float>())
 	{
 		m_mouse = Input::InputManager::getInstance().getMouse();
 		m_keyboard = Input::InputManager::getInstance().getKeyboard();
