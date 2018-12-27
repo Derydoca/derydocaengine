@@ -63,10 +63,13 @@ namespace DerydocaEngine::Components
 	{
 	}
 
+	void MeshRenderer::preDestroy()
+	{
+		m_meshRendererCamera = nullptr;
+	}
+
 	void MeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
-		assert(getGameObject());
-
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
 		Rendering::LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());

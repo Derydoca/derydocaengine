@@ -18,9 +18,6 @@ namespace DerydocaEngine
 
 	GameObject::~GameObject()
 	{
-		m_components.clear();
-
-		m_children.clear();
 	}
 
 	void GameObject::addChild(const std::shared_ptr<GameObject> gameObject)
@@ -50,6 +47,9 @@ namespace DerydocaEngine
 
 	void GameObject::preDestroy()
 	{
+		m_components.clear();
+		m_children.clear();
+
 		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->preDestroy();

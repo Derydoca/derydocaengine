@@ -59,15 +59,15 @@ namespace DerydocaEngine::Components
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Transform> projectionTransform) {}
 		virtual void postRender() {}
-		inline void setGameObject(const std::shared_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
-		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject; }
+		inline void setGameObject(const std::weak_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
+		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject.lock(); }
 		virtual void deserialize(YAML::Node const& compNode) { };
 
 		template<typename T>
 		inline std::shared_ptr<T> getComponent()
 		{
 			// Get the game object that this component belongs to
-			std::shared_ptr<GameObject> gameObject = getGameObject();
+			auto gameObject = getGameObject();
 			if (gameObject == nullptr)
 			{
 				return nullptr;
@@ -176,7 +176,7 @@ namespace DerydocaEngine::Components
 		}
 
 	private:
-		std::shared_ptr<GameObject> m_gameObject;
+		std::weak_ptr<GameObject> m_gameObject;
 	};
 
 }

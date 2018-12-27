@@ -32,7 +32,7 @@ namespace DerydocaEngine
 
 		std::vector<std::shared_ptr<Components::GameComponent>>& getComponents() { return m_components; }
 
-		std::shared_ptr<GameObject> getParent() const { return m_parent; }
+		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
 
 		std::shared_ptr<Components::Transform> getTransform() { return m_transform; }
 
@@ -64,7 +64,7 @@ namespace DerydocaEngine
 	private:
 		std::string m_name;
 		std::shared_ptr<Components::Transform> m_transform;
-		std::shared_ptr<GameObject> m_parent;
+		std::weak_ptr<GameObject> m_parent;
 		std::vector<std::shared_ptr<GameObject>> m_children;
 		std::vector<std::shared_ptr<Components::GameComponent>> m_components;
 	};

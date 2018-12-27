@@ -26,7 +26,7 @@ namespace DerydocaEngine::Scenes
 		// Initialize the components
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)
 		{
-			SceneObject* sceneObject = m_sceneObjects[i];
+			auto sceneObject = m_sceneObjects[i];
 
 			// If the object is already created, move onto the next object
 			if (sceneObject->isObjectCreated())
@@ -86,7 +86,7 @@ namespace DerydocaEngine::Scenes
 		// Resolve dependencies
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)
 		{
-			SceneObject* sceneObject = m_sceneObjects[i];
+			auto sceneObject = m_sceneObjects[i];
 
 			// Do not resolve the object if it is not created for some reason
 			if (!sceneObject->isObjectCreated())
@@ -103,7 +103,7 @@ namespace DerydocaEngine::Scenes
 			{
 				// If it is parented to another game object, set the relationship
 				boost::uuids::uuid parentId = parentObjectIdNode.as<boost::uuids::uuid>();
-				SceneObject* parentSceneObject = findNode(parentId);
+				auto parentSceneObject = findNode(parentId);
 				std::shared_ptr<GameObject> parentGo = parentSceneObject->getGameObject();
 				parentGo->addChild(go);
 			}
@@ -149,11 +149,12 @@ namespace DerydocaEngine::Scenes
 
 	void SerializedScene::tearDown()
 	{
+		m_sceneObjects.clear();
 		m_root->preDestroy();
 		m_root = nullptr;
 	}
 
-	void SerializedScene::LoadFromFile(std::string const& filePath)
+	void SerializedScene::LoadFromFile(const std::string& filePath)
 	{
 		std::cout << "Loading scene: " << filePath << "\n";
 		YAML::Node file = YAML::LoadFile(filePath);
@@ -168,12 +169,6 @@ namespace DerydocaEngine::Scenes
 			if (!typeNode)
 			{
 				std::cout << "Skipping scene node " << i << " because type is not defined.\n";
-				continue;
-			}
-
-			if (!typeNode.IsScalar())
-			{
-				std::cout << "Skipping scene node " << i << " because type is not a scalar.\n";
 				continue;
 			}
 
@@ -198,14 +193,14 @@ namespace DerydocaEngine::Scenes
 			boost::uuids::uuid id = idNode.as<boost::uuids::uuid>();
 			std::string typeName = typeNode.as<std::string>();
 
-			SceneObject* obj = new SceneObject(id, typeName, propertiesNode);
+			auto obj = std::make_shared<SceneObject>(id, typeName, propertiesNode);
 
 			// Store a tuple type object with object ID and generic pointer to object in memory then resolve all references
 			m_sceneObjects.push_back(obj);
 		}
 	}
 
-	void SerializedScene::SaveToFile(std::string const& filePath)
+	void SerializedScene::SaveToFile(const std::string& filePath)
 	{
 		YAML::Node root;
 
@@ -266,7 +261,7 @@ namespace DerydocaEngine::Scenes
 		file.close();
 	}
 
-	SceneObject * SerializedScene::findNode(boost::uuids::uuid const& id)
+	std::shared_ptr<SceneObject> SerializedScene::findNode(const boost::uuids::uuid& id)
 	{
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)
 		{

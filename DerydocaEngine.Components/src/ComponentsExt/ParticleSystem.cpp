@@ -98,7 +98,6 @@ namespace DerydocaEngine::Ext
 	void ParticleSystem::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		glDisable(GL_DEPTH_TEST);
-		assert(getGameObject());
 
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
