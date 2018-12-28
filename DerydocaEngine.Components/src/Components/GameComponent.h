@@ -41,7 +41,7 @@ namespace DerydocaEngine::Components
 	static std::string getClassName() { return #TYPE; }\
 	void __forceRegistration() { s_isRegistered; };
 
-	class GameComponent {
+	class GameComponent: public std::enable_shared_from_this<GameComponent> {
 	public:
 		GameComponent() :
 			m_gameObject()

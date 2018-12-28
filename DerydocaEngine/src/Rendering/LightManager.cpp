@@ -23,7 +23,7 @@ namespace DerydocaEngine::Rendering
 		assert(shader);
 
 		// Get a list of lights that will affect the object being sent in
-		std::list<Components::Light*> lights = getLights(objectTransform);
+		auto lights = getLights(objectTransform);
 
 		// Cache some things
 		Components::Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
@@ -32,7 +32,7 @@ namespace DerydocaEngine::Rendering
 
 		// Loop through each light and bind them to the shader
 		int lightIndex = 0;
-		for each (Components::Light* light in lights)
+		for each (auto light in lights)
 		{
 			Components::Light::LightType lightType = light->getLightType();
 
@@ -118,9 +118,9 @@ namespace DerydocaEngine::Rendering
 	void LightManager::renderShadowMaps(std::shared_ptr<Components::Transform> const& objectTransform)
 	{
 		// Get a list of lights that will affect the object being sent in
-		std::list<Components::Light*> lights = getLights(objectTransform);
+		auto lights = getLights(objectTransform);
 
-		for each (Components::Light* light in lights)
+		for each (auto light in lights)
 		{
 			if (light->isCastingShadows())
 			{
@@ -140,19 +140,19 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	std::list<Components::Light*> LightManager::getLights(std::shared_ptr<Components::Transform> const& objectTransform) const
+	std::list<std::shared_ptr<Components::Light>> LightManager::getLights(std::shared_ptr<Components::Transform> const& objectTransform) const
 	{
 		// Create a list to store the lights
-		std::list<Components::Light*> lights = std::list<Components::Light*>();
+		auto lights = std::list<std::shared_ptr<Components::Light>>();
 
 		// Go through each light
 		int numLights = 0;
-		for each (Components::Light* light in m_lights)
+		for each (auto light in m_lights)
 		{
 			// TODO: Only include lights that would potentially effect this object
 
 			// Add the light to the list
-			lights.push_back(light);
+			lights.push_back(light.lock());
 
 			// If we are at the maximum number of supported lights, lets end it early
 			numLights++;

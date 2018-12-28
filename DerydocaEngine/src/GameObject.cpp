@@ -47,9 +47,6 @@ namespace DerydocaEngine
 
 	void GameObject::preDestroy()
 	{
-		m_components.clear();
-		m_children.clear();
-
 		for each (std::shared_ptr<Components::GameComponent> c in m_components)
 		{
 			c->preDestroy();
@@ -59,6 +56,9 @@ namespace DerydocaEngine
 		{
 			go->preDestroy();
 		}
+
+		m_components.clear();
+		m_children.clear();
 	}
 
 	void GameObject::preRender() {
