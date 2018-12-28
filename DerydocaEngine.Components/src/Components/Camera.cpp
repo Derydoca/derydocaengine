@@ -55,8 +55,6 @@ namespace DerydocaEngine::Components
 
 	Camera::~Camera()
 	{
-		delete m_displayRect;
-		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
 	void Camera::init()
@@ -73,6 +71,12 @@ namespace DerydocaEngine::Components
 		{
 			m_postProcessMaterial->setTexture("RenderTex", m_renderTexture);
 		}
+	}
+
+	void Camera::preDestroy()
+	{
+		delete m_displayRect;
+		Rendering::CameraManager::getInstance().removeCamera(this);
 	}
 
 	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
@@ -232,10 +236,15 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Camera::renderRoots(const std::vector<std::shared_ptr<GameObject>> roots)
+	void Camera::renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
-		for (auto root : roots)
+		for (auto scene : scenes)
 		{
+			auto root = scene->getRoot();
+			if (root == nullptr)
+			{
+				continue;
+			}
 			Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
 		}
 
@@ -266,8 +275,13 @@ namespace DerydocaEngine::Components
 			(GLint)(textureH * m_displayRect->getHeight()));
 		glEnable(GL_DEPTH_TEST);
 		clear();
-		for (auto root : roots)
+		for (auto scene : scenes)
 		{
+			auto root = scene->getRoot();
+			if (root == nullptr)
+			{
+				continue;
+			}
 			root->preRender();
 			root->render(m_matrixStack);
 		}

@@ -65,8 +65,9 @@ namespace DerydocaEngine::Components
 		glm::mat4 getShadowMatrix(glm::mat4 const& objectModelMatrix);
 		float getShadowSoftness() const { return m_shadowSoftness; }
 
-		void init();
-		void deserialize(YAML::Node const& node);
+		virtual void init();
+		virtual void deserialize(YAML::Node const& node);
+		virtual void preDestroy();
 
 		void renderShadowMap(const GameObject* gameObject);
 	private:

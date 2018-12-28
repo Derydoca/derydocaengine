@@ -65,8 +65,6 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
-		assert(getGameObject());
-
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
 		m_animation->loadPose(m_time, m_boneMatrices, m_mesh->getSkeleton());

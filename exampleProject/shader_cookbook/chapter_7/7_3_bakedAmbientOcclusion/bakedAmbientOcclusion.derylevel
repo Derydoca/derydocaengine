@@ -1,6 +1,6 @@
 Scene:
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: a4c13e3e-a351-49a9-baa1-836876be7fdd
     Properties:
       Name: Cube
       Transform:
@@ -12,8 +12,9 @@ Scene:
           Properties:
             Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: df477d91-75c2-431c-a55a-c69d33e52fcd
     Properties:
       Name: Cube
       Transform:
@@ -25,8 +26,9 @@ Scene:
           Properties:
             Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: bce63d33-4b13-4d8d-9e58-7a74f43a31ab
     Properties:
       Name: Cube
       Transform:
@@ -40,7 +42,7 @@ Scene:
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
 
   - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: c21064fc-dfad-4c0e-ac10-9b6ee8deab38
     Properties:
       Name: Teapot
       Transform:
@@ -55,7 +57,7 @@ Scene:
             tessellationLevel: 4
             
   - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: 8a958a13-1f0e-4738-95a4-6f7713ebb34d
     Properties:
       Name: Squirrel Untextured
       Transform:
@@ -72,7 +74,7 @@ Scene:
             rotationSpeed: 30.0
   
   - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: 91a92412-e4a2-4ca4-90b8-b60ea396f159
     Properties:
       Name: Squirrel Textured
       Transform:
@@ -88,9 +90,8 @@ Scene:
           Properties:
             rotationSpeed: 30.0
 
-
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    ID: 02f9f7cf-9196-4bc0-99d2-dabfab10e59d
     Properties:
       Name: Point Light 1
       Transform:
@@ -109,7 +110,7 @@ Scene:
             shadowSoftness: 0.013671875
   
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: b9d24224-98a7-4fc2-9eb3-df0e3b6356b7
     Properties:
       Name: Cube
       Transform:
@@ -121,8 +122,9 @@ Scene:
           Properties:
             Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: 30f8223b-53f1-400b-a5df-20816f10ee60
     Properties:
       Name: Cube
       Transform:
@@ -136,7 +138,7 @@ Scene:
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
             
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: c727822d-8c71-41c6-a853-b25def8c541b
     Properties:
       Name: Cube
       Transform:
@@ -148,8 +150,9 @@ Scene:
           Properties:
             Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: 62c92589-9146-4544-bd41-3dd5c9d9eb29
     Properties:
       Name: Cube
       Transform:
@@ -163,7 +166,7 @@ Scene:
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
             
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: 0dd3db24-a81a-4623-99c3-fe4b92d93fa0
     Properties:
       Name: Cube
       Transform:
@@ -175,8 +178,9 @@ Scene:
           Properties:
             Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: 0319f1f3-faff-4f5f-8fc7-af5b704126ee 
     Properties:
       Name: Cube
       Transform:
@@ -188,3 +192,4 @@ Scene:
           Properties:
             Material: 14e476a1-b906-4fd9-88eb-35b5e52e5dcd
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+  

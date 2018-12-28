@@ -36,13 +36,12 @@ namespace DerydocaEngine::Editor::UI
 
 	std::shared_ptr<Scenes::SerializedScene> SetUpLevelObject(
 		const std::shared_ptr<Resources::Resource> levelResource,
-		const std::string& levelType,
-		const std::shared_ptr<GameObject> rootSceneObject
+		const std::string& levelType
 	)
 	{
 		auto scene = std::make_shared<Scenes::SerializedScene>();
 		scene->LoadFromFile(levelResource->getSourceFilePath());
-		scene->setUp(rootSceneObject);
+		scene->setUp();
 
 		return scene;
 	}
@@ -74,26 +73,25 @@ namespace DerydocaEngine::Editor::UI
 		// Divisor defines minimum frames per second
 		unsigned long minFrameTime = 1000 / 60;
 
-		auto editorSceneRoot = std::make_shared<GameObject>("__EDITOR_SCENE_ROOT__");
 		auto editorSceneResource = getLevelResource(settings->getEditorComponentsSceneIdentifier(), "editor");
-		std::shared_ptr<Scenes::SerializedScene> editorScene = SetUpLevelObject(editorSceneResource, "editor", editorSceneRoot);
+		auto editorScene = SetUpLevelObject(editorSceneResource, "editor");
 
-		std::shared_ptr<GameObject> sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT__");
-		auto levelResource = getLevelResource(levelIdentifier, "editor");
-		std::shared_ptr<Scenes::Scene> scene = SetUpLevelObject(levelResource, "main", sceneRoot);
+		auto levelResource = getLevelResource(levelIdentifier, "scene");
+		auto scene = SetUpLevelObject(levelResource, "main");
+		getLastModifiedTime(levelResource->getSourceFilePath(), m_levelLoadTime);
 
 		// Initialize all components in the scene before rendering anything
-		editorSceneRoot->init();
-		sceneRoot->init();
+		editorScene->getRoot()->init();
+		scene->getRoot()->init();
 
 		// Run the post initialization routine on all components
-		editorSceneRoot->postInit();
-		sceneRoot->postInit();
+		editorScene->getRoot()->postInit();
+		scene->getRoot()->postInit();
 
-		std::vector<std::shared_ptr<GameObject>> roots =
+		std::vector<std::shared_ptr<Scenes::Scene>> scenes =
 		{
-			editorSceneRoot,
-			sceneRoot
+			editorScene,
+			scene
 		};
 
 		std::time_t levelLastModifiedTime;
@@ -103,15 +101,15 @@ namespace DerydocaEngine::Editor::UI
 		{
 
 			// Tick the clock forward the number of ms it took since the last frame rendered
-			editorSceneRoot->update(clock->getDeltaTime());
-			sceneRoot->update(clock->getDeltaTime());
+			editorScene->getRoot()->update(clock->getDeltaTime());
+			scene->getRoot()->update(clock->getDeltaTime());
 
 			// Render all scene objects
-			Rendering::CameraManager::getInstance().render(roots);
+			Rendering::CameraManager::getInstance().render(scenes);
 
 			// Let the scene objects do whatever it is they need to do after rendering has completed this frame
-			editorSceneRoot->postRender();
-			sceneRoot->postRender();
+			editorScene->getRoot()->postRender();
+			scene->getRoot()->postRender();
 
 			// Let the display respond to any input events
 			display->update();
@@ -131,28 +129,31 @@ namespace DerydocaEngine::Editor::UI
 			}
 			clock->update();
 
-			//// If the file has been updated since we last loaded it
-			//if (getLastModifiedTime(levelResource->getSourceFilePath(), levelLastModifiedTime) &&
-			//	levelLastModifiedTime > m_levelLoadTime)
-			//{
-			//	// Store the time that we reloaded the level
-			//	m_levelLoadTime = levelLastModifiedTime;
+			// If the file has been updated since we last loaded it
+			if (getLastModifiedTime(levelResource->getSourceFilePath(), levelLastModifiedTime) &&
+				levelLastModifiedTime > m_levelLoadTime)
+			{
+				// Store the time that we reloaded the level
+				m_levelLoadTime = levelLastModifiedTime;
 
-			//	// Rebuild the scene components
-			//	
-			//	sceneRoot = std::make_shared<GameObject>("__SCENE_ROOT_UPDATED__");
-			//	scene->tearDown(sceneRoot);
-			//	scene = SetUpLevelObject(editorSceneResource, "editor", editorSceneRoot);
+				// Rebuild the scene components
+				scene->tearDown();
+				scene = SetUpLevelObject(levelResource, "main");
+				scenes =
+				{
+					editorScene,
+					scene
+				};
 
-			//	// Initialize the new scene
-			//	sceneRoot->init();
-			//	sceneRoot->postInit();
-			//}
+				// Initialize the new scene
+				scene->getRoot()->init();
+				scene->getRoot()->postInit();
+			}
 		}
 
 		// Clean up the scene
-		editorScene->tearDown(editorSceneRoot);
-		scene->tearDown(sceneRoot);
+		editorScene->tearDown();
+		scene->tearDown();
 
 		return 0;
 	}

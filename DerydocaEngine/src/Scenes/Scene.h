@@ -10,9 +10,11 @@ namespace DerydocaEngine::Scenes
 
 	class Scene {
 	public:
-		virtual ~Scene() {}
-		virtual void setUp(std::shared_ptr<GameObject> const root) {}
-		virtual void tearDown(std::shared_ptr<GameObject> const root) {}
+		virtual void setUp() = 0;
+		virtual void tearDown() = 0;
+		virtual std::shared_ptr<GameObject> getRoot() const { return m_root; }
+	protected:
+		std::shared_ptr<GameObject> m_root;
 	};
 
 }

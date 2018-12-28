@@ -11,15 +11,15 @@ namespace DerydocaEngine::Scenes
 		SerializedScene();
 		~SerializedScene();
 
-		virtual void setUp(std::shared_ptr<GameObject> const root);
-		virtual void tearDown(std::shared_ptr<GameObject> const root);
+		virtual void setUp();
+		virtual void tearDown();
 
-		void LoadFromFile(std::string const& filePath);
-		void SaveToFile(std::string const& filePath);
+		void LoadFromFile(const std::string& filePath);
+		void SaveToFile(const std::string& filePath);
 	private:
-		std::vector<SceneObject*> m_sceneObjects;
+		std::vector<std::shared_ptr<SceneObject>> m_sceneObjects;
 
-		SceneObject* findNode(boost::uuids::uuid const& id);
+		std::shared_ptr<SceneObject> findNode(const boost::uuids::uuid& id);
 	};
 
 }

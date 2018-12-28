@@ -32,9 +32,10 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Material> getMaterial() { return m_material; }
 		std::shared_ptr<Camera> getMeshRendererCamera() { return m_meshRendererCamera; }
 
-		void deserialize(YAML::Node const& compNode);
+		virtual void deserialize(YAML::Node const& compNode);
+		virtual void init();
+		virtual void preDestroy();
 
-		void init();
 		void setMesh(std::shared_ptr<Rendering::Mesh> const& mesh) { m_mesh = mesh; }
 		void setMaterial(std::shared_ptr<Rendering::Material> const& material) { m_material = material; }
 	private:

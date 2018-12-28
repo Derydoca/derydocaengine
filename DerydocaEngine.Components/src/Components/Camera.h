@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Projection.h"
+#include "Scenes\Scene.h"
 
 struct Rectangle;
 namespace DerydocaEngine::Rendering {
@@ -81,17 +82,18 @@ namespace DerydocaEngine::Components
 
 		@root Root game object to render all of its children
 		*/
-		void renderRoots(const std::vector<std::shared_ptr<GameObject>> roots);
+		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }
 		float getDisplayWidth();
 		float getDisplayHeight();
 		void setRenderTexture(std::shared_ptr<Rendering::RenderTexture> renderTexture) { m_renderTexture = renderTexture; }
-		void init();
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
 		void setRenderingMode(RenderingMode const& mode);
 		void resize(int const& width, int const& height);
+		virtual void init();
+		virtual void preDestroy();
 
 		void createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int & texid, int const& width, int const& height);
 

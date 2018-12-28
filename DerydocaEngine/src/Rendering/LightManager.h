@@ -26,20 +26,30 @@ namespace DerydocaEngine::Rendering
 			return instance;
 		}
 
-		void addLight(Components::Light* const& light) { m_lights.push_back(light); }
+		void addLight(std::weak_ptr<Components::Light> const& light) { m_lights.push_back(light); }
 		void bindLightsToShader(
 			std::shared_ptr<Rendering::MatrixStack> const& matrixStack,
 			std::shared_ptr<Components::Transform> const& objectTransform,
 			std::shared_ptr<Rendering::Shader> const& shader
 		);
-		void removeLight(Components::Light* const& light) { m_lights.remove(light); }
+		void removeLight(std::weak_ptr<Components::Light> const& light) {
+			auto lightRef = light.lock();
+			m_lights.remove_if([lightRef](std::weak_ptr<Components::Light> l) {
+				auto otherLightRef = l.lock();
+				if (lightRef && otherLightRef)
+				{
+					return lightRef == otherLightRef;
+				}
+				return false;
+			});
+		}
 		void renderShadowMaps(std::shared_ptr<Components::Transform> const& objectTransform);
 
 		void operator=(LightManager const&) = delete;
 	private:
 		const int MAX_LIGHTS = 10;
 
-		std::list<Components::Light*> m_lights;
+		std::list<std::weak_ptr<Components::Light>> m_lights;
 		unsigned int m_shadowJitterTexture;
 		glm::vec3 m_shadowJitterTextureSize;
 
@@ -48,7 +58,7 @@ namespace DerydocaEngine::Rendering
 		~LightManager();
 
 		void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
-		std::list<Components::Light*> getLights(std::shared_ptr<Components::Transform> const& objectTransform) const;
+		std::list<std::shared_ptr<Components::Light>> getLights(std::shared_ptr<Components::Transform> const& objectTransform) const;
 	};
 
 }

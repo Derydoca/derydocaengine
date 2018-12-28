@@ -26,12 +26,10 @@ namespace DerydocaEngine::Components
 		m_shadowMapFilterType(ShadowMapFilterType::Nearest),
 		m_shadowSoftness(0.01f)
 	{
-		Rendering::LightManager::getInstance().addLight(this);
 	}
 
 	Light::~Light()
 	{
-		Rendering::LightManager::getInstance().removeLight(this);
 	}
 
 	glm::mat4 Light::getProjectionMatrix()
@@ -52,6 +50,9 @@ namespace DerydocaEngine::Components
 
 	void Light::init()
 	{
+		auto sp = std::static_pointer_cast<Light>(shared_from_this());
+		Rendering::LightManager::getInstance().addLight(sp);
+
 		if (m_castShadows) {
 			generateShadowMap();
 		}
@@ -108,6 +109,12 @@ namespace DerydocaEngine::Components
 		}
 	}
 
+	void Light::preDestroy()
+	{
+		auto sp = std::static_pointer_cast<Light>(shared_from_this());
+		Rendering::LightManager::getInstance().removeLight(sp);
+	}
+
 	void Light::renderShadowMap(const GameObject* gameObject)
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_shadowFBO);
@@ -156,11 +163,7 @@ namespace DerydocaEngine::Components
 		glDrawBuffers(1, drawBuffers);
 
 		GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-		if (result == GL_FRAMEBUFFER_COMPLETE)
-		{
-			std::cout << "Framebuffer is complete.\n";
-		}
-		else
+		if (result != GL_FRAMEBUFFER_COMPLETE)
 		{
 			std::cout << "Framebuffer is not complete.\n";
 		}
