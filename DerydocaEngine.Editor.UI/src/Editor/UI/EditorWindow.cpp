@@ -69,6 +69,7 @@ namespace DerydocaEngine::Editor::UI
 		auto clock = std::make_unique<Timing::Clock>();
 
 		auto display = std::make_shared<Rendering::Display>(settings->getWidth(), settings->getHeight(), "Derydoca Engine");
+		display->init();
 
 		// Divisor defines minimum frames per second
 		unsigned long minFrameTime = 1000 / 60;
@@ -103,6 +104,9 @@ namespace DerydocaEngine::Editor::UI
 			// Tick the clock forward the number of ms it took since the last frame rendered
 			editorScene->getRoot()->update(clock->getDeltaTime());
 			scene->getRoot()->update(clock->getDeltaTime());
+
+			// Do any setup for a new frame
+			display->newFrame();
 
 			// Render all scene objects
 			Rendering::CameraManager::getInstance().render(scenes);

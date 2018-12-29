@@ -21,7 +21,8 @@ namespace DerydocaEngine::Rendering
 		Display(int const& width, int const& height, std::string const& title);
 		virtual ~Display();
 
-		void init(int const& width, int const& height, std::string const& title);
+		void init();
+		void newFrame();
 		void update();
 		bool isClosed();
 		inline float getAspectRatio() { return (float)m_width / (float)m_height; }

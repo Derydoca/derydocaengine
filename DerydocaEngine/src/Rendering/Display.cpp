@@ -3,15 +3,15 @@
 
 #include <GL/glew.h>
 #include "Components\Camera.h"
-#include "Rendering\DisplayManager.h"
 #include "Input\InputManager.h"
+#include "Rendering\DisplayManager.h"
+#include "Rendering\Gui\GuiImpl.h"
 
 #include <sdl2/SDL.h>
 #undef main
 
 namespace DerydocaEngine::Rendering
 {
-
 	Display::Display(int const& width, int const& height, std::string const& title)
 	{
 		DisplayManager::getInstance().addDisplay(this);
@@ -22,20 +22,21 @@ namespace DerydocaEngine::Rendering
 		// TODO: Look into reducing the number of items included
 		SDL_Init(SDL_INIT_EVERYTHING);
 
-		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 3);
+		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 3);
+		SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 2);
 		SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+
 		SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
-		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 		// Enable multisampling
 		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
 		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);
 
-		m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL);
-		SDL_SetWindowResizable(m_window, SDL_TRUE);
+		m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
@@ -55,32 +56,34 @@ namespace DerydocaEngine::Rendering
 		//glEnable(GL_CULL_FACE);
 		//glCullFace(GL_BACK);
 
-	/*
 		// Print information about the current instance of OpenGL
 		const GLubyte *renderer = glGetString(GL_RENDERER);
 		const GLubyte *vendor = glGetString(GL_VENDOR);
 		const GLubyte *version = glGetString(GL_VERSION);
 		const GLubyte *glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
-		cout << "Renderer: " << renderer << "\n";
-		cout << "Vendor: " << vendor << "\n";
-		cout << "Version: " << version << "\n";
-		cout << "GLSL Version: " << glslVersion << "\n";
-		cout << "Max Vertex Attributes: " << GL_MAX_VERTEX_ATTRIBS << "\n";
+		std::cout << "Renderer: " << renderer << "\n";
+		std::cout << "Vendor: " << vendor << "\n";
+		std::cout << "Version: " << version << "\n";
+		std::cout << "GLSL Version: " << glslVersion << "\n";
+		std::cout << "Max Vertex Attributes: " << GL_MAX_VERTEX_ATTRIBS << "\n";
 
+		/*
 		GLint nExtensions;
 		glGetIntegerv(GL_NUM_EXTENSIONS, &nExtensions);
-		cout << "Supported extensions (" << nExtensions << "):" << "\n";
+		std::cout << "Supported extensions (" << nExtensions << "):" << "\n";
 		for (GLint i = 0; i < nExtensions; i++)
 		{
-			cout << "    " << i << ": " << glGetStringi(GL_EXTENSIONS, i) << "\n";
+			std::cout << "    " << i << ": " << glGetStringi(GL_EXTENSIONS, i) << "\n";
 		}
-	*/
+		*/
 
 		m_keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	Display::~Display()
 	{
+		Gui::GuiImpl::shutdown();
+
 		SDL_GL_DeleteContext(m_glContext);
 		SDL_DestroyWindow(m_window);
 		SDL_Quit();
@@ -106,11 +109,17 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	void Display::init(int const& width, int const& height, std::string const& title)
+	void Display::init()
 	{
+		Gui::GuiImpl::init(m_window, &m_glContext);
+	}
+
+	void Display::newFrame() {
+		Gui::GuiImpl::newFrame(m_window);
 	}
 
 	void Display::update() {
+		Gui::GuiImpl::render();
 		SDL_GL_SwapWindow(m_window);
 
 		m_keyboard->update();

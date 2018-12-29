@@ -31,6 +31,9 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/transform.hpp>
 
+// Dear IMGUI
+#include <vendor/imgui/imgui.h>
+
 // YAML-CPP
 #include <yaml-cpp/yaml.h>
 
