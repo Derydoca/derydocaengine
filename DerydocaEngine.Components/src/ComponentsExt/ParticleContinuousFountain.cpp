@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 	{
 	}
 
-	void ParticleContinuousFountain::update(float const& deltaTime)
+	void ParticleContinuousFountain::update(const float deltaTime)
 	{
 		m_time += deltaTime;
 		m_lastDeltaTime = deltaTime;
@@ -42,7 +42,7 @@ namespace DerydocaEngine::Ext
 		m_material->setVec3("EmitterPosition", m_trans->getWorldPos());
 	}
 
-	void ParticleContinuousFountain::deserialize(YAML::Node const& compNode)
+	void ParticleContinuousFountain::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node numParticlesNode = compNode["numParticles"];
 		if (numParticlesNode)

@@ -22,7 +22,7 @@ namespace DerydocaEngine::Components
 			m_dirtyComponents = (Rendering::MeshComponents)(m_dirtyComponents | component);
 		}
 
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			std::shared_ptr<Rendering::Material> material,

@@ -100,7 +100,7 @@ namespace DerydocaEngine::Components
 		void setProjectionMode(Rendering::ProjectionMode const& mode);
 		void setOrthoSize(float const& size);
 		float getOrthoSize(float const& size) { return m_orthoSize; }
-		void deserialize(YAML::Node const& node);
+		void deserialize(const YAML::Node& node);
 		std::shared_ptr<Rendering::Shader> getPostProcessShader() const;
 		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
 		Rendering::Projection getProjection() const { return m_projection; }

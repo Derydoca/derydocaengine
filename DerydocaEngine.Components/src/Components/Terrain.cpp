@@ -143,7 +143,7 @@ namespace DerydocaEngine::Components
 		m_meshRenderer->render(matrixStack);
 	}
 
-	void Terrain::deserialize(YAML::Node const& node)
+	void Terrain::deserialize(const YAML::Node& node)
 	{
 		YAML::Node heightmapNode = node["heightmap"];
 		if (heightmapNode)

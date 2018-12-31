@@ -39,7 +39,7 @@ namespace DerydocaEngine::Ext
 		generateNoiseTexture(m_baseFrequency, m_persistence, m_periodic, m_seamless);
 	}
 
-	void NoiseTexture::deserialize(YAML::Node const& compNode)
+	void NoiseTexture::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node widthNode = compNode["width"];
 		if (widthNode)

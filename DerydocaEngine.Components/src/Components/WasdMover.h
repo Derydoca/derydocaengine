@@ -21,9 +21,9 @@ namespace DerydocaEngine::Components
 		~WasdMover();
 
 		void init();
-		void update(float const& deltaTime);
+		void update(const float deltaTime);
 
-		void deserialize(YAML::Node const& node);
+		void deserialize(const YAML::Node& node);
 	private:
 		std::shared_ptr<Components::Transform> m_transform;
 		Input::Keyboard* m_keyboard;

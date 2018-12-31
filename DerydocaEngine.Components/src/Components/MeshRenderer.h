@@ -22,7 +22,7 @@ namespace DerydocaEngine::Components
 			MeshRenderer();
 		MeshRenderer(std::shared_ptr<Rendering::Mesh> mesh, std::shared_ptr<Rendering::Material> material);
 		~MeshRenderer();
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			std::shared_ptr<Rendering::Material> material,
@@ -32,7 +32,7 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Material> getMaterial() { return m_material; }
 		std::shared_ptr<Camera> getMeshRendererCamera() { return m_meshRendererCamera; }
 
-		virtual void deserialize(YAML::Node const& compNode);
+		virtual void deserialize(const YAML::Node& compNode);
 		virtual void init();
 		virtual void preDestroy();
 

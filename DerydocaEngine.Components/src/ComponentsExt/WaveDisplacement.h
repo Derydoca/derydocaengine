@@ -13,9 +13,9 @@ namespace DerydocaEngine::Ext
 		~WaveDisplacement() {}
 
 		virtual void init();
-		virtual void update(float const& deltaTime);
+		virtual void update(const float deltaTime);
 		virtual void preRender();
-		virtual void deserialize(YAML::Node const& compNode);
+		virtual void deserialize(const YAML::Node& compNode);
 	private:
 		float m_k = 1.0f;
 		float m_velocity = 1.0f;

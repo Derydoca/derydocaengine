@@ -53,7 +53,7 @@ namespace DerydocaEngine::Timing
 		}
 	}
 
-	void Clock::update(float const& dtRealSeconds)
+	void Clock::update(const float dtRealSeconds)
 	{
 		if (!m_paused) {
 			Uint64 dtScaledCycles = secondsToCycles(dtRealSeconds * m_timeScale);

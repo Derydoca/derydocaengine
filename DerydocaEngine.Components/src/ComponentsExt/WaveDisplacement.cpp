@@ -24,7 +24,7 @@ namespace DerydocaEngine::Ext
 		m_material->setFloat("Amp", m_amplitude);
 	}
 
-	void WaveDisplacement::update(float const& deltaTime)
+	void WaveDisplacement::update(const float deltaTime)
 	{
 		m_time += deltaTime;
 	}
@@ -35,7 +35,7 @@ namespace DerydocaEngine::Ext
 		m_material->setFloat("Time", m_time);
 	}
 
-	void WaveDisplacement::deserialize(YAML::Node const& compNode)
+	void WaveDisplacement::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node kNode = compNode["k"];
 		if (kNode)

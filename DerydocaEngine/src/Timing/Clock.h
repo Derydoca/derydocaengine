@@ -21,7 +21,7 @@ namespace DerydocaEngine::Timing
 		static void init();
 		float calcDeltaSeconds(Clock const& other);
 		void update();
-		void update(float const& dtRealSeconds);
+		void update(const float dtRealSeconds);
 		void singleStep();
 
 		static inline unsigned long long int secondsToCycles(float const& timeSeconds) {

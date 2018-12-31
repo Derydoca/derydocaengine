@@ -31,7 +31,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	void SkinnedMeshRenderer::deserialize(YAML::Node const& compNode)
+	void SkinnedMeshRenderer::deserialize(const YAML::Node& compNode)
 	{
 		auto material = getResourcePointer<Rendering::Material>(compNode, "Material");
 		setMaterial(material);

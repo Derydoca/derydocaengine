@@ -30,8 +30,8 @@ namespace DerydocaEngine::Components
 		void setTextureSlot(int const& slot, std::shared_ptr<Rendering::Texture> texture);
 		void init();
 
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
-		void deserialize(YAML::Node const& node);
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
+		void deserialize(const YAML::Node& node);
 	private:
 		int m_width;
 		int m_depth;

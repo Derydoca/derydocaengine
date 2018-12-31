@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 		}
 	}
 
-	void GammaCorrectionFilter::deserialize(YAML::Node const& compNode)
+	void GammaCorrectionFilter::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node lumThreshNode = compNode["lumThresh"];
 		if (lumThreshNode)
@@ -26,7 +26,7 @@ namespace DerydocaEngine::Ext
 		}
 	}
 
-	void GammaCorrectionFilter::update(float const& deltaTime)
+	void GammaCorrectionFilter::update(const float deltaTime)
 	{
 		updateShader();
 	}

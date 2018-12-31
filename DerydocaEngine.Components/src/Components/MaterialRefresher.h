@@ -25,7 +25,7 @@ namespace DerydocaEngine::Components
 		~MaterialRefresher();
 
 		void init();
-		void update(float const& deltaTime);
+		void update(const float deltaTime);
 		void refreshMaterial();
 	private:
 		bool isShaderSourceUpdated();

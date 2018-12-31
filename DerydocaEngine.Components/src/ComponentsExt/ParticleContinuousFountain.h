@@ -23,10 +23,10 @@ namespace DerydocaEngine::Ext
 		~ParticleContinuousFountain();
 
 		virtual void init();
-		virtual void update(float const& deltaTime);
+		virtual void update(const float deltaTime);
 		virtual void preRender();
-		virtual void deserialize(YAML::Node const& compNode);
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
+		virtual void deserialize(const YAML::Node& compNode);
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 	private:
 		int m_numParticles = 1000;
 		std::shared_ptr<Rendering::Material> m_material;

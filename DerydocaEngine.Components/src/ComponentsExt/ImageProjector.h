@@ -15,8 +15,8 @@ namespace DerydocaEngine::Ext
 		~ImageProjector();
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
-		virtual void update(float const& deltaTime);
+		virtual void deserialize(const YAML::Node& compNode);
+		virtual void update(const float deltaTime);
 
 		void inline setFocalPoint(glm::vec3 const& focalPoint) { m_focalPoint = focalPoint; m_dirty = true; }
 		void inline setUpVector(glm::vec3 const& upVector) { m_upVector = upVector; m_dirty = true; }

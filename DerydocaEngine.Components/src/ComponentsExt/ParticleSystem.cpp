@@ -55,7 +55,7 @@ namespace DerydocaEngine::Ext
 		glBindVertexArray(0);
 	}
 
-	void ParticleSystem::deserialize(YAML::Node const& compNode)
+	void ParticleSystem::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node numParticlesNode = compNode["numParticles"];
 		if (numParticlesNode)

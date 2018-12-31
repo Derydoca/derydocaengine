@@ -93,7 +93,7 @@ namespace DerydocaEngine::Components
 		m_tessControlShaderExists = getLastModifiedTime(m_tessControlShaderPath.c_str(), m_tessControlShaderModifiedTime);
 	}
 
-	void MaterialRefresher::update(float const& deltaTime)
+	void MaterialRefresher::update(const float deltaTime)
 	{
 		if (isShaderSourceUpdated()) {
 			refreshMaterial();

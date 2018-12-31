@@ -14,7 +14,7 @@ namespace DerydocaEngine::Ext
 		~MultisampleSwitch();
 
 		virtual void init();
-		virtual void update(float const& deltaTime);
+		virtual void update(const float deltaTime);
 
 		void setEnableMultisample(bool const& enable);
 	private:

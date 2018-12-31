@@ -21,35 +21,10 @@ namespace DerydocaEngine
 	{
 	public:
 		GameObject(const std::string& name);
-
 		~GameObject();
 
 		void addChild(const std::shared_ptr<GameObject> gameObject);
-
-		void addComponent(std::shared_ptr<Components::GameComponent> component);
-
-		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
-
-		std::vector<std::shared_ptr<Components::GameComponent>>& getComponents() { return m_components; }
-
-		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
-
-		std::shared_ptr<Components::Transform> getTransform() { return m_transform; }
-
-		std::string getName() const { return m_name; }
-
-		void init();
-
-		void postInit();
-
-		void postRender();
-
-		void preRender();
-
-		void preDestroy();
-
-		void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const;
-
+		void addComponent(const std::shared_ptr<Components::GameComponent> component);
 		void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			std::shared_ptr<Rendering::Material> material,
@@ -57,9 +32,21 @@ namespace DerydocaEngine
 			std::shared_ptr<Components::Transform> projectionTransform
 		) const;
 
-		void setName(const std::string& name) { m_name = name; }
+		void init();
+		void postInit();
+		void postRender();
+		void preDestroy();
+		void preRender();
+		void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const;
+		void renderEditorGUI();
+		void update(const float deltaTime);
 
-		void update(const float& deltaTime);
+		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
+		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_components; }
+		std::string getName() const { return m_name; }
+		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
+		std::shared_ptr<Components::Transform> getTransform() const { return m_transform; }
+		void setName(const std::string& name) { m_name = name; }
 
 	private:
 		std::string m_name;

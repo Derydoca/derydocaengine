@@ -115,6 +115,9 @@ namespace DerydocaEngine::Editor::UI
 			editorScene->getRoot()->postRender();
 			scene->getRoot()->postRender();
 
+			editorScene->getRoot()->renderEditorGUI();
+			editorScene->getRoot()->renderEditorGUI();
+
 			// Let the display respond to any input events
 			display->update();
 

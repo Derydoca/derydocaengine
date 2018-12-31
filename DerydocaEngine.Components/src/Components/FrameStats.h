@@ -13,7 +13,7 @@ namespace DerydocaEngine::Components
 		~FrameStats();
 
 		virtual void postInit();
-		virtual void update(float const& deltaTime);
+		virtual void update(const float deltaTime);
 	private:
 		std::shared_ptr<TextRenderer> m_textRenderer;
 	};

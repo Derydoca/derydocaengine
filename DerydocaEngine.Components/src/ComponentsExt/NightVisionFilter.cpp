@@ -18,7 +18,7 @@ namespace DerydocaEngine::Ext
 		m_postProcessCamera->getPostProcessMaterial()->setFloat("Radius", m_radius);
 	}
 
-	void NightVisionFilter::deserialize(YAML::Node const& compNode)
+	void NightVisionFilter::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node radiusNode = compNode["radius"];
 		if (radiusNode)

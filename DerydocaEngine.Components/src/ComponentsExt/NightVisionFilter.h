@@ -14,7 +14,7 @@ namespace DerydocaEngine::Ext
 		~NightVisionFilter() {}
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
+		virtual void deserialize(const YAML::Node& compNode);
 	private:
 		float m_radius = 100.0f;
 		std::shared_ptr<Components::Camera> m_postProcessCamera;

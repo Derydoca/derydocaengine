@@ -14,8 +14,8 @@ namespace DerydocaEngine::Ext
 		~TessellatingQuad() {}
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack);
+		virtual void deserialize(const YAML::Node& compNode);
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 	private:
 		float m_controlPoints[8];
 		unsigned int m_vao;

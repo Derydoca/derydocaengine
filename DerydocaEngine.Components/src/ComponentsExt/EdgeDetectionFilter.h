@@ -16,8 +16,8 @@ namespace DerydocaEngine::Ext
 		~EdgeDetectionFilter() {}
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
-		virtual void update(float const& deltaTime);
+		virtual void deserialize(const YAML::Node& compNode);
+		virtual void update(const float deltaTime);
 	private:
 		void updateShader();
 

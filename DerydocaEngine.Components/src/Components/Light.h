@@ -66,7 +66,7 @@ namespace DerydocaEngine::Components
 		float getShadowSoftness() const { return m_shadowSoftness; }
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& node);
+		virtual void deserialize(const YAML::Node& node);
 		virtual void preDestroy();
 
 		void renderShadowMap(const GameObject* gameObject);

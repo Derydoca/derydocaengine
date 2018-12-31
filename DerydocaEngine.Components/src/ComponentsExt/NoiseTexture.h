@@ -16,7 +16,7 @@ namespace DerydocaEngine::Ext
 		~NoiseTexture();
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
+		virtual void deserialize(const YAML::Node& compNode);
 
 		void generateNoiseTexture(float const& baseFreq, float const& persistence, bool const& periodic, bool const& seamless);
 	private:

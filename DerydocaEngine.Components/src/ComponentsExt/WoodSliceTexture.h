@@ -13,7 +13,7 @@ namespace DerydocaEngine::Ext
 		~WoodSliceTexture() {}
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
+		virtual void deserialize(const YAML::Node& compNode);
 		virtual void preRender();
 	private:
 		Components::Transform m_sliceMatrixTransform;

@@ -19,7 +19,7 @@ namespace DerydocaEngine::Ext
 	{
 	}
 
-	void ParticleInstanced::update(float const& deltaTime)
+	void ParticleInstanced::update(const float deltaTime)
 	{
 		m_time += deltaTime;
 
@@ -44,7 +44,7 @@ namespace DerydocaEngine::Ext
 		m_material->setVec3("Gravity", m_gravity);
 	}
 
-	void ParticleInstanced::deserialize(YAML::Node const& compNode)
+	void ParticleInstanced::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node numParticlesNode = compNode["numParticles"];
 		if (numParticlesNode)

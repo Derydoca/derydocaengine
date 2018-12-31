@@ -64,7 +64,7 @@ namespace DerydocaEngine::Ext
 		updateShader();
 	}
 
-	void BloomFilter::deserialize(YAML::Node const& compNode)
+	void BloomFilter::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node lumThreshNode = compNode["lumThresh"];
 		if (lumThreshNode)
@@ -73,7 +73,7 @@ namespace DerydocaEngine::Ext
 		}
 	}
 
-	void BloomFilter::update(float const& deltaTime)
+	void BloomFilter::update(const float deltaTime)
 	{
 		updateShader();
 	}

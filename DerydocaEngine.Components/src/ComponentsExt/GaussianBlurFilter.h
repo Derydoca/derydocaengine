@@ -14,8 +14,8 @@ namespace DerydocaEngine::Ext
 		~GaussianBlurFilter() {}
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
-		virtual void update(float const& deltaTime);
+		virtual void deserialize(const YAML::Node& compNode);
+		virtual void update(const float deltaTime);
 	private:
 		std::shared_ptr<Components::Camera> m_postProcessCamera;
 		float m_weights[5];

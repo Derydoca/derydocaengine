@@ -52,7 +52,7 @@ namespace DerydocaEngine::Components
 		m_transform = getGameObject()->getTransform();
 	}
 
-	void KeyboardMover::update(float const& deltaTime)
+	void KeyboardMover::update(const float deltaTime)
 	{
 		float frameSpeed = m_movementSpeed * deltaTime;
 		glm::vec3 frameMovement = glm::vec3(0);
@@ -91,7 +91,7 @@ namespace DerydocaEngine::Components
 		m_transform->translate(frameMovement);
 	}
 
-	void KeyboardMover::deserialize(YAML::Node const& node)
+	void KeyboardMover::deserialize(const YAML::Node& node)
 	{
 		m_movementSpeed = node["movementSpeed"].as<float>();
 		m_keyForward = node["keyForward"].as<int>();

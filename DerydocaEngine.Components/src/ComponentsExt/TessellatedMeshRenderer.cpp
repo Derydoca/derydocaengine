@@ -33,7 +33,7 @@ namespace DerydocaEngine::Ext
 		glPatchParameteri(GL_PATCH_VERTICES, 16);
 	}
 
-	void TessellatedMeshRenderer::deserialize(YAML::Node const& compNode)
+	void TessellatedMeshRenderer::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node tessellationLevelNode = compNode["tessellationLevel"];
 		if (tessellationLevelNode)

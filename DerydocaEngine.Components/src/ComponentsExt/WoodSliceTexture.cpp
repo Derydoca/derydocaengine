@@ -12,7 +12,7 @@ namespace DerydocaEngine::Ext
 		m_meshRenderer = getComponent<Components::MeshRenderer>();
 	}
 
-	void WoodSliceTexture::deserialize(YAML::Node const& compNode)
+	void WoodSliceTexture::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node slicePositionNode = compNode["slicePosition"];
 		if (slicePositionNode)

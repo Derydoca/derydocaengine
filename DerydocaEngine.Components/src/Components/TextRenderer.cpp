@@ -41,7 +41,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void TextRenderer::deserialize(YAML::Node const& compNode)
+	void TextRenderer::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node boundsNode = compNode["bounds"];
 		if (boundsNode)

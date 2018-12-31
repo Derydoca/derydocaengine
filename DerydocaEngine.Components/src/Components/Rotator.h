@@ -12,9 +12,9 @@ namespace DerydocaEngine::Components
 		Rotator(float rotationSpeed);
 		~Rotator();
 
-		void update(float const& deltaTime);
+		void update(const float deltaTime);
 
-		void deserialize(YAML::Node const& node);
+		void deserialize(const YAML::Node& node);
 
 		inline void setSpeed(float const& rotSpeed) { m_rotSpeed = rotSpeed; }
 		inline float getSpeed() const { return m_rotSpeed; }

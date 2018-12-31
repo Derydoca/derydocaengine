@@ -58,7 +58,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Light::deserialize(YAML::Node const& node)
+	void Light::deserialize(const YAML::Node& node)
 	{
 		Color lightColor = node["color"].as<Color>();
 		setColor(&lightColor);

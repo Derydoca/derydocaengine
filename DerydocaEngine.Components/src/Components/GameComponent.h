@@ -21,7 +21,6 @@ namespace DerydocaEngine {
 		class MatrixStack;
 	}
 }
-class YAML::Node;
 
 namespace DerydocaEngine::Components
 {
@@ -47,21 +46,39 @@ namespace DerydocaEngine::Components
 			m_gameObject()
 		{}
 		virtual ~GameComponent() {}
+		
+		// Game Component Lifecycle
+		// ------------------------
+		// COMPONENT CREATION
+		// 	 - deserialize
+		// 	 - init
+		// 	 - postInit
+		// GAME LOOP
+		// 	 - update
+		// 	 - preRender
+		// 	 - render
+		// 	 - postRender
+		// 	 - renderEditorGUI
+		// COMPONENT DESTRUCTION
+		// 	 - preDestroy
+		virtual void deserialize(const YAML::Node& compNode) {}
 		virtual void init() {}
 		virtual void postInit() {}
-		virtual void update(float const& deltaTime) {}
-		virtual void preRender() {}
+		virtual void postRender() {}
 		virtual void preDestroy() {}
-		virtual void render(std::shared_ptr<Rendering::MatrixStack> const matrixStack) {}
+		virtual void preRender() {}
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) {}
+		virtual void renderEditorGUI() {}
+		virtual void update(const float deltaTime) {}
+
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			std::shared_ptr<Rendering::Material> material,
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Transform> projectionTransform) {}
-		virtual void postRender() {}
+
 		inline void setGameObject(const std::weak_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
 		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject.lock(); }
-		virtual void deserialize(YAML::Node const& compNode) { };
 
 		template<typename T>
 		inline std::shared_ptr<T> getComponent()
@@ -93,8 +110,29 @@ namespace DerydocaEngine::Components
 		}
 
 	protected:
+		inline std::shared_ptr<Resources::Resource> getResource(const YAML::Node& node, const std::string& resourceName)
+		{
+			YAML::Node resourceNode = node[resourceName];
+
+			if (resourceNode == nullptr)
+			{
+				return nullptr;
+			}
+
+			boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
+			auto resource = ObjectLibrary::getInstance().getResource(id);
+			return resource;
+		}
+
 		template<typename T>
-		inline std::shared_ptr<T> getResourcePointer(boost::uuids::uuid resourceId)
+		inline std::shared_ptr<T> getResource(const YAML::Node& node, const std::string& resourceName)
+		{
+			auto r = getResource(node, resourceName);
+			return std::static_pointer_cast<T>(r);
+		}
+
+		template<typename T>
+		inline std::shared_ptr<T> getResourcePointer(const boost::uuids::uuid& resourceId)
 		{
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
 		}
@@ -112,38 +150,9 @@ namespace DerydocaEngine::Components
 
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
 		}
-/*
-		template<typename T>
-		inline T getResource(YAML::Node const& node, std::string const& resourceName)
-		{
-			auto resource = getResource(node, resourceName);
-			return static_cast<T>(resource);
-		}
-*/
-
-		inline std::shared_ptr<Resources::Resource> getResource(YAML::Node const& node, std::string const& resourceName)
-		{
-			YAML::Node resourceNode = node[resourceName];
-
-			if (resourceNode == nullptr)
-			{
-				return nullptr;
-			}
-
-			boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
-			auto resource = ObjectLibrary::getInstance().getResource(id);
-			return resource;
-		}
 
 		template<typename T>
-		inline std::shared_ptr<T> getResource(YAML::Node const& node, std::string const& resourceName)
-		{
-			auto r = getResource(node, resourceName);
-			return std::static_pointer_cast<T>(r);
-		}
-
-		template<typename T>
-		inline std::vector<std::shared_ptr<T>> loadComponents(YAML::Node const& node, std::string const& componentCollectionName)
+		inline std::vector<std::shared_ptr<T>> loadComponents(const YAML::Node& node, const std::string& componentCollectionName)
 		{
 			std::vector<std::shared_ptr<T>> objectArr = std::vector<std::shared_ptr<T>>();
 

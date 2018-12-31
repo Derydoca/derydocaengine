@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 	{
 	}
 
-	void ParticleFountain::update(float const& deltaTime)
+	void ParticleFountain::update(const float deltaTime)
 	{
 		m_time += deltaTime;
 
@@ -42,7 +42,7 @@ namespace DerydocaEngine::Ext
 		m_material->setFloat("Time", m_time);
 	}
 
-	void ParticleFountain::deserialize(YAML::Node const& compNode)
+	void ParticleFountain::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node numParticlesNode = compNode["numParticles"];
 		if (numParticlesNode)

@@ -35,7 +35,7 @@ namespace DerydocaEngine::Components
 		m_transform = getGameObject()->getTransform();
 	}
 
-	void WasdMover::update(float const& deltaTime) {
+	void WasdMover::update(const float deltaTime) {
 
 		// Set the mouse to relative mode when the right mouse button is down
 		if (m_mouse->isKeyDownFrame(2)) {
@@ -118,7 +118,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void WasdMover::deserialize(YAML::Node const& node)
+	void WasdMover::deserialize(const YAML::Node& node)
 	{
 		m_moveSpeed = node["moveSpeed"].as<float>();
 		m_mouseSensitivityX = node["mouseSensitivityX"].as<float>();

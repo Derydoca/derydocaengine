@@ -25,7 +25,7 @@ namespace DerydocaEngine::Ext
 
 	}
 
-	void ImageProjector::deserialize(YAML::Node const& compNode)
+	void ImageProjector::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node focalPointNode = compNode["focalPoint"];
 		if (focalPointNode)
@@ -86,7 +86,7 @@ namespace DerydocaEngine::Ext
 		setProjectionGraphic();
 	}
 
-	void ImageProjector::update(float const& deltaTime)
+	void ImageProjector::update(const float deltaTime)
 	{
 		if (m_dirty)
 		{

@@ -34,7 +34,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	void MeshRenderer::deserialize(YAML::Node const& compNode)
+	void MeshRenderer::deserialize(const YAML::Node& compNode)
 	{
 		auto material = getResourcePointer<Rendering::Material>(compNode, "Material");
 		setMaterial(material);

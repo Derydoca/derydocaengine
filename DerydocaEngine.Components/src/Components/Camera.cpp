@@ -160,7 +160,7 @@ namespace DerydocaEngine::Components
 		m_projection.recalculateProjectionMatrix();
 	}
 
-	void Camera::deserialize(YAML::Node const& node)
+	void Camera::deserialize(const YAML::Node& node)
 	{
 		float fov = node["fov"].as<float>();
 		float zNear = node["zNear"].as<float>();

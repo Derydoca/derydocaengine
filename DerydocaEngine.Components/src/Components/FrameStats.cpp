@@ -18,7 +18,7 @@ namespace DerydocaEngine::Components
 		m_textRenderer = getComponent<TextRenderer>();
 	}
 
-	void FrameStats::update(float const& deltaTime)
+	void FrameStats::update(const float deltaTime)
 	{
 		float fps = 1.0f / deltaTime;
 		std::ostringstream s;

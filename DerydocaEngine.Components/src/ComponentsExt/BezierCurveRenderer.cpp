@@ -42,7 +42,7 @@ namespace DerydocaEngine::Ext
 		m_material->setColorRGBA("LineColor", m_lineColor);
 	}
 
-	void BezierCurveRenderer::deserialize(YAML::Node const& compNode)
+	void BezierCurveRenderer::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node controlPointsNode = compNode["controlPoints"];
 		if (controlPointsNode)

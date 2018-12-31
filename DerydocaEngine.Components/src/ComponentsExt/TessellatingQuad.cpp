@@ -34,7 +34,7 @@ namespace DerydocaEngine::Ext
 		std::cout << "Max patch vertices: " << maxVerts << "\n";
 	}
 
-	void TessellatingQuad::deserialize(YAML::Node const& compNode)
+	void TessellatingQuad::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node controlPointsNode = compNode["controlPoints"];
 		if (controlPointsNode)

@@ -37,7 +37,7 @@ namespace DerydocaEngine::Ext
 		}
 	}
 
-	void MultisampleSwitch::update(float const& deltaTime)
+	void MultisampleSwitch::update(const float deltaTime)
 	{
 		if (m_keyboard->isKeyDownFrame(SDLK_l))
 		{

@@ -15,8 +15,8 @@ namespace DerydocaEngine::Ext
 		~BloomFilter();
 
 		virtual void init();
-		virtual void deserialize(YAML::Node const& compNode);
-		virtual void update(float const& deltaTime);
+		virtual void deserialize(const YAML::Node& compNode);
+		virtual void update(const float deltaTime);
 	private:
 		float m_lumThresh;
 		std::shared_ptr<Components::Camera> m_postProcessCamera;

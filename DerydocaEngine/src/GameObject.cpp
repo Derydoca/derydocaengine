@@ -26,92 +26,10 @@ namespace DerydocaEngine
 		gameObject->m_parent = shared_from_this();
 	}
 
-	void GameObject::addComponent(std::shared_ptr<Components::GameComponent> component)
+	void GameObject::addComponent(const std::shared_ptr<Components::GameComponent> component)
 	{
 		m_components.push_back(component);
 		component->setGameObject(shared_from_this());
-	}
-
-	void GameObject::init()
-	{
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
-		{
-			c->init();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->init();
-		}
-	}
-
-	void GameObject::preDestroy()
-	{
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
-		{
-			c->preDestroy();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->preDestroy();
-		}
-
-		m_components.clear();
-		m_children.clear();
-	}
-
-	void GameObject::preRender() {
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
-		{
-			c->preRender();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->preRender();
-		}
-	}
-
-	void GameObject::postInit()
-	{
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
-		{
-			c->postInit();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->postInit();
-		}
-	}
-
-	void GameObject::postRender() {
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
-		{
-			c->postRender();
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->postRender();
-		}
-	}
-
-	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const {
-		matrixStack->push(m_transform->getModel());
-
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
-		{
-			c->render(matrixStack);
-		}
-
-		for each (std::shared_ptr<GameObject> go in m_children)
-		{
-			go->render(matrixStack);
-		}
-
-		matrixStack->pop();
 	}
 
 	void GameObject::renderMesh(
@@ -123,12 +41,12 @@ namespace DerydocaEngine
 	{
 		matrixStack->push(m_transform->getModel());
 
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
+		for each (auto c in m_components)
 		{
 			c->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
 
-		for each (std::shared_ptr<GameObject> go in m_children)
+		for each (auto go in m_children)
 		{
 			go->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
@@ -136,13 +54,107 @@ namespace DerydocaEngine
 		matrixStack->pop();
 	}
 
-	void GameObject::update(const float& deltaTime) {
-		for each (std::shared_ptr<Components::GameComponent> c in m_components)
+	void GameObject::init()
+	{
+		for each (auto c in m_components)
+		{
+			c->init();
+		}
+
+		for each (auto go in m_children)
+		{
+			go->init();
+		}
+	}
+
+	void GameObject::postInit()
+	{
+		for each (auto c in m_components)
+		{
+			c->postInit();
+		}
+
+		for each (auto go in m_children)
+		{
+			go->postInit();
+		}
+	}
+
+	void GameObject::postRender() {
+		for each (auto c in m_components)
+		{
+			c->postRender();
+		}
+
+		for each (auto go in m_children)
+		{
+			go->postRender();
+		}
+	}
+
+	void GameObject::preDestroy()
+	{
+		for each (auto c in m_components)
+		{
+			c->preDestroy();
+		}
+
+		for each (auto go in m_children)
+		{
+			go->preDestroy();
+		}
+
+		m_components.clear();
+		m_children.clear();
+	}
+
+	void GameObject::preRender() {
+		for each (auto c in m_components)
+		{
+			c->preRender();
+		}
+
+		for each (auto go in m_children)
+		{
+			go->preRender();
+		}
+	}
+
+	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const {
+		matrixStack->push(m_transform->getModel());
+
+		for each (auto c in m_components)
+		{
+			c->render(matrixStack);
+		}
+
+		for each (auto go in m_children)
+		{
+			go->render(matrixStack);
+		}
+
+		matrixStack->pop();
+	}
+
+	void GameObject::renderEditorGUI() {
+		for each (auto c in m_components)
+		{
+			c->renderEditorGUI();
+		}
+
+		for each (auto go in m_children)
+		{
+			go->renderEditorGUI();
+		}
+	}
+
+	void GameObject::update(const float deltaTime) {
+		for each (auto c in m_components)
 		{
 			c->update(deltaTime);
 		}
 
-		for each (std::shared_ptr<GameObject> go in m_children)
+		for each (auto go in m_children)
 		{
 			go->update(deltaTime);
 		}
