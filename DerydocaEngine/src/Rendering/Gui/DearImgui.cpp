@@ -14,15 +14,29 @@ namespace DerydocaEngine::Rendering::Gui
 		char* GLSL_VERSION = "#version 130";
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
-		auto guiIO = ImGui::GetIO(); (void)guiIO;
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		//io.ConfigFlags |= ImGuiConfigFlags_IsTouchScreen;
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+		io.ConfigDockingWithShift = true;
+		io.ConfigWindowsResizeFromEdges = true;
+		io.ConfigWindowsMoveFromTitleBarOnly = true;
 
 		ImGui::StyleColorsDark();
-		
+
+		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
+
 		ImGui_ImplSDL2_InitForOpenGL(window, context);
 #if (OPENGL == 1)
 		ImGui_ImplOpenGL3_Init(GLSL_VERSION);
 #endif
-		return guiIO;
+		return io;
 	}
 
 	void DearImgui::newFrame(SDL_Window* window)
@@ -32,12 +46,6 @@ namespace DerydocaEngine::Rendering::Gui
 #endif
 		ImGui_ImplSDL2_NewFrame(window);
 		ImGui::NewFrame();
-
-		static bool show_demo_w = true;
-		if (show_demo_w)
-		{
-			ImGui::ShowDemoWindow(&show_demo_w);
-		}
 	}
 
 	void DearImgui::render(SDL_Window* window, SDL_GLContext& context)

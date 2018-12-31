@@ -7,13 +7,26 @@ namespace DerydocaEngine
 {
 
 	GameObject::GameObject(const std::string& name) :
+		m_id(),
 		m_name(name),
 		m_transform(std::make_shared<Components::Transform>()),
 		m_parent(),
 		m_children(),
 		m_components()
 	{
+		auto idGen = boost::uuids::random_generator_pure();
+		m_id = idGen();
 		m_transform->setGameObject(this);
+	}
+
+	GameObject::GameObject(const boost::uuids::uuid id, const std::string & name) :
+		m_id(id),
+		m_name(name),
+		m_transform(std::make_shared<Components::Transform>()),
+		m_parent(),
+		m_children(),
+		m_components()
+	{
 	}
 
 	GameObject::~GameObject()

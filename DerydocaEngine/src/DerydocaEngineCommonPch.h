@@ -12,6 +12,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/convenience.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/uuid/random_generator.hpp>
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>

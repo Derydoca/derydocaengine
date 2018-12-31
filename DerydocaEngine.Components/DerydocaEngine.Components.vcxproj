@@ -209,7 +209,11 @@
     <ClCompile Include="src\ComponentsExt\TessellatingQuad.cpp" />
     <ClCompile Include="src\ComponentsExt\WaveDisplacement.cpp" />
     <ClCompile Include="src\ComponentsExt\WoodSliceTexture.cpp" />
+    <ClCompile Include="src\Components\EditorWindowComponent.cpp" />
+    <ClCompile Include="src\Components\EngineAssetBrowser.cpp" />
     <ClCompile Include="src\Components\Camera.cpp" />
+    <ClCompile Include="src\Components\EngineConsole.cpp" />
+    <ClCompile Include="src\Components\EngineGuiDockSpace.cpp" />
     <ClCompile Include="src\Components\FrameStats.cpp" />
     <ClCompile Include="src\Components\GameComponentFactory.cpp" />
     <ClCompile Include="src\Components\KeyboardMover.cpp" />
@@ -251,7 +255,11 @@
     <ClInclude Include="src\ComponentsExt\TessellatingQuad.h" />
     <ClInclude Include="src\ComponentsExt\WaveDisplacement.h" />
     <ClInclude Include="src\ComponentsExt\WoodSliceTexture.h" />
+    <ClInclude Include="src\Components\EditorWindowComponent.h" />
+    <ClInclude Include="src\Components\EngineAssetBrowser.h" />
     <ClInclude Include="src\Components\Camera.h" />
+    <ClInclude Include="src\Components\EngineConsole.h" />
+    <ClInclude Include="src\Components\EngineGuiDockSpace.h" />
     <ClInclude Include="src\Components\FrameStats.h" />
     <ClInclude Include="src\Components\GameComponent.h" />
     <ClInclude Include="src\Components\GameComponentFactory.h" />

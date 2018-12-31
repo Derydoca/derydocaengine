@@ -21,6 +21,7 @@ namespace DerydocaEngine
 	{
 	public:
 		GameObject(const std::string& name);
+		GameObject(const boost::uuids::uuid id, const std::string& name);
 		~GameObject();
 
 		void addChild(const std::shared_ptr<GameObject> gameObject);
@@ -43,12 +44,14 @@ namespace DerydocaEngine
 
 		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
 		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_components; }
+		boost::uuids::uuid getId() const { return m_id; }
 		std::string getName() const { return m_name; }
 		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
 		std::shared_ptr<Components::Transform> getTransform() const { return m_transform; }
 		void setName(const std::string& name) { m_name = name; }
 
 	private:
+		boost::uuids::uuid m_id;
 		std::string m_name;
 		std::shared_ptr<Components::Transform> m_transform;
 		std::weak_ptr<GameObject> m_parent;

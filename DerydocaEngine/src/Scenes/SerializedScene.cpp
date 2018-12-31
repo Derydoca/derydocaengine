@@ -48,7 +48,7 @@ namespace DerydocaEngine::Scenes
 			}
 
 			// Create the game object with the name found in the file
-			std::shared_ptr<GameObject> go = std::make_shared<GameObject>(name);
+			std::shared_ptr<GameObject> go = std::make_shared<GameObject>(sceneObject->getId(), name);
 
 			// Set the transform component
 			std::shared_ptr<Components::Transform> trans = go->getTransform();
