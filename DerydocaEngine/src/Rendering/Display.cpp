@@ -22,30 +22,34 @@ namespace DerydocaEngine::Rendering
 		// TODO: Look into reducing the number of items included
 		SDL_Init(SDL_INIT_EVERYTHING);
 
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+
 		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 3);
 		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 3);
 		SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 2);
 		SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 
-		SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
-		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+		SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+		SDL_DisplayMode current;
+		SDL_GetCurrentDisplayMode(0, &current);
+		m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+		m_glContext = SDL_GL_CreateContext(m_window);
+		SDL_GL_SetSwapInterval(1); // VSync
 
 		// Enable multisampling
 		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
 		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);
 
-		m_window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_width, m_height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-		m_glContext = SDL_GL_CreateContext(m_window);
-
 		GLenum status = glewInit();
 
 		if (status != GLEW_OK) {
-			std::cerr << "Derydoca Engine\n";
+			std::cerr << "Unable to initialize OpenGL loader!\n";
 		}
 
 		m_isClosed = false;
@@ -111,7 +115,7 @@ namespace DerydocaEngine::Rendering
 
 	void Display::init()
 	{
-		Gui::GuiImpl::init(m_window, &m_glContext);
+		Gui::GuiImpl::init(m_window, m_glContext);
 	}
 
 	void Display::newFrame() {
@@ -119,7 +123,7 @@ namespace DerydocaEngine::Rendering
 	}
 
 	void Display::update() {
-		Gui::GuiImpl::render();
+		Gui::GuiImpl::render(m_window, m_glContext);
 		SDL_GL_SwapWindow(m_window);
 
 		m_keyboard->update();
@@ -127,6 +131,8 @@ namespace DerydocaEngine::Rendering
 		SDL_Event e;
 
 		while (SDL_PollEvent(&e)) {
+			ImGui_ImplSDL2_ProcessEvent(&e);
+
 			switch (e.type) {
 			case SDL_QUIT:
 				m_isClosed = true;

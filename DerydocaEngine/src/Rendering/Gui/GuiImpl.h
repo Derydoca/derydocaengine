@@ -10,9 +10,9 @@ namespace DerydocaEngine::Rendering::Gui
 
 	class GuiImpl {
 	public:
-		static ImGuiIO init(SDL_Window* window, SDL_GLContext* context);
+		static ImGuiIO init(SDL_Window* window, SDL_GLContext& context);
 		static void newFrame(SDL_Window* window);
-		static void render();
+		static void render(SDL_Window* window, SDL_GLContext& context);
 		static void shutdown();
 	};
 
