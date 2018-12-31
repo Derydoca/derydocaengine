@@ -5,7 +5,7 @@
 #include "Components\Camera.h"
 #include "Input\InputManager.h"
 #include "Rendering\DisplayManager.h"
-#include "Rendering\Gui\GuiImpl.h"
+#include "Rendering\Gui\DearImgui.h"
 
 #include <sdl2/SDL.h>
 #undef main
@@ -86,7 +86,7 @@ namespace DerydocaEngine::Rendering
 
 	Display::~Display()
 	{
-		Gui::GuiImpl::shutdown();
+		Gui::DearImgui::shutdown();
 
 		SDL_GL_DeleteContext(m_glContext);
 		SDL_DestroyWindow(m_window);
@@ -115,15 +115,15 @@ namespace DerydocaEngine::Rendering
 
 	void Display::init()
 	{
-		Gui::GuiImpl::init(m_window, m_glContext);
+		Gui::DearImgui::init(m_window, m_glContext);
 	}
 
 	void Display::newFrame() {
-		Gui::GuiImpl::newFrame(m_window);
+		Gui::DearImgui::newFrame(m_window);
 	}
 
 	void Display::update() {
-		Gui::GuiImpl::render(m_window, m_glContext);
+		Gui::DearImgui::render(m_window, m_glContext);
 		SDL_GL_SwapWindow(m_window);
 
 		m_keyboard->update();
@@ -131,7 +131,7 @@ namespace DerydocaEngine::Rendering
 		SDL_Event e;
 
 		while (SDL_PollEvent(&e)) {
-			ImGui_ImplSDL2_ProcessEvent(&e);
+			Gui::DearImgui::processEvent(e);
 
 			switch (e.type) {
 			case SDL_QUIT:
