@@ -1,4 +1,5 @@
 #pragma once
+#include <boost/uuid/uuid.hpp>
 #include <memory>
 #include <vector>
 #include "Components\Transform.h"
