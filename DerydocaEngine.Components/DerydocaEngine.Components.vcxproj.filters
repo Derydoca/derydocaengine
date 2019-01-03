@@ -37,7 +37,6 @@
     <ClCompile Include="src\ComponentsExt\WoodSliceTexture.cpp" />
     <ClCompile Include="src\EngineComponentsPch.cpp" />
     <ClCompile Include="src\Components\EngineConsole.cpp" />
-    <ClCompile Include="src\Components\EngineGuiDockSpace.cpp" />
     <ClCompile Include="src\Components\EngineAssetBrowser.cpp" />
     <ClCompile Include="src\Components\EditorWindowComponent.cpp" />
   </ItemGroup>
@@ -79,7 +78,6 @@
     <ClInclude Include="src\ComponentsExt\WaveDisplacement.h" />
     <ClInclude Include="src\EngineComponentsPch.h" />
     <ClInclude Include="src\Components\EngineConsole.h" />
-    <ClInclude Include="src\Components\EngineGuiDockSpace.h" />
     <ClInclude Include="src\Components\EngineAssetBrowser.h" />
     <ClInclude Include="src\Components\EditorWindowComponent.h" />
   </ItemGroup>
