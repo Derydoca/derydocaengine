@@ -250,6 +250,9 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <ClCompile Include="src\Editor\Execution\CommandLineArgs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DerydocaEngine.Components.Editor\DerydocaEngine.Components.Editor.vcxproj">
+      <Project>{eb252008-399a-48db-897e-33f6a6a271d1}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">
       <Project>{c437a7f9-da09-4776-b3c0-8efcd2e02e2b}</Project>
     </ProjectReference>
