@@ -36,9 +36,6 @@
     <ClCompile Include="src\ComponentsExt\WaveDisplacement.cpp" />
     <ClCompile Include="src\ComponentsExt\WoodSliceTexture.cpp" />
     <ClCompile Include="src\EngineComponentsPch.cpp" />
-    <ClCompile Include="src\Components\EngineConsole.cpp" />
-    <ClCompile Include="src\Components\EngineAssetBrowser.cpp" />
-    <ClCompile Include="src\Components\EditorWindowComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\Camera.h" />
@@ -77,8 +74,5 @@
     <ClInclude Include="src\ComponentsExt\WoodSliceTexture.h" />
     <ClInclude Include="src\ComponentsExt\WaveDisplacement.h" />
     <ClInclude Include="src\EngineComponentsPch.h" />
-    <ClInclude Include="src\Components\EngineConsole.h" />
-    <ClInclude Include="src\Components\EngineAssetBrowser.h" />
-    <ClInclude Include="src\Components\EditorWindowComponent.h" />
   </ItemGroup>
 </Project>

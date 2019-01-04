@@ -1,4 +1,4 @@
-#include "EngineComponentsPch.h"
+#include "EditorComponentsPch.h"
 #include "EngineAssetBrowser.h"
 
 namespace DerydocaEngine::Components

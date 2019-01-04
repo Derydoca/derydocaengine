@@ -111,7 +111,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\local\boost_1_68_0\lib64-msvc-14.1;D:\local\boost_1_68_0\lib64-msvc-14.1</AdditionalLibraryDirectories>
-      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>@echo Copying DLLs
@@ -142,7 +142,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\local\boost_1_68_0\lib32-msvc-14.1;D:\local\boost_1_68_0\lib32-msvc-14.1</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
@@ -179,7 +179,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>assimp-vc140-mt.lib;glew32.lib;libyaml-cppmd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\local\boost_1_68_0\lib32-msvc-14.1;D:\local\boost_1_68_0\lib32-msvc-14.1</AdditionalLibraryDirectories>
     </Link>
@@ -216,7 +216,7 @@ xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(OutDir)engineResources\"</Co
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib %(AdditionalOptions)</AdditionalOptions>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\local\boost_1_68_0\lib64-msvc-14.1;D:\local\boost_1_68_0\lib64-msvc-14.1</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
