@@ -53,3 +53,25 @@ Scene:
       Components:
         - Type: EngineAssetBrowser
         
+  - Type: GameObject
+    ID: a4ce51c6-3989-4dfa-ab24-62b14b9a46eb
+    Properties:
+      Name: __sceneHierarchyWindow
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: SceneHierarchyWindow
+        
+  - Type: GameObject
+    ID: 6eb850ba-34fc-4812-8050-4897a5eff6d0
+    Properties:
+      Name: __gameComponentInspectorWindow
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: GameComponentInspectorWindow
+        

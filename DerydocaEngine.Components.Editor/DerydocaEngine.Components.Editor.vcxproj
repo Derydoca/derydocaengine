@@ -164,12 +164,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components\SceneHierarchyWindow.h" />
     <ClInclude Include="src\EditorComponentsPch.h" />
     <ClInclude Include="src\Components\EditorWindowComponent.h" />
     <ClInclude Include="src\Components\EngineAssetBrowser.h" />
     <ClInclude Include="src\Components\EngineConsole.h" />
+    <ClInclude Include="src\Components\GameComponentInspectorWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\GameComponentInspectorWindow.cpp" />
+    <ClCompile Include="src\Components\SceneHierarchyWindow.cpp" />
     <ClCompile Include="src\EditorComponentsPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
