@@ -198,6 +198,7 @@
     <ClCompile Include="src\vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Rendering\Gui\DearImgui.cpp" />
+    <ClCompile Include="src\Scenes\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h">
@@ -475,6 +476,7 @@
     <ClInclude Include="src\vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\vendor\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
+    <ClInclude Include="src\Scenes\SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

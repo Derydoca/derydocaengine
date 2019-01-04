@@ -222,6 +222,7 @@
     <ClCompile Include="src\Animation\Skeleton.cpp" />
     <ClCompile Include="src\Input\ButtonState.cpp" />
     <ClCompile Include="src\Rendering\CameraManager.cpp" />
+    <ClCompile Include="src\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\Timing\Clock.cpp" />
     <ClCompile Include="src\Resources\Serializers\CubemapResourceSerializer.cpp" />
     <ClCompile Include="src\Debug\DebugVisualizer.cpp" />
@@ -298,6 +299,7 @@
     <ClInclude Include="src\Animation\VertexBoneWeights.h" />
     <ClInclude Include="src\Input\ButtonState.h" />
     <ClInclude Include="src\Rendering\CameraManager.h" />
+    <ClInclude Include="src\Scenes\SceneManager.h" />
     <ClInclude Include="src\Timing\Clock.h" />
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\Resources\CubemapResource.h" />
