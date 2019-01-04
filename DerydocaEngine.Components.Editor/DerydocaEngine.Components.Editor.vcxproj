@@ -96,7 +96,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -113,10 +113,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,6 +136,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,6 +158,8 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -14,5 +14,10 @@ namespace DerydocaEngine::Components
 		virtual void renderWindow();
 		virtual std::string getWindowTitle() { return "Scene Hierarchy"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
+
+	private:
+		void renderGameObjectTreeNode(std::shared_ptr<GameObject> gameObject);
+
+		std::shared_ptr<GameObject> m_sceneRoot;
 	};
 }

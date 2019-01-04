@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene aa640cff-3845-4e02-a642-4bddb1f3ef80</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene fbd47f01-1f16-474d-bfbe-6b68958da7cc</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(OutputPath)</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
@@ -9,17 +9,17 @@
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene 0f790003-5239-4c54-8b91-dd2b33f22473</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene fbd47f01-1f16-474d-bfbe-6b68958da7cc</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(OutputPath)</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerWorkingDirectory>$(OutputPath)</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene 0f790003-5239-4c54-8b91-dd2b33f22473</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene fbd47f01-1f16-474d-bfbe-6b68958da7cc</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene aa640cff-3845-4e02-a642-4bddb1f3ef80</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-project ..\..\exampleProject -scene fbd47f01-1f16-474d-bfbe-6b68958da7cc</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(OutputPath)</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
