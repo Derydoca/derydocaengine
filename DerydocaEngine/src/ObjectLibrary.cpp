@@ -15,6 +15,11 @@ namespace DerydocaEngine
 
 	namespace fs = boost::filesystem;
 
+	ObjectLibrary::ObjectLibrary() :
+		m_projectResourceRoot(std::make_shared<Resources::ResourceTreeNode>("__projectRoot__"))
+	{
+	}
+
 	void ObjectLibrary::initialize(std::string const& engineResourcesPath, std::string const& projectPath)
 	{
 		std::cout << "Updating meta files for the project: " << projectPath << "\n";
@@ -24,6 +29,7 @@ namespace DerydocaEngine
 
 		std::cout << "Loading engine files: " << engineResourcesPath << "\n";
 		loadDirectory(engineResourcesPath);
+		loadResourceTree();
 	}
 
 	std::shared_ptr<Resources::Resource> ObjectLibrary::getResource(std::string const& uuidString)
@@ -222,6 +228,51 @@ namespace DerydocaEngine
 	{
 		// Load the resource into the map
 		m_resources.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Resources::Resource>>(resource->getId(), resource));
+	}
+
+	std::shared_ptr<Resources::ResourceTreeNode> ObjectLibrary::getResourceTreeNode(const std::string& resourcePath)
+	{
+		auto path = boost::filesystem::path(resourcePath);
+
+		bool passedFirstDir = false;
+		std::istringstream ss(path.parent_path().string());
+		std::string part;
+		auto currentNode = m_projectResourceRoot;
+		
+		while (std::getline(ss, part, '\\'))
+		{
+			if (part.length() == 0 || part == "." || part == "..")
+			{
+				continue;
+			}
+		
+			if (!passedFirstDir)
+			{
+				passedFirstDir = true;
+				continue;
+			}
+		
+			auto child = currentNode->getChild(part);
+			if (child == nullptr)
+			{
+				child = std::make_shared<Resources::ResourceTreeNode>(part);
+				currentNode->addChild(child);
+			}
+			currentNode = child;
+		}
+
+		return currentNode;
+	}
+
+	void ObjectLibrary::loadResourceTree()
+	{
+		m_projectResourceRoot->clear();
+
+		for (auto resource : m_resources)
+		{
+			auto node = getResourceTreeNode(resource.second->getSourceFilePath());
+			node->addResource(resource.second);
+		}
 	}
 
 	void ObjectLibrary::loadFile(std::string const& sourceFilePath)

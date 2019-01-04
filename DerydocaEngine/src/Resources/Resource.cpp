@@ -8,6 +8,7 @@ namespace DerydocaEngine::Resources
 
 	Resource::Resource() :
 		m_id(),
+		m_name(),
 		m_type(ResourceType::UnknownResourceType),
 		m_sourceFilePath(),
 		m_metaFilePath(),
@@ -22,8 +23,26 @@ namespace DerydocaEngine::Resources
 		m_sourceFilePath(sourceFilePath),
 		m_metaFilePath(metaFilePath)
 	{
+		auto filePath = boost::filesystem::path(sourceFilePath);
+		if (filePath.has_stem())
+		{
+			m_name = filePath.stem().string();
+		}
+
 		m_type = type;
 		m_resourceObject = 0;
+	}
+
+	void Resource::setFilePaths(std::string const & sourceFilePath, std::string const & metaFilePath)
+	{
+		m_sourceFilePath = sourceFilePath;
+		m_metaFilePath = metaFilePath;
+
+		auto filePath = boost::filesystem::path(sourceFilePath);
+		if (filePath.has_stem())
+		{
+			m_name = filePath.stem().string();
+		}
 	}
 
 	std::shared_ptr<void> Resource::getResourceObjectPointer()

@@ -212,6 +212,7 @@
     </ClCompile>
     <ClCompile Include="src\Animation\AnimationData.cpp" />
     <ClCompile Include="src\Rendering\Gui\DearImgui.cpp" />
+    <ClCompile Include="src\Resources\ResourceTreeNode.cpp" />
     <ClCompile Include="src\Resources\Serializers\AnimationResourceSerializer.cpp" />
     <ClCompile Include="src\Helpers\AssimpUtils.cpp" />
     <ClCompile Include="src\Ext\BezierPatchMesh.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="src\Animation\AnimationData.h" />
     <ClInclude Include="src\Animation\AnimationKey.h" />
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
+    <ClInclude Include="src\Resources\ResourceTreeNode.h" />
     <ClInclude Include="src\Resources\Serializers\AnimationResourceSerializer.h" />
     <ClInclude Include="src\Helpers\AssimpUtils.h" />
     <ClInclude Include="src\Ext\BezierPatchMesh.h" />

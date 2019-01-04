@@ -5,6 +5,7 @@
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid.hpp>
 #include "Resources\Resource.h"
+#include "Resources\ResourceTreeNode.h"
 
 namespace DerydocaEngine::Components {
 	class GameComponent;
@@ -25,6 +26,7 @@ namespace DerydocaEngine
 
 		void initialize(std::string const& engineResourcesPath, std::string const& projectPath);
 		std::string getMetaExtension() const { return m_metaExtension; }
+		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
 		std::shared_ptr<Components::GameComponent> getComponent(boost::uuids::uuid const& id);
@@ -72,16 +74,19 @@ namespace DerydocaEngine
 			return pointer;
 		}
 	private:
-		ObjectLibrary() {}
+		ObjectLibrary();
 		~ObjectLibrary() {}
 		ObjectLibrary(ObjectLibrary const&) {}
 
 		bool createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath);
 		void registerResource(std::shared_ptr<Resources::Resource> resource);
+		std::shared_ptr<Resources::ResourceTreeNode> getResourceTreeNode(const std::string& resourcePath);
+		void loadResourceTree();
 
 		const std::string m_metaExtension = ".derymeta";
 		std::map<boost::uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
 		std::map<boost::uuids::uuid, std::shared_ptr<Components::GameComponent>> m_sceneComponents;
+		std::shared_ptr<Resources::ResourceTreeNode> m_projectResourceRoot;
 	};
 
 }

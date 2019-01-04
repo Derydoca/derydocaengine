@@ -199,6 +199,7 @@
     <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Rendering\Gui\DearImgui.cpp" />
     <ClCompile Include="src\Scenes\SceneManager.cpp" />
+    <ClCompile Include="src\Resources\ResourceTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h">
@@ -477,6 +478,7 @@
     <ClInclude Include="src\vendor\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
     <ClInclude Include="src\Scenes\SceneManager.h" />
+    <ClInclude Include="src\Resources\ResourceTreeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">
