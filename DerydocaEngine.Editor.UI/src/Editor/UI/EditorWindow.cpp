@@ -159,12 +159,6 @@ namespace DerydocaEngine::Editor::UI
 		editorScene->getRoot()->postInit();
 		sceneManager.getActiveScene()->getRoot()->postInit();
 
-		std::vector<std::shared_ptr<Scenes::Scene>> scenes =
-		{
-			editorScene,
-			sceneManager.getActiveScene()
-		};
-
 		std::time_t levelLastModifiedTime;
 
 		// Render loop
@@ -179,7 +173,10 @@ namespace DerydocaEngine::Editor::UI
 			display->newFrame();
 
 			// Render all scene objects
-			Rendering::CameraManager::getInstance().render(scenes);
+			Rendering::CameraManager::getInstance().render({
+					editorScene,
+					sceneManager.getActiveScene()
+				});
 
 			// Let the scene objects do whatever it is they need to do after rendering has completed this frame
 			editorScene->getRoot()->postRender();
@@ -218,11 +215,6 @@ namespace DerydocaEngine::Editor::UI
 
 				// Reload the scene
 				sceneManager.loadScene(levelResource);
-				scenes =
-				{
-					editorScene,
-					sceneManager.getActiveScene()
-				};
 
 				// Initialize the new scene
 				sceneManager.getActiveScene()->getRoot()->init();

@@ -1,6 +1,7 @@
 #include "EditorComponentsPch.h"
 #include "EngineAssetBrowser.h"
 #include "ObjectLibrary.h"
+#include "Scenes\SceneManager.h"
 
 namespace DerydocaEngine::Components
 {
@@ -22,6 +23,8 @@ namespace DerydocaEngine::Components
 		}
 
 		auto root = m_resourceNode.lock();
+
+		ImGui::ShowDemoWindow();
 
 		renderNodeContent(root);
 	}
@@ -51,9 +54,19 @@ namespace DerydocaEngine::Components
 
 	void EngineAssetBrowser::renderResourceNode(std::shared_ptr<Resources::Resource> resource)
 	{
-		if (ImGui::TreeNode(resource->getName().c_str()))
+		std::string id = boost::uuids::to_string(resource->getId());
+		ImGui::TreeNodeEx(id.c_str(), ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen, "%s", resource->getName().c_str());
+		if (ImGui::IsItemClicked())
 		{
-			ImGui::TreePop();
+			std::cout << resource->getSourceFilePath() << std::endl;
+			switch (resource->getType())
+			{
+			case Resources::ResourceType::LevelResourceType:
+				Scenes::SceneManager::getInstance().loadScene(resource);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
