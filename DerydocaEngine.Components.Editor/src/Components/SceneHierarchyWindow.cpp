@@ -17,7 +17,7 @@ namespace DerydocaEngine::Components
 	void SceneHierarchyWindow::renderWindow()
 	{
 		// If we do not have a root object, try to get one
-		if (m_sceneRoot == nullptr)
+		if (m_sceneRoot.expired())
 		{
 			// Get the active scene
 			Scenes::SceneManager& sceneManager = Scenes::SceneManager::getInstance();
@@ -33,7 +33,7 @@ namespace DerydocaEngine::Components
 		}
 
 		// Render each GameObject under the root
-		for (auto child : m_sceneRoot->getChildren())
+		for (auto child : m_sceneRoot.lock()->getChildren())
 		{
 			renderGameObjectTreeNode(child);
 		}

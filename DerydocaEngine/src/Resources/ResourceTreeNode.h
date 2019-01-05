@@ -12,6 +12,7 @@ namespace DerydocaEngine::Resources
 		void addChild(std::weak_ptr<ResourceTreeNode> childNode);
 		void addResource(std::weak_ptr<Resource> resource);
 		void clear();
+		void sort();
 
 		std::shared_ptr<ResourceTreeNode> getChild(const std::string& name) const;
 		std::vector<std::shared_ptr<ResourceTreeNode>> getChildren() const { return m_children; }

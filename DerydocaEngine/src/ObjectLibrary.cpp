@@ -273,6 +273,8 @@ namespace DerydocaEngine
 			auto node = getResourceTreeNode(resource.second->getSourceFilePath());
 			node->addResource(resource.second);
 		}
+
+		m_projectResourceRoot->sort();
 	}
 
 	void ObjectLibrary::loadFile(std::string const& sourceFilePath)

@@ -18,6 +18,6 @@ namespace DerydocaEngine::Components
 	private:
 		void renderGameObjectTreeNode(std::shared_ptr<GameObject> gameObject);
 
-		std::shared_ptr<GameObject> m_sceneRoot;
+		std::weak_ptr<GameObject> m_sceneRoot;
 	};
 }

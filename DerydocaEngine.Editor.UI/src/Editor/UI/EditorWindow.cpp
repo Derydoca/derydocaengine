@@ -153,11 +153,9 @@ namespace DerydocaEngine::Editor::UI
 
 		// Initialize all components in the scene before rendering anything
 		editorScene->getRoot()->init();
-		sceneManager.getActiveScene()->getRoot()->init();
 
 		// Run the post initialization routine on all components
 		editorScene->getRoot()->postInit();
-		sceneManager.getActiveScene()->getRoot()->postInit();
 
 		std::time_t levelLastModifiedTime;
 
@@ -215,10 +213,6 @@ namespace DerydocaEngine::Editor::UI
 
 				// Reload the scene
 				sceneManager.loadScene(levelResource);
-
-				// Initialize the new scene
-				sceneManager.getActiveScene()->getRoot()->init();
-				sceneManager.getActiveScene()->getRoot()->postInit();
 			}
 		}
 

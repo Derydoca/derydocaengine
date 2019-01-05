@@ -21,6 +21,8 @@ namespace DerydocaEngine::Scenes
 		auto scene = std::make_shared<Scenes::SerializedScene>();
 		scene->LoadFromFile(levelResource->getSourceFilePath());
 		scene->setUp();
+		scene->getRoot()->init();
+		scene->getRoot()->postInit();
 		m_activeScene = scene;
 	}
 
