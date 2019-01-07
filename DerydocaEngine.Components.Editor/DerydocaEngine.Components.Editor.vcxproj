@@ -99,7 +99,7 @@
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -115,7 +115,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine\src;$(ProjectDir)src</AdditionalIncludeDirectories>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -159,7 +159,7 @@
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

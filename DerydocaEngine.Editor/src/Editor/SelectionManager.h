@@ -9,6 +9,12 @@ namespace DerydocaEngine::Editor
 	class SelectionManager
 	{
 	public:
+		static SelectionManager& getInstance()
+		{
+			static SelectionManager m_instance;
+			return m_instance;
+		}
+
 		SelectionGroup getPrimarySelectionGroup() const;
 		SelectionGroup getSelectionGroup(int groupId) const;
 
