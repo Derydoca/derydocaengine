@@ -2,8 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="src\EditorPch.cpp" />
+    <ClCompile Include="src\Editor\SelectionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorPch.h" />
+    <ClInclude Include="src\Editor\SelectionManager.h" />
+    <ClInclude Include="src\Editor\SelectionGroup.h" />
   </ItemGroup>
 </Project>
