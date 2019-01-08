@@ -1,4 +1,5 @@
 #pragma once
+#include "Object.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -6,22 +7,17 @@ namespace DerydocaEngine::Editor
 	class SelectionGroup
 	{
 	public:
-		void select(boost::uuids::uuid id)
+		void select(const std::weak_ptr<Object> selection)
 		{
 			m_selection.clear();
-			m_selection.push_back(id);
+			m_selection.push_back(selection.lock());
 		}
 
-		void select(std::list<boost::uuids::uuid> ids)
+		bool isSelected(std::shared_ptr<Object> object) const
 		{
-			m_selection = ids;
-		}
-
-		bool isSelected(boost::uuids::uuid id) const
-		{
-			for (auto selectedId : m_selection)
+			for (auto selectedObject : m_selection)
 			{
-				if (id == selectedId)
+				if (object == selectedObject)
 				{
 					return true;
 				}
@@ -29,10 +25,10 @@ namespace DerydocaEngine::Editor
 			return false;
 		}
 
-		std::list<boost::uuids::uuid> getSelection() const { return m_selection; }
+		std::list<std::shared_ptr<Object>> getSelection() const { return m_selection; }
 
 	private:
-		std::list<boost::uuids::uuid> m_selection;
+		std::list<std::shared_ptr<Object>> m_selection;
 
 	};
 

@@ -7,7 +7,7 @@ namespace DerydocaEngine::Resources
 {
 
 	Resource::Resource() :
-		m_id(),
+		Object(),
 		m_name(),
 		m_type(ResourceType::UnknownResourceType),
 		m_sourceFilePath(),
@@ -19,7 +19,7 @@ namespace DerydocaEngine::Resources
 	}
 
 	Resource::Resource(boost::uuids::uuid const& id, std::string const& sourceFilePath, std::string const& metaFilePath, ResourceType const& type) :
-		m_id(id),
+		Object(id),
 		m_sourceFilePath(sourceFilePath),
 		m_metaFilePath(metaFilePath)
 	{

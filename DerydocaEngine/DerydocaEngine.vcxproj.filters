@@ -479,6 +479,7 @@
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
     <ClInclude Include="src\Scenes\SceneManager.h" />
     <ClInclude Include="src\Resources\ResourceTreeNode.h" />
+    <ClInclude Include="src\Object.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

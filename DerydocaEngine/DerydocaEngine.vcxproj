@@ -289,6 +289,7 @@
     <ClInclude Include="src\Animation\AnimationChannel.h" />
     <ClInclude Include="src\Animation\AnimationData.h" />
     <ClInclude Include="src\Animation\AnimationKey.h" />
+    <ClInclude Include="src\Object.h" />
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
     <ClInclude Include="src\Resources\ResourceTreeNode.h" />
     <ClInclude Include="src\Resources\Serializers\AnimationResourceSerializer.h" />

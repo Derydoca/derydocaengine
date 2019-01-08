@@ -7,7 +7,7 @@ namespace DerydocaEngine
 {
 
 	GameObject::GameObject(const std::string& name) :
-		m_id(),
+		Object(),
 		m_name(name),
 		m_transform(std::make_shared<Components::Transform>()),
 		m_parent(),
@@ -20,7 +20,7 @@ namespace DerydocaEngine
 	}
 
 	GameObject::GameObject(const boost::uuids::uuid id, const std::string & name) :
-		m_id(id),
+		Object(id),
 		m_name(name),
 		m_transform(std::make_shared<Components::Transform>()),
 		m_parent(),

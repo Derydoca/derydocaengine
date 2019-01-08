@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "Components\Transform.h"
+#include "Object.h"
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -18,7 +19,7 @@ namespace DerydocaEngine {
 
 namespace DerydocaEngine
 {
-	class GameObject: public std::enable_shared_from_this<GameObject>
+	class GameObject: public std::enable_shared_from_this<GameObject>, public Object
 	{
 	public:
 		GameObject(const std::string& name);
@@ -45,14 +46,12 @@ namespace DerydocaEngine
 
 		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
 		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_components; }
-		boost::uuids::uuid getId() const { return m_id; }
 		std::string getName() const { return m_name; }
 		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
 		std::shared_ptr<Components::Transform> getTransform() const { return m_transform; }
 		void setName(const std::string& name) { m_name = name; }
 
 	private:
-		boost::uuids::uuid m_id;
 		std::string m_name;
 		std::shared_ptr<Components::Transform> m_transform;
 		std::weak_ptr<GameObject> m_parent;
