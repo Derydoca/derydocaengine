@@ -21,6 +21,6 @@ namespace DerydocaEngine::Components
 		void renderResourceNode(std::shared_ptr<Resources::Resource> resource);
 	private:
 		std::weak_ptr<Resources::ResourceTreeNode> m_resourceNode;
-		Editor::SelectionGroup m_selectionGroup;
+		std::shared_ptr<Editor::SelectionGroup> m_selectionGroup;
 	};
 }

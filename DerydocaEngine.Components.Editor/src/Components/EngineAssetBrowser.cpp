@@ -57,14 +57,14 @@ namespace DerydocaEngine::Components
 	{
 		std::string id = boost::uuids::to_string(resource->getId());
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-		if (m_selectionGroup.isSelected(resource))
+		if (m_selectionGroup->isSelected(resource))
 		{
 			flags |= ImGuiTreeNodeFlags_Selected;
 		}
 		ImGui::TreeNodeEx(id.c_str(), flags, "%s", resource->getName().c_str());
 		if (ImGui::IsItemClicked())
 		{
-			m_selectionGroup.select(resource);
+			m_selectionGroup->select(resource);
 			std::cout << resource->getSourceFilePath() << std::endl;
 			//switch (resource->getType())
 			//{

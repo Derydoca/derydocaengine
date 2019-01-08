@@ -15,15 +15,15 @@ namespace DerydocaEngine::Editor
 			return m_instance;
 		}
 
-		SelectionGroup getPrimarySelectionGroup() const;
-		SelectionGroup getSelectionGroup(int groupId) const;
+		std::shared_ptr<SelectionGroup> getPrimarySelectionGroup() const;
+		std::shared_ptr<SelectionGroup> getSelectionGroup(int groupId) const;
 
 	private:
 		SelectionManager();
 		~SelectionManager();
 		SelectionManager(const SelectionManager&);
 
-		std::vector<SelectionGroup> m_selectionGroups;
+		std::vector<std::shared_ptr<SelectionGroup>> m_selectionGroups;
 
 	};
 

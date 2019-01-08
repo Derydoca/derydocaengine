@@ -7,6 +7,10 @@ namespace DerydocaEngine::Editor
 	class SelectionGroup
 	{
 	public:
+		SelectionGroup() :
+			m_selection()
+		{}
+
 		void select(const std::weak_ptr<Object> selection)
 		{
 			m_selection.clear();

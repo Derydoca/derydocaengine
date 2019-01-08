@@ -17,8 +17,7 @@ namespace DerydocaEngine::Components
 		auto selection = m_selectionGroup->getSelection();
 
 		ImGui::Text(std::to_string(selection.size()).c_str());
-
-		renderInspector(selection);
+		ImGui::Text("The GameComponent inspector window is not yet implemented.");
 	}
 
 }
