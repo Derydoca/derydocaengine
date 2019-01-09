@@ -4,13 +4,13 @@
 
 namespace DerydocaEngine::Components
 {
-	class GameComponentInspectorWindow : public EditorWindowComponent, SelfRegister<GameComponentInspectorWindow>
+	class InspectorWindow : public EditorWindowComponent, SelfRegister<InspectorWindow>
 	{
 	public:
-		GENINSTANCE(GameComponentInspectorWindow);
+		GENINSTANCE(InspectorWindow);
 
-		GameComponentInspectorWindow();
-		~GameComponentInspectorWindow();
+		InspectorWindow();
+		~InspectorWindow();
 
 		virtual void renderWindow();
 		virtual std::string getWindowTitle() { return "Inspector"; }

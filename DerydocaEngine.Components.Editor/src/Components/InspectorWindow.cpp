@@ -8,16 +8,16 @@
 
 namespace DerydocaEngine::Components
 {
-	GameComponentInspectorWindow::GameComponentInspectorWindow()
+	InspectorWindow::InspectorWindow()
 	{
 		m_selectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
 	}
 
-	GameComponentInspectorWindow::~GameComponentInspectorWindow()
+	InspectorWindow::~InspectorWindow()
 	{
 	}
 
-	void GameComponentInspectorWindow::renderWindow()
+	void InspectorWindow::renderWindow()
 	{
 		auto selection = m_selectionGroup->getSelection();
 
