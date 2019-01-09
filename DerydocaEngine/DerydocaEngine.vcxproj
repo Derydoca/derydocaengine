@@ -211,6 +211,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">EnginePch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Animation\AnimationData.cpp" />
+    <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Rendering\Gui\DearImgui.cpp" />
     <ClCompile Include="src\Resources\ResourceTreeNode.cpp" />
     <ClCompile Include="src\Resources\Serializers\AnimationResourceSerializer.cpp" />
@@ -289,8 +290,15 @@
     <ClInclude Include="src\Animation\AnimationChannel.h" />
     <ClInclude Include="src\Animation\AnimationData.h" />
     <ClInclude Include="src\Animation\AnimationKey.h" />
+    <ClInclude Include="src\Ext\BezierPatchMeshResource.h" />
     <ClInclude Include="src\Object.h" />
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
+    <ClInclude Include="src\Resources\FontResource.h" />
+    <ClInclude Include="src\Resources\LevelResource.h" />
+    <ClInclude Include="src\Resources\MaterialResource.h" />
+    <ClInclude Include="src\Resources\RasterFontResource.h" />
+    <ClInclude Include="src\Resources\SpriteSheetResource.h" />
+    <ClInclude Include="src\Resources\TextureResource.h" />
     <ClInclude Include="src\Resources\ResourceTreeNode.h" />
     <ClInclude Include="src\Resources\Serializers\AnimationResourceSerializer.h" />
     <ClInclude Include="src\Helpers\AssimpUtils.h" />

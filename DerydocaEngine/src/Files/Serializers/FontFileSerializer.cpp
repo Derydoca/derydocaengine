@@ -1,6 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\FontFileSerializer.h"
-#include "Resources\Resource.h"
+#include "Resources\FontResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -23,8 +23,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 	std::shared_ptr<Resources::Resource> FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		auto r = std::make_shared<Resources::Resource>();
-		r->setType(Resources::FontResourceType);
+		auto r = std::make_shared<Resources::FontResource>();
 		return r;
 	}
 

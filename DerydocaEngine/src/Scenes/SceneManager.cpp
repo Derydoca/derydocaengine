@@ -14,7 +14,7 @@ namespace DerydocaEngine::Scenes
 	{
 	}
 	
-	void SceneManager::loadScene(const std::shared_ptr<Resources::Resource> levelResource)
+	void SceneManager::loadScene(const std::shared_ptr<Resources::LevelResource> levelResource)
 	{
 		unloadScene();
 

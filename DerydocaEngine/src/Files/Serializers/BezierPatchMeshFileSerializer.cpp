@@ -1,6 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\BezierPatchMeshFileSerializer.h"
-#include "Resources\Resource.h"
+#include "Ext\BezierPatchMeshResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -23,8 +23,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 	std::shared_ptr<Resources::Resource> BezierPatchMeshFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		auto r = std::make_shared<Resources::Resource>();
-		r->setType(Resources::BezierPatchMeshResourceType);
+		auto r = std::make_shared<Resources::BezierPatchMeshResource>();
 		return r;
 	}
 

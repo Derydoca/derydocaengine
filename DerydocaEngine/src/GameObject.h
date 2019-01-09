@@ -22,6 +22,7 @@ namespace DerydocaEngine
 	class GameObject: public std::enable_shared_from_this<GameObject>, public Object
 	{
 	public:
+		REGISTER_TYPE_ID(GameObject);
 		GameObject(const std::string& name);
 		GameObject(const boost::uuids::uuid id, const std::string& name);
 		~GameObject();

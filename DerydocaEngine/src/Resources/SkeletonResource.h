@@ -7,6 +7,8 @@ namespace DerydocaEngine::Resources
 	struct SkeletonResource : public Resource
 	{
 	public:
+		REGISTER_TYPE_ID(SkeletonResource);
+
 		SkeletonResource() :
 			m_name()
 		{}

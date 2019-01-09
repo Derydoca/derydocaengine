@@ -1,6 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\SpriteSheetFileSerializer.h"
-#include "Resources\Resource.h"
+#include "Resources\SpriteSheetResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -23,8 +23,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 	std::shared_ptr<Resources::Resource> SpriteSheetFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		auto r = std::make_shared<Resources::Resource>();
-		r->setType(Resources::ResourceType::SpriteSheetType);
+		auto r = std::make_shared<Resources::SpriteSheetResource>();
 		return r;
 	}
 

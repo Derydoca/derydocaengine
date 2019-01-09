@@ -1,6 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\RasterFontFileSerializer.h"
-#include "Resources\Resource.h"
+#include "Resources\RasterFontResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -23,8 +23,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 	std::shared_ptr<Resources::Resource> RasterFontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		auto r = std::make_shared<Resources::Resource>();
-		r->setType(Resources::RasterFontResourceType);
+		auto r = std::make_shared<Resources::RasterFontResource>();
 		return r;
 	}
 

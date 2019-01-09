@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-#include "Resources\Resource.h"
+#include "Resources\LevelResource.h"
 
 namespace DerydocaEngine::Scenes
 {
@@ -16,7 +16,7 @@ namespace DerydocaEngine::Scenes
 
 		std::shared_ptr<Scene> getActiveScene() { return m_activeScene; }
 
-		void loadScene(const std::shared_ptr<Resources::Resource> levelResource);
+		void loadScene(const std::shared_ptr<Resources::LevelResource> levelResource);
 		void unloadScene();
 
 	private:

@@ -7,9 +7,13 @@ namespace DerydocaEngine::Resources
 	struct CubemapResource : public Resource
 	{
 	public:
+		REGISTER_TYPE_ID(CubemapResource);
+
 		CubemapResource() :
 			m_slot(0)
-		{}
+		{
+			setType(Resources::CubemapResourceType);
+		}
 		~CubemapResource() {}
 
 		void setSlot(unsigned int const& slot) { m_slot = slot; }

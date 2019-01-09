@@ -200,6 +200,7 @@
     <ClCompile Include="src\Rendering\Gui\DearImgui.cpp" />
     <ClCompile Include="src\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\Resources\ResourceTreeNode.cpp" />
+    <ClCompile Include="src\Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h">
@@ -480,6 +481,13 @@
     <ClInclude Include="src\Scenes\SceneManager.h" />
     <ClInclude Include="src\Resources\ResourceTreeNode.h" />
     <ClInclude Include="src\Object.h" />
+    <ClInclude Include="src\Ext\BezierPatchMeshResource.h" />
+    <ClInclude Include="src\Resources\FontResource.h" />
+    <ClInclude Include="src\Resources\TextureResource.h" />
+    <ClInclude Include="src\Resources\LevelResource.h" />
+    <ClInclude Include="src\Resources\MaterialResource.h" />
+    <ClInclude Include="src\Resources\RasterFontResource.h" />
+    <ClInclude Include="src\Resources\SpriteSheetResource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

@@ -1,6 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\ImageFileSerializer.h"
-#include "Resources\Resource.h"
+#include "Resources\TextureResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -24,8 +24,7 @@ namespace DerydocaEngine::Files::Serializers {
 	std::shared_ptr<Resources::Resource> ImageFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
 		// Create a material resource type
-		auto r = std::make_shared<Resources::Resource>();
-		r->setType(Resources::TextureResourceType);
+		auto r = std::make_shared<Resources::TextureResource>();
 		return r;
 	}
 

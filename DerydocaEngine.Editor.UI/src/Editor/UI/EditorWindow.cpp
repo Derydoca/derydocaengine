@@ -17,7 +17,7 @@
 namespace DerydocaEngine::Editor::UI
 {
 
-	std::shared_ptr<Resources::Resource> getLevelResource(const std::string& levelIdentifier, const std::string& levelType)
+	std::shared_ptr<Resources::LevelResource> getLevelResource(const std::string& levelIdentifier, const std::string& levelType)
 	{
 		// Load the editor components
 		if (levelIdentifier.empty())
@@ -25,7 +25,7 @@ namespace DerydocaEngine::Editor::UI
 			std::cout << "No editor components level identifier was provided!\n";
 			return nullptr;
 		}
-		auto resource = ObjectLibrary::getInstance().getResource(levelIdentifier);
+		auto resource = ObjectLibrary::getInstance().getResource<Resources::LevelResource>(levelIdentifier);
 		if (resource == nullptr)
 		{
 			std::cout << "Unable to find the " << levelType << " level with ID of '" << levelIdentifier << "'!\n";

@@ -47,6 +47,7 @@
 #include <sys/stat.h>
 
 // STD Objects
+#include <atomic>
 #include <array>
 #include <chrono>
 #include <climits>
@@ -58,3 +59,4 @@
 #include <stack>
 #include <string>
 #include <vector>
+#include <unordered_map>

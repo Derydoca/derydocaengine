@@ -4,6 +4,7 @@
 #include "Rendering\Material.h"
 #include "Rendering\Shader.h"
 #include "Resources\CubemapResource.h"
+#include "Resources\MaterialResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -74,7 +75,6 @@ namespace DerydocaEngine::Files::Serializers {
 		if (resourceType == "Cubemap")
 		{
 			auto r = std::make_shared<Resources::CubemapResource>();
-			r->setType(Resources::CubemapResourceType);
 			if (resourceNode["Slot"])
 			{
 				r->setSlot(resourceNode["Slot"].as<int>());
@@ -83,8 +83,7 @@ namespace DerydocaEngine::Files::Serializers {
 		}
 		else
 		{
-			auto r = std::make_shared<Resources::Resource>();
-			r->setType(Resources::MaterialResourceType);
+			auto r = std::make_shared<Resources::MaterialResource>();
 			return r;
 		}
 	}

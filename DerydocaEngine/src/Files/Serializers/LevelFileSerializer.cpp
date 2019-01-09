@@ -1,6 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\LevelFileSerializer.h"
-#include "Resources\Resource.h"
+#include "Resources\LevelResource.h"
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -23,8 +23,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 	std::shared_ptr<Resources::Resource> LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		auto r = std::make_shared<Resources::Resource>();
-		r->setType(Resources::LevelResourceType);
+		auto r = std::make_shared<Resources::LevelResource>();
 		return r;
 	}
 

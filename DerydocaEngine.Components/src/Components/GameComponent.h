@@ -38,7 +38,8 @@ namespace DerydocaEngine::Components
 #define GENINSTANCE(TYPE) \
 	static std::shared_ptr<Components::GameComponent> generateInstance() { return std::static_pointer_cast<Components::GameComponent>(std::make_shared<TYPE>()); }\
 	static std::string getClassName() { return #TYPE; }\
-	void __forceRegistration() { s_isRegistered; };
+	void __forceRegistration() { s_isRegistered; };\
+	virtual int getTypeId() const { return DerydocaEngine::getTypeId<TYPE>(); }\
 
 	class GameComponent: public std::enable_shared_from_this<GameComponent> {
 	public:
@@ -70,6 +71,8 @@ namespace DerydocaEngine::Components
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) {}
 		virtual void renderEditorGUI() {}
 		virtual void update(const float deltaTime) {}
+
+		virtual int getTypeId() const = 0;
 
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,

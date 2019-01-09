@@ -8,6 +8,8 @@ namespace DerydocaEngine::Resources
 	struct ShaderResource : public Resource
 	{
 	public:
+		REGISTER_TYPE_ID(ShaderResource);
+
 		ShaderResource() :
 			m_rawShaderName(),
 			m_fragmentShaderSource(),

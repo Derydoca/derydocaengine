@@ -29,10 +29,10 @@ namespace DerydocaEngine::Editor
 			return false;
 		}
 
-		std::list<std::shared_ptr<Object>> getSelection() const { return m_selection; }
+		std::vector<std::shared_ptr<Object>> getSelection() const { return m_selection; }
 
 	private:
-		std::list<std::shared_ptr<Object>> m_selection;
+		std::vector<std::shared_ptr<Object>> m_selection;
 
 	};
 

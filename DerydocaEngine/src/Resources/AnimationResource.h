@@ -7,6 +7,8 @@ namespace DerydocaEngine::Resources
 	struct AnimationResource : public Resource
 	{
 	public:
+		REGISTER_TYPE_ID(AnimationResource);
+
 		AnimationResource() :
 			m_name()
 		{}

@@ -9,6 +9,8 @@ namespace DerydocaEngine::Resources
 	struct MeshResource : public Resource
 	{
 	public:
+		REGISTER_TYPE_ID(MeshResource);
+
 		MeshResource() :
 			m_hasSkeleton(false),
 			m_skeletonId(),
