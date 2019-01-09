@@ -1,5 +1,5 @@
 #include "EditorComponentsPch.h"
-#include "GameComponentInspectorWindow.h"
+#include "InspectorWindow.h"
 #include "Resources\MeshResource.h"
 #include "Resources\ShaderResource.h"
 #include "Resources\LevelResource.h"

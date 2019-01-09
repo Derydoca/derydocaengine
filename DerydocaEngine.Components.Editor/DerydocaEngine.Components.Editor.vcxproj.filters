@@ -30,7 +30,7 @@
     <ClCompile Include="src\Components\SceneHierarchyWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Components\GameComponentInspectorWindow.cpp">
+    <ClCompile Include="src\Components\InspectorWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +50,7 @@
     <ClInclude Include="src\Components\SceneHierarchyWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\GameComponentInspectorWindow.h">
+    <ClInclude Include="src\Components\InspectorWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
