@@ -173,8 +173,9 @@
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\FontResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\InspectorRenderer.h" />
     <ClInclude Include="src\Editor\Inspector\InspectorRendererFactory.h" />
-    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MaterialInspector.h" />
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MaterialResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MeshResourceInspector.h" />
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\RasterFontInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\TextureResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\UndefinedInspector.h" />
     <ClInclude Include="src\Editor\SelectionGroup.h" />

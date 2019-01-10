@@ -16,8 +16,9 @@
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\AnimationResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\CubemapResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\FontResourceInspector.h" />
-    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MaterialInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\TextureResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MeshResourceInspector.h" />
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MaterialResourceInspector.h" />
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\RasterFontInspector.h" />
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "Editor\Inspector\ResourceInspectors\LevelResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\MaterialResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\MeshResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\RasterFontInspector.h"
 #include "Editor\Inspector\ResourceInspectors\TextureResourceInspector.h"
 #include "Editor\Inspector\UndefinedInspector.h"
 
@@ -22,6 +23,7 @@ namespace DerydocaEngine::Editor::Inspector
 		registerRenderer<Resources::LevelResource>(std::make_shared<ResourceInspectors::LevelResourceInspector>());
 		registerRenderer<Resources::MaterialResource>(std::make_shared<ResourceInspectors::MaterialResourceInspector>());
 		registerRenderer<Resources::MeshResource>(std::make_shared<ResourceInspectors::MeshResourceInspector>());
+		registerRenderer<Resources::RasterFontResource>(std::make_shared<ResourceInspectors::RasterFontResourceInspector>());
 		registerRenderer<Resources::TextureResource>(std::make_shared<ResourceInspectors::TextureResourceInspector>());
 	}
 
