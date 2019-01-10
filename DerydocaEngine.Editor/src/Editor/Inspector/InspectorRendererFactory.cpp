@@ -4,8 +4,9 @@
 #include "Editor\Inspector\ResourceInspectors\CubemapResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\FontResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\LevelResourceInspector.h"
-#include "Editor\Inspector\ResourceInspectors\TextureResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\MaterialInspector.h"
+#include "Editor\Inspector\ResourceInspectors\MeshResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\TextureResourceInspector.h"
 #include "Editor\Inspector\UndefinedInspector.h"
 
 namespace DerydocaEngine::Editor::Inspector
@@ -20,6 +21,7 @@ namespace DerydocaEngine::Editor::Inspector
 		registerRenderer<Resources::FontResource>(std::make_shared<ResourceInspectors::FontResourceInspector>());
 		registerRenderer<Resources::LevelResource>(std::make_shared<ResourceInspectors::LevelResourceInspector>());
 		registerRenderer<Resources::MaterialResource>(std::make_shared<ResourceInspectors::MaterialResourceInspector>());
+		registerRenderer<Resources::MeshResource>(std::make_shared<ResourceInspectors::MeshResourceInspector>());
 		registerRenderer<Resources::TextureResource>(std::make_shared<ResourceInspectors::TextureResourceInspector>());
 	}
 
