@@ -14,5 +14,6 @@
     <ClInclude Include="src\Editor\Inspector\InspectorRenderer.h" />
     <ClInclude Include="src\Editor\Inspector\UndefinedInspector.h" />
     <ClInclude Include="src\Editor\Inspector\AnimationResourceInspector.h" />
+    <ClInclude Include="src\Editor\Inspector\CubemapResourceInspector.h" />
   </ItemGroup>
 </Project>

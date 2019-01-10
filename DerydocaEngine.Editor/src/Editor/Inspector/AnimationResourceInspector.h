@@ -3,8 +3,6 @@
 #include "Animation\AnimationData.h"
 #include "InspectorRendererFactory.h"
 #include "Resources\AnimationResource.h"
-#include "Editor\Inspector\InspectorRenderer.h"
-#include "Scenes\SceneManager.h"
 
 namespace DerydocaEngine::Editor::Inspector
 {
