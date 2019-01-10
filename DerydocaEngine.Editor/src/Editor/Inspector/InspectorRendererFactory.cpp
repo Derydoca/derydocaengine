@@ -4,7 +4,7 @@
 #include "Editor\Inspector\ResourceInspectors\CubemapResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\FontResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\LevelResourceInspector.h"
-#include "Editor\Inspector\ResourceInspectors\MaterialInspector.h"
+#include "Editor\Inspector\ResourceInspectors\MaterialResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\MeshResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\TextureResourceInspector.h"
 #include "Editor\Inspector\UndefinedInspector.h"
