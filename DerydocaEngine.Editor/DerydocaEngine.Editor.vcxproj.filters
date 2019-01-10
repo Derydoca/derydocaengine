@@ -20,5 +20,6 @@
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MeshResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MaterialResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\RasterFontInspector.h" />
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\ShaderResourceInspector.h" />
   </ItemGroup>
 </Project>
