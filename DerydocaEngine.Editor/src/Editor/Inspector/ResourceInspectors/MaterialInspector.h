@@ -1,10 +1,10 @@
 #pragma once
 #include "EditorPch.h"
-#include "InspectorRendererFactory.h"
+#include "Editor\Inspector\InspectorRendererFactory.h"
 #include "Rendering\Material.h"
 #include "Resources\MaterialResource.h"
 
-namespace DerydocaEngine::Editor::Inspector
+namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 {
 
 	class MaterialResourceInspector : public InspectorRenderer

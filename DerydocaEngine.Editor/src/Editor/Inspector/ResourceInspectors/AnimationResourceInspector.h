@@ -1,10 +1,10 @@
 #pragma once
 #include "EditorPch.h"
+#include "Editor\Inspector\InspectorRendererFactory.h"
 #include "Animation\AnimationData.h"
-#include "InspectorRendererFactory.h"
 #include "Resources\AnimationResource.h"
 
-namespace DerydocaEngine::Editor::Inspector
+namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 {
 
 	class AnimationResourceInspector : public InspectorRenderer

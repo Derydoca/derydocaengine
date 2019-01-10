@@ -1,11 +1,11 @@
 #pragma once
 #include "EditorPch.h"
-#include "InspectorRendererFactory.h"
+#include "Editor\Inspector\InspectorRendererFactory.h"
 #include "Resources\LevelResource.h"
 #include "Editor\Inspector\InspectorRenderer.h"
 #include "Scenes\SceneManager.h"
 
-namespace DerydocaEngine::Editor::Inspector
+namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 {
 
 	class LevelResourceInspector : public InspectorRenderer

@@ -1,12 +1,12 @@
 #include "EditorPch.h"
 #include "InspectorRendererFactory.h"
-#include "Editor\Inspector\AnimationResourceInspector.h"
-#include "Editor\Inspector\CubemapResourceInspector.h"
-#include "Editor\Inspector\FontResourceInspector.h"
-#include "Editor\Inspector\LevelResourceInspector.h"
-#include "Editor\Inspector\TextureResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\AnimationResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\CubemapResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\FontResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\LevelResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\TextureResourceInspector.h"
+#include "Editor\Inspector\ResourceInspectors\MaterialInspector.h"
 #include "Editor\Inspector\UndefinedInspector.h"
-#include "Editor\Inspector\MaterialInspector.h"
 
 namespace DerydocaEngine::Editor::Inspector
 {
@@ -15,12 +15,12 @@ namespace DerydocaEngine::Editor::Inspector
 		m_renderFunctions()
 	{
 		registerUndefinedRenderer(std::make_shared<UndefinedInspector>());
-		registerRenderer<Resources::AnimationResource>(std::make_shared<AnimationResourceInspector>());
-		registerRenderer<Resources::CubemapResource>(std::make_shared<CubemapResourceInspector>());
-		registerRenderer<Resources::FontResource>(std::make_shared<FontResourceInspector>());
-		registerRenderer<Resources::LevelResource>(std::make_shared<LevelResourceInspector>());
-		registerRenderer<Resources::MaterialResource>(std::make_shared<MaterialResourceInspector>());
-		registerRenderer<Resources::TextureResource>(std::make_shared<TextureResourceInspector>());
+		registerRenderer<Resources::AnimationResource>(std::make_shared<ResourceInspectors::AnimationResourceInspector>());
+		registerRenderer<Resources::CubemapResource>(std::make_shared<ResourceInspectors::CubemapResourceInspector>());
+		registerRenderer<Resources::FontResource>(std::make_shared<ResourceInspectors::FontResourceInspector>());
+		registerRenderer<Resources::LevelResource>(std::make_shared<ResourceInspectors::LevelResourceInspector>());
+		registerRenderer<Resources::MaterialResource>(std::make_shared<ResourceInspectors::MaterialResourceInspector>());
+		registerRenderer<Resources::TextureResource>(std::make_shared<ResourceInspectors::TextureResourceInspector>());
 	}
 
 	InspectorRendererFactory::~InspectorRendererFactory()
