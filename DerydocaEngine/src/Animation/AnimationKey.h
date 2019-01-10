@@ -6,7 +6,7 @@ namespace DerydocaEngine::Animation {
 	struct AnimationKey
 	{
 		AnimationKey() :
-			time(0)
+			time(0),
 			value()
 		{
 		}
