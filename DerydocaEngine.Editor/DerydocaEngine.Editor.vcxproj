@@ -172,6 +172,7 @@
     <ClInclude Include="src\Editor\Inspector\CubemapResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\InspectorRenderer.h" />
     <ClInclude Include="src\Editor\Inspector\InspectorRendererFactory.h" />
+    <ClInclude Include="src\Editor\Inspector\TextureResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\UndefinedInspector.h" />
     <ClInclude Include="src\Editor\SelectionGroup.h" />
     <ClInclude Include="src\Editor\SelectionManager.h" />
