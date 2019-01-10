@@ -170,6 +170,7 @@
     <ClInclude Include="src\EditorPch.h" />
     <ClInclude Include="src\Editor\Inspector\AnimationResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\CubemapResourceInspector.h" />
+    <ClInclude Include="src\Editor\Inspector\FontResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\InspectorRenderer.h" />
     <ClInclude Include="src\Editor\Inspector\InspectorRendererFactory.h" />
     <ClInclude Include="src\Editor\Inspector\TextureResourceInspector.h" />
