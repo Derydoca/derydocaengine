@@ -4,6 +4,6 @@
 namespace DerydocaEngine
 {
 
-	std::atomic_int TypeIdCounter(0);
+	std::atomic_uint TypeIdCounter(0);
 
 }

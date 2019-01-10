@@ -168,6 +168,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorPch.h" />
+    <ClInclude Include="src\Editor\Inspector\InspectorRenderer.h" />
+    <ClInclude Include="src\Editor\Inspector\InspectorRendererFactory.h" />
+    <ClInclude Include="src\Editor\Inspector\UndefinedInspector.h" />
     <ClInclude Include="src\Editor\SelectionGroup.h" />
     <ClInclude Include="src\Editor\SelectionManager.h" />
   </ItemGroup>
@@ -182,6 +185,8 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditorPch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">EditorPch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Editor\Inspector\InspectorRendererFactory.cpp" />
+    <ClCompile Include="src\Editor\Inspector\LevelResourceInspector.h" />
     <ClCompile Include="src\Editor\SelectionManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
