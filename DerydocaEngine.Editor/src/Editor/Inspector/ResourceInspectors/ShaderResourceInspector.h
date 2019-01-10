@@ -16,7 +16,7 @@ namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 			ImGui::Text("Shader");
 			ImGui::Text(resource->getName().c_str());
 
-			auto shader = std::static_pointer_cast<Rendering::Shader>(resource->getResourceObjectPointer());
+			//auto shader = std::static_pointer_cast<Rendering::Shader>(resource->getResourceObjectPointer());
 
 			//bool hasVertexShader = shader->GetVertexShaderPath().length() > 0;
 			//bool hasTessEvalShader = shader->GetTessellationEvaluationShaderPath().length() > 0;
