@@ -17,6 +17,8 @@ namespace DerydocaEngine::Editor::Inspector
 			ImGui::Text("Game Object");
 			
 			Dgui::InputText("Name", gameObject->getName());
+
+			InspectorRendererFactory::getInstance().renderInspector(gameObject->getTransform());
 		}
 	};
 

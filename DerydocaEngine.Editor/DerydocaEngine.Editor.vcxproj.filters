@@ -6,6 +6,7 @@
     <ClCompile Include="src\Editor\Inspector\InspectorRendererFactory.cpp" />
     <ClCompile Include="src\Editor\Inspector\ResourceInspectors\LevelResourceInspector.h" />
     <ClCompile Include="src\Dgui\InputText.cpp" />
+    <ClCompile Include="src\Dgui\InputQuaternion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorPch.h" />
@@ -26,5 +27,7 @@
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\SpriteSheetResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\GameObjectInspector.h" />
     <ClInclude Include="src\Dgui\InputText.h" />
+    <ClInclude Include="src\Editor\Inspector\ComponentInspectors\TransformInspector.h" />
+    <ClInclude Include="src\Dgui\InputQuaternion.h" />
   </ItemGroup>
 </Project>

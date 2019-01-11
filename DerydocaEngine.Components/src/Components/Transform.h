@@ -4,6 +4,7 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <memory>
+#include "Object.h"
 
 namespace DerydocaEngine {
 	class GameObject;
@@ -12,9 +13,10 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Components
 {
 
-	struct Transform
+	struct Transform : public Object
 	{
 	public:
+		REGISTER_TYPE_ID(Transform);
 
 		Transform() :
 			m_pos(glm::vec3()),
@@ -58,8 +60,11 @@ namespace DerydocaEngine::Components
 		glm::mat4 getWorldModel() const;
 
 		glm::vec3 getWorldPos() const;
+		inline glm::vec3& getPos() { return m_pos; }
 		inline glm::vec3 getPos() const { return m_pos; }
+		inline glm::fquat& getQuat() { return m_quat; }
 		inline glm::fquat getQuat() const { return m_quat; }
+		inline glm::vec3& getScale() { return m_scale; }
 		inline glm::vec3 getScale() const { return m_scale; }
 		GameObject* getGameObject() const { return m_gameObject; }
 

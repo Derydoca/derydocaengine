@@ -167,8 +167,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Dgui\InputQuaternion.h" />
     <ClInclude Include="src\Dgui\InputText.h" />
     <ClInclude Include="src\EditorPch.h" />
+    <ClInclude Include="src\Editor\Inspector\ComponentInspectors\TransformInspector.h" />
     <ClInclude Include="src\Editor\Inspector\GameObjectInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\AnimationResourceInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\CubemapResourceInspector.h" />
@@ -187,6 +189,7 @@
     <ClInclude Include="src\Editor\SelectionManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Dgui\InputQuaternion.cpp" />
     <ClCompile Include="src\Dgui\InputText.cpp" />
     <ClCompile Include="src\EditorPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
