@@ -14,10 +14,6 @@ namespace DerydocaEngine::Editor::Inspector
 		{
 			ImGui::Text("There is no inspector defined for this object type.");
 			auto resource = std::static_pointer_cast<Resources::Resource>(object);
-			if (resource)
-			{
-				ImGui::LabelText(resource->getSourceFilePath().c_str(), "Path");
-			}
 		}
 	};
 

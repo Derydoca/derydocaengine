@@ -65,15 +65,6 @@ namespace DerydocaEngine::Components
 		if (ImGui::IsItemClicked())
 		{
 			m_selectionGroup->select(resource);
-			std::cout << resource->getSourceFilePath() << std::endl;
-			//switch (resource->getType())
-			//{
-			//case Resources::ResourceType::LevelResourceType:
-			//	Scenes::SceneManager::getInstance().loadScene(resource);
-			//	break;
-			//default:
-			//	break;
-			//}
 		}
 	}
 

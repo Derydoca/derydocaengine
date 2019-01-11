@@ -8,6 +8,7 @@ namespace DerydocaEngine::Components
 	SceneHierarchyWindow::SceneHierarchyWindow() :
 		m_sceneRoot()
 	{
+		m_selectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
 	}
 
 	SceneHierarchyWindow::~SceneHierarchyWindow()
@@ -41,9 +42,34 @@ namespace DerydocaEngine::Components
 
 	void SceneHierarchyWindow::renderGameObjectTreeNode(std::shared_ptr<GameObject> gameObject)
 	{
-		if (ImGui::TreeNode(boost::uuids::to_string(gameObject->getId()).c_str(), gameObject->getName().c_str()))
+		// Get the string representation of the game object ID
+		auto id = boost::uuids::to_string(gameObject->getId());
+		
+		// Set render flags for this game object
+		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_OpenOnArrow;
+		if (m_selectionGroup->isSelected(gameObject))
 		{
-			// render all child GameObjects
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		if (gameObject->getChildren().size() == 0)
+		{
+			flags |= ImGuiTreeNodeFlags_Leaf;
+		}
+
+		// Render the element
+		bool isExpanded = ImGui::TreeNodeEx(id.c_str(), flags, gameObject->getName().c_str());
+
+		// Select the element if it was clicked
+		if (ImGui::IsItemClicked())
+		{
+			m_selectionGroup->select(gameObject);
+		}
+
+		// If it was expanded, render the child elements
+		if (isExpanded)
+		{
+			ImGui::TreePush();
+
 			for (auto child : gameObject->getChildren())
 			{
 				renderGameObjectTreeNode(child);
@@ -51,6 +77,7 @@ namespace DerydocaEngine::Components
 
 			ImGui::TreePop();
 		}
+
 	}
 
 }

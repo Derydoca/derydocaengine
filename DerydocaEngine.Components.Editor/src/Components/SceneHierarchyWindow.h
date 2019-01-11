@@ -1,5 +1,6 @@
 #pragma once
 #include "Components\EditorWindowComponent.h"
+#include "Editor\SelectionManager.h"
 
 namespace DerydocaEngine::Components
 {
@@ -19,5 +20,6 @@ namespace DerydocaEngine::Components
 		void renderGameObjectTreeNode(std::shared_ptr<GameObject> gameObject);
 
 		std::weak_ptr<GameObject> m_sceneRoot;
+		std::shared_ptr<Editor::SelectionGroup> m_selectionGroup;
 	};
 }
