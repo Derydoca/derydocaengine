@@ -48,6 +48,7 @@ namespace DerydocaEngine
 		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
 		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_components; }
 		std::string getName() const { return m_name; }
+		std::string& getName() { return m_name; }
 		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
 		std::shared_ptr<Components::Transform> getTransform() const { return m_transform; }
 		void setName(const std::string& name) { m_name = name; }

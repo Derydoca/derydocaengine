@@ -1,5 +1,6 @@
 #include "EditorPch.h"
 #include "InspectorRendererFactory.h"
+#include "Editor\Inspector\GameObjectInspector.h"
 #include "Editor\Inspector\ResourceInspectors\AnimationResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\CubemapResourceInspector.h"
 #include "Editor\Inspector\ResourceInspectors\FontResourceInspector.h"
@@ -20,6 +21,7 @@ namespace DerydocaEngine::Editor::Inspector
 		m_renderFunctions()
 	{
 		registerUndefinedRenderer(std::make_shared<UndefinedInspector>());
+		registerRenderer<GameObject>(std::make_shared<GameObjectInspector>());
 		registerRenderer<Resources::AnimationResource>(std::make_shared<ResourceInspectors::AnimationResourceInspector>());
 		registerRenderer<Resources::CubemapResource>(std::make_shared<ResourceInspectors::CubemapResourceInspector>());
 		registerRenderer<Resources::FontResource>(std::make_shared<ResourceInspectors::FontResourceInspector>());
