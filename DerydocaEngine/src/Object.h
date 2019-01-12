@@ -21,7 +21,6 @@ namespace DerydocaEngine
 		Object() :
 			m_id()
 		{
-
 		}
 
 		Object(boost::uuids::uuid id) :

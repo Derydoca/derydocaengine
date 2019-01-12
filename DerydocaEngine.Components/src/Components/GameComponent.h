@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "ObjectLibrary.h"
 #include "Helpers\YamlTools.h"
+#include "TypeNameLookup.h"
 
 struct Resource;
 
@@ -33,7 +34,7 @@ namespace DerydocaEngine::Components
 	};
 
 	template <typename T>
-	bool SelfRegister<T>::s_isRegistered = DerydocaEngine::Components::GameComponentFactory::getInstance().registerGenerator(T::getClassName(), T::generateInstance);
+	bool SelfRegister<T>::s_isRegistered = GameComponentFactory::getInstance().registerGenerator(T::getClassName(), T::generateInstance) && TypeNameLookup::getInstace().registerType<T>(T::getClassName());
 
 #define GENINSTANCE(TYPE) \
 	static std::shared_ptr<Components::GameComponent> generateInstance() { return std::static_pointer_cast<Components::GameComponent>(std::make_shared<TYPE>()); }\
@@ -41,13 +42,13 @@ namespace DerydocaEngine::Components
 	void __forceRegistration() { s_isRegistered; };\
 	virtual unsigned int getTypeId() const { return DerydocaEngine::getTypeId<TYPE>(); }\
 
-	class GameComponent: public std::enable_shared_from_this<GameComponent> {
+	class GameComponent: public std::enable_shared_from_this<GameComponent>, public Object {
 	public:
 		GameComponent() :
 			m_gameObject()
 		{}
 		virtual ~GameComponent() {}
-		
+
 		// Game Component Lifecycle
 		// ------------------------
 		// COMPONENT CREATION

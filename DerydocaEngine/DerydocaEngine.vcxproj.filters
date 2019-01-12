@@ -201,6 +201,7 @@
     <ClCompile Include="src\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\Resources\ResourceTreeNode.cpp" />
     <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\TypeNameLookup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h">
@@ -488,6 +489,7 @@
     <ClInclude Include="src\Resources\MaterialResource.h" />
     <ClInclude Include="src\Resources\RasterFontResource.h" />
     <ClInclude Include="src\Resources\SpriteSheetResource.h" />
+    <ClInclude Include="src\TypeNameLookup.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

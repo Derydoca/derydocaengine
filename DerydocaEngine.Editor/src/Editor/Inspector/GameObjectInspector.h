@@ -2,12 +2,23 @@
 #include "EditorPch.h"
 #include "Editor\Inspector\InspectorRendererFactory.h"
 #include "GameObject.h"
+#include "Components\GameComponent.h"
+#include "TypeNameLookup.h"
 
 namespace DerydocaEngine::Editor::Inspector
 {
 
 	class GameObjectInspector : public InspectorRenderer
 	{
+
+		void renderComponent(std::shared_ptr<Components::GameComponent> component)
+		{
+			if (ImGui::CollapsingHeader(TypeNameLookup::getInstace().get(component).c_str()))
+			{
+				InspectorRendererFactory::getInstance().renderInspector(component);
+			}
+		}
+
 		virtual void render(std::shared_ptr<Object> object)
 		{
 			auto gameObject = std::static_pointer_cast<GameObject>(object);
@@ -19,6 +30,11 @@ namespace DerydocaEngine::Editor::Inspector
 			Dgui::InputText("Name", gameObject->getName());
 
 			InspectorRendererFactory::getInstance().renderInspector(gameObject->getTransform());
+
+			for (auto component : gameObject->getComponents())
+			{
+				renderComponent(component);
+			}
 		}
 	};
 
