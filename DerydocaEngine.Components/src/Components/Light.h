@@ -55,14 +55,18 @@ namespace DerydocaEngine::Components
 			m_color.b = color->b;
 			m_color.a = color->a;
 		}
-		Color getColor() { return m_color; }
+		bool& getCastShadows() { return m_castShadows; }
+		Color& getColor() { return m_color; }
+		Color getColor() const { return m_color; }
 		float getSpotlightExponent() { return m_spotlightExponent; }
 		float getSpotlightCutoff() { return m_spotlightCutoff; }
 		unsigned int getShadowMap() { return m_depthTexture; }
 		bool isCastingShadows() { return m_castShadows; }
 		bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
-		Rendering::Projection getProjection() { return m_projection; }
+		Rendering::Projection& getProjection() { return m_projection; }
+		Rendering::Projection getProjection() const { return m_projection; }
 		glm::mat4 getShadowMatrix(glm::mat4 const& objectModelMatrix);
+		float& getShadowSoftness() { return m_shadowSoftness; }
 		float getShadowSoftness() const { return m_shadowSoftness; }
 
 		virtual void init();

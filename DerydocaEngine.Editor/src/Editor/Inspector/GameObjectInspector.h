@@ -15,7 +15,9 @@ namespace DerydocaEngine::Editor::Inspector
 		{
 			if (ImGui::CollapsingHeader(TypeNameLookup::getInstace().get(component).c_str()))
 			{
+				ImGui::TreePush();
 				InspectorRendererFactory::getInstance().renderInspector(component);
+				ImGui::TreePop();
 			}
 		}
 

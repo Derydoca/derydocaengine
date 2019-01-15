@@ -38,9 +38,12 @@ namespace DerydocaEngine::Rendering
 		void setZNear(float const& zNear) { m_zNear = zNear; }
 		void setZFar(float const& zFar) { m_zFar = zFar; }
 
+		float& getFov() { return m_fov; }
 		float getFov() const { return m_fov; }
 		float getAspectRatio() const { return m_aspect; }
+		float& getZNear() { return m_zNear; }
 		float getZNear() const { return m_zNear; }
+		float& getZFar() { return m_zFar; }
 		float getZFar() const { return m_zFar; }
 	private:
 		glm::mat4 m_projectionMatrix;

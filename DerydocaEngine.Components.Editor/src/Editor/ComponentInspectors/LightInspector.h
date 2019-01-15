@@ -1,14 +1,14 @@
 #pragma once
 #include "EditorPch.h"
 #include "Editor\Inspector\InspectorRendererFactory.h"
-#include "Components\MeshRenderer.h"
+#include "Components\Light.h"
 
 namespace DerydocaEngine::Editor::Inspector::ComponentInspectors
 {
 
-	class MeshRendererInspector : public InspectorRenderer, RegisterInspectorRenderer<MeshRendererInspector, Components::MeshRenderer>
+	class LightInspector : public InspectorRenderer, RegisterInspectorRenderer<LightInspector, Components::Light>
 	{
-		REGISTER_INSPECTOR(MeshRendererInspector);
+		REGISTER_INSPECTOR(LightInspector);
 
 		virtual void render(std::shared_ptr<Object> object);
 	};

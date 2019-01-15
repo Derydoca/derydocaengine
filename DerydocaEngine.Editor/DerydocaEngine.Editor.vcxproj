@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Dgui\InputProjection.h" />
     <ClInclude Include="src\Dgui\InputQuaternion.h" />
     <ClInclude Include="src\Dgui\InputText.h" />
     <ClInclude Include="src\EditorPch.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="src\Editor\SelectionManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Dgui\InputProjection.cpp" />
     <ClCompile Include="src\Dgui\InputQuaternion.cpp" />
     <ClCompile Include="src\Dgui\InputText.cpp" />
     <ClCompile Include="src\EditorPch.cpp">
