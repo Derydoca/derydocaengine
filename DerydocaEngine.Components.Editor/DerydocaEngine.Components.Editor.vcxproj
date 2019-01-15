@@ -175,6 +175,7 @@
     <ClInclude Include="src\Components\EngineAssetBrowser.h" />
     <ClInclude Include="src\Components\EngineConsole.h" />
     <ClInclude Include="src\Components\InspectorWindow.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\MeshRendererInspector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Components\InspectorWindow.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="src\Components\EditorWindowComponent.cpp" />
     <ClCompile Include="src\Components\EngineAssetBrowser.cpp" />
     <ClCompile Include="src\Components\EngineConsole.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\MeshRendererInspector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">

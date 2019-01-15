@@ -129,7 +129,7 @@ namespace DerydocaEngine::Scenes
 					continue;
 				}
 
-				// Let the component deserialize the data it ineeds
+				// Let the component deserialize the data it needs
 				if (compNode["Properties"])
 				{
 					component->deserialize(compNode["Properties"]);

@@ -30,6 +30,7 @@ namespace DerydocaEngine::Components
 			const std::shared_ptr<Transform> projectionTransform
 		);
 		std::shared_ptr<Rendering::Material> getMaterial() { return m_material; }
+		std::shared_ptr<Rendering::Mesh> getMesh() { return m_mesh; }
 		std::shared_ptr<Camera> getMeshRendererCamera() { return m_meshRendererCamera; }
 
 		virtual void deserialize(const YAML::Node& compNode);
