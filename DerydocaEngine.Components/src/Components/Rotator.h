@@ -17,6 +17,7 @@ namespace DerydocaEngine::Components
 		void deserialize(const YAML::Node& node);
 
 		inline void setSpeed(float const& rotSpeed) { m_rotSpeed = rotSpeed; }
+		inline float& getSpeed() { return m_rotSpeed; }
 		inline float getSpeed() const { return m_rotSpeed; }
 	private:
 		float m_rotVal;

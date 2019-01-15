@@ -1,15 +1,15 @@
 Scene:
 
-  - Type: GameObject
-    ID: e837d9d0-4694-4480-bebc-7c0cec1002c7
-    Properties:
-      Name: __screenshotUtil
-      Transform:
-        Position: [0, 0, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: ScreenshotUtil
+  # - Type: GameObject
+  #   ID: e837d9d0-4694-4480-bebc-7c0cec1002c7
+  #   Properties:
+  #     Name: __screenshotUtil
+  #     Transform:
+  #       Position: [0, 0, 0]
+  #       Rotation: [0, 0, 0, 1]
+  #       Scale: [1, 1, 1]
+  #     Components:
+  #       - Type: ScreenshotUtil
 
   - Type: GameObject
     ID: 0f5e5b4a-69ed-4345-868e-727b9d8b9139
