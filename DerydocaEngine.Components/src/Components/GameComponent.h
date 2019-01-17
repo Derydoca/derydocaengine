@@ -95,7 +95,7 @@ namespace DerydocaEngine::Components
 			}
 
 			// Iterate through all of the components on this game object
-			std::vector<std::shared_ptr<Components::GameComponent>>& gameObjectComponents = getGameObject()->getComponents();
+			std::vector<std::shared_ptr<Components::GameComponent>> gameObjectComponents = getGameObject()->getComponents();
 			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = gameObjectComponents.begin(); it != gameObjectComponents.end(); ++it)
 			{
 				// Attempt to cast this object to the type we want
