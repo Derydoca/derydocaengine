@@ -5,8 +5,6 @@
 #include "yaml-cpp\yaml.h"
 #include "Helpers\YamlTools.h"
 #include <fstream>
-#include "vendor/stb_image.h"
-#include "vendor/stb_image_write.h"
 #include "ObjectLibrary.h"
 #include "ObjectLibrary.h"
 #include <iostream>

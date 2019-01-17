@@ -12,6 +12,21 @@ namespace DerydocaEngine::Editor::Inspector
 			return m_instance;
 		}
 
+		template<typename T>
+		std::shared_ptr<InspectorRenderer> getInspectorRenderer()
+		{
+			unsigned int typeId = getTypeId<T>();
+			auto it = m_renderFunctions.find(typeId);
+			if (it == m_renderFunctions.end())
+			{
+				return nullptr;
+			}
+			else
+			{
+				return (*it).second;
+			}
+		}
+
 		void registerUndefinedRenderer(std::shared_ptr<InspectorRenderer> renderer)
 		{
 			m_renderFunctions[0] = renderer;

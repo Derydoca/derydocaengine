@@ -2,9 +2,6 @@
 #include "Rendering\Texture.h"
 
 #include <cassert>
-#include <GL/glew.h>
-#include <iostream>
-#include "vendor/stb_image.h"
 #include "Rendering\TextureParameters.h"
 
 namespace DerydocaEngine::Rendering

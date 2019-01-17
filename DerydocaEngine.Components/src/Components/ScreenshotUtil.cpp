@@ -9,8 +9,6 @@
 #include "Rendering\DisplayManager.h"
 #include "Input\InputManager.h"
 #include "sdl2\SDL.h"
-#include "vendor/stb_image.h"
-#include "vendor/stb_image_write.h"
 
 namespace t = boost::posix_time;
 

@@ -4,7 +4,6 @@
 #include "Rendering\Material.h"
 #include "Components\MeshRenderer.h"
 #include "Rendering\ShaderLibrary.h"
-#include "vendor/stb_image.h"
 #include "Rendering\Texture.h"
 
 namespace DerydocaEngine::Components

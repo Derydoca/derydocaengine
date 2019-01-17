@@ -1,7 +1,5 @@
 #include "EnginePch.h"
 #include "UI\Spritesheet.h"
-#include "vendor/stb_image.h"
-#include "vendor/stb_image_write.h"
 #include "ObjectLibrary.h"
 #include "Helpers\YamlTools.h"
 #include <yaml-cpp/yaml.h>

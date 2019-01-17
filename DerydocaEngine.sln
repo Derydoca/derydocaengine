@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Components.E
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor", "DerydocaEngine.Editor\DerydocaEngine.Editor.vcxproj", "{0FBC4ADD-5B4A-4388-8DB5-CBC58BB5B4A6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.Test", "DerydocaEngine.Editor.Test\DerydocaEngine.Editor.Test.vcxproj", "{DCAE92F4-A78B-4362-B685-E11E13105BFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -71,6 +73,14 @@ Global
 		{0FBC4ADD-5B4A-4388-8DB5-CBC58BB5B4A6}.Release|Win32.Build.0 = Release|Win32
 		{0FBC4ADD-5B4A-4388-8DB5-CBC58BB5B4A6}.Release|x64.ActiveCfg = Release|x64
 		{0FBC4ADD-5B4A-4388-8DB5-CBC58BB5B4A6}.Release|x64.Build.0 = Release|x64
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Debug|Win32.Build.0 = Debug|Win32
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Debug|x64.ActiveCfg = Debug|x64
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Debug|x64.Build.0 = Debug|x64
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Release|Win32.ActiveCfg = Release|Win32
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Release|Win32.Build.0 = Release|Win32
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Release|x64.ActiveCfg = Release|x64
+		{DCAE92F4-A78B-4362-B685-E11E13105BFF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
