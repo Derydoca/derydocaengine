@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include "Inspector\InspectorRegistrationMacros.h"
+
 #include "Components\Camera.h"
 #include "Components\FrameStats.h"
 #include "Components\KeyboardMover.h"
@@ -14,12 +16,6 @@
 #include "Components\TextRenderer.h"
 #include "Components\Transform.h"
 #include "Components\WasdMover.h"
-#include "Editor\Inspector\InspectorRendererFactory.h"
-
-#define TEST_INSPECTOR_REGISTRATION(TYPE) \
-auto& factory = DerydocaEngine::Editor::Inspector::InspectorRendererFactory::getInstance();\
-auto inspector = factory.getInspectorRenderer<TYPE>();\
-EXPECT_TRUE(inspector != nullptr);\
 
 TEST(InspectorRegistration_Component, Camera) {
 	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::Camera);

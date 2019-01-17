@@ -37,9 +37,11 @@
     <IntDir>$(SolutionDir)bin-int\$(ProjectName)\$(Platform)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClInclude Include="src\Inspector\InspectorRegistrationMacros.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Inspector\InspectorRegistration_Resource.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\stbi_impl.cpp" />
     <ClCompile Include="src\Inspector\InspectorRegistration_Component.cpp" />

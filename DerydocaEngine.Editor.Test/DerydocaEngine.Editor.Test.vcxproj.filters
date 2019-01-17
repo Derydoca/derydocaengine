@@ -5,11 +5,13 @@
     <ClCompile Include="src\pch.cpp" />
     <ClCompile Include="src\stbi_impl.cpp" />
     <ClCompile Include="src\Inspector\InspectorRegistration_Component.cpp" />
+    <ClCompile Include="src\Inspector\InspectorRegistration_Resource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Inspector\InspectorRegistrationMacros.h" />
   </ItemGroup>
 </Project>
