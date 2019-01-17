@@ -37,13 +37,13 @@
     <IntDir>$(SolutionDir)bin-int\$(ProjectName)\$(Platform)-$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="stbi_impl.cpp" />
-    <ClCompile Include="InspectorRegistration_Component.cpp" />
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\stbi_impl.cpp" />
+    <ClCompile Include="src\Inspector\InspectorRegistration_Component.cpp" />
+    <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -99,7 +99,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)include;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)include;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
