@@ -175,6 +175,7 @@
     <ClInclude Include="src\Components\EngineAssetBrowser.h" />
     <ClInclude Include="src\Components\EngineConsole.h" />
     <ClInclude Include="src\Components\InspectorWindow.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\CameraInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\LightInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\MeshRendererInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\RotatorInspector.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="src\Components\EditorWindowComponent.cpp" />
     <ClCompile Include="src\Components\EngineAssetBrowser.cpp" />
     <ClCompile Include="src\Components\EngineConsole.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\CameraInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\LightInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\MeshRendererInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\RotatorInspector.cpp" />

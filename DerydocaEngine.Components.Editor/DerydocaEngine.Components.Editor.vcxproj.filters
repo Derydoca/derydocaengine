@@ -42,6 +42,9 @@
     <ClCompile Include="src\Editor\ComponentInspectors\RotatorInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectors\CameraInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectors\RotatorInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectors\CameraInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

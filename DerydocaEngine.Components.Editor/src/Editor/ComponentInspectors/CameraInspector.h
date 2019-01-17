@@ -1,13 +1,13 @@
 #pragma once
 #include "Editor\Inspector\InspectorRendererFactory.h"
-#include "Components\Rotator.h"
+#include "Components\Camera.h"
 
 namespace DerydocaEngine::Editor::Inspector::ComponentInspectors
 {
 
-	class RotatorInspector : public InspectorRenderer, RegisterInspectorRenderer<RotatorInspector, Components::Rotator>
+	class CameraInspector : public InspectorRenderer, RegisterInspectorRenderer<CameraInspector, Components::Camera> 
 	{
-		REGISTER_INSPECTOR(RotatorInspector);
+		REGISTER_INSPECTOR(CameraInspector);
 
 		virtual void render(std::shared_ptr<Object> object);
 	};

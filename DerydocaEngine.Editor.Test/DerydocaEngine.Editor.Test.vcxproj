@@ -38,18 +38,19 @@
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="src\Inspector\InspectorRegistrationMacros.h" />
-    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\EditorTestPch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Inspector\InspectorRegistration_Resource.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\stbi_impl.cpp" />
     <ClCompile Include="src\Inspector\InspectorRegistration_Component.cpp" />
-    <ClCompile Include="src\pch.cpp">
+    <ClCompile Include="src\EditorTestPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditorTestPch.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,7 +95,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>EditorTestPch.h</PrecompiledHeaderFile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING;_HAS_TR1_NAMESPACE;OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>

@@ -103,6 +103,7 @@ namespace DerydocaEngine::Components
 		void deserialize(const YAML::Node& node);
 		std::shared_ptr<Rendering::Shader> getPostProcessShader() const;
 		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
+		Rendering::Projection& getProjection() { return m_projection; }
 		Rendering::Projection getProjection() const { return m_projection; }
 	private:
 		std::shared_ptr<Components::Transform> m_transform;

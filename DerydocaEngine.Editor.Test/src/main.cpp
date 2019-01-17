@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EditorTestPch.h"
 
 int main(int argc, char **argv) {
 	glewInit();

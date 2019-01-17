@@ -1,5 +1,4 @@
 #pragma once
-#include "EditorPch.h"
 #include "Editor\Inspector\InspectorRendererFactory.h"
 #include "Components\MeshRenderer.h"
 

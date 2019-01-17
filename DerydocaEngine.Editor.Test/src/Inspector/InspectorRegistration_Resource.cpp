@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EditorTestPch.h"
 #include "Inspector\InspectorRegistrationMacros.h"
 #include "Resources\AnimationResource.h"
 #include "Resources\CubemapResource.h"
