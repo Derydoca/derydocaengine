@@ -179,6 +179,7 @@
     <ClInclude Include="src\Editor\ComponentInspectors\FrameStatsInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\LightInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\MeshRendererInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\RotatorInspector.h" />
   </ItemGroup>
@@ -199,6 +200,7 @@
     <ClCompile Include="src\Editor\ComponentInspectors\FrameStatsInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\LightInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\MeshRendererInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\RotatorInspector.cpp" />
   </ItemGroup>
