@@ -185,6 +185,7 @@
     <ClInclude Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\SkinnedMeshRendererInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\SpriteRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\TextRendererInspector.h" />
     <ClInclude Include="src\Editor\TerrainInspector.h" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +211,7 @@
     <ClCompile Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\SkinnedMeshRendererInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\SpriteRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\TextRendererInspector.cpp" />
     <ClCompile Include="src\Editor\TerrainInspector.cpp" />
   </ItemGroup>
   <ItemGroup>

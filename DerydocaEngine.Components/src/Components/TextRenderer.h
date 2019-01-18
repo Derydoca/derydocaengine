@@ -79,6 +79,7 @@ namespace DerydocaEngine::Components
 			markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
 		}
 		std::string getText() { return m_text; }
+		Color getColor() const { return m_textColor; }
 		void setColor(Color const& color)
 		{
 			if (m_textColor == color)
