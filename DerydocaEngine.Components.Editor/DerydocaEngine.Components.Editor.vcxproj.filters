@@ -48,6 +48,9 @@
     <ClCompile Include="src\Editor\ComponentInspectors\FrameStatsInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectors\FrameStatsInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
