@@ -183,6 +183,8 @@
     <ClInclude Include="src\Editor\ComponentInspectors\MeshRendererInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\RotatorInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\SkinnedMeshRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\SpriteRendererInspector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Components\InspectorWindow.cpp" />
@@ -205,6 +207,8 @@
     <ClCompile Include="src\Editor\ComponentInspectors\MeshRendererInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\RotatorInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\SkinnedMeshRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\SpriteRendererInspector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">
