@@ -41,6 +41,7 @@
     <ClInclude Include="src\EditorTestPch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Inspector\InspectorRegistration_Component_Ext.cpp" />
     <ClCompile Include="src\Inspector\InspectorRegistration_Resource.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\stbi_impl.cpp" />

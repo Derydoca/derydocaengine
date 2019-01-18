@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "InspectorRenderer.h"
+#include "Components\SkinnedMeshRenderer.h"
 
 namespace DerydocaEngine::Editor::Inspector
 {
@@ -16,6 +17,7 @@ namespace DerydocaEngine::Editor::Inspector
 		std::shared_ptr<InspectorRenderer> getInspectorRenderer()
 		{
 			unsigned int typeId = getTypeId<T>();
+			unsigned int otherTypeId = getTypeId<Components::SkinnedMeshRenderer>();
 			auto it = m_renderFunctions.find(typeId);
 			if (it == m_renderFunctions.end())
 			{

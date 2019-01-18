@@ -69,6 +69,9 @@
     <ClCompile Include="src\Editor\ComponentInspectors\TextRendererInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectors\WasdMoverInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectors\TextRendererInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectors\WasdMoverInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

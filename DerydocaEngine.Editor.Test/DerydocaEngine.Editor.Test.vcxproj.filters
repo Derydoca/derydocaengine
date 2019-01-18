@@ -6,6 +6,7 @@
     <ClCompile Include="src\Inspector\InspectorRegistration_Component.cpp" />
     <ClCompile Include="src\Inspector\InspectorRegistration_Resource.cpp" />
     <ClCompile Include="src\EditorTestPch.cpp" />
+    <ClCompile Include="src\Inspector\InspectorRegistration_Component_Ext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
