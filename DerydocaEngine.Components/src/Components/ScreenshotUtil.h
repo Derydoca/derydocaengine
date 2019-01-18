@@ -21,6 +21,7 @@ namespace DerydocaEngine::Components
 		~ScreenshotUtil();
 
 		void postRender();
+		void saveScreenshot();
 	private:
 		Input::Keyboard* m_keyboard;
 		Rendering::Display* m_display;

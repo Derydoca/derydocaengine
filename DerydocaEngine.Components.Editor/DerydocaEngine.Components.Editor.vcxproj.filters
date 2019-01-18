@@ -54,6 +54,9 @@
     <ClCompile Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

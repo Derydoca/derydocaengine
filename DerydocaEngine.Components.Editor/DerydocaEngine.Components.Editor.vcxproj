@@ -182,6 +182,7 @@
     <ClInclude Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\MeshRendererInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\RotatorInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Components\InspectorWindow.cpp" />
@@ -203,6 +204,7 @@
     <ClCompile Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\MeshRendererInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\RotatorInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">
