@@ -17,6 +17,7 @@ namespace DerydocaEngine::Ext
 		virtual void update(const float deltaTime);
 
 		void setEnableMultisample(bool const& enable);
+		bool isMultisampleOn() { return m_enableMultisample; }
 	private:
 		Input::Keyboard * m_keyboard;
 		bool m_enableMultisample;
