@@ -17,6 +17,10 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
+
+		Color& getColor() { return m_lineColor; }
+		int& getNumStrips() { return m_numStrips; }
+		int& getNumSegments() { return m_numSegments; }
 	private:
 		float m_controlPoints[8];
 		unsigned int m_vao;

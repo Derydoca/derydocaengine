@@ -35,11 +35,6 @@ namespace DerydocaEngine::Ext
 
 		// Set the number of vertices per patch
 		glPatchParameteri(GL_PATCH_VERTICES, 4);
-
-		// Segments and strips may be inverted on NVIDIA
-		m_material->setInt("NumSegments", m_numSegments);
-		m_material->setInt("NumStrips", m_numStrips);
-		m_material->setColorRGBA("LineColor", m_lineColor);
 	}
 
 	void BezierCurveRenderer::deserialize(const YAML::Node& compNode)
@@ -82,6 +77,11 @@ namespace DerydocaEngine::Ext
 
 	void BezierCurveRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
+		// Segments and strips may be inverted on NVIDIA
+		m_material->setInt("NumSegments", m_numSegments);
+		m_material->setInt("NumStrips", m_numStrips);
+		m_material->setColorRGBA("LineColor", m_lineColor);
+
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
 		glBindVertexArray(m_vao);
