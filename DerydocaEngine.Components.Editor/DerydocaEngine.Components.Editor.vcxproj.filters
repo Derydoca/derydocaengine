@@ -96,6 +96,9 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\NightVisionFilterInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\NoiseTextureInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -177,6 +180,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectorsExt\NightVisionFilterInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\NoiseTextureInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,7 +18,14 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 
-		void generateNoiseTexture(float const& baseFreq, float const& persistence, bool const& periodic, bool const& seamless);
+		void generateNoiseTexture();
+		int& getWidth() { return m_width; }
+		int& getHeight() { return m_height; }
+		float& getBaseFrequency() { return m_baseFrequency; }
+		float& getPersistence() { return m_persistence; }
+		bool& getIsPeriodic() { return m_periodic; }
+		bool& getIsSeamless() { return m_seamless; }
+
 	private:
 		int m_width = 256;
 		int m_height = 256;

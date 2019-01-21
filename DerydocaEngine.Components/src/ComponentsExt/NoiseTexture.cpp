@@ -36,7 +36,7 @@ namespace DerydocaEngine::Ext
 			}
 		}
 
-		generateNoiseTexture(m_baseFrequency, m_persistence, m_periodic, m_seamless);
+		generateNoiseTexture();
 	}
 
 	void NoiseTexture::deserialize(const YAML::Node& compNode)
@@ -84,7 +84,7 @@ namespace DerydocaEngine::Ext
 		}
 	}
 
-	void NoiseTexture::generateNoiseTexture(float const& baseFreq, float const& persistence, bool const& periodic, bool const& seamless)
+	void NoiseTexture::generateNoiseTexture()
 	{
 		GLubyte* textureData = new GLubyte[m_width * m_height * 4];
 
@@ -100,12 +100,12 @@ namespace DerydocaEngine::Ext
 				float x = xFactor * col;
 				float y = yFactor * row;
 				float sum = 0.0f;
-				float freq = baseFreq;
-				float persist = persistence;
+				float freq = m_baseFrequency;
+				float persist = m_persistence;
 				for (int oct = 0; oct < 4; oct++) {
 
 					float val = 0.0f;
-					if (seamless)
+					if (m_seamless)
 					{
 						float a, b, c, d;
 
@@ -114,7 +114,7 @@ namespace DerydocaEngine::Ext
 						glm::vec2 cPos = glm::vec2(x, y + yRange) * freq;
 						glm::vec2 dPos = glm::vec2(x + xRange, y + yRange) * freq;
 
-						if (periodic)
+						if (m_periodic)
 						{
 							a = perlin(aPos);
 							b = perlin(bPos);
@@ -144,7 +144,7 @@ namespace DerydocaEngine::Ext
 					else
 					{
 						glm::vec2 p(x * freq, y * freq);
-						if (periodic)
+						if (m_periodic)
 						{
 							val = glm::perlin(p, glm::vec2(freq));
 						}
@@ -167,7 +167,7 @@ namespace DerydocaEngine::Ext
 					// Store in texture
 					textureData[((row * m_width + col) * 4) + oct] = (GLubyte)(result * 255.0f);
 					freq *= 2.0f;
-					persist *= persistence;
+					persist *= m_persistence;
 				}
 			}
 		}
