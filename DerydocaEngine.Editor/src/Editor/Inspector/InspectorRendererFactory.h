@@ -16,8 +16,8 @@ namespace DerydocaEngine::Editor::Inspector
 		template<typename T>
 		std::shared_ptr<InspectorRenderer> getInspectorRenderer()
 		{
-			unsigned int typeId = getTypeId<T>();
-			unsigned int otherTypeId = getTypeId<Components::SkinnedMeshRenderer>();
+			unsigned long typeId = getTypeId<T>();
+			unsigned long otherTypeId = getTypeId<Components::SkinnedMeshRenderer>();
 			auto it = m_renderFunctions.find(typeId);
 			if (it == m_renderFunctions.end())
 			{
@@ -37,7 +37,7 @@ namespace DerydocaEngine::Editor::Inspector
 		template<typename T>
 		bool registerRenderer(std::shared_ptr<InspectorRenderer> renderer)
 		{
-			unsigned int typeId = getTypeId<T>();
+			unsigned long typeId = getTypeId<T>();
 			m_renderFunctions[typeId] = renderer;
 			return true;
 		}
@@ -53,7 +53,7 @@ namespace DerydocaEngine::Editor::Inspector
 
 		void renderInspector(std::shared_ptr<Object> object)
 		{
-			unsigned int typeId = object->getTypeId();
+			unsigned long typeId = object->getTypeId();
 			auto it = m_renderFunctions.find(typeId);
 			if (it == m_renderFunctions.end())
 			{
@@ -70,7 +70,7 @@ namespace DerydocaEngine::Editor::Inspector
 		~InspectorRendererFactory();
 		InspectorRendererFactory(const InspectorRendererFactory&);
 
-		std::unordered_map<unsigned int, std::shared_ptr<InspectorRenderer>> m_renderFunctions;
+		std::unordered_map<unsigned long, std::shared_ptr<InspectorRenderer>> m_renderFunctions;
 	};
 
 }

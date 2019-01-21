@@ -15,7 +15,7 @@ namespace DerydocaEngine
 
 	std::string TypeNameLookup::get(std::shared_ptr<Object> object)
 	{
-		unsigned int typeId = object->getTypeId();
+		unsigned long typeId = object->getTypeId();
 		auto it = m_nameLookup.find(typeId);
 		return it == m_nameLookup.end() ? "" : (*it).second;
 	}

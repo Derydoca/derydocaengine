@@ -15,7 +15,7 @@ namespace DerydocaEngine
 		template<typename T>
 		bool registerType(std::string typeName)
 		{
-			unsigned int typeId = getTypeId<T>();
+			unsigned long typeId = getTypeId<T>();
 			m_nameLookup[typeId] = typeName;
 			return true;
 		}
@@ -27,7 +27,7 @@ namespace DerydocaEngine
 		~TypeNameLookup();
 		TypeNameLookup(const TypeNameLookup&);
 
-		std::unordered_map<unsigned int, std::string> m_nameLookup;
+		std::unordered_map<unsigned long, std::string> m_nameLookup;
 	};
 
 }

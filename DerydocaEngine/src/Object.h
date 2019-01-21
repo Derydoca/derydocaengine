@@ -5,15 +5,13 @@
 namespace DerydocaEngine
 {
 
-	extern std::atomic_uint TypeIdCounter;
-
 	template<typename T>
-	unsigned int getTypeId() {
-		static unsigned int id = ++TypeIdCounter;
+	unsigned long getTypeId() {
+		static unsigned long id = static_cast<unsigned long>(typeid(T).hash_code());
 		return id;
 	}
 
-#define REGISTER_TYPE_ID(TYPE) virtual unsigned int getTypeId() const { return DerydocaEngine::getTypeId<TYPE>(); }
+#define REGISTER_TYPE_ID(TYPE) virtual unsigned long getTypeId() const { return DerydocaEngine::getTypeId<TYPE>(); }
 
 	class Object
 	{
@@ -30,7 +28,7 @@ namespace DerydocaEngine
 
 		boost::uuids::uuid getId() const { return m_id; }
 
-		virtual unsigned int getTypeId() const = 0;
+		virtual unsigned long getTypeId() const = 0;
 
 	protected:
 		boost::uuids::uuid m_id;
