@@ -88,20 +88,17 @@ namespace DerydocaEngine::Ext
 
 	void ImageProjector::update(const float deltaTime)
 	{
-		if (m_dirty)
-		{
-			updateProjectionMatrix();
+		updateProjectionMatrix();
 
-			// Update all shaders with the new projection matrix
-			for (std::shared_ptr<Components::MeshRenderer> meshRenderer : m_meshRenderers)
+		// Update all shaders with the new projection matrix
+		for (std::shared_ptr<Components::MeshRenderer> meshRenderer : m_meshRenderers)
+		{
+			std::shared_ptr<Rendering::Material> mat = meshRenderer->getMaterial();
+			if (!mat)
 			{
-				std::shared_ptr<Rendering::Material> mat = meshRenderer->getMaterial();
-				if (!mat)
-				{
-					continue;
-				}
-				mat->setMat4("ProjectorMatrix", m_projectorMatrix);
+				continue;
 			}
+			mat->setMat4("ProjectorMatrix", m_projectorMatrix);
 		}
 	}
 
@@ -121,9 +118,6 @@ namespace DerydocaEngine::Ext
 
 		// Store it locally
 		m_projectorMatrix = projScaleTrans * projProj * projView;
-
-		// Clear our dirty flag
-		m_dirty = false;
 	}
 
 	void ImageProjector::setProjectionGraphic()

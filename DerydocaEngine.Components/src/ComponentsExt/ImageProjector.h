@@ -18,10 +18,11 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
-		void inline setFocalPoint(glm::vec3 const& focalPoint) { m_focalPoint = focalPoint; m_dirty = true; }
-		void inline setUpVector(glm::vec3 const& upVector) { m_upVector = upVector; m_dirty = true; }
+		void inline setFocalPoint(glm::vec3 const& focalPoint) { m_focalPoint = focalPoint; }
+		void inline setUpVector(glm::vec3 const& upVector) { m_upVector = upVector; }
+
+		float& getFov() { return m_fov; }
 	private:
-		bool m_dirty = true;
 		glm::vec3 m_focalPoint;
 		glm::vec3 m_upVector;
 		glm::mat4 m_projectorMatrix;
