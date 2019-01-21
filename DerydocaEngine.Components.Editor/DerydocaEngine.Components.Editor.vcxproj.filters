@@ -75,6 +75,9 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\BezierCurveRendererInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\BloomFilterInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -135,6 +138,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectorsExt\BezierCurveRendererInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\BloomFilterInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

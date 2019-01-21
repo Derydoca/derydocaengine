@@ -17,6 +17,8 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
+
+		float& getLumThresh() { return m_lumThresh; }
 	private:
 		float m_lumThresh;
 		std::shared_ptr<Components::Camera> m_postProcessCamera;
