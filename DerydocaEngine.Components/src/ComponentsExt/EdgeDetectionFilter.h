@@ -18,6 +18,8 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
+
+		float& getEdgeThreshold() { return m_edgeThreshold; }
 	private:
 		void updateShader();
 
