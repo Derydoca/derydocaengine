@@ -81,6 +81,9 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\EdgeDetectionFilterInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\GammaCorrectionFilterInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectorsExt\EdgeDetectionFilterInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\GammaCorrectionFilterInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
