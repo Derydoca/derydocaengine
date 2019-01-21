@@ -23,13 +23,13 @@ namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 			if (texture->getWidth() > 0 && texture->getHeight() > 0)
 			{
 				float windowWidth = ImGui::GetWindowWidth();
-				ImVec2 imgSize = ImVec2(texture->getWidth(), texture->getHeight());
+				ImVec2 imgSize = ImVec2(texture->getWidth() * 1.0f, texture->getHeight() * 1.0f);
 				if (imgSize.x > windowWidth)
 				{
 					imgSize.x = windowWidth;
 					imgSize.y = texture->getHeight() * (windowWidth / texture->getWidth());
 				}
-				ImGui::Image((ImTextureID)texture->getRendererId(), imgSize);
+				ImGui::Image((ImTextureID)(texture->getRendererId()), imgSize);
 			}
 		}
 	};
