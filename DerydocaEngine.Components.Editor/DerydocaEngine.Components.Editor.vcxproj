@@ -182,6 +182,7 @@
     <ClInclude Include="src\Editor\ComponentInspectorsExt\GaussianBlurFilterInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\ImageProjectorInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\MultisampleSwitchInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\NightVisionFilterInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\CameraInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\FrameStatsInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\GaussianBlurFilterInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\ImageProjectorInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\MultisampleSwitchInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\NightVisionFilterInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\CameraInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\FrameStatsInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.cpp" />
