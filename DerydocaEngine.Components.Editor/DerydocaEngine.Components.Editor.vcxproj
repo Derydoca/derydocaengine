@@ -179,6 +179,7 @@
     <ClInclude Include="src\Editor\ComponentInspectorsExt\BloomFilterInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\EdgeDetectionFilterInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\GammaCorrectionFilterInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\GaussianBlurFilterInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\CameraInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\FrameStatsInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\BloomFilterInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\EdgeDetectionFilterInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\GammaCorrectionFilterInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\GaussianBlurFilterInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\CameraInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\FrameStatsInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.cpp" />
