@@ -32,7 +32,7 @@ namespace DerydocaEngine::Ext
 		m_particleLocations = new glm::vec3[m_numParticles];
 
 		// Set positions to randomly generated positions within the volume size;
-		for (glm::uint i = 0; i < m_numParticles; i++)
+		for (int i = 0; i < m_numParticles; i++)
 		{
 			float posx = RandomFloat(-m_volumeSize.x / 2, m_volumeSize.x / 2);
 			float posy = RandomFloat(-m_volumeSize.y / 2, m_volumeSize.y / 2);
@@ -107,6 +107,12 @@ namespace DerydocaEngine::Ext
 		glDrawArrays(GL_POINTS, 0, m_numParticles);
 		glEnable(GL_DEPTH_TEST);
 		glFinish();
+	}
+
+	void ParticleSystem::reset()
+	{
+		m_material->setFloat("Size2", m_size2);
+		init();
 	}
 
 }

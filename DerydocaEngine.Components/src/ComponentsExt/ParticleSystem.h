@@ -18,8 +18,15 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
+
+		int& getNumParticles() { return m_numParticles; }
+		float& getSize() { return m_size2; }
+		glm::vec3& getVolumeSize() { return m_volumeSize; }
+
+		void reset();
+
 	private:
-		unsigned int m_numParticles;
+		int m_numParticles;
 		float m_size2;
 		unsigned int m_vao;
 		unsigned int m_vertexArrayBuffers[1];

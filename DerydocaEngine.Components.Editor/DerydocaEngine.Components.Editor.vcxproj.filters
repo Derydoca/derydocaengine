@@ -108,6 +108,9 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleInstancedInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleSystemInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -201,6 +204,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleInstancedInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleSystemInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
