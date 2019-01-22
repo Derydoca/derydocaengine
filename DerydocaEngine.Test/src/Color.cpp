@@ -18,3 +18,25 @@ TEST(Color, ValuesMatchConstructor_When_ConstructorIsCalled) {
 	EXPECT_FLOAT_EQ(color.b, 0.3f);
 	EXPECT_FLOAT_EQ(color.a, 0.4f);
 }
+
+TEST(Color, Vec3IsConvertedToColor_With_ImplicitConstructor)
+{
+	auto vec = glm::vec3(1.0f, 2.0f, 3.0f);
+	DerydocaEngine::Color color = vec;
+
+	EXPECT_FLOAT_EQ(vec[0], color.r);
+	EXPECT_FLOAT_EQ(vec[1], color.g);
+	EXPECT_FLOAT_EQ(vec[2], color.b);
+	EXPECT_FLOAT_EQ(1.0f, color.a);
+}
+
+TEST(Color, Vec4IsConvertedToColor_With_ImplicitConstructor)
+{
+	auto vec = glm::vec4(1.0f, 2.0f, 3.0f, 4.0f);
+	DerydocaEngine::Color color = vec;
+
+	EXPECT_FLOAT_EQ(vec[0], color.r);
+	EXPECT_FLOAT_EQ(vec[1], color.g);
+	EXPECT_FLOAT_EQ(vec[2], color.b);
+	EXPECT_FLOAT_EQ(vec[3], color.a);
+}

@@ -9,6 +9,8 @@ namespace DerydocaEngine
 		Color() : r(0), g(0), b(0), a(1) {}
 		Color(float const& r, float const& g, float const& b) : r(r), g(g), b(b), a(1) {}
 		Color(float const& r, float const& g, float const& b, float const& a) : r(r), g(g), b(b), a(a) {}
+		Color(glm::vec3 color) : r(color[0]), g(color[1]), b(color[2]), a(1) {}
+		Color(glm::vec4 color) : r(color[0]), g(color[1]), b(color[2]), a(color[3]) {}
 
 		float r, g, b, a;
 

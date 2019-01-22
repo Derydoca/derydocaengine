@@ -60,21 +60,21 @@ namespace DerydocaEngine::Rendering
 		bool textureSlotExists(int slot);
 		bool vec3Exists(const std::string& name);
 		bool vec4Exists(const std::string& name);
-		/*
-		void getBool(const std::string& name);
-		void getColorRGB(const std::string& name);
-		void getColorRGBA(const std::string& name);
-		void getFloat(const std::string& name);
-		void getInt(const std::string& name);
-		void getMat3(const std::string& name);
-		void getMat4(const std::string& name);
-		void getMat4Array(const std::string& name);
-		void getSubroutine(unsigned int program);
-		void getTexture(const std::string& name);
-		void getTextureSlot(int slot);
-		void getVec3(const std::string& name);
-		void getVec4(const std::string& name);
-		*/
+		
+		bool getBool(const std::string& name);
+		Color getColorRGB(const std::string& name);
+		Color getColorRGBA(const std::string& name);
+		float getFloat(const std::string& name);
+		int getInt(const std::string& name);
+		glm::mat3 getMat3(const std::string& name);
+		glm::mat4 getMat4(const std::string& name);
+		std::vector<glm::mat4> getMat4Array(const std::string& name);
+		unsigned int getSubroutineValue(unsigned int program);
+		std::shared_ptr<Texture> getTexture(const std::string& name);
+		std::shared_ptr<Texture> getTextureSlot(int slot);
+		glm::vec3 getVec3(const std::string& name);
+		glm::vec4 getVec4(const std::string& name);
+		
 	private:
 		std::shared_ptr<Shader> m_shader;
 		// TODO: Replace this with a BST for multiple textures

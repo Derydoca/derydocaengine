@@ -268,4 +268,165 @@ namespace DerydocaEngine::Rendering
 		return m_vec4Values.find(name) != m_vec4Values.end();
 	}
 
+	bool Material::getBool(const std::string& name)
+	{
+		auto it = m_boolValues.find(name);
+		if (it == m_boolValues.end())
+		{
+			return false;
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	Color Material::getColorRGB(const std::string& name)
+	{
+		auto it = m_vec3Values.find(name);
+		if (it == m_vec3Values.end())
+		{
+			return Color();
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	Color Material::getColorRGBA(const std::string& name)
+	{
+		auto it = m_vec4Values.find(name);
+		if (it == m_vec4Values.end())
+		{
+			return Color();
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	float Material::getFloat(const std::string& name)
+	{
+		auto it = m_floatValues.find(name);
+		if (it == m_floatValues.end())
+		{
+			return 0.0f;
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	int Material::getInt(const std::string& name)
+	{
+		auto it = m_intValues.find(name);
+		if (it == m_intValues.end())
+		{
+			return 0;
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	glm::mat3 Material::getMat3(const std::string& name)
+	{
+		auto it = m_mat3Values.find(name);
+		if (it == m_mat3Values.end())
+		{
+			return glm::mat3();
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	glm::mat4 Material::getMat4(const std::string& name)
+	{
+		auto it = m_mat4Values.find(name);
+		if (it == m_mat4Values.end())
+		{
+			return glm::mat4();
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	std::vector<glm::mat4> Material::getMat4Array(const std::string& name)
+	{
+		auto it = m_mat4ArrayValues.find(name);
+		if (it == m_mat4ArrayValues.end())
+		{
+			return std::vector<glm::mat4>();
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	unsigned int Material::getSubroutineValue(unsigned int program)
+	{
+		auto it = m_subroutineValues.find(program);
+		if (it == m_subroutineValues.end())
+		{
+			return 0;
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	std::shared_ptr<Texture> Material::getTexture(const std::string& name)
+	{
+		auto it = m_textures.find(name);
+		if (it == m_textures.end())
+		{
+			return nullptr;
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	std::shared_ptr<Texture> Material::getTextureSlot(int slot)
+	{
+		return m_texture;
+	}
+
+	glm::vec3 Material::getVec3(const std::string& name)
+	{
+		auto it = m_vec3Values.find(name);
+		if (it == m_vec3Values.end())
+		{
+			return glm::vec3();
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	glm::vec4 Material::getVec4(const std::string& name)
+	{
+		auto it = m_vec4Values.find(name);
+		if (it == m_vec4Values.end())
+		{
+			return glm::vec4();
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
 }
