@@ -2,7 +2,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Teapot 1
       Transform:
         Position: [-1.5, 0, -2]
         Rotation: [0.5, -0.5, -0.5, -0.5]
@@ -16,7 +16,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Teapot 2
       Transform:
         Position: [0, 0, -2]
         Rotation: [0.5, -0.5, -0.5, -0.5]
@@ -30,7 +30,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Teapot 3
       Transform:
         Position: [1.5, 0, -2]
         Rotation: [0.5, -0.5, -0.5, -0.5]

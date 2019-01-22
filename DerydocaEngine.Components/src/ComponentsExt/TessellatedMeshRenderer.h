@@ -23,8 +23,15 @@ namespace DerydocaEngine::Ext
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Components::Transform> projectionTransform
 		);
+		virtual void update(const float deltaTime);
 
 		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
+		bool& getUseDynamicTessellation() { return m_useDynamicTessellation; }
+		int& getTessellationLevel() { return m_tessellationLevel; }
+		int& getMinDynamicTessLevel() { return m_minDynamicTessLevel; }
+		int& getMaxDynamicTessLevel() { return m_maxDynamicTessLevel; }
+		float& getMinDynamicTessDistance() { return m_minDynamicTessDistance; }
+		float& getMaxDynamicTessDistance() { return m_maxDynamicTessDistance; }
 	private:
 		std::shared_ptr<BezierPatchMesh> m_mesh;
 		unsigned int m_vao;
@@ -32,8 +39,8 @@ namespace DerydocaEngine::Ext
 		std::shared_ptr<Rendering::Material> m_material;
 		int m_tessellationLevel = 4;
 		bool m_useDynamicTessellation = false;
-		float m_minDynamicTessLevel = 2;
-		float m_maxDynamicTessLevel = 8;
+		int m_minDynamicTessLevel = 2;
+		int m_maxDynamicTessLevel = 8;
 		float m_minDynamicTessDistance = 1.0;
 		float m_maxDynamicTessDistance = 10.0;
 		Color m_lineColor;
