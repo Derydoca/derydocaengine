@@ -19,6 +19,16 @@ namespace DerydocaEngine::Ext
 		virtual void preRender();
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
+
+		float& getVelocityMin() { return m_velocityMin; }
+		float& getVelocityMax() { return m_velocityMax; }
+		int& getNumParticles() { return m_numParticles; }
+		float& getLifetime() { return m_lifetime; }
+		float& getAngle() { return m_angle; }
+		glm::vec3 getGravity() { return m_gravity; }
+
+		void resetSimulation();
+
 	private:
 		int m_numParticles = 1000;
 		std::shared_ptr<Rendering::Material> m_material;

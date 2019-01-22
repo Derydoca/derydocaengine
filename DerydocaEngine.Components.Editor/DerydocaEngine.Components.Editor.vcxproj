@@ -186,6 +186,7 @@
     <ClInclude Include="src\Editor\ComponentInspectorsExt\NoiseTextureInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleContinuousFountainInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleFountainInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleInstancedInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\CameraInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\FrameStatsInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\NoiseTextureInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleContinuousFountainInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleFountainInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleInstancedInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\CameraInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\FrameStatsInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.cpp" />

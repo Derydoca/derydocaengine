@@ -22,11 +22,13 @@ namespace DerydocaEngine::Ext
 	void ParticleInstanced::update(const float deltaTime)
 	{
 		m_time += deltaTime;
+	}
 
-		if (m_keyboard->isKeyDownFrame(SDLK_r))
-		{
-			m_time = 0.0f;
-		}
+	void ParticleInstanced::resetSimulation()
+	{
+		m_time = 0.0f;
+		initBuffers();
+		m_material->setFloat("ParticleLifetime", m_lifetime);
 	}
 
 	void ParticleInstanced::init()
