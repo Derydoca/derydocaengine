@@ -32,6 +32,17 @@ namespace DerydocaEngine::Ext
 		m_updateSub = m_material->getShader()->getSubroutineIndex(GL_VERTEX_SHADER, "update");
 	}
 
+	void ParticleContinuousFountain::resetSimulation()
+	{
+		initBuffers();
+		m_time = 0.0f;
+		m_lastDeltaTime = 0.0f;
+		m_material->setFloat("ParticleLifetime", m_lifetime);
+		m_material->setVec3("Accel", m_acceleration);
+		m_material->setFloat("MinParticleSize", m_particleSizeMin);
+		m_material->setFloat("MaxParticleSize", m_particleSizeMax);
+	}
+
 	void ParticleContinuousFountain::preRender()
 	{
 		m_material->setVec3("Position", getGameObject()->getTransform()->getWorldPos());
