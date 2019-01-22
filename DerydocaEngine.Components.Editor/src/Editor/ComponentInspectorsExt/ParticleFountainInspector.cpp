@@ -1,5 +1,5 @@
 #include "EditorComponentsPch.h"
-#include "ParticleFountain.h"
+#include "ParticleFountainInspector.h"
 
 void DerydocaEngine::Editor::Inspector::ComponentInspectors::ParticleFountainInspector::render(std::shared_ptr<Object> object)
 {

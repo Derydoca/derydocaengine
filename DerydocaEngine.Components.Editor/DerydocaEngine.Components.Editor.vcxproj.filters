@@ -102,7 +102,7 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleContinuousFountainInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleFountain.cpp">
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleFountainInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,7 +194,7 @@
     <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleContinuousFountainInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleFountain.h">
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleFountainInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
