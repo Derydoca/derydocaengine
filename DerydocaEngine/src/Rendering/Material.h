@@ -28,21 +28,53 @@ namespace DerydocaEngine::Rendering
 
 		inline void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }
 		inline std::shared_ptr<Rendering::Shader> getShader() const { return m_shader; }
-		void setBool(std::string const& name, bool const& value);
-		void setInt(std::string const& name, int const& value);
-		void setTexture(std::string const& name, std::shared_ptr<Texture> texture);
-		void setTextureSlot(int const& slot, std::shared_ptr<Texture> texture);
-		void setFloat(std::string const& name, float const& value);
-		void setVec3(std::string const& name, glm::vec3 const& value);
-		void setVec4(std::string const& name, glm::vec4 const& value);
-		void setColorRGB(std::string const& name, Color const& value);
-		void setColorRGBA(std::string const& name, Color const& value);
-		void setMat3(std::string const& name, glm::mat3 const& value);
-		void setMat4(std::string const& name, glm::mat4 const& value);
-		void setMat4Array(std::string const& name, std::vector<glm::mat4> matrixArray);
-		void setSubroutine(unsigned int const& program, unsigned int const& value);
+		
 		void bind() const;
+		void copyFrom(std::shared_ptr<Material> other);
 		void unbind();
+
+		void setBool(const std::string& name, bool const& value);
+		void setColorRGB(const std::string& name, Color const& value);
+		void setColorRGBA(const std::string& name, Color const& value);
+		void setFloat(const std::string& name, float const& value);
+		void setInt(const std::string& name, int const& value);
+		void setMat3(const std::string& name, glm::mat3 const& value);
+		void setMat4(const std::string& name, glm::mat4 const& value);
+		void setMat4Array(const std::string& name, std::vector<glm::mat4> matrixArray);
+		void setSubroutine(unsigned int program, unsigned int value);
+		void setTexture(const std::string& name, std::shared_ptr<Texture> texture);
+		void setTextureSlot(int const& slot, std::shared_ptr<Texture> texture);
+		void setVec3(const std::string& name, glm::vec3 const& value);
+		void setVec4(const std::string& name, glm::vec4 const& value);
+
+		bool boolExists(const std::string& name);
+		bool colorRGBExists(const std::string& name);
+		bool colorRGBAExists(const std::string& name);
+		bool floatExists(const std::string& name);
+		bool intExists(const std::string& name);
+		bool mat3Exists(const std::string& name);
+		bool mat4Exists(const std::string& name);
+		bool mat4ArrayExists(const std::string& name);
+		bool subroutineValueExists(unsigned int program);
+		bool textureExists(const std::string& name);
+		bool textureSlotExists(int slot);
+		bool vec3Exists(const std::string& name);
+		bool vec4Exists(const std::string& name);
+		/*
+		void getBool(const std::string& name);
+		void getColorRGB(const std::string& name);
+		void getColorRGBA(const std::string& name);
+		void getFloat(const std::string& name);
+		void getInt(const std::string& name);
+		void getMat3(const std::string& name);
+		void getMat4(const std::string& name);
+		void getMat4Array(const std::string& name);
+		void getSubroutine(unsigned int program);
+		void getTexture(const std::string& name);
+		void getTextureSlot(int slot);
+		void getVec3(const std::string& name);
+		void getVec4(const std::string& name);
+		*/
 	private:
 		std::shared_ptr<Shader> m_shader;
 		// TODO: Replace this with a BST for multiple textures

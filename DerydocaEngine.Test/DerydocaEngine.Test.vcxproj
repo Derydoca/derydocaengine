@@ -65,8 +65,13 @@
     <ClCompile Include="src\Color.cpp" />
     <ClCompile Include="src\Components\Transform.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Rendering\MaterialTest.cpp" />
+    <ClCompile Include="src\stbi_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">
+      <Project>{c437a7f9-da09-4776-b3c0-8efcd2e02e2b}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DerydocaEngine\DerydocaEngine.vcxproj">
       <Project>{d0307648-a7a9-413c-a47c-d21474b321d1}</Project>
     </ProjectReference>
@@ -115,7 +120,16 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)libs\$(PlatformName)\$(ConfigurationName);C:\local\boost_1_68_0\lib64-msvc-14.1;D:\local\boost_1_68_0\lib64-msvc-14.1</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\$(PlatformName)\$(Configuration)\*.dll" "$(OutDir)"
+
+@echo Copying engine settings file
+xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(OutDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -7,12 +7,30 @@
 namespace DerydocaEngine::Ext
 {
 
+	TessellatedMeshRenderer::TessellatedMeshRenderer() :
+		m_vao(0),
+		m_vbo(0),
+		m_useDynamicTessellation(false),
+		m_tessellationLevel(4),
+		m_minDynamicTessLevel(2),
+		m_maxDynamicTessLevel(8),
+		m_minDynamicTessDistance(1.0f),
+		m_maxDynamicTessDistance(10.0f),
+		m_mesh(),
+		m_material()
+	{
+	}
+
+	TessellatedMeshRenderer::~TessellatedMeshRenderer()
+	{
+	}
+
 	void TessellatedMeshRenderer::init()
 	{
 		glGenBuffers(1, &m_vbo);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH * sizeof(float), m_mesh->getPatchData(), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH * sizeof(float), m_mesh->getPatchData(), GL_DYNAMIC_DRAW);
 
 		glGenVertexArrays(1, &m_vao);
 		glBindVertexArray(m_vao);
@@ -101,8 +119,8 @@ namespace DerydocaEngine::Ext
 	{
 		m_material->setInt("UseDynamicTessellation", m_useDynamicTessellation ? 1 : 0);
 		m_material->setInt("TessLevel", m_tessellationLevel);
-		m_material->setFloat("MinTessLevel", m_minDynamicTessLevel);
-		m_material->setFloat("MaxTessLevel", m_maxDynamicTessLevel);
+		m_material->setFloat("MinTessLevel", (float)m_minDynamicTessLevel);
+		m_material->setFloat("MaxTessLevel", (float)m_maxDynamicTessLevel);
 		m_material->setFloat("MinDistance", m_minDynamicTessDistance);
 		m_material->setFloat("MaxDistance", m_maxDynamicTessDistance);
 	}
