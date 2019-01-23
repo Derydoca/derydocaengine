@@ -9,14 +9,16 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(WoodSliceTexture);
-		WoodSliceTexture() {}
-		~WoodSliceTexture() {}
+		WoodSliceTexture();
+		~WoodSliceTexture();
 
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void preRender();
+
+		std::shared_ptr<Components::Transform> getSliceMatrixTransform() { return m_sliceMatrixTransform; }
 	private:
-		Components::Transform m_sliceMatrixTransform;
+		std::shared_ptr<Components::Transform> m_sliceMatrixTransform;
 		std::shared_ptr<Components::MeshRenderer> m_meshRenderer;
 	};
 

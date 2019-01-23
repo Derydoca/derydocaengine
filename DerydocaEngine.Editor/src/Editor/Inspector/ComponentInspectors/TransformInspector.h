@@ -16,7 +16,6 @@ namespace DerydocaEngine::Editor::Inspector::ComponentInspectors
 			ImGui::DragFloat3("Position", &transform->getPos()[0], 0.005f);
 			Dgui::InputQuaternion("Rotation", transform->getQuat());
 			ImGui::DragFloat3("Scale", &transform->getScale()[0], 0.005f);
-			
 		}
 	};
 
