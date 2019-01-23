@@ -92,7 +92,18 @@ namespace DerydocaEngine::Rendering
 
 	void Material::copyFrom(std::shared_ptr<Material> other)
 	{
-
+		m_boolValues = other->m_boolValues;
+		m_floatValues = other->m_floatValues;
+		m_intValues = other->m_intValues;
+		m_mat3Values = other->m_mat3Values;
+		m_mat4Values = other->m_mat4Values;
+		m_mat4ArrayValues = other->m_mat4ArrayValues;
+		m_subroutineValues = other->m_subroutineValues;
+		m_textures = other->m_textures;
+		m_texture = other->m_texture;
+		m_vec3Values = other->m_vec3Values;
+		m_vec4Values = other->m_vec4Values;
+		m_shader = other->m_shader;
 	}
 
 	void Material::unbind()

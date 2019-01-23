@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 		m_minDynamicTessDistance(1.0f),
 		m_maxDynamicTessDistance(10.0f),
 		m_mesh(),
-		m_material()
+		m_material(std::make_shared<Rendering::Material>())
 	{
 	}
 
@@ -82,7 +82,8 @@ namespace DerydocaEngine::Ext
 			m_maxDynamicTessLevel = maxDynamicTessLevelNode.as<int>();
 		}
 
-		m_material = getResourcePointer<Rendering::Material>(compNode, "material");
+		auto sourceMaterial = getResourcePointer<Rendering::Material>(compNode, "material");
+		m_material->copyFrom(sourceMaterial);
 		m_mesh = getResourcePointer<BezierPatchMesh>(compNode, "bezierPatchMesh");
 	}
 

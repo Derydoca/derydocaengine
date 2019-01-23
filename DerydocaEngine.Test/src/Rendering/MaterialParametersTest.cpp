@@ -3,18 +3,40 @@
 #include "Color.h"
 #include "Rendering\Texture.h"
 
-//TEST(Material, MaterialIsCopiedToOtherMaterial_When_CopyFromFunctionIsCalled) {
-//	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
-//	
-//	auto newMaterial = std::make_shared<DerydocaEngine::Rendering::Material>();
-//	newMaterial = std::make_shared<DerydocaEngine::Rendering::Material>();
-//	newMaterial->copyFrom(material);
-//
-//	std::string paramName = "MyInt";
-//
-//	EXPECT_NE(material, newMaterial);
-//	EXPECT_EQ(material->getInt(paramName), newMaterial->getInt(paramName));
-//}
+struct MaterialCopyTest : testing::Test
+{
+	std::shared_ptr<DerydocaEngine::Rendering::Material> sourceMaterial;
+	std::shared_ptr<DerydocaEngine::Rendering::Material> newMaterial;
+	std::string paramName;
+	std::string paramNameAlt;
+	int paramInt;
+	unsigned int paramUInt;
+
+	MaterialCopyTest() :
+		sourceMaterial(std::make_shared<DerydocaEngine::Rendering::Material>()),
+		newMaterial(std::make_shared<DerydocaEngine::Rendering::Material>()),
+		paramName("param1"),
+		paramNameAlt("param2"),
+		paramInt(5),
+		paramUInt(10)
+	{
+	}
+
+	void copy()
+	{
+		newMaterial->copyFrom(sourceMaterial);
+	}
+};
+
+TEST_F(MaterialCopyTest, BoolIsCopied) {
+	sourceMaterial->setBool(paramName, true);
+	sourceMaterial->setBool(paramNameAlt, false);
+
+	copy();
+
+	EXPECT_EQ(true, newMaterial->getBool(paramName));
+	EXPECT_EQ(false, newMaterial->getBool(paramNameAlt));
+}
 
 TEST(Material, BoolDefaultIsReturned_When_NoneIsSet)
 {
@@ -53,6 +75,15 @@ TEST(Material, BoolIsReturned_After_BeingSet)
 	EXPECT_EQ(false, material->getBool(propertyName2));
 }
 
+TEST_F(MaterialCopyTest, ColorRGBAIsCopied) {
+	auto value = DerydocaEngine::Color(0.1f, 0.2f, 0.3f, 0.4f);
+	sourceMaterial->setColorRGBA(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getColorRGBA(paramName));
+}
+
 TEST(Material, ColorRGBADefaultIsReturned_When_NoneIsSet)
 {
 	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
@@ -86,6 +117,15 @@ TEST(Material, ColorRGBAIsReturned_After_BeingSet)
 	auto color = DerydocaEngine::Color(0.1f, 0.2f, 0.3f, 0.4f);
 	material->setColorRGBA(propertyName, color);
 	EXPECT_EQ(color, material->getColorRGBA(propertyName));
+}
+
+TEST_F(MaterialCopyTest, ColorRGBIsCopied) {
+	auto value = DerydocaEngine::Color(0.1f, 0.2f, 0.3f);
+	sourceMaterial->setColorRGB(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getColorRGB(paramName));
 }
 
 TEST(Material, ColorRGBDefaultIsReturned_When_NoneIsSet)
@@ -123,6 +163,15 @@ TEST(Material, ColorRGBIsReturned_After_BeingSet)
 	EXPECT_EQ(color, material->getColorRGB(propertyName));
 }
 
+TEST_F(MaterialCopyTest, FloatIsCopied) {
+	auto value = 25.0f;
+	sourceMaterial->setFloat(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getFloat(paramName));
+}
+
 TEST(Material, FloatDefaultIsReturned_When_NoneIsSet)
 {
 	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
@@ -156,6 +205,15 @@ TEST(Material, FloatIsReturned_After_BeingSet)
 	float value = 25.0f;
 	material->setFloat(propertyName, value);
 	EXPECT_EQ(value, material->getFloat(propertyName));
+}
+
+TEST_F(MaterialCopyTest, IntIsCopied) {
+	auto value = 25;
+	sourceMaterial->setInt(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getInt(paramName));
 }
 
 TEST(Material, IntDefaultIsReturned_When_NoneIsSet)
@@ -193,6 +251,15 @@ TEST(Material, IntIsReturned_After_BeingSet)
 	EXPECT_EQ(value, material->getInt(propertyName));
 }
 
+TEST_F(MaterialCopyTest, Mat3IsCopied) {
+	auto value = glm::mat3(1, 2, 3, 4, 5, 6, 7, 8, 9);
+	sourceMaterial->setMat3(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getMat3(paramName));
+}
+
 TEST(Material, Mat3DefaultIsReturned_When_NoneIsSet)
 {
 	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
@@ -226,6 +293,15 @@ TEST(Material, Mat3IsReturned_After_BeingSet)
 	auto mat = glm::mat3(1, 2, 3, 4, 5, 6, 7, 8, 9);
 	material->setMat3(propertyName, mat);
 	EXPECT_EQ(mat, material->getMat3(propertyName));
+}
+
+TEST_F(MaterialCopyTest, Mat4IsCopied) {
+	auto value = glm::mat4(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+	sourceMaterial->setMat4(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getMat4(paramName));
 }
 
 TEST(Material, Mat4DefaultIsReturned_When_NoneIsSet)
@@ -263,6 +339,15 @@ TEST(Material, Mat4IsReturned_After_BeingSet)
 	EXPECT_EQ(mat, material->getMat4(propertyName));
 }
 
+TEST_F(MaterialCopyTest, Mat4ArrayIsCopied) {
+	auto value = std::vector<glm::mat4>({ glm::mat4(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) });
+	sourceMaterial->setMat4Array(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getMat4Array(paramName));
+}
+
 TEST(Material, Mat4ArrayDefaultIsReturned_When_NoneIsSet)
 {
 	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
@@ -298,6 +383,15 @@ TEST(Material, Mat4ArrayIsReturned_After_BeingSet)
 	EXPECT_EQ(matArr, material->getMat4Array(propertyName));
 }
 
+TEST_F(MaterialCopyTest, SubroutineValueArrayIsCopied) {
+	unsigned int value = 22;
+	sourceMaterial->setSubroutine(paramUInt, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getSubroutineValue(paramUInt));
+}
+
 TEST(Material, SubroutineValueDefaultIsReturned_When_NoneIsSet)
 {
 	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
@@ -331,6 +425,15 @@ TEST(Material, SubroutineValueIsReturned_After_BeingSet)
 	unsigned int value = 555;
 	material->setSubroutine(propertyName, value);
 	EXPECT_EQ(value, material->getSubroutineValue(propertyName));
+}
+
+TEST_F(MaterialCopyTest, TextureIsCopied) {
+	auto value = std::make_shared<DerydocaEngine::Rendering::Texture>();
+	sourceMaterial->setTexture(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getTexture(paramName));
 }
 
 TEST(Material, TextureDefaultIsReturned_When_NoneIsSet)
@@ -370,6 +473,15 @@ TEST(Material, TextureIsReturned_After_BeingSet)
 	EXPECT_EQ(texture, material->getTexture(propertyName));
 }
 
+TEST_F(MaterialCopyTest, TextureSlotIsCopied) {
+	auto value = std::make_shared<DerydocaEngine::Rendering::Texture>();
+	sourceMaterial->setTextureSlot(paramInt, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getTextureSlot(paramInt));
+}
+
 TEST(Material, TextureSlotDefaultIsReturned_When_NoneIsSet)
 {
 	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
@@ -407,6 +519,15 @@ TEST(Material, TextureSlotIsReturned_After_BeingSet)
 	EXPECT_EQ(texture, material->getTextureSlot(slot));
 }
 
+TEST_F(MaterialCopyTest, Vec3IsCopied) {
+	auto value = glm::vec3(1.0f, 2.0f, 3.0f);
+	sourceMaterial->setVec3(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getVec3(paramName));
+}
+
 TEST(Material, Vec3DoesNotExist_When_NoneIsSet)
 {
 	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
@@ -440,6 +561,15 @@ TEST(Material, Vec3DefaultIsReturned_When_NoneIsSet)
 
 	std::string propertyName = "MyProperty";
 	EXPECT_EQ(glm::vec3(), material->getVec3(propertyName));
+}
+
+TEST_F(MaterialCopyTest, Vec4IsCopied) {
+	auto value = glm::vec4(1.0f, 2.0f, 3.0f, 4.0f);
+	sourceMaterial->setVec4(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getVec4(paramName));
 }
 
 TEST(Material, Vec4DefaultIsReturned_When_NoneIsSet)
