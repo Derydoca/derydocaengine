@@ -7,6 +7,19 @@
 namespace DerydocaEngine::Ext
 {
 
+	WaveDisplacement::WaveDisplacement() :
+		m_k(1.0f),
+		m_velocity(1.0f),
+		m_amplitude(0.5f),
+		m_time(0.0f),
+		m_material()
+	{
+	}
+
+	WaveDisplacement::~WaveDisplacement()
+	{
+	}
+
 	void WaveDisplacement::init()
 	{
 		// Get reference to the material on this object
@@ -17,16 +30,16 @@ namespace DerydocaEngine::Ext
 			m_material = mr->getMaterial();
 		}
 		assert(m_material);
-
-		// Set the wave variables
-		m_material->setFloat("K", m_k);
-		m_material->setFloat("Velocity", m_velocity);
-		m_material->setFloat("Amp", m_amplitude);
 	}
 
 	void WaveDisplacement::update(const float deltaTime)
 	{
 		m_time += deltaTime;
+
+		// Set the wave variables
+		m_material->setFloat("K", m_k);
+		m_material->setFloat("Velocity", m_velocity);
+		m_material->setFloat("Amp", m_amplitude);
 	}
 
 	void WaveDisplacement::preRender()

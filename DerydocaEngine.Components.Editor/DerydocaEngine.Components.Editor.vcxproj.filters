@@ -120,6 +120,9 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\TessellatingQuadInspector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\WaveDisplacementInspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Components\EditorWindowComponent.h">
@@ -225,6 +228,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\ComponentInspectorsExt\TessellatingQuadInspector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\WaveDisplacementInspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

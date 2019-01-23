@@ -9,18 +9,23 @@ namespace DerydocaEngine::Ext
 	public:
 		GENINSTANCE(WaveDisplacement);
 
-		WaveDisplacement() {}
-		~WaveDisplacement() {}
+		WaveDisplacement();
+		~WaveDisplacement();
 
 		virtual void init();
 		virtual void update(const float deltaTime);
 		virtual void preRender();
 		virtual void deserialize(const YAML::Node& compNode);
+
+		float& getK() { return m_k; }
+		float& getVelocity() { return m_velocity; }
+		float& getAmplitude() { return m_amplitude; }
+
 	private:
-		float m_k = 1.0f;
-		float m_velocity = 1.0f;
-		float m_amplitude = 0.5f;
-		float m_time = 0.0f;
+		float m_k;
+		float m_velocity;
+		float m_amplitude;
+		float m_time;
 		std::shared_ptr<Rendering::Material> m_material;
 	};
 
