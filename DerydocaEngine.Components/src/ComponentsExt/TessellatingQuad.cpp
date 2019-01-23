@@ -24,9 +24,6 @@ namespace DerydocaEngine::Ext
 
 	void TessellatingQuad::init()
 	{
-		m_material->setInt("Inner", m_inner);
-		m_material->setInt("Outer", m_outer);
-
 		glGenBuffers(1, &m_vbo);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
@@ -83,6 +80,12 @@ namespace DerydocaEngine::Ext
 		glDrawArrays(GL_PATCHES, 0, 4);
 
 		glFinish();
+	}
+
+	void TessellatingQuad::update(const float deltaTime)
+	{
+		m_material->setInt("Inner", m_inner);
+		m_material->setInt("Outer", m_outer);
 	}
 
 }

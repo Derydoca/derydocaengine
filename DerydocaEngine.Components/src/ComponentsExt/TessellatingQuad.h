@@ -16,6 +16,10 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
+		virtual void update(const float deltaTime);
+
+		int& getInner() { return m_inner; }
+		int& getOuter() { return m_outer; }
 	private:
 		unsigned int m_vao;
 		unsigned int m_vbo;

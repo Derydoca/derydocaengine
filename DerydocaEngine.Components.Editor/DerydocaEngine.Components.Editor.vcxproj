@@ -190,6 +190,7 @@
     <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleSystemInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\ShaderSubroutineSwitcherInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectorsExt\TessellatedMeshRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\TessellatingQuadInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\CameraInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\FrameStatsInspector.h" />
     <ClInclude Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleSystemInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\ShaderSubroutineSwitcherInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectorsExt\TessellatedMeshRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\TessellatingQuadInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\CameraInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\FrameStatsInspector.cpp" />
     <ClCompile Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.cpp" />
