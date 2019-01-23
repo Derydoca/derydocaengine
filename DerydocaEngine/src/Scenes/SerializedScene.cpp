@@ -21,6 +21,8 @@ namespace DerydocaEngine::Scenes
 
 	void SerializedScene::setUp()
 	{
+		boost::uuids::basic_random_generator<boost::mt19937> uuidGenerator;
+
 		m_root = std::make_shared<GameObject>("__SCENE_ROOT__");
 
 		// Initialize the components
@@ -138,11 +140,14 @@ namespace DerydocaEngine::Scenes
 				// Add the component to the game object
 				go->addComponent(component);
 
+				// Set the component's ID
 				YAML::Node componentIdNode = compNode["ID"];
-				if (componentIdNode)
-				{
-					ObjectLibrary::getInstance().registerComponent(componentIdNode.as<boost::uuids::uuid>(), component);
-				}
+				boost::uuids::uuid componentId = boost::uuids::uuid();
+				componentId = componentIdNode ? componentIdNode.as<boost::uuids::uuid>() : uuidGenerator();
+				component->setId(componentId);
+
+				// Register the component with the object library
+				ObjectLibrary::getInstance().registerComponent(componentId, component);
 			}
 		}
 	}
