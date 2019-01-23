@@ -2,7 +2,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 2x2
       Transform:
         Position: [-4, 0, -2]
         Rotation: [0, 0, 0, 1]
@@ -17,7 +17,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 4x2
       Transform:
         Position: [-2, 0, -2]
         Rotation: [0, 0, 0, 1]
@@ -32,7 +32,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 8x2
       Transform:
         Position: [0, 0, -2]
         Rotation: [0, 0, 0, 1]
@@ -47,7 +47,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 16x2
       Transform:
         Position: [2, 0, -2]
         Rotation: [0, 0, 0, 1]
@@ -64,7 +64,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 2x4
       Transform:
         Position: [-4, 2, -2]
         Rotation: [0, 0, 0, 1]
@@ -79,7 +79,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 4x4
       Transform:
         Position: [-2, 2, -2]
         Rotation: [0, 0, 0, 1]
@@ -94,7 +94,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 8x4
       Transform:
         Position: [0, 2, -2]
         Rotation: [0, 0, 0, 1]
@@ -109,7 +109,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 16x4
       Transform:
         Position: [2, 2, -2]
         Rotation: [0, 0, 0, 1]
@@ -126,7 +126,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 2x8
       Transform:
         Position: [-4, 4, -2]
         Rotation: [0, 0, 0, 1]
@@ -141,7 +141,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 4x8
       Transform:
         Position: [-2, 4, -2]
         Rotation: [0, 0, 0, 1]
@@ -156,7 +156,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 8x8
       Transform:
         Position: [0, 4, -2]
         Rotation: [0, 0, 0, 1]
@@ -171,7 +171,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 8x16
       Transform:
         Position: [2, 4, -2]
         Rotation: [0, 0, 0, 1]
@@ -188,7 +188,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 2x16
       Transform:
         Position: [-4, 6, -2]
         Rotation: [0, 0, 0, 1]
@@ -203,7 +203,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 4x16
       Transform:
         Position: [-2, 6, -2]
         Rotation: [0, 0, 0, 1]
@@ -218,7 +218,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 8x16
       Transform:
         Position: [0, 6, -2]
         Rotation: [0, 0, 0, 1]
@@ -233,7 +233,7 @@ Scene:
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Squirrel
+      Name: Quad 16x16
       Transform:
         Position: [2, 6, -2]
         Rotation: [0, 0, 0, 1]

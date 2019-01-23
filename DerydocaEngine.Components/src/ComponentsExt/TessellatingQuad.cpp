@@ -8,6 +8,20 @@
 namespace DerydocaEngine::Ext
 {
 
+	TessellatingQuad::TessellatingQuad() :
+		m_vao(0),
+		m_vbo(0),
+		m_inner(4),
+		m_outer(4),
+		m_controlPoints(),
+		m_material(std::make_shared<Rendering::Material>())
+	{
+	}
+
+	TessellatingQuad::~TessellatingQuad()
+	{
+	}
+
 	void TessellatingQuad::init()
 	{
 		m_material->setInt("Inner", m_inner);
@@ -57,7 +71,8 @@ namespace DerydocaEngine::Ext
 			m_outer = outerNode.as<int>();
 		}
 
-		m_material = getResourcePointer<Rendering::Material>(compNode, "material");
+		auto sourceMaterial = getResourcePointer<Rendering::Material>(compNode, "material");
+		m_material->copyFrom(sourceMaterial);
 	}
 
 	void TessellatingQuad::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
