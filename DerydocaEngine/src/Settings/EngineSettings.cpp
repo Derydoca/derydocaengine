@@ -27,10 +27,10 @@ namespace DerydocaEngine::Settings
 				m_editorComponentsSceneIdentifier = editorComponentsSceneNode.as<std::string>();
 			}
 
-			YAML::Node editorWindowsSceneNode = engineNode["EditorWindowsScene"];
-			if (editorWindowsSceneNode)
+			YAML::Node editorGuiSceneNode = engineNode["EditorGuiScene"];
+			if (editorGuiSceneNode)
 			{
-				m_editorWindowsSceneIdentifier = editorWindowsSceneNode.as<std::string>();
+				m_editorGuiSceneIdentifier = editorGuiSceneNode.as<std::string>();
 			}
 		}
 

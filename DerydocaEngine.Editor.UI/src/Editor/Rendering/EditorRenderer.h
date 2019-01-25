@@ -23,7 +23,7 @@ namespace DerydocaEngine::Editor::Rendering
 
 	private:
 		std::shared_ptr<Scenes::SerializedScene> m_editorComponentsScene;
-		std::shared_ptr<Scenes::SerializedScene> m_editorWindowsScene;
+		std::shared_ptr<Scenes::SerializedScene> m_editorGuiScene;
 
 	};
 

@@ -10,7 +10,7 @@ namespace DerydocaEngine::Editor::Rendering
 	EditorRenderer::EditorRenderer() :
 		RendererImplementation("Derydoca Engine - Editor", 300, 300),
 		m_editorComponentsScene(std::make_shared<Scenes::SerializedScene>()),
-		m_editorWindowsScene(std::make_shared<Scenes::SerializedScene>())
+		m_editorGuiScene(std::make_shared<Scenes::SerializedScene>())
 	{
 	}
 
@@ -27,7 +27,7 @@ namespace DerydocaEngine::Editor::Rendering
 
 		// Load the scenes
 		loadScene(settings.getEditorComponentsSceneIdentifier(), m_editorComponentsScene);
-		loadScene(settings.getEditorWindowsSceneIdentifier(), m_editorWindowsScene);
+		loadScene(settings.getEditorGuiSceneIdentifier(), m_editorGuiScene);
 	}
 
 	void EditorRenderer::renderFrame(const float deltaTime)
@@ -36,7 +36,7 @@ namespace DerydocaEngine::Editor::Rendering
 
 		// Update
 		m_editorComponentsScene->getRoot()->update(deltaTime);
-		m_editorWindowsScene->getRoot()->update(deltaTime);
+		m_editorGuiScene->getRoot()->update(deltaTime);
 		scene->getRoot()->update(deltaTime);
 
 		// ImGui new frame
@@ -44,17 +44,17 @@ namespace DerydocaEngine::Editor::Rendering
 		// Render
 		DerydocaEngine::Rendering::CameraManager::getInstance().render({
 			m_editorComponentsScene,
-			m_editorWindowsScene,
+			m_editorGuiScene,
 			scene
 			});
 
 		// Post render
 		m_editorComponentsScene->getRoot()->postRender();
-		m_editorWindowsScene->getRoot()->postRender();
+		m_editorGuiScene->getRoot()->postRender();
 		scene->getRoot()->postRender();
 
 		// Render editor GUI
-		//m_editorWindowsScene->getRoot()->renderEditorGUI();
+		//m_editorGuiScene->getRoot()->renderEditorGUI();
 
 	}
 
