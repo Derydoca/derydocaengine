@@ -5,7 +5,7 @@
 #include "Input\InputManager.h"
 #include "Rendering\DisplayManager.h"
 #include "Rendering\GraphicsAPI.h"
-//#include "Rendering\Gui\DearImgui.h"
+#include "Rendering\Gui\DearImgui.h"
 #include "SystemWindowingLayer.h"
 
 namespace DerydocaEngine::Rendering
@@ -95,7 +95,8 @@ namespace DerydocaEngine::Rendering
 		SDL_Event e;
 
 		while (SDL_PollEvent(&e)) {
-			//Gui::DearImgui::processEvent(e);
+			// TODO: Move this someplace else when input layers are implemented
+			Gui::DearImgui::processEvent(e);
 
 			switch (e.type) {
 			case SDL_QUIT:

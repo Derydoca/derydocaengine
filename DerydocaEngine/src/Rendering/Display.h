@@ -29,7 +29,8 @@ namespace DerydocaEngine::Rendering
 
 		inline int getWidth() const { return m_width; }
 		inline int getHeight() const { return m_height; }
-		inline SDL_Window* getWindow() const { return m_window; }
+		inline SystemWindow* getWindow() const { return m_window; }
+		inline GraphicsAPIContext* getContext() { return &(m_context); }
 
 		void setSize(int width, int height);
 

@@ -9,7 +9,7 @@
 namespace DerydocaEngine::Rendering::Gui
 {
 
-	ImGuiIO DearImgui::init(SDL_Window* window, SDL_GLContext& context)
+	ImGuiIO DearImgui::init(std::shared_ptr<Display> display)
 	{
 		char* GLSL_VERSION = "#version 130";
 		IMGUI_CHECKVERSION();
@@ -32,26 +32,26 @@ namespace DerydocaEngine::Rendering::Gui
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
 
-		ImGui_ImplSDL2_InitForOpenGL(window, context);
+		ImGui_ImplSDL2_InitForOpenGL(display->getWindow(), display->getContext());
 #if (OPENGL == 1)
 		ImGui_ImplOpenGL3_Init(GLSL_VERSION);
 #endif
 		return io;
 	}
 
-	void DearImgui::newFrame(SDL_Window* window)
+	void DearImgui::newFrame(std::shared_ptr<Display> display)
 	{
 #if (OPENGL == 1)
 		ImGui_ImplOpenGL3_NewFrame();
 #endif
-		ImGui_ImplSDL2_NewFrame(window);
+		ImGui_ImplSDL2_NewFrame(display->getWindow());
 		ImGui::NewFrame();
 	}
 
-	void DearImgui::render(SDL_Window* window, SDL_GLContext& context)
+	void DearImgui::render(std::shared_ptr<Display> display)
 	{
 		ImGui::Render();
-		SDL_GL_MakeCurrent(window, context);
+		//SDL_GL_MakeCurrent(display->getWindow(), display->getContext());
 #if (OPENGL == 1)
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 #endif

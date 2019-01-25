@@ -12,9 +12,9 @@ namespace DerydocaEngine::Rendering
 
 		virtual void init() = 0;
 		virtual void renderFrame(const float deltaTime) = 0;
-		DerydocaEngine::Rendering::Display& getDisplay() { return m_display; }
+		std::shared_ptr<DerydocaEngine::Rendering::Display> getDisplay() { return m_display; }
 	protected:
-		DerydocaEngine::Rendering::Display m_display;
+		std::shared_ptr<DerydocaEngine::Rendering::Display> m_display;
 	};
 
 	class Renderer
