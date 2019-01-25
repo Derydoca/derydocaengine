@@ -1,27 +1,27 @@
 #include "EnginePch.h"
 #include "Rendering\Display.h"
 
-#include <GL/glew.h>
 #include "Components\Camera.h"
 #include "Input\InputManager.h"
 #include "Rendering\DisplayManager.h"
-#include "Rendering\Gui\DearImgui.h"
-#include "SystemWindowingLayer.h"
 #include "Rendering\GraphicsAPI.h"
-
-#include <sdl2/SDL.h>
-#undef main
+//#include "Rendering\Gui\DearImgui.h"
+#include "SystemWindowingLayer.h"
 
 namespace DerydocaEngine::Rendering
 {
-	Display::Display(int const& width, int const& height, std::string const& title)
+	Display::Display(int const& width, int const& height, std::string const& title) :
+		m_window(0),
+		m_context(),
+		m_isClosed(false),
+		m_width(width),
+		m_height(height),
+		m_keyboard(0),
+		m_camera(0)
 	{
 		DisplayManager::getInstance().addDisplay(this);
 
-		m_isClosed = false;
 		m_keyboard = Input::InputManager::getInstance().getKeyboard();
-		m_width = width;
-		m_height = height;
 
 		m_window = SystemWindowingLayer::createWindow(title, m_width, m_height);
 		m_context = SystemWindowingLayer::createGraphicsAPIContext(m_window);
@@ -39,7 +39,7 @@ namespace DerydocaEngine::Rendering
 
 	Display::~Display()
 	{
-		Gui::DearImgui::shutdown();
+		//Gui::DearImgui::shutdown();
 
 		SDL_GL_DeleteContext(m_context);
 		SDL_DestroyWindow(m_window);
@@ -79,15 +79,15 @@ namespace DerydocaEngine::Rendering
 
 	void Display::init()
 	{
-		Gui::DearImgui::init(m_window, m_context);
+		//Gui::DearImgui::init(m_window, m_context);
 	}
 
 	void Display::newFrame() {
-		Gui::DearImgui::newFrame(m_window);
+		//Gui::DearImgui::newFrame(m_window);
 	}
 
 	void Display::update() {
-		Gui::DearImgui::render(m_window, m_context);
+		//Gui::DearImgui::render(m_window, m_context);
 		SystemWindowingLayer::swapBuffers(m_window, &m_context);
 
 		m_keyboard->update();
@@ -95,7 +95,7 @@ namespace DerydocaEngine::Rendering
 		SDL_Event e;
 
 		while (SDL_PollEvent(&e)) {
-			Gui::DearImgui::processEvent(e);
+			//Gui::DearImgui::processEvent(e);
 
 			switch (e.type) {
 			case SDL_QUIT:

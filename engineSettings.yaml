@@ -1,6 +1,7 @@
 Engine:
     Resources: .\engineResources\
     EditorComponentsScene: 620d32d7-eb7e-4fd0-8ad6-4e339e4bbdad
+    EditorWindowsScene: 45e19c48-5012-4afd-85d1-0c690a1ce2a9
 Window:
 # Blog header image size: 2000 x 800
     Width: 400
