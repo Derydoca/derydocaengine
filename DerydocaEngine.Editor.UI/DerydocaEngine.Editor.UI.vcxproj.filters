@@ -3,12 +3,13 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Editor\Execution\CommandLineArgs.cpp" />
-    <ClCompile Include="src\Editor\UI\EditorWindow.cpp" />
     <ClCompile Include="src\EditorPch.cpp" />
+    <ClCompile Include="src\stbi_impl.cpp" />
+    <ClCompile Include="src\Editor\Rendering\EditorRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor\Execution\CommandLineArgs.h" />
-    <ClInclude Include="src\Editor\UI\EditorWindow.h" />
     <ClInclude Include="src\EditorPch.h" />
+    <ClInclude Include="src\Editor\Rendering\EditorRenderer.h" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "EnginePch.h"
 #include "SceneManager.h"
 #include "SerializedScene.h"
+#include "ObjectLibrary.h"
 
 namespace DerydocaEngine::Scenes
 {
@@ -14,6 +15,19 @@ namespace DerydocaEngine::Scenes
 	{
 	}
 	
+	void SceneManager::loadScene(const boost::uuids::uuid& levelId)
+	{
+		auto resource = ObjectLibrary::getInstance().getResource<Resources::LevelResource>(levelId);
+		
+		if (resource == nullptr)
+		{
+			std::cout << "Unable to find a scene with ID of '" << levelId << "'!\n";
+			return;
+		}
+
+		loadScene(resource);
+	}
+
 	void SceneManager::loadScene(const std::shared_ptr<Resources::LevelResource> levelResource)
 	{
 		unloadScene();

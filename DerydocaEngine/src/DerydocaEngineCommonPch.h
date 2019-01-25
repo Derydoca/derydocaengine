@@ -60,3 +60,15 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+
+// SDL
+#include <sdl2/SDL.h>
+#undef main
+
+#if OPENGL||VULKAN
+using SystemWindow = SDL_Window;
+using GraphicsAPIContext = SDL_GLContext;
+#else
+using SystemWindow = void;
+using GraphicsAPIContext = void;
+#endif

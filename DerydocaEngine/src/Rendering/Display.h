@@ -31,6 +31,8 @@ namespace DerydocaEngine::Rendering
 		inline int getHeight() const { return m_height; }
 		inline SDL_Window* getWindow() const { return m_window; }
 
+		void setSize(int width, int height);
+
 		void bindAsRenderTarget();
 		void registerCamera(Components::Camera* const& cam) { m_camera = cam; }
 		void unregisterCamera() { m_camera = nullptr; }
@@ -40,8 +42,8 @@ namespace DerydocaEngine::Rendering
 
 		void windowSizeChanged(int const& width, int const& height);
 
-		SDL_Window* m_window;
-		SDL_GLContext m_glContext;
+		SystemWindow* m_window;
+		GraphicsAPIContext m_context;
 		bool m_isClosed;
 		int m_width;
 		int m_height;

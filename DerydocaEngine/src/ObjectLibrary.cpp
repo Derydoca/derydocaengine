@@ -20,15 +20,19 @@ namespace DerydocaEngine
 	{
 	}
 
-	void ObjectLibrary::initialize(std::string const& engineResourcesPath, std::string const& projectPath)
+	void ObjectLibrary::loadEngineResources(const boost::filesystem::path& path)
 	{
-		std::cout << "Updating meta files for the project: " << projectPath << "\n";
-		updateMetaFilesDirectory(projectPath);
-		std::cout << "Loading project files: " << engineResourcesPath << "\n";
-		loadDirectory(projectPath);
+		std::cout << "Loading engine files: " << path << "\n";
+		loadDirectory(path);
+	}
 
-		std::cout << "Loading engine files: " << engineResourcesPath << "\n";
-		loadDirectory(engineResourcesPath);
+	void ObjectLibrary::loadProjectResources(const boost::filesystem::path& path)
+	{
+		std::cout << "Updating meta files: " << path << "\n";
+		updateMetaFilesDirectory(path);
+		std::cout << "Loading project files: " << path << "\n";
+		loadDirectory(path);
+
 		loadResourceTree();
 	}
 
@@ -125,7 +129,7 @@ namespace DerydocaEngine
 		return nullptr;
 	}
 
-	void ObjectLibrary::updateMetaFilesDirectory(std::string const& directory)
+	void ObjectLibrary::updateMetaFilesDirectory(const boost::filesystem::path& directory)
 	{
 		fs::directory_iterator it{ directory };
 		while (it != fs::directory_iterator{})
@@ -166,7 +170,7 @@ namespace DerydocaEngine
 		m_sceneComponents.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Components::GameComponent>>(id, component));
 	}
 
-	void ObjectLibrary::loadDirectory(std::string const& directory)
+	void ObjectLibrary::loadDirectory(const boost::filesystem::path& directory)
 	{
 		fs::directory_iterator it{ directory };
 		while (it != fs::directory_iterator{})

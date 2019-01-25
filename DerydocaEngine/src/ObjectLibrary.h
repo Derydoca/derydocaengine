@@ -24,16 +24,17 @@ namespace DerydocaEngine
 		}
 		void operator=(ObjectLibrary const&) = delete;
 
-		void initialize(std::string const& engineResourcesPath, std::string const& projectPath);
+		void loadEngineResources(const boost::filesystem::path& path);
+		void loadProjectResources(const boost::filesystem::path& path);
 		std::string getMetaExtension() const { return m_metaExtension; }
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
 		std::shared_ptr<Components::GameComponent> getComponent(boost::uuids::uuid const& id);
 		std::shared_ptr<Resources::Resource> getMetaFile(std::string const& sourceFilePath);
-		void updateMetaFilesDirectory(std::string const& directory);
+		void updateMetaFilesDirectory(const boost::filesystem::path& padirectoryth);
 		void updateMetaFiles(std::string const& file);
-		void loadDirectory(std::string const& directory);
+		void loadDirectory(const boost::filesystem::path& path);
 		void loadFile(std::string const& sourceFilePath);
 
 		void registerComponent(boost::uuids::uuid const& id, std::shared_ptr<Components::GameComponent> component);

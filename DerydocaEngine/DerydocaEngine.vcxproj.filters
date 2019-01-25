@@ -202,6 +202,9 @@
     <ClCompile Include="src\Resources\ResourceTreeNode.cpp" />
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\TypeNameLookup.cpp" />
+    <ClCompile Include="src\Rendering\Renderer.cpp" />
+    <ClCompile Include="src\SystemWindowingLayer_SDL.cpp" />
+    <ClCompile Include="src\Rendering\GraphicsAPI_OpenGL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h">
@@ -490,6 +493,9 @@
     <ClInclude Include="src\Resources\RasterFontResource.h" />
     <ClInclude Include="src\Resources\SpriteSheetResource.h" />
     <ClInclude Include="src\TypeNameLookup.h" />
+    <ClInclude Include="src\Rendering\Renderer.h" />
+    <ClInclude Include="src\SystemWindowingLayer.h" />
+    <ClInclude Include="src\Rendering\GraphicsAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

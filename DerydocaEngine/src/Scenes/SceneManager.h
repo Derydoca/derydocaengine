@@ -16,6 +16,7 @@ namespace DerydocaEngine::Scenes
 
 		std::shared_ptr<Scene> getActiveScene() { return m_activeScene; }
 
+		void loadScene(const boost::uuids::uuid & levelId);
 		void loadScene(const std::shared_ptr<Resources::LevelResource> levelResource);
 		void unloadScene();
 
