@@ -44,3 +44,14 @@ Scene:
       Components:
         - Type: InspectorWindow
         
+  - Type: GameObject
+    ID: 6eb850ba-34fc-4812-8050-4897a5eff6d0
+    Properties:
+      Name: __editorCameraWindow
+      Transform:
+        Position: [0, 0, 0]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: EditorCameraWindow
+        
