@@ -11,13 +11,20 @@ namespace DerydocaEngine::Editor::Rendering
 	class EditorRenderer : public DerydocaEngine::Rendering::RendererImplementation
 	{
 	public:
-		EditorRenderer();
-		~EditorRenderer();
+		static EditorRenderer& GetInstance()
+		{
+			static EditorRenderer instance;
+			return instance;
+		}
 
 		virtual void init();
 		virtual void renderFrame(const float deltaTime);
 
 	private:
+		EditorRenderer();
+		~EditorRenderer();
+		EditorRenderer(const EditorRenderer&);
+
 		std::shared_ptr<Resources::LevelResource> getSceneResource(const std::string& sceneId, const std::string& sceneType);
 		void loadScene(const std::string& sceneId, std::shared_ptr<Scenes::SerializedScene> scene);
 

@@ -20,7 +20,7 @@ namespace DerydocaEngine::Rendering
 	class Renderer
 	{
 	public:
-		Renderer(std::shared_ptr<RendererImplementation> implementation);
+		Renderer(RendererImplementation& implementation);
 
 		void init();
 		int runRenderLoop();
@@ -28,7 +28,7 @@ namespace DerydocaEngine::Rendering
 	private:
 		unsigned long m_minFrameTime;
 		Timing::Clock m_clock;
-		std::shared_ptr<RendererImplementation> m_implementation;
+		RendererImplementation& m_implementation;
 
 	};
 

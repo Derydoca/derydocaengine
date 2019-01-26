@@ -9,7 +9,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	Renderer::Renderer(std::shared_ptr<RendererImplementation> implementation) :
+	Renderer::Renderer(RendererImplementation& implementation) :
 		m_minFrameTime(1000 / 60), // 60 FPS cap
 		m_implementation(implementation)
 	{
@@ -18,18 +18,18 @@ namespace DerydocaEngine::Rendering
 
 	void Renderer::init()
 	{
-		m_implementation->init();
+		m_implementation.init();
 	}
 
 	int Renderer::runRenderLoop()
 	{
-		while (!m_implementation->getDisplay()->isClosed())
+		while (!m_implementation.getDisplay()->isClosed())
 		{
 			// Have the renderer implementation render a frame
-			m_implementation->renderFrame(m_clock.getDeltaTime());
+			m_implementation.renderFrame(m_clock.getDeltaTime());
 
 			// Let the display respond to any input events
-			m_implementation->getDisplay()->update();
+			m_implementation.getDisplay()->update();
 
 			// Update the mouse inputs
 			Input::InputManager::getInstance().getMouse()->update();
