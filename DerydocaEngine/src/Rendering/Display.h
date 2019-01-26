@@ -21,6 +21,7 @@ namespace DerydocaEngine::Rendering
 		Display(int const& width, int const& height, std::string const& title);
 		virtual ~Display();
 
+		void close() { m_isClosed = true; }
 		void init();
 		void newFrame();
 		void update();

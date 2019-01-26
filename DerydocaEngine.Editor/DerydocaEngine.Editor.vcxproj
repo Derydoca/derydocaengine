@@ -171,6 +171,7 @@
     <ClInclude Include="src\Dgui\InputQuaternion.h" />
     <ClInclude Include="src\Dgui\InputText.h" />
     <ClInclude Include="src\EditorPch.h" />
+    <ClInclude Include="src\Editor\EditorGUI.h" />
     <ClInclude Include="src\Editor\Inspector\ComponentInspectors\TransformInspector.h" />
     <ClInclude Include="src\Editor\Inspector\GameObjectInspector.h" />
     <ClInclude Include="src\Editor\Inspector\ResourceInspectors\AnimationResourceInspector.h" />
@@ -203,6 +204,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EditorPch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">EditorPch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Editor\EditorGUI.cpp" />
     <ClCompile Include="src\Editor\Inspector\InspectorRendererFactory.cpp" />
     <ClCompile Include="src\Editor\Inspector\ResourceInspectors\LevelResourceInspector.h" />
     <ClCompile Include="src\Editor\SelectionManager.cpp" />

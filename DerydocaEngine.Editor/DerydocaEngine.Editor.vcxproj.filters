@@ -8,6 +8,7 @@
     <ClCompile Include="src\Dgui\InputText.cpp" />
     <ClCompile Include="src\Dgui\InputQuaternion.cpp" />
     <ClCompile Include="src\Dgui\InputProjection.cpp" />
+    <ClCompile Include="src\Editor\EditorGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorPch.h" />
@@ -31,5 +32,6 @@
     <ClInclude Include="src\Editor\Inspector\ComponentInspectors\TransformInspector.h" />
     <ClInclude Include="src\Dgui\InputQuaternion.h" />
     <ClInclude Include="src\Dgui\InputProjection.h" />
+    <ClInclude Include="src\Editor\EditorGUI.h" />
   </ItemGroup>
 </Project>
