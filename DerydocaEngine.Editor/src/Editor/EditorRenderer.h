@@ -1,11 +1,12 @@
 #pragma once
 #include "EditorPch.h"
-#include "Rendering\Renderer.h"
 #include "Rendering\Display.h"
+#include "Rendering\Renderer.h"
+#include "Rendering\RenderTexture.h"
 #include "Scenes\SerializedScene.h"
 #include "Resources\LevelResource.h"
 
-namespace DerydocaEngine::Editor::Rendering
+namespace DerydocaEngine::Editor
 {
 
 	class EditorRenderer : public DerydocaEngine::Rendering::RendererImplementation
@@ -19,6 +20,7 @@ namespace DerydocaEngine::Editor::Rendering
 
 		virtual void init();
 		virtual void renderFrame(const float deltaTime);
+		void renderEditorCamera(std::shared_ptr<Rendering::RenderTexture> renderTexture);
 
 	private:
 		EditorRenderer();
@@ -27,7 +29,6 @@ namespace DerydocaEngine::Editor::Rendering
 
 		std::shared_ptr<Resources::LevelResource> getSceneResource(const std::string& sceneId, const std::string& sceneType);
 		void loadScene(const std::string& sceneId, std::shared_ptr<Scenes::SerializedScene> scene);
-		void renderEditorCamera();
 
 	private:
 		std::shared_ptr<Scenes::SerializedScene> m_editorComponentsScene;

@@ -25,4 +25,14 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
+	void CameraManager::render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<RenderTexture> renderTexture)
+	{
+		for each (Components::Camera* cam in m_cameras)
+		{
+			m_currentCamera = cam;
+
+			cam->renderScenes(scenes, renderTexture);
+		}
+	}
+
 }

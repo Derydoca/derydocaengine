@@ -1,15 +1,28 @@
 #include "EditorComponentsPch.h"
 #include "EditorCameraWindow.h"
+#include "Editor\EditorRenderer.h"
 
-DerydocaEngine::Components::EditorCameraWindow::EditorCameraWindow()
+namespace DerydocaEngine::Components
 {
-}
 
-DerydocaEngine::Components::EditorCameraWindow::~EditorCameraWindow()
-{
-}
+	EditorCameraWindow::EditorCameraWindow() :
+		m_renderTexture(std::make_shared<Rendering::RenderTexture>(200, 200))
+	{
+	}
 
-void DerydocaEngine::Components::EditorCameraWindow::renderWindow()
-{
-	ImGui::Text("Camera view goes here!");
+	EditorCameraWindow::~EditorCameraWindow()
+	{
+	}
+
+	void EditorCameraWindow::postRender()
+	{
+		Editor::EditorRenderer::GetInstance().renderEditorCamera(m_renderTexture);
+	}
+
+	void EditorCameraWindow::renderWindow()
+	{
+		ImGui::Image((ImTextureID)m_renderTexture->getRendererId(), { 200, 200 });
+		ImGui::Text("Camera view goes here!");
+	}
+
 }

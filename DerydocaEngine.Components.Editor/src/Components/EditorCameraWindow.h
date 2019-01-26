@@ -1,5 +1,6 @@
 #include "Components\EditorWindowComponent.h"
 #include "Editor\SelectionManager.h"
+#include "Rendering\RenderTexture.h"
 
 namespace DerydocaEngine::Components
 {
@@ -11,12 +12,14 @@ namespace DerydocaEngine::Components
 		EditorCameraWindow();
 		~EditorCameraWindow();
 
+		virtual void postRender();
+
 		virtual void renderWindow();
 		virtual std::string getWindowTitle() { return "Editor Camera"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
 
 	private:
-		std::weak_ptr<Resources::ResourceTreeNode> m_resourceNode;
-		std::shared_ptr<Editor::SelectionGroup> m_selectionGroup;
+		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
+
 	};
 }

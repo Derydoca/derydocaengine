@@ -6,7 +6,7 @@
 #include "Scenes\SceneManager.h"
 #include "Editor\EditorGUI.h"
 
-namespace DerydocaEngine::Editor::Rendering
+namespace DerydocaEngine::Editor
 {
 
 	EditorRenderer::EditorRenderer() :
@@ -34,9 +34,16 @@ namespace DerydocaEngine::Editor::Rendering
 		loadScene(settings.getEditorGuiSceneIdentifier(), m_editorGuiScene);
 	}
 
-	void EditorRenderer::renderEditorCamera()
+	void EditorRenderer::renderEditorCamera(std::shared_ptr<Rendering::RenderTexture> renderTexture)
 	{
-		m_editorComponentsScene->getRoot()->render()
+		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
+		
+		if (scene != nullptr)
+		{
+			DerydocaEngine::Rendering::CameraManager::getInstance().render({
+				scene
+				}, renderTexture);
+		}
 	}
 
 	void EditorRenderer::renderFrame(const float deltaTime)

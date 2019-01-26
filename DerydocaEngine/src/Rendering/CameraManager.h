@@ -2,7 +2,8 @@
 #include <list>
 #include <memory>
 
-#include <Scenes\Scene.h>
+#include "Scenes\Scene.h"
+#include "Rendering\RenderTexture.h"
 
 namespace DerydocaEngine {
 	class GameObject;
@@ -26,6 +27,7 @@ namespace DerydocaEngine::Rendering
 		void addCamera(Components::Camera* const& camera) { m_cameras.push_back(camera); }
 		void removeCamera(Components::Camera* const& camera) { m_cameras.remove(camera); }
 		void render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
+		void render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<RenderTexture> renderTexture);
 		Components::Camera* getCurrentCamera() { return m_currentCamera; }
 
 		void operator=(CameraManager const&) = delete;

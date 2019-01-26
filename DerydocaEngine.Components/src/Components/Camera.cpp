@@ -327,6 +327,85 @@ namespace DerydocaEngine::Components
 		}
 	}
 
+	void Camera::renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Rendering::RenderTexture> renderTexture)
+	{
+		for (auto scene : scenes)
+		{
+			auto root = scene->getRoot();
+			if (root == nullptr)
+			{
+				continue;
+			}
+			Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
+		}
+
+		renderTexture->bindAsRenderTexture();
+		int textureW = renderTexture->getWidth();
+		int textureH = renderTexture->getHeight();
+
+		if (m_renderingMode == RenderingMode::Deferred)
+		{
+			glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
+		}
+
+		glViewport(
+			(GLint)(textureW * m_displayRect->getX()),
+			(GLint)(textureH * m_displayRect->getY()),
+			(GLint)(textureW * m_displayRect->getWidth()),
+			(GLint)(textureH * m_displayRect->getHeight()));
+		glEnable(GL_DEPTH_TEST);
+		clear();
+		for (auto scene : scenes)
+		{
+			auto root = scene->getRoot();
+			if (root == nullptr)
+			{
+				continue;
+			}
+			root->preRender();
+			root->render(m_matrixStack);
+		}
+
+		// Postprocessing happens here
+		if (m_postProcessMaterial != nullptr)
+		{
+			glDisable(GL_DEPTH_TEST);
+
+			m_postProcessMaterial->bind();
+
+			// Load the shader with matricies that will transform the quad to take up the entire buffer
+			auto postProcessShader = m_postProcessMaterial->getShader();
+			setIdentityMatricies(postProcessShader);
+
+			postProcessShader->setInt("Width", renderTexture->getWidth());
+			postProcessShader->setInt("Height", renderTexture->getHeight());
+
+			// Render the full-buffer quad
+			postProcessShader->renderMesh(m_quad, renderTexture);
+		}
+
+		// Deferred rendering happens here
+		if (m_renderingMode == RenderingMode::Deferred)
+		{
+			// Render it to the screen
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+			glClearColor(0, 0, 0, 1);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glDisable(GL_DEPTH_TEST);
+
+			// Set the identity matrices so that the quad renders to the entire render area
+			setIdentityMatricies(m_deferredRendererCompositor);
+
+			// Render the full-buffer quad
+			m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
+			m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
+			m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
+			Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
+			m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
+		}
+	}
+
 	void Camera::setDisplay(Rendering::Display * const & display)
 	{
 		if (m_display != nullptr)

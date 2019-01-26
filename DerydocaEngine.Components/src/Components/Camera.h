@@ -83,6 +83,7 @@ namespace DerydocaEngine::Components
 		@root Root game object to render all of its children
 		*/
 		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
+		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Rendering::RenderTexture> renderTexture);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }
