@@ -37,6 +37,7 @@ namespace DerydocaEngine::Editor::Rendering
 	void EditorRenderer::renderFrame(const float deltaTime)
 	{
 		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
+		bool sceneExists = scene != nullptr;
 
 		// Initialize a new immediate mode GUI frame
 		DerydocaEngine::Rendering::Gui::DearImgui::newFrame(m_display);
@@ -44,21 +45,30 @@ namespace DerydocaEngine::Editor::Rendering
 		// Update
 		m_editorComponentsScene->getRoot()->update(deltaTime);
 		m_editorGuiScene->getRoot()->update(deltaTime);
-		scene->getRoot()->update(deltaTime);
-
-		// ImGui new frame
+		if (sceneExists)
+		{
+			scene->getRoot()->update(deltaTime);
+		}
 
 		// Render
 		DerydocaEngine::Rendering::CameraManager::getInstance().render({
 			m_editorComponentsScene,
-			m_editorGuiScene,
-			scene
+			m_editorGuiScene
 			});
+		if (sceneExists)
+		{
+			DerydocaEngine::Rendering::CameraManager::getInstance().render({
+				scene
+				});
+		}
 
 		// Post render
 		m_editorComponentsScene->getRoot()->postRender();
 		m_editorGuiScene->getRoot()->postRender();
-		scene->getRoot()->postRender();
+		if (sceneExists)
+		{
+			scene->getRoot()->postRender();
+		}
 
 		// Render editor GUI
 		EditorGUI::getInstance().render();
