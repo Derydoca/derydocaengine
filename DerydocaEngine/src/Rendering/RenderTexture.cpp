@@ -3,6 +3,7 @@
 
 #include <GL/glew.h>
 #include <cassert>
+#include "GraphicsAPI.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -19,9 +20,9 @@ namespace DerydocaEngine::Rendering
 
 	RenderTexture::~RenderTexture()
 	{
-		if (m_depthbuffer) glDeleteRenderbuffers(1, &m_depthbuffer);
-		if (m_rendererId) glDeleteTextures(1, &m_rendererId);
-		if (m_framebuffer) glDeleteFramebuffers(1, &m_framebuffer);
+		GraphicsAPI::deleteRenderBuffer(1, &m_depthbuffer);
+		GraphicsAPI::deleteTextures(1, &m_rendererId);
+		GraphicsAPI::deleteFramebuffers(1, &m_framebuffer);
 	}
 
 	void RenderTexture::initializeTexture(int const& width, int const& height)
@@ -29,15 +30,13 @@ namespace DerydocaEngine::Rendering
 		m_width = width;
 		m_height = height;
 
-		glGenFramebuffers(1, &m_framebuffer);
-		glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
-		glGenTextures(1, &m_rendererId);
-		glBindTexture(GL_TEXTURE_2D, m_rendererId);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+		GraphicsAPI::createFramebuffers(1, &m_framebuffer);
+		GraphicsAPI::bindFramebuffer(m_framebuffer);
+		GraphicsAPI::createTexture2D(&m_rendererId, m_width, m_height);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-		glGenRenderbuffers(1, &m_depthbuffer);
+		GraphicsAPI::createRenderBuffers(1, &m_depthbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, m_depthbuffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_width, m_height);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthbuffer);
@@ -55,13 +54,12 @@ namespace DerydocaEngine::Rendering
 	{
 		assert(unit >= 0 && unit <= 31);
 
-		glActiveTexture(GL_TEXTURE0 + unit);
-		glBindTexture(GL_TEXTURE_2D, m_rendererId);
+		GraphicsAPI::bindTexture2D(unit, m_rendererId);
 	}
 
 	void RenderTexture::bindAsRenderTexture()
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, m_framebuffer);
+		GraphicsAPI::bindFramebuffer(m_framebuffer);
 	}
 
 	float RenderTexture::getAspectRatio()
