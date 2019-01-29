@@ -25,7 +25,7 @@ Scene:
             fov: 70.0
             zNear: 0.01
             zFar: 1000.0
-            renderingMode: 1
+            renderingMode: 0
             skybox: 7a45b523-731d-4540-9da3-39632413a276
             clearMode: 2
             clearColor: [0.5, 0.0, 0.0]

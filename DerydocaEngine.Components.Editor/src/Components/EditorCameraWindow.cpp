@@ -14,7 +14,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	void EditorCameraWindow::postRender()
+	void EditorCameraWindow::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack)
 	{
 		Editor::EditorRenderer::GetInstance().renderEditorCamera(m_renderTexture);
 	}

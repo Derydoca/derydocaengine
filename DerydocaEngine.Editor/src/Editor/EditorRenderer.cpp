@@ -43,51 +43,32 @@ namespace DerydocaEngine::Editor
 			DerydocaEngine::Rendering::CameraManager::getInstance().render({
 				scene
 				}, renderTexture);
+			m_display->bindAsRenderTarget();
 		}
 	}
 
 	void EditorRenderer::renderFrame(const float deltaTime)
 	{
-		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
-		bool sceneExists = scene != nullptr;
-
 		// Initialize a new immediate mode GUI frame
 		DerydocaEngine::Rendering::Gui::DearImgui::newFrame(m_display);
 
 		// Update
-		m_editorComponentsScene->getRoot()->update(deltaTime);
 		m_editorGuiScene->getRoot()->update(deltaTime);
-		if (sceneExists)
-		{
-			scene->getRoot()->update(deltaTime);
-		}
-
-		// Render
-		DerydocaEngine::Rendering::CameraManager::getInstance().render({
-			//m_editorComponentsScene,
-			m_editorGuiScene
-			});
-		//if (sceneExists)
-		//{
-		//	DerydocaEngine::Rendering::CameraManager::getInstance().render({
-		//		scene
-		//		});
-		//}
-
-		// Post render
-		m_editorComponentsScene->getRoot()->postRender();
-		m_editorGuiScene->getRoot()->postRender();
-		if (sceneExists)
-		{
-			scene->getRoot()->postRender();
-		}
 
 		// Render editor GUI
 		EditorGUI::getInstance().render();
 		m_editorGuiScene->getRoot()->renderEditorGUI();
 
+		// Render
+		DerydocaEngine::Rendering::CameraManager::getInstance().render({
+			m_editorGuiScene
+			});
+
 		// Render the immediate mode GUI frame to the framebuffer
 		DerydocaEngine::Rendering::Gui::DearImgui::render(m_display);
+
+		// Post render
+		m_editorGuiScene->getRoot()->postRender();
 	}
 
 	std::shared_ptr<Resources::LevelResource> EditorRenderer::getSceneResource(const std::string& sceneId, const std::string& sceneType)

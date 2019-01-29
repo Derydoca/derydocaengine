@@ -12,7 +12,7 @@ namespace DerydocaEngine::Components
 		EditorCameraWindow();
 		~EditorCameraWindow();
 
-		virtual void postRender();
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 
 		virtual void renderWindow();
 		virtual std::string getWindowTitle() { return "Editor Camera"; }
