@@ -34,15 +34,13 @@ namespace DerydocaEngine::Editor
 		loadScene(settings.getEditorGuiSceneIdentifier(), m_editorGuiScene);
 	}
 
-	void EditorRenderer::renderEditorCamera(std::shared_ptr<Rendering::RenderTexture> renderTexture)
+	void EditorRenderer::renderEditorCamera(std::shared_ptr<Components::Camera> camera, std::shared_ptr<Rendering::RenderTexture> renderTexture)
 	{
 		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
 		
 		if (scene != nullptr)
 		{
-			DerydocaEngine::Rendering::CameraManager::getInstance().render({
-				scene
-				}, renderTexture);
+			camera->renderScenes({ scene }, renderTexture);
 			m_display->bindAsRenderTarget();
 		}
 	}

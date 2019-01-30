@@ -69,9 +69,10 @@ namespace DerydocaEngine
 
 	void GameObject::init()
 	{
-		for each (auto c in m_components)
+		// Use standard for loop so components can be added during init calls
+		for (size_t i = 0; i < m_components.size(); i++)
 		{
-			c->init();
+			m_components[i]->init();
 		}
 
 		for each (auto go in m_children)

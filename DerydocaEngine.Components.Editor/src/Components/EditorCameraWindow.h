@@ -1,6 +1,7 @@
 #include "Components\EditorWindowComponent.h"
 #include "Editor\SelectionManager.h"
 #include "Rendering\RenderTexture.h"
+#include "Components\Camera.h"
 
 namespace DerydocaEngine::Components
 {
@@ -12,6 +13,7 @@ namespace DerydocaEngine::Components
 		EditorCameraWindow();
 		~EditorCameraWindow();
 
+		virtual void init();
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 
 		virtual void renderWindow();
@@ -22,6 +24,7 @@ namespace DerydocaEngine::Components
 		int m_windowWidth;
 		int m_windowHeight;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
+		std::shared_ptr<Camera> m_camera;
 
 	};
 }

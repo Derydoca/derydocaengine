@@ -11,7 +11,8 @@
 namespace DerydocaEngine::Scenes
 {
 
-	SerializedScene::SerializedScene()
+	SerializedScene::SerializedScene() :
+		m_sceneObjects()
 	{
 	}
 

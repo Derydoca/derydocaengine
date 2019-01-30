@@ -8,12 +8,18 @@ namespace DerydocaEngine::Components
 	EditorCameraWindow::EditorCameraWindow() :
 		m_windowWidth(0),
 		m_windowHeight(0),
-		m_renderTexture(std::make_shared<Rendering::RenderTexture>(200, 200))
+		m_renderTexture(std::make_shared<Rendering::RenderTexture>(200, 200)),
+		m_camera(std::make_shared<Camera>())
 	{
 	}
 
 	EditorCameraWindow::~EditorCameraWindow()
 	{
+	}
+
+	void EditorCameraWindow::init()
+	{
+		getGameObject()->addComponent<Camera>(m_camera);
 	}
 
 	void EditorCameraWindow::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack)
@@ -28,7 +34,7 @@ namespace DerydocaEngine::Components
 			m_renderTexture->initializeTexture(m_windowWidth, m_windowHeight);
 		}
 
-		Editor::EditorRenderer::GetInstance().renderEditorCamera(m_renderTexture);
+		Editor::EditorRenderer::GetInstance().renderEditorCamera(m_camera, m_renderTexture);
 	}
 
 	void EditorCameraWindow::renderWindow()

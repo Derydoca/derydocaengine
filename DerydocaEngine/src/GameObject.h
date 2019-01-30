@@ -29,6 +29,12 @@ namespace DerydocaEngine
 
 		void addChild(const std::shared_ptr<GameObject> gameObject);
 		void addComponent(const std::shared_ptr<Components::GameComponent> component);
+		template <typename T>
+		void addComponent(const std::shared_ptr<T> component)
+		{
+			auto cmp = std::static_pointer_cast<Components::GameComponent>(component);
+			addComponent(cmp);
+		}
 		void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			std::shared_ptr<Rendering::Material> material,

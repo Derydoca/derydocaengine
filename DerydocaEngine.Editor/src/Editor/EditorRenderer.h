@@ -20,7 +20,7 @@ namespace DerydocaEngine::Editor
 
 		virtual void init();
 		virtual void renderFrame(const float deltaTime);
-		void renderEditorCamera(std::shared_ptr<Rendering::RenderTexture> renderTexture);
+		void renderEditorCamera(std::shared_ptr<Components::Camera> camera, std::shared_ptr<Rendering::RenderTexture> renderTexture);
 
 	private:
 		EditorRenderer();
