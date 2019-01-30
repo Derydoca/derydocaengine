@@ -19,6 +19,8 @@ namespace DerydocaEngine::Components
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
 
 	private:
+		int m_windowWidth;
+		int m_windowHeight;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
 
 	};

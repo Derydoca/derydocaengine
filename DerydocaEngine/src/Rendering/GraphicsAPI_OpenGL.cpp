@@ -29,26 +29,17 @@ namespace DerydocaEngine::Rendering
 
 	void GraphicsAPI::deleteRenderBuffer(int count, const unsigned int * rendererIds)
 	{
-		if ((*rendererIds) != 0)
-		{
-			glDeleteRenderbuffers(count, rendererIds);
-		}
+		glDeleteRenderbuffers(count, rendererIds);
 	}
 
 	void GraphicsAPI::deleteTextures(int count, const unsigned int * rendererIds)
 	{
-		if ((*rendererIds) != 0)
-		{
-			glDeleteTextures(count, rendererIds);
-		}
+		glDeleteTextures(count, rendererIds);
 	}
 
 	void GraphicsAPI::deleteFramebuffers(int count, const unsigned int * rendererIds)
 	{
-		if ((*rendererIds) != 0)
-		{
-			glDeleteFramebuffers(count, rendererIds);
-		}
+		glDeleteFramebuffers(count, rendererIds);
 	}
 
 	void GraphicsAPI::createFramebuffers(int count, unsigned int * rendererIds)

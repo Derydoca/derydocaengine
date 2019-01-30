@@ -20,13 +20,13 @@ namespace DerydocaEngine::Rendering
 
 	RenderTexture::~RenderTexture()
 	{
-		GraphicsAPI::deleteRenderBuffer(1, &m_depthbuffer);
-		GraphicsAPI::deleteTextures(1, &m_rendererId);
-		GraphicsAPI::deleteFramebuffers(1, &m_framebuffer);
+		deleteVbo();
 	}
 
 	void RenderTexture::initializeTexture(int const& width, int const& height)
 	{
+		deleteVbo();
+
 		m_width = width;
 		m_height = height;
 
@@ -48,6 +48,13 @@ namespace DerydocaEngine::Rendering
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 			printf("UNABLE TO CREATE RENDER TEXTURE!");
 		}
+	}
+
+	void RenderTexture::deleteVbo()
+	{
+		if (m_depthbuffer) GraphicsAPI::deleteRenderBuffer(1, &m_depthbuffer);
+		if (m_rendererId) GraphicsAPI::deleteTextures(1, &m_rendererId);
+		if (m_framebuffer) GraphicsAPI::deleteFramebuffers(1, &m_framebuffer);
 	}
 
 	void RenderTexture::bind(unsigned int const& unit)
