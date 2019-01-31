@@ -1,4 +1,5 @@
 #pragma once
+#include "Color.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -15,6 +16,8 @@ namespace DerydocaEngine::Rendering
 		static void createFramebuffers(int count, unsigned int* rendererIds);
 		static void createTexture2D(unsigned int* rendererId, int width, int height);
 		static void createRenderBuffers(int count, unsigned int* rendererIds);
+		static void clearDepthBuffer();
+		static void clearColorBuffer(Color color);
 	};
 
 }

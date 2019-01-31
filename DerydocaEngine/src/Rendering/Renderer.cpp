@@ -4,6 +4,7 @@
 #include "Rendering\LightManager.h"
 #include "GameObject.h"
 #include "Rendering\MatrixStack.h"
+#include "GraphicsAPI.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -28,6 +29,10 @@ namespace DerydocaEngine::Rendering
 		Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
 
 		glEnable(GL_DEPTH_TEST);
+
+		// Clear the buffers
+		GraphicsAPI::clearDepthBuffer();
+		GraphicsAPI::clearColorBuffer({ 0, 0, 0, 1 });
 
 		// Run the pre-render methods in all components in the scene
 		root->preRender();
