@@ -1,13 +1,15 @@
 #include "EditorComponentsPch.h"
 #include "EditorCameraWindow.h"
 #include "Editor\EditorRenderer.h"
+#include "Editor\Inspector\InspectorRendererFactory.h"
 
 namespace DerydocaEngine::Components
 {
 
 	EditorCameraWindow::EditorCameraWindow() :
-		m_windowWidth(0),
-		m_windowHeight(0),
+		m_displayWidth(0),
+		m_displayHeight(0),
+		m_showPropertiesPanel(false),
 		m_mouse(0),
 		m_mouseSensitivityX(0.005f),
 		m_mouseSensitivityY(0.005f),
@@ -37,13 +39,13 @@ namespace DerydocaEngine::Components
 	void EditorCameraWindow::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack)
 	{
 		if (
-			m_windowWidth != m_renderTexture->getWidth() ||
-			m_windowHeight != m_renderTexture->getHeight() &&
-			m_windowWidth > 0 &&
-			m_windowHeight > 0
+			m_displayWidth != m_renderTexture->getWidth() ||
+			m_displayHeight != m_renderTexture->getHeight() &&
+			m_displayWidth > 0 &&
+			m_displayHeight > 0
 			)
 		{
-			m_renderTexture->initializeTexture(m_windowWidth, m_windowHeight);
+			m_renderTexture->initializeTexture(m_displayWidth, m_displayHeight);
 		}
 
 		Editor::EditorRenderer::GetInstance().renderEditorCamera(m_camera, m_renderTexture);
@@ -131,14 +133,45 @@ namespace DerydocaEngine::Components
 
 	void EditorCameraWindow::renderWindow()
 	{
+		// Store the window's active state
 		m_isActive = ImGui::IsWindowFocused();
 
+		// Get useful information about the window
 		auto windowSize = ImGui::GetWindowSize();
 		auto itemSize = ImGui::GetItemRectSize();
-		m_windowWidth = windowSize.x;
-		m_windowHeight = windowSize.y - itemSize.y * 3;
+		auto windowPos = ImGui::GetWindowPos();
+		auto frameHeight = ImGui::GetFrameHeight();
+		auto viewport = ImGui::GetWindowViewport();
+
+		// Get the width of the properties panel
+		int propertiesPanelWidth = m_showPropertiesPanel ? 200 : 0;
+
+		// Define the display size of the render area
+		m_displayWidth = windowSize.x - propertiesPanelWidth;
+		m_displayHeight = windowSize.y - itemSize.y * 3.1;
+
+		// Show button to show/hide the properties panel
+		if (ImGui::Button(m_showPropertiesPanel ? "Hide Properties" : "Show Properties"))
+		{
+			m_showPropertiesPanel = !m_showPropertiesPanel;
+		}
+		// Also add status text to let the user know if the window is focued
+		ImGui::SameLine();
 		ImGui::Text(m_isActive ? "Focused" : "Not Focused");
-		ImGui::Image((ImTextureID)m_renderTexture->getRendererId(), { (float)m_windowWidth, (float)m_windowHeight }, { 0, 1 }, { 1, 0 });
+
+		// Render the camera's view to the window
+		ImGui::Image((ImTextureID)m_renderTexture->getRendererId(), { (float)m_displayWidth, (float)m_displayHeight }, { 0, 1 }, { 1, 0 });
+
+		// Render the properties panel if it is marked to be visible
+		if (m_showPropertiesPanel)
+		{
+			ImGui::SameLine();
+			if (ImGui::BeginChild(boost::uuids::to_string(getId()).c_str(), { (float)propertiesPanelWidth, (float)m_displayHeight }))
+			{
+				Editor::Inspector::InspectorRendererFactory::getInstance().renderInspector(m_camera);
+			}
+			ImGui::EndChild();
+		}
 	}
 
 }

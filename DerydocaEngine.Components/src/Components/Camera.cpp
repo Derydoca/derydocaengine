@@ -24,7 +24,7 @@ namespace DerydocaEngine::Components
 
 	Camera::Camera() :
 		m_transform(),
-		m_clearColor(),
+		m_clearColor(Color(0.0f, 0.0f, 0.2f, 1.0f)),
 		m_skybox(std::make_shared<Rendering::Skybox>()),
 		m_clearMode(Camera::NoClear),
 		m_renderingMode(Camera::RenderingMode::Forward),
@@ -48,7 +48,6 @@ namespace DerydocaEngine::Components
 		m_projection.setAspectRatio(m_display->getAspectRatio());
 		m_projection.recalculateProjectionMatrix();
 		setClearMode(ClearMode::ColorClear);
-		setClearColor(Color(0.5, 0.0, 0.0));
 	}
 
 	Camera::~Camera()

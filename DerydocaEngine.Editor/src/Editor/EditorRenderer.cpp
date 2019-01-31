@@ -6,6 +6,7 @@
 #include "Scenes\SceneManager.h"
 #include "Editor\EditorGUI.h"
 #include "Rendering\CameraManager.h"
+#include "Rendering\GraphicsAPI.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -43,8 +44,13 @@ namespace DerydocaEngine::Editor
 		{
 			Rendering::CameraManager::getInstance().setCurrentCamera(camera);
 			camera->renderScenes({ scene }, renderTexture);
-			m_display->bindAsRenderTarget();
 		}
+		else
+		{
+			renderTexture->bindAsRenderTexture();
+			Rendering::GraphicsAPI::clearColorBuffer({ 0.0f, 0.0f, 0.2f, 1.0f });
+		}
+		m_display->bindAsRenderTarget();
 	}
 
 	void EditorRenderer::renderFrame(const float deltaTime)

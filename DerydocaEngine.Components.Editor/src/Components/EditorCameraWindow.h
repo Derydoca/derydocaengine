@@ -24,8 +24,9 @@ namespace DerydocaEngine::Components
 
 	private:
 		bool m_isActive;
-		int m_windowWidth;
-		int m_windowHeight;
+		bool m_showPropertiesPanel;
+		int m_displayWidth;
+		int m_displayHeight;
 
 		// Mouse rotation vars
 		Input::Mouse* m_mouse;

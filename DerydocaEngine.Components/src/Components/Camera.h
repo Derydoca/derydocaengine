@@ -106,6 +106,7 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
 		Rendering::Projection& getProjection() { return m_projection; }
 		Rendering::Projection getProjection() const { return m_projection; }
+		Color& getClearColor() { return m_clearColor; }
 	private:
 		std::shared_ptr<Components::Transform> m_transform;
 		Color m_clearColor;

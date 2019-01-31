@@ -8,4 +8,5 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::CameraInspector::re
 	ImGui::Text("A more comprehensive inspector will come in the future.");
 
 	Dgui::InputProjection("Projection", camera->getProjection());
+	ImGui::ColorEdit3("Clear Color", &camera->getClearColor().r);
 }
