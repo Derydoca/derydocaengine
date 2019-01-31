@@ -343,6 +343,10 @@ namespace DerydocaEngine::Components
 		int textureW = renderTexture->getWidth();
 		int textureH = renderTexture->getHeight();
 
+		// Ensure that the aspect ratio matches the render target
+		m_projection.setAspectRatio(textureW, textureH);
+		m_projection.recalculateProjectionMatrix();
+
 		if (m_renderingMode == RenderingMode::Deferred)
 		{
 			glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
