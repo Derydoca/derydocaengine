@@ -5,6 +5,7 @@
 #include "Rendering\Gui\DearImgui.h"
 #include "Scenes\SceneManager.h"
 #include "Editor\EditorGUI.h"
+#include "Rendering\CameraManager.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -40,6 +41,7 @@ namespace DerydocaEngine::Editor
 		
 		if (scene != nullptr)
 		{
+			Rendering::CameraManager::getInstance().setCurrentCamera(camera);
 			camera->renderScenes({ scene }, renderTexture);
 			m_display->bindAsRenderTarget();
 		}
@@ -58,9 +60,7 @@ namespace DerydocaEngine::Editor
 		m_editorGuiScene->getRoot()->renderEditorGUI();
 
 		// Render
-		DerydocaEngine::Rendering::CameraManager::getInstance().render({
-			m_editorGuiScene
-			});
+		render(glm::mat4(), m_editorGuiScene);
 
 		// Render the immediate mode GUI frame to the framebuffer
 		DerydocaEngine::Rendering::Gui::DearImgui::render(m_display);

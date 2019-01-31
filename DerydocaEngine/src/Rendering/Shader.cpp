@@ -244,7 +244,7 @@ namespace DerydocaEngine::Rendering
 
 	void Shader::updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack)
 	{
-		Components::Camera* camera = CameraManager::getInstance().getCurrentCamera();
+		auto camera = CameraManager::getInstance().getCurrentCamera();
 
 		update(matrixStack, camera->getProjection(), camera->getGameObject()->getTransform());
 

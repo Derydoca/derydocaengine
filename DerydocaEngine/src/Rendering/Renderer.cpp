@@ -1,12 +1,41 @@
 #include "EnginePch.h"
 #include "Renderer.h"
 #include "Input\InputManager.h"
+#include "Rendering\LightManager.h"
+#include "GameObject.h"
+#include "Rendering\MatrixStack.h"
 
 namespace DerydocaEngine::Rendering
 {
 	RendererImplementation::RendererImplementation(std::string title, int width, int height) :
 		m_display(std::make_shared<Display>(width, height, title))
 	{
+	}
+
+	void RendererImplementation::render(
+		const glm::mat4& projectionMatrix,
+		const std::shared_ptr<Scenes::Scene> scene
+	)
+	{
+		// Extract the root element
+		auto root = scene->getRoot();
+		if (root == nullptr)
+		{
+			return;
+		}
+		
+		// Render any shadow maps
+		Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
+
+		glEnable(GL_DEPTH_TEST);
+
+		// Run the pre-render methods in all components in the scene
+		root->preRender();
+
+		// Run the render methods in all components in the scene
+		auto matrixStack = std::make_shared<Rendering::MatrixStack>();
+		matrixStack->push(projectionMatrix);
+		root->render(matrixStack);
 	}
 
 	Renderer::Renderer(RendererImplementation& implementation) :

@@ -44,8 +44,6 @@ namespace DerydocaEngine::Components
 		m_deferredRendererCompositor(0),
 		m_projection()
 	{
-		Rendering::CameraManager::getInstance().addCamera(this);
-
 		setDisplay(Rendering::DisplayManager::getInstance().getDisplay(0));
 		m_projection.setAspectRatio(m_display->getAspectRatio());
 		m_projection.recalculateProjectionMatrix();
@@ -59,6 +57,8 @@ namespace DerydocaEngine::Components
 
 	void Camera::init()
 	{
+		Rendering::CameraManager::getInstance().addCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+
 		auto quadResource = std::static_pointer_cast<Resources::MeshResource>(ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71"));
 		if (quadResource != nullptr)
 		{
@@ -76,7 +76,7 @@ namespace DerydocaEngine::Components
 	void Camera::preDestroy()
 	{
 		delete m_displayRect;
-		Rendering::CameraManager::getInstance().removeCamera(this);
+		Rendering::CameraManager::getInstance().removeCamera(std::static_pointer_cast<Camera>(shared_from_this()));
 	}
 
 	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)

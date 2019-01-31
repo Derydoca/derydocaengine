@@ -17,7 +17,7 @@ namespace DerydocaEngine::Rendering
 
 	void CameraManager::render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
-		for each (Components::Camera* cam in m_cameras)
+		for each (auto cam in m_cameras)
 		{
 			m_currentCamera = cam;
 
@@ -27,7 +27,7 @@ namespace DerydocaEngine::Rendering
 
 	void CameraManager::render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<RenderTexture> renderTexture)
 	{
-		for each (Components::Camera* cam in m_cameras)
+		for each (auto cam in m_cameras)
 		{
 			m_currentCamera = cam;
 

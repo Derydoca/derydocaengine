@@ -48,7 +48,7 @@ namespace DerydocaEngine::Debug {
 
 	void DebugVisualizer::postRender()
 	{
-		Components::Camera* currentCamera = Rendering::CameraManager::getInstance().getCurrentCamera();
+		auto currentCamera = Rendering::CameraManager::getInstance().getCurrentCamera();
 		if (currentCamera == nullptr)
 		{
 			return;

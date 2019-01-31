@@ -17,6 +17,16 @@ namespace DerydocaEngine::Rendering
 	struct Projection
 	{
 	public:
+		Projection() :
+			m_projectionMatrix(),
+			m_projectionMode(Perspective),
+			m_fov(60.0f),
+			m_aspect(1.0f),
+			m_zNear(0.01f),
+			m_zFar(1000.0f)
+		{
+		}
+
 		glm::mat4 getInverseViewProjectionMatrix(glm::mat4 const& transformModelMatrix) const { return m_projectionMatrix * glm::inverse(transformModelMatrix); }
 		glm::mat4 getViewMatrix(glm::mat4 const& transformModelMatrix) const { return glm::inverse(transformModelMatrix); }
 		glm::mat4 getProjectionMatrix() const { return m_projectionMatrix; }
@@ -47,7 +57,7 @@ namespace DerydocaEngine::Rendering
 		float getZFar() const { return m_zFar; }
 	private:
 		glm::mat4 m_projectionMatrix;
-		ProjectionMode m_projectionMode = Perspective;
+		ProjectionMode m_projectionMode;
 		float m_fov;
 		float m_aspect;
 		float m_zNear;

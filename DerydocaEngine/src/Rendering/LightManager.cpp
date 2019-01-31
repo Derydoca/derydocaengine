@@ -26,7 +26,7 @@ namespace DerydocaEngine::Rendering
 		auto lights = getLights(objectTransform);
 
 		// Cache some things
-		Components::Camera* currentCamera = CameraManager::getInstance().getCurrentCamera();
+		auto currentCamera = CameraManager::getInstance().getCurrentCamera();
 		glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
 		glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
 
