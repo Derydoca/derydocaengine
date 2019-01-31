@@ -144,7 +144,11 @@ namespace DerydocaEngine::Components
 		auto viewport = ImGui::GetWindowViewport();
 
 		// Get the width of the properties panel
-		int propertiesPanelWidth = m_showPropertiesPanel ? 200 : 0;
+		int propertiesPanelWidth = m_showPropertiesPanel ? 400 : 0;
+		if (propertiesPanelWidth > (int)windowSize.x)
+		{
+			propertiesPanelWidth = (int)windowSize.x;
+		}
 
 		// Define the display size of the render area
 		m_displayWidth = windowSize.x - propertiesPanelWidth;
