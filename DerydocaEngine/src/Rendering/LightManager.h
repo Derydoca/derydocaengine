@@ -2,6 +2,7 @@
 #include <glm/vec3.hpp>
 #include <list>
 #include <memory>
+#include "Scenes\Scene.h"
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -43,7 +44,7 @@ namespace DerydocaEngine::Rendering
 				return false;
 			});
 		}
-		void renderShadowMaps(std::shared_ptr<Components::Transform> const& objectTransform);
+		void renderShadowMaps(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Components::Transform> cameraTransform);
 
 		void operator=(LightManager const&) = delete;
 	private:

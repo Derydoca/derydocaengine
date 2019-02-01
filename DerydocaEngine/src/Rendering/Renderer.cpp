@@ -25,9 +25,6 @@ namespace DerydocaEngine::Rendering
 			return;
 		}
 		
-		// Render any shadow maps
-		Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
-
 		glEnable(GL_DEPTH_TEST);
 
 		// Clear the buffers

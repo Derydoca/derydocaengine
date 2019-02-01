@@ -236,15 +236,7 @@ namespace DerydocaEngine::Components
 
 	void Camera::renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
-		for (auto scene : scenes)
-		{
-			auto root = scene->getRoot();
-			if (root == nullptr)
-			{
-				continue;
-			}
-			Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
-		}
+		Rendering::LightManager::getInstance().renderShadowMaps(scenes, getGameObject()->getTransform());
 
 		int textureW, textureH = 1;
 
@@ -323,15 +315,18 @@ namespace DerydocaEngine::Components
 
 	void Camera::renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH)
 	{
-		//for (auto scene : scenes)
-		//{
-		//	auto root = scene->getRoot();
-		//	if (root == nullptr)
-		//	{
-		//		continue;
-		//	}
-		//	Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
-		//}
+		// Render the shadow maps
+		Rendering::LightManager::getInstance().renderShadowMaps(scenes, getGameObject()->getTransform());
+
+		// Set the viewport to what is defined on this camera
+		Rendering::GraphicsAPI::setViewport(std::static_pointer_cast<Camera>(shared_from_this()), textureW, textureH);
+
+		// Set the aspect ratio to the texture size
+		m_projection.setAspectRatio(textureW, textureH);
+		m_projection.recalculateProjectionMatrix();
+
+		// Clear the buffer
+		clear();
 
 		// Ensure depth testing is on
 		glEnable(GL_DEPTH_TEST);

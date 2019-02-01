@@ -80,6 +80,13 @@ namespace DerydocaEngine::Rendering
 			(GLint)(textureH * displayRect.getHeight()));
 	}
 
+	int GraphicsAPI::getCurrentFramebufferID()
+	{
+		int boundFbo;
+		glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &boundFbo);
+		return boundFbo;
+	}
+
 }
 
 #endif

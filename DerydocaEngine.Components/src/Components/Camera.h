@@ -95,7 +95,6 @@ namespace DerydocaEngine::Components
 		void resize(int const& width, int const& height);
 		virtual void init();
 		virtual void preDestroy();
-		void clear();
 
 		void createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int & texid, int const& width, int const& height);
 
@@ -129,6 +128,7 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Shader> m_deferredRendererCompositor;
 		Rendering::Projection m_projection;
 
+		void clear();
 		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);
 	};
 

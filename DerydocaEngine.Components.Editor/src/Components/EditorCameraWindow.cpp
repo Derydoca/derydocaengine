@@ -63,10 +63,6 @@ namespace DerydocaEngine::Components
 
 		// Clear the render texture and then render to it
 		m_renderTexture->bindAsRenderTexture();
-		Rendering::GraphicsAPI::setViewport(m_camera, m_renderTexture->getWidth(), m_renderTexture->getHeight());
-		m_camera->getProjection().setAspectRatio(m_renderTexture->getWidth(), m_renderTexture->getHeight());
-		m_camera->getProjection().recalculateProjectionMatrix();
-		m_camera->clear();
 		Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(m_camera, m_renderTexture->getWidth(), m_renderTexture->getHeight());
 	}
 

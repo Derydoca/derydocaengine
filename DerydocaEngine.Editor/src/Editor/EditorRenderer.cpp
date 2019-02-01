@@ -50,10 +50,14 @@ namespace DerydocaEngine::Editor
 	{
 		// Render the scene
 		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
+		Rendering::CameraManager::getInstance().setCurrentCamera(camera);
 		if (scene != nullptr)
 		{
-			Rendering::CameraManager::getInstance().setCurrentCamera(camera);
 			camera->renderScenesToActiveBuffer({ scene, m_editorComponentsScene }, textureW, textureH);
+		}
+		else
+		{
+			camera->renderScenesToActiveBuffer({ m_editorComponentsScene }, textureW, textureH);
 		}
 
 		// Re-bind the display as the render target

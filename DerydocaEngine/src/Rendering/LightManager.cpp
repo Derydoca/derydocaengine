@@ -115,20 +115,19 @@ namespace DerydocaEngine::Rendering
 		shader->setInt("LightCount", (int)lights.size());
 	}
 
-	void LightManager::renderShadowMaps(std::shared_ptr<Components::Transform> const& objectTransform)
+	void LightManager::renderShadowMaps(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Components::Transform> cameraTransform)
 	{
-		// Get a list of lights that will affect the object being sent in
-		auto lights = getLights(objectTransform);
+		// Get a list of lights that are visible by the camera
+		auto lights = getLights(cameraTransform);
 
+		// Render the shadown map for each light
 		for each (auto light in lights)
 		{
 			if (light->isCastingShadows())
 			{
-				light->renderShadowMap(objectTransform->getGameObject());
+				light->renderShadowMap(scenes);
 			}
 		}
-
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	LightManager::LightManager()

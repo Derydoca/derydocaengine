@@ -20,6 +20,7 @@ namespace DerydocaEngine::Rendering
 		static void clearDepthBuffer();
 		static void clearColorBuffer(Color color);
 		static void setViewport(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
+		static int getCurrentFramebufferID();
 	};
 
 }

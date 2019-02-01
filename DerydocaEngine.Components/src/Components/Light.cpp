@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Rendering\LightManager.h"
 #include "Rendering\Material.h"
+#include "Rendering\GraphicsAPI.h"
 
 namespace DerydocaEngine::Components
 {
@@ -115,9 +116,10 @@ namespace DerydocaEngine::Components
 		Rendering::LightManager::getInstance().removeLight(sp);
 	}
 
-	void Light::renderShadowMap(const GameObject* gameObject)
+	void Light::renderShadowMap(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, m_shadowFBO);
+		auto prevFramebufferId = Rendering::GraphicsAPI::getCurrentFramebufferID();
+		Rendering::GraphicsAPI::bindFramebuffer(m_shadowFBO);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, m_shadowMapWidth, m_shadowMapHeight);
 		glEnable(GL_CULL_FACE);
@@ -128,11 +130,15 @@ namespace DerydocaEngine::Components
 		// Draw all meshes with the shadow map shader to the framebuffer
 		m_shadowMapMaterial->bind();
 		std::shared_ptr<Components::Transform> trans = getGameObject()->getTransform();
-		gameObject->renderMesh(m_matrixStack, m_shadowMapMaterial, m_projection, trans);
+		for (auto scene : scenes)
+		{
+			scene->getRoot()->renderMesh(m_matrixStack, m_shadowMapMaterial, m_projection, trans);
+		}
 
 		glCullFace(GL_BACK);
 		glPolygonOffset(0.0f, 0.0f);
 		glFlush();
+		Rendering::GraphicsAPI::bindFramebuffer(prevFramebufferId);
 	}
 
 	void Light::generateShadowMap()

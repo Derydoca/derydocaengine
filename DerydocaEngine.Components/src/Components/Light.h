@@ -6,6 +6,7 @@
 #include "Rendering\MatrixStack.h"
 #include "Components\Transform.h"
 #include "Rendering\Projection.h"
+#include "Scenes\Scene.h"
 
 namespace DerydocaEngine::Rendering {
 	class Material;
@@ -73,7 +74,7 @@ namespace DerydocaEngine::Components
 		virtual void deserialize(const YAML::Node& node);
 		virtual void preDestroy();
 
-		void renderShadowMap(const GameObject* gameObject);
+		void renderShadowMap(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 	private:
 		void generateShadowMap();
 		int getShadowMapFilterTypeEnum();
