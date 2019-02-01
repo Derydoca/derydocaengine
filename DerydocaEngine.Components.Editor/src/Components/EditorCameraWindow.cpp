@@ -35,6 +35,8 @@ namespace DerydocaEngine::Components
 	{
 		// Add the camera component under this game object
 		getGameObject()->addComponent<Camera>(m_camera);
+		m_camera->init();
+		m_camera->postInit();
 
 		// Set the skybox to the editor default
 		auto skyboxMaterial = Editor::EditorRenderer::GetInstance().getEditorSkyboxMaterial();

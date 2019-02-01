@@ -43,8 +43,6 @@ namespace DerydocaEngine
 	{
 		m_components.push_back(component);
 		component->setGameObject(shared_from_this());
-		component->init();
-		component->postInit();
 	}
 
 	void GameObject::renderMesh(

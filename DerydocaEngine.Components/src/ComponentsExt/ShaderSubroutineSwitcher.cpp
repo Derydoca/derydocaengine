@@ -34,8 +34,14 @@ namespace DerydocaEngine::Ext
 			std::cout << "No mesh renderer found for ShaderSubroutineSwitcher object.\n";
 			return;
 		}
-		// Get the shader attached to the mesh renderer
-		std::shared_ptr<Rendering::Material> material = mr->getMaterial();
+		// Copy the material from the mesh renderer
+		auto material = std::make_shared<Rendering::Material>();
+		material->copyFrom(mr->getMaterial());
+
+		// Set the mesh renderer's material to our copy
+		mr->setMaterial(material);
+
+		// Get the shader from the material
 		auto shader = material->getShader();
 		if (shader == nullptr)
 		{
