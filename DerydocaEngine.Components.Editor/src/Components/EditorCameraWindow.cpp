@@ -32,12 +32,24 @@ namespace DerydocaEngine::Components
 
 	void EditorCameraWindow::init()
 	{
+		// Add the camera component under this game object
 		getGameObject()->addComponent<Camera>(m_camera);
+
+		// Set the skybox to the editor default
+		auto skyboxMaterial = Editor::EditorRenderer::GetInstance().getEditorSkyboxMaterial();
+		if (skyboxMaterial != nullptr)
+		{
+			m_camera->setSkybox(skyboxMaterial);
+			m_camera->setClearMode(Components::Camera::ClearMode::SkyboxClear);
+		}
+
+		// Store the camera's transform for later use
 		m_cameraTransform = m_camera->getGameObject()->getTransform();
 	}
 
 	void EditorCameraWindow::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack)
 	{
+		// Update the render texture size if the display area has changed since the last frame
 		if (
 			m_displayWidth != m_renderTexture->getWidth() ||
 			m_displayHeight != m_renderTexture->getHeight() &&
@@ -48,7 +60,10 @@ namespace DerydocaEngine::Components
 			m_renderTexture->initializeTexture(m_displayWidth, m_displayHeight);
 		}
 
-		Editor::EditorRenderer::GetInstance().renderEditorCamera(m_camera, m_renderTexture);
+		// Clear the render texture and then render to it
+		m_renderTexture->bindAsRenderTexture();
+		m_camera->clear();
+		Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(m_camera, m_renderTexture->getWidth(), m_renderTexture->getHeight());
 	}
 
 	void EditorCameraWindow::update(const float deltaTime)

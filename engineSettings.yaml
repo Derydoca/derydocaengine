@@ -1,7 +1,9 @@
 Engine:
     Resources: .\engineResources\
+Editor:
     EditorComponentsScene: 620d32d7-eb7e-4fd0-8ad6-4e339e4bbdad
     EditorGuiScene: 45e19c48-5012-4afd-85d1-0c690a1ce2a9
+    SkyboxMaterial: 7a45b523-731d-4540-9da3-39632413a276
 Window:
 # Blog header image size: 2000 x 800
     Width: 400

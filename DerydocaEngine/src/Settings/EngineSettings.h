@@ -22,6 +22,7 @@ namespace DerydocaEngine::Settings
 		std::string getEngineResourceDirectory() const { return m_engineResourceDirectory; }
 		std::string getEditorComponentsSceneIdentifier() const { return m_editorComponentsSceneIdentifier; }
 		std::string getEditorGuiSceneIdentifier() const { return m_editorGuiSceneIdentifier; }
+		std::string getEditorSkyboxMaterialIdentifier() const { return m_editorSkyboxMaterialIdentifier; }
 	private:
 		boost::filesystem::path m_settingsFilePath;
 		int m_width;
@@ -29,6 +30,7 @@ namespace DerydocaEngine::Settings
 		std::string m_engineResourceDirectory;
 		std::string m_editorComponentsSceneIdentifier;
 		std::string m_editorGuiSceneIdentifier;
+		std::string m_editorSkyboxMaterialIdentifier;
 	};
 
 }

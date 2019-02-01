@@ -20,18 +20,25 @@ namespace DerydocaEngine::Settings
 		if (engineNode)
 		{
 			m_engineResourceDirectory = engineNode["Resources"].as<std::string>();
+		}
 
-			YAML::Node editorComponentsSceneNode = engineNode["EditorComponentsScene"];
+
+		YAML::Node editorNode = root["Editor"];
+		if (editorNode)
+		{
+			YAML::Node editorComponentsSceneNode = editorNode["EditorComponentsScene"];
 			if (editorComponentsSceneNode)
 			{
 				m_editorComponentsSceneIdentifier = editorComponentsSceneNode.as<std::string>();
 			}
 
-			YAML::Node editorGuiSceneNode = engineNode["EditorGuiScene"];
+			YAML::Node editorGuiSceneNode = editorNode["EditorGuiScene"];
 			if (editorGuiSceneNode)
 			{
 				m_editorGuiSceneIdentifier = editorGuiSceneNode.as<std::string>();
 			}
+
+			m_editorSkyboxMaterialIdentifier = editorNode["SkyboxMaterial"].as<std::string>();
 		}
 
 		YAML::Node windowNode = root["Window"];

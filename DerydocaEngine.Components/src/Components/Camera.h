@@ -83,7 +83,7 @@ namespace DerydocaEngine::Components
 		@root Root game object to render all of its children
 		*/
 		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
-		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Rendering::RenderTexture> renderTexture);
+		void renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }
@@ -95,6 +95,7 @@ namespace DerydocaEngine::Components
 		void resize(int const& width, int const& height);
 		virtual void init();
 		virtual void preDestroy();
+		void clear();
 
 		void createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int & texid, int const& width, int const& height);
 
@@ -107,6 +108,7 @@ namespace DerydocaEngine::Components
 		Rendering::Projection& getProjection() { return m_projection; }
 		Rendering::Projection getProjection() const { return m_projection; }
 		Color& getClearColor() { return m_clearColor; }
+		ClearMode getClearMode() { return m_clearMode; }
 	private:
 		std::shared_ptr<Components::Transform> m_transform;
 		Color m_clearColor;
@@ -126,7 +128,6 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Shader> m_deferredRendererCompositor;
 		Rendering::Projection m_projection;
 
-		void clear();
 		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);
 	};
 

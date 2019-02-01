@@ -7,6 +7,7 @@
 #include "Editor\EditorGUI.h"
 #include "Rendering\CameraManager.h"
 #include "Rendering\GraphicsAPI.h"
+#include "ObjectLibrary.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -14,7 +15,8 @@ namespace DerydocaEngine::Editor
 	EditorRenderer::EditorRenderer() :
 		RendererImplementation("Derydoca Engine - Editor", 300, 300),
 		m_editorComponentsScene(std::make_shared<Scenes::SerializedScene>()),
-		m_editorGuiScene(std::make_shared<Scenes::SerializedScene>())
+		m_editorGuiScene(std::make_shared<Scenes::SerializedScene>()),
+		m_editorSkyboxMaterial(std::make_shared<Rendering::Material>())
 	{
 		DerydocaEngine::Rendering::Gui::DearImgui::init(m_display);
 	}
@@ -31,25 +33,30 @@ namespace DerydocaEngine::Editor
 		m_display->setSize(settings.getWidth(), settings.getHeight());
 		m_display->init();
 
+		// Load the editor skybox material
+		auto skyboxIdString = settings.getEditorSkyboxMaterialIdentifier();
+		if (skyboxIdString.size() > 0)
+		{
+			auto skyboxId = boost::lexical_cast<boost::uuids::uuid>(skyboxIdString);
+			m_editorSkyboxMaterial = ObjectLibrary::getInstance().getResourceObjectPointer<Rendering::Material>(skyboxId);
+		}
+
 		// Load the scenes
 		loadScene(settings.getEditorComponentsSceneIdentifier(), m_editorComponentsScene);
 		loadScene(settings.getEditorGuiSceneIdentifier(), m_editorGuiScene);
 	}
 
-	void EditorRenderer::renderEditorCamera(std::shared_ptr<Components::Camera> camera, std::shared_ptr<Rendering::RenderTexture> renderTexture)
+	void EditorRenderer::renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH)
 	{
+		// Render the scene
 		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
-		
 		if (scene != nullptr)
 		{
 			Rendering::CameraManager::getInstance().setCurrentCamera(camera);
-			camera->renderScenes({ scene }, renderTexture);
+			camera->renderScenesToActiveBuffer({ scene, m_editorComponentsScene }, textureW, textureH);
 		}
-		else
-		{
-			renderTexture->bindAsRenderTexture();
-			Rendering::GraphicsAPI::clearColorBuffer({ 0.0f, 0.0f, 0.2f, 1.0f });
-		}
+
+		// Re-bind the display as the render target
 		m_display->bindAsRenderTarget();
 	}
 

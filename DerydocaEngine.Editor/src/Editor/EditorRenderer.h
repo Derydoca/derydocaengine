@@ -5,6 +5,7 @@
 #include "Rendering\RenderTexture.h"
 #include "Scenes\SerializedScene.h"
 #include "Resources\LevelResource.h"
+#include "Rendering\Material.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -20,7 +21,8 @@ namespace DerydocaEngine::Editor
 
 		virtual void init();
 		virtual void renderFrame(const float deltaTime);
-		void renderEditorCamera(std::shared_ptr<Components::Camera> camera, std::shared_ptr<Rendering::RenderTexture> renderTexture);
+		void renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
+		std::shared_ptr<Rendering::Material> getEditorSkyboxMaterial() { return m_editorSkyboxMaterial; };
 
 	private:
 		EditorRenderer();
@@ -33,6 +35,7 @@ namespace DerydocaEngine::Editor
 	private:
 		std::shared_ptr<Scenes::SerializedScene> m_editorComponentsScene;
 		std::shared_ptr<Scenes::SerializedScene> m_editorGuiScene;
+		std::shared_ptr<Rendering::Material> m_editorSkyboxMaterial;
 
 	};
 

@@ -18,6 +18,7 @@
 #include "Rendering\Shader.h"
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Skybox.h"
+#include "Rendering\GraphicsAPI.h"
 
 namespace DerydocaEngine::Components
 {
@@ -215,24 +216,23 @@ namespace DerydocaEngine::Components
 
 	void Camera::clear()
 	{
-		glClear(GL_DEPTH_BUFFER_BIT);
+		// Clear the depth buffer
+		Rendering::GraphicsAPI::clearDepthBuffer();
 
-		switch (m_clearMode)
+		// If the clear mode is set to ClearColor or SkyboxClear but no skybox is defined, clear it with the clear color
+		if ((m_clearMode == ColorClear) || (m_clearMode == SkyboxClear && m_skyboxMaterial == nullptr))
 		{
-		case ColorClear:
-			glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-			glClear(GL_COLOR_BUFFER_BIT);
-			break;
-		case SkyboxClear:
-			assert(m_skyboxMaterial);
-
+			Rendering::GraphicsAPI::clearColorBuffer(m_clearColor);
+		}
+		// Otherwise, if it passed the check before and is set to SkyboxClear then render the skybox
+		else if(m_clearMode == SkyboxClear)
+		{
 			m_skyboxMaterial->bind();
 			m_skyboxMaterial->getShader()->update(m_projection.getRotationProjection(getGameObject()->getTransform()->getQuat()));
 			m_skybox->getMesh()->draw();
-			break;
-		default:
-			break;
 		}
+		// NoClear will fall through and do nothing as we would expect it to do
+
 	}
 
 	void Camera::renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
@@ -326,7 +326,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Camera::renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Rendering::RenderTexture> renderTexture)
+	void Camera::renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH)
 	{
 		//for (auto scene : scenes)
 		//{
@@ -338,26 +338,24 @@ namespace DerydocaEngine::Components
 		//	Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
 		//}
 
-		renderTexture->bindAsRenderTexture();
-		int textureW = renderTexture->getWidth();
-		int textureH = renderTexture->getHeight();
-
 		// Ensure that the aspect ratio matches the render target
 		m_projection.setAspectRatio(textureW, textureH);
 		m_projection.recalculateProjectionMatrix();
 
-		if (m_renderingMode == RenderingMode::Deferred)
-		{
-			glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
-		}
-
+		// Set the viewport to the area defined on this camera
 		glViewport(
 			(GLint)(textureW * m_displayRect->getX()),
 			(GLint)(textureH * m_displayRect->getY()),
 			(GLint)(textureW * m_displayRect->getWidth()),
 			(GLint)(textureH * m_displayRect->getHeight()));
+
+		// Ensure depth testing is on
 		glEnable(GL_DEPTH_TEST);
+
+		// Clear the buffer
 		clear();
+
+		// Render each scene to the active buffer
 		for (auto scene : scenes)
 		{
 			auto root = scene->getRoot();
@@ -368,45 +366,6 @@ namespace DerydocaEngine::Components
 			root->preRender();
 			root->render(m_matrixStack);
 		}
-
-		//// Postprocessing happens here
-		//if (m_postProcessMaterial != nullptr)
-		//{
-		//	glDisable(GL_DEPTH_TEST);
-
-		//	m_postProcessMaterial->bind();
-
-		//	// Load the shader with matricies that will transform the quad to take up the entire buffer
-		//	auto postProcessShader = m_postProcessMaterial->getShader();
-		//	setIdentityMatricies(postProcessShader);
-
-		//	postProcessShader->setInt("Width", renderTexture->getWidth());
-		//	postProcessShader->setInt("Height", renderTexture->getHeight());
-
-		//	// Render the full-buffer quad
-		//	postProcessShader->renderMesh(m_quad, renderTexture);
-		//}
-
-		//// Deferred rendering happens here
-		//if (m_renderingMode == RenderingMode::Deferred)
-		//{
-		//	// Render it to the screen
-		//	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-		//	glClearColor(0, 0, 0, 1);
-		//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//	glDisable(GL_DEPTH_TEST);
-
-		//	// Set the identity matrices so that the quad renders to the entire render area
-		//	setIdentityMatricies(m_deferredRendererCompositor);
-
-		//	// Render the full-buffer quad
-		//	m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
-		//	m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
-		//	m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
-		//	Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
-		//	m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
-		//}
 	}
 
 	void Camera::setDisplay(Rendering::Display * const & display)

@@ -10,24 +10,3 @@ Scene:
   #       Scale: [1, 1, 1]
   #     Components:
   #       - Type: ScreenshotUtil
-
-  - Type: GameObject
-    ID: 0f5e5b4a-69ed-4345-868e-727b9d8b9139
-    Properties:
-      Name: __editorCamera
-      Transform:
-        Position: [0, 0, 1.0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: Camera
-          Properties:
-            fov: 70.0
-            zNear: 0.01
-            zFar: 1000.0
-            renderingMode: 0
-            skybox: 7a45b523-731d-4540-9da3-39632413a276
-            clearMode: 2
-            clearColor: [0.5, 0.0, 0.0]
-        - Type: WasdMover
-        
