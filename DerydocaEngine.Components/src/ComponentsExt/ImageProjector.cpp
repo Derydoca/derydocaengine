@@ -22,7 +22,7 @@ namespace DerydocaEngine::Ext
 
 	void ImageProjector::init()
 	{
-
+		updateShader();
 	}
 
 	void ImageProjector::deserialize(const YAML::Node& compNode)
@@ -87,6 +87,11 @@ namespace DerydocaEngine::Ext
 	}
 
 	void ImageProjector::update(const float deltaTime)
+	{
+		updateShader();
+	}
+
+	void ImageProjector::updateShader()
 	{
 		updateProjectionMatrix();
 

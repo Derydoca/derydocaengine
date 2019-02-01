@@ -20,6 +20,7 @@ namespace DerydocaEngine::Ext
 
 		void inline setFocalPoint(glm::vec3 const& focalPoint) { m_focalPoint = focalPoint; }
 		void inline setUpVector(glm::vec3 const& upVector) { m_upVector = upVector; }
+		void updateShader();
 
 		float& getFov() { return m_fov; }
 	private:
