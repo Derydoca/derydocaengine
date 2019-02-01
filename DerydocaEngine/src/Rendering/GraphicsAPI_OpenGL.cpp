@@ -70,6 +70,16 @@ namespace DerydocaEngine::Rendering
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
+	void GraphicsAPI::setViewport(std::shared_ptr<Components::Camera> camera, int textureW, int textureH)
+	{
+		auto displayRect = camera->getDisplayRect();
+		glViewport(
+			(GLint)(textureW * displayRect.getX()),
+			(GLint)(textureH * displayRect.getY()),
+			(GLint)(textureW * displayRect.getWidth()),
+			(GLint)(textureH * displayRect.getHeight()));
+	}
+
 }
 
 #endif

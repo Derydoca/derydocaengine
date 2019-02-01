@@ -1,5 +1,6 @@
 #pragma once
 #include "Color.h"
+#include "Components\Camera.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -18,6 +19,7 @@ namespace DerydocaEngine::Rendering
 		static void createRenderBuffers(int count, unsigned int* rendererIds);
 		static void clearDepthBuffer();
 		static void clearColorBuffer(Color color);
+		static void setViewport(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
 	};
 
 }

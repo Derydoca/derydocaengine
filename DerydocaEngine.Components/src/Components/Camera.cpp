@@ -33,7 +33,7 @@ namespace DerydocaEngine::Components
 		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
 		m_renderTexture(nullptr),
 		m_display(nullptr),
-		m_displayRect(new Rectangle(0, 0, 1, 1)),
+		m_displayRect(Rectangle(0, 0, 1, 1)),
 		m_quad(nullptr),
 		m_postProcessMaterial(nullptr),
 		m_orthoSize(10.0f),
@@ -75,16 +75,15 @@ namespace DerydocaEngine::Components
 
 	void Camera::preDestroy()
 	{
-		delete m_displayRect;
 		Rendering::CameraManager::getInstance().removeCamera(std::static_pointer_cast<Camera>(shared_from_this()));
 	}
 
 	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
 	{
-		m_displayRect->setX(x);
-		m_displayRect->setY(x);
-		m_displayRect->setWidth(x);
-		m_displayRect->setHeight(x);
+		m_displayRect.setX(x);
+		m_displayRect.setY(x);
+		m_displayRect.setWidth(x);
+		m_displayRect.setHeight(x);
 	}
 
 	void Camera::setRenderingMode(RenderingMode const& mode)
@@ -267,11 +266,7 @@ namespace DerydocaEngine::Components
 			glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
 		}
 
-		glViewport(
-			(GLint)(textureW * m_displayRect->getX()),
-			(GLint)(textureH * m_displayRect->getY()),
-			(GLint)(textureW * m_displayRect->getWidth()),
-			(GLint)(textureH * m_displayRect->getHeight()));
+		Rendering::GraphicsAPI::setViewport(std::static_pointer_cast<Camera>(shared_from_this()), textureW, textureH);
 		glEnable(GL_DEPTH_TEST);
 		clear();
 		for (auto scene : scenes)
@@ -337,17 +332,6 @@ namespace DerydocaEngine::Components
 		//	}
 		//	Rendering::LightManager::getInstance().renderShadowMaps(root->getTransform());
 		//}
-
-		// Ensure that the aspect ratio matches the render target
-		m_projection.setAspectRatio(textureW, textureH);
-		m_projection.recalculateProjectionMatrix();
-
-		// Set the viewport to the area defined on this camera
-		glViewport(
-			(GLint)(textureW * m_displayRect->getX()),
-			(GLint)(textureH * m_displayRect->getY()),
-			(GLint)(textureW * m_displayRect->getWidth()),
-			(GLint)(textureH * m_displayRect->getHeight()));
 
 		// Ensure depth testing is on
 		glEnable(GL_DEPTH_TEST);

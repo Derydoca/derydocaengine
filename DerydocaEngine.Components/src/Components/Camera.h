@@ -109,6 +109,7 @@ namespace DerydocaEngine::Components
 		Rendering::Projection getProjection() const { return m_projection; }
 		Color& getClearColor() { return m_clearColor; }
 		ClearMode getClearMode() { return m_clearMode; }
+		Rectangle& getDisplayRect() { return m_displayRect; }
 	private:
 		std::shared_ptr<Components::Transform> m_transform;
 		Color m_clearColor;
@@ -119,7 +120,7 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
 		Rendering::Display* m_display;
-		Rectangle* m_displayRect;
+		Rectangle m_displayRect;
 		std::shared_ptr<Rendering::Mesh> m_quad;
 		std::shared_ptr<Rendering::Material> m_postProcessMaterial;
 		float m_orthoSize = 10.0f;

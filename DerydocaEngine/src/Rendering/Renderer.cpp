@@ -41,6 +41,7 @@ namespace DerydocaEngine::Rendering
 		auto matrixStack = std::make_shared<Rendering::MatrixStack>();
 		matrixStack->push(projectionMatrix);
 		root->render(matrixStack);
+		matrixStack->pop();
 	}
 
 	Renderer::Renderer(RendererImplementation& implementation) :
