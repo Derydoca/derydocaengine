@@ -194,8 +194,11 @@ namespace DerydocaEngine::Components
 			m_renderTexture = std::make_shared<Rendering::RenderTexture>(width, height);
 
 			auto postProcessingShader = getResourcePointer<Rendering::Shader>(renderTextureNode, "PostProcessShader");
-			m_postProcessMaterial = std::make_shared<Rendering::Material>();
-			m_postProcessMaterial->setShader(postProcessingShader);
+			if (postProcessingShader)
+			{
+				m_postProcessMaterial = std::make_shared<Rendering::Material>();
+				m_postProcessMaterial->setShader(postProcessingShader);
+			}
 		}
 
 		auto renderingModeNode = node["renderingMode"];
