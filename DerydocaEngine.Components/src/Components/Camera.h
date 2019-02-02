@@ -29,6 +29,8 @@ namespace DerydocaEngine::Components
 	public:
 		GENINSTANCE(Camera);
 
+		class NoRegister {};
+
 		/* Types of screen clear methods when rendering a camera. */
 		enum ClearMode {
 			/* Do not clear the screen. */
@@ -47,6 +49,7 @@ namespace DerydocaEngine::Components
 		};
 
 		Camera();
+		Camera(NoRegister);
 		~Camera();
 
 		inline std::shared_ptr<Rendering::RenderTexture> getRenderTexture() const { return m_renderTexture; }
@@ -84,6 +87,7 @@ namespace DerydocaEngine::Components
 		*/
 		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 		void renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH);
+		void renderToAttachedRenderTexture(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 
 		void setDisplay(Rendering::Display* const& display);
 		Rendering::Display* getDisplay() { return m_display; }
@@ -127,6 +131,9 @@ namespace DerydocaEngine::Components
 		unsigned int m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
 		std::shared_ptr<Rendering::Shader> m_deferredRendererCompositor;
 		Rendering::Projection m_projection;
+		bool m_registerWithManager;
+
+		Camera(bool registerWithManager);
 
 		void clear();
 		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);

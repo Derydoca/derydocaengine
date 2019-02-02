@@ -20,7 +20,7 @@ namespace DerydocaEngine::Components
 		m_keyboard(0),
 		m_moveSpeed(5.0f),
 		m_renderTexture(std::make_shared<Rendering::RenderTexture>(200, 200)),
-		m_camera(std::make_shared<Camera>()),
+		m_camera(std::make_shared<Camera>(Camera::NoRegister({}))),
 		m_cameraTransform()
 	{
 		m_mouse = Input::InputManager::getInstance().getMouse();

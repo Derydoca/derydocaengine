@@ -7,6 +7,7 @@
 #include "Editor\EditorGUI.h"
 #include "Rendering\CameraManager.h"
 #include "Rendering\GraphicsAPI.h"
+#include "Rendering\LightManager.h"
 #include "ObjectLibrary.h"
 
 namespace DerydocaEngine::Editor
@@ -48,17 +49,21 @@ namespace DerydocaEngine::Editor
 
 	void EditorRenderer::renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH)
 	{
-		// Render the scene
+		// Build a vector of the scenes to render
+		auto scenes = std::vector<std::shared_ptr<Scenes::Scene>>();
+		scenes.reserve(2);
 		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
-		Rendering::CameraManager::getInstance().setCurrentCamera(camera);
 		if (scene != nullptr)
 		{
-			camera->renderScenesToActiveBuffer({ scene, m_editorComponentsScene }, textureW, textureH);
+			scenes.push_back(scene);
 		}
-		else
-		{
-			camera->renderScenesToActiveBuffer({ m_editorComponentsScene }, textureW, textureH);
-		}
+		scenes.push_back(m_editorComponentsScene);
+
+		// Render the scenes
+		Rendering::CameraManager::getInstance().renderCamerasToAttachedRenderTextures(scenes);
+		Rendering::LightManager::getInstance().renderShadowMaps(scenes, camera->getGameObject()->getTransform());
+		Rendering::CameraManager::getInstance().setCurrentCamera(camera);
+		camera->renderScenesToActiveBuffer(scenes, textureW, textureH);
 
 		// Re-bind the display as the render target
 		m_display->bindAsRenderTarget();

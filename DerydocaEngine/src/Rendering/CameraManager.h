@@ -29,6 +29,7 @@ namespace DerydocaEngine::Rendering
 		void render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 		std::shared_ptr<Components::Camera> getCurrentCamera() { return m_currentCamera; }
 		void setCurrentCamera(const std::shared_ptr<Components::Camera> camera) { m_currentCamera = camera; }
+		void renderCamerasToAttachedRenderTextures(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 
 		void operator=(CameraManager const&) = delete;
 	private:

@@ -19,11 +19,20 @@
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Skybox.h"
 #include "Rendering\GraphicsAPI.h"
+#include "Scenes\SceneManager.h"
 
 namespace DerydocaEngine::Components
 {
 
-	Camera::Camera() :
+	Camera::Camera() : Camera(true)
+	{
+	}
+
+	Camera::Camera(NoRegister) : Camera(false)
+	{
+	}
+
+	Camera::Camera(bool registerWithManager) :
 		m_transform(),
 		m_clearColor(Color(0.0f, 0.0f, 0.2f, 1.0f)),
 		m_skybox(std::make_shared<Rendering::Skybox>()),
@@ -43,7 +52,8 @@ namespace DerydocaEngine::Components
 		m_gbuffNorm(0),
 		m_gbuffColor(0),
 		m_deferredRendererCompositor(0),
-		m_projection()
+		m_projection(),
+		m_registerWithManager(registerWithManager)
 	{
 		setDisplay(Rendering::DisplayManager::getInstance().getDisplay(0));
 		m_projection.setAspectRatio(m_display->getAspectRatio());
@@ -57,7 +67,10 @@ namespace DerydocaEngine::Components
 
 	void Camera::init()
 	{
-		Rendering::CameraManager::getInstance().addCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+		if (m_registerWithManager)
+		{
+			Rendering::CameraManager::getInstance().addCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+		}
 
 		auto quadResource = std::static_pointer_cast<Resources::MeshResource>(ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71"));
 		if (quadResource != nullptr)
@@ -75,7 +88,10 @@ namespace DerydocaEngine::Components
 
 	void Camera::preDestroy()
 	{
-		Rendering::CameraManager::getInstance().removeCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+		if (m_registerWithManager)
+		{
+			Rendering::CameraManager::getInstance().removeCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+		}
 	}
 
 	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
@@ -315,9 +331,6 @@ namespace DerydocaEngine::Components
 
 	void Camera::renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH)
 	{
-		// Render the shadow maps
-		Rendering::LightManager::getInstance().renderShadowMaps(scenes, getGameObject()->getTransform());
-
 		// Set the viewport to what is defined on this camera
 		Rendering::GraphicsAPI::setViewport(std::static_pointer_cast<Camera>(shared_from_this()), textureW, textureH);
 
@@ -344,6 +357,26 @@ namespace DerydocaEngine::Components
 			}
 			root->preRender();
 			root->render(m_matrixStack);
+		}
+	}
+
+	void Camera::renderToAttachedRenderTexture(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
+	{
+		if (m_renderTexture)
+		{
+			// Store the current framebuffer
+			auto prevFramebufferId = Rendering::GraphicsAPI::getCurrentFramebufferID();
+
+			// Bind the render texture as the current framebuffer
+			m_renderTexture->bindAsRenderTexture();
+
+			// Render the scene
+			auto scene = Scenes::SceneManager::getInstance().getActiveScene();
+			Rendering::CameraManager::getInstance().setCurrentCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+			renderScenesToActiveBuffer({ scene }, m_renderTexture->getWidth(), m_renderTexture->getHeight());
+
+			// Rebind the old framebuffer
+			Rendering::GraphicsAPI::bindFramebuffer(prevFramebufferId);
 		}
 	}
 

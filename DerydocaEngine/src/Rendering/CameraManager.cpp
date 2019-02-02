@@ -25,4 +25,12 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
+	void CameraManager::renderCamerasToAttachedRenderTextures(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
+	{
+		for each (auto cam in m_cameras)
+		{
+			cam->renderToAttachedRenderTexture(scenes);
+		}
+	}
+
 }
