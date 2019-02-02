@@ -375,6 +375,24 @@ namespace DerydocaEngine::Components
 			Rendering::CameraManager::getInstance().setCurrentCamera(std::static_pointer_cast<Camera>(shared_from_this()));
 			renderScenesToActiveBuffer({ scene }, m_renderTexture->getWidth(), m_renderTexture->getHeight());
 
+			// Postprocessing happens here
+			if (m_postProcessMaterial != nullptr)
+			{
+				glDisable(GL_DEPTH_TEST);
+
+				m_postProcessMaterial->bind();
+
+				// Load the shader with matricies that will transform the quad to take up the entire buffer
+				auto postProcessShader = m_postProcessMaterial->getShader();
+				setIdentityMatricies(postProcessShader);
+
+				postProcessShader->setInt("Width", m_renderTexture->getWidth());
+				postProcessShader->setInt("Height", m_renderTexture->getHeight());
+
+				// Render the full-buffer quad
+				postProcessShader->renderMesh(m_quad, m_renderTexture);
+			}
+
 			// Rebind the old framebuffer
 			Rendering::GraphicsAPI::bindFramebuffer(prevFramebufferId);
 		}
