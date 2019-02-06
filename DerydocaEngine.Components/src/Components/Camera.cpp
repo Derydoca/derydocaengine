@@ -376,16 +376,8 @@ namespace DerydocaEngine::Components
 			// Store the current framebuffer
 			auto prevFramebufferId = Rendering::GraphicsAPI::getCurrentFramebufferID();
 
-			if (m_renderingMode == RenderingMode::Deferred && m_renderTexture)
-			{
-				Rendering::GraphicsAPI::setViewport(std::static_pointer_cast<Camera>(shared_from_this()), width textureW, textureH);
-				glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
-			}
-			else
-			{
-				// Bind the render texture as the current framebuffer
-				m_renderTexture->bindAsRenderTexture();
-			}
+			// Bind the render texture as the current framebuffer
+			m_renderTexture->bindAsRenderTexture();
 
 			// Render the scene
 			auto scene = Scenes::SceneManager::getInstance().getActiveScene();
