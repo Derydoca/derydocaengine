@@ -21,6 +21,7 @@ namespace DerydocaEngine::Ext
 
 		float sum = 0.0f;
 		float sigma2 = 8.0f;
+		m_weights.resize(5);
 		m_weights[0] = gauss(0, sigma2);
 		sum = m_weights[0];
 		for (int i = 1; i < 5; i++)
@@ -62,13 +63,13 @@ namespace DerydocaEngine::Ext
 
 	void GaussianBlurFilter::updateShader()
 	{
-		auto shader = m_postProcessCamera->getPostProcessShader();
-		if (shader == nullptr)
+		auto material = m_postProcessCamera->getPostProcessMaterial();
+		if (material == nullptr)
 		{
 			return;
 		}
 
-		shader->setFloatArray("Weights", m_weights, 5);
+		material->setFloatArray("Weights", m_weights);
 	}
 
 }

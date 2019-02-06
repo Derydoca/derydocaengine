@@ -39,6 +39,7 @@ namespace DerydocaEngine::Rendering
 		void updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack);
 
 		void setFloat(std::string const& name, float const& val);
+		void setFloatArray(const std::string& name, const std::vector<float>& value);
 		void setFloatArray(std::string const& name, float* const& arrayLocation, unsigned int const& arrayLength);
 		void setColorRGB(std::string const& name, Color const& color);
 		void setColorRGBA(std::string const& name, Color const& color);

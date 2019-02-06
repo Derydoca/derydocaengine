@@ -29,6 +29,7 @@ namespace DerydocaEngine::Ext
 
 		float sum = 0.0f;
 		float sigma2 = 4.0f;
+		m_weights.resize(10);
 		m_weights[0] = gauss(0, sigma2);
 		sum = m_weights[0];
 		for (int i = 1; i < 10; i++)
@@ -87,14 +88,14 @@ namespace DerydocaEngine::Ext
 
 	void BloomFilter::updateShader()
 	{
-		auto shader = m_postProcessCamera->getPostProcessShader();
-		if (shader == nullptr)
+		auto material = m_postProcessCamera->getPostProcessMaterial();
+		if (material == nullptr)
 		{
 			return;
 		}
 
-		shader->setFloatArray("Weights", m_weights, 10);
-		shader->setFloat("LumThresh", m_lumThresh);
+		material->setFloatArray("Weights", m_weights);
+		material->setFloat("LumThresh", m_lumThresh);
 	}
 
 }

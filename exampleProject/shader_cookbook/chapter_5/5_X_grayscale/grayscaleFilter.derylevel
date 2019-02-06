@@ -1,6 +1,6 @@
 Scene:
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31ebaaa
+    ID: 82b80ef9-961f-47d6-97cb-92e895f546f8
     Properties:
       Name: Render Texture Camera
       Transform:
@@ -8,7 +8,7 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
-        - ID: 77fdefa8-28de-11e9-b210-d663bd873d93
+        - ID: aaaf98cc-9421-4226-8a26-680ad31ebaaa
           Type: Camera
           Properties:
             fov: 70.0
@@ -17,12 +17,10 @@ Scene:
             RenderTexture:
               Width: 512
               Height: 512
-              PostProcessShader: 11483d64-c0a1-4be6-ab3b-4973d237bbc5
-        - Type: GammaCorrectionFilter
-          Properties:
-            gamma: 2.1
+              PostProcessShader: 299215c5-91e2-4193-94a5-996fed731770
+
   - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    ID: 681c5688-401b-4691-ae6d-87ddac77f027
     Properties:
       Name: Squirrel
       Transform:
@@ -37,23 +35,11 @@ Scene:
         - Type: Rotator
           Properties:
             rotationSpeed: 30.0
-  - Type: GameObject
-    ID: a1ff98cc-9421-4226-8a26-680ab31eb6ba
-    Properties:
-      Name: Bright Cube
-      Transform:
-        Position: [-3, 0, -5]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
-            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
-      Name: Cube
+      Name: RenderTexture Display
       Transform:
         Position: [0, 0, -3]
         Rotation: [0, 0, 0, 1]
@@ -61,13 +47,13 @@ Scene:
       Components:
         - Type: MeshRenderer
           Properties:
-            RenderTextureSource: 77fdefa8-28de-11e9-b210-d663bd873d93
+            RenderTextureSource: aaaf98cc-9421-4226-8a26-680ad31ebaaa
             RenderTextureName: RenderTex
-            Material: 42bddab8-9ff6-472f-aead-a1d7c085184a
+            Material: 88bf10c9-bc91-4d03-b5a5-4aaaf1dfa4f6
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
-        - Type: MaterialRefresher
+            
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    ID: c27cb73c-0530-4fa2-b911-d7c59225b675
     Properties:
       Name: Point Light 1
       Transform:
@@ -83,8 +69,9 @@ Scene:
           Properties:
             Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
             Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+
   - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
+    ID: cac7759f-5583-4842-b77c-59886ec4d02c
     Properties:
       Name: Point Light 2
       Transform:

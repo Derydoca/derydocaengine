@@ -53,6 +53,11 @@ namespace DerydocaEngine::Rendering
 			m_shader->setFloat(x.first, x.second);
 		}
 
+		for (auto const& x : m_floatArrayValues)
+		{
+			m_shader->setFloatArray(x.first, x.second);
+		}
+
 		for (auto const& x : m_intValues)
 		{
 			m_shader->setInt(x.first, x.second);
@@ -94,6 +99,7 @@ namespace DerydocaEngine::Rendering
 	{
 		m_boolValues = other->m_boolValues;
 		m_floatValues = other->m_floatValues;
+		m_floatArrayValues = other->m_floatArrayValues;
 		m_intValues = other->m_intValues;
 		m_mat3Values = other->m_mat3Values;
 		m_mat4Values = other->m_mat4Values;
@@ -169,6 +175,11 @@ namespace DerydocaEngine::Rendering
 		m_floatValues[name] = value;
 	}
 
+	void Material::setFloatArray(const std::string & name, std::vector<float> value)
+	{
+		m_floatArrayValues[name] = value;
+	}
+
 	void Material::setInt(const std::string& name, int const& value)
 	{
 		m_intValues[name] = value;
@@ -232,6 +243,11 @@ namespace DerydocaEngine::Rendering
 	bool Material::floatExists(const std::string& name)
 	{
 		return m_floatValues.find(name) != m_floatValues.end();
+	}
+
+	bool Material::floatArrayExists(const std::string & name)
+	{
+		return m_floatArrayValues.find(name) != m_floatArrayValues.end();
 	}
 
 	bool Material::intExists(const std::string& name)
@@ -324,6 +340,19 @@ namespace DerydocaEngine::Rendering
 		if (it == m_floatValues.end())
 		{
 			return 0.0f;
+		}
+		else
+		{
+			return (*it).second;
+		}
+	}
+
+	std::vector<float> Material::getFloatArray(const std::string & name)
+	{
+		auto it = m_floatArrayValues.find(name);
+		if (it == m_floatArrayValues.end())
+		{
+			return std::vector<float>();
 		}
 		else
 		{

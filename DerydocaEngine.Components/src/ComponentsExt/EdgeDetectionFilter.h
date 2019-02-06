@@ -12,8 +12,8 @@ namespace DerydocaEngine::Ext
 	public:
 		GENINSTANCE(EdgeDetectionFilter);
 
-		EdgeDetectionFilter() {}
-		~EdgeDetectionFilter() {}
+		EdgeDetectionFilter();
+		~EdgeDetectionFilter();
 
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);

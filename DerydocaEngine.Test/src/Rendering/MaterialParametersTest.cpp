@@ -207,6 +207,50 @@ TEST(Material, FloatIsReturned_After_BeingSet)
 	EXPECT_EQ(value, material->getFloat(propertyName));
 }
 
+TEST_F(MaterialCopyTest, FloatArrayIsCopied) {
+	auto value = std::vector<float>({ 5.0f, 10.0f, 25.0f });
+	sourceMaterial->setFloatArray(paramName, value);
+
+	copy();
+
+	EXPECT_EQ(value, newMaterial->getFloatArray(paramName));
+}
+
+TEST(Material, FloatArrayDefaultIsReturned_When_NoneIsSet)
+{
+	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
+
+	std::string propertyName = "MyProperty";
+	EXPECT_EQ(std::vector<float>(), material->getFloatArray(propertyName));
+}
+
+TEST(Material, FloatArrayDoesNotExist_When_NoneIsSet)
+{
+	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
+
+	std::string propertyName = "MyProperty";
+	EXPECT_FALSE(material->floatArrayExists(propertyName));
+}
+
+TEST(Material, FloatArrayExists_After_BeingSet)
+{
+	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
+
+	std::string propertyName = "MyProperty";
+	material->setFloatArray(propertyName, { 5.0f, 10.0f, 25.0f });
+	EXPECT_TRUE(material->floatArrayExists(propertyName));
+}
+
+TEST(Material, FloatArrayIsReturned_After_BeingSet)
+{
+	auto material = std::make_shared<DerydocaEngine::Rendering::Material>();
+
+	std::string propertyName = "MyProperty";
+	auto value = std::vector<float>({ 5.0f, 10.0f, 25.0f });
+	material->setFloatArray(propertyName, value);
+	EXPECT_EQ(value, material->getFloatArray(propertyName));
+}
+
 TEST_F(MaterialCopyTest, IntIsCopied) {
 	auto value = 25;
 	sourceMaterial->setInt(paramName, value);

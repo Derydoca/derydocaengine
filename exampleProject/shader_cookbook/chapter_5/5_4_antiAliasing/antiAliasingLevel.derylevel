@@ -8,7 +8,7 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
-        - ID: aaaf98cc-9421-4226-8a26-680ad31ebaaa
+        - ID: 6eb625e2-299b-11e9-b210-d663bd873d93
           Type: Camera
           Properties:
             fov: 70.0
@@ -61,7 +61,7 @@ Scene:
       Components:
         - Type: MeshRenderer
           Properties:
-            RenderTextureSource: aaaf98cc-9421-4226-8a26-680ad31ebaaa
+            RenderTextureSource: 6eb625e2-299b-11e9-b210-d663bd873d93
             RenderTextureName: RenderTex
             Material: 42bddab8-9ff6-472f-aead-a1d7c085184a
             Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac

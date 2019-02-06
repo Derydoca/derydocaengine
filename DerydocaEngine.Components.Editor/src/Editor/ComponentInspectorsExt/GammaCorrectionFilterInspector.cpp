@@ -5,5 +5,5 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::GammaCorrectionFilt
 {
 	auto gammaCorrectionFilter = std::static_pointer_cast<Ext::GammaCorrectionFilter>(object);
 
-	ImGui::DragFloat("Gamma", &gammaCorrectionFilter->getGamma(), 0.0f, 3.0f);
+	ImGui::DragFloat("Gamma", &gammaCorrectionFilter->getGamma(), 0.01f, 0.0f, 10.0f);
 }

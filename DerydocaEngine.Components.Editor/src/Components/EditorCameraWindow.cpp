@@ -171,6 +171,12 @@ namespace DerydocaEngine::Components
 		m_displayWidth = windowSize.x - propertiesPanelWidth;
 		m_displayHeight = windowSize.y - itemSize.y * 3.1;
 
+		if (m_displayWidth <= 0 || m_displayHeight <= 0)
+		{
+			m_displayWidth = 1;
+			m_displayHeight = 1;
+		}
+
 		// Show button to show/hide the properties panel
 		if (ImGui::Button(m_showPropertiesPanel ? "Hide Properties" : "Show Properties"))
 		{

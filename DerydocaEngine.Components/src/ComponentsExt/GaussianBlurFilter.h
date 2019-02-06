@@ -18,7 +18,7 @@ namespace DerydocaEngine::Ext
 		virtual void update(const float deltaTime);
 	private:
 		std::shared_ptr<Components::Camera> m_postProcessCamera;
-		float m_weights[5];
+		std::vector<float> m_weights;
 
 		float gauss(float const& x, float const& sigma2);
 		void updateShader();

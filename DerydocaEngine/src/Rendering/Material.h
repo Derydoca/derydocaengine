@@ -37,6 +37,7 @@ namespace DerydocaEngine::Rendering
 		void setColorRGB(const std::string& name, Color const& value);
 		void setColorRGBA(const std::string& name, Color const& value);
 		void setFloat(const std::string& name, float const& value);
+		void setFloatArray(const std::string& name, std::vector<float> value);
 		void setInt(const std::string& name, int const& value);
 		void setMat3(const std::string& name, glm::mat3 const& value);
 		void setMat4(const std::string& name, glm::mat4 const& value);
@@ -51,6 +52,7 @@ namespace DerydocaEngine::Rendering
 		bool colorRGBExists(const std::string& name);
 		bool colorRGBAExists(const std::string& name);
 		bool floatExists(const std::string& name);
+		bool floatArrayExists(const std::string& name);
 		bool intExists(const std::string& name);
 		bool mat3Exists(const std::string& name);
 		bool mat4Exists(const std::string& name);
@@ -65,6 +67,7 @@ namespace DerydocaEngine::Rendering
 		Color getColorRGB(const std::string& name);
 		Color getColorRGBA(const std::string& name);
 		float getFloat(const std::string& name);
+		std::vector<float> getFloatArray(const std::string& name);
 		int getInt(const std::string& name);
 		glm::mat3 getMat3(const std::string& name);
 		glm::mat4 getMat4(const std::string& name);
@@ -83,6 +86,7 @@ namespace DerydocaEngine::Rendering
 		std::map<std::string, int> m_intValues;
 		std::map<std::string, std::shared_ptr<Texture>> m_textures;
 		std::map<std::string, float> m_floatValues;
+		std::map<std::string, std::vector<float>> m_floatArrayValues;
 		std::map<std::string, glm::vec3> m_vec3Values;
 		std::map<std::string, glm::vec4> m_vec4Values;
 		std::map<std::string, glm::mat3> m_mat3Values;

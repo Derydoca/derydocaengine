@@ -22,7 +22,7 @@ namespace DerydocaEngine::Ext
 	private:
 		float m_lumThresh;
 		std::shared_ptr<Components::Camera> m_postProcessCamera;
-		float m_weights[10];
+		std::vector<float> m_weights;
 		std::shared_ptr<Rendering::RenderTexture> m_blurTex;
 		std::shared_ptr<Rendering::RenderTexture> m_blurTex2;
 

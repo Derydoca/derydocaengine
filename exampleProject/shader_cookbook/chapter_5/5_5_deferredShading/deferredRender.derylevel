@@ -8,7 +8,7 @@ Scene:
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
-        - ID: aaaf98cc-9421-4226-8a26-680ad31ebaaa
+        - ID: 77fdf4bc-28de-11e9-b210-d663bd873d93
           Type: Camera
           Properties:
             fov: 70.0

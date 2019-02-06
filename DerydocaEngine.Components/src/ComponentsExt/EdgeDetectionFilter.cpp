@@ -5,9 +5,20 @@
 #include "Components\MeshRenderer.h"
 #include "Rendering\Shader.h"
 #include <iostream>
+#include "Rendering\Material.h"
 
 namespace DerydocaEngine::Ext
 {
+
+	EdgeDetectionFilter::EdgeDetectionFilter() :
+		m_edgeThreshold(0.5f),
+		m_postProcessCamera()
+	{
+	}
+
+	EdgeDetectionFilter::~EdgeDetectionFilter()
+	{
+	}
 
 	void EdgeDetectionFilter::init()
 	{
@@ -38,13 +49,13 @@ namespace DerydocaEngine::Ext
 
 	void EdgeDetectionFilter::updateShader()
 	{
-		auto shader = m_postProcessCamera->getPostProcessShader();
-		if (shader == nullptr)
+		auto material = m_postProcessCamera->getPostProcessMaterial();
+		if (material == nullptr)
 		{
 			return;
 		}
 
-		shader->setFloat("EdgeThreshold", m_edgeThreshold);
+		material->setFloat("EdgeThreshold", m_edgeThreshold);
 	}
 
 }

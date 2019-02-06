@@ -45,7 +45,8 @@ namespace DerydocaEngine::Rendering
 		GLenum colorAttachments[] = { GL_COLOR_ATTACHMENT0 };
 		glDrawBuffers(1, colorAttachments);
 
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		auto framebufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+		if (framebufferStatus != GL_FRAMEBUFFER_COMPLETE) {
 			printf("UNABLE TO CREATE RENDER TEXTURE!");
 		}
 	}

@@ -262,6 +262,16 @@ namespace DerydocaEngine::Rendering
 		glUniform1f(getUniformName(name), val);
 	}
 
+	void Shader::setFloatArray(const std::string& name, const std::vector<float>& value)
+	{
+		for (size_t i = 0; i < value.size(); i++)
+		{
+			std::string uniformStringName = name + "[" + std::to_string(i) + "]";
+			int uniformName = getUniformName(uniformStringName);
+			glUniform1f(uniformName, value[i]);
+		}
+	}
+
 	void Shader::setFloatArray(std::string const& name, float * const& arrayLocation, unsigned int const& arrayLength)
 	{
 		for (unsigned int i = 0; i < arrayLength; i++)
