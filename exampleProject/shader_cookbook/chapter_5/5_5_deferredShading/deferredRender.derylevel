@@ -14,16 +14,18 @@ Scene:
             fov: 70.0
             zNear: 0.01
             zFar: 1000.0
+            renderingMode: 1 # Deferred rendering
             RenderTexture:
               Width: 512
               Height: 512
               PostProcessShader: 11483d64-c0a1-4be6-ab3b-4973d237bbc5
+
   - Type: GameObject
     ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
     Properties:
       Name: Squirrel
       Transform:
-        Position: [0, 0, -2]
+        Position: [-3, 0.4, -2]
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
@@ -34,6 +36,23 @@ Scene:
         - Type: Rotator
           Properties:
             rotationSpeed: 30.0
+
+  - Type: GameObject
+    ID: a1ff98cc-9421-4226-8a26-680ad31eb6aa
+    Properties:
+      Name: Cube
+      Transform:
+        Position: [0, 0, -3]
+        Rotation: [0, 0, 0, 1]
+        Scale: [1, 1, 1]
+      Components:
+        - Type: MeshRenderer
+          Properties:
+            RenderTextureSource: 77fdf4bc-28de-11e9-b210-d663bd873d93
+            RenderTextureName: RenderTex
+            Material: 42bddab8-9ff6-472f-aead-a1d7c085184a
+            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
+
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
     Properties:
@@ -51,6 +70,7 @@ Scene:
           Properties:
             Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
             Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+
   - Type: GameObject
     ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
     Properties:
