@@ -93,6 +93,7 @@ namespace DerydocaEngine::Ext
 		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);
 		m_material->setFloat("Size2", m_size2);
+		m_material->setTexture("SpriteTex", m_texture);
 	}
 
 	void ParticleSystem::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
