@@ -43,6 +43,8 @@ namespace DerydocaEngine::Ext
 		GLint maxVerts;
 		glGetIntegerv(GL_MAX_PATCH_VERTICES, &maxVerts);
 		std::cout << "Max patch vertices: " << maxVerts << "\n";
+
+		updateMaterial();
 	}
 
 	void TessellatingQuad::deserialize(const YAML::Node& compNode)
@@ -83,6 +85,11 @@ namespace DerydocaEngine::Ext
 	}
 
 	void TessellatingQuad::update(const float deltaTime)
+	{
+		updateMaterial();
+	}
+
+	void TessellatingQuad::updateMaterial()
 	{
 		m_material->setInt("Inner", m_inner);
 		m_material->setInt("Outer", m_outer);

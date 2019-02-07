@@ -18,6 +18,8 @@ namespace DerydocaEngine::Ext
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		virtual void update(const float deltaTime);
 
+		void updateMaterial();
+
 		int& getInner() { return m_inner; }
 		int& getOuter() { return m_outer; }
 	private:
