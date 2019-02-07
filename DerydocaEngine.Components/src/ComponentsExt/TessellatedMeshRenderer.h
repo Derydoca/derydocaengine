@@ -25,6 +25,8 @@ namespace DerydocaEngine::Ext
 		);
 		virtual void update(const float deltaTime);
 
+		void updateMaterial();
+
 		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
 		bool& getUseDynamicTessellation() { return m_useDynamicTessellation; }
 		int& getTessellationLevel() { return m_tessellationLevel; }

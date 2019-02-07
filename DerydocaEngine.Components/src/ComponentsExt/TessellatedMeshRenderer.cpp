@@ -42,6 +42,8 @@ namespace DerydocaEngine::Ext
 		glBindVertexArray(0);
 
 		glPatchParameteri(GL_PATCH_VERTICES, 16);
+
+		updateMaterial();
 	}
 
 	void TessellatedMeshRenderer::deserialize(const YAML::Node& compNode)
@@ -117,6 +119,11 @@ namespace DerydocaEngine::Ext
 	}
 
 	void TessellatedMeshRenderer::update(const float deltaTime)
+	{
+		updateMaterial();
+	}
+
+	void TessellatedMeshRenderer::updateMaterial()
 	{
 		m_material->setInt("UseDynamicTessellation", m_useDynamicTessellation ? 1 : 0);
 		m_material->setInt("TessLevel", m_tessellationLevel);
