@@ -14,6 +14,8 @@ namespace DerydocaEngine::Ext
 			std::cout << "No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.\n";
 			return;
 		}
+
+		updateMaterial();
 	}
 
 	void NightVisionFilter::deserialize(const YAML::Node& compNode)
@@ -26,6 +28,11 @@ namespace DerydocaEngine::Ext
 	}
 
 	void NightVisionFilter::update(const float deltaTime)
+	{
+		updateMaterial();
+	}
+
+	void NightVisionFilter::updateMaterial()
 	{
 		m_postProcessCamera->getPostProcessMaterial()->setFloat("Radius", m_radius);
 	}

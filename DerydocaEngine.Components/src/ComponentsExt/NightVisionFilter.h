@@ -17,6 +17,8 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
+		void updateMaterial();
+
 		float& getRadius() { return m_radius; }
 	private:
 		float m_radius = 100.0f;
