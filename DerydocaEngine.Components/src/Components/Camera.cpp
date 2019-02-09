@@ -37,20 +37,15 @@ namespace DerydocaEngine::Components
 		m_clearColor(Color(0.0f, 0.0f, 0.2f, 1.0f)),
 		m_skybox(std::make_shared<Rendering::Skybox>()),
 		m_clearMode(Camera::NoClear),
-		m_renderingMode(Camera::RenderingMode::Forward),
+		m_renderingMode(Rendering::RenderingMode::Forward),
 		m_skyboxMaterial(nullptr),
 		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
 		m_renderTexture(nullptr),
+		m_deferredRenderBuffer(nullptr),
 		m_display(nullptr),
 		m_displayRect(Rectangle(0, 0, 1, 1)),
 		m_quad(nullptr),
 		m_postProcessMaterial(nullptr),
-		m_orthoSize(10.0f),
-		m_deferredFBO(0),
-		m_gbuffDepth(0),
-		m_gbuffPos(0),
-		m_gbuffNorm(0),
-		m_gbuffColor(0),
 		m_deferredRendererCompositor(0),
 		m_projection(),
 		m_registerWithManager(registerWithManager)
@@ -84,6 +79,8 @@ namespace DerydocaEngine::Components
 		{
 			m_postProcessMaterial->setTexture("RenderTex", m_renderTexture);
 		}
+
+
 	}
 
 	void Camera::preDestroy()
@@ -102,49 +99,13 @@ namespace DerydocaEngine::Components
 		m_displayRect.setHeight(x);
 	}
 
-	void Camera::setRenderingMode(RenderingMode const& mode)
+	void Camera::setRenderingMode(Rendering::RenderingMode const& mode)
 	{
 		m_renderingMode = mode;
 
-		if (m_renderingMode == RenderingMode::Deferred)
+		if (m_renderingMode == Rendering::RenderingMode::Deferred)
 		{
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			////          THIS NEEDS TO BE IMPROVED FOR DEFERRED RENDERING TO WORK PROPERLY          ////
-			/////////////////////////////////////////////////////////////////////////////////////////////
-			/////////////////////////////////////////////////////////////////////////////////////////////
-
-			// initialize g-buffer
-
-			int width = m_display->getWidth();
-			int height = m_display->getHeight();
-
-			glGenFramebuffers(1, &m_deferredFBO);
-			glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
-
-			// Depth buffer
-			glGenRenderbuffers(1, &m_gbuffDepth);
-			glBindRenderbuffer(GL_RENDERBUFFER, m_gbuffDepth);
-			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
-
-			// Create the textures
-			createGBufTex(GL_TEXTURE0, GL_RGB32F, m_gbuffPos, width, height);
-			createGBufTex(GL_TEXTURE1, GL_RGB32F, m_gbuffNorm, width, height);
-			createGBufTex(GL_TEXTURE2, GL_RGB8, m_gbuffColor, width, height);
-
-			// Attach images to the framebuffer
-			glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_gbuffDepth);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_gbuffPos, 0);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, m_gbuffNorm, 0);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, m_gbuffColor, 0);
-
-			GLenum drawBuffers[] = { GL_NONE, GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
-			glDrawBuffers(4, drawBuffers);
-
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-			// TODO: Find a better way to get the shader so the ID is not hard-coded
-			m_deferredRendererCompositor = Rendering::ShaderLibrary::getInstance().find(".\\engineResources\\shaders\\deferredRenderCompositorShader");
+			// ???
 		}
 		else
 		{
@@ -175,12 +136,6 @@ namespace DerydocaEngine::Components
 		m_projection.recalculateProjectionMatrix();
 	}
 
-	void Camera::setOrthoSize(float const& size)
-	{
-		m_orthoSize = size;
-		m_projection.recalculateProjectionMatrix();
-	}
-
 	void Camera::deserialize(const YAML::Node& node)
 	{
 		float fov = node["fov"].as<float>();
@@ -197,7 +152,8 @@ namespace DerydocaEngine::Components
 		{
 			int width = renderTextureNode["Width"].as<int>();
 			int height = renderTextureNode["Height"].as<int>();
-			m_renderTexture = std::make_shared<Rendering::RenderTexture>(width, height);
+			m_renderTexture = std::make_shared<Rendering::RenderTexture>();
+			m_renderTexture->initializeTexture(width, height);
 
 			auto postProcessingShader = getResourcePointer<Rendering::Shader>(renderTextureNode, "PostProcessShader");
 			if (postProcessingShader)
@@ -210,7 +166,7 @@ namespace DerydocaEngine::Components
 		auto renderingModeNode = node["renderingMode"];
 		if (renderingModeNode)
 		{
-			setRenderingMode(static_cast<RenderingMode>(renderingModeNode.as<int>()));
+			setRenderingMode(static_cast<Rendering::RenderingMode>(renderingModeNode.as<int>()));
 		}
 
 		auto clearModeNode = node["clearMode"];
@@ -278,9 +234,9 @@ namespace DerydocaEngine::Components
 			textureH = m_display->getHeight();
 		}
 
-		if (m_renderingMode == RenderingMode::Deferred)
+		if (m_renderingMode == Rendering::RenderingMode::Deferred)
 		{
-			glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
+			//glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
 		}
 
 		Rendering::GraphicsAPI::setViewport(std::static_pointer_cast<Camera>(shared_from_this()), textureW, textureH);
@@ -317,7 +273,7 @@ namespace DerydocaEngine::Components
 		}
 
 		// Deferred rendering happens here
-		if (m_renderingMode == RenderingMode::Deferred)
+		if (m_renderingMode == Rendering::RenderingMode::Deferred)
 		{
 			// Render it to the screen
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -330,9 +286,10 @@ namespace DerydocaEngine::Components
 			setIdentityMatricies(m_deferredRendererCompositor);
 
 			// Render the full-buffer quad
-			m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
-			m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
-			m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
+			//m_deferredRenderBuffer->bindBuffersToShader(m_deferredRendererCompositor);
+			//m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
+			//m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
+			//m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
 			Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
 			m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
 		}
@@ -385,7 +342,7 @@ namespace DerydocaEngine::Components
 			renderScenesToActiveBuffer({ scene }, m_renderTexture->getWidth(), m_renderTexture->getHeight());
 
 			// Deferred rendering happens here
-			if (m_renderingMode == RenderingMode::Deferred && m_renderTexture)
+			if (m_renderingMode == Rendering::RenderingMode::Deferred && m_renderTexture)
 			{
 				// Render it to the screen
 				m_renderTexture->bindAsRenderTexture();
@@ -398,9 +355,10 @@ namespace DerydocaEngine::Components
 				setIdentityMatricies(m_deferredRendererCompositor);
 
 				// Render the full-buffer quad
-				m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
-				m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
-				m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
+				//m_deferredRenderBuffer->bindBuffersToShader(m_deferredRendererCompositor);
+				//m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
+				//m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
+				//m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
 				Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
 				m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
 			}

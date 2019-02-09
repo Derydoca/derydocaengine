@@ -47,8 +47,10 @@ namespace DerydocaEngine::Ext
 		auto cameraRenderTexture = m_postProcessCamera->getRenderTexture();
 		int width = cameraRenderTexture->getWidth();
 		int height = cameraRenderTexture->getHeight();
-		m_blurTex = std::make_shared<Rendering::RenderTexture>(width, height);
-		m_blurTex2 = std::make_shared<Rendering::RenderTexture>(width, height);
+		m_blurTex = std::make_shared<Rendering::RenderTexture>();
+		m_blurTex->initializeTexture(width, height);
+		m_blurTex2 = std::make_shared<Rendering::RenderTexture>();
+		m_blurTex2->initializeTexture(width, height);
 
 		auto shader = m_postProcessCamera->getPostProcessShader();
 		if (shader != nullptr)

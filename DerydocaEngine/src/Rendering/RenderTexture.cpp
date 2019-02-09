@@ -8,14 +8,17 @@
 namespace DerydocaEngine::Rendering
 {
 
-	RenderTexture::RenderTexture()
+	RenderTexture::RenderTexture() :
+		RenderTexture(RenderingMode::Forward)
 	{
-
 	}
 
-	RenderTexture::RenderTexture(int const& width, int const& height)
+	RenderTexture::RenderTexture(RenderingMode renderingMode) :
+		m_renderingMode(renderingMode),
+		m_framebuffer(0),
+		m_depthbuffer(0)
 	{
-		initializeTexture(width, height);
+		
 	}
 
 	RenderTexture::~RenderTexture()
@@ -32,6 +35,7 @@ namespace DerydocaEngine::Rendering
 
 		GraphicsAPI::createFramebuffers(1, &m_framebuffer);
 		GraphicsAPI::bindFramebuffer(m_framebuffer);
+
 		GraphicsAPI::createTexture2D(&m_rendererId, m_width, m_height);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);

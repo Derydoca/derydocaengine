@@ -4,8 +4,10 @@
 #include "Color.h"
 #include "Components\GameComponent.h"
 #include "GameObject.h"
+#include "Rendering\DeferredRenderTexture.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Projection.h"
+#include "Rendering\RenderingMode.h"
 #include "Scenes\Scene.h"
 
 struct Rectangle;
@@ -41,11 +43,6 @@ namespace DerydocaEngine::Components
 
 			/* Clears the screen with a skybox. */
 			SkyboxClear
-		};
-
-		enum RenderingMode {
-			Forward = 0,
-			Deferred = 1
 		};
 
 		Camera();
@@ -95,7 +92,7 @@ namespace DerydocaEngine::Components
 		float getDisplayHeight();
 		void setRenderTexture(std::shared_ptr<Rendering::RenderTexture> renderTexture) { m_renderTexture = renderTexture; }
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
-		void setRenderingMode(RenderingMode const& mode);
+		void setRenderingMode(Rendering::RenderingMode const& mode);
 		void resize(int const& width, int const& height);
 		virtual void init();
 		virtual void preDestroy();
@@ -103,8 +100,6 @@ namespace DerydocaEngine::Components
 		void createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int & texid, int const& width, int const& height);
 
 		void setProjectionMode(Rendering::ProjectionMode const& mode);
-		void setOrthoSize(float const& size);
-		float getOrthoSize(float const& size) { return m_orthoSize; }
 		void deserialize(const YAML::Node& node);
 		std::shared_ptr<Rendering::Shader> getPostProcessShader() const;
 		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
@@ -114,29 +109,28 @@ namespace DerydocaEngine::Components
 		ClearMode getClearMode() { return m_clearMode; }
 		Rectangle& getDisplayRect() { return m_displayRect; }
 	private:
-		std::shared_ptr<Components::Transform> m_transform;
-		Color m_clearColor;
-		std::shared_ptr<Rendering::Skybox> m_skybox;
-		ClearMode m_clearMode;
-		RenderingMode m_renderingMode;
-		std::shared_ptr<Rendering::Material> m_skyboxMaterial;
-		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
-		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
-		Rendering::Display* m_display;
-		Rectangle m_displayRect;
-		std::shared_ptr<Rendering::Mesh> m_quad;
-		std::shared_ptr<Rendering::Material> m_postProcessMaterial;
-		float m_orthoSize = 10.0f;
-		unsigned int m_deferredFBO;
-		unsigned int m_gbuffDepth, m_gbuffPos, m_gbuffNorm, m_gbuffColor;
-		std::shared_ptr<Rendering::Shader> m_deferredRendererCompositor;
-		Rendering::Projection m_projection;
-		bool m_registerWithManager;
-
 		Camera(bool registerWithManager);
 
 		void clear();
 		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);
+
+	private:
+		std::shared_ptr<Components::Transform> m_transform;
+		Color m_clearColor;
+		std::shared_ptr<Rendering::Skybox> m_skybox;
+		ClearMode m_clearMode;
+		Rendering::RenderingMode m_renderingMode;
+		std::shared_ptr<Rendering::Material> m_skyboxMaterial;
+		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
+		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
+		std::shared_ptr<Rendering::DeferredRenderTexture> m_deferredRenderBuffer;
+		Rendering::Display* m_display;
+		Rectangle m_displayRect;
+		std::shared_ptr<Rendering::Mesh> m_quad;
+		std::shared_ptr<Rendering::Material> m_postProcessMaterial;
+		std::shared_ptr<Rendering::Shader> m_deferredRendererCompositor;
+		Rendering::Projection m_projection;
+		bool m_registerWithManager;
 	};
 
 }
