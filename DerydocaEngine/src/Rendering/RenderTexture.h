@@ -17,11 +17,14 @@ namespace DerydocaEngine::Rendering
 		float getAspectRatio();
 		void initializeTexture(int const& width, int const& height);
 	private:
-		void deleteVbo();
+		void createRenderbuffer(int textureUnit, GLenum format, unsigned int & textureId);
+		void createRenderbuffers_Forward();
+		void createRenderbuffers_Deferred();
+		void destroyGraphicsApiObjects();
 	private:
 		RenderingMode m_renderingMode;
 		unsigned int m_framebuffer;
-		unsigned int m_depthbuffer;
+		std::vector<unsigned int> m_renderBufferIds;
 	};
 
 }
