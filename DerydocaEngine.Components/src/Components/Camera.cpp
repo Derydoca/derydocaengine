@@ -37,11 +37,10 @@ namespace DerydocaEngine::Components
 		m_clearColor(Color(0.0f, 0.0f, 0.2f, 1.0f)),
 		m_skybox(std::make_shared<Rendering::Skybox>()),
 		m_clearMode(Camera::NoClear),
-		m_renderingMode(Rendering::RenderingMode::Forward),
 		m_skyboxMaterial(nullptr),
 		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
 		m_renderTexture(nullptr),
-		m_deferredRenderBuffer(nullptr),
+		m_renderTextureDeferred(nullptr),
 		m_display(nullptr),
 		m_displayRect(Rectangle(0, 0, 1, 1)),
 		m_quad(nullptr),
@@ -99,20 +98,6 @@ namespace DerydocaEngine::Components
 		m_displayRect.setHeight(x);
 	}
 
-	void Camera::setRenderingMode(Rendering::RenderingMode const& mode)
-	{
-		m_renderingMode = mode;
-
-		if (m_renderingMode == Rendering::RenderingMode::Deferred)
-		{
-			// ???
-		}
-		else
-		{
-			// destroy g-buffer
-		}
-	}
-
 	void Camera::resize(int const& width, int const& height)
 	{
 		m_projection.setAspectRatio(width, height);
@@ -147,13 +132,26 @@ namespace DerydocaEngine::Components
 		m_projection.setZFar(zFar);
 		m_projection.recalculateProjectionMatrix();
 
+		auto renderingModeNode = node["renderingMode"];
+		Rendering::RenderingMode renderingMode = Rendering::RenderingMode::Forward;
+		if (renderingModeNode)
+		{
+			renderingMode = static_cast<Rendering::RenderingMode>(renderingModeNode.as<int>());
+		}
+
 		auto renderTextureNode = node["RenderTexture"];
 		if (renderTextureNode)
 		{
 			int width = renderTextureNode["Width"].as<int>();
 			int height = renderTextureNode["Height"].as<int>();
-			m_renderTexture = std::make_shared<Rendering::RenderTexture>();
+			m_renderTexture = std::make_shared<Rendering::RenderTexture>(Rendering::RenderingMode::Forward);
 			m_renderTexture->initializeTexture(width, height);
+
+			if (renderingMode == Rendering::RenderingMode::Deferred)
+			{
+				m_renderTextureDeferred = std::make_shared<Rendering::RenderTexture>(Rendering::RenderingMode::Deferred);
+				m_renderTextureDeferred->initializeTexture(width, height);
+			}
 
 			auto postProcessingShader = getResourcePointer<Rendering::Shader>(renderTextureNode, "PostProcessShader");
 			if (postProcessingShader)
@@ -161,12 +159,6 @@ namespace DerydocaEngine::Components
 				m_postProcessMaterial = std::make_shared<Rendering::Material>();
 				m_postProcessMaterial->setShader(postProcessingShader);
 			}
-		}
-
-		auto renderingModeNode = node["renderingMode"];
-		if (renderingModeNode)
-		{
-			setRenderingMode(static_cast<Rendering::RenderingMode>(renderingModeNode.as<int>()));
 		}
 
 		auto clearModeNode = node["clearMode"];
@@ -187,6 +179,12 @@ namespace DerydocaEngine::Components
 			auto skybox = getResourcePointer<Rendering::Material>(skyboxNode.as<boost::uuids::uuid>());
 			setSkybox(skybox);
 		}
+
+		auto deferredCompositorShaderNode = node["deferredCompositorShader"];
+		if (deferredCompositorShaderNode)
+		{
+			m_deferredRendererCompositor = getResourcePointer<Rendering::Shader>(deferredCompositorShaderNode.as<boost::uuids::uuid>());
+		}
 	}
 
 	std::shared_ptr<Rendering::Shader> Camera::getPostProcessShader() const
@@ -205,7 +203,7 @@ namespace DerydocaEngine::Components
 			Rendering::GraphicsAPI::clearColorBuffer(m_clearColor);
 		}
 		// Otherwise, if it passed the check before and is set to SkyboxClear then render the skybox
-		else if(m_clearMode == SkyboxClear)
+		else if (m_clearMode == SkyboxClear)
 		{
 			m_skyboxMaterial->bind();
 			m_skyboxMaterial->getShader()->update(m_projection.getRotationProjection(getGameObject()->getTransform()->getQuat()));
@@ -213,86 +211,6 @@ namespace DerydocaEngine::Components
 		}
 		// NoClear will fall through and do nothing as we would expect it to do
 
-	}
-
-	void Camera::renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
-	{
-		Rendering::LightManager::getInstance().renderShadowMaps(scenes, getGameObject()->getTransform());
-
-		int textureW, textureH = 1;
-
-		if (m_renderTexture)
-		{
-			m_renderTexture->bindAsRenderTexture();
-			textureW = m_renderTexture->getWidth();
-			textureH = m_renderTexture->getHeight();
-		}
-		else
-		{
-			m_display->bindAsRenderTarget();
-			textureW = m_display->getWidth();
-			textureH = m_display->getHeight();
-		}
-
-		if (m_renderingMode == Rendering::RenderingMode::Deferred)
-		{
-			//glBindFramebuffer(GL_FRAMEBUFFER, m_deferredFBO);
-		}
-
-		Rendering::GraphicsAPI::setViewport(std::static_pointer_cast<Camera>(shared_from_this()), textureW, textureH);
-		glEnable(GL_DEPTH_TEST);
-		clear();
-		for (auto scene : scenes)
-		{
-			auto root = scene->getRoot();
-			if (root == nullptr)
-			{
-				continue;
-			}
-			root->preRender();
-			root->render(m_matrixStack);
-		}
-
-		// Postprocessing happens here
-		if (m_renderTexture != nullptr && m_postProcessMaterial != nullptr)
-		{
-			glDisable(GL_DEPTH_TEST);
-
-			m_postProcessMaterial->bind();
-
-			// Load the shader with matricies that will transform the quad to take up the entire buffer
-			auto postProcessShader = m_postProcessMaterial->getShader();
-			setIdentityMatricies(postProcessShader);
-
-			postProcessShader->setInt("Width", m_renderTexture->getWidth());
-			postProcessShader->setInt("Height", m_renderTexture->getHeight());
-			//postProcessShader->setTexture("RenderTex", 0, m_renderTexture);
-
-			// Render the full-buffer quad
-			postProcessShader->renderMesh(m_quad, m_renderTexture);
-		}
-
-		// Deferred rendering happens here
-		if (m_renderingMode == Rendering::RenderingMode::Deferred)
-		{
-			// Render it to the screen
-			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-			glClearColor(0, 0, 0, 1);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glDisable(GL_DEPTH_TEST);
-
-			// Set the identity matrices so that the quad renders to the entire render area
-			setIdentityMatricies(m_deferredRendererCompositor);
-
-			// Render the full-buffer quad
-			//m_deferredRenderBuffer->bindBuffersToShader(m_deferredRendererCompositor);
-			//m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
-			//m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
-			//m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
-			Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
-			m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
-		}
 	}
 
 	void Camera::renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH)
@@ -303,9 +221,6 @@ namespace DerydocaEngine::Components
 		// Set the aspect ratio to the texture size
 		m_projection.setAspectRatio(textureW, textureH);
 		m_projection.recalculateProjectionMatrix();
-
-		// Clear the buffer
-		clear();
 
 		// Ensure depth testing is on
 		glEnable(GL_DEPTH_TEST);
@@ -328,62 +243,68 @@ namespace DerydocaEngine::Components
 
 	void Camera::renderToAttachedRenderTexture(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
-		if (m_renderTexture)
+		if (!m_renderTexture)
 		{
-			// Store the current framebuffer
-			auto prevFramebufferId = Rendering::GraphicsAPI::getCurrentFramebufferID();
+			return;
+		}
 
-			// Bind the render texture as the current framebuffer
+		// Store the current framebuffer
+		auto prevFramebufferId = Rendering::GraphicsAPI::getCurrentFramebufferID();
+
+		auto rtex = m_renderTextureDeferred == nullptr ? m_renderTexture : m_renderTextureDeferred;
+
+		rtex->bindAsRenderTexture();
+
+		// Render the scene
+		auto scene = Scenes::SceneManager::getInstance().getActiveScene();
+		Rendering::CameraManager::getInstance().setCurrentCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+		renderScenesToActiveBuffer({ scene }, rtex->getWidth(), rtex->getHeight());
+
+		// Deferred rendering happens here
+		if (m_renderTextureDeferred)
+		{
+			assert(m_deferredRendererCompositor);
+
+			// Render it to the render texture
 			m_renderTexture->bindAsRenderTexture();
 
-			// Render the scene
-			auto scene = Scenes::SceneManager::getInstance().getActiveScene();
-			Rendering::CameraManager::getInstance().setCurrentCamera(std::static_pointer_cast<Camera>(shared_from_this()));
-			renderScenesToActiveBuffer({ scene }, m_renderTexture->getWidth(), m_renderTexture->getHeight());
+			Rendering::GraphicsAPI::clearDepthBuffer();
+			Rendering::GraphicsAPI::clearColorBuffer({ 0.0f, 0.0f, 0.0f, 1.0f });
+			glDisable(GL_DEPTH_TEST);
 
-			// Deferred rendering happens here
-			if (m_renderingMode == Rendering::RenderingMode::Deferred && m_renderTexture)
-			{
-				// Render it to the screen
-				m_renderTexture->bindAsRenderTexture();
+			// Set the identity matrices so that the quad renders to the entire render area
+			setIdentityMatricies(m_deferredRendererCompositor);
 
-				glClearColor(0, 0, 0, 1);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				glDisable(GL_DEPTH_TEST);
-
-				// Set the identity matrices so that the quad renders to the entire render area
-				setIdentityMatricies(m_deferredRendererCompositor);
-
-				// Render the full-buffer quad
-				//m_deferredRenderBuffer->bindBuffersToShader(m_deferredRendererCompositor);
-				//m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
-				//m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
-				//m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
-				Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
-				m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
-			}
-
-			// Postprocessing happens here
-			if (m_postProcessMaterial != nullptr)
-			{
-				glDisable(GL_DEPTH_TEST);
-
-				m_postProcessMaterial->bind();
-
-				// Load the shader with matricies that will transform the quad to take up the entire buffer
-				auto postProcessShader = m_postProcessMaterial->getShader();
-				setIdentityMatricies(postProcessShader);
-
-				postProcessShader->setInt("Width", m_renderTexture->getWidth());
-				postProcessShader->setInt("Height", m_renderTexture->getHeight());
-
-				// Render the full-buffer quad
-				postProcessShader->renderMesh(m_quad, m_renderTexture);
-			}
-
-			// Rebind the old framebuffer
-			Rendering::GraphicsAPI::bindFramebuffer(prevFramebufferId);
+			// Render the full-buffer quad
+			//m_deferredRenderBuffer->bindBuffersToShader(m_deferredRendererCompositor);
+			//m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
+			//m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
+			//m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
+			m_renderTextureDeferred->bindDeferredTextures(m_deferredRendererCompositor);
+			Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
+			m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
 		}
+
+		// Postprocessing happens here
+		if (m_postProcessMaterial != nullptr)
+		{
+			glDisable(GL_DEPTH_TEST);
+
+			m_postProcessMaterial->bind();
+
+			// Load the shader with matricies that will transform the quad to take up the entire buffer
+			auto postProcessShader = m_postProcessMaterial->getShader();
+			setIdentityMatricies(postProcessShader);
+
+			postProcessShader->setInt("Width", m_renderTexture->getWidth());
+			postProcessShader->setInt("Height", m_renderTexture->getHeight());
+
+			// Render the full-buffer quad
+			postProcessShader->renderMesh(m_quad, m_renderTexture);
+		}
+
+		// Rebind the old framebuffer
+		Rendering::GraphicsAPI::bindFramebuffer(prevFramebufferId);
 	}
 
 	void Camera::setDisplay(Rendering::Display * const & display)

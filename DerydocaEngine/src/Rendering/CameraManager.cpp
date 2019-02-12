@@ -15,16 +15,6 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	void CameraManager::render(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
-	{
-		for each (auto cam in m_cameras)
-		{
-			m_currentCamera = cam;
-
-			cam->renderScenes(scenes);
-		}
-	}
-
 	void CameraManager::renderCamerasToAttachedRenderTextures(const std::vector<std::shared_ptr<Scenes::Scene>> scenes)
 	{
 		for each (auto cam in m_cameras)

@@ -4,7 +4,6 @@
 #include "Color.h"
 #include "Components\GameComponent.h"
 #include "GameObject.h"
-#include "Rendering\DeferredRenderTexture.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Projection.h"
 #include "Rendering\RenderingMode.h"
@@ -82,7 +81,6 @@ namespace DerydocaEngine::Components
 
 		@root Root game object to render all of its children
 		*/
-		void renderScenes(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 		void renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH);
 		void renderToAttachedRenderTexture(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 
@@ -92,7 +90,6 @@ namespace DerydocaEngine::Components
 		float getDisplayHeight();
 		void setRenderTexture(std::shared_ptr<Rendering::RenderTexture> renderTexture) { m_renderTexture = renderTexture; }
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
-		void setRenderingMode(Rendering::RenderingMode const& mode);
 		void resize(int const& width, int const& height);
 		virtual void init();
 		virtual void preDestroy();
@@ -119,11 +116,10 @@ namespace DerydocaEngine::Components
 		Color m_clearColor;
 		std::shared_ptr<Rendering::Skybox> m_skybox;
 		ClearMode m_clearMode;
-		Rendering::RenderingMode m_renderingMode;
 		std::shared_ptr<Rendering::Material> m_skyboxMaterial;
 		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
-		std::shared_ptr<Rendering::DeferredRenderTexture> m_deferredRenderBuffer;
+		std::shared_ptr<Rendering::RenderTexture> m_renderTextureDeferred;
 		Rendering::Display* m_display;
 		Rectangle m_displayRect;
 		std::shared_ptr<Rendering::Mesh> m_quad;
