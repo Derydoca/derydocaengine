@@ -5,6 +5,7 @@
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
 #include "Rendering\LightManager.h"
+#include "Rendering\MatrixStack.h"
 #include "Rendering\Mesh.h"
 #include "Resources\MeshResource.h"
 #include "Rendering\RenderTexture.h"
@@ -31,7 +32,6 @@ namespace DerydocaEngine::Components
 		m_skybox(std::make_shared<Rendering::Skybox>()),
 		m_clearMode(ClearMode::ColorClear),
 		m_skyboxMaterial(nullptr),
-		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
 		m_renderTexture(nullptr),
 		m_renderTextureDeferred(nullptr),
 		m_displayRect(Rectangle(0, 0, 1, 1)),
@@ -191,7 +191,7 @@ namespace DerydocaEngine::Components
 				continue;
 			}
 			root->preRender();
-			root->render(m_matrixStack);
+			root->render(std::make_shared<Rendering::MatrixStack>());
 		}
 	}
 

@@ -3,7 +3,6 @@
 #include "Color.h"
 #include "Components\GameComponent.h"
 #include "Rendering\Material.h"
-#include "Rendering\MatrixStack.h"
 #include "Rendering\Projection.h"
 #include "Scenes\Scene.h"
 
@@ -86,7 +85,6 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Skybox> m_skybox;
 		ClearMode m_clearMode;
 		std::shared_ptr<Rendering::Material> m_skyboxMaterial;
-		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTextureDeferred;
 		Rectangle m_displayRect;
