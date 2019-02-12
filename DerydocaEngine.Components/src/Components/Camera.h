@@ -2,13 +2,13 @@
 
 #include "Color.h"
 #include "Components\GameComponent.h"
+#include "Rendering\Material.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Projection.h"
 #include "Scenes\Scene.h"
 
 namespace DerydocaEngine::Rendering {
 	class Display;
-	class Material;
 	class Mesh;
 	class RenderTexture;
 	class Shader;
@@ -55,19 +55,17 @@ namespace DerydocaEngine::Components
 
 		Color& getClearColor() { return m_clearColor; }
 		ClearMode getClearMode() { return m_clearMode; }
-		Rendering::Display* getDisplay() { return m_display; }
 		float getDisplayHeight();
 		float getDisplayWidth();
 		Rectangle& getDisplayRect() { return m_displayRect; }
 		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
-		std::shared_ptr<Rendering::Shader> getPostProcessShader() const;
+		std::shared_ptr<Rendering::Shader> getPostProcessShader() const { return m_postProcessMaterial ? m_postProcessMaterial->getShader() : nullptr; }
 		Rendering::Projection& getProjection() { return m_projection; }
 		Rendering::Projection getProjection() const { return m_projection; }
 		std::shared_ptr<Rendering::RenderTexture> getRenderTexture() const { return m_renderTexture; }
 
 		void setClearColor(Color const& clearColor) { m_clearColor = clearColor; }
 		void setClearMode(ClearMode const& clearMode) { m_clearMode = clearMode; }
-		void setDisplay(Rendering::Display* const& display);
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
 		void setProjection(Rendering::Projection projection)
 		{
@@ -84,7 +82,6 @@ namespace DerydocaEngine::Components
 		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);
 
 	private:
-		std::shared_ptr<Components::Transform> m_transform;
 		Color m_clearColor;
 		std::shared_ptr<Rendering::Skybox> m_skybox;
 		ClearMode m_clearMode;
@@ -92,7 +89,6 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
 		std::shared_ptr<Rendering::RenderTexture> m_renderTextureDeferred;
-		Rendering::Display* m_display;
 		Rectangle m_displayRect;
 		std::shared_ptr<Rendering::Mesh> m_quad;
 		std::shared_ptr<Rendering::Material> m_postProcessMaterial;

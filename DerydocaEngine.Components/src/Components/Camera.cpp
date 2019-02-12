@@ -1,18 +1,12 @@
 #include "EngineComponentsPch.h"
 #include "Components\Camera.h"
 
-#include <GL/glew.h>
-#include <glm/glm.hpp>
-#include "Helpers\YamlTools.h"
 #include "Rendering\CameraManager.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
 #include "Rendering\LightManager.h"
-#include "Rendering\Material.h"
-#include "Rendering\MatrixStack.h"
 #include "Rendering\Mesh.h"
 #include "Resources\MeshResource.h"
-#include "Rectangle.h"
 #include "Rendering\RenderTexture.h"
 #include "Rendering\Shader.h"
 #include "Rendering\Shader.h"
@@ -33,15 +27,13 @@ namespace DerydocaEngine::Components
 	}
 
 	Camera::Camera(bool registerWithManager) :
-		m_transform(),
 		m_clearColor(Color(0.0f, 0.0f, 0.2f, 1.0f)),
 		m_skybox(std::make_shared<Rendering::Skybox>()),
-		m_clearMode(Camera::NoClear),
+		m_clearMode(ClearMode::ColorClear),
 		m_skyboxMaterial(nullptr),
 		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
 		m_renderTexture(nullptr),
 		m_renderTextureDeferred(nullptr),
-		m_display(nullptr),
 		m_displayRect(Rectangle(0, 0, 1, 1)),
 		m_quad(nullptr),
 		m_postProcessMaterial(nullptr),
@@ -49,10 +41,8 @@ namespace DerydocaEngine::Components
 		m_projection(),
 		m_registerWithManager(registerWithManager)
 	{
-		setDisplay(Rendering::DisplayManager::getInstance().getDisplay(0));
-		m_projection.setAspectRatio(m_display->getAspectRatio());
+		m_projection.setAspectRatio(Rendering::DisplayManager::getInstance().getDisplay(0)->getAspectRatio());
 		m_projection.recalculateProjectionMatrix();
-		setClearMode(ClearMode::ColorClear);
 	}
 
 	Camera::~Camera()
@@ -146,36 +136,31 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	std::shared_ptr<Rendering::Shader> Camera::getPostProcessShader() const
-	{
-		return m_postProcessMaterial->getShader();
-	}
-
 	void Camera::init()
 	{
+		// If the flag is set to register for the manager, register this camera
 		if (m_registerWithManager)
 		{
 			Rendering::CameraManager::getInstance().addCamera(std::static_pointer_cast<Camera>(shared_from_this()));
 		}
 
+		// Load the quad resource (used for deferred rendering compositing and post processing effects)
 		auto quadResource = std::static_pointer_cast<Resources::MeshResource>(ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71"));
 		if (quadResource != nullptr)
 		{
 			m_quad = std::static_pointer_cast<Rendering::Mesh>(quadResource->getResourceObjectPointer());
 		}
 
-		m_transform = getGameObject()->getTransform();
-
+		// If this component is using post processing, bind the render texture to the post processing material
 		if (m_postProcessMaterial)
 		{
 			m_postProcessMaterial->setTexture("RenderTex", m_renderTexture);
 		}
-
-
 	}
 
 	void Camera::preDestroy()
 	{
+		// If this has been registered with the manager, remove it from the manager before it is destroyed
 		if (m_registerWithManager)
 		{
 			Rendering::CameraManager::getInstance().removeCamera(std::static_pointer_cast<Camera>(shared_from_this()));
@@ -245,10 +230,6 @@ namespace DerydocaEngine::Components
 			setIdentityMatricies(m_deferredRendererCompositor);
 
 			// Render the full-buffer quad
-			//m_deferredRenderBuffer->bindBuffersToShader(m_deferredRendererCompositor);
-			//m_deferredRendererCompositor->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_gbuffPos);
-			//m_deferredRendererCompositor->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_gbuffNorm);
-			//m_deferredRendererCompositor->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_gbuffColor);
 			m_renderTextureDeferred->bindDeferredTextures(m_deferredRendererCompositor);
 			Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
 			m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
@@ -282,29 +263,14 @@ namespace DerydocaEngine::Components
 		m_projection.recalculateProjectionMatrix();
 	}
 
-	void Camera::setDisplay(Rendering::Display * const & display)
-	{
-		if (m_display != nullptr)
-		{
-			m_display->unregisterCamera();
-		}
-
-		m_display = display;
-
-		if (m_display != nullptr)
-		{
-			m_display->registerCamera(this);
-		}
-	}
-
 	float Camera::getDisplayHeight()
 	{
-		return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)m_display->getHeight();
+		return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)Rendering::DisplayManager::getInstance().getDisplay(0)->getHeight();
 	}
 
 	float Camera::getDisplayWidth()
 	{
-		return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)m_display->getWidth();
+		return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)Rendering::DisplayManager::getInstance().getDisplay(0)->getWidth();
 	}
 
 	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
