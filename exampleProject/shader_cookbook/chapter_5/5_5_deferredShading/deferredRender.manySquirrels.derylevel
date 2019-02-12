@@ -35,7 +35,7 @@ Scene:
       Name: Squirrel
       Parent: 596b3e47-2395-430e-b4af-39e5e10367c2
       Transform:
-        Position: [-3, 0.4, -2]
+        Position: [-0.5, 0.0, -2]
         Rotation: [0, 0, 0, 1]
         Scale: [1, 1, 1]
       Components:
