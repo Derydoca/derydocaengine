@@ -12,6 +12,10 @@ The Boost C++ library is required to build this project. The project will look f
 ## How To Build
 
 ### Command Line Arguments
+You can use command line arguments for specifying a particular project and scene to load immediately. Specifying the project is required, however specifying a scene is not. If you do not specify a scene, an empty scene will be loaded and you can use the GUI to locate and load a level of your choosing.
+
+If you do want to jump into a specific level, there is a table below with a list of command line arguments you can use.
+
 Open the solution file included in the root directory. Once open, right-click on the project DerydocaEngine.Editor.UI and open the Properties panel. Under Configuration Properties > Debugging > Command Arguments, enter in the command line arguments for the scene you want to open.
 
 #### Format
