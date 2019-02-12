@@ -59,66 +59,25 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	void Camera::init()
+	void Camera::clear()
 	{
-		if (m_registerWithManager)
+		// Clear the depth buffer
+		Rendering::GraphicsAPI::clearDepthBuffer();
+
+		// If the clear mode is set to ClearColor or SkyboxClear but no skybox is defined, clear it with the clear color
+		if ((m_clearMode == ColorClear) || (m_clearMode == SkyboxClear && m_skyboxMaterial == nullptr))
 		{
-			Rendering::CameraManager::getInstance().addCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+			Rendering::GraphicsAPI::clearColorBuffer(m_clearColor);
 		}
-
-		auto quadResource = std::static_pointer_cast<Resources::MeshResource>(ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71"));
-		if (quadResource != nullptr)
+		// Otherwise, if it passed the check before and is set to SkyboxClear then render the skybox
+		else if (m_clearMode == SkyboxClear)
 		{
-			m_quad = std::static_pointer_cast<Rendering::Mesh>(quadResource->getResourceObjectPointer());
+			m_skyboxMaterial->bind();
+			m_skyboxMaterial->getShader()->update(m_projection.getRotationProjection(getGameObject()->getTransform()->getQuat()));
+			m_skybox->getMesh()->draw();
 		}
+		// NoClear will fall through and do nothing as we would expect it to do
 
-		m_transform = getGameObject()->getTransform();
-
-		if (m_postProcessMaterial)
-		{
-			m_postProcessMaterial->setTexture("RenderTex", m_renderTexture);
-		}
-
-
-	}
-
-	void Camera::preDestroy()
-	{
-		if (m_registerWithManager)
-		{
-			Rendering::CameraManager::getInstance().removeCamera(std::static_pointer_cast<Camera>(shared_from_this()));
-		}
-	}
-
-	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
-	{
-		m_displayRect.setX(x);
-		m_displayRect.setY(x);
-		m_displayRect.setWidth(x);
-		m_displayRect.setHeight(x);
-	}
-
-	void Camera::resize(int const& width, int const& height)
-	{
-		m_projection.setAspectRatio(width, height);
-		m_projection.recalculateProjectionMatrix();
-	}
-
-	void Camera::createGBufTex(unsigned int const& textureUnit, unsigned int const& format, unsigned int &texid, int const& width, int const& height)
-	{
-		glActiveTexture(textureUnit);
-		glGenTextures(1, &texid);
-		glBindTexture(GL_TEXTURE_2D, texid);
-		glTexStorage2D(GL_TEXTURE_2D, 1, format, width, height);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
-	}
-
-	void Camera::setProjectionMode(Rendering::ProjectionMode const& mode)
-	{
-		m_projection.setProjectionMode(mode);
-		m_projection.recalculateProjectionMatrix();
 	}
 
 	void Camera::deserialize(const YAML::Node& node)
@@ -192,25 +151,35 @@ namespace DerydocaEngine::Components
 		return m_postProcessMaterial->getShader();
 	}
 
-	void Camera::clear()
+	void Camera::init()
 	{
-		// Clear the depth buffer
-		Rendering::GraphicsAPI::clearDepthBuffer();
-
-		// If the clear mode is set to ClearColor or SkyboxClear but no skybox is defined, clear it with the clear color
-		if ((m_clearMode == ColorClear) || (m_clearMode == SkyboxClear && m_skyboxMaterial == nullptr))
+		if (m_registerWithManager)
 		{
-			Rendering::GraphicsAPI::clearColorBuffer(m_clearColor);
+			Rendering::CameraManager::getInstance().addCamera(std::static_pointer_cast<Camera>(shared_from_this()));
 		}
-		// Otherwise, if it passed the check before and is set to SkyboxClear then render the skybox
-		else if (m_clearMode == SkyboxClear)
-		{
-			m_skyboxMaterial->bind();
-			m_skyboxMaterial->getShader()->update(m_projection.getRotationProjection(getGameObject()->getTransform()->getQuat()));
-			m_skybox->getMesh()->draw();
-		}
-		// NoClear will fall through and do nothing as we would expect it to do
 
+		auto quadResource = std::static_pointer_cast<Resources::MeshResource>(ObjectLibrary::getInstance().getResource("136a5d0f-51d7-4f3c-857c-0497de142a71"));
+		if (quadResource != nullptr)
+		{
+			m_quad = std::static_pointer_cast<Rendering::Mesh>(quadResource->getResourceObjectPointer());
+		}
+
+		m_transform = getGameObject()->getTransform();
+
+		if (m_postProcessMaterial)
+		{
+			m_postProcessMaterial->setTexture("RenderTex", m_renderTexture);
+		}
+
+
+	}
+
+	void Camera::preDestroy()
+	{
+		if (m_registerWithManager)
+		{
+			Rendering::CameraManager::getInstance().removeCamera(std::static_pointer_cast<Camera>(shared_from_this()));
+		}
 	}
 
 	void Camera::renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH)
@@ -307,6 +276,12 @@ namespace DerydocaEngine::Components
 		Rendering::GraphicsAPI::bindFramebuffer(prevFramebufferId);
 	}
 
+	void Camera::resize(int const& width, int const& height)
+	{
+		m_projection.setAspectRatio(width, height);
+		m_projection.recalculateProjectionMatrix();
+	}
+
 	void Camera::setDisplay(Rendering::Display * const & display)
 	{
 		if (m_display != nullptr)
@@ -322,14 +297,22 @@ namespace DerydocaEngine::Components
 		}
 	}
 
+	float Camera::getDisplayHeight()
+	{
+		return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)m_display->getHeight();
+	}
+
 	float Camera::getDisplayWidth()
 	{
 		return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)m_display->getWidth();
 	}
 
-	float Camera::getDisplayHeight()
+	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
 	{
-		return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)m_display->getHeight();
+		m_displayRect.setX(x);
+		m_displayRect.setY(x);
+		m_displayRect.setWidth(x);
+		m_displayRect.setHeight(x);
 	}
 
 	void Camera::setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader)
@@ -345,6 +328,12 @@ namespace DerydocaEngine::Components
 		shader->setMat4("ModelViewMatrix", mv);
 		shader->setMat3("NormalMatrix", glm::mat3(mv[0], glm::vec3(mv[1]), glm::vec3(mv[2])));
 		shader->setMat4("MVP", mvp);
+	}
+
+	void Camera::setProjectionMode(Rendering::ProjectionMode const& mode)
+	{
+		m_projection.setProjectionMode(mode);
+		m_projection.recalculateProjectionMatrix();
 	}
 
 }
