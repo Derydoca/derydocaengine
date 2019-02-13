@@ -29,7 +29,7 @@ namespace DerydocaEngine::Rendering
 
 		// Clear the buffers
 		GraphicsAPI::clearDepthBuffer();
-		GraphicsAPI::clearColorBuffer({ 0, 0, 0, 1 });
+		GraphicsAPI::clearColorBuffer({ 0.098f, 0.098f, 0.098f, 1 });
 
 		// Run the pre-render methods in all components in the scene
 		root->preRender();
