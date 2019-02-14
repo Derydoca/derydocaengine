@@ -6,6 +6,7 @@ namespace DerydocaEngine::Rendering::Gui
 
 	class DearImgui {
 	public:
+		static void ApplyDefaultStyle();
 		static ImGuiIO init(std::shared_ptr<Display> display);
 		static void newFrame(std::shared_ptr<Display> display);
 		static void render(std::shared_ptr<Display> display);
