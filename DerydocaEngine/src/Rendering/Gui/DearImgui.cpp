@@ -90,6 +90,8 @@ namespace DerydocaEngine::Rendering::Gui
 		io.ConfigDockingWithShift = true;
 		io.ConfigWindowsResizeFromEdges = true;
 		io.ConfigWindowsMoveFromTitleBarOnly = true;
+		ImFont* font = io.Fonts->AddFontFromFileTTF(".\\engineResources\\fonts\\FiraCode-Medium.ttf", 16.0f);
+		io.FontDefault = font;
 
 		ApplyDefaultStyle();
 
