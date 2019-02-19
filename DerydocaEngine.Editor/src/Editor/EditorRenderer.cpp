@@ -69,6 +69,15 @@ namespace DerydocaEngine::Editor
 		m_display->bindAsRenderTarget();
 	}
 
+	void EditorRenderer::addWindow(std::shared_ptr<Components::EditorWindowComponent> window)
+	{
+		auto windowGameObject = std::make_shared<GameObject>("__newWindow");
+		windowGameObject->addComponent(window);
+		windowGameObject->init();
+		windowGameObject->postInit();
+		m_editorGuiScene->getRoot()->addChild(windowGameObject);
+	}
+
 	void EditorRenderer::renderFrame(const float deltaTime)
 	{
 		// Initialize a new immediate mode GUI frame

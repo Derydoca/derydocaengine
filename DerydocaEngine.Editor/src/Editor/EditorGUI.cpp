@@ -1,7 +1,12 @@
 #include "EditorPch.h"
 #include "EditorGUI.h"
+#include "Components\AnimationViewerWindow.h"
+#include "Components\EditorCameraWindow.h"
+#include "Components\EngineAssetBrowser.h"
+#include "Components\EngineConsole.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
+#include "Editor\EditorRenderer.h"
 
 DerydocaEngine::Editor::EditorGUI::EditorGUI()
 {
@@ -79,8 +84,22 @@ void DerydocaEngine::Editor::EditorGUI::render()
 
 		if (ImGui::BeginMenu("Windows"))
 		{
-			if (ImGui::MenuItem("Console")) {}
-			if (ImGui::MenuItem("Asset Browser")) {}
+			if (ImGui::MenuItem("Console"))
+			{
+				EditorRenderer::GetInstance().addWindow(std::make_shared<Components::EngineConsole>());
+			}
+			if (ImGui::MenuItem("Asset Browser"))
+			{
+				EditorRenderer::GetInstance().addWindow(std::make_shared<Components::EngineAssetBrowser>());
+			}
+			if (ImGui::MenuItem("Editor Camera Window"))
+			{
+				EditorRenderer::GetInstance().addWindow(std::make_shared<Components::EditorCameraWindow>());
+			}
+			if (ImGui::MenuItem("Animation Viewer"))
+			{
+				EditorRenderer::GetInstance().addWindow(std::make_shared<Components::AnimationViewerWindow>());
+			}
 			ImGui::EndMenu();
 		}
 
