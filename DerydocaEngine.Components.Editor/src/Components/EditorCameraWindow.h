@@ -16,6 +16,8 @@ namespace DerydocaEngine::Components
 		virtual std::string getWindowTitle() { return "Editor Camera"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
 		virtual glm::vec2 getViewPadding() override;
+		virtual void renderToActiveBuffer() override;
+
 	private:
 		bool m_showPropertiesPanel;
 

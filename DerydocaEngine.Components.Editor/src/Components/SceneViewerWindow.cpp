@@ -1,6 +1,7 @@
 #include "EditorComponentsPch.h"
 #include "SceneViewerWindow.h"
 #include "Editor\EditorRenderer.h"
+#include "Rendering\GraphicsAPI.h"
 
 namespace DerydocaEngine::Components
 {
@@ -63,7 +64,8 @@ namespace DerydocaEngine::Components
 
 		// Clear the render texture and then render to it
 		m_renderTexture->bindAsRenderTexture();
-		Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(m_camera, m_renderTexture->getWidth(), m_renderTexture->getHeight());
+		renderToActiveBuffer();
+		Rendering::GraphicsAPI::bindFramebuffer(0);
 	}
 
 	void SceneViewerWindow::update(const float deltaTime)

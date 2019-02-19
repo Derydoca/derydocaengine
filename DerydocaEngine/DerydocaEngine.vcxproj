@@ -226,6 +226,7 @@
     <ClCompile Include="src\Animation\Skeleton.cpp" />
     <ClCompile Include="src\Input\ButtonState.cpp" />
     <ClCompile Include="src\Rendering\CameraManager.cpp" />
+    <ClCompile Include="src\Scenes\HardCodedScene.cpp" />
     <ClCompile Include="src\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\SystemWindowingLayer_SDL.cpp" />
     <ClCompile Include="src\Timing\Clock.cpp" />
@@ -317,6 +318,7 @@
     <ClInclude Include="src\Animation\VertexBoneWeights.h" />
     <ClInclude Include="src\Input\ButtonState.h" />
     <ClInclude Include="src\Rendering\CameraManager.h" />
+    <ClInclude Include="src\Scenes\HardCodedScene.h" />
     <ClInclude Include="src\Scenes\SceneManager.h" />
     <ClInclude Include="src\SystemWindowingLayer.h" />
     <ClInclude Include="src\Timing\Clock.h" />

@@ -22,6 +22,7 @@ namespace DerydocaEngine::Components
 		void updateDisplayProperties();
 
 		virtual glm::vec2 getViewPadding() = 0;
+		virtual void renderToActiveBuffer() = 0;
 
 		bool isActive() { return m_isActive; }
 		int getDisplayWidth() { return m_displayWidth; }

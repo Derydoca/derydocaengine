@@ -205,6 +205,7 @@
     <ClCompile Include="src\Rendering\Renderer.cpp" />
     <ClCompile Include="src\SystemWindowingLayer_SDL.cpp" />
     <ClCompile Include="src\Rendering\GraphicsAPI_OpenGL.cpp" />
+    <ClCompile Include="src\Scenes\HardCodedScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h">
@@ -497,6 +498,7 @@
     <ClInclude Include="src\SystemWindowingLayer.h" />
     <ClInclude Include="src\Rendering\GraphicsAPI.h" />
     <ClInclude Include="src\Rendering\RenderingMode.h" />
+    <ClInclude Include="src\Scenes\HardCodedScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

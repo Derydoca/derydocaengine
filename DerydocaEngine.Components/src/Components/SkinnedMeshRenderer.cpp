@@ -59,12 +59,21 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::init()
 	{
+		if (!m_mesh)
+		{
+			return;
+		}
 		m_boneMatrices.resize(m_mesh->getSkeleton()->getNumBones());
 		m_animation->optimizeForSkeleton(m_mesh->getSkeleton());
 	}
 
 	void SkinnedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
+		if (!m_mesh || !m_animation || !m_material)
+		{
+			return;
+		}
+
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
 		m_animation->loadPose(m_time, m_boneMatrices, m_mesh->getSkeleton());

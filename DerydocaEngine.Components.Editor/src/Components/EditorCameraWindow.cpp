@@ -1,6 +1,7 @@
 #include "EditorComponentsPch.h"
 #include "EditorCameraWindow.h"
 #include "Editor\Inspector\InspectorRendererFactory.h"
+#include "Editor\EditorRenderer.h"
 
 namespace DerydocaEngine::Components
 {
@@ -51,6 +52,11 @@ namespace DerydocaEngine::Components
 			m_showPropertiesPanel ? PROPERTIES_PANEL_WIDTH : 0,
 			VERTICAL_PADDING
 		);
+	}
+
+	void EditorCameraWindow::renderToActiveBuffer()
+	{
+		Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(getCamera(), getDisplayWidth(), getDisplayHeight());
 	}
 
 }
