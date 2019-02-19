@@ -1,5 +1,6 @@
 #include "EditorPch.h"
 #include "EditorGUI.h"
+#include "Editor\EditorRenderer.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
 
@@ -82,6 +83,16 @@ void DerydocaEngine::Editor::EditorGUI::render()
 			if (ImGui::MenuItem("Console")) {}
 			if (ImGui::MenuItem("Asset Browser")) {}
 			ImGui::EndMenu();
+		}
+
+		bool isPlaying = EditorRenderer::GetInstance().isPlaying();
+		if (!isPlaying && ImGui::MenuItem("Play"))
+		{
+			EditorRenderer::GetInstance().setPlaying(true);
+		}
+		if (isPlaying && ImGui::MenuItem("Pause"))
+		{
+			EditorRenderer::GetInstance().setPlaying(false);
 		}
 
 		ImGui::EndMenuBar();
