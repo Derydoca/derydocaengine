@@ -6,6 +6,11 @@ http://www.derydoca.com
 Watch a short demo video of the engine in action by clicking the thumbnail below!
 [![Watch the demo video](https://img.youtube.com/vi/E6ZjRsHbDro/maxresdefault.jpg)](https://youtu.be/E6ZjRsHbDro)
 
+## Screenshots
+![Screenshot of shadow mapping](https://user-images.githubusercontent.com/3605996/52811539-38319f00-304a-11e9-9ce3-5e0f16788ba5.png)
+![Screenshot of dynamic LOD system](https://user-images.githubusercontent.com/3605996/52811473-0caeb480-304a-11e9-9e41-8a52f4ed8b9a.png)
+![Screenshot of bumpmapping](https://user-images.githubusercontent.com/3605996/52811389-ceb19080-3049-11e9-94d6-108df728787e.png)
+
 ## Development Environment
 This is being written in Visual Studio 2017. For anyone who wants to use another compiler, feel free to, however it will be simplest to use the most recent version of Visual Studio.
 
