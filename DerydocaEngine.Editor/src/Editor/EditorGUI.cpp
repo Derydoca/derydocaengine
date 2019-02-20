@@ -103,6 +103,16 @@ void DerydocaEngine::Editor::EditorGUI::render()
 			ImGui::EndMenu();
 		}
 
+		bool isPlaying = EditorRenderer::GetInstance().isPlaying();
+		if (!isPlaying && ImGui::MenuItem("Play"))
+		{
+			EditorRenderer::GetInstance().setPlaying(true);
+		}
+		if (isPlaying && ImGui::MenuItem("Pause"))
+		{
+			EditorRenderer::GetInstance().setPlaying(false);
+		}
+
 		ImGui::EndMenuBar();
 	}
 

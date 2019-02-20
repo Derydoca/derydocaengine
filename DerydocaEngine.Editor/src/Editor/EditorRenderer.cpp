@@ -85,6 +85,14 @@ namespace DerydocaEngine::Editor
 
 		// Update
 		m_editorGuiScene->getRoot()->update(deltaTime);
+		if (m_playing)
+		{
+			auto scene = Scenes::SceneManager::getInstance().getActiveScene();
+			if (scene != nullptr)
+			{
+				scene->getRoot()->update(deltaTime);
+			}
+		}
 
 		// Render editor GUI
 		EditorGUI::getInstance().render();
