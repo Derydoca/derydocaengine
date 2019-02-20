@@ -3,6 +3,9 @@ The Derydoca Engine is a game engine and personal project of mine I am making av
 
 http://www.derydoca.com
 
+Watch a short demo video of the engine in action by clicking the thumbnail below!
+[![Watch the demo video](https://img.youtube.com/vi/E6ZjRsHbDro/maxresdefault.jpg)](https://youtu.be/E6ZjRsHbDro)
+
 ## Development Environment
 This is being written in Visual Studio 2017. For anyone who wants to use another compiler, feel free to, however it will be simplest to use the most recent version of Visual Studio.
 
