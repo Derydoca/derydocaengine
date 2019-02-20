@@ -4,7 +4,8 @@ The Derydoca Engine is a game engine and personal project of mine I am making av
 http://www.derydoca.com
 
 Watch a short demo video of the engine in action by clicking the thumbnail below!
-[![Watch the demo video](https://img.youtube.com/vi/E6ZjRsHbDro/maxresdefault.jpg)](https://youtu.be/E6ZjRsHbDro)
+
+[![Watch the demo video](https://user-images.githubusercontent.com/3605996/53131394-8b5f9200-3521-11e9-8caa-9ff2e4ac5e88.png)](https://youtu.be/E6ZjRsHbDro)
 
 ## Screenshots
 ![Screenshot of shadow mapping](https://user-images.githubusercontent.com/3605996/52811539-38319f00-304a-11e9-9ce3-5e0f16788ba5.png)
