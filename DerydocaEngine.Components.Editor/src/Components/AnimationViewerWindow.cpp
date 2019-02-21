@@ -37,10 +37,7 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 {
 	SceneViewerWindow::updateDisplayProperties();
 
-	if (Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType))
-	{
-		std::cout << "An asset was selected." << std::endl;
-	}
+	Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType);
 
 	SceneViewerWindow::renderViewToWindow();
 }

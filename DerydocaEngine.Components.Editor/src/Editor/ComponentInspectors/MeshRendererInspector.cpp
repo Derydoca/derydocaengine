@@ -2,6 +2,7 @@
 #include "MeshRendererInspector.h"
 #include "Rendering\Material.h"
 #include "Rendering\Mesh.h"
+#include "Dgui\ResourcePicker.h"
 
 void DerydocaEngine::Editor::Inspector::ComponentInspectors::MeshRendererInspector::render(std::shared_ptr<Object> object)
 {
@@ -9,12 +10,22 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::MeshRendererInspect
 
 	ImGui::Text("A more comprehensive inspector will come in the future.");
 
-	// TODO: Replace with a control that can set the actual material
 	auto material = meshRenderer->getMaterial();
-	ImGui::LabelText("Material", material == nullptr ? "[NOT SET]" : "[IS SET]");
-	
-	// TODO: Replace with a control that can set the actual mesh
-	auto mesh = meshRenderer->getMesh();
-	ImGui::LabelText("Mesh", mesh == nullptr ? "[NOT SET]" : "[IS SET]");
+	{
+		auto resource = Dgui::ResourcePicker("Material", "my_material", Resources::ResourceType::MaterialResourceType);
+		if (resource)
+		{
+			meshRenderer->setMaterial(std::static_pointer_cast<Rendering::Material>(resource->getResourceObjectPointer()));
+		}
+	}
+
+	{
+		auto mesh = meshRenderer->getMesh();
+		auto resource = Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType);
+		if (resource)
+		{
+			meshRenderer->setMesh(std::static_pointer_cast<Rendering::Mesh>(resource->getResourceObjectPointer()));
+		}
+	}
 
 }
