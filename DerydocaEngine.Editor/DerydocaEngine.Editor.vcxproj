@@ -170,6 +170,7 @@
     <ClInclude Include="src\Dgui\InputProjection.h" />
     <ClInclude Include="src\Dgui\InputQuaternion.h" />
     <ClInclude Include="src\Dgui\InputText.h" />
+    <ClInclude Include="src\Dgui\ResourcePicker.h" />
     <ClInclude Include="src\EditorPch.h" />
     <ClInclude Include="src\Editor\EditorGUI.h" />
     <ClInclude Include="src\Editor\EditorRenderer.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="src\Dgui\InputProjection.cpp" />
     <ClCompile Include="src\Dgui\InputQuaternion.cpp" />
     <ClCompile Include="src\Dgui\InputText.cpp" />
+    <ClCompile Include="src\Dgui\ResourcePicker.cpp" />
     <ClCompile Include="src\EditorPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

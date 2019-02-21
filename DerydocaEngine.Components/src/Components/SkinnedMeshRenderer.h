@@ -33,6 +33,7 @@ namespace DerydocaEngine::Components
 		virtual void update(const float deltaTime) { m_time += deltaTime; }
 		std::shared_ptr<Rendering::Material> getMaterial() { return m_material; }
 		std::shared_ptr<Camera> getSkinnedMeshRendererCamera() { return m_SkinnedMeshRendererCamera; }
+		std::shared_ptr<Rendering::Mesh> getMesh() const { return m_mesh; }
 
 		void deserialize(const YAML::Node& compNode);
 

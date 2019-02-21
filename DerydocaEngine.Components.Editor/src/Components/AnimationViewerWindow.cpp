@@ -1,6 +1,8 @@
 #include "EditorComponentsPch.h"
 #include "AnimationViewerWindow.h"
 #include "Editor\EditorRenderer.h"
+#include "Dgui\ResourcePicker.h"
+#include "Rendering\Mesh.h"
 
 DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	SceneViewerWindow(),
@@ -34,6 +36,11 @@ void DerydocaEngine::Components::AnimationViewerWindow::update(const float delta
 void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 {
 	SceneViewerWindow::updateDisplayProperties();
+
+	if (Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType))
+	{
+		std::cout << "An asset was selected." << std::endl;
+	}
 
 	SceneViewerWindow::renderViewToWindow();
 }

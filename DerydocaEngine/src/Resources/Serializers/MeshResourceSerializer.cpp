@@ -20,7 +20,7 @@ namespace DerydocaEngine::Resources::Serializers
 		{
 			skeleton = ObjectLibrary::getInstance().getResourceObjectPointer<Animation::Skeleton>(mr->getSkeletonId());
 		}
-		
+
 		Assimp::Importer importer;
 
 		const aiScene* aiScene = importer.ReadFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
@@ -58,14 +58,14 @@ namespace DerydocaEngine::Resources::Serializers
 		}
 
 		std::shared_ptr<Rendering::Mesh> m = std::make_shared<Rendering::Mesh>(
-				m_positions,
-				m_indices,
-				m_normals,
-				m_texCoords,
-				m_tangents,
-				m_bitangents,
-				std::vector<Color>(),
-				m_boneWeights);
+			m_positions,
+			m_indices,
+			m_normals,
+			m_texCoords,
+			m_tangents,
+			m_bitangents,
+			std::vector<Color>(),
+			m_boneWeights);
 
 		m->setSkeleton(skeleton);
 
