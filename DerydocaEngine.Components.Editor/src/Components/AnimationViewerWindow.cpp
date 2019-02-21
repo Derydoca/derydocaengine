@@ -1,5 +1,6 @@
 #include "EditorComponentsPch.h"
 #include "AnimationViewerWindow.h"
+#include "Editor\EditorRenderer.h"
 
 DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	SceneViewerWindow(),
@@ -44,4 +45,5 @@ glm::vec2 DerydocaEngine::Components::AnimationViewerWindow::getViewPadding()
 
 void DerydocaEngine::Components::AnimationViewerWindow::renderToActiveBuffer()
 {
+	Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(getCamera(), {m_scene}, getDisplayWidth(), getDisplayHeight());
 }

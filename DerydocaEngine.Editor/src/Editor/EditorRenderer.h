@@ -24,6 +24,7 @@ namespace DerydocaEngine::Editor
 		virtual void renderFrame(const float deltaTime) override;
 
 		void renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
+		void renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH);
 		std::shared_ptr<Rendering::Material> getEditorSkyboxMaterial() { return m_editorSkyboxMaterial; };
 		void addWindow(std::shared_ptr<Components::EditorWindowComponent> window);
 
