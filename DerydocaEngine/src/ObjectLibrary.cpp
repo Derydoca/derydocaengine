@@ -59,6 +59,29 @@ namespace DerydocaEngine
 		}
 	}
 
+	std::vector<std::shared_ptr<Resources::Resource>> ObjectLibrary::getResourcesOfType(Resources::ResourceType resourceType)
+	{
+		// Consider creating an unordered map of resources with the key of resource type for a more inexpensive lookup time
+		auto matchingResources = std::vector<std::shared_ptr<Resources::Resource>>();
+		for (auto resource : m_resources)
+		{
+			if (resource.second->getType() == resourceType)
+			{
+				matchingResources.push_back(resource.second);
+			}
+		}
+
+		// Sort the resources by name
+		std::sort(
+			matchingResources.begin(), 
+			matchingResources.end(),
+			[](const std::shared_ptr<Resources::Resource> r1, const std::shared_ptr<Resources::Resource> r2) -> bool {
+				return r1->getName().compare(r2->getName()) < 0;
+		});
+
+		return matchingResources;
+	}
+
 	std::shared_ptr<Components::GameComponent> ObjectLibrary::getComponent(boost::uuids::uuid const& id)
 	{
 		auto search = m_sceneComponents.find(id);
