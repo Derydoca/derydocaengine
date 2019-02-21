@@ -4,9 +4,9 @@
 #include "Components\EditorCameraWindow.h"
 #include "Components\EngineAssetBrowser.h"
 #include "Components\EngineConsole.h"
+#include "Editor\EditorRenderer.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
-#include "Editor\EditorRenderer.h"
 
 DerydocaEngine::Editor::EditorGUI::EditorGUI()
 {
@@ -64,7 +64,7 @@ void DerydocaEngine::Editor::EditorGUI::render()
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			// Disabling fullscreen would allow the window to be moved to the front of other windows, 
+			// Disabling fullscreen would allow the window to be moved to the front of other windows,
 			// which we can't undo at the moment without finer window depth/z control.
 			//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 			if (ImGui::MenuItem("Open Scene")) {}
@@ -101,6 +101,16 @@ void DerydocaEngine::Editor::EditorGUI::render()
 				EditorRenderer::GetInstance().addWindow(std::make_shared<Components::AnimationViewerWindow>());
 			}
 			ImGui::EndMenu();
+		}
+
+		bool isPlaying = EditorRenderer::GetInstance().isPlaying();
+		if (!isPlaying && ImGui::MenuItem("Play"))
+		{
+			EditorRenderer::GetInstance().setPlaying(true);
+		}
+		if (isPlaying && ImGui::MenuItem("Pause"))
+		{
+			EditorRenderer::GetInstance().setPlaying(false);
 		}
 
 		ImGui::EndMenuBar();
