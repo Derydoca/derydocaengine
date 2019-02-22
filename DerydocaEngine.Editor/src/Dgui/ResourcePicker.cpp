@@ -5,50 +5,43 @@
 namespace DerydocaEngine::Dgui
 {
 
-	std::shared_ptr<Resources::Resource> DerydocaEngine::Dgui::ResourcePicker(
+	bool DerydocaEngine::Dgui::ResourcePicker(
 		const std::string label,
-		const std::string& resourceName,
-		const Resources::ResourceType resourceType
+		std::shared_ptr<Resources::Resource> resource,
+		std::shared_ptr<Resources::Resource>& selectedResource
 	)
 	{
 		bool result = false;
 		static bool opened = false;
 		static int selectedIndex = -1;
 		static std::vector<std::shared_ptr<Resources::Resource>> resources;
-	
+
 		// Button to open asset picker
+		std::string resourceName = resource ? resource->getName() : "[None]";
 		if (ImGui::Button(resourceName.c_str()))
 		{
-			ImGui::OpenPopup("Resource Picker");
+			ImGui::OpenPopup(label.c_str());
 		}
-	
+
 		// Field name
 		ImGui::SameLine();
 		ImGui::Text(label.c_str());
-	
+
 		// Modal popup
 		ImGui::SetNextWindowSize({ 250, 400 }, ImGuiCond_FirstUseEver);
-		if (ImGui::BeginPopupModal("Resource Picker", NULL, ImGuiWindowFlags_None))
+		if (ImGui::BeginPopupModal(label.c_str(), NULL, ImGuiWindowFlags_None))
 		{
+			// Initialize the list the first time the window appears
 			if (!opened)
 			{
-				// Initialize the list
 				opened = true;
-				resources = ObjectLibrary::getInstance().getResourcesOfType(resourceType);
+				resources = ObjectLibrary::getInstance().getResourcesOfType(resource->getType());
 			}
-	
+
+			// Display a selectable list of resources that match the resource type
 			auto cra = ImGui::GetContentRegionAvail();
 			if (ImGui::ListBoxHeader("List", ImVec2(cra.x, cra.y - 30)))
 			{
-				ImGui::Selectable("None", selectedIndex < 0, ImGuiSelectableFlags_AllowDoubleClick);
-				if (ImGui::IsItemClicked())
-				{
-					selectedIndex = -1;
-					if (ImGui::IsMouseDoubleClicked(0))
-					{
-						result = true;
-					}
-				}
 				for (int i = 0; i < resources.size(); i++)
 				{
 					ImGui::Selectable(resources[i]->getName().c_str(), selectedIndex == i, ImGuiSelectableFlags_AllowDoubleClick);
@@ -63,7 +56,8 @@ namespace DerydocaEngine::Dgui
 				}
 				ImGui::ListBoxFooter();
 			}
-	
+
+			// Confirmation/Cancel buttons
 			if (ImGui::Button("Cancel", { 60, 0 }))
 			{
 				ImGui::CloseCurrentPopup();
@@ -74,13 +68,13 @@ namespace DerydocaEngine::Dgui
 			{
 				result = true;
 			}
-	
+
 			if (result == true)
 			{
 				ImGui::CloseCurrentPopup();
-	
+
 			}
-	
+
 			ImGui::EndPopup();
 		}
 		else
@@ -90,18 +84,14 @@ namespace DerydocaEngine::Dgui
 				opened = false;
 				resources.clear();
 			}
-	
+
 		}
-	
-		// Return true if an resource was selected
-		if (result && selectedIndex >= 0)
+
+		if (result)
 		{
-			return resources[selectedIndex];
+			selectedResource = resources[selectedIndex];
 		}
-		else
-		{
-			return nullptr;
-		}
+		return result;
 	}
 
 }

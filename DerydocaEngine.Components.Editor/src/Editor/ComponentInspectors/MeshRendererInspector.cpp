@@ -8,23 +8,20 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::MeshRendererInspect
 {
 	auto meshRenderer = std::static_pointer_cast<Components::MeshRenderer>(object);
 
-	ImGui::Text("A more comprehensive inspector will come in the future.");
-
-	auto material = meshRenderer->getMaterial();
 	{
-		auto resource = Dgui::ResourcePicker("Material", "my_material", Resources::ResourceType::MaterialResourceType);
+		std::shared_ptr<Resources::Resource> modifiedResource;
+		auto resource = Dgui::ResourcePicker("Material", meshRenderer->getMaterialResource(), modifiedResource);
 		if (resource)
 		{
-			meshRenderer->setMaterial(std::static_pointer_cast<Rendering::Material>(resource->getResourceObjectPointer()));
+			meshRenderer->setMaterial(std::static_pointer_cast<Resources::MaterialResource>(modifiedResource));
 		}
 	}
 
 	{
-		auto mesh = meshRenderer->getMesh();
-		auto resource = Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType);
-		if (resource)
+		std::shared_ptr<Resources::Resource> modifiedResource;
+		if (Dgui::ResourcePicker("Mesh", meshRenderer->getMeshResource(), modifiedResource))
 		{
-			meshRenderer->setMesh(std::static_pointer_cast<Rendering::Mesh>(resource->getResourceObjectPointer()));
+			meshRenderer->setMesh(std::static_pointer_cast<Resources::MeshResource>(modifiedResource));
 		}
 	}
 

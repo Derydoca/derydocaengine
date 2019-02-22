@@ -4,10 +4,10 @@
 namespace DerydocaEngine::Dgui
 {
 
-	std::shared_ptr<Resources::Resource> ResourcePicker(
+	bool ResourcePicker(
 		const std::string label,
-		const std::string& resourceName,
-		const Resources::ResourceType resourceType
+		std::shared_ptr<Resources::Resource> resource,
+		std::shared_ptr<Resources::Resource>& selectedResource
 	);
 
 }

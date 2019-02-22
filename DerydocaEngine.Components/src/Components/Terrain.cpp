@@ -62,7 +62,7 @@ namespace DerydocaEngine::Components
 		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 
-		m_meshRenderer = std::make_shared<MeshRenderer>(m_mesh, mat);
+		//m_meshRenderer = std::make_shared<MeshRenderer>(m_mesh, mat);
 	}
 
 	Terrain::~Terrain()
@@ -155,8 +155,8 @@ namespace DerydocaEngine::Components
 			loadTerrainFromTexture(heightmapResource->getSourceFilePath(), unitScale, heightScale);
 			if (node["material"])
 			{
-				std::shared_ptr<Rendering::Material> material = getResourcePointer<Rendering::Material>(node, "material");
-				m_meshRenderer->setMaterial(material);
+				//std::shared_ptr<Rendering::Material> material = getResourcePointer<Rendering::Material>(node, "material");
+				//m_meshRenderer->setMaterial(material);
 			}
 		}
 	}
@@ -191,7 +191,7 @@ namespace DerydocaEngine::Components
 		auto mat = std::make_shared<Rendering::Material>();
 		mat->setShader(shader);
 
-		m_meshRenderer = std::make_shared<MeshRenderer>(m_mesh, mat);
+		//m_meshRenderer = std::make_shared<MeshRenderer>(m_mesh, mat);
 	}
 
 }

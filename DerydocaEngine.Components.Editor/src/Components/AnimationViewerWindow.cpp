@@ -37,7 +37,7 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 {
 	SceneViewerWindow::updateDisplayProperties();
 
-	Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType);
+	//Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType);
 
 	SceneViewerWindow::renderViewToWindow();
 }
