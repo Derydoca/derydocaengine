@@ -27,18 +27,16 @@ namespace DerydocaEngine::Components
 		SkinnedMeshRenderer();
 		~SkinnedMeshRenderer();
 
-		void init();
-		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
+		void init() override;
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) override;
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			std::shared_ptr<Rendering::Material> material,
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Transform> projectionTransform
-		);
-		virtual void update(const float deltaTime) { m_time += deltaTime; }
+		) override;
+		virtual void update(const float deltaTime) override;
 		
-		std::shared_ptr<Camera> getSkinnedMeshRendererCamera() { return m_SkinnedMeshRendererCamera; }
-
 		void setAnimationResource(std::shared_ptr<Resources::AnimationResource> animationResource) { m_animation = animationResource; }
 		void setMaterialResource(std::shared_ptr<Resources::MaterialResource> materialResource) { m_material = materialResource; }
 		void setMeshResource(std::shared_ptr<Resources::MeshResource> meshResource) { m_mesh = meshResource; }
@@ -58,7 +56,6 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Resources::AnimationResource> m_animation;
 		std::shared_ptr<Resources::MaterialResource> m_material;
 		std::shared_ptr<Resources::MeshResource> m_mesh;
-		std::shared_ptr<Camera> m_SkinnedMeshRendererCamera;
 		std::vector<glm::mat4> m_boneMatrices;
 	};
 

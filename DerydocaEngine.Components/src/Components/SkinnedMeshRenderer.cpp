@@ -22,7 +22,6 @@ namespace DerydocaEngine::Components
 		m_animation(),
 		m_material(),
 		m_mesh(),
-		m_SkinnedMeshRendererCamera(),
 		m_boneMatrices()
 	{
 	}
@@ -33,27 +32,9 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::deserialize(const YAML::Node& compNode)
 	{
-		m_material = getResource<Resources::MaterialResource>(compNode, "Material");
-
-		m_mesh = getResource<Resources::MeshResource>(compNode, "Mesh");
-
 		m_animation = getResource<Resources::AnimationResource>(compNode, "Animation");
-
-		YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];
-		if (renderTextureSourceNode && renderTextureSourceNode.IsScalar())
-		{
-			// Get the name that should be used to bind this texture to the shader
-			std::string renderTextureName = "RenderTexture";
-			YAML::Node renderTextureNameNode = compNode["RenderTextureName"];
-			if (renderTextureNameNode != nullptr && renderTextureNameNode.IsScalar())
-			{
-				renderTextureName = renderTextureNameNode.as<std::string>();
-			}
-
-			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
-			m_SkinnedMeshRendererCamera = ObjectLibrary::getInstance().getComponent<Camera>(renderTextureCameraId);
-			getMaterial()->setTexture(renderTextureName, m_SkinnedMeshRendererCamera->getRenderTexture());
-		}
+		m_material = getResource<Resources::MaterialResource>(compNode, "Material");
+		m_mesh = getResource<Resources::MeshResource>(compNode, "Mesh");
 	}
 
 	void SkinnedMeshRenderer::init()
@@ -95,6 +76,11 @@ namespace DerydocaEngine::Components
 		material->bind();
 		material->getShader()->update(matrixStack, projection, projectionTransform);
 		getMesh()->draw();
+	}
+
+	void SkinnedMeshRenderer::update(const float deltaTime)
+	{
+		m_time += deltaTime;
 	}
 
 }
