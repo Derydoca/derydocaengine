@@ -27,6 +27,7 @@ namespace DerydocaEngine::Components
 		SkinnedMeshRenderer();
 		~SkinnedMeshRenderer();
 
+		void deserialize(const YAML::Node& compNode) override;
 		void init() override;
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) override;
 		virtual void renderMesh(
@@ -37,9 +38,22 @@ namespace DerydocaEngine::Components
 		) override;
 		virtual void update(const float deltaTime) override;
 		
-		void setAnimationResource(std::shared_ptr<Resources::AnimationResource> animationResource) { m_animation = animationResource; }
-		void setMaterialResource(std::shared_ptr<Resources::MaterialResource> materialResource) { m_material = materialResource; }
-		void setMeshResource(std::shared_ptr<Resources::MeshResource> meshResource) { m_mesh = meshResource; }
+		bool isFullyConfigured() const { return m_animation && m_material && m_mesh; };
+
+		void setAnimationResource(std::shared_ptr<Resources::AnimationResource> animationResource)
+		{
+			m_animation = animationResource;
+			m_dirty = true;
+		}
+		void setMaterialResource(std::shared_ptr<Resources::MaterialResource> materialResource)
+		{
+			m_material = materialResource;
+		}
+		void setMeshResource(std::shared_ptr<Resources::MeshResource> meshResource)
+		{
+			m_mesh = meshResource;
+			m_dirty = true;
+		}
 		
 		std::shared_ptr<Animation::AnimationData> getAnimation() const { return std::static_pointer_cast<Animation::AnimationData>(m_animation->getResourceObjectPointer()); }
 		std::shared_ptr<Rendering::Material> getMaterial() { return m_material ? std::static_pointer_cast<Rendering::Material>(m_material->getResourceObjectPointer()) : nullptr; }
@@ -49,10 +63,12 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Resources::MaterialResource> getMaterialResource() { return m_material; }
 		std::shared_ptr<Resources::MeshResource> getMeshResource() const { return m_mesh; }
 
-		void deserialize(const YAML::Node& compNode);
+	private:
+		void fixDirtyStatus();
 
 	private:
 		float m_time;
+		bool m_dirty;
 		std::shared_ptr<Resources::AnimationResource> m_animation;
 		std::shared_ptr<Resources::MaterialResource> m_material;
 		std::shared_ptr<Resources::MeshResource> m_mesh;

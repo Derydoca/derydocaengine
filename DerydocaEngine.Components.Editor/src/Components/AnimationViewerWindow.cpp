@@ -15,6 +15,7 @@ DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	meshRendererGameObject->addComponent(m_meshRenderer);
 	meshRendererGameObject->init();
 	meshRendererGameObject->postInit();
+	meshRendererGameObject->getTransform()->setScale(glm::vec3(0.001f));
 
 	m_scene->getRoot()->addChild(meshRendererGameObject);
 }

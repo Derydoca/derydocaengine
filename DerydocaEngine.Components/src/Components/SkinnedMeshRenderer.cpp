@@ -19,6 +19,7 @@ namespace DerydocaEngine::Components
 
 	SkinnedMeshRenderer::SkinnedMeshRenderer() :
 		m_time(0.0f),
+		m_dirty(true),
 		m_animation(),
 		m_material(),
 		m_mesh(),
@@ -39,19 +40,23 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::init()
 	{
-		if (!getMesh())
+		if (!isFullyConfigured())
 		{
 			return;
 		}
-		m_boneMatrices.resize(getMesh()->getSkeleton()->getNumBones());
-		getAnimation()->optimizeForSkeleton(getMesh()->getSkeleton());
+
+		fixDirtyStatus();
 	}
 
 	void SkinnedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
-		if (!getMesh() || !getAnimation() || !getMaterial())
+		if (!isFullyConfigured())
 		{
 			return;
+		}
+		else if (m_dirty)
+		{
+			fixDirtyStatus();
 		}
 
 		getMaterial()->bind();
@@ -73,6 +78,11 @@ namespace DerydocaEngine::Components
 		const std::shared_ptr<Transform> projectionTransform
 	)
 	{
+		if (!isFullyConfigured())
+		{
+			return;
+		}
+
 		material->bind();
 		material->getShader()->update(matrixStack, projection, projectionTransform);
 		getMesh()->draw();
@@ -81,6 +91,16 @@ namespace DerydocaEngine::Components
 	void SkinnedMeshRenderer::update(const float deltaTime)
 	{
 		m_time += deltaTime;
+	}
+
+	void SkinnedMeshRenderer::fixDirtyStatus()
+	{
+		assert(isFullyConfigured());
+
+		m_boneMatrices.resize(getMesh()->getSkeleton()->getNumBones());
+		getAnimation()->optimizeForSkeleton(getMesh()->getSkeleton());
+
+		m_dirty = false;
 	}
 
 }
