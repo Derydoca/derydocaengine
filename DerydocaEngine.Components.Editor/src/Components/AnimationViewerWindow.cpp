@@ -32,6 +32,8 @@ void DerydocaEngine::Components::AnimationViewerWindow::update(const float delta
 	{
 		m_animationTime += deltaTime;
 	}
+
+	m_meshRenderer->setAnimationTime(m_animationTime);
 }
 
 void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
@@ -46,6 +48,8 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 		}
 	}
 
+	ImGui::SameLine();
+
 	{
 		std::shared_ptr<Resources::Resource> modifiedResource;
 		if (Dgui::ResourcePicker("Mesh", m_meshRenderer->getMeshResource(), Resources::MeshResourceType, modifiedResource))
@@ -53,6 +57,8 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 			m_meshRenderer->setMeshResource(std::static_pointer_cast<Resources::MeshResource>(modifiedResource));
 		}
 	}
+
+	ImGui::SameLine();
 
 	{
 		std::shared_ptr<Resources::Resource> modifiedResource;
@@ -63,6 +69,8 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 	}
 
 	SceneViewerWindow::renderViewToWindow();
+
+	renderTimelineControl();
 }
 
 glm::vec2 DerydocaEngine::Components::AnimationViewerWindow::getViewPadding()
@@ -73,4 +81,16 @@ glm::vec2 DerydocaEngine::Components::AnimationViewerWindow::getViewPadding()
 void DerydocaEngine::Components::AnimationViewerWindow::renderToActiveBuffer()
 {
 	Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(getCamera(), {m_scene}, getDisplayWidth(), getDisplayHeight());
+}
+
+void DerydocaEngine::Components::AnimationViewerWindow::renderTimelineControl()
+{
+	float animationDuration = 0.0f;
+	auto anim = m_meshRenderer->getAnimation();
+	if (anim)
+	{
+		animationDuration = anim->getDuration();
+	}
+
+	ImGui::SliderFloat("Time", &m_animationTime, 0.0f, animationDuration);
 }

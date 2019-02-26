@@ -54,8 +54,9 @@ namespace DerydocaEngine::Components
 			m_mesh = meshResource;
 			m_dirty = true;
 		}
+		void setAnimationTime(const float animationTime) { m_time = animationTime; }
 		
-		std::shared_ptr<Animation::AnimationData> getAnimation() const { return std::static_pointer_cast<Animation::AnimationData>(m_animation->getResourceObjectPointer()); }
+		std::shared_ptr<Animation::AnimationData> getAnimation() const { return m_animation ? std::static_pointer_cast<Animation::AnimationData>(m_animation->getResourceObjectPointer()) : nullptr; }
 		std::shared_ptr<Rendering::Material> getMaterial() { return m_material ? std::static_pointer_cast<Rendering::Material>(m_material->getResourceObjectPointer()) : nullptr; }
 		std::shared_ptr<Rendering::Mesh> getMesh() const { return m_mesh ? std::static_pointer_cast<Rendering::Mesh>(m_mesh->getResourceObjectPointer()) : nullptr; }
 

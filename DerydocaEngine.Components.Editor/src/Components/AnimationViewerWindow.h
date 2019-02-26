@@ -15,14 +15,18 @@ namespace DerydocaEngine::Components
 		AnimationViewerWindow();
 		~AnimationViewerWindow();
 		
-		virtual void update(const float deltaTime) override;
 		virtual void renderWindow();
+		virtual void update(const float deltaTime) override;
+
 		virtual std::string getWindowTitle() { return "Animation Viewer"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
 		virtual glm::vec2 getViewPadding() override;
 		virtual void renderToActiveBuffer() override;
 
 		std::shared_ptr<Components::SkinnedMeshRenderer> getSkinnedMeshRenderer() { return m_meshRenderer; }
+
+	private:
+		void renderTimelineControl();
 
 	private:
 		float m_animationTime;
