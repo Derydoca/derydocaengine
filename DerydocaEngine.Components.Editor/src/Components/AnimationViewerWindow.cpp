@@ -37,7 +37,29 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 {
 	SceneViewerWindow::updateDisplayProperties();
 
-	//Dgui::ResourcePicker("Mesh", "my_mesh", Resources::ResourceType::MeshResourceType);
+	{
+		std::shared_ptr<Resources::Resource> modifiedResource;
+		if (Dgui::ResourcePicker("Animation", m_meshRenderer->getAnimationResource(), Resources::AnimationResourceType, modifiedResource))
+		{
+			m_meshRenderer->setAnimationResource(std::static_pointer_cast<Resources::AnimationResource>(modifiedResource));
+		}
+	}
+
+	{
+		std::shared_ptr<Resources::Resource> modifiedResource;
+		if (Dgui::ResourcePicker("Mesh", m_meshRenderer->getMeshResource(), Resources::MeshResourceType, modifiedResource))
+		{
+			m_meshRenderer->setMeshResource(std::static_pointer_cast<Resources::MeshResource>(modifiedResource));
+		}
+	}
+
+	{
+		std::shared_ptr<Resources::Resource> modifiedResource;
+		if (Dgui::ResourcePicker("Material", m_meshRenderer->getMaterialResource(), Resources::MaterialResourceType, modifiedResource))
+		{
+			m_meshRenderer->setMaterialResource(std::static_pointer_cast<Resources::MaterialResource>(modifiedResource));
+		}
+	}
 
 	SceneViewerWindow::renderViewToWindow();
 }
