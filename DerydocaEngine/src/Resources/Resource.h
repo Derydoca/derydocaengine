@@ -22,6 +22,7 @@ namespace DerydocaEngine::Resources
 		std::string getSourceFilePath() const { return m_sourceFilePath; }
 		std::string getMetaFilePath() const { return m_metaFilePath; }
 		std::shared_ptr<void> getResourceObjectPointer();
+		void setData(std::shared_ptr<void> data) { m_resourceObjectPointer = data; };
 		virtual unsigned long getTypeId() const = 0;
 	protected:
 		std::string m_name;

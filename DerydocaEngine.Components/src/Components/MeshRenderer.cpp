@@ -23,7 +23,7 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	MeshRenderer::MeshRenderer(std::shared_ptr<Rendering::Mesh> mesh, std::shared_ptr<Rendering::Material> material) :
+	MeshRenderer::MeshRenderer(std::shared_ptr<Resources::MeshResource> mesh, std::shared_ptr<Resources::MaterialResource> material) :
 		m_mesh(mesh),
 		m_material(material),
 		m_meshRendererCamera()
@@ -36,10 +36,10 @@ namespace DerydocaEngine::Components
 
 	void MeshRenderer::deserialize(const YAML::Node& compNode)
 	{
-		auto material = getResourcePointer<Rendering::Material>(compNode, "Material");
+		auto material = getResource<Resources::MaterialResource>(compNode, "Material");
 		setMaterial(material);
 
-		auto mesh = getResourcePointer<Rendering::Mesh>(compNode, "Mesh");
+		auto mesh = getResource<Resources::MeshResource>(compNode, "Mesh");
 		setMesh(mesh);
 
 		YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];
@@ -55,7 +55,7 @@ namespace DerydocaEngine::Components
 
 			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
 			m_meshRendererCamera = ObjectLibrary::getInstance().getComponent<Camera>(renderTextureCameraId);
-			material->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
+			getMaterial()->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
 		}
 	}
 
@@ -70,13 +70,21 @@ namespace DerydocaEngine::Components
 
 	void MeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
-		m_material->bind();
-		m_material->getShader()->updateViaActiveCamera(matrixStack);
-		Rendering::LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), m_material->getShader());
+		auto mesh = getMesh();
+		auto material = getMaterial();
 
-		m_mesh->draw();
+		if (!mesh || !material)
+		{
+			return;
+		}
 
-		m_material->unbind();
+		material->bind();
+		material->getShader()->updateViaActiveCamera(matrixStack);
+		Rendering::LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), material->getShader());
+		
+		mesh->draw();
+		
+		material->unbind();
 	}
 
 	void MeshRenderer::renderMesh(
@@ -88,7 +96,7 @@ namespace DerydocaEngine::Components
 	{
 		material->bind();
 		material->getShader()->update(matrixStack, projection, projectionTransform);
-		m_mesh->draw();
+		getMesh()->draw();
 	}
 
 }

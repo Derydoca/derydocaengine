@@ -6,6 +6,7 @@
 #include <boost/uuid/uuid.hpp>
 #include "Resources\Resource.h"
 #include "Resources\ResourceTreeNode.h"
+#include "Resources\ResourceType.h"
 
 namespace DerydocaEngine::Components {
 	class GameComponent;
@@ -27,6 +28,7 @@ namespace DerydocaEngine
 		void loadEngineResources(const boost::filesystem::path& path);
 		void loadProjectResources(const boost::filesystem::path& path);
 		std::string getMetaExtension() const { return m_metaExtension; }
+		std::vector<std::shared_ptr<Resources::Resource>> getResourcesOfType(Resources::ResourceType resourceType);
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
