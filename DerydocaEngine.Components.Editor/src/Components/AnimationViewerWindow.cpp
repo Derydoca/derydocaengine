@@ -3,11 +3,14 @@
 #include "Editor\EditorRenderer.h"
 #include "Dgui\ResourcePicker.h"
 #include "Rendering\Mesh.h"
+#include <limits>
 
 DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	SceneViewerWindow(),
 	m_animationTime(0.0f),
+	m_playbackSpeed(1.0f),
 	m_playing(false),
+	m_looping(false),
 	m_meshRenderer(std::make_shared<Components::SkinnedMeshRenderer>()),
 	m_scene(std::make_shared<Scenes::HardCodedScene>())
 {
@@ -28,9 +31,25 @@ void DerydocaEngine::Components::AnimationViewerWindow::update(const float delta
 {
 	SceneViewerWindow::update(deltaTime);
 
-	if (m_playing)
+	if (m_playing && m_meshRenderer->isFullyConfigured())
 	{
-		m_animationTime += deltaTime;
+		m_animationTime += deltaTime * m_playbackSpeed;
+
+		float animDuration = m_meshRenderer->getAnimation()->getDuration();
+		if (m_animationTime > animDuration)
+		{
+			if (m_looping)
+			{
+				m_animationTime = fmod(m_animationTime, animDuration) * animDuration;
+			}
+			else
+			{
+				// TODO: Fix this. It is currently invalid to end on the final frame as
+				//  the engine will crash looking for the next frame to blend
+				m_animationTime = animDuration - (animDuration / 1000.0f);
+				m_playing = false;
+			}
+		}
 	}
 
 	m_meshRenderer->setAnimationTime(m_animationTime);
@@ -92,5 +111,16 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderTimelineControl()
 		animationDuration = anim->getDuration();
 	}
 
-	ImGui::SliderFloat("Time", &m_animationTime, 0.0f, animationDuration);
+	ImGui::PushItemWidth(-1);
+	ImGui::SliderFloat("Time", &m_animationTime, 0.0f, animationDuration, "%.2f sec");
+	ImGui::PopItemWidth();
+
+	//ImGui::SameLine();
+	if (ImGui::Button(m_playing ? "Pause" : "Play"))
+	{
+		m_playing = !m_playing;
+	}
+
+	ImGui::Checkbox("Loop", &m_looping);
+	ImGui::InputFloat("Playback Speed", &m_playbackSpeed);
 }

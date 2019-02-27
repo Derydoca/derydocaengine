@@ -30,7 +30,9 @@ namespace DerydocaEngine::Components
 
 	private:
 		float m_animationTime;
+		float m_playbackSpeed;
 		bool m_playing;
+		bool m_looping;
 		std::shared_ptr<Components::SkinnedMeshRenderer> m_meshRenderer;
 		std::shared_ptr<Scenes::HardCodedScene> m_scene;
 
