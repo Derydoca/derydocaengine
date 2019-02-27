@@ -25,8 +25,8 @@ namespace DerydocaEngine::Components
 		virtual void renderToActiveBuffer() = 0;
 
 		bool isActive() { return m_isActive; }
-		int getDisplayWidth() { return m_displayWidth; }
-		int getDisplayHeight() { return m_displayHeight; }
+		float getDisplayWidth() { return m_displayWidth; }
+		float getDisplayHeight() { return m_displayHeight; }
 		std::shared_ptr<Components::Camera> getCamera() { return m_camera; }
 
 	private:

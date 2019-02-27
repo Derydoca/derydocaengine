@@ -4,11 +4,13 @@
 #include "Dgui\ResourcePicker.h"
 #include "Rendering\Mesh.h"
 #include <limits>
+#include "Components\Light.h"
 
 DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	SceneViewerWindow(),
 	m_animationTime(0.0f),
 	m_playbackSpeed(1.0f),
+	m_modelScale(0.001f),
 	m_playing(false),
 	m_looping(false),
 	m_meshRenderer(std::make_shared<Components::SkinnedMeshRenderer>()),
@@ -21,6 +23,21 @@ DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	meshRendererGameObject->getTransform()->setScale(glm::vec3(0.001f));
 
 	m_scene->getRoot()->addChild(meshRendererGameObject);
+
+	auto go = std::make_shared<GameObject>("");
+	go->addComponent(Components::Light::generateInstance());
+	go->init();
+	go->postInit();
+	go->getTransform()->setPos({ 0.0f, 0.5f, 1.0f });
+	m_scene->getRoot()->addChild(go);
+	auto go2 = std::make_shared<GameObject>("");
+	go2->init();
+	go2->postInit();
+	go2->addComponent(Components::Light::generateInstance());
+	go2->getTransform()->setPos({ 0.0f, 0.5f, -1.0f });
+	m_scene->getRoot()->addChild(go2);
+
+	getCamera();
 }
 
 DerydocaEngine::Components::AnimationViewerWindow::~AnimationViewerWindow()
@@ -35,7 +52,7 @@ void DerydocaEngine::Components::AnimationViewerWindow::update(const float delta
 	{
 		m_animationTime += deltaTime * m_playbackSpeed;
 
-		float animDuration = m_meshRenderer->getAnimation()->getDuration();
+		float animDuration = static_cast<float>(m_meshRenderer->getAnimation()->getDuration());
 		if (m_animationTime > animDuration)
 		{
 			if (m_looping)
@@ -47,6 +64,18 @@ void DerydocaEngine::Components::AnimationViewerWindow::update(const float delta
 				// TODO: Fix this. It is currently invalid to end on the final frame as
 				//  the engine will crash looking for the next frame to blend
 				m_animationTime = animDuration - (animDuration / 1000.0f);
+				m_playing = false;
+			}
+		}
+		if (m_animationTime < 0.0f)
+		{
+			if (m_looping)
+			{
+				m_animationTime = animDuration - (fmod(m_animationTime, animDuration) * animDuration * -1);
+			}
+			else
+			{
+				m_animationTime = 0.0f;
 				m_playing = false;
 			}
 		}
@@ -87,6 +116,12 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 		}
 	}
 
+	ImGui::SameLine();
+	if (ImGui::InputFloat("Model Scale", &m_modelScale, 0.01f))
+	{
+		updateModelScale();
+	}
+
 	SceneViewerWindow::renderViewToWindow();
 
 	renderTimelineControl();
@@ -94,12 +129,23 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 
 glm::vec2 DerydocaEngine::Components::AnimationViewerWindow::getViewPadding()
 {
-	return glm::vec2(0.0f, 150.0f);
+	return glm::vec2(0.0f, 120.0f);
 }
 
 void DerydocaEngine::Components::AnimationViewerWindow::renderToActiveBuffer()
 {
-	Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(getCamera(), {m_scene}, getDisplayWidth(), getDisplayHeight());
+	Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(
+		getCamera(),
+		{m_scene},
+		static_cast<int>(getDisplayWidth()),
+		static_cast<int>(getDisplayHeight())
+	);
+}
+
+void DerydocaEngine::Components::AnimationViewerWindow::setModelScale(float modelScale)
+{
+	m_modelScale = modelScale;
+	updateModelScale();
 }
 
 void DerydocaEngine::Components::AnimationViewerWindow::renderTimelineControl()
@@ -108,19 +154,25 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderTimelineControl()
 	auto anim = m_meshRenderer->getAnimation();
 	if (anim)
 	{
-		animationDuration = anim->getDuration();
+		animationDuration = static_cast<float>(anim->getDuration());
 	}
 
 	ImGui::PushItemWidth(-1);
 	ImGui::SliderFloat("Time", &m_animationTime, 0.0f, animationDuration, "%.2f sec");
 	ImGui::PopItemWidth();
 
-	//ImGui::SameLine();
 	if (ImGui::Button(m_playing ? "Pause" : "Play"))
 	{
 		m_playing = !m_playing;
 	}
 
+	ImGui::SameLine();
 	ImGui::Checkbox("Loop", &m_looping);
+	ImGui::SameLine();
 	ImGui::InputFloat("Playback Speed", &m_playbackSpeed);
+}
+
+void DerydocaEngine::Components::AnimationViewerWindow::updateModelScale()
+{
+	m_meshRenderer->getGameObject()->getTransform()->setScale(glm::vec3(m_modelScale));
 }
