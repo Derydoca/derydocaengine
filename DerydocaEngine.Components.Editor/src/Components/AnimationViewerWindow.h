@@ -13,13 +13,14 @@ namespace DerydocaEngine::Components
 		GENINSTANCE(AnimationViewerWindow);
 
 		AnimationViewerWindow();
-		~AnimationViewerWindow();
-		
+		virtual ~AnimationViewerWindow();
+
 		virtual void renderWindow();
 		virtual void update(const float deltaTime) override;
 
-		virtual std::string getWindowTitle() { return "Animation Viewer"; }
-		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
+		virtual glm::ivec2 getWindowInitialSize() override { return { 500.0f, 400.0f }; }
+		virtual std::string getWindowTitle() override { return "Animation Viewer"; }
+		virtual ImGuiWindowFlags getWindowFlags() override { return ImGuiWindowFlags_None; }
 		virtual glm::vec2 getViewPadding() override;
 		virtual void renderToActiveBuffer() override;
 

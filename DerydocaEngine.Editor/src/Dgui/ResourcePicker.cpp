@@ -94,7 +94,12 @@ namespace DerydocaEngine::Dgui
 		return result;
 	}
 
-	bool ResourcePicker(const std::string label, std::shared_ptr<Resources::Resource> resource, Resources::ResourceType resourceType, std::shared_ptr<Resources::Resource>& selectedResource)
+	bool ResourcePicker(
+		const std::string label,
+		std::shared_ptr<Resources::Resource> resource,
+		Resources::ResourceType resourceType,
+		std::shared_ptr<Resources::Resource>& selectedResource
+	)
 	{
 		bool result = false;
 		static bool opened = false;

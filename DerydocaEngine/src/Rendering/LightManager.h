@@ -34,6 +34,10 @@ namespace DerydocaEngine::Rendering
 			std::shared_ptr<Rendering::Shader> const& shader
 		);
 		void removeLight(std::weak_ptr<Components::Light> const& light) {
+			if (m_lights.size() == 0)
+			{
+				return;
+			}
 			auto lightRef = light.lock();
 			m_lights.remove_if([lightRef](std::weak_ptr<Components::Light> l) {
 				auto otherLightRef = l.lock();

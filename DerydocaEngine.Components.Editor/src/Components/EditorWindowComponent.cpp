@@ -25,6 +25,16 @@ namespace DerydocaEngine::Components
 			return;
 		}
 
+		ImVec2 size = {20.0f, 20.0f};
+		{
+			auto initSize = getWindowInitialSize();
+			size.x = initSize.x;
+			size.y = initSize.y;
+		}
+		if (size.x > 0 && size.y > 0)
+		{
+			ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
+		}
 		ImGui::Begin(m_windowName.c_str(), &m_isOpen, getWindowFlags());
 		renderWindow();
 		ImGui::End();
