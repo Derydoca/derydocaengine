@@ -6,7 +6,12 @@
 namespace DerydocaEngine::Input
 {
 
-	Mouse::Mouse()
+	Mouse::Mouse() :
+		m_currentPos(glm::ivec2(0, 0)),
+		m_prevPos(glm::ivec2(0, 0)),
+		m_relativeMouseWheelMovement(glm::ivec2(0, 0)),
+		m_tick(0),
+		m_keys()
 	{
 	}
 
@@ -29,7 +34,7 @@ namespace DerydocaEngine::Input
 		m_prevPos.x = m_currentPos.x;
 		m_prevPos.y = m_currentPos.y;
 
-		// Query the mouse for it's current position
+		// Query the mouse for the current position
 		unsigned int buttonMask = SDL_GetMouseState(&m_currentPos.x, &m_currentPos.y);
 
 		// Update the mouse's button states
@@ -37,6 +42,10 @@ namespace DerydocaEngine::Input
 		{
 			m_keys[i].setState(buttonMask & SDL_BUTTON(i + 1), m_tick);
 		}
+
+		// Reset the relative mouse wheel movement
+		m_relativeMouseWheelMovement.x = 0;
+		m_relativeMouseWheelMovement.y = 0;
 	}
 
 	void Mouse::setRelative(bool const & isRelative)

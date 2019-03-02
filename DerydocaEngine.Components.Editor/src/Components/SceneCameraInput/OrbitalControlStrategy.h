@@ -13,7 +13,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 		const float MIN_DISTANCE = 0.01f;
 
 		float m_distance;
-		float m_zoomSpeed;
+		float m_zoomFactor;
 		float m_pitch;
 		float m_pitchSensitivity;
 		float m_minPitch;

@@ -17,11 +17,13 @@ namespace DerydocaEngine::Rendering
 		m_width(width),
 		m_height(height),
 		m_keyboard(0),
+		m_mouse(0),
 		m_camera(0)
 	{
 		DisplayManager::getInstance().addDisplay(this);
 
 		m_keyboard = Input::InputManager::getInstance().getKeyboard();
+		m_mouse = Input::InputManager::getInstance().getMouse();
 
 		m_window = SystemWindowingLayer::createWindow(title, m_width, m_height);
 		m_context = SystemWindowingLayer::createGraphicsAPIContext(m_window);
@@ -104,6 +106,9 @@ namespace DerydocaEngine::Rendering
 				break;
 			case SDL_MOUSEMOTION:
 				break;
+			case SDL_MOUSEWHEEL:
+				m_mouse->setRelativeWheelMovement(e.wheel.x, e.wheel.y);
+				break;
 			case SDL_KEYDOWN:
 				switch (e.key.keysym.sym) {
 				case SDLK_ESCAPE:
@@ -116,7 +121,6 @@ namespace DerydocaEngine::Rendering
 				}
 				break;
 			case SDL_KEYUP:
-
 				m_keyboard->setKeyState(e.key.keysym.sym, false);
 				break;
 			case SDL_WINDOWEVENT:

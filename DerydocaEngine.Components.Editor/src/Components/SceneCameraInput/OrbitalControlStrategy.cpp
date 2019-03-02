@@ -7,7 +7,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 	OrbitalControlStrategy::OrbitalControlStrategy() :
 		SceneCameraInputStrategy(),
 		m_distance(5.0f),
-		m_zoomSpeed(5.0f),
+		m_zoomFactor(0.1f),
 		m_pitch(0.0f),
 		m_pitchSensitivity(0.005f),
 		m_minPitch(-glm::half_pi<float>()),
@@ -45,6 +45,12 @@ namespace DerydocaEngine::Components::SceneCameraInput
 			else if (m_pitch > m_maxPitch)
 			{
 				m_pitch = m_maxPitch;
+			}
+
+			int zoomWheelY = m_mouse->getRelativeWheelMovementY();
+			if (zoomWheelY)
+			{
+				m_distance *= 1 + (zoomWheelY * m_zoomFactor);
 			}
 
 			// Constrain the distance of the camera from the origin so that we can not pass through the origin
