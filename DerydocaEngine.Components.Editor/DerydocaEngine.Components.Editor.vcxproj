@@ -171,6 +171,8 @@
   <ItemGroup>
     <ClInclude Include="src\Components\AnimationViewerWindow.h" />
     <ClInclude Include="src\Components\EditorCameraWindow.h" />
+    <ClInclude Include="src\Components\SceneCameraInput\SceneCameraInputStrategy.h" />
+    <ClInclude Include="src\Components\SceneCameraInput\WasdControlStrategy.h" />
     <ClInclude Include="src\Components\SceneHierarchyWindow.h" />
     <ClInclude Include="src\Components\SceneViewerWindow.h" />
     <ClInclude Include="src\EditorComponentsPch.h" />
@@ -214,6 +216,8 @@
     <ClCompile Include="src\Components\AnimationViewerWindow.cpp" />
     <ClCompile Include="src\Components\EditorCameraWindow.cpp" />
     <ClCompile Include="src\Components\InspectorWindow.cpp" />
+    <ClCompile Include="src\Components\SceneCameraInput\SceneCameraInputStrategy.cpp" />
+    <ClCompile Include="src\Components\SceneCameraInput\WasdControlStrategy.cpp" />
     <ClCompile Include="src\Components\SceneHierarchyWindow.cpp" />
     <ClCompile Include="src\Components\SceneViewerWindow.cpp" />
     <ClCompile Include="src\EditorComponentsPch.cpp">

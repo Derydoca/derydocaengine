@@ -1,8 +1,9 @@
 #pragma once
-#include "Components\EditorWindowComponent.h"
-#include "Rendering\RenderTexture.h"
 #include "Components\Camera.h"
+#include "Components\EditorWindowComponent.h"
 #include "Input\InputManager.h"
+#include "Rendering\RenderTexture.h"
+#include "SceneCameraInput\SceneCameraInputStrategy.h"
 
 namespace DerydocaEngine::Components
 {
@@ -10,7 +11,7 @@ namespace DerydocaEngine::Components
 	class SceneViewerWindow : public EditorWindowComponent
 	{
 	public:
-		SceneViewerWindow();
+		SceneViewerWindow(std::shared_ptr<SceneCameraInput::SceneCameraInputStrategy> inputStrategy);
 		virtual ~SceneViewerWindow();
 
 		virtual void init() override;
@@ -29,23 +30,14 @@ namespace DerydocaEngine::Components
 		float getDisplayHeight() { return m_displayHeight; }
 		std::shared_ptr<Components::Camera> getCamera() { return m_camera; }
 
+	protected:
+		std::shared_ptr<SceneCameraInput::SceneCameraInputStrategy> m_sceneCameraInputStrategy;
+
 	private:
 		// Display variables
 		bool m_isActive;
 		float m_displayWidth;
 		float m_displayHeight;
-
-		// Mouse rotation vars
-		Input::Mouse* m_mouse;
-		float m_mouseSensitivityX;
-		float m_mouseSensitivityY;
-		float m_minXRot;
-		float m_maxXRot;
-		glm::vec2 m_eulerRot;
-
-		// Keyboard movement vars
-		Input::Keyboard* m_keyboard;
-		float m_moveSpeed;
 
 		std::shared_ptr<Rendering::RenderTexture> m_renderTexture;
 		std::shared_ptr<Camera> m_camera;

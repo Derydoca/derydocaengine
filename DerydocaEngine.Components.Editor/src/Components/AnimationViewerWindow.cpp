@@ -5,9 +5,10 @@
 #include "Rendering\Mesh.h"
 #include <limits>
 #include "Components\Light.h"
+#include "SceneCameraInput\WasdControlStrategy.h"
 
 DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
-	SceneViewerWindow(),
+	SceneViewerWindow(std::make_shared<SceneCameraInput::WasdControlStrategy>()),
 	m_animationTime(0.0f),
 	m_playbackSpeed(1.0f),
 	m_modelScale(0.001f),

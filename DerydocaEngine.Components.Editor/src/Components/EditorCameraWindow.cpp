@@ -2,6 +2,7 @@
 #include "EditorCameraWindow.h"
 #include "Editor\Inspector\InspectorRendererFactory.h"
 #include "Editor\EditorRenderer.h"
+#include "SceneCameraInput\WasdControlStrategy.h"
 
 namespace DerydocaEngine::Components
 {
@@ -9,7 +10,7 @@ namespace DerydocaEngine::Components
 	const float VERTICAL_PADDING = 70.0f;
 
 	EditorCameraWindow::EditorCameraWindow() :
-		SceneViewerWindow(),
+		SceneViewerWindow(std::make_shared<SceneCameraInput::WasdControlStrategy>()),
 		m_showPropertiesPanel(false)
 	{
 	}
