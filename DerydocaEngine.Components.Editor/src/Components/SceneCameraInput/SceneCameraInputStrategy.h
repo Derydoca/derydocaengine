@@ -8,7 +8,8 @@ namespace DerydocaEngine::Components::SceneCameraInput
 	class SceneCameraInputStrategy
 	{
 	public:
-		virtual void update(const float deltaTime, std::shared_ptr<Components::Transform> cameraTransform) = 0;
+		virtual void updateCameraTransform(std::shared_ptr<Components::Transform> cameraTransform) = 0;
+		virtual bool updateInput(const float deltaTime) = 0;
 	protected:
 		SceneCameraInputStrategy();
 		virtual ~SceneCameraInputStrategy();

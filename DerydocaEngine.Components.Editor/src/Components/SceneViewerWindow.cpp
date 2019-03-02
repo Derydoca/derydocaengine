@@ -38,6 +38,9 @@ namespace DerydocaEngine::Components
 
 		// Store the camera's transform for later use
 		m_cameraTransform = m_camera->getGameObject()->getTransform();
+
+		// Set the initial camera position
+		m_sceneCameraInputStrategy->updateCameraTransform(m_cameraTransform);
 	}
 
 	void SceneViewerWindow::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack)
@@ -66,7 +69,10 @@ namespace DerydocaEngine::Components
 			return;
 		}
 
-		m_sceneCameraInputStrategy->update(deltaTime, m_camera->getGameObject()->getTransform());
+		if (m_sceneCameraInputStrategy->updateInput(deltaTime))
+		{
+			m_sceneCameraInputStrategy->updateCameraTransform(m_cameraTransform);
+		}
 	}
 
 	void SceneViewerWindow::updateDisplayProperties()

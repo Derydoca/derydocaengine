@@ -8,7 +8,9 @@ namespace DerydocaEngine::Components::SceneCameraInput
 	{
 	public:
 		OrbitalControlStrategy();
-		virtual void update(const float deltaTime, std::shared_ptr<Components::Transform> cameraTransform) override;
+
+		virtual void updateCameraTransform(std::shared_ptr<Components::Transform> cameraTransform) override;
+		virtual bool updateInput(const float deltaTime) override;
 	private:
 		const float MIN_DISTANCE = 0.01f;
 

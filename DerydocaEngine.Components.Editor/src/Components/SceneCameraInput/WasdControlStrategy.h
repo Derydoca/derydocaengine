@@ -8,7 +8,9 @@ namespace DerydocaEngine::Components::SceneCameraInput
 	{
 	public:
 		WasdControlStrategy();
-		virtual void update(const float deltaTime, std::shared_ptr<Components::Transform> cameraTransform) override;
+
+		virtual void updateCameraTransform(std::shared_ptr<Components::Transform> cameraTransform) override;
+		virtual bool updateInput(const float deltaTime) override;
 	private:
 		float m_moveSpeed;
 		float m_pitch;
@@ -17,6 +19,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 		float m_maxPitch;
 		float m_yaw;
 		float m_yawSensitivity;
+		glm::vec3 m_localTranslationDelta;
 	};
 
 }

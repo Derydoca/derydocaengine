@@ -11,11 +11,27 @@ namespace DerydocaEngine::Components::SceneCameraInput
 		m_minPitch(-glm::half_pi<float>()),
 		m_maxPitch(glm::half_pi<float>()),
 		m_yaw(0.0f),
-		m_yawSensitivity(0.005f)
+		m_yawSensitivity(0.005f),
+		m_localTranslationDelta(glm::vec3(0))
 	{
 	}
 
-	void WasdControlStrategy::update(const float deltaTime, std::shared_ptr<Components::Transform> cameraTransform)
+	void WasdControlStrategy::updateCameraTransform(std::shared_ptr<Components::Transform> cameraTransform)
+	{
+		// Convert the local translation delta vector to a global translation vector and move the camera by that vector
+		glm::vec3 globalTranslationDelta = cameraTransform->getModel() * glm::vec4(m_localTranslationDelta, 0);
+		cameraTransform->setPos(cameraTransform->getPos() + globalTranslationDelta);
+
+		// Calculate the rotation quaternion using the yaw and pitch and set the camera's rotation quaternion to that
+		glm::fquat newQuat =
+			glm::rotate(m_yaw, glm::vec3(0, 1, 0))
+			*
+			glm::rotate(m_pitch, glm::vec3(1, 0, 0))
+			;
+		cameraTransform->setQuat(newQuat);
+	}
+
+	bool WasdControlStrategy::updateInput(const float deltaTime)
 	{
 		if (m_mouse->isKeyDownFrame(2))
 		{
@@ -26,68 +42,61 @@ namespace DerydocaEngine::Components::SceneCameraInput
 			m_mouse->setRelative(false);
 		}
 
+		// Only manipulate the variables when the right mouse button is pressed
 		if (m_mouse->isKeyDown(2))
 		{
-			{ // Keyboard movement
+			// Reset the translation delta
+			m_localTranslationDelta = glm::vec3();
 
-			// Reset the momentum each frame
-				auto localMomentum = glm::vec3();
+			// Scale the movement speed by the delta time
+			float moveSpeed = m_moveSpeed * deltaTime;
 
-				float moveSpeed = m_moveSpeed * deltaTime;
+			// Z axis translation
+			if (m_keyboard->isKeyDown(SDLK_w)) {
+				m_localTranslationDelta.z -= moveSpeed;
+			}
+			if (m_keyboard->isKeyDown(SDLK_s)) {
+				m_localTranslationDelta.z += moveSpeed;
+			}
 
-				// Forward/backward
-				if (m_keyboard->isKeyDown(SDLK_w)) {
-					localMomentum.z -= moveSpeed;
-				}
-				if (m_keyboard->isKeyDown(SDLK_s)) {
-					localMomentum.z += moveSpeed;
-				}
+			// X axis translation
+			if (m_keyboard->isKeyDown(SDLK_a)) {
+				m_localTranslationDelta.x -= moveSpeed;
+			}
+			if (m_keyboard->isKeyDown(SDLK_d)) {
+				m_localTranslationDelta.x += moveSpeed;
+			}
 
-				// Left/right
-				if (m_keyboard->isKeyDown(SDLK_a)) {
-					localMomentum.x -= moveSpeed;
-				}
-				if (m_keyboard->isKeyDown(SDLK_d)) {
-					localMomentum.x += moveSpeed;
-				}
+			// Y axis translation
+			if (m_keyboard->isKeyDown(SDLK_q)) {
+				m_localTranslationDelta.y -= moveSpeed;
+			}
+			if (m_keyboard->isKeyDown(SDLK_e)) {
+				m_localTranslationDelta.y += moveSpeed;
+			}
 
-				// Up/down
-				if (m_keyboard->isKeyDown(SDLK_q)) {
-					localMomentum.y -= moveSpeed;
-				}
-				if (m_keyboard->isKeyDown(SDLK_e)) {
-					localMomentum.y += moveSpeed;
-				}
-				// Convert the local direction to global direction
-				glm::vec4 globalMomentum = cameraTransform->getModel() * glm::vec4(localMomentum, 0);
+			// Convert the mouse's relative movement into pitch and
+			//  yaw and add the delta to the existing values
+			glm::ivec2 diff = m_mouse->getRelativeMovement();
+			m_pitch -= (float)diff.y * m_pitchSensitivity;
+			m_yaw -= (float)diff.x * m_yawSensitivity;
 
-				// Translate
-				cameraTransform->setPos(cameraTransform->getPos() + glm::vec3(globalMomentum));
+			// Constrain the pitch between the min and max values
+			if (m_pitch < m_minPitch)
+			{
+				m_pitch = m_minPitch;
+			}
+			else if (m_pitch > m_maxPitch)
+			{
+				m_pitch = m_maxPitch;
+			}
 
-			} // End keyboard movement
-
-			{ // Mouse look
-				glm::ivec2 diff = m_mouse->getRelativeMovement();
-				m_pitch -= (float)diff.y * m_pitchSensitivity;
-				m_yaw -= (float)diff.x * m_yawSensitivity;
-
-				if (m_pitch < m_minPitch)
-				{
-					m_pitch = m_minPitch;
-				}
-				else if (m_pitch > m_maxPitch)
-				{
-					m_pitch = m_maxPitch;
-				}
-
-				glm::fquat newQuat =
-					glm::rotate(m_yaw, glm::vec3(0, 1, 0))
-					*
-					glm::rotate(m_pitch, glm::vec3(1, 0, 0))
-					;
-				cameraTransform->setQuat(newQuat);
-			} // End mouse look
+			// Assume something has changed
+			return true;
 		}
+
+		// If we are here, then there were no possible changes to the values
+		return false;
 	}
 
 }
