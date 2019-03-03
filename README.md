@@ -1,7 +1,7 @@
 # Derydoca Engine
 The Derydoca Engine is a game engine and personal project of mine I am making available to anyone interested in it. Feel free to fork it and customize it to your needs or just play around in it. For more information, you can visit my personal website where I periodically post blogs about the development of this engine.
 
-http://www.derydoca.com
+http://derydoca.com/category/derydoca-game-engine/
 
 Watch a short demo video of the engine in action by clicking the thumbnail below!
 
