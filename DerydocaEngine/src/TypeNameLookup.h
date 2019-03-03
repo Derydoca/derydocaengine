@@ -7,7 +7,7 @@ namespace DerydocaEngine
 	class TypeNameLookup
 	{
 	public:
-		static TypeNameLookup& getInstace() {
+		static TypeNameLookup& get() {
 			static TypeNameLookup m_instance;
 			return m_instance;
 		}
