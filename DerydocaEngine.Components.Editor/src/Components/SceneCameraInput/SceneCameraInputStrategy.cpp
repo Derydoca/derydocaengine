@@ -5,6 +5,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 {
 
 	SceneCameraInputStrategy::SceneCameraInputStrategy() :
+		m_isActive(false),
 		m_keyboard(0),
 		m_mouse(0)
 	{

@@ -8,6 +8,8 @@ namespace DerydocaEngine::Components
 
 	SceneViewerWindow::SceneViewerWindow(std::shared_ptr<SceneCameraInput::SceneCameraInputStrategy> inputStrategy) :
 		m_sceneCameraInputStrategy(inputStrategy),
+		m_isActive(false),
+		m_isViewportHovered(false),
 		m_displayWidth(0),
 		m_displayHeight(0),
 		m_renderTexture(std::make_shared<Rendering::RenderTexture>()),
@@ -69,7 +71,9 @@ namespace DerydocaEngine::Components
 			return;
 		}
 
-		if (m_sceneCameraInputStrategy->updateInput(deltaTime))
+		m_sceneCameraInputStrategy->updateActiveState(m_isViewportHovered);
+
+		if (m_sceneCameraInputStrategy->updateInput(deltaTime, m_isViewportHovered))
 		{
 			m_sceneCameraInputStrategy->updateCameraTransform(m_cameraTransform);
 		}
@@ -103,7 +107,8 @@ namespace DerydocaEngine::Components
 	void SceneViewerWindow::renderViewToWindow()
 	{
 		// Render the camera's view to the window
-		ImGui::Image((ImTextureID)m_renderTexture->getRendererId(), { m_displayWidth, m_displayHeight }, { 0, 1 }, { 1, 0 });
+		ImGui::ImageButton((ImTextureID)m_renderTexture->getRendererId(), { m_displayWidth, m_displayHeight }, { 0, 1 }, { 1, 0 }, 0);
+		m_isViewportHovered = ImGui::IsItemHovered(ImGuiHoveredFlags_RectOnly);
 	}
 
 }

@@ -16,6 +16,20 @@ namespace DerydocaEngine::Components::SceneCameraInput
 	{
 	}
 
+	void WasdControlStrategy::updateActiveState(bool isViewportHovered)
+	{
+		if (isViewportHovered && m_mouse->isKeyDownFrame(2))
+		{
+			m_mouse->setRelative(true);
+			setActive(true);
+		}
+		if (isActive() && !m_mouse->isKeyDown(2))
+		{
+			m_mouse->setRelative(false);
+			setActive(false);
+		}
+	}
+
 	void WasdControlStrategy::updateCameraTransform(std::shared_ptr<Components::Transform> cameraTransform)
 	{
 		// Convert the local translation delta vector to a global translation vector and move the camera by that vector
@@ -31,17 +45,8 @@ namespace DerydocaEngine::Components::SceneCameraInput
 		cameraTransform->setQuat(newQuat);
 	}
 
-	bool WasdControlStrategy::updateInput(const float deltaTime)
+	bool WasdControlStrategy::updateInput(const float deltaTime, bool isViewportHovered)
 	{
-		if (m_mouse->isKeyDownFrame(2))
-		{
-			m_mouse->setRelative(true);
-		}
-		else if (m_mouse->isKeyUpFrame(2))
-		{
-			m_mouse->setRelative(false);
-		}
-
 		// Only manipulate the variables when the right mouse button is pressed
 		if (m_mouse->isKeyDown(2))
 		{

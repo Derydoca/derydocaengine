@@ -9,8 +9,9 @@ namespace DerydocaEngine::Components::SceneCameraInput
 	public:
 		WasdControlStrategy();
 
+		virtual void updateActiveState(bool isViewportHovered) override;
 		virtual void updateCameraTransform(std::shared_ptr<Components::Transform> cameraTransform) override;
-		virtual bool updateInput(const float deltaTime) override;
+		virtual bool updateInput(const float deltaTime, bool isViewportHovered) override;
 	private:
 		float m_moveSpeed;
 		float m_pitch;
