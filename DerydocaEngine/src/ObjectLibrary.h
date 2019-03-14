@@ -27,6 +27,10 @@ namespace DerydocaEngine
 
 		void loadEngineResources(const boost::filesystem::path& path);
 		void loadProjectResources(const boost::filesystem::path& path);
+		void addResource(std::shared_ptr<Resources::Resource> resource)
+		{
+			m_resources[resource->getId()] = resource;
+		}
 		std::string getMetaExtension() const { return m_metaExtension; }
 		std::vector<std::shared_ptr<Resources::Resource>> getResourcesOfType(Resources::ResourceType resourceType);
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
