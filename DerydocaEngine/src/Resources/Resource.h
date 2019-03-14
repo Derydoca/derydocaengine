@@ -34,7 +34,6 @@ namespace DerydocaEngine::Resources
 		ResourceType m_type;
 		std::string m_sourceFilePath;
 		std::string m_metaFilePath;
-		void* m_resourceObject;
 		std::shared_ptr<void> m_resourceObjectPointer;
 	};
 

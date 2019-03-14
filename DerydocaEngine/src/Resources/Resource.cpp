@@ -12,7 +12,6 @@ namespace DerydocaEngine::Resources
 		m_type(ResourceType::UnknownResourceType),
 		m_sourceFilePath(),
 		m_metaFilePath(),
-		m_resourceObject(nullptr),
 		m_resourceObjectPointer()
 	{
 
@@ -34,7 +33,6 @@ namespace DerydocaEngine::Resources
 		m_type(type),
 		m_sourceFilePath(sourceFilePath),
 		m_metaFilePath(metaFilePath),
-		m_resourceObject(nullptr),
 		m_resourceObjectPointer(nullptr)
 	{
 	}
