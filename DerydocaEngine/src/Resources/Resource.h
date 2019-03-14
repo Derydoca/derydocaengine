@@ -27,6 +27,7 @@ namespace DerydocaEngine::Resources
 		virtual unsigned long getTypeId() const = 0;
 
 	protected:
+		Resource(const std::string& name, ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
 		Resource(const boost::uuids::uuid& id, const std::string& name, ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
 
 	protected:

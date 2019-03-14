@@ -7,12 +7,7 @@ namespace DerydocaEngine::Resources
 {
 
 	Resource::Resource() :
-		Object(),
-		m_name(),
-		m_type(ResourceType::UnknownResourceType),
-		m_sourceFilePath(),
-		m_metaFilePath(),
-		m_resourceObjectPointer()
+		Resource("", ResourceType::UnknownResourceType, "", "")
 	{
 
 	}
@@ -25,6 +20,16 @@ namespace DerydocaEngine::Resources
 		{
 			m_name = filePath.stem().string();
 		}
+	}
+
+	Resource::Resource(const std::string & name, ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+		Object(),
+		m_name(name),
+		m_type(type),
+		m_sourceFilePath(sourceFilePath),
+		m_metaFilePath(metaFilePath),
+		m_resourceObjectPointer(nullptr)
+	{
 	}
 
 	Resource::Resource(const boost::uuids::uuid& id, const std::string & name, ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
