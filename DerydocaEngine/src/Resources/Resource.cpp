@@ -42,7 +42,7 @@ namespace DerydocaEngine::Resources
 	{
 	}
 
-	void Resource::setFilePaths(std::string const & sourceFilePath, std::string const & metaFilePath)
+	void Resource::setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath)
 	{
 		m_sourceFilePath = sourceFilePath;
 		m_metaFilePath = metaFilePath;
