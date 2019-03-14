@@ -11,7 +11,7 @@ namespace DerydocaEngine::Resources
 	{
 	public:
 		Resource();
-		Resource(boost::uuids::uuid const& id, std::string const& sourceFilePath, std::string const& metaFilePath, ResourceType const& type);
+		Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type);
 
 		void setData(std::shared_ptr<void> data) { m_resourceObjectPointer = data; };
 		void setFilePaths(std::string const& sourceFilePath, std::string const& metaFilePath);
@@ -27,8 +27,8 @@ namespace DerydocaEngine::Resources
 		virtual unsigned long getTypeId() const = 0;
 
 	protected:
-		Resource(const std::string& name, ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
-		Resource(const boost::uuids::uuid& id, const std::string& name, ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
+		Resource(const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
+		Resource(const boost::uuids::uuid& id, const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
 
 	protected:
 		std::string m_name;

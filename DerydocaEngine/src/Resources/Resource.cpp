@@ -12,7 +12,7 @@ namespace DerydocaEngine::Resources
 
 	}
 
-	Resource::Resource(boost::uuids::uuid const& id, std::string const& sourceFilePath, std::string const& metaFilePath, ResourceType const& type) :
+	Resource::Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
 		Resource(id, "", type, sourceFilePath, metaFilePath)
 	{
 		auto filePath = boost::filesystem::path(sourceFilePath);
@@ -22,7 +22,7 @@ namespace DerydocaEngine::Resources
 		}
 	}
 
-	Resource::Resource(const std::string & name, ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+	Resource::Resource(const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
 		Object(),
 		m_name(name),
 		m_type(type),
@@ -32,7 +32,7 @@ namespace DerydocaEngine::Resources
 	{
 	}
 
-	Resource::Resource(const boost::uuids::uuid& id, const std::string & name, ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+	Resource::Resource(const boost::uuids::uuid& id, const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
 		Object(id),
 		m_name(name),
 		m_type(type),
