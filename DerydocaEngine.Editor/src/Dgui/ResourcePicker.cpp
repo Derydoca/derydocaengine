@@ -4,6 +4,21 @@
 
 namespace DerydocaEngine::Dgui
 {
+	int findIndex(std::vector<std::shared_ptr<Resources::Resource>> resources, std::shared_ptr<Resources::Resource> resource)
+	{
+		if (resource == nullptr)
+		{
+			return 0;
+		}
+		for (size_t i = 0; i < resources.size(); i++)
+		{
+			if (resources[i]->getId() == resource->getId())
+			{
+				return i;
+			}
+		}
+		return 0;
+	}
 
 	bool DerydocaEngine::Dgui::ResourcePicker(
 		const std::string label,
@@ -111,6 +126,9 @@ namespace DerydocaEngine::Dgui
 		if (ImGui::Button(resourceName.c_str()))
 		{
 			ImGui::OpenPopup(label.c_str());
+			opened = true;
+			resources = ObjectLibrary::getInstance().getResourcesOfType(resourceType);
+			selectedIndex = findIndex(resources, selectedResource);
 		}
 
 		// Field name
@@ -119,14 +137,15 @@ namespace DerydocaEngine::Dgui
 
 		// Modal popup
 		ImGui::SetNextWindowSize({ 250, 400 }, ImGuiCond_FirstUseEver);
-		if (ImGui::BeginPopupModal(label.c_str(), NULL, ImGuiWindowFlags_None))
+		if (ImGui::BeginPopupModal(label.c_str(), &opened, ImGuiWindowFlags_None))
 		{
-			// Initialize the list the first time the window appears
-			if (!opened)
-			{
-				opened = true;
-				resources = ObjectLibrary::getInstance().getResourcesOfType(resourceType);
-			}
+			//// Initialize the list the first time the window appears
+			//if (!opened)
+			//{
+			//	opened = true;
+			//	resources = ObjectLibrary::getInstance().getResourcesOfType(resourceType);
+			//	selectedIndex = findIndex(resources, selectedResource);
+			//}
 
 			// Display a selectable list of resources that match the resource type
 			auto cra = ImGui::GetContentRegionAvail();
@@ -151,6 +170,7 @@ namespace DerydocaEngine::Dgui
 			if (ImGui::Button("Cancel", { 60, 0 }))
 			{
 				ImGui::CloseCurrentPopup();
+				opened = false;
 			}
 			ImGui::SetItemDefaultFocus();
 			ImGui::SameLine(ImGui::GetWindowContentRegionMax().x - 100);
@@ -162,23 +182,18 @@ namespace DerydocaEngine::Dgui
 			if (result == true)
 			{
 				ImGui::CloseCurrentPopup();
-
 			}
 
 			ImGui::EndPopup();
 		}
-		else
+		if (!opened && resources.size() > 0)
 		{
-			if (opened)
-			{
-				opened = false;
-				resources.clear();
-			}
-
+			resources.clear();
 		}
 
 		if (result)
 		{
+			opened = false;
 			selectedResource = resources[selectedIndex];
 		}
 		return result;
