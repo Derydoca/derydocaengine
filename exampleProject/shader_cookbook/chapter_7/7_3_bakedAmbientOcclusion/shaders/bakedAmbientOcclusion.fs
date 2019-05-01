@@ -9,6 +9,7 @@ struct LightInfo
 };
 uniform LightInfo Lights[10];
 uniform int LightCount;
+uniform mat4 ModelMatrix;
 
 uniform sampler3D ShadowJitterTex;
 uniform vec3 ShadowJitterTexSize; // (width, height, depth)
@@ -94,7 +95,7 @@ void main()
     FragColor = vec4(0, 0, 0, 1);
     for(int i = 0; i < LightCount; i++)
     {
-        vec4 ShadowCoord = Lights[i].ShadowMatrix * ModelCoord;
+        vec4 ShadowCoord = Lights[i].ShadowMatrix * ModelMatrix * ModelCoord;
 
         float shadow = getShadowInfluence(i, ShadowCoord);
         vec3 diffuseTexFactor = texture(Material.DiffuseTex, TexCoord).xyz;

@@ -80,7 +80,7 @@ namespace DerydocaEngine::Components
 
 		material->bind();
 		material->getShader()->updateViaActiveCamera(matrixStack);
-		Rendering::LightManager::getInstance().bindLightsToShader(matrixStack, getGameObject()->getTransform(), material->getShader());
+		Rendering::LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), material->getShader());
 		
 		mesh->draw();
 		

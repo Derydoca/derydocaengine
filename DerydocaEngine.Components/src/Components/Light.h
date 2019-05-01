@@ -66,7 +66,7 @@ namespace DerydocaEngine::Components
 		bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
 		Rendering::Projection& getProjection() { return m_projection; }
 		Rendering::Projection getProjection() const { return m_projection; }
-		glm::mat4 getShadowMatrix(glm::mat4 const& objectModelMatrix);
+		glm::mat4 getShadowMatrix();
 		float& getShadowSoftness() { return m_shadowSoftness; }
 		float getShadowSoftness() const { return m_shadowSoftness; }
 

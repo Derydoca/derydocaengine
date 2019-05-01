@@ -231,7 +231,7 @@ namespace DerydocaEngine::Components
 
 			// Render the full-buffer quad
 			m_renderTextureDeferred->bindDeferredTextures(m_deferredRendererCompositor);
-			Rendering::LightManager::getInstance().bindLightsToShader(nullptr, getGameObject()->getTransform(), m_deferredRendererCompositor);
+			Rendering::LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), m_deferredRendererCompositor);
 			m_deferredRendererCompositor->renderMesh(m_quad, nullptr);
 		}
 

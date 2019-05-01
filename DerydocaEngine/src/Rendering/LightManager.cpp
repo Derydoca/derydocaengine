@@ -14,7 +14,6 @@ namespace DerydocaEngine::Rendering
 {
 
 	void LightManager::bindLightsToShader(
-		std::shared_ptr<Rendering::MatrixStack> const& matrixStack,
 		std::shared_ptr<Components::Transform> const& objectTransform,
 		std::shared_ptr<Rendering::Shader> const& shader
 	)
@@ -94,11 +93,8 @@ namespace DerydocaEngine::Rendering
 				shader->setFloat(shadowSoftnessName, light->getShadowSoftness());
 
 				// Set the shadow matrix
-				if (matrixStack)
-				{
-					std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
-					shader->setMat4(shadowMatrixName, light->getShadowMatrix(matrixStack->getMatrix()));
-				}
+				std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
+				shader->setMat4(shadowMatrixName, light->getShadowMatrix());
 			}
 
 			// Increase our light index
@@ -139,7 +135,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	std::list<std::shared_ptr<Components::Light>> LightManager::getLights(std::shared_ptr<Components::Transform> const& objectTransform) const
+	std::list<std::shared_ptr<Components::Light>> LightManager::getLights(std::shared_ptr<Components::Transform> const& cameraTransform) const
 	{
 		// Create a list to store the lights
 		auto lights = std::list<std::shared_ptr<Components::Light>>();
