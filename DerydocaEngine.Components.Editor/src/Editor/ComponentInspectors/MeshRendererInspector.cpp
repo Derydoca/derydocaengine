@@ -10,7 +10,7 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::MeshRendererInspect
 
 	{
 		std::shared_ptr<Resources::Resource> modifiedResource;
-		auto resource = Dgui::ResourcePicker("Material", meshRenderer->getMaterialResource(), modifiedResource);
+		auto resource = Dgui::ResourcePicker("Material", meshRenderer->getMaterialResource(), Resources::ResourceType::MaterialResourceType, modifiedResource);
 		if (resource)
 		{
 			meshRenderer->setMaterial(std::static_pointer_cast<Resources::MaterialResource>(modifiedResource));
@@ -19,7 +19,7 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::MeshRendererInspect
 
 	{
 		std::shared_ptr<Resources::Resource> modifiedResource;
-		if (Dgui::ResourcePicker("Mesh", meshRenderer->getMeshResource(), modifiedResource))
+		if (Dgui::ResourcePicker("Mesh", meshRenderer->getMeshResource(), Resources::ResourceType::MeshResourceType, modifiedResource))
 		{
 			meshRenderer->setMesh(std::static_pointer_cast<Resources::MeshResource>(modifiedResource));
 		}
