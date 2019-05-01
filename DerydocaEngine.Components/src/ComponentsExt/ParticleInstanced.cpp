@@ -89,7 +89,7 @@ namespace DerydocaEngine::Ext
 	{
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
-		Rendering::LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), m_material->getShader());
+		Rendering::LightManager::getInstance().bindLightsToShader(m_material->getShader());
 
 		glBindVertexArray(m_mesh->getVao());
 		glDrawElementsInstanced(GL_TRIANGLES, static_cast<int>(m_mesh->getNumIndices()), GL_UNSIGNED_INT, 0, m_numParticles);

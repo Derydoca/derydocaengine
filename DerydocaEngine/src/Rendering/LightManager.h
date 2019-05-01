@@ -29,7 +29,6 @@ namespace DerydocaEngine::Rendering
 
 		void addLight(std::weak_ptr<Components::Light> const& light) { m_lights.push_back(light); }
 		void bindLightsToShader(
-			std::shared_ptr<Components::Transform> const& objectTransform,
 			std::shared_ptr<Rendering::Shader> const& shader
 		);
 		void removeLight(std::weak_ptr<Components::Light> const& light) {

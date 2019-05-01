@@ -14,20 +14,18 @@ namespace DerydocaEngine::Rendering
 {
 
 	void LightManager::bindLightsToShader(
-		std::shared_ptr<Components::Transform> const& objectTransform,
 		std::shared_ptr<Rendering::Shader> const& shader
 	)
 	{
-		assert(objectTransform);
 		assert(shader);
-
-		// Get a list of lights that will affect the object being sent in
-		auto lights = getLights(objectTransform);
 
 		// Cache some things
 		auto currentCamera = CameraManager::getInstance().getCurrentCamera();
 		glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
 		glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
+
+		// Get a list of lights that will affect the object being sent in
+		auto lights = getLights(currentCamera->getGameObject()->getTransform());
 
 		// Loop through each light and bind them to the shader
 		int lightIndex = 0;

@@ -64,7 +64,7 @@ namespace DerydocaEngine::Components
 		getAnimation()->loadPose(m_time, m_boneMatrices, getMesh()->getSkeleton());
 		getMaterial()->setMat4Array("BoneMatrices", m_boneMatrices);
 
-		Rendering::LightManager::getInstance().bindLightsToShader(getGameObject()->getTransform(), getMaterial()->getShader());
+		Rendering::LightManager::getInstance().bindLightsToShader(getMaterial()->getShader());
 
 		getMesh()->draw();
 
