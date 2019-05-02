@@ -13,9 +13,7 @@
 namespace DerydocaEngine::Rendering
 {
 
-	void LightManager::bindLightsToShader(
-		std::shared_ptr<Rendering::Shader> const& shader
-	)
+	void LightManager::bindLightsToShader(std::shared_ptr<Rendering::Shader> const& shader)
 	{
 		assert(shader);
 

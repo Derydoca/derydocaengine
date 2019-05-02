@@ -82,9 +82,58 @@ namespace DerydocaEngine::Rendering
 
 	int GraphicsAPI::getCurrentFramebufferID()
 	{
-		int boundFbo;
-		glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &boundFbo);
-		return boundFbo;
+		int boundFrameBufferId;
+		glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &boundFrameBufferId);
+		return boundFrameBufferId;
+	}
+
+	void GraphicsAPI::setTexture(const int uniformLocation, const int textureUnit, const unsigned int textureType, const unsigned int textureId)
+	{
+		glActiveTexture(GL_TEXTURE0 + textureUnit);
+		glBindTexture(textureType, textureId);
+		glUniform1i(uniformLocation, textureUnit);
+	}
+
+	int GraphicsAPI::getUniformName(const unsigned int rendererId, const std::string& name)
+	{
+		int uniformName = glGetUniformLocation(rendererId, name.c_str());
+		return uniformName;
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const int val)
+	{
+		glUniform1i(uniformLocation, val);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const float val)
+	{
+		glUniform1f(uniformLocation, val);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const glm::vec3& val)
+	{
+		glUniform3f(uniformLocation, val.x, val.y, val.z);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const glm::vec4& val)
+	{
+		glUniform4f(uniformLocation, val.x, val.y, val.z, val.w);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const glm::mat3& val)
+	{
+
+		glUniformMatrix3fv(uniformLocation, 1, GL_FALSE, &val[0][0]);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const glm::mat4& val)
+	{
+		glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, &val[0][0]);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const Color& val)
+	{
+		glUniform4f(uniformLocation, val.r, val.g, val.b, val.a);
 	}
 
 }
