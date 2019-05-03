@@ -83,11 +83,11 @@ namespace DerydocaEngine::Rendering
 		glValidateProgram(m_rendererId);
 		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformName(m_rendererId, "MVP");
-		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformName(m_rendererId, "ModelViewMatrix");
-		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformName(m_rendererId, "NormalMatrix");
-		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformName(m_rendererId, "ProjectionMatrix");
-		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformName(m_rendererId, "ModelMatrix");
+		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
+		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
+		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformLocation(m_rendererId, "NormalMatrix");
+		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformLocation(m_rendererId, "ProjectionMatrix");
+		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelMatrix");
 	}
 
 	Shader::Shader(const std::string& fileName, const int varyingsCount, const char * const * varyings) :
@@ -150,11 +150,11 @@ namespace DerydocaEngine::Rendering
 		glValidateProgram(m_rendererId);
 		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformName(m_rendererId, "MVP");
-		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformName(m_rendererId, "ModelViewMatrix");
-		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformName(m_rendererId, "NormalMatrix");
-		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformName(m_rendererId, "ProjectionMatrix");
-		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformName(m_rendererId, "ModelMatrix");
+		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
+		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
+		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformLocation(m_rendererId, "NormalMatrix");
+		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformLocation(m_rendererId, "ProjectionMatrix");
+		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelMatrix");
 	}
 
 	Shader::~Shader()
@@ -210,7 +210,7 @@ namespace DerydocaEngine::Rendering
 		}
 
 		glm::vec3 worldCamPos = trans->getWorldPos();
-		int worldCamPosUniformLocation = getUniformName("WorldCameraPosition");
+		int worldCamPosUniformLocation = getUniformLocation("WorldCameraPosition");
 		GraphicsAPI::setUniform(worldCamPosUniformLocation, worldCamPos.x, worldCamPos.y, worldCamPos.z);
 	}
 
@@ -231,13 +231,13 @@ namespace DerydocaEngine::Rendering
 			glm::vec4(0.0f, h2, 0.0f, 0.0f),
 			glm::vec4(0.0f, 0.0f, 1.0f, 0.0f),
 			glm::vec4(w2 + 0, h2 + 0, 0.0f, 1.0f));
-		int viewportMatrixUniformLocation = getUniformName("ViewportMatrix");
+		int viewportMatrixUniformLocation = getUniformLocation("ViewportMatrix");
 		GraphicsAPI::setUniformMat4(viewportMatrixUniformLocation, glm::value_ptr(viewportMatrix), 1);
 	}
 
 	void Shader::setFloat(const std::string& name, const float val)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, val);
 	}
 
@@ -246,7 +246,7 @@ namespace DerydocaEngine::Rendering
 		for (size_t i = 0; i < value.size(); i++)
 		{
 			std::string uniformStringName = name + "[" + std::to_string(i) + "]";
-			int uniformLocation = getUniformName(uniformStringName);
+			int uniformLocation = getUniformLocation(uniformStringName);
 			GraphicsAPI::setUniform(uniformLocation, value[i]);
 		}
 	}
@@ -256,26 +256,26 @@ namespace DerydocaEngine::Rendering
 		for (unsigned int i = 0; i < arrayLength; i++)
 		{
 			std::string uniformStringName = name + "[" + std::to_string(i) + "]";
-			int uniformLocation = getUniformName(uniformStringName);
+			int uniformLocation = getUniformLocation(uniformStringName);
 			GraphicsAPI::setUniform(uniformLocation, arrayLocation[i]);
 		}
 	}
 
 	void Shader::setColorRGB(const std::string& name, const Color& color)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, color.r, color.g, color.b);
 	}
 
 	void Shader::setColorRGBA(const std::string& name, const Color& color)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, color.r, color.g, color.b, color.a);
 	}
 
 	void Shader::setInt(const std::string& name, const int val)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, val);
 	}
 
@@ -284,50 +284,50 @@ namespace DerydocaEngine::Rendering
 		for (unsigned int i = 0; i < arrayLength; i++)
 		{
 			std::string uniformStringName = name + std::to_string(i);
-			int uniformLocation = getUniformName(uniformStringName);
+			int uniformLocation = getUniformLocation(uniformStringName);
 			GraphicsAPI::setUniform(uniformLocation, arrayLocation[i]);
 		}
 	}
 
 	void Shader::setVec3(const std::string& name, const glm::vec3& val)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, val.x, val.y, val.z);
 	}
 
 	void Shader::setVec4(const std::string& name, const glm::vec4& val)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, val.x, val.y, val.z, val.w);
 	}
 
 	void Shader::setMat3(const std::string& name, const glm::mat3& val)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniformMat3(uniformLocation, &val[0][0], 1);
 	}
 
 	void Shader::setMat4(const std::string& name, const glm::mat4& val)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniformMat4(uniformLocation, &val[0][0], 1);
 	}
 
 	void Shader::setMat4Array(const std::string& name, const std::vector<glm::mat4>& valArray)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniformMat4(uniformLocation, &valArray.at(0)[0][0], valArray.size());
 	}
 
 	void Shader::setTexture(const std::string& name, const int textureUnit, const std::shared_ptr<Rendering::Texture> texture)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, texture->getTextureType(), texture->getRendererId());
 	}
 
 	void Shader::setTexture(const std::string& name, const int textureUnit, const unsigned int textureType, const unsigned int textureId)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, textureType, textureId);
 	}
 
@@ -410,7 +410,7 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	int Shader::getUniformName(const std::string& stringName)
+	int Shader::getUniformLocation(const std::string& stringName)
 	{
 		if (m_uniformLookup.count(stringName) != 0)
 		{
@@ -418,7 +418,7 @@ namespace DerydocaEngine::Rendering
 		}
 		else
 		{
-			int uniformName = GraphicsAPI::getUniformName(m_rendererId, stringName);
+			int uniformName = GraphicsAPI::getUniformLocation(m_rendererId, stringName);
 			m_uniformLookup[stringName] = uniformName;
 			return uniformName;
 		}
@@ -496,7 +496,7 @@ namespace DerydocaEngine::Rendering
 
 	void Shader::clearFloat(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, 0.0f);
 	}
 
@@ -505,26 +505,26 @@ namespace DerydocaEngine::Rendering
 		for (unsigned int i = 0; i < arrayLength; i++)
 		{
 			std::string uniformStringName = name + "[" + std::to_string(i) + "]";
-			int uniformLocation = getUniformName(uniformStringName);
+			int uniformLocation = getUniformLocation(uniformStringName);
 			GraphicsAPI::setUniform(uniformLocation, 0.0f);
 		}
 	}
 
 	void Shader::clearColorRGB(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, 0.0f, 0.0f, 0.0f);
 	}
 
 	void Shader::clearColorRGBA(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, 0.0f, 0.0f, 0.0f, 0.0f);
 	}
 
 	void Shader::clearInt(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, 0);
 	}
 
@@ -533,40 +533,40 @@ namespace DerydocaEngine::Rendering
 		for (unsigned int i = 0; i < arrayLength; i++)
 		{
 			std::string uniformStringName = name + std::to_string(i);
-			int uniformLocation = getUniformName(uniformStringName);
+			int uniformLocation = getUniformLocation(uniformStringName);
 			GraphicsAPI::setUniform(uniformLocation, 0);
 		}
 	}
 
 	void Shader::clearVec3(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, 0.0f, 0.0f, 0.0f);
 	}
 
 	void Shader::clearVec4(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setUniform(uniformLocation, 0.0f, 0.0f, 0.0f, 0.0f);
 	}
 
 	void Shader::clearMat3(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		float emptyMatrix[3 * 3] = { 0 };
 		GraphicsAPI::setUniformMat3(uniformLocation, emptyMatrix, 1);
 	}
 
 	void Shader::clearMat4(const std::string& name)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		float emptyMatrix[4 * 4] = { 0 };
 		GraphicsAPI::setUniformMat4(uniformLocation, emptyMatrix, 1);
 	}
 
 	void Shader::clearTexture(const std::string& name, const int textureUnit, const unsigned int textureType)
 	{
-		int uniformLocation = getUniformName(name);
+		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, textureType, 0);
 	}
 

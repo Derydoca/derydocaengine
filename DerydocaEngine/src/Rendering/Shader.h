@@ -82,7 +82,7 @@ namespace DerydocaEngine::Rendering
 		static const unsigned int NUM_SHADERS = 5;
 		Shader(const Shader& other) {}
 		void operator=(const Shader& other) {}
-		int getUniformName(const std::string& stringName);
+		int getUniformLocation(const std::string& stringName);
 		void setTransformFeedbackVaryings(const int count, const char *const * varyings);
 
 		static void CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage);

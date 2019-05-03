@@ -21,7 +21,7 @@ namespace DerydocaEngine::Rendering
 		static void clearColorBuffer(Color color);
 		static void setViewport(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
 		static int getCurrentFramebufferID();
-		static int getUniformName(const unsigned int rendererId, const std::string& name);
+		static int getUniformLocation(const unsigned int rendererId, const std::string& name);
 		static void setTexture(const int uniformLocation, const int textureUnit, const unsigned int textureType, const unsigned int textureId);
 		static void setUniform(const int uniformLocation, const int val);
 		static void setUniform(const int uniformLocation, const float val);

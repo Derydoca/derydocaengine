@@ -94,7 +94,7 @@ namespace DerydocaEngine::Rendering
 		glUniform1i(uniformLocation, textureUnit);
 	}
 
-	int GraphicsAPI::getUniformName(const unsigned int rendererId, const std::string& name)
+	int GraphicsAPI::getUniformLocation(const unsigned int rendererId, const std::string& name)
 	{
 		int uniformName = glGetUniformLocation(rendererId, name.c_str());
 		return uniformName;
