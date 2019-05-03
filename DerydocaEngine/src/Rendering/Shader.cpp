@@ -89,11 +89,11 @@ namespace DerydocaEngine::Rendering
 		glValidateProgram(m_rendererId);
 		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-		m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_rendererId, "MVP");
-		m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_rendererId, "ModelViewMatrix");
-		m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_rendererId, "NormalMatrix");
-		m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_rendererId, "ProjectionMatrix");
-		m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_rendererId, "ModelMatrix");
+		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformName(m_rendererId, "MVP");
+		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformName(m_rendererId, "ModelViewMatrix");
+		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformName(m_rendererId, "NormalMatrix");
+		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformName(m_rendererId, "ProjectionMatrix");
+		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformName(m_rendererId, "ModelMatrix");
 	}
 
 	Shader::Shader(std::string const& fileName, int const& varyingsCount, const char * const * varyings) :
@@ -156,11 +156,11 @@ namespace DerydocaEngine::Rendering
 		glValidateProgram(m_rendererId);
 		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-		m_uniforms[TRANSFORM_MVP] = glGetUniformLocation(m_rendererId, "MVP");
-		m_uniforms[TRANSFORM_MV] = glGetUniformLocation(m_rendererId, "ModelViewMatrix");
-		m_uniforms[TRANSFORM_NORMAL] = glGetUniformLocation(m_rendererId, "NormalMatrix");
-		m_uniforms[TRANSFORM_PROJECTION] = glGetUniformLocation(m_rendererId, "ProjectionMatrix");
-		m_uniforms[TRANSFORM_MODEL] = glGetUniformLocation(m_rendererId, "ModelMatrix");
+		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformName(m_rendererId, "MVP");
+		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformName(m_rendererId, "ModelViewMatrix");
+		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformName(m_rendererId, "NormalMatrix");
+		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformName(m_rendererId, "ProjectionMatrix");
+		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformName(m_rendererId, "ModelMatrix");
 	}
 
 	Shader::~Shader()
@@ -210,37 +210,38 @@ namespace DerydocaEngine::Rendering
 		if (m_uniforms[TRANSFORM_MVP] >= 0)
 		{
 			glm::mat4 mvpMatrix = projection.getInverseViewProjectionMatrix(transformModelMatrix) * modelMatrix;
-			glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+			GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_MVP], glm::value_ptr(mvpMatrix), 1);
 		}
 
 		if (m_uniforms[TRANSFORM_MV] >= 0)
 		{
 			glm::mat4 mvMatrix = projection.getViewMatrix(transformModelMatrix) * modelMatrix;
-			glUniformMatrix4fv(m_uniforms[TRANSFORM_MV], 1, GL_FALSE, glm::value_ptr(mvMatrix));
+			GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_MV], glm::value_ptr(mvMatrix), 1);
 		}
 
 		if (m_uniforms[TRANSFORM_NORMAL] >= 0)
 		{
 			glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(projection.getViewMatrix(transformModelMatrix) * modelMatrix)));
-			glUniformMatrix3fv(m_uniforms[TRANSFORM_NORMAL], 1, GL_FALSE, glm::value_ptr(normalMatrix));
+			GraphicsAPI::setUniformMat3(m_uniforms[TRANSFORM_NORMAL], glm::value_ptr(normalMatrix), 1);
 		}
 
 		if (m_uniforms[TRANSFORM_PROJECTION] >= 0) {
 			glm::mat4 projectionMatrix = projection.getProjectionMatrix();
-			glUniformMatrix4fv(m_uniforms[TRANSFORM_PROJECTION], 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+			GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_PROJECTION], glm::value_ptr(projectionMatrix), 1);
 		}
 
 		if (m_uniforms[TRANSFORM_MODEL] >= 0) {
-			glUniformMatrix4fv(m_uniforms[TRANSFORM_MODEL], 1, GL_FALSE, glm::value_ptr(modelMatrix));
+			GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_MODEL], glm::value_ptr(modelMatrix), 1);
 		}
 
 		glm::vec3 worldCamPos = trans->getWorldPos();
-		glUniform3f(getUniformName("WorldCameraPosition"), worldCamPos.x, worldCamPos.y, worldCamPos.z);
+		int worldCamPosUniformLocation = getUniformName("WorldCameraPosition");
+		GraphicsAPI::setUniform(worldCamPosUniformLocation, worldCamPos.x, worldCamPos.y, worldCamPos.z);
 	}
 
 	void Shader::update(glm::mat4 const& matrix)
 	{
-		glUniformMatrix4fv(m_uniforms[TRANSFORM_MVP], 1, GL_FALSE, &matrix[0][0]);
+		GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_MVP], &matrix[0][0], 1);
 	}
 
 	void Shader::updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack)
@@ -255,7 +256,8 @@ namespace DerydocaEngine::Rendering
 			glm::vec4(0.0f, h2, 0.0f, 0.0f),
 			glm::vec4(0.0f, 0.0f, 1.0f, 0.0f),
 			glm::vec4(w2 + 0, h2 + 0, 0.0f, 1.0f));
-		glUniformMatrix4fv(getUniformName("ViewportMatrix"), 1, GL_FALSE, glm::value_ptr(viewportMatrix));
+		int viewportMatrixUniformLocation = getUniformName("ViewportMatrix");
+		GraphicsAPI::setUniformMat4(viewportMatrixUniformLocation, glm::value_ptr(viewportMatrix), 1);
 	}
 
 	void Shader::setFloat(std::string const& name, float const& val)
@@ -411,7 +413,7 @@ namespace DerydocaEngine::Rendering
 				else
 				{
 					// Render to the screen
-					glBindFramebuffer(GL_FRAMEBUFFER, 0);
+					GraphicsAPI::bindFramebuffer(0);
 					//cout << "No proper render target was supplied!\n";
 				}
 
