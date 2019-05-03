@@ -110,30 +110,29 @@ namespace DerydocaEngine::Rendering
 		glUniform1f(uniformLocation, val);
 	}
 
-	void GraphicsAPI::setUniform(const int uniformLocation, const glm::vec3& val)
+	void GraphicsAPI::setUniform(const int uniformLocation, const float v0, const float v1)
 	{
-		glUniform3f(uniformLocation, val.x, val.y, val.z);
+		glUniform2f(uniformLocation, v0, v1);
 	}
 
-	void GraphicsAPI::setUniform(const int uniformLocation, const glm::vec4& val)
+	void GraphicsAPI::setUniform(const int uniformLocation, const float v0, const float v1, const float v2)
 	{
-		glUniform4f(uniformLocation, val.x, val.y, val.z, val.w);
+		glUniform3f(uniformLocation, v0, v1, v2);
 	}
 
-	void GraphicsAPI::setUniform(const int uniformLocation, const glm::mat3& val)
+	void GraphicsAPI::setUniform(const int uniformLocation, const float v0, const float v1, const float v2, const float v3)
 	{
-
-		glUniformMatrix3fv(uniformLocation, 1, GL_FALSE, &val[0][0]);
+		glUniform4f(uniformLocation, v0, v1, v2, v3);
 	}
 
-	void GraphicsAPI::setUniform(const int uniformLocation, const glm::mat4& val)
+	void GraphicsAPI::setUniformMat3(const int uniformLocation, const float* matrixArrayPointer, int numMatrices)
 	{
-		glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, &val[0][0]);
+		glUniformMatrix3fv(uniformLocation, numMatrices, GL_FALSE, matrixArrayPointer);
 	}
 
-	void GraphicsAPI::setUniform(const int uniformLocation, const Color& val)
+	void GraphicsAPI::setUniformMat4(const int uniformLocation, const float* matrixArrayPointer, int numMatrices)
 	{
-		glUniform4f(uniformLocation, val.r, val.g, val.b, val.a);
+		glUniformMatrix4fv(uniformLocation, numMatrices, GL_FALSE, matrixArrayPointer);
 	}
 
 }

@@ -25,11 +25,11 @@ namespace DerydocaEngine::Rendering
 		static void setTexture(const int uniformLocation, const int textureUnit, const unsigned int textureType, const unsigned int textureId);
 		static void setUniform(const int uniformLocation, const int val);
 		static void setUniform(const int uniformLocation, const float val);
-		static void setUniform(const int uniformLocation, const glm::vec3& val);
-		static void setUniform(const int uniformLocation, const glm::vec4& val);
-		static void setUniform(const int uniformLocation, const glm::mat3& val);
-		static void setUniform(const int uniformLocation, const glm::mat4& val);
-		static void setUniform(const int uniformLocation, const Color& val);
+		static void setUniform(const int uniformLocation, const float v0, const float v1);
+		static void setUniform(const int uniformLocation, const float v0, const float v1, const float v2);
+		static void setUniform(const int uniformLocation, const float v0, const float v1, const float v2, const float v3);
+		static void setUniformMat3(const int uniformLocation, const float* matrixArrayPointer, int numMatrices);
+		static void setUniformMat4(const int uniformLocation, const float* matrixArrayPointer, int numMatrices);
 	};
 
 }
