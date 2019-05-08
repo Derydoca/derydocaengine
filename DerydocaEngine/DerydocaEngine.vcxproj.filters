@@ -499,6 +499,7 @@
     <ClInclude Include="src\Rendering\GraphicsAPI.h" />
     <ClInclude Include="src\Rendering\RenderingMode.h" />
     <ClInclude Include="src\Scenes\HardCodedScene.h" />
+    <ClInclude Include="src\Rendering\UniformBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Third Party">

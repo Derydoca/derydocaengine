@@ -15,6 +15,7 @@
 #include "Rendering\RenderTexture.h"
 #include "Rendering\Texture.h"
 #include "Components\Transform.h"
+#include "..\Debug\GLError.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -233,6 +234,15 @@ namespace DerydocaEngine::Rendering
 			glm::vec4(w2 + 0, h2 + 0, 0.0f, 1.0f));
 		int viewportMatrixUniformLocation = getUniformLocation("ViewportMatrix");
 		GraphicsAPI::setUniformMat4(viewportMatrixUniformLocation, glm::value_ptr(viewportMatrix), 1);
+	}
+
+	void Shader::bindUniformBuffer(const std::string & name, int uniformBufferId)
+	{
+		unsigned int blockIndex = glGetUniformBlockIndex(m_rendererId, name.c_str());
+		if (blockIndex != GL_INVALID_INDEX)
+		{
+			GL_CHECK(glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, uniformBufferId));
+		}
 	}
 
 	void Shader::setFloat(const std::string& name, const float val)

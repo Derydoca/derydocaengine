@@ -3,6 +3,7 @@
 #include <list>
 #include <memory>
 #include "Scenes\Scene.h"
+#include "UniformBuffer.h"
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -17,6 +18,23 @@ namespace DerydocaEngine {
 
 namespace DerydocaEngine::Rendering
 {
+
+	struct ubo_light_data
+	{
+		glm::vec4 Direction;
+		glm::vec4 Position;
+		glm::vec4 Intensity;
+		int Type;
+		float Cutoff;
+		float Exponent;
+		float Padding;
+	};
+
+	struct ubo_light_collection
+	{
+		ubo_light_data Lights[10];
+		int NumLights;
+	};
 
 	class LightManager
 	{
@@ -45,21 +63,26 @@ namespace DerydocaEngine::Rendering
 			});
 		}
 		void renderShadowMaps(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Components::Transform> cameraTransform);
+		void uploadLightUniformBufferData(const std::shared_ptr<Components::Transform> objectTransform);
 
 		void operator=(LightManager const&) = delete;
-	private:
-		const int MAX_LIGHTS = 10;
 
+	public:
+		static const int MAX_LIGHTS = 10;
+
+	private:
 		std::list<std::weak_ptr<Components::Light>> m_lights;
 		unsigned int m_shadowJitterTexture;
 		glm::vec3 m_shadowJitterTextureSize;
+		UniformBuffer<ubo_light_collection> m_lightUniformBuffer;
+		ubo_light_collection m_lightData;
 
 		LightManager();
 		LightManager(LightManager const&);
 		~LightManager();
 
 		void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
-		std::list<std::shared_ptr<Components::Light>> getLights(std::shared_ptr<Components::Transform> const& objectTransform) const;
+		std::vector<std::shared_ptr<Components::Light>> getLights(std::shared_ptr<Components::Transform> const& objectTransform) const;
 	};
 
 }

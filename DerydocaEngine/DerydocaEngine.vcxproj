@@ -301,6 +301,7 @@
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
     <ClInclude Include="src\Rendering\Renderer.h" />
     <ClInclude Include="src\Rendering\RenderingMode.h" />
+    <ClInclude Include="src\Rendering\UniformBuffer.h" />
     <ClInclude Include="src\Resources\FontResource.h" />
     <ClInclude Include="src\Resources\LevelResource.h" />
     <ClInclude Include="src\Resources\MaterialResource.h" />

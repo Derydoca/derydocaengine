@@ -5,20 +5,11 @@ in vec3 VertexNormal;
 
 out vec4 Color;
 
-struct Light {
-    vec4 Direction;
+struct LightInfo {
     vec4 Position;
     vec4 Intensity;
-    int Type;
-    float Cutoff;
-    float Exponent;
-    float Padding;
 };
-layout (std140) uniform LightCollection
-{
-    Light Lights[10];
-    int NumLights;
-};
+uniform LightInfo Lights[10];
 
 uniform vec4 Kd;
 uniform vec4 Ka;
@@ -43,7 +34,7 @@ void main()
     vec3 eyeNorm = normalize(NormalMatrix * VertexNormal);
     vec4 eyePosition = ModelViewMatrix * vec4(VertexPosition, 1.0);
     Color = vec4(0.0);
-    for(int i = 0; i < NumLights; i++)
+    for(int i = 0; i < 10; i++)
     {
         Color += ads(i, eyePosition, eyeNorm);
     }

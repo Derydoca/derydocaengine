@@ -23,6 +23,11 @@ namespace DerydocaEngine
 		{
 			return r != rhs.r || g != rhs.g || b != rhs.b || a != rhs.b;
 		}
+
+		glm::vec4 toVec4()
+		{
+			return glm::vec4(r, g, b, a);
+		}
 	};
 
 }

@@ -38,6 +38,7 @@ namespace DerydocaEngine::Rendering
 		void update(const glm::mat4& matrix);
 		void updateViaActiveCamera(const std::shared_ptr<MatrixStack>& matrixStack);
 
+		void bindUniformBuffer(const std::string& name, int uniformBufferId);
 		void setFloat(const std::string& name, const float val);
 		void setFloatArray(const std::string& name, const std::vector<float>& value);
 		void setFloatArray(const std::string& name, const float* arrayLocation, const unsigned int arrayLength);
