@@ -29,7 +29,6 @@ namespace DerydocaEngine::Rendering
 			if (light->isCastingShadows())
 			{
 				_itoa(lightIndex, indexStringBuffer, 10);
-				//std::string lightIndexString = std::to_string(lightIndex);
 
 				// Set the shadow map
 				std::string shadowMapName = std::string("ShadowMap[").append(indexStringBuffer).append("]");

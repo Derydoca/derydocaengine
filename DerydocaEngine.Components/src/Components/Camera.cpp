@@ -169,6 +169,8 @@ namespace DerydocaEngine::Components
 
 	void Camera::renderScenesToActiveBuffer(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH)
 	{
+		Rendering::LightManager::getInstance().uploadLightUniformBufferData(getGameObject()->getTransform());
+
 		// Set the viewport to what is defined on this camera
 		Rendering::GraphicsAPI::setViewport(std::static_pointer_cast<Camera>(shared_from_this()), textureW, textureH);
 

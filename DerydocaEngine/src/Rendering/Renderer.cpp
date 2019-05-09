@@ -31,9 +31,6 @@ namespace DerydocaEngine::Rendering
 		GraphicsAPI::clearDepthBuffer();
 		GraphicsAPI::clearColorBuffer({ 0.098f, 0.098f, 0.098f, 1 });
 
-		// Upload the light data
-		LightManager::getInstance().uploadLightUniformBufferData(nullptr);
-
 		// Run the pre-render methods in all components in the scene
 		root->preRender();
 
