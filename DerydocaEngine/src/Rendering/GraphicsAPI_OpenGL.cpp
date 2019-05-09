@@ -3,9 +3,11 @@
 #if OPENGL
 
 #include "GraphicsAPI.h"
+#include "Debug\GLError.h"
 
 namespace DerydocaEngine::Rendering
 {
+	int GraphicsAPI::USAGE_PATTERN_DYNAMIC_DRAW = GL_DYNAMIC_DRAW;
 
 	void GraphicsAPI::init()
 	{
@@ -40,6 +42,19 @@ namespace DerydocaEngine::Rendering
 	void GraphicsAPI::deleteFramebuffers(int count, const unsigned int * rendererIds)
 	{
 		glDeleteFramebuffers(count, rendererIds);
+	}
+
+	void GraphicsAPI::deleteUniformBuffer(const unsigned int& rendererId)
+	{
+		glDeleteBuffers(1, &rendererId);
+	}
+
+	void GraphicsAPI::createUniformBuffer(unsigned int& rendererId, const void* buffer, const size_t size, const int usagePattern)
+	{
+		glGenBuffers(1, &rendererId);
+		glBindBuffer(GL_UNIFORM_BUFFER, rendererId);
+		glBufferData(GL_UNIFORM_BUFFER, size, buffer, usagePattern);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	}
 
 	void GraphicsAPI::createFramebuffers(int count, unsigned int * rendererIds)
@@ -133,6 +148,15 @@ namespace DerydocaEngine::Rendering
 	void GraphicsAPI::setUniformMat4(const int uniformLocation, const float* matrixArrayPointer, int numMatrices)
 	{
 		glUniformMatrix4fv(uniformLocation, numMatrices, GL_FALSE, matrixArrayPointer);
+	}
+
+	void GraphicsAPI::updateUniformBuffer(const int rendererId, const void * buffer, const size_t size)
+	{
+		GL_CHECK(glBindBuffer(GL_UNIFORM_BUFFER, rendererId));
+		void* p;
+		GL_CHECK(p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY));
+		memcpy(p, buffer, size);
+		GL_CHECK(glUnmapBuffer(GL_UNIFORM_BUFFER));
 	}
 
 }

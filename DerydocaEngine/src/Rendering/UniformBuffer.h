@@ -1,58 +1,49 @@
 #pragma once
 #include "EnginePch.h"
-#include "..\Debug\GLError.h"
+#include "Rendering\GraphicsAPI.h"
 
-template<class T>
-class UniformBuffer
+namespace DerydocaEngine::Rendering
 {
-public:
-	UniformBuffer()
-	{
-		create();
-	}
 
-	~UniformBuffer()
+	template<class T>
+	class UniformBuffer
 	{
-		destroy();
-	}
-
-	void create()
-	{
-		glGenBuffers(1, &m_ubo);
-		glBindBuffer(GL_UNIFORM_BUFFER, m_ubo);
-		glBufferData(GL_UNIFORM_BUFFER, sizeof(T), NULL, GL_DYNAMIC_DRAW);
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	}
-
-	void destroy()
-	{
-		if (m_ubo)
+	public:
+		UniformBuffer()
 		{
-			glDeleteBuffers(1, &m_ubo);
+			create();
 		}
-	}
 
-	void uploadData(const T* lightData)
-	{
-		assert(m_ubo);
-
-		GL_CHECK(glBindBuffer(GL_UNIFORM_BUFFER, m_ubo));
-		void* p;
-		GL_CHECK(p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY));
-		if (!p)
+		~UniformBuffer()
 		{
-			return;
+			destroy();
 		}
-		memcpy(p, lightData, sizeof(T));
-		GL_CHECK(glUnmapBuffer(GL_UNIFORM_BUFFER));
-	}
 
-	unsigned int getRendererId()
-	{
-		return m_ubo;
-	}
+		void create()
+		{
+			GraphicsAPI::createUniformBuffer(m_ubo, nullptr, sizeof(T), GraphicsAPI::USAGE_PATTERN_DYNAMIC_DRAW);
+		}
 
-private:
-	unsigned int m_ubo;
-};
+		void destroy()
+		{
+			if (m_ubo)
+			{
+				GraphicsAPI::deleteUniformBuffer(m_ubo);
+			}
+		}
 
+		void uploadData(const T* lightData)
+		{
+			GraphicsAPI::updateUniformBuffer(m_ubo, lightData, sizeof(T));
+		}
+
+		unsigned int getRendererId()
+		{
+			return m_ubo;
+		}
+
+	private:
+		unsigned int m_ubo;
+	};
+
+}
