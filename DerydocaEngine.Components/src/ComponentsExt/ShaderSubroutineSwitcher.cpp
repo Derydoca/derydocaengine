@@ -37,9 +37,11 @@ namespace DerydocaEngine::Ext
 		// Copy the material from the mesh renderer
 		auto material = std::make_shared<Rendering::Material>();
 		material->copyFrom(mr->getMaterial());
+		auto materialResource = std::make_shared<Resources::MaterialResource>();
+		materialResource->setData(material);
 
 		// Set the mesh renderer's material to our copy
-		mr->setMaterial(material);
+		mr->setMaterial(materialResource);
 
 		// Get the shader from the material
 		auto shader = material->getShader();

@@ -18,13 +18,6 @@ struct MaterialInfo
 };
 uniform MaterialInfo Material;
 
-struct LightInfo
-{
-    vec4 Position;
-    vec4 Intensity;
-};
-uniform LightInfo Lights[10];
-
 out vec4 FragColor;
 
 float luma(vec3 color)

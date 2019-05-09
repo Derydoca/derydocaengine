@@ -9,6 +9,7 @@ namespace DerydocaEngine {
 	}
 	namespace Input {
 		class Keyboard;
+		class Mouse;
 	}
 }
 
@@ -50,6 +51,7 @@ namespace DerydocaEngine::Rendering
 		int m_width;
 		int m_height;
 		Input::Keyboard* m_keyboard;
+		Input::Mouse* m_mouse;
 		Components::Camera* m_camera;
 	};
 

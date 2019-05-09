@@ -4,13 +4,20 @@ in vec3 VertexPosition;
 in vec3 VertexNormal;
 varying vec2 texCoord0;
 
-struct LightInfo {
+struct Light {
+    vec4 Direction;
+    vec4 Position;
+    vec4 Intensity;
     int Type;
-    vec3 Direction;
-    vec3 Position; // Light position in eye coords
-    vec3 Ld; // Light intensity
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 layout( location = 0 ) out vec4 FragColor;
 
@@ -23,25 +30,25 @@ vec3 ads(int lightIndex)
     if(Lights[lightIndex].Type == 0)
     {
         vec3 tnorm = normalize(NormalMatrix * vertNormal);
-        float cosTheta = dot(Lights[lightIndex].Direction, tnorm);
-        return Lights[lightIndex].Ld * max(cosTheta, 0.0) * 3.0;
+        float cosTheta = dot(vec3(Lights[lightIndex].Direction), tnorm);
+        return Lights[lightIndex].Intensity * max(cosTheta, 0.0) * 3.0;
     }
     else if(Lights[lightIndex].Type == 1)
     {
         vec3 tnorm = normalize(NormalMatrix * vertNormal);
         vec3 eyeCoords = (ModelViewMatrix * vec4(vertPosition, 1.0)).xyz;
-        vec3 s = normalize(Lights[lightIndex].Position - eyeCoords);
+        vec3 s = normalize(Lights[lightIndex].Position.xyz - eyeCoords);
 
         float cosTheta = dot(s, tnorm);
         float dist = distance(eyeCoords, Lights[lightIndex].Position.xyz);
-        return Lights[lightIndex].Ld * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
+        return Lights[lightIndex].Intensity * max(cosTheta, 0.0) * (cosTheta / (dist*dist));
     }
 }
 
 void main() {
 
     vec3 color = vec3(0.0);
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < NumLights; i++)
     {
         color += ads(i);
     }

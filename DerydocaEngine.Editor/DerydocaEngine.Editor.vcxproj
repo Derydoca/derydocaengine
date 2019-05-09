@@ -100,7 +100,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>EditorPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Components.Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -117,7 +117,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>EditorPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Components.Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,7 +136,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>EditorPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Components.Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,7 +157,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>EditorPch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(ProjectDir)src;$(SolutionDir)$(SolutionName)\src;$(SolutionDir)$(SolutionName).Components\src;$(SolutionDir)$(SolutionName).Components.Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -170,6 +170,7 @@
     <ClInclude Include="src\Dgui\InputProjection.h" />
     <ClInclude Include="src\Dgui\InputQuaternion.h" />
     <ClInclude Include="src\Dgui\InputText.h" />
+    <ClInclude Include="src\Dgui\ResourcePicker.h" />
     <ClInclude Include="src\EditorPch.h" />
     <ClInclude Include="src\Editor\EditorGUI.h" />
     <ClInclude Include="src\Editor\EditorRenderer.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="src\Dgui\InputProjection.cpp" />
     <ClCompile Include="src\Dgui\InputQuaternion.cpp" />
     <ClCompile Include="src\Dgui\InputText.cpp" />
+    <ClCompile Include="src\Dgui\ResourcePicker.cpp" />
     <ClCompile Include="src\EditorPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

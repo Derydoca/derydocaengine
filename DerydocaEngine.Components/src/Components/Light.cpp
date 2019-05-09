@@ -43,10 +43,10 @@ namespace DerydocaEngine::Components
 		return glm::mat4();
 	}
 
-	glm::mat4 Light::getShadowMatrix(glm::mat4 const& objectModelMatrix)
+	glm::mat4 Light::getShadowMatrix()
 	{
 		glm::mat4 model = getGameObject()->getTransform()->getModel();
-		return (m_shadowBias * m_projection.getProjectionMatrix() * m_projection.getViewMatrix(model)) * objectModelMatrix;
+		return (m_shadowBias * m_projection.getProjectionMatrix() * m_projection.getViewMatrix(model));
 	}
 
 	void Light::init()

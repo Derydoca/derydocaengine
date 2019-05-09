@@ -1,12 +1,19 @@
 #version 400
 
-struct LightInfo
-{
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
-uniform int LightCount;
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 struct MaterialInfo {
     vec4 Kd;
@@ -37,7 +44,7 @@ vec3 ads(int lightIndex)
 void main()
 {
     FragColor = vec4(0, 0, 0, 1);
-    for(int i = 0; i < LightCount; i++)
+    for(int i = 0; i < NumLights; i++)
     {
         vec3 diffAndSpec = ads(i);
 

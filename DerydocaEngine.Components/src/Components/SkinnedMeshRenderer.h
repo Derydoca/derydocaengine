@@ -2,6 +2,9 @@
 #include "Animation\AnimationData.h"
 #include "Components\GameComponent.h"
 #include "Animation\Skeleton.h"
+#include "Resources\AnimationResource.h"
+#include "Resources\MaterialResource.h"
+#include "Resources\MeshResource.h"
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -23,27 +26,53 @@ namespace DerydocaEngine::Components
 		GENINSTANCE(SkinnedMeshRenderer)
 		SkinnedMeshRenderer();
 		~SkinnedMeshRenderer();
-		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
+
+		void deserialize(const YAML::Node& compNode) override;
+		void init() override;
+		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) override;
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,
 			std::shared_ptr<Rendering::Material> material,
 			const Rendering::Projection& projection,
 			const std::shared_ptr<Transform> projectionTransform
-		);
-		virtual void update(const float deltaTime) { m_time += deltaTime; }
-		std::shared_ptr<Rendering::Material> getMaterial() { return m_material; }
-		std::shared_ptr<Camera> getSkinnedMeshRendererCamera() { return m_SkinnedMeshRendererCamera; }
+		) override;
+		virtual void update(const float deltaTime) override;
+		
+		bool isFullyConfigured() const { return m_animation && m_material && m_mesh; };
 
-		void deserialize(const YAML::Node& compNode);
+		void setAnimationResource(std::shared_ptr<Resources::AnimationResource> animationResource)
+		{
+			m_animation = animationResource;
+			m_dirty = true;
+		}
+		void setMaterialResource(std::shared_ptr<Resources::MaterialResource> materialResource)
+		{
+			m_material = materialResource;
+		}
+		void setMeshResource(std::shared_ptr<Resources::MeshResource> meshResource)
+		{
+			m_mesh = meshResource;
+			m_dirty = true;
+		}
+		void setAnimationTime(const float animationTime) { m_time = animationTime; }
+		
+		std::shared_ptr<Animation::AnimationData> getAnimation() const { return m_animation ? std::static_pointer_cast<Animation::AnimationData>(m_animation->getResourceObjectPointer()) : nullptr; }
+		std::shared_ptr<Rendering::Material> getMaterial() { return m_material ? std::static_pointer_cast<Rendering::Material>(m_material->getResourceObjectPointer()) : nullptr; }
+		std::shared_ptr<Rendering::Mesh> getMesh() const { return m_mesh ? std::static_pointer_cast<Rendering::Mesh>(m_mesh->getResourceObjectPointer()) : nullptr; }
 
-		void init();
-		void setMaterial(std::shared_ptr<Rendering::Material> const& material) { m_material = material; }
+		std::shared_ptr<Resources::AnimationResource> getAnimationResource() const { return m_animation; }
+		std::shared_ptr<Resources::MaterialResource> getMaterialResource() { return m_material; }
+		std::shared_ptr<Resources::MeshResource> getMeshResource() const { return m_mesh; }
+
 	private:
-		std::shared_ptr<Rendering::Mesh> m_mesh;
-		std::shared_ptr<Rendering::Material> m_material;
-		std::shared_ptr<Camera> m_SkinnedMeshRendererCamera;
-		std::shared_ptr<Animation::AnimationData> m_animation;
+		void fixDirtyStatus();
+
+	private:
 		float m_time;
+		bool m_dirty;
+		std::shared_ptr<Resources::AnimationResource> m_animation;
+		std::shared_ptr<Resources::MaterialResource> m_material;
+		std::shared_ptr<Resources::MeshResource> m_mesh;
 		std::vector<glm::mat4> m_boneMatrices;
 	};
 

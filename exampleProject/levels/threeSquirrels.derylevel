@@ -162,18 +162,18 @@ Scene:
           Properties:
             color: [0.2, 0.2, 0.02, 1.0]
             type: 0
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6dd
-    Properties:
-      Name: Terrain
-      Transform:
-        Position: [-50, -1.3, -50]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: Terrain
-          Properties:
-            heightmap: 6e141a6d-76db-4d4d-8568-9bdca3ed62f9
-            unitScale: 0.2
-            heightScale: 15.0
-            material: e48e0e65-42f2-4b00-89f5-bca1f5611580
+  # - Type: GameObject
+  #   ID: a2ff98cc-9421-4226-8a26-680ad31eb6dd
+  #   Properties:
+  #     Name: Terrain
+  #     Transform:
+  #       Position: [-50, -1.3, -50]
+  #       Rotation: [0, 0, 0, 1]
+  #       Scale: [1, 1, 1]
+  #     Components:
+  #       - Type: Terrain
+  #         Properties:
+  #           heightmap: 6e141a6d-76db-4d4d-8568-9bdca3ed62f9
+  #           unitScale: 0.2
+  #           heightScale: 15.0
+  #           material: e48e0e65-42f2-4b00-89f5-bca1f5611580

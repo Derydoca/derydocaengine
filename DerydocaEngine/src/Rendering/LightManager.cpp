@@ -13,96 +13,39 @@
 namespace DerydocaEngine::Rendering
 {
 
-	void LightManager::bindLightsToShader(
-		std::shared_ptr<Rendering::MatrixStack> const& matrixStack,
-		std::shared_ptr<Components::Transform> const& objectTransform,
-		std::shared_ptr<Rendering::Shader> const& shader
-	)
+	void LightManager::bindLightsToShader(const std::shared_ptr<Rendering::Shader>& shader)
 	{
-		assert(objectTransform);
-		assert(shader);
+		shader->bindUniformBuffer("LightCollection", m_lightUniformBuffer.getRendererId());
+	}
 
-		// Get a list of lights that will affect the object being sent in
-		auto lights = getLights(objectTransform);
+	void LightManager::bindShadowDataToShader(const std::shared_ptr<Rendering::Shader> shader, const glm::mat4& modelMatrix)
+	{
+		auto lights = getLights(nullptr);
 
-		// Cache some things
-		auto currentCamera = CameraManager::getInstance().getCurrentCamera();
-		glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
-		glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
-
-		// Loop through each light and bind them to the shader
 		int lightIndex = 0;
+		char indexStringBuffer[3];
 		for each (auto light in lights)
 		{
-			Components::Light::LightType lightType = light->getLightType();
-
-			if (lightType == Components::Light::Directional || lightType == Components::Light::Spotlight)
-			{
-				// Set the light direction
-				std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
-				glm::vec3 lightDirection = glm::normalize(glm::vec3(viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(0, 1, 0, 0)));
-				shader->setVec3(typeName, lightDirection);
-			}
-
-			if (lightType == Components::Light::Spotlight)
-			{
-				// Set the spotlight exponent
-				std::string exponentName = "Lights[" + std::to_string(lightIndex) + "].Exponent";
-				shader->setFloat(exponentName, light->getSpotlightExponent());
-
-				// Set the spotlight cutoff
-				std::string cutoffName = "Lights[" + std::to_string(lightIndex) + "].Cutoff";
-				shader->setFloat(cutoffName, light->getSpotlightCutoff());
-			}
-
-			// Set the light type
-			std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Type";
-			shader->setInt(typeName, (int)lightType);
-
-			// Set the Intensity
-			std::string intensityName = "Lights[" + std::to_string(lightIndex) + "].Intensity";
-			shader->setColorRGBA(intensityName, light->getColor());
-
-			// Set the Ambient
-			std::string ambientName = "Lights[" + std::to_string(lightIndex) + "].La";
-			shader->setColorRGBA(ambientName, Color(1.0, 1.0, 1.0, 1.0));
-
-			// Set the Diffuse
-			std::string diffuseName = "Lights[" + std::to_string(lightIndex) + "].Ld";
-			shader->setColorRGBA(diffuseName, light->getColor());
-
-			// Set the Specular
-			std::string specularName = "Lights[" + std::to_string(lightIndex) + "].Ls";
-			shader->setColorRGBA(specularName, Color(1.0, 1.0, 1.0, 1.0));
-
-			// Set the position
-			glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
-			glm::vec4 lightPositionEyeCoords = viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(lightWorldPos, 1);
-			std::string positionName = "Lights[" + std::to_string(lightIndex) + "].Position";
-			shader->setVec4(positionName, lightPositionEyeCoords);
-
-			// If the light is casting shadows, set the related uniforms for it
 			if (light->isCastingShadows())
 			{
+				_itoa(lightIndex, indexStringBuffer, 10);
+
 				// Set the shadow map
-				std::string shadowMapName = "ShadowMaps[" + std::to_string(lightIndex) + "]";
+				std::string shadowMapName = std::string("ShadowMap[").append(indexStringBuffer).append("]");
 				int shadowMapTextureUnit = 10 + lightIndex; // Find a better way to get an index for this
 				shader->setTexture(shadowMapName, shadowMapTextureUnit, GL_TEXTURE_2D, light->getShadowMap());
 
 				// Set the shadow softness
-				std::string shadowSoftnessName = "Lights[" + std::to_string(lightIndex) + "].ShadowSoftness";
+				std::string shadowSoftnessName = std::string("ShadowSoftness[").append(indexStringBuffer).append("]");
 				shader->setFloat(shadowSoftnessName, light->getShadowSoftness());
-
+				
 				// Set the shadow matrix
-				if (matrixStack)
-				{
-					std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
-					shader->setMat4(shadowMatrixName, light->getShadowMatrix(matrixStack->getMatrix()));
-				}
-			}
+				std::string shadowMatrixName = std::string("ShadowMatrix[").append(indexStringBuffer).append("]");
+				shader->setMat4(shadowMatrixName, light->getShadowMatrix() * modelMatrix);
 
-			// Increase our light index
-			lightIndex++;
+				// Increase our light index
+				lightIndex++;
+			}
 		}
 
 		// Set the shadow jitter texture
@@ -111,8 +54,6 @@ namespace DerydocaEngine::Rendering
 
 		// Set the shadow jitter texture size
 		shader->setVec3("ShadowJitterTexSize", m_shadowJitterTextureSize);
-
-		shader->setInt("LightCount", (int)lights.size());
 	}
 
 	void LightManager::renderShadowMaps(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Components::Transform> cameraTransform)
@@ -130,19 +71,52 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
+	void LightManager::uploadLightUniformBufferData(const std::shared_ptr<Components::Transform> objectTransform)
+	{
+		auto currentCamera = CameraManager::getInstance().getCurrentCamera();
+		glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
+		glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
+
+		auto lights = getLights(objectTransform);
+
+		int limit = lights.size() > MAX_LIGHTS ? MAX_LIGHTS : lights.size();
+		for (int i = 0; i < limit; i++)
+		{
+			auto l = lights[i];
+			auto ld = &m_lightData.Lights[i];
+			auto lightTransform = l->getGameObject()->getTransform();
+
+
+			glm::vec3 lightWorldPos = l->getGameObject()->getTransform()->getWorldPos();
+			glm::vec4 lightPositionEyeCoords = viewMat * l->getGameObject()->getTransform()->getWorldModel() * glm::vec4(lightWorldPos, 1);
+
+			ld->Cutoff = l->getSpotlightCutoff();
+			ld->Direction = glm::vec4(glm::normalize(glm::vec3(viewMat * lightTransform->getWorldModel() * glm::vec4(0, 1, 0, 0))), 1.0f);
+			ld->Exponent = l->getSpotlightExponent();
+			ld->Intensity = l->getColor().toVec4();
+			ld->Position = lightPositionEyeCoords;
+			ld->Type = static_cast<int>(l->getLightType());
+		}
+		m_lightData.NumLights = limit;
+
+		m_lightUniformBuffer.uploadData(&m_lightData);
+	}
+
 	LightManager::LightManager()
 	{
 		buildOffsetTex(8, 4, 8);
+		m_lightUniformBuffer.create();
 	}
 
 	LightManager::~LightManager()
 	{
+		m_lightUniformBuffer.destroy();
 	}
 
-	std::list<std::shared_ptr<Components::Light>> LightManager::getLights(std::shared_ptr<Components::Transform> const& objectTransform) const
+	std::vector<std::shared_ptr<Components::Light>> LightManager::getLights(std::shared_ptr<Components::Transform> const& cameraTransform) const
 	{
 		// Create a list to store the lights
-		auto lights = std::list<std::shared_ptr<Components::Light>>();
+		auto lights = std::vector<std::shared_ptr<Components::Light>>();
 
 		// Go through each light
 		int numLights = 0;

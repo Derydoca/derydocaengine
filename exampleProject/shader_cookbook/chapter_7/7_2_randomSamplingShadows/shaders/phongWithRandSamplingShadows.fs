@@ -1,14 +1,23 @@
 #version 400
 
-struct LightInfo
-{
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
-    mat4 ShadowMatrix;
-    float ShadowSoftness;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
-uniform int LightCount;
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
+
+uniform mat4 ShadowMatrix[10];
+uniform sampler2DShadow ShadowMap[10];
+uniform float ShadowSoftness[10];
 
 uniform sampler3D ShadowJitterTex;
 uniform vec3 ShadowJitterTexSize; // (width, height, depth)
@@ -20,8 +29,6 @@ struct MaterialInfo {
     float Shininess;
 };
 uniform MaterialInfo Material;
-
-uniform sampler2DShadow ShadowMaps[10];
 
 in vec3 Position;
 in vec3 Normal;
@@ -58,12 +65,12 @@ float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
         for(int i = 0; i < 4; i++)
         {
             offsetCoord.z = i;
-            vec4 offsets = texelFetch(ShadowJitterTex, offsetCoord, 0) * Lights[lightIndex].ShadowSoftness * ShadowCoord.w;
+            vec4 offsets = texelFetch(ShadowJitterTex, offsetCoord, 0) * ShadowSoftness[lightIndex] * ShadowCoord.w;
             
             sc.xy = ShadowCoord.xy + offsets.xy;
-            sum += textureProj(ShadowMaps[lightIndex], sc);
+            sum += textureProj(ShadowMap[lightIndex], sc);
             sc.xy = ShadowCoord.xy + offsets.zw;
-            sum += textureProj(ShadowMaps[lightIndex], sc);
+            sum += textureProj(ShadowMap[lightIndex], sc);
         }
         
         shadow = sum / 8.0;
@@ -72,11 +79,11 @@ float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
             for(int i = 4; i < samplesDiv2; i++)
             {
                 offsetCoord.z = i;
-                vec4 offsets = texelFetch(ShadowJitterTex, offsetCoord, 0) * Lights[lightIndex].ShadowSoftness * ShadowCoord.w;
+                vec4 offsets = texelFetch(ShadowJitterTex, offsetCoord, 0) * ShadowSoftness[lightIndex] * ShadowCoord.w;
                 sc.xy = ShadowCoord.xy + offsets.xy;
-                sum += textureProj(ShadowMaps[lightIndex], sc);
+                sum += textureProj(ShadowMap[lightIndex], sc);
                 sc.xy = ShadowCoord.xy + offsets.zw;
-                sum += textureProj(ShadowMaps[lightIndex], sc);
+                sum += textureProj(ShadowMap[lightIndex], sc);
             }
             shadow = sum / float(samplesDiv2 * 2.0);
         }
@@ -88,9 +95,9 @@ float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
 void main()
 {
     FragColor = vec4(0, 0, 0, 1);
-    for(int i = 0; i < LightCount; i++)
+    for(int i = 0; i < NumLights; i++)
     {
-        vec4 ShadowCoord = Lights[i].ShadowMatrix * ModelCoord;
+        vec4 ShadowCoord = ShadowMatrix[i] * ModelCoord;
         
         float shadow = getShadowInfluence(i, ShadowCoord);
         vec3 diffAndSpec = ads(i);

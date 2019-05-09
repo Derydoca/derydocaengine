@@ -25,8 +25,8 @@ namespace DerydocaEngine::Rendering
 	class Shader
 	{
 	public:
-		Shader(std::string const& fileName);
-		Shader(std::string const& fileName, int const& count, const char *const * varyings);
+		Shader(const std::string& fileName);
+		Shader(const std::string& fileName, const int count, const char *const * varyings);
 		~Shader();
 
 		void bind();
@@ -35,35 +35,36 @@ namespace DerydocaEngine::Rendering
 			const Projection& projection,
 			const std::shared_ptr<Components::Transform> trans
 		);
-		void update(glm::mat4 const& matrix);
-		void updateViaActiveCamera(std::shared_ptr<MatrixStack> const& matrixStack);
+		void update(const glm::mat4& matrix);
+		void updateViaActiveCamera(const std::shared_ptr<MatrixStack>& matrixStack);
 
-		void setFloat(std::string const& name, float const& val);
+		void bindUniformBuffer(const std::string& name, int uniformBufferId);
+		void setFloat(const std::string& name, const float val);
 		void setFloatArray(const std::string& name, const std::vector<float>& value);
-		void setFloatArray(std::string const& name, float* const& arrayLocation, unsigned int const& arrayLength);
-		void setColorRGB(std::string const& name, Color const& color);
-		void setColorRGBA(std::string const& name, Color const& color);
-		void setInt(std::string const& name, int const& val);
-		void setIntArray(std::string const& name, int* const& arrayLocation, unsigned int const& arrayLength);
-		void setVec3(std::string const& name, glm::vec3 const& val);
-		void setVec4(std::string const& name, glm::vec4 const& val);
-		void setMat3(std::string const& name, glm::mat3 const& val);
-		void setMat4(std::string const& name, glm::mat4 const& val);
-		void setMat4Array(std::string const& name, std::vector<glm::mat4> const& valArray);
-		void setTexture(std::string const& name, int const& textureUnit, std::shared_ptr<Rendering::Texture> handle);
-		void setTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType, unsigned int const& handle);
+		void setFloatArray(const std::string& name, const float* arrayLocation, const unsigned int arrayLength);
+		void setColorRGB(const std::string& name, const Color& color);
+		void setColorRGBA(const std::string& name, const Color& color);
+		void setInt(const std::string& name, const int val);
+		void setIntArray(const std::string& name, const int* arrayLocation, const unsigned int arrayLength);
+		void setVec3(const std::string& name, const glm::vec3& val);
+		void setVec4(const std::string& name, const glm::vec4& val);
+		void setMat3(const std::string& name, const glm::mat3& val);
+		void setMat4(const std::string& name, const glm::mat4& val);
+		void setMat4Array(const std::string& name, const std::vector<glm::mat4>& valArray);
+		void setTexture(const std::string& name, const int textureUnit, const std::shared_ptr<Rendering::Texture> handle);
+		void setTexture(const std::string& name, const int textureUnit, const unsigned int textureType, const unsigned int handle);
 
-		void clearFloat(std::string const& name);
-		void clearFloatArray(std::string const& name, unsigned int const& arrayLength);
-		void clearColorRGB(std::string const& name);
-		void clearColorRGBA(std::string const& name);
-		void clearInt(std::string const& name);
-		void clearIntArray(std::string const& name, unsigned int const& arrayLength);
-		void clearVec3(std::string const& name);
-		void clearVec4(std::string const& name);
-		void clearMat3(std::string const& name);
-		void clearMat4(std::string const& name);
-		void clearTexture(std::string const& name, int const& textureUnit, unsigned int const& textureType);
+		void clearFloat(const std::string& name);
+		void clearFloatArray(const std::string& name, const unsigned int arrayLength);
+		void clearColorRGB(const std::string& name);
+		void clearColorRGBA(const std::string& name);
+		void clearInt(const std::string& name);
+		void clearIntArray(const std::string& name, const unsigned int arrayLength);
+		void clearVec3(const std::string& name);
+		void clearVec4(const std::string& name);
+		void clearMat3(const std::string& name);
+		void clearMat4(const std::string& name);
+		void clearTexture(const std::string& name, const int textureUnit, const unsigned int textureType);
 
 		std::string GetLoadPath() const { return m_loadPath; }
 		std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }
@@ -72,18 +73,23 @@ namespace DerydocaEngine::Rendering
 		std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 		std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 
-		unsigned int getSubroutineIndex(unsigned int const& program, std::string const& subroutineName);
-		void setSubroutine(unsigned int const& program, unsigned int const& subroutineIndex);
+		unsigned int getSubroutineIndex(const unsigned int program, const std::string& subroutineName);
+		void setSubroutine(const unsigned int program, const unsigned int subroutineIndex);
 
-		void setSubPasses(unsigned int const& program, RenderPass* const& renderPasses, int const& numPasses);
+		void setSubPasses(const unsigned int program, RenderPass* renderPasses, const int numPasses);
 
-		void renderMesh(const std::shared_ptr<Mesh> mesh, std::shared_ptr<RenderTexture> renderTexture);
+		void renderMesh(const std::shared_ptr<Mesh> mesh, const std::shared_ptr<RenderTexture> renderTexture);
 	private:
 		static const unsigned int NUM_SHADERS = 5;
-		Shader(Shader const& other) {}
-		void operator=(Shader const& other) {}
-		int getUniformName(std::string const& stringName);
-		void setTransformFeedbackVaryings(int const& count, const char *const * varyings);
+		Shader(const Shader& other) {}
+		void operator=(const Shader& other) {}
+		int getUniformLocation(const std::string& stringName);
+		void setTransformFeedbackVaryings(const int count, const char *const * varyings);
+
+		static void CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage);
+		static std::string LoadShader(const std::string& fileName);
+		static bool CheckIfShaderExists(const std::string& fileName);
+		static unsigned int CreateShader(const std::string& text, const unsigned int shaderType);
 
 		enum {
 			TRANSFORM_MVP = 0,

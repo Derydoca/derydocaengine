@@ -60,11 +60,11 @@ namespace DerydocaEngine::Rendering
 			// Have the renderer implementation render a frame
 			m_implementation.renderFrame(m_clock.getDeltaTime());
 
-			// Let the display respond to any input events
-			m_implementation.getDisplay()->update();
-
 			// Update the mouse inputs
 			Input::InputManager::getInstance().getMouse()->update();
+
+			// Let the display respond to any input events
+			m_implementation.getDisplay()->update();
 
 			// If we have rendered our frame under the FPS limit, wait until it's time to render the next frame
 			unsigned long msToWait = (unsigned long)(m_minFrameTime - m_clock.getRenderTimeMS());

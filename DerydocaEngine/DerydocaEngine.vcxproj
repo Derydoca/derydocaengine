@@ -100,7 +100,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src;$(ProjectDir)src</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -123,7 +123,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src;$(ProjectDir)src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -156,7 +156,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src;$(ProjectDir)src</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -181,7 +181,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;C:\local\boost_1_68_0;D:\local\boost_1_68_0;$(SolutionDir)DerydocaEngine.Components\src;$(ProjectDir)src</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -226,6 +226,7 @@
     <ClCompile Include="src\Animation\Skeleton.cpp" />
     <ClCompile Include="src\Input\ButtonState.cpp" />
     <ClCompile Include="src\Rendering\CameraManager.cpp" />
+    <ClCompile Include="src\Scenes\HardCodedScene.cpp" />
     <ClCompile Include="src\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\SystemWindowingLayer_SDL.cpp" />
     <ClCompile Include="src\Timing\Clock.cpp" />
@@ -300,6 +301,7 @@
     <ClInclude Include="src\Rendering\Gui\DearImgui.h" />
     <ClInclude Include="src\Rendering\Renderer.h" />
     <ClInclude Include="src\Rendering\RenderingMode.h" />
+    <ClInclude Include="src\Rendering\UniformBuffer.h" />
     <ClInclude Include="src\Resources\FontResource.h" />
     <ClInclude Include="src\Resources\LevelResource.h" />
     <ClInclude Include="src\Resources\MaterialResource.h" />
@@ -317,6 +319,7 @@
     <ClInclude Include="src\Animation\VertexBoneWeights.h" />
     <ClInclude Include="src\Input\ButtonState.h" />
     <ClInclude Include="src\Rendering\CameraManager.h" />
+    <ClInclude Include="src\Scenes\HardCodedScene.h" />
     <ClInclude Include="src\Scenes\SceneManager.h" />
     <ClInclude Include="src\SystemWindowingLayer.h" />
     <ClInclude Include="src\Timing\Clock.h" />

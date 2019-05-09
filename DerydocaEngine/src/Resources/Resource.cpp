@@ -7,33 +7,42 @@ namespace DerydocaEngine::Resources
 {
 
 	Resource::Resource() :
-		Object(),
-		m_name(),
-		m_type(ResourceType::UnknownResourceType),
-		m_sourceFilePath(),
-		m_metaFilePath(),
-		m_resourceObject(nullptr),
-		m_resourceObjectPointer()
+		Resource("", ResourceType::UnknownResourceType, "", "")
 	{
 
 	}
 
-	Resource::Resource(boost::uuids::uuid const& id, std::string const& sourceFilePath, std::string const& metaFilePath, ResourceType const& type) :
-		Object(id),
-		m_sourceFilePath(sourceFilePath),
-		m_metaFilePath(metaFilePath)
+	Resource::Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
+		Resource(id, "", type, sourceFilePath, metaFilePath)
 	{
 		auto filePath = boost::filesystem::path(sourceFilePath);
 		if (filePath.has_stem())
 		{
 			m_name = filePath.stem().string();
 		}
-
-		m_type = type;
-		m_resourceObject = 0;
 	}
 
-	void Resource::setFilePaths(std::string const & sourceFilePath, std::string const & metaFilePath)
+	Resource::Resource(const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+		Object(),
+		m_name(name),
+		m_type(type),
+		m_sourceFilePath(sourceFilePath),
+		m_metaFilePath(metaFilePath),
+		m_resourceObjectPointer(nullptr)
+	{
+	}
+
+	Resource::Resource(const boost::uuids::uuid& id, const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+		Object(id),
+		m_name(name),
+		m_type(type),
+		m_sourceFilePath(sourceFilePath),
+		m_metaFilePath(metaFilePath),
+		m_resourceObjectPointer(nullptr)
+	{
+	}
+
+	void Resource::setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath)
 	{
 		m_sourceFilePath = sourceFilePath;
 		m_metaFilePath = metaFilePath;

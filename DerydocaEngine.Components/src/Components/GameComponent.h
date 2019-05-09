@@ -34,7 +34,7 @@ namespace DerydocaEngine::Components
 	};
 
 	template <typename T>
-	bool SelfRegister<T>::s_isRegistered = GameComponentFactory::getInstance().registerGenerator(T::getClassName(), T::generateInstance) && TypeNameLookup::getInstace().registerType<T>(T::getClassName());
+	bool SelfRegister<T>::s_isRegistered = GameComponentFactory::getInstance().registerGenerator(T::getClassName(), T::generateInstance) && TypeNameLookup::get().registerType<T>(T::getClassName());
 
 #define GENINSTANCE(TYPE) \
 	static std::shared_ptr<Components::GameComponent> generateInstance() { return std::static_pointer_cast<Components::GameComponent>(std::make_shared<TYPE>()); }\

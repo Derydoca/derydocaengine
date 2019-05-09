@@ -1,11 +1,12 @@
 #pragma once
 #include "EditorPch.h"
+#include "Components\EditorWindowComponent.h"
 #include "Rendering\Display.h"
+#include "Rendering\Material.h"
 #include "Rendering\Renderer.h"
 #include "Rendering\RenderTexture.h"
-#include "Scenes\SerializedScene.h"
 #include "Resources\LevelResource.h"
-#include "Rendering\Material.h"
+#include "Scenes\SerializedScene.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -19,10 +20,13 @@ namespace DerydocaEngine::Editor
 			return instance;
 		}
 
-		virtual void init();
-		virtual void renderFrame(const float deltaTime);
+		virtual void init() override;
+		virtual void renderFrame(const float deltaTime) override;
+
 		void renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
+		void renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH);
 		std::shared_ptr<Rendering::Material> getEditorSkyboxMaterial() { return m_editorSkyboxMaterial; };
+		void addWindow(std::shared_ptr<Components::EditorWindowComponent> window);
 
 		bool isPlaying() const { return m_playing; }
 		void setPlaying(bool isPlaying) { m_playing = isPlaying; }

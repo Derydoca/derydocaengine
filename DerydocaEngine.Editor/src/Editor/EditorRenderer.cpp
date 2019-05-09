@@ -60,6 +60,12 @@ namespace DerydocaEngine::Editor
 		scenes.push_back(m_editorComponentsScene);
 
 		// Render the scenes
+		renderEditorCameraToActiveBuffer(camera, scenes, textureW, textureH);
+	}
+
+	void EditorRenderer::renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH)
+	{
+		// Render the scenes
 		Rendering::CameraManager::getInstance().renderCamerasToAttachedRenderTextures(scenes);
 		Rendering::LightManager::getInstance().renderShadowMaps(scenes, camera->getGameObject()->getTransform());
 		Rendering::CameraManager::getInstance().setCurrentCamera(camera);
@@ -67,6 +73,15 @@ namespace DerydocaEngine::Editor
 
 		// Re-bind the display as the render target
 		m_display->bindAsRenderTarget();
+	}
+
+	void EditorRenderer::addWindow(std::shared_ptr<Components::EditorWindowComponent> window)
+	{
+		auto windowGameObject = std::make_shared<GameObject>("__newWindow");
+		windowGameObject->addComponent(window);
+		windowGameObject->init();
+		windowGameObject->postInit();
+		m_editorGuiScene->getRoot()->addChild(windowGameObject);
 	}
 
 	void EditorRenderer::renderFrame(const float deltaTime)

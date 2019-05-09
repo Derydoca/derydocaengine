@@ -3,9 +3,11 @@
 #if OPENGL
 
 #include "GraphicsAPI.h"
+#include "Debug\GLError.h"
 
 namespace DerydocaEngine::Rendering
 {
+	int GraphicsAPI::USAGE_PATTERN_DYNAMIC_DRAW = GL_DYNAMIC_DRAW;
 
 	void GraphicsAPI::init()
 	{
@@ -40,6 +42,19 @@ namespace DerydocaEngine::Rendering
 	void GraphicsAPI::deleteFramebuffers(int count, const unsigned int * rendererIds)
 	{
 		glDeleteFramebuffers(count, rendererIds);
+	}
+
+	void GraphicsAPI::deleteUniformBuffer(const unsigned int& rendererId)
+	{
+		glDeleteBuffers(1, &rendererId);
+	}
+
+	void GraphicsAPI::createUniformBuffer(unsigned int& rendererId, const void* buffer, const size_t size, const int usagePattern)
+	{
+		glGenBuffers(1, &rendererId);
+		glBindBuffer(GL_UNIFORM_BUFFER, rendererId);
+		glBufferData(GL_UNIFORM_BUFFER, size, buffer, usagePattern);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	}
 
 	void GraphicsAPI::createFramebuffers(int count, unsigned int * rendererIds)
@@ -82,9 +97,66 @@ namespace DerydocaEngine::Rendering
 
 	int GraphicsAPI::getCurrentFramebufferID()
 	{
-		int boundFbo;
-		glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &boundFbo);
-		return boundFbo;
+		int boundFrameBufferId;
+		glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &boundFrameBufferId);
+		return boundFrameBufferId;
+	}
+
+	void GraphicsAPI::setTexture(const int uniformLocation, const int textureUnit, const unsigned int textureType, const unsigned int textureId)
+	{
+		glActiveTexture(GL_TEXTURE0 + textureUnit);
+		glBindTexture(textureType, textureId);
+		glUniform1i(uniformLocation, textureUnit);
+	}
+
+	int GraphicsAPI::getUniformLocation(const unsigned int rendererId, const std::string& name)
+	{
+		int uniformName = glGetUniformLocation(rendererId, name.c_str());
+		return uniformName;
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const int val)
+	{
+		glUniform1i(uniformLocation, val);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const float val)
+	{
+		glUniform1f(uniformLocation, val);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const float v0, const float v1)
+	{
+		glUniform2f(uniformLocation, v0, v1);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const float v0, const float v1, const float v2)
+	{
+		glUniform3f(uniformLocation, v0, v1, v2);
+	}
+
+	void GraphicsAPI::setUniform(const int uniformLocation, const float v0, const float v1, const float v2, const float v3)
+	{
+		glUniform4f(uniformLocation, v0, v1, v2, v3);
+	}
+
+	void GraphicsAPI::setUniformMat3(const int uniformLocation, const float* matrixArrayPointer, int numMatrices)
+	{
+		glUniformMatrix3fv(uniformLocation, numMatrices, GL_FALSE, matrixArrayPointer);
+	}
+
+	void GraphicsAPI::setUniformMat4(const int uniformLocation, const float* matrixArrayPointer, int numMatrices)
+	{
+		glUniformMatrix4fv(uniformLocation, numMatrices, GL_FALSE, matrixArrayPointer);
+	}
+
+	void GraphicsAPI::updateUniformBuffer(const int rendererId, const void * buffer, const size_t size)
+	{
+		GL_CHECK(glBindBuffer(GL_UNIFORM_BUFFER, rendererId));
+		void* p;
+		GL_CHECK(p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY));
+		memcpy(p, buffer, size);
+		GL_CHECK(glUnmapBuffer(GL_UNIFORM_BUFFER));
 	}
 
 }

@@ -14,12 +14,20 @@ uniform mat4 ProjectionMatrix;
 uniform mat4 ModelMatrix;
 uniform mat4 MVP;
 
-struct LightInfo {
-    int Type;
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 struct LineInfo {
     float Width;
@@ -69,7 +77,7 @@ vec4 ads(int lightIndex)
 void main()
 {
     vec4 color = vec4(0.0);
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < NumLights; i++)
     {
         color += ads(i);
     }

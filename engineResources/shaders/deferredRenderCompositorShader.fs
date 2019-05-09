@@ -1,12 +1,19 @@
 #version 430
 
-
-struct LightInfo
-{
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 struct MaterialInfo {
   vec3 Kd;            // Diffuse reflectivity
@@ -39,7 +46,7 @@ void main() {
   vec3 diffColor = vec3( texture(ColorTex, TexCoord) );
 
   vec3 diff = vec3(0);
-  for(int i = 0; i < 10; i++)
+  for(int i = 0; i < NumLights; i++)
   {
     diff += diffuseModel(i, pos, norm, diffColor);
   }

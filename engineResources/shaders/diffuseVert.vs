@@ -4,11 +4,20 @@ in vec3 VertexNormal;
 
 out vec3 LightIntensity;
 
-struct LightInfo {
-    vec4 Position; // Eye coords
-    vec4 Ld;
+struct Light {
+    vec4 Direction;
+    vec4 Position;
+    vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 uniform vec4 Kd; // Diffuse reflectivity
 uniform mat4 ModelViewMatrix;
@@ -21,14 +30,14 @@ vec3 diffuse(int lightIndex)
     vec3 tnorm = normalize(NormalMatrix * VertexNormal);
     vec4 eyeCoords = ModelViewMatrix * vec4(VertexPosition, 1.0);
     vec3 s = normalize(vec3(Lights[lightIndex].Position - eyeCoords));
-    return (Lights[lightIndex].Ld * Kd * max(dot(s, tnorm), 0.0)).xyz;
+    return (Lights[lightIndex].Intensity * Kd * max(dot(s, tnorm), 0.0)).xyz;
 }
 
 void main()
 {
     // The diffuse shading equation
     LightIntensity = vec3(0.0);
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < NumLights; i++)
     {
         LightIntensity += diffuse(i);
     }
