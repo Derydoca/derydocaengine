@@ -74,10 +74,6 @@ namespace DerydocaEngine::Rendering
 	void LightManager::uploadLightUniformBufferData(const std::shared_ptr<Components::Transform> objectTransform)
 	{
 		auto currentCamera = CameraManager::getInstance().getCurrentCamera();
-		if (currentCamera == nullptr)
-		{
-			return;
-		}
 		glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
 		glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
 
