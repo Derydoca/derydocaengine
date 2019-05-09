@@ -9,12 +9,20 @@ uniform vec4 Ka;
 const int Levels = 3;
 const float ScaleFactor = 1.0 / Levels;
 
-struct LightInfo {
-    int Type;
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 out vec4 FragColor;
 
@@ -29,7 +37,7 @@ vec4 toonShade(int lightIndex)
 void main()
 {
     FragColor = vec4(0.0);
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < NumLights; i++)
     {
         FragColor += toonShade(i);
     }

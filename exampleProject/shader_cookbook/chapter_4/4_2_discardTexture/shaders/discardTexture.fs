@@ -7,12 +7,20 @@ in vec2 TexCoord;
 uniform sampler2D Tex1;
 uniform sampler2D Tex2;
 
-struct LightInfo
-{
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 struct MaterialInfo
 {
@@ -48,7 +56,7 @@ void main()
     }
     else
     {
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < NumLights; i++)
         {
             vec3 tempAmbAndDiff;
             vec3 tempSpec;

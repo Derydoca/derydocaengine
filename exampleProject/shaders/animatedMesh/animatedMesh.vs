@@ -7,11 +7,20 @@ in vec4 VertexBoneWeights;
 
 out vec4 Color;
 
-struct LightInfo {
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 const uint MaxBoneCount = 150;
 uniform mat4 BoneMatrices[MaxBoneCount];

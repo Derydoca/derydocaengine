@@ -1,14 +1,23 @@
 #version 400
 
-struct LightInfo
-{
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
-    mat4 ShadowMatrix;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
-uniform int LightCount;
-uniform mat4 ModelMatrix;
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
+
+uniform mat4 ShadowMatrix[10];
+uniform sampler2DShadow ShadowMap[10];
+uniform float ShadowSoftness[10];
 
 struct MaterialInfo {
     vec4 Kd;
@@ -17,8 +26,6 @@ struct MaterialInfo {
     float Shininess;
 };
 uniform MaterialInfo Material;
-
-uniform sampler2DShadow ShadowMaps[10];
 
 in vec3 Position;
 in vec3 Normal;
@@ -42,10 +49,10 @@ vec3 ads(int lightIndex)
 float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
 {
     float shadow = 0;
-    shadow += textureProjOffset(ShadowMaps[lightIndex], ShadowCoord, ivec2(-1, -1));
-    shadow += textureProjOffset(ShadowMaps[lightIndex], ShadowCoord, ivec2(-1, 1));
-    shadow += textureProjOffset(ShadowMaps[lightIndex], ShadowCoord, ivec2(1, 1));
-    shadow += textureProjOffset(ShadowMaps[lightIndex], ShadowCoord, ivec2(1, -1));
+    shadow += textureProjOffset(ShadowMap[lightIndex], ShadowCoord, ivec2(-1, -1));
+    shadow += textureProjOffset(ShadowMap[lightIndex], ShadowCoord, ivec2(-1, 1));
+    shadow += textureProjOffset(ShadowMap[lightIndex], ShadowCoord, ivec2(1, 1));
+    shadow += textureProjOffset(ShadowMap[lightIndex], ShadowCoord, ivec2(1, -1));
     shadow *= 0.25;
     return shadow;
 }
@@ -53,9 +60,9 @@ float getShadowInfluence(int lightIndex, vec4 ShadowCoord)
 void main()
 {
     FragColor = vec4(0, 0, 0, 1);
-    for(int i = 0; i < LightCount; i++)
+    for(int i = 0; i < NumLights; i++)
     {
-        vec4 ShadowCoord = Lights[i].ShadowMatrix * ModelMatrix * ModelCoord;
+        vec4 ShadowCoord = ShadowMatrix[i] * ModelCoord;
 
         float shadow = getShadowInfluence(i, ShadowCoord);
         vec3 diffAndSpec = ads(i);

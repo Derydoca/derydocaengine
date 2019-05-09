@@ -3,12 +3,20 @@
 in vec3 Position;
 in vec3 Normal;
 
-struct LightInfo {
-    int Type;
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 struct FogInfo {
     float MaxDist;
@@ -43,7 +51,7 @@ void main()
     fogFactor = clamp(fogFactor, 0.0, 1.0);
 
     vec3 shadeColor = vec3(0.0);
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < NumLights; i++)
     {
         shadeColor += ads(i);
     }

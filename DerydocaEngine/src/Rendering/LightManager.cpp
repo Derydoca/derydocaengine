@@ -17,86 +17,123 @@ namespace DerydocaEngine::Rendering
 	{
 		shader->bindUniformBuffer("LightCollection", m_lightUniformBuffer.getRendererId());
 
-		assert(shader);
+		//assert(shader);
 
-		// Cache some things
-		auto currentCamera = CameraManager::getInstance().getCurrentCamera();
-		glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
-		glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
+		//// Cache some things
+		//auto currentCamera = CameraManager::getInstance().getCurrentCamera();
+		//glm::mat4 cameraModelMat = currentCamera->getGameObject()->getTransform()->getModel();
+		//glm::mat4 viewMat = currentCamera->getProjection().getViewMatrix(cameraModelMat);
 
-		// Get a list of lights that will affect the object being sent in
-		auto lights = getLights(currentCamera->getGameObject()->getTransform());
+		//// Get a list of lights that will affect the object being sent in
+		//auto lights = getLights(currentCamera->getGameObject()->getTransform());
 
-		// Loop through each light and bind them to the shader
+		//// Loop through each light and bind them to the shader
+		//int lightIndex = 0;
+		//for each (auto light in lights)
+		//{
+		//	Components::Light::LightType lightType = light->getLightType();
+
+		//	if (lightType == Components::Light::Directional || lightType == Components::Light::Spotlight)
+		//	{
+		//		// Set the light direction
+		//		std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
+		//		glm::vec3 lightDirection = glm::normalize(glm::vec3(viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(0, 1, 0, 0)));
+		//		shader->setVec3(typeName, lightDirection);
+		//	}
+
+		//	if (lightType == Components::Light::Spotlight)
+		//	{
+		//		// Set the spotlight exponent
+		//		std::string exponentName = "Lights[" + std::to_string(lightIndex) + "].Exponent";
+		//		shader->setFloat(exponentName, light->getSpotlightExponent());
+
+		//		// Set the spotlight cutoff
+		//		std::string cutoffName = "Lights[" + std::to_string(lightIndex) + "].Cutoff";
+		//		shader->setFloat(cutoffName, light->getSpotlightCutoff());
+		//	}
+
+		//	// Set the light type
+		//	std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Type";
+		//	shader->setInt(typeName, (int)lightType);
+
+		//	// Set the Intensity
+		//	std::string intensityName = "Lights[" + std::to_string(lightIndex) + "].Intensity";
+		//	shader->setColorRGBA(intensityName, light->getColor());
+
+		//	// Set the Ambient
+		//	std::string ambientName = "Lights[" + std::to_string(lightIndex) + "].La";
+		//	shader->setColorRGBA(ambientName, Color(1.0, 1.0, 1.0, 1.0));
+
+		//	// Set the Diffuse
+		//	std::string diffuseName = "Lights[" + std::to_string(lightIndex) + "].Ld";
+		//	shader->setColorRGBA(diffuseName, light->getColor());
+
+		//	// Set the Specular
+		//	std::string specularName = "Lights[" + std::to_string(lightIndex) + "].Ls";
+		//	shader->setColorRGBA(specularName, Color(1.0, 1.0, 1.0, 1.0));
+
+		//	// Set the position
+		//	glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
+		//	glm::vec4 lightPositionEyeCoords = viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(lightWorldPos, 1);
+		//	std::string positionName = "Lights[" + std::to_string(lightIndex) + "].Position";
+		//	shader->setVec4(positionName, lightPositionEyeCoords);
+
+		//	// If the light is casting shadows, set the related uniforms for it
+		//	if (light->isCastingShadows())
+		//	{
+		//		// Set the shadow map
+		//		std::string shadowMapName = "ShadowMaps[" + std::to_string(lightIndex) + "]";
+		//		int shadowMapTextureUnit = 10 + lightIndex; // Find a better way to get an index for this
+		//		shader->setTexture(shadowMapName, shadowMapTextureUnit, GL_TEXTURE_2D, light->getShadowMap());
+
+		//		// Set the shadow softness
+		//		std::string shadowSoftnessName = "Lights[" + std::to_string(lightIndex) + "].ShadowSoftness";
+		//		shader->setFloat(shadowSoftnessName, light->getShadowSoftness());
+
+		//		// Set the shadow matrix
+		//		std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
+		//		shader->setMat4(shadowMatrixName, light->getShadowMatrix());
+		//	}
+
+		//	// Increase our light index
+		//	lightIndex++;
+		//}
+
+		//// Set the shadow jitter texture
+		//int shadowJitterTextureUnit = 30; // Find a better way to get an index for this
+		//shader->setTexture("ShadowJitterTex", shadowJitterTextureUnit, GL_TEXTURE_3D, m_shadowJitterTexture);
+
+		//// Set the shadow jitter texture size
+		//shader->setVec3("ShadowJitterTexSize", m_shadowJitterTextureSize);
+
+		//shader->setInt("LightCount", (int)lights.size());
+	}
+
+	void LightManager::bindShadowDataToShader(const std::shared_ptr<Rendering::Shader> shader, const glm::mat4& modelMatrix)
+	{
+		auto lights = getLights(nullptr);
+
 		int lightIndex = 0;
 		for each (auto light in lights)
 		{
-			Components::Light::LightType lightType = light->getLightType();
-
-			if (lightType == Components::Light::Directional || lightType == Components::Light::Spotlight)
-			{
-				// Set the light direction
-				std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Direction";
-				glm::vec3 lightDirection = glm::normalize(glm::vec3(viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(0, 1, 0, 0)));
-				shader->setVec3(typeName, lightDirection);
-			}
-
-			if (lightType == Components::Light::Spotlight)
-			{
-				// Set the spotlight exponent
-				std::string exponentName = "Lights[" + std::to_string(lightIndex) + "].Exponent";
-				shader->setFloat(exponentName, light->getSpotlightExponent());
-
-				// Set the spotlight cutoff
-				std::string cutoffName = "Lights[" + std::to_string(lightIndex) + "].Cutoff";
-				shader->setFloat(cutoffName, light->getSpotlightCutoff());
-			}
-
-			// Set the light type
-			std::string typeName = "Lights[" + std::to_string(lightIndex) + "].Type";
-			shader->setInt(typeName, (int)lightType);
-
-			// Set the Intensity
-			std::string intensityName = "Lights[" + std::to_string(lightIndex) + "].Intensity";
-			shader->setColorRGBA(intensityName, light->getColor());
-
-			// Set the Ambient
-			std::string ambientName = "Lights[" + std::to_string(lightIndex) + "].La";
-			shader->setColorRGBA(ambientName, Color(1.0, 1.0, 1.0, 1.0));
-
-			// Set the Diffuse
-			std::string diffuseName = "Lights[" + std::to_string(lightIndex) + "].Ld";
-			shader->setColorRGBA(diffuseName, light->getColor());
-
-			// Set the Specular
-			std::string specularName = "Lights[" + std::to_string(lightIndex) + "].Ls";
-			shader->setColorRGBA(specularName, Color(1.0, 1.0, 1.0, 1.0));
-
-			// Set the position
-			glm::vec3 lightWorldPos = light->getGameObject()->getTransform()->getWorldPos();
-			glm::vec4 lightPositionEyeCoords = viewMat * light->getGameObject()->getTransform()->getWorldModel() * glm::vec4(lightWorldPos, 1);
-			std::string positionName = "Lights[" + std::to_string(lightIndex) + "].Position";
-			shader->setVec4(positionName, lightPositionEyeCoords);
-
-			// If the light is casting shadows, set the related uniforms for it
 			if (light->isCastingShadows())
 			{
 				// Set the shadow map
-				std::string shadowMapName = "ShadowMaps[" + std::to_string(lightIndex) + "]";
+				std::string shadowMapName = "ShadowMap[" + std::to_string(lightIndex) + "]";
 				int shadowMapTextureUnit = 10 + lightIndex; // Find a better way to get an index for this
 				shader->setTexture(shadowMapName, shadowMapTextureUnit, GL_TEXTURE_2D, light->getShadowMap());
 
 				// Set the shadow softness
-				std::string shadowSoftnessName = "Lights[" + std::to_string(lightIndex) + "].ShadowSoftness";
+				std::string shadowSoftnessName = "ShadowSoftness[" + std::to_string(lightIndex) + "]";
 				shader->setFloat(shadowSoftnessName, light->getShadowSoftness());
 
 				// Set the shadow matrix
-				std::string shadowMatrixName = "Lights[" + std::to_string(lightIndex) + "].ShadowMatrix";
-				shader->setMat4(shadowMatrixName, light->getShadowMatrix());
-			}
+				std::string shadowMatrixName = "ShadowMatrix[" + std::to_string(lightIndex) + "]";
+				shader->setMat4(shadowMatrixName, light->getShadowMatrix() * modelMatrix);
 
-			// Increase our light index
-			lightIndex++;
+				// Increase our light index
+				lightIndex++;
+			}
 		}
 
 		// Set the shadow jitter texture
@@ -105,8 +142,6 @@ namespace DerydocaEngine::Rendering
 
 		// Set the shadow jitter texture size
 		shader->setVec3("ShadowJitterTexSize", m_shadowJitterTextureSize);
-
-		shader->setInt("LightCount", (int)lights.size());
 	}
 
 	void LightManager::renderShadowMaps(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Components::Transform> cameraTransform)

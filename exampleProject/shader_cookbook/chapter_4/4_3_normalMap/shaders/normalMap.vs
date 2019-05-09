@@ -6,11 +6,20 @@ in vec2 VertexTexCoord;
 in vec4 VertexTangent;
 in vec3 VertexBitangent;
 
-struct LightInfo {
-  vec4 Position;  // Light position in eye coords.
-  vec4 Intensity; // A,D,S intensity
+struct Light {
+    vec4 Direction;
+    vec4 Position;
+    vec4 Intensity;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 out vec3 LightDirs[10];
 out vec2 TexCoord;

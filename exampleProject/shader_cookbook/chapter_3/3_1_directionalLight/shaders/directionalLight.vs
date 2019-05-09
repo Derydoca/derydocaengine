@@ -5,13 +5,20 @@ in vec3 VertexNormal;
 
 out vec4 Color;
 
-struct LightInfo {
-    int Type;
+struct Light {
+    vec4 Direction;
     vec4 Position;
     vec4 Intensity;
-    vec3 Direction;
+    int Type;
+    float Cutoff;
+    float Exponent;
+    float _padding;
 };
-uniform LightInfo Lights[10];
+layout (std140) uniform LightCollection
+{
+    Light Lights[10];
+    int NumLights;
+};
 
 uniform vec4 Kd;
 uniform vec4 Ka;

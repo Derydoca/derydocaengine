@@ -12,7 +12,7 @@ struct Light {
     int Type;
     float Cutoff;
     float Exponent;
-    float Padding;
+    float _padding;
 };
 layout (std140) uniform LightCollection
 {
