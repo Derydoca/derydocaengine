@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Dgui">
+      <UniqueIdentifier>{EE1E847C-DA55-850D-8342-6B106F58010F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Inspector">
+      <UniqueIdentifier>{5212F9CB-3E0B-181E-673D-FDA25395F729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Inspector\ComponentInspectors">
+      <UniqueIdentifier>{3EB53EAF-2A9C-00A7-D3EC-66C4BFB2790D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Inspector\ResourceInspectors">
+      <UniqueIdentifier>{F382E70E-5F3C-52B9-E89B-6C9354540829}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Dgui\InputProjection.h">
+      <Filter>Dgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dgui\InputQuaternion.h">
+      <Filter>Dgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dgui\InputText.h">
+      <Filter>Dgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dgui\ResourcePicker.h">
+      <Filter>Dgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\EditorGUI.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\EditorRenderer.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ComponentInspectors\TransformInspector.h">
+      <Filter>Editor\Inspector\ComponentInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\GameObjectInspector.h">
+      <Filter>Editor\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\InspectorRenderer.h">
+      <Filter>Editor\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\InspectorRendererFactory.h">
+      <Filter>Editor\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\AnimationResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\CubemapResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\FontResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\LevelResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MaterialResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\MeshResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\RasterFontInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\ShaderResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\SkeletonResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\SpriteSheetResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\ResourceInspectors\TextureResourceInspector.h">
+      <Filter>Editor\Inspector\ResourceInspectors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\Inspector\UndefinedInspector.h">
+      <Filter>Editor\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\SelectionGroup.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\SelectionManager.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EditorPch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Dgui\InputProjection.cpp">
+      <Filter>Dgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dgui\InputQuaternion.cpp">
+      <Filter>Dgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dgui\InputText.cpp">
+      <Filter>Dgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dgui\ResourcePicker.cpp">
+      <Filter>Dgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\EditorGUI.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\EditorRenderer.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\Inspector\InspectorRendererFactory.cpp">
+      <Filter>Editor\Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\SelectionManager.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EditorPch.cpp" />
+  </ItemGroup>
+</Project>
