@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{859E00A2-F108-B518-3A47-66BEA6F0926D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructures">
+      <UniqueIdentifier>{039EC1FD-EF6B-B503-D8FF-252AC46C9168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{0C95060D-78A9-2EBE-412B-D21DADFE2AEF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ext">
+      <UniqueIdentifier>{56E8870B-C2F1-877C-4B6D-9E7CB775937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files">
+      <UniqueIdentifier>{18202D0D-8434-55BE-4DB6-F81DB98951EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Serializers">
+      <UniqueIdentifier>{B4AA8751-20C1-85E7-6938-1109D58D566F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{D8389B9D-4418-1A39-4D30-A50FB98E809A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{953A660D-014F-8EBE-CAD0-311E36A48AEF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{E3AE1F7C-4F19-D4F2-9857-85980401B247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Gui">
+      <UniqueIdentifier>{B76B6DD0-232C-E906-EC66-328458E62DE3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{000BCD17-6C75-818E-B5B3-3234215D5FE3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Serializers">
+      <UniqueIdentifier>{9C31770F-089E-320A-D191-CA673DBD5472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{86EEB3D0-7290-DEA6-5B4B-F2FA478C65F7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Settings">
+      <UniqueIdentifier>{F63FCA8A-E20C-2596-0B26-133EF7515A24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Timing">
+      <UniqueIdentifier>{0DF979D3-F99A-A4A9-E255-B8FDCE962BFA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{83755900-6F01-880B-D8AF-880BC45A880B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{010A8043-6D74-34BA-B6B2-E55F225C120F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\imgui">
+      <UniqueIdentifier>{5D3BD0F0-499E-5F95-F223-984BDE652B18}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Animation\AnimationChannel.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\AnimationData.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\AnimationKey.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\Bone.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\Skeleton.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\VertexBoneWeights.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Color.h" />
+    <ClInclude Include="src\DataStructures\LinkedList.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\LinkedListNode.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Debug\DebugLine.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Debug\DebugVisualizer.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Debug\GLError.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DerydocaEngineCommonPch.h" />
+    <ClInclude Include="src\EnginePch.h" />
+    <ClInclude Include="src\Ext\BezierPatchMesh.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BezierPatchMeshFileLoader.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BezierPatchMeshResource.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ext\BezierPatchMeshResourceSerializer.h">
+      <Filter>Ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\FileType.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\BezierPatchMeshFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\FileSerializerLibrary.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\FileTypeSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\FontFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\ImageFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\LevelFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\MaterialFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\MeshFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\RasterFontFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\ShaderFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\Serializers\SpriteSheetFileSerializer.h">
+      <Filter>Files\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\Helpers\AssimpUtils.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helpers\StringUtils.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helpers\YamlTools.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\ButtonState.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\InputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Key.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Keyboard.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Mouse.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IntRect.h" />
+    <ClInclude Include="src\IntRectangle.h" />
+    <ClInclude Include="src\MeshAdjacencyCalculator.h" />
+    <ClInclude Include="src\MeshFlags.h" />
+    <ClInclude Include="src\Object.h" />
+    <ClInclude Include="src\ObjectLibrary.h" />
+    <ClInclude Include="src\Rect.h" />
+    <ClInclude Include="src\Rectangle.h" />
+    <ClInclude Include="src\Rendering\CameraManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Display.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\DisplayManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\GraphicsAPI.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Gui\DearImgui.h">
+      <Filter>Rendering\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\LightManager.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Material.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\MatrixStack.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Mesh.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Projection.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\RenderPass.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\RenderTexture.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Renderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\RenderingMode.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Shader.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\ShaderLibrary.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Skybox.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\Texture.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\TextureParameters.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Rendering\UniformBuffer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\AnimationResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\CubemapResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\FontResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\LevelResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\MaterialResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\MeshResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\RasterFontResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\ResourceTreeNode.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\ResourceType.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\AnimationResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\CubemapResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\MaterialResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\MeshResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\ResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\ResourceSerializerLibrary.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\ShaderResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\SkeletonResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\SpriteSheetResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\Serializers\TextureResourceSerializer.h">
+      <Filter>Resources\Serializers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\ShaderResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\SkeletonResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\SpriteSheetResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Resources\TextureResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\HardCodedScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\SceneManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\SceneObject.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\SerializedScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Settings\EngineSettings.h">
+      <Filter>Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SystemWindowingLayer.h" />
+    <ClInclude Include="src\Timing\Clock.h">
+      <Filter>Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TypeNameLookup.h" />
+    <ClInclude Include="src\UI\FontFace.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\SpriteReference.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\SpriteSheet.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\TexturePacker.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\TexturePackerImage.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\TexturePackerTextureData.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imconfig.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imgui.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imgui_impl_opengl3.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imgui_impl_sdl.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imgui_internal.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imstb_rectpack.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imstb_textedit.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\imgui\imstb_truetype.h">
+      <Filter>vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\stb_image.h">
+      <Filter>vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\stb_image_write.h">
+      <Filter>vendor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Animation\AnimationData.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Bone.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation\Skeleton.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Debug\DebugVisualizer.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Debug\GLError.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnginePch.cpp" />
+    <ClCompile Include="src\Ext\BezierPatchMesh.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\BezierPatchMeshFileLoader.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ext\BezierPatchMeshResourceSerializer.cpp">
+      <Filter>Ext</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\FileType.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\BezierPatchMeshFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\FileSerializerLibrary.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\FileTypeSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\FontFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\ImageFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\LevelFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\MaterialFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\MeshFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\RasterFontFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\ShaderFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\Serializers\SpriteSheetFileSerializer.cpp">
+      <Filter>Files\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Helpers\AssimpUtils.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helpers\StringUtils.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\ButtonState.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\InputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Key.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Keyboard.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Mouse.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntRect.cpp" />
+    <ClCompile Include="src\IntRectangle.cpp" />
+    <ClCompile Include="src\MeshAdjacencyCalculator.cpp" />
+    <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\ObjectLibrary.cpp" />
+    <ClCompile Include="src\Rendering\CameraManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Display.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\DisplayManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\GraphicsAPI_OpenGL.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Gui\DearImgui.cpp">
+      <Filter>Rendering\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\LightManager.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Material.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Mesh.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Projection.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\RenderTexture.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Renderer.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Shader.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\ShaderLibrary.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Skybox.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\Texture.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rendering\TextureParameters.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Resource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\ResourceTreeNode.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\AnimationResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\CubemapResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\MaterialResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\MeshResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\ResourceSerializerLibrary.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\ShaderResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\SkeletonResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\SpriteSheetResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Serializers\TextureResourceSerializer.cpp">
+      <Filter>Resources\Serializers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scenes\HardCodedScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scenes\SceneManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scenes\SerializedScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Settings\EngineSettings.cpp">
+      <Filter>Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SystemWindowingLayer_SDL.cpp" />
+    <ClCompile Include="src\Timing\Clock.cpp">
+      <Filter>Timing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TypeNameLookup.cpp" />
+    <ClCompile Include="src\UI\FontFace.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\SpriteSheet.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\TexturePacker.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\TexturePackerImage.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\TexturePackerTextureData.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\imgui\imgui.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\imgui\imgui_demo.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\imgui\imgui_draw.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\imgui\imgui_impl_sdl.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vendor\imgui\imgui_widgets.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
