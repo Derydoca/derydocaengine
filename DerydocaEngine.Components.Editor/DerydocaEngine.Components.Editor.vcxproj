@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2F8CCCF3-1BDD-B735-4441-A6F730F14A9F}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>DerydocaEngine.Components.Editor</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\bin\Debug-windows-x86_64\DerydocaEngine.Components.Editor\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\DerydocaEngine.Components.Editor\</IntDir>
+    <TargetName>DerydocaEngine.Components.Editor</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\bin\Release-windows-x86_64\DerydocaEngine.Components.Editor\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\DerydocaEngine.Components.Editor\</IntDir>
+    <TargetName>DerydocaEngine.Components.Editor</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <OutDir>..\bin\Dist-windows-x86_64\DerydocaEngine.Components.Editor\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86_64\DerydocaEngine.Components.Editor\</IntDir>
+    <TargetName>DerydocaEngine.Components.Editor</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;..\DerydocaEngine.Editor\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;..\DerydocaEngine.Editor\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EditorComponentsPch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;..\DerydocaEngine.Editor\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Components\AnimationViewerWindow.h" />
+    <ClInclude Include="src\Components\EditorCameraWindow.h" />
+    <ClInclude Include="src\Components\EditorWindowComponent.h" />
+    <ClInclude Include="src\Components\EngineAssetBrowser.h" />
+    <ClInclude Include="src\Components\EngineConsole.h" />
+    <ClInclude Include="src\Components\InspectorWindow.h" />
+    <ClInclude Include="src\Components\SceneCameraInput\OrbitalControlStrategy.h" />
+    <ClInclude Include="src\Components\SceneCameraInput\SceneCameraInputStrategy.h" />
+    <ClInclude Include="src\Components\SceneCameraInput\WasdControlStrategy.h" />
+    <ClInclude Include="src\Components\SceneHierarchyWindow.h" />
+    <ClInclude Include="src\Components\SceneViewerWindow.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\CameraInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\FrameStatsInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\LightInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\MeshRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\RotatorInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\SkinnedMeshRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\SpriteRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\TextRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectors\WasdMoverInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\BezierCurveRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\BloomFilterInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\EdgeDetectionFilterInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\GammaCorrectionFilterInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\GaussianBlurFilterInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ImageProjectorInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\MultisampleSwitchInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\NightVisionFilterInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\NoiseTextureInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleContinuousFountainInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleFountainInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleInstancedInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ParticleSystemInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\ShaderSubroutineSwitcherInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\TessellatedMeshRendererInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\TessellatingQuadInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\WaveDisplacementInspector.h" />
+    <ClInclude Include="src\Editor\ComponentInspectorsExt\WoodSliceTextureInspector.h" />
+    <ClInclude Include="src\Editor\TerrainInspector.h" />
+    <ClInclude Include="src\EditorComponentsPch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Components\AnimationViewerWindow.cpp" />
+    <ClCompile Include="src\Components\EditorCameraWindow.cpp" />
+    <ClCompile Include="src\Components\EditorWindowComponent.cpp" />
+    <ClCompile Include="src\Components\EngineAssetBrowser.cpp" />
+    <ClCompile Include="src\Components\EngineConsole.cpp" />
+    <ClCompile Include="src\Components\InspectorWindow.cpp" />
+    <ClCompile Include="src\Components\SceneCameraInput\OrbitalControlStrategy.cpp" />
+    <ClCompile Include="src\Components\SceneCameraInput\SceneCameraInputStrategy.cpp" />
+    <ClCompile Include="src\Components\SceneCameraInput\WasdControlStrategy.cpp" />
+    <ClCompile Include="src\Components\SceneHierarchyWindow.cpp" />
+    <ClCompile Include="src\Components\SceneViewerWindow.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\CameraInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\FrameStatsInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\KeyboardMoverInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\LightInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\MaterialRefresherInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\MeshRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\RotatorInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\ScreenshotUtilInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\SkinnedMeshRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\SpriteRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\TextRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectors\WasdMoverInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\BezierCurveRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\BloomFilterInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\EdgeDetectionFilterInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\GammaCorrectionFilterInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\GaussianBlurFilterInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ImageProjectorInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\MultisampleSwitchInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\NightVisionFilterInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\NoiseTextureInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleContinuousFountainInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleFountainInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleInstancedInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ParticleSystemInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\ShaderSubroutineSwitcherInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\TessellatedMeshRendererInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\TessellatingQuadInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\WaveDisplacementInspector.cpp" />
+    <ClCompile Include="src\Editor\ComponentInspectorsExt\WoodSliceTextureInspector.cpp" />
+    <ClCompile Include="src\Editor\TerrainInspector.cpp" />
+    <ClCompile Include="src\EditorComponentsPch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
