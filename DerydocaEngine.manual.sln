@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.UI", "DerydocaEngine.Editor.UI\DerydocaEngine.Editor.UI.vcxproj", "{0E76525C-9706-43CD-801C-FDACA8F6C5E4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.UI", "DerydocaEngine.Editor.UI\DerydocaEngine.Editor.UI.manual.vcxproj", "{0E76525C-9706-43CD-801C-FDACA8F6C5E4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine", "DerydocaEngine\DerydocaEngine.vcxproj", "{D0307648-A7A9-413C-A47C-D21474B321D1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine", "DerydocaEngine\DerydocaEngine.manual.vcxproj", "{D0307648-A7A9-413C-A47C-D21474B321D1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Components", "DerydocaEngine.Components\DerydocaEngine.Components.vcxproj", "{C437A7F9-DA09-4776-B3C0-8EFCD2E02E2B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Components", "DerydocaEngine.Components\DerydocaEngine.Components.manual.vcxproj", "{C437A7F9-DA09-4776-B3C0-8EFCD2E02E2B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Test", "DerydocaEngine.Test\DerydocaEngine.Test.vcxproj", "{D2E727BB-C664-496A-B0BD-37DCE39C2581}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Test", "DerydocaEngine.Test\DerydocaEngine.Test.manual.vcxproj", "{D2E727BB-C664-496A-B0BD-37DCE39C2581}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Components.Editor", "DerydocaEngine.Components.Editor\DerydocaEngine.Components.Editor.vcxproj", "{EB252008-399A-48DB-897E-33F6A6A271D1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Components.Editor", "DerydocaEngine.Components.Editor\DerydocaEngine.Components.Editor.manual.vcxproj", "{EB252008-399A-48DB-897E-33F6A6A271D1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor", "DerydocaEngine.Editor\DerydocaEngine.Editor.vcxproj", "{0FBC4ADD-5B4A-4388-8DB5-CBC58BB5B4A6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor", "DerydocaEngine.Editor\DerydocaEngine.Editor.manual.vcxproj", "{0FBC4ADD-5B4A-4388-8DB5-CBC58BB5B4A6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.Test", "DerydocaEngine.Editor.Test\DerydocaEngine.Editor.Test.vcxproj", "{DCAE92F4-A78B-4362-B685-E11E13105BFF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.Test", "DerydocaEngine.Editor.Test\DerydocaEngine.Editor.Test.manual.vcxproj", "{DCAE92F4-A78B-4362-B685-E11E13105BFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

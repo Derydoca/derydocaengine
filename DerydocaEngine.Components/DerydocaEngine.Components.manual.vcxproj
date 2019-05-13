@@ -90,7 +90,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(ProjectName)\$(Platform)-$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)bin-int\DerydocaEngine.Components\$(Platform)-$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <TargetExt>.lib</TargetExt>
     <IncludePath>$(ProjectDir)src;$(IncludePath)</IncludePath>
@@ -271,7 +271,7 @@
     <ClInclude Include="src\EngineComponentsPch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DerydocaEngine\DerydocaEngine.vcxproj">
+    <ProjectReference Include="..\DerydocaEngine\DerydocaEngine.manual.vcxproj">
       <Project>{d0307648-a7a9-413c-a47c-d21474b321d1}</Project>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
