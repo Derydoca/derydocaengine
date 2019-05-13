@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>DerydocaEngine.Components</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\bin\Debug-windows-x86_64\DerydocaEngine.Components\</OutDir>
+    <IntDir>..\bin-int\Debug-windows-x86_64\DerydocaEngine.Components\</IntDir>
+    <TargetName>DerydocaEngine.Components</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\bin\Release-windows-x86_64\DerydocaEngine.Components\</OutDir>
+    <IntDir>..\bin-int\Release-windows-x86_64\DerydocaEngine.Components\</IntDir>
+    <TargetName>DerydocaEngine.Components</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <OutDir>..\bin\Dist-windows-x86_64\DerydocaEngine.Components\</OutDir>
+    <IntDir>..\bin-int\Dist-windows-x86_64\DerydocaEngine.Components\</IntDir>
+    <TargetName>DerydocaEngine.Components</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EngineComponentsPch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EngineComponentsPch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EngineComponentsPch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Components\Camera.h" />
+    <ClInclude Include="src\Components\FrameStats.h" />
+    <ClInclude Include="src\Components\GameComponent.h" />
+    <ClInclude Include="src\Components\GameComponentFactory.h" />
+    <ClInclude Include="src\Components\KeyboardMover.h" />
+    <ClInclude Include="src\Components\Light.h" />
+    <ClInclude Include="src\Components\MaterialRefresher.h" />
+    <ClInclude Include="src\Components\MeshRenderer.h" />
+    <ClInclude Include="src\Components\RendererComponent.h" />
+    <ClInclude Include="src\Components\Rotator.h" />
+    <ClInclude Include="src\Components\ScreenshotUtil.h" />
+    <ClInclude Include="src\Components\SkinnedMeshRenderer.h" />
+    <ClInclude Include="src\Components\SpriteRenderer.h" />
+    <ClInclude Include="src\Components\Terrain.h" />
+    <ClInclude Include="src\Components\TextRenderer.h" />
+    <ClInclude Include="src\Components\Transform.h" />
+    <ClInclude Include="src\Components\WasdMover.h" />
+    <ClInclude Include="src\ComponentsExt\BezierCurveRenderer.h" />
+    <ClInclude Include="src\ComponentsExt\BloomFilter.h" />
+    <ClInclude Include="src\ComponentsExt\EdgeDetectionFilter.h" />
+    <ClInclude Include="src\ComponentsExt\GammaCorrectionFilter.h" />
+    <ClInclude Include="src\ComponentsExt\GaussianBlurFilter.h" />
+    <ClInclude Include="src\ComponentsExt\ImageProjector.h" />
+    <ClInclude Include="src\ComponentsExt\MultisampleSwitch.h" />
+    <ClInclude Include="src\ComponentsExt\NightVisionFilter.h" />
+    <ClInclude Include="src\ComponentsExt\NoiseTexture.h" />
+    <ClInclude Include="src\ComponentsExt\ParticleContinuousFountain.h" />
+    <ClInclude Include="src\ComponentsExt\ParticleFountain.h" />
+    <ClInclude Include="src\ComponentsExt\ParticleInstanced.h" />
+    <ClInclude Include="src\ComponentsExt\ParticleSystem.h" />
+    <ClInclude Include="src\ComponentsExt\ShaderSubroutineSwitcher.h" />
+    <ClInclude Include="src\ComponentsExt\TessellatedMeshRenderer.h" />
+    <ClInclude Include="src\ComponentsExt\TessellatingQuad.h" />
+    <ClInclude Include="src\ComponentsExt\WaveDisplacement.h" />
+    <ClInclude Include="src\ComponentsExt\WoodSliceTexture.h" />
+    <ClInclude Include="src\EngineComponentsPch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Components\Camera.cpp" />
+    <ClCompile Include="src\Components\FrameStats.cpp" />
+    <ClCompile Include="src\Components\GameComponentFactory.cpp" />
+    <ClCompile Include="src\Components\KeyboardMover.cpp" />
+    <ClCompile Include="src\Components\Light.cpp" />
+    <ClCompile Include="src\Components\MaterialRefresher.cpp" />
+    <ClCompile Include="src\Components\MeshRenderer.cpp" />
+    <ClCompile Include="src\Components\RendererComponent.cpp" />
+    <ClCompile Include="src\Components\Rotator.cpp" />
+    <ClCompile Include="src\Components\ScreenshotUtil.cpp" />
+    <ClCompile Include="src\Components\SkinnedMeshRenderer.cpp" />
+    <ClCompile Include="src\Components\SpriteRenderer.cpp" />
+    <ClCompile Include="src\Components\Terrain.cpp" />
+    <ClCompile Include="src\Components\TextRenderer.cpp" />
+    <ClCompile Include="src\Components\Transform.cpp" />
+    <ClCompile Include="src\Components\WasdMover.cpp" />
+    <ClCompile Include="src\ComponentsExt\BezierCurveRenderer.cpp" />
+    <ClCompile Include="src\ComponentsExt\BloomFilter.cpp" />
+    <ClCompile Include="src\ComponentsExt\EdgeDetectionFilter.cpp" />
+    <ClCompile Include="src\ComponentsExt\GammaCorrectionFilter.cpp" />
+    <ClCompile Include="src\ComponentsExt\GaussianBlurFilter.cpp" />
+    <ClCompile Include="src\ComponentsExt\ImageProjector.cpp" />
+    <ClCompile Include="src\ComponentsExt\MultisampleSwitch.cpp" />
+    <ClCompile Include="src\ComponentsExt\NightVisionFilter.cpp" />
+    <ClCompile Include="src\ComponentsExt\NoiseTexture.cpp" />
+    <ClCompile Include="src\ComponentsExt\ParticleContinuousFountain.cpp" />
+    <ClCompile Include="src\ComponentsExt\ParticleFountain.cpp" />
+    <ClCompile Include="src\ComponentsExt\ParticleInstanced.cpp" />
+    <ClCompile Include="src\ComponentsExt\ParticleSystem.cpp" />
+    <ClCompile Include="src\ComponentsExt\ShaderSubroutineSwitcher.cpp" />
+    <ClCompile Include="src\ComponentsExt\TessellatedMeshRenderer.cpp" />
+    <ClCompile Include="src\ComponentsExt\TessellatingQuad.cpp" />
+    <ClCompile Include="src\ComponentsExt\WaveDisplacement.cpp" />
+    <ClCompile Include="src\ComponentsExt\WoodSliceTexture.cpp" />
+    <ClCompile Include="src\EngineComponentsPch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

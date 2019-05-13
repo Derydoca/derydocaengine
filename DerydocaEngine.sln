@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine", "DerydocaEngine\DerydocaEngine.vcxproj", "{E6147636-D2E2-693C-BB76-DA62A7E345A1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Components", "DerydocaEngine.Components\DerydocaEngine.Components.vcxproj", "{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.UI", "DerydocaEngine.Editor.UI\DerydocaEngine.Editor.UI.vcxproj", "{A7E3E263-9308-32E4-BC53-1774A8D73002}"
 EndProject
 Global
@@ -18,6 +20,12 @@ Global
 		{E6147636-D2E2-693C-BB76-DA62A7E345A1}.Dist|x64.Build.0 = Dist|x64
 		{E6147636-D2E2-693C-BB76-DA62A7E345A1}.Release|x64.ActiveCfg = Release|x64
 		{E6147636-D2E2-693C-BB76-DA62A7E345A1}.Release|x64.Build.0 = Release|x64
+		{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}.Debug|x64.ActiveCfg = Debug|x64
+		{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}.Debug|x64.Build.0 = Debug|x64
+		{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}.Dist|x64.ActiveCfg = Dist|x64
+		{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}.Dist|x64.Build.0 = Dist|x64
+		{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}.Release|x64.ActiveCfg = Release|x64
+		{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}.Release|x64.Build.0 = Release|x64
 		{A7E3E263-9308-32E4-BC53-1774A8D73002}.Debug|x64.ActiveCfg = Debug|x64
 		{A7E3E263-9308-32E4-BC53-1774A8D73002}.Debug|x64.Build.0 = Debug|x64
 		{A7E3E263-9308-32E4-BC53-1774A8D73002}.Dist|x64.ActiveCfg = Dist|x64
