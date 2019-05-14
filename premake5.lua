@@ -460,7 +460,7 @@ project "DerydocaEngine.Test"
         }
 
 project "GoogleTest"
-    location "vendor/gtest/googletest"
+    location "vendor/generatedProjects"
     kind "StaticLib"
     language "C++"
 

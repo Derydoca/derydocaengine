@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor", "De
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Test", "DerydocaEngine.Test\DerydocaEngine.Test.vcxproj", "{94485573-00AA-3281-8917-7933F5776940}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTest", "vendor\gtest\googletest\GoogleTest.vcxproj", "{A2790B43-8E31-4D90-F738-26ECE30FE880}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTest", "vendor\generatedProjects\GoogleTest.vcxproj", "{A2790B43-8E31-4D90-F738-26ECE30FE880}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

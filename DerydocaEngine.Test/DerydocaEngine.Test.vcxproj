@@ -176,7 +176,7 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(TargetDir)"</Command>
     <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">
       <Project>{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\vendor\gtest\googletest\GoogleTest.vcxproj">
+    <ProjectReference Include="..\vendor\generatedProjects\GoogleTest.vcxproj">
       <Project>{A2790B43-8E31-4D90-F738-26ECE30FE880}</Project>
     </ProjectReference>
   </ItemGroup>
