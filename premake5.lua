@@ -21,7 +21,6 @@ project "DerydocaEngine.Components"
 
     pchheader "EngineComponentsPch.h"
     pchsource "%{prj.location}/src/EngineComponentsPch.cpp"
-    staticruntime "Off"
 
     flags
     {
@@ -45,7 +44,6 @@ project "DerydocaEngine.Components"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -57,16 +55,20 @@ project "DerydocaEngine.Components"
         }
 
     filter "configurations:Debug"
+        staticruntime "Off"
         defines "DD_DEBUG"
         symbols "On"
+        runtime "Debug"
 
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
+        runtime "Release"
 
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
+        runtime "Release"
 
 project "DerydocaEngine.Editor"
     location "DerydocaEngine.Editor"
@@ -78,7 +80,6 @@ project "DerydocaEngine.Editor"
 
     pchheader "EditorPch.h"
     pchsource "%{prj.location}/src/EditorPch.cpp"
-    staticruntime "Off"
 
     flags
     {
@@ -104,7 +105,6 @@ project "DerydocaEngine.Editor"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -118,14 +118,18 @@ project "DerydocaEngine.Editor"
     filter "configurations:Debug"
         defines "DD_DEBUG"
         symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
 
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
+        runtime "Release"
 
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
+        runtime "Release"
 
 project "DerydocaEngine.Components.Editor"
     location "DerydocaEngine.Components.Editor"
@@ -137,7 +141,6 @@ project "DerydocaEngine.Components.Editor"
 
     pchheader "EditorComponentsPch.h"
     pchsource "%{prj.location}/src/EditorComponentsPch.cpp"
-    staticruntime "Off"
 
     flags
     {
@@ -163,7 +166,6 @@ project "DerydocaEngine.Components.Editor"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -177,14 +179,18 @@ project "DerydocaEngine.Components.Editor"
     filter "configurations:Debug"
         defines "DD_DEBUG"
         symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
 
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
+        runtime "Release"
 
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
+        runtime "Release"
 
 project "DerydocaEngine"
     location "DerydocaEngine"
@@ -196,7 +202,6 @@ project "DerydocaEngine"
 
     pchheader "EnginePch.h"
     pchsource "%{prj.location}/src/EnginePch.cpp"
-    staticruntime "Off"
 
     flags
     {
@@ -220,7 +225,6 @@ project "DerydocaEngine"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -234,14 +238,18 @@ project "DerydocaEngine"
     filter "configurations:Debug"
         defines "DD_DEBUG"
         symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
 
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
+        runtime "Release"
 
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
+        runtime "Release"
 
 project "DerydocaEngine.Editor.UI"
     location "DerydocaEngine.Editor.UI"
@@ -263,7 +271,6 @@ project "DerydocaEngine.Editor.UI"
     links {
         "assimp",
         "glew32",
-        "libyaml-cppmdd",
         "SDL2",
         "OpenGL32",
         "freetype"
@@ -302,7 +309,6 @@ project "DerydocaEngine.Editor.UI"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -328,11 +334,27 @@ project "DerydocaEngine.Editor.UI"
     filter "configurations:Debug"
         defines "DD_DEBUG"
         symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
+
+        links {
+            "libyaml-cppmdd"
+        }
 
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
+        runtime "Release"
+
+        links {
+            "libyaml-cppmd"
+        }
 
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
+        runtime "Release"
+
+        links {
+            "libyaml-cppmd"
+        }
