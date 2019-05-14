@@ -7,7 +7,7 @@ SET exampleProjectDirName=engineResources
 SET sourceExampleProjectDir=%~dp0%exampleProjectDirName%
 
 :: List all possible paths that an executable could be found in, in order of priority
-SET buildDirectories=%~dp0bin\x64-Debug\ %~dp0bin\x64-Release\ %~dp0bin\Win32-Debug\ %~dp0bin\Win32-Release\
+SET buildDirectories=%~dp0bin\Debug-windows-x86_64\ %~dp0bin\Release-windows-x86_64\ %~dp0bin\Dist-windows-x86_64\
 
 :: Iterate through all executable paths to find one with a valid exe file
 (for %%a in (%buildDirectories%) do (
