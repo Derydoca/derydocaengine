@@ -1,5 +1,6 @@
 workspace "DerydocaEngine"
     architecture "x64"
+    startproject "DerydocaEngine.Editor.UI"
 
     configurations
     {
