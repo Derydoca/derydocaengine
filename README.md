@@ -16,7 +16,13 @@ Watch a short demo video of the engine in action by clicking the thumbnail below
 The Boost C++ library is required to build this project. The project will look for boost version 1.68.0 in either "C:\local\boost_1_68_0" or "D:\local\boost_1_68_0. You can download it from here: https://sourceforge.net/projects/boost/files/boost-binaries/1.68.0/
 
 ## How To Build
-This project is utilizing Premake for project generation. It has only been tested to be working by generating Visual Studio project files, but you may also try other generators at your own risk.
+After cloning the project you will have to restore the project's submodules. Run the two commands below in your console/terminal window:
+```
+git submodule init
+git submodule update
+```
+
+You will also need to generate the solution and project files. This repo is utilizing Premake for project generation. It has only been tested to be working by generating Visual Studio project files, but you may also try other generators at your own risk.
 
 Creating the Visual Studio solution and project files are simple. You can either run the "generateProjects.bat" batch file in the root or run the command below:
 ```
