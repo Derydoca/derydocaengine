@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Inspector">
+      <UniqueIdentifier>{5C3EE94E-C8A8-9DC5-11E7-4E6B7D907B1A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\EditorTestPch.h" />
+    <ClInclude Include="src\Inspector\InspectorRegistrationMacros.h">
+      <Filter>Inspector</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\EditorTestPch.cpp" />
+    <ClCompile Include="src\Inspector\InspectorRegistration_Component.cpp">
+      <Filter>Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inspector\InspectorRegistration_Component_Ext.cpp">
+      <Filter>Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inspector\InspectorRegistration_Resource.cpp">
+      <Filter>Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\stbi_impl.cpp" />
+  </ItemGroup>
+</Project>

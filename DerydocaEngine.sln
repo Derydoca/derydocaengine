@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Components.E
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor", "DerydocaEngine.Editor\DerydocaEngine.Editor.vcxproj", "{9BD6B47A-0743-7075-D036-08D33C6292DD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor.Test", "DerydocaEngine.Editor.Test\DerydocaEngine.Editor.Test.vcxproj", "{69632AE8-5573-D6B8-BE2C-3BD7AA5BC551}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Test", "DerydocaEngine.Test\DerydocaEngine.Test.vcxproj", "{94485573-00AA-3281-8917-7933F5776940}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTest", "vendor\generatedProjects\GoogleTest.vcxproj", "{A2790B43-8E31-4D90-F738-26ECE30FE880}"
@@ -52,6 +54,12 @@ Global
 		{9BD6B47A-0743-7075-D036-08D33C6292DD}.Dist|x64.Build.0 = Dist|x64
 		{9BD6B47A-0743-7075-D036-08D33C6292DD}.Release|x64.ActiveCfg = Release|x64
 		{9BD6B47A-0743-7075-D036-08D33C6292DD}.Release|x64.Build.0 = Release|x64
+		{69632AE8-5573-D6B8-BE2C-3BD7AA5BC551}.Debug|x64.ActiveCfg = Debug|x64
+		{69632AE8-5573-D6B8-BE2C-3BD7AA5BC551}.Debug|x64.Build.0 = Debug|x64
+		{69632AE8-5573-D6B8-BE2C-3BD7AA5BC551}.Dist|x64.ActiveCfg = Dist|x64
+		{69632AE8-5573-D6B8-BE2C-3BD7AA5BC551}.Dist|x64.Build.0 = Dist|x64
+		{69632AE8-5573-D6B8-BE2C-3BD7AA5BC551}.Release|x64.ActiveCfg = Release|x64
+		{69632AE8-5573-D6B8-BE2C-3BD7AA5BC551}.Release|x64.Build.0 = Release|x64
 		{94485573-00AA-3281-8917-7933F5776940}.Debug|x64.ActiveCfg = Debug|x64
 		{94485573-00AA-3281-8917-7933F5776940}.Debug|x64.Build.0 = Debug|x64
 		{94485573-00AA-3281-8917-7933F5776940}.Dist|x64.ActiveCfg = Dist|x64

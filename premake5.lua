@@ -459,6 +459,118 @@ project "DerydocaEngine.Test"
             "libyaml-cppmd"
         }
 
+project "DerydocaEngine.Editor.Test"
+    location "DerydocaEngine.Editor.Test"
+    kind "ConsoleApp"
+    language "C++"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    linkoptions {
+        "/WHOLEARCHIVE:DerydocaEngine.Components.lib",
+        "/WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib"
+    }
+    
+    links {
+        "assimp",
+        "glew32",
+        "SDL2",
+        "OpenGL32",
+        "freetype"
+    }
+
+    libdirs {
+        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
+        "C:/local/boost_1_68_0/lib64-msvc-14.1",
+        "D:/local/boost_1_68_0/lib64-msvc-14.1"
+    }
+
+    pchheader "EditorTestPch.h"
+    pchsource "%{prj.location}/src/EditorTestPch.cpp"
+
+    flags
+    {
+        "MultiProcessorCompile"
+    }
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "C:/local/boost_1_68_0",
+        "D:/local/boost_1_68_0",
+        "%{wks.location}/DerydocaEngine/src",
+        "%{wks.location}/DerydocaEngine.Components/src",
+        "%{wks.location}/DerydocaEngine.Editor/src",
+        "%{prj.location}/src",
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/gtest/googletest/include"
+    }
+
+    links
+    {
+        "DerydocaEngine",
+        "DerydocaEngine.Components",
+        "DerydocaEngine.Components.Editor",
+        "DerydocaEngine.Editor",
+        "GoogleTest"
+    }
+
+    filter "system:windows"
+        cppdialect "C++17"
+        systemversion "latest"
+
+        defines
+        {
+            "OPENGL=1",
+            "_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING",
+            "_HAS_TR1_NAMESPACE",
+            "_CRT_SECURE_NO_WARNINGS",
+            "YAML_DECLARE_STATIC",
+            "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
+        }
+        
+        postbuildcommands
+        {
+            "@echo Copying DLLs",
+            "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
+            "@echo Copying engine settings file",
+            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\""
+        }
+
+    filter "configurations:Debug"
+        defines "DD_DEBUG"
+        symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
+
+        links {
+            "libyaml-cppmdd"
+        }
+
+    filter "configurations:Release"
+        defines "DD_RELEASE"
+        symbols "On"
+        runtime "Release"
+
+        links {
+            "libyaml-cppmd"
+        }
+
+    filter "configurations:Dist"
+        defines "DD_DIST"
+        symbols "On"
+        runtime "Release"
+
+        links {
+            "libyaml-cppmd"
+        }
+    
 project "GoogleTest"
     location "vendor/generatedProjects"
     kind "StaticLib"
@@ -480,8 +592,8 @@ project "GoogleTest"
 
     includedirs
     {
-        "%{prj.location}",
-        "%{prj.location}/include"
+        "%{wks.location}/vendor/gtest/googletest",
+        "%{wks.location}/vendor/gtest/googletest/include"
     }
 
     filter "system:windows"
