@@ -11,7 +11,7 @@ SET buildDirectories=%~dp0bin\Debug-windows-x86_64\ %~dp0bin\Release-windows-x86
 
 :: Iterate through all executable paths to find one with a valid exe file
 (for %%a in (%buildDirectories%) do (
-    SET buildExampleProjectDir=%%a%exampleProjectDirName%
+    SET buildExampleProjectDir=%%aDerydocaEngine.Editor.UI\%exampleProjectDirName%
 
     ECHO "Deleting !buildExampleProjectDir!"
     RD /S /Q !buildExampleProjectDir!
