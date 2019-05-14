@@ -21,7 +21,7 @@ project "DerydocaEngine.Components"
 
     pchheader "EngineComponentsPch.h"
     pchsource "%{prj.location}/src/EngineComponentsPch.cpp"
-    staticruntime "off"
+    staticruntime "Off"
 
     flags
     {
@@ -45,7 +45,7 @@ project "DerydocaEngine.Components"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
+        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -80,7 +80,7 @@ project "DerydocaEngine.Editor"
 
     pchheader "EditorPch.h"
     pchsource "%{prj.location}/src/EditorPch.cpp"
-    staticruntime "off"
+    staticruntime "Off"
 
     flags
     {
@@ -106,7 +106,7 @@ project "DerydocaEngine.Editor"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
+        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -143,7 +143,7 @@ project "DerydocaEngine.Components.Editor"
 
     pchheader "EditorComponentsPch.h"
     pchsource "%{prj.location}/src/EditorComponentsPch.cpp"
-    staticruntime "off"
+    staticruntime "Off"
 
     flags
     {
@@ -169,7 +169,7 @@ project "DerydocaEngine.Components.Editor"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
+        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -202,7 +202,7 @@ project "DerydocaEngine"
 
     pchheader "EnginePch.h"
     pchsource "%{prj.location}/src/EnginePch.cpp"
-    staticruntime "off"
+    staticruntime "Off"
 
     flags
     {
@@ -226,7 +226,7 @@ project "DerydocaEngine"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
+        staticruntime "Off"
         systemversion "latest"
 
         defines
@@ -236,11 +236,6 @@ project "DerydocaEngine"
             "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
-
-        -- postbuildcommands
-        -- {
-        --     ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/DerydocaEngine.Editor.UI")
-        -- }
 
     filter "configurations:Debug"
         defines "DD_DEBUG"
@@ -254,13 +249,41 @@ project "DerydocaEngine"
         defines "DD_DIST"
         symbols "On"
 
+-- Conformance mode - Yes (/permissive-)
+-- Command Arguments and Working Directory is not working right now
+-- Runtime Library - Multi-threaded Debug DLL (/MDd), The new config has Multi-threaded Debug /MTd
+-- SDL checks - Yes (/sdl): This option is missing from Premake but existed in the manually created project
 project "DerydocaEngine.Editor.UI"
     location "DerydocaEngine.Editor.UI"
     kind "ConsoleApp"
     language "C++"
+    debugdir "$(OutputPath)"
+    debugargs ("-project ../../../exampleProject")
+    pchheader "EditorPch.h"
+    pchsource "%{prj.location}/src/EditorPch.cpp"
+
+    linkoptions {
+        "/WHOLEARCHIVE:DerydocaEngine.Components.lib",
+        "/WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib"
+    }
     
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    links {
+        "assimp",
+        "glew32",
+        "libyaml-cppmdd",
+        "SDL2",
+        "OpenGL32",
+        "freetype"
+    }
+
+    libdirs {
+        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
+        "C:/local/boost_1_68_0/lib64-msvc-14.1",
+        "D:/local/boost_1_68_0/lib64-msvc-14.1"
+    }
 
     files
     {
@@ -270,22 +293,46 @@ project "DerydocaEngine.Editor.UI"
 
     includedirs
     {
-        "include"
+        "C:/local/boost_1_68_0",
+        "D:/local/boost_1_68_0",
+        "%{wks.location}/include",
+        "%{wks.location}/DerydocaEngine/src",
+        "%{wks.location}/DerydocaEngine.Components/src",
+        "%{wks.location}/DerydocaEngine.Components.Editor/src",
+        "%{wks.location}/DerydocaEngine.Editor/src"
     }
 
     links
     {
-        "DerydocaEngine"
+        "DerydocaEngine",
+        "DerydocaEngine.Components",
+        "DerydocaEngine.Components.Editor",
+        "DerydocaEngine.Editor"
     }
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
+        staticruntime "Off"
         systemversion "latest"
 
         defines
         {
-            "OPENGL"
+            "OPENGL=1",
+            "_CRT_SECURE_NO_WARNINGS",
+            "YAML_DECLARE_STATIC",
+            "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
+        }
+
+        postbuildcommands
+        {
+            "@echo Copying DLLs",
+            "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
+            "@echo Copying engine settings file",
+            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\"",
+            "@echo Processing the engine resource directory",
+            "\"%{cfg.buildtarget.abspath}\" -processDirectory \"%{wks.location}engineResources\"",
+            "@echo Copying engine resources",
+            "xcopy /y /d /e \"%{wks.location}engineResources\\*\" \"%{cfg.buildtarget.directory}engineResources\\\"",
         }
 
     filter "configurations:Debug"

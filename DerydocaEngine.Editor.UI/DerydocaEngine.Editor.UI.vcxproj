@@ -76,51 +76,93 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EditorPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>OPENGL;DD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\include;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;..\DerydocaEngine.Components.Editor\src;..\DerydocaEngine.Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\libs\x86_64\debug;C:\local\boost_1_68_0\lib64-msvc-14.1;D:\local\boost_1_68_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\x86_64\debug\*.dll" "$(TargetDir)"
+@echo Copying engine settings file
+xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(TargetDir)"
+@echo Processing the engine resource directory
+"../bin/Debug-windows-x86_64/DerydocaEngine.Editor.UI/DerydocaEngine.Editor.UI.exe" -processDirectory "$(SolutionDir)engineResources"
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(TargetDir)engineResources\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EditorPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>OPENGL;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\include;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;..\DerydocaEngine.Components.Editor\src;..\DerydocaEngine.Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\libs\x86_64\release;C:\local\boost_1_68_0\lib64-msvc-14.1;D:\local\boost_1_68_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\x86_64\release\*.dll" "$(TargetDir)"
+@echo Copying engine settings file
+xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(TargetDir)"
+@echo Processing the engine resource directory
+"../bin/Release-windows-x86_64/DerydocaEngine.Editor.UI/DerydocaEngine.Editor.UI.exe" -processDirectory "$(SolutionDir)engineResources"
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(TargetDir)engineResources\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>EditorPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>OPENGL;DD_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OPENGL=1;_CRT_SECURE_NO_WARNINGS;YAML_DECLARE_STATIC;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;DD_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\include;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;..\DerydocaEngine.Components.Editor\src;..\DerydocaEngine.Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>assimp.lib;glew32.lib;libyaml-cppmdd.lib;SDL2.lib;OpenGL32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\libs\x86_64\dist;C:\local\boost_1_68_0\lib64-msvc-14.1;D:\local\boost_1_68_0\lib64-msvc-14.1;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/WHOLEARCHIVE:DerydocaEngine.Components.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>@echo Copying DLLs
+xcopy /y /d "$(SolutionDir)libs\x86_64\dist\*.dll" "$(TargetDir)"
+@echo Copying engine settings file
+xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(TargetDir)"
+@echo Processing the engine resource directory
+"../bin/Dist-windows-x86_64/DerydocaEngine.Editor.UI/DerydocaEngine.Editor.UI.exe" -processDirectory "$(SolutionDir)engineResources"
+@echo Copying engine resources
+xcopy /y /d /e "$(SolutionDir)engineResources\*" "$(TargetDir)engineResources\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Editor\Execution\CommandLineArgs.h" />
@@ -128,13 +170,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Editor\Execution\CommandLineArgs.cpp" />
-    <ClCompile Include="src\EditorPch.cpp" />
+    <ClCompile Include="src\EditorPch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\stbi_impl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DerydocaEngine\DerydocaEngine.vcxproj">
       <Project>{E6147636-D2E2-693C-BB76-DA62A7E345A1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">
+      <Project>{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DerydocaEngine.Components.Editor\DerydocaEngine.Components.Editor.vcxproj">
+      <Project>{2F8CCCF3-1BDD-B735-4441-A6F730F14A9F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DerydocaEngine.Editor\DerydocaEngine.Editor.vcxproj">
+      <Project>{9BD6B47A-0743-7075-D036-08D33C6292DD}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
