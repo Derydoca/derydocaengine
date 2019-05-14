@@ -10,7 +10,6 @@ workspace "DerydocaEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
--- SDL checks - Yes (/sdl): This option is missing from Premake but existed in the manually created project
 project "DerydocaEngine.Components"
     location "DerydocaEngine.Components"
     kind "StaticLib"
@@ -68,8 +67,6 @@ project "DerydocaEngine.Components"
         defines "DD_DIST"
         symbols "On"
 
--- Conformance mode - Yes (/permissive-)
--- SDL checks - Yes (/sdl): This option is missing from Premake but existed in the manually created project
 project "DerydocaEngine.Editor"
     location "DerydocaEngine.Editor"
     kind "StaticLib"
@@ -98,7 +95,7 @@ project "DerydocaEngine.Editor"
         "C:/local/boost_1_68_0",
         "D:/local/boost_1_68_0",
         "%{wks.location}/DerydocaEngine/src",
-        "%{wks.location}/DerydocaEngine.Components/src", -- Where is this????
+        "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
         "%{prj.location}/src",
         "%{wks.location}/include"
@@ -129,10 +126,6 @@ project "DerydocaEngine.Editor"
         defines "DD_DIST"
         symbols "On"
 
--- Conformance mode - Yes (/permissive-)
--- SDL checks - Yes (/sdl): This option is missing from Premake but existed in the manually created project
--- Multi-processor Compilation was not set on the old project
--- Runtime Library - Multi-threaded Debug DLL (/MDd), The new config has Multi-threaded Debug /MTd
 project "DerydocaEngine.Components.Editor"
     location "DerydocaEngine.Components.Editor"
     kind "StaticLib"
@@ -249,10 +242,6 @@ project "DerydocaEngine"
         defines "DD_DIST"
         symbols "On"
 
--- Conformance mode - Yes (/permissive-)
--- Command Arguments and Working Directory is not working right now
--- Runtime Library - Multi-threaded Debug DLL (/MDd), The new config has Multi-threaded Debug /MTd
--- SDL checks - Yes (/sdl): This option is missing from Premake but existed in the manually created project
 project "DerydocaEngine.Editor.UI"
     location "DerydocaEngine.Editor.UI"
     kind "ConsoleApp"
