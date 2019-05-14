@@ -358,3 +358,100 @@ project "DerydocaEngine.Editor.UI"
         links {
             "libyaml-cppmd"
         }
+
+-- Debug Information Format - Manual=Program Database /Zi, Current=Program Database for Edit And Continue /ZI
+-- Enable Minimal Build - Manual=Yes /GM, Current=No /GM-
+-- Multi-processor Compilation - Manual=EMPTY, Current=Yes /MP
+-- Missing Preprocessor Definitions - X64, _DEBUG, _CONSOLE
+-- Enable Incremental Linking - Manual=EMPTY, Current=Yes /INCREMENTAL
+project "DerydocaEngine.Test"
+    location "DerydocaEngine.Test"
+    kind "ConsoleApp"
+    language "C++"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    links {
+        "assimp",
+        "glew32",
+        "SDL2",
+        "OpenGL32",
+        "freetype"
+    }
+
+    libdirs {
+        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
+        "C:/local/boost_1_68_0/lib64-msvc-14.1",
+        "D:/local/boost_1_68_0/lib64-msvc-14.1"
+    }
+
+    pchheader "EngineTestPch.h"
+    pchsource "%{prj.location}/src/EngineTestPch.cpp"
+
+    flags
+    {
+        "MultiProcessorCompile"
+    }
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "C:/local/boost_1_68_0",
+        "D:/local/boost_1_68_0",
+        "%{wks.location}/DerydocaEngine/src",
+        "%{wks.location}/DerydocaEngine.Components/src",
+        "%{prj.location}/src",
+        "%{wks.location}/include"
+    }
+
+    filter "system:windows"
+        cppdialect "C++17"
+        systemversion "latest"
+
+        defines
+        {
+            "_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING",
+            "_HAS_TR1_NAMESPACE"
+        }
+        
+        postbuildcommands
+        {
+            "@echo Copying DLLs",
+            "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
+            "@echo Copying engine settings file",
+            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\""
+        }
+
+    filter "configurations:Debug"
+        defines "DD_DEBUG"
+        symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
+
+        links {
+            "libyaml-cppmdd"
+        }
+
+    filter "configurations:Release"
+        defines "DD_RELEASE"
+        symbols "On"
+        runtime "Release"
+
+        links {
+            "libyaml-cppmd"
+        }
+
+    filter "configurations:Dist"
+        defines "DD_DIST"
+        symbols "On"
+        runtime "Release"
+
+        links {
+            "libyaml-cppmd"
+        }
