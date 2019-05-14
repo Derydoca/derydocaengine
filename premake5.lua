@@ -359,11 +359,6 @@ project "DerydocaEngine.Editor.UI"
             "libyaml-cppmd"
         }
 
--- Debug Information Format - Manual=Program Database /Zi, Current=Program Database for Edit And Continue /ZI
--- Enable Minimal Build - Manual=Yes /GM, Current=No /GM-
--- Multi-processor Compilation - Manual=EMPTY, Current=Yes /MP
--- Missing Preprocessor Definitions - X64, _DEBUG, _CONSOLE
--- Enable Incremental Linking - Manual=EMPTY, Current=Yes /INCREMENTAL
 project "DerydocaEngine.Test"
     location "DerydocaEngine.Test"
     kind "ConsoleApp"
@@ -407,7 +402,15 @@ project "DerydocaEngine.Test"
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/gtest/googletest/include"
+    }
+
+    links
+    {
+        "DerydocaEngine",
+        "DerydocaEngine.Components",
+        "GoogleTest"
     }
 
     filter "system:windows"
@@ -455,3 +458,54 @@ project "DerydocaEngine.Test"
         links {
             "libyaml-cppmd"
         }
+
+project "GoogleTest"
+    location "vendor/gtest/googletest"
+    kind "StaticLib"
+    language "C++"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    flags
+    {
+        "MultiProcessorCompile"
+    }
+
+    files
+    {
+        "vendor/gtest/googletest/src/**.h",
+        "vendor/gtest/googletest/src/**.cc"
+    }
+
+    includedirs
+    {
+        "%{prj.location}",
+        "%{prj.location}/include"
+    }
+
+    filter "system:windows"
+        cppdialect "C++17"
+        systemversion "latest"
+
+        defines
+        {
+            "OPENGL=1"
+        }
+
+    filter "configurations:Debug"
+        defines "DD_DEBUG"
+        symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
+
+    filter "configurations:Release"
+        defines "DD_RELEASE"
+        symbols "On"
+        runtime "Release"
+
+    filter "configurations:Dist"
+        defines "DD_DIST"
+        symbols "On"
+        runtime "Release"
+    

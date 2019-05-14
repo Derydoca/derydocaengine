@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Editor", "De
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DerydocaEngine.Test", "DerydocaEngine.Test\DerydocaEngine.Test.vcxproj", "{94485573-00AA-3281-8917-7933F5776940}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTest", "vendor\gtest\googletest\GoogleTest.vcxproj", "{A2790B43-8E31-4D90-F738-26ECE30FE880}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -56,6 +58,12 @@ Global
 		{94485573-00AA-3281-8917-7933F5776940}.Dist|x64.Build.0 = Dist|x64
 		{94485573-00AA-3281-8917-7933F5776940}.Release|x64.ActiveCfg = Release|x64
 		{94485573-00AA-3281-8917-7933F5776940}.Release|x64.Build.0 = Release|x64
+		{A2790B43-8E31-4D90-F738-26ECE30FE880}.Debug|x64.ActiveCfg = Debug|x64
+		{A2790B43-8E31-4D90-F738-26ECE30FE880}.Debug|x64.Build.0 = Debug|x64
+		{A2790B43-8E31-4D90-F738-26ECE30FE880}.Dist|x64.ActiveCfg = Dist|x64
+		{A2790B43-8E31-4D90-F738-26ECE30FE880}.Dist|x64.Build.0 = Dist|x64
+		{A2790B43-8E31-4D90-F738-26ECE30FE880}.Release|x64.ActiveCfg = Release|x64
+		{A2790B43-8E31-4D90-F738-26ECE30FE880}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

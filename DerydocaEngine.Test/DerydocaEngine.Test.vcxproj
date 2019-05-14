@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>EngineTestPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING;_HAS_TR1_NAMESPACE;DD_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;src;..\include;..\vendor\gtest\googletest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -107,7 +107,7 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(TargetDir)"</Command>
       <PrecompiledHeaderFile>EngineTestPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING;_HAS_TR1_NAMESPACE;DD_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;src;..\include;..\vendor\gtest\googletest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -134,7 +134,7 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(TargetDir)"</Command>
       <PrecompiledHeaderFile>EngineTestPch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING;_HAS_TR1_NAMESPACE;DD_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;src;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\local\boost_1_68_0;D:\local\boost_1_68_0;..\DerydocaEngine\src;..\DerydocaEngine.Components\src;src;..\include;..\vendor\gtest\googletest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -168,6 +168,17 @@ xcopy /y /f "$(SolutionDir)engineSettings.yaml" "$(TargetDir)"</Command>
     <ClCompile Include="src\ObjectLibraryTest.cpp" />
     <ClCompile Include="src\Rendering\MaterialParametersTest.cpp" />
     <ClCompile Include="src\stbi_impl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DerydocaEngine\DerydocaEngine.vcxproj">
+      <Project>{E6147636-D2E2-693C-BB76-DA62A7E345A1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DerydocaEngine.Components\DerydocaEngine.Components.vcxproj">
+      <Project>{FAA87756-666B-ABE0-AF1B-3A6D1B1D84BE}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\vendor\gtest\googletest\GoogleTest.vcxproj">
+      <Project>{A2790B43-8E31-4D90-F738-26ECE30FE880}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
