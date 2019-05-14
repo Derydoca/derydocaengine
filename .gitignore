@@ -3,7 +3,10 @@ bin/*
 bin-int/*
 packages/*
 
-# Exclude the hidden visual studio file
-.vs/*
-
 *.tlog
+
+# Exclude all Visual Studio artifacts
+.vs/*
+*.vcxproj
+*.vcxproj.filters
+*.sln

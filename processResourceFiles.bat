@@ -2,7 +2,7 @@
 SETLOCAL EnableDelayedExpansion
 
 :: List all possible paths that an executable could be found in, in order of priority
-SET buildDirectories=%~dp0bin\x64-Debug\ %~dp0bin\x64-Release\ %~dp0bin\Win32-Debug\ %~dp0bin\Win32-Release\
+SET buildDirectories=%~dp0bin\Debug-windows-x86_64\ %~dp0bin\Release-windows-x86_64\ %~dp0bin\Dist-windows-x86_64\
 
 :: Name of the executable to run
 SET executableName=DerydocaEngine.Editor.UI.exe
@@ -12,7 +12,7 @@ SET args=-processDirectory %~dp0engineResources %~dp0exampleProject
 
 :: Iterate through all executable paths to find one with a valid exe file
 (for %%a in (%buildDirectories%) do (
-    SET fullExecutablePath=%%a%executableName%
+    SET fullExecutablePath=%%aDerydocaEngine.Editor.UI/%executableName%
     if exist !fullExecutablePath! (
         ECHO "Found the exe at !fullExecutablePath!."
         ECHO "Processing files..."
