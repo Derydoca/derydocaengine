@@ -12,15 +12,22 @@ Watch a short demo video of the engine in action by clicking the thumbnail below
 ![Screenshot of dynamic LOD system](https://user-images.githubusercontent.com/3605996/52811473-0caeb480-304a-11e9-9e41-8a52f4ed8b9a.png)
 ![Screenshot of bumpmapping](https://user-images.githubusercontent.com/3605996/52811389-ceb19080-3049-11e9-94d6-108df728787e.png)
 
-## Development Environment
-This is being written in Visual Studio 2017. For anyone who wants to use another compiler, feel free to, however it will be simplest to use the most recent version of Visual Studio.
-
 ## Prerequisites
 The Boost C++ library is required to build this project. The project will look for boost version 1.68.0 in either "C:\local\boost_1_68_0" or "D:\local\boost_1_68_0. You can download it from here: https://sourceforge.net/projects/boost/files/boost-binaries/1.68.0/
 
 ## How To Build
+This project is utilizing Premake for project generation. It has only been tested to be working by generating Visual Studio project files, but you may also try other generators at your own risk.
 
-### Command Line Arguments
+Creating the Visual Studio solution and project files are simple. You can either run the "generateProjects.bat" batch file in the root or run the command below:
+```
+vendor\bin\premake\premake5.exe vs2017
+```
+
+If you do not have Visual Studio 2017 installed on your system, you can change "vs2017" to any valid generator. For more information, check out the [official Premake documentation](https://github.com/premake/premake-core/wiki/Using-Premake).
+
+After running the command, open the solution file in the root directory and proceede as usual.
+
+## Command Line Arguments
 You can use command line arguments for specifying a particular project and scene to load immediately. Specifying the project is required, however specifying a scene is not. If you do not specify a scene, an empty scene will be loaded and you can use the GUI to locate and load a level of your choosing.
 
 If you do want to jump into a specific level, there is a table below with a list of command line arguments you can use.
