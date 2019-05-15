@@ -51,7 +51,6 @@ project "DerydocaEngine.Components"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -113,7 +112,6 @@ project "DerydocaEngine.Editor"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -175,7 +173,6 @@ project "DerydocaEngine.Components.Editor"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -235,7 +232,6 @@ project "DerydocaEngine"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -321,7 +317,6 @@ project "DerydocaEngine.Editor.UI"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -517,7 +512,6 @@ project "DerydocaEngine.Editor.Test"
             "_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING",
             "_HAS_TR1_NAMESPACE",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
         
