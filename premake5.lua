@@ -39,7 +39,8 @@ project "DerydocaEngine.Components"
         "D:/local/boost_1_68_0",
         "%{wks.location}/DerydocaEngine/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -100,7 +101,8 @@ project "DerydocaEngine.Editor"
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -161,7 +163,8 @@ project "DerydocaEngine.Components.Editor"
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Editor/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -220,7 +223,8 @@ project "DerydocaEngine"
         "D:/local/boost_1_68_0",
         "%{wks.location}/%{wks.name}.Components/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -296,7 +300,8 @@ project "DerydocaEngine.Editor.UI"
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
-        "%{wks.location}/DerydocaEngine.Editor/src"
+        "%{wks.location}/DerydocaEngine.Editor/src",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     links
@@ -304,7 +309,8 @@ project "DerydocaEngine.Editor.UI"
         "DerydocaEngine",
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
-        "DerydocaEngine.Editor"
+        "DerydocaEngine.Editor",
+        "yaml-cpp"
     }
 
     filter "system:windows"
@@ -337,27 +343,15 @@ project "DerydocaEngine.Editor.UI"
         staticruntime "Off"
         runtime "Debug"
 
-        links {
-            "libyaml-cppmdd"
-        }
-
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
         runtime "Release"
 
-        links {
-            "libyaml-cppmd"
-        }
-
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
         runtime "Release"
-
-        links {
-            "libyaml-cppmd"
-        }
 
 project "DerydocaEngine.Test"
     location "DerydocaEngine.Test"
@@ -403,14 +397,16 @@ project "DerydocaEngine.Test"
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
-        "%{wks.location}/vendor/gtest/googletest/include"
+        "%{wks.location}/vendor/gtest/googletest/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     links
     {
         "DerydocaEngine",
         "DerydocaEngine.Components",
-        "GoogleTest"
+        "GoogleTest",
+        "yaml-cpp"
     }
 
     filter "system:windows"
@@ -437,27 +433,15 @@ project "DerydocaEngine.Test"
         staticruntime "Off"
         runtime "Debug"
 
-        links {
-            "libyaml-cppmdd"
-        }
-
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
         runtime "Release"
 
-        links {
-            "libyaml-cppmd"
-        }
-
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
         runtime "Release"
-
-        links {
-            "libyaml-cppmd"
-        }
 
 project "DerydocaEngine.Editor.Test"
     location "DerydocaEngine.Editor.Test"
@@ -509,7 +493,8 @@ project "DerydocaEngine.Editor.Test"
         "%{wks.location}/DerydocaEngine.Editor/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
-        "%{wks.location}/vendor/gtest/googletest/include"
+        "%{wks.location}/vendor/gtest/googletest/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     links
@@ -518,7 +503,8 @@ project "DerydocaEngine.Editor.Test"
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
         "DerydocaEngine.Editor",
-        "GoogleTest"
+        "GoogleTest",
+        "yaml-cpp"
     }
 
     filter "system:windows"
@@ -549,27 +535,15 @@ project "DerydocaEngine.Editor.Test"
         staticruntime "Off"
         runtime "Debug"
 
-        links {
-            "libyaml-cppmdd"
-        }
-
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
         runtime "Release"
 
-        links {
-            "libyaml-cppmd"
-        }
-
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
         runtime "Release"
-
-        links {
-            "libyaml-cppmd"
-        }
     
 project "GoogleTest"
     location "vendor/generatedProjects"
