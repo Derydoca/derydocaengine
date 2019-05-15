@@ -10,6 +10,7 @@ workspace "DerydocaEngine"
     }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+boostdir = "C:/local/boost_1_68_0"
 
 project "DerydocaEngine.Components"
     location "DerydocaEngine.Components"
@@ -35,8 +36,7 @@ project "DerydocaEngine.Components"
 
     includedirs
     {
-        "C:/local/boost_1_68_0",
-        "D:/local/boost_1_68_0",
+        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
@@ -94,8 +94,7 @@ project "DerydocaEngine.Editor"
 
     includedirs
     {
-        "C:/local/boost_1_68_0",
-        "D:/local/boost_1_68_0",
+        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
@@ -155,8 +154,7 @@ project "DerydocaEngine.Components.Editor"
 
     includedirs
     {
-        "C:/local/boost_1_68_0",
-        "D:/local/boost_1_68_0",
+        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Editor/src",
@@ -216,8 +214,7 @@ project "DerydocaEngine"
 
     includedirs
     {
-        "C:/local/boost_1_68_0",
-        "D:/local/boost_1_68_0",
+        (boostdir),
         "%{wks.location}/%{wks.name}.Components/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
@@ -278,8 +275,7 @@ project "DerydocaEngine.Editor.UI"
 
     libdirs {
         "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
-        "C:/local/boost_1_68_0/lib64-msvc-14.1",
-        "D:/local/boost_1_68_0/lib64-msvc-14.1"
+        (boostdir .. "/lib64-msvc-14.1")
     }
 
     files
@@ -290,8 +286,7 @@ project "DerydocaEngine.Editor.UI"
 
     includedirs
     {
-        "C:/local/boost_1_68_0",
-        "D:/local/boost_1_68_0",
+        (boostdir),
         "%{wks.location}/include",
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
@@ -366,8 +361,7 @@ project "DerydocaEngine.Test"
 
     libdirs {
         "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
-        "C:/local/boost_1_68_0/lib64-msvc-14.1",
-        "D:/local/boost_1_68_0/lib64-msvc-14.1"
+        (boostdir .. "/lib64-msvc-14.1")
     }
 
     pchheader "EngineTestPch.h"
@@ -386,8 +380,7 @@ project "DerydocaEngine.Test"
 
     includedirs
     {
-        "C:/local/boost_1_68_0",
-        "D:/local/boost_1_68_0",
+        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{prj.location}/src",
@@ -461,8 +454,7 @@ project "DerydocaEngine.Editor.Test"
 
     libdirs {
         "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
-        "C:/local/boost_1_68_0/lib64-msvc-14.1",
-        "D:/local/boost_1_68_0/lib64-msvc-14.1"
+        (boostdir .. "/lib64-msvc-14.1")
     }
 
     pchheader "EditorTestPch.h"
@@ -481,8 +473,7 @@ project "DerydocaEngine.Editor.Test"
 
     includedirs
     {
-        "C:/local/boost_1_68_0",
-        "D:/local/boost_1_68_0",
+        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Editor/src",
