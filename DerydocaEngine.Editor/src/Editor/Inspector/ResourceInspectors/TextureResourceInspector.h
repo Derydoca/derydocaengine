@@ -29,7 +29,8 @@ namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 					imgSize.x = windowWidth;
 					imgSize.y = texture->getHeight() * (windowWidth / texture->getWidth());
 				}
-				ImGui::Image((ImTextureID)(texture->getRendererId()), imgSize);
+#pragma warning(suppress: 4312)
+				ImGui::Image(reinterpret_cast<ImTextureID>(texture->getRendererId()), imgSize);
 			}
 		}
 	};

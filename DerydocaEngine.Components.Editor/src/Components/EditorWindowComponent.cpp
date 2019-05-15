@@ -28,8 +28,8 @@ namespace DerydocaEngine::Components
 		ImVec2 size = {20.0f, 20.0f};
 		{
 			auto initSize = getWindowInitialSize();
-			size.x = initSize.x;
-			size.y = initSize.y;
+			size.x = static_cast<float>(initSize.x);
+			size.y = static_cast<float>(initSize.y);
 		}
 		if (size.x > 0 && size.y > 0)
 		{

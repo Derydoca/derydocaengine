@@ -326,7 +326,7 @@ namespace DerydocaEngine::Rendering
 	void Shader::setMat4Array(const std::string& name, const std::vector<glm::mat4>& valArray)
 	{
 		int uniformLocation = getUniformLocation(name);
-		GraphicsAPI::setUniformMat4(uniformLocation, &valArray.at(0)[0][0], valArray.size());
+		GraphicsAPI::setUniformMat4(uniformLocation, &valArray.at(0)[0][0], static_cast<int>(valArray.size()));
 	}
 
 	void Shader::setTexture(const std::string& name, const int textureUnit, const std::shared_ptr<Rendering::Texture> texture)

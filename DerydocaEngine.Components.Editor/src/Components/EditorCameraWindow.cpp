@@ -57,7 +57,7 @@ namespace DerydocaEngine::Components
 
 	void EditorCameraWindow::renderToActiveBuffer()
 	{
-		Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(getCamera(), getDisplayWidth(), getDisplayHeight());
+		Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(getCamera(), static_cast<int>(getDisplayWidth()), static_cast<int>(getDisplayHeight()));
 	}
 
 }

@@ -14,7 +14,7 @@ namespace DerydocaEngine::Dgui
 		{
 			if (resources[i]->getId() == resource->getId())
 			{
-				return i;
+				return static_cast<int>(i);
 			}
 		}
 		return 0;

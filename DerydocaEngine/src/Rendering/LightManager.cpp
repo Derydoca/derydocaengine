@@ -79,7 +79,7 @@ namespace DerydocaEngine::Rendering
 
 		auto lights = getLights(objectTransform);
 
-		int limit = lights.size() > MAX_LIGHTS ? MAX_LIGHTS : lights.size();
+		int limit = lights.size() > MAX_LIGHTS ? MAX_LIGHTS : static_cast<int>(lights.size());
 		for (int i = 0; i < limit; i++)
 		{
 			auto l = lights[i];

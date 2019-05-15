@@ -55,7 +55,7 @@ namespace DerydocaEngine::Components
 			m_displayHeight > 0
 			)
 		{
-			m_renderTexture->initializeTexture(m_displayWidth, m_displayHeight);
+			m_renderTexture->initializeTexture(static_cast<int>(m_displayWidth), static_cast<int>(m_displayHeight));
 		}
 
 		// Clear the render texture and then render to it
@@ -107,7 +107,8 @@ namespace DerydocaEngine::Components
 	void SceneViewerWindow::renderViewToWindow()
 	{
 		// Render the camera's view to the window
-		ImGui::ImageButton((ImTextureID)m_renderTexture->getRendererId(), { m_displayWidth, m_displayHeight }, { 0, 1 }, { 1, 0 }, 0);
+#pragma warning(suppress: 4312)
+		ImGui::ImageButton(reinterpret_cast<ImTextureID>(m_renderTexture->getRendererId()), { m_displayWidth, m_displayHeight }, { 0, 1 }, { 1, 0 }, 0);
 		m_isViewportHovered = ImGui::IsItemHovered(ImGuiHoveredFlags_RectOnly);
 	}
 
