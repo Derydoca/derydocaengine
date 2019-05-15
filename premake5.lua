@@ -554,8 +554,7 @@ project "GoogleTest"
 
     files
     {
-        "vendor/gtest/googletest/src/**.h",
-        "vendor/gtest/googletest/src/**.cc"
+        "vendor/gtest/googletest/src/gtest-all.cc"
     }
 
     includedirs
@@ -568,24 +567,16 @@ project "GoogleTest"
         cppdialect "C++17"
         systemversion "latest"
 
-        defines
-        {
-            "OPENGL=1"
-        }
-
     filter "configurations:Debug"
-        defines "DD_DEBUG"
         symbols "On"
         staticruntime "Off"
         runtime "Debug"
 
     filter "configurations:Release"
-        defines "DD_RELEASE"
         symbols "On"
         runtime "Release"
 
     filter "configurations:Dist"
-        defines "DD_DIST"
         symbols "On"
         runtime "Release"
     
