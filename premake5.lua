@@ -39,7 +39,8 @@ project "DerydocaEngine.Components"
         "D:/local/boost_1_68_0",
         "%{wks.location}/DerydocaEngine/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -50,7 +51,6 @@ project "DerydocaEngine.Components"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -100,7 +100,8 @@ project "DerydocaEngine.Editor"
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -111,7 +112,6 @@ project "DerydocaEngine.Editor"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -161,7 +161,8 @@ project "DerydocaEngine.Components.Editor"
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Editor/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -172,7 +173,6 @@ project "DerydocaEngine.Components.Editor"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -220,7 +220,8 @@ project "DerydocaEngine"
         "D:/local/boost_1_68_0",
         "%{wks.location}/%{wks.name}.Components/src",
         "%{prj.location}/src",
-        "%{wks.location}/include"
+        "%{wks.location}/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     filter "system:windows"
@@ -231,7 +232,6 @@ project "DerydocaEngine"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -296,7 +296,8 @@ project "DerydocaEngine.Editor.UI"
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
-        "%{wks.location}/DerydocaEngine.Editor/src"
+        "%{wks.location}/DerydocaEngine.Editor/src",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     links
@@ -304,7 +305,8 @@ project "DerydocaEngine.Editor.UI"
         "DerydocaEngine",
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
-        "DerydocaEngine.Editor"
+        "DerydocaEngine.Editor",
+        "yaml-cpp"
     }
 
     filter "system:windows"
@@ -315,7 +317,6 @@ project "DerydocaEngine.Editor.UI"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
 
@@ -337,27 +338,15 @@ project "DerydocaEngine.Editor.UI"
         staticruntime "Off"
         runtime "Debug"
 
-        links {
-            "libyaml-cppmdd"
-        }
-
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
         runtime "Release"
 
-        links {
-            "libyaml-cppmd"
-        }
-
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
         runtime "Release"
-
-        links {
-            "libyaml-cppmd"
-        }
 
 project "DerydocaEngine.Test"
     location "DerydocaEngine.Test"
@@ -403,14 +392,16 @@ project "DerydocaEngine.Test"
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
-        "%{wks.location}/vendor/gtest/googletest/include"
+        "%{wks.location}/vendor/gtest/googletest/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     links
     {
         "DerydocaEngine",
         "DerydocaEngine.Components",
-        "GoogleTest"
+        "GoogleTest",
+        "yaml-cpp"
     }
 
     filter "system:windows"
@@ -437,27 +428,15 @@ project "DerydocaEngine.Test"
         staticruntime "Off"
         runtime "Debug"
 
-        links {
-            "libyaml-cppmdd"
-        }
-
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
         runtime "Release"
 
-        links {
-            "libyaml-cppmd"
-        }
-
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
         runtime "Release"
-
-        links {
-            "libyaml-cppmd"
-        }
 
 project "DerydocaEngine.Editor.Test"
     location "DerydocaEngine.Editor.Test"
@@ -509,7 +488,8 @@ project "DerydocaEngine.Editor.Test"
         "%{wks.location}/DerydocaEngine.Editor/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
-        "%{wks.location}/vendor/gtest/googletest/include"
+        "%{wks.location}/vendor/gtest/googletest/include",
+        "%{wks.location}/vendor/yaml-cpp/include"
     }
 
     links
@@ -518,7 +498,8 @@ project "DerydocaEngine.Editor.Test"
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
         "DerydocaEngine.Editor",
-        "GoogleTest"
+        "GoogleTest",
+        "yaml-cpp"
     }
 
     filter "system:windows"
@@ -531,7 +512,6 @@ project "DerydocaEngine.Editor.Test"
             "_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING",
             "_HAS_TR1_NAMESPACE",
             "_CRT_SECURE_NO_WARNINGS",
-            "YAML_DECLARE_STATIC",
             "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
         }
         
@@ -549,27 +529,15 @@ project "DerydocaEngine.Editor.Test"
         staticruntime "Off"
         runtime "Debug"
 
-        links {
-            "libyaml-cppmdd"
-        }
-
     filter "configurations:Release"
         defines "DD_RELEASE"
         symbols "On"
         runtime "Release"
 
-        links {
-            "libyaml-cppmd"
-        }
-
     filter "configurations:Dist"
         defines "DD_DIST"
         symbols "On"
         runtime "Release"
-
-        links {
-            "libyaml-cppmd"
-        }
     
 project "GoogleTest"
     location "vendor/generatedProjects"
@@ -604,6 +572,51 @@ project "GoogleTest"
         {
             "OPENGL=1"
         }
+
+    filter "configurations:Debug"
+        defines "DD_DEBUG"
+        symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
+
+    filter "configurations:Release"
+        defines "DD_RELEASE"
+        symbols "On"
+        runtime "Release"
+
+    filter "configurations:Dist"
+        defines "DD_DIST"
+        symbols "On"
+        runtime "Release"
+    
+project "yaml-cpp"
+    location "vendor/generatedProjects"
+    kind "StaticLib"
+    language "C++"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    flags
+    {
+        "MultiProcessorCompile"
+    }
+
+    files
+    {
+        "vendor/yaml-cpp/src/**.h",
+        "vendor/yaml-cpp/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "%{wks.location}/vendor/yaml-cpp/src",
+        "%{wks.location}/vendor/yaml-cpp/include"
+    }
+
+    filter "system:windows"
+        cppdialect "C++17"
+        systemversion "latest"
 
     filter "configurations:Debug"
         defines "DD_DEBUG"
