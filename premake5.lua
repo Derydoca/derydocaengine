@@ -11,6 +11,10 @@ workspace "DerydocaEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 boostdir = "C:/local/boost_1_68_0"
+vendorincludes = {
+    (boostdir),
+    "%{wks.location}/vendor/yaml-cpp/include"
+}
 
 project "DerydocaEngine.Components"
     location "DerydocaEngine.Components"
@@ -34,13 +38,12 @@ project "DerydocaEngine.Components"
         "%{prj.name}/src/**.cpp"
     }
 
+    includedirs { vendorincludes }
     includedirs
     {
-        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{prj.location}/src",
-        "%{wks.location}/include",
-        "%{wks.location}/vendor/yaml-cpp/include"
+        "%{wks.location}/include"
     }
 
     filter "system:windows"
@@ -92,15 +95,14 @@ project "DerydocaEngine.Editor"
         "%{prj.name}/src/**.cpp"
     }
 
+    includedirs { vendorincludes }
     includedirs
     {
-        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
         "%{prj.location}/src",
-        "%{wks.location}/include",
-        "%{wks.location}/vendor/yaml-cpp/include"
+        "%{wks.location}/include"
     }
 
     filter "system:windows"
@@ -152,15 +154,14 @@ project "DerydocaEngine.Components.Editor"
         "%{prj.name}/src/**.cpp"
     }
 
+    includedirs { vendorincludes }
     includedirs
     {
-        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Editor/src",
         "%{prj.location}/src",
-        "%{wks.location}/include",
-        "%{wks.location}/vendor/yaml-cpp/include"
+        "%{wks.location}/include"
     }
 
     filter "system:windows"
@@ -212,13 +213,12 @@ project "DerydocaEngine"
         "%{prj.name}/src/**.cpp"
     }
 
+    includedirs { vendorincludes }
     includedirs
     {
-        (boostdir),
         "%{wks.location}/%{wks.name}.Components/src",
         "%{prj.location}/src",
-        "%{wks.location}/include",
-        "%{wks.location}/vendor/yaml-cpp/include"
+        "%{wks.location}/include"
     }
 
     filter "system:windows"
@@ -274,8 +274,8 @@ project "DerydocaEngine.Editor.UI"
     }
 
     libdirs {
-        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
-        (boostdir .. "/lib64-msvc-14.1")
+        (boostdir .. "/lib64-msvc-14.1"),
+        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}"
     }
 
     files
@@ -284,15 +284,14 @@ project "DerydocaEngine.Editor.UI"
         "%{prj.name}/src/**.cpp"
     }
 
+    includedirs { vendorincludes }
     includedirs
     {
-        (boostdir),
         "%{wks.location}/include",
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Components.Editor/src",
-        "%{wks.location}/DerydocaEngine.Editor/src",
-        "%{wks.location}/vendor/yaml-cpp/include"
+        "%{wks.location}/DerydocaEngine.Editor/src"
     }
 
     links
@@ -360,8 +359,8 @@ project "DerydocaEngine.Test"
     }
 
     libdirs {
-        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
-        (boostdir .. "/lib64-msvc-14.1")
+        (boostdir .. "/lib64-msvc-14.1"),
+        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}"
     }
 
     pchheader "EngineTestPch.h"
@@ -378,15 +377,14 @@ project "DerydocaEngine.Test"
         "%{prj.name}/src/**.cpp"
     }
 
+    includedirs { vendorincludes }
     includedirs
     {
-        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
-        "%{wks.location}/vendor/gtest/googletest/include",
-        "%{wks.location}/vendor/yaml-cpp/include"
+        "%{wks.location}/vendor/gtest/googletest/include"
     }
 
     links
@@ -453,8 +451,8 @@ project "DerydocaEngine.Editor.Test"
     }
 
     libdirs {
-        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}",
-        (boostdir .. "/lib64-msvc-14.1")
+        (boostdir .. "/lib64-msvc-14.1"),
+        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}"
     }
 
     pchheader "EditorTestPch.h"
@@ -471,16 +469,15 @@ project "DerydocaEngine.Editor.Test"
         "%{prj.name}/src/**.cpp"
     }
 
+    includedirs { vendorincludes }
     includedirs
     {
-        (boostdir),
         "%{wks.location}/DerydocaEngine/src",
         "%{wks.location}/DerydocaEngine.Components/src",
         "%{wks.location}/DerydocaEngine.Editor/src",
         "%{prj.location}/src",
         "%{wks.location}/include",
-        "%{wks.location}/vendor/gtest/googletest/include",
-        "%{wks.location}/vendor/yaml-cpp/include"
+        "%{wks.location}/vendor/gtest/googletest/include"
     }
 
     links
