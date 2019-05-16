@@ -4,3 +4,6 @@
 [submodule "vendor/yaml-cpp"]
 	path = vendor/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "vendor/freetype"]
+	path = vendor/freetype
+	url = https://github.com/aseprite/freetype2.git

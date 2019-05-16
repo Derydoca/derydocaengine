@@ -13,7 +13,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 boostdir = "C:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
-    "%{wks.location}/vendor/yaml-cpp/include"
+    "%{wks.location}/vendor/yaml-cpp/include",
+    "%{wks.location}/vendor/freetype/include"
 }
 
 project "DerydocaEngine.Components"
@@ -596,6 +597,100 @@ project "yaml-cpp"
     filter "system:windows"
         cppdialect "C++17"
         systemversion "latest"
+
+    filter "configurations:Debug"
+        defines "DD_DEBUG"
+        symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
+
+    filter "configurations:Release"
+        defines "DD_RELEASE"
+        symbols "On"
+        runtime "Release"
+
+    filter "configurations:Dist"
+        defines "DD_DIST"
+        symbols "On"
+        runtime "Release"
+    
+project "freetype"
+    location "vendor/generatedProjects"
+    kind "StaticLib"
+    language "C++"
+    warnings "Off"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    flags
+    {
+        "MultiProcessorCompile"
+    }
+
+    files
+    {
+        "vendor/freetype/src/autofit/autofit.c",
+        "vendor/freetype/src/base/ftbase.c",
+        "vendor/freetype/src/base/ftbbox.c",
+        "vendor/freetype/src/base/ftbdf.c",
+        "vendor/freetype/src/base/ftbitmap.c",
+        "vendor/freetype/src/base/ftcid.c",
+        "vendor/freetype/src/base/ftdebug.c",
+        "vendor/freetype/src/base/ftfstype.c",
+        "vendor/freetype/src/base/ftgasp.c",
+        "vendor/freetype/src/base/ftglyph.c",
+        "vendor/freetype/src/base/ftgxval.c",
+        "vendor/freetype/src/base/ftinit.c",
+        "vendor/freetype/src/base/ftmm.c",
+        "vendor/freetype/src/base/ftotval.c",
+        "vendor/freetype/src/base/ftpatent.c",
+        "vendor/freetype/src/base/ftpfr.c",
+        "vendor/freetype/src/base/ftstroke.c",
+        "vendor/freetype/src/base/ftsynth.c",
+        "vendor/freetype/src/base/ftsystem.c",
+        "vendor/freetype/src/base/fttype1.c",
+        "vendor/freetype/src/base/ftwinfnt.c",
+        "vendor/freetype/src/bdf/bdf.c",
+        "vendor/freetype/src/bzip2/ftbzip2.c",
+        "vendor/freetype/src/cache/ftcache.c",
+        "vendor/freetype/src/cff/cff.c",
+        "vendor/freetype/src/cid/type1cid.c",
+        "vendor/freetype/src/gzip/ftgzip.c",
+        "vendor/freetype/src/lzw/ftlzw.c",
+        "vendor/freetype/src/pcf/pcf.c",
+        "vendor/freetype/src/pfr/pfr.c",
+        "vendor/freetype/src/psaux/psaux.c",
+        "vendor/freetype/src/pshinter/pshinter.c",
+        "vendor/freetype/src/psnames/psnames.c",
+        "vendor/freetype/src/raster/raster.c",
+        "vendor/freetype/src/sfnt/sfnt.c",
+        "vendor/freetype/src/smooth/smooth.c",
+        "vendor/freetype/src/truetype/truetype.c",
+        "vendor/freetype/src/type1/type1.c",
+        "vendor/freetype/src/type42/type42.c",
+        "vendor/freetype/src/winfonts/winfnt.c"
+    }
+
+    includedirs
+    {
+        "%{wks.location}/vendor/freetype/src",
+        "%{wks.location}/vendor/freetype/include",
+        "%{wks.location}/include"
+    }
+
+    filter "system:windows"
+        cppdialect "C++17"
+        systemversion "latest"
+
+        defines
+        {
+            "WIN32",
+            "_WINDOWS",
+            "_CRT_SECURE_NO_WARNINGS",
+            "_CRT_NONSTDC_NO_WARNINGS",
+            "FT2_BUILD_LIBRARY"
+        }
 
     filter "configurations:Debug"
         defines "DD_DEBUG"
