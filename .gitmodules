@@ -19,3 +19,54 @@
 [submodule "vendor/boost/uuid"]
 	path = vendor/boost/uuid
 	url = https://github.com/boostorg/uuid
+[submodule "vendor/boost/config"]
+	path = vendor/boost/config
+	url = https://github.com/boostorg/config.git
+[submodule "vendor/boost/mpl"]
+	path = vendor/boost/mpl
+	url = https://github.com/boostorg/mpl
+[submodule "vendor/boost/range"]
+	path = vendor/boost/range
+	url = https://github.com/boostorg/range.git
+[submodule "vendor/boost/preprocessor"]
+	path = vendor/boost/preprocessor
+	url = https://github.com/boostorg/preprocessor.git
+[submodule "vendor/boost/type_traits"]
+	path = vendor/boost/type_traits
+	url = https://github.com/boostorg/type_traits.git
+[submodule "vendor/boost/iterator"]
+	path = vendor/boost/iterator
+	url = https://github.com/boostorg/iterator.git
+[submodule "vendor/boost/assert"]
+	path = vendor/boost/assert
+	url = https://github.com/boostorg/assert.git
+[submodule "vendor/boost/static_assert"]
+	path = vendor/boost/static_assert
+	url = https://github.com/boostorg/static_assert.git
+[submodule "vendor/boost/core"]
+	path = vendor/boost/core
+	url = https://github.com/boostorg/core.git
+[submodule "vendor/boost/detail"]
+	path = vendor/boost/detail
+	url = https://github.com/boostorg/detail.git
+[submodule "vendor/boost/concept_check"]
+	path = vendor/boost/concept_check
+	url = https://github.com/boostorg/concept_check.git
+[submodule "vendor/boost/utility"]
+	path = vendor/boost/utility
+	url = https://github.com/boostorg/utility.git
+[submodule "vendor/boost/function"]
+	path = vendor/boost/function
+	url = https://github.com/boostorg/function.git
+[submodule "vendor/boost/throw_exception"]
+	path = vendor/boost/throw_exception
+	url = https://github.com/boostorg/throw_exception.git
+[submodule "vendor/boost/integer"]
+	path = vendor/boost/integer
+	url = https://github.com/boostorg/integer.git
+[submodule "vendor/boost/type_index"]
+	path = vendor/boost/type_index
+	url = https://github.com/boostorg/type_index.git
+[submodule "vendor/boost/container_hash"]
+	path = vendor/boost/container_hash
+	url = https://github.com/boostorg/container_hash.git
