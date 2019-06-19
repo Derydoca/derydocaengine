@@ -12,27 +12,7 @@ workspace "DerydocaEngine"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 boostdir = "C:/local/boost_1_68_0"
 vendorincludes = {
-    "%{wks.location}/vendor/boost/algorithm/include",
-    "%{wks.location}/vendor/boost/assert/include",
-    "%{wks.location}/vendor/boost/concept_check/include",
-    "%{wks.location}/vendor/boost/config/include",
-    "%{wks.location}/vendor/boost/container_hash/include",
-    "%{wks.location}/vendor/boost/core/include",
-    "%{wks.location}/vendor/boost/date_time/include",
-    "%{wks.location}/vendor/boost/detail/include",
-    "%{wks.location}/vendor/boost/filesystem/include",
-    "%{wks.location}/vendor/boost/function/include",
-    "%{wks.location}/vendor/boost/integer/include",
-    "%{wks.location}/vendor/boost/iterator/include",
-    "%{wks.location}/vendor/boost/mpl/include",
-    "%{wks.location}/vendor/boost/preprocessor/include",
-    "%{wks.location}/vendor/boost/range/include",
-    "%{wks.location}/vendor/boost/static_assert/include",
-    "%{wks.location}/vendor/boost/throw_exception/include",
-    "%{wks.location}/vendor/boost/type_index/include",
-    "%{wks.location}/vendor/boost/type_traits/include",
-    "%{wks.location}/vendor/boost/utility/include",
-    "%{wks.location}/vendor/boost/uuid/include",
+    (boostdir),
     "%{wks.location}/vendor/yaml-cpp/include",
     "%{wks.location}/vendor/freetype/include"
 }
