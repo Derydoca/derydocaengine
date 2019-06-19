@@ -7,15 +7,3 @@
 [submodule "vendor/freetype"]
 	path = vendor/freetype
 	url = https://github.com/aseprite/freetype2.git
-[submodule "vendor/boost/algorithm"]
-	path = vendor/boost/algorithm
-	url = https://github.com/boostorg/algorithm.git
-[submodule "vendor/boost/date_time"]
-	path = vendor/boost/date_time
-	url = https://github.com/boostorg/date_time.git
-[submodule "vendor/boost/filesystem"]
-	path = vendor/boost/filesystem
-	url = https://github.com/boostorg/filesystem.git
-[submodule "vendor/boost/uuid"]
-	path = vendor/boost/uuid
-	url = https://github.com/boostorg/uuid
