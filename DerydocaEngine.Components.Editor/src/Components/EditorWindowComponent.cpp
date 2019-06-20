@@ -35,7 +35,6 @@ namespace DerydocaEngine::Components
 		{
 			ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
 		}
-		//ImGui::SetNextWindowDockId
 		ImGui::Begin(m_windowName.c_str(), &m_isOpen, getWindowFlags());
 		renderWindow();
 		ImGui::End();
