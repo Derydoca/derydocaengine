@@ -19,7 +19,7 @@ DerydocaEngine::Editor::EditorGUI::~EditorGUI()
 void DerydocaEngine::Editor::EditorGUI::render()
 {
 	static bool opt_fullscreen_persistant = true;
-	static ImGuiDockNodeFlags opt_flags = ImGuiDockNodeFlags_PassthruDockspace;
+	static ImGuiDockNodeFlags opt_flags = ImGuiDockNodeFlags_PassthruCentralNode;
 	bool opt_fullscreen = opt_fullscreen_persistant;
 
 	// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
@@ -38,7 +38,7 @@ void DerydocaEngine::Editor::EditorGUI::render()
 	}
 
 	// When using ImGuiDockNodeFlags_PassthruDockspace, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
-	if (opt_flags & ImGuiDockNodeFlags_PassthruDockspace)
+	if (opt_flags & ImGuiDockNodeFlags_PassthruCentralNode)
 		window_flags |= ImGuiWindowFlags_NoBackground;
 
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
