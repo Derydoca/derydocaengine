@@ -230,7 +230,8 @@ project "DerydocaEngine"
         {
             "OPENGL=1",
             "_CRT_SECURE_NO_WARNINGS",
-            "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING"
+            "_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING",
+            "IMGUI_IMPL_OPENGL_LOADER_GLEW"
         }
 
     filter "configurations:Debug"
@@ -321,6 +322,8 @@ project "DerydocaEngine.Editor.UI"
             "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying engine settings file",
             "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\"",
+            "@echo Copying IMGUI default layout file",
+            "xcopy /y /f \"%{wks.location}imgui.ini\" \"%{cfg.buildtarget.directory}\"",
             "@echo Processing the engine resource directory",
             "\"%{cfg.buildtarget.abspath}\" -processDirectory \"%{wks.location}engineResources\"",
             "@echo Copying engine resources",
