@@ -82,6 +82,8 @@ namespace DerydocaEngine::Ext
 
 	void ParticleFountain::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
+		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+
 		glDisable(GL_DEPTH_TEST);
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
