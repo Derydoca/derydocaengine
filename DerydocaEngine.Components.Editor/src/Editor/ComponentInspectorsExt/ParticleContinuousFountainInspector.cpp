@@ -11,6 +11,7 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::ParticleContinuousF
 	ImGui::DragFloat3("Max Velocity", &particleFountain->getVelocityMax()[0]);
 	ImGui::InputInt("Particle Count", &particleFountain->getNumParticles());
 	ImGui::InputFloat("Lifetime", &particleFountain->getLifetime());
+	ImGui::InputFloat("Spawn Rate (Per Second)", &particleFountain->getSpawnRatePerSecond());
 	ImGui::SliderFloat("Spawn Angle", &particleFountain->getAngle(), 0.0f, 180.0f);
 	ImGui::DragFloat3("Acceleration", &particleFountain->getAcceleration()[0], 0.0f, 10.0f);
 	ImGui::InputFloat3("Emitter Size", &particleFountain->getEmitterSize()[0]);

@@ -37,6 +37,7 @@ namespace DerydocaEngine::Ext
 		glm::vec3 getEmitterSize() { return m_emitterSize; }
 		float& getParticleSizeMin() { return m_particleSizeMin; }
 		float& getParticleSizeMax() { return m_particleSizeMax; }
+		float& getSpawnRatePerSecond() { return m_spawnRatePerSecond; }
 
 		void resetSimulation();
 
