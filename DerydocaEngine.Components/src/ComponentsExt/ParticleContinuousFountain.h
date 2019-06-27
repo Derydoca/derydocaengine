@@ -65,6 +65,7 @@ namespace DerydocaEngine::Ext
 		glm::vec3 m_emitterSize = glm::vec3(1.0, 1.0, 1.0);
 		float m_particleSizeMin = 10.0f;
 		float m_particleSizeMax = 10.0f;
+		float m_spawnRatePerSecond = 100.0f;
 
 		void initBuffers();
 		float randFloat();

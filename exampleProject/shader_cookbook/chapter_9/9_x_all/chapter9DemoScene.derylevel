@@ -73,14 +73,14 @@ Scene:
       Components:
         - Type: ParticleContinuousFountain
           Properties:
-            emitterType: 2
             numParticles: 10000
             velocityMin: 0.75
             velocityMax: 1.25
             lifetime: 5.0
             angle: 12.0
-            particleSizeMin: 20.0
-            particleSizeMax: 20.0
+            emitterType: 2
+            particleSizeMin: 50.0
+            particleSizeMax: 100.0
             shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
             texture: cb774137-e5d2-4ee1-b2ab-f906cbeb148d
   - Type: GameObject
@@ -94,7 +94,7 @@ Scene:
       Components:
         - Type: ParticleContinuousFountain
           Properties:
-            numParticles: 10000
+            numParticles: 2400
             velocityMin: [0.0, 0.05, 0.0]
             velocityMax: [0.0, 0.1, 0.0]
             lifetime: 12.0
@@ -102,8 +102,9 @@ Scene:
             angle: 12.0
             emitterType: 1
             emitterSize: [1.0, 0.0, 0.0]
-            particleSizeMin: 10.0
-            particleSizeMax: 300.0
+            particleSizeMin: 20.0
+            particleSizeMax: 600.0
+            spawnRatePerSecond: 200.0
             shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
             texture: 7d1edd30-bff2-4caf-8152-c74269901ff0
   - Type: GameObject
@@ -127,5 +128,6 @@ Scene:
             emitterSize: [1.0, 0.0, 0.0]
             particleSizeMin: 50.0
             particleSizeMax: 50.0
+            spawnRatePerSecond: 1000.0
             shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
             texture: 3530afaf-4c1e-423e-a1ca-e30a002c1132

@@ -131,6 +131,12 @@ namespace DerydocaEngine::Ext
 			m_particleSizeMax = particleSizeMaxNode.as<float>();
 		}
 
+		YAML::Node spawnRatePerSecondNode = compNode["spawnRatePerSecond"];
+		if (spawnRatePerSecondNode)
+		{
+			m_spawnRatePerSecond = spawnRatePerSecondNode.as<float>();
+		}
+
 		const char * outputNames[] = { "Position", "Velocity", "StartTime" };
 		auto shaderResource = getResource<Resources::ShaderResource>(compNode, "shader");
 		assert(shaderResource);
@@ -238,7 +244,7 @@ namespace DerydocaEngine::Ext
 		delete[] data;
 		data = new GLfloat[m_numParticles];
 		float time = 0.0f;
-		float rate = 0.01f;
+		float rate = 1 / m_spawnRatePerSecond;
 
 		for (int i = 0; i < m_numParticles; i++)
 		{
