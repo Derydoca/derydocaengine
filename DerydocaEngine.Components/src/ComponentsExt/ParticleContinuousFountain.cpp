@@ -149,6 +149,8 @@ namespace DerydocaEngine::Ext
 
 	void ParticleContinuousFountain::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
+		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
+
 		m_material->bind();
 		m_material->getShader()->updateViaActiveCamera(matrixStack);
 
