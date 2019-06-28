@@ -32,6 +32,15 @@ namespace DerydocaEngine::Editor
 		// Load the settings
 		auto settings = DerydocaEngine::Settings::EngineSettings(".\\engineSettings.yaml");
 		m_display->setSize(settings.getWidth(), settings.getHeight());
+		if (settings.shouldBeFullScreen())
+		{
+			m_display->setFullScreen(true);
+		}
+		if (settings.shouldBeMaximized())
+		{
+			m_display->maximize();
+		}
+		
 		m_display->init();
 
 		// Load the editor skybox material

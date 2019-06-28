@@ -19,6 +19,8 @@ namespace DerydocaEngine::Settings
 
 		int getWidth() const { return m_width; }
 		int getHeight() const { return m_height; }
+		bool shouldBeFullScreen() const { return m_fullScreen; }
+		bool shouldBeMaximized() const { return m_maximized; }
 		std::string getEngineResourceDirectory() const { return m_engineResourceDirectory; }
 		std::string getEditorComponentsSceneIdentifier() const { return m_editorComponentsSceneIdentifier; }
 		std::string getEditorGuiSceneIdentifier() const { return m_editorGuiSceneIdentifier; }
@@ -27,6 +29,8 @@ namespace DerydocaEngine::Settings
 		boost::filesystem::path m_settingsFilePath;
 		int m_width;
 		int m_height;
+		bool m_fullScreen;
+		bool m_maximized;
 		std::string m_engineResourceDirectory;
 		std::string m_editorComponentsSceneIdentifier;
 		std::string m_editorGuiSceneIdentifier;

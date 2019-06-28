@@ -8,3 +8,5 @@ Window:
 # Blog header image size: 2000 x 800
     Width: 400
     Height: 300
+    FullScreen: false
+    Maximized: true

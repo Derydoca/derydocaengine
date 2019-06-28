@@ -17,6 +17,17 @@ namespace DerydocaEngine
 	class YamlTools {
 	public:
 
+		static bool getBoolSafe(YAML::Node node, std::string name, bool defaultValue = false) {
+			if (node[name])
+			{
+				return node[name].as<bool>();
+			}
+			else
+			{
+				return defaultValue;
+			}
+		}
+
 		static int getIntSafe(YAML::Node node, std::string name, int defaultValue = 0) {
 			if (node[name])
 			{

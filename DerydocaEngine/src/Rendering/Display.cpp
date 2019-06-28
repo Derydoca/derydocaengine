@@ -63,6 +63,16 @@ namespace DerydocaEngine::Rendering
 
 	}
 
+	void Display::setFullScreen(bool isFullScreen)
+	{
+		SDL_SetWindowFullscreen(m_window, isFullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+	}
+
+	void Display::maximize()
+	{
+		SDL_MaximizeWindow(m_window);
+	}
+
 	void Display::bindAsRenderTarget()
 	{
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);

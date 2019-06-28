@@ -8,6 +8,8 @@ namespace DerydocaEngine::Settings
 		m_settingsFilePath(),
 		m_width(800),
 		m_height(600),
+		m_fullScreen(false),
+		m_maximized(false),
 		m_engineResourceDirectory(),
 		m_editorComponentsSceneIdentifier()
 	{
@@ -46,6 +48,8 @@ namespace DerydocaEngine::Settings
 		{
 			m_width = YamlTools::getIntSafe(windowNode, "Width", 800);
 			m_height = YamlTools::getIntSafe(windowNode, "Height", 600);
+			m_fullScreen = YamlTools::getBoolSafe(windowNode, "FullScreen", false);
+			m_maximized = YamlTools::getBoolSafe(windowNode, "Maximized", false);
 		}
 
 	}

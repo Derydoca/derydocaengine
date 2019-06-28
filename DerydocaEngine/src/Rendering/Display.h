@@ -35,8 +35,10 @@ namespace DerydocaEngine::Rendering
 		inline GraphicsAPIContext* getContext() { return &(m_context); }
 
 		void setSize(int width, int height);
+		void setFullScreen(bool isFullScreen);
 
 		void bindAsRenderTarget();
+		void maximize();
 		void registerCamera(Components::Camera* const& cam) { m_camera = cam; }
 		void unregisterCamera() { m_camera = nullptr; }
 	private:
