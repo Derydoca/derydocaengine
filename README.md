@@ -24,10 +24,7 @@ git submodule update
 
 You will also need to generate the solution and project files. This repo is utilizing Premake for project generation. It has only been tested to be working by generating Visual Studio project files, but you may also try other generators at your own risk.
 
-Creating the Visual Studio solution and project files are simple. You can either run the "generateProjects.bat" batch file in the root or run the command below:
-```
-vendor\bin\premake\premake5.exe vs2017
-```
+Creating the Visual Studio solution and project files are simple. You will need to have Premake5 installed on your machine and run premake in the repo root. If you want to use the generateProjects.bat file, you will have to define an environment variable %PREMAKE_INSTALLATION_DIR% that points to the directory it is installed at on your machine.
 
 If you do not have Visual Studio 2017 installed on your system, you can change "vs2017" to any valid generator. For more information, check out the [official Premake documentation](https://github.com/premake/premake-core/wiki/Using-Premake).
 
