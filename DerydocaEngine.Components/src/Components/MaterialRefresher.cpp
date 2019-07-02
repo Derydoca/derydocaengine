@@ -109,7 +109,7 @@ namespace DerydocaEngine::Components
 		m_tessEvalShaderExists = getLastModifiedTime(m_tessEvalShaderPath.c_str(), m_tessEvalShaderModifiedTime);
 		m_tessControlShaderExists = getLastModifiedTime(m_tessControlShaderPath.c_str(), m_tessControlShaderModifiedTime);
 
-		printf("Unloading the previous material.\n");
+		D_LOG_TRACE("Unloading the previous material.");
 		std::shared_ptr<Rendering::Material> mat = nullptr;
 		switch (m_rendererType)
 		{
@@ -127,10 +127,10 @@ namespace DerydocaEngine::Components
 		}
 		auto oldShader = mat->getShader();
 
-		printf("Reloading new material.\n");
+		D_LOG_TRACE("Reloading new material.");
 		auto newShader = std::make_shared<Rendering::Shader>(m_shaderLoadPath);
 		mat->setShader(newShader);
-		printf("Material reload finished.\n");
+		D_LOG_TRACE("Material reload finished.");
 	}
 
 	bool MaterialRefresher::isShaderSourceUpdated()

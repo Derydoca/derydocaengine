@@ -98,7 +98,7 @@ namespace DerydocaEngine::Files::Serializers {
 		// If the type field is missing, then it cannot be loaded
 		if (!resourceNode["Type"])
 		{
-			printf("The node with ID of %s could not be loaded because it did not have a type field defined to it.\n", resourceNode["id"].as<std::string>().c_str());
+			D_LOG_ERROR("The node with ID of {} could not be loaded because it did not have a type field defined to it.", resourceNode["id"].as<std::string>());
 			return nullptr;
 		}
 

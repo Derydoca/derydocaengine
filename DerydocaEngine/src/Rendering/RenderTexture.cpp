@@ -54,7 +54,7 @@ namespace DerydocaEngine::Rendering
 
 		auto framebufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (framebufferStatus != GL_FRAMEBUFFER_COMPLETE) {
-			printf("UNABLE TO CREATE RENDER TEXTURE!");
+			D_LOG_ERROR("UNABLE TO CREATE RENDER TEXTURE!");
 		}
 	}
 
