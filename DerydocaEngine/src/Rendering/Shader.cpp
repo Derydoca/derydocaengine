@@ -438,7 +438,7 @@ namespace DerydocaEngine::Rendering
 		GLuint shader = glCreateShader(shaderType);
 
 		if (shader == 0) {
-			std::cerr << "Error: Shader creation failed!\n";
+			D_LOG_ERROR("Shader creation failed!");
 		}
 
 		const GLchar* shaderSourceStrings[1];
@@ -469,7 +469,7 @@ namespace DerydocaEngine::Rendering
 			}
 		}
 		else {
-			std::cerr << "Unable to load shader: " << fileName << "\n";
+			D_LOG_ERROR("Unable to load shader: {}", fileName);
 		}
 
 		return output;

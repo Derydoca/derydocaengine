@@ -71,8 +71,6 @@ namespace DerydocaEngine::Ext
 				float component = stof(componentAsString);
 
 				// Load the component into the patch data
-				//int patchDataIndex = patch * BezierPatchMesh::FLOATS_PER_PATCH + vectorIndex * BezierPatchMesh::FLOATS_PER_VECTOR + vectorComponentIndex;
-				//cout << patchDataIndex << ": " << component << "\n";
 				patchData[patchDataIndex++] = component;
 			}
 		}
