@@ -36,7 +36,7 @@ namespace DerydocaEngine::Rendering
 		m_numPasses(0),
 		m_renderPasses()
 	{
-		printf("Loading shader: %s\n", fileName.c_str());
+		D_LOG_TRACE("Loading shader: {}", fileName);
 
 		// Create the shaders
 		LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
@@ -49,7 +49,7 @@ namespace DerydocaEngine::Rendering
 		m_rendererId = glCreateProgram();
 		if (0 == m_rendererId)
 		{
-			fprintf(stderr, "Error creating program object..\n");
+			D_LOG_ERROR("Error creating program object.");
 			__debugbreak();
 		}
 
@@ -100,7 +100,7 @@ namespace DerydocaEngine::Rendering
 		m_numPasses(0),
 		m_renderPasses()
 	{
-		printf("Loading shader: %s\n", fileName.c_str());
+		D_LOG_TRACE("Loading shader: {}", fileName);
 
 		// Create the shaders
 		LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
@@ -113,7 +113,7 @@ namespace DerydocaEngine::Rendering
 		m_rendererId = glCreateProgram();
 		if (0 == m_rendererId)
 		{
-			fprintf(stderr, "Error creating program object..\n");
+			D_LOG_ERROR("Error creating program object.");
 			__debugbreak();
 		}
 

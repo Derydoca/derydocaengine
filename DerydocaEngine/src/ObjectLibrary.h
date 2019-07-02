@@ -41,7 +41,7 @@ namespace DerydocaEngine
 		void updateMetaFilesDirectory(const boost::filesystem::path& padirectoryth);
 		void updateMetaFiles(std::string const& file);
 		void loadDirectory(const boost::filesystem::path& path);
-		void loadFile(std::string const& sourceFilePath);
+		void loadFile(const std::string& sourceFilePath);
 
 		void registerComponent(boost::uuids::uuid const& id, std::shared_ptr<Components::GameComponent> component);
 
