@@ -29,11 +29,11 @@ namespace DerydocaEngine::Ext
 
 		if (m_msaaSupported)
 		{
-			std::cout << "MSAA: Buffers = " << bufs << ", samples = " << samples << "\n";
+			LOG_INFO("MSAA: Buffers = {}, samples = {}", bufs, samples);
 		}
 		else
 		{
-			std::cout << "MSAA is not supported!\n";
+			LOG_WARN("MSAA is not supported.");
 		}
 	}
 
@@ -62,7 +62,7 @@ namespace DerydocaEngine::Ext
 			glDisable(GL_MULTISAMPLE);
 		}
 
-		std::cout << "Multisampling Enabled: " << m_enableMultisample << "\n";
+		LOG_INFO("Multisampling Enabled: {}", m_enableMultisample);
 	}
 
 }

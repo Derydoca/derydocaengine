@@ -62,11 +62,11 @@ namespace DerydocaEngine::Components
 		// Give some feedback
 		if (result == 0)
 		{
-			std::cout << "Unable to save screenshot\n";
+			D_LOG_ERROR("Unable to save screenshot.");
 		}
 		else
 		{
-			std::cout << "Screenshot saved!\n";
+			D_LOG_INFO("Screenshot saved!");
 		}
 	}
 
