@@ -162,7 +162,7 @@ namespace DerydocaEngine::Scenes
 
 	void SerializedScene::LoadFromFile(const std::string& filePath)
 	{
-		std::cout << "Loading scene: " << filePath << "\n";
+		D_LOG_TRACE("Loading scene: {}", filePath);
 		YAML::Node file = YAML::LoadFile(filePath);
 		YAML::Node scene = file["Scene"];
 		for (unsigned i = 0; i < scene.size(); i++)
@@ -174,25 +174,25 @@ namespace DerydocaEngine::Scenes
 
 			if (!typeNode)
 			{
-				std::cout << "Skipping scene node " << i << " because type is not defined.\n";
+				D_LOG_WARN("Skipping scene node {} because type is not defined.", i);
 				continue;
 			}
 
 			if (!typeNode.IsScalar())
 			{
-				std::cout << "Skipping scene node " << i << " because type is not a scalar.\n";
+				D_LOG_WARN("Skipping scene node {} because type is not a scalar.", i);
 				continue;
 			}
 
 			if (!idNode || !idNode.IsScalar())
 			{
-				std::cout << "Skipping scene node " << i << " because it does not contain a valid ID.\n";
+				D_LOG_WARN("Skipping scene node {} because it does not contain a valid ID.", i);
 				continue;
 			}
 
 			if (!propertiesNode)
 			{
-				std::cout << "Skipping scene node " << i << " because it contains no properties.\n";
+				D_LOG_WARN("Skipping scene node {} because it contains no properties.", i);
 				continue;
 			}
 

@@ -66,6 +66,9 @@
 #include <sdl2/SDL.h>
 #undef main
 
+// Derydoca Engine Classes
+#include "Logging/Log.h"
+
 #if OPENGL||VULKAN
 using SystemWindow = SDL_Window;
 using GraphicsAPIContext = SDL_GLContext;
