@@ -17,7 +17,7 @@ namespace DerydocaEngine::Ext
 			// Get the number of patches from the first line in the file
 			if (!getline(file, line))
 			{
-				std::cout << "Unable to read first line of file!\n";
+				D_LOG_ERROR("Unable to read first line of file!");
 			}
 			numPatches = stoi(line, nullptr, 10);
 
@@ -28,13 +28,13 @@ namespace DerydocaEngine::Ext
 			{
 				if (!loadPatchData(file, patchIndex, patchData))
 				{
-					std::cout << "Unable to load file due to issue with patch " << patchIndex << ".\n";
+					D_LOG_ERROR("Unable to load file due to issue with patch {}.", patchIndex);
 				}
 			}
 		}
 		else
 		{
-			std::cout << "Unable to open file: " << filePath << "\n";
+			D_LOG_ERROR("Unable to open file: {}", filePath);
 		}
 
 		auto bpm = std::make_shared<BezierPatchMesh>();
@@ -52,7 +52,7 @@ namespace DerydocaEngine::Ext
 		{
 			if (!getline(fileStream, line))
 			{
-				std::cout << "Unable to read first line of patch!\n";
+				D_LOG_ERROR("Unable to read first line of patch!");
 				return false;
 			}
 		}
