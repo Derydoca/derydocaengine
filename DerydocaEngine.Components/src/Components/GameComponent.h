@@ -181,7 +181,7 @@ namespace DerydocaEngine::Components
 				else
 				{
 					// If no component was found, log the issue and continue on
-					std::cout << "Unable to load the component with ID of '" << id << "' because it was not found in the ObjectLibrary.\n";
+					D_LOG_ERROR("Unable to load the component with ID of '{}' because it was not found in the ObjectLibrary.", boost::uuids::to_string(id));
 				}
 			}
 

@@ -138,7 +138,7 @@ namespace DerydocaEngine::Utilities
 						imageLocations[i] = IntRect(scanPosX, scanPosY, scanPosX + imageWidth, scanPosY + imageHeight);
 
 						found = true;
-						std::cout << "Placed image " << i + 1 << "/" << m_images.size() << "\n";
+						D_LOG_TRACE("Placed image {}/{}", i + 1, m_images.size());
 					}
 					else
 					{

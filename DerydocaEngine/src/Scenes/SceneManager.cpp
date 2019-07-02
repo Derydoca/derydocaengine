@@ -21,7 +21,7 @@ namespace DerydocaEngine::Scenes
 		
 		if (resource == nullptr)
 		{
-			std::cout << "Unable to find a scene with ID of '" << levelId << "'!\n";
+			D_LOG_ERROR("Unable to find a scene with ID of '{}.", boost::uuids::to_string(levelId));
 			return;
 		}
 

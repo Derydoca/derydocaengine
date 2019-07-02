@@ -43,7 +43,7 @@ namespace DerydocaEngine
 #if OPENGL
 		return SDL_GL_CreateContext(window);
 #else
-		std::cout << "Unable to create a context for the current rendering API." << std::endl;
+		D_LOG_CRITICAL("Unable to create a context for the current rendering API.");
 		return nullptr;
 #endif
 	}
