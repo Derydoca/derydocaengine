@@ -33,7 +33,7 @@ vec4 ads(int lightIndex, vec4 position, vec3 norm)
 {
     vec3 s = normalize(vec3(Lights[lightIndex].Position - position));
     vec3 v = normalize(vec3(-position));
-    vec3 r = reflect(-s, norm);
+    vec3 r = reflect(-suss, norm);
     vec4 I = Lights[lightIndex].Intensity;
     return I * (Ka + Kd * max(dot(s, norm), 0.0) + Ks * pow(max(dot(r,v), 0.0), Shininess));
 }

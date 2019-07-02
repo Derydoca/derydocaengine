@@ -79,10 +79,10 @@ namespace DerydocaEngine::Rendering
 
 		// Link the program
 		glLinkProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed: ");
+		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed");
 
 		glValidateProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
+		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
 		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
 		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
@@ -500,7 +500,7 @@ namespace DerydocaEngine::Rendering
 				glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 			}
 
-			std::cerr << errorMessage << ": '\n" << error << "'\n";
+			D_LOG_ERROR("{}:\n{}", errorMessage, error);
 		}
 	}
 
