@@ -24,7 +24,7 @@ namespace DerydocaEngine::Resources::Serializers
 			YAML::Node resourceIdNode = node[resourceName];
 			if (!resourceIdNode)
 			{
-				std::cout << "Unable to load resource because the ID node of '" << resourceName << "' could not be found.\n";
+				D_LOG_ERROR("Unable to load resource because the ID node of '{}' could not be found.", resourceName);
 				return std::make_shared<T>();
 			}
 			boost::uuids::uuid id = node[resourceName].as<boost::uuids::uuid>();
@@ -45,7 +45,7 @@ namespace DerydocaEngine::Resources::Serializers
 			auto resource = ObjectLibrary::getInstance().getResource(id);
 			if (!resource)
 			{
-				std::cout << "Unable to get the source file path of '" << resourceName << "' from the asset with ID of '" << boost::uuids::to_string(id) << "'.\n";
+				D_LOG_ERROR("Unable to get the source file path of '{}' from the asset with ID of '{}'.", resourceName, boost::uuids::to_string(id));
 				return "";
 			}
 			return resource->getSourceFilePath();
