@@ -10,7 +10,7 @@ workspace "DerydocaEngine"
     }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-boostdir = "C:/local/boost_1_68_0"
+boostdir = "D:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
     "%{wks.location}/vendor/yaml-cpp/include",

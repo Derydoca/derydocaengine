@@ -4,7 +4,10 @@
 namespace DerydocaEngine::Components
 {
 
-	EngineConsole::EngineConsole()
+	EngineConsole::EngineConsole() :
+		m_selected(-1),
+		m_visibleTypeFlags(Logging::LogLevel::All),
+		m_messages()
 	{
 		{
 			Logging::LogMessage m;
@@ -36,59 +39,91 @@ namespace DerydocaEngine::Components
 			m.message = "This is the error";
 			m_messages.push_back(m);
 		}
+		{
+			Logging::LogMessage m;
+			m.fileName = "file.cpp";
+			m.functionName = "someCrazyFunction(int, float)";
+			m.level = Logging::LogLevel::Trace;
+			m.line = 25;
+			m.loggerName = "theLogger";
+			m.message = "This is a trace message and it is pretty long. In fact, it is most likely word-wrapping in the user interface right now! Well... it was good tracing with you. Hope you have a great day!";
+			m_messages.push_back(m);
+		}
 	}
 
 	EngineConsole::~EngineConsole()
 	{
 	}
 
+	void selectableLogLevel(const char* text, const Logging::LogLevel level, Logging::LogLevel& visibleTypeFlags)
+	{
+		if (ImGui::Selectable(text, visibleTypeFlags & level, 0, ImVec2(50.0f, 0.0f)))
+		{
+			visibleTypeFlags = (Logging::LogLevel)(visibleTypeFlags ^ level);
+		}
+	}
+
 	void EngineConsole::renderWindow()
 	{
+		renderMenuBar();
+
 		float detailsHeight = 100.0f;
 		float childHeight = glm::max(ImGui::GetContentRegionAvail().y - detailsHeight, detailsHeight);
 
-		static size_t selected = -1;
 		ImGui::BeginChild("Logs", ImVec2(0.0f, childHeight), false);
-		ImGui::Columns(2);
-		ImGui::Separator();
-		ImGui::Text("Severity"); ImGui::NextColumn();
-		ImGui::Text("Message"); ImGui::NextColumn();
-		ImGui::Separator();
 		{
 			for (size_t i = 0; i < m_messages.size(); i++)
 			{
 				Logging::LogMessage m = m_messages[i];
+
+				if ((m_visibleTypeFlags & m.level) == 0)
+				{
+					continue;
+				}
+
 				ImGui::PushID(i);
 				ImGui::PushStyleColor(ImGuiCol_Text, logLevelToColor(m.level));
 				
-				if (ImGui::Selectable(m.functionName.c_str(), selected == i, ImGuiSelectableFlags_SpanAllColumns))
+				if (ImGui::Selectable(m.message.c_str(), m_selected == i, ImGuiSelectableFlags_SpanAllColumns))
 				{
-					selected = i;
+					m_selected = i;
 				}
-				ImGui::NextColumn();
-				ImGui::Text(m.message.c_str());
-				ImGui::NextColumn();
 
 				ImGui::PopStyleColor();
 				ImGui::PopID();
 			}
 		}
-		ImGui::Columns(1);
 		ImGui::EndChild();
 		ImGui::Separator();
 		ImGui::BeginChild("Details", ImVec2(0.0f, detailsHeight - 10.0f), false);
-		if (selected >= 0 && selected < m_messages.size())
+		if (m_selected >= 0 && m_selected < m_messages.size() && (m_visibleTypeFlags & m_messages[m_selected].level))
 		{
-			Logging::LogMessage m = m_messages[selected];
-			ImGui::Text(m.message.c_str());
-			ImGui::Text(m.functionName.c_str());
-			ImGui::Text("%s:%d", m.fileName.c_str(), m.line);
+			Logging::LogMessage m = m_messages[m_selected];
+			ImGui::TextWrapped("%s(%d) - %s\n%s", m.fileName.c_str(), m.line, m.functionName.c_str(), m.message.c_str());
 		}
 		else
 		{
 			ImGui::Text("Select a log to see the details.");
 		}
 		ImGui::EndChild();
+	}
+
+	void EngineConsole::renderMenuBar()
+	{
+		ImGui::BeginMenuBar();
+		if (ImGui::Button("Clear"))
+		{
+			m_messages.clear();
+			m_selected = -1;
+		}
+
+		ImGui::Spacing();
+
+		selectableLogLevel("Trace", Logging::LogLevel::Trace, m_visibleTypeFlags);
+		selectableLogLevel("Info", Logging::LogLevel::Info, m_visibleTypeFlags);
+		selectableLogLevel("Warn", Logging::LogLevel::Warn, m_visibleTypeFlags);
+		selectableLogLevel("Error", Logging::LogLevel::Err, m_visibleTypeFlags);
+		ImGui::EndMenuBar();
 	}
 
 	ImVec4 EngineConsole::logLevelToColor(Logging::LogLevel level)
