@@ -6,7 +6,7 @@ namespace DerydocaEngine::Components
 
 	EngineConsole::EngineConsole() :
 		m_selected(-1),
-		m_visibleTypeFlags(Logging::LogLevel::All),
+		m_visibleTypeFlags(static_cast<Logging::LogLevel>(Logging::LogLevel::All & ~(Logging::LogLevel::Trace))),
 		m_messages()
 	{
 		m_messages = &Logging::Log::GetCoreSync()->getMessages();
