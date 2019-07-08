@@ -19,7 +19,7 @@ namespace DerydocaEngine::Logging
 
 		inline static std::shared_ptr<engine_console_sync_mt>& GetCoreSync()
 		{
-			return s_coreSync;
+			return s_sync;
 		}
 
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger()
@@ -28,7 +28,7 @@ namespace DerydocaEngine::Logging
 		}
 
 	private:
-		static std::shared_ptr<engine_console_sync_mt> s_coreSync;
+		static std::shared_ptr<engine_console_sync_mt> s_sync;
 		static std::shared_ptr<spdlog::logger> s_coreLogger;
 		static std::shared_ptr<spdlog::logger> s_clientLogger;
 	};
