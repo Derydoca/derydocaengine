@@ -9,46 +9,7 @@ namespace DerydocaEngine::Components
 		m_visibleTypeFlags(Logging::LogLevel::All),
 		m_messages()
 	{
-		{
-			Logging::LogMessage m;
-			m.fileName = "file.cpp";
-			m.functionName = "myFunc(int, float)";
-			m.level = Logging::LogLevel::Info;
-			m.line = 25;
-			m.loggerName = "theLogger";
-			m.message = "This is the message";
-			m_messages.push_back(m);
-		}
-		{
-			Logging::LogMessage m;
-			m.fileName = "file.cpp";
-			m.functionName = "myFunc(int, float)";
-			m.level = Logging::LogLevel::Warn;
-			m.line = 25;
-			m.loggerName = "theLogger";
-			m.message = "This is the warning";
-			m_messages.push_back(m);
-		}
-		{
-			Logging::LogMessage m;
-			m.fileName = "file.cpp";
-			m.functionName = "myFunc(int, float)";
-			m.level = Logging::LogLevel::Err;
-			m.line = 25;
-			m.loggerName = "theLogger";
-			m.message = "This is the error";
-			m_messages.push_back(m);
-		}
-		{
-			Logging::LogMessage m;
-			m.fileName = "file.cpp";
-			m.functionName = "someCrazyFunction(int, float)";
-			m.level = Logging::LogLevel::Trace;
-			m.line = 25;
-			m.loggerName = "theLogger";
-			m.message = "This is a trace message and it is pretty long. In fact, it is most likely word-wrapping in the user interface right now! Well... it was good tracing with you. Hope you have a great day!";
-			m_messages.push_back(m);
-		}
+		m_messages = &Logging::Log::GetCoreSync()->getMessages();
 	}
 
 	EngineConsole::~EngineConsole()
@@ -72,9 +33,9 @@ namespace DerydocaEngine::Components
 
 		ImGui::BeginChild("Logs", ImVec2(0.0f, childHeight), false);
 		{
-			for (size_t i = 0; i < m_messages.size(); i++)
+			for (size_t i = 0; i < m_messages->size(); i++)
 			{
-				Logging::LogMessage m = m_messages[i];
+				Logging::LogMessage m = m_messages->at(i);
 
 				if ((m_visibleTypeFlags & m.level) == 0)
 				{
@@ -96,9 +57,9 @@ namespace DerydocaEngine::Components
 		ImGui::EndChild();
 		ImGui::Separator();
 		ImGui::BeginChild("Details", ImVec2(0.0f, detailsHeight - 10.0f), false);
-		if (m_selected >= 0 && m_selected < m_messages.size() && (m_visibleTypeFlags & m_messages[m_selected].level))
+		if (m_selected >= 0 && m_selected < m_messages->size() && (m_visibleTypeFlags & m_messages->at(m_selected).level))
 		{
-			Logging::LogMessage m = m_messages[m_selected];
+			Logging::LogMessage m = m_messages->at(m_selected);
 			ImGui::TextWrapped("%s(%d) - %s\n%s", m.fileName.c_str(), m.line, m.functionName.c_str(), m.message.c_str());
 		}
 		else
@@ -113,7 +74,7 @@ namespace DerydocaEngine::Components
 		ImGui::BeginMenuBar();
 		if (ImGui::Button("Clear"))
 		{
-			m_messages.clear();
+			m_messages->clear();
 			m_selected = -1;
 		}
 

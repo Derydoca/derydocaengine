@@ -32,48 +32,73 @@ namespace DerydocaEngine::Logging
 		std::string fileName;
 		std::string functionName;
 		int line;
+
+		LogMessage() :
+			level(),
+			loggerName(),
+			message(),
+			fileName(),
+			functionName(),
+			line(-1)
+		{
+		}
+
+		LogMessage(const ::spdlog::details::log_msg & msg);
 	};
 
-	//template<typename Mutex>
-	//class engine_console_sync final : public base_sink<Mutex>
-	//{
-	//public:
-	//	explicit engine_console_sync();
+	template<typename Mutex>
+	class engine_console_sync final : public ::spdlog::sinks::base_sink<Mutex>
+	{
+	public:
+		explicit engine_console_sync();
+		std::vector<Logging::LogMessage>& getMessages()
+		{
+			return m_messages;
+		}
 
-	//protected:
-	//	void sink_it_(const ::spdlog::details::log_msg &msg) override;
-	//	void flush_() override;
+	protected:
+		void sink_it_(const ::spdlog::details::log_msg &msg) override;
+		void flush_() override;
 
-	//private:
-	//	
-	//};
+	private:
+		std::vector<Logging::LogMessage> m_messages;
+		
+	};
 
-	//using engine_console_sync_mt = engine_console_sync<std::mutex>;
-	//using engine_console_sync_st = engine_console_sync<::spdlog::details::null_mutex>;
+	using engine_console_sync_mt = engine_console_sync<std::mutex>;
+	using engine_console_sync_st = engine_console_sync<::spdlog::details::null_mutex>;
 
-	//template<typename Mutex>
-	//inline void engine_console_sync<Mutex>::sink_it_(const ::spdlog::details::log_msg & msg)
-	//{
-	//}
+	template<typename Mutex>
+	inline engine_console_sync<Mutex>::engine_console_sync() :
+		m_messages()
+	{
+	}
 
-	//template<typename Mutex>
-	//inline void engine_console_sync<Mutex>::flush_()
-	//{
-	//}
-	////
-	//// factory functions
-	////
-	//template<typename Factory = ::spdlog::synchronous_factory>
-	//inline std::shared_ptr<::spdlog::logger> basic_logger_mt(const std::string &logger_name, const ::spdlog::filename_t &filename, bool truncate = false)
-	//{
-	//	return Factory::template create<sinks::engine_console_sync_mt>(logger_name, filename, truncate);
-	//}
+	template<typename Mutex>
+	inline void engine_console_sync<Mutex>::sink_it_(const ::spdlog::details::log_msg & msg)
+	{
+		Logging::LogMessage message(msg);
+		m_messages.push_back(message);
+	}
 
-	//template<typename Factory = ::spdlog::synchronous_factory>
-	//inline std::shared_ptr<::spdlog::logger> basic_logger_st(const std::string &logger_name, const ::spdlog::filename_t &filename, bool truncate = false)
-	//{
-	//	return Factory::template create<sinks::engine_console_sync_st>(logger_name, filename, truncate);
-	//}
+	template<typename Mutex>
+	inline void engine_console_sync<Mutex>::flush_()
+	{
+	}
+	//
+	// factory functions
+	//
+	template<typename Factory = ::spdlog::synchronous_factory>
+	inline std::shared_ptr<::spdlog::logger> basic_logger_mt(const std::string &logger_name, const ::spdlog::filename_t &filename, bool truncate = false)
+	{
+		return Factory::template create<sinks::engine_console_sync_mt>(logger_name, filename, truncate);
+	}
+
+	template<typename Factory = ::spdlog::synchronous_factory>
+	inline std::shared_ptr<::spdlog::logger> basic_logger_st(const std::string &logger_name, const ::spdlog::filename_t &filename, bool truncate = false)
+	{
+		return Factory::template create<sinks::engine_console_sync_st>(logger_name, filename, truncate);
+	}
 
 	class Log
 	{
@@ -85,11 +110,18 @@ namespace DerydocaEngine::Logging
 			return s_coreLogger;
 		}
 
+		inline static std::shared_ptr<engine_console_sync_mt>& GetCoreSync()
+		{
+			return s_coreSync;
+		}
+
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger()
 		{
 			return s_clientLogger;
 		}
+
 	private:
+		static std::shared_ptr<engine_console_sync_mt> s_coreSync;
 		static std::shared_ptr<spdlog::logger> s_coreLogger;
 		static std::shared_ptr<spdlog::logger> s_clientLogger;
 	};

@@ -20,6 +20,6 @@ namespace DerydocaEngine::Components
 	private:
 		size_t m_selected;
 		Logging::LogLevel m_visibleTypeFlags;
-		std::vector<Logging::LogMessage> m_messages;
+		std::vector<Logging::LogMessage>* m_messages;
 	};
 }
