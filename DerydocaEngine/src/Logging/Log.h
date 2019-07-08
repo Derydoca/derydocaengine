@@ -1,104 +1,11 @@
 #pragma once
 
-#include "spdlog/details/file_helper.h"
-#include "spdlog/details/null_mutex.h"
-#include "spdlog/sinks/base_sink.h"
-#include "spdlog/details/synchronous_factory.h"
-
-#include <mutex>
-#include "spdlog/spdlog.h"
+#include <spdlog/spdlog.h>
+#include "Logging/InternalEngineSync.h"
+#include "Logging/LogLevel.h"
 
 namespace DerydocaEngine::Logging
 {
-
-	enum LogLevel
-	{
-		Trace = 1,
-		Debug = 2,
-		Info = 4,
-		Warn = 8,
-		Err = 16,
-		Critical = 32,
-		All = Trace | Debug | Info | Warn | Err | Critical
-	};
-
-	struct LogMessage
-	{
-	public:
-		LogLevel level;
-		std::string loggerName;
-		//std::string time;
-		std::string message;
-		std::string fileName;
-		std::string functionName;
-		int line;
-
-		LogMessage() :
-			level(),
-			loggerName(),
-			message(),
-			fileName(),
-			functionName(),
-			line(-1)
-		{
-		}
-
-		LogMessage(const ::spdlog::details::log_msg & msg);
-	};
-
-	template<typename Mutex>
-	class engine_console_sync final : public ::spdlog::sinks::base_sink<Mutex>
-	{
-	public:
-		explicit engine_console_sync();
-		std::vector<Logging::LogMessage>& getMessages()
-		{
-			return m_messages;
-		}
-
-	protected:
-		void sink_it_(const ::spdlog::details::log_msg &msg) override;
-		void flush_() override;
-
-	private:
-		std::vector<Logging::LogMessage> m_messages;
-		
-	};
-
-	using engine_console_sync_mt = engine_console_sync<std::mutex>;
-	using engine_console_sync_st = engine_console_sync<::spdlog::details::null_mutex>;
-
-	template<typename Mutex>
-	inline engine_console_sync<Mutex>::engine_console_sync() :
-		m_messages()
-	{
-	}
-
-	template<typename Mutex>
-	inline void engine_console_sync<Mutex>::sink_it_(const ::spdlog::details::log_msg & msg)
-	{
-		Logging::LogMessage message(msg);
-		m_messages.push_back(message);
-	}
-
-	template<typename Mutex>
-	inline void engine_console_sync<Mutex>::flush_()
-	{
-	}
-	//
-	// factory functions
-	//
-	template<typename Factory = ::spdlog::synchronous_factory>
-	inline std::shared_ptr<::spdlog::logger> basic_logger_mt(const std::string &logger_name, const ::spdlog::filename_t &filename, bool truncate = false)
-	{
-		return Factory::template create<sinks::engine_console_sync_mt>(logger_name, filename, truncate);
-	}
-
-	template<typename Factory = ::spdlog::synchronous_factory>
-	inline std::shared_ptr<::spdlog::logger> basic_logger_st(const std::string &logger_name, const ::spdlog::filename_t &filename, bool truncate = false)
-	{
-		return Factory::template create<sinks::engine_console_sync_st>(logger_name, filename, truncate);
-	}
 
 	class Log
 	{
