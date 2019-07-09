@@ -25,8 +25,6 @@ namespace DerydocaEngine::Components
 
 		auto root = m_resourceNode.lock();
 
-		ImGui::ShowDemoWindow();
-
 		renderNodeContent(root);
 	}
 
