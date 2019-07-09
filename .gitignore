@@ -5,6 +5,9 @@ packages/*
 
 *.tlog
 
+# Engine generated log
+log.txt
+
 # Exclude all Visual Studio artifacts
 .vs/*
 *.vcxproj
