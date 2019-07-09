@@ -74,7 +74,7 @@ namespace DerydocaEngine::Components
 						continue;
 					}
 
-					ImGui::PushID(i);
+					ImGui::PushID(static_cast<int>(i));
 					ImGui::PushStyleColor(ImGuiCol_Text, logLevelToColor(m.level));
 
 					if (ImGui::Selectable(m.message.c_str(), m_selected == i, ImGuiSelectableFlags_SpanAllColumns))
