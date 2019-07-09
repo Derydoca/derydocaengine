@@ -28,7 +28,7 @@ namespace DerydocaEngine::Rendering
 		unsigned char* data = stbi_load(fileName.c_str(), &w, &h, &bpp, 0);
 		if (!data)
 		{
-			std::cout << "Unable to load image.\n";
+			D_LOG_ERROR("Unable to load image.");
 			return;
 		}
 
@@ -75,7 +75,7 @@ namespace DerydocaEngine::Rendering
 			}
 			else
 			{
-				std::cout << "Failed to load texture for cubemap\n";
+				D_LOG_ERROR("Failed to load texture for cubemap.");
 			}
 			// Free up our memory
 			stbi_image_free(data);

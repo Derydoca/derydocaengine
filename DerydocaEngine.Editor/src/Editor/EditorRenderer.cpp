@@ -128,7 +128,7 @@ namespace DerydocaEngine::Editor
 		// Validate that the sceneId parameter is populated
 		if (sceneId.empty())
 		{
-			std::cout << "No identifier was provided for the " << sceneType << " scene!\n";
+			D_LOG_ERROR("No identifier was provided for the {} scene.", sceneType);
 			return nullptr;
 		}
 
@@ -136,7 +136,7 @@ namespace DerydocaEngine::Editor
 		auto resource = ObjectLibrary::getInstance().getResource<Resources::LevelResource>(sceneId);
 		if (resource == nullptr)
 		{
-			std::cout << "Unable to find the " << sceneType << " scene with ID of '" << sceneId << "'!\n";
+			D_LOG_ERROR("Unable to find the {} scene with ID of ''.", sceneType, sceneId);
 			return nullptr;
 		}
 

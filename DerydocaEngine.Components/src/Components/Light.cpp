@@ -171,7 +171,7 @@ namespace DerydocaEngine::Components
 		GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (result != GL_FRAMEBUFFER_COMPLETE)
 		{
-			std::cout << "Framebuffer is not complete.\n";
+			D_LOG_ERROR("Framebuffer is not complete.");
 		}
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);

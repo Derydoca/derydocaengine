@@ -10,7 +10,7 @@ workspace "DerydocaEngine"
     }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-boostdir = "C:/local/boost_1_68_0"
+boostdir = "D:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
     "%{wks.location}/vendor/yaml-cpp/include",
@@ -252,7 +252,7 @@ project "DerydocaEngine"
 
 project "DerydocaEngine.Editor.UI"
     location "DerydocaEngine.Editor.UI"
-    kind "ConsoleApp"
+    kind "WindowedApp"
     language "C++"
     debugdir "$(OutputPath)"
     debugargs ("-project ../../../exampleProject")
@@ -331,7 +331,10 @@ project "DerydocaEngine.Editor.UI"
         }
 
     filter "configurations:Debug"
-        defines "DD_DEBUG"
+        defines {
+            "DD_DEBUG",
+            "_WINDOWS"
+        }
         symbols "On"
         staticruntime "Off"
         runtime "Debug"

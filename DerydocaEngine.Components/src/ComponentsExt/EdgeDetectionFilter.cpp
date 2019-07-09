@@ -25,7 +25,7 @@ namespace DerydocaEngine::Ext
 		m_postProcessCamera = getComponent<Components::Camera>();
 		if (m_postProcessCamera == nullptr)
 		{
-			std::cout << "No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.\n";
+			LOG_ERROR("No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.");
 			return;
 		}
 

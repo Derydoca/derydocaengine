@@ -49,7 +49,7 @@ namespace DerydocaEngine::UI
 		FT_Error error = FT_Init_FreeType(&freeTypeLibrary);
 		if (error)
 		{
-			std::cout << "An error occurred while attempting to initialize FreeType. Error: " << error << "\n";
+			D_LOG_ERROR("An error occurred while attempting to initialize FreeType. Error: {}", error);
 		}
 
 		// Load the font file
@@ -57,12 +57,12 @@ namespace DerydocaEngine::UI
 		error = FT_New_Face(freeTypeLibrary, filePath.c_str(), 0, &fontFace);
 		if (error == FT_Err_Unknown_File_Format)
 		{
-			std::cout << "Unable to load the font because it is of an unknown file format. File: " << filePath << "\n";
+			D_LOG_ERROR("Unable to load the font because it is of an unknown file format. File: {}", filePath);
 			return;
 		}
 		else if (error)
 		{
-			std::cout << "Unable to load the font. Error: " << error << "\n";
+			D_LOG_ERROR("Unable to load the font. Error: {}", error);
 			return;
 		}
 
@@ -94,7 +94,7 @@ namespace DerydocaEngine::UI
 			error = FT_Load_Glyph(fontFace, glyph_index, FT_LOAD_DEFAULT);
 			if (error)
 			{
-				std::cout << "Unable to load glyph at index " << glyph_index << ". Error: " << error;
+				D_LOG_ERROR("Unable to load glyph at index {}. Error: ", glyph_index, error);
 				continue;
 			}
 
@@ -104,7 +104,7 @@ namespace DerydocaEngine::UI
 				error = FT_Render_Glyph(fontFace->glyph, FT_RENDER_MODE_NORMAL);
 				if (error)
 				{
-					std::cout << "Unable to render glyph.\n";
+					D_LOG_ERROR("Unable to render glyph.");
 					continue;
 				}
 			}

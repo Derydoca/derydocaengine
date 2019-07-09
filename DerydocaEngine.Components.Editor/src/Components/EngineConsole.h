@@ -15,5 +15,12 @@ namespace DerydocaEngine::Components
 		virtual std::string getWindowTitle() { return "Console"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_MenuBar; }
 	private:
+		ImVec4 logLevelToColor(Logging::LogLevel level);
+		void renderMenuBar();
+	private:
+		size_t m_selected;
+		Logging::LogLevel m_visibleTypeFlags;
+		Logging::LogDomain m_visibleDomainFlags;
+		std::vector<Logging::LogMessage>* m_messages;
 	};
 }

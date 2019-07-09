@@ -14,7 +14,7 @@ namespace DerydocaEngine::Rendering
 		GLenum status = glewInit();
 
 		if (status != GLEW_OK) {
-			std::cerr << "Unable to initialize OpenGL loader!\n";
+			D_LOG_CRITICAL("Unable to initialize OpenGL loader!");
 		}
 	}
 

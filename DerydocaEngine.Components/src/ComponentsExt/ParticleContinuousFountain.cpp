@@ -325,7 +325,7 @@ namespace DerydocaEngine::Ext
 
 		GLint value;
 		glGetIntegerv(GL_MAX_TRANSFORM_FEEDBACK_BUFFERS, &value);
-		std::cout << "MAX_TRANSFORM_FEEDBACK_BUFFERS = " << value << "\n";
+		LOG_INFO("MAX_TRANSFORM_FEEDBACK_BUFFERS = {}", value);
 	}
 
 	float ParticleContinuousFountain::randFloat()

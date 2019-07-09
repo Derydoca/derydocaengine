@@ -36,7 +36,7 @@ namespace DerydocaEngine::Rendering
 		m_numPasses(0),
 		m_renderPasses()
 	{
-		printf("Loading shader: %s\n", fileName.c_str());
+		D_LOG_TRACE("Loading shader: {}", fileName);
 
 		// Create the shaders
 		LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
@@ -49,7 +49,7 @@ namespace DerydocaEngine::Rendering
 		m_rendererId = glCreateProgram();
 		if (0 == m_rendererId)
 		{
-			fprintf(stderr, "Error creating program object..\n");
+			D_LOG_ERROR("Error creating program object.");
 			__debugbreak();
 		}
 
@@ -79,10 +79,10 @@ namespace DerydocaEngine::Rendering
 
 		// Link the program
 		glLinkProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed: ");
+		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed");
 
 		glValidateProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
+		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
 
 		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
 		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
@@ -100,7 +100,7 @@ namespace DerydocaEngine::Rendering
 		m_numPasses(0),
 		m_renderPasses()
 	{
-		printf("Loading shader: %s\n", fileName.c_str());
+		D_LOG_TRACE("Loading shader: {}", fileName);
 
 		// Create the shaders
 		LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
@@ -113,7 +113,7 @@ namespace DerydocaEngine::Rendering
 		m_rendererId = glCreateProgram();
 		if (0 == m_rendererId)
 		{
-			fprintf(stderr, "Error creating program object..\n");
+			D_LOG_ERROR("Error creating program object.");
 			__debugbreak();
 		}
 
@@ -438,7 +438,7 @@ namespace DerydocaEngine::Rendering
 		GLuint shader = glCreateShader(shaderType);
 
 		if (shader == 0) {
-			std::cerr << "Error: Shader creation failed!\n";
+			D_LOG_ERROR("Shader creation failed!");
 		}
 
 		const GLchar* shaderSourceStrings[1];
@@ -469,7 +469,7 @@ namespace DerydocaEngine::Rendering
 			}
 		}
 		else {
-			std::cerr << "Unable to load shader: " << fileName << "\n";
+			D_LOG_ERROR("Unable to load shader: {}", fileName);
 		}
 
 		return output;
@@ -500,7 +500,7 @@ namespace DerydocaEngine::Rendering
 				glGetShaderInfoLog(shader, sizeof(error), NULL, error);
 			}
 
-			std::cerr << errorMessage << ": '\n" << error << "'\n";
+			D_LOG_ERROR("{}:\n{}", errorMessage, error);
 		}
 	}
 

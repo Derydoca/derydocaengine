@@ -22,15 +22,15 @@ namespace DerydocaEngine
 
 	void ObjectLibrary::loadEngineResources(const boost::filesystem::path& path)
 	{
-		std::cout << "Loading engine files: " << path << "\n";
+		D_LOG_TRACE("Loading engine files: {}", path.string());
 		loadDirectory(path);
 	}
 
 	void ObjectLibrary::loadProjectResources(const boost::filesystem::path& path)
 	{
-		std::cout << "Updating meta files: " << path << "\n";
+		D_LOG_TRACE("Updating meta files: {}", path.string());
 		updateMetaFilesDirectory(path);
-		std::cout << "Loading project files: " << path << "\n";
+		D_LOG_TRACE("Loading project files: {}", path.string());
 		loadDirectory(path);
 
 		loadResourceTree();
@@ -102,7 +102,7 @@ namespace DerydocaEngine
 		YAML::Node resourcesNode = file["Resources"];
 		if (!resourcesNode)
 		{
-			std::cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!\n";
+			D_LOG_ERROR("The meta file '{}' does not have a resource node assigned it it. This file could not be parsed!", metaFilePath);
 			return nullptr;
 		}
 
@@ -114,7 +114,7 @@ namespace DerydocaEngine
 			// If no ID node is defined, exit out because it is required
 			if (!resourceNode["ID"])
 			{
-				std::cout << "A node was skipped because it was missing an ID parameter.\n";
+				D_LOG_WARN("A node was skipped because it was missing an ID parameter.");
 				continue;
 			}
 
@@ -127,7 +127,7 @@ namespace DerydocaEngine
 			// If the serializer could not be found, continue onto the next resource
 			if (serializer == nullptr)
 			{
-				std::cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!\n";
+				D_LOG_ERROR("The file '{}' does not have a parser assigned to the extension. This file could not be parsed!", sourceFilePath);
 				continue;
 			}
 
@@ -137,7 +137,7 @@ namespace DerydocaEngine
 			// If no resource could be parsed from the node, continue on
 			if (resource == nullptr)
 			{
-				std::cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!\n";
+				D_LOG_ERROR("Unable to convert node {} to resource. This resource could not be parsed!", i);
 				continue;
 			}
 
@@ -229,7 +229,7 @@ namespace DerydocaEngine
 		// If the serializer was not found, abort and return false
 		if (serializer == nullptr)
 		{
-			std::cout << "The file '" << sourceFilePath.c_str() << "' does not have a serializer associated with it.\n";
+			D_LOG_ERROR("The file '{}' does not have a serializer associated with it.", sourceFilePath);
 			return false;
 		}
 
@@ -304,7 +304,7 @@ namespace DerydocaEngine
 		m_projectResourceRoot->sort();
 	}
 
-	void ObjectLibrary::loadFile(std::string const& sourceFilePath)
+	void ObjectLibrary::loadFile(const std::string& sourceFilePath)
 	{
 		std::string metaFilePath = sourceFilePath + m_metaExtension;
 
@@ -319,7 +319,7 @@ namespace DerydocaEngine
 		YAML::Node resourcesNode = file["Resources"];
 		if (!resourcesNode)
 		{
-			std::cout << "The meta file '" << metaFilePath.c_str() << "' does not have a resource node assigned it it. This file could not be parsed!\n";
+			D_LOG_ERROR("The meta file '{}' does not have a resource node assigned it it. This file could not be parsed!", metaFilePath);
 		}
 
 		// Go through all the resource nodes in the file
@@ -330,7 +330,7 @@ namespace DerydocaEngine
 			// If no ID node is defined, exit out because it is required
 			if (!resourceNode["ID"])
 			{
-				std::cout << "A node was skipped because it was missing an ID parameter.\n";
+				D_LOG_WARN("A node was skipped because it was missing an ID parameter.");
 				continue;
 			}
 
@@ -343,7 +343,7 @@ namespace DerydocaEngine
 			// If the serializer could not be found, continue onto the next resource
 			if (serializer == nullptr)
 			{
-				std::cout << "The file '" << sourceFilePath.c_str() << "' does not have a parser assigned to the extension. This file could not be parsed!\n";
+				D_LOG_ERROR("The file '{}' does not have a parser assigned to the extension. This file could not be parsed!", sourceFilePath);
 				continue;
 			}
 
@@ -353,7 +353,7 @@ namespace DerydocaEngine
 			// If no resource could be parsed from the node, continue on
 			if (resource == nullptr)
 			{
-				std::cout << "Unable to convert node " << i << " to resource. This resource could not be parsed!\n";
+				D_LOG_ERROR("Unable to convert node {} to resource. This resource could not be parsed!", i);
 				continue;
 			}
 

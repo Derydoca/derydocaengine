@@ -42,7 +42,7 @@ namespace DerydocaEngine::Ext
 
 		GLint maxVerts;
 		glGetIntegerv(GL_MAX_PATCH_VERTICES, &maxVerts);
-		std::cout << "Max patch vertices: " << maxVerts << "\n";
+		LOG_INFO("Max patch vertices: {}", maxVerts);
 
 		updateMaterial();
 	}

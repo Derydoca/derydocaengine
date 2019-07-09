@@ -23,7 +23,7 @@ namespace DerydocaEngine::Ext
 	{
 		if (subroutineName.empty())
 		{
-			std::cout << "Unable to set the subroutine for this component because a subroutine name was not supplied.\n";
+			LOG_ERROR("Unable to set the subroutine for this component because a subroutine name was not supplied.");
 			return;
 		}
 
@@ -31,7 +31,7 @@ namespace DerydocaEngine::Ext
 		auto mr = getComponent<Components::MeshRenderer>();
 		if (mr == nullptr)
 		{
-			std::cout << "No mesh renderer found for ShaderSubroutineSwitcher object.\n";
+			LOG_ERROR("No mesh renderer found for ShaderSubroutineSwitcher object.");
 			return;
 		}
 		// Copy the material from the mesh renderer
@@ -47,7 +47,7 @@ namespace DerydocaEngine::Ext
 		auto shader = material->getShader();
 		if (shader == nullptr)
 		{
-			std::cout << "Unable to set the subroutine for this component because it does not have a shader assigned to it.\n";
+			LOG_ERROR("Unable to set the subroutine for this component because it does not have a shader assigned to it.");
 			return;
 		}
 

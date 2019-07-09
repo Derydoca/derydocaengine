@@ -21,20 +21,11 @@ namespace DerydocaEngine::Rendering
 			return it->second;
 		}
 
-		//// Otherwise, try to load the shader
-		//// Get the resource object
-		//auto resource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
-		//if (resource == nullptr)
-		//{
-		//	std::cout << "Unable to find a resource with the ID of '" << shaderId << "'.\n";
-		//	return nullptr;
-		//}
-
 		// Convert the resource object to a shader resource object
 		std::shared_ptr<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
 		if (shaderResource == nullptr)
 		{
-			std::cout << "The resource with ID of '" << shaderId << "' is not a shader.\n";
+			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", boost::uuids::to_string(shaderId));
 			return nullptr;
 		}
 
@@ -56,7 +47,7 @@ namespace DerydocaEngine::Rendering
 		// If it could not be found, return with a null shader
 		if (it == m_shaderPaths.end())
 		{
-			std::cout << "Unable to find a shader uuid associated with the path '" << shaderPath << "'.\n";
+			D_LOG_ERROR("Unable to find a shader uuid associated with the path '{}'.", shaderPath);
 			return nullptr;
 		}
 

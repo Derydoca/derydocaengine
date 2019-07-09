@@ -2599,8 +2599,10 @@ static void ShowDemoWindowColumns()
         {
             char label[32];
             sprintf(label, "%04d", i);
-            if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns))
-                selected = i;
+			if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns))
+			{
+				selected = i;
+			}
             bool hovered = ImGui::IsItemHovered();
             ImGui::NextColumn();
             ImGui::Text(names[i]); ImGui::NextColumn();
