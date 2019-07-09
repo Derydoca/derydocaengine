@@ -12,9 +12,8 @@ namespace DerydocaEngine::Logging
 
 	void Log::Init()
 	{
-		spdlog::set_pattern("%^[%T] %n: %v%$");
-
 		s_sync = std::make_shared<engine_console_sync_mt>();
+
 		s_coreLogger = std::make_shared<spdlog::logger>("Engine", s_sync);
 		s_coreLogger->set_level(spdlog::level::trace);
 

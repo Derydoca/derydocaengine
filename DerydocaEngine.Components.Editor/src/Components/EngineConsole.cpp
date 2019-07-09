@@ -60,11 +60,11 @@ namespace DerydocaEngine::Components
 		if (m_selected >= 0 && m_selected < m_messages->size() && (m_visibleTypeFlags & m_messages->at(m_selected).level))
 		{
 			Logging::LogMessage m = m_messages->at(m_selected);
+			ImGui::TextWrapped(m.message.c_str());
 			if (m.line > 0)
 			{
-				ImGui::TextWrapped("%s(%d)%s", m.fileName.c_str(), m.line, m.functionName.c_str());
+				ImGui::TextWrapped("%s:%d @ %s", m.fileName.c_str(), m.line, m.functionName.c_str());
 			}
-			ImGui::TextWrapped(m.message.c_str());
 		}
 		else
 		{

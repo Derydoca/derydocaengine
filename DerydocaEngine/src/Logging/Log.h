@@ -35,14 +35,14 @@ namespace DerydocaEngine::Logging
 
 }
 
-#define D_LOG_TRACE(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define D_LOG_INFO(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define D_LOG_WARN(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define D_LOG_ERROR(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define D_LOG_CRITICAL(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define D_LOG_TRACE(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::trace, __VA_ARGS__)
+#define D_LOG_INFO(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::info, __VA_ARGS__)
+#define D_LOG_WARN(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::warn, __VA_ARGS__)
+#define D_LOG_ERROR(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::err, __VA_ARGS__)
+#define D_LOG_CRITICAL(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::critical, __VA_ARGS__)
 
-#define LOG_TRACE(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define LOG_INFO(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->info(__VA_ARGS__)
-#define LOG_WARN(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define LOG_ERROR(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->error(__VA_ARGS__)
-#define LOG_CRITICAL(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->critical(__VA_ARGS__)
+#define LOG_TRACE(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::trace, __VA_ARGS__)
+#define LOG_INFO(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::info, __VA_ARGS__)
+#define LOG_WARN(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::warn, __VA_ARGS__)
+#define LOG_ERROR(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::err, __VA_ARGS__)
+#define LOG_CRITICAL(...) ::DerydocaEngine::Logging::Log::GetClientLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::critical, __VA_ARGS__)
