@@ -2,6 +2,7 @@
 
 #include <spdlog/spdlog.h>
 #include "Logging/LogLevel.h"
+#include "Logging/LogDomain.h"
 
 namespace DerydocaEngine::Logging
 {
@@ -10,23 +11,14 @@ namespace DerydocaEngine::Logging
 	{
 	public:
 		LogLevel level;
-		std::string loggerName;
+		LogDomain domain;
 		//std::string time;
 		std::string message;
 		std::string fileName;
 		std::string functionName;
 		int line;
 
-		LogMessage() :
-			level(),
-			loggerName(),
-			message(),
-			fileName(),
-			functionName(),
-			line(-1)
-		{
-		}
-
+		LogMessage();
 		LogMessage(const ::spdlog::details::log_msg & msg);
 	};
 

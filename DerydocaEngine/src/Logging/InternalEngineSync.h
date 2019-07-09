@@ -25,8 +25,7 @@ namespace DerydocaEngine::Logging
 	protected:
 		void sink_it_(const ::spdlog::details::log_msg &msg) override
 		{
-			Logging::LogMessage message(msg);
-			m_messages.push_back(message);
+			m_messages.push_back(msg);
 		}
 		void flush_() override
 		{
