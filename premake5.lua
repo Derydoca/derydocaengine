@@ -252,7 +252,7 @@ project "DerydocaEngine"
 
 project "DerydocaEngine.Editor.UI"
     location "DerydocaEngine.Editor.UI"
-    kind "ConsoleApp"
+    kind "WindowedApp"
     language "C++"
     debugdir "$(OutputPath)"
     debugargs ("-project ../../../exampleProject")
@@ -331,7 +331,10 @@ project "DerydocaEngine.Editor.UI"
         }
 
     filter "configurations:Debug"
-        defines "DD_DEBUG"
+        defines {
+            "DD_DEBUG",
+            "_WINDOWS"
+        }
         symbols "On"
         staticruntime "Off"
         runtime "Debug"
