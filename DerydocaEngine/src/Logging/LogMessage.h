@@ -12,7 +12,7 @@ namespace DerydocaEngine::Logging
 	public:
 		LogLevel level;
 		LogDomain domain;
-		//std::string time;
+		std::chrono::time_point<std::chrono::system_clock> time;
 		std::string message;
 		std::string fileName;
 		std::string functionName;

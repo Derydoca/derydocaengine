@@ -94,10 +94,17 @@ namespace DerydocaEngine::Components
 		{
 			Logging::LogMessage m = m_messages->at(m_selected);
 			ImGui::TextWrapped(m.message.c_str());
+
+			ImVec4 textColor = ImGui::GetStyleColorVec4(ImGuiCol_Text);
+			ImGui::PushStyleColor(ImGuiCol_Text, {textColor.x, textColor.y, textColor.z, 0.5f});
 			if (m.line > 0)
 			{
 				ImGui::TextWrapped("%s:%d @ %s", m.fileName.c_str(), m.line, m.functionName.c_str());
 			}
+			std::time_t time_t = std::chrono::system_clock::to_time_t(m.time);
+			ImGui::Text(std::ctime(&time_t));
+			ImGui::PopStyleColor();
+
 		}
 		ImGui::EndChild();
 	}

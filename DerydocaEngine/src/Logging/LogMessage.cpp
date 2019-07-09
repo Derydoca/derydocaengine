@@ -6,6 +6,7 @@ namespace DerydocaEngine::Logging
 	LogMessage::LogMessage() :
 		level(),
 		domain(LogDomain::Engine),
+		time(),
 		message(),
 		fileName(),
 		functionName(),
@@ -16,6 +17,7 @@ namespace DerydocaEngine::Logging
 	LogMessage::LogMessage(const::spdlog::details::log_msg & msg) :
 		level(),
 		domain(),
+		time(),
 		message(),
 		fileName(),
 		functionName(),
@@ -30,6 +32,7 @@ namespace DerydocaEngine::Logging
 
 		domain = msg.logger_name.data()[0] == 'E' ? Logging::LogDomain::Engine : Logging::LogDomain::Client;
 		message = std::string(msg.payload.data(), msg.payload.size());
+		time = msg.time;
 
 		switch (msg.level)
 		{
