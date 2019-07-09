@@ -17,9 +17,13 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	void selectableLogLevel(const char* text, const Logging::LogLevel level, Logging::LogLevel& visibleTypeFlags)
+	void selectableLogLevel(const char* text, const Logging::LogLevel level, Logging::LogLevel& visibleTypeFlags, bool small)
 	{
-		if (ImGui::Selectable(text, visibleTypeFlags & level, 0, ImVec2(50.0f, 0.0f)))
+		if (
+			(small && ImGui::Selectable(text, visibleTypeFlags & level, 0, ImVec2(50.0f, 0.0f)))
+			||
+			(!small && ImGui::MenuItem(text, 0, visibleTypeFlags & level, true))
+			)
 		{
 			visibleTypeFlags = (Logging::LogLevel)(visibleTypeFlags ^ level);
 		}
@@ -27,7 +31,7 @@ namespace DerydocaEngine::Components
 
 	void selectableLogDomain(const char* text, const Logging::LogDomain domain, Logging::LogDomain& visibleDomains)
 	{
-		if (ImGui::Selectable(text, visibleDomains & domain, 0, ImVec2(50.0f, 0.0f)))
+		if (ImGui::MenuItem(text, 0, visibleDomains & domain, true))
 		{
 			visibleDomains = (Logging::LogDomain)(visibleDomains ^ domain);
 		}
@@ -42,7 +46,7 @@ namespace DerydocaEngine::Components
 
 		ImGui::BeginChild("Logs", ImVec2(0.0f, childHeight), false);
 		{
-			if ((m_visibleTypeFlags & (static_cast<Logging::LogLevel>(Logging::LogLevel::Info | Logging::LogLevel::Warn | Logging::LogLevel::Trace | Logging::LogLevel::Err))) == 0)
+			if (m_visibleTypeFlags == 0)
 			{
 				ImGui::Text("No log types are marked to be visible.");
 				if (ImGui::Button("Fix it!"))
@@ -96,7 +100,7 @@ namespace DerydocaEngine::Components
 			ImGui::TextWrapped(m.message.c_str());
 
 			ImVec4 textColor = ImGui::GetStyleColorVec4(ImGuiCol_Text);
-			ImGui::PushStyleColor(ImGuiCol_Text, {textColor.x, textColor.y, textColor.z, 0.5f});
+			ImGui::PushStyleColor(ImGuiCol_Text, { textColor.x, textColor.y, textColor.z, 0.5f });
 			if (m.line > 0)
 			{
 				ImGui::TextWrapped("%s:%d @ %s", m.fileName.c_str(), m.line, m.functionName.c_str());
@@ -120,15 +124,28 @@ namespace DerydocaEngine::Components
 
 		ImGui::Spacing();
 
-		selectableLogLevel("Trace", Logging::LogLevel::Trace, m_visibleTypeFlags);
-		selectableLogLevel("Info", Logging::LogLevel::Info, m_visibleTypeFlags);
-		selectableLogLevel("Warn", Logging::LogLevel::Warn, m_visibleTypeFlags);
-		selectableLogLevel("Error", Logging::LogLevel::Err, m_visibleTypeFlags);
+		selectableLogLevel("Info", Logging::LogLevel::Info, m_visibleTypeFlags, true);
+		selectableLogLevel("Warn", Logging::LogLevel::Warn, m_visibleTypeFlags, true);
+		selectableLogLevel("Error", Logging::LogLevel::Err, m_visibleTypeFlags, true);
 
-		ImGui::Spacing();
+		if (ImGui::Button("..."))
+		{
+			ImGui::OpenPopup("log_filters");
+		}
 
-		selectableLogDomain("Engine", Logging::LogDomain::Engine, m_visibleDomainFlags);
-		selectableLogDomain("Client", Logging::LogDomain::Client, m_visibleDomainFlags);
+		if (ImGui::BeginPopup("log_filters"))
+		{
+			selectableLogLevel("Trace", Logging::LogLevel::Trace, m_visibleTypeFlags, false);
+			selectableLogLevel("Debug", Logging::LogLevel::Debug, m_visibleTypeFlags, false);
+			selectableLogLevel("Critical", Logging::LogLevel::Critical, m_visibleTypeFlags, false);
+
+			ImGui::Spacing();
+
+			selectableLogDomain("Engine", Logging::LogDomain::Engine, m_visibleDomainFlags);
+			selectableLogDomain("Client", Logging::LogDomain::Client, m_visibleDomainFlags);
+
+			ImGui::EndPopup();
+		}
 
 		ImGui::EndMenuBar();
 	}
