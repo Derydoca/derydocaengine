@@ -12,7 +12,8 @@ namespace DerydocaEngine
 		m_transform(std::make_shared<Components::Transform>()),
 		m_parent(),
 		m_children(),
-		m_components()
+		m_components(),
+		m_destroyFlag(false)
 	{
 		auto idGen = boost::uuids::random_generator_pure();
 		m_id = idGen();
@@ -25,7 +26,8 @@ namespace DerydocaEngine
 		m_transform(std::make_shared<Components::Transform>()),
 		m_parent(),
 		m_children(),
-		m_components()
+		m_components(),
+		m_destroyFlag(false)
 	{
 	}
 
@@ -171,6 +173,26 @@ namespace DerydocaEngine
 		for each (auto go in m_children)
 		{
 			go->update(deltaTime);
+		}
+	}
+
+	void GameObject::destroy()
+	{
+		m_destroyFlag = true;
+	}
+
+	void GameObject::destroyFlaggedChildren()
+	{
+		for (size_t i = m_children.size(); i > 0 ; i--)
+		{
+			auto child = m_children[i-1];
+			child->destroyFlaggedChildren();
+			if (child->m_destroyFlag)
+			{
+				D_LOG_TRACE("Deleting '{}' which has {} reference(s).", child->getName().c_str(), child.use_count());
+				child->preDestroy();
+				m_children.erase(m_children.begin() + (i - 1));
+			}
 		}
 	}
 

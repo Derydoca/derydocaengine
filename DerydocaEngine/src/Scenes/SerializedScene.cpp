@@ -151,6 +151,8 @@ namespace DerydocaEngine::Scenes
 				ObjectLibrary::getInstance().registerComponent(componentId, component);
 			}
 		}
+		// HACK: Forcing this vector to clear so that game object references arent being held onto unnecessarily
+		m_sceneObjects.clear();
 	}
 
 	void SerializedScene::tearDown()

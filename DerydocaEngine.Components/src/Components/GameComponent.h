@@ -85,6 +85,8 @@ namespace DerydocaEngine::Components
 		inline void setId(const boost::uuids::uuid& id) { m_id = id; }
 		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject.lock(); }
 
+		void destroy(std::shared_ptr<GameObject> objectToDestroy);
+
 		template<typename T>
 		inline std::shared_ptr<T> getComponent()
 		{

@@ -51,6 +51,7 @@ namespace DerydocaEngine
 		void renderEditorGUI();
 		void update(const float deltaTime);
 
+		void destroy();
 		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
 		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_components; }
 		std::string getName() const { return m_name; }
@@ -58,6 +59,7 @@ namespace DerydocaEngine
 		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
 		std::shared_ptr<Components::Transform> getTransform() const { return m_transform; }
 		void setName(const std::string& name) { m_name = name; }
+		void destroyFlaggedChildren();
 
 	private:
 		std::string m_name;
@@ -65,6 +67,7 @@ namespace DerydocaEngine
 		std::weak_ptr<GameObject> m_parent;
 		std::vector<std::shared_ptr<GameObject>> m_children;
 		std::vector<std::shared_ptr<Components::GameComponent>> m_components;
+		bool m_destroyFlag;
 	};
 
 }

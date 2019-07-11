@@ -121,6 +121,9 @@ namespace DerydocaEngine::Editor
 
 		// Post render
 		m_editorGuiScene->getRoot()->postRender();
+
+		m_editorGuiScene->getRoot()->destroyFlaggedChildren();
+		m_editorComponentsScene->getRoot()->destroyFlaggedChildren();
 	}
 
 	std::shared_ptr<Resources::LevelResource> EditorRenderer::getSceneResource(const std::string& sceneId, const std::string& sceneType)

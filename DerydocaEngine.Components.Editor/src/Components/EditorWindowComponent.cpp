@@ -22,7 +22,7 @@ namespace DerydocaEngine::Components
 	{
 		if (!m_isOpen)
 		{
-			return;
+			destroy(getGameObject());
 		}
 
 		ImVec2 size = {20.0f, 20.0f};
