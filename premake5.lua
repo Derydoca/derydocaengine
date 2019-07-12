@@ -340,12 +340,18 @@ project "DerydocaEngine.Editor.UI"
         runtime "Debug"
 
     filter "configurations:Release"
-        defines "DD_RELEASE"
+        defines {
+            "DD_RELEASE",
+            "_WINDOWS"
+        }
         symbols "On"
         runtime "Release"
 
     filter "configurations:Dist"
-        defines "DD_DIST"
+        defines {
+            "DD_DIST",
+            "_WINDOWS"
+        }
         symbols "On"
         runtime "Release"
 
