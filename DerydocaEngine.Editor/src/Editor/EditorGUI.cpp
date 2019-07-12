@@ -2,6 +2,7 @@
 #include "EditorGUI.h"
 #include "Components\AnimationViewerWindow.h"
 #include "Components\EditorCameraWindow.h"
+#include "Components\ImGuiDemoWindow.h"
 #include "Components\EngineAssetBrowser.h"
 #include "Components\EngineConsole.h"
 #include "Editor\EditorRenderer.h"
@@ -99,6 +100,10 @@ void DerydocaEngine::Editor::EditorGUI::render()
 			if (ImGui::MenuItem("Animation Viewer"))
 			{
 				EditorRenderer::GetInstance().addWindow(std::make_shared<Components::AnimationViewerWindow>());
+			}
+			if (ImGui::MenuItem("ImGui Demo"))
+			{
+				EditorRenderer::GetInstance().addWindow(std::make_shared<Components::ImGuiDemoWindow>());
 			}
 			ImGui::EndMenu();
 		}
