@@ -24,7 +24,7 @@ namespace DerydocaEngine
 		Object(id),
 		m_name(name),
 		m_transform(std::make_shared<Components::Transform>()),
-		m_parent(),
+		m_parent(std::weak_ptr<GameObject>()),
 		m_children(),
 		m_components(),
 		m_destroyFlag(false)
@@ -178,6 +178,8 @@ namespace DerydocaEngine
 
 	void GameObject::destroy()
 	{
+		m_children.clear();
+		m_parent.reset();
 		m_destroyFlag = true;
 	}
 
@@ -189,9 +191,9 @@ namespace DerydocaEngine
 			child->destroyFlaggedChildren();
 			if (child->m_destroyFlag)
 			{
-				D_LOG_TRACE("Deleting '{}' which has {} reference(s).", child->getName().c_str(), child.use_count());
 				child->preDestroy();
 				m_children.erase(m_children.begin() + (i - 1));
+				D_LOG_TRACE("Deleting '{}' which has {} reference(s).", child->getName().c_str(), child.use_count());
 			}
 		}
 	}

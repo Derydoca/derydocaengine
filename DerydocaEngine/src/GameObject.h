@@ -56,10 +56,59 @@ namespace DerydocaEngine
 		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_components; }
 		std::string getName() const { return m_name; }
 		std::string& getName() { return m_name; }
+		bool hasParent() const { return !m_parent.expired(); }
 		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
 		std::shared_ptr<Components::Transform> getTransform() const { return m_transform; }
 		void setName(const std::string& name) { m_name = name; }
 		void destroyFlaggedChildren();
+
+		template <class T>
+		std::shared_ptr<T> getComponentInChildren()
+		{
+			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = m_components.begin(); it != m_components.end(); ++it)
+			{
+				// Attempt to cast this object to the type we want
+				std::shared_ptr<Components::GameComponent> component = *it;
+				auto attemptedCast = std::dynamic_pointer_cast<T>(component);
+
+				// If the cast worked, return the component
+				if (attemptedCast != nullptr)
+				{
+					return attemptedCast;
+				}
+			}
+
+			for (std::vector<std::shared_ptr<GameObject>>::iterator it = m_children.begin(); it != m_children.end(); ++it)
+			{
+				return (*it)->getComponentInChildren<T>();
+			}
+
+			return nullptr;
+		}
+
+		template <class T>
+		std::shared_ptr<T> getComponentInChildren(boost::uuids::uuid id)
+		{
+			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = m_components.begin(); it != m_components.end(); ++it)
+			{
+				// Attempt to cast this object to the type we want
+				std::shared_ptr<Components::GameComponent> component = *it;
+				auto attemptedCast = std::dynamic_pointer_cast<T>(component);
+
+				// If the cast worked, return the component
+				if (attemptedCast != nullptr && component->getId() == id)
+				{
+					return attemptedCast;
+				}
+			}
+
+			for (std::vector<std::shared_ptr<GameObject>>::iterator it = m_children.begin(); it != m_children.end(); ++it)
+			{
+				return (*it)->getComponentInChildren<T>(id);
+			}
+
+			return nullptr;
+		}
 
 	private:
 		std::string m_name;

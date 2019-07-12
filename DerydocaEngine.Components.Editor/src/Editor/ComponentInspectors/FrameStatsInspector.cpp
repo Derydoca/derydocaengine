@@ -8,7 +8,7 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::FrameStatsInspector
 
 	ImGui::Text("This component will update a TextRenderer component on the same GameObject with the current framerate.");
 
-	std::weak_ptr<DerydocaEngine::Components::TextRenderer> textRendererComponent = frameStats->getComponent<DerydocaEngine::Components::TextRenderer>();
+	std::weak_ptr<DerydocaEngine::Components::TextRenderer> textRendererComponent = frameStats->getComponentInChildren<DerydocaEngine::Components::TextRenderer>();
 	if (!textRendererComponent.lock())
 	{
 		ImGui::Text("Please attach a TextRenderer component to this GameObject.");

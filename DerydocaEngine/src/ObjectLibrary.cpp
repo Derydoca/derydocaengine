@@ -82,17 +82,6 @@ namespace DerydocaEngine
 		return matchingResources;
 	}
 
-	std::shared_ptr<Components::GameComponent> ObjectLibrary::getComponent(boost::uuids::uuid const& id)
-	{
-		auto search = m_sceneComponents.find(id);
-		if (search != m_sceneComponents.end())
-		{
-			return search->second;
-		}
-
-		return nullptr;
-	}
-
 	std::shared_ptr<Resources::Resource> ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 	{
 		std::string metaFilePath = sourceFilePath + m_metaExtension;
@@ -186,11 +175,6 @@ namespace DerydocaEngine
 				return;
 			}
 		}
-	}
-
-	void ObjectLibrary::registerComponent(boost::uuids::uuid const& id, std::shared_ptr<Components::GameComponent> component)
-	{
-		m_sceneComponents.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Components::GameComponent>>(id, component));
 	}
 
 	void ObjectLibrary::loadDirectory(const boost::filesystem::path& directory)

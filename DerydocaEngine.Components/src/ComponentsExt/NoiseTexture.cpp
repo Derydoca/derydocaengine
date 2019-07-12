@@ -22,14 +22,14 @@ namespace DerydocaEngine::Ext
 
 	void NoiseTexture::init()
 	{
-		auto mr = getComponent<Components::MeshRenderer>();
+		auto mr = getComponentInChildren<Components::MeshRenderer>();
 		if (mr)
 		{
 			m_material = mr->getMaterial();
 		}
 		else
 		{
-			auto cam = getComponent<Components::Camera>();
+			auto cam = getComponentInChildren<Components::Camera>();
 			if (cam)
 			{
 				m_material = cam->getPostProcessMaterial();

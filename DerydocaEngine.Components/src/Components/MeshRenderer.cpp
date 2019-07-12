@@ -54,7 +54,7 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
-			m_meshRendererCamera = ObjectLibrary::getInstance().getComponent<Camera>(renderTextureCameraId);
+			m_meshRendererCamera = findComponentOfType<Camera>(renderTextureCameraId);
 			getMaterial()->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
 		}
 	}

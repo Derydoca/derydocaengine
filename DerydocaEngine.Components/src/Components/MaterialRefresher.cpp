@@ -51,7 +51,7 @@ namespace DerydocaEngine::Components
 
 	void MaterialRefresher::init()
 	{
-		m_meshRenderer = getComponent<MeshRenderer>();
+		m_meshRenderer = getComponentInChildren<MeshRenderer>();
 		std::shared_ptr<Rendering::Material> material;
 		if (m_meshRenderer != nullptr)
 		{
@@ -60,7 +60,7 @@ namespace DerydocaEngine::Components
 		}
 		else
 		{
-			m_skinnedMeshRenderer = getComponent<SkinnedMeshRenderer>();
+			m_skinnedMeshRenderer = getComponentInChildren<SkinnedMeshRenderer>();
 			if (m_skinnedMeshRenderer != nullptr)
 			{
 				m_rendererType = 1;
@@ -69,7 +69,7 @@ namespace DerydocaEngine::Components
 			else
 			{
 				m_rendererType = 2;
-				m_tessMeshRenderer = getComponent<Ext::TessellatedMeshRenderer>();
+				m_tessMeshRenderer = getComponentInChildren<Ext::TessellatedMeshRenderer>();
 				material = m_tessMeshRenderer->getMaterial();
 			}
 		}

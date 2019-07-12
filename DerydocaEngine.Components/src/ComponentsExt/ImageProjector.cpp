@@ -81,7 +81,7 @@ namespace DerydocaEngine::Ext
 		m_projectorTexture = std::make_shared<Rendering::Texture>(projectorTextureResource->getSourceFilePath(), &textureParams);
 
 		// Load references to all mesh renderers this shader affects
-		m_meshRenderers = loadComponents<Components::MeshRenderer>(compNode, "affectedMeshRenderers");
+		//m_meshRenderers = loadComponents<Components::MeshRenderer>(compNode, "affectedMeshRenderers");
 
 		setProjectionGraphic();
 	}

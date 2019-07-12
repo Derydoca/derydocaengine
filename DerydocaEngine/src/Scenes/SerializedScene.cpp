@@ -132,23 +132,20 @@ namespace DerydocaEngine::Scenes
 					continue;
 				}
 
+				// Add the component to the game object
+				go->addComponent(component);
+
 				// Let the component deserialize the data it needs
 				if (compNode["Properties"])
 				{
 					component->deserialize(compNode["Properties"]);
 				}
 
-				// Add the component to the game object
-				go->addComponent(component);
-
 				// Set the component's ID
 				YAML::Node componentIdNode = compNode["ID"];
 				boost::uuids::uuid componentId = boost::uuids::uuid();
 				componentId = componentIdNode ? componentIdNode.as<boost::uuids::uuid>() : uuidGenerator();
 				component->setId(componentId);
-
-				// Register the component with the object library
-				ObjectLibrary::getInstance().registerComponent(componentId, component);
 			}
 		}
 		// HACK: Forcing this vector to clear so that game object references arent being held onto unnecessarily

@@ -88,7 +88,7 @@ namespace DerydocaEngine::Components
 		void destroy(std::shared_ptr<GameObject> objectToDestroy);
 
 		template<typename T>
-		inline std::shared_ptr<T> getComponent()
+		inline std::shared_ptr<T> getComponentInChildren()
 		{
 			// Get the game object that this component belongs to
 			auto gameObject = getGameObject();
@@ -96,24 +96,31 @@ namespace DerydocaEngine::Components
 			{
 				return nullptr;
 			}
+			return gameObject->getComponentInChildren<T>();
+		}
 
-			// Iterate through all of the components on this game object
-			std::vector<std::shared_ptr<Components::GameComponent>> gameObjectComponents = getGameObject()->getComponents();
-			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = gameObjectComponents.begin(); it != gameObjectComponents.end(); ++it)
+		template<typename T>
+		inline std::shared_ptr<T> findComponentOfType()
+		{
+			std::shared_ptr<GameObject> root = getGameObject();
+			while (root->hasParent())
 			{
-				// Attempt to cast this object to the type we want
-				std::shared_ptr<Components::GameComponent> component = *it;
-				auto attemptedCast = std::dynamic_pointer_cast<T>(component);
-
-				// If the cast worked, return the component
-				if (attemptedCast != nullptr)
-				{
-					return attemptedCast;
-				}
+				root = root->getParent();
 			}
 
-			// If we are here, we didn't find the component and have nothing to return
-			return nullptr;
+			return root->getComponentInChildren<T>();
+		}
+
+		template<typename T>
+		inline std::shared_ptr<T> findComponentOfType(boost::uuids::uuid id)
+		{
+			std::shared_ptr<GameObject> root = getGameObject();
+			while (root->hasParent())
+			{
+				root = root->getParent();
+			}
+
+			return root->getComponentInChildren<T>(id);
 		}
 
 	protected:
@@ -156,39 +163,6 @@ namespace DerydocaEngine::Components
 			boost::uuids::uuid resourceId = resourceIdNode.as<boost::uuids::uuid>();
 
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
-		}
-
-		template<typename T>
-		inline std::vector<std::shared_ptr<T>> loadComponents(const YAML::Node& node, const std::string& componentCollectionName)
-		{
-			std::vector<std::shared_ptr<T>> objectArr = std::vector<std::shared_ptr<T>>();
-
-			// Get the collection node
-			YAML::Node componentIdCollectionNode = node[componentCollectionName];
-			if (componentIdCollectionNode == nullptr || !componentIdCollectionNode.IsSequence())
-			{
-				return objectArr;
-			}
-
-			// Iterate through all component IDs in the collection
-			for (size_t componentIndex = 0; componentIndex < componentIdCollectionNode.size(); componentIndex++)
-			{
-				boost::uuids::uuid id = componentIdCollectionNode[componentIndex].as<boost::uuids::uuid>();
-				auto component = ObjectLibrary::getInstance().getComponent(id);
-				if (component)
-				{
-					// Add it to the array if we found one
-					objectArr.push_back(std::static_pointer_cast<T>(component));
-				}
-				else
-				{
-					// If no component was found, log the issue and continue on
-					D_LOG_ERROR("Unable to load the component with ID of '{}' because it was not found in the ObjectLibrary.", boost::uuids::to_string(id));
-				}
-			}
-
-			// Serve up what we found
-			return objectArr;
 		}
 
 	private:
