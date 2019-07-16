@@ -97,6 +97,7 @@ namespace DerydocaEngine::Rendering
 			TRANSFORM_NORMAL = 2,
 			TRANSFORM_PROJECTION = 3,
 			TRANSFORM_MODEL = 4,
+			TRANSFORM_VIEW = 5,
 
 			NUM_UNIFORMS
 		};

@@ -89,6 +89,7 @@ namespace DerydocaEngine::Rendering
 		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformLocation(m_rendererId, "NormalMatrix");
 		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformLocation(m_rendererId, "ProjectionMatrix");
 		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelMatrix");
+		m_uniforms[TRANSFORM_VIEW] = GraphicsAPI::getUniformLocation(m_rendererId, "ViewMatrix");
 	}
 
 	Shader::Shader(const std::string& fileName, const int varyingsCount, const char * const * varyings) :
@@ -156,6 +157,7 @@ namespace DerydocaEngine::Rendering
 		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformLocation(m_rendererId, "NormalMatrix");
 		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformLocation(m_rendererId, "ProjectionMatrix");
 		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelMatrix");
+		m_uniforms[TRANSFORM_VIEW] = GraphicsAPI::getUniformLocation(m_rendererId, "ViewMatrix");
 	}
 
 	Shader::~Shader()
@@ -208,6 +210,11 @@ namespace DerydocaEngine::Rendering
 
 		if (m_uniforms[TRANSFORM_MODEL] >= 0) {
 			GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_MODEL], glm::value_ptr(modelMatrix), 1);
+		}
+
+		if (m_uniforms[TRANSFORM_VIEW] > 0)
+		{
+			GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_VIEW], glm::value_ptr(projection.getViewMatrix(transformModelMatrix)), 1);
 		}
 
 		glm::vec3 worldCamPos = trans->getWorldPos();
