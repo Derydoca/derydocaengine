@@ -5,6 +5,7 @@ uniform vec4 SubUnitGridLineColor;
 uniform vec4 MajorUnitGridLineColor;
 in vec3 WorldPos;
 in vec3 Normal;
+in vec2 TexCoord;
 uniform mat4 ViewMatrix;
 uniform mat4 ProjectionMatrix;
 
@@ -18,10 +19,7 @@ bool isOnLine(float lineSize, float interval)
 void main()
 {
     float alignment = abs(dot(Normal, vec3(ViewMatrix[1].xyz)));
-    float lineSize = (1 - gl_FragCoord.w * gl_FragCoord.w * gl_FragCoord.w) * 0.2;
-    float alignmentMin = 0.1;
-    float alignmentRange = 5.0;
-    lineSize *= (1 - alignment) * alignmentRange + alignmentMin;
+    float lineSize = 0.01f;
 
     bool onUnitLine = isOnLine(lineSize, 1.0);
     bool onSubUnitLine = isOnLine(lineSize / 2, 1.0 / 10.0);
@@ -46,6 +44,10 @@ void main()
     }
     else
     {
-        FragColor = vec4(0);
+        FragColor = vec4(0, 0, 0, 0.3);
     }
+
+    // Fade the edges away
+    FragColor.a *= 1 - abs((TexCoord.x - 0.5) * 2);
+    FragColor.a *= 1 - abs((TexCoord.y - 0.5) * 2);
 }

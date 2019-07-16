@@ -47,6 +47,7 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Resources::MeshResource> m_mesh;
 		std::shared_ptr<Resources::MaterialResource> m_material;
 		std::shared_ptr<Camera> m_meshRendererCamera;
+		bool m_isTransparent;
 	};
 
 }

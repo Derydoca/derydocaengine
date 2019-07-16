@@ -2,10 +2,10 @@ Shader: 40ceb881-f04c-44e6-91c1-cc2426ece94c
 MaterialParameters:
   - Type: Color
     Name: UnitGridLineColor
-    Value: [0.8, 0.8, 0.8, 1.0]
+    Value: [1.0, 1.0, 1.0, 0.5]
   - Type: Color
     Name: SubUnitGridLineColor
-    Value: [0.4, 0.4, 0.4, 1.0]
+    Value: [1.0, 1.0, 1.0, 0.1]
   - Type: Color
     Name: MajorUnitGridLineColor
-    Value: [1.0, 1.0, 1.0, 1.0]
+    Value: [1.0, 1.0, 1.0, 0.8]

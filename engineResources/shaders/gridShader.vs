@@ -2,9 +2,11 @@
 
 in vec3 VertexPosition;
 in vec3 VertexNormal;
+in vec2 VertexTexCoord;
 
 out vec3 WorldPos;
 out vec3 Normal;
+out vec2 TexCoord;
 
 uniform vec4 UnitGridLineColor;
 uniform vec4 SubUnitGridLineColor;
@@ -19,6 +21,7 @@ uniform float minimumScale = 10.0;
 
 void main()
 {
+    TexCoord = VertexTexCoord;
     Normal = NormalMatrix * VertexNormal;
     mat4 inv = inverse(ViewMatrix);
     vec3 camOffset = vec3(inv[3][0], 0.0, inv[3][2]);

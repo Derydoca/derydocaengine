@@ -22,7 +22,7 @@ Scene:
       Components:
         - Type: MeshRenderer
           Properties:
-            #Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
             Material: f31bfa36-a1fe-44fd-8cee-0ee83f3ce69a
             Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
+            Transparent: true
         - Type: MaterialRefresher
