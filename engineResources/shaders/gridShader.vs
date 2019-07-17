@@ -8,16 +8,12 @@ out vec3 WorldPos;
 out vec3 Normal;
 out vec2 TexCoord;
 
-uniform vec4 UnitGridLineColor;
-uniform vec4 SubUnitGridLineColor;
 uniform mat4 ModelMatrix;
-uniform mat4 ModelViewMatrix;
 uniform mat4 ViewMatrix;
 uniform mat3 NormalMatrix;
-uniform mat4 ProjectionMatrix;
 uniform mat4 MVP;
 
-uniform float minimumScale = 10.0;
+uniform float minimumScale = 50.0;
 
 void main()
 {

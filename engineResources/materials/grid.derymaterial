@@ -8,4 +8,4 @@ MaterialParameters:
     Value: [1.0, 1.0, 1.0, 0.1]
   - Type: Color
     Name: MajorUnitGridLineColor
-    Value: [1.0, 1.0, 1.0, 0.8]
+    Value: [1.0, 1.0, 1.0, 0.9]
