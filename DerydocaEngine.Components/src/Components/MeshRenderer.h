@@ -43,6 +43,7 @@ namespace DerydocaEngine::Components
 
 		void setMesh(std::shared_ptr<Resources::MeshResource> const& mesh) { m_mesh = mesh; }
 		void setMaterial(std::shared_ptr<Resources::MaterialResource> const& material) { m_material = material; }
+		void setTransparent(const bool isTransparent) { m_isTransparent = isTransparent; }
 	private:
 		std::shared_ptr<Resources::MeshResource> m_mesh;
 		std::shared_ptr<Resources::MaterialResource> m_material;

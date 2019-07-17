@@ -6,6 +6,7 @@
 #include <limits>
 #include "Components\Light.h"
 #include "SceneCameraInput\OrbitalControlStrategy.h"
+#include "Components\MeshRenderer.h"
 
 DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	SceneViewerWindow(std::make_shared<SceneCameraInput::OrbitalControlStrategy>()),
@@ -38,6 +39,15 @@ DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	go2->postInit();
 	go2->getTransform()->setPos({ 0.0f, 0.5f, -1.0f });
 	m_scene->getRoot()->addChild(go2);
+	auto goGrid = std::make_shared<GameObject>("_xzPlane");
+	auto gridMeshRenderer = std::make_shared<Components::MeshRenderer>();
+	gridMeshRenderer->setMesh(ObjectLibrary::getInstance().getResource<Resources::MeshResource>("cdadf7f6-536c-4765-9d6d-08a15c8e54c5"));
+	gridMeshRenderer->setMaterial(ObjectLibrary::getInstance().getResource<Resources::MaterialResource>("f31bfa36-a1fe-44fd-8cee-0ee83f3ce69a"));
+	gridMeshRenderer->setTransparent(true);
+	goGrid->addComponent(gridMeshRenderer);
+	goGrid->init();
+	goGrid->postInit();
+	m_scene->getRoot()->addChild(goGrid);
 }
 
 DerydocaEngine::Components::AnimationViewerWindow::~AnimationViewerWindow()
