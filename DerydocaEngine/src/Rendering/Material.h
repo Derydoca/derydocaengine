@@ -26,7 +26,7 @@ namespace DerydocaEngine::Rendering
 		Material();
 		~Material();
 
-		inline void setShader(std::shared_ptr<Shader> shader) { m_shader = shader; }
+		void setShader(std::shared_ptr<Shader> shader);
 		inline std::shared_ptr<Rendering::Shader> getShader() const { return m_shader; }
 		
 		void bind() const;

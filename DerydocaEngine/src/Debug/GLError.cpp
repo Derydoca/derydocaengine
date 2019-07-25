@@ -31,7 +31,6 @@ namespace DerydocaEngine::Debug
 		GLenum err = glGetError();
 		if (err != GL_NO_ERROR) {
 			D_LOG_ERROR("GL ERROR: {}\n    {} : {}", GLErrorToString(err), fname, line);
-			__debugbreak();
 		}
 	}
 

@@ -37,6 +37,7 @@ namespace DerydocaEngine::Rendering
 		);
 		void update(const glm::mat4& matrix);
 		void updateViaActiveCamera(const std::shared_ptr<MatrixStack>& matrixStack);
+		bool isValid() { return m_rendererId != 0; }
 
 		void bindUniformBuffer(const std::string& name, int uniformBufferId);
 		void setFloat(const std::string& name, const float val);
@@ -72,6 +73,7 @@ namespace DerydocaEngine::Rendering
 		std::string GetTessellationEvaluationShaderPath() const { return m_loadPath + ".tes"; }
 		std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 		std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
+		unsigned int getRendererId() const { return m_rendererId; }
 
 		unsigned int getSubroutineIndex(const unsigned int program, const std::string& subroutineName);
 		void setSubroutine(const unsigned int program, const unsigned int subroutineIndex);
@@ -85,11 +87,13 @@ namespace DerydocaEngine::Rendering
 		void operator=(const Shader& other) {}
 		int getUniformLocation(const std::string& stringName);
 		void setTransformFeedbackVaryings(const int count, const char *const * varyings);
+		void deleteShaderProgram();
 
-		static void CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage);
+		static bool CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage);
 		static std::string LoadShader(const std::string& fileName);
 		static bool CheckIfShaderExists(const std::string& fileName);
 		static unsigned int CreateShader(const std::string& text, const unsigned int shaderType);
+		static int getErrorShaderID();
 
 		enum {
 			TRANSFORM_MVP = 0,

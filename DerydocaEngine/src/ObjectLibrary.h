@@ -66,6 +66,14 @@ namespace DerydocaEngine
 		}
 
 		template<class resourceObjectType>
+		std::shared_ptr<resourceObjectType> getResourceObjectPointer(const std::string& id)
+		{
+			boost::uuids::string_generator gen;
+			boost::uuids::uuid uuid = gen(id);
+			return getResourceObjectPointer<resourceObjectType>(uuid);
+		}
+
+		template<class resourceObjectType>
 		std::shared_ptr<resourceObjectType> getResourceObjectPointer(boost::uuids::uuid const& id)
 		{
 			std::shared_ptr<Resources::Resource> resource = getResource(id);

@@ -13,6 +13,7 @@
 #include "Rendering\Mesh.h"
 #include "Rendering\RenderPass.h"
 #include "Rendering\RenderTexture.h"
+#include "Rendering\ShaderLibrary.h"
 #include "Rendering\Texture.h"
 #include "Components\Transform.h"
 #include "..\Debug\GLError.h"
@@ -79,10 +80,18 @@ namespace DerydocaEngine::Rendering
 
 		// Link the program
 		glLinkProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed");
+		if (!CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed"))
+		{
+			deleteShaderProgram();
+			return;
+		}
 
 		glValidateProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid");
+		if (!CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid"))
+		{
+			deleteShaderProgram();
+			return;
+		}
 
 		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
 		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
@@ -147,10 +156,18 @@ namespace DerydocaEngine::Rendering
 
 		// Link the program
 		glLinkProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed: ");
+		if(!CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed: "))
+		{
+			deleteShaderProgram();
+			return;
+		}
 
 		glValidateProgram(m_rendererId);
-		CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
+		if(!CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: "))
+		{
+			deleteShaderProgram();
+			return;
+		}
 
 		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
 		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
@@ -167,7 +184,7 @@ namespace DerydocaEngine::Rendering
 			glDeleteShader(m_shaders[i]);
 		}
 
-		glDeleteProgram(m_rendererId);
+		deleteShaderProgram();
 
 		delete[] m_renderPasses;
 	}
@@ -353,6 +370,12 @@ namespace DerydocaEngine::Rendering
 		glTransformFeedbackVaryings(m_rendererId, count, varyings, GL_SEPARATE_ATTRIBS);
 	}
 
+	void Shader::deleteShaderProgram()
+	{
+		glDeleteProgram(m_rendererId);
+		m_rendererId = 0;
+	}
+
 	unsigned int Shader::getSubroutineIndex(const unsigned int program, const std::string& subroutineName)
 	{
 		return glGetSubroutineIndex(m_rendererId, program, subroutineName.c_str());
@@ -457,9 +480,18 @@ namespace DerydocaEngine::Rendering
 		glShaderSource(shader, 1, shaderSourceStrings, shaderSourceStringLengths);
 		glCompileShader(shader);
 
-		CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error: Shader compilation failed: ");
+		if (!CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error: Shader compilation failed: "))
+		{
+			return getErrorShaderID();
+		}
 
 		return shader;
+	}
+
+	int Shader::getErrorShaderID()
+	{
+		auto errorShader = Rendering::ShaderLibrary::getInstance().getErrorShader();
+		return errorShader->m_rendererId;
 	}
 
 	std::string Shader::LoadShader(const std::string& fileName) {
@@ -488,7 +520,7 @@ namespace DerydocaEngine::Rendering
 		return (stat(fileName.c_str(), &buffer) == 0);
 	}
 
-	void Shader::CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage) {
+	bool Shader::CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage) {
 		GLint success = 0;
 		GLchar error[1024] = { 0 };
 
@@ -508,7 +540,11 @@ namespace DerydocaEngine::Rendering
 			}
 
 			D_LOG_ERROR("{}:\n{}", errorMessage, error);
+			
+			return false;
 		}
+
+		return true;
 	}
 
 	void Shader::clearFloat(const std::string& name)

@@ -10,6 +10,17 @@
 namespace DerydocaEngine::Rendering
 {
 
+	ShaderLibrary::ShaderLibrary() :
+		m_shaders(),
+		m_shaderPaths(),
+		m_errorShader()
+	{
+	}
+
+	ShaderLibrary::~ShaderLibrary()
+	{
+	}
+
 	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const boost::uuids::uuid& shaderId)
 	{
 		// Look through the list of already loaded shaders
@@ -53,6 +64,11 @@ namespace DerydocaEngine::Rendering
 
 		// Otherwise, use the UUID to load the shader
 		return find(it->second);
+	}
+
+	void ShaderLibrary::initialize()
+	{
+		m_errorShader = ObjectLibrary::getInstance().getResourceObjectPointer<Rendering::Shader>("3a8405f2-e16f-4aa7-bef0-5644d7d19cdd");
 	}
 
 	void Rendering::ShaderLibrary::registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid)
