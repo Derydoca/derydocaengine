@@ -3,6 +3,7 @@
 
 #include <gl\glew.h>
 #include "Rendering\Shader.h"
+#include "Rendering\ShaderLibrary.h"
 #include "Rendering\Texture.h"
 #include "Color.h"
 
@@ -27,6 +28,11 @@ namespace DerydocaEngine::Rendering
 
 	Material::~Material()
 	{
+	}
+
+	void Material::setShader(std::shared_ptr<Shader> shader)
+	{
+		m_shader = shader->isValid() ? shader : Rendering::ShaderLibrary::getInstance().getErrorShader();
 	}
 
 	void Material::bind() const
