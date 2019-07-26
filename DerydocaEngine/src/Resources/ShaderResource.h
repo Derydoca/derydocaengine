@@ -5,17 +5,17 @@
 namespace DerydocaEngine::Resources
 {
 
-	struct ShaderResource : public Resource
+	struct GlslShaderResource : public Resource
 	{
 	public:
-		REGISTER_TYPE_ID(ShaderResource);
+		REGISTER_TYPE_ID(GlslShaderResource);
 
-		ShaderResource() :
+		GlslShaderResource() :
 			m_rawShaderName(),
 			m_fragmentShaderSource(),
 			m_geometryShaderSource()
 		{}
-		~ShaderResource() {}
+		~GlslShaderResource() {}
 
 		void setRawShaderName(std::string const& rawShaderName) { m_rawShaderName = rawShaderName; }
 		void setFragmentShaderSource(std::string const& fragmentShaderSource) { m_fragmentShaderSource = fragmentShaderSource; }

@@ -30,7 +30,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	void Material::setShader(std::shared_ptr<Shader> shader)
+	void Material::setShader(std::shared_ptr<GlslShader> shader)
 	{
 		m_shader = shader->isValid() ? shader : Rendering::ShaderLibrary::getInstance().getErrorShader();
 	}

@@ -128,7 +128,7 @@ namespace DerydocaEngine::Components
 		auto oldShader = mat->getShader();
 
 		D_LOG_TRACE("Reloading new material.");
-		auto newShader = std::make_shared<Rendering::Shader>(m_shaderLoadPath);
+		auto newShader = std::make_shared<Rendering::GlslShader>(m_shaderLoadPath);
 		mat->setShader(newShader);
 		D_LOG_TRACE("Material reload finished.");
 	}

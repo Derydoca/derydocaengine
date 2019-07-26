@@ -31,7 +31,7 @@ namespace DerydocaEngine::Editor::Inspector
 		registerRenderer<Resources::MaterialResource>(std::make_shared<ResourceInspectors::MaterialResourceInspector>());
 		registerRenderer<Resources::MeshResource>(std::make_shared<ResourceInspectors::MeshResourceInspector>());
 		registerRenderer<Resources::RasterFontResource>(std::make_shared<ResourceInspectors::RasterFontResourceInspector>());
-		registerRenderer<Resources::ShaderResource>(std::make_shared<ResourceInspectors::ShaderResourceInspector>());
+		registerRenderer<Resources::GlslShaderResource>(std::make_shared<ResourceInspectors::ShaderResourceInspector>());
 		registerRenderer<Resources::SkeletonResource>(std::make_shared<ResourceInspectors::SkeletonResourceInspector>());
 		registerRenderer<Resources::SpriteSheetResource>(std::make_shared<ResourceInspectors::SpriteSheetResourceInspector>());
 		registerRenderer<Resources::TextureResource>(std::make_shared<ResourceInspectors::TextureResourceInspector>());

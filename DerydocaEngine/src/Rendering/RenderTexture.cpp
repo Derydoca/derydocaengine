@@ -130,7 +130,7 @@ namespace DerydocaEngine::Rendering
 		GraphicsAPI::bindTexture2D(unit, m_rendererId);
 	}
 
-	void RenderTexture::bindDeferredTextures(std::shared_ptr<Rendering::Shader> shader)
+	void RenderTexture::bindDeferredTextures(std::shared_ptr<Rendering::GlslShader> shader)
 	{
 		shader->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_renderBufferIds[1]);
 		shader->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_renderBufferIds[2]);

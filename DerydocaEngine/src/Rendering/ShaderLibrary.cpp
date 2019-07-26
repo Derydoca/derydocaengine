@@ -21,7 +21,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const boost::uuids::uuid& shaderId)
+	std::shared_ptr<GlslShader> Rendering::ShaderLibrary::find(const boost::uuids::uuid& shaderId)
 	{
 		// Look through the list of already loaded shaders
 		auto it = m_shaders.find(shaderId);
@@ -33,7 +33,7 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Convert the resource object to a shader resource object
-		std::shared_ptr<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
+		std::shared_ptr<Resources::GlslShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::GlslShaderResource>(shaderId);
 		if (shaderResource == nullptr)
 		{
 			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", boost::uuids::to_string(shaderId));
@@ -41,7 +41,7 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Load the shader from the resource object
-		auto shader = std::static_pointer_cast<Shader>(shaderResource->getResourceObjectPointer());
+		auto shader = std::static_pointer_cast<GlslShader>(shaderResource->getResourceObjectPointer());
 
 		// Add it to the library
 		m_shaders[shaderId] = shader;
@@ -50,7 +50,7 @@ namespace DerydocaEngine::Rendering
 		return shader;
 	}
 
-	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const std::string& shaderPath)
+	std::shared_ptr<GlslShader> Rendering::ShaderLibrary::find(const std::string& shaderPath)
 	{
 		// Find the uuid associated with the path
 		auto it = m_shaderPaths.find(shaderPath);
@@ -68,7 +68,7 @@ namespace DerydocaEngine::Rendering
 
 	void ShaderLibrary::initialize()
 	{
-		m_errorShader = ObjectLibrary::getInstance().getResourceObjectPointer<Rendering::Shader>("3a8405f2-e16f-4aa7-bef0-5644d7d19cdd");
+		m_errorShader = ObjectLibrary::getInstance().getResourceObjectPointer<Rendering::GlslShader>("3a8405f2-e16f-4aa7-bef0-5644d7d19cdd");
 	}
 
 	void Rendering::ShaderLibrary::registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid)

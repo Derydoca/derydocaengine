@@ -22,12 +22,12 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Rendering
 {
 
-	class Shader
+	class GlslShader
 	{
 	public:
-		Shader(const std::string& fileName);
-		Shader(const std::string& fileName, const int count, const char *const * varyings);
-		~Shader();
+		GlslShader(const std::string& fileName);
+		GlslShader(const std::string& fileName, const int count, const char *const * varyings);
+		~GlslShader();
 
 		void bind();
 		void update(
@@ -83,8 +83,8 @@ namespace DerydocaEngine::Rendering
 		void renderMesh(const std::shared_ptr<Mesh> mesh, const std::shared_ptr<RenderTexture> renderTexture);
 	private:
 		static const unsigned int NUM_SHADERS = 5;
-		Shader(const Shader& other) {}
-		void operator=(const Shader& other) {}
+		GlslShader(const GlslShader& other) {}
+		void operator=(const GlslShader& other) {}
 		int getUniformLocation(const std::string& stringName);
 		void setTransformFeedbackVaryings(const int count, const char *const * varyings);
 		void deleteShaderProgram();

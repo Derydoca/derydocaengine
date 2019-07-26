@@ -11,7 +11,7 @@ namespace DerydocaEngine
 {
 	struct Color;
 	namespace Rendering {
-		class Shader;
+		class GlslShader;
 		class Texture;
 	}
 }
@@ -26,8 +26,8 @@ namespace DerydocaEngine::Rendering
 		Material();
 		~Material();
 
-		void setShader(std::shared_ptr<Shader> shader);
-		inline std::shared_ptr<Rendering::Shader> getShader() const { return m_shader; }
+		void setShader(std::shared_ptr<GlslShader> shader);
+		inline std::shared_ptr<Rendering::GlslShader> getShader() const { return m_shader; }
 		
 		void bind() const;
 		void copyFrom(std::shared_ptr<Material> other);
@@ -79,7 +79,7 @@ namespace DerydocaEngine::Rendering
 		glm::vec4 getVec4(const std::string& name);
 		
 	private:
-		std::shared_ptr<Shader> m_shader;
+		std::shared_ptr<GlslShader> m_shader;
 		// TODO: Replace this with a BST for multiple textures
 		std::shared_ptr<Texture> m_texture;
 		std::map<std::string, bool> m_boolValues;

@@ -72,7 +72,7 @@ namespace DerydocaEngine::Ext
 			m_angle = angleNode.as<float>();
 		}
 
-		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
+		auto shader = getResourcePointer<Rendering::GlslShader>(compNode, "shader");
 		assert(shader);
 		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);

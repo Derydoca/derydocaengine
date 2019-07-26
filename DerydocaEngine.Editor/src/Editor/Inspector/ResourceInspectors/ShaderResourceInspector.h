@@ -11,7 +11,7 @@ namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 	{
 		virtual void render(std::shared_ptr<Object> object)
 		{
-			auto resource = std::static_pointer_cast<Resources::ShaderResource>(object);
+			auto resource = std::static_pointer_cast<Resources::GlslShaderResource>(object);
 
 			ImGui::Text("Shader");
 			ImGui::Text(resource->getName().c_str());

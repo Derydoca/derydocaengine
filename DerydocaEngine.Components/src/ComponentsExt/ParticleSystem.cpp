@@ -89,7 +89,7 @@ namespace DerydocaEngine::Ext
 
 		m_texture = getResourcePointer<Rendering::Texture>(compNode, "texture");
 
-		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
+		auto shader = getResourcePointer<Rendering::GlslShader>(compNode, "shader");
 		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);
 		m_material->setFloat("Size2", m_size2);

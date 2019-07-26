@@ -13,12 +13,12 @@
 namespace DerydocaEngine::Rendering
 {
 
-	void LightManager::bindLightsToShader(const std::shared_ptr<Rendering::Shader>& shader)
+	void LightManager::bindLightsToShader(const std::shared_ptr<Rendering::GlslShader>& shader)
 	{
 		shader->bindUniformBuffer("LightCollection", m_lightUniformBuffer.getRendererId());
 	}
 
-	void LightManager::bindShadowDataToShader(const std::shared_ptr<Rendering::Shader> shader, const glm::mat4& modelMatrix)
+	void LightManager::bindShadowDataToShader(const std::shared_ptr<Rendering::GlslShader> shader, const glm::mat4& modelMatrix)
 	{
 		auto lights = getLights(nullptr);
 

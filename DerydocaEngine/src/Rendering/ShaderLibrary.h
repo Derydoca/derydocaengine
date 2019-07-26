@@ -4,13 +4,13 @@
 #include <string>
 
 namespace DerydocaEngine::Rendering {
-	class Shader;
+	class GlslShader;
 }
 
 namespace DerydocaEngine::Rendering
 {
 
-	using shaderMap = std::map<boost::uuids::uuid, std::shared_ptr<Shader>>;
+	using shaderMap = std::map<boost::uuids::uuid, std::shared_ptr<GlslShader>>;
 	using shaderPathMap = std::map<std::string, boost::uuids::uuid>;
 
 	class ShaderLibrary
@@ -23,9 +23,9 @@ namespace DerydocaEngine::Rendering
 		}
 		void operator=(ShaderLibrary const&) = delete;
 
-		std::shared_ptr<Shader> find(const boost::uuids::uuid& shaderId);
-		std::shared_ptr<Shader> find(const std::string& shaderPath);
-		std::shared_ptr<Shader> getErrorShader() const { return m_errorShader; }
+		std::shared_ptr<GlslShader> find(const boost::uuids::uuid& shaderId);
+		std::shared_ptr<GlslShader> find(const std::string& shaderPath);
+		std::shared_ptr<GlslShader> getErrorShader() const { return m_errorShader; }
 		void initialize();
 
 		void registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid);
@@ -36,7 +36,7 @@ namespace DerydocaEngine::Rendering
 
 		shaderMap m_shaders;
 		shaderPathMap m_shaderPaths;
-		std::shared_ptr<Shader> m_errorShader;
+		std::shared_ptr<GlslShader> m_errorShader;
 	};
 
 }

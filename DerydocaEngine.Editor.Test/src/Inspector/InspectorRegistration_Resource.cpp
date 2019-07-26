@@ -41,7 +41,7 @@ TEST(InspectorRegistration_Resource, RasterFontResource) {
 }
 
 TEST(InspectorRegistration_Resource, ShaderResource) {
-	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Resources::ShaderResource);
+	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Resources::GlslShaderResource);
 }
 
 TEST(InspectorRegistration_Resource, SkeletonResource) {

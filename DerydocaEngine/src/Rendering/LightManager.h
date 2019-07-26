@@ -12,7 +12,7 @@ namespace DerydocaEngine {
 	}
 	namespace Rendering {
 		class MatrixStack;
-		class Shader;
+		class GlslShader;
 	}
 }
 
@@ -46,8 +46,8 @@ namespace DerydocaEngine::Rendering
 		}
 
 		void addLight(std::weak_ptr<Components::Light> const& light) { m_lights.push_back(light); }
-		void bindLightsToShader(const std::shared_ptr<Rendering::Shader>& shader);
-		void bindShadowDataToShader(const std::shared_ptr<Rendering::Shader> shader, const glm::mat4& modelMatrix);
+		void bindLightsToShader(const std::shared_ptr<Rendering::GlslShader>& shader);
+		void bindShadowDataToShader(const std::shared_ptr<Rendering::GlslShader> shader, const glm::mat4& modelMatrix);
 		void removeLight(std::weak_ptr<Components::Light> const& light) {
 			if (m_lights.size() == 0)
 			{

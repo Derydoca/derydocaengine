@@ -70,7 +70,7 @@ namespace DerydocaEngine::Ext
 			m_lineColor = Color(1.0, 1.0, 1.0, 1.0);
 		}
 
-		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
+		auto shader = getResourcePointer<Rendering::GlslShader>(compNode, "shader");
 		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);
 	}

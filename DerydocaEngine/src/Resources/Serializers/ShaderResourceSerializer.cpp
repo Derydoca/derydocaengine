@@ -8,10 +8,10 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<void> ShaderResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	std::shared_ptr<void> GlslShaderResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
-		auto shaderResource = std::static_pointer_cast<ShaderResource>(resource);
-		auto shader = std::make_shared<Rendering::Shader>(shaderResource->getRawShaderName());
+		auto shaderResource = std::static_pointer_cast<GlslShaderResource>(resource);
+		auto shader = std::make_shared<Rendering::GlslShader>(shaderResource->getRawShaderName());
 		return shader;
 	}
 

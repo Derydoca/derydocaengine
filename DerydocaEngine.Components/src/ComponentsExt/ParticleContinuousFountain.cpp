@@ -138,9 +138,9 @@ namespace DerydocaEngine::Ext
 		}
 
 		const char * outputNames[] = { "Position", "Velocity", "StartTime" };
-		auto shaderResource = getResource<Resources::ShaderResource>(compNode, "shader");
+		auto shaderResource = getResource<Resources::GlslShaderResource>(compNode, "shader");
 		assert(shaderResource);
-		auto shader = std::make_shared<Rendering::Shader>(shaderResource->getRawShaderName(), 3, outputNames);
+		auto shader = std::make_shared<Rendering::GlslShader>(shaderResource->getRawShaderName(), 3, outputNames);
 		assert(shader);
 		m_material = std::make_shared<Rendering::Material>();
 		m_material->setShader(shader);

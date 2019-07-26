@@ -4,7 +4,7 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	class ShaderResourceSerializer : public ResourceSerializer
+	class GlslShaderResourceSerializer : public ResourceSerializer
 	{
 	public:
 		virtual std::shared_ptr<void> deserializePointer(std::shared_ptr<Resource> resource);

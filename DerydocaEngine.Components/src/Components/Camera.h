@@ -10,7 +10,7 @@ namespace DerydocaEngine::Rendering {
 	class Display;
 	class Mesh;
 	class RenderTexture;
-	class Shader;
+	class GlslShader;
 	class Skybox;
 }
 
@@ -58,7 +58,7 @@ namespace DerydocaEngine::Components
 		float getDisplayWidth();
 		Rectangle& getDisplayRect() { return m_displayRect; }
 		std::shared_ptr<Rendering::Material> getPostProcessMaterial() { return m_postProcessMaterial; }
-		std::shared_ptr<Rendering::Shader> getPostProcessShader() const { return m_postProcessMaterial ? m_postProcessMaterial->getShader() : nullptr; }
+		std::shared_ptr<Rendering::GlslShader> getPostProcessShader() const { return m_postProcessMaterial ? m_postProcessMaterial->getShader() : nullptr; }
 		Rendering::Projection& getProjection() { return m_projection; }
 		Rendering::Projection getProjection() const { return m_projection; }
 		std::shared_ptr<Rendering::RenderTexture> getRenderTexture() const { return m_renderTexture; }
@@ -78,7 +78,7 @@ namespace DerydocaEngine::Components
 		Camera(bool registerWithManager);
 
 		void clear();
-		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);
+		void setIdentityMatricies(std::shared_ptr<Rendering::GlslShader> shader);
 
 	private:
 		Color m_clearColor;
@@ -90,7 +90,7 @@ namespace DerydocaEngine::Components
 		Rectangle m_displayRect;
 		std::shared_ptr<Rendering::Mesh> m_quad;
 		std::shared_ptr<Rendering::Material> m_postProcessMaterial;
-		std::shared_ptr<Rendering::Shader> m_deferredRendererCompositor;
+		std::shared_ptr<Rendering::GlslShader> m_deferredRendererCompositor;
 		Rendering::Projection m_projection;
 		bool m_registerWithManager;
 	};

@@ -102,7 +102,7 @@ namespace DerydocaEngine::Components
 				m_renderTextureDeferred->initializeTexture(width, height);
 			}
 
-			auto postProcessingShader = getResourcePointer<Rendering::Shader>(renderTextureNode, "PostProcessShader");
+			auto postProcessingShader = getResourcePointer<Rendering::GlslShader>(renderTextureNode, "PostProcessShader");
 			if (postProcessingShader)
 			{
 				m_postProcessMaterial = std::make_shared<Rendering::Material>();
@@ -132,7 +132,7 @@ namespace DerydocaEngine::Components
 		auto deferredCompositorShaderNode = node["deferredCompositorShader"];
 		if (deferredCompositorShaderNode)
 		{
-			m_deferredRendererCompositor = getResourcePointer<Rendering::Shader>(deferredCompositorShaderNode.as<boost::uuids::uuid>());
+			m_deferredRendererCompositor = getResourcePointer<Rendering::GlslShader>(deferredCompositorShaderNode.as<boost::uuids::uuid>());
 		}
 	}
 
@@ -283,7 +283,7 @@ namespace DerydocaEngine::Components
 		m_displayRect.setHeight(x);
 	}
 
-	void Camera::setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader)
+	void Camera::setIdentityMatricies(std::shared_ptr<Rendering::GlslShader> shader)
 	{
 		glm::mat4 m = glm::mat4(1.0);
 		glm::mat4 v = glm::mat4(1.0);

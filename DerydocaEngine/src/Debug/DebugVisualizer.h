@@ -24,7 +24,7 @@ namespace DerydocaEngine::Debug {
 
 		DebugLine m_testLine;
 
-		std::shared_ptr<Rendering::Shader> m_shader;
+		std::shared_ptr<Rendering::GlslShader> m_shader;
 	};
 
 }

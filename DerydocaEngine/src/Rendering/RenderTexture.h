@@ -14,7 +14,7 @@ namespace DerydocaEngine::Rendering
 		~RenderTexture();
 
 		void bind(unsigned int const& unit);
-		void bindDeferredTextures(std::shared_ptr<Shader> shader); // TODO: This is a hack. Find another way to bind the deferred textures
+		void bindDeferredTextures(std::shared_ptr<GlslShader> shader); // TODO: This is a hack. Find another way to bind the deferred textures
 		void bindAsRenderTexture();
 		float getAspectRatio();
 		void initializeTexture(int const& width, int const& height);

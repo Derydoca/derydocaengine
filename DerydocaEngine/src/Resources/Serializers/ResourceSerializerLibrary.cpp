@@ -33,7 +33,7 @@ namespace DerydocaEngine::Resources::Serializers
 		registerSerializer(std::make_shared<CubemapResourceSerializer>());
 		registerSerializer(std::make_shared<MaterialResourceSerializer>());
 		registerSerializer(std::make_shared<MeshResourceSerializer>());
-		registerSerializer(std::make_shared<ShaderResourceSerializer>());
+		registerSerializer(std::make_shared<GlslShaderResourceSerializer>());
 		registerSerializer(std::make_shared<SkeletonResourceSerializer>());
 		registerSerializer(std::make_shared<SpriteSheetResourceSerializer>());
 		registerSerializer(std::make_shared<TextureResourceSerializer>());
