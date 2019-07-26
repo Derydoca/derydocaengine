@@ -720,3 +720,55 @@ project "freetype"
         symbols "On"
         runtime "Release"
     
+project "HLSLcc"
+    location "vendor/generatedProjects"
+    kind "StaticLib"
+    language "C++"
+    warnings "Off"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    flags
+    {
+        "MultiProcessorCompile"
+    }
+
+    files
+    {
+        "vendor/HLSLcc/src/*.cpp"
+    }
+
+    includedirs
+    {
+        "%{wks.location}/vendor/HLSLcc",
+        "%{wks.location}/vendor/HLSLcc/include",
+        "%{wks.location}/vendor/HLSLcc/src/cbstring",
+        "%{wks.location}/vendor/HLSLcc/src/internal_includes"
+    }
+
+    filter "system:windows"
+        cppdialect "C++11"
+        systemversion "latest"
+
+        defines
+        {
+            "WIN32",
+            "_WINDOWS",
+        }
+
+    filter "configurations:Debug"
+        defines "DD_DEBUG"
+        symbols "On"
+        staticruntime "Off"
+        runtime "Debug"
+
+    filter "configurations:Release"
+        defines "DD_RELEASE"
+        symbols "On"
+        runtime "Release"
+
+    filter "configurations:Dist"
+        defines "DD_DIST"
+        symbols "On"
+        runtime "Release"
