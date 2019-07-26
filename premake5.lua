@@ -14,7 +14,8 @@ boostdir = "D:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
     "%{wks.location}/vendor/yaml-cpp/include",
-    "%{wks.location}/vendor/freetype/include"
+    "%{wks.location}/vendor/freetype/include",
+    "%{wks.location}/vendor/HLSLcc/include"
 }
 
 project "DerydocaEngine.Components"
@@ -302,7 +303,8 @@ project "DerydocaEngine.Editor.UI"
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
         "DerydocaEngine.Editor",
-        "yaml-cpp"
+        "yaml-cpp",
+        "HLSLcc"
     }
 
     filter "system:windows"
