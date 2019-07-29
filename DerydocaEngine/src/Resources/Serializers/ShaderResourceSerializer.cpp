@@ -15,4 +15,11 @@ namespace DerydocaEngine::Resources::Serializers
 		return shader;
 	}
 
+	std::shared_ptr<void> ShaderResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	{
+		auto shaderResource = std::static_pointer_cast<ShaderResource>(resource);
+		auto shader = std::make_shared<Rendering::Shader>(shaderResource->getSourceFilePath());
+		return shader;
+	}
+
 }

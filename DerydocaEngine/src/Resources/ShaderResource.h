@@ -5,6 +5,15 @@
 namespace DerydocaEngine::Resources
 {
 
+	struct ShaderResource : public Resource
+	{
+	public:
+		REGISTER_TYPE_ID(ShaderResource);
+
+		ShaderResource() {}
+		~ShaderResource() {}
+	};
+
 	struct GlslShaderResource : public Resource
 	{
 	public:

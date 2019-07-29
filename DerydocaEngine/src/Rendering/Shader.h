@@ -22,6 +22,13 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Rendering
 {
 
+	class Shader
+	{
+	public:
+		Shader(const std::string& fileName);
+		~Shader();
+	};
+
 	class GlslShader
 	{
 	public:

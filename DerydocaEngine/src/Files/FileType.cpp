@@ -24,9 +24,13 @@ namespace DerydocaEngine::Files
 		{
 			return LevelFileType;
 		}
-		else if (extension == "vs")
+		else if (extension == "hlsl")
 		{
 			return ShaderFileType;
+		}
+		else if (extension == "vs")
+		{
+			return GlslShaderFileType;
 		}
 		else if (extension == "bpm")
 		{

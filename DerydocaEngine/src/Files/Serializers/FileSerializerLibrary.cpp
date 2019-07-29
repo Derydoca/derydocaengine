@@ -51,6 +51,7 @@ namespace DerydocaEngine::Files::Serializers {
 		registerTypeSerializer(new ImageFileSerializer());
 		registerTypeSerializer(new LevelFileSerializer());
 		registerTypeSerializer(new ShaderFileSerializer());
+		registerTypeSerializer(new GlslShaderFileSerializer());
 		registerTypeSerializer(new BezierPatchMeshFileSerializer());
 		registerTypeSerializer(new FontFileSerializer());
 		registerTypeSerializer(new RasterFontFileSerializer());

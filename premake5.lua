@@ -273,7 +273,8 @@ project "DerydocaEngine.Editor.UI"
         "glew32",
         "SDL2",
         "OpenGL32",
-        "freetype"
+        "freetype",
+        "HLSLcc"
     }
 
     libdirs {
@@ -738,7 +739,8 @@ project "HLSLcc"
 
     files
     {
-        "vendor/HLSLcc/src/*.cpp"
+        "vendor/HLSLcc/src/*.cpp",
+        "vendor/HLSLcc/src/cbstring/*.c"
     }
 
     includedirs

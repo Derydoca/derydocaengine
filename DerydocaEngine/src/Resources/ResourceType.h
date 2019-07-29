@@ -12,6 +12,7 @@ namespace DerydocaEngine::Resources
 		CubemapResourceType,
 		LevelResourceType,
 		ShaderResourceType,
+		GlslShaderResourceType,
 		BezierPatchMeshResourceType,
 		FontResourceType,
 		RasterFontResourceType,

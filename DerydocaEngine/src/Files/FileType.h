@@ -13,6 +13,7 @@ namespace DerydocaEngine::Files
 		ImageFileType,
 		LevelFileType,
 		ShaderFileType,
+		GlslShaderFileType,
 		BezierPatchMeshType,
 		FontType,
 		RasterFontType,

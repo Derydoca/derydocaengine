@@ -17,6 +17,7 @@
 #include "Rendering\Texture.h"
 #include "Components\Transform.h"
 #include "..\Debug\GLError.h"
+#include "hlslcc.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -28,6 +29,21 @@ namespace DerydocaEngine::Rendering
 		m_shaders[(shaderIndex)] = CreateShader(LoadShader(fileName), shaderType); \
 	} \
 }
+
+	Shader::Shader(const std::string& fileName)
+	{
+		GLSLShader glsl;
+		HLSLccSamplerPrecisionInfo samplerPrecision;
+		HLSLccReflection reflection;
+		TranslateHLSLFromFile(fileName.c_str(), 0, GLLang::LANG_GL_LAST, 0, 0, samplerPrecision, reflection, &glsl);
+		//glsl.sourceCode
+		std::cout << "Hello\n";
+	}
+
+	Shader::~Shader()
+	{
+	}
+
 	GlslShader::GlslShader(const std::string& fileName) :
 		m_rendererId(0),
 		m_shaders(),

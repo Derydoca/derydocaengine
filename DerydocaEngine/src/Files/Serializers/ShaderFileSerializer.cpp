@@ -28,7 +28,7 @@ namespace DerydocaEngine::Files::Serializers {
 
 	std::shared_ptr<Resources::Resource> ShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
 	{
-		auto resource = std::make_shared<Resources::GlslShaderResource>();
+		auto resource = std::make_shared<Resources::ShaderResource>();
 
 		resource->setType(Resources::ShaderResourceType);
 
@@ -36,6 +36,37 @@ namespace DerydocaEngine::Files::Serializers {
 	}
 
 	void ShaderFileSerializer::postLoadInitialize(std::shared_ptr<Resources::Resource> resource)
+	{
+		//?
+	}
+
+	YAML::Node GlslShaderFileSerializer::generateResourceNodes(std::string const& filePath)
+	{
+		YAML::Node resources;
+
+		YAML::Node shaderResource;
+		shaderResource["ID"] = generateUuid();
+
+		resources.push_back(shaderResource);
+
+		return resources;
+	}
+
+	Files::FileType GlslShaderFileSerializer::getFileType()
+	{
+		return Files::FileType::GlslShaderFileType;
+	}
+
+	std::shared_ptr<Resources::Resource> GlslShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
+	{
+		auto resource = std::make_shared<Resources::GlslShaderResource>();
+
+		resource->setType(Resources::GlslShaderResourceType);
+
+		return resource;
+	}
+
+	void GlslShaderFileSerializer::postLoadInitialize(std::shared_ptr<Resources::Resource> resource)
 	{
 		auto shaderResource = std::static_pointer_cast<Resources::GlslShaderResource>(resource);
 		fs::path vertexShaderPath(shaderResource->getVertexShaderLocation());
