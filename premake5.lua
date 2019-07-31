@@ -371,7 +371,8 @@ project "DerydocaEngine.Test"
         "glew32",
         "SDL2",
         "OpenGL32",
-        "freetype"
+        "freetype",
+        "HLSLcc"
     }
 
     libdirs {

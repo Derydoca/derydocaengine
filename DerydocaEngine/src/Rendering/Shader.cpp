@@ -34,7 +34,7 @@ namespace DerydocaEngine::Rendering
 	{
 		GLSLShader glsl;
 		HLSLccSamplerPrecisionInfo samplerPrecision;
-		HLSLccReflection reflection;
+		ShaderCodeReflection reflection;
 		TranslateHLSLFromFile(fileName.c_str(), 0, GLLang::LANG_GL_LAST, 0, 0, samplerPrecision, reflection, &glsl);
 		//glsl.sourceCode
 		std::cout << "Hello\n";
@@ -637,6 +637,48 @@ namespace DerydocaEngine::Rendering
 	{
 		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, textureType, 0);
+	}
+
+	void ShaderCodeReflection::OnDiagnostics(const std::string & error, int line, bool isError)
+	{
+	}
+
+	void ShaderCodeReflection::OnInputBinding(const std::string & name, int bindIndex)
+	{
+	}
+
+	bool ShaderCodeReflection::OnConstantBuffer(const std::string & name, size_t bufferSize, size_t memberCount)
+	{
+		return false;
+	}
+
+	bool ShaderCodeReflection::OnConstant(const std::string & name, int bindIndex, int shaderVariableType, int rows, int cols, bool isMatrix, int arraySize, bool isUsed)
+	{
+		return false;
+	}
+
+	void ShaderCodeReflection::OnConstantBufferBinding(const std::string & name, int bindIndex)
+	{
+	}
+
+	void ShaderCodeReflection::OnTextureBinding(const std::string & name, int bindIndex, int samplerIndex, bool multisampled, int hlslccTexDimension, bool isUAV)
+	{
+	}
+
+	void ShaderCodeReflection::OnBufferBinding(const std::string & name, int bindIndex, bool isUAV)
+	{
+	}
+
+	void ShaderCodeReflection::OnThreadGroupSize(unsigned int xSize, unsigned int ySize, unsigned int zSize)
+	{
+	}
+
+	void ShaderCodeReflection::OnTessellationInfo(uint32_t tessPartitionMode, uint32_t tessOutputWindingOrder, uint32_t tessMaxFactor, uint32_t tessNumPatchesInThreadGroup)
+	{
+	}
+
+	void ShaderCodeReflection::OnTessellationKernelInfo(uint32_t patchKernelBufferCount)
+	{
 	}
 
 }

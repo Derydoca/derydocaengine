@@ -5,6 +5,7 @@
 #include <vector>
 #include "Color.h"
 #include "Rendering\Projection.h"
+#include "hlslcc.h"
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -21,6 +22,21 @@ namespace DerydocaEngine {
 
 namespace DerydocaEngine::Rendering
 {
+
+	class ShaderCodeReflection : public HLSLccReflection
+	{
+	public:
+		virtual void OnDiagnostics(const std::string &error, int line, bool isError);
+		virtual void OnInputBinding(const std::string &name, int bindIndex);
+		virtual bool OnConstantBuffer(const std::string &name, size_t bufferSize, size_t memberCount);
+		virtual bool OnConstant(const std::string &name, int bindIndex, int shaderVariableType, int rows, int cols, bool isMatrix, int arraySize, bool isUsed);
+		virtual void OnConstantBufferBinding(const std::string &name, int bindIndex);
+		virtual void OnTextureBinding(const std::string &name, int bindIndex, int samplerIndex, bool multisampled, int hlslccTexDimension, bool isUAV);
+		virtual void OnBufferBinding(const std::string &name, int bindIndex, bool isUAV);
+		virtual void OnThreadGroupSize(unsigned int xSize, unsigned int ySize, unsigned int zSize);
+		virtual void OnTessellationInfo(uint32_t tessPartitionMode, uint32_t tessOutputWindingOrder, uint32_t tessMaxFactor, uint32_t tessNumPatchesInThreadGroup);
+		virtual void OnTessellationKernelInfo(uint32_t patchKernelBufferCount);
+	};
 
 	class Shader
 	{
