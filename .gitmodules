@@ -10,3 +10,6 @@
 [submodule "vendor/HLSLcc"]
 	path = vendor/HLSLcc
 	url = https://github.com/Unity-Technologies/HLSLcc.git
+[submodule "vendor/DirectXShaderCompiler"]
+	path = vendor/DirectXShaderCompiler
+	url = https://github.com/microsoft/DirectXShaderCompiler.git
