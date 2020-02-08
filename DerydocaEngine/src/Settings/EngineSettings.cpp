@@ -1,61 +1,43 @@
 #include "EnginePch.h"
 #include "Settings\EngineSettings.h"
+#include <cereal/types/memory.hpp>
 
 namespace DerydocaEngine::Settings
 {
+	std::shared_ptr<EngineSettings> EngineSettings::s_Instance = std::make_shared<EngineSettings>();
+	const char* s_FilePath = ".\\EngineSettings.json";
 
-	EngineSettings::EngineSettings(const std::string& configFilePath) :
-		m_settingsFilePath(),
-		m_width(800),
-		m_height(600),
+	EngineSettings::EngineSettings() :
+		m_size(800, 600),
 		m_fullScreen(false),
 		m_maximized(false),
 		m_engineResourceDirectory(),
 		m_editorComponentsSceneIdentifier()
 	{
-		m_settingsFilePath = boost::filesystem::absolute(configFilePath);
-
-		// Load the configuration file
-		YAML::Node root = YAML::LoadFile(m_settingsFilePath.string());
-
-		YAML::Node engineNode = root["Engine"];
-		if (engineNode)
-		{
-			m_engineResourceDirectory = engineNode["Resources"].as<std::string>();
-		}
-
-
-		YAML::Node editorNode = root["Editor"];
-		if (editorNode)
-		{
-			YAML::Node editorComponentsSceneNode = editorNode["EditorComponentsScene"];
-			if (editorComponentsSceneNode)
-			{
-				m_editorComponentsSceneIdentifier = editorComponentsSceneNode.as<std::string>();
-			}
-
-			YAML::Node editorGuiSceneNode = editorNode["EditorGuiScene"];
-			if (editorGuiSceneNode)
-			{
-				m_editorGuiSceneIdentifier = editorGuiSceneNode.as<std::string>();
-			}
-
-			m_editorSkyboxMaterialIdentifier = editorNode["SkyboxMaterial"].as<std::string>();
-		}
-
-		YAML::Node windowNode = root["Window"];
-		if (windowNode)
-		{
-			m_width = YamlTools::getIntSafe(windowNode, "Width", 800);
-			m_height = YamlTools::getIntSafe(windowNode, "Height", 600);
-			m_fullScreen = YamlTools::getBoolSafe(windowNode, "FullScreen", false);
-			m_maximized = YamlTools::getBoolSafe(windowNode, "Maximized", false);
-		}
-
 	}
 
 	EngineSettings::~EngineSettings()
 	{
 	}
 
+	bool EngineSettings::Initialize()
+	{
+		EngineSettings::s_Instance = std::make_shared<EngineSettings>();
+
+		std::fstream fs(s_FilePath);
+		{
+			cereal::JSONInputArchive iarchive(fs);
+			iarchive(SERIALIZE_NAMED("m_engineSettings", EngineSettings::s_Instance));
+		}
+		fs.close();
+		return true;
+	}
+
+	void EngineSettings::Save()
+	{
+		std::fstream fs(s_FilePath);
+		cereal::JSONOutputArchive oarchive(fs);
+		oarchive(SERIALIZE_NAMED("m_engineSettings", EngineSettings::s_Instance));
+		fs.close();
+	}
 }

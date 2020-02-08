@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Rendering\MatrixStack.h"
 #include "GraphicsAPI.h"
+#include "Settings/EngineSettings.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -74,6 +75,10 @@ namespace DerydocaEngine::Rendering
 			}
 			m_clock.update();
 		}
+		// TODO: Save the window settings to the EngineSettings object
+		auto settings = DerydocaEngine::Settings::EngineSettings::getInstance();
+		auto display = m_implementation.getDisplay();
+		settings->setWindowProperties(display->getNonMaximizedSize(), display->isFullScreen(), display->isMaximized());
 		return 0;
 	}
 

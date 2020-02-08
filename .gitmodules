@@ -7,3 +7,6 @@
 [submodule "vendor/freetype"]
 	path = vendor/freetype
 	url = https://github.com/aseprite/freetype2.git
+[submodule "vendor/cereal"]
+	path = vendor/cereal
+	url = https://github.com/USCiLab/cereal.git

@@ -13,9 +13,13 @@ namespace DerydocaEngine::Rendering
 	Display::Display(int const& width, int const& height, std::string const& title) :
 		m_window(0),
 		m_context(),
+		m_hasLoadedInitialDimensions(false),
 		m_isClosed(false),
-		m_width(width),
-		m_height(height),
+		m_isFullscreen(false),
+		m_isMaximized(false),
+		m_lastSize(width, height),
+		m_actualSize(width, height),
+		m_windowSize(width, height),
 		m_keyboard(0),
 		m_mouse(0),
 		m_camera(0)
@@ -25,7 +29,7 @@ namespace DerydocaEngine::Rendering
 		m_keyboard = Input::InputManager::getInstance().getKeyboard();
 		m_mouse = Input::InputManager::getInstance().getMouse();
 
-		m_window = SystemWindowingLayer::createWindow(title, m_width, m_height);
+		m_window = SystemWindowingLayer::createWindow(title, m_actualSize.x, m_actualSize.y);
 		m_context = SystemWindowingLayer::createGraphicsAPIContext(m_window);
 		
 		static bool graphicsAPIInitialized = false;
@@ -52,24 +56,26 @@ namespace DerydocaEngine::Rendering
 		return m_isClosed;
 	}
 
-	void Display::setSize(int width, int height)
+	void Display::setSize(int2 size)
 	{
-		m_width = width;
-		m_height = height;
-		SDL_SetWindowSize(m_window, m_width, m_height);
+		m_actualSize = size;
+		SDL_SetWindowSize(m_window, m_actualSize.x, m_actualSize.y);
 
 		// Clear the screen to black
 		SystemWindowingLayer::swapBuffers(m_window, &m_context);
-
 	}
 
 	void Display::setFullScreen(bool isFullScreen)
 	{
+		m_isMaximized = false;
+		m_isFullscreen = true;
 		SDL_SetWindowFullscreen(m_window, isFullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 	}
 
 	void Display::maximize()
 	{
+		m_isMaximized = true;
+		m_isFullscreen = false;
 		SDL_MaximizeWindow(m_window);
 	}
 
@@ -80,12 +86,22 @@ namespace DerydocaEngine::Rendering
 
 	void Display::windowSizeChanged(int const& width, int const& height)
 	{
-		m_width = width;
-		m_height = height;
+		m_lastSize = m_actualSize;
+		m_actualSize = { width, height };
+
+		if (!(m_isFullscreen || m_isMaximized) && m_hasLoadedInitialDimensions)
+		{
+			m_windowSize = { width, height };
+		}
 
 		if (m_camera)
 		{
 			m_camera->resize(width, height);
+		}
+
+		if (!m_hasLoadedInitialDimensions)
+		{
+			m_hasLoadedInitialDimensions = true;
 		}
 	}
 
@@ -136,6 +152,16 @@ namespace DerydocaEngine::Rendering
 			case SDL_WINDOWEVENT:
 				switch (e.window.event)
 				{
+				case SDL_WINDOWEVENT_MAXIMIZED:
+					m_isMaximized = true;
+					m_isFullscreen = false;
+					
+					break;
+				case SDL_WINDOWEVENT_RESTORED:
+					m_isMaximized = false;
+					m_isFullscreen = false;
+
+					break;
 				case SDL_WINDOWEVENT_SIZE_CHANGED:
 					windowSizeChanged(e.window.data1, e.window.data2);
 

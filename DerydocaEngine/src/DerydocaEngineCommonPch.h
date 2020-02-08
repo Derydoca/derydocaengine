@@ -68,6 +68,10 @@
 
 // Derydoca Engine Classes
 #include "Logging/Log.h"
+#include "Helpers/Serialization.h"
+
+// Maths
+#include "Math/int2.h"
 
 #if OPENGL||VULKAN
 using SystemWindow = SDL_Window;

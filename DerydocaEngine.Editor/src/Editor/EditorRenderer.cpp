@@ -30,13 +30,13 @@ namespace DerydocaEngine::Editor
 	void EditorRenderer::init()
 	{
 		// Load the settings
-		auto settings = DerydocaEngine::Settings::EngineSettings(".\\engineSettings.yaml");
-		m_display->setSize(settings.getWidth(), settings.getHeight());
-		if (settings.shouldBeFullScreen())
+		auto settings = DerydocaEngine::Settings::EngineSettings::getInstance();
+		m_display->setSize(settings->getSize());
+		if (settings->shouldBeFullScreen())
 		{
 			m_display->setFullScreen(true);
 		}
-		if (settings.shouldBeMaximized())
+		if (settings->shouldBeMaximized())
 		{
 			m_display->maximize();
 		}
@@ -44,7 +44,7 @@ namespace DerydocaEngine::Editor
 		m_display->init();
 
 		// Load the editor skybox material
-		auto skyboxIdString = settings.getEditorSkyboxMaterialIdentifier();
+		auto skyboxIdString = settings->getEditorSkyboxMaterialIdentifier();
 		if (skyboxIdString.size() > 0)
 		{
 			auto skyboxId = boost::lexical_cast<boost::uuids::uuid>(skyboxIdString);
@@ -52,8 +52,8 @@ namespace DerydocaEngine::Editor
 		}
 
 		// Load the scenes
-		loadScene(settings.getEditorComponentsSceneIdentifier(), m_editorComponentsScene);
-		loadScene(settings.getEditorGuiSceneIdentifier(), m_editorGuiScene);
+		loadScene(settings->getEditorComponentsSceneIdentifier(), m_editorComponentsScene);
+		loadScene(settings->getEditorGuiSceneIdentifier(), m_editorGuiScene);
 	}
 
 	void EditorRenderer::renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH)

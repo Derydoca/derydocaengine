@@ -18,6 +18,7 @@ namespace DerydocaEngine::Scenes
 
 		void loadScene(const boost::uuids::uuid & levelId);
 		void loadScene(const std::shared_ptr<Resources::LevelResource> levelResource);
+		void saveScene(const std::string& outputPath);
 		void unloadScene();
 
 	private:

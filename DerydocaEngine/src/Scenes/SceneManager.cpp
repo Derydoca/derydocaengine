@@ -40,6 +40,16 @@ namespace DerydocaEngine::Scenes
 		m_activeScene = scene;
 	}
 
+	void SceneManager::saveScene(const std::string& outputPath)
+	{
+		auto ss = std::static_pointer_cast<Scenes::SerializedScene>(m_activeScene);
+		if (ss == NULL)
+		{
+			return;
+		}
+		ss->SaveToFile(outputPath);
+	}
+
 	void SceneManager::unloadScene()
 	{
 		if (m_activeScene == nullptr)

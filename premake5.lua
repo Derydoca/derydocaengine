@@ -13,6 +13,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 boostdir = "D:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
+    "%{wks.location}/vendor/cereal/include",
     "%{wks.location}/vendor/yaml-cpp/include",
     "%{wks.location}/vendor/freetype/include"
 }
@@ -321,7 +322,7 @@ project "DerydocaEngine.Editor.UI"
             "@echo Copying DLLs",
             "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying engine settings file",
-            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\"",
+            "xcopy /y /f \"%{wks.location}engineSettings.json\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying IMGUI default layout file",
             "xcopy /y /f \"%{wks.location}imgui.ini\" \"%{cfg.buildtarget.directory}\"",
             "@echo Processing the engine resource directory",
@@ -423,7 +424,7 @@ project "DerydocaEngine.Test"
             "@echo Copying DLLs",
             "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying engine settings file",
-            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\""
+            "xcopy /y /f \"%{wks.location}engineSettings.json\" \"%{cfg.buildtarget.directory}\""
         }
 
     filter "configurations:Debug"
@@ -521,7 +522,7 @@ project "DerydocaEngine.Editor.Test"
             "@echo Copying DLLs",
             "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying engine settings file",
-            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\""
+            "xcopy /y /f \"%{wks.location}engineSettings.json\" \"%{cfg.buildtarget.directory}\""
         }
 
     filter "configurations:Debug"

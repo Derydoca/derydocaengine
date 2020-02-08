@@ -7,6 +7,9 @@
 #include "Components\GameComponentFactory.h"
 #include <iostream>
 #include "Components\GameComponent.h"
+#include <fstream>
+#include <cereal/types/vector.hpp>
+#include <cereal/types/memory.hpp>
 
 namespace DerydocaEngine::Scenes
 {
@@ -207,63 +210,12 @@ namespace DerydocaEngine::Scenes
 
 	void SerializedScene::SaveToFile(const std::string& filePath)
 	{
-		YAML::Node root;
-
-		YAML::Node materialNode;
-		materialNode["Type"] = "Material";
-		materialNode["ID"] = 100;
-		YAML::Node materialProperties;
-		materialProperties["Shader"] = "..\\engineResources\\shaders\\diffuseFrag";
-		YAML::Node materialTexture;
-		materialTexture["Type"] = "Texture";
-		materialTexture["Slot"] = 0;
-		materialTexture["Path"] = ".\\engineResources\\grass.png";
-		materialProperties["MaterialParameters"].push_back(materialTexture);
-		materialNode["Properties"] = materialProperties;
-		root["Scene"].push_back(materialNode);
-
-		YAML::Node meshNode;
-		meshNode["Type"] = "Mesh";
-		meshNode["ID"] = 200;
-		YAML::Node meshProperties;
-		meshProperties["Path"] = ".\\engineResources\\sphere.obj";
-		meshNode["Properties"] = meshProperties;
-		root["Scene"].push_back(meshNode);
-
-		YAML::Node gameObjectNode;
-		gameObjectNode["Type"] = "GameObject";
-		gameObjectNode["ID"] = 300;
-		YAML::Node gameObjectProperties;
-		gameObjectProperties["Name"] = "Diffuse Shaded Model";
-		YAML::Node gameObjectTransform;
-		gameObjectTransform["Position"].push_back<float>(0);
-		gameObjectTransform["Position"].push_back<float>(0);
-		gameObjectTransform["Position"].push_back<float>(-1);
-		gameObjectTransform["Rotation"].push_back<float>(0);
-		gameObjectTransform["Rotation"].push_back<float>(0);
-		gameObjectTransform["Rotation"].push_back<float>(0);
-		gameObjectTransform["Scale"].push_back<float>(1);
-		gameObjectTransform["Scale"].push_back<float>(1);
-		gameObjectTransform["Scale"].push_back<float>(1);
-		gameObjectProperties["Transform"] = gameObjectTransform;
-		YAML::Node meshRendererComponent;
-		meshRendererComponent["Type"] = "MeshRenderer";
-		meshRendererComponent["ID"] = 310;
-		meshRendererComponent["Material"] = 100;
-		meshRendererComponent["Mesh"] = 200;
-		gameObjectProperties["Components"].push_back(meshRendererComponent);
-		gameObjectNode["Properties"] = gameObjectProperties;
-		root["Scene"].push_back(gameObjectNode);
-
-		YAML::Emitter out;
-		out.SetIndent(2);
-		out.SetMapFormat(YAML::Block);
-		out << root;
-		//out.c_str()
-		std::ofstream file;
-		file.open(filePath);
-		file << out.c_str();
-		file.close();
+		//std::stringstream ss;
+		//
+		//{
+		//	cereal::JSONOutputArchive oarchive(ss);
+		//	oarchive(m_sceneObjects);
+		//}
 	}
 
 	std::shared_ptr<SceneObject> SerializedScene::findNode(const boost::uuids::uuid& id)

@@ -2,6 +2,7 @@
 #include <yaml-cpp\yaml.h>
 #include <boost\uuid\uuid.hpp>
 #include "GameObject.h"
+#include <cereal/types/string.hpp>
 
 namespace DerydocaEngine::Scenes
 {
@@ -24,6 +25,12 @@ namespace DerydocaEngine::Scenes
 		bool isObjectCreated() const { return m_objectReference != 0; }
 		std::shared_ptr<GameObject> getGameObject() const { return m_objectReference; }
 		void setObjectReference(std::shared_ptr<GameObject> const reference) { m_objectReference = reference; }
+
+		//template<class Archive>
+		//void Serialize(Archive& ar)
+		//{
+		//	ar(m_type);
+		//}
 	private:
 		boost::uuids::uuid m_id;
 		std::string m_type;

@@ -27,14 +27,18 @@ namespace DerydocaEngine::Rendering
 		void newFrame();
 		void update();
 		bool isClosed();
-		inline float getAspectRatio() { return (float)m_width / (float)m_height; }
+		inline float getAspectRatio() { return (float)m_actualSize.x / (float)m_actualSize.y; }
 
-		inline int getWidth() const { return m_width; }
-		inline int getHeight() const { return m_height; }
+		inline int2 getNonMaximizedSize() const {
+			return (m_isMaximized || m_isFullscreen) ? m_lastSize : m_actualSize;
+		}
+		inline int2 getActualSize() const { return m_actualSize; }
+		inline bool isFullScreen() const { return m_isFullscreen; }
+		inline bool isMaximized() const { return m_isMaximized; }
 		inline SystemWindow* getWindow() const { return m_window; }
 		inline GraphicsAPIContext* getContext() { return &(m_context); }
 
-		void setSize(int width, int height);
+		void setSize(int2 size);
 		void setFullScreen(bool isFullScreen);
 
 		void bindAsRenderTarget();
@@ -49,9 +53,13 @@ namespace DerydocaEngine::Rendering
 
 		SystemWindow* m_window;
 		GraphicsAPIContext m_context;
+		bool m_hasLoadedInitialDimensions;
 		bool m_isClosed;
-		int m_width;
-		int m_height;
+		bool m_isFullscreen;
+		bool m_isMaximized;
+		int2 m_lastSize;
+		int2 m_actualSize;
+		int2 m_windowSize;
 		Input::Keyboard* m_keyboard;
 		Input::Mouse* m_mouse;
 		Components::Camera* m_camera;

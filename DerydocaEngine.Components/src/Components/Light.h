@@ -75,6 +75,7 @@ namespace DerydocaEngine::Components
 		virtual void preDestroy();
 
 		void renderShadowMap(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
+
 	private:
 		void generateShadowMap();
 		int getShadowMapFilterTypeEnum();

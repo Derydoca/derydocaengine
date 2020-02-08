@@ -265,14 +265,16 @@ namespace DerydocaEngine::Components
 		m_projection.recalculateProjectionMatrix();
 	}
 
+	// TODO: Replace with new function Camera::getDisplaySize()
 	float Camera::getDisplayHeight()
 	{
-		return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)Rendering::DisplayManager::getInstance().getDisplay(0)->getHeight();
+		return m_renderTexture != nullptr ? (float)m_renderTexture->getHeight() : (float)Rendering::DisplayManager::getInstance().getDisplay(0)->getActualSize().y;
 	}
 
+	// TODO: Replace with new function Camera::getDisplaySize()
 	float Camera::getDisplayWidth()
 	{
-		return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)Rendering::DisplayManager::getInstance().getDisplay(0)->getWidth();
+		return m_renderTexture != nullptr ? (float)m_renderTexture->getWidth() : (float)Rendering::DisplayManager::getInstance().getDisplay(0)->getActualSize().x;
 	}
 
 	void Camera::setDisplayRect(float const& x, float const& y, float const& w, float const& h)
