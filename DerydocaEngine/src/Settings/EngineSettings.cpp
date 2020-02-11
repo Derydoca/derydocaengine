@@ -12,7 +12,9 @@ namespace DerydocaEngine::Settings
 		m_fullScreen(false),
 		m_maximized(false),
 		m_engineResourceDirectory(),
-		m_editorComponentsSceneIdentifier()
+		m_editorComponentsSceneIdentifier(),
+		m_editorGuiSceneIdentifier(),
+		m_editorSkyboxMaterialIdentifier()
 	{
 	}
 
@@ -24,7 +26,7 @@ namespace DerydocaEngine::Settings
 	{
 		EngineSettings::s_Instance = std::make_shared<EngineSettings>();
 
-		std::fstream fs(s_FilePath);
+		std::ifstream fs(s_FilePath);
 		{
 			cereal::JSONInputArchive iarchive(fs);
 			iarchive(SERIALIZE_NAMED("m_engineSettings", EngineSettings::s_Instance));
@@ -35,9 +37,11 @@ namespace DerydocaEngine::Settings
 
 	void EngineSettings::Save()
 	{
-		std::fstream fs(s_FilePath);
-		cereal::JSONOutputArchive oarchive(fs);
-		oarchive(SERIALIZE_NAMED("m_engineSettings", EngineSettings::s_Instance));
+		std::ofstream fs(s_FilePath);
+		{
+			cereal::JSONOutputArchive oarchive(fs);
+			oarchive(SERIALIZE_NAMED("m_engineSettings", EngineSettings::s_Instance));
+		}
 		fs.close();
 	}
 }
