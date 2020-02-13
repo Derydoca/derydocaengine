@@ -39,7 +39,7 @@ namespace DerydocaEngine::Editor
 	EditorRenderer::~EditorRenderer()
 	{
 		{
-			//m_settings.setPosition(m_display->getPosition);
+			m_settings.setPosition(m_display->getNonMaximizedPosition());
 			m_settings.setSize(m_display->getNonMaximizedSize());
 			m_settings.setState(m_display->getWindowState());
 			
@@ -55,6 +55,11 @@ namespace DerydocaEngine::Editor
 	{
 		// Load the settings
 		m_display->setSize(m_settings.getSize());
+		int2 windowPosition = m_settings.getPosition();
+		if (windowPosition.x >= 0)
+		{
+			m_display->setPosition(windowPosition);
+		}
 		DerydocaEngine::Settings::WindowState state = m_settings.getState();
 		switch (state)
 		{

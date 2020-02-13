@@ -30,6 +30,9 @@ namespace DerydocaEngine::Rendering
 		bool isClosed();
 		inline float getAspectRatio() { return (float)m_actualSize.x / (float)m_actualSize.y; }
 
+		inline int2 getNonMaximizedPosition() const {
+			return m_windowState == Settings::WindowState::Normal ? m_actualPosition : m_lastPosition;
+		}
 		inline int2 getNonMaximizedSize() const {
 			return m_windowState == Settings::WindowState::Normal ? m_actualSize : m_lastSize;
 		}
@@ -38,6 +41,7 @@ namespace DerydocaEngine::Rendering
 		inline SystemWindow* getWindow() const { return m_window; }
 		inline GraphicsAPIContext* getContext() { return &(m_context); }
 
+		void setPosition(int2 position);
 		void setSize(int2 size);
 		void setFullScreen(bool isFullScreen);
 
@@ -49,6 +53,7 @@ namespace DerydocaEngine::Rendering
 		Display(Display const& other) {}
 		Display& operator=(Display const& other) {}
 
+		void windowPositionChanged(const int x, const int y);
 		void windowSizeChanged(int const& width, int const& height);
 
 		SystemWindow* m_window;
@@ -56,6 +61,9 @@ namespace DerydocaEngine::Rendering
 		bool m_hasLoadedInitialDimensions;
 		bool m_isClosed;
 		Settings::WindowState m_windowState;
+		int2 m_lastPosition;
+		int2 m_actualPosition;
+		int2 m_windowPosition;
 		int2 m_lastSize;
 		int2 m_actualSize;
 		int2 m_windowSize;

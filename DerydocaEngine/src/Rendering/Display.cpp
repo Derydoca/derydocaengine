@@ -16,6 +16,9 @@ namespace DerydocaEngine::Rendering
 		m_hasLoadedInitialDimensions(false),
 		m_isClosed(false),
 		m_windowState(Settings::WindowState::Normal),
+		m_lastPosition(0, 0),
+		m_actualPosition(0, 0),
+		m_windowPosition(0, 0),
 		m_lastSize(width, height),
 		m_actualSize(width, height),
 		m_windowSize(width, height),
@@ -55,6 +58,12 @@ namespace DerydocaEngine::Rendering
 		return m_isClosed;
 	}
 
+	void Display::setPosition(int2 position)
+	{
+		m_actualPosition = position;
+		SDL_SetWindowPosition(m_window, m_actualPosition.x, m_actualPosition.y);
+	}
+
 	void Display::setSize(int2 size)
 	{
 		m_actualSize = size;
@@ -79,6 +88,17 @@ namespace DerydocaEngine::Rendering
 	void Display::bindAsRenderTarget()
 	{
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	}
+
+	void Display::windowPositionChanged(const int x, const int y)
+	{
+		m_lastPosition = m_actualPosition;
+		m_actualPosition = { x, y };
+
+		if (m_windowState == Settings::WindowState::Normal && m_hasLoadedInitialDimensions)
+		{
+			m_windowPosition = { x, y };
+		}
 	}
 
 	void Display::windowSizeChanged(int const& width, int const& height)
@@ -149,12 +169,16 @@ namespace DerydocaEngine::Rendering
 			case SDL_WINDOWEVENT:
 				switch (e.window.event)
 				{
+				case SDL_WINDOWEVENT_MOVED:
+					windowPositionChanged(e.window.data1, e.window.data2);
+
+					break;
 				case SDL_WINDOWEVENT_MAXIMIZED:
-					m_windowState == Settings::WindowState::Maximized;
+					m_windowState = Settings::WindowState::Maximized;
 					
 					break;
 				case SDL_WINDOWEVENT_RESTORED:
-					m_windowState == Settings::WindowState::Normal;
+					m_windowState = Settings::WindowState::Normal;
 
 					break;
 				case SDL_WINDOWEVENT_SIZE_CHANGED:
