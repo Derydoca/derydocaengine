@@ -8,9 +8,6 @@ namespace DerydocaEngine::Settings
 	const char* s_FilePath = ".\\EngineSettings.json";
 
 	EngineSettings::EngineSettings() :
-		m_size(800, 600),
-		m_fullScreen(false),
-		m_maximized(false),
 		m_engineResourceDirectory(),
 		m_editorComponentsSceneIdentifier(),
 		m_editorGuiSceneIdentifier(),

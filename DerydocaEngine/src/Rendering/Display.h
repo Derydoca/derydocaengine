@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Settings/EditorWindowSettings.h"
 
 typedef void *SDL_GLContext;
 struct SDL_Window;
@@ -30,11 +31,10 @@ namespace DerydocaEngine::Rendering
 		inline float getAspectRatio() { return (float)m_actualSize.x / (float)m_actualSize.y; }
 
 		inline int2 getNonMaximizedSize() const {
-			return (m_isMaximized || m_isFullscreen) ? m_lastSize : m_actualSize;
+			return m_windowState == Settings::WindowState::Normal ? m_actualSize : m_lastSize;
 		}
 		inline int2 getActualSize() const { return m_actualSize; }
-		inline bool isFullScreen() const { return m_isFullscreen; }
-		inline bool isMaximized() const { return m_isMaximized; }
+		inline const Settings::WindowState getWindowState() const { return m_windowState; }
 		inline SystemWindow* getWindow() const { return m_window; }
 		inline GraphicsAPIContext* getContext() { return &(m_context); }
 
@@ -55,8 +55,7 @@ namespace DerydocaEngine::Rendering
 		GraphicsAPIContext m_context;
 		bool m_hasLoadedInitialDimensions;
 		bool m_isClosed;
-		bool m_isFullscreen;
-		bool m_isMaximized;
+		Settings::WindowState m_windowState;
 		int2 m_lastSize;
 		int2 m_actualSize;
 		int2 m_windowSize;

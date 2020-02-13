@@ -15,8 +15,7 @@ namespace DerydocaEngine::Rendering
 		m_context(),
 		m_hasLoadedInitialDimensions(false),
 		m_isClosed(false),
-		m_isFullscreen(false),
-		m_isMaximized(false),
+		m_windowState(Settings::WindowState::Normal),
 		m_lastSize(width, height),
 		m_actualSize(width, height),
 		m_windowSize(width, height),
@@ -67,15 +66,13 @@ namespace DerydocaEngine::Rendering
 
 	void Display::setFullScreen(bool isFullScreen)
 	{
-		m_isMaximized = false;
-		m_isFullscreen = true;
+		m_windowState = Settings::WindowState::FullScreen;
 		SDL_SetWindowFullscreen(m_window, isFullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
 	}
 
 	void Display::maximize()
 	{
-		m_isMaximized = true;
-		m_isFullscreen = false;
+		m_windowState = Settings::WindowState::Maximized;
 		SDL_MaximizeWindow(m_window);
 	}
 
@@ -89,7 +86,7 @@ namespace DerydocaEngine::Rendering
 		m_lastSize = m_actualSize;
 		m_actualSize = { width, height };
 
-		if (!(m_isFullscreen || m_isMaximized) && m_hasLoadedInitialDimensions)
+		if (m_windowState == Settings::WindowState::Normal && m_hasLoadedInitialDimensions)
 		{
 			m_windowSize = { width, height };
 		}
@@ -153,13 +150,11 @@ namespace DerydocaEngine::Rendering
 				switch (e.window.event)
 				{
 				case SDL_WINDOWEVENT_MAXIMIZED:
-					m_isMaximized = true;
-					m_isFullscreen = false;
+					m_windowState == Settings::WindowState::Maximized;
 					
 					break;
 				case SDL_WINDOWEVENT_RESTORED:
-					m_isMaximized = false;
-					m_isFullscreen = false;
+					m_windowState == Settings::WindowState::Normal;
 
 					break;
 				case SDL_WINDOWEVENT_SIZE_CHANGED:

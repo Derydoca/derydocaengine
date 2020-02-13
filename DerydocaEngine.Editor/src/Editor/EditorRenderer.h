@@ -7,6 +7,7 @@
 #include "Rendering\RenderTexture.h"
 #include "Resources\LevelResource.h"
 #include "Scenes\SerializedScene.h"
+#include "Settings\EditorWindowSettings.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -44,6 +45,7 @@ namespace DerydocaEngine::Editor
 		std::shared_ptr<Scenes::SerializedScene> m_editorComponentsScene;
 		std::shared_ptr<Scenes::SerializedScene> m_editorGuiScene;
 		std::shared_ptr<Rendering::Material> m_editorSkyboxMaterial;
+		Settings::EditorWindowSettings m_settings;
 
 	};
 
