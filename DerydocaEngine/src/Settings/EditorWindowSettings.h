@@ -27,15 +27,11 @@ namespace DerydocaEngine::Settings
 		void setSize(int2 size) { m_size = size; }
 		void setState(WindowState state) { m_state = state; }
 
-		template<class Archive>
-		void serialize(Archive& ar)
-		{
-			ar(
-				SERIALIZE(m_position),
-				SERIALIZE(m_size),
-				SERIALIZE(m_state)
-			);
-		}
+		SERIALIZE_FUNC(
+			SERIALIZE(m_position),
+			SERIALIZE(m_size),
+			SERIALIZE(m_state)
+		);
 	private:
 		int2 m_position;
 		int2 m_size;

@@ -24,16 +24,12 @@ namespace DerydocaEngine::Settings
 		std::string getEditorGuiSceneIdentifier() const { return m_editorGuiSceneIdentifier; }
 		std::string getEditorSkyboxMaterialIdentifier() const { return m_editorSkyboxMaterialIdentifier; }
 		
-		template<class Archive>
-		void serialize(Archive& ar)
-		{
-			ar(
-				SERIALIZE(m_engineResourceDirectory),
-				SERIALIZE(m_editorComponentsSceneIdentifier),
-				SERIALIZE(m_editorGuiSceneIdentifier),
-				SERIALIZE(m_editorSkyboxMaterialIdentifier)
-			);
-		}
+		SERIALIZE_FUNC(
+			SERIALIZE(m_engineResourceDirectory),
+			SERIALIZE(m_editorComponentsSceneIdentifier),
+			SERIALIZE(m_editorGuiSceneIdentifier),
+			SERIALIZE(m_editorSkyboxMaterialIdentifier)
+		);
 		static std::shared_ptr<EngineSettings> s_Instance;
 	private:
 
