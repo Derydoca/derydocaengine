@@ -326,7 +326,7 @@ project "DerydocaEngine.Editor.UI"
             "@echo Copying IMGUI default layout file",
             "xcopy /y /f \"%{wks.location}imgui.ini\" \"%{cfg.buildtarget.directory}\"",
             "@echo Processing the engine resource directory",
-            "\"%{cfg.buildtarget.abspath}\" -processDirectory \"%{wks.location}engineResources\"",
+            "\"%{prj.name}.exe\" -processDirectory \"%{wks.location}engineResources\"",
             "@echo Copying engine resources",
             "xcopy /y /d /e \"%{wks.location}engineResources\\*\" \"%{cfg.buildtarget.directory}engineResources\\\"",
         }
