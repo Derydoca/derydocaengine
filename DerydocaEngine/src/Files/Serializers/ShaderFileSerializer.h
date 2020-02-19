@@ -10,6 +10,7 @@ namespace DerydocaEngine::Files::Serializers {
 		~ShaderFileSerializer() {};
 
 		YAML::Node generateResourceNodes(std::string const& filePath);
+		virtual std::vector<std::shared_ptr<Resources::Resource>> generateResources(const std::string& assetPath);
 		Files::FileType getFileType();
 		std::shared_ptr<Resources::Resource> loadResourceFromMeta(YAML::Node const& resourceNode);
 		virtual void postLoadInitialize(std::shared_ptr<Resources::Resource> resource);

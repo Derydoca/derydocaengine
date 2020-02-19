@@ -14,6 +14,7 @@ namespace DerydocaEngine::Resources
 			setType(DerydocaEngine::Resources::FontResourceType);
 		}
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
 	};
 
 }

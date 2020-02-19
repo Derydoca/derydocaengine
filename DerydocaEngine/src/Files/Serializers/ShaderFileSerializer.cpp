@@ -21,6 +21,17 @@ namespace DerydocaEngine::Files::Serializers {
 		return resources;
 	}
 
+	std::vector<std::shared_ptr<Resources::Resource>> ShaderFileSerializer::generateResources(const std::string& assetPath)
+	{
+		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();
+
+		auto resource = std::make_shared<Resources::ShaderResource>();
+		resource->generateAndSetId();
+		resources.push_back(resource);
+
+		return resources;
+	}
+
 	Files::FileType ShaderFileSerializer::getFileType()
 	{
 		return Files::FileType::ShaderFileType;

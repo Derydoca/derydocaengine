@@ -32,6 +32,12 @@ namespace DerydocaEngine::Resources
 		const boost::uuids::uuid getSkeletonId() const { return m_skeletonId; }
 		bool hasSkeleton() const { return m_hasSkeleton; }
 
+		SERIALIZE_FUNC_BASE(
+			DerydocaEngine::Resources::Resource,
+			SERIALIZE(m_meshIndex),
+			SERIALIZE(m_meshName),
+		);
+
 	private:
 		bool m_hasSkeleton;
 		boost::uuids::uuid m_skeletonId;

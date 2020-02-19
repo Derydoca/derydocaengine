@@ -14,6 +14,8 @@ namespace DerydocaEngine::Resources
 			setType(DerydocaEngine::Resources::RasterFontResourceType);
 		}
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
+
 	};
 
 }

@@ -19,6 +19,7 @@ namespace DerydocaEngine::Resources
 		void setName(const std::string& name) { m_name = name; }
 		void setType(const ResourceType type) { m_type = type; }
 
+		void generateAndSetId();
 		std::string getMetaFilePath() const { return m_metaFilePath; }
 		std::string getName() const { return m_name; }
 		std::shared_ptr<void> getResourceObjectPointer();
@@ -26,6 +27,7 @@ namespace DerydocaEngine::Resources
 		ResourceType getType() const { return m_type; }
 		virtual unsigned long getTypeId() const = 0;
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Object);
 	protected:
 		Resource(const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
 		Resource(const boost::uuids::uuid& id, const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);

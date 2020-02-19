@@ -16,6 +16,15 @@ namespace DerydocaEngine::Files::Serializers {
 		return resources;
 	}
 
+	std::vector<std::shared_ptr<Resources::Resource>> SpriteSheetFileSerializer::generateResources(const std::string& assetPath)
+	{
+		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();
+		auto resource = std::make_shared<Resources::SpriteSheetResource>();
+		resource->generateAndSetId();
+		resources.push_back(resource);
+		return resources;
+	}
+
 	Files::FileType SpriteSheetFileSerializer::getFileType()
 	{
 		return Files::FileType::SpriteSheetFileType;

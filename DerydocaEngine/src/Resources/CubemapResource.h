@@ -19,6 +19,12 @@ namespace DerydocaEngine::Resources
 		void setSlot(unsigned int const& slot) { m_slot = slot; }
 
 		unsigned int getSlot() { return m_slot; }
+
+		SERIALIZE_FUNC_BASE(
+			DerydocaEngine::Resources::Resource,
+			SERIALIZE(m_slot)
+		);
+
 	private:
 		unsigned int m_slot;
 	};

@@ -14,6 +14,10 @@ namespace DerydocaEngine::Resources
 			setType(DerydocaEngine::Resources::MaterialResourceType);
 		}
 
+		SERIALIZE_FUNC_BASE(
+			DerydocaEngine::Resources::Resource
+		);
+
 	};
 
 }

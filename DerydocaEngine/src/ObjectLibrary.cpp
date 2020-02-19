@@ -84,7 +84,7 @@ namespace DerydocaEngine
 
 	std::shared_ptr<Resources::Resource> ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
 	{
-		std::string metaFilePath = sourceFilePath + m_metaExtension;
+		std::string metaFilePath = sourceFilePath + m_oldMetaExtension;
 
 		// Load the meta file
 		YAML::Node file = YAML::LoadFile(metaFilePath);
@@ -152,7 +152,7 @@ namespace DerydocaEngine
 			}
 			else
 			{
-				if (!endsWith(it->path().string(), m_metaExtension))
+				if (!endsWith(it->path().string(), m_oldMetaExtension))
 				{
 					updateMetaFiles(it->path().string());
 				}
@@ -163,7 +163,7 @@ namespace DerydocaEngine
 
 	void ObjectLibrary::updateMetaFiles(std::string const& sourceFilePath)
 	{
-		std::string metaFilePath = sourceFilePath + m_metaExtension;
+		std::string metaFilePath = sourceFilePath + m_oldMetaExtension;
 
 		// If the meta file does not exist
 		if (!fs::exists(metaFilePath))
@@ -188,7 +188,7 @@ namespace DerydocaEngine
 			}
 			else
 			{
-				if (!endsWith(it->path().string(), m_metaExtension))
+				if (!endsWith(it->path().string(), m_oldMetaExtension))
 				{
 					loadFile(it->path().string());
 				}
@@ -290,7 +290,7 @@ namespace DerydocaEngine
 
 	void ObjectLibrary::loadFile(const std::string& sourceFilePath)
 	{
-		std::string metaFilePath = sourceFilePath + m_metaExtension;
+		std::string metaFilePath = sourceFilePath + m_oldMetaExtension;
 
 		// If the meta file does not exist, skip loading this resource
 		if (!fs::exists(metaFilePath))

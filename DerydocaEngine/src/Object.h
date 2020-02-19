@@ -30,6 +30,10 @@ namespace DerydocaEngine
 
 		virtual unsigned long getTypeId() const = 0;
 
+		SERIALIZE_FUNC(
+			SERIALIZE(m_id)
+		);
+
 	protected:
 		boost::uuids::uuid m_id;
 

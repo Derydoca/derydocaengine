@@ -25,6 +25,9 @@ namespace DerydocaEngine::Resources
 		std::string getVertexShaderLocation() const { return m_sourceFilePath; }
 		std::string getFragmentShaderSource() const { return m_fragmentShaderSource; }
 		std::string getGeometryShaderSource() const { return m_geometryShaderSource; }
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
+
 	private:
 		std::string m_rawShaderName;
 		std::string m_fragmentShaderSource;

@@ -14,6 +14,8 @@ namespace DerydocaEngine::Resources
 			setType(DerydocaEngine::Resources::TextureResourceType);
 		}
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
+
 	};
 
 }

@@ -31,7 +31,8 @@ namespace DerydocaEngine
 		{
 			m_resources[resource->getId()] = resource;
 		}
-		std::string getMetaExtension() const { return m_metaExtension; }
+		std::string getOldMetaExtension() const { return m_oldMetaExtension; }
+		const std::string& getMetaExtension() const { return m_metaExtension; }
 		std::vector<std::shared_ptr<Resources::Resource>> getResourcesOfType(Resources::ResourceType resourceType);
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
@@ -95,7 +96,8 @@ namespace DerydocaEngine
 		std::shared_ptr<Resources::ResourceTreeNode> getResourceTreeNode(const std::string& resourcePath);
 		void loadResourceTree();
 
-		const std::string m_metaExtension = ".derymeta";
+		const std::string m_oldMetaExtension = ".derymeta";
+		const std::string m_metaExtension = ".dmeta";
 		std::map<boost::uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
 		std::shared_ptr<Resources::ResourceTreeNode> m_projectResourceRoot;
 	};
