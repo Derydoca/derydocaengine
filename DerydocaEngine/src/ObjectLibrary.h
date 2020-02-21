@@ -39,7 +39,9 @@ namespace DerydocaEngine
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
 		std::shared_ptr<Resources::Resource> getMetaFile(std::string const& sourceFilePath);
 		void updateMetaFilesDirectory(const boost::filesystem::path& padirectoryth);
+		void updateMetaFilesDirectoryNew(const boost::filesystem::path& directoryPath);
 		void updateMetaFiles(std::string const& file);
+		void updateMetaFilesNew(std::string const& file);
 		void loadDirectory(const boost::filesystem::path& path);
 		void loadFile(const std::string& sourceFilePath);
 
@@ -92,6 +94,7 @@ namespace DerydocaEngine
 		ObjectLibrary(ObjectLibrary const&) {}
 
 		bool createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath);
+		bool createMetaFileNew(std::string const& sourceFilePath, std::string const& metaFilePath);
 		void registerResource(std::shared_ptr<Resources::Resource> resource);
 		std::shared_ptr<Resources::ResourceTreeNode> getResourceTreeNode(const std::string& resourcePath);
 		void loadResourceTree();

@@ -14,6 +14,9 @@ namespace DerydocaEngine::Resources
 			setType(DerydocaEngine::Resources::BezierPatchMeshResourceType);
 		}
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
 	};
 
 }
+
+CEREAL_REGISTER_TYPE(DerydocaEngine::Resources::BezierPatchMeshResource);

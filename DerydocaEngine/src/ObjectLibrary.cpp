@@ -161,6 +161,26 @@ namespace DerydocaEngine
 		}
 	}
 
+	void ObjectLibrary::updateMetaFilesDirectoryNew(const boost::filesystem::path& directoryPath)
+	{
+		fs::directory_iterator it{ directoryPath };
+		while (it != fs::directory_iterator{})
+		{
+			if (is_directory(it->path()))
+			{
+				updateMetaFilesDirectoryNew(it->path().string());
+			}
+			else
+			{
+				if (!endsWith(it->path().string(), m_metaExtension))
+				{
+					updateMetaFilesNew(it->path().string());
+				}
+			}
+			it++;
+		}
+	}
+
 	void ObjectLibrary::updateMetaFiles(std::string const& sourceFilePath)
 	{
 		std::string metaFilePath = sourceFilePath + m_oldMetaExtension;
@@ -170,6 +190,22 @@ namespace DerydocaEngine
 		{
 			// Create the meta file
 			if (!createMetaFile(sourceFilePath, metaFilePath))
+			{
+				// If the meta file was not be created, skip this file
+				return;
+			}
+		}
+	}
+
+	void ObjectLibrary::updateMetaFilesNew(std::string const& sourceFilePath)
+	{
+		std::string metaFilePath = sourceFilePath + m_metaExtension;
+
+		// If the meta file does not exist
+		if (!fs::exists(metaFilePath))
+		{
+			// Create the meta file
+			if (!createMetaFileNew(sourceFilePath, metaFilePath))
 			{
 				// If the meta file was not be created, skip this file
 				return;
@@ -231,6 +267,37 @@ namespace DerydocaEngine
 		file.open(metaFilePath);
 		file << out.c_str();
 		file.close();
+
+		return true;
+	}
+
+	bool ObjectLibrary::createMetaFileNew(std::string const& assetPath, std::string const& metaFilePath)
+	{
+		Files::FileType fileType = Files::pathToFileType(assetPath);
+
+		// If this is a file type we are expected to ignore, lets ignore it
+		if (fileType == Files::FileType::IgnoredFileType)
+		{
+			return false;
+		}
+
+		// Find the serializer for this file type
+		auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(fileType);
+
+		// If the serializer was not found, abort and return false
+		if (serializer == nullptr)
+		{
+			D_LOG_ERROR("The file '{}' does not have a serializer associated with it.", assetPath);
+			return false;
+		}
+
+		auto resources = serializer->generateResources(assetPath);
+		
+		{
+			std::ofstream fs(metaFilePath);
+			cereal::JSONOutputArchive oarchive(fs);
+			oarchive(SERIALIZE(resources));
+		}
 
 		return true;
 	}

@@ -18,6 +18,12 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
+// Cereal
+#include <cereal\cereal.hpp>
+#include <cereal\types\polymorphic.hpp>
+#include <cereal\archives\json.hpp>
+#include <cereal\types\memory.hpp>
+
 // GLEW
 #include <GL/glew.h>
 
@@ -67,8 +73,8 @@
 #undef main
 
 // Derydoca Engine Classes
-#include "Logging/Log.h"
-#include "Helpers/Serialization.h"
+#include "Logging\Log.h"
+#include "Serialization\Serialization.h"
 
 // Maths
 #include "Math/int2.h"

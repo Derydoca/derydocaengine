@@ -11,6 +11,7 @@ namespace DerydocaEngine::Resources
 	{
 	public:
 		Resource();
+		virtual ~Resource() {}
 		Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type);
 
 		void setData(const std::shared_ptr<void> data) { m_resourceObjectPointer = data; };

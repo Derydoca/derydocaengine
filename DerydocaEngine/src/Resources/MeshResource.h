@@ -35,7 +35,7 @@ namespace DerydocaEngine::Resources
 		SERIALIZE_FUNC_BASE(
 			DerydocaEngine::Resources::Resource,
 			SERIALIZE(m_meshIndex),
-			SERIALIZE(m_meshName),
+			SERIALIZE(m_meshName)
 		);
 
 	private:
@@ -47,3 +47,5 @@ namespace DerydocaEngine::Resources
 	};
 
 }
+
+CEREAL_REGISTER_TYPE(DerydocaEngine::Resources::MeshResource);

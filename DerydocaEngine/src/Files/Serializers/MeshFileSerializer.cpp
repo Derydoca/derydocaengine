@@ -113,12 +113,12 @@ namespace DerydocaEngine::Files::Serializers {
 			auto resource = std::make_shared<Resources::MeshResource>();
 			resource->generateAndSetId();
 			// TODO: Set the hard-coded value Type to "Mesh"
-			resource->setMeshIndex(i);
+			resource->setMeshIndex(static_cast<const unsigned int>(i));
 			resource->setMeshName(mesh->mName.data);
 
 			if (mesh->HasBones())
 			{
-				std::shared_ptr<Animation::Skeleton> skeleton = Helpers::AssimpUtils::getSkeleton(scene, i);
+				std::shared_ptr<Animation::Skeleton> skeleton = Helpers::AssimpUtils::getSkeleton(scene, static_cast<unsigned int>(i));
 
 				if (skeletons.find(skeleton->getName()) == skeletons.end())
 				{

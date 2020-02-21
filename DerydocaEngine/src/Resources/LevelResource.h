@@ -15,7 +15,8 @@ namespace DerydocaEngine::Resources
 		}
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
-
 	};
 
 }
+
+CEREAL_REGISTER_TYPE(DerydocaEngine::Resources::LevelResource);

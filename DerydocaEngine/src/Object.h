@@ -26,17 +26,16 @@ namespace DerydocaEngine
 		{
 		}
 
+		virtual ~Object() {};
+
 		boost::uuids::uuid getId() const { return m_id; }
 
 		virtual unsigned long getTypeId() const = 0;
 
-		SERIALIZE_FUNC(
-			SERIALIZE(m_id)
-		);
+		SERIALIZE_FUNC(SERIALIZE(m_id));
 
 	protected:
 		boost::uuids::uuid m_id;
-
 	};
 
 }

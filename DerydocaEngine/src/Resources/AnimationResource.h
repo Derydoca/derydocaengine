@@ -25,3 +25,5 @@ namespace DerydocaEngine::Resources
 	};
 
 }
+
+CEREAL_REGISTER_TYPE(DerydocaEngine::Resources::AnimationResource);
