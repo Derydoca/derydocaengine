@@ -37,15 +37,6 @@ namespace DerydocaEngine::Files::Serializers {
 		return Files::FileType::ShaderFileType;
 	}
 
-	std::shared_ptr<Resources::Resource> ShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		auto resource = std::make_shared<Resources::ShaderResource>();
-
-		resource->setType(Resources::ShaderResourceType);
-
-		return resource;
-	}
-
 	void ShaderFileSerializer::postLoadInitialize(std::shared_ptr<Resources::Resource> resource)
 	{
 		auto shaderResource = std::static_pointer_cast<Resources::ShaderResource>(resource);

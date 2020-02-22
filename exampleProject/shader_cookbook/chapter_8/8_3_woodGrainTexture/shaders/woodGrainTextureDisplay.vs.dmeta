@@ -1,0 +1,20 @@
+{
+    "resources": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "DerydocaEngine::Resources::ShaderResource",
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "b56d2976-d291-4aaf-8b27-faf5d5471353"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

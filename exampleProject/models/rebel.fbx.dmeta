@@ -1,0 +1,200 @@
+{
+    "resources": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "DerydocaEngine::Resources::MeshResource",
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "168b6ee0-ffb0-48e5-b51f-a3046d7966bb"
+                            }
+                        }
+                    },
+                    "m_meshIndex": 0,
+                    "m_meshName": "Plane.000"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483650,
+            "polymorphic_name": "DerydocaEngine::Resources::SkeletonResource",
+            "ptr_wrapper": {
+                "id": 2147483650,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "228c9079-a947-4069-b3b4-64bcb4f9f542"
+                            }
+                        }
+                    },
+                    "m_name": ""
+                }
+            }
+        },
+        {
+            "polymorphic_id": 2147483651,
+            "polymorphic_name": "DerydocaEngine::Resources::AnimationResource",
+            "ptr_wrapper": {
+                "id": 2147483651,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "8b970b93-c87e-407d-b6d7-58f055cb4fe5"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|Action"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483652,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "f5769d25-2f1f-4692-bb6c-d51e328a712f"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|Action.001"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483653,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "18e215df-37f7-4375-b770-4a22eeab4673"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|CallingYouOut"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483654,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "41c97359-7fbf-4373-8ef2-6910ca430b9e"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|Crying"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483655,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "01331def-9afd-4206-bf4d-ae8f6adc3a12"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|IdleLookAround"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483656,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "ce224f18-1752-4f27-9213-baa53b760686"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|PoseLib"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483657,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "b95a214e-0eb4-4ad8-ab11-9801f72589f0"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|Rebel_Attack"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483658,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "6563837e-a607-466e-a0c8-d408ac9dcf48"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|Rebel_Idle"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483659,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "b8193141-0854-4012-9b42-be7118e4e892"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|Idle"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 3,
+            "ptr_wrapper": {
+                "id": 2147483660,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "e1f19e6a-cdfc-4540-b000-4ab466977011"
+                            }
+                        }
+                    },
+                    "m_name": "AnimStack::rig|Sitting_01"
+                }
+            }
+        }
+    ]
+}

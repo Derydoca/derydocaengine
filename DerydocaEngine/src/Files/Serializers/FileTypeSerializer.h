@@ -18,7 +18,6 @@ namespace DerydocaEngine::Files::Serializers {
 		virtual YAML::Node generateResourceNodes(std::string const& filePath) = 0;
 		virtual std::vector<std::shared_ptr<Resources::Resource>> generateResources(const std::string& assetPath) = 0;
 		virtual Files::FileType getFileType() = 0;
-		virtual std::shared_ptr<Resources::Resource> loadResourceFromMeta(YAML::Node const& resourceNode) = 0;
 		virtual void postLoadInitialize(std::shared_ptr<Resources::Resource> resource) {}
 
 		friend boost::uuids::uuid generateUuid();

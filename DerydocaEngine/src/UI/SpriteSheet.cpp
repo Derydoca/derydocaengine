@@ -75,51 +75,52 @@ namespace DerydocaEngine::UI
 
 	void SpriteSheet::saveToDisk(std::string const& filePath)
 	{
-		// Save the image to disk and process it by the object library
-		std::string imageFileName = filePath + ".tga";
-		stbi_write_tga(imageFileName.c_str(), m_texture->getWidth(), m_texture->getHeight(), 4, m_imageBuffer);
-		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
-		auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
+		//TODO: Replace YAML
+		//// Save the image to disk and process it by the object library
+		//std::string imageFileName = filePath + ".tga";
+		//stbi_write_tga(imageFileName.c_str(), m_texture->getWidth(), m_texture->getHeight(), 4, m_imageBuffer);
+		//ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
+		//auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
 
-		// Create the root and add all root level data
-		YAML::Node root = YAML::Node();
-		YAML::Node spriteSheetNode = root["SpriteSheet"];
-		spriteSheetNode["Texture"] = boost::lexical_cast<std::string>(imageResource->getId());
+		//// Create the root and add all root level data
+		//YAML::Node root = YAML::Node();
+		//YAML::Node spriteSheetNode = root["SpriteSheet"];
+		//spriteSheetNode["Texture"] = boost::lexical_cast<std::string>(imageResource->getId());
 
-		// Add all sprite data to a parent "Sprites" node
-		YAML::Node spritesNode = spriteSheetNode["Sprites"];
-		for (auto sprite : m_sprites)
-		{
-			// Create the sprite node
-			YAML::Node spriteNode;
-			Rect tex = sprite.second.getTexPosition();
-			spriteNode["Id"] = sprite.second.getId();
-			spriteNode["Texture"] = sprite.second.getTextureId();
-			spriteNode["Width"] = sprite.second.getWidth();
-			spriteNode["Height"] = sprite.second.getHeight();
-			spriteNode["TexX"] = tex.getX();
-			spriteNode["TexY"] = tex.getY();
-			spriteNode["TexDX"] = tex.getDX();
-			spriteNode["TexDY"] = tex.getDY();
-			spriteNode["Type"] = (int)sprite.second.getType();
-			spriteNode["SliceTop"] = sprite.second.getSliceTop();
-			spriteNode["SliceRight"] = sprite.second.getSliceRight();
-			spriteNode["SliceBottom"] = sprite.second.getSliceBottom();
-			spriteNode["SliceLeft"] = sprite.second.getSliceLeft();
+		//// Add all sprite data to a parent "Sprites" node
+		//YAML::Node spritesNode = spriteSheetNode["Sprites"];
+		//for (auto sprite : m_sprites)
+		//{
+		//	// Create the sprite node
+		//	YAML::Node spriteNode;
+		//	Rect tex = sprite.second.getTexPosition();
+		//	spriteNode["Id"] = sprite.second.getId();
+		//	spriteNode["Texture"] = sprite.second.getTextureId();
+		//	spriteNode["Width"] = sprite.second.getWidth();
+		//	spriteNode["Height"] = sprite.second.getHeight();
+		//	spriteNode["TexX"] = tex.getX();
+		//	spriteNode["TexY"] = tex.getY();
+		//	spriteNode["TexDX"] = tex.getDX();
+		//	spriteNode["TexDY"] = tex.getDY();
+		//	spriteNode["Type"] = (int)sprite.second.getType();
+		//	spriteNode["SliceTop"] = sprite.second.getSliceTop();
+		//	spriteNode["SliceRight"] = sprite.second.getSliceRight();
+		//	spriteNode["SliceBottom"] = sprite.second.getSliceBottom();
+		//	spriteNode["SliceLeft"] = sprite.second.getSliceLeft();
 
-			// Add this sprite to the parent node
-			spritesNode.push_back(spriteNode);
-		}
+		//	// Add this sprite to the parent node
+		//	spritesNode.push_back(spriteNode);
+		//}
 
-		// Write this to disk
-		YAML::Emitter out;
-		out.SetIndent(2);
-		out.SetMapFormat(YAML::Block);
-		out << root;
-		std::ofstream file;
-		file.open(filePath);
-		file << out.c_str();
-		file.close();
+		//// Write this to disk
+		//YAML::Emitter out;
+		//out.SetIndent(2);
+		//out.SetMapFormat(YAML::Block);
+		//out << root;
+		//std::ofstream file;
+		//file.open(filePath);
+		//file << out.c_str();
+		//file.close();
 	}
 
 	void SpriteSheet::LoadFromDisk(std::string const& filePath)

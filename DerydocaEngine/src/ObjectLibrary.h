@@ -2,8 +2,8 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <boost/uuid/string_generator.hpp>
-#include <boost/uuid/uuid.hpp>
+#include <boost\uuid\string_generator.hpp>
+#include <boost\uuid\uuid.hpp>
 #include "Resources\Resource.h"
 #include "Resources\ResourceTreeNode.h"
 #include "Resources\ResourceType.h"
@@ -31,17 +31,13 @@ namespace DerydocaEngine
 		{
 			m_resources[resource->getId()] = resource;
 		}
-		std::string getOldMetaExtension() const { return m_oldMetaExtension; }
 		const std::string& getMetaExtension() const { return m_metaExtension; }
 		std::vector<std::shared_ptr<Resources::Resource>> getResourcesOfType(Resources::ResourceType resourceType);
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
-		std::shared_ptr<Resources::Resource> getMetaFile(std::string const& sourceFilePath);
-		void updateMetaFilesDirectory(const boost::filesystem::path& padirectoryth);
-		void updateMetaFilesDirectoryNew(const boost::filesystem::path& directoryPath);
+		void updateMetaFilesDirectory(const boost::filesystem::path& directoryPath);
 		void updateMetaFiles(std::string const& file);
-		void updateMetaFilesNew(std::string const& file);
 		void loadDirectory(const boost::filesystem::path& path);
 		void loadFile(const std::string& sourceFilePath);
 
@@ -94,12 +90,10 @@ namespace DerydocaEngine
 		ObjectLibrary(ObjectLibrary const&) {}
 
 		bool createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath);
-		bool createMetaFileNew(std::string const& sourceFilePath, std::string const& metaFilePath);
 		void registerResource(std::shared_ptr<Resources::Resource> resource);
 		std::shared_ptr<Resources::ResourceTreeNode> getResourceTreeNode(const std::string& resourcePath);
 		void loadResourceTree();
 
-		const std::string m_oldMetaExtension = ".derymeta";
 		const std::string m_metaExtension = ".dmeta";
 		std::map<boost::uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
 		std::shared_ptr<Resources::ResourceTreeNode> m_projectResourceRoot;

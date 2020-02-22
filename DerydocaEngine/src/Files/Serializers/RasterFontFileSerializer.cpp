@@ -30,10 +30,4 @@ namespace DerydocaEngine::Files::Serializers {
 		return Files::FileType::RasterFontType;
 	}
 
-	std::shared_ptr<Resources::Resource> RasterFontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		auto r = std::make_shared<Resources::RasterFontResource>();
-		return r;
-	}
-
 }

@@ -1,0 +1,20 @@
+{
+    "resources": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "DerydocaEngine::Resources::LevelResource",
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "ee2952e8-a357-4806-84c2-198fa86ca7f1"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

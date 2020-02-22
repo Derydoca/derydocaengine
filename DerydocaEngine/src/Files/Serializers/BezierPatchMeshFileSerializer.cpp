@@ -30,10 +30,4 @@ namespace DerydocaEngine::Files::Serializers {
 		return Files::FileType::BezierPatchMeshType;
 	}
 
-	std::shared_ptr<Resources::Resource> BezierPatchMeshFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		auto r = std::make_shared<Resources::BezierPatchMeshResource>();
-		return r;
-	}
-
 }

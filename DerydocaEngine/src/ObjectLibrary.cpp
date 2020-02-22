@@ -6,8 +6,6 @@
 #include <boost\uuid\uuid_generators.hpp>
 #include "Files\Serializers\FileSerializerLibrary.h"
 #include "Helpers\StringUtils.h"
-#include "yaml-cpp\yaml.h"
-#include "Helpers\YamlTools.h"
 #include "Files\FileType.h"
 
 namespace DerydocaEngine
@@ -82,68 +80,9 @@ namespace DerydocaEngine
 		return matchingResources;
 	}
 
-	std::shared_ptr<Resources::Resource> ObjectLibrary::getMetaFile(std::string const& sourceFilePath)
+	void ObjectLibrary::updateMetaFilesDirectory(const boost::filesystem::path& directoryPath)
 	{
-		std::string metaFilePath = sourceFilePath + m_oldMetaExtension;
-
-		// Load the meta file
-		YAML::Node file = YAML::LoadFile(metaFilePath);
-		YAML::Node resourcesNode = file["Resources"];
-		if (!resourcesNode)
-		{
-			D_LOG_ERROR("The meta file '{}' does not have a resource node assigned it it. This file could not be parsed!", metaFilePath);
-			return nullptr;
-		}
-
-		// Go through all the resource nodes in the file
-		for (size_t i = 0; i < resourcesNode.size(); i++)
-		{
-			YAML::Node resourceNode = resourcesNode[i];
-
-			// If no ID node is defined, exit out because it is required
-			if (!resourceNode["ID"])
-			{
-				D_LOG_WARN("A node was skipped because it was missing an ID parameter.");
-				continue;
-			}
-
-			// Get the ID
-			boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
-
-			// Find the serializer related to this source file object
-			auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
-
-			// If the serializer could not be found, continue onto the next resource
-			if (serializer == nullptr)
-			{
-				D_LOG_ERROR("The file '{}' does not have a parser assigned to the extension. This file could not be parsed!", sourceFilePath);
-				continue;
-			}
-
-			// Load the resource object
-			std::shared_ptr<Resources::Resource> resource = serializer->loadResourceFromMeta(resourceNode);
-
-			// If no resource could be parsed from the node, continue on
-			if (resource == nullptr)
-			{
-				D_LOG_ERROR("Unable to convert node {} to resource. This resource could not be parsed!", i);
-				continue;
-			}
-
-			// Set the common parameters of the resource object
-			resource->setFilePaths(sourceFilePath, metaFilePath);
-			resource->setId(resourceUuid);
-			serializer->postLoadInitialize(resource);
-
-			return resource;
-		}
-
-		return nullptr;
-	}
-
-	void ObjectLibrary::updateMetaFilesDirectory(const boost::filesystem::path& directory)
-	{
-		fs::directory_iterator it{ directory };
+		fs::directory_iterator it{ directoryPath };
 		while (it != fs::directory_iterator{})
 		{
 			if (is_directory(it->path()))
@@ -152,7 +91,7 @@ namespace DerydocaEngine
 			}
 			else
 			{
-				if (!endsWith(it->path().string(), m_oldMetaExtension))
+				if (!endsWith(it->path().string(), m_metaExtension))
 				{
 					updateMetaFiles(it->path().string());
 				}
@@ -161,43 +100,7 @@ namespace DerydocaEngine
 		}
 	}
 
-	void ObjectLibrary::updateMetaFilesDirectoryNew(const boost::filesystem::path& directoryPath)
-	{
-		fs::directory_iterator it{ directoryPath };
-		while (it != fs::directory_iterator{})
-		{
-			if (is_directory(it->path()))
-			{
-				updateMetaFilesDirectoryNew(it->path().string());
-			}
-			else
-			{
-				if (!endsWith(it->path().string(), m_metaExtension))
-				{
-					updateMetaFilesNew(it->path().string());
-				}
-			}
-			it++;
-		}
-	}
-
 	void ObjectLibrary::updateMetaFiles(std::string const& sourceFilePath)
-	{
-		std::string metaFilePath = sourceFilePath + m_oldMetaExtension;
-
-		// If the meta file does not exist
-		if (!fs::exists(metaFilePath))
-		{
-			// Create the meta file
-			if (!createMetaFile(sourceFilePath, metaFilePath))
-			{
-				// If the meta file was not be created, skip this file
-				return;
-			}
-		}
-	}
-
-	void ObjectLibrary::updateMetaFilesNew(std::string const& sourceFilePath)
 	{
 		std::string metaFilePath = sourceFilePath + m_metaExtension;
 
@@ -205,7 +108,7 @@ namespace DerydocaEngine
 		if (!fs::exists(metaFilePath))
 		{
 			// Create the meta file
-			if (!createMetaFileNew(sourceFilePath, metaFilePath))
+			if (!createMetaFile(sourceFilePath, metaFilePath))
 			{
 				// If the meta file was not be created, skip this file
 				return;
@@ -224,7 +127,7 @@ namespace DerydocaEngine
 			}
 			else
 			{
-				if (!endsWith(it->path().string(), m_oldMetaExtension))
+				if (!endsWith(it->path().string(), m_metaExtension))
 				{
 					loadFile(it->path().string());
 				}
@@ -233,45 +136,7 @@ namespace DerydocaEngine
 		}
 	}
 
-	bool ObjectLibrary::createMetaFile(std::string const& sourceFilePath, std::string const& metaFilePath)
-	{
-		Files::FileType fileType = Files::pathToFileType(sourceFilePath);
-
-		// If this is a file type we are expected to ignore, lets ignore it
-		if (fileType == Files::FileType::IgnoredFileType)
-		{
-			return false;
-		}
-
-		// Find the serializer for this file type
-		auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(fileType);
-
-		// If the serializer was not found, abort and return false
-		if (serializer == nullptr)
-		{
-			D_LOG_ERROR("The file '{}' does not have a serializer associated with it.", sourceFilePath);
-			return false;
-		}
-
-		// Create the yaml structure
-		YAML::Node root;
-		YAML::Node resources = serializer->generateResourceNodes(sourceFilePath);
-		root["Resources"] = resources;
-
-		// Create the file emitter and save it to disk
-		YAML::Emitter out;
-		out.SetIndent(2);
-		out.SetMapFormat(YAML::Block);
-		out << root;
-		std::ofstream file;
-		file.open(metaFilePath);
-		file << out.c_str();
-		file.close();
-
-		return true;
-	}
-
-	bool ObjectLibrary::createMetaFileNew(std::string const& assetPath, std::string const& metaFilePath)
+	bool ObjectLibrary::createMetaFile(std::string const& assetPath, std::string const& metaFilePath)
 	{
 		Files::FileType fileType = Files::pathToFileType(assetPath);
 
@@ -357,7 +222,7 @@ namespace DerydocaEngine
 
 	void ObjectLibrary::loadFile(const std::string& sourceFilePath)
 	{
-		std::string metaFilePath = sourceFilePath + m_oldMetaExtension;
+		std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 		// If the meta file does not exist, skip loading this resource
 		if (!fs::exists(metaFilePath))
@@ -366,27 +231,17 @@ namespace DerydocaEngine
 		}
 
 		// Load the meta file
-		YAML::Node file = YAML::LoadFile(metaFilePath);
-		YAML::Node resourcesNode = file["Resources"];
-		if (!resourcesNode)
+		std::vector<std::shared_ptr<Resources::Resource>> resources;
 		{
-			D_LOG_ERROR("The meta file '{}' does not have a resource node assigned it it. This file could not be parsed!", metaFilePath);
+			std::ifstream fs(metaFilePath);
+			cereal::JSONInputArchive iarchive(fs);
+			iarchive(resources);
 		}
 
 		// Go through all the resource nodes in the file
-		for (size_t i = 0; i < resourcesNode.size(); i++)
+		for (size_t i = 0; i < resources.size(); i++)
 		{
-			YAML::Node resourceNode = resourcesNode[i];
-
-			// If no ID node is defined, exit out because it is required
-			if (!resourceNode["ID"])
-			{
-				D_LOG_WARN("A node was skipped because it was missing an ID parameter.");
-				continue;
-			}
-
-			// Get the ID
-			boost::uuids::uuid resourceUuid = resourceNode["ID"].as<boost::uuids::uuid>();
+			auto resource = resources[i];
 
 			// Find the serializer related to this source file object
 			auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
@@ -398,19 +253,8 @@ namespace DerydocaEngine
 				continue;
 			}
 
-			// Load the resource object
-			std::shared_ptr<Resources::Resource> resource = serializer->loadResourceFromMeta(resourceNode);
-
-			// If no resource could be parsed from the node, continue on
-			if (resource == nullptr)
-			{
-				D_LOG_ERROR("Unable to convert node {} to resource. This resource could not be parsed!", i);
-				continue;
-			}
-
 			// Set the common parameters of the resource object
 			resource->setFilePaths(sourceFilePath, metaFilePath);
-			resource->setId(resourceUuid);
 			serializer->postLoadInitialize(resource);
 
 			// Register the resource so it can be referenced later

@@ -154,64 +154,6 @@ namespace DerydocaEngine::Files::Serializers {
 		return resources;
 	}
 
-	std::shared_ptr<Resources::Resource> MeshSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		// If the type field is missing, then it cannot be loaded
-		if (!resourceNode["Type"])
-		{
-			D_LOG_ERROR("The node with ID of {} could not be loaded because it did not have a type field defined to it.", resourceNode["id"].as<std::string>());
-			return nullptr;
-		}
-
-		// Read the type of the resource
-		std::string type = resourceNode["Type"].as<std::string>();
-
-		// Deserialize to a specific resource type based on the type name
-		if (type == "Mesh")
-		{
-			// If it is a mesh, make a mesh resource
-			auto meshResource = std::make_shared<Resources::MeshResource>();
-			meshResource->setMeshIndex(resourceNode["Index"].as<unsigned int>());
-			meshResource->setMeshName(resourceNode["Name"].as<std::string>());
-			YAML::Node skeletonNode = resourceNode["Skeleton"];
-			if (skeletonNode)
-			{
-				meshResource->setSkeletonId(skeletonNode.as<boost::uuids::uuid>());
-			}
-			meshResource->setType(Resources::MeshResourceType);
-
-			YAML::Node flagsNode = resourceNode["Flags"];
-			if (flagsNode && flagsNode.IsSequence())
-			{
-				for (size_t i = 0; i < flagsNode.size(); i++)
-				{
-					meshResource->setFlag(stringToFlag(flagsNode[0].as<std::string>()));
-				}
-			}
-
-			return meshResource;
-		}
-		else if (type == "Skeleton")
-		{
-			auto skeletonResource = std::make_shared<Resources::SkeletonResource>();
-			skeletonResource->setName(resourceNode["Name"].as<std::string>());
-			skeletonResource->setType(Resources::SkeletonResourceType);
-
-			return skeletonResource;
-		}
-		else if (type == "Animation")
-		{
-			auto animationResource = std::make_shared<Resources::AnimationResource>();
-			animationResource->setName(resourceNode["Name"].as<std::string>());
-			animationResource->setType(Resources::AnimationResourceType);
-
-			return animationResource;
-		}
-
-		// If we are here, then the type was not defined and we have no way to convert it into a resource type
-		return nullptr;
-	}
-
 	bool MeshSerializer::findMeshResourceNode(YAML::Node const& root, unsigned int const& index, aiString const& name, YAML::Node & resourceNode)
 	{
 		for (unsigned int i = 0; i < root.size(); i++)

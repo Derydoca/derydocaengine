@@ -30,10 +30,4 @@ namespace DerydocaEngine::Files::Serializers {
 		return Files::FileType::FontType;
 	}
 
-	std::shared_ptr<Resources::Resource> FontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		auto r = std::make_shared<Resources::FontResource>();
-		return r;
-	}
-
 }

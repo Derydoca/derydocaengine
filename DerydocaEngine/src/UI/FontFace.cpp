@@ -197,53 +197,54 @@ namespace DerydocaEngine::UI
 
 	void FontFace::saveToSerializedFile(std::string const& filePath)
 	{
-		YAML::Node root = YAML::Node();
+		//TODO: Replace YAML
+		//YAML::Node root = YAML::Node();
 
-		YAML::Node font = root["Font"];
+		//YAML::Node font = root["Font"];
 
-		// Save the general font data
-		font["name"] = m_name;
-		font["style"] = m_style;
-		font["fontSize"] = m_fontSize;
-		font["width"] = m_imageBufferSize.x;
-		font["height"] = m_imageBufferSize.y;
-		font["lineHeight"] = m_lineHeight;
-		std::string imageFileName = filePath + ".bmp";
-		stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
-		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
-		auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
-		font["image"] = boost::lexical_cast<std::string>(imageResource->getId());
+		//// Save the general font data
+		//font["name"] = m_name;
+		//font["style"] = m_style;
+		//font["fontSize"] = m_fontSize;
+		//font["width"] = m_imageBufferSize.x;
+		//font["height"] = m_imageBufferSize.y;
+		//font["lineHeight"] = m_lineHeight;
+		//std::string imageFileName = filePath + ".bmp";
+		//stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
+		//ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
+		//auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
+		//font["image"] = boost::lexical_cast<std::string>(imageResource->getId());
 
-		// Save the character information
-		YAML::Node charactersNode = font["characters"];
-		for (auto charImage : m_charImages)
-		{
-			YAML::Node charNode;
-			charNode["id"] = charImage.second.getID();
-			charNode["width"] = charImage.second.getWidth();
-			charNode["height"] = charImage.second.getHeight();
-			charNode["sizeX"] = charImage.second.getSizeX();
-			charNode["sizeY"] = charImage.second.getSizeY();
-			charNode["advanceX"] = charImage.second.getAdvanceX();
-			charNode["advanceY"] = charImage.second.getAdvanceY();
-			charNode["bearingX"] = charImage.second.getBearingX();
-			charNode["bearingY"] = charImage.second.getBearingY();
-			Rect texPos = charImage.second.getTexSheetPosition();
-			charNode["texX"] = texPos.getX();
-			charNode["texY"] = texPos.getY();
-			charNode["texDX"] = texPos.getDX();
-			charNode["texDY"] = texPos.getDY();
-			charactersNode.push_back(charNode);
-		}
+		//// Save the character information
+		//YAML::Node charactersNode = font["characters"];
+		//for (auto charImage : m_charImages)
+		//{
+		//	YAML::Node charNode;
+		//	charNode["id"] = charImage.second.getID();
+		//	charNode["width"] = charImage.second.getWidth();
+		//	charNode["height"] = charImage.second.getHeight();
+		//	charNode["sizeX"] = charImage.second.getSizeX();
+		//	charNode["sizeY"] = charImage.second.getSizeY();
+		//	charNode["advanceX"] = charImage.second.getAdvanceX();
+		//	charNode["advanceY"] = charImage.second.getAdvanceY();
+		//	charNode["bearingX"] = charImage.second.getBearingX();
+		//	charNode["bearingY"] = charImage.second.getBearingY();
+		//	Rect texPos = charImage.second.getTexSheetPosition();
+		//	charNode["texX"] = texPos.getX();
+		//	charNode["texY"] = texPos.getY();
+		//	charNode["texDX"] = texPos.getDX();
+		//	charNode["texDY"] = texPos.getDY();
+		//	charactersNode.push_back(charNode);
+		//}
 
-		YAML::Emitter out;
-		out.SetIndent(2);
-		out.SetMapFormat(YAML::Block);
-		out << root;
-		std::ofstream file;
-		file.open(filePath);
-		file << out.c_str();
-		file.close();
+		//YAML::Emitter out;
+		//out.SetIndent(2);
+		//out.SetMapFormat(YAML::Block);
+		//out << root;
+		//std::ofstream file;
+		//file.open(filePath);
+		//file << out.c_str();
+		//file.close();
 	}
 
 }

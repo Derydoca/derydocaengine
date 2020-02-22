@@ -1,0 +1,39 @@
+{
+    "resources": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "DerydocaEngine::Resources::MeshResource",
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "73db3b2c-2653-4c9d-a8be-97f01aaa1c10"
+                            }
+                        }
+                    },
+                    "m_meshIndex": 0,
+                    "m_meshName": "Mesh"
+                }
+            }
+        },
+        {
+            "polymorphic_id": 1,
+            "ptr_wrapper": {
+                "id": 2147483650,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_id": {
+                                "value0": "6345ba67-3c4c-4d9c-99fe-7ed0b925ed46"
+                            }
+                        }
+                    },
+                    "m_meshIndex": 1,
+                    "m_meshName": "Mesh.001"
+                }
+            }
+        }
+    ]
+}
