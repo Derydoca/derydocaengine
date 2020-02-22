@@ -8,9 +8,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "bba06979-6314-4773-a94e-978fa231d742"
-                            }
+                            "m_id": "c02f3b3b-4df5-4dc8-9d3e-2d700f89c07f"
                         }
                     },
                     "m_meshIndex": 0,
@@ -26,9 +24,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "8a863817-e569-4959-9fcf-fe539e3e1b35"
-                            }
+                            "m_id": "8f9b08b9-40a1-4615-8c0e-7eb0799aaaad"
                         }
                     },
                     "m_name": ""
@@ -43,9 +39,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "9ac6a0f4-956e-47ff-8420-4a87e4f04d71"
-                            }
+                            "m_id": "d0b0739f-34bb-484d-80e2-7bdac1041cb2"
                         }
                     },
                     "m_name": "AnimStack::MeshArmature|Action"

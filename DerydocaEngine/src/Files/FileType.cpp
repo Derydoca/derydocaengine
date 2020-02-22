@@ -48,6 +48,11 @@ namespace DerydocaEngine::Files
 		{
 			return SpriteSheetFileType;
 		}
+		else if (extension == "derymeta")
+		{
+			D_LOG_INFO("Ignoring legacy meta file format: {}", str);
+			return IgnoredFileType;
+		}
 		else
 		{
 			return UnknownFileType;

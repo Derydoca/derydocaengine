@@ -8,9 +8,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "fa874d4f-ac62-43b5-8665-66eff9f4ac58"
-                            }
+                            "m_id": "c9b0887c-af2e-4b45-93f5-b51d8e239cbb"
                         }
                     }
                 }

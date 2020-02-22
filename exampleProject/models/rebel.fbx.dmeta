@@ -8,9 +8,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "168b6ee0-ffb0-48e5-b51f-a3046d7966bb"
-                            }
+                            "m_id": "1897c1c8-b06d-47a3-a36a-24460d2454fe"
                         }
                     },
                     "m_meshIndex": 0,
@@ -26,9 +24,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "228c9079-a947-4069-b3b4-64bcb4f9f542"
-                            }
+                            "m_id": "32c138d6-e618-44fb-87a8-d46e06a00566"
                         }
                     },
                     "m_name": ""
@@ -43,9 +39,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "8b970b93-c87e-407d-b6d7-58f055cb4fe5"
-                            }
+                            "m_id": "eea864e5-334a-40dc-90e7-fbc96e72c507"
                         }
                     },
                     "m_name": "AnimStack::rig|Action"
@@ -59,9 +53,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "f5769d25-2f1f-4692-bb6c-d51e328a712f"
-                            }
+                            "m_id": "3bf9cf1e-bc2b-4183-9eac-6a814f50796a"
                         }
                     },
                     "m_name": "AnimStack::rig|Action.001"
@@ -75,9 +67,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "18e215df-37f7-4375-b770-4a22eeab4673"
-                            }
+                            "m_id": "70875a90-26f0-4a24-b61f-c062f86f02be"
                         }
                     },
                     "m_name": "AnimStack::rig|CallingYouOut"
@@ -91,9 +81,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "41c97359-7fbf-4373-8ef2-6910ca430b9e"
-                            }
+                            "m_id": "3b18485f-10a8-42b1-905d-b8c440892ed2"
                         }
                     },
                     "m_name": "AnimStack::rig|Crying"
@@ -107,9 +95,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "01331def-9afd-4206-bf4d-ae8f6adc3a12"
-                            }
+                            "m_id": "0966c200-d58a-4b35-ae0e-4c8af5b2f6bf"
                         }
                     },
                     "m_name": "AnimStack::rig|IdleLookAround"
@@ -123,9 +109,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "ce224f18-1752-4f27-9213-baa53b760686"
-                            }
+                            "m_id": "72a51c54-7f47-402d-b002-7ff531230124"
                         }
                     },
                     "m_name": "AnimStack::rig|PoseLib"
@@ -139,9 +123,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "b95a214e-0eb4-4ad8-ab11-9801f72589f0"
-                            }
+                            "m_id": "d80412f2-8d82-496b-abe7-fcba5b11d499"
                         }
                     },
                     "m_name": "AnimStack::rig|Rebel_Attack"
@@ -155,9 +137,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "6563837e-a607-466e-a0c8-d408ac9dcf48"
-                            }
+                            "m_id": "7473bab1-693e-43fd-8144-1dfa168501ad"
                         }
                     },
                     "m_name": "AnimStack::rig|Rebel_Idle"
@@ -171,9 +151,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "b8193141-0854-4012-9b42-be7118e4e892"
-                            }
+                            "m_id": "12ea6559-2799-4470-9ca2-5d88709e1e1f"
                         }
                     },
                     "m_name": "AnimStack::rig|Idle"
@@ -187,9 +165,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": {
-                                "value0": "e1f19e6a-cdfc-4540-b000-4ab466977011"
-                            }
+                            "m_id": "049ea7d9-2edd-4a3a-936a-435c8860a16d"
                         }
                     },
                     "m_name": "AnimStack::rig|Sitting_01"
