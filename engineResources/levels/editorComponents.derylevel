@@ -11,17 +11,17 @@ Scene:
   #     Components:
   #       - Type: ScreenshotUtil
 
-  - Type: GameObject
-    ID: faf88776-f81e-4d4f-8280-d23f5971a922
-    Properties:
-      Name: __xzPlaneGrid
-      Transform:
-        Position: [0, 0, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: f31bfa36-a1fe-44fd-8cee-0ee83f3ce69a
-            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
-            Transparent: true
+  # - Type: GameObject
+  #   ID: faf88776-f81e-4d4f-8280-d23f5971a922
+  #   Properties:
+  #     Name: __xzPlaneGrid
+  #     Transform:
+  #       Position: [0, 0, 0]
+  #       Rotation: [0, 0, 0, 1]
+  #       Scale: [1, 1, 1]
+  #     Components:
+  #       - Type: MeshRenderer
+  #         Properties:
+  #           Material: f31bfa36-a1fe-44fd-8cee-0ee83f3ce69a
+  #           Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
+  #           Transparent: true
