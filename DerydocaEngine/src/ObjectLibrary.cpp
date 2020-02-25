@@ -233,9 +233,20 @@ namespace DerydocaEngine
 		// Load the meta file
 		std::vector<std::shared_ptr<Resources::Resource>> resources;
 		{
-			std::ifstream fs(metaFilePath);
-			cereal::JSONInputArchive iarchive(fs);
-			iarchive(resources);
+			try
+			{
+				std::ifstream fs(metaFilePath);
+				cereal::JSONInputArchive iarchive(fs);
+				iarchive(resources);
+			}
+			catch (const std::exception & ex)
+			{
+				D_LOG_ERROR("An error occurred while attempting to load this meta file: {}\n{}", metaFilePath, ex.what());
+			}
+			catch (...)
+			{
+				D_LOG_ERROR("An unknown error occurred while attempting to load this meta file: {}", metaFilePath);
+			}
 		}
 
 		// Go through all the resource nodes in the file
