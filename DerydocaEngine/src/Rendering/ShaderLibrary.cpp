@@ -34,7 +34,7 @@ namespace DerydocaEngine::Rendering
 
 		// Convert the resource object to a shader resource object
 		std::shared_ptr<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
-		if (shaderResource == nullptr)
+		if (!shaderResource)
 		{
 			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", boost::uuids::to_string(shaderId));
 			return nullptr;

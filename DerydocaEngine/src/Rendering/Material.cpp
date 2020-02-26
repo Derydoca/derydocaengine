@@ -32,7 +32,19 @@ namespace DerydocaEngine::Rendering
 
 	void Material::setShader(std::shared_ptr<Shader> shader)
 	{
-		m_shader = shader->isValid() ? shader : Rendering::ShaderLibrary::getInstance().getErrorShader();
+		if (!shader)
+		{
+			D_LOG_ERROR("Unable to set a shader because the shader reference is null.");
+			m_shader = Rendering::ShaderLibrary::getInstance().getErrorShader();
+			return;
+		}
+		else if (!shader->isValid())
+		{
+			D_LOG_ERROR("Unable to set a shader because it is invalid.\nVert:{}\nFrag:{}", shader->GetVertexShaderPath(), shader->GetFragmentShaderPath());
+			m_shader = Rendering::ShaderLibrary::getInstance().getErrorShader();
+			return;
+		}
+		m_shader = shader;
 	}
 
 	void Material::bind() const
