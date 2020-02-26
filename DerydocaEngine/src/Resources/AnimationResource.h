@@ -10,6 +10,7 @@ namespace DerydocaEngine::Resources
 		REGISTER_TYPE_ID(AnimationResource);
 
 		AnimationResource() :
+			Resource(ResourceType::AnimationResourceType),
 			m_name()
 		{}
 

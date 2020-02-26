@@ -9,10 +9,9 @@ namespace DerydocaEngine::Resources
 	public:
 		REGISTER_TYPE_ID(MaterialResource);
 
-		MaterialResource()
-		{
-			setType(DerydocaEngine::Resources::MaterialResourceType);
-		}
+		MaterialResource() :
+			Resource(ResourceType::MaterialResourceType)
+		{}
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
 

@@ -13,6 +13,11 @@ namespace DerydocaEngine::Resources
 
 	}
 
+	Resource::Resource(ResourceType type) :
+		Resource("", type, "", "")
+	{
+	}
+
 	Resource::Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
 		Resource(id, "", type, sourceFilePath, metaFilePath)
 	{

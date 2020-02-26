@@ -11,6 +11,7 @@ namespace DerydocaEngine::Resources
 		REGISTER_TYPE_ID(ShaderResource);
 
 		ShaderResource() :
+			Resource(ResourceType::ShaderResourceType),
 			m_rawShaderName(),
 			m_fragmentShaderSource(),
 			m_geometryShaderSource()

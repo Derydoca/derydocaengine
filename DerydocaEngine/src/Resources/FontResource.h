@@ -9,10 +9,9 @@ namespace DerydocaEngine::Resources
 	public:
 		REGISTER_TYPE_ID(FontResource);
 
-		FontResource()
-		{
-			setType(DerydocaEngine::Resources::FontResourceType);
-		}
+		FontResource() :
+			Resource(ResourceType::FontResourceType)
+		{}
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
 	};

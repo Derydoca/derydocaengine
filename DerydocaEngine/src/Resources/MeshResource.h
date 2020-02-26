@@ -12,6 +12,7 @@ namespace DerydocaEngine::Resources
 		REGISTER_TYPE_ID(MeshResource);
 
 		MeshResource() :
+			Resource(ResourceType::MeshResourceType),
 			m_hasSkeleton(false),
 			m_skeletonId(),
 			m_meshIndex(0),

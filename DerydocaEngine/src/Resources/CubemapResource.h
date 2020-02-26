@@ -10,10 +10,9 @@ namespace DerydocaEngine::Resources
 		REGISTER_TYPE_ID(CubemapResource);
 
 		CubemapResource() :
+			Resource(ResourceType::CubemapResourceType),
 			m_slot(0)
-		{
-			setType(Resources::CubemapResourceType);
-		}
+		{}
 		~CubemapResource() {}
 
 		void setSlot(unsigned int const& slot) { m_slot = slot; }

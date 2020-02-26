@@ -10,6 +10,7 @@ namespace DerydocaEngine::Resources
 		REGISTER_TYPE_ID(SkeletonResource);
 
 		SkeletonResource() :
+			Resource(ResourceType::SkeletonResourceType),
 			m_name()
 		{}
 

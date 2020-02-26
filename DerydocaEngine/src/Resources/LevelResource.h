@@ -9,10 +9,9 @@ namespace DerydocaEngine::Resources
 	public:
 		REGISTER_TYPE_ID(LevelResource);
 
-		LevelResource()
-		{
-			setType(DerydocaEngine::Resources::LevelResourceType);
-		}
+		LevelResource() :
+			Resource(ResourceType::LevelResourceType)
+		{}
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
 	};
