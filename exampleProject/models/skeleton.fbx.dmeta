@@ -8,7 +8,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": "2346cc81-c297-462c-b412-a772098236f6"
+                            "m_id": "b0a6615e-397c-4116-bc9f-cdf8b0836913"
                         }
                     },
                     "m_meshIndex": 0,
@@ -24,7 +24,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": "d6fc8f0d-2bdb-4e7b-9abf-1f194fc836eb"
+                            "m_id": "87d11b0d-5cd8-44c1-a7ec-2aff7d44f9c0"
                         }
                     },
                     "m_name": ""
@@ -39,7 +39,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": "3d6d8da3-6652-4011-9295-aa163e725595"
+                            "m_id": "892300d0-df55-42bc-b543-d8c6036957bf"
                         }
                     },
                     "m_name": "AnimStack::skeleton.armature|Wiggle"

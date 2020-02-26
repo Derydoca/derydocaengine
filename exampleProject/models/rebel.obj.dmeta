@@ -8,7 +8,7 @@
                 "data": {
                     "__base_DerydocaEngine::Resources::Resource": {
                         "__base_DerydocaEngine::Object": {
-                            "m_id": "a93b1c86-9517-4da0-8ba1-1ace1e6108df"
+                            "m_id": "b1b135df-0f8a-4ebf-bd9d-a98127daf307"
                         }
                     },
                     "m_meshIndex": 0,
@@ -18,3 +18,16 @@
         }
     ]
 }
+
+/*
+Resources:
+  - ID: b1b135df-0f8a-4ebf-bd9d-a98127daf307
+    Type: Mesh
+    Index: 0
+    Name: ""
+  - ID: 69584004-76a6-4400-bd04-4b24ce518478
+    Type: Mesh
+    Index: 0
+    Name: ""
+    Flags: ['load_adjacent']
+*/
