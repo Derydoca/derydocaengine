@@ -25,6 +25,7 @@ namespace DerydocaEngine::Editor
 		try
 		{
 			std::ifstream fs(SETTINGS_PATH);
+			if(fs.is_open())
 			{
 				cereal::JSONInputArchive iarchive(fs);
 				iarchive(SERIALIZE_NAMED("Settings", m_settings));
