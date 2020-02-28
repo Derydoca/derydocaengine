@@ -82,6 +82,7 @@ namespace DerydocaEngine::Ext
 
 		// Load references to all mesh renderers this shader affects
 		//m_meshRenderers = loadComponents<Components::MeshRenderer>(compNode, "affectedMeshRenderers");
+		D_LOG_WARN("ImageProjector.cpp::84 was intentionally commented out. This will not be fixed until the serialization is changed to use the Cereal library.");
 
 		setProjectionGraphic();
 	}
