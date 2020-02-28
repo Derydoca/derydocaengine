@@ -12,7 +12,8 @@
                         }
                     },
                     "m_meshIndex": 0,
-                    "m_meshName": "Plane.000"
+                    "m_meshName": "Plane.000",
+                    "m_skeletonId": "8d4d41bc-4532-470b-92ae-4534376f7ad4"
                 }
             }
         },

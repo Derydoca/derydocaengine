@@ -12,7 +12,8 @@
                         }
                     },
                     "m_meshIndex": 0,
-                    "m_meshName": ""
+                    "m_meshName": "",
+                    "m_skeletonId": "00000000-0000-0000-0000-000000000000"
                 }
             }
         }

@@ -36,7 +36,8 @@ namespace DerydocaEngine::Resources
 		SERIALIZE_FUNC_BASE(
 			DerydocaEngine::Resources::Resource,
 			SERIALIZE(m_meshIndex),
-			SERIALIZE(m_meshName)
+			SERIALIZE(m_meshName),
+			SERIALIZE(m_skeletonId)
 		);
 
 	private:

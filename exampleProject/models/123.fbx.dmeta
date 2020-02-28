@@ -12,7 +12,8 @@
                         }
                     },
                     "m_meshIndex": 0,
-                    "m_meshName": "CUTextOne"
+                    "m_meshName": "CUTextOne",
+                    "m_skeletonId": "00000000-0000-0000-0000-000000000000"
                 }
             }
         },
@@ -27,7 +28,8 @@
                         }
                     },
                     "m_meshIndex": 1,
-                    "m_meshName": "CUTextOne.001"
+                    "m_meshName": "CUTextOne.001",
+                    "m_skeletonId": "00000000-0000-0000-0000-000000000000"
                 }
             }
         },
@@ -42,7 +44,8 @@
                         }
                     },
                     "m_meshIndex": 2,
-                    "m_meshName": "CUTextOne.002"
+                    "m_meshName": "CUTextOne.002",
+                    "m_skeletonId": "00000000-0000-0000-0000-000000000000"
                 }
             }
         }
