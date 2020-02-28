@@ -13,7 +13,8 @@
                     },
                     "m_meshIndex": 0,
                     "m_meshName": "Cube.001",
-                    "m_skeletonId": "fe805b7e-1579-4629-8abb-6c89f63f4fae"
+                    "m_skeletonId": "fe805b7e-1579-4629-8abb-6c89f63f4fae",
+                    "m_flags": 0
                 }
             }
         },

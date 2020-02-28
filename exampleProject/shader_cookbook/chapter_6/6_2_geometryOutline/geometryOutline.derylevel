@@ -11,7 +11,7 @@ Scene:
         - Type: MeshRenderer
           Properties:
             Material: c2422fdd-a814-4ea9-b7c6-cdce91c5d246
-            Mesh: 69584004-76a6-4400-bd04-4b24ce518478
+            Mesh: 823eeb64-3d93-4570-a4b4-ad3b3c078444
         - Type: Rotator
           Properties:
             rotationSpeed: 30.0

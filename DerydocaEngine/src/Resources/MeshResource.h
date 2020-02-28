@@ -36,7 +36,8 @@ namespace DerydocaEngine::Resources
 			DerydocaEngine::Resources::Resource,
 			SERIALIZE(m_meshIndex),
 			SERIALIZE(m_meshName),
-			SERIALIZE(m_skeletonId)
+			SERIALIZE(m_skeletonId),
+			SERIALIZE(m_flags)
 		);
 
 	private:
