@@ -2,7 +2,7 @@ Shader: 3988658b-66f3-4279-8162-62450947bdd1
 MaterialParameters:
   - Type: Texture
     Name: CubeMapTex
-    ID: a5dfbc43-582b-46cf-9416-e853b21cae07
+    ID: 1992fb25-4511-45e2-b944-6a153fead285
   - Type: Bool
     Name: DrawSkyBox
     Value: false

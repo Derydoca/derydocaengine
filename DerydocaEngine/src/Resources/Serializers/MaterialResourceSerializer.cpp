@@ -54,18 +54,6 @@ namespace DerydocaEngine::Resources::Serializers
 				std::string paramName = parameters[i]["Name"].as<std::string>();
 				material->setBool(paramName, paramValue);
 			}
-			else if (paramType == "Cubemap")
-			{
-				std::string xpos = getSourceFilePath(parameters[i], "XPos");
-				std::string xneg = getSourceFilePath(parameters[i], "XNeg");
-				std::string ypos = getSourceFilePath(parameters[i], "YPos");
-				std::string yneg = getSourceFilePath(parameters[i], "YNeg");
-				std::string zpos = getSourceFilePath(parameters[i], "ZPos");
-				std::string zneg = getSourceFilePath(parameters[i], "ZNeg");
-				auto paramValue = std::make_shared<Rendering::Texture>(xpos, xneg, ypos, yneg, zpos, zneg);
-				std::string paramName = parameters[i]["Name"].as<std::string>();
-				material->setTexture(paramName, paramValue);
-			}
 		}
 
 		return material;

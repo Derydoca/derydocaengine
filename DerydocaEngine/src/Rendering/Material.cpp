@@ -12,7 +12,7 @@ namespace DerydocaEngine::Rendering
 
 	Material::Material() :
 		m_shader(),
-		m_texture(nullptr),
+		m_texture(),
 		m_boolValues(),
 		m_intValues(),
 		m_textures(),

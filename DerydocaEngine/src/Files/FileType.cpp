@@ -12,6 +12,10 @@ namespace DerydocaEngine::Files
 		{
 			return MaterialFileType;
 		}
+		else if (extension == "dcubemap")
+		{
+			return CubemapFileType;
+		}
 		else if (extension == "fbx" || extension == "obj")
 		{
 			return MeshFileType;

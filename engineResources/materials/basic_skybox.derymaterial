@@ -1,6 +1,6 @@
 Shader: bef58587-98d5-4351-9a78-07f6d1f93a87
 MaterialParameters:
-  - Type: Texture
+  - Type: Cubemap
     Slot: 0
     Name: cubemap
-    ID: 1ac6ba1c-7d43-4e02-a1c9-576f9a9c6c33
+    ID: 1a1745a0-41ec-413d-8fb6-9da520e7961c
