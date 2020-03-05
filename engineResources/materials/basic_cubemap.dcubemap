@@ -1,10 +1,10 @@
-Shader: bef58587-98d5-4351-9a78-07f6d1f93a87
-MaterialParameters:
-  - Type: Cubemap
-    Slot: 0
-    XPos: fa331d47-3ba1-4453-9177-ea8194276f94
-    XNeg: a8c84a1a-f589-40a5-a42c-2afc79878ea3
-    YPos: adb6a6fd-b434-4e4c-a10c-cb0cb8cf31a8
-    YNeg: b78f820c-9073-4e1e-a63a-de188fc97daa
-    ZPos: 49b82284-ca19-43f2-bf84-831ad4e275d0
-    ZNeg: 60760012-a010-49ea-9b3f-91b03f6b2669
+{
+  "cubemapData" : {
+    "texXPos": "fa331d47-3ba1-4453-9177-ea8194276f94",
+    "texXNeg": "a8c84a1a-f589-40a5-a42c-2afc79878ea3",
+    "texYPos": "adb6a6fd-b434-4e4c-a10c-cb0cb8cf31a8",
+    "texYNeg": "b78f820c-9073-4e1e-a63a-de188fc97daa",
+    "texZPos": "49b82284-ca19-43f2-bf84-831ad4e275d0",
+    "texZNeg": "60760012-a010-49ea-9b3f-91b03f6b2669"
+  }
+}
