@@ -8,6 +8,8 @@
 #include "ObjectLibrary.h"
 #include "ObjectLibrary.h"
 #include <iostream>
+#include "AssetData\FontFaceData.h"
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine::UI
 {
@@ -112,15 +114,23 @@ namespace DerydocaEngine::UI
 			// Add the glyph to the texture packer
 			packer.addImage(
 				i,
-				fontFace->glyph->metrics.width / 64.0f,
-				fontFace->glyph->metrics.height / 64.0f,
-				fontFace->glyph->metrics.horiBearingX / 64.0f,
-				fontFace->glyph->metrics.horiBearingY / 64.0f,
-				fontFace->glyph->metrics.horiAdvance / 64.0f,
-				0.0f,
+				{
+					fontFace->glyph->metrics.width / 64.0f,
+					fontFace->glyph->metrics.height / 64.0f
+				},
+				{
+					fontFace->glyph->metrics.horiBearingX / 64.0f,
+					fontFace->glyph->metrics.horiBearingY / 64.0f
+				},
+				{
+					fontFace->glyph->metrics.horiAdvance / 64.0f,
+					0.0f
+				},
 				fontFace->glyph->bitmap.buffer,
-				fontFace->glyph->bitmap.width,
-				fontFace->glyph->bitmap.rows,
+				{
+					static_cast<int>(fontFace->glyph->bitmap.width),
+					static_cast<int>(fontFace->glyph->bitmap.rows)
+				},
 				1);
 		}
 
@@ -138,7 +148,7 @@ namespace DerydocaEngine::UI
 		m_charImages.clear();
 		for (auto image : images)
 		{
-			m_charImages[image.getID()] = image;
+			m_charImages[image.id] = image;
 		}
 	}
 
@@ -187,7 +197,7 @@ namespace DerydocaEngine::UI
 			float ty = charNode["texY"].as<float>();
 			float tdx = charNode["texDX"].as<float>();
 			float tdy = charNode["texDY"].as<float>();
-			Utilities::TexturePackerImage img(id, w, h, 1, sx, sy, bx, by, ax, ay);
+			Utilities::TexturePackerImage img(id, { w, h }, 1, { sx, sy }, { bx, by }, { ax, ay });
 			img.setTextureSheetRectangle(tx, ty, tdx, tdy);
 			m_charImages.emplace(id, img);
 		}
@@ -197,54 +207,30 @@ namespace DerydocaEngine::UI
 
 	void FontFace::saveToSerializedFile(std::string const& filePath)
 	{
-		//TODO: Replace YAML
-		//YAML::Node root = YAML::Node();
+		// Write the generated texture to disk
+		std::string imageFileName = filePath + ".bmp";
+		stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
+		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
+		auto textureId = ObjectLibrary::getInstance().assetPathToId(imageFileName);
 
-		//YAML::Node font = root["Font"];
+		// Construct the struct
+		AssetData::FontFaceData data(
+			m_name,
+			m_style,
+			m_fontSize,
+			m_lineHeight,
+			boost::uuids::uuid()
+		);
+		data.textureId = textureId;
 
-		//// Save the general font data
-		//font["name"] = m_name;
-		//font["style"] = m_style;
-		//font["fontSize"] = m_fontSize;
-		//font["width"] = m_imageBufferSize.x;
-		//font["height"] = m_imageBufferSize.y;
-		//font["lineHeight"] = m_lineHeight;
-		//std::string imageFileName = filePath + ".bmp";
-		//stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
-		//ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
-		//auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
-		//font["image"] = boost::lexical_cast<std::string>(imageResource->getId());
-
-		//// Save the character information
-		//YAML::Node charactersNode = font["characters"];
-		//for (auto charImage : m_charImages)
-		//{
-		//	YAML::Node charNode;
-		//	charNode["id"] = charImage.second.getID();
-		//	charNode["width"] = charImage.second.getWidth();
-		//	charNode["height"] = charImage.second.getHeight();
-		//	charNode["sizeX"] = charImage.second.getSizeX();
-		//	charNode["sizeY"] = charImage.second.getSizeY();
-		//	charNode["advanceX"] = charImage.second.getAdvanceX();
-		//	charNode["advanceY"] = charImage.second.getAdvanceY();
-		//	charNode["bearingX"] = charImage.second.getBearingX();
-		//	charNode["bearingY"] = charImage.second.getBearingY();
-		//	Rect texPos = charImage.second.getTexSheetPosition();
-		//	charNode["texX"] = texPos.getX();
-		//	charNode["texY"] = texPos.getY();
-		//	charNode["texDX"] = texPos.getDX();
-		//	charNode["texDY"] = texPos.getDY();
-		//	charactersNode.push_back(charNode);
-		//}
-
-		//YAML::Emitter out;
-		//out.SetIndent(2);
-		//out.SetMapFormat(YAML::Block);
-		//out << root;
-		//std::ofstream file;
-		//file.open(filePath);
-		//file << out.c_str();
-		//file.close();
+		// Copy the glyph data
+		data.glyphs.reserve(m_charImages.size());
+		for (const auto& s : m_charImages)
+		{
+			data.glyphs.push_back(s.second);
+		}
+		
+		Files::Utils::WriteToDisk(data, filePath);
 	}
 
 }

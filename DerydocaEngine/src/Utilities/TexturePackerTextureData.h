@@ -26,7 +26,7 @@ namespace DerydocaEngine::Utilities
 
 		void Resize(int const& x, int const& y);
 
-		void AddImage(int const& xPos, int const& yPos, TexturePackerImage* const& image, unsigned char* const& imageBuffer);
+		void AddImage(const int xPos, const int yPos, const TexturePackerImage& image, const unsigned char* imageBuffer);
 
 		void Fill(int const& sx, int const& sy, int const& ex, int const& ey, unsigned char const& value);
 

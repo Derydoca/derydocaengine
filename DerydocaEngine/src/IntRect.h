@@ -6,34 +6,28 @@ namespace DerydocaEngine
 	struct IntRect
 	{
 	public:
-		IntRect()
+		IntRect() :
+			x(0),
+			y(0),
+			dx(1),
+			dy(1)
 		{
-			m_x = 0;
-			m_y = 0;
-			m_dx = 1;
-			m_dy = 1;
 		}
 
 		IntRect(int const& x, int const& y, int const& dx, int const& dy) :
-			m_x(x),
-			m_y(y),
-			m_dx(dx),
-			m_dy(dy)
+			x(x),
+			y(y),
+			dx(dx),
+			dy(dy)
 		{
 		}
 
-		int getX() { return m_x; }
-		int getY() { return m_y; }
-		int getDx() { return m_dx; }
-		int getDy() { return m_dy; }
-		void setX(int const& x) { m_x = x; }
-		void setY(int const& y) { m_y = y; }
-		void setDx(int const& dx) { m_dx = dx; }
-		void setDy(int const& dy) { m_dy = dy; }
+		inline static bool IsRectOverlapping(const IntRect& r1, const IntRect& r2)
+		{
+			return r1.dy > r2.y&& r1.y < r2.dy && r1.x < r2.dx && r1.dx > r2.x;
+		}
 
-		static bool IsRectOverlapping(IntRect & r1, IntRect & r2);
-	private:
-		int m_x, m_y, m_dx, m_dy;
+		int x, y, dx, dy;
 	};
 
 }

@@ -78,6 +78,7 @@
 
 // Maths
 #include "Math/int2.h"
+#include "Math/TypeAliases.h"
 
 #if OPENGL||VULKAN
 using SystemWindow = SDL_Window;

@@ -2,9 +2,10 @@
 #include "UI\Spritesheet.h"
 #include "ObjectLibrary.h"
 #include "Helpers\YamlTools.h"
-#include <yaml-cpp/yaml.h>
-#include <boost/lexical_cast.hpp>
+#include <yaml-cpp\yaml.h>
+#include <boost\lexical_cast.hpp>
 #include <fstream>
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine::UI
 {
@@ -38,7 +39,7 @@ namespace DerydocaEngine::UI
 			sprite.setWidth(imgw);
 			sprite.setHeight(imgh);
 			sprite.setType(SpriteType::Sprite);
-			packer.addImage(sprite.getId(), (float)imgw, (float)imgh, 0, 0, 0, 0, spriteImageBuffer, imgw, imgh, imgch);
+			packer.addImage(sprite.getId(), { (float)imgw, (float)imgh }, { 0, 0 }, { 0, 0 }, spriteImageBuffer, { imgw, imgh }, imgch);
 			delete[] spriteImageBuffer;
 
 			m_sprites[spriteMapItem.first] = sprite;
@@ -49,14 +50,14 @@ namespace DerydocaEngine::UI
 		std::vector<Utilities::TexturePackerImage> packedImages = packer.getSubImageData();
 		for (auto img : packedImages)
 		{
-			auto spriteMapRecord = m_sprites.find(img.getID());
+			auto spriteMapRecord = m_sprites.find(img.id);
 
 			if (spriteMapRecord == m_sprites.end())
 			{
 				continue;
 			}
 
-			auto tex = img.getTexSheetPosition();
+			auto tex = img.texSheetPosition;
 			(*spriteMapRecord).second.setTexPosition(tex.getX(), tex.getY(), tex.getDX(), tex.getDY());
 		}
 
@@ -73,7 +74,7 @@ namespace DerydocaEngine::UI
 		m_sprites[m_largestId] = sprite;
 	}
 
-	void SpriteSheet::saveToDisk(std::string const& filePath)
+	void SpriteSheet::saveToDisk(const std::string& filePath)
 	{
 		//TODO: Replace YAML
 		//// Save the image to disk and process it by the object library

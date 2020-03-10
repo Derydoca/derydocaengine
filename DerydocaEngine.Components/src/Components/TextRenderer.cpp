@@ -139,18 +139,21 @@ namespace DerydocaEngine::Components
 				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 				// Set the vertex positions
-				float charXMin = penX + img.getBearingX();
-				float charXMax = penX + img.getBearingX() + img.getSizeX();
-				float charYMax = penY - img.getSizeY() + img.getBearingY();
-				float charYMin = penY + img.getBearingY();
+				float2 bearing = img.bearing;
+				float2 worldSize = img.worldSize;
+				float charXMin = penX + bearing.x;
+				float charXMax = penX + bearing.x + worldSize.x;
+				float charYMax = penY - worldSize.y + bearing.y;
+				float charYMin = penY + bearing.y;
 				vertices.push_back(glm::vec3(charXMin, charYMin, 0));
 				vertices.push_back(glm::vec3(charXMin, charYMax, 0));
 				vertices.push_back(glm::vec3(charXMax, charYMax, 0));
 				vertices.push_back(glm::vec3(charXMax, charYMin, 0));
 
 				// Advance the pen position
-				penX += img.getAdvanceX() + extraCharAdvance;
-				penY += img.getAdvanceY();
+				float2 advance = img.advance;
+				penX += advance.x + extraCharAdvance;
+				penY += advance.y;
 
 				// Continue on to the next char
 				charQuadIndex++;
@@ -183,7 +186,7 @@ namespace DerydocaEngine::Components
 				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 				// Set the UV positions
-				Rect rect = img.getTexSheetPosition();
+				Rect rect = img.texSheetPosition;
 				texCoords.push_back(glm::vec2(rect.getX(), rect.getY()));
 				texCoords.push_back(glm::vec2(rect.getX(), rect.getDY()));
 				texCoords.push_back(glm::vec2(rect.getDX(), rect.getDY()));
@@ -392,7 +395,7 @@ namespace DerydocaEngine::Components
 			{
 				// Get the character image information
 				Utilities::TexturePackerImage img = fontFace->getCharData(c);
-				bool isWhitespace = img.getWidth() == 0.0f;
+				bool isWhitespace = img.imageSize.x == 0.0f;
 				bool isBreakable = c == ' ' || c == '-';
 
 				// If the character can break the line, store information about this position
@@ -412,14 +415,16 @@ namespace DerydocaEngine::Components
 					}
 				}
 
+				float2 advance = img.advance;
+
 				// If this line of text starts with whitespace and this line was started by a forced line break
 				if (isLineAForcedBreak && isWhitespace && currentLineWidth == 0.0f)
 				{
-					currentLineStartAdjust -= img.getAdvanceX();
+					currentLineStartAdjust -= advance.x;
 				}
 
 				// Check to see if this next character will break the horizontal boundary
-				if (!lookingForNextLineBreak && horizontalBoundSize > 0 && (currentLineWidth + img.getAdvanceX() + currentLineStartAdjust) > horizontalBoundSize)
+				if (!lookingForNextLineBreak && horizontalBoundSize > 0 && (currentLineWidth + advance.x + currentLineStartAdjust) > horizontalBoundSize)
 				{
 					// If the overflow wrap is set to break on all characters, end the line here
 					if (overflowWrap == OverflowWrap::BreakAll)
@@ -446,7 +451,7 @@ namespace DerydocaEngine::Components
 						else if (overflowWrap == OverflowWrap::Normal)
 						{
 							lookingForNextLineBreak = true;
-							currentLineWidth += img.getAdvanceX();
+							currentLineWidth += advance.x;
 						}
 						// Otherwise, break the word at the current index
 						else
@@ -461,13 +466,13 @@ namespace DerydocaEngine::Components
 				// If this character does not break the horizontal boundary, increase the line's width
 				else
 				{
-					currentLineWidth += img.getAdvanceX();
+					currentLineWidth += advance.x;
 				}
 
 				// Remove the trailing whitespace if there is any
 				if (filteredTextEndIndex > 0 && isWhitespace)
 				{
-					currentLineWidth -= img.getAdvanceX();
+					currentLineWidth -= advance.x;
 				}
 			}
 

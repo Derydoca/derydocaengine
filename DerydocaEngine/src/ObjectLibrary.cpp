@@ -57,6 +57,16 @@ namespace DerydocaEngine
 		}
 	}
 
+	const boost::uuids::uuid ObjectLibrary::assetPathToId(const std::string& assetPath)
+	{
+		auto find = m_pathToIdMap.find(assetPath);
+		if (find != m_pathToIdMap.end())
+		{
+			return find->second;
+		}
+		return boost::uuids::uuid();
+	}
+
 	std::vector<std::shared_ptr<Resources::Resource>> ObjectLibrary::getResourcesOfType(Resources::ResourceType resourceType)
 	{
 		// Consider creating an unordered map of resources with the key of resource type for a more inexpensive lookup time
@@ -157,7 +167,12 @@ namespace DerydocaEngine
 		}
 
 		auto resources = serializer->generateResources(assetPath);
-		
+		for (auto resource : resources)
+		{
+			resource->setFilePaths(assetPath, metaFilePath);
+			registerResource(resource);
+		}
+
 		{
 			std::ofstream fs(metaFilePath);
 			cereal::JSONOutputArchive oarchive(fs);
@@ -171,6 +186,7 @@ namespace DerydocaEngine
 	{
 		// Load the resource into the map
 		m_resources.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Resources::Resource>>(resource->getId(), resource));
+		m_pathToIdMap.insert(std::pair<std::string, boost::uuids::uuid>(resource->getSourceFilePath(), resource->getId()));
 	}
 
 	std::shared_ptr<Resources::ResourceTreeNode> ObjectLibrary::getResourceTreeNode(const std::string& resourcePath)

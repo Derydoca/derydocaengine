@@ -39,16 +39,17 @@ namespace DerydocaEngine::UI
 		void loadFromSerializedFile(std::string const& filePath);
 		void saveToSerializedFile(std::string const& filePath);
 	private:
-		glm::ivec2 m_dotsPerInch;
-		float m_fontSize;
-		std::shared_ptr<Rendering::Texture> m_texture;
-		std::map<int, Utilities::TexturePackerImage> m_charImages;
-		unsigned char* m_imageBuffer;
-		glm::ivec2 m_imageBufferSize;
-		bool m_textureDirty;
-		float m_lineHeight;
 		std::string m_name;
 		std::string m_style;
+		float m_fontSize;
+		glm::ivec2 m_imageBufferSize;
+		float m_lineHeight;
+		std::map<int, Utilities::TexturePackerImage> m_charImages;
+		std::shared_ptr<Rendering::Texture> m_texture;
+
+		glm::ivec2 m_dotsPerInch;
+		unsigned char* m_imageBuffer;
+		bool m_textureDirty;
 	};
 
 }

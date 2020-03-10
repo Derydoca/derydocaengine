@@ -37,6 +37,13 @@ namespace DerydocaEngine
 		void setY(float const& y) { m_y = y; }
 		void setDX(float const& w) { m_dx = w; }
 		void setDY(float const& h) { m_dy = h; }
+
+		SERIALIZE_FUNC(
+			SERIALIZE_NAMED("x", m_x),
+			SERIALIZE_NAMED("y", m_y),
+			SERIALIZE_NAMED("dx", m_dx),
+			SERIALIZE_NAMED("dy", m_dy)
+		);
 	private:
 		float m_x, m_y, m_dx, m_dy;
 	};

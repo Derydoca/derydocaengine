@@ -20,17 +20,13 @@ namespace DerydocaEngine::Utilities
 		~TexturePacker();
 
 		void addImage(
-			unsigned long const& id,
-			float const& sizeX,
-			float const& sizeY,
-			float const& bearingX,
-			float const& bearingY,
-			float const& advanceX,
-			float const& advanceY,
-			unsigned char* const& imageBuffer,
-			int const& width,
-			int const& height,
-			int const& channels);
+			const unsigned long id,
+			const float2& size2,
+			const float2& bearing,
+			const float2& advance,
+			const unsigned char* imageBuffer,
+			const int2& size,
+			const int channels);
 		void packImages();
 		bool getIsDirty() const { return m_isDirty; }
 		std::shared_ptr<Rendering::Texture> allocTexture() { return m_packedImageData.allocTexture(); };
@@ -46,7 +42,7 @@ namespace DerydocaEngine::Utilities
 		bool m_isDirty;
 		TexturePackerTextureData m_packedImageData;
 
-		int getIntersectingImageXAdvance(std::vector<IntRect> imageBounds, IntRect rect);
+		int getIntersectingImageXAdvance(const std::vector<IntRect>& imageBounds, const IntRect& rect);
 	};
 
 }

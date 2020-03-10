@@ -16,7 +16,7 @@ namespace DerydocaEngine::UI
 
 		void updateTexture();
 		void addSprite(std::string const& textureId);
-		void saveToDisk(std::string const& filePath);
+		void saveToDisk(const std::string& filePath);
 		void LoadFromDisk(std::string const& filePath);
 
 		std::shared_ptr<Rendering::Texture> getTexture() { return m_texture; }
@@ -31,6 +31,11 @@ namespace DerydocaEngine::UI
 
 			return &(*spriteMapRecord).second;
 		}
+
+		SERIALIZE_FUNC(
+			SERIALIZE(m_sprites),
+			SERIALIZE(m_texture->m_id)
+		);
 	private:
 		std::map<int, SpriteReference> m_sprites;
 		unsigned char* m_imageBuffer;
