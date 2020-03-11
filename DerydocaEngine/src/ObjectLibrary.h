@@ -35,6 +35,7 @@ namespace DerydocaEngine
 		const std::string& getMetaExtension() const { return m_metaExtension; }
 		std::vector<std::shared_ptr<Resources::Resource>> getResourcesOfType(Resources::ResourceType resourceType);
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
+		std::vector<sptr<Resources::Resource>> getResources(const std::string& metaFilePath);
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
 		void updateMetaFilesDirectory(const boost::filesystem::path& directoryPath);

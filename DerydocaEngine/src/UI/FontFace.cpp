@@ -113,11 +113,7 @@ namespace DerydocaEngine::UI
 
 			// Add the glyph to the texture packer
 			packer.addImage(
-				i,
-				{
-					fontFace->glyph->metrics.width / 64.0f,
-					fontFace->glyph->metrics.height / 64.0f
-				},
+				i,\
 				{
 					fontFace->glyph->metrics.horiBearingX / 64.0f,
 					fontFace->glyph->metrics.horiBearingY / 64.0f
@@ -197,8 +193,8 @@ namespace DerydocaEngine::UI
 			float ty = charNode["texY"].as<float>();
 			float tdx = charNode["texDX"].as<float>();
 			float tdy = charNode["texDY"].as<float>();
-			Utilities::TexturePackerImage img(id, { w, h }, 1, { sx, sy }, { bx, by }, { ax, ay });
-			img.setTextureSheetRectangle(tx, ty, tdx, tdy);
+			Utilities::TexturePackerImage img(id, 1, { w, h }, { bx, by }, { ax, ay });
+			img.imageRect = { tx, ty, tdx, tdy };
 			m_charImages.emplace(id, img);
 		}
 

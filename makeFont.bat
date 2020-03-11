@@ -1,0 +1,1 @@
+"D:\gh\derydocaengine\bin\Debug-windows-x86_64\DerydocaEngine.Editor.UI\DerydocaEngine.Editor.UI.exe" -processFont "D:\gh\derydocaengine\engineResources\fonts\FiraCode-Medium.ttf" 20 "D:\gh\derydocaengine\engineResources\fonts\FiraCode-Medium-new.dfont"

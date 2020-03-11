@@ -11,7 +11,7 @@ namespace DerydocaEngine::Utilities
 	// Method for sorting images
 	bool compareTexturePackerImageBySize(TexturePackerImage lhs, TexturePackerImage rhs)
 	{
-		return lhs.imageSize.x > rhs.imageSize.x;
+		return lhs.size.x > rhs.size.x;
 	}
 
 	TexturePacker::TexturePacker(int const& channels)
@@ -28,7 +28,6 @@ namespace DerydocaEngine::Utilities
 
 	void TexturePacker::addImage(
 		const unsigned long id,
-		const float2& size2,
 		const float2& bearing,
 		const float2& advance,
 		const unsigned char* imageBuffer,
@@ -36,7 +35,7 @@ namespace DerydocaEngine::Utilities
 		const int channels)
 	{
 		// Store the image
-		TexturePackerImage image(id, size, channels, size2, bearing, advance);
+		TexturePackerImage image(id, channels, size, bearing, advance);
 		m_images.push_back(image);
 
 		// Store the image data in the image buffers object
@@ -71,7 +70,7 @@ namespace DerydocaEngine::Utilities
 			float totalGlyphArea = 0.0f;
 			for (auto image : m_images)
 			{
-				int2 size = image.imageSize;
+				int2 size = image.size;
 				totalGlyphArea += size.x * size.y;
 			}
 			while (textureSheetWidth * textureSheetWidth < totalGlyphArea)
@@ -92,7 +91,7 @@ namespace DerydocaEngine::Utilities
 		// For each image
 		for (size_t i = 0; i < m_images.size(); i++)
 		{
-			int2 imageSize = m_images[i].imageSize;
+			int2 imageSize = m_images[i].size;
 			int imageWidth = imageSize.x;
 			int imageHeight = imageSize.y;
 
@@ -153,7 +152,7 @@ namespace DerydocaEngine::Utilities
 			float y = (float)loc.y / m_packedImageData.getHeight();
 			float dx = (float)loc.dx / m_packedImageData.getWidth();
 			float dy = (float)loc.dy / m_packedImageData.getHeight();
-			m_images[i].setTextureSheetRectangle(x, y, dx, dy);
+			m_images[i].imageRect = { x, y, dx, dy };
 		}
 
 		// Delete the temporary image locations array

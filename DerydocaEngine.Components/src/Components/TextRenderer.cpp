@@ -140,7 +140,7 @@ namespace DerydocaEngine::Components
 
 				// Set the vertex positions
 				float2 bearing = img.bearing;
-				float2 worldSize = img.worldSize;
+				float2 worldSize = img.size;
 				float charXMin = penX + bearing.x;
 				float charXMax = penX + bearing.x + worldSize.x;
 				float charYMax = penY - worldSize.y + bearing.y;
@@ -186,7 +186,7 @@ namespace DerydocaEngine::Components
 				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
 
 				// Set the UV positions
-				Rect rect = img.texSheetPosition;
+				Rect rect = img.imageRect;
 				texCoords.push_back(glm::vec2(rect.getX(), rect.getY()));
 				texCoords.push_back(glm::vec2(rect.getX(), rect.getDY()));
 				texCoords.push_back(glm::vec2(rect.getDX(), rect.getDY()));
@@ -395,7 +395,7 @@ namespace DerydocaEngine::Components
 			{
 				// Get the character image information
 				Utilities::TexturePackerImage img = fontFace->getCharData(c);
-				bool isWhitespace = img.imageSize.x == 0.0f;
+				bool isWhitespace = img.size.x == 0.0f;
 				bool isBreakable = c == ' ' || c == '-';
 
 				// If the character can break the line, store information about this position

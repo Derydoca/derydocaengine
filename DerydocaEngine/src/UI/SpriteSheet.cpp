@@ -39,7 +39,7 @@ namespace DerydocaEngine::UI
 			sprite.setWidth(imgw);
 			sprite.setHeight(imgh);
 			sprite.setType(SpriteType::Sprite);
-			packer.addImage(sprite.getId(), { (float)imgw, (float)imgh }, { 0, 0 }, { 0, 0 }, spriteImageBuffer, { imgw, imgh }, imgch);
+			packer.addImage(sprite.getId(), { 0, 0 }, { 0, 0 }, spriteImageBuffer, { imgw, imgh }, imgch);
 			delete[] spriteImageBuffer;
 
 			m_sprites[spriteMapItem.first] = sprite;
@@ -57,7 +57,7 @@ namespace DerydocaEngine::UI
 				continue;
 			}
 
-			auto tex = img.texSheetPosition;
+			auto tex = img.imageRect;
 			(*spriteMapRecord).second.setTexPosition(tex.getX(), tex.getY(), tex.getDX(), tex.getDY());
 		}
 

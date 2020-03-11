@@ -7,6 +7,7 @@
 #include "Files\Serializers\FileSerializerLibrary.h"
 #include "Helpers\StringUtils.h"
 #include "Files\FileType.h"
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine
 {
@@ -90,6 +91,11 @@ namespace DerydocaEngine
 		return matchingResources;
 	}
 
+	std::vector<sptr<Resources::Resource>> ObjectLibrary::getResources(const std::string& metaFilePath)
+	{
+		return Files::Utils::ReadFromDisk2<std::vector<sptr<Resources::Resource>>>(metaFilePath);
+	}
+
 	void ObjectLibrary::updateMetaFilesDirectory(const boost::filesystem::path& directoryPath)
 	{
 		fs::directory_iterator it{ directoryPath };
@@ -124,6 +130,14 @@ namespace DerydocaEngine
 				return;
 			}
 		}
+
+		auto resources = getResources(metaFilePath);
+		for (auto resource : resources)
+		{
+			resource->setFilePaths(sourceFilePath, metaFilePath);
+			registerResource(resource);
+		}
+
 	}
 
 	void ObjectLibrary::loadDirectory(const boost::filesystem::path& directory)
@@ -167,12 +181,6 @@ namespace DerydocaEngine
 		}
 
 		auto resources = serializer->generateResources(assetPath);
-		for (auto resource : resources)
-		{
-			resource->setFilePaths(assetPath, metaFilePath);
-			registerResource(resource);
-		}
-
 		{
 			std::ofstream fs(metaFilePath);
 			cereal::JSONOutputArchive oarchive(fs);

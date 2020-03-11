@@ -24,7 +24,7 @@ namespace DerydocaEngine::Utilities
 
 	void TexturePackerTextureData::AddImage(const int xPos, const int yPos, const TexturePackerImage& image, const unsigned char* imageBuffer)
 	{
-		int2 size = image.imageSize;
+		int2 size = image.size;
 		assert(size.x + xPos <= (int)m_data[0].size());
 		assert(size.y + yPos <= (int)m_data.size());
 

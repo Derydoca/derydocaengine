@@ -21,7 +21,6 @@ namespace DerydocaEngine::Utilities
 
 		void addImage(
 			const unsigned long id,
-			const float2& size2,
 			const float2& bearing,
 			const float2& advance,
 			const unsigned char* imageBuffer,

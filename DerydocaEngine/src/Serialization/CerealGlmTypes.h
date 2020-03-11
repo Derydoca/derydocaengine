@@ -7,6 +7,15 @@ namespace glm
 {
 
 	template<class Archive>
+	void serialize(Archive& archive, glm::ivec2& m)
+	{
+		archive(
+			SERIALIZE_NAMED("x", m.x),
+			SERIALIZE_NAMED("y", m.y)
+		);
+	}
+
+	template<class Archive>
 	void serialize(Archive& archive, glm::vec2& m)
 	{
 		archive(

@@ -10,32 +10,35 @@ namespace DerydocaEngine::Utilities
 		TexturePackerImage() {};
 		TexturePackerImage(
 			const unsigned long id,
-			const int2& imageSize,
 			const int channels,
-			const float2& worldSize,
+			const int2& size,
 			const float2& bearing,
-			const float2& advance);
-		~TexturePackerImage();
-
-		void setTextureSheetRectangle(const float x, const float y, const float dx, const float dy);
+			const float2& advance) :
+			id(id),
+			size(size),
+			channels(channels),
+			bearing(bearing),
+			advance(advance),
+			imageRect()
+		{
+		}
+		~TexturePackerImage() {};
 
 		SERIALIZE_FUNC(
 			SERIALIZE(id),
-			SERIALIZE(imageSize),
 			SERIALIZE(channels),
-			SERIALIZE(worldSize),
+			SERIALIZE(size),
 			SERIALIZE(advance),
 			SERIALIZE(bearing),
-			SERIALIZE(texSheetPosition)
+			SERIALIZE(imageRect)
 		);
 
 		unsigned long id;
-		int2 imageSize;
 		int channels;
-		float2 worldSize;
+		int2 size;
 		float2 advance;
 		float2 bearing;
-		Rect texSheetPosition;
+		Rect imageRect;
 	};
 
 }
