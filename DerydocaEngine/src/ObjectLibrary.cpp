@@ -192,6 +192,8 @@ namespace DerydocaEngine
 
 	void ObjectLibrary::registerResource(std::shared_ptr<Resources::Resource> resource)
 	{
+		resource->postLoadInitialize();
+
 		// Load the resource into the map
 		m_resources.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Resources::Resource>>(resource->getId(), resource));
 		m_pathToIdMap.insert(std::pair<std::string, boost::uuids::uuid>(resource->getSourceFilePath(), resource->getId()));
@@ -262,6 +264,12 @@ namespace DerydocaEngine
 				std::ifstream fs(metaFilePath);
 				cereal::JSONInputArchive iarchive(fs);
 				iarchive(resources);
+
+				for (auto resource : resources)
+				{
+					resource->setFilePaths(sourceFilePath, metaFilePath);
+					registerResource(resource);
+				}
 			}
 			catch (const std::exception & ex)
 			{
@@ -272,30 +280,6 @@ namespace DerydocaEngine
 				D_LOG_ERROR("An unknown error occurred while attempting to load this meta file: {}", metaFilePath);
 			}
 		}
-
-		// Go through all the resource nodes in the file
-		for (size_t i = 0; i < resources.size(); i++)
-		{
-			auto resource = resources[i];
-
-			// Find the serializer related to this source file object
-			auto serializer = Files::Serializers::FileSerializerLibrary::getInstance().getTypeSerializer(sourceFilePath);
-
-			// If the serializer could not be found, continue onto the next resource
-			if (serializer == nullptr)
-			{
-				D_LOG_ERROR("The file '{}' does not have a parser assigned to the extension. This file could not be parsed!", sourceFilePath);
-				continue;
-			}
-
-			// Set the common parameters of the resource object
-			resource->setFilePaths(sourceFilePath, metaFilePath);
-			serializer->postLoadInitialize(resource);
-
-			// Register the resource so it can be referenced later
-			registerResource(resource);
-		}
-
 	}
 
 }

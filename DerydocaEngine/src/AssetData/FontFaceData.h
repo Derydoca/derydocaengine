@@ -10,6 +10,7 @@ namespace DerydocaEngine::AssetData
 {
 	struct FontFaceData
 	{
+		FontFaceData() {}
 		FontFaceData(
 			const std::string& name,
 			const std::string& style,

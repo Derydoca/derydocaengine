@@ -6,10 +6,6 @@
 #include <climits>
 #include <algorithm>
 
-void* operator new(size_t size)
-{
-	return malloc(size);
-}
 namespace DerydocaEngine::Utilities
 {
 

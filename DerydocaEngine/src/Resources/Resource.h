@@ -28,6 +28,7 @@ namespace DerydocaEngine::Resources
 		std::string getSourceFilePath() const { return m_sourceFilePath; }
 		ResourceType getType() const { return m_type; }
 		virtual unsigned long getTypeId() const = 0;
+		virtual void postLoadInitialize() {}
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Object);
 	protected:

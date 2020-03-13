@@ -27,6 +27,8 @@ namespace DerydocaEngine::Resources
 		std::string getFragmentShaderSource() const { return m_fragmentShaderSource; }
 		std::string getGeometryShaderSource() const { return m_geometryShaderSource; }
 
+		virtual void postLoadInitialize();
+
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
 
 	private:

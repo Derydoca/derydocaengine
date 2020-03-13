@@ -161,6 +161,11 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid resourceId = resourceIdNode.as<boost::uuids::uuid>();
+			if (resourceId.is_nil())
+			{
+				D_LOG_ERROR("Invalid resource ID");
+				return nullptr;
+			}
 
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
 		}
