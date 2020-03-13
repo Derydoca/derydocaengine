@@ -150,23 +150,22 @@ namespace DerydocaEngine::UI
 
 	void FontFace::loadFromSerializedFile(std::string const& filePath)
 	{
-		YAML::Node file = YAML::LoadFile(filePath);
+		auto data = Files::Utils::ReadFromDisk<AssetData::FontFaceData>(filePath);
 
-		YAML::Node font = file["Font"];
+		m_name = data.name;
+		m_style = data.style;
+		m_fontSize = data.fontSize;
+		m_lineHeight = data.lineHeight;
 
-		// Load general font information
-		m_name = font["name"].as<std::string>();
-		m_style = font["style"].as<std::string>();
-		m_fontSize = font["fontSize"].as<float>();
-		m_imageBufferSize.x = font["width"].as<int>();
-		m_imageBufferSize.y = font["height"].as<int>();
-		m_lineHeight = font["lineHeight"].as<float>();
+		for (auto img : data.glyphs)
+		{
+			m_charImages.emplace(img.id, img);
+		}
 
-		// Load the image
-		std::string imageUuid = font["image"].as<std::string>();
-		auto r = ObjectLibrary::getInstance().getResource(imageUuid);
+		auto r = ObjectLibrary::getInstance().getResource(data.textureId);
 		int imgw, imgh, imgch;
 		unsigned char* imageData = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
+		m_imageBufferSize = { imgw, imgh };
 		delete[] m_imageBuffer;
 		m_imageBuffer = new unsigned char[m_imageBufferSize.x * m_imageBufferSize.y];
 		for (int i = 0; i < m_imageBufferSize.x * m_imageBufferSize.y; i++)
@@ -174,29 +173,6 @@ namespace DerydocaEngine::UI
 			m_imageBuffer[i] = imageData[i * imgch];
 		}
 		delete[] imageData;
-
-		// Load all character data
-		YAML::Node charactersNode = font["characters"];
-		for (size_t i = 0; i < charactersNode.size(); i++)
-		{
-			YAML::Node charNode = charactersNode[i];
-			int id = charNode["id"].as<unsigned long>();
-			int w = charNode["width"].as<int>();
-			int h = charNode["height"].as<int>();
-			float sx = charNode["sizeX"].as<float>();
-			float sy = charNode["sizeY"].as<float>();
-			float ax = charNode["advanceX"].as<float>();
-			float ay = charNode["advanceY"].as<float>();
-			float bx = charNode["bearingX"].as<float>();
-			float by = charNode["bearingY"].as<float>();
-			float tx = charNode["texX"].as<float>();
-			float ty = charNode["texY"].as<float>();
-			float tdx = charNode["texDX"].as<float>();
-			float tdy = charNode["texDY"].as<float>();
-			Utilities::TexturePackerImage img(id, 1, { w, h }, { bx, by }, { ax, ay });
-			img.imageRect = { tx, ty, tdx, tdy };
-			m_charImages.emplace(id, img);
-		}
 
 		m_textureDirty = true;
 	}
