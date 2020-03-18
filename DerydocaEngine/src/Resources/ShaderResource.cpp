@@ -1,17 +1,12 @@
 #include "EnginePch.h"
 #include "ShaderResource.h"
-#include "Rendering\ShaderLibrary.h";
+#include "Rendering\ShaderLibrary.h"
 #include <boost\filesystem.hpp>
 
 namespace fs = boost::filesystem;
 
 void DerydocaEngine::Resources::ShaderResource::postLoadInitialize()
 {
-	if (getSourceFilePath().find("basicShader") != std::string::npos)
-	{
-		__debugbreak;
-	}
-
 	fs::path vertexShaderPath(getVertexShaderLocation());
 
 	// Get the path that this exists for

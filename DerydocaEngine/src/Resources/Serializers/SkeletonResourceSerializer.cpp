@@ -12,7 +12,7 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<void> SkeletonResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	std::shared_ptr<Object> SkeletonResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
 		auto sr = std::static_pointer_cast<SkeletonResource>(resource);
 		Assimp::Importer importer;

@@ -6,6 +6,7 @@
 #include <boost\lexical_cast.hpp>
 #include <fstream>
 #include "Files\FileUtils.h"
+#include "AssetData\SpriteSheetData.h"
 
 namespace DerydocaEngine::UI
 {
@@ -76,6 +77,9 @@ namespace DerydocaEngine::UI
 
 	void SpriteSheet::saveToDisk(const std::string& filePath)
 	{
+		//auto textureId = ObjectLibrary::getInstance().assetPathToId(imageFileName);
+		//AssetData::SpriteSheetData data("Engine Sprites", );
+		
 		//TODO: Replace YAML
 		//// Save the image to disk and process it by the object library
 		//std::string imageFileName = filePath + ".tga";

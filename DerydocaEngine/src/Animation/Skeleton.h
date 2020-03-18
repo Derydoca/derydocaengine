@@ -6,10 +6,12 @@
 
 namespace DerydocaEngine::Animation {
 
-	class Skeleton {
+	class Skeleton : public Object {
 	public:
 		Skeleton();
 		Skeleton(const std::shared_ptr<Bone>& rootBone, const glm::mat4& rootTransform);
+
+		virtual unsigned long getTypeId() const { return 0; }
 
 		const glm::mat4& getGlobalInverseTransform() const { return m_rootTransform; }
 		std::string getName() const { return m_rootBone->getName(); }

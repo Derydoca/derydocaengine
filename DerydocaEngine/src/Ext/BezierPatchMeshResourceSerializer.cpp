@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	std::shared_ptr<void> BezierPatchMeshResourceSerializer::deserializePointer(std::shared_ptr<Resources::Resource> resource)
+	std::shared_ptr<Object> BezierPatchMeshResourceSerializer::deserializePointer(std::shared_ptr<Resources::Resource> resource)
 	{
 		BezierPatchMeshFileLoader loader;
 		auto mesh = loader.Load(resource->getSourceFilePath().c_str());
