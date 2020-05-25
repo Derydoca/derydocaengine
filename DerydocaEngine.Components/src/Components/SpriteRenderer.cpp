@@ -72,9 +72,9 @@ namespace DerydocaEngine::Components
 
 		bool nativeSize = m_size.x == 0.0f && m_size.y == 0.0f;
 		float c0 = 0.0f;
-		float c3 = nativeSize ? m_sprite->getWidth() : m_size.x;
+		float c3 = nativeSize ? m_sprite->size.x : m_size.x;
 		float r0 = -(0.0f);
-		float r3 = -(nativeSize ? m_sprite->getHeight() : m_size.y);
+		float r3 = -(nativeSize ? m_sprite->size.y : m_size.y);
 
 		// Set the corner positions
 		vertices.push_back(glm::vec3(c0, r0, 0.0f));
@@ -83,12 +83,14 @@ namespace DerydocaEngine::Components
 		vertices.push_back(glm::vec3(c3, r3, 0.0f));
 
 		// If this is a nine-slice sprite, set the positions for the remaining verts
-		if (m_sprite->getType() == UI::SpriteType::NineSlice)
+		if (m_sprite->type == UI::SpriteType::NineSlice)
 		{
-			float c1 = c0 + (m_sprite->getWidth() * m_sprite->getSliceLeft());
-			float c2 = c3 - (m_sprite->getWidth() * (1 - m_sprite->getSliceRight()));
-			float r1 = r0 - (m_sprite->getHeight() * m_sprite->getSliceTop());
-			float r2 = r3 + (m_sprite->getHeight() * (1 - m_sprite->getSliceBottom()));
+			int2 spriteSize = m_sprite->size;
+			float4 spriteSlice = m_sprite->slice;
+			float c1 = c0 + (spriteSize.x * spriteSlice.w);
+			float c2 = c3 - (spriteSize.x * (1 - spriteSlice.y));
+			float r1 = r0 - (spriteSize.y * spriteSlice.x);
+			float r2 = r3 + (spriteSize.y * (1 - spriteSlice.z));
 
 			// Fill the gap of two in the first line
 			vertices.push_back(glm::vec3(c1, r0, 0.0f));
@@ -126,10 +128,10 @@ namespace DerydocaEngine::Components
 		std::vector<glm::vec2> texCoords;
 		texCoords.reserve(numVerts);
 
-		float c0 = m_sprite->getTexPosition().getX();
-		float c3 = m_sprite->getTexPosition().getDX();
-		float r0 = 1.0f - m_sprite->getTexPosition().getY();
-		float r3 = 1.0f - m_sprite->getTexPosition().getDY();
+		float c0 = m_sprite->texPosition.getX();
+		float c3 = m_sprite->texPosition.getDX();
+		float r0 = 1.0f - m_sprite->texPosition.getY();
+		float r3 = 1.0f - m_sprite->texPosition.getDY();
 
 		// Set the corners
 		texCoords.push_back(glm::vec2(c0, r0));
@@ -138,15 +140,16 @@ namespace DerydocaEngine::Components
 		texCoords.push_back(glm::vec2(c3, r3));
 
 		// If this is a nine-slice sprite, set the UVs for the remaining verts
-		if (m_sprite->getType() == UI::SpriteType::NineSlice)
+		if (m_sprite->type == UI::SpriteType::NineSlice)
 		{
 			float texw = c3 - c0;
 			float texh = r3 - r0;
 
-			float c1 = c0 + (texw * m_sprite->getSliceLeft());
-			float c2 = c0 + (texw * m_sprite->getSliceRight());
-			float r1 = r0 + (texh * m_sprite->getSliceTop());
-			float r2 = r0 + (texh * m_sprite->getSliceBottom());
+			float4 spriteSlice = m_sprite->slice;
+			float c1 = c0 + (texw * spriteSlice.w);
+			float c2 = c0 + (texw * spriteSlice.y);
+			float r1 = r0 + (texh * spriteSlice.x);
+			float r2 = r0 + (texh * spriteSlice.z);
 
 			// Fill the gap of two in the first line
 			texCoords.push_back(glm::vec2(c1, r0));
@@ -194,7 +197,7 @@ namespace DerydocaEngine::Components
 
 	std::vector<unsigned int> SpriteRenderer::generateTriangleIndices()
 	{
-		switch (m_sprite->getType())
+		switch (m_sprite->type)
 		{
 		case UI::SpriteType::Sprite:
 			return {

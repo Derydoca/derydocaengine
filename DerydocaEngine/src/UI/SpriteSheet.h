@@ -18,6 +18,8 @@ namespace DerydocaEngine::UI
 		void addSprite(std::string const& textureId);
 		void saveToDisk(const std::string& filePath);
 		void LoadFromDisk(std::string const& filePath);
+		void LoadFromSerializedFile(const std::string& filePath);
+		void SaveToSerializedFile(const std::string& filePath);
 
 		std::shared_ptr<Rendering::Texture> getTexture() { return m_texture; }
 		SpriteReference* getSpriteReference(unsigned int const& id)

@@ -6,6 +6,7 @@
 #include <boost\lexical_cast.hpp>
 #include <fstream>
 #include "Files\FileUtils.h"
+#include "AssetData\SpriteSheetData.h"
 
 namespace DerydocaEngine::UI
 {
@@ -32,14 +33,13 @@ namespace DerydocaEngine::UI
 		{
 			SpriteReference sprite = spriteMapItem.second;
 
-			auto spriteImageResource = ObjLib->getResource(sprite.getTextureId());
+			auto spriteImageResource = ObjLib->getResource(sprite.textureId);
 
 			int imgw, imgh, imgch;
 			unsigned char* spriteImageBuffer = stbi_load(spriteImageResource->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
-			sprite.setWidth(imgw);
-			sprite.setHeight(imgh);
-			sprite.setType(SpriteType::Sprite);
-			packer.addImage(sprite.getId(), { 0, 0 }, { 0, 0 }, spriteImageBuffer, { imgw, imgh }, imgch);
+			sprite.size = { imgw, imgh };
+			sprite.type = SpriteType::Sprite;
+			packer.addImage(sprite.id, { 0, 0 }, { 0, 0 }, spriteImageBuffer, { imgw, imgh }, imgch);
 			delete[] spriteImageBuffer;
 
 			m_sprites[spriteMapItem.first] = sprite;
@@ -58,7 +58,7 @@ namespace DerydocaEngine::UI
 			}
 
 			auto tex = img.imageRect;
-			(*spriteMapRecord).second.setTexPosition(tex.getX(), tex.getY(), tex.getDX(), tex.getDY());
+			(*spriteMapRecord).second.texPosition.set(tex.getX(), tex.getY(), tex.getDX(), tex.getDY());
 		}
 
 		delete[] m_imageBuffer;
@@ -69,8 +69,8 @@ namespace DerydocaEngine::UI
 	void SpriteSheet::addSprite(std::string const& textureId)
 	{
 		SpriteReference sprite = SpriteReference(++m_largestId);
-		sprite.setTextureId(textureId);
-		sprite.setType(SpriteType::Sprite);
+		sprite.textureId = textureId;
+		sprite.type = SpriteType::Sprite;
 		m_sprites[m_largestId] = sprite;
 	}
 
@@ -150,29 +150,78 @@ namespace DerydocaEngine::UI
 			int spriteId = hasBeenProcessed ? spriteNode["Id"].as<int>() : ++nextId;
 
 			SpriteReference sprite = SpriteReference(spriteId);
-			sprite.setTextureId(spriteNode["Texture"].as<std::string>());
+			sprite.textureId = spriteNode["Texture"].as<std::string>();
 			if (hasBeenProcessed)
 			{
-				sprite.setWidth(spriteNode["Width"].as<int>());
-				sprite.setHeight(spriteNode["Height"].as<int>());
-				sprite.setTexPosition(
+				sprite.size = { spriteNode["Width"].as<int>(), spriteNode["Height"].as<int>() };
+				sprite.texPosition.set(
 					spriteNode["TexX"].as<float>(),
 					spriteNode["TexY"].as<float>(),
 					spriteNode["TexDX"].as<float>(),
 					spriteNode["TexDY"].as<float>()
 				);
 				int typeId = spriteNode["Type"].as<int>();
-				sprite.setType((SpriteType)typeId);
-				sprite.setSliceTop(spriteNode["SliceTop"].as<float>());
-				sprite.setSliceRight(spriteNode["SliceRight"].as<float>());
-				sprite.setSliceBottom(spriteNode["SliceBottom"].as<float>());
-				sprite.setSliceLeft(spriteNode["SliceLeft"].as<float>());
+				sprite.type = (SpriteType)typeId;
+				sprite.slice = {
+					spriteNode["SliceTop"].as<float>(),
+					spriteNode["SliceRight"].as<float>(),
+					spriteNode["SliceBottom"].as<float>(),
+					spriteNode["SliceLeft"].as<float>()
+				};
 			}
 
 			// Add this sprite to the parent node
 			m_sprites[spriteId] = sprite;
 		}
 
+	}
+
+    void SpriteSheet::LoadFromSerializedFile(const std::string& filePath)
+    {
+		auto data = Files::Utils::ReadFromDisk<AssetData::SpriteSheetData>(filePath);
+
+		for (auto img : data.sprites)
+		{
+			m_sprites.emplace(img.id, img);
+		}
+
+		auto r = ObjectLibrary::getInstance().getResource(data.textureId);
+		int imgw, imgh, imgch;
+		unsigned char* imageData = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
+		int2 imageSize = { imgw, imgh };
+		delete[] m_imageBuffer;
+		m_imageBuffer = new unsigned char[imageSize.x * imageSize.y];
+		for (int i = 0; i < imageSize.x * imageSize.y; i++)
+		{
+			m_imageBuffer[i] = imageData[i * imgch];
+		}
+		m_imageBuffer = imageData;
+		m_texture->updateBuffer(m_imageBuffer, imgw, imgh, imgch, nullptr);
+		delete[] imageData;
+
+		//m_textureDirty = true;
+    }
+
+	void SpriteSheet::SaveToSerializedFile(const std::string& filePath)
+	{
+		// Write the generated texture to disk
+		std::string imageFileName = filePath + ".bmp";
+		int imgw, imgh, imgch;
+		stbi_write_bmp(imageFileName.c_str(), imgw, imgh, imgch, m_imageBuffer);
+		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
+		auto textureId = ObjectLibrary::getInstance().assetPathToId(imageFileName);
+
+		// Construct the struct
+		AssetData::SpriteSheetData data(textureId);
+
+		// Copy the glyph data
+		data.sprites.reserve(m_sprites.size());
+		for (const auto& s : m_sprites)
+		{
+			data.sprites.push_back(s.second);
+		}
+
+		Files::Utils::WriteToDisk(data, filePath);
 	}
 
 }

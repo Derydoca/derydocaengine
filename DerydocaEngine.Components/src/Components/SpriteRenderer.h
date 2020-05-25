@@ -42,7 +42,7 @@ namespace DerydocaEngine::Components
 
 		unsigned int generateNumVertices()
 		{
-			switch (m_sprite->getType())
+			switch (m_sprite->type)
 			{
 			case UI::SpriteType::Sprite:
 				return 4;
@@ -55,7 +55,7 @@ namespace DerydocaEngine::Components
 
 		unsigned int generateNumIndices()
 		{
-			switch (m_sprite->getType())
+			switch (m_sprite->type)
 			{
 			case UI::SpriteType::Sprite:
 				return 2 * 3;
