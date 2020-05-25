@@ -12,7 +12,7 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<void> AnimationResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	std::shared_ptr<Object> AnimationResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
 		Assimp::Importer importer;
 

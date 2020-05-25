@@ -22,12 +22,14 @@ namespace DerydocaEngine {
 namespace DerydocaEngine::Rendering
 {
 
-	class Shader
+	class Shader : public Object
 	{
 	public:
 		Shader(const std::string& fileName);
 		Shader(const std::string& fileName, const int count, const char *const * varyings);
 		~Shader();
+
+		virtual unsigned long getTypeId() const { return 0; }
 
 		void bind();
 		void update(

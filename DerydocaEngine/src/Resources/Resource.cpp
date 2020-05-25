@@ -66,7 +66,7 @@ namespace DerydocaEngine::Resources
 		}
 	}
 
-	std::shared_ptr<void> Resource::getResourceObjectPointer()
+	std::shared_ptr<Object> Resource::getResourceObjectPointer()
 	{
 		if (m_resourceObjectPointer == 0)
 		{

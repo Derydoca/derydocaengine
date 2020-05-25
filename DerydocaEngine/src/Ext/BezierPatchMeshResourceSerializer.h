@@ -10,7 +10,7 @@ namespace DerydocaEngine::Ext
 		BezierPatchMeshResourceSerializer() {}
 		~BezierPatchMeshResourceSerializer() {}
 
-		virtual std::shared_ptr<void> deserializePointer(std::shared_ptr<Resources::Resource> resource);
+		virtual std::shared_ptr<Object> deserializePointer(std::shared_ptr<Resources::Resource> resource);
 		virtual Resources::ResourceType getResourceType();
 	};
 

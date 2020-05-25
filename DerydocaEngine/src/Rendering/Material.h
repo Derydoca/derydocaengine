@@ -20,11 +20,13 @@ class RenderTexture;
 namespace DerydocaEngine::Rendering
 {
 
-	class Material
+	class Material : public Object
 	{
 	public:
 		Material();
 		~Material();
+
+		virtual unsigned long getTypeId() const { return 0; }
 
 		void setShader(std::shared_ptr<Shader> shader);
 		inline std::shared_ptr<Rendering::Shader> getShader() const { return m_shader; }
