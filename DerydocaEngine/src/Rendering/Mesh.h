@@ -24,7 +24,7 @@ namespace DerydocaEngine::Rendering
 		All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors | BoneWeights
 	};
 
-	class Mesh : public Object
+	class Mesh
 	{
 	public:
 		Mesh(
@@ -38,8 +38,6 @@ namespace DerydocaEngine::Rendering
 			const std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
 
 		~Mesh();
-
-		virtual unsigned long getTypeId() const { return 0; }
 
 		void loadMeshComponentData(
 			const MeshComponents& meshComponentFlags,

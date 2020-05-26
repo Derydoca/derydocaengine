@@ -6,7 +6,7 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<Object> TextureResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	std::shared_ptr<void> TextureResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
 		std::string sourceFilePath = resource->getSourceFilePath();
 

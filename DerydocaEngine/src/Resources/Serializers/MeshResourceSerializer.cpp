@@ -11,7 +11,7 @@
 
 namespace DerydocaEngine::Resources::Serializers
 {
-	std::shared_ptr<Object> MeshResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	std::shared_ptr<void> MeshResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
 		auto mr = std::static_pointer_cast<MeshResource>(resource);
 
@@ -71,7 +71,7 @@ namespace DerydocaEngine::Resources::Serializers
 
 		m->setFlags(mr->getFlags());
 
-		return m;
+		return std::static_pointer_cast<void>(m);
 	}
 
 	void MeshResourceSerializer::ProcessMeshData(

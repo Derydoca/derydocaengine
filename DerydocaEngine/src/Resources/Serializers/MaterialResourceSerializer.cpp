@@ -8,7 +8,7 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<Object> MaterialResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	std::shared_ptr<void> MaterialResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
 		// Load the yaml file
 		YAML::Node root = YAML::LoadFile(resource->getSourceFilePath());

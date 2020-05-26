@@ -14,7 +14,7 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 	public:
 		virtual ~ResourceSerializer() {}
-		virtual std::shared_ptr<Object> deserializePointer(std::shared_ptr<Resource> resource) { return nullptr; }
+		virtual std::shared_ptr<void> deserializePointer(std::shared_ptr<Resource> resource) { return nullptr; }
 		virtual ResourceType getResourceType() = 0;
 
 	protected:

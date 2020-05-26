@@ -3,7 +3,7 @@
 namespace DerydocaEngine::Ext
 {
 
-	class BezierPatchMesh : public Object
+	class BezierPatchMesh
 	{
 	public:
 		const static int FLOATS_PER_VECTOR = 3;
@@ -12,8 +12,6 @@ namespace DerydocaEngine::Ext
 
 		BezierPatchMesh();
 		~BezierPatchMesh();
-
-		virtual unsigned long getTypeId() const { return 0; }
 
 		int getNumPatches() const { return m_numPatches; }
 		void loadPatchData(int const& numPatches, float* const& patchData);

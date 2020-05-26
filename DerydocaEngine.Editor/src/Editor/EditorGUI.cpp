@@ -72,7 +72,7 @@ void DerydocaEngine::Editor::EditorGUI::render()
 			if (ImGui::MenuItem("Open Scene")) {}
 			if (ImGui::MenuItem("Save Scene"))
 			{
-				Scenes::SceneManager::getInstance().saveScene("");
+				Scenes::SceneManager::getInstance().saveScene("./NewScene.derylevel");
 			}
 			if (ImGui::MenuItem("Save Scene As")) {}
 			ImGui::Separator();

@@ -7,7 +7,7 @@
 namespace DerydocaEngine::Resources::Serializers
 {
 
-	std::shared_ptr<Object> CubemapResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+	std::shared_ptr<void> CubemapResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
 	{
 		try
 		{

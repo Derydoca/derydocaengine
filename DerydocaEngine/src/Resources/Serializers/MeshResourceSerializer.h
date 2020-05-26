@@ -16,7 +16,7 @@ namespace DerydocaEngine::Resources::Serializers
 	class MeshResourceSerializer : public ResourceSerializer
 	{
 	public:
-		virtual std::shared_ptr<Object> deserializePointer(std::shared_ptr<Resource> resource);
+		virtual std::shared_ptr<void> deserializePointer(std::shared_ptr<Resource> resource);
 		void ProcessMeshData(
 			aiMesh * &mesh,
 			std::vector<glm::vec3> &m_positions,

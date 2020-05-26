@@ -6,12 +6,10 @@
 
 namespace DerydocaEngine::Animation {
 
-	class AnimationData : public Object {
+	class AnimationData {
 	public:
 		AnimationData();
 		AnimationData(const std::string& name, const double duration, const std::vector<AnimationChannel>& channels);
-
-		virtual unsigned long getTypeId() const { return 0; }
 
 		double getDuration() const { return m_duration; }
 		std::string getName() const { return m_name; }

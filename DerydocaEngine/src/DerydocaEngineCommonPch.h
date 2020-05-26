@@ -75,7 +75,6 @@
 // Derydoca Engine Classes
 #include "Logging\Log.h"
 #include "Serialization\Serialization.h"
-#include "Object.h"
 
 // Maths
 #include "Math/TypeAliases.h"

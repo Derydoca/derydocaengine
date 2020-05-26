@@ -9,7 +9,7 @@ namespace DerydocaEngine::Rendering {
 namespace DerydocaEngine::Rendering
 {
 
-	class Texture : public Object
+	class Texture
 	{
 	public:
 		Texture();
@@ -23,8 +23,6 @@ namespace DerydocaEngine::Rendering
 			const std::string& zneg
 		);
 		~Texture();
-
-		virtual unsigned long getTypeId() const { return 0; };
 
 		void bind(const unsigned int unit) const;
 		int getWidth() const { return m_width; }

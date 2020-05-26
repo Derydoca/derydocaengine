@@ -10,6 +10,7 @@
 #include <fstream>
 #include <cereal/types/vector.hpp>
 #include <cereal/types/memory.hpp>
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine::Scenes
 {
@@ -210,12 +211,8 @@ namespace DerydocaEngine::Scenes
 
 	void SerializedScene::SaveToFile(const std::string& filePath)
 	{
-		//std::stringstream ss;
-		//
-		//{
-		//	cereal::JSONOutputArchive oarchive(ss);
-		//	oarchive(m_sceneObjects);
-		//}
+		m_Name = "Remove this field when scene serialization is implemented.";
+		Files::Utils::WriteToDisk(*this, filePath);
 	}
 
 	std::shared_ptr<SceneObject> SerializedScene::findNode(const boost::uuids::uuid& id)

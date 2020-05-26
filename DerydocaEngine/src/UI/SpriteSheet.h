@@ -8,13 +8,11 @@
 namespace DerydocaEngine::UI
 {
 
-	class SpriteSheet : public Object
+	class SpriteSheet
 	{
 	public:
 		SpriteSheet();
 		~SpriteSheet();
-
-		virtual unsigned long getTypeId() const { return 0; }
 
 		void updateTexture();
 		void addSprite(std::string const& textureId);
