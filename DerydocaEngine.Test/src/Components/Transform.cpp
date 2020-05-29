@@ -15,7 +15,7 @@ TEST(Transform, ModelHasTransform_When_PositionIsSet)
 	DerydocaEngine::Components::Transform transform;
 
 	glm::vec3 newPos(1.1f, 2.2f, 3.3f);
-	transform.setPos(newPos);
+	transform.setPosition(newPos);
 
 	auto transModel = transform.getModel();
 

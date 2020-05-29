@@ -118,7 +118,7 @@ namespace DerydocaEngine::Ext
 		}
 
 		// Create the projection matrix
-		glm::mat4 projView = lookAt(getGameObject()->getTransform()->getWorldPos(), m_focalPoint, m_upVector);
+		glm::mat4 projView = lookAt(getGameObject()->getTransform()->getWorldPosition(), m_focalPoint, m_upVector);
 		glm::mat4 projProj = glm::perspective(glm::radians(m_fov), aspectRatio, m_zNear, m_zFar);
 		glm::mat4 projScaleTrans = glm::translate(glm::mat4(), glm::vec3(0.5f)) * glm::scale(glm::mat4(), glm::vec3(0.5f));
 

@@ -48,7 +48,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 		pos = glm::rotate(pos, m_pitch, glm::vec3(1, 0, 0));
 		pos = glm::rotate(pos, m_yaw, glm::vec3(0, 1, 0));
 		pos += m_offset;
-		cameraTransform->setPos(pos);
+		cameraTransform->setPosition(pos);
 
 		// Calculate the new rotation quaternion of the camera by factoring in the pitch and yaw
 		glm::fquat newQuat =
@@ -56,7 +56,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 			*
 			glm::rotate(m_pitch, glm::vec3(1, 0, 0))
 			;
-		cameraTransform->setQuat(newQuat);
+		cameraTransform->setQuaternion(newQuat);
 	}
 
 	bool OrbitalControlStrategy::updateInput(const float deltaTime, bool isViewportHovered)

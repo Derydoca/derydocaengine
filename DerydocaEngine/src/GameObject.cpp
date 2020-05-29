@@ -8,26 +8,26 @@ namespace DerydocaEngine
 
 	GameObject::GameObject(const std::string& name) :
 		Object(),
-		m_name(name),
-		m_transform(std::make_shared<Components::Transform>()),
-		m_parent(),
-		m_children(),
-		m_components(),
-		m_destroyFlag(false)
+		m_Name(name),
+		m_Transform(std::make_shared<Components::Transform>()),
+		m_Parent(),
+		m_Children(),
+		m_Components(),
+		m_DestroyFlag(false)
 	{
 		auto idGen = boost::uuids::random_generator_pure();
 		m_id = idGen();
-		m_transform->setGameObject(this);
+		m_Transform->setGameObject(this);
 	}
 
 	GameObject::GameObject(const boost::uuids::uuid id, const std::string & name) :
 		Object(id),
-		m_name(name),
-		m_transform(std::make_shared<Components::Transform>()),
-		m_parent(std::weak_ptr<GameObject>()),
-		m_children(),
-		m_components(),
-		m_destroyFlag(false)
+		m_Name(name),
+		m_Transform(std::make_shared<Components::Transform>()),
+		m_Parent(std::weak_ptr<GameObject>()),
+		m_Children(),
+		m_Components(),
+		m_DestroyFlag(false)
 	{
 	}
 
@@ -37,13 +37,13 @@ namespace DerydocaEngine
 
 	void GameObject::addChild(const std::shared_ptr<GameObject> gameObject)
 	{
-		m_children.push_back(gameObject);
-		gameObject->m_parent = shared_from_this();
+		m_Children.push_back(gameObject);
+		gameObject->m_Parent = shared_from_this();
 	}
 
 	void GameObject::addComponent(const std::shared_ptr<Components::GameComponent> component)
 	{
-		m_components.push_back(component);
+		m_Components.push_back(component);
 		component->setGameObject(shared_from_this());
 	}
 
@@ -54,14 +54,14 @@ namespace DerydocaEngine
 		std::shared_ptr<Components::Transform> projectionTransform
 	) const
 	{
-		matrixStack->push(m_transform->getModel());
+		matrixStack->push(m_Transform->getModel());
 
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->renderMesh(matrixStack, material, projection, projectionTransform);
 		}
@@ -72,12 +72,12 @@ namespace DerydocaEngine
 	void GameObject::init()
 	{
 		// Use standard for loop so components can be added during init calls
-		for (size_t i = 0; i < m_components.size(); i++)
+		for (size_t i = 0; i < m_Components.size(); i++)
 		{
-			m_components[i]->init();
+			m_Components[i]->init();
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->init();
 		}
@@ -85,24 +85,24 @@ namespace DerydocaEngine
 
 	void GameObject::postInit()
 	{
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->postInit();
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->postInit();
 		}
 	}
 
 	void GameObject::postRender() {
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->postRender();
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->postRender();
 		}
@@ -110,41 +110,41 @@ namespace DerydocaEngine
 
 	void GameObject::preDestroy()
 	{
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->preDestroy();
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->preDestroy();
 		}
 
-		m_components.clear();
-		m_children.clear();
+		m_Components.clear();
+		m_Children.clear();
 	}
 
 	void GameObject::preRender() {
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->preRender();
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->preRender();
 		}
 	}
 
 	void GameObject::render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) const {
-		matrixStack->push(m_transform->getModel());
+		matrixStack->push(m_Transform->getModel());
 
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->render(matrixStack);
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->render(matrixStack);
 		}
@@ -153,24 +153,24 @@ namespace DerydocaEngine
 	}
 
 	void GameObject::renderEditorGUI() {
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->renderEditorGUI();
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->renderEditorGUI();
 		}
 	}
 
 	void GameObject::update(const float deltaTime) {
-		for each (auto c in m_components)
+		for each (auto c in m_Components)
 		{
 			c->update(deltaTime);
 		}
 
-		for each (auto go in m_children)
+		for each (auto go in m_Children)
 		{
 			go->update(deltaTime);
 		}
@@ -178,21 +178,21 @@ namespace DerydocaEngine
 
 	void GameObject::destroy()
 	{
-		m_children.clear();
-		m_parent.reset();
-		m_destroyFlag = true;
+		m_Children.clear();
+		m_Parent.reset();
+		m_DestroyFlag = true;
 	}
 
 	void GameObject::destroyFlaggedChildren()
 	{
-		for (size_t i = m_children.size(); i > 0 ; i--)
+		for (size_t i = m_Children.size(); i > 0 ; i--)
 		{
-			auto child = m_children[i-1];
+			auto child = m_Children[i-1];
 			child->destroyFlaggedChildren();
-			if (child->m_destroyFlag)
+			if (child->m_DestroyFlag)
 			{
 				child->preDestroy();
-				m_children.erase(m_children.begin() + (i - 1));
+				m_Children.erase(m_Children.begin() + (i - 1));
 				D_LOG_TRACE("Deleting '{}' which has {} reference(s).", child->getName().c_str(), child.use_count());
 			}
 		}

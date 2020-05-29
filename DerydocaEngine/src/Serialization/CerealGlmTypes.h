@@ -7,6 +7,17 @@ namespace glm
 {
 
 	template<class Archive>
+	void serialize(Archive& archive, glm::fquat& q)
+	{
+		archive(
+			SERIALIZE_NAMED("x", q.x),
+			SERIALIZE_NAMED("y", q.y),
+			SERIALIZE_NAMED("z", q.z),
+			SERIALIZE_NAMED("w", q.w)
+		);
+	}
+
+	template<class Archive>
 	void serialize(Archive& archive, glm::ivec2& m)
 	{
 		archive(

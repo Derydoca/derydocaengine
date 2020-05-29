@@ -19,66 +19,72 @@ namespace DerydocaEngine::Components
 		REGISTER_TYPE_ID(Transform);
 
 		Transform() :
-			m_pos(glm::vec3()),
-			m_scale(glm::vec3(1, 1, 1)),
-			m_quat(glm::fquat()),
+			m_Position(glm::vec3()),
+			m_Scale(glm::vec3(1, 1, 1)),
+			m_Quaternion(glm::fquat()),
 			m_gameObject()
 		{
 		}
 
 		Transform(glm::vec3 const& pos) :
-			m_pos(pos),
-			m_scale(glm::vec3(1, 1, 1)),
-			m_quat(glm::fquat()),
+			m_Position(pos),
+			m_Scale(glm::vec3(1, 1, 1)),
+			m_Quaternion(glm::fquat()),
 			m_gameObject()
 		{
 		}
 
 		Transform(glm::vec3 const& pos, glm::vec3 const& rot, glm::vec3 const& scale) :
-			m_pos(pos),
-			m_scale(scale),
-			m_quat(),
+			m_Position(pos),
+			m_Scale(scale),
+			m_Quaternion(),
 			m_gameObject()
 		{
 			setEulerAngles(rot);
 		}
 
 		Transform(glm::vec3 const& pos, glm::fquat const& quat, glm::vec3 const& scale) :
-			m_pos(pos),
-			m_quat(quat),
-			m_scale(scale),
+			m_Position(pos),
+			m_Quaternion(quat),
+			m_Scale(scale),
 			m_gameObject()
 		{
 		}
 
 		~Transform() {};
 
-		inline glm::mat4 getModel() const { return glm::translate(m_pos) * glm::mat4_cast(m_quat) * glm::scale(m_scale); }
-		inline glm::mat4 getTranslationMatrix() const { return glm::translate(m_pos); }
-		inline glm::mat4 getRotationMatrix() const { return glm::mat4_cast(m_quat); }
-		inline glm::mat4 getScaleMatrix() const { return glm::scale(m_scale); }
+		inline glm::mat4 getModel() const { return glm::translate(m_Position) * glm::mat4_cast(m_Quaternion) * glm::scale(m_Scale); }
+		inline glm::mat4 getTranslationMatrix() const { return glm::translate(m_Position); }
+		inline glm::mat4 getRotationMatrix() const { return glm::mat4_cast(m_Quaternion); }
+		inline glm::mat4 getScaleMatrix() const { return glm::scale(m_Scale); }
 		glm::mat4 getWorldModel() const;
 
-		glm::vec3 getWorldPos() const;
-		inline glm::vec3& getPos() { return m_pos; }
-		inline glm::vec3 getPos() const { return m_pos; }
-		inline glm::fquat& getQuat() { return m_quat; }
-		inline glm::fquat getQuat() const { return m_quat; }
-		inline glm::vec3& getScale() { return m_scale; }
-		inline glm::vec3 getScale() const { return m_scale; }
+		glm::vec3 getWorldPosition() const;
+		inline glm::vec3& getPosition() { return m_Position; }
+		inline glm::vec3 getPosition() const { return m_Position; }
+		inline glm::fquat& getQuaternion() { return m_Quaternion; }
+		inline glm::fquat getQuaternion() const { return m_Quaternion; }
+		inline glm::vec3& getScale() { return m_Scale; }
+		inline glm::vec3 getScale() const { return m_Scale; }
 		GameObject* getGameObject() const { return m_gameObject; }
 
-		inline void setPos(glm::vec3 const& pos) { m_pos = pos; }
-		inline void setEulerAngles(glm::vec3 const& euler) { m_quat = glm::fquat(euler * 0.0174533f); }
-		inline void setQuat(glm::fquat const& quat) { m_quat = quat; }
-		inline void setScale(glm::vec3 const& scale) { m_scale = scale; }
+		inline void setPosition(glm::vec3 const& pos) { m_Position = pos; }
+		inline void setEulerAngles(glm::vec3 const& euler) { m_Quaternion = glm::fquat(euler * 0.0174533f); }
+		inline void setQuaternion(glm::fquat const& quat) { m_Quaternion = quat; }
+		inline void setScale(glm::vec3 const& scale) { m_Scale = scale; }
 		void setGameObject(GameObject* object) { m_gameObject = object; }
 
 		void translate(glm::vec3 const& delta);
+
+		SERIALIZE_FUNC(
+			SERIALIZE(m_Position),
+			SERIALIZE(m_Scale),
+			SERIALIZE(m_Quaternion)
+		)
 	private:
-		glm::vec3 m_pos;
-		glm::vec3 m_scale;
-		glm::fquat m_quat;
+		glm::vec3 m_Position;
+		glm::vec3 m_Scale;
+		glm::fquat m_Quaternion;
 		GameObject* m_gameObject;
 	};
 

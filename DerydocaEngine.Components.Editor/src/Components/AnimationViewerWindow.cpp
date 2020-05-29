@@ -31,13 +31,13 @@ DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	go->addComponent(Components::Light::generateInstance());
 	go->init();
 	go->postInit();
-	go->getTransform()->setPos({ 0.0f, 0.5f, 1.0f });
+	go->getTransform()->setPosition({ 0.0f, 0.5f, 1.0f });
 	m_scene->getRoot()->addChild(go);
 	auto go2 = std::make_shared<GameObject>("");
 	go2->addComponent(Components::Light::generateInstance());
 	go2->init();
 	go2->postInit();
-	go2->getTransform()->setPos({ 0.0f, 0.5f, -1.0f });
+	go2->getTransform()->setPosition({ 0.0f, 0.5f, -1.0f });
 	m_scene->getRoot()->addChild(go2);
 	auto goGrid = std::make_shared<GameObject>("_xzPlane");
 	auto gridMeshRenderer = std::make_shared<Components::MeshRenderer>();

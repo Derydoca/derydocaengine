@@ -45,12 +45,12 @@ namespace DerydocaEngine::Ext
 
 	void ParticleContinuousFountain::preRender()
 	{
-		m_material->setVec3("Position", getGameObject()->getTransform()->getWorldPos());
+		m_material->setVec3("Position", getGameObject()->getTransform()->getWorldPosition());
 
 		// Update the shader's time variable
 		m_material->setFloat("Time", m_time);
 
-		m_material->setVec3("EmitterPosition", m_trans->getWorldPos());
+		m_material->setVec3("EmitterPosition", m_trans->getWorldPosition());
 	}
 
 	void ParticleContinuousFountain::deserialize(const YAML::Node& compNode)
@@ -198,7 +198,7 @@ namespace DerydocaEngine::Ext
 
 		// Fill the position data
 		GLfloat* data = new GLfloat[m_numParticles * 3];
-		glm::vec3 worldPos = m_trans->getWorldPos();
+		glm::vec3 worldPos = m_trans->getWorldPosition();
 		for (int i = 0; i < m_numParticles; i++)
 		{
 			data[i * 3 + 0] = worldPos.x;

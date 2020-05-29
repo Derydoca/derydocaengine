@@ -63,7 +63,7 @@ namespace DerydocaEngine::Components
 		else if (m_clearMode == SkyboxClear)
 		{
 			m_skyboxMaterial->bind();
-			m_skyboxMaterial->getShader()->update(m_projection.getRotationProjection(getGameObject()->getTransform()->getQuat()));
+			m_skyboxMaterial->getShader()->update(m_projection.getRotationProjection(getGameObject()->getTransform()->getQuaternion()));
 			m_skybox->getMesh()->draw();
 		}
 		// NoClear will fall through and do nothing as we would expect it to do

@@ -18,11 +18,9 @@ namespace DerydocaEngine::Scenes
 		void SaveToFile(const std::string& filePath);
 
 		SERIALIZE_FUNC(
-			SERIALIZE(m_Name)
+			SERIALIZE(m_Root)
 		);
 	private:
-		std::string m_Name;
-
 		// TODO: Find a better way for tracking scene objects for setting up the scene
 		std::vector<std::shared_ptr<SceneObject>> m_sceneObjects;
 

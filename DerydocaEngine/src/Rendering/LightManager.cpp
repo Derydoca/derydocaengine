@@ -87,7 +87,7 @@ namespace DerydocaEngine::Rendering
 			auto lightTransform = l->getGameObject()->getTransform();
 
 
-			glm::vec3 lightWorldPos = l->getGameObject()->getTransform()->getWorldPos();
+			glm::vec3 lightWorldPos = l->getGameObject()->getTransform()->getWorldPosition();
 			glm::vec4 lightPositionEyeCoords = viewMat * l->getGameObject()->getTransform()->getWorldModel() * glm::vec4(lightWorldPos, 1);
 
 			ld->Cutoff = l->getSpotlightCutoff();

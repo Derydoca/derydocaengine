@@ -26,11 +26,9 @@ namespace DerydocaEngine::Scenes
 		std::shared_ptr<GameObject> getGameObject() const { return m_objectReference; }
 		void setObjectReference(std::shared_ptr<GameObject> const reference) { m_objectReference = reference; }
 
-		//template<class Archive>
-		//void Serialize(Archive& ar)
-		//{
-		//	ar(m_type);
-		//}
+		SERIALIZE_FUNC(
+			SERIALIZE(m_id)
+		);
 	private:
 		boost::uuids::uuid m_id;
 		std::string m_type;

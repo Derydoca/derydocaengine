@@ -28,7 +28,7 @@ namespace DerydocaEngine::Scenes
 	{
 		boost::uuids::basic_random_generator<boost::mt19937> uuidGenerator;
 
-		m_root = std::make_shared<GameObject>("__SCENE_ROOT__");
+		m_Root = std::make_shared<GameObject>("__SCENE_ROOT__");
 
 		// Initialize the components
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)
@@ -83,8 +83,8 @@ namespace DerydocaEngine::Scenes
 			}
 
 			// Apply the transform, rotation (quat), and sclae
-			trans->setPos(transformPosition);
-			trans->setQuat(transformQuat);
+			trans->setPosition(transformPosition);
+			trans->setQuaternion(transformQuat);
 			trans->setScale(transformScale);
 
 			sceneObject->setObjectReference(go);
@@ -117,7 +117,7 @@ namespace DerydocaEngine::Scenes
 			else
 			{
 				// Otherwise this object should exist on the root of the scene
-				m_root->addChild(go);
+				m_Root->addChild(go);
 			}
 
 			// Iterate through each component
@@ -159,8 +159,8 @@ namespace DerydocaEngine::Scenes
 	void SerializedScene::tearDown()
 	{
 		m_sceneObjects.clear();
-		m_root->preDestroy();
-		m_root = nullptr;
+		m_Root->preDestroy();
+		m_Root = nullptr;
 	}
 
 	void SerializedScene::LoadFromFile(const std::string& filePath)
@@ -211,7 +211,6 @@ namespace DerydocaEngine::Scenes
 
 	void SerializedScene::SaveToFile(const std::string& filePath)
 	{
-		m_Name = "Remove this field when scene serialization is implemented.";
 		Files::Utils::WriteToDisk(*this, filePath);
 	}
 

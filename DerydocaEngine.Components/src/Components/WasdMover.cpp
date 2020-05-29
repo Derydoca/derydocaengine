@@ -82,7 +82,7 @@ namespace DerydocaEngine::Components
 			glm::vec4 globalMomentum = m_transform->getModel() * glm::vec4(m_localMomentum, 0);
 
 			// Translate
-			m_transform->setPos(m_transform->getPos() + glm::vec3(globalMomentum));
+			m_transform->setPosition(m_transform->getPosition() + glm::vec3(globalMomentum));
 
 			// Update the rotations based on mouse movement
 			glm::ivec2 diff = m_mouse->getRelativeMovement();
@@ -114,7 +114,7 @@ namespace DerydocaEngine::Components
 				*
 				glm::rotate(m_eulerRot.x, glm::vec3(1, 0, 0))
 				;
-			m_transform->setQuat(newQuat);
+			m_transform->setQuaternion(newQuat);
 		}
 	}
 

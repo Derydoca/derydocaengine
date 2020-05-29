@@ -38,7 +38,7 @@ namespace DerydocaEngine::Ext
 
 	void ParticleFountain::preRender()
 	{
-		m_material->setVec3("Position", getGameObject()->getTransform()->getWorldPos());
+		m_material->setVec3("Position", getGameObject()->getTransform()->getWorldPosition());
 
 		// Update the shader's time variable
 		m_material->setFloat("Time", m_time);
