@@ -22,7 +22,7 @@ namespace DerydocaEngine::Components
 			m_Position(glm::vec3()),
 			m_Scale(glm::vec3(1, 1, 1)),
 			m_Quaternion(glm::fquat()),
-			m_gameObject()
+			m_GameObject()
 		{
 		}
 
@@ -30,7 +30,7 @@ namespace DerydocaEngine::Components
 			m_Position(pos),
 			m_Scale(glm::vec3(1, 1, 1)),
 			m_Quaternion(glm::fquat()),
-			m_gameObject()
+			m_GameObject()
 		{
 		}
 
@@ -38,7 +38,7 @@ namespace DerydocaEngine::Components
 			m_Position(pos),
 			m_Scale(scale),
 			m_Quaternion(),
-			m_gameObject()
+			m_GameObject()
 		{
 			setEulerAngles(rot);
 		}
@@ -47,7 +47,7 @@ namespace DerydocaEngine::Components
 			m_Position(pos),
 			m_Quaternion(quat),
 			m_Scale(scale),
-			m_gameObject()
+			m_GameObject()
 		{
 		}
 
@@ -66,13 +66,13 @@ namespace DerydocaEngine::Components
 		inline glm::fquat getQuaternion() const { return m_Quaternion; }
 		inline glm::vec3& getScale() { return m_Scale; }
 		inline glm::vec3 getScale() const { return m_Scale; }
-		GameObject* getGameObject() const { return m_gameObject; }
+		GameObject* getGameObject() const { return m_GameObject; }
 
 		inline void setPosition(glm::vec3 const& pos) { m_Position = pos; }
 		inline void setEulerAngles(glm::vec3 const& euler) { m_Quaternion = glm::fquat(euler * 0.0174533f); }
 		inline void setQuaternion(glm::fquat const& quat) { m_Quaternion = quat; }
 		inline void setScale(glm::vec3 const& scale) { m_Scale = scale; }
-		void setGameObject(GameObject* object) { m_gameObject = object; }
+		void setGameObject(GameObject* object) { m_GameObject = object; }
 
 		void translate(glm::vec3 const& delta);
 
@@ -85,7 +85,7 @@ namespace DerydocaEngine::Components
 		glm::vec3 m_Position;
 		glm::vec3 m_Scale;
 		glm::fquat m_Quaternion;
-		GameObject* m_gameObject;
+		GameObject* m_GameObject;
 	};
 
 }

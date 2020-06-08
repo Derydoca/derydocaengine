@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "SerializedScene.h"
 #include "ObjectLibrary.h"
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine::Scenes
 {
@@ -32,8 +33,28 @@ namespace DerydocaEngine::Scenes
 	{
 		unloadScene();
 
-		auto scene = std::make_shared<Scenes::SerializedScene>();
-		scene->LoadFromFile(levelResource->getSourceFilePath());
+		char temporarySerializationSwitch = ' ';
+		{
+			std::ifstream fs;
+			fs.open(levelResource->getSourceFilePath());
+			std::string line;
+			std::getline(fs, line);
+			fs.close();
+			temporarySerializationSwitch = line[0];
+		}
+
+		std::shared_ptr<Scenes::SerializedScene> scene;
+		if (temporarySerializationSwitch == 'S')
+		{
+			scene = std::make_shared<Scenes::SerializedScene>();
+			scene->LoadFromFile(levelResource->getSourceFilePath());
+		}
+		else
+		{
+			std::string path = levelResource->getSourceFilePath();
+			auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
+			scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
+		}
 		scene->setUp();
 		scene->getRoot()->init();
 		scene->getRoot()->postInit();

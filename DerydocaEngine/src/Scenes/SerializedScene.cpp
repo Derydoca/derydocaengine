@@ -28,7 +28,10 @@ namespace DerydocaEngine::Scenes
 	{
 		boost::uuids::basic_random_generator<boost::mt19937> uuidGenerator;
 
-		m_Root = std::make_shared<GameObject>("__SCENE_ROOT__");
+		if (!m_Root)
+		{
+			m_Root = std::make_shared<GameObject>("__SCENE_ROOT__");
+		}
 
 		// Initialize the components
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)

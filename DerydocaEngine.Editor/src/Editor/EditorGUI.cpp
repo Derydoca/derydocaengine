@@ -8,7 +8,8 @@
 #include "Editor\EditorRenderer.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
-#include "Scenes/SceneManager.h"
+#include "Scenes\SceneManager.h"
+#include "Settings\EngineSettings.h"
 
 DerydocaEngine::Editor::EditorGUI::EditorGUI()
 {
@@ -72,7 +73,7 @@ void DerydocaEngine::Editor::EditorGUI::render()
 			if (ImGui::MenuItem("Open Scene")) {}
 			if (ImGui::MenuItem("Save Scene"))
 			{
-				Scenes::SceneManager::getInstance().saveScene("./NewScene.derylevel");
+				Scenes::SceneManager::getInstance().saveScene("../../../exampleProject/levels/spriteRendering/GeneratedScene.derylevel");
 			}
 			if (ImGui::MenuItem("Save Scene As")) {}
 			ImGui::Separator();

@@ -23,6 +23,7 @@ namespace DerydocaEngine
 	{
 	public:
 		REGISTER_TYPE_ID(GameObject);
+		GameObject();
 		GameObject(const std::string& name);
 		GameObject(const boost::uuids::uuid id, const std::string& name);
 		~GameObject();
@@ -112,7 +113,8 @@ namespace DerydocaEngine
 
 		SERIALIZE_FUNC(
 			SERIALIZE(m_Name),
-			SERIALIZE(m_Transform)
+			SERIALIZE(m_Transform),
+			SERIALIZE(m_Children)
 		);
 
 	private:

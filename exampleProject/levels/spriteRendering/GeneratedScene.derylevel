@@ -1,0 +1,276 @@
+{
+    "m_Root": {
+        "polymorphic_id": 1073741824,
+        "ptr_wrapper": {
+            "id": 2147483649,
+            "data": {
+                "m_Name": "__SCENE_ROOT__",
+                "m_Transform": {
+                    "polymorphic_id": 1073741824,
+                    "ptr_wrapper": {
+                        "id": 2147483650,
+                        "data": {
+                            "m_Position": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0
+                            },
+                            "m_Scale": {
+                                "x": 1.0,
+                                "y": 1.0,
+                                "z": 1.0
+                            },
+                            "m_Quaternion": {
+                                "x": 0.0,
+                                "y": 0.0,
+                                "z": 0.0,
+                                "w": 1.0
+                            }
+                        }
+                    }
+                },
+                "m_Children": [
+                    {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483651,
+                            "data": {
+                                "m_Name": "UI Container",
+                                "m_Transform": {
+                                    "polymorphic_id": 1073741824,
+                                    "ptr_wrapper": {
+                                        "id": 2147483652,
+                                        "data": {
+                                            "m_Position": {
+                                                "x": 0.0,
+                                                "y": 0.0,
+                                                "z": -1.0
+                                            },
+                                            "m_Scale": {
+                                                "x": 0.003000000026077032,
+                                                "y": 0.003000000026077032,
+                                                "z": 0.003000000026077032
+                                            },
+                                            "m_Quaternion": {
+                                                "x": 0.0,
+                                                "y": 0.0,
+                                                "z": 0.0,
+                                                "w": 1.0
+                                            }
+                                        }
+                                    }
+                                },
+                                "m_Children": [
+                                    {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483653,
+                                            "data": {
+                                                "m_Name": "UI Circle",
+                                                "m_Transform": {
+                                                    "polymorphic_id": 1073741824,
+                                                    "ptr_wrapper": {
+                                                        "id": 2147483654,
+                                                        "data": {
+                                                            "m_Position": {
+                                                                "x": 36.0,
+                                                                "y": -4.0,
+                                                                "z": 0.0
+                                                            },
+                                                            "m_Scale": {
+                                                                "x": 1.0,
+                                                                "y": 1.0,
+                                                                "z": 1.0
+                                                            },
+                                                            "m_Quaternion": {
+                                                                "x": 0.0,
+                                                                "y": 0.0,
+                                                                "z": 0.0,
+                                                                "w": 1.0
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "m_Children": []
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483655,
+                                            "data": {
+                                                "m_Name": "UI Caret",
+                                                "m_Transform": {
+                                                    "polymorphic_id": 1073741824,
+                                                    "ptr_wrapper": {
+                                                        "id": 2147483656,
+                                                        "data": {
+                                                            "m_Position": {
+                                                                "x": 36.0,
+                                                                "y": -40.0,
+                                                                "z": 0.0
+                                                            },
+                                                            "m_Scale": {
+                                                                "x": 1.0,
+                                                                "y": 1.0,
+                                                                "z": 1.0
+                                                            },
+                                                            "m_Quaternion": {
+                                                                "x": 0.0,
+                                                                "y": 0.0,
+                                                                "z": 0.0,
+                                                                "w": 1.0
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "m_Children": []
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483657,
+                                            "data": {
+                                                "m_Name": "UI Slice Sprite Square",
+                                                "m_Transform": {
+                                                    "polymorphic_id": 1073741824,
+                                                    "ptr_wrapper": {
+                                                        "id": 2147483658,
+                                                        "data": {
+                                                            "m_Position": {
+                                                                "x": 0.0,
+                                                                "y": 0.0,
+                                                                "z": -0.5
+                                                            },
+                                                            "m_Scale": {
+                                                                "x": 1.0,
+                                                                "y": 1.0,
+                                                                "z": 1.0
+                                                            },
+                                                            "m_Quaternion": {
+                                                                "x": 0.0,
+                                                                "y": 0.0,
+                                                                "z": 0.0,
+                                                                "w": 1.0
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "m_Children": []
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483659,
+                            "data": {
+                                "m_Name": "Squirrel 1",
+                                "m_Transform": {
+                                    "polymorphic_id": 1073741824,
+                                    "ptr_wrapper": {
+                                        "id": 2147483660,
+                                        "data": {
+                                            "m_Position": {
+                                                "x": 0.0,
+                                                "y": 0.0,
+                                                "z": -2.0
+                                            },
+                                            "m_Scale": {
+                                                "x": 1.0,
+                                                "y": 1.0,
+                                                "z": 1.0
+                                            },
+                                            "m_Quaternion": {
+                                                "x": 0.0,
+                                                "y": 0.0,
+                                                "z": 0.0,
+                                                "w": 1.0
+                                            }
+                                        }
+                                    }
+                                },
+                                "m_Children": []
+                            }
+                        }
+                    },
+                    {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483661,
+                            "data": {
+                                "m_Name": "Point Light 1",
+                                "m_Transform": {
+                                    "polymorphic_id": 1073741824,
+                                    "ptr_wrapper": {
+                                        "id": 2147483662,
+                                        "data": {
+                                            "m_Position": {
+                                                "x": 2.0,
+                                                "y": 0.5,
+                                                "z": -1.0
+                                            },
+                                            "m_Scale": {
+                                                "x": 0.05000000074505806,
+                                                "y": 0.05000000074505806,
+                                                "z": 0.05000000074505806
+                                            },
+                                            "m_Quaternion": {
+                                                "x": 0.0,
+                                                "y": 0.0,
+                                                "z": 0.0,
+                                                "w": 1.0
+                                            }
+                                        }
+                                    }
+                                },
+                                "m_Children": []
+                            }
+                        }
+                    },
+                    {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483663,
+                            "data": {
+                                "m_Name": "Point Light 2",
+                                "m_Transform": {
+                                    "polymorphic_id": 1073741824,
+                                    "ptr_wrapper": {
+                                        "id": 2147483664,
+                                        "data": {
+                                            "m_Position": {
+                                                "x": -2.0,
+                                                "y": 0.5,
+                                                "z": 1.0
+                                            },
+                                            "m_Scale": {
+                                                "x": 0.05000000074505806,
+                                                "y": 0.05000000074505806,
+                                                "z": 0.05000000074505806
+                                            },
+                                            "m_Quaternion": {
+                                                "x": 0.0,
+                                                "y": 0.0,
+                                                "z": 0.0,
+                                                "w": 1.0
+                                            }
+                                        }
+                                    }
+                                },
+                                "m_Children": []
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

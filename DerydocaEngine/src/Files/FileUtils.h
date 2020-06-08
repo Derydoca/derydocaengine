@@ -49,9 +49,9 @@ namespace DerydocaEngine::Files::Utils
 			cereal::JSONInputArchive iarchive(fs);
 			iarchive(data);
 		}
-		catch (...)
+		catch (std::exception& e)
 		{
-			D_LOG_ERROR("An error occurred while attempting to deserialize an object frpm disk.\nPath: {}", filePath);
+			D_LOG_ERROR("An error occurred while attempting to deserialize an object from disk.\nPath: {}", filePath);
 		}
 		return data;
 	}
