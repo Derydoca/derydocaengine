@@ -68,7 +68,7 @@ namespace DerydocaEngine::Scenes
 		{
 			return;
 		}
-		ss->SaveToFile(outputPath);
+		Files::Utils::WriteToDisk(*ss, outputPath);
 	}
 
 	void SceneManager::unloadScene()

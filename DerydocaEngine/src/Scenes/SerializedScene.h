@@ -15,11 +15,8 @@ namespace DerydocaEngine::Scenes
 		virtual void tearDown();
 
 		void LoadFromFile(const std::string& filePath);
-		void SaveToFile(const std::string& filePath);
 
-		SERIALIZE_FUNC(
-			SERIALIZE(m_Root)
-		);
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Scenes::Scene);
 	private:
 		// TODO: Find a better way for tracking scene objects for setting up the scene
 		std::vector<std::shared_ptr<SceneObject>> m_sceneObjects;

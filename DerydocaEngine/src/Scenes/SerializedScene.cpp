@@ -212,11 +212,6 @@ namespace DerydocaEngine::Scenes
 		}
 	}
 
-	void SerializedScene::SaveToFile(const std::string& filePath)
-	{
-		Files::Utils::WriteToDisk(*this, filePath);
-	}
-
 	std::shared_ptr<SceneObject> SerializedScene::findNode(const boost::uuids::uuid& id)
 	{
 		for (size_t i = 0; i < m_sceneObjects.size(); i++)
