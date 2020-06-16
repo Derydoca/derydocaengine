@@ -14,10 +14,10 @@ namespace DerydocaEngine::Files::Utils
 			cereal::JSONOutputArchive oarchive(fs);
 			obj.serialize(oarchive);
 		}
-		catch (...)
+		catch (const std::exception & e)
 		{
 			result = false;
-			D_LOG_ERROR("An error occurred while attempting to serialize an object to disk.\nPath: {}", filePath);
+			D_LOG_ERROR("An error occurred while attempting to serialize an object to disk.\nPath: {}\nError: {}", filePath, e.what());
 		}
 		return result;
 	}

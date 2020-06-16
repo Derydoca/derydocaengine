@@ -123,6 +123,10 @@ namespace DerydocaEngine::Components
 			return root->getComponentInChildren<T>(id);
 		}
 
+		SERIALIZE_FUNC_BASE(
+			DerydocaEngine::Object
+		);
+
 	protected:
 		inline std::shared_ptr<Resources::Resource> getResource(const YAML::Node& node, const std::string& resourceName)
 		{

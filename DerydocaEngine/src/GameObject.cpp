@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Components\GameComponent.h"
 #include "Rendering\MatrixStack.h"
+#include "cereal\archives\json.hpp"
 
 namespace DerydocaEngine
 {
@@ -201,5 +202,19 @@ namespace DerydocaEngine
 			}
 		}
 	}
+
+	template <class Archive> inline
+	void GameObject::serialize(Archive& ar)
+	{
+		ar(
+			SERIALIZE(m_Name),
+			SERIALIZE(m_Transform),
+			SERIALIZE(m_Children),
+			SERIALIZE(m_Components)
+		);
+	}
+
+	template void GameObject::serialize<cereal::JSONOutputArchive>(cereal::JSONOutputArchive&);
+	template void GameObject::serialize<cereal::JSONInputArchive>(cereal::JSONInputArchive&);
 
 }

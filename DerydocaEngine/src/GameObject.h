@@ -111,11 +111,8 @@ namespace DerydocaEngine
 			return nullptr;
 		}
 
-		SERIALIZE_FUNC(
-			SERIALIZE(m_Name),
-			SERIALIZE(m_Transform),
-			SERIALIZE(m_Children)
-		);
+		template <class Archive>
+		void serialize(Archive& ar);
 
 	private:
 		std::string m_Name;

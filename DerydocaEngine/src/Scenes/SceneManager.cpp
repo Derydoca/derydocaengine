@@ -8,7 +8,7 @@ namespace DerydocaEngine::Scenes
 {
 
 	SceneManager::SceneManager() :
-		m_activeScene()
+		m_ActiveScene()
 	{
 	}
 
@@ -16,7 +16,7 @@ namespace DerydocaEngine::Scenes
 	{
 	}
 	
-	void SceneManager::loadScene(const boost::uuids::uuid& levelId)
+	void SceneManager::LoadScene(const boost::uuids::uuid& levelId)
 	{
 		auto resource = ObjectLibrary::getInstance().getResource<Resources::LevelResource>(levelId);
 		
@@ -26,17 +26,19 @@ namespace DerydocaEngine::Scenes
 			return;
 		}
 
-		loadScene(resource);
+		LoadScene(resource);
 	}
 
-	void SceneManager::loadScene(const std::shared_ptr<Resources::LevelResource> levelResource)
+	void SceneManager::LoadScene(const std::shared_ptr<Resources::LevelResource> levelResource)
 	{
-		unloadScene();
+		UnloadScene();
+
+		m_ActiveLevelResource = levelResource;
 
 		char temporarySerializationSwitch = ' ';
 		{
 			std::ifstream fs;
-			fs.open(levelResource->getSourceFilePath());
+			fs.open(m_ActiveLevelResource->getSourceFilePath());
 			std::string line;
 			std::getline(fs, line);
 			fs.close();
@@ -47,23 +49,23 @@ namespace DerydocaEngine::Scenes
 		if (temporarySerializationSwitch == 'S')
 		{
 			scene = std::make_shared<Scenes::SerializedScene>();
-			scene->LoadFromFile(levelResource->getSourceFilePath());
+			scene->LoadFromFile(m_ActiveLevelResource->getSourceFilePath());
 		}
 		else
 		{
-			std::string path = levelResource->getSourceFilePath();
+			std::string path = m_ActiveLevelResource->getSourceFilePath();
 			auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
 			scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
 		}
 		scene->setUp();
 		scene->getRoot()->init();
 		scene->getRoot()->postInit();
-		m_activeScene = scene;
+		m_ActiveScene = scene;
 	}
 
-	void SceneManager::saveScene(const std::string& outputPath)
+	void SceneManager::SaveScene(const std::string& outputPath)
 	{
-		auto ss = std::static_pointer_cast<Scenes::SerializedScene>(m_activeScene);
+		auto ss = std::static_pointer_cast<Scenes::SerializedScene>(m_ActiveScene);
 		if (ss == NULL)
 		{
 			return;
@@ -71,15 +73,15 @@ namespace DerydocaEngine::Scenes
 		Files::Utils::WriteToDisk(*ss, outputPath);
 	}
 
-	void SceneManager::unloadScene()
+	void SceneManager::UnloadScene()
 	{
-		if (m_activeScene == nullptr)
+		if (m_ActiveScene == nullptr)
 		{
 			return;
 		}
 
-		m_activeScene->tearDown();
-		m_activeScene = nullptr;
+		m_ActiveScene->tearDown();
+		m_ActiveScene = nullptr;
 	}
 
 }
