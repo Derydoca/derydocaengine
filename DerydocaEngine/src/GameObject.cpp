@@ -204,7 +204,7 @@ namespace DerydocaEngine
 	}
 
 	template <class Archive> inline
-	void GameObject::serialize(Archive& ar)
+	void GameObject::load(Archive& ar)
 	{
 		ar(
 			SERIALIZE(m_Name),
@@ -214,7 +214,18 @@ namespace DerydocaEngine
 		);
 	}
 
-	template void GameObject::serialize<cereal::JSONOutputArchive>(cereal::JSONOutputArchive&);
-	template void GameObject::serialize<cereal::JSONInputArchive>(cereal::JSONInputArchive&);
+	template <class Archive> inline
+	void GameObject::save(Archive& ar) const
+	{
+		ar(
+			SERIALIZE(m_Name),
+			SERIALIZE(m_Transform),
+			SERIALIZE(m_Children),
+			SERIALIZE(m_Components)
+		);
+	}
+
+	template void GameObject::load<cereal::JSONInputArchive>(cereal::JSONInputArchive&);
+	template void GameObject::save<cereal::JSONOutputArchive>(cereal::JSONOutputArchive&) const;
 
 }

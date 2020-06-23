@@ -30,7 +30,22 @@ namespace DerydocaEngine::Resources
 		virtual unsigned long getTypeId() const = 0;
 		virtual void postLoadInitialize() {}
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Object);
+		template<class Archive>
+		void save(Archive& archive) const
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Object)
+			);
+		}
+
+		template<class Archive>
+		void load(Archive& archive)
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Object)
+			);
+		}
+
 	protected:
 		Resource(const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
 		Resource(const boost::uuids::uuid& id, const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);

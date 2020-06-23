@@ -13,7 +13,22 @@ namespace DerydocaEngine::Resources
 			Resource(DerydocaEngine::Resources::BezierPatchMeshResourceType)
 		{}
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Resources::Resource);
+		template<class Archive>
+		void save(Archive& archive) const
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource)
+			);
+		}
+
+		template<class Archive>
+		void load(Archive& archive)
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource)
+			);
+		}
+
 	};
 
 }

@@ -12,7 +12,7 @@ namespace DerydocaEngine::Files::Utils
 		{
 			std::ofstream fs(filePath);
 			cereal::JSONOutputArchive oarchive(fs);
-			obj.serialize(oarchive);
+			obj.save(oarchive);
 		}
 		catch (const std::exception & e)
 		{
@@ -34,7 +34,7 @@ namespace DerydocaEngine::Files::Utils
 		}
 		catch (const std::exception& e)
 		{
-			D_LOG_ERROR("An error occurred while attempting to deserialize an object from disk.\nPath: {}", filePath);
+			D_LOG_ERROR("An error occurred while attempting to deserialize an object from disk.\nPath: {}\nError: {}", filePath, e.what());
 		}
 		return data;
 	}
@@ -51,7 +51,7 @@ namespace DerydocaEngine::Files::Utils
 		}
 		catch (std::exception& e)
 		{
-			D_LOG_ERROR("An error occurred while attempting to deserialize an object from disk.\nPath: {}", filePath);
+			D_LOG_ERROR("An error occurred while attempting to deserialize an object from disk.\nPath: {}\nError: {}", filePath, e.what());
 		}
 		return data;
 	}
@@ -60,7 +60,7 @@ namespace DerydocaEngine::Files::Utils
 		typename std::enable_if< cereal::traits::has_member_serialize<Class, Archive>::value>::type * = nullptr>
 		inline static void serializeHelper(Class& cl, Archive& ar)
 	{
-		cl.serialize(ar);
+		cl.load(ar);
 	}
 
 	template< typename Class, typename Archive,
@@ -76,7 +76,7 @@ namespace DerydocaEngine::Files::Utils
 		typename std::enable_if< cereal::traits::has_member_serialize<Class, Archive>::value>::type * = nullptr>
 		inline static void deserializeHelper(Class& cl, Archive& ar)
 	{
-		cl.serialize(ar);
+		cl.load(ar);
 	}
 
 	template< typename Class, typename Archive,

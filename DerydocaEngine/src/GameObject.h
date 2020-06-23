@@ -112,7 +112,10 @@ namespace DerydocaEngine
 		}
 
 		template <class Archive>
-		void serialize(Archive& ar);
+		void load(Archive& ar);
+
+		template <class Archive>
+		void save(Archive& ar) const;
 
 	private:
 		std::string m_Name;

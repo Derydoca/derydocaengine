@@ -32,13 +32,31 @@ namespace DerydocaEngine::Resources
 		const boost::uuids::uuid getSkeletonId() const { return m_skeletonId; }
 		const bool hasSkeleton() const { return !m_skeletonId.is_nil(); }
 
-		SERIALIZE_FUNC_BASE(
-			DerydocaEngine::Resources::Resource,
-			SERIALIZE(m_meshIndex),
-			SERIALIZE(m_meshName),
-			SERIALIZE(m_skeletonId),
-			SERIALIZE(m_flags)
-		);
+		template<class Archive>
+		void save(Archive& archive) const
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource),
+				SERIALIZE(m_meshIndex),
+				SERIALIZE(m_meshName),
+				SERIALIZE(m_skeletonId),
+				SERIALIZE(m_flags)
+			);
+			D_LOG_INFO("Serialized mesh resource");
+		}
+
+		template<class Archive>
+		void load(Archive& archive)
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource),
+				SERIALIZE(m_meshIndex),
+				SERIALIZE(m_meshName),
+				SERIALIZE(m_skeletonId),
+				SERIALIZE(m_flags)
+			);
+			D_LOG_INFO("Deserialized mesh resource");
+		}
 
 	private:
 		boost::uuids::uuid m_skeletonId;

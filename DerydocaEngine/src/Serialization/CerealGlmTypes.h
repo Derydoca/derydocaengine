@@ -7,7 +7,17 @@ namespace glm
 {
 
 	template<class Archive>
-	void serialize(Archive& archive, glm::fquat& q)
+	void save(Archive& archive, glm::fquat const & q)
+	{
+		archive(
+			SERIALIZE_NAMED("x", q.x),
+			SERIALIZE_NAMED("y", q.y),
+			SERIALIZE_NAMED("z", q.z),
+			SERIALIZE_NAMED("w", q.w)
+		);
+	}
+	template<class Archive>
+	void load(Archive& archive, glm::fquat& q)
 	{
 		archive(
 			SERIALIZE_NAMED("x", q.x),
@@ -18,7 +28,15 @@ namespace glm
 	}
 
 	template<class Archive>
-	void serialize(Archive& archive, glm::ivec2& m)
+	void load(Archive& archive, glm::ivec2& m)
+	{
+		archive(
+			SERIALIZE_NAMED("x", m.x),
+			SERIALIZE_NAMED("y", m.y)
+		);
+	}
+	template<class Archive>
+	void save(Archive& archive, glm::ivec2 const & m)
 	{
 		archive(
 			SERIALIZE_NAMED("x", m.x),
@@ -27,7 +45,15 @@ namespace glm
 	}
 
 	template<class Archive>
-	void serialize(Archive& archive, glm::vec2& m)
+	void load(Archive& archive, glm::vec2& m)
+	{
+		archive(
+			SERIALIZE_NAMED("x", m.x),
+			SERIALIZE_NAMED("y", m.y)
+		);
+	}
+	template<class Archive>
+	void save(Archive& archive, glm::vec2 const & m)
 	{
 		archive(
 			SERIALIZE_NAMED("x", m.x),
@@ -36,7 +62,16 @@ namespace glm
 	}
 
 	template<class Archive>
-	void serialize(Archive& archive, glm::vec3& m)
+	void load(Archive& archive, glm::vec3& m)
+	{
+		archive(
+			SERIALIZE_NAMED("x", m.x),
+			SERIALIZE_NAMED("y", m.y),
+			SERIALIZE_NAMED("z", m.z)
+		);
+	}
+	template<class Archive>
+	void save(Archive& archive, glm::vec3 const & m)
 	{
 		archive(
 			SERIALIZE_NAMED("x", m.x),
@@ -46,7 +81,17 @@ namespace glm
 	}
 
 	template<class Archive>
-	void serialize(Archive& archive, glm::vec4& m)
+	void load(Archive& archive, glm::vec4& m)
+	{
+		archive(
+			SERIALIZE_NAMED("x", m.x),
+			SERIALIZE_NAMED("y", m.y),
+			SERIALIZE_NAMED("z", m.z),
+			SERIALIZE_NAMED("w", m.w)
+		);
+	}
+	template<class Archive>
+	void save(Archive& archive, glm::vec4 const & m)
 	{
 		archive(
 			SERIALIZE_NAMED("x", m.x),
