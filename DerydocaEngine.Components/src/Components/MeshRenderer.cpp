@@ -17,18 +17,16 @@ namespace DerydocaEngine::Components
 {
 
 	MeshRenderer::MeshRenderer() :
-		m_mesh(),
-		m_material(),
-		m_meshRendererCamera(),
-		m_isTransparent(false)
+		m_Mesh(),
+		m_Material(),
+		m_Transparent(false)
 	{
 	}
 
 	MeshRenderer::MeshRenderer(std::shared_ptr<Resources::MeshResource> mesh, std::shared_ptr<Resources::MaterialResource> material) :
-		m_mesh(mesh),
-		m_material(material),
-		m_meshRendererCamera(),
-		m_isTransparent(false)
+		m_Mesh(mesh),
+		m_Material(material),
+		m_Transparent(false)
 	{
 	}
 
@@ -56,14 +54,14 @@ namespace DerydocaEngine::Components
 			}
 
 			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
-			m_meshRendererCamera = findComponentOfType<Camera>(renderTextureCameraId);
-			getMaterial()->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
+			//m_meshRendererCamera = findComponentOfType<Camera>(renderTextureCameraId);
+			//getMaterial()->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
 		}
 
 		YAML::Node transparentNode = compNode["Transparent"];
 		if (transparentNode && transparentNode.IsScalar())
 		{
-			m_isTransparent = transparentNode.as<bool>();
+			m_Transparent = transparentNode.as<bool>();
 		}
 	}
 
@@ -73,7 +71,6 @@ namespace DerydocaEngine::Components
 
 	void MeshRenderer::preDestroy()
 	{
-		m_meshRendererCamera = nullptr;
 	}
 
 	void MeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
@@ -91,12 +88,12 @@ namespace DerydocaEngine::Components
 		Rendering::LightManager::getInstance().bindLightsToShader(material->getShader());
 		Rendering::LightManager::getInstance().bindShadowDataToShader(material->getShader(), getGameObject()->getTransform()->getModel());
 
-		if (m_isTransparent)
+		if (m_Transparent)
 		{
 			Rendering::GraphicsAPI::enableTransparancy();
 		}
 		mesh->draw();
-		if (m_isTransparent)
+		if (m_Transparent)
 		{
 			Rendering::GraphicsAPI::disableTransparancy();
 		}

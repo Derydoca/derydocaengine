@@ -79,6 +79,7 @@ namespace DerydocaEngine
 		// Use standard for loop so components can be added during init calls
 		for (size_t i = 0; i < m_Components.size(); i++)
 		{
+			m_Components[i]->setGameObject(shared_from_this());
 			m_Components[i]->init();
 		}
 
