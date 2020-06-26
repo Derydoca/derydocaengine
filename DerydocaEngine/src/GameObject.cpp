@@ -204,10 +204,9 @@ namespace DerydocaEngine
 		}
 	}
 
-	template <class Archive> inline
-	void GameObject::load(Archive& ar)
+	SERIALIZE_FUNC_LOAD(archive, GameObject)
 	{
-		ar(
+		archive(
 			SERIALIZE(m_Name),
 			SERIALIZE(m_Transform),
 			SERIALIZE(m_Children),
@@ -215,10 +214,9 @@ namespace DerydocaEngine
 		);
 	}
 
-	template <class Archive> inline
-	void GameObject::save(Archive& ar) const
+	SERIALIZE_FUNC_SAVE(archive, GameObject)
 	{
-		ar(
+		archive(
 			SERIALIZE(m_Name),
 			SERIALIZE(m_Transform),
 			SERIALIZE(m_Children),

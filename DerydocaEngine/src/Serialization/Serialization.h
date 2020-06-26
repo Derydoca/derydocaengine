@@ -6,6 +6,17 @@
 #include "Serialization\CerealTypeBoostUuid.h"
 #include "Serialization\CerealGlmTypes.h"
 
+#define SERIALIZE_FUNC_DEFINITIONS template<class Archive>\
+void load(Archive& archive);\
+template<class Archive>\
+void save(Archive& archive) const;
+
+#define SERIALIZE_FUNC_LOAD(ARCHIVE, CLASSNAME) template<class Archive>\
+void CLASSNAME::load(Archive& ARCHIVE)
+
+#define SERIALIZE_FUNC_SAVE(ARCHIVE, CLASSNAME) template<class Archive>\
+void CLASSNAME::save(Archive& ARCHIVE) const
+
 #define SERIALIZE_FUNC(...) template<class Archive>\
 void save(Archive& archive) const\
 {\

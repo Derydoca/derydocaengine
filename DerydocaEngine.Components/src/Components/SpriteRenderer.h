@@ -33,12 +33,7 @@ namespace DerydocaEngine::Components
 			markComponentAsDirty(Rendering::MeshComponents::Colors);
 		}
 
-		template<class Archive>
-		void save(Archive& archive) const;
-
-		template<class Archive>
-		void load(Archive& archive);
-
+		SERIALIZE_FUNC_DEFINITIONS;
 	private:
 		Color m_color;
 		ResourceRef<Resources::SpriteSheetResource> m_spriteSheet;

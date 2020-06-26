@@ -235,8 +235,7 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	template<class Archive>
-	void SpriteRenderer::save(Archive& archive) const
+	SERIALIZE_FUNC_SAVE(archive, SpriteRenderer)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
 			SERIALIZE(m_color),
@@ -245,8 +244,8 @@ namespace DerydocaEngine::Components
 			SERIALIZE(m_Shader),
 			SERIALIZE(m_size));
 	}
-	template<class Archive>
-	void SpriteRenderer::load(Archive& archive)
+
+	SERIALIZE_FUNC_LOAD(archive, SpriteRenderer)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
 			SERIALIZE(m_color),

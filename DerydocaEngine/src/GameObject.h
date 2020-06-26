@@ -111,11 +111,7 @@ namespace DerydocaEngine
 			return nullptr;
 		}
 
-		template <class Archive>
-		void load(Archive& ar);
-
-		template <class Archive>
-		void save(Archive& ar) const;
+		SERIALIZE_FUNC_DEFINITIONS;
 
 	private:
 		std::string m_Name;
