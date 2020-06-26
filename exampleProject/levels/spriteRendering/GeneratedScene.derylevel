@@ -61,7 +61,201 @@
                                             }
                                         }
                                     },
-                                    "m_Children": [],
+                                    "m_Children": [
+                                        {
+                                            "polymorphic_id": 1073741824,
+                                            "ptr_wrapper": {
+                                                "id": 2147483653,
+                                                "data": {
+                                                    "m_Name": "UI Circle",
+                                                    "m_Transform": {
+                                                        "polymorphic_id": 1073741824,
+                                                        "ptr_wrapper": {
+                                                            "id": 2147483654,
+                                                            "data": {
+                                                                "m_Position": {
+                                                                    "x": 27.28499984741211,
+                                                                    "y": 100.0,
+                                                                    "z": 0.0
+                                                                },
+                                                                "m_Scale": {
+                                                                    "x": 1.0,
+                                                                    "y": 1.0,
+                                                                    "z": 1.0
+                                                                },
+                                                                "m_Quaternion": {
+                                                                    "x": 0.0,
+                                                                    "y": 0.0,
+                                                                    "z": 0.0,
+                                                                    "w": 1.0
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "m_Children": [],
+                                                    "m_Components": [
+                                                        {
+                                                            "polymorphic_id": 2147483649,
+                                                            "polymorphic_name": "DerydocaEngine::Components::SpriteRenderer",
+                                                            "ptr_wrapper": {
+                                                                "id": 2147483655,
+                                                                "data": {
+                                                                    "__base_DerydocaEngine::Components::RendererComponent": {
+                                                                        "__base_DerydocaEngine::Components::GameComponent": {
+                                                                            "__base_DerydocaEngine::Object": {
+                                                                                "m_id": "399d1626-a304-4164-b979-b5b6192cda0f"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "m_color": {
+                                                                        "r": 1.0,
+                                                                        "g": 0.0,
+                                                                        "b": 0.0,
+                                                                        "a": 1.0
+                                                                    },
+                                                                    "m_spriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
+                                                                    "m_SpriteIndex": 2,
+                                                                    "m_Shader": "b87ce577-1711-40ad-bf7a-2a5ff3214a46",
+                                                                    "m_size": {
+                                                                        "x": 0.0,
+                                                                        "y": 0.0
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 1073741824,
+                                            "ptr_wrapper": {
+                                                "id": 2147483656,
+                                                "data": {
+                                                    "m_Name": "UI Caret",
+                                                    "m_Transform": {
+                                                        "polymorphic_id": 1073741824,
+                                                        "ptr_wrapper": {
+                                                            "id": 2147483657,
+                                                            "data": {
+                                                                "m_Position": {
+                                                                    "x": 50.0,
+                                                                    "y": 0.0,
+                                                                    "z": 0.0
+                                                                },
+                                                                "m_Scale": {
+                                                                    "x": 1.7400000095367432,
+                                                                    "y": 0.7950000166893005,
+                                                                    "z": 1.0
+                                                                },
+                                                                "m_Quaternion": {
+                                                                    "x": 0.0,
+                                                                    "y": -0.0,
+                                                                    "z": -0.7071067690849304,
+                                                                    "w": 0.7071067690849304
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "m_Children": [],
+                                                    "m_Components": [
+                                                        {
+                                                            "polymorphic_id": 1,
+                                                            "ptr_wrapper": {
+                                                                "id": 2147483658,
+                                                                "data": {
+                                                                    "__base_DerydocaEngine::Components::RendererComponent": {
+                                                                        "__base_DerydocaEngine::Components::GameComponent": {
+                                                                            "__base_DerydocaEngine::Object": {
+                                                                                "m_id": "6e1900ea-88bb-45e2-a0d1-3b2d77f4b54e"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "m_color": {
+                                                                        "r": 1.0,
+                                                                        "g": 1.0,
+                                                                        "b": 1.0,
+                                                                        "a": 1.0
+                                                                    },
+                                                                    "m_spriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
+                                                                    "m_SpriteIndex": 3,
+                                                                    "m_Shader": "b87ce577-1711-40ad-bf7a-2a5ff3214a46",
+                                                                    "m_size": {
+                                                                        "x": 0.0,
+                                                                        "y": 0.0
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 1073741824,
+                                            "ptr_wrapper": {
+                                                "id": 2147483659,
+                                                "data": {
+                                                    "m_Name": "UI Slice Sprite Square",
+                                                    "m_Transform": {
+                                                        "polymorphic_id": 1073741824,
+                                                        "ptr_wrapper": {
+                                                            "id": 2147483660,
+                                                            "data": {
+                                                                "m_Position": {
+                                                                    "x": 5.0,
+                                                                    "y": 70.0,
+                                                                    "z": -0.5
+                                                                },
+                                                                "m_Scale": {
+                                                                    "x": 0.07500000298023224,
+                                                                    "y": 0.7099999785423279,
+                                                                    "z": 1.0
+                                                                },
+                                                                "m_Quaternion": {
+                                                                    "x": 0.0,
+                                                                    "y": 0.0,
+                                                                    "z": 0.0,
+                                                                    "w": 1.0
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "m_Children": [],
+                                                    "m_Components": [
+                                                        {
+                                                            "polymorphic_id": 1,
+                                                            "ptr_wrapper": {
+                                                                "id": 2147483661,
+                                                                "data": {
+                                                                    "__base_DerydocaEngine::Components::RendererComponent": {
+                                                                        "__base_DerydocaEngine::Components::GameComponent": {
+                                                                            "__base_DerydocaEngine::Object": {
+                                                                                "m_id": "3b06d57c-cce5-4066-bdd2-da5b74c72ff4"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "m_color": {
+                                                                        "r": 0.20000000298023225,
+                                                                        "g": 1.0,
+                                                                        "b": 0.20000000298023225,
+                                                                        "a": 1.0
+                                                                    },
+                                                                    "m_spriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
+                                                                    "m_SpriteIndex": 1,
+                                                                    "m_Shader": "b87ce577-1711-40ad-bf7a-2a5ff3214a46",
+                                                                    "m_size": {
+                                                                        "x": 1000.0,
+                                                                        "y": 100.0
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ],
                                     "m_Components": []
                                 }
                             }
@@ -69,13 +263,13 @@
                         {
                             "polymorphic_id": 1073741824,
                             "ptr_wrapper": {
-                                "id": 2147483653,
+                                "id": 2147483662,
                                 "data": {
-                                    "m_Name": "Squirrel 1abab",
+                                    "m_Name": "Sqworrel",
                                     "m_Transform": {
                                         "polymorphic_id": 1073741824,
                                         "ptr_wrapper": {
-                                            "id": 2147483654,
+                                            "id": 2147483663,
                                             "data": {
                                                 "m_Position": {
                                                     "x": 0.0,
@@ -84,7 +278,7 @@
                                                 },
                                                 "m_Scale": {
                                                     "x": 1.0,
-                                                    "y": 1.0,
+                                                    "y": 0.3400000035762787,
                                                     "z": 1.0
                                                 },
                                                 "m_Quaternion": {
@@ -99,31 +293,31 @@
                                     "m_Children": [],
                                     "m_Components": [
                                         {
-                                            "polymorphic_id": 2147483649,
+                                            "polymorphic_id": 2147483650,
                                             "polymorphic_name": "DerydocaEngine::Components::MeshRenderer",
                                             "ptr_wrapper": {
-                                                "id": 2147483655,
+                                                "id": 2147483664,
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_id": "ed64a1ad-0571-4e91-a23b-9b1806d145f7"
+                                                            "m_id": "2c11ac13-db88-4a60-8655-3b486a449d34"
                                                         }
                                                     },
-                                                    "m_Mesh": "84d21022-d7b4-4dee-b617-90763d995773",
+                                                    "m_Mesh": "b1b135df-0f8a-4ebf-bd9d-a98127daf307",
                                                     "m_Material": "f6e7235c-ec43-48f0-b189-d89b40f10089",
                                                     "m_Transparent": false
                                                 }
                                             }
                                         },
                                         {
-                                            "polymorphic_id": 2147483650,
+                                            "polymorphic_id": 2147483651,
                                             "polymorphic_name": "DerydocaEngine::Components::Rotator",
                                             "ptr_wrapper": {
-                                                "id": 2147483656,
+                                                "id": 2147483665,
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_id": "211dd888-04d5-41d3-90dc-83b71d36238b"
+                                                            "m_id": "71b6b960-a0b0-4944-85de-2d5fb272ad48"
                                                         }
                                                     },
                                                     "m_rotVal": 0.0,

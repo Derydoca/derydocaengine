@@ -44,6 +44,11 @@ namespace DerydocaEngine
             return m_Resource.get();
         }
 
+        operator bool() const
+        {
+            return m_Resource != nullptr;
+        }
+
         void Set(std::shared_ptr<ResourceType> value)
         {
             m_Resource = value;

@@ -4,6 +4,9 @@
 #include "Color.h"
 #include "RendererComponent.h"
 #include "UI\Spritesheet.h"
+#include "ResourceRef.h"
+#include "Resources\SpriteSheetResource.h"
+#include "Resources\ShaderResource.h"
 
 namespace DerydocaEngine::Components
 {
@@ -29,9 +32,18 @@ namespace DerydocaEngine::Components
 			m_color = color;
 			markComponentAsDirty(Rendering::MeshComponents::Colors);
 		}
+
+		template<class Archive>
+		void save(Archive& archive) const;
+
+		template<class Archive>
+		void load(Archive& archive);
+
 	private:
 		Color m_color;
-		std::shared_ptr<UI::SpriteSheet> m_spriteSheet;
+		ResourceRef<Resources::SpriteSheetResource> m_spriteSheet;
+		ResourceRef<Resources::ShaderResource> m_Shader;
+		int m_SpriteIndex;
 		UI::SpriteReference* m_sprite;
 		glm::vec2 m_size;
 
@@ -69,3 +81,5 @@ namespace DerydocaEngine::Components
 	};
 
 }
+
+CEREAL_REGISTER_TYPE(DerydocaEngine::Components::SpriteRenderer);

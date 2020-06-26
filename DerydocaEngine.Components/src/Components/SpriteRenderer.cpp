@@ -24,7 +24,8 @@ namespace DerydocaEngine::Components
 	{
 		if (m_spriteSheet)
 		{
-			auto spriteSheetTexture = m_spriteSheet->getTexture();
+			auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_spriteSheet.GetSmartPointer()->getResourceObjectPointer());
+			auto spriteSheetTexture = ss->getTexture();
 			getMaterial()->setTexture("SpriteSheet", spriteSheetTexture);
 			markComponentAsDirty(Rendering::MeshComponents::All);
 		}
@@ -32,8 +33,9 @@ namespace DerydocaEngine::Components
 
 	void SpriteRenderer::deserialize(const YAML::Node& compNode)
 	{
-		m_spriteSheet = getResourcePointer<UI::SpriteSheet>(compNode, "spriteSheet");
-		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
+		m_spriteSheet.Set(getResource<Resources::SpriteSheetResource>(compNode, "spriteSheet"));
+		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
+		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
 		auto material = std::make_shared<Rendering::Material>();
 		material->setShader(shader);
 		setMaterial(material);
@@ -53,8 +55,9 @@ namespace DerydocaEngine::Components
 		YAML::Node spriteIdNode = compNode["spriteId"];
 		if (spriteIdNode)
 		{
-			unsigned int spriteId = spriteIdNode.as<unsigned int>();
-			m_sprite = m_spriteSheet->getSpriteReference(spriteId);
+			m_SpriteIndex = spriteIdNode.as<unsigned int>();
+			auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_spriteSheet.GetSmartPointer()->getResourceObjectPointer());
+			m_sprite = ss->getSpriteReference(m_SpriteIndex);
 		}
 	}
 
@@ -232,4 +235,35 @@ namespace DerydocaEngine::Components
 		}
 	}
 
+	template<class Archive>
+	void SpriteRenderer::save(Archive& archive) const
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
+			SERIALIZE(m_color),
+			SERIALIZE(m_spriteSheet),
+			SERIALIZE(m_SpriteIndex),
+			SERIALIZE(m_Shader),
+			SERIALIZE(m_size));
+	}
+	template<class Archive>
+	void SpriteRenderer::load(Archive& archive)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
+			SERIALIZE(m_color),
+			SERIALIZE(m_spriteSheet),
+			SERIALIZE(m_SpriteIndex),
+			SERIALIZE(m_Shader),
+			SERIALIZE(m_size));
+
+		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
+		auto material = std::make_shared<Rendering::Material>();
+		material->setShader(shader);
+		setMaterial(material);
+
+		auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_spriteSheet.GetSmartPointer()->getResourceObjectPointer());
+		m_sprite = ss->getSpriteReference(m_SpriteIndex);
+
+		markComponentAsDirty(Rendering::MeshComponents::All);
+		updateMesh();
+	}
 }

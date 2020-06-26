@@ -28,6 +28,13 @@ namespace DerydocaEngine
 		{
 			return glm::vec4(r, g, b, a);
 		}
+
+		SERIALIZE_FUNC(
+			SERIALIZE_NAMED("r", r),
+			SERIALIZE_NAMED("g", g),
+			SERIALIZE_NAMED("b", b),
+			SERIALIZE_NAMED("a", a)
+		);
 	};
 
 }
