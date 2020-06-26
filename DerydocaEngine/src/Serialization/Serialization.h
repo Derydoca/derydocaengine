@@ -31,3 +31,5 @@ void load(Archive& archive)\
 #define SERIALIZE(FIELD) CEREAL_NVP(FIELD)
 #define SERIALIZE_NAMED(NAME, FIELD) cereal::make_nvp(NAME, FIELD)
 #define SERIALIZE_BASE(CLASS) SERIALIZE_NAMED(std::string("__base_") + #CLASS, cereal::base_class<CLASS>( this ))
+
+#define REGISTER_SERIALIZED_TYPE(CLASS) CEREAL_REGISTER_TYPE(CLASS)

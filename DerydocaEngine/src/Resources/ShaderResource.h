@@ -54,4 +54,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-CEREAL_REGISTER_TYPE(DerydocaEngine::Resources::ShaderResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::ShaderResource);

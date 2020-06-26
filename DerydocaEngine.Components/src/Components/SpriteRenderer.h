@@ -82,4 +82,4 @@ namespace DerydocaEngine::Components
 
 }
 
-CEREAL_REGISTER_TYPE(DerydocaEngine::Components::SpriteRenderer);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SpriteRenderer);

@@ -33,4 +33,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-CEREAL_REGISTER_TYPE(DerydocaEngine::Resources::LevelResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::LevelResource);
