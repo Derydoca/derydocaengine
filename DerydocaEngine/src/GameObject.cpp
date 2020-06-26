@@ -21,7 +21,7 @@ namespace DerydocaEngine
 		m_DestroyFlag(false)
 	{
 		auto idGen = boost::uuids::random_generator_pure();
-		m_id = idGen();
+		m_ID = idGen();
 		m_Transform->setGameObject(this);
 	}
 

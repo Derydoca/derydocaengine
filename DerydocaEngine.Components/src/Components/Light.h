@@ -43,32 +43,32 @@ namespace DerydocaEngine::Components
 		Light();
 		~Light();
 
-		void setLightType(LightType const& type) { m_lightType = type; }
-		LightType getLightType() { return m_lightType; }
+		void setLightType(LightType const& type) { m_Type = type; }
+		LightType getLightType() { return m_Type; }
 
 		glm::mat4 getProjectionMatrix();
 		glm::mat4 getViewMatrix();
 
 		void setColor(Color* const& color)
 		{
-			m_color.r = color->r;
-			m_color.g = color->g;
-			m_color.b = color->b;
-			m_color.a = color->a;
+			m_Color.r = color->r;
+			m_Color.g = color->g;
+			m_Color.b = color->b;
+			m_Color.a = color->a;
 		}
-		bool& getCastShadows() { return m_castShadows; }
-		Color& getColor() { return m_color; }
-		Color getColor() const { return m_color; }
-		float getSpotlightExponent() { return m_spotlightExponent; }
-		float getSpotlightCutoff() { return m_spotlightCutoff; }
-		unsigned int getShadowMap() { return m_depthTexture; }
-		bool isCastingShadows() { return m_castShadows; }
-		bool setCastingShadows(bool const& castShadows) { m_castShadows = castShadows; }
-		Rendering::Projection& getProjection() { return m_projection; }
-		Rendering::Projection getProjection() const { return m_projection; }
+		bool& getCastShadows() { return m_CastShadows; }
+		Color& getColor() { return m_Color; }
+		Color getColor() const { return m_Color; }
+		float getSpotlightExponent() { return m_SpotlightExponent; }
+		float getSpotlightCutoff() { return m_SpotlightCutoff; }
+		unsigned int getShadowMap() { return m_DepthTexture; }
+		bool isCastingShadows() { return m_CastShadows; }
+		bool setCastingShadows(bool const& castShadows) { m_CastShadows = castShadows; }
+		Rendering::Projection& getProjection() { return m_Projection; }
+		Rendering::Projection getProjection() const { return m_Projection; }
 		glm::mat4 getShadowMatrix();
-		float& getShadowSoftness() { return m_shadowSoftness; }
-		float getShadowSoftness() const { return m_shadowSoftness; }
+		float& getShadowSoftness() { return m_ShadowSoftness; }
+		float getShadowSoftness() const { return m_ShadowSoftness; }
 
 		virtual void init();
 		virtual void deserialize(const YAML::Node& node);
@@ -78,35 +78,35 @@ namespace DerydocaEngine::Components
 
 		SERIALIZE_FUNC_BASE(
 			DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_lightType),
-			SERIALIZE(m_color),
-			SERIALIZE(m_spotlightExponent),
-			SERIALIZE(m_spotlightCutoff),
-			SERIALIZE(m_castShadows),
-			SERIALIZE(m_shadowMapSize),
-			SERIALIZE(m_shadowMapFilterType),
-			SERIALIZE(m_shadowSoftness)
+			SERIALIZE(m_Type),
+			SERIALIZE(m_ShadowMapFilterType),
+			SERIALIZE(m_ShadowMapSize),
+			SERIALIZE(m_Color),
+			SERIALIZE(m_CastShadows),
+			SERIALIZE(m_SpotlightExponent),
+			SERIALIZE(m_SpotlightCutoff),
+			SERIALIZE(m_ShadowSoftness)
 		);
 
 	private:
 		void generateShadowMap();
 		int getShadowMapFilterTypeEnum();
 
-		LightType m_lightType;
-		Color m_color;
-		float m_spotlightExponent;
-		float m_spotlightCutoff;
-		bool m_castShadows;
-		int2 m_shadowMapSize;
-		ShadowMapFilterType m_shadowMapFilterType;
-		float m_shadowSoftness;
+		LightType m_Type;
+		ShadowMapFilterType m_ShadowMapFilterType;
+		int2 m_ShadowMapSize;
+		Color m_Color;
+		bool m_CastShadows;
+		float m_SpotlightExponent;
+		float m_SpotlightCutoff;
+		float m_ShadowSoftness;
 
-		unsigned int m_depthTexture;
-		unsigned int m_shadowFBO;
-		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
-		std::shared_ptr<Rendering::Material> m_shadowMapMaterial;
-		Rendering::Projection m_projection;
-		glm::mat4 m_shadowBias;
+		unsigned int m_DepthTexture;
+		unsigned int m_ShadowFBO;
+		std::shared_ptr<Rendering::MatrixStack> m_MatrixStack;
+		std::shared_ptr<Rendering::Material> m_ShadowMapMaterial;
+		Rendering::Projection m_Projection;
+		glm::mat4 m_ShadowBias;
 	};
 
 }

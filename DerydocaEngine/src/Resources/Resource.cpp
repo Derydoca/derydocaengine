@@ -51,7 +51,7 @@ namespace DerydocaEngine::Resources
 	void Resource::generateAndSetId()
 	{
 		boost::uuids::random_generator gen;
-		m_id = gen();
+		m_ID = gen();
 	}
 
 	void Resource::setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath)

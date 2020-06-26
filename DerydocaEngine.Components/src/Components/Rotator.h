@@ -16,16 +16,15 @@ namespace DerydocaEngine::Components
 
 		void deserialize(const YAML::Node& node);
 
-		inline void setSpeed(float const& rotSpeed) { m_rotSpeed = rotSpeed; }
-		inline float& getSpeed() { return m_rotSpeed; }
-		inline float getSpeed() const { return m_rotSpeed; }
+		inline void setSpeed(float const& rotSpeed) { m_Speed = rotSpeed; }
+		inline float& getSpeed() { return m_Speed; }
+		inline float getSpeed() const { return m_Speed; }
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_rotVal),
-			SERIALIZE(m_rotSpeed));
+			SERIALIZE(m_Speed));
 	private:
-		float m_rotVal;
-		float m_rotSpeed;
+		float m_Value;
+		float m_Speed;
 	};
 
 }

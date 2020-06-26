@@ -103,20 +103,20 @@
                                                                     "__base_DerydocaEngine::Components::RendererComponent": {
                                                                         "__base_DerydocaEngine::Components::GameComponent": {
                                                                             "__base_DerydocaEngine::Object": {
-                                                                                "m_id": "a9c01a0e-6c98-44d8-94e1-c818c6b632b9"
+                                                                                "m_ID": "a460f075-08e8-413b-90ff-5d8037870e91"
                                                                             }
                                                                         }
                                                                     },
-                                                                    "m_color": {
+                                                                    "m_Color": {
                                                                         "r": 1.0,
                                                                         "g": 0.0,
                                                                         "b": 0.0,
                                                                         "a": 1.0
                                                                     },
-                                                                    "m_spriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
+                                                                    "m_SpriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
                                                                     "m_SpriteIndex": 2,
                                                                     "m_Shader": "b87ce577-1711-40ad-bf7a-2a5ff3214a46",
-                                                                    "m_size": {
+                                                                    "m_Size": {
                                                                         "x": 0.0,
                                                                         "y": 0.0
                                                                     }
@@ -144,7 +144,7 @@
                                                                     "z": 0.0
                                                                 },
                                                                 "m_Scale": {
-                                                                    "x": -1.934999942779541,
+                                                                    "x": 1.0,
                                                                     "y": 1.0,
                                                                     "z": 1.0
                                                                 },
@@ -167,20 +167,20 @@
                                                                     "__base_DerydocaEngine::Components::RendererComponent": {
                                                                         "__base_DerydocaEngine::Components::GameComponent": {
                                                                             "__base_DerydocaEngine::Object": {
-                                                                                "m_id": "b35103e6-c5b2-4fc0-bb8d-0fcb5af61a20"
+                                                                                "m_ID": "ec6d5dad-1835-4c04-aabe-d3512a33aaf7"
                                                                             }
                                                                         }
                                                                     },
-                                                                    "m_color": {
+                                                                    "m_Color": {
                                                                         "r": 1.0,
                                                                         "g": 1.0,
                                                                         "b": 1.0,
                                                                         "a": 1.0
                                                                     },
-                                                                    "m_spriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
+                                                                    "m_SpriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
                                                                     "m_SpriteIndex": 3,
                                                                     "m_Shader": "b87ce577-1711-40ad-bf7a-2a5ff3214a46",
-                                                                    "m_size": {
+                                                                    "m_Size": {
                                                                         "x": 0.0,
                                                                         "y": 0.0
                                                                     }
@@ -231,20 +231,20 @@
                                                                     "__base_DerydocaEngine::Components::RendererComponent": {
                                                                         "__base_DerydocaEngine::Components::GameComponent": {
                                                                             "__base_DerydocaEngine::Object": {
-                                                                                "m_id": "8dd04825-3ba0-4861-a98a-41e0cc7d75c4"
+                                                                                "m_ID": "881509ef-1d9e-4380-b5e8-aff8ed23df06"
                                                                             }
                                                                         }
                                                                     },
-                                                                    "m_color": {
+                                                                    "m_Color": {
                                                                         "r": 0.20000000298023225,
                                                                         "g": 1.0,
                                                                         "b": 0.20000000298023225,
                                                                         "a": 1.0
                                                                     },
-                                                                    "m_spriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
+                                                                    "m_SpriteSheet": "7db95fb4-622a-4c6c-a9e7-30ade44e43b1",
                                                                     "m_SpriteIndex": 1,
                                                                     "m_Shader": "b87ce577-1711-40ad-bf7a-2a5ff3214a46",
-                                                                    "m_size": {
+                                                                    "m_Size": {
                                                                         "x": 1000.0,
                                                                         "y": 100.0
                                                                     }
@@ -265,7 +265,7 @@
                             "ptr_wrapper": {
                                 "id": 2147483662,
                                 "data": {
-                                    "m_Name": "Squanch",
+                                    "m_Name": "Squirrel 1",
                                     "m_Transform": {
                                         "polymorphic_id": 1073741824,
                                         "ptr_wrapper": {
@@ -300,7 +300,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_id": "1cbba16d-0bc4-4d13-9cc8-82b92e0459c0"
+                                                            "m_ID": "92f8547b-8107-4121-9c36-d7c4f390839a"
                                                         }
                                                     },
                                                     "m_Mesh": "b1b135df-0f8a-4ebf-bd9d-a98127daf307",
@@ -317,11 +317,10 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_id": "28a27d89-6a4b-40d1-9294-258b92616dcb"
+                                                            "m_ID": "db0b9840-feb3-4200-9b9b-71be382f7a08"
                                                         }
                                                     },
-                                                    "m_rotVal": 0.0,
-                                                    "m_rotSpeed": 30.0
+                                                    "m_Speed": 30.0
                                                 }
                                             }
                                         }
@@ -341,8 +340,8 @@
                                             "id": 2147483667,
                                             "data": {
                                                 "m_Position": {
-                                                    "x": 0.0,
-                                                    "y": -3.015000104904175,
+                                                    "x": 2.0,
+                                                    "y": 0.5,
                                                     "z": -1.0
                                                 },
                                                 "m_Scale": {
@@ -369,25 +368,25 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_id": "622ebc58-7cca-48c7-8072-e5ad3404cefc"
+                                                            "m_ID": "c7573abd-a276-4058-b32c-3c2e991b1533"
                                                         }
                                                     },
-                                                    "m_lightType": 1,
-                                                    "m_color": {
-                                                        "r": 0.0,
-                                                        "g": 0.17858362197875977,
-                                                        "b": 1.0,
-                                                        "a": 1.0
-                                                    },
-                                                    "m_spotlightExponent": 0.0,
-                                                    "m_spotlightCutoff": 0.0,
-                                                    "m_castShadows": false,
-                                                    "m_shadowMapSize": {
+                                                    "m_Type": 1,
+                                                    "m_ShadowMapFilterType": 0,
+                                                    "m_ShadowMapSize": {
                                                         "x": 512,
                                                         "y": 512
                                                     },
-                                                    "m_shadowMapFilterType": 0,
-                                                    "m_shadowSoftness": 0.009999999776482582
+                                                    "m_Color": {
+                                                        "r": 1.0,
+                                                        "g": 1.0,
+                                                        "b": 1.0,
+                                                        "a": 1.0
+                                                    },
+                                                    "m_CastShadows": false,
+                                                    "m_SpotlightExponent": 0.0,
+                                                    "m_SpotlightCutoff": 0.0,
+                                                    "m_ShadowSoftness": 0.009999999776482582
                                                 }
                                             }
                                         }
@@ -407,8 +406,8 @@
                                             "id": 2147483670,
                                             "data": {
                                                 "m_Position": {
-                                                    "x": 0.0,
-                                                    "y": 1.440000057220459,
+                                                    "x": -2.0,
+                                                    "y": 0.5,
                                                     "z": 1.0
                                                 },
                                                 "m_Scale": {
@@ -434,25 +433,25 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_id": "bd230041-7a0f-4ebc-b9bb-eedf009aa524"
+                                                            "m_ID": "06f74c5e-9720-4076-88cc-cd6f952287fd"
                                                         }
                                                     },
-                                                    "m_lightType": 1,
-                                                    "m_color": {
-                                                        "r": 0.649789035320282,
-                                                        "g": 0.6497825384140015,
-                                                        "b": 0.6497825384140015,
-                                                        "a": 1.0
-                                                    },
-                                                    "m_spotlightExponent": 0.0,
-                                                    "m_spotlightCutoff": 0.0,
-                                                    "m_castShadows": false,
-                                                    "m_shadowMapSize": {
+                                                    "m_Type": 1,
+                                                    "m_ShadowMapFilterType": 0,
+                                                    "m_ShadowMapSize": {
                                                         "x": 512,
                                                         "y": 512
                                                     },
-                                                    "m_shadowMapFilterType": 0,
-                                                    "m_shadowSoftness": 0.009999999776482582
+                                                    "m_Color": {
+                                                        "r": 1.0,
+                                                        "g": 0.20000000298023225,
+                                                        "b": 0.20000000298023225,
+                                                        "a": 1.0
+                                                    },
+                                                    "m_CastShadows": false,
+                                                    "m_SpotlightExponent": 0.0,
+                                                    "m_SpotlightCutoff": 0.0,
+                                                    "m_ShadowSoftness": 0.009999999776482582
                                                 }
                                             }
                                         }

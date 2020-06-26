@@ -9,10 +9,10 @@ namespace DerydocaEngine::Components
 {
 
 	SpriteRenderer::SpriteRenderer() :
-		m_color(1.0f, 1.0f, 1.0f, 1.0f),
-		m_spriteSheet(),
-		m_sprite(nullptr),
-		m_size(0.0f, 0.0f)
+		m_Color(1.0f, 1.0f, 1.0f, 1.0f),
+		m_SpriteSheet(),
+		m_Sprite(nullptr),
+		m_Size(0.0f, 0.0f)
 	{
 	}
 
@@ -22,9 +22,9 @@ namespace DerydocaEngine::Components
 
 	void SpriteRenderer::postInit()
 	{
-		if (m_spriteSheet)
+		if (m_SpriteSheet)
 		{
-			auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_spriteSheet.GetSmartPointer()->getResourceObjectPointer());
+			auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_SpriteSheet.GetSmartPointer()->getResourceObjectPointer());
 			auto spriteSheetTexture = ss->getTexture();
 			getMaterial()->setTexture("SpriteSheet", spriteSheetTexture);
 			markComponentAsDirty(Rendering::MeshComponents::All);
@@ -33,7 +33,7 @@ namespace DerydocaEngine::Components
 
 	void SpriteRenderer::deserialize(const YAML::Node& compNode)
 	{
-		m_spriteSheet.Set(getResource<Resources::SpriteSheetResource>(compNode, "spriteSheet"));
+		m_SpriteSheet.Set(getResource<Resources::SpriteSheetResource>(compNode, "spriteSheet"));
 		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
 		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
 		auto material = std::make_shared<Rendering::Material>();
@@ -43,21 +43,21 @@ namespace DerydocaEngine::Components
 		YAML::Node sizeNode = compNode["size"];
 		if (sizeNode)
 		{
-			m_size = sizeNode.as<glm::vec2>();
+			m_Size = sizeNode.as<glm::vec2>();
 		}
 
 		YAML::Node colorNode = compNode["color"];
 		if (colorNode)
 		{
-			m_color = colorNode.as<Color>();
+			m_Color = colorNode.as<Color>();
 		}
 
 		YAML::Node spriteIdNode = compNode["spriteId"];
 		if (spriteIdNode)
 		{
 			m_SpriteIndex = spriteIdNode.as<unsigned int>();
-			auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_spriteSheet.GetSmartPointer()->getResourceObjectPointer());
-			m_sprite = ss->getSpriteReference(m_SpriteIndex);
+			auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_SpriteSheet.GetSmartPointer()->getResourceObjectPointer());
+			m_Sprite = ss->getSpriteReference(m_SpriteIndex);
 		}
 	}
 
@@ -73,11 +73,11 @@ namespace DerydocaEngine::Components
 		std::vector<glm::vec3> vertices;
 		vertices.reserve(numVerts);
 
-		bool nativeSize = m_size.x == 0.0f && m_size.y == 0.0f;
+		bool nativeSize = m_Size.x == 0.0f && m_Size.y == 0.0f;
 		float c0 = 0.0f;
-		float c3 = nativeSize ? m_sprite->size.x : m_size.x;
+		float c3 = nativeSize ? m_Sprite->size.x : m_Size.x;
 		float r0 = -(0.0f);
-		float r3 = -(nativeSize ? m_sprite->size.y : m_size.y);
+		float r3 = -(nativeSize ? m_Sprite->size.y : m_Size.y);
 
 		// Set the corner positions
 		vertices.push_back(glm::vec3(c0, r0, 0.0f));
@@ -86,10 +86,10 @@ namespace DerydocaEngine::Components
 		vertices.push_back(glm::vec3(c3, r3, 0.0f));
 
 		// If this is a nine-slice sprite, set the positions for the remaining verts
-		if (m_sprite->type == UI::SpriteType::NineSlice)
+		if (m_Sprite->type == UI::SpriteType::NineSlice)
 		{
-			int2 spriteSize = m_sprite->size;
-			float4 spriteSlice = m_sprite->slice;
+			int2 spriteSize = m_Sprite->size;
+			float4 spriteSlice = m_Sprite->slice;
 			float c1 = c0 + (spriteSize.x * spriteSlice.w);
 			float c2 = c3 - (spriteSize.x * (1 - spriteSlice.y));
 			float r1 = r0 - (spriteSize.y * spriteSlice.x);
@@ -131,10 +131,10 @@ namespace DerydocaEngine::Components
 		std::vector<glm::vec2> texCoords;
 		texCoords.reserve(numVerts);
 
-		float c0 = m_sprite->texPosition.getX();
-		float c3 = m_sprite->texPosition.getDX();
-		float r0 = 1.0f - m_sprite->texPosition.getY();
-		float r3 = 1.0f - m_sprite->texPosition.getDY();
+		float c0 = m_Sprite->texPosition.getX();
+		float c3 = m_Sprite->texPosition.getDX();
+		float r0 = 1.0f - m_Sprite->texPosition.getY();
+		float r3 = 1.0f - m_Sprite->texPosition.getDY();
 
 		// Set the corners
 		texCoords.push_back(glm::vec2(c0, r0));
@@ -143,12 +143,12 @@ namespace DerydocaEngine::Components
 		texCoords.push_back(glm::vec2(c3, r3));
 
 		// If this is a nine-slice sprite, set the UVs for the remaining verts
-		if (m_sprite->type == UI::SpriteType::NineSlice)
+		if (m_Sprite->type == UI::SpriteType::NineSlice)
 		{
 			float texw = c3 - c0;
 			float texh = r3 - r0;
 
-			float4 spriteSlice = m_sprite->slice;
+			float4 spriteSlice = m_Sprite->slice;
 			float c1 = c0 + (texw * spriteSlice.w);
 			float c2 = c0 + (texw * spriteSlice.y);
 			float r1 = r0 + (texh * spriteSlice.x);
@@ -192,7 +192,7 @@ namespace DerydocaEngine::Components
 
 		for (int i = 0; i < numVerts; i++)
 		{
-			vertexColors.push_back(m_color);
+			vertexColors.push_back(m_Color);
 		}
 
 		return vertexColors;
@@ -200,7 +200,7 @@ namespace DerydocaEngine::Components
 
 	std::vector<unsigned int> SpriteRenderer::generateTriangleIndices()
 	{
-		switch (m_sprite->type)
+		switch (m_Sprite->type)
 		{
 		case UI::SpriteType::Sprite:
 			return {
@@ -238,29 +238,29 @@ namespace DerydocaEngine::Components
 	SERIALIZE_FUNC_SAVE(archive, SpriteRenderer)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
-			SERIALIZE(m_color),
-			SERIALIZE(m_spriteSheet),
+			SERIALIZE(m_Color),
+			SERIALIZE(m_SpriteSheet),
 			SERIALIZE(m_SpriteIndex),
 			SERIALIZE(m_Shader),
-			SERIALIZE(m_size));
+			SERIALIZE(m_Size));
 	}
 
 	SERIALIZE_FUNC_LOAD(archive, SpriteRenderer)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
-			SERIALIZE(m_color),
-			SERIALIZE(m_spriteSheet),
+			SERIALIZE(m_Color),
+			SERIALIZE(m_SpriteSheet),
 			SERIALIZE(m_SpriteIndex),
 			SERIALIZE(m_Shader),
-			SERIALIZE(m_size));
+			SERIALIZE(m_Size));
 
 		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
 		auto material = std::make_shared<Rendering::Material>();
 		material->setShader(shader);
 		setMaterial(material);
 
-		auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_spriteSheet.GetSmartPointer()->getResourceObjectPointer());
-		m_sprite = ss->getSpriteReference(m_SpriteIndex);
+		auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_SpriteSheet.GetSmartPointer()->getResourceObjectPointer());
+		m_Sprite = ss->getSpriteReference(m_SpriteIndex);
 
 		markComponentAsDirty(Rendering::MeshComponents::All);
 		updateMesh();

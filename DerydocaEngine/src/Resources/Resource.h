@@ -17,7 +17,7 @@ namespace DerydocaEngine::Resources
 
 		void setData(const std::shared_ptr<void> data) { m_resourceObjectPointer = data; };
 		void setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath);
-		void setId(const boost::uuids::uuid& id) { m_id = id; }
+		void setId(const boost::uuids::uuid& id) { m_ID = id; }
 		void setName(const std::string& name) { m_name = name; }
 		void setType(const ResourceType type) { m_type = type; }
 

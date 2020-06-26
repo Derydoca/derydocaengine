@@ -82,7 +82,7 @@ namespace DerydocaEngine::Components
 			const std::shared_ptr<Transform> projectionTransform) {}
 
 		inline void setGameObject(const std::weak_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
-		inline void setId(const boost::uuids::uuid& id) { m_id = id; }
+		inline void setId(const boost::uuids::uuid& id) { m_ID = id; }
 		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject.lock(); }
 
 		void destroy(std::shared_ptr<GameObject> objectToDestroy);
