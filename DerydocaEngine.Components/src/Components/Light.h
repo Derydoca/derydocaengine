@@ -76,6 +76,18 @@ namespace DerydocaEngine::Components
 
 		void renderShadowMap(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
 
+		SERIALIZE_FUNC_BASE(
+			DerydocaEngine::Components::GameComponent,
+			SERIALIZE(m_lightType),
+			SERIALIZE(m_color),
+			SERIALIZE(m_spotlightExponent),
+			SERIALIZE(m_spotlightCutoff),
+			SERIALIZE(m_castShadows),
+			SERIALIZE(m_shadowMapSize),
+			SERIALIZE(m_shadowMapFilterType),
+			SERIALIZE(m_shadowSoftness)
+		);
+
 	private:
 		void generateShadowMap();
 		int getShadowMapFilterTypeEnum();
@@ -85,16 +97,18 @@ namespace DerydocaEngine::Components
 		float m_spotlightExponent;
 		float m_spotlightCutoff;
 		bool m_castShadows;
-		int m_shadowMapHeight;
-		int m_shadowMapWidth;
+		int2 m_shadowMapSize;
+		ShadowMapFilterType m_shadowMapFilterType;
+		float m_shadowSoftness;
+
 		unsigned int m_depthTexture;
 		unsigned int m_shadowFBO;
 		std::shared_ptr<Rendering::MatrixStack> m_matrixStack;
 		std::shared_ptr<Rendering::Material> m_shadowMapMaterial;
 		Rendering::Projection m_projection;
 		glm::mat4 m_shadowBias;
-		ShadowMapFilterType m_shadowMapFilterType;
-		float m_shadowSoftness;
 	};
 
 }
+
+CEREAL_REGISTER_TYPE(DerydocaEngine::Components::Light);

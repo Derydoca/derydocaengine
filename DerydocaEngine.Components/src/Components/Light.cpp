@@ -16,8 +16,7 @@ namespace DerydocaEngine::Components
 		m_spotlightExponent(0.0f),
 		m_spotlightCutoff(0.0f),
 		m_castShadows(false),
-		m_shadowMapHeight(512),
-		m_shadowMapWidth(512),
+		m_shadowMapSize(512, 512),
 		m_depthTexture(0),
 		m_shadowFBO(0),
 		m_matrixStack(std::make_shared<Rendering::MatrixStack>()),
@@ -88,13 +87,13 @@ namespace DerydocaEngine::Components
 		YAML::Node shadowMapHeightNode = node["shadowMapHeight"];
 		if (shadowMapHeightNode)
 		{
-			m_shadowMapHeight = shadowMapHeightNode.as<int>();
+			m_shadowMapSize.y = shadowMapHeightNode.as<int>();
 		}
 
 		YAML::Node shadowMapWidthNode = node["shadowMapWidth"];
 		if (shadowMapWidthNode)
 		{
-			m_shadowMapWidth = shadowMapWidthNode.as<int>();
+			m_shadowMapSize.x = shadowMapWidthNode.as<int>();
 		}
 
 		YAML::Node shadowMapFilterTypeNode = node["shadowMapFilterType"];
@@ -121,7 +120,7 @@ namespace DerydocaEngine::Components
 		auto prevFramebufferId = Rendering::GraphicsAPI::getCurrentFramebufferID();
 		Rendering::GraphicsAPI::bindFramebuffer(m_shadowFBO);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		glViewport(0, 0, m_shadowMapWidth, m_shadowMapHeight);
+		glViewport(0, 0, m_shadowMapSize.x, m_shadowMapSize.y);
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_FRONT);
 		glEnable(GL_POLYGON_OFFSET_FILL);
@@ -148,7 +147,7 @@ namespace DerydocaEngine::Components
 		glGenTextures(1, &m_depthTexture);
 		glBindTexture(GL_TEXTURE_2D, m_depthTexture);
 		glFinish();
-		glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, m_shadowMapWidth, m_shadowMapHeight);
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT24, m_shadowMapSize.x, m_shadowMapSize.y);
 		GLint filterType = getShadowMapFilterTypeEnum();
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterType);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterType);
