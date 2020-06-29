@@ -242,7 +242,8 @@ namespace DerydocaEngine::Components
 			SERIALIZE(m_SpriteSheet),
 			SERIALIZE(m_SpriteIndex),
 			SERIALIZE(m_Shader),
-			SERIALIZE(m_Size));
+			SERIALIZE(m_Size)
+		);
 	}
 
 	SERIALIZE_FUNC_LOAD(archive, SpriteRenderer)

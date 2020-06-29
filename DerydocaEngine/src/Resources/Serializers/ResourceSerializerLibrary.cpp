@@ -9,6 +9,7 @@
 #include "Resources\Serializers\SpriteSheetResourceSerializer.h"
 #include "Resources\Serializers\AnimationResourceSerializer.h"
 #include "Resources\Serializers\SkeletonResourceSerializer.h"
+#include "Resources\Serializers\RasterFontResourceSerializer.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {
@@ -38,6 +39,7 @@ namespace DerydocaEngine::Resources::Serializers
 		registerSerializer(std::make_shared<SpriteSheetResourceSerializer>());
 		registerSerializer(std::make_shared<TextureResourceSerializer>());
 		registerSerializer(std::make_shared<Ext::BezierPatchMeshResourceSerializer>());
+		registerSerializer(std::make_shared<RasterFontResourceSerializer>());
 	}
 
 	ResourceSerializerLibrary::~ResourceSerializerLibrary()

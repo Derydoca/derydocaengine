@@ -103,7 +103,7 @@
                                                                     "__base_DerydocaEngine::Components::RendererComponent": {
                                                                         "__base_DerydocaEngine::Components::GameComponent": {
                                                                             "__base_DerydocaEngine::Object": {
-                                                                                "m_ID": "a460f075-08e8-413b-90ff-5d8037870e91"
+                                                                                "m_ID": "d28cdc53-6b91-4d21-9282-73c5374c320d"
                                                                             }
                                                                         }
                                                                     },
@@ -167,7 +167,7 @@
                                                                     "__base_DerydocaEngine::Components::RendererComponent": {
                                                                         "__base_DerydocaEngine::Components::GameComponent": {
                                                                             "__base_DerydocaEngine::Object": {
-                                                                                "m_ID": "ec6d5dad-1835-4c04-aabe-d3512a33aaf7"
+                                                                                "m_ID": "7dd9ffb2-36e4-4f62-878e-1e280df362de"
                                                                             }
                                                                         }
                                                                     },
@@ -231,7 +231,7 @@
                                                                     "__base_DerydocaEngine::Components::RendererComponent": {
                                                                         "__base_DerydocaEngine::Components::GameComponent": {
                                                                             "__base_DerydocaEngine::Object": {
-                                                                                "m_ID": "881509ef-1d9e-4380-b5e8-aff8ed23df06"
+                                                                                "m_ID": "5290d4df-05ef-43e6-b29d-f8564e015508"
                                                                             }
                                                                         }
                                                                     },
@@ -300,7 +300,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "92f8547b-8107-4121-9c36-d7c4f390839a"
+                                                            "m_ID": "1dbc4163-04bc-4032-8044-25b68811e5a9"
                                                         }
                                                     },
                                                     "m_Mesh": "b1b135df-0f8a-4ebf-bd9d-a98127daf307",
@@ -317,7 +317,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "db0b9840-feb3-4200-9b9b-71be382f7a08"
+                                                            "m_ID": "fa5f13e8-1dfc-452c-a9d0-790da3992942"
                                                         }
                                                     },
                                                     "m_Speed": 30.0
@@ -368,7 +368,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "c7573abd-a276-4058-b32c-3c2e991b1533"
+                                                            "m_ID": "6002e178-185d-469b-8596-f10ec9df1abd"
                                                         }
                                                     },
                                                     "m_Type": 1,
@@ -433,7 +433,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "06f74c5e-9720-4076-88cc-cd6f952287fd"
+                                                            "m_ID": "278acbb8-55e1-4ebd-8bc1-b24d1a32fa8f"
                                                         }
                                                     },
                                                     "m_Type": 1,

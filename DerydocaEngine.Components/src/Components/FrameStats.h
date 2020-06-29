@@ -14,8 +14,12 @@ namespace DerydocaEngine::Components
 
 		virtual void postInit();
 		virtual void update(const float deltaTime);
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
 		std::shared_ptr<TextRenderer> m_textRenderer;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::FrameStats);

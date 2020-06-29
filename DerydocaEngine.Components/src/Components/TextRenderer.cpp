@@ -12,17 +12,18 @@ namespace DerydocaEngine::Components
 	const int DEL_CHAR = 127;
 
 	TextRenderer::TextRenderer() :
-		m_material(),
-		m_fontFace(),
-		m_text(),
-		m_bounds(),
-		m_textColor(1.0f, 1.0f, 1.0f, 1.0f),
-		m_overflowWrap(OverflowWrap::Normal),
-		m_horizontalAlign(TextAlign::Start),
-		m_verticalAlign(TextAlign::Start),
-		m_lines(),
-		m_filteredText(nullptr),
-		m_textDirty(true)
+		m_Color(1.0f, 1.0f, 1.0f, 1.0f),
+		m_Bounds(),
+		m_OverflowWrap(OverflowWrap::Normal),
+		m_HorizontalAlign(TextAlign::Start),
+		m_VerticalAlign(TextAlign::Start),
+		m_Text(),
+		m_Shader(),
+		m_FontFace(),
+		m_Lines(),
+		m_FilteredText(nullptr),
+		m_TextDirty(true),
+		m_Material()
 	{
 	}
 
@@ -32,13 +33,52 @@ namespace DerydocaEngine::Components
 
 	void TextRenderer::postInit()
 	{
-		if (m_fontFace)
+		if (m_FontFace)
 		{
-			auto fontTexture = m_fontFace->getTexture();
+			auto ff = std::static_pointer_cast<UI::FontFace>(m_FontFace.GetSmartPointer()->getResourceObjectPointer());
+			auto fontTexture = ff->getTexture();
 			getMaterial()->setTexture("CharacterSheet", fontTexture);
 			markComponentAsDirty(DIRTY_COMPONENTS_ON_INDICES_CHANGED);
 			markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
 		}
+	}
+
+	SERIALIZE_FUNC_LOAD(archive, TextRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
+			SERIALIZE(m_Color),
+			SERIALIZE(m_Bounds),
+			SERIALIZE(m_OverflowWrap),
+			SERIALIZE(m_HorizontalAlign),
+			SERIALIZE(m_VerticalAlign),
+			SERIALIZE(m_Text),
+			SERIALIZE(m_Shader),
+			SERIALIZE(m_FontFace)
+		);
+
+		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
+		auto material = std::make_shared<Rendering::Material>();
+		material->setShader(shader);
+		setMaterial(material);
+
+		setText(m_Text);
+
+		markComponentAsDirty(Rendering::MeshComponents::All);
+		updateMesh();
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, TextRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::RendererComponent),
+			SERIALIZE(m_Color),
+			SERIALIZE(m_Bounds),
+			SERIALIZE(m_OverflowWrap),
+			SERIALIZE(m_HorizontalAlign),
+			SERIALIZE(m_VerticalAlign),
+			SERIALIZE(m_Text),
+			SERIALIZE(m_Shader),
+			SERIALIZE(m_FontFace)
+		);
 	}
 
 	void TextRenderer::deserialize(const YAML::Node& compNode)
@@ -46,62 +86,77 @@ namespace DerydocaEngine::Components
 		YAML::Node boundsNode = compNode["bounds"];
 		if (boundsNode)
 		{
-			m_bounds = boundsNode.as<glm::vec2>();
+			m_Bounds = boundsNode.as<glm::vec2>();
 		}
 
 		YAML::Node colorNode = compNode["color"];
 		if (colorNode)
 		{
-			m_textColor = colorNode.as<Color>();
+			m_Color = colorNode.as<Color>();
 		}
 
 		YAML::Node overflowWrapNode = compNode["overflowWrap"];
 		if (overflowWrapNode)
 		{
-			m_overflowWrap = static_cast<OverflowWrap>(overflowWrapNode.as<int>());
+			m_OverflowWrap = static_cast<OverflowWrap>(overflowWrapNode.as<int>());
 		}
 
 		YAML::Node horizontalAlignNode = compNode["horizontalAlign"];
 		if (horizontalAlignNode)
 		{
-			m_horizontalAlign = static_cast<TextAlign>(horizontalAlignNode.as<int>());
+			m_HorizontalAlign = static_cast<TextAlign>(horizontalAlignNode.as<int>());
 		}
 
 		YAML::Node verticalAlignNode = compNode["verticalAlign"];
 		if (verticalAlignNode)
 		{
-			m_verticalAlign = static_cast<TextAlign>(verticalAlignNode.as<int>());
+			m_VerticalAlign = static_cast<TextAlign>(verticalAlignNode.as<int>());
 		}
 
 		setMaterial(std::make_shared<Rendering::Material>());
-		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
-		getMaterial()->setShader(shader);
+		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
+		getMaterial()->setShader(std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer()));
 
-		auto fontResource = getResource<Resources::Resource>(compNode, "font");
-		if (fontResource->getType() == Resources::ResourceType::FontResourceType) {
-			// Load the font size from the file
-			float fontSize = 16.0f;
-			YAML::Node fontSizeNode = compNode["fontSize"];
-			if (fontSizeNode)
-			{
-				fontSize = fontSizeNode.as<float>();
-			}
+		m_FontFace.Set(getResource<Resources::RasterFontResource>(compNode, "font"));
+		//auto fontResource = getResource<Resources::Resource>(compNode, "font");
+		//if (fontResource->getType() == Resources::ResourceType::FontResourceType) {
+		//	// Load the font size from the file
+		//	float fontSize = 16.0f;
+		//	YAML::Node fontSizeNode = compNode["fontSize"];
+		//	if (fontSizeNode)
+		//	{
+		//		fontSize = fontSizeNode.as<float>();
+		//	}
 
-			m_fontFace = std::make_shared<UI::FontFace>();
-			m_fontFace->setFontSize(fontSize);
-			m_fontFace->loadFromFontFile(fontResource->getSourceFilePath());
-		}
-		else if (fontResource->getType() == Resources::ResourceType::RasterFontResourceType)
-		{
-			m_fontFace = std::make_shared<UI::FontFace>();
-			m_fontFace->loadFromSerializedFile(fontResource->getSourceFilePath());
-		}
+		//	m_FontFace = std::make_shared<UI::FontFace>();
+		//	m_FontFace->setFontSize(fontSize);
+		//	m_FontFace->loadFromFontFile(fontResource->getSourceFilePath());
+		//}
+		//else if (fontResource->getType() == Resources::ResourceType::RasterFontResourceType)
+		//{
+		//	m_FontFace = std::make_shared<UI::FontFace>();
+		//	m_FontFace->loadFromSerializedFile(fontResource->getSourceFilePath());
+		//}
 
 		YAML::Node textNode = compNode["text"];
 		if (textNode)
 		{
 			setText(textNode.as<std::string>());
 		}
+	}
+
+	void TextRenderer::setText(const std::string& text)
+	{
+		m_Text = text;
+		auto ff = std::static_pointer_cast<UI::FontFace>(m_FontFace.GetSmartPointer()->getResourceObjectPointer());
+		m_Lines = processTextToLines(m_Text, m_OverflowWrap, ff, m_Bounds.x, m_FilteredText);
+		int newVertCount = generateNumVertices();
+		int currentVertCount = getNumVertices();
+		if (newVertCount != currentVertCount)
+		{
+			markComponentAsDirty(DIRTY_COMPONENTS_ON_INDICES_CHANGED);
+		}
+		markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
 	}
 
 	std::vector<glm::vec3> TextRenderer::generateVertices()
@@ -112,7 +167,8 @@ namespace DerydocaEngine::Components
 
 		// Calculate the information we need for vertical alignment
 		float lineHeight = 0.0f;
-		calculateVerticalAlignmentProperties(m_verticalAlign, (int)m_lines.size(), m_bounds.y, m_fontFace->getLineHeight(), &penY, &lineHeight);
+		auto ff = std::static_pointer_cast<UI::FontFace>(m_FontFace.GetSmartPointer()->getResourceObjectPointer());
+		calculateVerticalAlignmentProperties(m_VerticalAlign, (int)m_Lines.size(), m_Bounds.y, ff->getLineHeight(), &penY, &lineHeight);
 
 		// Keep reference to the quad that we are currently building
 		int charQuadIndex = 0;
@@ -121,13 +177,13 @@ namespace DerydocaEngine::Components
 		vertices.reserve(generateNumVertices());
 
 		// Iterate through all lines of the text
-		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
+		for (size_t lineIndex = 0; lineIndex < m_Lines.size(); lineIndex++)
 		{
-			LineProperties* lineProperties = m_lines[lineIndex];
+			LineProperties* lineProperties = m_Lines[lineIndex];
 
 			// Calculate the information we need for horizontal alignment
 			float extraCharAdvance = 0.0f;
-			calculateHorizontalAlignmentProperties(m_horizontalAlign, m_bounds.x, lineProperties->getWidth(), lineProperties->getEnd() - lineProperties->getStart(), lineProperties->getStartAdjust(), &penX, &extraCharAdvance);
+			calculateHorizontalAlignmentProperties(m_HorizontalAlign, m_Bounds.x, lineProperties->getWidth(), lineProperties->getEnd() - lineProperties->getStart(), lineProperties->getStartAdjust(), &penX, &extraCharAdvance);
 
 			// Adjust the x position based on the line's start adjustment
 			penX += lineProperties->getStartAdjust();
@@ -136,7 +192,8 @@ namespace DerydocaEngine::Components
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Get the character image information
-				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+				auto ff = std::static_pointer_cast<UI::FontFace>(m_FontFace.GetSmartPointer()->getResourceObjectPointer());
+				Utilities::TexturePackerImage img = ff->getCharData(m_FilteredText[charIndex]);
 
 				// Set the vertex positions
 				float2 bearing = img.bearing;
@@ -175,15 +232,16 @@ namespace DerydocaEngine::Components
 		texCoords.reserve(generateNumVertices());
 
 		// Iterate through all lines of the text
-		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
+		for (size_t lineIndex = 0; lineIndex < m_Lines.size(); lineIndex++)
 		{
-			LineProperties* lineProperties = m_lines[lineIndex];
+			LineProperties* lineProperties = m_Lines[lineIndex];
 
 			// Iterate through each character in the line
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Get the character image information
-				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+				auto ff = std::static_pointer_cast<UI::FontFace>(m_FontFace.GetSmartPointer()->getResourceObjectPointer());
+				Utilities::TexturePackerImage img = ff->getCharData(m_FilteredText[charIndex]);
 
 				// Set the UV positions
 				Rect rect = img.imageRect;
@@ -209,18 +267,18 @@ namespace DerydocaEngine::Components
 		vertexColors.reserve(generateNumVertices());
 
 		// Iterate through all lines of the text
-		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
+		for (size_t lineIndex = 0; lineIndex < m_Lines.size(); lineIndex++)
 		{
-			LineProperties* lineProperties = m_lines[lineIndex];
+			LineProperties* lineProperties = m_Lines[lineIndex];
 
 			// Iterate through each character in the line
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Set the vertex colors
-				vertexColors.push_back(m_textColor);
-				vertexColors.push_back(m_textColor);
-				vertexColors.push_back(m_textColor);
-				vertexColors.push_back(m_textColor);
+				vertexColors.push_back(m_Color);
+				vertexColors.push_back(m_Color);
+				vertexColors.push_back(m_Color);
+				vertexColors.push_back(m_Color);
 
 				// Continue on to the next char
 				charQuadIndex++;
@@ -239,15 +297,16 @@ namespace DerydocaEngine::Components
 		triangleIndices.reserve(generateNumIndices());
 
 		// Iterate through all lines of the text
-		for (size_t lineIndex = 0; lineIndex < m_lines.size(); lineIndex++)
+		for (size_t lineIndex = 0; lineIndex < m_Lines.size(); lineIndex++)
 		{
-			LineProperties* lineProperties = m_lines[lineIndex];
+			LineProperties* lineProperties = m_Lines[lineIndex];
 
 			// Iterate through each character in the line
 			for (int charIndex = lineProperties->getStart(); charIndex < lineProperties->getEnd(); charIndex++)
 			{
 				// Get the character image information
-				Utilities::TexturePackerImage img = m_fontFace->getCharData(m_filteredText[charIndex]);
+				auto ff = std::static_pointer_cast<UI::FontFace>(m_FontFace.GetSmartPointer()->getResourceObjectPointer());
+				Utilities::TexturePackerImage img = ff->getCharData(m_FilteredText[charIndex]);
 
 				// Set the indices to draw the two triangles
 				triangleIndices.push_back(charQuadIndex * 4 + 0);

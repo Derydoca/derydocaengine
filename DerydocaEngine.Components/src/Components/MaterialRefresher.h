@@ -27,6 +27,8 @@ namespace DerydocaEngine::Components
 		void init();
 		void update(const float deltaTime);
 		void refreshMaterial();
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
 		bool isShaderSourceUpdated();
 
@@ -53,3 +55,5 @@ namespace DerydocaEngine::Components
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::MaterialRefresher);

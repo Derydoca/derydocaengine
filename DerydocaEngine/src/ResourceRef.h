@@ -28,6 +28,10 @@ namespace DerydocaEngine
         template <class Archive>
         std::string save_minimal(Archive const&) const
         {
+            if (!m_Resource)
+            {
+                return "";
+            }
             std::string val = boost::lexical_cast<std::string>(m_Resource->getId());
             return val;
         }
@@ -35,7 +39,14 @@ namespace DerydocaEngine
         template <class Archive>
         void load_minimal(Archive const&, std::string const& value)
         {
-            m_Resource = DerydocaEngine::ObjectLibrary::getInstance().getResource<ResourceType>(value);
+            if (value.length() > 0)
+            {
+                m_Resource = DerydocaEngine::ObjectLibrary::getInstance().getResource<ResourceType>(value);
+            }
+            else
+            {
+                D_LOG_WARN("A ResourceRef object was created without a valid ID");
+            }
         }
 
         std::shared_ptr<ResourceType> GetSmartPointer() const { return m_Resource; }

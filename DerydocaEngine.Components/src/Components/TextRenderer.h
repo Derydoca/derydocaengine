@@ -2,6 +2,8 @@
 #include <string>
 #include "UI\FontFace.h"
 #include "RendererComponent.h"
+#include "Resources\ShaderResource.h"
+#include "Resources\RasterFontResource.h"
 
 namespace DerydocaEngine::Rendering {
 	class Material;
@@ -66,28 +68,17 @@ namespace DerydocaEngine::Components
 		virtual void postInit();
 		virtual void deserialize(const YAML::Node& compNode);
 
-		void setText(const std::string& text)
-		{
-			m_text = text;
-			m_lines = processTextToLines(m_text, m_overflowWrap, m_fontFace, m_bounds.x, m_filteredText);
-			int newVertCount = generateNumVertices();
-			int currentVertCount = getNumVertices();
-			if (newVertCount != currentVertCount)
-			{
-				markComponentAsDirty(DIRTY_COMPONENTS_ON_INDICES_CHANGED);
-			}
-			markComponentAsDirty(DIRTY_COMPONENTS_ON_TEXT_CHANGE);
-		}
-		std::string getText() { return m_text; }
-		Color getColor() const { return m_textColor; }
+		void setText(const std::string& text);
+		std::string getText() { return m_Text; }
+		Color getColor() const { return m_Color; }
 		void setColor(Color const& color)
 		{
-			if (m_textColor == color)
+			if (m_Color == color)
 			{
 				return;
 			}
 
-			m_textColor = color;
+			m_Color = color;
 			markComponentAsDirty(Rendering::MeshComponents::Colors);
 		}
 
@@ -97,38 +88,42 @@ namespace DerydocaEngine::Components
 		virtual std::vector<unsigned int> generateTriangleIndices();
 		int generateNumVertices()
 		{
-			if (m_lines.size() == 0)
+			if (m_Lines.size() == 0)
 			{
 				return 0;
 			}
-			int charCount = m_lines.back()->getEnd();
+			int charCount = m_Lines.back()->getEnd();
 			return charCount * 4;
 		}
 		virtual unsigned int generateNumIndices()
 		{
-			if (m_lines.size() == 0)
+			if (m_Lines.size() == 0)
 			{
 				return 0;
 			}
-			int charCount = m_lines.back()->getEnd();
+			int charCount = m_Lines.back()->getEnd();
 			return charCount * 6;
 		}
+
+		SERIALIZE_FUNC_DEFINITIONS;
 
 	private:
 		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_TEXT_CHANGE = (Rendering::MeshComponents)(Rendering::MeshComponents::Positions | Rendering::MeshComponents::TexCoords);
 		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_INDICES_CHANGED = (Rendering::MeshComponents)(Rendering::MeshComponents::Colors | Rendering::MeshComponents::Indices);
 
-		std::shared_ptr<Rendering::Material> m_material;
-		std::shared_ptr<UI::FontFace> m_fontFace;
-		std::string m_text;
-		glm::vec2 m_bounds;
-		Color m_textColor;
-		OverflowWrap m_overflowWrap;
-		TextAlign m_horizontalAlign;
-		TextAlign m_verticalAlign;
-		std::vector<LineProperties*> m_lines;
-		char* m_filteredText;
-		bool m_textDirty;
+		Color m_Color;
+		glm::vec2 m_Bounds;
+		OverflowWrap m_OverflowWrap;
+		TextAlign m_HorizontalAlign;
+		TextAlign m_VerticalAlign;
+		std::string m_Text;
+		ResourceRef<Resources::ShaderResource> m_Shader;
+		ResourceRef<Resources::RasterFontResource> m_FontFace;
+
+		std::vector<LineProperties*> m_Lines;
+		char* m_FilteredText;
+		bool m_TextDirty;
+		std::shared_ptr<Rendering::Material> m_Material;
 
 		static void calculateVerticalAlignmentProperties(TextAlign const& alignment, int const& numberOfLines, float const& verticalBoundSize, float const& fontLineHeight, float* const& penY, float* const& newLineHeight);
 		static void calculateHorizontalAlignmentProperties(TextAlign const& alignment, float const& horizontalBoundSize, float const& lineWidth, int const& numChars, float const& lineStartAdjust, float* const& penX, float* const& extraCharAdvance);
@@ -142,3 +137,5 @@ namespace DerydocaEngine::Components
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::TextRenderer);
