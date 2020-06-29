@@ -18,12 +18,12 @@ namespace DerydocaEngine::Components
 {
 
 	SkinnedMeshRenderer::SkinnedMeshRenderer() :
-		m_time(0.0f),
-		m_dirty(true),
-		m_animation(),
-		m_material(),
-		m_mesh(),
-		m_boneMatrices()
+		m_Time(0.0f),
+		m_Dirty(true),
+		m_Animation(),
+		m_Material(),
+		m_Mesh(),
+		m_BoneMatrices()
 	{
 	}
 
@@ -33,9 +33,9 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::deserialize(const YAML::Node& compNode)
 	{
-		m_animation = getResource<Resources::AnimationResource>(compNode, "Animation");
-		m_material = getResource<Resources::MaterialResource>(compNode, "Material");
-		m_mesh = getResource<Resources::MeshResource>(compNode, "Mesh");
+		m_Animation.Set(getResource<Resources::AnimationResource>(compNode, "Animation"));
+		m_Material.Set(getResource<Resources::MaterialResource>(compNode, "Material"));
+		m_Mesh.Set(getResource<Resources::MeshResource>(compNode, "Mesh"));
 	}
 
 	void SkinnedMeshRenderer::init()
@@ -54,15 +54,15 @@ namespace DerydocaEngine::Components
 		{
 			return;
 		}
-		else if (m_dirty)
+		else if (m_Dirty)
 		{
 			fixDirtyStatus();
 		}
 
 		getMaterial()->bind();
 		getMaterial()->getShader()->updateViaActiveCamera(matrixStack);
-		getAnimation()->loadPose(m_time, m_boneMatrices, getMesh()->getSkeleton());
-		getMaterial()->setMat4Array("BoneMatrices", m_boneMatrices);
+		getAnimation()->loadPose(m_Time, m_BoneMatrices, getMesh()->getSkeleton());
+		getMaterial()->setMat4Array("BoneMatrices", m_BoneMatrices);
 
 		Rendering::LightManager::getInstance().bindLightsToShader(getMaterial()->getShader());
 
@@ -90,17 +90,17 @@ namespace DerydocaEngine::Components
 
 	void SkinnedMeshRenderer::update(const float deltaTime)
 	{
-		m_time += deltaTime;
+		m_Time += deltaTime;
 	}
 
 	void SkinnedMeshRenderer::fixDirtyStatus()
 	{
 		assert(isFullyConfigured());
 
-		m_boneMatrices.resize(getMesh()->getSkeleton()->getNumBones());
+		m_BoneMatrices.resize(getMesh()->getSkeleton()->getNumBones());
 		getAnimation()->optimizeForSkeleton(getMesh()->getSkeleton());
 
-		m_dirty = false;
+		m_Dirty = false;
 	}
 
 }

@@ -38,42 +38,51 @@ namespace DerydocaEngine::Components
 		) override;
 		virtual void update(const float deltaTime) override;
 		
-		bool isFullyConfigured() const { return m_animation && m_material && m_mesh; };
+		bool isFullyConfigured() const { return m_Animation && m_Material && m_Mesh; };
 
 		void setAnimationResource(std::shared_ptr<Resources::AnimationResource> animationResource)
 		{
-			m_animation = animationResource;
-			m_dirty = true;
+			m_Animation = animationResource;
+			m_Dirty = true;
 		}
 		void setMaterialResource(std::shared_ptr<Resources::MaterialResource> materialResource)
 		{
-			m_material = materialResource;
+			m_Material = materialResource;
 		}
 		void setMeshResource(std::shared_ptr<Resources::MeshResource> meshResource)
 		{
-			m_mesh = meshResource;
-			m_dirty = true;
+			m_Mesh = meshResource;
+			m_Dirty = true;
 		}
-		void setAnimationTime(const float animationTime) { m_time = animationTime; }
+		void setAnimationTime(const float animationTime) { m_Time = animationTime; }
 		
-		std::shared_ptr<Animation::AnimationData> getAnimation() const { return m_animation ? std::static_pointer_cast<Animation::AnimationData>(m_animation->getResourceObjectPointer()) : nullptr; }
-		std::shared_ptr<Rendering::Material> getMaterial() { return m_material ? std::static_pointer_cast<Rendering::Material>(m_material->getResourceObjectPointer()) : nullptr; }
-		std::shared_ptr<Rendering::Mesh> getMesh() const { return m_mesh ? std::static_pointer_cast<Rendering::Mesh>(m_mesh->getResourceObjectPointer()) : nullptr; }
+		std::shared_ptr<Animation::AnimationData> getAnimation() const { return m_Animation ? std::static_pointer_cast<Animation::AnimationData>(m_Animation->getResourceObjectPointer()) : nullptr; }
+		std::shared_ptr<Rendering::Material> getMaterial() { return m_Material ? std::static_pointer_cast<Rendering::Material>(m_Material->getResourceObjectPointer()) : nullptr; }
+		std::shared_ptr<Rendering::Mesh> getMesh() const { return m_Mesh ? std::static_pointer_cast<Rendering::Mesh>(m_Mesh->getResourceObjectPointer()) : nullptr; }
 
-		std::shared_ptr<Resources::AnimationResource> getAnimationResource() const { return m_animation; }
-		std::shared_ptr<Resources::MaterialResource> getMaterialResource() { return m_material; }
-		std::shared_ptr<Resources::MeshResource> getMeshResource() const { return m_mesh; }
+		std::shared_ptr<Resources::AnimationResource> getAnimationResource() const { return m_Animation.GetSmartPointer(); }
+		std::shared_ptr<Resources::MaterialResource> getMaterialResource() { return m_Material.GetSmartPointer(); }
+		std::shared_ptr<Resources::MeshResource> getMeshResource() const { return m_Mesh.GetSmartPointer(); }
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
+			SERIALIZE(m_Animation),
+			SERIALIZE(m_Material),
+			SERIALIZE(m_Mesh)
+		);
 
 	private:
 		void fixDirtyStatus();
 
 	private:
-		float m_time;
-		bool m_dirty;
-		std::shared_ptr<Resources::AnimationResource> m_animation;
-		std::shared_ptr<Resources::MaterialResource> m_material;
-		std::shared_ptr<Resources::MeshResource> m_mesh;
-		std::vector<glm::mat4> m_boneMatrices;
+		ResourceRef<Resources::AnimationResource> m_Animation;
+		ResourceRef<Resources::MaterialResource> m_Material;
+		ResourceRef<Resources::MeshResource> m_Mesh;
+
+		float m_Time;
+		bool m_Dirty;
+		std::vector<glm::mat4> m_BoneMatrices;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SkinnedMeshRenderer);
