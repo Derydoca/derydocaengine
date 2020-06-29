@@ -80,6 +80,10 @@ namespace DerydocaEngine
 		for (size_t i = 0; i < m_Components.size(); i++)
 		{
 			m_Components[i]->setGameObject(shared_from_this());
+		}
+
+		for (size_t i = 0; i < m_Components.size(); i++)
+		{
 			m_Components[i]->init();
 		}
 

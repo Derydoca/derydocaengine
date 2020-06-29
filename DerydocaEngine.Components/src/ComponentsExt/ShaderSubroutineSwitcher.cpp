@@ -11,12 +11,12 @@ namespace DerydocaEngine::Ext
 
 	void ShaderSubroutineSwitcher::init()
 	{
-		setSubroutine(GL_VERTEX_SHADER, m_subroutineName);
+		setSubroutine(GL_VERTEX_SHADER, m_SubroutineName);
 	}
 
 	void ShaderSubroutineSwitcher::deserialize(const YAML::Node& compNode)
 	{
-		m_subroutineName = compNode["SubroutineName"].as<std::string>();
+		m_SubroutineName = compNode["SubroutineName"].as<std::string>();
 	}
 
 	void ShaderSubroutineSwitcher::setSubroutine(unsigned int const& program, std::string const& subroutineName)
@@ -36,12 +36,15 @@ namespace DerydocaEngine::Ext
 		}
 		// Copy the material from the mesh renderer
 		auto material = std::make_shared<Rendering::Material>();
-		material->copyFrom(mr->getMaterial());
+		auto mrMat = mr->getMaterial();
+		auto mrMaterialId = mr->getMaterialId();
+		material->copyFrom(mrMat);
 		auto materialResource = std::make_shared<Resources::MaterialResource>();
 		materialResource->setData(material);
 
 		// Set the mesh renderer's material to our copy
 		mr->setMaterial(materialResource);
+		mr->setMaterialId(mrMaterialId);
 
 		// Get the shader from the material
 		auto shader = material->getShader();

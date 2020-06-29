@@ -45,6 +45,11 @@ namespace DerydocaEngine::Components
 		void setMaterial(std::shared_ptr<Resources::MaterialResource> const& material) { m_Material.Set(material); }
 		void setTransparent(const bool isTransparent) { m_Transparent = isTransparent; }
 
+		// HACK: This was added to allow serializing of ShaderSubroutineSwitcher because it loses the material ID when creating
+		//  a new instance and the mesh renderer will not have a material to load after saving the scene.
+		void setMaterialId(boost::uuids::uuid id) { m_Material.GetSmartPointer()->setId(id); }
+		boost::uuids::uuid getMaterialId() { return m_Material.GetSmartPointer()->getId(); }
+
 		SERIALIZE_FUNC_BASE(
 			DerydocaEngine::Components::GameComponent,
 			SERIALIZE(m_Mesh),
