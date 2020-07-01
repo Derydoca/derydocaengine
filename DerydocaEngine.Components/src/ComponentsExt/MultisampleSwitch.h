@@ -17,11 +17,15 @@ namespace DerydocaEngine::Ext
 		virtual void update(const float deltaTime);
 
 		void setEnableMultisample(bool const& enable);
-		bool isMultisampleOn() { return m_enableMultisample; }
+		bool isMultisampleOn() { return m_EnableMultisample; }
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
-		Input::Keyboard * m_keyboard;
-		bool m_enableMultisample;
-		bool m_msaaSupported;
+		Input::Keyboard * m_Keyboard;
+		bool m_EnableMultisample;
+		bool m_MSAASupported;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::MultisampleSwitch);

@@ -8,8 +8,8 @@ namespace DerydocaEngine::Ext
 
 	void NightVisionFilter::init()
 	{
-		m_postProcessCamera = getComponentInChildren<Components::Camera>();
-		if (m_postProcessCamera == nullptr)
+		m_PostProcessCamera = getComponentInChildren<Components::Camera>();
+		if (m_PostProcessCamera == nullptr)
 		{
 			LOG_ERROR("No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.");
 			return;
@@ -23,7 +23,7 @@ namespace DerydocaEngine::Ext
 		YAML::Node radiusNode = compNode["radius"];
 		if (radiusNode)
 		{
-			m_radius = radiusNode.as<float>();
+			m_Radius = radiusNode.as<float>();
 		}
 	}
 
@@ -34,7 +34,7 @@ namespace DerydocaEngine::Ext
 
 	void NightVisionFilter::updateMaterial()
 	{
-		m_postProcessCamera->getPostProcessMaterial()->setFloat("Radius", m_radius);
+		m_PostProcessCamera->getPostProcessMaterial()->setFloat("Radius", m_Radius);
 	}
 
 }

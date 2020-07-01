@@ -88,6 +88,17 @@ namespace DerydocaEngine::Components
 			SERIALIZE(m_DeferredRendererCompositor)
 		);
 
+		if (m_RenderTextureSize.x > 0 && m_RenderTextureSize.y > 0)
+		{
+			if (m_RenderingMode == Rendering::RenderingMode::Deferred)
+			{
+				m_RenderTextureDeferred = std::make_shared<Rendering::RenderTexture>(Rendering::RenderingMode::Deferred);
+				m_RenderTextureDeferred->initializeTexture(m_RenderTextureSize.x, m_RenderTextureSize.y);
+			}
+			m_RenderTexture = std::make_shared<Rendering::RenderTexture>(Rendering::RenderingMode::Forward);
+			m_RenderTexture->initializeTexture(m_RenderTextureSize.x, m_RenderTextureSize.y);
+		}
+
 		m_Projection.recalculateProjectionMatrix();
 	}
 

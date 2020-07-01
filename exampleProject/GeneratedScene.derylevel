@@ -44,7 +44,7 @@
                                             "data": {
                                                 "m_Position": {
                                                     "x": -3.0,
-                                                    "y": 0.4000000059604645,
+                                                    "y": 0.699999988079071,
                                                     "z": -1.2999999523162842
                                                 },
                                                 "m_Scale": {
@@ -71,7 +71,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "c9c0c21e-7515-4e70-a8b2-2dcd05e72681"
+                                                            "m_ID": "77fdf4bc-28de-11e9-b210-d663bd873d93"
                                                         }
                                                     },
                                                     "m_Projection": {
@@ -80,7 +80,7 @@
                                                         "m_ZNear": 0.009999999776482582,
                                                         "m_ZFar": 1000.0
                                                     },
-                                                    "m_RenderingMode": 0,
+                                                    "m_RenderingMode": 1,
                                                     "m_RenderTextureSize": {
                                                         "x": 512.0,
                                                         "y": 512.0
@@ -94,7 +94,7 @@
                                                         "a": 1.0
                                                     },
                                                     "m_SkyboxMaterial": "",
-                                                    "m_DeferredRendererCompositor": ""
+                                                    "m_DeferredRendererCompositor": "0d8693e6-e8c9-4e71-80a3-e34ad9c42200"
                                                 }
                                             }
                                         }
@@ -115,7 +115,7 @@
                                             "data": {
                                                 "m_Position": {
                                                     "x": -3.0,
-                                                    "y": 0.0,
+                                                    "y": 0.4000000059604645,
                                                     "z": -2.0
                                                 },
                                                 "m_Scale": {
@@ -142,11 +142,11 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "79c593b8-5461-46bf-9c45-2f0c0c62538a"
+                                                            "m_ID": "58675daa-442c-452e-95a5-c553f5914875"
                                                         }
                                                     },
                                                     "m_Mesh": "b1b135df-0f8a-4ebf-bd9d-a98127daf307",
-                                                    "m_Material": "9886e9a7-f340-47a2-9edf-2e764acc3b08",
+                                                    "m_Material": "d90f3f82-3fa4-4007-991e-7f5827badc6c",
                                                     "m_Transparent": false
                                                 }
                                             }
@@ -159,7 +159,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "3e18c731-6b65-459f-a690-94ed38147e80"
+                                                            "m_ID": "988b82a8-10c1-4d58-ab6a-2a6807894b6b"
                                                         }
                                                     },
                                                     "m_Speed": 30.0
@@ -209,11 +209,11 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "51256320-3d6b-4f03-936f-ea5d19c13e50"
+                                                            "m_ID": "88036a7a-c02f-4cd0-aad8-7ba89271fafa"
                                                         }
                                                     },
                                                     "m_Mesh": "deb8fa30-119b-4483-b3fe-58978a4a73ac",
-                                                    "m_Material": "88bf10c9-bc91-4d03-b5a5-4aaaf1dfa4f6",
+                                                    "m_Material": "42bddab8-9ff6-472f-aead-a1d7c085184a",
                                                     "m_Transparent": false
                                                 }
                                             }
@@ -235,8 +235,8 @@
                                             "data": {
                                                 "m_Position": {
                                                     "x": 2.0,
-                                                    "y": 0.5,
-                                                    "z": -1.0
+                                                    "y": 1.5,
+                                                    "z": -3.0
                                                 },
                                                 "m_Scale": {
                                                     "x": 0.05000000074505806,
@@ -262,7 +262,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "9bcc8d53-72fd-4b7c-b692-7a3ffc652c18"
+                                                            "m_ID": "408d1f58-10df-469f-bee2-ab945f68218d"
                                                         }
                                                     },
                                                     "m_Type": 1,
@@ -291,7 +291,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "07c693f9-9167-42b1-b36d-76570998994b"
+                                                            "m_ID": "5f09640e-ca1a-46be-bada-cfd8e3fb7926"
                                                         }
                                                     },
                                                     "m_Mesh": "c8692242-532d-4905-a1eb-0ed40dab3114",
@@ -316,7 +316,7 @@
                                             "id": 2147483666,
                                             "data": {
                                                 "m_Position": {
-                                                    "x": -2.0,
+                                                    "x": -200.0,
                                                     "y": 0.5,
                                                     "z": 1.0
                                                 },
@@ -343,7 +343,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "567216f3-aacc-4e0a-8b71-0e548bd7fa64"
+                                                            "m_ID": "0af45b09-91e7-4404-a4cd-b9b63d30d5b0"
                                                         }
                                                     },
                                                     "m_Type": 1,
@@ -353,8 +353,8 @@
                                                         "y": 512
                                                     },
                                                     "m_Color": {
-                                                        "r": 0.8100000023841858,
-                                                        "g": 0.800000011920929,
+                                                        "r": 0.0,
+                                                        "g": 1.0,
                                                         "b": 1.0,
                                                         "a": 1.0
                                                     },
@@ -372,7 +372,7 @@
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "0ca09ff8-2215-444f-a81c-32d8a0237d06"
+                                                            "m_ID": "f9ec0856-0514-418b-95b5-44b5193f0168"
                                                         }
                                                     },
                                                     "m_Mesh": "c8692242-532d-4905-a1eb-0ed40dab3114",

@@ -11,7 +11,7 @@ namespace DerydocaEngine::Ext
 
 	MultisampleSwitch::MultisampleSwitch()
 	{
-		m_keyboard = Input::InputManager::getInstance().getKeyboard();
+		m_Keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	MultisampleSwitch::~MultisampleSwitch()
@@ -25,9 +25,9 @@ namespace DerydocaEngine::Ext
 		glGetIntegerv(GL_SAMPLE_BUFFERS, &bufs);
 		glGetIntegerv(GL_SAMPLES, &samples);
 
-		m_msaaSupported = bufs > 0 && samples > 0;
+		m_MSAASupported = bufs > 0 && samples > 0;
 
-		if (m_msaaSupported)
+		if (m_MSAASupported)
 		{
 			LOG_INFO("MSAA: Buffers = {}, samples = {}", bufs, samples);
 		}
@@ -39,21 +39,21 @@ namespace DerydocaEngine::Ext
 
 	void MultisampleSwitch::update(const float deltaTime)
 	{
-		if (m_keyboard->isKeyDownFrame(SDLK_l))
+		if (m_Keyboard->isKeyDownFrame(SDLK_l))
 		{
-			setEnableMultisample(!m_enableMultisample);
+			setEnableMultisample(!m_EnableMultisample);
 		}
 	}
 
 	void MultisampleSwitch::setEnableMultisample(bool const& enable)
 	{
-		if (!m_msaaSupported)
+		if (!m_MSAASupported)
 		{
 			return;
 		}
 
-		m_enableMultisample = enable;
-		if (m_enableMultisample)
+		m_EnableMultisample = enable;
+		if (m_EnableMultisample)
 		{
 			glEnable(GL_MULTISAMPLE);
 		}
@@ -62,7 +62,7 @@ namespace DerydocaEngine::Ext
 			glDisable(GL_MULTISAMPLE);
 		}
 
-		LOG_INFO("Multisampling Enabled: {}", m_enableMultisample);
+		LOG_INFO("Multisampling Enabled: {}", m_EnableMultisample);
 	}
 
 }

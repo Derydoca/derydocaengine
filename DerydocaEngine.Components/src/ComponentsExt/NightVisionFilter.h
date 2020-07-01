@@ -19,10 +19,17 @@ namespace DerydocaEngine::Ext
 
 		void updateMaterial();
 
-		float& getRadius() { return m_radius; }
+		float& getRadius() { return m_Radius; }
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
+			SERIALIZE(m_Radius)
+		);
 	private:
-		float m_radius = 100.0f;
-		std::shared_ptr<Components::Camera> m_postProcessCamera;
+		float m_Radius = 100.0f;
+
+		std::shared_ptr<Components::Camera> m_PostProcessCamera;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::NightVisionFilter);

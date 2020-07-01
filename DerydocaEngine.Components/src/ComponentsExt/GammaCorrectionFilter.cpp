@@ -8,8 +8,8 @@ namespace DerydocaEngine::Ext
 {
 
 	GammaCorrectionFilter::GammaCorrectionFilter() :
-		m_gamma(2.0f),
-		m_postProcessCamera()
+		m_Gamma(2.0f),
+		m_PostProcessCamera()
 	{
 	}
 
@@ -19,8 +19,8 @@ namespace DerydocaEngine::Ext
 
 	void GammaCorrectionFilter::init()
 	{
-		m_postProcessCamera = getComponentInChildren<Components::Camera>();
-		if (m_postProcessCamera == nullptr)
+		m_PostProcessCamera = getComponentInChildren<Components::Camera>();
+		if (m_PostProcessCamera == nullptr)
 		{
 			LOG_ERROR("No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.");
 			return;
@@ -33,7 +33,7 @@ namespace DerydocaEngine::Ext
 		YAML::Node lumThreshNode = compNode["gamma"];
 		if (lumThreshNode)
 		{
-			m_gamma = lumThreshNode.as<float>();
+			m_Gamma = lumThreshNode.as<float>();
 		}
 	}
 
@@ -44,13 +44,13 @@ namespace DerydocaEngine::Ext
 
 	void GammaCorrectionFilter::updateShader()
 	{
-		auto mat = m_postProcessCamera->getPostProcessMaterial();
+		auto mat = m_PostProcessCamera->getPostProcessMaterial();
 		if (mat == nullptr)
 		{
 			return;
 		}
 
-		mat->setFloat("Gamma", m_gamma);
+		mat->setFloat("Gamma", m_Gamma);
 	}
 
 }
