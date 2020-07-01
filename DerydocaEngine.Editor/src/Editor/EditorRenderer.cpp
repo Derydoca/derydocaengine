@@ -18,7 +18,7 @@ namespace DerydocaEngine::Editor
 		RendererImplementation("Derydoca Engine - Editor", 300, 300),
 		m_editorComponentsScene(std::make_shared<Scenes::SerializedScene>()),
 		m_editorGuiScene(std::make_shared<Scenes::SerializedScene>()),
-		m_editorSkyboxMaterial(std::make_shared<Rendering::Material>()),
+		m_editorSkyboxMaterialResource(std::make_shared<Resources::MaterialResource>()),
 		m_settings()
 	{
 		DerydocaEngine::Rendering::Gui::DearImgui::init(m_display);
@@ -84,7 +84,7 @@ namespace DerydocaEngine::Editor
 		if (skyboxIdString.size() > 0)
 		{
 			auto skyboxId = boost::lexical_cast<boost::uuids::uuid>(skyboxIdString);
-			m_editorSkyboxMaterial = ObjectLibrary::getInstance().getResourceObjectPointer<Rendering::Material>(skyboxId);
+			m_editorSkyboxMaterialResource = ObjectLibrary::getInstance().getResource<Resources::MaterialResource>(skyboxId);
 		}
 
 		// Load the scenes

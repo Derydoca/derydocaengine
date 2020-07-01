@@ -7,16 +7,16 @@ namespace DerydocaEngine::Rendering
 {
 	void Projection::recalculateProjectionMatrix()
 	{
-		switch (m_projectionMode)
+		switch (m_ProjectionMode)
 		{
 		case ProjectionMode::Orthographic:
-			m_projectionMatrix = glm::mat4(); //glm::ortho(-m_orthoSize, m_orthoSize, -m_orthoSize, m_orthoSize, m_zNear, m_zFar);
+			m_ProjectionMatrix = glm::mat4(); //glm::ortho(-m_orthoSize, m_orthoSize, -m_orthoSize, m_orthoSize, m_zNear, m_zFar);
 			break;
 		case ProjectionMode::Perspective:
-			m_projectionMatrix = glm::perspective(m_fov * (glm::pi<float>() / 180), m_aspect, m_zNear, m_zFar);
+			m_ProjectionMatrix = glm::perspective(m_FOV * (glm::pi<float>() / 180), m_Aspect, m_ZNear, m_ZFar);
 			break;
 		default:
-			m_projectionMatrix = glm::mat4();
+			m_ProjectionMatrix = glm::mat4();
 			break;
 		}
 	}

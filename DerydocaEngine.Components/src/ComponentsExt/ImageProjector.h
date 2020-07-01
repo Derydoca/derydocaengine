@@ -2,6 +2,7 @@
 #include "Components\GameComponent.h"
 #include "Rendering\Texture.h"
 #include "Components\MeshRenderer.h"
+#include "Resources\TextureResource.h"
 
 namespace DerydocaEngine::Ext
 {
@@ -18,23 +19,28 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
-		void inline setFocalPoint(glm::vec3 const& focalPoint) { m_focalPoint = focalPoint; }
-		void inline setUpVector(glm::vec3 const& upVector) { m_upVector = upVector; }
+		void inline setFocalPoint(glm::vec3 const& focalPoint) { m_FocalPoint = focalPoint; }
+		void inline setUpVector(glm::vec3 const& upVector) { m_UpVector = upVector; }
 		void updateShader();
 
-		float& getFov() { return m_fov; }
+		float& getFov() { return m_FOV; }
+
+		SERIALIZE_FUNC_DEFINITIONS;
 	private:
-		glm::vec3 m_focalPoint;
-		glm::vec3 m_upVector;
-		glm::mat4 m_projectorMatrix;
-		float m_fov;
-		float m_zNear;
-		float m_zFar;
-		std::shared_ptr<Rendering::Texture> m_projectorTexture;
-		std::vector<std::shared_ptr<Components::MeshRenderer>> m_meshRenderers;
+		glm::vec3 m_FocalPoint;
+		glm::vec3 m_UpVector;
+		float m_FOV;
+		float m_ZNear;
+		float m_ZFar;
+		ResourceRef<Resources::TextureResource> m_ProjectorTexture;
+		std::vector<std::shared_ptr<Components::MeshRenderer>> m_MeshRenderers;
+
+		glm::mat4 m_ProjectorMatrix;
 
 		void updateProjectionMatrix();
 		void setProjectionGraphic();
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ImageProjector);
