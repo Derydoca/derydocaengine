@@ -22,37 +22,64 @@ namespace DerydocaEngine::Ext
 
 	ParticleSystem::~ParticleSystem()
 	{
-		delete m_particleLocations;
-		glDeleteVertexArrays(1, &m_vao);
+		delete m_ParticleLocations;
+		glDeleteVertexArrays(1, &m_VAO);
 	}
 
 	void ParticleSystem::init()
 	{
 		// Create the array of particles
-		m_particleLocations = new glm::vec3[m_numParticles];
+		m_ParticleLocations = new glm::vec3[m_NumParticles];
 
 		// Set positions to randomly generated positions within the volume size;
-		for (int i = 0; i < m_numParticles; i++)
+		for (int i = 0; i < m_NumParticles; i++)
 		{
-			float posx = RandomFloat(-m_volumeSize.x / 2, m_volumeSize.x / 2);
-			float posy = RandomFloat(-m_volumeSize.y / 2, m_volumeSize.y / 2);
-			float posz = RandomFloat(-m_volumeSize.z / 2, m_volumeSize.z / 2);
-			m_particleLocations[i] = glm::vec3(posx, posy, posz);
+			float posx = RandomFloat(-m_VolumeSize.x / 2, m_VolumeSize.x / 2);
+			float posy = RandomFloat(-m_VolumeSize.y / 2, m_VolumeSize.y / 2);
+			float posz = RandomFloat(-m_VolumeSize.z / 2, m_VolumeSize.z / 2);
+			m_ParticleLocations[i] = glm::vec3(posx, posy, posz);
 		}
 
-		glGenBuffers(1, m_vertexArrayBuffers);
+		glGenBuffers(1, m_VertexArrayBuffers);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[0]);
-		glBufferData(GL_ARRAY_BUFFER, m_numParticles * sizeof(glm::vec3), m_particleLocations, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexArrayBuffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, m_NumParticles * sizeof(glm::vec3), m_ParticleLocations, GL_STATIC_DRAW);
 
-		glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
+		glGenVertexArrays(1, &m_VAO);
+		glBindVertexArray(m_VAO);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_vertexArrayBuffers[0]);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexArrayBuffers[0]);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(0);
 
 		glBindVertexArray(0);
+	}
+
+	SERIALIZE_FUNC_LOAD(archive, ParticleSystem)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_NumParticles),
+			SERIALIZE(m_VolumeSize),
+			SERIALIZE(m_Size2),
+			SERIALIZE(m_Texture),
+			SERIALIZE(m_Shader)
+		);
+
+		m_Material = std::make_shared<Rendering::Material>();
+		m_Material->setShader(GetShader());
+		m_Material->setFloat("Size2", m_Size2);
+		m_Material->setTexture("SpriteTex", GetTexture());
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, ParticleSystem)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_NumParticles),
+			SERIALIZE(m_VolumeSize),
+			SERIALIZE(m_Size2),
+			SERIALIZE(m_Texture),
+			SERIALIZE(m_Shader)
+		);
 	}
 
 	void ParticleSystem::deserialize(const YAML::Node& compNode)
@@ -60,59 +87,60 @@ namespace DerydocaEngine::Ext
 		YAML::Node numParticlesNode = compNode["numParticles"];
 		if (numParticlesNode)
 		{
-			m_numParticles = numParticlesNode.as<int>();
+			m_NumParticles = numParticlesNode.as<int>();
 		}
 		else
 		{
-			m_numParticles = 8;
+			m_NumParticles = 8;
 		}
 
 		YAML::Node volumeSizeNode = compNode["volumeSize"];
 		if (volumeSizeNode)
 		{
-			m_volumeSize = volumeSizeNode.as<glm::vec3>();
+			m_VolumeSize = volumeSizeNode.as<glm::vec3>();
 		}
 		else
 		{
-			m_volumeSize = glm::vec3(1.0);
+			m_VolumeSize = glm::vec3(1.0);
 		}
 
 		YAML::Node size2Node = compNode["size2"];
 		if (size2Node)
 		{
-			m_size2 = size2Node.as<float>();
+			m_Size2 = size2Node.as<float>();
 		}
 		else
 		{
-			m_size2 = 0.25f;
+			m_Size2 = 0.25f;
 		}
 
-		m_texture = getResourcePointer<Rendering::Texture>(compNode, "texture");
+		m_Texture.Set(getResource<Resources::TextureResource>(compNode, "texture"));
 
-		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
-		m_material = std::make_shared<Rendering::Material>();
-		m_material->setShader(shader);
-		m_material->setFloat("Size2", m_size2);
-		m_material->setTexture("SpriteTex", m_texture);
+		auto shaderResource = getResource<Resources::ShaderResource>(compNode, "shader");
+		m_Shader.Set(shaderResource);
+		m_Material = std::make_shared<Rendering::Material>();
+		m_Material->setShader(GetShader());
+		m_Material->setFloat("Size2", m_Size2);
+		m_Material->setTexture("SpriteTex", GetTexture());
 	}
 
 	void ParticleSystem::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		glDisable(GL_DEPTH_TEST);
 
-		m_material->bind();
-		m_material->getShader()->updateViaActiveCamera(matrixStack);
-		Rendering::LightManager::getInstance().bindLightsToShader(m_material->getShader());
+		m_Material->bind();
+		m_Material->getShader()->updateViaActiveCamera(matrixStack);
+		Rendering::LightManager::getInstance().bindLightsToShader(m_Material->getShader());
 
-		glBindVertexArray(m_vao);
-		glDrawArrays(GL_POINTS, 0, m_numParticles);
+		glBindVertexArray(m_VAO);
+		glDrawArrays(GL_POINTS, 0, m_NumParticles);
 		glEnable(GL_DEPTH_TEST);
 		glFinish();
 	}
 
 	void ParticleSystem::reset()
 	{
-		m_material->setFloat("Size2", m_size2);
+		m_Material->setFloat("Size2", m_Size2);
 		init();
 	}
 
