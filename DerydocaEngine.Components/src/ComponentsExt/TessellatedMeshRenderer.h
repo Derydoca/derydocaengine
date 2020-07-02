@@ -2,6 +2,8 @@
 #include "Components\GameComponent.h"
 #include "Rendering\Material.h"
 #include "Ext\BezierPatchMesh.h"
+#include "Ext\BezierPatchMeshResource.h"
+#include "Resources\MaterialResource.h"
 
 namespace DerydocaEngine::Ext
 {
@@ -10,6 +12,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(TessellatedMeshRenderer);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		TessellatedMeshRenderer();
 		~TessellatedMeshRenderer();
@@ -27,24 +30,27 @@ namespace DerydocaEngine::Ext
 
 		void updateMaterial();
 
-		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
-		bool& getUseDynamicTessellation() { return m_useDynamicTessellation; }
-		int& getTessellationLevel() { return m_tessellationLevel; }
-		int& getMinDynamicTessLevel() { return m_minDynamicTessLevel; }
-		int& getMaxDynamicTessLevel() { return m_maxDynamicTessLevel; }
-		float& getMinDynamicTessDistance() { return m_minDynamicTessDistance; }
-		float& getMaxDynamicTessDistance() { return m_maxDynamicTessDistance; }
+		std::shared_ptr<Rendering::Material> getMaterial() const { return m_Material.As<Rendering::Material>(); }
+		bool& getUseDynamicTessellation() { return m_UseDynamicTessellation; }
+		int& getTessellationLevel() { return m_TessellationLevel; }
+		int& getMinDynamicTessLevel() { return m_MinDynamicTessLevel; }
+		int& getMaxDynamicTessLevel() { return m_MaxDynamicTessLevel; }
+		float& getMinDynamicTessDistance() { return m_MinDynamicTessDistance; }
+		float& getMaxDynamicTessDistance() { return m_MaxDynamicTessDistance; }
 	private:
-		unsigned int m_vao;
-		unsigned int m_vbo;
-		bool m_useDynamicTessellation;
-		int m_tessellationLevel;
-		int m_minDynamicTessLevel;
-		int m_maxDynamicTessLevel;
-		float m_minDynamicTessDistance;
-		float m_maxDynamicTessDistance;
-		std::shared_ptr<BezierPatchMesh> m_mesh;
-		std::shared_ptr<Rendering::Material> m_material;
+		int m_TessellationLevel;
+		bool m_UseDynamicTessellation;
+		float m_MinDynamicTessDistance;
+		float m_MaxDynamicTessDistance;
+		int m_MinDynamicTessLevel;
+		int m_MaxDynamicTessLevel;
+		ResourceRef<Resources::BezierPatchMeshResource> m_Mesh;
+		ResourceRef<Resources::MaterialResource> m_Material;
+
+		unsigned int m_VAO;
+		unsigned int m_VBO;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::TessellatedMeshRenderer);

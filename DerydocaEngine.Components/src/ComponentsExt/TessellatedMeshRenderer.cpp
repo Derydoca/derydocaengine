@@ -8,16 +8,16 @@ namespace DerydocaEngine::Ext
 {
 
 	TessellatedMeshRenderer::TessellatedMeshRenderer() :
-		m_vao(0),
-		m_vbo(0),
-		m_useDynamicTessellation(false),
-		m_tessellationLevel(4),
-		m_minDynamicTessLevel(2),
-		m_maxDynamicTessLevel(8),
-		m_minDynamicTessDistance(1.0f),
-		m_maxDynamicTessDistance(10.0f),
-		m_mesh(),
-		m_material(std::make_shared<Rendering::Material>())
+		m_TessellationLevel(4),
+		m_UseDynamicTessellation(false),
+		m_MinDynamicTessDistance(1.0f),
+		m_MaxDynamicTessDistance(10.0f),
+		m_MinDynamicTessLevel(2),
+		m_MaxDynamicTessLevel(8),
+		m_Mesh(),
+		m_Material(),
+		m_VAO(0),
+		m_VBO(0)
 	{
 	}
 
@@ -27,15 +27,17 @@ namespace DerydocaEngine::Ext
 
 	void TessellatedMeshRenderer::init()
 	{
-		glGenBuffers(1, &m_vbo);
+		auto mesh = m_Mesh.As<Ext::BezierPatchMesh>();
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH * sizeof(float), m_mesh->getPatchData(), GL_DYNAMIC_DRAW);
+		glGenBuffers(1, &m_VBO);
 
-		glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBufferData(GL_ARRAY_BUFFER, mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH * sizeof(float), mesh->getPatchData(), GL_DYNAMIC_DRAW);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+		glGenVertexArrays(1, &m_VAO);
+		glBindVertexArray(m_VAO);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(0);
 
@@ -46,56 +48,88 @@ namespace DerydocaEngine::Ext
 		updateMaterial();
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, TessellatedMeshRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_TessellationLevel),
+			SERIALIZE(m_UseDynamicTessellation),
+			SERIALIZE(m_MinDynamicTessDistance),
+			SERIALIZE(m_MaxDynamicTessDistance),
+			SERIALIZE(m_MinDynamicTessLevel),
+			SERIALIZE(m_MaxDynamicTessLevel),
+			SERIALIZE(m_Mesh),
+			SERIALIZE(m_Material)
+		);
+
+		m_Material.As<Rendering::Material>()->copyFrom(m_Material.As<Rendering::Material>());
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, TessellatedMeshRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_TessellationLevel),
+			SERIALIZE(m_UseDynamicTessellation),
+			SERIALIZE(m_MinDynamicTessDistance),
+			SERIALIZE(m_MaxDynamicTessDistance),
+			SERIALIZE(m_MinDynamicTessLevel),
+			SERIALIZE(m_MaxDynamicTessLevel),
+			SERIALIZE(m_Mesh),
+			SERIALIZE(m_Material)
+		);
+	}
+
 	void TessellatedMeshRenderer::deserialize(const YAML::Node& compNode)
 	{
 		YAML::Node tessellationLevelNode = compNode["tessellationLevel"];
 		if (tessellationLevelNode)
 		{
-			m_tessellationLevel = tessellationLevelNode.as<int>();
+			m_TessellationLevel = tessellationLevelNode.as<int>();
 		}
 
 		YAML::Node useDynamicTessellationNode = compNode["useDynamicTessellation"];
 		if (useDynamicTessellationNode)
 		{
-			m_useDynamicTessellation = useDynamicTessellationNode.as<bool>();
+			m_UseDynamicTessellation = useDynamicTessellationNode.as<bool>();
 		}
 
 		YAML::Node minDynamicTessDistanceNode = compNode["minDynamicTessDistance"];
 		if (minDynamicTessDistanceNode)
 		{
-			m_minDynamicTessDistance = minDynamicTessDistanceNode.as<float>();
+			m_MinDynamicTessDistance = minDynamicTessDistanceNode.as<float>();
 		}
 
 		YAML::Node maxDynamicTessDistanceNode = compNode["maxDynamicTessDistance"];
 		if (maxDynamicTessDistanceNode)
 		{
-			m_maxDynamicTessDistance = maxDynamicTessDistanceNode.as<float>();
+			m_MaxDynamicTessDistance = maxDynamicTessDistanceNode.as<float>();
 		}
 
 		YAML::Node minDynamicTessLevelNode = compNode["minDynamicTessLevel"];
 		if (minDynamicTessLevelNode)
 		{
-			m_minDynamicTessLevel = minDynamicTessLevelNode.as<int>();
+			m_MinDynamicTessLevel = minDynamicTessLevelNode.as<int>();
 		}
 
 		YAML::Node maxDynamicTessLevelNode = compNode["maxDynamicTessLevel"];
 		if (maxDynamicTessLevelNode)
 		{
-			m_maxDynamicTessLevel = maxDynamicTessLevelNode.as<int>();
+			m_MaxDynamicTessLevel = maxDynamicTessLevelNode.as<int>();
 		}
 
-		auto sourceMaterial = getResourcePointer<Rendering::Material>(compNode, "material");
-		m_material->copyFrom(sourceMaterial);
-		m_mesh = getResourcePointer<BezierPatchMesh>(compNode, "bezierPatchMesh");
+		m_Material.Set(getResource<Resources::MaterialResource>(compNode, "material"));
+		m_Material.As<Rendering::Material>()->copyFrom(m_Material.As<Rendering::Material>());
+		m_Mesh.Set(getResource<Resources::BezierPatchMeshResource>(compNode, "bezierPatchMesh"));
 	}
 
 	void TessellatedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
-		m_material->bind();
-		m_material->getShader()->updateViaActiveCamera(matrixStack);
-		glBindVertexArray(m_vao);
+		auto material = m_Material.As<Rendering::Material>();
+		auto mesh = m_Mesh.As<Ext::BezierPatchMesh>();
+		material->bind();
+		material->getShader()->updateViaActiveCamera(matrixStack);
+		glBindVertexArray(m_VAO);
 		glPatchParameteri(GL_PATCH_VERTICES, 16);
-		glDrawArrays(GL_PATCHES, 0, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH);
+		glDrawArrays(GL_PATCHES, 0, mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH);
 
 		glFinish();
 	}
@@ -109,11 +143,11 @@ namespace DerydocaEngine::Ext
 	{
 		// Consider an alternate to using the same material as what is being used to render to screen
 		//  The calculations may be excessive for a shadow calc
-		m_material->bind();
-		m_material->getShader()->update(matrixStack, projection, projectionTransform);
-		glBindVertexArray(m_vao);
+		material->bind();
+		material->getShader()->update(matrixStack, projection, projectionTransform);
+		glBindVertexArray(m_VAO);
 		glPatchParameteri(GL_PATCH_VERTICES, 16);
-		glDrawArrays(GL_PATCHES, 0, m_mesh->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH);
+		glDrawArrays(GL_PATCHES, 0, m_Mesh.As<Ext::BezierPatchMesh>()->getNumPatches() * BezierPatchMesh::FLOATS_PER_PATCH);
 
 		glFinish();
 	}
@@ -125,12 +159,12 @@ namespace DerydocaEngine::Ext
 
 	void TessellatedMeshRenderer::updateMaterial()
 	{
-		m_material->setInt("UseDynamicTessellation", m_useDynamicTessellation ? 1 : 0);
-		m_material->setInt("TessLevel", m_tessellationLevel);
-		m_material->setFloat("MinTessLevel", (float)m_minDynamicTessLevel);
-		m_material->setFloat("MaxTessLevel", (float)m_maxDynamicTessLevel);
-		m_material->setFloat("MinDistance", m_minDynamicTessDistance);
-		m_material->setFloat("MaxDistance", m_maxDynamicTessDistance);
+		m_Material.As<Rendering::Material>()->setInt("UseDynamicTessellation", m_UseDynamicTessellation ? 1 : 0);
+		m_Material.As<Rendering::Material>()->setInt("TessLevel", m_TessellationLevel);
+		m_Material.As<Rendering::Material>()->setFloat("MinTessLevel", (float)m_MinDynamicTessLevel);
+		m_Material.As<Rendering::Material>()->setFloat("MaxTessLevel", (float)m_MaxDynamicTessLevel);
+		m_Material.As<Rendering::Material>()->setFloat("MinDistance", m_MinDynamicTessDistance);
+		m_Material.As<Rendering::Material>()->setFloat("MaxDistance", m_MaxDynamicTessDistance);
 	}
 
 }

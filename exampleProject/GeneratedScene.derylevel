@@ -36,27 +36,27 @@
                             "ptr_wrapper": {
                                 "id": 2147483651,
                                 "data": {
-                                    "m_Name": "Point Sprite Particle System",
+                                    "m_Name": "Squirrel",
                                     "m_Transform": {
                                         "polymorphic_id": 1073741824,
                                         "ptr_wrapper": {
                                             "id": 2147483652,
                                             "data": {
                                                 "m_Position": {
-                                                    "x": 0.0,
+                                                    "x": -2.0,
                                                     "y": 0.0,
                                                     "z": -2.0
                                                 },
                                                 "m_Scale": {
-                                                    "x": 1.0,
-                                                    "y": 1.0,
-                                                    "z": 1.0
+                                                    "x": 0.25,
+                                                    "y": 0.25,
+                                                    "z": 0.25
                                                 },
                                                 "m_Quaternion": {
-                                                    "x": 0.0,
-                                                    "y": 0.0,
-                                                    "z": 0.0,
-                                                    "w": 1.0
+                                                    "x": 0.5,
+                                                    "y": -0.5,
+                                                    "z": -0.5,
+                                                    "w": -0.5
                                                 }
                                             }
                                         }
@@ -65,24 +65,177 @@
                                     "m_Components": [
                                         {
                                             "polymorphic_id": 2147483649,
-                                            "polymorphic_name": "DerydocaEngine::Ext::ParticleSystem",
+                                            "polymorphic_name": "DerydocaEngine::Ext::TessellatedMeshRenderer",
                                             "ptr_wrapper": {
                                                 "id": 2147483653,
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "18c294c8-8f3e-4cbc-87b0-4b02b4f76008"
+                                                            "m_ID": "3bdc2bbc-68bc-4c77-a997-fd8065ece86b"
                                                         }
                                                     },
-                                                    "m_NumParticles": 512,
-                                                    "m_VolumeSize": {
-                                                        "x": 2.0,
-                                                        "y": 2.0,
-                                                        "z": 2.0
+                                                    "m_TessellationLevel": 2,
+                                                    "m_UseDynamicTessellation": false,
+                                                    "m_MinDynamicTessDistance": 1.0,
+                                                    "m_MaxDynamicTessDistance": 10.0,
+                                                    "m_MinDynamicTessLevel": 2,
+                                                    "m_MaxDynamicTessLevel": 8,
+                                                    "m_Mesh": "0d648145-3b5d-45f4-bea8-fe2d25648b20",
+                                                    "m_Material": "1a08b85f-42bb-4f96-a4d0-04b103a16f4b"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 2147483650,
+                                            "polymorphic_name": "DerydocaEngine::Components::MaterialRefresher",
+                                            "ptr_wrapper": {
+                                                "id": 2147483654,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "e4936f7c-65fc-4b27-8ccd-2418a125b706"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483655,
+                                "data": {
+                                    "m_Name": "Squirrel",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483656,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": -2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 0.25,
+                                                    "y": 0.25,
+                                                    "z": 0.25
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.5,
+                                                    "y": -0.5,
+                                                    "z": -0.5,
+                                                    "w": -0.5
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 1,
+                                            "ptr_wrapper": {
+                                                "id": 2147483657,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "3127d826-9de8-4e68-a5bb-b118168fc55a"
+                                                        }
                                                     },
-                                                    "m_Size2": 0.10000000149011612,
-                                                    "m_Texture": "cb774137-e5d2-4ee1-b2ab-f906cbeb148d",
-                                                    "m_Shader": "9306d255-6de5-450f-ab26-dde82741624f"
+                                                    "m_TessellationLevel": 8,
+                                                    "m_UseDynamicTessellation": false,
+                                                    "m_MinDynamicTessDistance": 1.0,
+                                                    "m_MaxDynamicTessDistance": 10.0,
+                                                    "m_MinDynamicTessLevel": 2,
+                                                    "m_MaxDynamicTessLevel": 8,
+                                                    "m_Mesh": "0d648145-3b5d-45f4-bea8-fe2d25648b20",
+                                                    "m_Material": "831847fe-3a0b-4586-8279-fb3209b90c16"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 2,
+                                            "ptr_wrapper": {
+                                                "id": 2147483658,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "f0840a01-53c9-4474-ab73-cda56d220b43"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483659,
+                                "data": {
+                                    "m_Name": "Squirrel",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483660,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 1.5,
+                                                    "y": 0.0,
+                                                    "z": -2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 0.25,
+                                                    "y": 0.25,
+                                                    "z": 0.25
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.5,
+                                                    "y": -0.5,
+                                                    "z": -0.5,
+                                                    "w": -0.5
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 1,
+                                            "ptr_wrapper": {
+                                                "id": 2147483661,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "cf1dfcd1-bfe1-416e-8082-1a82080fe284"
+                                                        }
+                                                    },
+                                                    "m_TessellationLevel": 16,
+                                                    "m_UseDynamicTessellation": false,
+                                                    "m_MinDynamicTessDistance": 1.0,
+                                                    "m_MaxDynamicTessDistance": 10.0,
+                                                    "m_MinDynamicTessLevel": 2,
+                                                    "m_MaxDynamicTessLevel": 8,
+                                                    "m_Mesh": "0d648145-3b5d-45f4-bea8-fe2d25648b20",
+                                                    "m_Material": "3cd4a0ab-63ff-4f34-8341-03ed3693d989"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 2,
+                                            "ptr_wrapper": {
+                                                "id": 2147483662,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "b9906c37-e4fe-4784-8aa0-3a15bd2f6e6f"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }

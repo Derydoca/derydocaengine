@@ -49,6 +49,12 @@ namespace DerydocaEngine
             }
         }
 
+        template <class AssetType>
+        std::shared_ptr<AssetType> As() const
+        {
+            return std::static_pointer_cast<AssetType>(m_Resource->getResourceObjectPointer());
+        }
+
         std::shared_ptr<ResourceType> GetSmartPointer() const { return m_Resource; }
 
         ResourceType* operator->() const {
