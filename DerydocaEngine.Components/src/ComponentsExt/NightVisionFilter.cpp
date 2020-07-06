@@ -34,7 +34,11 @@ namespace DerydocaEngine::Ext
 
 	void NightVisionFilter::updateMaterial()
 	{
-		m_PostProcessCamera->getPostProcessMaterial()->setFloat("Radius", m_Radius);
+		auto material = m_PostProcessCamera->getPostProcessMaterial();
+		if (material)
+		{
+			material->setFloat("Radius", m_Radius);
+		}
 	}
 
 }
