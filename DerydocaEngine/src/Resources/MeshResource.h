@@ -42,7 +42,6 @@ namespace DerydocaEngine::Resources
 				SERIALIZE(m_skeletonId),
 				SERIALIZE(m_flags)
 			);
-			D_LOG_INFO("Serialized mesh resource");
 		}
 
 		template<class Archive>
@@ -55,7 +54,6 @@ namespace DerydocaEngine::Resources
 				SERIALIZE(m_skeletonId),
 				SERIALIZE(m_flags)
 			);
-			D_LOG_INFO("Deserialized mesh resource");
 		}
 
 	private:
