@@ -17,10 +17,12 @@ namespace DerydocaEngine::Components
 
 		virtual void postInit();
 		virtual void renderEditorGUI();
-		void close() { m_isOpen = false; }
+		void close() { m_IsOpen = false; }
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	protected:
-		bool m_isOpen;
-		std::string m_windowName;
+		bool m_IsOpen;
+		std::string m_WindowName;
 	};
 
 }

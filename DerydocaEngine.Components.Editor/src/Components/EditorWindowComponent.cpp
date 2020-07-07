@@ -4,8 +4,8 @@
 namespace DerydocaEngine::Components
 {
 	EditorWindowComponent::EditorWindowComponent() :
-		m_isOpen(true),
-		m_windowName()
+		m_IsOpen(true),
+		m_WindowName()
 	{
 	}
 
@@ -15,12 +15,12 @@ namespace DerydocaEngine::Components
 
 	void EditorWindowComponent::postInit()
 	{
-		m_windowName = getWindowTitle() + "##" + boost::lexical_cast<std::string>(getGameObject()->getId());
+		m_WindowName = getWindowTitle() + "##" + boost::lexical_cast<std::string>(getGameObject()->getId());
 	}
 
 	void EditorWindowComponent::renderEditorGUI()
 	{
-		if (!m_isOpen)
+		if (!m_IsOpen)
 		{
 			destroy(getGameObject());
 		}
@@ -35,7 +35,7 @@ namespace DerydocaEngine::Components
 		{
 			ImGui::SetNextWindowSize(size, ImGuiCond_FirstUseEver);
 		}
-		ImGui::Begin(m_windowName.c_str(), &m_isOpen, getWindowFlags());
+		ImGui::Begin(m_WindowName.c_str(), &m_IsOpen, getWindowFlags());
 		renderWindow();
 		ImGui::End();
 	}

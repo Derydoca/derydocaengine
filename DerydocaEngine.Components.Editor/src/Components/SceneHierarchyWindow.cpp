@@ -6,9 +6,9 @@ namespace DerydocaEngine::Components
 {
 
 	SceneHierarchyWindow::SceneHierarchyWindow() :
-		m_sceneRoot()
+		m_SceneRoot()
 	{
-		m_selectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
+		m_SelectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
 	}
 
 	SceneHierarchyWindow::~SceneHierarchyWindow()
@@ -18,7 +18,7 @@ namespace DerydocaEngine::Components
 	void SceneHierarchyWindow::renderWindow()
 	{
 		// If we do not have a root object, try to get one
-		if (m_sceneRoot.expired())
+		if (m_SceneRoot.expired())
 		{
 			// Get the active scene
 			Scenes::SceneManager& sceneManager = Scenes::SceneManager::getInstance();
@@ -29,12 +29,12 @@ namespace DerydocaEngine::Components
 			}
 
 			// Get the root GameObject for the scene
-			m_sceneRoot = scene->getRoot();
+			m_SceneRoot = scene->getRoot();
 			return;
 		}
 
 		// Render each GameObject under the root
-		for (auto child : m_sceneRoot.lock()->getChildren())
+		for (auto child : m_SceneRoot.lock()->getChildren())
 		{
 			renderGameObjectTreeNode(child);
 		}
@@ -47,7 +47,7 @@ namespace DerydocaEngine::Components
 		
 		// Set render flags for this game object
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_OpenOnArrow;
-		if (m_selectionGroup->isSelected(gameObject))
+		if (m_SelectionGroup->isSelected(gameObject))
 		{
 			flags |= ImGuiTreeNodeFlags_Selected;
 		}
@@ -62,7 +62,7 @@ namespace DerydocaEngine::Components
 		// Select the element if it was clicked
 		if (ImGui::IsItemClicked())
 		{
-			m_selectionGroup->select(gameObject);
+			m_SelectionGroup->select(gameObject);
 		}
 
 		// If it was expanded, render the child elements

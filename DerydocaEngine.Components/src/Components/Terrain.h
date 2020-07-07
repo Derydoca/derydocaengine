@@ -32,16 +32,20 @@ namespace DerydocaEngine::Components
 
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		void deserialize(const YAML::Node& node);
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
-		int m_width;
-		int m_depth;
-		float m_unitScale;
-		float m_heightScale;
-		float** m_heightData;
-		std::shared_ptr<Rendering::Mesh> m_mesh;
-		std::shared_ptr<MeshRenderer> m_meshRenderer;
+		int m_Width;
+		int m_Depth;
+		float m_UnitScale;
+		float m_HeightScale;
+		float** m_HeightData;
+		std::shared_ptr<Rendering::Mesh> m_Mesh;
+		std::shared_ptr<MeshRenderer> m_MeshRenderer;
 
 		void loadTerrainFromTexture(const std::string & fileName, float const& unitScale, float const& heightScale);
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::Terrain);

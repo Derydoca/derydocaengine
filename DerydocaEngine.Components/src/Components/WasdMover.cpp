@@ -10,20 +10,20 @@ namespace DerydocaEngine::Components
 {
 
 	WasdMover::WasdMover() :
-		m_keyboard(nullptr),
-		m_mouse(nullptr),
-		m_moveSpeed(5.0f),
-		m_mouseSensitivityX(0.005f),
-		m_mouseSensitivityY(0.005f),
-		m_fastMoveMultiplier(2.0f),
-		m_slowMoveMultiplier(0.5f),
-		m_localMomentum(),
-		m_eulerRot(),
-		m_minXRot(-glm::half_pi<float>()),
-		m_maxXRot(glm::half_pi<float>())
+		m_Keyboard(nullptr),
+		m_Mouse(nullptr),
+		m_MoveSpeed(5.0f),
+		m_MouseSensitivityX(0.005f),
+		m_MouseSensitivityY(0.005f),
+		m_FastMoveMultiplier(2.0f),
+		m_SlowMoveMultiplier(0.5f),
+		m_LocalMomentum(),
+		m_EulerRot(),
+		m_MinXRot(-glm::half_pi<float>()),
+		m_MaxXRot(glm::half_pi<float>())
 	{
-		m_mouse = Input::InputManager::getInstance().getMouse();
-		m_keyboard = Input::InputManager::getInstance().getKeyboard();
+		m_Mouse = Input::InputManager::getInstance().getMouse();
+		m_Keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	WasdMover::~WasdMover()
@@ -32,101 +32,101 @@ namespace DerydocaEngine::Components
 
 	void WasdMover::init()
 	{
-		m_transform = getGameObject()->getTransform();
+		m_Transform = getGameObject()->getTransform();
 	}
 
 	void WasdMover::update(const float deltaTime) {
 
 		// Set the mouse to relative mode when the right mouse button is down
-		if (m_mouse->isKeyDownFrame(2)) {
-			m_mouse->setRelative(true);
+		if (m_Mouse->isKeyDownFrame(2)) {
+			m_Mouse->setRelative(true);
 		}
-		else if (m_mouse->isKeyUpFrame(2)) {
-			m_mouse->setRelative(false);
+		else if (m_Mouse->isKeyUpFrame(2)) {
+			m_Mouse->setRelative(false);
 		}
 
 		// Only allow the camera to be moved when the right mouse button is down
-		if (m_mouse->isKeyDown(2)) {
+		if (m_Mouse->isKeyDown(2)) {
 			// Reset the momentum each frame
-			m_localMomentum = glm::vec3();
+			m_LocalMomentum = glm::vec3();
 
-			float moveSpeed = m_moveSpeed * deltaTime;
-			if (m_keyboard->isKeyDown(SDLK_z)) {
-				moveSpeed *= m_fastMoveMultiplier;
+			float moveSpeed = m_MoveSpeed * deltaTime;
+			if (m_Keyboard->isKeyDown(SDLK_z)) {
+				moveSpeed *= m_FastMoveMultiplier;
 			}
 
 			// Forward/backward
-			if (m_keyboard->isKeyDown(SDLK_w)) {
-				m_localMomentum.z -= moveSpeed;
+			if (m_Keyboard->isKeyDown(SDLK_w)) {
+				m_LocalMomentum.z -= moveSpeed;
 			}
-			if (m_keyboard->isKeyDown(SDLK_s)) {
-				m_localMomentum.z += moveSpeed;
+			if (m_Keyboard->isKeyDown(SDLK_s)) {
+				m_LocalMomentum.z += moveSpeed;
 			}
 
 			// Left/right
-			if (m_keyboard->isKeyDown(SDLK_a)) {
-				m_localMomentum.x -= moveSpeed;
+			if (m_Keyboard->isKeyDown(SDLK_a)) {
+				m_LocalMomentum.x -= moveSpeed;
 			}
-			if (m_keyboard->isKeyDown(SDLK_d)) {
-				m_localMomentum.x += moveSpeed;
+			if (m_Keyboard->isKeyDown(SDLK_d)) {
+				m_LocalMomentum.x += moveSpeed;
 			}
 
 			// Up/down
-			if (m_keyboard->isKeyDown(SDLK_q)) {
-				m_localMomentum.y -= moveSpeed;
+			if (m_Keyboard->isKeyDown(SDLK_q)) {
+				m_LocalMomentum.y -= moveSpeed;
 			}
-			if (m_keyboard->isKeyDown(SDLK_e)) {
-				m_localMomentum.y += moveSpeed;
+			if (m_Keyboard->isKeyDown(SDLK_e)) {
+				m_LocalMomentum.y += moveSpeed;
 			}
 			// Convert the local direction to global direction
-			glm::vec4 globalMomentum = m_transform->getModel() * glm::vec4(m_localMomentum, 0);
+			glm::vec4 globalMomentum = m_Transform->getModel() * glm::vec4(m_LocalMomentum, 0);
 
 			// Translate
-			m_transform->setPosition(m_transform->getPosition() + glm::vec3(globalMomentum));
+			m_Transform->setPosition(m_Transform->getPosition() + glm::vec3(globalMomentum));
 
 			// Update the rotations based on mouse movement
-			glm::ivec2 diff = m_mouse->getRelativeMovement();
-			m_eulerRot.x -= (float)diff.y * m_mouseSensitivityX;
-			m_eulerRot.y -= (float)diff.x * m_mouseSensitivityY;
+			glm::ivec2 diff = m_Mouse->getRelativeMovement();
+			m_EulerRot.x -= (float)diff.y * m_MouseSensitivityX;
+			m_EulerRot.y -= (float)diff.x * m_MouseSensitivityY;
 
 			// Clamp the vertical look
-			if (m_eulerRot.x < m_minXRot)
+			if (m_EulerRot.x < m_MinXRot)
 			{
-				m_eulerRot.x = m_minXRot;
+				m_EulerRot.x = m_MinXRot;
 			}
-			else if (m_eulerRot.x > m_maxXRot)
+			else if (m_EulerRot.x > m_MaxXRot)
 			{
-				m_eulerRot.x = m_maxXRot;
+				m_EulerRot.x = m_MaxXRot;
 			}
 
-			if (m_keyboard->isKeyDownFrame(SDLK_LEFTBRACKET))
+			if (m_Keyboard->isKeyDownFrame(SDLK_LEFTBRACKET))
 			{
-				m_eulerRot.y -= 90.0f * 0.0174533f;
+				m_EulerRot.y -= 90.0f * 0.0174533f;
 			}
-			if (m_keyboard->isKeyDownFrame(SDLK_RIGHTBRACKET))
+			if (m_Keyboard->isKeyDownFrame(SDLK_RIGHTBRACKET))
 			{
-				m_eulerRot.y += 90.0f * 0.0174533f;
+				m_EulerRot.y += 90.0f * 0.0174533f;
 			}
 
 			// Rotate
 			glm::fquat newQuat =
-				glm::rotate(m_eulerRot.y, glm::vec3(0, 1, 0))
+				glm::rotate(m_EulerRot.y, glm::vec3(0, 1, 0))
 				*
-				glm::rotate(m_eulerRot.x, glm::vec3(1, 0, 0))
+				glm::rotate(m_EulerRot.x, glm::vec3(1, 0, 0))
 				;
-			m_transform->setQuaternion(newQuat);
+			m_Transform->setQuaternion(newQuat);
 		}
 	}
 
 	void WasdMover::deserialize(const YAML::Node& node)
 	{
-		m_moveSpeed = node["moveSpeed"].as<float>();
-		m_mouseSensitivityX = node["mouseSensitivityX"].as<float>();
-		m_mouseSensitivityY = node["mouseSensitivityY"].as<float>();
-		m_fastMoveMultiplier = node["fastMoveMultiplier"].as<float>();
-		m_slowMoveMultiplier = node["slowMoveMultiplier"].as<float>();
-		m_minXRot = node["minXRot"].as<float>();
-		m_maxXRot = node["maxXRot"].as<float>();
+		m_MoveSpeed = node["moveSpeed"].as<float>();
+		m_MouseSensitivityX = node["mouseSensitivityX"].as<float>();
+		m_MouseSensitivityY = node["mouseSensitivityY"].as<float>();
+		m_FastMoveMultiplier = node["fastMoveMultiplier"].as<float>();
+		m_SlowMoveMultiplier = node["slowMoveMultiplier"].as<float>();
+		m_MinXRot = node["minXRot"].as<float>();
+		m_MaxXRot = node["maxXRot"].as<float>();
 	}
 
 }

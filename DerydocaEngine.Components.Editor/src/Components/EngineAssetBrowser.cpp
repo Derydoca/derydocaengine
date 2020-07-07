@@ -8,7 +8,7 @@ namespace DerydocaEngine::Components
 
 	EngineAssetBrowser::EngineAssetBrowser()
 	{
-		m_selectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
+		m_SelectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
 	}
 
 	EngineAssetBrowser::~EngineAssetBrowser()
@@ -17,13 +17,13 @@ namespace DerydocaEngine::Components
 
 	void EngineAssetBrowser::renderWindow()
 	{
-		if (m_resourceNode.expired())
+		if (m_ResourceNode.expired())
 		{
-			m_resourceNode = ObjectLibrary::getInstance().getRootResourceTreeNode();
+			m_ResourceNode = ObjectLibrary::getInstance().getRootResourceTreeNode();
 			return;
 		}
 
-		auto root = m_resourceNode.lock();
+		auto root = m_ResourceNode.lock();
 
 		renderNodeContent(root);
 	}
@@ -55,14 +55,14 @@ namespace DerydocaEngine::Components
 	{
 		std::string id = boost::uuids::to_string(resource->getId());
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-		if (m_selectionGroup->isSelected(resource))
+		if (m_SelectionGroup->isSelected(resource))
 		{
 			flags |= ImGuiTreeNodeFlags_Selected;
 		}
 		ImGui::TreeNodeEx(id.c_str(), flags, "%s", resource->getName().c_str());
 		if (ImGui::IsItemClicked())
 		{
-			m_selectionGroup->select(resource);
+			m_SelectionGroup->select(resource);
 		}
 	}
 

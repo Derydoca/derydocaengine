@@ -11,7 +11,7 @@ namespace DerydocaEngine::Components
 
 	EditorCameraWindow::EditorCameraWindow() :
 		SceneViewerWindow(std::make_shared<SceneCameraInput::WasdControlStrategy>()),
-		m_showPropertiesPanel(false)
+		m_ShowPropertiesPanel(false)
 	{
 	}
 
@@ -24,9 +24,9 @@ namespace DerydocaEngine::Components
 		SceneViewerWindow::updateDisplayProperties();
 
 		// Show button to show/hide the properties panel
-		if (ImGui::Button(m_showPropertiesPanel ? "Hide Properties" : "Show Properties"))
+		if (ImGui::Button(m_ShowPropertiesPanel ? "Hide Properties" : "Show Properties"))
 		{
-			m_showPropertiesPanel = !m_showPropertiesPanel;
+			m_ShowPropertiesPanel = !m_ShowPropertiesPanel;
 		}
 		// Also add status text to let the user know if the window is focued
 		ImGui::SameLine();
@@ -36,7 +36,7 @@ namespace DerydocaEngine::Components
 		SceneViewerWindow::renderViewToWindow();
 
 		// Render the properties panel if it is marked to be visible
-		if (m_showPropertiesPanel)
+		if (m_ShowPropertiesPanel)
 		{
 			ImGui::SameLine();
 			if (ImGui::BeginChild(boost::uuids::to_string(getId()).c_str(), { PROPERTIES_PANEL_WIDTH, (float)getDisplayHeight() }))
@@ -50,7 +50,7 @@ namespace DerydocaEngine::Components
 	glm::vec2 EditorCameraWindow::getViewPadding()
 	{
 		return glm::vec2(
-			m_showPropertiesPanel ? PROPERTIES_PANEL_WIDTH : 0,
+			m_ShowPropertiesPanel ? PROPERTIES_PANEL_WIDTH : 0,
 			VERTICAL_PADDING
 		);
 	}

@@ -22,9 +22,13 @@ namespace DerydocaEngine::Components
 
 		void postRender();
 		void saveScreenshot();
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
-		Input::Keyboard* m_keyboard;
-		Rendering::Display* m_display;
+		Input::Keyboard* m_Keyboard;
+		Rendering::Display* m_Display;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::ScreenshotUtil);

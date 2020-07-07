@@ -25,11 +25,11 @@ namespace DerydocaEngine::Components
 	}
 
 	ScreenshotUtil::ScreenshotUtil() :
-		m_keyboard(),
-		m_display()
+		m_Keyboard(),
+		m_Display()
 	{
-		m_keyboard = Input::InputManager::getInstance().getKeyboard();
-		m_display = Rendering::DisplayManager::getInstance().getDisplay(0);
+		m_Keyboard = Input::InputManager::getInstance().getKeyboard();
+		m_Display = Rendering::DisplayManager::getInstance().getDisplay(0);
 	}
 
 	ScreenshotUtil::~ScreenshotUtil()
@@ -49,7 +49,7 @@ namespace DerydocaEngine::Components
 
 		// Get the screen buffer's content
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		int2 size = m_display->getActualSize();
+		int2 size = m_Display->getActualSize();
 		GLubyte* data = new GLubyte[size.x * size.y * 3];
 		glReadPixels(0, 0, size.x, size.y, GL_RGB, GL_UNSIGNED_BYTE, data);
 
@@ -71,7 +71,7 @@ namespace DerydocaEngine::Components
 
 	void ScreenshotUtil::postRender()
 	{
-		if (m_keyboard->isKeyDownFrame(SDLK_p))
+		if (m_Keyboard->isKeyDownFrame(SDLK_p))
 		{
 			saveScreenshot();
 		}

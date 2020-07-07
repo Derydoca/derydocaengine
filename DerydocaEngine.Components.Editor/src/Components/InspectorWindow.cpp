@@ -6,7 +6,7 @@ namespace DerydocaEngine::Components
 {
 	InspectorWindow::InspectorWindow()
 	{
-		m_selectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
+		m_SelectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
 	}
 
 	InspectorWindow::~InspectorWindow()
@@ -15,7 +15,7 @@ namespace DerydocaEngine::Components
 
 	void InspectorWindow::renderWindow()
 	{
-		auto selection = m_selectionGroup->getSelection();
+		auto selection = m_SelectionGroup->getSelection();
 
 		if (selection.size() <= 0)
 		{

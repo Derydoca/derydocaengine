@@ -15,9 +15,13 @@ namespace DerydocaEngine::Components
 		virtual void renderWindow();
 		virtual std::string getWindowTitle() { return "Inspector"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::EditorWindowComponent);
 	private:
-		std::shared_ptr<Editor::SelectionGroup> m_selectionGroup;
+		std::shared_ptr<Editor::SelectionGroup> m_SelectionGroup;
 
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::InspectorWindow);

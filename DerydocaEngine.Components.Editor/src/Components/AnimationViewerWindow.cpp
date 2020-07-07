@@ -10,35 +10,35 @@
 
 DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	SceneViewerWindow(std::make_shared<SceneCameraInput::OrbitalControlStrategy>()),
-	m_animationTime(0.0f),
-	m_playbackSpeed(1.0f),
-	m_modelScale(0.001f),
-	m_playing(false),
-	m_looping(true),
-	m_meshRenderer(std::make_shared<Components::SkinnedMeshRenderer>()),
-	m_scene(std::make_shared<Scenes::HardCodedScene>())
+	m_AnimationTime(0.0f),
+	m_PlaybackSpeed(1.0f),
+	m_ModelScale(0.001f),
+	m_Playing(false),
+	m_Looping(true),
+	m_MeshRenderer(std::make_shared<Components::SkinnedMeshRenderer>()),
+	m_Scene(std::make_shared<Scenes::HardCodedScene>())
 {
-	m_scene->setUp();
+	m_Scene->setUp();
 	auto meshRendererGameObject = std::make_shared<GameObject>("__skinnedMeshRenderer");
-	meshRendererGameObject->addComponent(m_meshRenderer);
+	meshRendererGameObject->addComponent(m_MeshRenderer);
 	meshRendererGameObject->init();
 	meshRendererGameObject->postInit();
 	meshRendererGameObject->getTransform()->setScale(glm::vec3(0.001f));
 
-	m_scene->getRoot()->addChild(meshRendererGameObject);
+	m_Scene->getRoot()->addChild(meshRendererGameObject);
 
 	auto go = std::make_shared<GameObject>("");
 	go->addComponent(Components::Light::generateInstance());
 	go->init();
 	go->postInit();
 	go->getTransform()->setPosition({ 0.0f, 0.5f, 1.0f });
-	m_scene->getRoot()->addChild(go);
+	m_Scene->getRoot()->addChild(go);
 	auto go2 = std::make_shared<GameObject>("");
 	go2->addComponent(Components::Light::generateInstance());
 	go2->init();
 	go2->postInit();
 	go2->getTransform()->setPosition({ 0.0f, 0.5f, -1.0f });
-	m_scene->getRoot()->addChild(go2);
+	m_Scene->getRoot()->addChild(go2);
 	auto goGrid = std::make_shared<GameObject>("_xzPlane");
 	auto gridMeshRenderer = std::make_shared<Components::MeshRenderer>();
 	gridMeshRenderer->setMesh(ObjectLibrary::getInstance().getResource<Resources::MeshResource>("cdadf7f6-536c-4765-9d6d-08a15c8e54c5"));
@@ -47,52 +47,52 @@ DerydocaEngine::Components::AnimationViewerWindow::AnimationViewerWindow() :
 	goGrid->addComponent(gridMeshRenderer);
 	goGrid->init();
 	goGrid->postInit();
-	m_scene->getRoot()->addChild(goGrid);
+	m_Scene->getRoot()->addChild(goGrid);
 }
 
 DerydocaEngine::Components::AnimationViewerWindow::~AnimationViewerWindow()
 {
-	m_scene->tearDown();
+	m_Scene->tearDown();
 }
 
 void DerydocaEngine::Components::AnimationViewerWindow::update(const float deltaTime)
 {
 	SceneViewerWindow::update(deltaTime);
 
-	if (m_playing && m_meshRenderer->isFullyConfigured())
+	if (m_Playing && m_MeshRenderer->isFullyConfigured())
 	{
-		m_animationTime += deltaTime * m_playbackSpeed;
+		m_AnimationTime += deltaTime * m_PlaybackSpeed;
 
-		float animDuration = static_cast<float>(m_meshRenderer->getAnimation()->getDuration());
-		if (m_animationTime > animDuration)
+		float animDuration = static_cast<float>(m_MeshRenderer->getAnimation()->getDuration());
+		if (m_AnimationTime > animDuration)
 		{
-			if (m_looping)
+			if (m_Looping)
 			{
-				m_animationTime = fmod(m_animationTime, animDuration) * animDuration;
+				m_AnimationTime = fmod(m_AnimationTime, animDuration) * animDuration;
 			}
 			else
 			{
 				// TODO: Fix this. It is currently invalid to end on the final frame as
 				//  the engine will crash looking for the next frame to blend
-				m_animationTime = animDuration - (animDuration / 1000.0f);
-				m_playing = false;
+				m_AnimationTime = animDuration - (animDuration / 1000.0f);
+				m_Playing = false;
 			}
 		}
-		if (m_animationTime < 0.0f)
+		if (m_AnimationTime < 0.0f)
 		{
-			if (m_looping)
+			if (m_Looping)
 			{
-				m_animationTime = animDuration - (fmod(m_animationTime, animDuration) * animDuration * -1);
+				m_AnimationTime = animDuration - (fmod(m_AnimationTime, animDuration) * animDuration * -1);
 			}
 			else
 			{
-				m_animationTime = 0.0f;
-				m_playing = false;
+				m_AnimationTime = 0.0f;
+				m_Playing = false;
 			}
 		}
 	}
 
-	m_meshRenderer->setAnimationTime(m_animationTime);
+	m_MeshRenderer->setAnimationTime(m_AnimationTime);
 }
 
 void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
@@ -100,34 +100,34 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderWindow()
 	SceneViewerWindow::updateDisplayProperties();
 
 	{
-		std::shared_ptr<Resources::Resource> modifiedResource = m_meshRenderer->getMeshResource();
-		if (Dgui::ResourcePicker("Mesh", m_meshRenderer->getMeshResource(), Resources::MeshResourceType, modifiedResource))
+		std::shared_ptr<Resources::Resource> modifiedResource = m_MeshRenderer->getMeshResource();
+		if (Dgui::ResourcePicker("Mesh", m_MeshRenderer->getMeshResource(), Resources::MeshResourceType, modifiedResource))
 		{
-			m_meshRenderer->setMeshResource(std::static_pointer_cast<Resources::MeshResource>(modifiedResource));
+			m_MeshRenderer->setMeshResource(std::static_pointer_cast<Resources::MeshResource>(modifiedResource));
 		}
 	}
 
 	ImGui::SameLine();
 	{
-		std::shared_ptr<Resources::Resource> modifiedResource = m_meshRenderer->getAnimationResource();
-		if (Dgui::ResourcePicker("Animation", m_meshRenderer->getAnimationResource(), Resources::AnimationResourceType, modifiedResource))
+		std::shared_ptr<Resources::Resource> modifiedResource = m_MeshRenderer->getAnimationResource();
+		if (Dgui::ResourcePicker("Animation", m_MeshRenderer->getAnimationResource(), Resources::AnimationResourceType, modifiedResource))
 		{
-			m_meshRenderer->setAnimationResource(std::static_pointer_cast<Resources::AnimationResource>(modifiedResource));
+			m_MeshRenderer->setAnimationResource(std::static_pointer_cast<Resources::AnimationResource>(modifiedResource));
 		}
 	}
 
 	ImGui::SameLine();
 	{
-		std::shared_ptr<Resources::Resource> modifiedResource = m_meshRenderer->getMaterialResource();
-		if (Dgui::ResourcePicker("Material", m_meshRenderer->getMaterialResource(), Resources::MaterialResourceType, modifiedResource))
+		std::shared_ptr<Resources::Resource> modifiedResource = m_MeshRenderer->getMaterialResource();
+		if (Dgui::ResourcePicker("Material", m_MeshRenderer->getMaterialResource(), Resources::MaterialResourceType, modifiedResource))
 		{
-			m_meshRenderer->setMaterialResource(std::static_pointer_cast<Resources::MaterialResource>(modifiedResource));
+			m_MeshRenderer->setMaterialResource(std::static_pointer_cast<Resources::MaterialResource>(modifiedResource));
 		}
 	}
 
 	ImGui::SameLine();
 	ImGui::PushItemWidth(60.0f);
-	if (ImGui::DragFloat("Scale", &m_modelScale, 0.01f))
+	if (ImGui::DragFloat("Scale", &m_ModelScale, 0.01f))
 	{
 		updateModelScale();
 	}
@@ -147,7 +147,7 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderToActiveBuffer()
 {
 	Editor::EditorRenderer::GetInstance().renderEditorCameraToActiveBuffer(
 		getCamera(),
-		{m_scene},
+		{m_Scene},
 		static_cast<int>(getDisplayWidth()),
 		static_cast<int>(getDisplayHeight())
 	);
@@ -155,22 +155,22 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderToActiveBuffer()
 
 void DerydocaEngine::Components::AnimationViewerWindow::setModelScale(float modelScale)
 {
-	m_modelScale = modelScale;
+	m_ModelScale = modelScale;
 	updateModelScale();
 }
 
 void DerydocaEngine::Components::AnimationViewerWindow::renderTimelineControl()
 {
 	float animationDuration = 0.0f;
-	auto anim = m_meshRenderer->getAnimation();
+	auto anim = m_MeshRenderer->getAnimation();
 	if (anim)
 	{
 		animationDuration = static_cast<float>(anim->getDuration());
 	}
 
-	if (ImGui::Button(m_playing ? "Pause" : "Play"))
+	if (ImGui::Button(m_Playing ? "Pause" : "Play"))
 	{
-		m_playing = !m_playing;
+		m_Playing = !m_Playing;
 	}
 
 	ImGui::SameLine();
@@ -178,19 +178,19 @@ void DerydocaEngine::Components::AnimationViewerWindow::renderTimelineControl()
 	ImGui::SameLine();
 
 	ImGui::PushItemWidth(-1);
-	ImGui::SliderFloat("Time", &m_animationTime, 0.0f, animationDuration, "%.2f sec");
+	ImGui::SliderFloat("Time", &m_AnimationTime, 0.0f, animationDuration, "%.2f sec");
 	ImGui::PopItemWidth();
 
-	ImGui::Checkbox("Loop", &m_looping);
+	ImGui::Checkbox("Loop", &m_Looping);
 	ImGui::SameLine();
 	ImGui::Dummy({10.0f, 0.0f});
 	ImGui::SameLine();
 	ImGui::PushItemWidth(50.0f);
-	ImGui::InputFloat("Speed", &m_playbackSpeed);
+	ImGui::InputFloat("Speed", &m_PlaybackSpeed);
 	ImGui::PopItemWidth();
 }
 
 void DerydocaEngine::Components::AnimationViewerWindow::updateModelScale()
 {
-	m_meshRenderer->getGameObject()->getTransform()->setScale(glm::vec3(m_modelScale));
+	m_MeshRenderer->getGameObject()->getTransform()->setScale(glm::vec3(m_ModelScale));
 }
