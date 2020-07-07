@@ -1,6 +1,8 @@
 #pragma once
 #include "Components\GameComponent.h"
 #include "Rendering\Material.h"
+#include "Resources\ShaderResource.h"
+#include "Resources\TextureResource.h"
 
 class YAML::Node;
 
@@ -18,6 +20,7 @@ namespace DerydocaEngine::Ext
 		};
 
 		GENINSTANCE(ParticleContinuousFountain);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		ParticleContinuousFountain();
 		~ParticleContinuousFountain();
@@ -28,45 +31,48 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 
-		glm::vec3& getVelocityMin() { return m_velocityMin; }
-		glm::vec3& getVelocityMax() { return m_velocityMax; }
-		int& getNumParticles() { return m_numParticles; }
-		float& getLifetime() { return m_lifetime; }
-		float& getAngle() { return m_angle; }
-		glm::vec3 getAcceleration() { return m_acceleration; }
-		glm::vec3 getEmitterSize() { return m_emitterSize; }
-		float& getParticleSizeMin() { return m_particleSizeMin; }
-		float& getParticleSizeMax() { return m_particleSizeMax; }
-		float& getSpawnRatePerSecond() { return m_spawnRatePerSecond; }
+		glm::vec3& getVelocityMin() { return m_VelocityMin; }
+		glm::vec3& getVelocityMax() { return m_VelocityMax; }
+		int& getNumParticles() { return m_NumParticles; }
+		float& getLifetime() { return m_Lifetime; }
+		float& getAngle() { return m_Angle; }
+		glm::vec3 getAcceleration() { return m_Acceleration; }
+		glm::vec3 getEmitterSize() { return m_EmitterSize; }
+		float& getParticleSizeMin() { return m_ParticleSizeMin; }
+		float& getParticleSizeMax() { return m_ParticleSizeMax; }
+		float& getSpawnRatePerSecond() { return m_SpawnRatePerSecond; }
 
 		void resetSimulation();
 
 	private:
-		int m_numParticles = 1000;
-		std::shared_ptr<Rendering::Material> m_material;
-		float m_time = 0.0f;
-		float m_lifetime = 5.0f;
-		glm::vec3 m_velocityMin = glm::vec3(1.25f);
-		glm::vec3 m_velocityMax = glm::vec3(1.5f);
-		float m_angle = 6.0f;
-		float m_lastDeltaTime = 0.0f;
-		glm::vec3 m_acceleration = glm::vec3(0.0f, -0.4f, 0.0f);
-		unsigned int m_posBuf[2];
-		unsigned int m_velBuf[2];
-		unsigned int m_startTime[2];
-		unsigned int m_initVel;
-		unsigned int m_initPos;
-		unsigned int m_particleArray[2];
-		unsigned int m_feedback[2];
-		unsigned int m_drawBuf = 1;
-		unsigned int m_updateSub;
-		unsigned int m_renderSub;
-		std::shared_ptr<Components::Transform> m_trans;
-		ParticleEmitterType m_emitterType;
-		glm::vec3 m_emitterSize = glm::vec3(1.0, 1.0, 1.0);
-		float m_particleSizeMin = 10.0f;
-		float m_particleSizeMax = 10.0f;
-		float m_spawnRatePerSecond = 100.0f;
+		int m_NumParticles = 1000;
+		glm::vec3 m_VelocityMin = glm::vec3(1.25f);
+		glm::vec3 m_VelocityMax = glm::vec3(1.5f);
+		float m_Angle = 6.0f;
+		float m_Lifetime = 5.0f;
+		ParticleEmitterType m_EmitterType;
+		glm::vec3 m_EmitterSize = glm::vec3(1.0, 1.0, 1.0);
+		glm::vec3 m_Acceleration = glm::vec3(0.0f, -0.4f, 0.0f);
+		float m_ParticleSizeMin = 10.0f;
+		float m_ParticleSizeMax = 10.0f;
+		float m_SpawnRatePerSecond = 100.0f;
+		ResourceRef<Resources::ShaderResource> m_Shader;
+		ResourceRef<Resources::TextureResource> m_Texture;
+
+		std::shared_ptr<Rendering::Material> m_Material;
+		float m_Time = 0.0f;
+		float m_LastDeltaTime = 0.0f;
+		unsigned int m_PosBuf[2];
+		unsigned int m_VelBuf[2];
+		unsigned int m_StartTime[2];
+		unsigned int m_InitVel;
+		unsigned int m_InitPos;
+		unsigned int m_ParticleArray[2];
+		unsigned int m_Feedback[2];
+		unsigned int m_DrawBuf = 1;
+		unsigned int m_UpdateSub;
+		unsigned int m_RenderSub;
+		std::shared_ptr<Components::Transform> m_Trans;
 
 		void initBuffers();
 		float randFloat();
@@ -77,3 +83,5 @@ namespace DerydocaEngine::Ext
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ParticleContinuousFountain);

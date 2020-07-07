@@ -8,11 +8,11 @@ namespace DerydocaEngine::Ext
 {
 
 	WaveDisplacement::WaveDisplacement() :
-		m_k(1.0f),
-		m_velocity(1.0f),
-		m_amplitude(0.5f),
-		m_time(0.0f),
-		m_material()
+		m_K(1.0f),
+		m_Velocity(1.0f),
+		m_Amplitude(0.5f),
+		m_Time(0.0f),
+		m_Material()
 	{
 	}
 
@@ -27,25 +27,25 @@ namespace DerydocaEngine::Ext
 		assert(mr);
 		if (mr)
 		{
-			m_material = mr->getMaterial();
+			m_Material = mr->getMaterial();
 		}
-		assert(m_material);
+		assert(m_Material);
 	}
 
 	void WaveDisplacement::update(const float deltaTime)
 	{
-		m_time += deltaTime;
+		m_Time += deltaTime;
 
 		// Set the wave variables
-		m_material->setFloat("K", m_k);
-		m_material->setFloat("Velocity", m_velocity);
-		m_material->setFloat("Amp", m_amplitude);
+		m_Material->setFloat("K", m_K);
+		m_Material->setFloat("Velocity", m_Velocity);
+		m_Material->setFloat("Amp", m_Amplitude);
 	}
 
 	void WaveDisplacement::preRender()
 	{
 		// Update the shader's time variable
-		m_material->setFloat("Time", m_time);
+		m_Material->setFloat("Time", m_Time);
 	}
 
 	void WaveDisplacement::deserialize(const YAML::Node& compNode)
@@ -53,19 +53,19 @@ namespace DerydocaEngine::Ext
 		YAML::Node kNode = compNode["k"];
 		if (kNode)
 		{
-			m_k = kNode.as<float>();
+			m_K = kNode.as<float>();
 		}
 
 		YAML::Node velocityNode = compNode["velocity"];
 		if (velocityNode)
 		{
-			m_velocity = velocityNode.as<float>();
+			m_Velocity = velocityNode.as<float>();
 		}
 
 		YAML::Node amplitudeNode = compNode["amplitude"];
 		if (amplitudeNode)
 		{
-			m_amplitude = amplitudeNode.as<float>();
+			m_Amplitude = amplitudeNode.as<float>();
 		}
 	}
 

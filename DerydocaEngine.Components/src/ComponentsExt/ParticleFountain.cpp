@@ -19,29 +19,64 @@ namespace DerydocaEngine::Ext
 
 	void ParticleFountain::update(const float deltaTime)
 	{
-		m_time += deltaTime;
+		m_Time += deltaTime;
 	}
 
 	void ParticleFountain::resetSimulation()
 	{
-		m_time = 0.0f;
+		m_Time = 0.0f;
 		initBuffers();
-		m_material->setFloat("ParticleLifetime", m_lifetime);
+		m_Material->setFloat("ParticleLifetime", m_Lifetime);
 	}
 
 	void ParticleFountain::init()
 	{
 		initBuffers();
 
-		m_keyboard = Input::InputManager::getInstance().getKeyboard();
+		m_Keyboard = Input::InputManager::getInstance().getKeyboard();
 	}
 
 	void ParticleFountain::preRender()
 	{
-		m_material->setVec3("Position", getGameObject()->getTransform()->getWorldPosition());
+		m_Material->setVec3("Position", getGameObject()->getTransform()->getWorldPosition());
 
 		// Update the shader's time variable
-		m_material->setFloat("Time", m_time);
+		m_Material->setFloat("Time", m_Time);
+	}
+
+	SERIALIZE_FUNC_LOAD(archive, ParticleFountain)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_NumParticles),
+			SERIALIZE(m_VelocityMin),
+			SERIALIZE(m_VelocityMax),
+			SERIALIZE(m_Angle),
+			SERIALIZE(m_Lifetime),
+			SERIALIZE(m_Shader),
+			SERIALIZE(m_Texture)
+		);
+
+		auto shader = m_Shader.As<Rendering::Shader>();
+		assert(shader);
+		m_Material = std::make_shared<Rendering::Material>();
+		m_Material->setShader(shader);
+		m_Material->setFloat("ParticleLifetime", m_Lifetime);
+
+		auto texture = m_Texture.As<Rendering::Texture>();
+		m_Material->setTexture("ParticleTex", texture);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, ParticleFountain)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_NumParticles),
+			SERIALIZE(m_VelocityMin),
+			SERIALIZE(m_VelocityMax),
+			SERIALIZE(m_Angle),
+			SERIALIZE(m_Lifetime),
+			SERIALIZE(m_Shader),
+			SERIALIZE(m_Texture)
+		);
 	}
 
 	void ParticleFountain::deserialize(const YAML::Node& compNode)
@@ -49,35 +84,37 @@ namespace DerydocaEngine::Ext
 		YAML::Node numParticlesNode = compNode["numParticles"];
 		if (numParticlesNode)
 		{
-			m_numParticles = numParticlesNode.as<int>();
+			m_NumParticles = numParticlesNode.as<int>();
 		}
 
 		YAML::Node velocityMaxNode = compNode["velocityMax"];
 		if (velocityMaxNode)
 		{
-			m_velocityMax = velocityMaxNode.as<float>();
+			m_VelocityMax = velocityMaxNode.as<float>();
 		}
 
 		YAML::Node velocityMinNode = compNode["velocityMin"];
 		if (velocityMinNode)
 		{
-			m_velocityMin = velocityMinNode.as<float>();
+			m_VelocityMin = velocityMinNode.as<float>();
 		}
 
 		YAML::Node angleNode = compNode["angle"];
 		if (angleNode)
 		{
-			m_angle = angleNode.as<float>();
+			m_Angle = angleNode.as<float>();
 		}
 
-		auto shader = getResourcePointer<Rendering::Shader>(compNode, "shader");
+		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
+		auto shader = m_Shader.As<Rendering::Shader>();
 		assert(shader);
-		m_material = std::make_shared<Rendering::Material>();
-		m_material->setShader(shader);
-		m_material->setFloat("ParticleLifetime", m_lifetime);
+		m_Material = std::make_shared<Rendering::Material>();
+		m_Material->setShader(shader);
+		m_Material->setFloat("ParticleLifetime", m_Lifetime);
 
-		std::shared_ptr<Rendering::Texture> m_tex = getResourcePointer<Rendering::Texture>(compNode, "texture");
-		m_material->setTexture("ParticleTex", m_tex);
+		m_Texture.Set(getResource<Resources::TextureResource>(compNode, "texture"));
+		auto texture = m_Texture.As<Rendering::Texture>();
+		m_Material->setTexture("ParticleTex", texture);
 	}
 
 	void ParticleFountain::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
@@ -85,15 +122,15 @@ namespace DerydocaEngine::Ext
 		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 
 		glDisable(GL_DEPTH_TEST);
-		m_material->bind();
-		m_material->getShader()->updateViaActiveCamera(matrixStack);
+		m_Material->bind();
+		m_Material->getShader()->updateViaActiveCamera(matrixStack);
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glPointSize(10.0f);
 
-		glBindVertexArray(m_vao);
-		glDrawArrays(GL_POINTS, 0, m_numParticles);
+		glBindVertexArray(m_VAO);
+		glDrawArrays(GL_POINTS, 0, m_NumParticles);
 		glFinish();
 		glEnable(GL_DEPTH_TEST);
 	}
@@ -101,24 +138,24 @@ namespace DerydocaEngine::Ext
 	void ParticleFountain::initBuffers()
 	{
 		// Generate the buffers
-		glGenBuffers(1, &m_initVel);
-		glGenBuffers(1, &m_startTime);
+		glGenBuffers(1, &m_InitVel);
+		glGenBuffers(1, &m_StartTime);
 
-		int size = m_numParticles * 3 * sizeof(float);
-		glBindBuffer(GL_ARRAY_BUFFER, m_initVel);
+		int size = m_NumParticles * 3 * sizeof(float);
+		glBindBuffer(GL_ARRAY_BUFFER, m_InitVel);
 		glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, m_startTime);
-		glBufferData(GL_ARRAY_BUFFER, m_numParticles * sizeof(float), NULL, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, m_StartTime);
+		glBufferData(GL_ARRAY_BUFFER, m_NumParticles * sizeof(float), NULL, GL_STATIC_DRAW);
 
 		// Fill the first buffer with random velocities
 		glm::vec3 v(0.0f);
 		float velocity, theta, phi;
 
-		GLfloat* data = new GLfloat[m_numParticles * 3];
-		for (int i = 0; i < m_numParticles; i++)
+		GLfloat* data = new GLfloat[m_NumParticles * 3];
+		for (int i = 0; i < m_NumParticles; i++)
 		{
 			// Pick the direction of the particles
-			theta = glm::mix(0.0f, glm::pi<float>() / m_angle, randFloat());
+			theta = glm::mix(0.0f, glm::pi<float>() / m_Angle, randFloat());
 			phi = glm::mix(0.0f, glm::two_pi<float>(), randFloat());
 
 			v.x = sinf(theta) * cosf(phi);
@@ -126,7 +163,7 @@ namespace DerydocaEngine::Ext
 			v.z = sinf(theta) * sinf(phi);
 
 			// Scale to set the magnitude of the velocity
-			velocity = glm::mix(m_velocityMin, m_velocityMax, randFloat());
+			velocity = glm::mix(m_VelocityMin, m_VelocityMax, randFloat());
 			v = normalize(v) * velocity;
 
 			data[3 * i] = v.x;
@@ -134,34 +171,34 @@ namespace DerydocaEngine::Ext
 			data[3 * i + 2] = v.z;
 		}
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_initVel);
+		glBindBuffer(GL_ARRAY_BUFFER, m_InitVel);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 
 		delete[] data;
 
-		data = new GLfloat[m_numParticles];
+		data = new GLfloat[m_NumParticles];
 		float time = 0.0f;
 		float rate = 0.00075f;
 
-		for (int i = 0; i < m_numParticles; i++)
+		for (int i = 0; i < m_NumParticles; i++)
 		{
 			data[i] = time;
 			time += rate;
 		}
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_startTime);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, m_numParticles * sizeof(float), data);
+		glBindBuffer(GL_ARRAY_BUFFER, m_StartTime);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, m_NumParticles * sizeof(float), data);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		delete[] data;
 
-		glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
-		glBindBuffer(GL_ARRAY_BUFFER, m_initVel);
+		glGenVertexArrays(1, &m_VAO);
+		glBindVertexArray(m_VAO);
+		glBindBuffer(GL_ARRAY_BUFFER, m_InitVel);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 		glEnableVertexAttribArray(0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_startTime);
+		glBindBuffer(GL_ARRAY_BUFFER, m_StartTime);
 		glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 0, NULL);
 		glEnableVertexAttribArray(1);
 

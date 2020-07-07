@@ -2,6 +2,8 @@
 #include "Components\GameComponent.h"
 #include "Rendering\Mesh.h"
 #include "Input\Keyboard.h"
+#include "Resources\ShaderResource.h"
+#include "Resources\MeshResource.h"
 
 namespace DerydocaEngine::Ext
 {
@@ -10,6 +12,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(ParticleInstanced);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		ParticleInstanced();
 		~ParticleInstanced();
@@ -20,31 +23,35 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 
-		float& getVelocityMin() { return m_velocityMin; }
-		float& getVelocityMax() { return m_velocityMax; }
-		int& getNumParticles() { return m_numParticles; }
-		float& getLifetime() { return m_lifetime; }
-		float& getAngle() { return m_angle; }
-		glm::vec3 getGravity() { return m_gravity; }
+		float& getVelocityMin() { return m_VelocityMin; }
+		float& getVelocityMax() { return m_VelocityMax; }
+		int& getNumParticles() { return m_NumParticles; }
+		float& getLifetime() { return m_Lifetime; }
+		float& getAngle() { return m_Angle; }
+		glm::vec3 getGravity() { return m_Gravity; }
 
 		void resetSimulation();
 
 	private:
-		int m_numParticles = 1000;
-		std::shared_ptr<Rendering::Material> m_material;
-		float m_time = 0.0f;
-		float m_lifetime = 5.0f;
-		float m_velocityMin = 1.25f;
-		float m_velocityMax = 1.5f;
-		float m_angle = 6.0f;
-		glm::vec3 m_gravity = glm::vec3(0.0f, -0.2f, 0.0f);
-		unsigned int m_initVel;
-		unsigned int m_startTime;
-		Input::Keyboard* m_keyboard;
-		std::shared_ptr<Rendering::Mesh> m_mesh;
+		int m_NumParticles = 1000;
+		float m_VelocityMin = 1.25f;
+		float m_VelocityMax = 1.5f;
+		float m_Angle = 6.0f;
+		ResourceRef<Resources::ShaderResource> m_Shader;
+		ResourceRef<Resources::MeshResource> m_Mesh;
+
+		std::shared_ptr<Rendering::Material> m_Material;
+		float m_Time = 0.0f;
+		float m_Lifetime = 5.0f;
+		glm::vec3 m_Gravity = glm::vec3(0.0f, -0.2f, 0.0f);
+		unsigned int m_InitVel;
+		unsigned int m_StartTime;
+		Input::Keyboard* m_Keyboard;
 
 		void initBuffers();
 		float randFloat();
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ParticleInstanced);
