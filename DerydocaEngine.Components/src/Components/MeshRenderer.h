@@ -64,4 +64,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::MeshRenderer);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::MeshRenderer, 0);

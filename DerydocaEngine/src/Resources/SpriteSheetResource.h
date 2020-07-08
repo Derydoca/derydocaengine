@@ -34,4 +34,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::SpriteSheetResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::SpriteSheetResource, 0);

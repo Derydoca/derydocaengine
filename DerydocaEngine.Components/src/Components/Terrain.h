@@ -48,4 +48,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::Terrain);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::Terrain, 0);

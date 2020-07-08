@@ -29,4 +29,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::Rotator);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::Rotator, 0);

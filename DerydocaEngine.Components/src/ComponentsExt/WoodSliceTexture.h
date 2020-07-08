@@ -30,4 +30,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::WoodSliceTexture);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::WoodSliceTexture, 0);

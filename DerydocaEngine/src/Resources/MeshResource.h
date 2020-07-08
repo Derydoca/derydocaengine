@@ -65,4 +65,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::MeshResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::MeshResource, 0);

@@ -20,4 +20,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::ImGuiDemoWindow);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::ImGuiDemoWindow, 0);

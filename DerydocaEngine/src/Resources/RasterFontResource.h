@@ -33,4 +33,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::RasterFontResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::RasterFontResource, 0);

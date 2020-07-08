@@ -33,4 +33,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::FontResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::FontResource, 0);

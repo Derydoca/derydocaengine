@@ -28,4 +28,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::GaussianBlurFilter);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::GaussianBlurFilter, 0);

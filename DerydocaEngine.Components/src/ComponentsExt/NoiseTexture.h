@@ -50,4 +50,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::NoiseTexture);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::NoiseTexture, 0);

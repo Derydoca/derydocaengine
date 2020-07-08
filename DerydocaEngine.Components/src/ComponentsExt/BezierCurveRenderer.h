@@ -37,4 +37,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::BezierCurveRenderer);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::BezierCurveRenderer, 0);

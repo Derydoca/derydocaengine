@@ -33,4 +33,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::EdgeDetectionFilter);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::EdgeDetectionFilter, 0);

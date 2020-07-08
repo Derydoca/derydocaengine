@@ -39,4 +39,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::WaveDisplacement);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::WaveDisplacement, 0);

@@ -47,4 +47,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ParticleSystem);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ParticleSystem, 0);

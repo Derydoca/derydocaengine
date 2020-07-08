@@ -27,4 +27,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ShaderSubroutineSwitcher);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ShaderSubroutineSwitcher, 0);

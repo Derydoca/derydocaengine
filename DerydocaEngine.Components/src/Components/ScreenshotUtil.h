@@ -31,4 +31,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::ScreenshotUtil);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::ScreenshotUtil, 0);

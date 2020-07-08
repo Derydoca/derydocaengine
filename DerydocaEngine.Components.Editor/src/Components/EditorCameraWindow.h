@@ -25,4 +25,4 @@ namespace DerydocaEngine::Components
 	};
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::EditorCameraWindow);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::EditorCameraWindow, 0);

@@ -35,4 +35,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::TextureResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::TextureResource, 0);

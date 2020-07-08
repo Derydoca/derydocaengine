@@ -85,4 +85,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SkinnedMeshRenderer);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SkinnedMeshRenderer, 0);

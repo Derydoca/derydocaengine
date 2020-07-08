@@ -53,4 +53,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ParticleFountain);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ParticleFountain, 0);

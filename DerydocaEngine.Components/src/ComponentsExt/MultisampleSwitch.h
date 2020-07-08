@@ -28,4 +28,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::MultisampleSwitch);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::MultisampleSwitch, 0);

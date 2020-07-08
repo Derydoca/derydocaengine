@@ -43,4 +43,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::CubemapResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::CubemapResource, 0);

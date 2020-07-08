@@ -41,4 +41,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::SkeletonResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::SkeletonResource, 0);

@@ -37,4 +37,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::BloomFilter);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::BloomFilter, 0);

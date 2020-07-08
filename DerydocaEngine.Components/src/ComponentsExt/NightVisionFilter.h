@@ -32,4 +32,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::NightVisionFilter);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::NightVisionFilter, 0);

@@ -33,4 +33,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::GammaCorrectionFilter);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::GammaCorrectionFilter, 0);

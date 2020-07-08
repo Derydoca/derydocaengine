@@ -43,4 +43,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ImageProjector);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::ImageProjector, 0);

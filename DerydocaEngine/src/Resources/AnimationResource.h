@@ -41,4 +41,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::AnimationResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::AnimationResource, 0);

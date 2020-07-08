@@ -33,4 +33,4 @@ namespace DerydocaEngine::Resources
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::BezierPatchMeshResource);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::BezierPatchMeshResource, 0);

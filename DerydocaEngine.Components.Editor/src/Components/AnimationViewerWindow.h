@@ -44,4 +44,4 @@ namespace DerydocaEngine::Components
 	};
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::AnimationViewerWindow);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::AnimationViewerWindow, 0);

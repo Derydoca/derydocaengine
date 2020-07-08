@@ -51,4 +51,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::KeyboardMover);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::KeyboardMover, 0);

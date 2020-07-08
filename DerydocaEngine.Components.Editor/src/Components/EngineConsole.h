@@ -27,4 +27,4 @@ namespace DerydocaEngine::Components
 	};
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::EngineConsole);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::EngineConsole, 0);

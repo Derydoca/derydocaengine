@@ -7,15 +7,15 @@
 #include "Serialization\CerealGlmTypes.h"
 
 #define SERIALIZE_FUNC_DEFINITIONS template<class Archive>\
-void load(Archive& archive);\
+void load(Archive& archive, std::uint32_t const version);\
 template<class Archive>\
-void save(Archive& archive) const;
+void save(Archive& archive, std::uint32_t const version) const;
 
 #define SERIALIZE_FUNC_LOAD(ARCHIVE, CLASSNAME) template<class Archive>\
-void CLASSNAME::load(Archive& ARCHIVE)
+void CLASSNAME::load(Archive& ARCHIVE, std::uint32_t const version)
 
 #define SERIALIZE_FUNC_SAVE(ARCHIVE, CLASSNAME) template<class Archive>\
-void CLASSNAME::save(Archive& ARCHIVE) const
+void CLASSNAME::save(Archive& ARCHIVE, std::uint32_t const version) const
 
 #define SERIALIZE_FUNC(...) template<class Archive>\
 void save(Archive& archive) const\
@@ -43,4 +43,5 @@ void load(Archive& archive)\
 #define SERIALIZE_NAMED(NAME, FIELD) cereal::make_nvp(NAME, FIELD)
 #define SERIALIZE_BASE(CLASS) SERIALIZE_NAMED(std::string("__base_") + #CLASS, cereal::base_class<CLASS>( this ))
 
-#define REGISTER_SERIALIZED_TYPE(CLASS) CEREAL_REGISTER_TYPE(CLASS)
+#define REGISTER_SERIALIZED_TYPE(CLASS, VERSION) CEREAL_REGISTER_TYPE(CLASS);\
+CEREAL_CLASS_VERSION(CLASS, VERSION);

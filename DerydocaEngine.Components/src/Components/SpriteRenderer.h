@@ -77,4 +77,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SpriteRenderer);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SpriteRenderer, 0);

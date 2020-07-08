@@ -24,4 +24,4 @@ namespace DerydocaEngine::Components
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::InspectorWindow);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::InspectorWindow, 0);

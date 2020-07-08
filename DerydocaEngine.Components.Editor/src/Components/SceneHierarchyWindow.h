@@ -25,4 +25,4 @@ namespace DerydocaEngine::Components
 	};
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SceneHierarchyWindow);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SceneHierarchyWindow, 0);

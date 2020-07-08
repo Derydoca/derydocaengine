@@ -228,7 +228,7 @@ namespace DerydocaEngine
 		);
 	}
 
-	template void GameObject::load<cereal::JSONInputArchive>(cereal::JSONInputArchive&);
-	template void GameObject::save<cereal::JSONOutputArchive>(cereal::JSONOutputArchive&) const;
+	template void GameObject::load<cereal::JSONInputArchive>(cereal::JSONInputArchive&, std::uint32_t const version);
+	template void GameObject::save<cereal::JSONOutputArchive>(cereal::JSONOutputArchive&, std::uint32_t const version) const;
 
 }

@@ -53,4 +53,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::TessellatedMeshRenderer);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::TessellatedMeshRenderer, 0);

@@ -36,4 +36,4 @@ namespace DerydocaEngine::Ext
 
 }
 
-REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::TessellatingQuad);
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::TessellatingQuad, 0);
