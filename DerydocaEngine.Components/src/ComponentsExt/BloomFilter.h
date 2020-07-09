@@ -10,6 +10,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(BloomFilter);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		BloomFilter();
 		~BloomFilter();
@@ -20,9 +21,6 @@ namespace DerydocaEngine::Ext
 
 		float& GetThreshold() { return m_Threshold; }
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Threshold)
-		);
 	private:
 		float m_Threshold;
 

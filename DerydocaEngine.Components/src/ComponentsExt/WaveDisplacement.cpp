@@ -69,4 +69,22 @@ namespace DerydocaEngine::Ext
 		}
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, WaveDisplacement)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_K),
+			SERIALIZE(m_Velocity),
+			SERIALIZE(m_Amplitude)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, WaveDisplacement)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_K),
+			SERIALIZE(m_Velocity),
+			SERIALIZE(m_Amplitude)
+		);
+	}
+
 }

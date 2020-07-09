@@ -9,6 +9,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(GaussianBlurFilter);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		GaussianBlurFilter() {}
 		~GaussianBlurFilter() {}
@@ -17,7 +18,6 @@ namespace DerydocaEngine::Ext
 		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
 		std::shared_ptr<Components::Camera> m_PostProcessCamera;
 		std::vector<float> m_Weights;

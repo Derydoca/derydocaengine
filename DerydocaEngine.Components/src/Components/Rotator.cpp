@@ -33,4 +33,18 @@ namespace DerydocaEngine::Components
 		m_Speed = node["rotationSpeed"].as<float>();
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, Rotator)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Speed)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, Rotator)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Speed)
+		);
+	}
+
 }

@@ -9,13 +9,12 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(FrameStats);
+		SERIALIZE_FUNC_DEFINITIONS;
 		FrameStats();
 		~FrameStats();
 
 		virtual void postInit();
 		virtual void update(const float deltaTime);
-
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
 		std::shared_ptr<TextRenderer> m_textRenderer;
 	};

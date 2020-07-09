@@ -11,6 +11,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(NoiseTexture);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		NoiseTexture();
 		~NoiseTexture();
@@ -25,16 +26,6 @@ namespace DerydocaEngine::Ext
 		float& getPersistence() { return m_Persistence; }
 		bool& getIsPeriodic() { return m_Periodic; }
 		bool& getIsSeamless() { return m_Seamless; }
-
-		SERIALIZE_FUNC_BASE(
-			DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Size),
-			SERIALIZE(m_TextureName),
-			SERIALIZE(m_BaseFrequency),
-			SERIALIZE(m_Persistence),
-			SERIALIZE(m_Periodic),
-			SERIALIZE(m_Seamless)
-		);
 
 	private:
 		int2 m_Size = { 256, 256 };

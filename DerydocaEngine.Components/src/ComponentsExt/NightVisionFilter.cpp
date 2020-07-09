@@ -41,4 +41,18 @@ namespace DerydocaEngine::Ext
 		}
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, NightVisionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Radius)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, NightVisionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Radius)
+		);
+	}
+
 }

@@ -10,6 +10,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(GammaCorrectionFilter);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		GammaCorrectionFilter();
 		~GammaCorrectionFilter();
@@ -20,9 +21,6 @@ namespace DerydocaEngine::Ext
 
 		float& getGamma() { return m_Gamma; }
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Gamma)
-		);
 	private:
 		float m_Gamma;
 

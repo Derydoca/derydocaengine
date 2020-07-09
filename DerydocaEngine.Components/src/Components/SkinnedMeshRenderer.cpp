@@ -103,4 +103,22 @@ namespace DerydocaEngine::Components
 		m_Dirty = false;
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, SkinnedMeshRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Animation),
+			SERIALIZE(m_Material),
+			SERIALIZE(m_Mesh)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, SkinnedMeshRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Animation),
+			SERIALIZE(m_Material),
+			SERIALIZE(m_Mesh)
+		);
+	}
+
 }

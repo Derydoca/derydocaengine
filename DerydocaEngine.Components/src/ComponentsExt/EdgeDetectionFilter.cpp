@@ -57,4 +57,18 @@ namespace DerydocaEngine::Ext
 		material->setFloat("EdgeThreshold", m_EdgeThreshold);
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, EdgeDetectionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_EdgeThreshold)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, EdgeDetectionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_EdgeThreshold)
+		);
+	}
+
 }

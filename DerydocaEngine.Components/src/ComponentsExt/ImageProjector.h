@@ -11,6 +11,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(ImageProjector);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		ImageProjector();
 		~ImageProjector();
@@ -25,7 +26,6 @@ namespace DerydocaEngine::Ext
 
 		float& getFov() { return m_FOV; }
 
-		SERIALIZE_FUNC_DEFINITIONS;
 	private:
 		glm::vec3 m_FocalPoint;
 		glm::vec3 m_UpVector;

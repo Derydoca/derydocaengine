@@ -65,4 +65,14 @@ namespace DerydocaEngine::Ext
 		LOG_INFO("Multisampling Enabled: {}", m_EnableMultisample);
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, MultisampleSwitch)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, MultisampleSwitch)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
 }

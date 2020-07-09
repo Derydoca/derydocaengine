@@ -53,4 +53,18 @@ namespace DerydocaEngine::Ext
 		mat->setFloat("Gamma", m_Gamma);
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, GammaCorrectionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Gamma)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, GammaCorrectionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Gamma)
+		);
+	}
+
 }

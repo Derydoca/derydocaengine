@@ -72,4 +72,14 @@ namespace DerydocaEngine::Ext
 		material->setFloatArray("Weights", m_Weights);
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, GaussianBlurFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, GaussianBlurFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
 }

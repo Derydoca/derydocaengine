@@ -17,6 +17,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(WasdMover);
+		SERIALIZE_FUNC_DEFINITIONS;
 		WasdMover();
 		~WasdMover();
 
@@ -25,15 +26,6 @@ namespace DerydocaEngine::Components
 
 		void deserialize(const YAML::Node& node);
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_MoveSpeed),
-			SERIALIZE(m_MouseSensitivityX),
-			SERIALIZE(m_MouseSensitivityY),
-			SERIALIZE(m_FastMoveMultiplier),
-			SERIALIZE(m_SlowMoveMultiplier),
-			SERIALIZE(m_MinXRot),
-			SERIALIZE(m_MaxXRot)
-		);
 	private:
 		float m_MoveSpeed;
 		float m_MouseSensitivityX, m_MouseSensitivityY;

@@ -129,4 +129,30 @@ namespace DerydocaEngine::Components
 		m_MaxXRot = node["maxXRot"].as<float>();
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, WasdMover)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_MoveSpeed),
+			SERIALIZE(m_MouseSensitivityX),
+			SERIALIZE(m_MouseSensitivityY),
+			SERIALIZE(m_FastMoveMultiplier),
+			SERIALIZE(m_SlowMoveMultiplier),
+			SERIALIZE(m_MinXRot),
+			SERIALIZE(m_MaxXRot)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, WasdMover)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_MoveSpeed),
+			SERIALIZE(m_MouseSensitivityX),
+			SERIALIZE(m_MouseSensitivityY),
+			SERIALIZE(m_FastMoveMultiplier),
+			SERIALIZE(m_SlowMoveMultiplier),
+			SERIALIZE(m_MinXRot),
+			SERIALIZE(m_MaxXRot)
+		);
+	}
+
 }

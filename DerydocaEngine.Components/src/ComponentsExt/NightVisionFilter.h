@@ -9,6 +9,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(NightVisionFilter);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		NightVisionFilter() {}
 		~NightVisionFilter() {}
@@ -21,9 +22,6 @@ namespace DerydocaEngine::Ext
 
 		float& getRadius() { return m_Radius; }
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Radius)
-		);
 	private:
 		float m_Radius = 100.0f;
 

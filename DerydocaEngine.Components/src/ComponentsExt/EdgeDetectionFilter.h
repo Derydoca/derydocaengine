@@ -11,6 +11,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(EdgeDetectionFilter);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		EdgeDetectionFilter();
 		~EdgeDetectionFilter();
@@ -21,9 +22,6 @@ namespace DerydocaEngine::Ext
 
 		float& getEdgeThreshold() { return m_EdgeThreshold; }
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_EdgeThreshold)
-		);
 	private:
 		void updateShader();
 

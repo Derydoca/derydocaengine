@@ -8,6 +8,8 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(Rotator);
+		SERIALIZE_FUNC_DEFINITIONS;
+
 		Rotator();
 		Rotator(float rotationSpeed);
 		~Rotator();
@@ -19,9 +21,6 @@ namespace DerydocaEngine::Components
 		inline void setSpeed(float const& rotSpeed) { m_Speed = rotSpeed; }
 		inline float& getSpeed() { return m_Speed; }
 		inline float getSpeed() const { return m_Speed; }
-
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Speed));
 	private:
 		float m_Value;
 		float m_Speed;

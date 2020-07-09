@@ -113,4 +113,22 @@ namespace DerydocaEngine::Components
 		getMesh()->draw();
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, MeshRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Mesh),
+			SERIALIZE(m_Material),
+			SERIALIZE(m_Transparent)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, MeshRenderer)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Mesh),
+			SERIALIZE(m_Material),
+			SERIALIZE(m_Transparent)
+		);
+	}
+
 }

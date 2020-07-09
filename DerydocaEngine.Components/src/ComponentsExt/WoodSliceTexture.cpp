@@ -48,4 +48,18 @@ namespace DerydocaEngine::Ext
 		m_MeshRenderer->getMaterial()->setMat4("Slice", m_SliceMatrixTransform->getModel());
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, WoodSliceTexture)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_SliceMatrixTransform)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, WoodSliceTexture)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_SliceMatrixTransform)
+		);
+	}
+
 }

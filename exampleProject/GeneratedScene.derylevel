@@ -37,7 +37,7 @@
                             "ptr_wrapper": {
                                 "id": 2147483651,
                                 "data": {
-                                    "m_Name": "Vertex Diffuse Model",
+                                    "m_Name": "Particle Instanced",
                                     "m_Transform": {
                                         "polymorphic_id": 1073741824,
                                         "ptr_wrapper": {
@@ -49,9 +49,9 @@
                                                     "z": 0.0
                                                 },
                                                 "m_Scale": {
-                                                    "x": 1.0,
-                                                    "y": 1.0,
-                                                    "z": 1.0
+                                                    "x": 0.15000000596046449,
+                                                    "y": 0.15000000596046449,
+                                                    "z": 0.15000000596046449
                                                 },
                                                 "m_Quaternion": {
                                                     "x": 0.0,
@@ -66,33 +66,22 @@
                                     "m_Components": [
                                         {
                                             "polymorphic_id": 2147483649,
-                                            "polymorphic_name": "DerydocaEngine::Components::MeshRenderer",
+                                            "polymorphic_name": "DerydocaEngine::Ext::ParticleInstanced",
                                             "ptr_wrapper": {
                                                 "id": 2147483653,
                                                 "data": {
+                                                    "cereal_class_version": 0,
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "2162da50-4b4d-4382-af89-ea5a8574d7ed"
+                                                            "m_ID": "7960577b-078c-41c0-857b-601cfa81c7a5"
                                                         }
                                                     },
-                                                    "m_Mesh": "b1b135df-0f8a-4ebf-bd9d-a98127daf307",
-                                                    "m_Material": "3d15b574-e99a-4c11-8d94-d3cfc3da9bc9",
-                                                    "m_Transparent": false
-                                                }
-                                            }
-                                        },
-                                        {
-                                            "polymorphic_id": 2147483650,
-                                            "polymorphic_name": "DerydocaEngine::Components::Rotator",
-                                            "ptr_wrapper": {
-                                                "id": 2147483654,
-                                                "data": {
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "4f6a393b-cb98-415e-8371-31d0fc91cb01"
-                                                        }
-                                                    },
-                                                    "m_Speed": 30.0
+                                                    "m_NumParticles": 10000,
+                                                    "m_VelocityMin": 0.75,
+                                                    "m_VelocityMax": 1.25,
+                                                    "m_Angle": 12.0,
+                                                    "m_Shader": "eb2e2b32-03fa-4e1f-aa82-72286fc83b51",
+                                                    "m_Mesh": "84d21022-d7b4-4dee-b617-90763d995773"
                                                 }
                                             }
                                         }
@@ -103,18 +92,18 @@
                         {
                             "polymorphic_id": 1073741824,
                             "ptr_wrapper": {
-                                "id": 2147483655,
+                                "id": 2147483654,
                                 "data": {
-                                    "m_Name": "Point Light Left",
+                                    "m_Name": "Displaced Plane",
                                     "m_Transform": {
                                         "polymorphic_id": 1073741824,
                                         "ptr_wrapper": {
-                                            "id": 2147483656,
+                                            "id": 2147483655,
                                             "data": {
                                                 "m_Position": {
-                                                    "x": -1.0,
-                                                    "y": 1.0,
-                                                    "z": 0.0
+                                                    "x": 0.0,
+                                                    "y": -0.5,
+                                                    "z": -2.0
                                                 },
                                                 "m_Scale": {
                                                     "x": 1.0,
@@ -133,14 +122,102 @@
                                     "m_Children": [],
                                     "m_Components": [
                                         {
+                                            "polymorphic_id": 2147483650,
+                                            "polymorphic_name": "DerydocaEngine::Components::MeshRenderer",
+                                            "ptr_wrapper": {
+                                                "id": 2147483656,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "0011ac6e-d58b-4de4-821c-dc178c5f10b8"
+                                                        }
+                                                    },
+                                                    "m_Mesh": "e66593df-56c5-41e5-9016-358e0bada566",
+                                                    "m_Material": "8de02efa-e971-47a4-9908-a7752ddaccd1",
+                                                    "m_Transparent": false
+                                                }
+                                            }
+                                        },
+                                        {
                                             "polymorphic_id": 2147483651,
-                                            "polymorphic_name": "DerydocaEngine::Components::Light",
+                                            "polymorphic_name": "DerydocaEngine::Ext::WaveDisplacement",
                                             "ptr_wrapper": {
                                                 "id": 2147483657,
                                                 "data": {
+                                                    "cereal_class_version": 0,
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "a70940a0-b093-4df6-882e-b0e9e66cfd34"
+                                                            "m_ID": "341aeeb8-5af9-4740-98c4-eee9c88bc1bb"
+                                                        }
+                                                    },
+                                                    "m_K": 5.0,
+                                                    "m_Velocity": 0.5,
+                                                    "m_Amplitude": 0.10000000149011612
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 2147483652,
+                                            "polymorphic_name": "DerydocaEngine::Components::MaterialRefresher",
+                                            "ptr_wrapper": {
+                                                "id": 2147483658,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "a24c89bc-d792-4d8b-980b-6346140df37a"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483659,
+                                "data": {
+                                    "m_Name": "Point Light 1",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483660,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 2.0,
+                                                    "y": 0.10000000149011612,
+                                                    "z": 2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 0.05000000074505806,
+                                                    "y": 0.05000000074505806,
+                                                    "z": 0.05000000074505806
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 2147483653,
+                                            "polymorphic_name": "DerydocaEngine::Components::Light",
+                                            "ptr_wrapper": {
+                                                "id": 2147483661,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "1386738e-15d1-4387-b14a-eb36bc77cd47"
                                                         }
                                                     },
                                                     "m_Type": 1,
@@ -151,8 +228,8 @@
                                                     },
                                                     "m_Color": {
                                                         "r": 1.0,
-                                                        "g": 0.0,
-                                                        "b": 0.0,
+                                                        "g": 1.0,
+                                                        "b": 1.0,
                                                         "a": 1.0
                                                     },
                                                     "m_CastShadows": false,
@@ -169,18 +246,83 @@
                         {
                             "polymorphic_id": 1073741824,
                             "ptr_wrapper": {
-                                "id": 2147483658,
+                                "id": 2147483662,
                                 "data": {
-                                    "m_Name": "Point Light Right",
+                                    "m_Name": "Point Light 2",
                                     "m_Transform": {
                                         "polymorphic_id": 1073741824,
                                         "ptr_wrapper": {
-                                            "id": 2147483659,
+                                            "id": 2147483663,
                                             "data": {
                                                 "m_Position": {
-                                                    "x": 1.0,
-                                                    "y": 1.0,
-                                                    "z": 0.0
+                                                    "x": -2.0,
+                                                    "y": 0.0,
+                                                    "z": 2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 0.05000000074505806,
+                                                    "y": 0.05000000074505806,
+                                                    "z": 0.05000000074505806
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 5,
+                                            "ptr_wrapper": {
+                                                "id": 2147483664,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "e38bbed2-f968-4b70-b95f-f22aabee1de4"
+                                                        }
+                                                    },
+                                                    "m_Type": 1,
+                                                    "m_ShadowMapFilterType": 0,
+                                                    "m_ShadowMapSize": {
+                                                        "x": 512,
+                                                        "y": 512
+                                                    },
+                                                    "m_Color": {
+                                                        "r": 1.0,
+                                                        "g": 0.20000000298023225,
+                                                        "b": 0.20000000298023225,
+                                                        "a": 1.0
+                                                    },
+                                                    "m_CastShadows": false,
+                                                    "m_SpotlightExponent": 0.0,
+                                                    "m_SpotlightCutoff": 0.0,
+                                                    "m_ShadowSoftness": 0.009999999776482582
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483665,
+                                "data": {
+                                    "m_Name": "Particle Continuous Fountain",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483666,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": -2.0
                                                 },
                                                 "m_Scale": {
                                                     "x": 1.0,
@@ -199,31 +341,202 @@
                                     "m_Children": [],
                                     "m_Components": [
                                         {
-                                            "polymorphic_id": 3,
+                                            "polymorphic_id": 2147483654,
+                                            "polymorphic_name": "DerydocaEngine::Ext::ParticleContinuousFountain",
                                             "ptr_wrapper": {
-                                                "id": 2147483660,
+                                                "id": 2147483667,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "79d2d290-d8e9-42ee-a5c6-e95532a36160"
+                                                        }
+                                                    },
+                                                    "m_NumParticles": 10000,
+                                                    "m_VelocityMin": {
+                                                        "x": 0.75,
+                                                        "y": 0.75,
+                                                        "z": 0.75
+                                                    },
+                                                    "m_VelocityMax": {
+                                                        "x": 1.25,
+                                                        "y": 1.25,
+                                                        "z": 1.25
+                                                    },
+                                                    "m_Angle": 12.0,
+                                                    "m_Lifetime": 5.0,
+                                                    "m_EmitterType": 2,
+                                                    "m_EmitterSize": {
+                                                        "x": 1.0,
+                                                        "y": 1.0,
+                                                        "z": 1.0
+                                                    },
+                                                    "m_Acceleration": {
+                                                        "x": 0.0,
+                                                        "y": -0.4000000059604645,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_ParticleSizeMin": 50.0,
+                                                    "m_ParticleSizeMax": 100.0,
+                                                    "m_SpawnRatePerSecond": 100.0,
+                                                    "m_Shader": "2ec05e39-d53b-4891-8d46-2dea8dfb9701",
+                                                    "m_Texture": "cb774137-e5d2-4ee1-b2ab-f906cbeb148d"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483668,
+                                "data": {
+                                    "m_Name": "Particle Continuous Fountain",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483669,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": -1.0,
+                                                    "y": 0.0,
+                                                    "z": -2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 1.0,
+                                                    "y": 1.0,
+                                                    "z": 1.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 6,
+                                            "ptr_wrapper": {
+                                                "id": 2147483670,
                                                 "data": {
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "3ce976fd-385b-47e3-b924-7bada9bb1f6c"
+                                                            "m_ID": "3e66bfdf-ae83-4fb5-8861-9b3db48d8ad8"
                                                         }
                                                     },
-                                                    "m_Type": 1,
-                                                    "m_ShadowMapFilterType": 0,
-                                                    "m_ShadowMapSize": {
-                                                        "x": 512,
-                                                        "y": 512
+                                                    "m_NumParticles": 2400,
+                                                    "m_VelocityMin": {
+                                                        "x": 0.0,
+                                                        "y": 0.05000000074505806,
+                                                        "z": 0.0
                                                     },
-                                                    "m_Color": {
-                                                        "r": 0.0,
-                                                        "g": 0.0,
-                                                        "b": 1.0,
-                                                        "a": 1.0
+                                                    "m_VelocityMax": {
+                                                        "x": 0.0,
+                                                        "y": 0.10000000149011612,
+                                                        "z": 0.0
                                                     },
-                                                    "m_CastShadows": false,
-                                                    "m_SpotlightExponent": 0.0,
-                                                    "m_SpotlightCutoff": 0.0,
-                                                    "m_ShadowSoftness": 0.009999999776482582
+                                                    "m_Angle": 12.0,
+                                                    "m_Lifetime": 12.0,
+                                                    "m_EmitterType": 1,
+                                                    "m_EmitterSize": {
+                                                        "x": 1.0,
+                                                        "y": 0.0,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_Acceleration": {
+                                                        "x": 0.0,
+                                                        "y": 0.02500000037252903,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_ParticleSizeMin": 20.0,
+                                                    "m_ParticleSizeMax": 600.0,
+                                                    "m_SpawnRatePerSecond": 200.0,
+                                                    "m_Shader": "2ec05e39-d53b-4891-8d46-2dea8dfb9701",
+                                                    "m_Texture": "7d1edd30-bff2-4caf-8152-c74269901ff0"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483671,
+                                "data": {
+                                    "m_Name": "Particle Continuous Fountain",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483672,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 1.0,
+                                                    "y": 0.0,
+                                                    "z": -2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 1.0,
+                                                    "y": 1.0,
+                                                    "z": 1.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 6,
+                                            "ptr_wrapper": {
+                                                "id": 2147483673,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "09657ce0-3b1e-4a92-a1d5-fe12a3877cea"
+                                                        }
+                                                    },
+                                                    "m_NumParticles": 10000,
+                                                    "m_VelocityMin": {
+                                                        "x": 0.0,
+                                                        "y": 0.10000000149011612,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_VelocityMax": {
+                                                        "x": 0.0,
+                                                        "y": 0.5,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_Angle": 12.0,
+                                                    "m_Lifetime": 4.0,
+                                                    "m_EmitterType": 1,
+                                                    "m_EmitterSize": {
+                                                        "x": 1.0,
+                                                        "y": 0.0,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_Acceleration": {
+                                                        "x": 0.0,
+                                                        "y": 0.10000000149011612,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_ParticleSizeMin": 50.0,
+                                                    "m_ParticleSizeMax": 50.0,
+                                                    "m_SpawnRatePerSecond": 1000.0,
+                                                    "m_Shader": "2ec05e39-d53b-4891-8d46-2dea8dfb9701",
+                                                    "m_Texture": "3530afaf-4c1e-423e-a1ca-e30a002c1132"
                                                 }
                                             }
                                         }

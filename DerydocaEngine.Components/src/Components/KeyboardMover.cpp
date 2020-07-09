@@ -100,4 +100,30 @@ namespace DerydocaEngine::Components
 		m_KeyDown = node["keyDown"].as<int>();
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, KeyboardMover)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_MovementSpeed),
+			SERIALIZE(m_KeyForward),
+			SERIALIZE(m_KeyBackward),
+			SERIALIZE(m_KeyLeft),
+			SERIALIZE(m_KeyRight),
+			SERIALIZE(m_KeyUp),
+			SERIALIZE(m_KeyDown)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, KeyboardMover)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_MovementSpeed),
+			SERIALIZE(m_KeyForward),
+			SERIALIZE(m_KeyBackward),
+			SERIALIZE(m_KeyLeft),
+			SERIALIZE(m_KeyRight),
+			SERIALIZE(m_KeyUp),
+			SERIALIZE(m_KeyDown)
+		);
+	}
+
 }

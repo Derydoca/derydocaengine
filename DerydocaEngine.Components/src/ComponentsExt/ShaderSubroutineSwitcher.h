@@ -9,6 +9,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(ShaderSubroutineSwitcher);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		ShaderSubroutineSwitcher() {}
 		~ShaderSubroutineSwitcher() {}
@@ -16,9 +17,6 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void deserialize(const YAML::Node& compNode);
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_SubroutineName)
-		);
 	private:
 		void setSubroutine(unsigned int const& program, std::string const& subroutineName);
 

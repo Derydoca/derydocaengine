@@ -19,6 +19,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(Light);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		/* Defines a light's type */
 		enum LightType
@@ -75,18 +76,6 @@ namespace DerydocaEngine::Components
 		virtual void preDestroy();
 
 		void renderShadowMap(const std::vector<std::shared_ptr<Scenes::Scene>> scenes);
-
-		SERIALIZE_FUNC_BASE(
-			DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Type),
-			SERIALIZE(m_ShadowMapFilterType),
-			SERIALIZE(m_ShadowMapSize),
-			SERIALIZE(m_Color),
-			SERIALIZE(m_CastShadows),
-			SERIALIZE(m_SpotlightExponent),
-			SERIALIZE(m_SpotlightCutoff),
-			SERIALIZE(m_ShadowSoftness)
-		);
 
 	private:
 		void generateShadowMap();

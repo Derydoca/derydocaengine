@@ -61,4 +61,18 @@ namespace DerydocaEngine::Ext
 		material->setSubroutine(program, subroutineIndex);
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, ShaderSubroutineSwitcher)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_SubroutineName)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, ShaderSubroutineSwitcher)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_SubroutineName)
+		);
+	}
+
 }

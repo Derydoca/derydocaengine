@@ -15,6 +15,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(SpriteRenderer);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		SpriteRenderer();
 		~SpriteRenderer();
@@ -33,7 +34,6 @@ namespace DerydocaEngine::Components
 			markComponentAsDirty(Rendering::MeshComponents::Colors);
 		}
 
-		SERIALIZE_FUNC_DEFINITIONS;
 	private:
 		Color m_Color;
 		ResourceRef<Resources::SpriteSheetResource> m_SpriteSheet;

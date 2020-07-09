@@ -185,4 +185,28 @@ namespace DerydocaEngine::Ext
 		delete[] textureData;
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, NoiseTexture)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Size),
+			SERIALIZE(m_TextureName),
+			SERIALIZE(m_BaseFrequency),
+			SERIALIZE(m_Persistence),
+			SERIALIZE(m_Periodic),
+			SERIALIZE(m_Seamless)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, NoiseTexture)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Size),
+			SERIALIZE(m_TextureName),
+			SERIALIZE(m_BaseFrequency),
+			SERIALIZE(m_Persistence),
+			SERIALIZE(m_Periodic),
+			SERIALIZE(m_Seamless)
+		);
+	}
+
 }

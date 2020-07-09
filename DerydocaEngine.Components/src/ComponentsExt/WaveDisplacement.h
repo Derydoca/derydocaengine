@@ -8,6 +8,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(WaveDisplacement);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		WaveDisplacement();
 		~WaveDisplacement();
@@ -20,13 +21,6 @@ namespace DerydocaEngine::Ext
 		float& getK() { return m_K; }
 		float& getVelocity() { return m_Velocity; }
 		float& getAmplitude() { return m_Amplitude; }
-
-		SERIALIZE_FUNC_BASE(
-			DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_K),
-			SERIALIZE(m_Velocity),
-			SERIALIZE(m_Amplitude)
-		);
 
 	private:
 		float m_K;

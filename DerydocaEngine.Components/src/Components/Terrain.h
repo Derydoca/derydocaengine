@@ -19,6 +19,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(Terrain);
+		SERIALIZE_FUNC_DEFINITIONS;
 		Terrain();
 		Terrain(const std::string& fileName, float const& unitScale, float const& heightScale);
 		Terrain(int const& width, int const& depth, float const& unitScale, float const& heightScale);
@@ -33,7 +34,6 @@ namespace DerydocaEngine::Components
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		void deserialize(const YAML::Node& node);
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
 		int m_Width;
 		int m_Depth;

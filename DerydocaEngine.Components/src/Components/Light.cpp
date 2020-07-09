@@ -206,4 +206,32 @@ namespace DerydocaEngine::Components
 		}
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, Light)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Type),
+			SERIALIZE(m_ShadowMapFilterType),
+			SERIALIZE(m_ShadowMapSize),
+			SERIALIZE(m_Color),
+			SERIALIZE(m_CastShadows),
+			SERIALIZE(m_SpotlightExponent),
+			SERIALIZE(m_SpotlightCutoff),
+			SERIALIZE(m_ShadowSoftness)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, Light)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Type),
+			SERIALIZE(m_ShadowMapFilterType),
+			SERIALIZE(m_ShadowMapSize),
+			SERIALIZE(m_Color),
+			SERIALIZE(m_CastShadows),
+			SERIALIZE(m_SpotlightExponent),
+			SERIALIZE(m_SpotlightCutoff),
+			SERIALIZE(m_ShadowSoftness)
+		);
+	}
+
 }

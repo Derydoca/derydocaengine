@@ -9,6 +9,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(MultisampleSwitch);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		MultisampleSwitch();
 		~MultisampleSwitch();
@@ -19,7 +20,6 @@ namespace DerydocaEngine::Ext
 		void setEnableMultisample(bool const& enable);
 		bool isMultisampleOn() { return m_EnableMultisample; }
 
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
 		Input::Keyboard * m_Keyboard;
 		bool m_EnableMultisample;

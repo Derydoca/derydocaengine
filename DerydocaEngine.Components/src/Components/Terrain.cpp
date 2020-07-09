@@ -194,4 +194,14 @@ namespace DerydocaEngine::Components
 		//m_meshRenderer = std::make_shared<MeshRenderer>(m_mesh, mat);
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, Terrain)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, Terrain)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
 }

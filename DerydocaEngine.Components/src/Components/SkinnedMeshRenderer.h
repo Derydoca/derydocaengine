@@ -24,6 +24,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(SkinnedMeshRenderer)
+		SERIALIZE_FUNC_DEFINITIONS;
 		SkinnedMeshRenderer();
 		~SkinnedMeshRenderer();
 
@@ -63,12 +64,6 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Resources::AnimationResource> getAnimationResource() const { return m_Animation.GetSmartPointer(); }
 		std::shared_ptr<Resources::MaterialResource> getMaterialResource() { return m_Material.GetSmartPointer(); }
 		std::shared_ptr<Resources::MeshResource> getMeshResource() const { return m_Mesh.GetSmartPointer(); }
-
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Animation),
-			SERIALIZE(m_Material),
-			SERIALIZE(m_Mesh)
-		);
 
 	private:
 		void fixDirtyStatus();

@@ -21,14 +21,13 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(MaterialRefresher);
+		SERIALIZE_FUNC_DEFINITIONS;
 		MaterialRefresher();
 		~MaterialRefresher();
 
 		void init();
 		void update(const float deltaTime);
 		void refreshMaterial();
-
-		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
 		bool isShaderSourceUpdated();
 

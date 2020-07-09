@@ -181,4 +181,14 @@ namespace DerydocaEngine::Components
 		return false;
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, MaterialRefresher)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, MaterialRefresher)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
 }

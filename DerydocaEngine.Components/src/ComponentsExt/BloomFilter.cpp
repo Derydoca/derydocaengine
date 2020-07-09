@@ -100,4 +100,18 @@ namespace DerydocaEngine::Ext
 		material->setFloat("LumThresh", m_Threshold);
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, BloomFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Threshold)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, BloomFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Threshold)
+		);
+	}
+
 }

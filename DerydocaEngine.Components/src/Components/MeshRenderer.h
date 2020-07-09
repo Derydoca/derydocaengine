@@ -22,6 +22,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(MeshRenderer);
+		SERIALIZE_FUNC_DEFINITIONS;
 		MeshRenderer();
 		MeshRenderer(std::shared_ptr<Resources::MeshResource> mesh, std::shared_ptr<Resources::MaterialResource> material);
 		~MeshRenderer();
@@ -50,12 +51,6 @@ namespace DerydocaEngine::Components
 		void setMaterialId(boost::uuids::uuid id) { m_Material.GetSmartPointer()->setId(id); }
 		boost::uuids::uuid getMaterialId() { return m_Material.GetSmartPointer()->getId(); }
 
-		SERIALIZE_FUNC_BASE(
-			DerydocaEngine::Components::GameComponent,
-			SERIALIZE(m_Mesh),
-			SERIALIZE(m_Material),
-			SERIALIZE(m_Transparent)
-		);
 	private:
 		ResourceRef<Resources::MeshResource> m_Mesh;
 		ResourceRef<Resources::MaterialResource> m_Material;

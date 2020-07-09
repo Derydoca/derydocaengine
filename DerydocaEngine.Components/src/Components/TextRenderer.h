@@ -61,6 +61,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(TextRenderer);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		TextRenderer();
 		~TextRenderer();
@@ -104,8 +105,6 @@ namespace DerydocaEngine::Components
 			int charCount = m_Lines.back()->getEnd();
 			return charCount * 6;
 		}
-
-		SERIALIZE_FUNC_DEFINITIONS;
 
 	private:
 		const Rendering::MeshComponents DIRTY_COMPONENTS_ON_TEXT_CHANGE = (Rendering::MeshComponents)(Rendering::MeshComponents::Positions | Rendering::MeshComponents::TexCoords);
