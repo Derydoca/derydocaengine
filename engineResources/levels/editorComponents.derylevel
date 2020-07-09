@@ -1,27 +1,95 @@
-Scene:
-
-  # - Type: GameObject
-  #   ID: e837d9d0-4694-4480-bebc-7c0cec1002c7
-  #   Properties:
-  #     Name: __screenshotUtil
-  #     Transform:
-  #       Position: [0, 0, 0]
-  #       Rotation: [0, 0, 0, 1]
-  #       Scale: [1, 1, 1]
-  #     Components:
-  #       - Type: ScreenshotUtil
-
-  - Type: GameObject
-    ID: faf88776-f81e-4d4f-8280-d23f5971a922
-    Properties:
-      Name: __xzPlaneGrid
-      Transform:
-        Position: [0, 0, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: f31bfa36-a1fe-44fd-8cee-0ee83f3ce69a
-            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5
-            Transparent: true
+{
+    "__base_DerydocaEngine::Scenes::Scene": {
+        "m_Root": {
+            "polymorphic_id": 1073741824,
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "cereal_class_version": 0,
+                    "m_Name": "__SCENE_ROOT__",
+                    "m_Transform": {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483650,
+                            "data": {
+                                "m_Position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "m_Scale": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "m_Quaternion": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0
+                                }
+                            }
+                        }
+                    },
+                    "m_Children": [
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483651,
+                                "data": {
+                                    "m_Name": "__xzPlaneGrid",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483652,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 1.0,
+                                                    "y": 1.0,
+                                                    "z": 1.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 2147483649,
+                                            "polymorphic_name": "DerydocaEngine::Components::MeshRenderer",
+                                            "ptr_wrapper": {
+                                                "id": 2147483653,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "8dcf3c4a-f202-43db-a468-7507e9562ed7"
+                                                        }
+                                                    },
+                                                    "m_Mesh": "cdadf7f6-536c-4765-9d6d-08a15c8e54c5",
+                                                    "m_Material": "f31bfa36-a1fe-44fd-8cee-0ee83f3ce69a",
+                                                    "m_Transparent": true
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "m_Components": []
+                }
+            }
+        }
+    }
+}
