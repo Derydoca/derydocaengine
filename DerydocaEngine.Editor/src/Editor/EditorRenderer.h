@@ -43,7 +43,7 @@ namespace DerydocaEngine::Editor
 		EditorRenderer(const EditorRenderer&);
 
 		std::shared_ptr<Resources::LevelResource> getSceneResource(const std::string& sceneId, const std::string& sceneType);
-		void loadScene(const std::string& sceneId, std::shared_ptr<Scenes::SerializedScene> scene);
+		std::shared_ptr<Scenes::SerializedScene> loadScene(const std::string& sceneId);
 
 	private:
 		bool m_playing;

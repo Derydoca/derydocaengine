@@ -216,6 +216,7 @@ namespace DerydocaEngine
 			SERIALIZE(m_Children),
 			SERIALIZE(m_Components)
 		);
+		m_DestroyFlag = false;
 	}
 
 	SERIALIZE_FUNC_SAVE(archive, GameObject)

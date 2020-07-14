@@ -9,6 +9,7 @@
 #include "Rendering\GraphicsAPI.h"
 #include "Rendering\LightManager.h"
 #include "ObjectLibrary.h"
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -88,8 +89,8 @@ namespace DerydocaEngine::Editor
 		}
 
 		// Load the scenes
-		loadScene(engineSettings->getEditorComponentsSceneIdentifier(), m_editorComponentsScene);
-		loadScene(engineSettings->getEditorGuiSceneIdentifier(), m_editorGuiScene);
+		m_editorComponentsScene = loadScene(engineSettings->getEditorComponentsSceneIdentifier());
+		m_editorGuiScene = loadScene(engineSettings->getEditorGuiSceneIdentifier());
 	}
 
 	void EditorRenderer::renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH)
@@ -134,7 +135,11 @@ namespace DerydocaEngine::Editor
 		DerydocaEngine::Rendering::Gui::DearImgui::newFrame(m_display);
 
 		// Update
-		m_editorGuiScene->getRoot()->update(deltaTime);
+		auto rootElement = m_editorGuiScene->getRoot();
+		if (rootElement)
+		{
+			rootElement->update(deltaTime);
+		}
 		if (m_playing)
 		{
 			auto scene = Scenes::SceneManager::getInstance().getActiveScene();
@@ -182,15 +187,38 @@ namespace DerydocaEngine::Editor
 		return resource;
 	}
 
-	void EditorRenderer::loadScene(const std::string& sceneId, std::shared_ptr<Scenes::SerializedScene> scene)
+	std::shared_ptr<Scenes::SerializedScene> EditorRenderer::loadScene(const std::string& sceneId)
 	{
+		// TODO: Refactor code so it doesn't duplicate logic in SceneManager::LoadScene()
 		auto editorComponentsSceneResource = getSceneResource(sceneId, "editor components");
 		if (editorComponentsSceneResource != nullptr)
 		{
-			scene->LoadFromFile(editorComponentsSceneResource->getSourceFilePath());
+			char temporarySerializationSwitch = ' ';
+			{
+				std::ifstream fs;
+				fs.open(editorComponentsSceneResource->getSourceFilePath());
+				std::string line;
+				std::getline(fs, line);
+				fs.close();
+				temporarySerializationSwitch = line[0];
+			}
+
+			auto scene = std::make_shared<Scenes::SerializedScene>();
+			if (temporarySerializationSwitch == 'S')
+			{
+				scene->LoadFromFile(editorComponentsSceneResource->getSourceFilePath());
+			}
+			else
+			{
+				std::string path = editorComponentsSceneResource->getSourceFilePath();
+				auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
+				scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
+			}
+			//scene->LoadFromFile(editorComponentsSceneResource->getSourceFilePath());
 			scene->setUp();
 			scene->getRoot()->init();
 			scene->getRoot()->postInit();
+			return scene;
 		}
 	}
 
