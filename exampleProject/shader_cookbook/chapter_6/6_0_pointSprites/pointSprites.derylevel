@@ -1,17 +1,101 @@
-Scene:
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31ebaaa
-    Properties:
-      Name: Point Sprite Particle System
-      Transform:
-        Position: [0.0, 0.0, -2.0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: ParticleSystem
-          Properties:
-            numParticles: 512
-            volumeSize: [2.0, 2.0, 2.0]
-            size2: 0.1
-            shader: 9306d255-6de5-450f-ab26-dde82741624f
-            texture: cb774137-e5d2-4ee1-b2ab-f906cbeb148d
+{
+    "__base_DerydocaEngine::Scenes::Scene": {
+        "m_Root": {
+            "polymorphic_id": 1073741824,
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "cereal_class_version": 0,
+                    "m_Name": "__SCENE_ROOT__",
+                    "m_Transform": {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483650,
+                            "data": {
+                                "m_Position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "m_Scale": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "m_Quaternion": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0
+                                }
+                            }
+                        }
+                    },
+                    "m_Children": [
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483651,
+                                "data": {
+                                    "m_Name": "Point Sprite Particle System",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483652,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": -2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 1.0,
+                                                    "y": 1.0,
+                                                    "z": 1.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 2147483649,
+                                            "polymorphic_name": "DerydocaEngine::Ext::ParticleSystem",
+                                            "ptr_wrapper": {
+                                                "id": 2147483653,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "30d587c9-be60-4dfc-8595-e63eca179b6a"
+                                                        }
+                                                    },
+                                                    "m_NumParticles": 512,
+                                                    "m_VolumeSize": {
+                                                        "x": 2.0,
+                                                        "y": 2.0,
+                                                        "z": 2.0
+                                                    },
+                                                    "m_Size2": 0.10000000149011612,
+                                                    "m_Texture": "cb774137-e5d2-4ee1-b2ab-f906cbeb148d",
+                                                    "m_Shader": "9306d255-6de5-450f-ab26-dde82741624f"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "m_Components": []
+                }
+            }
+        }
+    }
+}

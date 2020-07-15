@@ -73,9 +73,17 @@ void DerydocaEngine::Editor::EditorGUI::render()
 			if (ImGui::MenuItem("Open Scene")) {}
 			if (ImGui::MenuItem("Save Scene"))
 			{
-				Scenes::SceneManager::getInstance().SaveScene("../../../exampleProject/GeneratedScene.derylevel");
+				const std::string path = Scenes::SceneManager::getInstance().GetLoadedScenePath();
+				if (path.length() == 0)
+				{
+					D_LOG_INFO("No scene is loaded.");
+				}
+				else
+				{
+					Scenes::SceneManager::getInstance().SaveScene(path);
+				}
 			}
-			if (ImGui::MenuItem("Save Scene As")) {}
+			//if (ImGui::MenuItem("Save Scene As")) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Exit", ""))
 			{

@@ -20,6 +20,13 @@ namespace DerydocaEngine::Scenes
 		void LoadScene(const std::shared_ptr<Resources::LevelResource> levelResource);
 		void SaveScene(const std::string& outputPath);
 		void UnloadScene();
+		std::string GetLoadedScenePath() const {
+			if (!m_ActiveLevelResource)
+			{
+				return std::string();
+			}
+			return m_ActiveLevelResource->getSourceFilePath();
+		}
 
 	private:
 		SceneManager();

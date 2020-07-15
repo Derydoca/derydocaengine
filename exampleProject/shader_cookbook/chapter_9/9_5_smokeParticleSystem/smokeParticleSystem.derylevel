@@ -1,25 +1,121 @@
-Scene:
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
-    Properties:
-      Name: Particle Continuous Fountain
-      Transform:
-        Position: [0, 0, -2]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: ParticleContinuousFountain
-          Properties:
-            numParticles: 2400
-            velocityMin: [0.0, 0.05, 0.0]
-            velocityMax: [0.0, 0.1, 0.0]
-            lifetime: 12.0
-            acceleration: [0.0, 0.025, 0.0]
-            angle: 12.0
-            emitterType: 1
-            emitterSize: [1.0, 0.0, 0.0]
-            particleSizeMin: 20.0
-            particleSizeMax: 600.0
-            spawnRatePerSecond: 200.0
-            shader: 2ec05e39-d53b-4891-8d46-2dea8dfb9701
-            texture: 7d1edd30-bff2-4caf-8152-c74269901ff0
+{
+    "__base_DerydocaEngine::Scenes::Scene": {
+        "m_Root": {
+            "polymorphic_id": 1073741824,
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "cereal_class_version": 0,
+                    "m_Name": "__SCENE_ROOT__",
+                    "m_Transform": {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483650,
+                            "data": {
+                                "m_Position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "m_Scale": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "m_Quaternion": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0
+                                }
+                            }
+                        }
+                    },
+                    "m_Children": [
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483651,
+                                "data": {
+                                    "m_Name": "Particle Continuous Fountain",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483652,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": -2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 1.0,
+                                                    "y": 1.0,
+                                                    "z": 1.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 2147483649,
+                                            "polymorphic_name": "DerydocaEngine::Ext::ParticleContinuousFountain",
+                                            "ptr_wrapper": {
+                                                "id": 2147483653,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "b84ed7b9-889d-4b94-8b44-3734be8b26b9"
+                                                        }
+                                                    },
+                                                    "m_NumParticles": 2400,
+                                                    "m_VelocityMin": {
+                                                        "x": 0.0,
+                                                        "y": 0.05000000074505806,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_VelocityMax": {
+                                                        "x": 0.0,
+                                                        "y": 0.10000000149011612,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_Angle": 12.0,
+                                                    "m_Lifetime": 12.0,
+                                                    "m_EmitterType": 1,
+                                                    "m_EmitterSize": {
+                                                        "x": 1.0,
+                                                        "y": 0.0,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_Acceleration": {
+                                                        "x": 0.0,
+                                                        "y": 0.02500000037252903,
+                                                        "z": 0.0
+                                                    },
+                                                    "m_ParticleSizeMin": 20.0,
+                                                    "m_ParticleSizeMax": 600.0,
+                                                    "m_SpawnRatePerSecond": 200.0,
+                                                    "m_Shader": "2ec05e39-d53b-4891-8d46-2dea8dfb9701",
+                                                    "m_Texture": "7d1edd30-bff2-4caf-8152-c74269901ff0"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "m_Components": []
+                }
+            }
+        }
+    }
+}
