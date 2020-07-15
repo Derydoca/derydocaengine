@@ -18,6 +18,8 @@ namespace DerydocaEngine::Components
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) override;
 		virtual void update(const float deltaTime) override;
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::EditorWindowComponent);
+
 	protected:
 		void renderViewToWindow();
 		void updateDisplayProperties();
