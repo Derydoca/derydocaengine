@@ -52,7 +52,6 @@ namespace DerydocaEngine::Components
 		// Game Component Lifecycle
 		// ------------------------
 		// COMPONENT CREATION
-		// 	 - deserialize
 		// 	 - init
 		// 	 - postInit
 		// GAME LOOP
@@ -63,7 +62,6 @@ namespace DerydocaEngine::Components
 		// 	 - renderEditorGUI
 		// COMPONENT DESTRUCTION
 		// 	 - preDestroy
-		virtual void deserialize(const YAML::Node& compNode) {}
 		virtual void init() {}
 		virtual void postInit() {}
 		virtual void postRender() {}

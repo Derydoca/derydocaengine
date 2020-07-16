@@ -15,7 +15,6 @@ namespace DerydocaEngine::Ext
 		~NightVisionFilter() {}
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
 		void updateMaterial();

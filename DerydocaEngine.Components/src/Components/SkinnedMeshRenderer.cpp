@@ -31,13 +31,6 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	void SkinnedMeshRenderer::deserialize(const YAML::Node& compNode)
-	{
-		m_Animation.Set(getResource<Resources::AnimationResource>(compNode, "Animation"));
-		m_Material.Set(getResource<Resources::MaterialResource>(compNode, "Material"));
-		m_Mesh.Set(getResource<Resources::MeshResource>(compNode, "Mesh"));
-	}
-
 	void SkinnedMeshRenderer::init()
 	{
 		if (!isFullyConfigured())

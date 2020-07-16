@@ -89,17 +89,6 @@ namespace DerydocaEngine::Components
 		m_Transform->translate(frameMovement);
 	}
 
-	void KeyboardMover::deserialize(const YAML::Node& node)
-	{
-		m_MovementSpeed = node["movementSpeed"].as<float>();
-		m_KeyForward = node["keyForward"].as<int>();
-		m_KeyBackward = node["keyBackward"].as<int>();
-		m_KeyLeft = node["keyLeft"].as<int>();
-		m_KeyRight = node["keyRight"].as<int>();
-		m_KeyUp = node["keyUp"].as<int>();
-		m_KeyDown = node["keyDown"].as<int>();
-	}
-
 	SERIALIZE_FUNC_LOAD(archive, KeyboardMover)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),

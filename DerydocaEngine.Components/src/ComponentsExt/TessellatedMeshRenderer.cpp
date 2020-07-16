@@ -78,49 +78,6 @@ namespace DerydocaEngine::Ext
 		);
 	}
 
-	void TessellatedMeshRenderer::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node tessellationLevelNode = compNode["tessellationLevel"];
-		if (tessellationLevelNode)
-		{
-			m_TessellationLevel = tessellationLevelNode.as<int>();
-		}
-
-		YAML::Node useDynamicTessellationNode = compNode["useDynamicTessellation"];
-		if (useDynamicTessellationNode)
-		{
-			m_UseDynamicTessellation = useDynamicTessellationNode.as<bool>();
-		}
-
-		YAML::Node minDynamicTessDistanceNode = compNode["minDynamicTessDistance"];
-		if (minDynamicTessDistanceNode)
-		{
-			m_MinDynamicTessDistance = minDynamicTessDistanceNode.as<float>();
-		}
-
-		YAML::Node maxDynamicTessDistanceNode = compNode["maxDynamicTessDistance"];
-		if (maxDynamicTessDistanceNode)
-		{
-			m_MaxDynamicTessDistance = maxDynamicTessDistanceNode.as<float>();
-		}
-
-		YAML::Node minDynamicTessLevelNode = compNode["minDynamicTessLevel"];
-		if (minDynamicTessLevelNode)
-		{
-			m_MinDynamicTessLevel = minDynamicTessLevelNode.as<int>();
-		}
-
-		YAML::Node maxDynamicTessLevelNode = compNode["maxDynamicTessLevel"];
-		if (maxDynamicTessLevelNode)
-		{
-			m_MaxDynamicTessLevel = maxDynamicTessLevelNode.as<int>();
-		}
-
-		m_Material.Set(getResource<Resources::MaterialResource>(compNode, "material"));
-		m_Material.As<Rendering::Material>()->copyFrom(m_Material.As<Rendering::Material>());
-		m_Mesh.Set(getResource<Resources::BezierPatchMeshResource>(compNode, "bezierPatchMesh"));
-	}
-
 	void TessellatedMeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		auto material = m_Material.As<Rendering::Material>();

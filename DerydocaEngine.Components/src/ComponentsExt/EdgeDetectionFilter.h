@@ -17,7 +17,6 @@ namespace DerydocaEngine::Ext
 		~EdgeDetectionFilter();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
 		float& getEdgeThreshold() { return m_EdgeThreshold; }

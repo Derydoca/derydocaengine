@@ -48,7 +48,6 @@ namespace DerydocaEngine::Components
 		Camera(NoRegister);
 		~Camera();
 
-		virtual void deserialize(const YAML::Node& node) override;
 		virtual void init() override;
 		virtual void preDestroy() override;
 

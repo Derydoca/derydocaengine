@@ -63,69 +63,6 @@ namespace DerydocaEngine::Ext
 		);
 	}
 
-	void ImageProjector::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node focalPointNode = compNode["focalPoint"];
-		if (focalPointNode)
-		{
-			m_FocalPoint = focalPointNode.as<glm::vec3>();
-		}
-
-		YAML::Node upVectorNode = compNode["upVector"];
-		if (upVectorNode)
-		{
-			m_UpVector = upVectorNode.as<glm::vec3>();
-		}
-		else
-		{
-			m_UpVector = glm::vec3(0.0f, 1.0f, 0.0);
-		}
-
-		YAML::Node fovNode = compNode["fov"];
-		if (fovNode)
-		{
-			m_FOV = fovNode.as<float>();
-		}
-		else
-		{
-			m_FOV = 30.0f;
-		}
-
-		YAML::Node zNearNode = compNode["zNear"];
-		if (zNearNode)
-		{
-			m_ZNear = zNearNode.as<float>();
-		}
-		else
-		{
-			m_ZNear = 1.0f;
-		}
-
-		YAML::Node zFarNode = compNode["zFar"];
-		if (zFarNode)
-		{
-			m_ZFar = zFarNode.as<float>();
-		}
-		else
-		{
-			m_ZFar = 1000.0f;
-		}
-
-		// Load the projector texture with flags to disable all wrapping
-		Rendering::TextureParameters textureParams;
-		textureParams.setWrapModeS(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
-		textureParams.setWrapModeT(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
-		auto projectorTextureResource = getResource<Resources::TextureResource>(compNode, "texture");
-		m_ProjectorTexture.Set(projectorTextureResource);
-		//m_ProjectorTexture = std::make_shared<Rendering::Texture>(projectorTextureResource->getSourceFilePath(), &textureParams);
-
-		// Load references to all mesh renderers this shader affects
-		//m_meshRenderers = loadComponents<Components::MeshRenderer>(compNode, "affectedMeshRenderers");
-		D_LOG_WARN("ImageProjector.cpp::84 was intentionally commented out. This will not be fixed until the serialization is changed to use the Cereal library.");
-
-		setProjectionGraphic();
-	}
-
 	void ImageProjector::update(const float deltaTime)
 	{
 		updateShader();

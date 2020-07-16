@@ -118,17 +118,6 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void WasdMover::deserialize(const YAML::Node& node)
-	{
-		m_MoveSpeed = node["moveSpeed"].as<float>();
-		m_MouseSensitivityX = node["mouseSensitivityX"].as<float>();
-		m_MouseSensitivityY = node["mouseSensitivityY"].as<float>();
-		m_FastMoveMultiplier = node["fastMoveMultiplier"].as<float>();
-		m_SlowMoveMultiplier = node["slowMoveMultiplier"].as<float>();
-		m_MinXRot = node["minXRot"].as<float>();
-		m_MaxXRot = node["maxXRot"].as<float>();
-	}
-
 	SERIALIZE_FUNC_LOAD(archive, WasdMover)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),

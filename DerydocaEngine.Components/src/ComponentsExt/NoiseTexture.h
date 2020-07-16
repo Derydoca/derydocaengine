@@ -17,7 +17,6 @@ namespace DerydocaEngine::Ext
 		~NoiseTexture();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 
 		void generateNoiseTexture();
 		int& getWidth() { return m_Size.x; }

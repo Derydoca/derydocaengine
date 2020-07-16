@@ -69,33 +69,6 @@ namespace DerydocaEngine::Ext
 		);
 	}
 
-	void TessellatingQuad::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node controlPointsNode = compNode["controlPoints"];
-		if (controlPointsNode)
-		{
-			for (size_t i = 0; i < 8; i++)
-			{
-				m_ControlPoints[i] = controlPointsNode[i].as<float>();
-			}
-		}
-
-		YAML::Node innerNode = compNode["inner"];
-		if (innerNode)
-		{
-			m_Inner = innerNode.as<int>();
-		}
-
-		YAML::Node outerNode = compNode["outer"];
-		if (outerNode)
-		{
-			m_Outer = outerNode.as<int>();
-		}
-
-		m_Material.Set(getResource<Resources::MaterialResource>(compNode, "material"));
-		m_Material.As<Rendering::Material>()->copyFrom(m_Material.As<Rendering::Material>());
-	}
-
 	void TessellatingQuad::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		auto material = m_Material.As<Rendering::Material>();

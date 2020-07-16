@@ -19,7 +19,6 @@ namespace DerydocaEngine::Ext
 		~ParticleSystem();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 
 		int& getNumParticles() { return m_NumParticles; }

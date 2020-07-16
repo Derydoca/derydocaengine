@@ -45,10 +45,6 @@ namespace DerydocaEngine::Ext
 		updateShader();
 	}
 
-	void GaussianBlurFilter::deserialize(const YAML::Node& compNode)
-	{
-	}
-
 	void GaussianBlurFilter::update(const float deltaTime)
 	{
 		updateShader();

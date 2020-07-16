@@ -67,7 +67,6 @@ namespace DerydocaEngine::Components
 		~TextRenderer();
 
 		virtual void postInit();
-		virtual void deserialize(const YAML::Node& compNode);
 
 		void setText(const std::string& text);
 		std::string getText() { return m_Text; }

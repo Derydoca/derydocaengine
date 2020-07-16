@@ -35,28 +35,9 @@ namespace DerydocaEngine::Scenes
 
 		m_ActiveLevelResource = levelResource;
 
-		char temporarySerializationSwitch = ' ';
-		{
-			std::ifstream fs;
-			fs.open(m_ActiveLevelResource->getSourceFilePath());
-			std::string line;
-			std::getline(fs, line);
-			fs.close();
-			temporarySerializationSwitch = line[0];
-		}
-
-		std::shared_ptr<Scenes::SerializedScene> scene;
-		if (temporarySerializationSwitch == 'S')
-		{
-			scene = std::make_shared<Scenes::SerializedScene>();
-			scene->LoadFromFile(m_ActiveLevelResource->getSourceFilePath());
-		}
-		else
-		{
-			std::string path = m_ActiveLevelResource->getSourceFilePath();
-			auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
-			scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
-		}
+		std::string path = m_ActiveLevelResource->getSourceFilePath();
+		auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
+		auto scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
 		scene->setUp();
 		scene->getRoot()->init();
 		scene->getRoot()->postInit();

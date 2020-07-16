@@ -80,46 +80,6 @@ namespace DerydocaEngine::Ext
 		);
 	}
 
-	void ParticleInstanced::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node numParticlesNode = compNode["numParticles"];
-		if (numParticlesNode)
-		{
-			m_NumParticles = numParticlesNode.as<int>();
-		}
-
-		YAML::Node velocityMaxNode = compNode["velocityMax"];
-		if (velocityMaxNode)
-		{
-			m_VelocityMax = velocityMaxNode.as<float>();
-		}
-
-		YAML::Node velocityMinNode = compNode["velocityMin"];
-		if (velocityMinNode)
-		{
-			m_VelocityMin = velocityMinNode.as<float>();
-		}
-
-		YAML::Node angleNode = compNode["angle"];
-		if (angleNode)
-		{
-			m_Angle = angleNode.as<float>();
-		}
-
-		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
-		auto shader = m_Shader.As<Rendering::Shader>();
-		assert(shader);
-		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(shader);
-		m_Material->setFloat("ParticleLifetime", m_Lifetime);
-		m_Material->setVec4("Material.Kd", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-		m_Material->setVec4("Material.Ka", glm::vec4(0.05f, 0.05f, 0.0f, 1.0f));
-		m_Material->setVec4("Material.Ks", glm::vec4(0.7f, 0.7f, 0.7f, 1.0f));
-		m_Material->setFloat("Material.Shininess", 50.0f);
-
-		m_Mesh.Set(getResource<Resources::MeshResource>(compNode, "mesh"));
-	}
-
 	void ParticleInstanced::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		auto mesh = m_Mesh.As<Rendering::Mesh>();

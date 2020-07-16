@@ -28,7 +28,6 @@ namespace DerydocaEngine::Components
 		SkinnedMeshRenderer();
 		~SkinnedMeshRenderer();
 
-		void deserialize(const YAML::Node& compNode) override;
 		void init() override;
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack) override;
 		virtual void renderMesh(

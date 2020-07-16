@@ -14,11 +14,6 @@ namespace DerydocaEngine::Ext
 		setSubroutine(GL_VERTEX_SHADER, m_SubroutineName);
 	}
 
-	void ShaderSubroutineSwitcher::deserialize(const YAML::Node& compNode)
-	{
-		m_SubroutineName = compNode["SubroutineName"].as<std::string>();
-	}
-
 	void ShaderSubroutineSwitcher::setSubroutine(unsigned int const& program, std::string const& subroutineName)
 	{
 		if (subroutineName.empty())

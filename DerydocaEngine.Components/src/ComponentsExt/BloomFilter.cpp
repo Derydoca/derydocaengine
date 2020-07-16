@@ -67,15 +67,6 @@ namespace DerydocaEngine::Ext
 		updateShader();
 	}
 
-	void BloomFilter::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node lumThreshNode = compNode["lumThresh"];
-		if (lumThreshNode)
-		{
-			m_Threshold = compNode["lumThresh"].as<float>();
-		}
-	}
-
 	void BloomFilter::update(const float deltaTime)
 	{
 		updateShader();

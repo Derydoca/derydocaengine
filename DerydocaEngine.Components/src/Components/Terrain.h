@@ -32,7 +32,6 @@ namespace DerydocaEngine::Components
 		void init();
 
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
-		void deserialize(const YAML::Node& node);
 
 	private:
 		int m_Width;

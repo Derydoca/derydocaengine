@@ -16,7 +16,6 @@ namespace DerydocaEngine::Ext
 		~BloomFilter();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
 		float& GetThreshold() { return m_Threshold; }

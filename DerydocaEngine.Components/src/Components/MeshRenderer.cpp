@@ -34,37 +34,6 @@ namespace DerydocaEngine::Components
 	{
 	}
 
-	void MeshRenderer::deserialize(const YAML::Node& compNode)
-	{
-		auto material = getResource<Resources::MaterialResource>(compNode, "Material");
-		setMaterial(material);
-
-		auto mesh = getResource<Resources::MeshResource>(compNode, "Mesh");
-		setMesh(mesh);
-
-		YAML::Node renderTextureSourceNode = compNode["RenderTextureSource"];
-		if (renderTextureSourceNode && renderTextureSourceNode.IsScalar())
-		{
-			// Get the name that should be used to bind this texture to the shader
-			std::string renderTextureName = "RenderTexture";
-			YAML::Node renderTextureNameNode = compNode["RenderTextureName"];
-			if (renderTextureNameNode != nullptr && renderTextureNameNode.IsScalar())
-			{
-				renderTextureName = renderTextureNameNode.as<std::string>();
-			}
-
-			boost::uuids::uuid renderTextureCameraId = renderTextureSourceNode.as<boost::uuids::uuid>();
-			//m_meshRendererCamera = findComponentOfType<Camera>(renderTextureCameraId);
-			//getMaterial()->setTexture(renderTextureName, m_meshRendererCamera->getRenderTexture());
-		}
-
-		YAML::Node transparentNode = compNode["Transparent"];
-		if (transparentNode && transparentNode.IsScalar())
-		{
-			m_Transparent = transparentNode.as<bool>();
-		}
-	}
-
 	void MeshRenderer::init()
 	{
 	}

@@ -18,7 +18,6 @@ namespace DerydocaEngine::Ext
 		~TessellatedMeshRenderer();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		virtual void renderMesh(
 			const std::shared_ptr<Rendering::MatrixStack> matrixStack,

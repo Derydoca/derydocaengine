@@ -142,25 +142,6 @@ namespace DerydocaEngine::Components
 		m_MeshRenderer->render(matrixStack);
 	}
 
-	void Terrain::deserialize(const YAML::Node& node)
-	{
-		YAML::Node heightmapNode = node["heightmap"];
-		if (heightmapNode)
-		{
-			boost::uuids::uuid heightmapResourceId = heightmapNode.as<boost::uuids::uuid>();
-			auto heightmapResource = ObjectLibrary::getInstance().getResource(heightmapResourceId);
-
-			float unitScale = node["unitScale"].as<float>();
-			float heightScale = node["heightScale"].as<float>();
-			loadTerrainFromTexture(heightmapResource->getSourceFilePath(), unitScale, heightScale);
-			if (node["material"])
-			{
-				//std::shared_ptr<Rendering::Material> material = getResourcePointer<Rendering::Material>(node, "material");
-				//m_meshRenderer->setMaterial(material);
-			}
-		}
-	}
-
 	void Terrain::loadTerrainFromTexture(const std::string & fileName, float const& unitScale, float const& heightScale)
 	{
 		m_UnitScale = unitScale;

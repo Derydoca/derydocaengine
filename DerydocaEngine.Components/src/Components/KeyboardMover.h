@@ -26,7 +26,6 @@ namespace DerydocaEngine::Components
 		void init();
 		void update(const float deltaTime);
 
-		void deserialize(const YAML::Node& node);
 	private:
 		float m_MovementSpeed;
 		int m_KeyForward;

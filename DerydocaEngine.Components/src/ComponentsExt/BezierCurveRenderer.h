@@ -17,7 +17,6 @@ namespace DerydocaEngine::Ext
 		~BezierCurveRenderer();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 
 		Color& getColor() { return m_LineColor; }

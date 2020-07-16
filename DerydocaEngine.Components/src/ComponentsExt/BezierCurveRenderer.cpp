@@ -62,44 +62,6 @@ namespace DerydocaEngine::Ext
 		);
 	}
 
-	void BezierCurveRenderer::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node controlPointsNode = compNode["controlPoints"];
-		if (controlPointsNode)
-		{
-			for (size_t i = 0; i < 8; i++)
-			{
-				m_ControlPoints[i] = controlPointsNode[i].as<float>();
-			}
-		}
-
-		YAML::Node numSegmentsNode = compNode["numSegments"];
-		if (numSegmentsNode)
-		{
-			m_NumSegments = numSegmentsNode.as<int>();
-		}
-
-		YAML::Node numStripsNode = compNode["numStrips"];
-		if (numStripsNode)
-		{
-			m_NumStrips = numStripsNode.as<int>();
-		}
-
-		YAML::Node lineColorNode = compNode["lineColor"];
-		if (lineColorNode)
-		{
-			m_LineColor = lineColorNode.as<Color>();
-		}
-		else
-		{
-			m_LineColor = Color(1.0, 1.0, 1.0, 1.0);
-		}
-
-		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
-		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(m_Shader.As<Rendering::Shader>());
-	}
-
 	void BezierCurveRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		// Segments and strips may be inverted on NVIDIA

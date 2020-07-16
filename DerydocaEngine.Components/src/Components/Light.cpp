@@ -58,57 +58,6 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void Light::deserialize(const YAML::Node& node)
-	{
-		Color lightColor = node["color"].as<Color>();
-		setColor(&lightColor);
-
-		LightType type = (LightType)node["type"].as<int>();
-		setLightType(type);
-
-		YAML::Node spotlightExponentNode = node["spotlightExponent"];
-		if (spotlightExponentNode)
-		{
-			m_SpotlightExponent = spotlightExponentNode.as<float>();
-		}
-
-		YAML::Node spotlightCutoffNode = node["spotlightCutoff"];
-		if (spotlightCutoffNode)
-		{
-			m_SpotlightCutoff = spotlightCutoffNode.as<float>();
-		}
-
-		YAML::Node castShadowsNode = node["castShadows"];
-		if (castShadowsNode)
-		{
-			m_CastShadows = castShadowsNode.as<bool>();
-		}
-
-		YAML::Node shadowMapHeightNode = node["shadowMapHeight"];
-		if (shadowMapHeightNode)
-		{
-			m_ShadowMapSize.y = shadowMapHeightNode.as<int>();
-		}
-
-		YAML::Node shadowMapWidthNode = node["shadowMapWidth"];
-		if (shadowMapWidthNode)
-		{
-			m_ShadowMapSize.x = shadowMapWidthNode.as<int>();
-		}
-
-		YAML::Node shadowMapFilterTypeNode = node["shadowMapFilterType"];
-		if (shadowMapFilterTypeNode)
-		{
-			m_ShadowMapFilterType = (ShadowMapFilterType)shadowMapFilterTypeNode.as<int>();
-		}
-
-		YAML::Node shadowSoftnessNode = node["shadowSoftness"];
-		if (shadowSoftnessNode)
-		{
-			m_ShadowSoftness = shadowSoftnessNode.as<float>();
-		}
-	}
-
 	void Light::preDestroy()
 	{
 		auto sp = std::static_pointer_cast<Light>(shared_from_this());

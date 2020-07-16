@@ -39,51 +39,6 @@ namespace DerydocaEngine::Ext
 		generateNoiseTexture();
 	}
 
-	void NoiseTexture::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node widthNode = compNode["width"];
-		if (widthNode)
-		{
-			m_Size.x = widthNode.as<int>();
-		}
-
-		YAML::Node heightNode = compNode["height"];
-		if (heightNode)
-		{
-			m_Size.y = heightNode.as<int>();
-		}
-
-		YAML::Node textureNameNode = compNode["textureName"];
-		if (textureNameNode)
-		{
-			m_TextureName = textureNameNode.as<std::string>();
-		}
-
-		YAML::Node baseFrequencyNode = compNode["baseFrequency"];
-		if (baseFrequencyNode)
-		{
-			m_BaseFrequency = baseFrequencyNode.as<float>();
-		}
-
-		YAML::Node persistenceNode = compNode["persistence"];
-		if (persistenceNode)
-		{
-			m_Persistence = persistenceNode.as<float>();
-		}
-
-		YAML::Node periodicNode = compNode["periodic"];
-		if (periodicNode)
-		{
-			m_Periodic = periodicNode.as<bool>();
-		}
-
-		YAML::Node seamlessNode = compNode["seamless"];
-		if (seamlessNode)
-		{
-			m_Seamless = seamlessNode.as<bool>();
-		}
-	}
-
 	void NoiseTexture::generateNoiseTexture()
 	{
 		GLubyte* textureData = new GLubyte[m_Size.x * m_Size.y * 4];

@@ -18,15 +18,6 @@ namespace DerydocaEngine::Ext
 		updateMaterial();
 	}
 
-	void NightVisionFilter::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node radiusNode = compNode["radius"];
-		if (radiusNode)
-		{
-			m_Radius = radiusNode.as<float>();
-		}
-	}
-
 	void NightVisionFilter::update(const float deltaTime)
 	{
 		updateMaterial();

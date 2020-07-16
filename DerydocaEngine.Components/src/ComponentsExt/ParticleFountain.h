@@ -20,7 +20,6 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void update(const float deltaTime);
 		virtual void preRender();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 
 		float& getVelocityMin() { return m_VelocityMin; }

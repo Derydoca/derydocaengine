@@ -28,11 +28,6 @@ namespace DerydocaEngine::Components
 		getGameObject()->getTransform()->setEulerAngles(glm::vec3(0, m_Value, 0));
 	}
 
-	void Rotator::deserialize(const YAML::Node& node)
-	{
-		m_Speed = node["rotationSpeed"].as<float>();
-	}
-
 	SERIALIZE_FUNC_LOAD(archive, Rotator)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),

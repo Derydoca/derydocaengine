@@ -32,15 +32,6 @@ namespace DerydocaEngine::Ext
 		updateShader();
 	}
 
-	void EdgeDetectionFilter::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node edgeThresholdNode = compNode["edgeThreshold"];
-		if (edgeThresholdNode)
-		{
-			m_EdgeThreshold = edgeThresholdNode.as<float>();
-		}
-	}
-
 	void EdgeDetectionFilter::update(const float deltaTime)
 	{
 		updateShader();

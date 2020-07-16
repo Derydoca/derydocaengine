@@ -38,7 +38,6 @@ namespace DerydocaEngine::Components
 		std::shared_ptr<Rendering::Mesh> getMesh() { return m_Mesh.GetSmartPointer() != nullptr ? std::static_pointer_cast<Rendering::Mesh>(m_Mesh->getResourceObjectPointer()) : nullptr; }
 		std::shared_ptr<Resources::MeshResource> getMeshResource() { return m_Mesh.GetSmartPointer(); }
 
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void init();
 		virtual void preDestroy();
 

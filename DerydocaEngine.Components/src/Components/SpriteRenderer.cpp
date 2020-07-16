@@ -31,36 +31,6 @@ namespace DerydocaEngine::Components
 		}
 	}
 
-	void SpriteRenderer::deserialize(const YAML::Node& compNode)
-	{
-		m_SpriteSheet.Set(getResource<Resources::SpriteSheetResource>(compNode, "spriteSheet"));
-		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
-		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
-		auto material = std::make_shared<Rendering::Material>();
-		material->setShader(shader);
-		setMaterial(material);
-
-		YAML::Node sizeNode = compNode["size"];
-		if (sizeNode)
-		{
-			m_Size = sizeNode.as<glm::vec2>();
-		}
-
-		YAML::Node colorNode = compNode["color"];
-		if (colorNode)
-		{
-			m_Color = colorNode.as<Color>();
-		}
-
-		YAML::Node spriteIdNode = compNode["spriteId"];
-		if (spriteIdNode)
-		{
-			m_SpriteIndex = spriteIdNode.as<unsigned int>();
-			auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_SpriteSheet.GetSmartPointer()->getResourceObjectPointer());
-			m_Sprite = ss->getSpriteReference(m_SpriteIndex);
-		}
-	}
-
 	std::vector<glm::vec3> SpriteRenderer::generateVertices()
 	{
 		// Get the number of verts we will need for this mesh

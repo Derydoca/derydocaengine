@@ -189,32 +189,12 @@ namespace DerydocaEngine::Editor
 
 	std::shared_ptr<Scenes::SerializedScene> EditorRenderer::loadScene(const std::string& sceneId)
 	{
-		// TODO: Refactor code so it doesn't duplicate logic in SceneManager::LoadScene()
 		auto editorComponentsSceneResource = getSceneResource(sceneId, "editor components");
 		if (editorComponentsSceneResource != nullptr)
 		{
-			char temporarySerializationSwitch = ' ';
-			{
-				std::ifstream fs;
-				fs.open(editorComponentsSceneResource->getSourceFilePath());
-				std::string line;
-				std::getline(fs, line);
-				fs.close();
-				temporarySerializationSwitch = line[0];
-			}
-
-			auto scene = std::make_shared<Scenes::SerializedScene>();
-			if (temporarySerializationSwitch == 'S')
-			{
-				scene->LoadFromFile(editorComponentsSceneResource->getSourceFilePath());
-			}
-			else
-			{
-				std::string path = editorComponentsSceneResource->getSourceFilePath();
-				auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
-				scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
-			}
-			//scene->LoadFromFile(editorComponentsSceneResource->getSourceFilePath());
+			std::string path = editorComponentsSceneResource->getSourceFilePath();
+			auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
+			auto scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
 			scene->setUp();
 			scene->getRoot()->init();
 			scene->getRoot()->postInit();

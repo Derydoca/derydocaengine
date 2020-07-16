@@ -82,48 +82,6 @@ namespace DerydocaEngine::Ext
 		);
 	}
 
-	void ParticleSystem::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node numParticlesNode = compNode["numParticles"];
-		if (numParticlesNode)
-		{
-			m_NumParticles = numParticlesNode.as<int>();
-		}
-		else
-		{
-			m_NumParticles = 8;
-		}
-
-		YAML::Node volumeSizeNode = compNode["volumeSize"];
-		if (volumeSizeNode)
-		{
-			m_VolumeSize = volumeSizeNode.as<glm::vec3>();
-		}
-		else
-		{
-			m_VolumeSize = glm::vec3(1.0);
-		}
-
-		YAML::Node size2Node = compNode["size2"];
-		if (size2Node)
-		{
-			m_Size2 = size2Node.as<float>();
-		}
-		else
-		{
-			m_Size2 = 0.25f;
-		}
-
-		m_Texture.Set(getResource<Resources::TextureResource>(compNode, "texture"));
-
-		auto shaderResource = getResource<Resources::ShaderResource>(compNode, "shader");
-		m_Shader.Set(shaderResource);
-		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(GetShader());
-		m_Material->setFloat("Size2", m_Size2);
-		m_Material->setTexture("SpriteTex", GetTexture());
-	}
-
 	void ParticleSystem::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		glDisable(GL_DEPTH_TEST);

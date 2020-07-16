@@ -21,7 +21,6 @@ namespace DerydocaEngine::Components
 		~SpriteRenderer();
 
 		void postInit();
-		void deserialize(const YAML::Node& compNode);
 
 		Color getColor() const { return m_Color; }
 		void setColor(Color const& color) {

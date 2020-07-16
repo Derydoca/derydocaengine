@@ -15,7 +15,6 @@ namespace DerydocaEngine::Ext
 		~ShaderSubroutineSwitcher() {}
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 
 	private:
 		void setSubroutine(unsigned int const& program, std::string const& subroutineName);

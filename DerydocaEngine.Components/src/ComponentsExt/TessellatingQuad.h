@@ -16,7 +16,6 @@ namespace DerydocaEngine::Ext
 		~TessellatingQuad();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		virtual void update(const float deltaTime);
 

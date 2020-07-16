@@ -16,7 +16,6 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void update(const float deltaTime);
 		virtual void preRender();
-		virtual void deserialize(const YAML::Node& compNode);
 
 		float& getK() { return m_K; }
 		float& getVelocity() { return m_Velocity; }

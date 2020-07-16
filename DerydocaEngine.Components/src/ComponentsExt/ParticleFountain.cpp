@@ -79,44 +79,6 @@ namespace DerydocaEngine::Ext
 		);
 	}
 
-	void ParticleFountain::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node numParticlesNode = compNode["numParticles"];
-		if (numParticlesNode)
-		{
-			m_NumParticles = numParticlesNode.as<int>();
-		}
-
-		YAML::Node velocityMaxNode = compNode["velocityMax"];
-		if (velocityMaxNode)
-		{
-			m_VelocityMax = velocityMaxNode.as<float>();
-		}
-
-		YAML::Node velocityMinNode = compNode["velocityMin"];
-		if (velocityMinNode)
-		{
-			m_VelocityMin = velocityMinNode.as<float>();
-		}
-
-		YAML::Node angleNode = compNode["angle"];
-		if (angleNode)
-		{
-			m_Angle = angleNode.as<float>();
-		}
-
-		m_Shader.Set(getResource<Resources::ShaderResource>(compNode, "shader"));
-		auto shader = m_Shader.As<Rendering::Shader>();
-		assert(shader);
-		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(shader);
-		m_Material->setFloat("ParticleLifetime", m_Lifetime);
-
-		m_Texture.Set(getResource<Resources::TextureResource>(compNode, "texture"));
-		auto texture = m_Texture.As<Rendering::Texture>();
-		m_Material->setTexture("ParticleTex", texture);
-	}
-
 	void ParticleFountain::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
 		glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);

@@ -48,27 +48,6 @@ namespace DerydocaEngine::Ext
 		m_Material->setFloat("Time", m_Time);
 	}
 
-	void WaveDisplacement::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node kNode = compNode["k"];
-		if (kNode)
-		{
-			m_K = kNode.as<float>();
-		}
-
-		YAML::Node velocityNode = compNode["velocity"];
-		if (velocityNode)
-		{
-			m_Velocity = velocityNode.as<float>();
-		}
-
-		YAML::Node amplitudeNode = compNode["amplitude"];
-		if (amplitudeNode)
-		{
-			m_Amplitude = amplitudeNode.as<float>();
-		}
-	}
-
 	SERIALIZE_FUNC_LOAD(archive, WaveDisplacement)
 	{
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
