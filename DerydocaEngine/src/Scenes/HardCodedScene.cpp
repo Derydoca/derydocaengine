@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "HardCodedScene.h"
+#include "GameObject.h"
 
 DerydocaEngine::Scenes::HardCodedScene::HardCodedScene()
 {

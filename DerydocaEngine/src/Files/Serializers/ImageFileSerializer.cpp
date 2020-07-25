@@ -4,18 +4,6 @@
 
 namespace DerydocaEngine::Files::Serializers {
 
-	YAML::Node ImageFileSerializer::generateResourceNodes(std::string const& filePath)
-	{
-		YAML::Node resources;
-
-		YAML::Node materialResource;
-		materialResource["ID"] = generateUuid();
-
-		resources.push_back(materialResource);
-
-		return resources;
-	}
-
 	std::vector<std::shared_ptr<Resources::Resource>> ImageFileSerializer::generateResources(const std::string& assetPath)
 	{
 		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();

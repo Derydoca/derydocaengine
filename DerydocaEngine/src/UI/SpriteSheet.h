@@ -16,7 +16,6 @@ namespace DerydocaEngine::UI
 
 		void updateTexture();
 		void addSprite(std::string const& textureId);
-		void saveToDisk(const std::string& filePath);
 		void LoadFromDisk(std::string const& filePath);
 		void LoadFromSerializedFile(const std::string& filePath);
 		void SaveToSerializedFile(const std::string& filePath);

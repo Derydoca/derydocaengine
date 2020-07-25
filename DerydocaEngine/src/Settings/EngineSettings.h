@@ -1,11 +1,9 @@
 #pragma once
-#include "yaml-cpp\yaml.h"
 #include <assert.h>
 #include <boost\filesystem.hpp>
 #include <boost\uuid\uuid.hpp>
 #include <string>
 #include "glm/glm.hpp"
-#include "Helpers\YamlTools.h"
 #include "Components\Camera.h"
 
 namespace DerydocaEngine::Settings

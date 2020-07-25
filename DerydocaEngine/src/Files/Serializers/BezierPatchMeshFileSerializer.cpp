@@ -4,18 +4,6 @@
 
 namespace DerydocaEngine::Files::Serializers {
 
-	YAML::Node BezierPatchMeshFileSerializer::generateResourceNodes(std::string const& filePath)
-	{
-		YAML::Node resources;
-
-		YAML::Node bezierPatchMeshResource;
-		bezierPatchMeshResource["ID"] = generateUuid();
-
-		resources.push_back(bezierPatchMeshResource);
-
-		return resources;
-	}
-
 	std::vector<std::shared_ptr<Resources::Resource>> BezierPatchMeshFileSerializer::generateResources(const std::string& assetPath)
 	{
 		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();

@@ -4,8 +4,6 @@
 #include "Resources\ShaderResource.h"
 #include "Resources\TextureResource.h"
 
-class YAML::Node;
-
 namespace DerydocaEngine::Ext
 {
 

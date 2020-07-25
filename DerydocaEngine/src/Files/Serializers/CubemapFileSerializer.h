@@ -9,7 +9,6 @@ namespace DerydocaEngine::Files::Serializers {
 		CubemapSerializer() {}
 		~CubemapSerializer() {}
 
-		YAML::Node generateResourceNodes(std::string const& filePath);
 		virtual std::vector<std::shared_ptr<Resources::Resource>> generateResources(const std::string& assetPath);
 		virtual Files::FileType getFileType();
 	};

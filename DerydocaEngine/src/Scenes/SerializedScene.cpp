@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include "ObjectLibrary.h"
-#include "Helpers\YamlTools.h"
 #include "Components\GameComponentFactory.h"
 #include <iostream>
 #include "Components\GameComponent.h"

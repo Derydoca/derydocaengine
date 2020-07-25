@@ -3,7 +3,6 @@
 
 #include "Rendering\Material.h"
 #include "Utilities\TexturePackerImage.h"
-#include "Helpers\YamlTools.h"
 
 namespace DerydocaEngine::Components
 {

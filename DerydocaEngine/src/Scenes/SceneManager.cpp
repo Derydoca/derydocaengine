@@ -3,6 +3,7 @@
 #include "SerializedScene.h"
 #include "ObjectLibrary.h"
 #include "Files\FileUtils.h"
+#include "GameObject.h"
 
 namespace DerydocaEngine::Scenes
 {

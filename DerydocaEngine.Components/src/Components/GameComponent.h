@@ -7,7 +7,6 @@
 #include "Components\GameComponentFactory.h"
 #include "GameObject.h"
 #include "ObjectLibrary.h"
-#include "Helpers\YamlTools.h"
 #include "TypeNameLookup.h"
 
 struct Resource;
@@ -126,49 +125,9 @@ namespace DerydocaEngine::Components
 		);
 
 	protected:
-		inline std::shared_ptr<Resources::Resource> getResource(const YAML::Node& node, const std::string& resourceName)
-		{
-			YAML::Node resourceNode = node[resourceName];
-
-			if (resourceNode == nullptr)
-			{
-				return nullptr;
-			}
-
-			boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
-			auto resource = ObjectLibrary::getInstance().getResource(id);
-			return resource;
-		}
-
-		template<typename T>
-		inline std::shared_ptr<T> getResource(const YAML::Node& node, const std::string& resourceName)
-		{
-			auto r = getResource(node, resourceName);
-			return std::static_pointer_cast<T>(r);
-		}
-
 		template<typename T>
 		inline std::shared_ptr<T> getResourcePointer(const boost::uuids::uuid& resourceId)
 		{
-			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
-		}
-
-		template<typename T>
-		inline std::shared_ptr<T> getResourcePointer(const YAML::Node& node, const std::string& resourceName)
-		{
-			YAML::Node resourceIdNode = node[resourceName];
-			if (resourceIdNode == nullptr || !resourceIdNode.IsScalar())
-			{
-				return nullptr;
-			}
-
-			boost::uuids::uuid resourceId = resourceIdNode.as<boost::uuids::uuid>();
-			if (resourceId.is_nil())
-			{
-				D_LOG_ERROR("Invalid resource ID");
-				return nullptr;
-			}
-
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
 		}
 

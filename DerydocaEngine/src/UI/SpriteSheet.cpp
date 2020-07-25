@@ -1,8 +1,6 @@
 #include "EnginePch.h"
 #include "UI\Spritesheet.h"
 #include "ObjectLibrary.h"
-#include "Helpers\YamlTools.h"
-#include <yaml-cpp\yaml.h>
 #include <boost\lexical_cast.hpp>
 #include <fstream>
 #include "Files\FileUtils.h"
@@ -72,111 +70,6 @@ namespace DerydocaEngine::UI
 		sprite.textureId = textureId;
 		sprite.type = SpriteType::Sprite;
 		m_sprites[m_largestId] = sprite;
-	}
-
-	void SpriteSheet::saveToDisk(const std::string& filePath)
-	{
-		//auto textureId = ObjectLibrary::getInstance().assetPathToId(imageFileName);
-		//AssetData::SpriteSheetData data("Engine Sprites", );
-		
-		//TODO: Replace YAML
-		//// Save the image to disk and process it by the object library
-		//std::string imageFileName = filePath + ".tga";
-		//stbi_write_tga(imageFileName.c_str(), m_texture->getWidth(), m_texture->getHeight(), 4, m_imageBuffer);
-		//ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
-		//auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
-
-		//// Create the root and add all root level data
-		//YAML::Node root = YAML::Node();
-		//YAML::Node spriteSheetNode = root["SpriteSheet"];
-		//spriteSheetNode["Texture"] = boost::lexical_cast<std::string>(imageResource->getId());
-
-		//// Add all sprite data to a parent "Sprites" node
-		//YAML::Node spritesNode = spriteSheetNode["Sprites"];
-		//for (auto sprite : m_sprites)
-		//{
-		//	// Create the sprite node
-		//	YAML::Node spriteNode;
-		//	Rect tex = sprite.second.getTexPosition();
-		//	spriteNode["Id"] = sprite.second.getId();
-		//	spriteNode["Texture"] = sprite.second.getTextureId();
-		//	spriteNode["Width"] = sprite.second.getWidth();
-		//	spriteNode["Height"] = sprite.second.getHeight();
-		//	spriteNode["TexX"] = tex.getX();
-		//	spriteNode["TexY"] = tex.getY();
-		//	spriteNode["TexDX"] = tex.getDX();
-		//	spriteNode["TexDY"] = tex.getDY();
-		//	spriteNode["Type"] = (int)sprite.second.getType();
-		//	spriteNode["SliceTop"] = sprite.second.getSliceTop();
-		//	spriteNode["SliceRight"] = sprite.second.getSliceRight();
-		//	spriteNode["SliceBottom"] = sprite.second.getSliceBottom();
-		//	spriteNode["SliceLeft"] = sprite.second.getSliceLeft();
-
-		//	// Add this sprite to the parent node
-		//	spritesNode.push_back(spriteNode);
-		//}
-
-		//// Write this to disk
-		//YAML::Emitter out;
-		//out.SetIndent(2);
-		//out.SetMapFormat(YAML::Block);
-		//out << root;
-		//std::ofstream file;
-		//file.open(filePath);
-		//file << out.c_str();
-		//file.close();
-	}
-
-	void SpriteSheet::LoadFromDisk(std::string const& filePath)
-	{
-		YAML::Node file = YAML::LoadFile(filePath);
-		YAML::Node spriteSheetNode = file["SpriteSheet"];
-
-		bool hasBeenProcessed = spriteSheetNode["Texture"];
-
-		if (hasBeenProcessed)
-		{
-			std::string textureUuid = spriteSheetNode["Texture"].as<std::string>();
-			auto r = ObjectLibrary::getInstance().getResource(textureUuid);
-			int imgw, imgh, imgch;
-			m_imageBuffer = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
-			m_texture->updateBuffer(m_imageBuffer, imgw, imgh, imgch, nullptr);
-		}
-
-		// Add all sprite data to a parent "Sprites" node
-		int nextId = 0;
-		YAML::Node spritesNode = spriteSheetNode["Sprites"];
-		for (size_t i = 0; i < spritesNode.size(); i++)
-		{
-			YAML::Node spriteNode = spritesNode[i];
-
-			int spriteId = hasBeenProcessed ? spriteNode["Id"].as<int>() : ++nextId;
-
-			SpriteReference sprite = SpriteReference(spriteId);
-			sprite.textureId = spriteNode["Texture"].as<std::string>();
-			if (hasBeenProcessed)
-			{
-				sprite.size = { spriteNode["Width"].as<int>(), spriteNode["Height"].as<int>() };
-				sprite.texPosition.set(
-					spriteNode["TexX"].as<float>(),
-					spriteNode["TexY"].as<float>(),
-					spriteNode["TexDX"].as<float>(),
-					spriteNode["TexDY"].as<float>()
-				);
-				int typeId = spriteNode["Type"].as<int>();
-				sprite.type = (SpriteType)typeId;
-				sprite.slice = {
-					spriteNode["SliceTop"].as<float>(),
-					spriteNode["SliceRight"].as<float>(),
-					spriteNode["SliceBottom"].as<float>(),
-					spriteNode["SliceLeft"].as<float>()
-				};
-			}
-
-			// Add this sprite to the parent node
-			m_sprites[spriteId] = sprite;
-		}
-
 	}
 
     void SpriteSheet::LoadFromSerializedFile(const std::string& filePath)

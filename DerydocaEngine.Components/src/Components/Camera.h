@@ -9,6 +9,7 @@
 #include "Resources\ShaderResource.h"
 #include "Resources\TextureResource.h"
 #include "Resources\MaterialResource.h"
+#include "Rectangle.h"
 
 namespace DerydocaEngine::Rendering {
 	class Display;

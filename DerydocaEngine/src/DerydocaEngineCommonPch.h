@@ -42,9 +42,6 @@
 // Dear IMGUI
 #include <vendor/imgui/imgui.h>
 
-// YAML-CPP
-#include <yaml-cpp/yaml.h>
-
 // STD Methods
 #include <algorithm>
 #include <assert.h>

@@ -1,6 +1,5 @@
 #pragma once
 #include "Scenes\Scene.h"
-#include "Scenes\SceneObject.h"
 
 namespace DerydocaEngine::Scenes
 {

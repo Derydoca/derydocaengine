@@ -3,6 +3,7 @@
 #include "glm\glm.hpp"
 #include "Rendering\Material.h"
 #include "Resources\ShaderResource.h"
+#include "Color.h"
 
 namespace DerydocaEngine::Ext
 {

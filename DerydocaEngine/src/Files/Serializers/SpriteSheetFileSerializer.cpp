@@ -4,18 +4,6 @@
 
 namespace DerydocaEngine::Files::Serializers {
 
-	YAML::Node SpriteSheetFileSerializer::generateResourceNodes(std::string const& filePath)
-	{
-		YAML::Node resources;
-
-		YAML::Node spriteSheetResource;
-		spriteSheetResource["ID"] = generateUuid();
-
-		resources.push_back(spriteSheetResource);
-
-		return resources;
-	}
-
 	std::vector<std::shared_ptr<Resources::Resource>> SpriteSheetFileSerializer::generateResources(const std::string& assetPath)
 	{
 		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();
