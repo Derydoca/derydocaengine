@@ -43,10 +43,6 @@ namespace DerydocaEngine
             {
                 m_Resource = DerydocaEngine::ObjectLibrary::getInstance().getResource<ResourceType>(value);
             }
-            else
-            {
-                D_LOG_WARN("A ResourceRef object was created without a valid ID");
-            }
         }
 
         template <class AssetType>

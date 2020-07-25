@@ -6,9 +6,15 @@
 
 namespace DerydocaEngine
 {
-    GameObject::GameObject()
+    GameObject::GameObject() :
+		Object(),
+		m_Name(),
+		m_Transform(std::make_shared<Components::Transform>()),
+		m_Parent(),
+		m_Children(),
+		m_Components(),
+		m_DestroyFlag(false)
     {
-		D_LOG_WARN("The GameObject default constructor is not fully implemented yet.");
     }
 
     GameObject::GameObject(const std::string& name) :
