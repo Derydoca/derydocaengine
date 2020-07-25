@@ -48,7 +48,7 @@ namespace DerydocaEngine::Ext
 		);
 
 		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(m_Shader.As<Rendering::Shader>());
+		m_Material->setShader(m_Shader);
 	}
 
 	SERIALIZE_FUNC_SAVE(archive, BezierCurveRenderer)

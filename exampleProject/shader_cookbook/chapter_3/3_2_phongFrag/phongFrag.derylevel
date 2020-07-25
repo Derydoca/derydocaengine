@@ -97,21 +97,6 @@
                                                     "m_Speed": 30.0
                                                 }
                                             }
-                                        },
-                                        {
-                                            "polymorphic_id": 2147483651,
-                                            "polymorphic_name": "DerydocaEngine::Components::MaterialRefresher",
-                                            "ptr_wrapper": {
-                                                "id": 2147483655,
-                                                "data": {
-                                                    "cereal_class_version": 0,
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "2b16c5ce-de16-49eb-9cb6-3c052ffd566e"
-                                                        }
-                                                    }
-                                                }
-                                            }
                                         }
                                     ]
                                 }
@@ -162,19 +147,6 @@
                                                     "m_Mesh": "cdadf7f6-536c-4765-9d6d-08a15c8e54c5",
                                                     "m_Material": "4e263193-5c65-44c3-940c-fce2f9041fb2",
                                                     "m_Transparent": false
-                                                }
-                                            }
-                                        },
-                                        {
-                                            "polymorphic_id": 3,
-                                            "ptr_wrapper": {
-                                                "id": 2147483659,
-                                                "data": {
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "72e1ef5a-24b6-40b2-b2d1-cafed6f8cbbb"
-                                                        }
-                                                    }
                                                 }
                                             }
                                         }

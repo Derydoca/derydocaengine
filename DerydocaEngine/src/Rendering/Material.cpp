@@ -30,7 +30,7 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	void Material::setShader(std::shared_ptr<Shader> shader)
+	void Material::setShader(std::shared_ptr<Resources::ShaderResource> shader)
 	{
 		if (!shader)
 		{
@@ -38,9 +38,30 @@ namespace DerydocaEngine::Rendering
 			m_shader = Rendering::ShaderLibrary::getInstance().getErrorShader();
 			return;
 		}
-		else if (!shader->isValid())
+
+		auto shaderReference = std::static_pointer_cast<Rendering::Shader>(shader->getResourceObjectPointer());
+		if (!shaderReference->isValid())
 		{
-			D_LOG_ERROR("Unable to set a shader because it is invalid.\nVert:{}\nFrag:{}", shader->GetVertexShaderPath(), shader->GetFragmentShaderPath());
+			D_LOG_ERROR("Unable to set a shader because it is invalid.\nVert:{}\nFrag:{}", shaderReference->GetVertexShaderPath(), shaderReference->GetFragmentShaderPath());
+			m_shader = Rendering::ShaderLibrary::getInstance().getErrorShader();
+			return;
+		}
+		m_shader.Set(shader);
+	}
+
+	void Material::setShader(ResourceRef<Resources::ShaderResource> shader)
+	{
+		if (!shader)
+		{
+			D_LOG_ERROR("Unable to set a shader because the shader reference is null.");
+			m_shader = Rendering::ShaderLibrary::getInstance().getErrorShader();
+			return;
+		}
+
+		auto shaderReference = shader.As<Rendering::Shader>();
+		if (!shaderReference->isValid())
+		{
+			D_LOG_ERROR("Unable to set a shader because it is invalid.\nVert:{}\nFrag:{}", shaderReference->GetVertexShaderPath(), shaderReference->GetFragmentShaderPath());
 			m_shader = Rendering::ShaderLibrary::getInstance().getErrorShader();
 			return;
 		}
@@ -51,64 +72,66 @@ namespace DerydocaEngine::Rendering
 	{
 		assert(m_shader);
 
+		auto shader = m_shader.As<Rendering::Shader>();
+
 		// TODO: Remove this texture binding method
-		m_shader->bind();
+		shader->bind();
 		if (m_texture != NULL)
 		{
-			m_texture->bind(0);
+			m_texture.As<Rendering::Texture>()->bind(0);
 		}
 
 		{
 			int texIndex = 0;
 			for (auto const& x : m_textures)
 			{
-				m_shader->setTexture(x.first, texIndex++, x.second);
+				shader->setTexture(x.first, texIndex++, x.second.As<Rendering::Texture>());
 			}
 		}
 
 		for (auto const& x : m_floatValues)
 		{
-			m_shader->setFloat(x.first, x.second);
+			shader->setFloat(x.first, x.second);
 		}
 
 		for (auto const& x : m_floatArrayValues)
 		{
-			m_shader->setFloatArray(x.first, x.second);
+			shader->setFloatArray(x.first, x.second);
 		}
 
 		for (auto const& x : m_intValues)
 		{
-			m_shader->setInt(x.first, x.second);
+			shader->setInt(x.first, x.second);
 		}
 
 		for (auto const& x : m_vec3Values)
 		{
-			m_shader->setVec3(x.first, x.second);
+			shader->setVec3(x.first, x.second);
 		}
 
 		for (auto const& x : m_vec4Values)
 		{
-			m_shader->setVec4(x.first, x.second);
+			shader->setVec4(x.first, x.second);
 		}
 
 		for (auto const& x : m_mat3Values)
 		{
-			m_shader->setMat3(x.first, x.second);
+			shader->setMat3(x.first, x.second);
 		}
 
 		for (auto const& x : m_mat4Values)
 		{
-			m_shader->setMat4(x.first, x.second);
+			shader->setMat4(x.first, x.second);
 		}
 
 		for (auto const& x : m_mat4ArrayValues)
 		{
-			m_shader->setMat4Array(x.first, x.second);
+			shader->setMat4Array(x.first, x.second);
 		}
 
 		for (auto const& x : m_subroutineValues)
 		{
-			m_shader->setSubroutine(x.first, x.second);
+			shader->setSubroutine(x.first, x.second);
 		}
 
 	}
@@ -134,42 +157,44 @@ namespace DerydocaEngine::Rendering
 	{
 		assert(m_shader);
 
+		auto shader = m_shader.As<Rendering::Shader>();
+
 		{
 			int texIndex = 0;
 			for (auto const& x : m_textures)
 			{
-				m_shader->clearTexture(x.first, texIndex++, x.second->getTextureType());
+				shader->clearTexture(x.first, texIndex++, x.second.As<Rendering::Texture>()->getTextureType());
 			}
 		}
 
 		for (auto const& x : m_floatValues)
 		{
-			m_shader->clearFloat(x.first);
+			shader->clearFloat(x.first);
 		}
 
 		for (auto const& x : m_intValues)
 		{
-			m_shader->clearInt(x.first);
+			shader->clearInt(x.first);
 		}
 
 		for (auto const& x : m_vec3Values)
 		{
-			m_shader->clearVec3(x.first);
+			shader->clearVec3(x.first);
 		}
 
 		for (auto const& x : m_vec4Values)
 		{
-			m_shader->clearVec4(x.first);
+			shader->clearVec4(x.first);
 		}
 
 		for (auto const& x : m_mat3Values)
 		{
-			m_shader->clearMat3(x.first);
+			shader->clearMat3(x.first);
 		}
 
 		for (auto const& x : m_mat4Values)
 		{
-			m_shader->clearMat4(x.first);
+			shader->clearMat4(x.first);
 		}
 	}
 
@@ -223,12 +248,19 @@ namespace DerydocaEngine::Rendering
 		m_subroutineValues[program] = value;
 	}
 
-	void Material::setTexture(const std::string& name, std::shared_ptr<Texture> texture)
+	void Material::setTexture(const std::string& name, std::shared_ptr<Rendering::Texture> texture)
+	{
+		auto res = std::make_shared<Resources::TextureResource>();
+		res->setData(texture);
+		m_textures[name] = res;
+	}
+
+	void Material::setTexture(const std::string& name, ResourceRef<Resources::TextureResource> texture)
 	{
 		m_textures[name] = texture;
 	}
 
-	void Material::setTextureSlot(int const& slot, std::shared_ptr<Texture> texture)
+	void Material::setTextureSlot(int const& slot, ResourceRef<Resources::TextureResource> texture)
 	{
 		m_texture = texture;
 	}
@@ -300,7 +332,7 @@ namespace DerydocaEngine::Rendering
 
 	bool Material::textureSlotExists(int slot)
 	{
-		return m_texture != nullptr;
+		return m_texture.As<Rendering::Texture>() != nullptr;
 	}
 
 	bool Material::vec3Exists(const std::string& name)
@@ -443,7 +475,7 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	std::shared_ptr<Texture> Material::getTexture(const std::string& name)
+	ResourceRef<Resources::TextureResource> Material::getTexture(const std::string& name)
 	{
 		auto it = m_textures.find(name);
 		if (it == m_textures.end())
@@ -456,7 +488,7 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	std::shared_ptr<Texture> Material::getTextureSlot(int slot)
+	ResourceRef<Resources::TextureResource> Material::getTextureSlot(int slot)
 	{
 		return m_texture;
 	}
@@ -486,5 +518,33 @@ namespace DerydocaEngine::Rendering
 			return (*it).second;
 		}
 	}
+
+    AssetData::MaterialData Material::ToData() const
+    {
+		auto data = AssetData::MaterialData();
+
+		if (m_shader && m_shader.As<Shader>()->isValid())
+		{
+			data.ShaderId = m_shader->getId();
+		}
+
+		for (auto texture : m_textures)
+		{
+			data.Textures.push_back(AssetData::MaterialPropertyData<ResourceRef<Resources::TextureResource>>(texture.first, texture.second));
+		}
+
+		for (auto prop : m_boolValues) data.Bools.push_back(AssetData::MaterialPropertyData<bool>(prop.first, prop.second));
+		for (auto prop : m_intValues) data.Ints.push_back(AssetData::MaterialPropertyData<int>(prop.first, prop.second));
+		for (auto prop : m_floatValues) data.Floats.push_back(AssetData::MaterialPropertyData<float>(prop.first, prop.second));
+		for (auto prop : m_floatArrayValues) data.FloatArrays.push_back(AssetData::MaterialPropertyData<std::vector<float>>(prop.first, prop.second));
+		for (auto prop : m_vec3Values) data.Float3s.push_back(AssetData::MaterialPropertyData<glm::vec3>(prop.first, prop.second));
+		for (auto prop : m_vec4Values) data.Float4s.push_back(AssetData::MaterialPropertyData<glm::vec4>(prop.first, prop.second));
+		for (auto prop : m_mat3Values) data.Float3x3s.push_back(AssetData::MaterialPropertyData<glm::mat3>(prop.first, prop.second));
+		for (auto prop : m_mat4Values) data.Float4x4s.push_back(AssetData::MaterialPropertyData<glm::mat4>(prop.first, prop.second));
+		for (auto prop : m_mat4ArrayValues) data.Float4x4Arrays.push_back(AssetData::MaterialPropertyData<std::vector<glm::mat4>>(prop.first, prop.second));
+		for (auto prop : m_subroutineValues) data.SubroutineValues.push_back(AssetData::SubroutineMap(prop.first, prop.second));
+
+		return data;
+    }
 
 }

@@ -97,21 +97,6 @@
                                                     "m_Speed": 30.0
                                                 }
                                             }
-                                        },
-                                        {
-                                            "polymorphic_id": 2147483651,
-                                            "polymorphic_name": "DerydocaEngine::Components::MaterialRefresher",
-                                            "ptr_wrapper": {
-                                                "id": 2147483655,
-                                                "data": {
-                                                    "cereal_class_version": 0,
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "7ce5e910-d09a-49dd-9b1a-3466e305f121"
-                                                        }
-                                                    }
-                                                }
-                                            }
                                         }
                                     ]
                                 }
@@ -178,19 +163,6 @@
                                                     "m_Speed": 30.0
                                                 }
                                             }
-                                        },
-                                        {
-                                            "polymorphic_id": 3,
-                                            "ptr_wrapper": {
-                                                "id": 2147483660,
-                                                "data": {
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "50f01030-09ca-4670-bdce-6f147ea40bdd"
-                                                        }
-                                                    }
-                                                }
-                                            }
                                         }
                                     ]
                                 }
@@ -255,19 +227,6 @@
                                                         }
                                                     },
                                                     "m_Speed": 30.0
-                                                }
-                                            }
-                                        },
-                                        {
-                                            "polymorphic_id": 3,
-                                            "ptr_wrapper": {
-                                                "id": 2147483665,
-                                                "data": {
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "2e9e79d8-7e38-452c-9e0d-3a4c3051a469"
-                                                        }
-                                                    }
                                                 }
                                             }
                                         }

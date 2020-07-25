@@ -66,7 +66,7 @@ namespace DerydocaEngine::Ext
 		);
 
 		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(GetShader());
+		m_Material->setShader(m_Shader);
 		m_Material->setFloat("Size2", m_Size2);
 		m_Material->setTexture("SpriteTex", GetTexture());
 	}

@@ -97,21 +97,6 @@
                                                     "m_Speed": 30.0
                                                 }
                                             }
-                                        },
-                                        {
-                                            "polymorphic_id": 2147483651,
-                                            "polymorphic_name": "DerydocaEngine::Components::MaterialRefresher",
-                                            "ptr_wrapper": {
-                                                "id": 2147483655,
-                                                "data": {
-                                                    "cereal_class_version": 0,
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "41b2aa90-fd06-4aa7-99cb-fb11c21fec88"
-                                                        }
-                                                    }
-                                                }
-                                            }
                                         }
                                     ]
                                 }

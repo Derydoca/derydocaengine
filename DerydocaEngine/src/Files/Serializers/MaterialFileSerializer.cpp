@@ -23,37 +23,6 @@ namespace DerydocaEngine::Files::Serializers {
 
 		resources.push_back(materialResource);
 
-		// Load the yaml file
-		YAML::Node root = YAML::LoadFile(filePath);
-
-		// Open the material parameters node
-		YAML::Node materialParamNode = root["MaterialParameters"];
-		if (materialParamNode && materialParamNode.IsSequence())
-		{
-			// Iterate through each parameter
-			for (unsigned int i = 0; i < materialParamNode.size(); i++)
-			{
-				// Get the type of the parameter
-				YAML::Node parameterTypeNode = materialParamNode[i]["Type"];
-				if (!parameterTypeNode || !parameterTypeNode.IsScalar())
-				{
-					continue;
-				}
-				std::string parameterType = parameterTypeNode.as<std::string>();
-
-				// If it is a cubemap, then create a cubemap resource
-				if (parameterType == "Cubemap")
-				{
-					YAML::Node cubemapResource;
-					cubemapResource["Type"] = "Cubemap";
-					cubemapResource["Slot"] = i;
-					cubemapResource["ID"] = generateUuid();
-
-					resources.push_back(cubemapResource);
-				}
-			}
-		}
-
 		return resources;
 	}
 
@@ -83,20 +52,6 @@ namespace DerydocaEngine::Files::Serializers {
 						continue;
 					}
 					std::string parameterType = parameterTypeNode.as<std::string>();
-
-					// If it is a cubemap, then create a cubemap resource
-					if (parameterType == "Cubemap")
-					{
-						// TODO: Make this work with Cereal
-						/*
-						YAML::Node cubemapResource;
-						cubemapResource["Type"] = "Cubemap";
-						cubemapResource["Slot"] = i;
-						cubemapResource["ID"] = generateUuid();
-
-						resources.push_back(cubemapResource);
-						*/
-					}
 				}
 			}
 		}

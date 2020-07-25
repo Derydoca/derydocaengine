@@ -6,6 +6,9 @@
 #include <glm\vec4.hpp>
 #include <memory>
 #include <vector>
+#include "Resources\ShaderResource.h"
+#include "AssetData\MaterialData.h"
+#include "Resources\TextureResource.h"
 
 namespace DerydocaEngine
 {
@@ -26,8 +29,9 @@ namespace DerydocaEngine::Rendering
 		Material();
 		~Material();
 
-		void setShader(std::shared_ptr<Shader> shader);
-		inline std::shared_ptr<Rendering::Shader> getShader() const { return m_shader; }
+		void setShader(std::shared_ptr<Resources::ShaderResource> shader);
+		void setShader(ResourceRef<Resources::ShaderResource> shader);
+		inline std::shared_ptr<Rendering::Shader> getShader() const { return m_shader.As<Rendering::Shader>(); }
 		
 		void bind() const;
 		void copyFrom(std::shared_ptr<Material> other);
@@ -43,8 +47,9 @@ namespace DerydocaEngine::Rendering
 		void setMat4(const std::string& name, glm::mat4 const& value);
 		void setMat4Array(const std::string& name, std::vector<glm::mat4> matrixArray);
 		void setSubroutine(unsigned int program, unsigned int value);
-		void setTexture(const std::string& name, std::shared_ptr<Texture> texture);
-		void setTextureSlot(int const& slot, std::shared_ptr<Texture> texture);
+		void setTexture(const std::string& name, std::shared_ptr<Rendering::Texture> texture);
+		void setTexture(const std::string& name, ResourceRef<Resources::TextureResource> texture);
+		void setTextureSlot(int const& slot, ResourceRef<Resources::TextureResource> texture);
 		void setVec3(const std::string& name, glm::vec3 const& value);
 		void setVec4(const std::string& name, glm::vec4 const& value);
 
@@ -73,18 +78,20 @@ namespace DerydocaEngine::Rendering
 		glm::mat4 getMat4(const std::string& name);
 		std::vector<glm::mat4> getMat4Array(const std::string& name);
 		unsigned int getSubroutineValue(unsigned int program);
-		std::shared_ptr<Texture> getTexture(const std::string& name);
-		std::shared_ptr<Texture> getTextureSlot(int slot);
+		ResourceRef<Resources::TextureResource> getTexture(const std::string& name);
+		ResourceRef<Resources::TextureResource> getTextureSlot(int slot);
 		glm::vec3 getVec3(const std::string& name);
 		glm::vec4 getVec4(const std::string& name);
+
+		AssetData::MaterialData ToData() const;
 		
 	private:
-		std::shared_ptr<Shader> m_shader;
+		ResourceRef<Resources::ShaderResource> m_shader;
 		// TODO: Replace this with a BST for multiple textures
-		std::shared_ptr<Texture> m_texture;
+		ResourceRef<Resources::TextureResource> m_texture;
 		std::map<std::string, bool> m_boolValues;
 		std::map<std::string, int> m_intValues;
-		std::map<std::string, std::shared_ptr<Texture>> m_textures;
+		std::map<std::string, ResourceRef<Resources::TextureResource>> m_textures;
 		std::map<std::string, float> m_floatValues;
 		std::map<std::string, std::vector<float>> m_floatArrayValues;
 		std::map<std::string, glm::vec3> m_vec3Values;

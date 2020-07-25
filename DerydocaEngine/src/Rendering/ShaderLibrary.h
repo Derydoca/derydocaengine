@@ -2,6 +2,7 @@
 #include <boost/uuid/uuid.hpp>
 #include <map>
 #include <string>
+#include "Resources\ShaderResource.h"
 
 namespace DerydocaEngine::Rendering {
 	class Shader;
@@ -23,9 +24,10 @@ namespace DerydocaEngine::Rendering
 		}
 		void operator=(ShaderLibrary const&) = delete;
 
+		std::shared_ptr<Resources::ShaderResource> findResource(const boost::uuids::uuid& shaderId);
 		std::shared_ptr<Shader> find(const boost::uuids::uuid& shaderId);
 		std::shared_ptr<Shader> find(const std::string& shaderPath);
-		std::shared_ptr<Shader> getErrorShader() const { return m_errorShader; }
+		ResourceRef<Resources::ShaderResource> getErrorShader() const { return m_errorShader; }
 		void initialize();
 
 		void registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid);
@@ -36,7 +38,7 @@ namespace DerydocaEngine::Rendering
 
 		shaderMap m_shaders;
 		shaderPathMap m_shaderPaths;
-		std::shared_ptr<Shader> m_errorShader;
+		ResourceRef<Resources::ShaderResource> m_errorShader;
 	};
 
 }

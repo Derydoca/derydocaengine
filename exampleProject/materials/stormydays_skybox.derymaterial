@@ -1,6 +1,19 @@
-Shader: bef58587-98d5-4351-9a78-07f6d1f93a87
-MaterialParameters:
-  - Type: Texture
-    Slot: 0
-    Name: cubeMap
-    ID: 1992fb25-4511-45e2-b944-6a153fead285
+{
+    "ShaderId": "bef58587-98d5-4351-9a78-07f6d1f93a87",
+    "Textures": [
+        {
+            "Name": "cubeMap",
+            "Value": "1992fb25-4511-45e2-b944-6a153fead285"
+        }
+    ],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

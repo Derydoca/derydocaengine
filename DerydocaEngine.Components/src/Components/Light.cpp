@@ -6,6 +6,7 @@
 #include "Rendering\LightManager.h"
 #include "Rendering\Material.h"
 #include "Rendering\GraphicsAPI.h"
+#include "Resources\ShaderResource.h"
 
 namespace DerydocaEngine::Components
 {
@@ -126,7 +127,7 @@ namespace DerydocaEngine::Components
 
 		boost::uuids::string_generator gen;
 		boost::uuids::uuid shaderId = gen("05cdcea1-2312-4e30-828c-68717d484274");
-		auto shadowMapShader = getResourcePointer<Rendering::Shader>(shaderId);
+		auto shadowMapShader = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
 		m_ShadowMapMaterial = std::make_shared<Rendering::Material>();
 		m_ShadowMapMaterial->setShader(shadowMapShader);
 

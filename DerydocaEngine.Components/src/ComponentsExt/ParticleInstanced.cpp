@@ -57,10 +57,13 @@ namespace DerydocaEngine::Ext
 			SERIALIZE(m_Mesh)
 		);
 
-		auto shader = m_Shader.As<Rendering::Shader>();
-		assert(shader);
 		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(shader);
+		// This may break having multiple instances of this component, but this component is only for illustrative purposes only
+		{
+			/*auto shader = m_Shader.As<Rendering::Shader>();
+			m_Material->setShader(shader);*/
+		}
+		m_Material->setShader(m_Shader);
 		m_Material->setFloat("ParticleLifetime", m_Lifetime);
 		m_Material->setVec4("Material.Kd", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 		m_Material->setVec4("Material.Ka", glm::vec4(0.05f, 0.05f, 0.0f, 1.0f));

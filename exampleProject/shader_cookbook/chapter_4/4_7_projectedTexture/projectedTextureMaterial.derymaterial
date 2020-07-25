@@ -1,14 +1,47 @@
-Shader: 954aa86c-f113-42dd-a4af-9096d2164f3a
-MaterialParameters:
-  - Type: Color
-    Name: Material.Ka
-    Value: [0.01, 0.01, 0.01, 1.0]
-  - Type: Color
-    Name: Material.Kd
-    Value: [1.0, 1.0, 1.0, 1.0]
-  - Type: Color
-    Name: Material.Ks
-    Value: [0.5, 0.5, 0.5, 1.0]
-  - Type: Float
-    Name: Material.Shininess
-    Value: 30.0
+{
+    "ShaderId": "954aa86c-f113-42dd-a4af-9096d2164f3a",
+    "Textures": [],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [
+        {
+            "Name": "Material.Shininess",
+            "Value": 30.0
+        }
+    ],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [
+        {
+            "Name": "Material.Ka",
+            "Value": {
+                "x": 0.009999999776482582,
+                "y": 0.009999999776482582,
+                "z": 0.009999999776482582,
+                "w": 1.0
+            }
+        },
+        {
+            "Name": "Material.Kd",
+            "Value": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Name": "Material.Ks",
+            "Value": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5,
+                "w": 1.0
+            }
+        }
+    ],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

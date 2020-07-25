@@ -289,21 +289,6 @@
                                                     "m_Transparent": false
                                                 }
                                             }
-                                        },
-                                        {
-                                            "polymorphic_id": 2147483653,
-                                            "polymorphic_name": "DerydocaEngine::Components::MaterialRefresher",
-                                            "ptr_wrapper": {
-                                                "id": 2147483665,
-                                                "data": {
-                                                    "cereal_class_version": 0,
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "67ac4309-fcc8-4991-80c6-c168eeda7f89"
-                                                        }
-                                                    }
-                                                }
-                                            }
                                         }
                                     ]
                                 }

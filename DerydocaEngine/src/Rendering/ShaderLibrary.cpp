@@ -21,6 +21,18 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
+	std::shared_ptr<Resources::ShaderResource> Rendering::ShaderLibrary::findResource(const boost::uuids::uuid& shaderId)
+	{
+		// Convert the resource object to a shader resource object
+		std::shared_ptr<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
+		if (!shaderResource)
+		{
+			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", boost::uuids::to_string(shaderId));
+			return nullptr;
+		}
+		return shaderResource;
+	}
+
 	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const boost::uuids::uuid& shaderId)
 	{
 		// Look through the list of already loaded shaders
@@ -68,7 +80,7 @@ namespace DerydocaEngine::Rendering
 
 	void ShaderLibrary::initialize()
 	{
-		m_errorShader = ObjectLibrary::getInstance().getResourceObjectPointer<Rendering::Shader>("3a8405f2-e16f-4aa7-bef0-5644d7d19cdd");
+		m_errorShader = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>("3a8405f2-e16f-4aa7-bef0-5644d7d19cdd");
 	}
 
 	void Rendering::ShaderLibrary::registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid)

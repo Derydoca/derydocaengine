@@ -491,7 +491,7 @@ namespace DerydocaEngine::Rendering
 	int Shader::getErrorShaderID()
 	{
 		auto errorShader = Rendering::ShaderLibrary::getInstance().getErrorShader();
-		return errorShader->m_rendererId;
+		return errorShader.As<Rendering::Shader>()->m_rendererId;
 	}
 
 	std::string Shader::LoadShader(const std::string& fileName) {

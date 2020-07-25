@@ -156,21 +156,6 @@
                                                     "m_Amplitude": 0.10000000149011612
                                                 }
                                             }
-                                        },
-                                        {
-                                            "polymorphic_id": 2147483652,
-                                            "polymorphic_name": "DerydocaEngine::Components::MaterialRefresher",
-                                            "ptr_wrapper": {
-                                                "id": 2147483658,
-                                                "data": {
-                                                    "cereal_class_version": 0,
-                                                    "__base_DerydocaEngine::Components::GameComponent": {
-                                                        "__base_DerydocaEngine::Object": {
-                                                            "m_ID": "aca3ab3d-a265-424a-bee9-eb23813d2ce1"
-                                                        }
-                                                    }
-                                                }
-                                            }
                                         }
                                     ]
                                 }

@@ -56,9 +56,8 @@ namespace DerydocaEngine::Components
 			SERIALIZE(m_FontFace)
 		);
 
-		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
 		auto material = std::make_shared<Rendering::Material>();
-		material->setShader(shader);
+		material->setShader(m_Shader);
 		setMaterial(material);
 
 		setText(m_Text);

@@ -1,11 +1,38 @@
-Shader: ce6b7184-2a7e-448f-a0dd-8e2dacf055c7
-MaterialParameters:
-  - Type: Float
-    Name: Line.Width
-    Value: 0.75
-  - Type: Color
-    Name: Line.Color
-    Value: [0.0, 0.0, 0.25, 1.0]
-  - Type: Color
-    Name: QuadColor
-    Value: [0.0, 0.0, 0.75, 1.0]
+{
+    "ShaderId": "ce6b7184-2a7e-448f-a0dd-8e2dacf055c7",
+    "Textures": [],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [
+        {
+            "Name": "Line.Width",
+            "Value": 0.75
+        }
+    ],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [
+        {
+            "Name": "Line.Color",
+            "Value": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.25,
+                "w": 1.0
+            }
+        },
+        {
+            "Name": "QuadColor",
+            "Value": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.75,
+                "w": 1.0
+            }
+        }
+    ],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

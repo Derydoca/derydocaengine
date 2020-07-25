@@ -116,8 +116,8 @@ namespace DerydocaEngine::Ext
 			{
 				continue;
 			}
-			auto texture = std::static_pointer_cast<Rendering::Texture>(m_ProjectorTexture->getResourceObjectPointer());
-			mat->setTexture("ProjectorTex", texture);
+			/*auto texture = std::static_pointer_cast<Rendering::Texture>(m_ProjectorTexture->getResourceObjectPointer());
+			mat->setTexture("ProjectorTex", texture);*/
 		}
 	}
 

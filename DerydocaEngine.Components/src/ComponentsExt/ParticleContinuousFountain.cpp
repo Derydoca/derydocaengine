@@ -71,11 +71,13 @@ namespace DerydocaEngine::Ext
 			SERIALIZE(m_Texture)
 		);
 
+		m_Material = std::make_shared<Rendering::Material>();
 		const char* outputNames[] = { "Position", "Velocity", "StartTime" };
 		auto shader = std::make_shared<Rendering::Shader>(m_Shader->getRawShaderName(), 3, outputNames);
+		auto shaderResource = std::make_shared<Resources::ShaderResource>();
+		shaderResource->setData(shader);
 		assert(shader);
-		m_Material = std::make_shared<Rendering::Material>();
-		m_Material->setShader(shader);
+		m_Material->setShader(shaderResource);
 		m_Material->setFloat("ParticleLifetime", m_Lifetime);
 		m_Material->setVec3("Accel", m_Acceleration);
 		m_Material->setFloat("MinParticleSize", m_ParticleSizeMin);

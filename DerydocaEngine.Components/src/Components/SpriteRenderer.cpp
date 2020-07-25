@@ -225,9 +225,8 @@ namespace DerydocaEngine::Components
 			SERIALIZE(m_Shader),
 			SERIALIZE(m_Size));
 
-		auto shader = std::static_pointer_cast<Rendering::Shader>(m_Shader->getResourceObjectPointer());
 		auto material = std::make_shared<Rendering::Material>();
-		material->setShader(shader);
+		material->setShader(m_Shader);
 		setMaterial(material);
 
 		auto ss = std::static_pointer_cast<UI::SpriteSheet>(m_SpriteSheet.GetSmartPointer()->getResourceObjectPointer());
