@@ -15,7 +15,6 @@ boostdir = "D:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
     "%{wks.location}/vendor/cereal/include",
-    "%{wks.location}/vendor/yaml-cpp/include",
     "%{wks.location}/vendor/freetype/include"
 }
 
@@ -303,8 +302,7 @@ project "DerydocaEngine.Editor.UI"
         "DerydocaEngine",
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
-        "DerydocaEngine.Editor",
-        "yaml-cpp"
+        "DerydocaEngine.Editor"
     }
 
     filter "system:windows"
@@ -406,8 +404,7 @@ project "DerydocaEngine.Test"
     {
         "DerydocaEngine",
         "DerydocaEngine.Components",
-        "GoogleTest",
-        "yaml-cpp"
+        "GoogleTest"
     }
 
     filter "system:windows"
@@ -501,8 +498,7 @@ project "DerydocaEngine.Editor.Test"
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
         "DerydocaEngine.Editor",
-        "GoogleTest",
-        "yaml-cpp"
+        "GoogleTest"
     }
 
     filter "system:windows"
@@ -580,51 +576,6 @@ project "GoogleTest"
         runtime "Release"
 
     filter "configurations:Dist"
-        symbols "On"
-        runtime "Release"
-    
-project "yaml-cpp"
-    location "vendor/generatedProjects"
-    kind "StaticLib"
-    language "C++"
-
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-    flags
-    {
-        "MultiProcessorCompile"
-    }
-
-    files
-    {
-        "vendor/yaml-cpp/src/**.h",
-        "vendor/yaml-cpp/src/**.cpp"
-    }
-
-    includedirs
-    {
-        "%{wks.location}/vendor/yaml-cpp/src",
-        "%{wks.location}/vendor/yaml-cpp/include"
-    }
-
-    filter "system:windows"
-        cppdialect "C++17"
-        systemversion "latest"
-
-    filter "configurations:Debug"
-        defines "DD_DEBUG"
-        symbols "On"
-        staticruntime "Off"
-        runtime "Debug"
-
-    filter "configurations:Release"
-        defines "DD_RELEASE"
-        symbols "On"
-        runtime "Release"
-
-    filter "configurations:Dist"
-        defines "DD_DIST"
         symbols "On"
         runtime "Release"
     
