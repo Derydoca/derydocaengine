@@ -1,6 +1,7 @@
 #pragma once
 #include "Components\GameComponent.h"
 #include "Rendering\Material.h"
+#include "Resources\MaterialResource.h"
 
 namespace DerydocaEngine::Ext
 {
@@ -9,26 +10,29 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(TessellatingQuad);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		TessellatingQuad();
 		~TessellatingQuad();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void render(const std::shared_ptr<Rendering::MatrixStack> matrixStack);
 		virtual void update(const float deltaTime);
 
 		void updateMaterial();
 
-		int& getInner() { return m_inner; }
-		int& getOuter() { return m_outer; }
+		int& getInner() { return m_Inner; }
+		int& getOuter() { return m_Outer; }
 	private:
-		unsigned int m_vao;
-		unsigned int m_vbo;
-		int m_inner = 4;
-		int m_outer = 4;
-		float m_controlPoints[8];
-		std::shared_ptr<Rendering::Material> m_material;
+		float m_ControlPoints[8];
+		int m_Inner = 4;
+		int m_Outer = 4;
+		ResourceRef<Resources::MaterialResource> m_Material;
+
+		unsigned int m_VAO;
+		unsigned int m_VBO;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::TessellatingQuad, 0);

@@ -1,28 +1,158 @@
-Scene:
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
-    Properties:
-      Name: Cube
-      Transform:
-        Position: [0, 0, -2]
-        Rotation: [0, 0, 0, 1]
-        Scale: [0.5, 0.5, 0.5]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 131aefb4-db2f-4584-8a76-a3ae658d5d51
-            Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac
-        - Type: NoiseTexture
-          Properties:
-            width: 256
-            height: 256
-            seamless: true
-            textureName: NoiseTexture
-            baseFrequency: 4.0
-            persistence: 0.5
-            periodic: false
-        - Type: WoodSliceTexture
-          Properties:
-            slicePosition: [-0.5, -0.5, -0.5]
-            sliceRotation: [-0.4112356, -0.263693, 0.4709898, 0.7345203]
-            sliceScale: [15, 15, 15]
+{
+    "__base_DerydocaEngine::Scenes::Scene": {
+        "m_Root": {
+            "polymorphic_id": 1073741824,
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "cereal_class_version": 0,
+                    "m_Name": "__SCENE_ROOT__",
+                    "m_Transform": {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483650,
+                            "data": {
+                                "m_Position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "m_Scale": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "m_Quaternion": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0
+                                }
+                            }
+                        }
+                    },
+                    "m_Children": [
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483651,
+                                "data": {
+                                    "m_Name": "Cube",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483652,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": -2.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 0.5,
+                                                    "y": 0.5,
+                                                    "z": 0.5
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 2147483649,
+                                            "polymorphic_name": "DerydocaEngine::Components::MeshRenderer",
+                                            "ptr_wrapper": {
+                                                "id": 2147483653,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "9ea4b462-6073-4030-948e-9757ca8f0e3e"
+                                                        }
+                                                    },
+                                                    "m_Mesh": "deb8fa30-119b-4483-b3fe-58978a4a73ac",
+                                                    "m_Material": "131aefb4-db2f-4584-8a76-a3ae658d5d51",
+                                                    "m_Transparent": false
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 2147483650,
+                                            "polymorphic_name": "DerydocaEngine::Ext::NoiseTexture",
+                                            "ptr_wrapper": {
+                                                "id": 2147483654,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "818384d8-d68f-4c6e-abc4-334a5bae31fc"
+                                                        }
+                                                    },
+                                                    "m_Size": {
+                                                        "x": 256,
+                                                        "y": 256
+                                                    },
+                                                    "m_TextureName": "NoiseTexture",
+                                                    "m_BaseFrequency": 4.0,
+                                                    "m_Persistence": 0.5,
+                                                    "m_Periodic": false,
+                                                    "m_Seamless": true
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 2147483651,
+                                            "polymorphic_name": "DerydocaEngine::Ext::WoodSliceTexture",
+                                            "ptr_wrapper": {
+                                                "id": 2147483655,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "5b800cb3-5b00-4ceb-8875-e6a0672cab83"
+                                                        }
+                                                    },
+                                                    "m_SliceMatrixTransform": {
+                                                        "polymorphic_id": 1073741824,
+                                                        "ptr_wrapper": {
+                                                            "id": 2147483656,
+                                                            "data": {
+                                                                "m_Position": {
+                                                                    "x": -0.5,
+                                                                    "y": -0.5,
+                                                                    "z": -0.5
+                                                                },
+                                                                "m_Scale": {
+                                                                    "x": 15.0,
+                                                                    "y": 15.0,
+                                                                    "z": 15.0
+                                                                },
+                                                                "m_Quaternion": {
+                                                                    "x": -0.41123560070991518,
+                                                                    "y": -0.2636930048465729,
+                                                                    "z": 0.47098979353904726,
+                                                                    "w": 0.7345203161239624
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "m_Components": []
+                }
+            }
+        }
+    }
+}

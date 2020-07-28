@@ -14,18 +14,27 @@ namespace DerydocaEngine::Scenes
 			return instance;
 		}
 
-		std::shared_ptr<Scene> getActiveScene() { return m_activeScene; }
+		std::shared_ptr<Scene> getActiveScene() { return m_ActiveScene; }
 
-		void loadScene(const boost::uuids::uuid & levelId);
-		void loadScene(const std::shared_ptr<Resources::LevelResource> levelResource);
-		void unloadScene();
+		void LoadScene(const boost::uuids::uuid & levelId);
+		void LoadScene(const std::shared_ptr<Resources::LevelResource> levelResource);
+		void SaveScene(const std::string& outputPath);
+		void UnloadScene();
+		std::string GetLoadedScenePath() const {
+			if (!m_ActiveLevelResource)
+			{
+				return std::string();
+			}
+			return m_ActiveLevelResource->getSourceFilePath();
+		}
 
 	private:
 		SceneManager();
 		~SceneManager();
 		SceneManager(const SceneManager&);
 
-		std::shared_ptr<Scene> m_activeScene;
+		std::shared_ptr<Scene> m_ActiveScene;
+		std::shared_ptr<Resources::LevelResource> m_ActiveLevelResource;
 	};
 
 }

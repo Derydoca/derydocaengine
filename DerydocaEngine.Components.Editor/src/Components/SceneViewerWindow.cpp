@@ -31,10 +31,10 @@ namespace DerydocaEngine::Components
 		m_camera->postInit();
 
 		// Set the skybox to the editor default
-		auto skyboxMaterial = Editor::EditorRenderer::GetInstance().getEditorSkyboxMaterial();
-		if (skyboxMaterial != nullptr)
+		auto skyboxMaterialResource = Editor::EditorRenderer::GetInstance().getEditorSkyboxMaterialResource();
+		if (skyboxMaterialResource != nullptr)
 		{
-			m_camera->setSkybox(skyboxMaterial);
+			m_camera->setSkybox(skyboxMaterialResource);
 			m_camera->setClearMode(Components::Camera::ClearMode::SkyboxClear);
 		}
 

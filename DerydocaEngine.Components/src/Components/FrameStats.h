@@ -9,6 +9,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(FrameStats);
+		SERIALIZE_FUNC_DEFINITIONS;
 		FrameStats();
 		~FrameStats();
 
@@ -19,3 +20,5 @@ namespace DerydocaEngine::Components
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::FrameStats, 0);

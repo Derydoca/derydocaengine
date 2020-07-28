@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Rendering\MatrixStack.h"
 #include "GraphicsAPI.h"
+#include "Settings/EngineSettings.h"
 
 namespace DerydocaEngine::Rendering
 {

@@ -17,7 +17,7 @@ namespace DerydocaEngine::Editor::Inspector::ResourceInspectors
 			ImGui::Text(levelResource->getName().c_str());
 			if (ImGui::Button("Load"))
 			{
-				Scenes::SceneManager::getInstance().loadScene(levelResource);
+				Scenes::SceneManager::getInstance().LoadScene(levelResource);
 			}
 		}
 	};

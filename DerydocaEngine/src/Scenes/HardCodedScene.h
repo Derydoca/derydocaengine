@@ -1,6 +1,5 @@
 #pragma once
 #include "Scenes\Scene.h"
-#include "Scenes\SceneObject.h"
 
 namespace DerydocaEngine::Scenes
 {
@@ -13,9 +12,6 @@ namespace DerydocaEngine::Scenes
 
 		virtual void setUp() override;
 		virtual void tearDown() override;
-
-	private:
-		std::vector<std::shared_ptr<SceneObject>> m_sceneObjects;
 
 	};
 

@@ -10,20 +10,24 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(GammaCorrectionFilter);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		GammaCorrectionFilter();
 		~GammaCorrectionFilter();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
-		float& getGamma() { return m_gamma; }
+		float& getGamma() { return m_Gamma; }
+
 	private:
-		float m_gamma;
-		std::shared_ptr<Components::Camera> m_postProcessCamera;
+		float m_Gamma;
+
+		std::shared_ptr<Components::Camera> m_PostProcessCamera;
 
 		void updateShader();
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::GammaCorrectionFilter, 0);

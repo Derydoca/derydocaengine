@@ -26,4 +26,14 @@ namespace DerydocaEngine::Components
 		m_textRenderer->setText(s.str());
 	}
 
+	SERIALIZE_FUNC_LOAD(archive, FrameStats)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, FrameStats)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent));
+	}
+
 }

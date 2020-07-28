@@ -14,13 +14,17 @@ namespace DerydocaEngine::Components
 		virtual void renderWindow();
 		virtual std::string getWindowTitle() { return "Console"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_MenuBar; }
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::EditorWindowComponent);
 	private:
 		ImVec4 logLevelToColor(Logging::LogLevel level);
 		void renderMenuBar();
 	private:
-		size_t m_selected;
-		Logging::LogLevel m_visibleTypeFlags;
-		Logging::LogDomain m_visibleDomainFlags;
-		std::vector<Logging::LogMessage>* m_messages;
+		size_t m_Selected;
+		Logging::LogLevel m_VisibleTypeFlags;
+		Logging::LogDomain m_VisibleDomainFlags;
+		std::vector<Logging::LogMessage>* m_Messages;
 	};
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::EngineConsole, 0);

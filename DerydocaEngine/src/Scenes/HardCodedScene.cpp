@@ -1,5 +1,6 @@
 #include "EnginePch.h"
 #include "HardCodedScene.h"
+#include "GameObject.h"
 
 DerydocaEngine::Scenes::HardCodedScene::HardCodedScene()
 {
@@ -11,12 +12,12 @@ DerydocaEngine::Scenes::HardCodedScene::~HardCodedScene()
 
 void DerydocaEngine::Scenes::HardCodedScene::setUp()
 {
-	m_root = std::make_shared<GameObject>("__root__");
-	m_root->init();
-	m_root->postInit();
+	m_Root = std::make_shared<GameObject>("__root__");
+	m_Root->init();
+	m_Root->postInit();
 }
 
 void DerydocaEngine::Scenes::HardCodedScene::tearDown()
 {
-	m_root->preDestroy();
+	m_Root->preDestroy();
 }

@@ -1,42 +1,68 @@
-SpriteSheet:
-  Texture: 2492a12b-9269-4e67-bc78-e0f4da4bf9eb
-  Sprites:
-    - Id: 1
-      Texture: f7087017-d7d2-4d5e-8a53-448d4d08190c
-      Width: 32
-      Height: 32
-      TexX: 0
-      TexY: 0
-      TexDX: 0.25
-      TexDY: 1
-      Type: 1
-      SliceTop: 0.3
-      SliceRight: 0.7
-      SliceBottom: 0.7
-      SliceLeft: 0.3
-    - Id: 2
-      Texture: 1f2ce41a-788a-4344-86b6-3c7aaf5d0ad1
-      Width: 32
-      Height: 32
-      TexX: 0.25
-      TexY: 0
-      TexDX: 0.5
-      TexDY: 1
-      Type: 0
-      SliceTop: 0
-      SliceRight: 1
-      SliceBottom: 1
-      SliceLeft: 0
-    - Id: 3
-      Texture: 10f63e7b-e91f-466f-9a6f-b7221695091c
-      Width: 18
-      Height: 27
-      TexX: 0.5
-      TexY: 0
-      TexDX: 0.640625
-      TexDY: 0.84375
-      Type: 0
-      SliceTop: 0
-      SliceRight: 1
-      SliceBottom: 1
-      SliceLeft: 0
+{
+  "textureId": "2492a12b-9269-4e67-bc78-e0f4da4bf9eb",
+  "sprites": [
+    {
+        "id": 1,
+        "type": 1,
+        "slice": {
+            "x": 0.3,
+            "y": 0.7,
+            "z": 0.7,
+            "w": 0.3
+        },
+        "size": {
+            "x": 32,
+            "y": 32
+        },
+        "texPosition": {
+            "x": 0,
+            "y": 0,
+            "dx": 0.25,
+            "dy": 1
+        },
+        "textureId": "f7087017-d7d2-4d5e-8a53-448d4d08190c"
+    },
+    {
+        "id": 2,
+        "type": 0,
+        "slice": {
+            "x": 0,
+            "y": 1,
+            "z": 1,
+            "w": 0
+        },
+        "size": {
+            "x": 32,
+            "y": 32
+        },
+        "texPosition": {
+            "x": 0.25,
+            "y": 0,
+            "dx": 0.5,
+            "dy": 1
+        },
+        "textureId": "1f2ce41a-788a-4344-86b6-3c7aaf5d0ad1"
+    },
+    {
+        "id": 3,
+        "type": 0,
+        "slice": {
+            "x": 0,
+            "y": 1,
+            "z": 1,
+            "w": 0
+        },
+        "size": {
+            "x": 18,
+            "y": 27
+        },
+        "texPosition": {
+            "x": 0.5,
+            "y": 0,
+            "dx": 0.640625,
+            "dy": 0.84375
+        },
+        "textureId": "10f63e7b-e91f-466f-9a6f-b7221695091c"
+    }
+  ]
+}

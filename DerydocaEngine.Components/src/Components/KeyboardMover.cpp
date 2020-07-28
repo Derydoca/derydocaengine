@@ -7,16 +7,15 @@ namespace DerydocaEngine::Components
 {
 
 	KeyboardMover::KeyboardMover() :
-		m_transform(),
-		m_keyboard(nullptr),
-		m_movementSpeed(1.0f),
-		m_keyForward(),
-		m_keyBackward(),
-		m_keyLeft(),
-		m_keyRight(),
-		m_key(),
-		m_keyUp(),
-		m_keyDown()
+		m_Transform(),
+		m_Keyboard(nullptr),
+		m_MovementSpeed(1.0f),
+		m_KeyForward(),
+		m_KeyBackward(),
+		m_KeyLeft(),
+		m_KeyRight(),
+		m_KeyUp(),
+		m_KeyDown()
 	{
 	}
 
@@ -30,16 +29,15 @@ namespace DerydocaEngine::Components
 		int const& keyUp,
 		int const& keyDown
 	) :
-		m_transform(),
-		m_keyboard(keyboard),
-		m_movementSpeed(movementSpeed),
-		m_keyForward(keyForward),
-		m_keyBackward(keyBackward),
-		m_keyLeft(keyLeft),
-		m_keyRight(keyRight),
-		m_key(),
-		m_keyUp(keyUp),
-		m_keyDown(keyDown)
+		m_Transform(),
+		m_Keyboard(keyboard),
+		m_MovementSpeed(movementSpeed),
+		m_KeyForward(keyForward),
+		m_KeyBackward(keyBackward),
+		m_KeyLeft(keyLeft),
+		m_KeyRight(keyRight),
+		m_KeyUp(keyUp),
+		m_KeyDown(keyDown)
 	{
 	}
 
@@ -49,57 +47,72 @@ namespace DerydocaEngine::Components
 
 	void KeyboardMover::init()
 	{
-		m_transform = getGameObject()->getTransform();
+		m_Transform = getGameObject()->getTransform();
 	}
 
 	void KeyboardMover::update(const float deltaTime)
 	{
-		float frameSpeed = m_movementSpeed * deltaTime;
+		float frameSpeed = m_MovementSpeed * deltaTime;
 		glm::vec3 frameMovement = glm::vec3(0);
 
 		// Z Movement
-		if (m_keyboard->isKeyDown(m_keyForward))
+		if (m_Keyboard->isKeyDown(m_KeyForward))
 		{
 			frameMovement.z -= frameSpeed;
 		}
-		if (m_keyboard->isKeyDown(m_keyBackward))
+		if (m_Keyboard->isKeyDown(m_KeyBackward))
 		{
 			frameMovement.z += frameSpeed;
 		}
 
 		// X Movement
-		if (m_keyboard->isKeyDown(m_keyRight))
+		if (m_Keyboard->isKeyDown(m_KeyRight))
 		{
 			frameMovement.x += frameSpeed;
 		}
-		if (m_keyboard->isKeyDown(m_keyLeft))
+		if (m_Keyboard->isKeyDown(m_KeyLeft))
 		{
 			frameMovement.x -= frameSpeed;
 		}
 
 		// Y Movement
-		if (m_keyboard->isKeyDown(m_keyUp))
+		if (m_Keyboard->isKeyDown(m_KeyUp))
 		{
 			frameMovement.y += frameSpeed;
 		}
-		if (m_keyboard->isKeyDown(m_keyDown))
+		if (m_Keyboard->isKeyDown(m_KeyDown))
 		{
 			frameMovement.y -= frameSpeed;
 		}
 
 		// Translate the gameobject
-		m_transform->translate(frameMovement);
+		m_Transform->translate(frameMovement);
 	}
 
-	void KeyboardMover::deserialize(const YAML::Node& node)
+	SERIALIZE_FUNC_LOAD(archive, KeyboardMover)
 	{
-		m_movementSpeed = node["movementSpeed"].as<float>();
-		m_keyForward = node["keyForward"].as<int>();
-		m_keyBackward = node["keyBackward"].as<int>();
-		m_keyLeft = node["keyLeft"].as<int>();
-		m_keyRight = node["keyRight"].as<int>();
-		m_keyUp = node["keyUp"].as<int>();
-		m_keyDown = node["keyDown"].as<int>();
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_MovementSpeed),
+			SERIALIZE(m_KeyForward),
+			SERIALIZE(m_KeyBackward),
+			SERIALIZE(m_KeyLeft),
+			SERIALIZE(m_KeyRight),
+			SERIALIZE(m_KeyUp),
+			SERIALIZE(m_KeyDown)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, KeyboardMover)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_MovementSpeed),
+			SERIALIZE(m_KeyForward),
+			SERIALIZE(m_KeyBackward),
+			SERIALIZE(m_KeyLeft),
+			SERIALIZE(m_KeyRight),
+			SERIALIZE(m_KeyUp),
+			SERIALIZE(m_KeyDown)
+		);
 	}
 
 }

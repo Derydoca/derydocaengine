@@ -1,0 +1,18 @@
+{
+    "resources": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "DerydocaEngine::Resources::TextureResource",
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_ID": "3831bb8d-2a86-455e-aeeb-baeac024d1e7"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

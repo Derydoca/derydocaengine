@@ -18,8 +18,11 @@ namespace DerydocaEngine::Components
 		virtual glm::vec2 getViewPadding() override;
 		virtual void renderToActiveBuffer() override;
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::SceneViewerWindow);
 	private:
-		bool m_showPropertiesPanel;
+		bool m_ShowPropertiesPanel;
 
 	};
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::EditorCameraWindow, 0);

@@ -11,8 +11,8 @@ namespace DerydocaEngine::Ext
 {
 
 	EdgeDetectionFilter::EdgeDetectionFilter() :
-		m_edgeThreshold(0.5f),
-		m_postProcessCamera()
+		m_EdgeThreshold(0.5f),
+		m_PostProcessCamera()
 	{
 	}
 
@@ -22,24 +22,14 @@ namespace DerydocaEngine::Ext
 
 	void EdgeDetectionFilter::init()
 	{
-		m_postProcessCamera = getComponentInChildren<Components::Camera>();
-		if (m_postProcessCamera == nullptr)
+		m_PostProcessCamera = getComponentInChildren<Components::Camera>();
+		if (m_PostProcessCamera == nullptr)
 		{
 			LOG_ERROR("No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.");
 			return;
 		}
 
 		updateShader();
-	}
-
-	void EdgeDetectionFilter::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node edgeThresholdNode = compNode["edgeThreshold"];
-		if (edgeThresholdNode)
-		{
-			m_edgeThreshold = edgeThresholdNode.as<float>();
-		}
-
 	}
 
 	void EdgeDetectionFilter::update(const float deltaTime)
@@ -49,13 +39,27 @@ namespace DerydocaEngine::Ext
 
 	void EdgeDetectionFilter::updateShader()
 	{
-		auto material = m_postProcessCamera->getPostProcessMaterial();
+		auto material = m_PostProcessCamera->getPostProcessMaterial();
 		if (material == nullptr)
 		{
 			return;
 		}
 
-		material->setFloat("EdgeThreshold", m_edgeThreshold);
+		material->setFloat("EdgeThreshold", m_EdgeThreshold);
+	}
+
+	SERIALIZE_FUNC_LOAD(archive, EdgeDetectionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_EdgeThreshold)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, EdgeDetectionFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_EdgeThreshold)
+		);
 	}
 
 }

@@ -34,7 +34,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 	{
 		// Convert the local translation delta vector to a global translation vector and move the camera by that vector
 		glm::vec3 globalTranslationDelta = cameraTransform->getModel() * glm::vec4(m_localTranslationDelta, 0);
-		cameraTransform->setPos(cameraTransform->getPos() + globalTranslationDelta);
+		cameraTransform->setPosition(cameraTransform->getPosition() + globalTranslationDelta);
 
 		// Calculate the rotation quaternion using the yaw and pitch and set the camera's rotation quaternion to that
 		glm::fquat newQuat =
@@ -42,7 +42,7 @@ namespace DerydocaEngine::Components::SceneCameraInput
 			*
 			glm::rotate(m_pitch, glm::vec3(1, 0, 0))
 			;
-		cameraTransform->setQuat(newQuat);
+		cameraTransform->setQuaternion(newQuat);
 	}
 
 	bool WasdControlStrategy::updateInput(const float deltaTime, bool isViewportHovered)

@@ -11,7 +11,7 @@ namespace DerydocaEngine::Utilities
 	// Method for sorting images
 	bool compareTexturePackerImageBySize(TexturePackerImage lhs, TexturePackerImage rhs)
 	{
-		return lhs.getWidth() > rhs.getWidth();
+		return lhs.size.x > rhs.size.x;
 	}
 
 	TexturePacker::TexturePacker(int const& channels)
@@ -27,26 +27,21 @@ namespace DerydocaEngine::Utilities
 	}
 
 	void TexturePacker::addImage(
-		unsigned long const& id,
-		float const& sizeX,
-		float const& sizeY,
-		float const& bearingX,
-		float const& bearingY,
-		float const& advanceX,
-		float const& advanceY,
-		unsigned char* const& imageBuffer,
-		int const& width,
-		int const& height,
-		int const& channels)
+		const unsigned long id,
+		const float2& bearing,
+		const float2& advance,
+		const unsigned char* imageBuffer,
+		const int2& size,
+		const int channels)
 	{
 		// Store the image
-		TexturePackerImage image(id, width, height, channels, sizeX, sizeY, bearingX, bearingY, advanceX, advanceY);
+		TexturePackerImage image(id, channels, size, bearing, advance);
 		m_images.push_back(image);
 
 		// Store the image data in the image buffers object
 		unsigned char* buffer = m_imageBuffers[id];
 		delete[] buffer;
-		int imageBufferSize = width * height * channels;
+		int imageBufferSize = size.x * size.y * channels;
 		unsigned char* newBuffer = new unsigned char[imageBufferSize];
 		for (int i = 0; i < imageBufferSize; i++)
 		{
@@ -75,7 +70,8 @@ namespace DerydocaEngine::Utilities
 			float totalGlyphArea = 0.0f;
 			for (auto image : m_images)
 			{
-				totalGlyphArea += (float)image.getWidth() * image.getHeight();
+				int2 size = image.size;
+				totalGlyphArea += size.x * size.y;
 			}
 			while (textureSheetWidth * textureSheetWidth < totalGlyphArea)
 			{
@@ -95,8 +91,9 @@ namespace DerydocaEngine::Utilities
 		// For each image
 		for (size_t i = 0; i < m_images.size(); i++)
 		{
-			int imageWidth = m_images[i].getWidth();
-			int imageHeight = m_images[i].getHeight();
+			int2 imageSize = m_images[i].size;
+			int imageWidth = imageSize.x;
+			int imageHeight = imageSize.y;
 
 			IntRect imgRect;
 
@@ -107,14 +104,14 @@ namespace DerydocaEngine::Utilities
 			// Find a place for the image by progressively looking farther down the image after scanning the current line
 			for (int scanPosY = 0; scanPosY < textureSheetWidth * 2 && !found; scanPosY++)
 			{
-				imgRect.setY(scanPosY);
-				imgRect.setDy(scanPosY + imageHeight);
+				imgRect.y = scanPosY;
+				imgRect.dy = scanPosY + imageHeight;
 
 				// Scan through each X location in the line
 				for (int scanPosX = 0; scanPosX <= textureSheetWidth - imageWidth && !found; scanPosX++)
 				{
-					imgRect.setX(scanPosX);
-					imgRect.setDx(scanPosX + imageWidth);
+					imgRect.x = scanPosX;
+					imgRect.dx = scanPosX + imageWidth;
 
 					// This x,y location is valid if there is nothing obstructing the placement
 					int spaceToSkip = getIntersectingImageXAdvance(imageBounds, imgRect);
@@ -129,7 +126,7 @@ namespace DerydocaEngine::Utilities
 						}
 
 						// Add the image
-						m_packedImageData.AddImage(scanPosX, scanPosY, &m_images[i], m_imageBuffers[m_images[i].getID()]);
+						m_packedImageData.AddImage(scanPosX, scanPosY, m_images[i], m_imageBuffers[m_images[i].id]);
 
 						// Remember where this is located at
 						imageBounds.push_back(IntRect(scanPosX, scanPosY, scanPosX + imageWidth, scanPosY + imageHeight));
@@ -138,7 +135,6 @@ namespace DerydocaEngine::Utilities
 						imageLocations[i] = IntRect(scanPosX, scanPosY, scanPosX + imageWidth, scanPosY + imageHeight);
 
 						found = true;
-						D_LOG_TRACE("Placed image {}/{}", i + 1, m_images.size());
 					}
 					else
 					{
@@ -152,11 +148,11 @@ namespace DerydocaEngine::Utilities
 		for (size_t i = 0; i < m_images.size(); i++)
 		{
 			IntRect loc = imageLocations[i];
-			float x = (float)loc.getX() / m_packedImageData.getWidth();
-			float y = (float)loc.getY() / m_packedImageData.getHeight();
-			float dx = (float)loc.getDx() / m_packedImageData.getWidth();
-			float dy = (float)loc.getDy() / m_packedImageData.getHeight();
-			m_images[i].setTextureSheetRectangle(x, y, dx, dy);
+			float x = (float)loc.x / m_packedImageData.getWidth();
+			float y = (float)loc.y / m_packedImageData.getHeight();
+			float dx = (float)loc.dx / m_packedImageData.getWidth();
+			float dy = (float)loc.dy / m_packedImageData.getHeight();
+			m_images[i].imageRect = { x, y, dx, dy };
 		}
 
 		// Delete the temporary image locations array
@@ -175,7 +171,7 @@ namespace DerydocaEngine::Utilities
 		m_imageBuffers.clear();
 	}
 
-	int TexturePacker::getIntersectingImageXAdvance(std::vector<IntRect> imageBounds, IntRect rect)
+	int TexturePacker::getIntersectingImageXAdvance(const std::vector<IntRect>& imageBounds, const IntRect& rect)
 	{
 		// For each image boundary
 		for (auto imageBoundary : imageBounds)
@@ -184,7 +180,7 @@ namespace DerydocaEngine::Utilities
 			if (IntRect::IsRectOverlapping(imageBoundary, rect))
 			{
 				// Return the number of pixels we can advance to be in front of this intersecting image boundary
-				return imageBoundary.getDx() - rect.getX();
+				return imageBoundary.dx - rect.x;
 			}
 		}
 

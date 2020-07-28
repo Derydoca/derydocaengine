@@ -1,11 +1,9 @@
 #pragma once
-#include "yaml-cpp\yaml.h"
 #include <assert.h>
 #include <boost\filesystem.hpp>
 #include <boost\uuid\uuid.hpp>
 #include <string>
 #include "glm/glm.hpp"
-#include "Helpers\YamlTools.h"
 #include "Components\Camera.h"
 
 namespace DerydocaEngine::Settings
@@ -14,23 +12,27 @@ namespace DerydocaEngine::Settings
 	class EngineSettings
 	{
 	public:
-		EngineSettings(const std::string& configFilePath);
+		EngineSettings();
 		~EngineSettings();
-
-		int getWidth() const { return m_width; }
-		int getHeight() const { return m_height; }
-		bool shouldBeFullScreen() const { return m_fullScreen; }
-		bool shouldBeMaximized() const { return m_maximized; }
+		static bool Initialize();
+		static void Save();
+		static std::shared_ptr<EngineSettings> getInstance() { return EngineSettings::s_Instance; }
 		std::string getEngineResourceDirectory() const { return m_engineResourceDirectory; }
 		std::string getEditorComponentsSceneIdentifier() const { return m_editorComponentsSceneIdentifier; }
 		std::string getEditorGuiSceneIdentifier() const { return m_editorGuiSceneIdentifier; }
 		std::string getEditorSkyboxMaterialIdentifier() const { return m_editorSkyboxMaterialIdentifier; }
+		
+		SERIALIZE_FUNC(
+			SERIALIZE(m_engineResourceDirectory),
+			SERIALIZE(m_editorComponentsSceneIdentifier),
+			SERIALIZE(m_editorGuiSceneIdentifier),
+			SERIALIZE(m_editorSkyboxMaterialIdentifier)
+		);
+		static std::shared_ptr<EngineSettings> s_Instance;
 	private:
-		boost::filesystem::path m_settingsFilePath;
-		int m_width;
-		int m_height;
-		bool m_fullScreen;
-		bool m_maximized;
+
+	private:
+
 		std::string m_engineResourceDirectory;
 		std::string m_editorComponentsSceneIdentifier;
 		std::string m_editorGuiSceneIdentifier;

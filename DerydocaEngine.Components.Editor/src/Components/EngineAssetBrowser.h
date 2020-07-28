@@ -19,8 +19,12 @@ namespace DerydocaEngine::Components
 		void renderNode(std::shared_ptr<Resources::ResourceTreeNode> node);
 		void renderNodeContent(std::shared_ptr<Resources::ResourceTreeNode> node);
 		void renderResourceNode(std::shared_ptr<Resources::Resource> resource);
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::EditorWindowComponent);
 	private:
-		std::weak_ptr<Resources::ResourceTreeNode> m_resourceNode;
-		std::shared_ptr<Editor::SelectionGroup> m_selectionGroup;
+		std::weak_ptr<Resources::ResourceTreeNode> m_ResourceNode;
+		std::shared_ptr<Editor::SelectionGroup> m_SelectionGroup;
 	};
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::EngineAssetBrowser, 0);

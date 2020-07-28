@@ -1,20 +1,56 @@
-Shader: 5c7c249f-6028-41e9-8a94-f3a9459b4a2d
-MaterialParameters:
-  - Type: Texture
-    Name: Tex1
-    ID: d88e3c9a-dc0e-4dd7-add6-c81daf470610
-  - Type: Texture
-    Name: Tex2
-    ID: 4cae1246-923f-4975-b9b8-7f076ba15011
-  - Type: Color
-    Name: Material.Ka
-    Value: [0.01, 0.01, 0.01, 1.0]
-  - Type: Color
-    Name: Material.Kd
-    Value: [1.0, 1.0, 1.0, 1.0]
-  - Type: Color
-    Name: Material.Ks
-    Value: [0.5, 0.5, 0.5, 1.0]
-  - Type: Float
-    Name: Material.Shininess
-    Value: 30.0
+{
+    "ShaderId": "5c7c249f-6028-41e9-8a94-f3a9459b4a2d",
+    "Textures": [
+        {
+            "Name": "Tex1",
+            "Value": "d88e3c9a-dc0e-4dd7-add6-c81daf470610"
+        },
+        {
+            "Name": "Tex2",
+            "Value": "4cae1246-923f-4975-b9b8-7f076ba15011"
+        }
+    ],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [
+        {
+            "Name": "Material.Shininess",
+            "Value": 30.0
+        }
+    ],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [
+        {
+            "Name": "Material.Ka",
+            "Value": {
+                "x": 0.009999999776482582,
+                "y": 0.009999999776482582,
+                "z": 0.009999999776482582,
+                "w": 1.0
+            }
+        },
+        {
+            "Name": "Material.Kd",
+            "Value": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Name": "Material.Ks",
+            "Value": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5,
+                "w": 1.0
+            }
+        }
+    ],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

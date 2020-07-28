@@ -11,6 +11,7 @@ namespace DerydocaEngine::Resources
 		REGISTER_TYPE_ID(ShaderResource);
 
 		ShaderResource() :
+			Resource(ResourceType::ShaderResourceType),
 			m_rawShaderName(),
 			m_fragmentShaderSource(),
 			m_geometryShaderSource()
@@ -25,6 +26,26 @@ namespace DerydocaEngine::Resources
 		std::string getVertexShaderLocation() const { return m_sourceFilePath; }
 		std::string getFragmentShaderSource() const { return m_fragmentShaderSource; }
 		std::string getGeometryShaderSource() const { return m_geometryShaderSource; }
+
+		virtual void postLoadInitialize();
+
+		template<class Archive>
+		void save(Archive& archive) const
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource)
+			);
+		}
+
+		template<class Archive>
+		void load(Archive& archive)
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource)
+			);
+		}
+
+
 	private:
 		std::string m_rawShaderName;
 		std::string m_fragmentShaderSource;
@@ -32,3 +53,5 @@ namespace DerydocaEngine::Resources
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::ShaderResource, 0);

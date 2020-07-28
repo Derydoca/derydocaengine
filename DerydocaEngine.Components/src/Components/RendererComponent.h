@@ -15,6 +15,11 @@ namespace DerydocaEngine::Components
 		virtual ~RendererComponent();
 		std::shared_ptr<Rendering::Material> getMaterial() const { return m_material; }
 		void setMaterial(std::shared_ptr<Rendering::Material> material) { m_material = material; }
+
+		SERIALIZE_FUNC_BASE(
+			DerydocaEngine::Components::GameComponent
+			// All properties are generated and do not need to be serialized
+		);
 	protected:
 		void updateMesh();
 		void markComponentAsDirty(Rendering::MeshComponents const& component)

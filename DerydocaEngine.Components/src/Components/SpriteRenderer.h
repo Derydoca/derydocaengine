@@ -4,6 +4,9 @@
 #include "Color.h"
 #include "RendererComponent.h"
 #include "UI\Spritesheet.h"
+#include "ResourceRef.h"
+#include "Resources\SpriteSheetResource.h"
+#include "Resources\ShaderResource.h"
 
 namespace DerydocaEngine::Components
 {
@@ -12,28 +15,31 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(SpriteRenderer);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		SpriteRenderer();
 		~SpriteRenderer();
 
 		void postInit();
-		void deserialize(const YAML::Node& compNode);
 
-		Color getColor() const { return m_color; }
+		Color getColor() const { return m_Color; }
 		void setColor(Color const& color) {
-			if (color == m_color)
+			if (color == m_Color)
 			{
 				return;
 			}
 
-			m_color = color;
+			m_Color = color;
 			markComponentAsDirty(Rendering::MeshComponents::Colors);
 		}
+
 	private:
-		Color m_color;
-		std::shared_ptr<UI::SpriteSheet> m_spriteSheet;
-		UI::SpriteReference* m_sprite;
-		glm::vec2 m_size;
+		Color m_Color;
+		ResourceRef<Resources::SpriteSheetResource> m_SpriteSheet;
+		ResourceRef<Resources::ShaderResource> m_Shader;
+		int m_SpriteIndex;
+		UI::SpriteReference* m_Sprite;
+		glm::vec2 m_Size;
 
 		std::vector<glm::vec3> generateVertices();
 		std::vector<glm::vec2> generateTexCoords();
@@ -42,7 +48,7 @@ namespace DerydocaEngine::Components
 
 		unsigned int generateNumVertices()
 		{
-			switch (m_sprite->getType())
+			switch (m_Sprite->type)
 			{
 			case UI::SpriteType::Sprite:
 				return 4;
@@ -55,7 +61,7 @@ namespace DerydocaEngine::Components
 
 		unsigned int generateNumIndices()
 		{
-			switch (m_sprite->getType())
+			switch (m_Sprite->type)
 			{
 			case UI::SpriteType::Sprite:
 				return 2 * 3;
@@ -69,3 +75,5 @@ namespace DerydocaEngine::Components
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::SpriteRenderer, 0);

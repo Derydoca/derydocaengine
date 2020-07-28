@@ -7,7 +7,6 @@
 #include "Components\GameComponentFactory.h"
 #include "GameObject.h"
 #include "ObjectLibrary.h"
-#include "Helpers\YamlTools.h"
 #include "TypeNameLookup.h"
 
 struct Resource;
@@ -52,7 +51,6 @@ namespace DerydocaEngine::Components
 		// Game Component Lifecycle
 		// ------------------------
 		// COMPONENT CREATION
-		// 	 - deserialize
 		// 	 - init
 		// 	 - postInit
 		// GAME LOOP
@@ -63,7 +61,6 @@ namespace DerydocaEngine::Components
 		// 	 - renderEditorGUI
 		// COMPONENT DESTRUCTION
 		// 	 - preDestroy
-		virtual void deserialize(const YAML::Node& compNode) {}
 		virtual void init() {}
 		virtual void postInit() {}
 		virtual void postRender() {}
@@ -82,7 +79,7 @@ namespace DerydocaEngine::Components
 			const std::shared_ptr<Transform> projectionTransform) {}
 
 		inline void setGameObject(const std::weak_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
-		inline void setId(const boost::uuids::uuid& id) { m_id = id; }
+		inline void setId(const boost::uuids::uuid& id) { m_ID = id; }
 		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject.lock(); }
 
 		void destroy(std::shared_ptr<GameObject> objectToDestroy);
@@ -123,45 +120,14 @@ namespace DerydocaEngine::Components
 			return root->getComponentInChildren<T>(id);
 		}
 
+		SERIALIZE_FUNC_BASE(
+			DerydocaEngine::Object
+		);
+
 	protected:
-		inline std::shared_ptr<Resources::Resource> getResource(const YAML::Node& node, const std::string& resourceName)
-		{
-			YAML::Node resourceNode = node[resourceName];
-
-			if (resourceNode == nullptr)
-			{
-				return nullptr;
-			}
-
-			boost::uuids::uuid id = resourceNode.as<boost::uuids::uuid>();
-			auto resource = ObjectLibrary::getInstance().getResource(id);
-			return resource;
-		}
-
-		template<typename T>
-		inline std::shared_ptr<T> getResource(const YAML::Node& node, const std::string& resourceName)
-		{
-			auto r = getResource(node, resourceName);
-			return std::static_pointer_cast<T>(r);
-		}
-
 		template<typename T>
 		inline std::shared_ptr<T> getResourcePointer(const boost::uuids::uuid& resourceId)
 		{
-			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
-		}
-
-		template<typename T>
-		inline std::shared_ptr<T> getResourcePointer(const YAML::Node& node, const std::string& resourceName)
-		{
-			YAML::Node resourceIdNode = node[resourceName];
-			if (resourceIdNode == nullptr || !resourceIdNode.IsScalar())
-			{
-				return nullptr;
-			}
-
-			boost::uuids::uuid resourceId = resourceIdNode.as<boost::uuids::uuid>();
-
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
 		}
 

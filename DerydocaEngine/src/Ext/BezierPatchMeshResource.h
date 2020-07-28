@@ -9,11 +9,28 @@ namespace DerydocaEngine::Resources
 	public:
 		REGISTER_TYPE_ID(BezierPatchMeshResource);
 
-		BezierPatchMeshResource()
+		BezierPatchMeshResource() :
+			Resource(DerydocaEngine::Resources::BezierPatchMeshResourceType)
+		{}
+
+		template<class Archive>
+		void save(Archive& archive) const
 		{
-			setType(DerydocaEngine::Resources::BezierPatchMeshResourceType);
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource)
+			);
+		}
+
+		template<class Archive>
+		void load(Archive& archive)
+		{
+			archive(
+				SERIALIZE_BASE(DerydocaEngine::Resources::Resource)
+			);
 		}
 
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Resources::BezierPatchMeshResource, 0);

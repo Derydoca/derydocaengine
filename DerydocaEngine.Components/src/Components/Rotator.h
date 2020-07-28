@@ -8,20 +8,22 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(Rotator);
+		SERIALIZE_FUNC_DEFINITIONS;
+
 		Rotator();
 		Rotator(float rotationSpeed);
 		~Rotator();
 
 		void update(const float deltaTime);
 
-		void deserialize(const YAML::Node& node);
-
-		inline void setSpeed(float const& rotSpeed) { m_rotSpeed = rotSpeed; }
-		inline float& getSpeed() { return m_rotSpeed; }
-		inline float getSpeed() const { return m_rotSpeed; }
+		inline void setSpeed(float const& rotSpeed) { m_Speed = rotSpeed; }
+		inline float& getSpeed() { return m_Speed; }
+		inline float getSpeed() const { return m_Speed; }
 	private:
-		float m_rotVal;
-		float m_rotSpeed;
+		float m_Value;
+		float m_Speed;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::Rotator, 0);

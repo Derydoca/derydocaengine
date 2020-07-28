@@ -9,14 +9,13 @@ namespace fs = boost::filesystem;
 
 namespace DerydocaEngine::Files::Serializers {
 
-	YAML::Node ShaderFileSerializer::generateResourceNodes(std::string const& filePath)
+	std::vector<std::shared_ptr<Resources::Resource>> ShaderFileSerializer::generateResources(const std::string& assetPath)
 	{
-		YAML::Node resources;
+		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();
 
-		YAML::Node shaderResource;
-		shaderResource["ID"] = generateUuid();
-
-		resources.push_back(shaderResource);
+		auto resource = std::make_shared<Resources::ShaderResource>();
+		resource->generateAndSetId();
+		resources.push_back(resource);
 
 		return resources;
 	}
@@ -24,15 +23,6 @@ namespace DerydocaEngine::Files::Serializers {
 	Files::FileType ShaderFileSerializer::getFileType()
 	{
 		return Files::FileType::ShaderFileType;
-	}
-
-	std::shared_ptr<Resources::Resource> ShaderFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		auto resource = std::make_shared<Resources::ShaderResource>();
-
-		resource->setType(Resources::ShaderResourceType);
-
-		return resource;
 	}
 
 	void ShaderFileSerializer::postLoadInitialize(std::shared_ptr<Resources::Resource> resource)

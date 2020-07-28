@@ -2,6 +2,7 @@
 #include "Resources\Resource.h"
 #include "Files\Serializers\FileSerializerLibrary.h"
 #include "Resources\Serializers\ResourceSerializerLibrary.h"
+#include <boost\uuid\uuid.hpp>
 
 namespace DerydocaEngine::Resources
 {
@@ -10,6 +11,11 @@ namespace DerydocaEngine::Resources
 		Resource("", ResourceType::UnknownResourceType, "", "")
 	{
 
+	}
+
+	Resource::Resource(ResourceType type) :
+		Resource("", type, "", "")
+	{
 	}
 
 	Resource::Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
@@ -40,6 +46,12 @@ namespace DerydocaEngine::Resources
 		m_metaFilePath(metaFilePath),
 		m_resourceObjectPointer(nullptr)
 	{
+	}
+
+	void Resource::generateAndSetId()
+	{
+		boost::uuids::random_generator gen;
+		m_ID = gen();
 	}
 
 	void Resource::setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath)

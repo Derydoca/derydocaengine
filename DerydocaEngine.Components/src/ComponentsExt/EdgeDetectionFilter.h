@@ -11,20 +11,23 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(EdgeDetectionFilter);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		EdgeDetectionFilter();
 		~EdgeDetectionFilter();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 		virtual void update(const float deltaTime);
 
-		float& getEdgeThreshold() { return m_edgeThreshold; }
+		float& getEdgeThreshold() { return m_EdgeThreshold; }
+
 	private:
 		void updateShader();
 
-		float m_edgeThreshold;
-		std::shared_ptr<Components::Camera> m_postProcessCamera;
+		float m_EdgeThreshold;
+		std::shared_ptr<Components::Camera> m_PostProcessCamera;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::EdgeDetectionFilter, 0);

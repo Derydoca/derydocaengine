@@ -11,31 +11,33 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(NoiseTexture);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		NoiseTexture();
 		~NoiseTexture();
 
 		virtual void init();
-		virtual void deserialize(const YAML::Node& compNode);
 
 		void generateNoiseTexture();
-		int& getWidth() { return m_width; }
-		int& getHeight() { return m_height; }
-		float& getBaseFrequency() { return m_baseFrequency; }
-		float& getPersistence() { return m_persistence; }
-		bool& getIsPeriodic() { return m_periodic; }
-		bool& getIsSeamless() { return m_seamless; }
+		int& getWidth() { return m_Size.x; }
+		int& getHeight() { return m_Size.y; }
+		float& getBaseFrequency() { return m_BaseFrequency; }
+		float& getPersistence() { return m_Persistence; }
+		bool& getIsPeriodic() { return m_Periodic; }
+		bool& getIsSeamless() { return m_Seamless; }
 
 	private:
-		int m_width = 256;
-		int m_height = 256;
-		std::string m_textureName = "NoiseTexture";
-		std::shared_ptr<Rendering::Material> m_material;
-		std::shared_ptr<Rendering::Texture> m_texture = nullptr;
-		float m_baseFrequency = 4.0;
-		float m_persistence = 1.0;
-		bool m_periodic = false;
-		bool m_seamless = false;
+		int2 m_Size = { 256, 256 };
+		std::string m_TextureName = "NoiseTexture";
+		float m_BaseFrequency = 4.0;
+		float m_Persistence = 1.0;
+		bool m_Periodic = false;
+		bool m_Seamless = false;
+
+		std::shared_ptr<Rendering::Material> m_Material;
+		std::shared_ptr<Rendering::Texture> m_Texture = nullptr;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::NoiseTexture, 0);

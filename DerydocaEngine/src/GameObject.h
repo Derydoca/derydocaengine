@@ -23,6 +23,7 @@ namespace DerydocaEngine
 	{
 	public:
 		REGISTER_TYPE_ID(GameObject);
+		GameObject();
 		GameObject(const std::string& name);
 		GameObject(const boost::uuids::uuid id, const std::string& name);
 		~GameObject();
@@ -52,20 +53,20 @@ namespace DerydocaEngine
 		void update(const float deltaTime);
 
 		void destroy();
-		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_children; }
-		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_components; }
-		std::string getName() const { return m_name; }
-		std::string& getName() { return m_name; }
-		bool hasParent() const { return !m_parent.expired(); }
-		std::shared_ptr<GameObject> getParent() const { return m_parent.lock(); }
-		std::shared_ptr<Components::Transform> getTransform() const { return m_transform; }
-		void setName(const std::string& name) { m_name = name; }
+		std::vector<std::shared_ptr<GameObject>> getChildren() const { return m_Children; }
+		std::vector<std::shared_ptr<Components::GameComponent>> getComponents() const { return m_Components; }
+		std::string getName() const { return m_Name; }
+		std::string& getName() { return m_Name; }
+		bool hasParent() const { return !m_Parent.expired(); }
+		std::shared_ptr<GameObject> getParent() const { return m_Parent.lock(); }
+		std::shared_ptr<Components::Transform> getTransform() const { return m_Transform; }
+		void setName(const std::string& name) { m_Name = name; }
 		void destroyFlaggedChildren();
 
 		template <class T>
 		std::shared_ptr<T> getComponentInChildren()
 		{
-			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = m_components.begin(); it != m_components.end(); ++it)
+			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = m_Components.begin(); it != m_Components.end(); ++it)
 			{
 				// Attempt to cast this object to the type we want
 				std::shared_ptr<Components::GameComponent> component = *it;
@@ -78,7 +79,7 @@ namespace DerydocaEngine
 				}
 			}
 
-			for (std::vector<std::shared_ptr<GameObject>>::iterator it = m_children.begin(); it != m_children.end(); ++it)
+			for (std::vector<std::shared_ptr<GameObject>>::iterator it = m_Children.begin(); it != m_Children.end(); ++it)
 			{
 				return (*it)->getComponentInChildren<T>();
 			}
@@ -89,7 +90,7 @@ namespace DerydocaEngine
 		template <class T>
 		std::shared_ptr<T> getComponentInChildren(boost::uuids::uuid id)
 		{
-			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = m_components.begin(); it != m_components.end(); ++it)
+			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = m_Components.begin(); it != m_Components.end(); ++it)
 			{
 				// Attempt to cast this object to the type we want
 				std::shared_ptr<Components::GameComponent> component = *it;
@@ -102,7 +103,7 @@ namespace DerydocaEngine
 				}
 			}
 
-			for (std::vector<std::shared_ptr<GameObject>>::iterator it = m_children.begin(); it != m_children.end(); ++it)
+			for (std::vector<std::shared_ptr<GameObject>>::iterator it = m_Children.begin(); it != m_Children.end(); ++it)
 			{
 				return (*it)->getComponentInChildren<T>(id);
 			}
@@ -110,13 +111,15 @@ namespace DerydocaEngine
 			return nullptr;
 		}
 
+		SERIALIZE_FUNC_DEFINITIONS;
+
 	private:
-		std::string m_name;
-		std::shared_ptr<Components::Transform> m_transform;
-		std::weak_ptr<GameObject> m_parent;
-		std::vector<std::shared_ptr<GameObject>> m_children;
-		std::vector<std::shared_ptr<Components::GameComponent>> m_components;
-		bool m_destroyFlag;
+		std::string m_Name;
+		std::shared_ptr<Components::Transform> m_Transform;
+		std::weak_ptr<GameObject> m_Parent;
+		std::vector<std::shared_ptr<GameObject>> m_Children;
+		std::vector<std::shared_ptr<Components::GameComponent>> m_Components;
+		bool m_DestroyFlag;
 	};
 
 }

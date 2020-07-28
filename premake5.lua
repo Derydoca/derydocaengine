@@ -1,6 +1,7 @@
 workspace "DerydocaEngine"
     architecture "x64"
     startproject "DerydocaEngine.Editor.UI"
+    rtti("On")
 
     configurations
     {
@@ -13,7 +14,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 boostdir = "D:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
-    "%{wks.location}/vendor/yaml-cpp/include",
+    "%{wks.location}/vendor/cereal/include",
     "%{wks.location}/vendor/freetype/include"
 }
 
@@ -301,8 +302,7 @@ project "DerydocaEngine.Editor.UI"
         "DerydocaEngine",
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
-        "DerydocaEngine.Editor",
-        "yaml-cpp"
+        "DerydocaEngine.Editor"
     }
 
     filter "system:windows"
@@ -321,11 +321,11 @@ project "DerydocaEngine.Editor.UI"
             "@echo Copying DLLs",
             "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying engine settings file",
-            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\"",
+            "xcopy /y /f \"%{wks.location}engineSettings.json\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying IMGUI default layout file",
             "xcopy /y /f \"%{wks.location}imgui.ini\" \"%{cfg.buildtarget.directory}\"",
             "@echo Processing the engine resource directory",
-            "\"%{cfg.buildtarget.abspath}\" -processDirectory \"%{wks.location}engineResources\"",
+            "\"%{prj.name}.exe\" -processDirectory \"%{wks.location}engineResources\"",
             "@echo Copying engine resources",
             "xcopy /y /d /e \"%{wks.location}engineResources\\*\" \"%{cfg.buildtarget.directory}engineResources\\\"",
         }
@@ -404,8 +404,7 @@ project "DerydocaEngine.Test"
     {
         "DerydocaEngine",
         "DerydocaEngine.Components",
-        "GoogleTest",
-        "yaml-cpp"
+        "GoogleTest"
     }
 
     filter "system:windows"
@@ -423,7 +422,7 @@ project "DerydocaEngine.Test"
             "@echo Copying DLLs",
             "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying engine settings file",
-            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\""
+            "xcopy /y /f \"%{wks.location}engineSettings.json\" \"%{cfg.buildtarget.directory}\""
         }
 
     filter "configurations:Debug"
@@ -499,8 +498,7 @@ project "DerydocaEngine.Editor.Test"
         "DerydocaEngine.Components",
         "DerydocaEngine.Components.Editor",
         "DerydocaEngine.Editor",
-        "GoogleTest",
-        "yaml-cpp"
+        "GoogleTest"
     }
 
     filter "system:windows"
@@ -521,7 +519,7 @@ project "DerydocaEngine.Editor.Test"
             "@echo Copying DLLs",
             "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
             "@echo Copying engine settings file",
-            "xcopy /y /f \"%{wks.location}engineSettings.yaml\" \"%{cfg.buildtarget.directory}\""
+            "xcopy /y /f \"%{wks.location}engineSettings.json\" \"%{cfg.buildtarget.directory}\""
         }
 
     filter "configurations:Debug"
@@ -578,51 +576,6 @@ project "GoogleTest"
         runtime "Release"
 
     filter "configurations:Dist"
-        symbols "On"
-        runtime "Release"
-    
-project "yaml-cpp"
-    location "vendor/generatedProjects"
-    kind "StaticLib"
-    language "C++"
-
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-    flags
-    {
-        "MultiProcessorCompile"
-    }
-
-    files
-    {
-        "vendor/yaml-cpp/src/**.h",
-        "vendor/yaml-cpp/src/**.cpp"
-    }
-
-    includedirs
-    {
-        "%{wks.location}/vendor/yaml-cpp/src",
-        "%{wks.location}/vendor/yaml-cpp/include"
-    }
-
-    filter "system:windows"
-        cppdialect "C++17"
-        systemversion "latest"
-
-    filter "configurations:Debug"
-        defines "DD_DEBUG"
-        symbols "On"
-        staticruntime "Off"
-        runtime "Debug"
-
-    filter "configurations:Release"
-        defines "DD_RELEASE"
-        symbols "On"
-        runtime "Release"
-
-    filter "configurations:Dist"
-        defines "DD_DIST"
         symbols "On"
         runtime "Release"
     

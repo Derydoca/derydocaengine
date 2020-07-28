@@ -4,27 +4,18 @@
 
 namespace DerydocaEngine::Files::Serializers {
 
-	YAML::Node RasterFontFileSerializer::generateResourceNodes(std::string const& filePath)
+	std::vector<std::shared_ptr<Resources::Resource>> RasterFontFileSerializer::generateResources(const std::string& assetPath)
 	{
-		YAML::Node resources;
-
-		YAML::Node levelResource;
-		levelResource["ID"] = generateUuid();
-
-		resources.push_back(levelResource);
-
+		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();
+		auto resource = std::make_shared<Resources::RasterFontResource>();
+		resource->generateAndSetId();
+		resources.push_back(resource);
 		return resources;
 	}
 
 	Files::FileType RasterFontFileSerializer::getFileType()
 	{
 		return Files::FileType::RasterFontType;
-	}
-
-	std::shared_ptr<Resources::Resource> RasterFontFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		auto r = std::make_shared<Resources::RasterFontResource>();
-		return r;
 	}
 
 }

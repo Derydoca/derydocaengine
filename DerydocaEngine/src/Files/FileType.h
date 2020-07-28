@@ -17,6 +17,7 @@ namespace DerydocaEngine::Files
 		FontType,
 		RasterFontType,
 		SpriteSheetFileType,
+		CubemapFileType
 	};
 
 	FileType pathToFileType(std::string const& str);

@@ -8,6 +8,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(WaveDisplacement);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		WaveDisplacement();
 		~WaveDisplacement();
@@ -15,18 +16,20 @@ namespace DerydocaEngine::Ext
 		virtual void init();
 		virtual void update(const float deltaTime);
 		virtual void preRender();
-		virtual void deserialize(const YAML::Node& compNode);
 
-		float& getK() { return m_k; }
-		float& getVelocity() { return m_velocity; }
-		float& getAmplitude() { return m_amplitude; }
+		float& getK() { return m_K; }
+		float& getVelocity() { return m_Velocity; }
+		float& getAmplitude() { return m_Amplitude; }
 
 	private:
-		float m_k;
-		float m_velocity;
-		float m_amplitude;
-		float m_time;
-		std::shared_ptr<Rendering::Material> m_material;
+		float m_K;
+		float m_Velocity;
+		float m_Amplitude;
+
+		float m_Time;
+		std::shared_ptr<Rendering::Material> m_Material;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::WaveDisplacement, 0);

@@ -9,6 +9,7 @@ namespace DerydocaEngine::Ext
 	{
 	public:
 		GENINSTANCE(MultisampleSwitch);
+		SERIALIZE_FUNC_DEFINITIONS;
 
 		MultisampleSwitch();
 		~MultisampleSwitch();
@@ -17,11 +18,14 @@ namespace DerydocaEngine::Ext
 		virtual void update(const float deltaTime);
 
 		void setEnableMultisample(bool const& enable);
-		bool isMultisampleOn() { return m_enableMultisample; }
+		bool isMultisampleOn() { return m_EnableMultisample; }
+
 	private:
-		Input::Keyboard * m_keyboard;
-		bool m_enableMultisample;
-		bool m_msaaSupported;
+		Input::Keyboard * m_Keyboard;
+		bool m_EnableMultisample;
+		bool m_MSAASupported;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Ext::MultisampleSwitch, 0);

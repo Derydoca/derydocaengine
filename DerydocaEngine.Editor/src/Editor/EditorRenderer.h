@@ -6,7 +6,9 @@
 #include "Rendering\Renderer.h"
 #include "Rendering\RenderTexture.h"
 #include "Resources\LevelResource.h"
+#include "Resources\MaterialResource.h"
 #include "Scenes\SerializedScene.h"
+#include "Settings\EditorWindowSettings.h"
 
 namespace DerydocaEngine::Editor
 {
@@ -25,7 +27,11 @@ namespace DerydocaEngine::Editor
 
 		void renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
 		void renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, std::vector<std::shared_ptr<Scenes::Scene>> scenes, int textureW, int textureH);
-		std::shared_ptr<Rendering::Material> getEditorSkyboxMaterial() { return m_editorSkyboxMaterial; };
+		std::shared_ptr<Rendering::Material> getEditorSkyboxMaterial()
+		{
+			return std::static_pointer_cast<Rendering::Material>(m_editorSkyboxMaterialResource->getResourceObjectPointer());
+		};
+		std::shared_ptr<Resources::MaterialResource> getEditorSkyboxMaterialResource() { return m_editorSkyboxMaterialResource; };
 		void addWindow(const std::shared_ptr<Components::GameComponent> component);
 
 		bool isPlaying() const { return m_playing; }
@@ -37,13 +43,14 @@ namespace DerydocaEngine::Editor
 		EditorRenderer(const EditorRenderer&);
 
 		std::shared_ptr<Resources::LevelResource> getSceneResource(const std::string& sceneId, const std::string& sceneType);
-		void loadScene(const std::string& sceneId, std::shared_ptr<Scenes::SerializedScene> scene);
+		std::shared_ptr<Scenes::SerializedScene> loadScene(const std::string& sceneId);
 
 	private:
 		bool m_playing;
 		std::shared_ptr<Scenes::SerializedScene> m_editorComponentsScene;
 		std::shared_ptr<Scenes::SerializedScene> m_editorGuiScene;
-		std::shared_ptr<Rendering::Material> m_editorSkyboxMaterial;
+		std::shared_ptr<Resources::MaterialResource> m_editorSkyboxMaterialResource;
+		Settings::EditorWindowSettings m_settings;
 
 	};
 

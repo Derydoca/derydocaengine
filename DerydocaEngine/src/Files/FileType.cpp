@@ -12,6 +12,10 @@ namespace DerydocaEngine::Files
 		{
 			return MaterialFileType;
 		}
+		else if (extension == "dcubemap")
+		{
+			return CubemapFileType;
+		}
 		else if (extension == "fbx" || extension == "obj")
 		{
 			return MeshFileType;
@@ -47,6 +51,11 @@ namespace DerydocaEngine::Files
 		else if (extension == "dsprites")
 		{
 			return SpriteSheetFileType;
+		}
+		else if (extension == "derymeta")
+		{
+			D_LOG_INFO("Ignoring legacy meta file format: {}", str);
+			return IgnoredFileType;
 		}
 		else
 		{

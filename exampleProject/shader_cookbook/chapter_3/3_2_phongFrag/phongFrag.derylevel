@@ -1,83 +1,378 @@
-Scene:
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6aa
-    Properties:
-      Name: Phong Fragment Shader Example
-      Transform:
-        Position: [0, 0, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 4e263193-5c65-44c3-940c-fce2f9041fb2
-            Mesh: b1b135df-0f8a-4ebf-bd9d-a98127daf307
-        - Type: Rotator
-          Properties:
-            rotationSpeed: 30.0
-        - Type: MaterialRefresher
-          Properties:
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6bb
-    Properties:
-      Name: Floor
-      Transform:
-        Position: [0, 0, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [5, 5, 5]
-      Components:
-        - Type: MeshRenderer
-          Properties:
-            Material: 4e263193-5c65-44c3-940c-fce2f9041fb2
-            Mesh: cdadf7f6-536c-4765-9d6d-08a15c8e54c5 # Plane
-            #Mesh: deb8fa30-119b-4483-b3fe-58978a4a73ac # Cube
-            #Mesh: c8692242-532d-4905-a1eb-0ed40dab3114 # Sphere
-        - Type: MaterialRefresher
-          Properties:
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31ebee1
-    Properties:
-      Name: Light Spinner
-      Transform:
-        Position: [1, 0, 0]
-        Rotation: [0, 0, 0, 1]
-        Scale: [1, 1, 1]
-      Components:
-        - Type: Rotator
-          Properties:
-            rotationSpeed: -90.0
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e1
-    Properties:
-      Name: Point Light 1
-      Parent: a2ff98cc-9421-4226-8a26-680ad31ebee1
-      Transform:
-        Position: [1.5, 0.5, 2.5]
-        Rotation: [0, 0, 0, 1]
-        Scale: [0.05, 0.05, 0.05]
-      Components:
-        - Type: Light
-          Properties:
-            color: [0.7, 0.25, 0.5, 1.0]
-            type: 1
-        - Type: MeshRenderer
-          Properties:
-            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
-            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
-  - Type: GameObject
-    ID: a2ff98cc-9421-4226-8a26-680ad31eb6e2
-    Properties:
-      Name: Point Light 2
-      Transform:
-        Position: [-2, 0.5, -1]
-        Rotation: [0, 0, 0, 1]
-        Scale: [0.05, 0.05, 0.05]
-      Components:
-        - Type: Light
-          Properties:
-            color: [0.2, 0.84, 0.33, 1.0]
-            type: 1
-        - Type: MeshRenderer
-          Properties:
-            Material: 9a932980-a824-4ec9-bd89-e67cc45e992a
-            Mesh: c8692242-532d-4905-a1eb-0ed40dab3114
+{
+    "__base_DerydocaEngine::Scenes::Scene": {
+        "m_Root": {
+            "polymorphic_id": 1073741824,
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "cereal_class_version": 0,
+                    "m_Name": "__SCENE_ROOT__",
+                    "m_Transform": {
+                        "polymorphic_id": 1073741824,
+                        "ptr_wrapper": {
+                            "id": 2147483650,
+                            "data": {
+                                "m_Position": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0
+                                },
+                                "m_Scale": {
+                                    "x": 1.0,
+                                    "y": 1.0,
+                                    "z": 1.0
+                                },
+                                "m_Quaternion": {
+                                    "x": 0.0,
+                                    "y": 0.0,
+                                    "z": 0.0,
+                                    "w": 1.0
+                                }
+                            }
+                        }
+                    },
+                    "m_Children": [
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483651,
+                                "data": {
+                                    "m_Name": "Phong Fragment Shader Example",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483652,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 1.0,
+                                                    "y": 1.0,
+                                                    "z": 1.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 2147483649,
+                                            "polymorphic_name": "DerydocaEngine::Components::MeshRenderer",
+                                            "ptr_wrapper": {
+                                                "id": 2147483653,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "8f79e235-d1ca-47ec-ae2c-25f416282f1f"
+                                                        }
+                                                    },
+                                                    "m_Mesh": "b1b135df-0f8a-4ebf-bd9d-a98127daf307",
+                                                    "m_Material": "4e263193-5c65-44c3-940c-fce2f9041fb2",
+                                                    "m_Transparent": false
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 2147483650,
+                                            "polymorphic_name": "DerydocaEngine::Components::Rotator",
+                                            "ptr_wrapper": {
+                                                "id": 2147483654,
+                                                "data": {
+                                                    "cereal_class_version": 0,
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "601a8aea-4e74-4bb2-b0e7-d9c453748259"
+                                                        }
+                                                    },
+                                                    "m_Speed": 30.0
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483656,
+                                "data": {
+                                    "m_Name": "Floor",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483657,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 5.0,
+                                                    "y": 5.0,
+                                                    "z": 5.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 1,
+                                            "ptr_wrapper": {
+                                                "id": 2147483658,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "c7ac7ed5-84ed-474d-a8f8-333eab174840"
+                                                        }
+                                                    },
+                                                    "m_Mesh": "cdadf7f6-536c-4765-9d6d-08a15c8e54c5",
+                                                    "m_Material": "4e263193-5c65-44c3-940c-fce2f9041fb2",
+                                                    "m_Transparent": false
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483660,
+                                "data": {
+                                    "m_Name": "Light Spinner",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483661,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": 1.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 1.0,
+                                                    "y": 1.0,
+                                                    "z": 1.0
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [
+                                        {
+                                            "polymorphic_id": 1073741824,
+                                            "ptr_wrapper": {
+                                                "id": 2147483662,
+                                                "data": {
+                                                    "m_Name": "Point Light 1",
+                                                    "m_Transform": {
+                                                        "polymorphic_id": 1073741824,
+                                                        "ptr_wrapper": {
+                                                            "id": 2147483663,
+                                                            "data": {
+                                                                "m_Position": {
+                                                                    "x": 1.5,
+                                                                    "y": 0.5,
+                                                                    "z": 2.5
+                                                                },
+                                                                "m_Scale": {
+                                                                    "x": 0.05000000074505806,
+                                                                    "y": 0.05000000074505806,
+                                                                    "z": 0.05000000074505806
+                                                                },
+                                                                "m_Quaternion": {
+                                                                    "x": 0.0,
+                                                                    "y": 0.0,
+                                                                    "z": 0.0,
+                                                                    "w": 1.0
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "m_Children": [],
+                                                    "m_Components": [
+                                                        {
+                                                            "polymorphic_id": 2147483652,
+                                                            "polymorphic_name": "DerydocaEngine::Components::Light",
+                                                            "ptr_wrapper": {
+                                                                "id": 2147483664,
+                                                                "data": {
+                                                                    "cereal_class_version": 0,
+                                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                                        "__base_DerydocaEngine::Object": {
+                                                                            "m_ID": "26841b46-468b-41f5-98e1-e41a0d005212"
+                                                                        }
+                                                                    },
+                                                                    "m_Type": 1,
+                                                                    "m_ShadowMapFilterType": 0,
+                                                                    "m_ShadowMapSize": {
+                                                                        "x": 512,
+                                                                        "y": 512
+                                                                    },
+                                                                    "m_Color": {
+                                                                        "r": 0.699999988079071,
+                                                                        "g": 0.25,
+                                                                        "b": 0.5,
+                                                                        "a": 1.0
+                                                                    },
+                                                                    "m_CastShadows": false,
+                                                                    "m_SpotlightExponent": 0.0,
+                                                                    "m_SpotlightCutoff": 0.0,
+                                                                    "m_ShadowSoftness": 0.009999999776482582
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "polymorphic_id": 1,
+                                                            "ptr_wrapper": {
+                                                                "id": 2147483665,
+                                                                "data": {
+                                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                                        "__base_DerydocaEngine::Object": {
+                                                                            "m_ID": "fe93bfa2-2952-42da-b166-712e0e7865dc"
+                                                                        }
+                                                                    },
+                                                                    "m_Mesh": "c8692242-532d-4905-a1eb-0ed40dab3114",
+                                                                    "m_Material": "9a932980-a824-4ec9-bd89-e67cc45e992a",
+                                                                    "m_Transparent": false
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 2,
+                                            "ptr_wrapper": {
+                                                "id": 2147483666,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "381ad8e9-9148-46c8-b27d-88071ebdadb6"
+                                                        }
+                                                    },
+                                                    "m_Speed": -90.0
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "polymorphic_id": 1073741824,
+                            "ptr_wrapper": {
+                                "id": 2147483667,
+                                "data": {
+                                    "m_Name": "Point Light 2",
+                                    "m_Transform": {
+                                        "polymorphic_id": 1073741824,
+                                        "ptr_wrapper": {
+                                            "id": 2147483668,
+                                            "data": {
+                                                "m_Position": {
+                                                    "x": -2.0,
+                                                    "y": 0.5,
+                                                    "z": -1.0
+                                                },
+                                                "m_Scale": {
+                                                    "x": 0.05000000074505806,
+                                                    "y": 0.05000000074505806,
+                                                    "z": 0.05000000074505806
+                                                },
+                                                "m_Quaternion": {
+                                                    "x": 0.0,
+                                                    "y": 0.0,
+                                                    "z": 0.0,
+                                                    "w": 1.0
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "m_Children": [],
+                                    "m_Components": [
+                                        {
+                                            "polymorphic_id": 4,
+                                            "ptr_wrapper": {
+                                                "id": 2147483669,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "5ae53b65-9618-40ef-b93c-997ee3baae10"
+                                                        }
+                                                    },
+                                                    "m_Type": 1,
+                                                    "m_ShadowMapFilterType": 0,
+                                                    "m_ShadowMapSize": {
+                                                        "x": 512,
+                                                        "y": 512
+                                                    },
+                                                    "m_Color": {
+                                                        "r": 0.20000000298023225,
+                                                        "g": 0.8399999737739563,
+                                                        "b": 0.33000001311302187,
+                                                        "a": 1.0
+                                                    },
+                                                    "m_CastShadows": false,
+                                                    "m_SpotlightExponent": 0.0,
+                                                    "m_SpotlightCutoff": 0.0,
+                                                    "m_ShadowSoftness": 0.009999999776482582
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "polymorphic_id": 1,
+                                            "ptr_wrapper": {
+                                                "id": 2147483670,
+                                                "data": {
+                                                    "__base_DerydocaEngine::Components::GameComponent": {
+                                                        "__base_DerydocaEngine::Object": {
+                                                            "m_ID": "fd9f69dc-337d-4504-a3cf-065ab251706b"
+                                                        }
+                                                    },
+                                                    "m_Mesh": "c8692242-532d-4905-a1eb-0ed40dab3114",
+                                                    "m_Material": "9a932980-a824-4ec9-bd89-e67cc45e992a",
+                                                    "m_Transparent": false
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "m_Components": []
+                }
+            }
+        }
+    }
+}

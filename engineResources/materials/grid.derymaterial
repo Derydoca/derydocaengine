@@ -1,11 +1,42 @@
-Shader: 40ceb881-f04c-44e6-91c1-cc2426ece94c
-MaterialParameters:
-  - Type: Color
-    Name: UnitGridLineColor
-    Value: [1.0, 1.0, 1.0, 0.5]
-  - Type: Color
-    Name: SubUnitGridLineColor
-    Value: [1.0, 1.0, 1.0, 0.1]
-  - Type: Color
-    Name: MajorUnitGridLineColor
-    Value: [1.0, 1.0, 1.0, 0.9]
+{
+    "ShaderId": "40ceb881-f04c-44e6-91c1-cc2426ece94c",
+    "Textures": [],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [
+        {
+            "Name": "MajorUnitGridLineColor",
+            "Value": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0,
+                "w": 0.8999999761581421
+            }
+        },
+        {
+            "Name": "SubUnitGridLineColor",
+            "Value": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0,
+                "w": 0.10000000149011612
+            }
+        },
+        {
+            "Name": "UnitGridLineColor",
+            "Value": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0,
+                "w": 0.5
+            }
+        }
+    ],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

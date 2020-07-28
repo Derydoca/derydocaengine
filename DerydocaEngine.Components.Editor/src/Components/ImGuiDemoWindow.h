@@ -12,8 +12,12 @@ namespace DerydocaEngine::Components
 		ImGuiDemoWindow();
 
 		virtual void update(const float deltaTime);
+
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::GameComponent);
 	private:
-		bool m_open;
+		bool m_Open;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::ImGuiDemoWindow, 0);

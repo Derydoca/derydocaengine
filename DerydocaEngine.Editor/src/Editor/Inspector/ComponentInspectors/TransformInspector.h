@@ -13,8 +13,8 @@ namespace DerydocaEngine::Editor::Inspector::ComponentInspectors
 		{
 			auto transform = std::static_pointer_cast<Components::Transform>(object);
 
-			ImGui::DragFloat3("Position", &transform->getPos()[0], 0.005f);
-			Dgui::InputQuaternion("Rotation", transform->getQuat());
+			ImGui::DragFloat3("Position", &transform->getPosition()[0], 0.005f);
+			Dgui::InputQuaternion("Rotation", transform->getQuaternion());
 			ImGui::DragFloat3("Scale", &transform->getScale()[0], 0.005f);
 		}
 	};

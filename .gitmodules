@@ -1,9 +1,9 @@
 [submodule "vendor/gtest"]
 	path = vendor/gtest
 	url = https://github.com/google/googletest.git
-[submodule "vendor/yaml-cpp"]
-	path = vendor/yaml-cpp
-	url = https://github.com/jbeder/yaml-cpp.git
 [submodule "vendor/freetype"]
 	path = vendor/freetype
 	url = https://github.com/aseprite/freetype2.git
+[submodule "vendor/cereal"]
+	path = vendor/cereal
+	url = https://github.com/USCiLab/cereal.git

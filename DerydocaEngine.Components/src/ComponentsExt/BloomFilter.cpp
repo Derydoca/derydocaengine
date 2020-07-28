@@ -20,8 +20,8 @@ namespace DerydocaEngine::Ext
 
 	void BloomFilter::init()
 	{
-		m_postProcessCamera = getComponentInChildren<Components::Camera>();
-		if (m_postProcessCamera == nullptr)
+		m_PostProcessCamera = getComponentInChildren<Components::Camera>();
+		if (m_PostProcessCamera == nullptr)
 		{
 			LOG_ERROR("No camera was found attached to this EdgeDetectionFilter component. A camera with a render texture is required to use this component.");
 			return;
@@ -29,51 +29,42 @@ namespace DerydocaEngine::Ext
 
 		float sum = 0.0f;
 		float sigma2 = 4.0f;
-		m_weights.resize(10);
-		m_weights[0] = gauss(0, sigma2);
-		sum = m_weights[0];
+		m_Weights.resize(10);
+		m_Weights[0] = gauss(0, sigma2);
+		sum = m_Weights[0];
 		for (int i = 1; i < 10; i++)
 		{
-			m_weights[i] = gauss(float(i), sigma2);
-			sum += 2 * m_weights[i];
+			m_Weights[i] = gauss(float(i), sigma2);
+			sum += 2 * m_Weights[i];
 		}
 
 		for (int i = 0; i < 10; i++)
 		{
-			m_weights[i] = m_weights[i] / sum;
+			m_Weights[i] = m_Weights[i] / sum;
 		}
 
 		// Create the blur texture
-		auto cameraRenderTexture = m_postProcessCamera->getRenderTexture();
+		auto cameraRenderTexture = m_PostProcessCamera->getRenderTexture();
 		int width = cameraRenderTexture->getWidth();
 		int height = cameraRenderTexture->getHeight();
-		m_blurTex = std::make_shared<Rendering::RenderTexture>();
-		m_blurTex->initializeTexture(width, height);
-		m_blurTex2 = std::make_shared<Rendering::RenderTexture>();
-		m_blurTex2->initializeTexture(width, height);
+		m_BlurTex = std::make_shared<Rendering::RenderTexture>();
+		m_BlurTex->initializeTexture(width, height);
+		m_BlurTex2 = std::make_shared<Rendering::RenderTexture>();
+		m_BlurTex2->initializeTexture(width, height);
 
-		auto shader = m_postProcessCamera->getPostProcessShader();
+		auto shader = m_PostProcessCamera->getPostProcessShader();
 		if (shader != nullptr)
 		{
 			Rendering::RenderPass subPassNames[3] =
 			{
-				Rendering::RenderPass("lumThreshPass", m_blurTex, "BlurTex"),
-				Rendering::RenderPass("blurY", m_blurTex2, "BlurTex2"),
+				Rendering::RenderPass("lumThreshPass", m_BlurTex, "BlurTex"),
+				Rendering::RenderPass("blurY", m_BlurTex2, "BlurTex2"),
 				Rendering::RenderPass("blurX")
 			};
 			shader->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 3);
 		}
 
 		updateShader();
-	}
-
-	void BloomFilter::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node lumThreshNode = compNode["lumThresh"];
-		if (lumThreshNode)
-		{
-			m_lumThresh = compNode["lumThresh"].as<float>();
-		}
 	}
 
 	void BloomFilter::update(const float deltaTime)
@@ -90,14 +81,28 @@ namespace DerydocaEngine::Ext
 
 	void BloomFilter::updateShader()
 	{
-		auto material = m_postProcessCamera->getPostProcessMaterial();
+		auto material = m_PostProcessCamera->getPostProcessMaterial();
 		if (material == nullptr)
 		{
 			return;
 		}
 
-		material->setFloatArray("Weights", m_weights);
-		material->setFloat("LumThresh", m_lumThresh);
+		material->setFloatArray("Weights", m_Weights);
+		material->setFloat("LumThresh", m_Threshold);
+	}
+
+	SERIALIZE_FUNC_LOAD(archive, BloomFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Threshold)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, BloomFilter)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Threshold)
+		);
 	}
 
 }

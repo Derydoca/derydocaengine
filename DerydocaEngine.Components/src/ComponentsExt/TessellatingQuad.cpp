@@ -9,12 +9,12 @@ namespace DerydocaEngine::Ext
 {
 
 	TessellatingQuad::TessellatingQuad() :
-		m_vao(0),
-		m_vbo(0),
-		m_inner(4),
-		m_outer(4),
-		m_controlPoints(),
-		m_material(std::make_shared<Rendering::Material>())
+		m_ControlPoints(),
+		m_Inner(4),
+		m_Outer(4),
+		m_Material(),
+		m_VAO(0),
+		m_VBO(0)
 	{
 	}
 
@@ -24,15 +24,15 @@ namespace DerydocaEngine::Ext
 
 	void TessellatingQuad::init()
 	{
-		glGenBuffers(1, &m_vbo);
+		glGenBuffers(1, &m_VBO);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), m_controlPoints, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), m_ControlPoints, GL_STATIC_DRAW);
 
-		glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
+		glGenVertexArrays(1, &m_VAO);
+		glBindVertexArray(m_VAO);
 
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(0);
 
@@ -47,38 +47,34 @@ namespace DerydocaEngine::Ext
 		updateMaterial();
 	}
 
-	void TessellatingQuad::deserialize(const YAML::Node& compNode)
+	SERIALIZE_FUNC_LOAD(archive, TessellatingQuad)
 	{
-		YAML::Node controlPointsNode = compNode["controlPoints"];
-		if (controlPointsNode)
-		{
-			for (size_t i = 0; i < 8; i++)
-			{
-				m_controlPoints[i] = controlPointsNode[i].as<float>();
-			}
-		}
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_ControlPoints),
+			SERIALIZE(m_Inner),
+			SERIALIZE(m_Outer),
+			SERIALIZE(m_Material)
+		);
 
-		YAML::Node innerNode = compNode["inner"];
-		if (innerNode)
-		{
-			m_inner = innerNode.as<int>();
-		}
+		m_Material.As<Rendering::Material>()->copyFrom(m_Material.As<Rendering::Material>());
+	}
 
-		YAML::Node outerNode = compNode["outer"];
-		if (outerNode)
-		{
-			m_outer = outerNode.as<int>();
-		}
-
-		auto sourceMaterial = getResourcePointer<Rendering::Material>(compNode, "material");
-		m_material->copyFrom(sourceMaterial);
+	SERIALIZE_FUNC_SAVE(archive, TessellatingQuad)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_ControlPoints),
+			SERIALIZE(m_Inner),
+			SERIALIZE(m_Outer),
+			SERIALIZE(m_Material)
+		);
 	}
 
 	void TessellatingQuad::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
 	{
-		m_material->bind();
-		m_material->getShader()->updateViaActiveCamera(matrixStack);
-		glBindVertexArray(m_vao);
+		auto material = m_Material.As<Rendering::Material>();
+		material->bind();
+		material->getShader()->updateViaActiveCamera(matrixStack);
+		glBindVertexArray(m_VAO);
 		glDrawArrays(GL_PATCHES, 0, 4);
 
 		glFinish();
@@ -91,8 +87,9 @@ namespace DerydocaEngine::Ext
 
 	void TessellatingQuad::updateMaterial()
 	{
-		m_material->setInt("Inner", m_inner);
-		m_material->setInt("Outer", m_outer);
+		auto material = m_Material.As<Rendering::Material>();
+		material->setInt("Inner", m_Inner);
+		material->setInt("Outer", m_Outer);
 	}
 
 }

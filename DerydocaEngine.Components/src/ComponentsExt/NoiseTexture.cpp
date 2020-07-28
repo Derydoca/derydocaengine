@@ -13,7 +13,7 @@ namespace DerydocaEngine::Ext
 
 	NoiseTexture::NoiseTexture()
 	{
-		m_texture = std::make_shared<Rendering::Texture>();
+		m_Texture = std::make_shared<Rendering::Texture>();
 	}
 
 	NoiseTexture::~NoiseTexture()
@@ -25,87 +25,42 @@ namespace DerydocaEngine::Ext
 		auto mr = getComponentInChildren<Components::MeshRenderer>();
 		if (mr)
 		{
-			m_material = mr->getMaterial();
+			m_Material = mr->getMaterial();
 		}
 		else
 		{
 			auto cam = getComponentInChildren<Components::Camera>();
 			if (cam)
 			{
-				m_material = cam->getPostProcessMaterial();
+				m_Material = cam->getPostProcessMaterial();
 			}
 		}
 
 		generateNoiseTexture();
 	}
 
-	void NoiseTexture::deserialize(const YAML::Node& compNode)
-	{
-		YAML::Node widthNode = compNode["width"];
-		if (widthNode)
-		{
-			m_width = widthNode.as<int>();
-		}
-
-		YAML::Node heightNode = compNode["height"];
-		if (heightNode)
-		{
-			m_height = heightNode.as<int>();
-		}
-
-		YAML::Node textureNameNode = compNode["textureName"];
-		if (textureNameNode)
-		{
-			m_textureName = textureNameNode.as<std::string>();
-		}
-
-		YAML::Node baseFrequencyNode = compNode["baseFrequency"];
-		if (baseFrequencyNode)
-		{
-			m_baseFrequency = baseFrequencyNode.as<float>();
-		}
-
-		YAML::Node persistenceNode = compNode["persistence"];
-		if (persistenceNode)
-		{
-			m_persistence = persistenceNode.as<float>();
-		}
-
-		YAML::Node periodicNode = compNode["periodic"];
-		if (periodicNode)
-		{
-			m_periodic = periodicNode.as<bool>();
-		}
-
-		YAML::Node seamlessNode = compNode["seamless"];
-		if (seamlessNode)
-		{
-			m_seamless = seamlessNode.as<bool>();
-		}
-	}
-
 	void NoiseTexture::generateNoiseTexture()
 	{
-		GLubyte* textureData = new GLubyte[m_width * m_height * 4];
+		GLubyte* textureData = new GLubyte[m_Size.x * m_Size.y * 4];
 
 		float xRange = 1.0f;
 		float yRange = 1.0f;
-		float xFactor = xRange / (m_width - 1);
-		float yFactor = yRange / (m_height - 1);
+		float xFactor = xRange / (m_Size.x - 1);
+		float yFactor = yRange / (m_Size.y - 1);
 
-		for (int row = 0; row < m_height; row++)
+		for (int row = 0; row < m_Size.y; row++)
 		{
-			for (int col = 0; col < m_width; col++)
+			for (int col = 0; col < m_Size.x; col++)
 			{
 				float x = xFactor * col;
 				float y = yFactor * row;
 				float sum = 0.0f;
-				float freq = m_baseFrequency;
-				float persist = m_persistence;
+				float freq = m_BaseFrequency;
+				float persist = m_Persistence;
 				for (int oct = 0; oct < 4; oct++) {
 
 					float val = 0.0f;
-					if (m_seamless)
+					if (m_Seamless)
 					{
 						float a, b, c, d;
 
@@ -114,7 +69,7 @@ namespace DerydocaEngine::Ext
 						glm::vec2 cPos = glm::vec2(x, y + yRange) * freq;
 						glm::vec2 dPos = glm::vec2(x + xRange, y + yRange) * freq;
 
-						if (m_periodic)
+						if (m_Periodic)
 						{
 							a = perlin(aPos);
 							b = perlin(bPos);
@@ -144,7 +99,7 @@ namespace DerydocaEngine::Ext
 					else
 					{
 						glm::vec2 p(x * freq, y * freq);
-						if (m_periodic)
+						if (m_Periodic)
 						{
 							val = glm::perlin(p, glm::vec2(freq));
 						}
@@ -165,9 +120,9 @@ namespace DerydocaEngine::Ext
 					result = result < 0.0f ? 0.0f : result;
 
 					// Store in texture
-					textureData[((row * m_width + col) * 4) + oct] = (GLubyte)(result * 255.0f);
+					textureData[((row * m_Size.x + col) * 4) + oct] = (GLubyte)(result * 255.0f);
 					freq *= 2.0f;
-					persist *= m_persistence;
+					persist *= m_Persistence;
 				}
 			}
 		}
@@ -175,11 +130,38 @@ namespace DerydocaEngine::Ext
 		Rendering::TextureParameters texParams;
 		texParams.setWrapModeS(Rendering::TextureWrapMode::REPEAT);
 		texParams.setWrapModeT(Rendering::TextureWrapMode::REPEAT);
-		m_texture->updateBuffer(textureData, m_width, m_height, 4, &texParams);
+		m_Texture->updateBuffer(textureData, m_Size.x, m_Size.y, 4, &texParams);
 
-		m_material->setTexture(m_textureName, m_texture);
+		if (m_Material)
+		{
+			m_Material->setTexture(m_TextureName, m_Texture);
+		}
 
 		delete[] textureData;
+	}
+
+	SERIALIZE_FUNC_LOAD(archive, NoiseTexture)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Size),
+			SERIALIZE(m_TextureName),
+			SERIALIZE(m_BaseFrequency),
+			SERIALIZE(m_Persistence),
+			SERIALIZE(m_Periodic),
+			SERIALIZE(m_Seamless)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, NoiseTexture)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Size),
+			SERIALIZE(m_TextureName),
+			SERIALIZE(m_BaseFrequency),
+			SERIALIZE(m_Persistence),
+			SERIALIZE(m_Periodic),
+			SERIALIZE(m_Seamless)
+		);
 	}
 
 }

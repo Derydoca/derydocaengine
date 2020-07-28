@@ -7,7 +7,6 @@
 #include "Resources\Resource.h"
 #include "Rendering\Texture.h"
 #include "Rendering\TextureParameters.h"
-#include "Helpers\YamlTools.h"
 
 namespace DerydocaEngine::Ext
 {
@@ -25,65 +24,42 @@ namespace DerydocaEngine::Ext
 		updateShader();
 	}
 
-	void ImageProjector::deserialize(const YAML::Node& compNode)
+	SERIALIZE_FUNC_LOAD(archive, ImageProjector)
 	{
-		YAML::Node focalPointNode = compNode["focalPoint"];
-		if (focalPointNode)
-		{
-			m_focalPoint = focalPointNode.as<glm::vec3>();
-		}
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_FocalPoint),
+			SERIALIZE(m_UpVector),
+			SERIALIZE(m_FOV),
+			SERIALIZE(m_ZNear),
+			SERIALIZE(m_ZFar),
+			SERIALIZE(m_ProjectorTexture)
+			//SERIALIZE(m_MeshRenderers)
+		);
 
-		YAML::Node upVectorNode = compNode["upVector"];
-		if (upVectorNode)
-		{
-			m_upVector = upVectorNode.as<glm::vec3>();
-		}
-		else
-		{
-			m_upVector = glm::vec3(0.0f, 1.0f, 0.0);
-		}
-
-		YAML::Node fovNode = compNode["fov"];
-		if (fovNode)
-		{
-			m_fov = fovNode.as<float>();
-		}
-		else
-		{
-			m_fov = 30.0f;
-		}
-
-		YAML::Node zNearNode = compNode["zNear"];
-		if (zNearNode)
-		{
-			m_zNear = zNearNode.as<float>();
-		}
-		else
-		{
-			m_zNear = 1.0f;
-		}
-
-		YAML::Node zFarNode = compNode["zFar"];
-		if (zFarNode)
-		{
-			m_zFar = zFarNode.as<float>();
-		}
-		else
-		{
-			m_zFar = 1000.0f;
-		}
-
+		// TODO: Set the wrap mode on the texture to CLAMP
 		// Load the projector texture with flags to disable all wrapping
-		Rendering::TextureParameters textureParams;
-		textureParams.setWrapModeS(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
-		textureParams.setWrapModeT(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
-		auto projectorTextureResource = getResource(compNode, "texture");
-		m_projectorTexture = std::make_shared<Rendering::Texture>(projectorTextureResource->getSourceFilePath(), &textureParams);
+		//Rendering::TextureParameters textureParams;
+		//textureParams.setWrapModeS(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
+		//textureParams.setWrapModeT(Rendering::TextureWrapMode::CLAMP_TO_BORDER);
+		//auto texture = std::static_pointer_cast<Rendering::Texture>(m_ProjectorTexture->getResourceObjectPointer());
+		//texture->SetWrapMode();
 
-		// Load references to all mesh renderers this shader affects
-		//m_meshRenderers = loadComponents<Components::MeshRenderer>(compNode, "affectedMeshRenderers");
+		D_LOG_WARN("The ImageProjector component is intentionally broken. A mechanism is needed to store reference to affected mesh renderers.");
 
 		setProjectionGraphic();
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, ImageProjector)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_FocalPoint),
+			SERIALIZE(m_UpVector),
+			SERIALIZE(m_FOV),
+			SERIALIZE(m_ZNear),
+			SERIALIZE(m_ZFar),
+			SERIALIZE(m_ProjectorTexture)
+			//SERIALIZE(m_MeshRenderers)
+		);
 	}
 
 	void ImageProjector::update(const float deltaTime)
@@ -96,14 +72,14 @@ namespace DerydocaEngine::Ext
 		updateProjectionMatrix();
 
 		// Update all shaders with the new projection matrix
-		for (std::shared_ptr<Components::MeshRenderer> meshRenderer : m_meshRenderers)
+		for (std::shared_ptr<Components::MeshRenderer> meshRenderer : m_MeshRenderers)
 		{
 			std::shared_ptr<Rendering::Material> mat = meshRenderer->getMaterial();
 			if (!mat)
 			{
 				continue;
 			}
-			mat->setMat4("ProjectorMatrix", m_projectorMatrix);
+			mat->setMat4("ProjectorMatrix", m_ProjectorMatrix);
 		}
 	}
 
@@ -111,31 +87,36 @@ namespace DerydocaEngine::Ext
 	{
 		// Safely calculate the aspect ratio based on the texture assigned to this component
 		float aspectRatio = 1.0;
-		if (m_projectorTexture != nullptr && m_projectorTexture->getHeight() != 0)
+		if (m_ProjectorTexture)
 		{
-			aspectRatio = (float)m_projectorTexture->getWidth() / (float)m_projectorTexture->getHeight();
+			auto texture = std::static_pointer_cast<Rendering::Texture>(m_ProjectorTexture->getResourceObjectPointer());
+			if (texture->getHeight() != 0)
+			{
+				aspectRatio = (float)texture->getWidth() / (float)texture->getHeight();
+			}
 		}
 
 		// Create the projection matrix
-		glm::mat4 projView = lookAt(getGameObject()->getTransform()->getWorldPos(), m_focalPoint, m_upVector);
-		glm::mat4 projProj = glm::perspective(glm::radians(m_fov), aspectRatio, m_zNear, m_zFar);
+		glm::mat4 projView = lookAt(getGameObject()->getTransform()->getWorldPosition(), m_FocalPoint, m_UpVector);
+		glm::mat4 projProj = glm::perspective(glm::radians(m_FOV), aspectRatio, m_ZNear, m_ZFar);
 		glm::mat4 projScaleTrans = glm::translate(glm::mat4(), glm::vec3(0.5f)) * glm::scale(glm::mat4(), glm::vec3(0.5f));
 
 		// Store it locally
-		m_projectorMatrix = projScaleTrans * projProj * projView;
+		m_ProjectorMatrix = projScaleTrans * projProj * projView;
 	}
 
 	void ImageProjector::setProjectionGraphic()
 	{
 		// Update all shaders with the new projection matrix
-		for (std::shared_ptr<DerydocaEngine::Components::MeshRenderer> meshRenderer : m_meshRenderers)
+		for (std::shared_ptr<DerydocaEngine::Components::MeshRenderer> meshRenderer : m_MeshRenderers)
 		{
 			std::shared_ptr<Rendering::Material> mat = meshRenderer->getMaterial();
 			if (!mat)
 			{
 				continue;
 			}
-			mat->setTexture("ProjectorTex", m_projectorTexture);
+			/*auto texture = std::static_pointer_cast<Rendering::Texture>(m_ProjectorTexture->getResourceObjectPointer());
+			mat->setTexture("ProjectorTex", texture);*/
 		}
 	}
 

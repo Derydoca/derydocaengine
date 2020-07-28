@@ -1,10 +1,19 @@
-Shader: bef58587-98d5-4351-9a78-07f6d1f93a87
-MaterialParameters:
-  - Type: Cubemap
-    Slot: 0
-    ZPos: 56de1116-82e9-4360-97a9-d0e063efdc44
-    ZNeg: 3d83beab-dbd4-48e9-b32b-2ae6db7797f2
-    YPos: e3cef09f-af3b-406a-a8de-48dde3cd0c0c
-    YNeg: 1a091d98-7157-4b38-a6a3-b2bd867e3e0c
-    XNeg: d5e6a438-069c-43f6-8b09-cca26c6421ab
-    XPos: 55d83928-6cfd-4efa-8abd-68bf1c88555b
+{
+    "ShaderId": "bef58587-98d5-4351-9a78-07f6d1f93a87",
+    "Textures": [
+        {
+            "Name": "cubemap",
+            "Value": "1ac6ba1c-7d43-4e02-a1c9-576f9a9c6c33"
+        }
+    ],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

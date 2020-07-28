@@ -2,8 +2,8 @@
 #include <map>
 #include <memory>
 #include <string>
-#include <boost/uuid/string_generator.hpp>
-#include <boost/uuid/uuid.hpp>
+#include <boost\uuid\string_generator.hpp>
+#include <boost\uuid\uuid.hpp>
 #include "Resources\Resource.h"
 #include "Resources\ResourceTreeNode.h"
 #include "Resources\ResourceType.h"
@@ -31,13 +31,14 @@ namespace DerydocaEngine
 		{
 			m_resources[resource->getId()] = resource;
 		}
-		std::string getMetaExtension() const { return m_metaExtension; }
+		const boost::uuids::uuid assetPathToId(const std::string& assetPath);
+		const std::string& getMetaExtension() const { return m_metaExtension; }
 		std::vector<std::shared_ptr<Resources::Resource>> getResourcesOfType(Resources::ResourceType resourceType);
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
+		std::vector<sptr<Resources::Resource>> getResources(const std::string& metaFilePath);
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(boost::uuids::uuid const& uuid);
-		std::shared_ptr<Resources::Resource> getMetaFile(std::string const& sourceFilePath);
-		void updateMetaFilesDirectory(const boost::filesystem::path& padirectoryth);
+		void updateMetaFilesDirectory(const boost::filesystem::path& directoryPath);
 		void updateMetaFiles(std::string const& file);
 		void loadDirectory(const boost::filesystem::path& path);
 		void loadFile(const std::string& sourceFilePath);
@@ -95,8 +96,9 @@ namespace DerydocaEngine
 		std::shared_ptr<Resources::ResourceTreeNode> getResourceTreeNode(const std::string& resourcePath);
 		void loadResourceTree();
 
-		const std::string m_metaExtension = ".derymeta";
+		const std::string m_metaExtension = ".dmeta";
 		std::map<boost::uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
+		std::map<std::string, boost::uuids::uuid> m_pathToIdMap;
 		std::shared_ptr<Resources::ResourceTreeNode> m_projectResourceRoot;
 	};
 

@@ -17,14 +17,18 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(ScreenshotUtil);
+		SERIALIZE_FUNC_DEFINITIONS;
 		ScreenshotUtil();
 		~ScreenshotUtil();
 
 		void postRender();
 		void saveScreenshot();
+
 	private:
-		Input::Keyboard* m_keyboard;
-		Rendering::Display* m_display;
+		Input::Keyboard* m_Keyboard;
+		Rendering::Display* m_Display;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::ScreenshotUtil, 0);

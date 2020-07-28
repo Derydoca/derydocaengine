@@ -2,12 +2,12 @@
 #include "UI\FontFace.h"
 #include "Utilities\TexturePacker.h"
 #include "Rendering\Texture.h"
-#include "yaml-cpp\yaml.h"
-#include "Helpers\YamlTools.h"
 #include <fstream>
 #include "ObjectLibrary.h"
 #include "ObjectLibrary.h"
 #include <iostream>
+#include "AssetData\FontFaceData.h"
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine::UI
 {
@@ -111,16 +111,20 @@ namespace DerydocaEngine::UI
 
 			// Add the glyph to the texture packer
 			packer.addImage(
-				i,
-				fontFace->glyph->metrics.width / 64.0f,
-				fontFace->glyph->metrics.height / 64.0f,
-				fontFace->glyph->metrics.horiBearingX / 64.0f,
-				fontFace->glyph->metrics.horiBearingY / 64.0f,
-				fontFace->glyph->metrics.horiAdvance / 64.0f,
-				0.0f,
+				i,\
+				{
+					fontFace->glyph->metrics.horiBearingX / 64.0f,
+					fontFace->glyph->metrics.horiBearingY / 64.0f
+				},
+				{
+					fontFace->glyph->metrics.horiAdvance / 64.0f,
+					0.0f
+				},
 				fontFace->glyph->bitmap.buffer,
-				fontFace->glyph->bitmap.width,
-				fontFace->glyph->bitmap.rows,
+				{
+					static_cast<int>(fontFace->glyph->bitmap.width),
+					static_cast<int>(fontFace->glyph->bitmap.rows)
+				},
 				1);
 		}
 
@@ -138,29 +142,28 @@ namespace DerydocaEngine::UI
 		m_charImages.clear();
 		for (auto image : images)
 		{
-			m_charImages[image.getID()] = image;
+			m_charImages[image.id] = image;
 		}
 	}
 
 	void FontFace::loadFromSerializedFile(std::string const& filePath)
 	{
-		YAML::Node file = YAML::LoadFile(filePath);
+		auto data = Files::Utils::ReadFromDisk<AssetData::FontFaceData>(filePath);
 
-		YAML::Node font = file["Font"];
+		m_name = data.name;
+		m_style = data.style;
+		m_fontSize = data.fontSize;
+		m_lineHeight = data.lineHeight;
 
-		// Load general font information
-		m_name = font["name"].as<std::string>();
-		m_style = font["style"].as<std::string>();
-		m_fontSize = font["fontSize"].as<float>();
-		m_imageBufferSize.x = font["width"].as<int>();
-		m_imageBufferSize.y = font["height"].as<int>();
-		m_lineHeight = font["lineHeight"].as<float>();
+		for (auto img : data.glyphs)
+		{
+			m_charImages.emplace(img.id, img);
+		}
 
-		// Load the image
-		std::string imageUuid = font["image"].as<std::string>();
-		auto r = ObjectLibrary::getInstance().getResource(imageUuid);
+		auto r = ObjectLibrary::getInstance().getResource(data.textureId);
 		int imgw, imgh, imgch;
 		unsigned char* imageData = stbi_load(r->getSourceFilePath().c_str(), &imgw, &imgh, &imgch, 0);
+		m_imageBufferSize = { imgw, imgh };
 		delete[] m_imageBuffer;
 		m_imageBuffer = new unsigned char[m_imageBufferSize.x * m_imageBufferSize.y];
 		for (int i = 0; i < m_imageBufferSize.x * m_imageBufferSize.y; i++)
@@ -169,81 +172,35 @@ namespace DerydocaEngine::UI
 		}
 		delete[] imageData;
 
-		// Load all character data
-		YAML::Node charactersNode = font["characters"];
-		for (size_t i = 0; i < charactersNode.size(); i++)
-		{
-			YAML::Node charNode = charactersNode[i];
-			int id = charNode["id"].as<unsigned long>();
-			int w = charNode["width"].as<int>();
-			int h = charNode["height"].as<int>();
-			float sx = charNode["sizeX"].as<float>();
-			float sy = charNode["sizeY"].as<float>();
-			float ax = charNode["advanceX"].as<float>();
-			float ay = charNode["advanceY"].as<float>();
-			float bx = charNode["bearingX"].as<float>();
-			float by = charNode["bearingY"].as<float>();
-			float tx = charNode["texX"].as<float>();
-			float ty = charNode["texY"].as<float>();
-			float tdx = charNode["texDX"].as<float>();
-			float tdy = charNode["texDY"].as<float>();
-			Utilities::TexturePackerImage img(id, w, h, 1, sx, sy, bx, by, ax, ay);
-			img.setTextureSheetRectangle(tx, ty, tdx, tdy);
-			m_charImages.emplace(id, img);
-		}
-
 		m_textureDirty = true;
 	}
 
 	void FontFace::saveToSerializedFile(std::string const& filePath)
 	{
-		YAML::Node root = YAML::Node();
-
-		YAML::Node font = root["Font"];
-
-		// Save the general font data
-		font["name"] = m_name;
-		font["style"] = m_style;
-		font["fontSize"] = m_fontSize;
-		font["width"] = m_imageBufferSize.x;
-		font["height"] = m_imageBufferSize.y;
-		font["lineHeight"] = m_lineHeight;
+		// Write the generated texture to disk
 		std::string imageFileName = filePath + ".bmp";
 		stbi_write_bmp(imageFileName.c_str(), m_imageBufferSize.x, m_imageBufferSize.y, 1, m_imageBuffer);
 		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
-		auto imageResource = ObjectLibrary::getInstance().getMetaFile(imageFileName);
-		font["image"] = boost::lexical_cast<std::string>(imageResource->getId());
+		auto textureId = ObjectLibrary::getInstance().assetPathToId(imageFileName);
 
-		// Save the character information
-		YAML::Node charactersNode = font["characters"];
-		for (auto charImage : m_charImages)
+		// Construct the struct
+		AssetData::FontFaceData data(
+			m_name,
+			m_style,
+			m_fontSize,
+			m_lineHeight,
+			boost::uuids::uuid()
+		);
+		data.textureId = textureId;
+
+		// Copy the glyph data
+		data.glyphs.reserve(m_charImages.size());
+		for (const auto& s : m_charImages)
 		{
-			YAML::Node charNode;
-			charNode["id"] = charImage.second.getID();
-			charNode["width"] = charImage.second.getWidth();
-			charNode["height"] = charImage.second.getHeight();
-			charNode["sizeX"] = charImage.second.getSizeX();
-			charNode["sizeY"] = charImage.second.getSizeY();
-			charNode["advanceX"] = charImage.second.getAdvanceX();
-			charNode["advanceY"] = charImage.second.getAdvanceY();
-			charNode["bearingX"] = charImage.second.getBearingX();
-			charNode["bearingY"] = charImage.second.getBearingY();
-			Rect texPos = charImage.second.getTexSheetPosition();
-			charNode["texX"] = texPos.getX();
-			charNode["texY"] = texPos.getY();
-			charNode["texDX"] = texPos.getDX();
-			charNode["texDY"] = texPos.getDY();
-			charactersNode.push_back(charNode);
+			data.glyphs.push_back(s.second);
 		}
-
-		YAML::Emitter out;
-		out.SetIndent(2);
-		out.SetMapFormat(YAML::Block);
-		out << root;
-		std::ofstream file;
-		file.open(filePath);
-		file << out.c_str();
-		file.close();
+		
+		Files::Utils::WriteToDisk(data, filePath);
 	}
 
 }

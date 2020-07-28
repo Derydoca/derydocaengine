@@ -18,16 +18,17 @@ namespace DerydocaEngine::Utilities
 		}
 	}
 
-	void TexturePackerTextureData::AddImage(int const& xPos, int const& yPos, TexturePackerImage * const& image, unsigned char* const& imageBuffer)
+	void TexturePackerTextureData::AddImage(const int xPos, const int yPos, const TexturePackerImage& image, const unsigned char* imageBuffer)
 	{
-		assert(image->getWidth() + xPos <= (int)m_data[0].size());
-		assert(image->getHeight() + yPos <= (int)m_data.size());
+		int2 size = image.size;
+		assert(size.x + xPos <= (int)m_data[0].size());
+		assert(size.y + yPos <= (int)m_data.size());
 
-		int channelsToRead = glm::min(image->getChannels(), m_channels);
+		int channelsToRead = glm::min(image.channels, m_channels);
 
-		for (int y = 0; y < image->getHeight(); y++)
+		for (int y = 0; y < size.y; y++)
 		{
-			for (int x = 0; x < image->getWidth(); x++)
+			for (int x = 0; x < size.x; x++)
 			{
 				for (int c = 0; c < m_channels; c++)
 				{
@@ -36,7 +37,7 @@ namespace DerydocaEngine::Utilities
 
 					if (c < channelsToRead)
 					{
-						m_data[dataX][dataY] = imageBuffer[(y * image->getWidth() * image->getChannels()) + (x * image->getChannels()) + c];
+						m_data[dataX][dataY] = imageBuffer[(y * size.x * image.channels) + (x * image.channels) + c];
 					}
 					else
 					{

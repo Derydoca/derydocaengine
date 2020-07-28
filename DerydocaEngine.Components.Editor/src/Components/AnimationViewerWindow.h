@@ -24,21 +24,24 @@ namespace DerydocaEngine::Components
 		virtual glm::vec2 getViewPadding() override;
 		virtual void renderToActiveBuffer() override;
 
-		std::shared_ptr<Components::SkinnedMeshRenderer> getSkinnedMeshRenderer() { return m_meshRenderer; }
+		std::shared_ptr<Components::SkinnedMeshRenderer> getSkinnedMeshRenderer() { return m_MeshRenderer; }
 		void setModelScale(float modelScale);
-		float getModelScale() { return m_modelScale; }
+		float getModelScale() { return m_ModelScale; }
 
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::SceneViewerWindow);
 	private:
 		void renderTimelineControl();
 		void updateModelScale();
 
 	private:
-		float m_animationTime;
-		float m_playbackSpeed;
-		float m_modelScale;
-		bool m_playing;
-		bool m_looping;
-		std::shared_ptr<Components::SkinnedMeshRenderer> m_meshRenderer;
-		std::shared_ptr<Scenes::HardCodedScene> m_scene;
+		float m_AnimationTime;
+		float m_PlaybackSpeed;
+		float m_ModelScale;
+		bool m_Playing;
+		bool m_Looping;
+		std::shared_ptr<Components::SkinnedMeshRenderer> m_MeshRenderer;
+		std::shared_ptr<Scenes::HardCodedScene> m_Scene;
 	};
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::AnimationViewerWindow, 0);

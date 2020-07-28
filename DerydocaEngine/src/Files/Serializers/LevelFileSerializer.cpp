@@ -4,27 +4,18 @@
 
 namespace DerydocaEngine::Files::Serializers {
 
-	YAML::Node LevelFileSerializer::generateResourceNodes(std::string const& filePath)
+	std::vector<std::shared_ptr<Resources::Resource>> LevelFileSerializer::generateResources(const std::string& assetPath)
 	{
-		YAML::Node resources;
-
-		YAML::Node levelResource;
-		levelResource["ID"] = generateUuid();
-
-		resources.push_back(levelResource);
-
+		auto resources = std::vector<std::shared_ptr<Resources::Resource>>();
+		auto resource = std::make_shared<Resources::LevelResource>();
+		resource->generateAndSetId();
+		resources.push_back(resource);
 		return resources;
 	}
 
 	Files::FileType LevelFileSerializer::getFileType()
 	{
 		return Files::FileType::LevelFileType;
-	}
-
-	std::shared_ptr<Resources::Resource> LevelFileSerializer::loadResourceFromMeta(YAML::Node const& resourceNode)
-	{
-		auto r = std::make_shared<Resources::LevelResource>();
-		return r;
 	}
 
 }

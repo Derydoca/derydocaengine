@@ -1,6 +1,5 @@
 #pragma once
 #include "Scenes\Scene.h"
-#include "Scenes\SceneObject.h"
 
 namespace DerydocaEngine::Scenes
 {
@@ -14,13 +13,7 @@ namespace DerydocaEngine::Scenes
 		virtual void setUp();
 		virtual void tearDown();
 
-		void LoadFromFile(const std::string& filePath);
-		void SaveToFile(const std::string& filePath);
-	private:
-		// TODO: Find a better way for tracking scene objects for setting up the scene
-		std::vector<std::shared_ptr<SceneObject>> m_sceneObjects;
-
-		std::shared_ptr<SceneObject> findNode(const boost::uuids::uuid& id);
+		SERIALIZE_FUNC_BASE(DerydocaEngine::Scenes::Scene);
 	};
 
 }

@@ -1,0 +1,22 @@
+{
+    "resources": [
+        {
+            "polymorphic_id": 2147483649,
+            "polymorphic_name": "DerydocaEngine::Resources::MeshResource",
+            "ptr_wrapper": {
+                "id": 2147483649,
+                "data": {
+                    "__base_DerydocaEngine::Resources::Resource": {
+                        "__base_DerydocaEngine::Object": {
+                            "m_ID": "84d21022-d7b4-4dee-b617-90763d995773"
+                        }
+                    },
+                    "m_meshIndex": 0,
+                    "m_meshName": "",
+                    "m_skeletonId": "00000000-0000-0000-0000-000000000000",
+                    "m_flags": 0
+                }
+            }
+        }
+    ]
+}

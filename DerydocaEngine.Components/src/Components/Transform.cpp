@@ -10,10 +10,10 @@ namespace DerydocaEngine::Components
 		// Start off with the object's local model
 		glm::mat4 worldModel = getModel();
 
-		if (this->m_gameObject != NULL)
+		if (this->m_GameObject != NULL)
 		{
 			// Temporary storage object for recursive iteration
-			auto currentGameObject = this->m_gameObject->getParent();
+			auto currentGameObject = this->m_GameObject->getParent();
 
 			// Recursively transform the position by all parent objects
 			while (currentGameObject != NULL)
@@ -30,15 +30,15 @@ namespace DerydocaEngine::Components
 		return worldModel;
 	}
 
-	glm::vec3 Transform::getWorldPos() const
+	glm::vec3 Transform::getWorldPosition() const
 	{
 		// Start off with the object's local position
-		glm::vec4 pos = glm::vec4(m_pos, 1);
+		glm::vec4 pos = glm::vec4(m_Position, 1);
 
-		if (this->m_gameObject != NULL)
+		if (this->m_GameObject != NULL)
 		{
 			// Temporary storage object for recursive iteration
-			auto currentGameObject = this->m_gameObject->getParent();
+			auto currentGameObject = this->m_GameObject->getParent();
 
 			// Recursively transform the position by all parent objects
 			while (currentGameObject != NULL)
@@ -61,9 +61,9 @@ namespace DerydocaEngine::Components
 
 	void Transform::translate(glm::vec3 const& delta)
 	{
-		m_pos.x += delta.x;
-		m_pos.y += delta.y;
-		m_pos.z += delta.z;
+		m_Position.x += delta.x;
+		m_Position.y += delta.y;
+		m_Position.z += delta.z;
 	}
 
 }

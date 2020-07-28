@@ -1,9 +1,0 @@
-Resources:
-  - ID: 5a167ea6-4e5d-45b3-a295-9678ddc86727
-    Type: Mesh
-    Index: 0
-    Name: Mesh
-  - ID: dc645bd6-c80f-499e-be24-0968868244cb
-    Type: Mesh
-    Index: 1
-    Name: Mesh.001

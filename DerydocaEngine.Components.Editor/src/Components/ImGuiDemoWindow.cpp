@@ -4,14 +4,14 @@
 namespace DerydocaEngine::Components
 {
 	ImGuiDemoWindow::ImGuiDemoWindow() :
-		m_open(true)
+		m_Open(true)
 	{
 	}
 
 	void ImGuiDemoWindow::update(const float deltaTime)
 	{
-		ImGui::ShowDemoWindow(&m_open);
-		if (!m_open)
+		ImGui::ShowDemoWindow(&m_Open);
+		if (!m_Open)
 		{
 			destroy(getGameObject());
 		}

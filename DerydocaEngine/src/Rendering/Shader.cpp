@@ -234,7 +234,7 @@ namespace DerydocaEngine::Rendering
 			GraphicsAPI::setUniformMat4(m_uniforms[TRANSFORM_VIEW], glm::value_ptr(projection.getViewMatrix(transformModelMatrix)), 1);
 		}
 
-		glm::vec3 worldCamPos = trans->getWorldPos();
+		glm::vec3 worldCamPos = trans->getWorldPosition();
 		int worldCamPosUniformLocation = getUniformLocation("WorldCameraPosition");
 		GraphicsAPI::setUniform(worldCamPosUniformLocation, worldCamPos.x, worldCamPos.y, worldCamPos.z);
 	}
@@ -491,7 +491,7 @@ namespace DerydocaEngine::Rendering
 	int Shader::getErrorShaderID()
 	{
 		auto errorShader = Rendering::ShaderLibrary::getInstance().getErrorShader();
-		return errorShader->m_rendererId;
+		return errorShader.As<Rendering::Shader>()->m_rendererId;
 	}
 
 	std::string Shader::LoadShader(const std::string& fileName) {

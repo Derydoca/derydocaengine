@@ -1,0 +1,19 @@
+{
+    "ShaderId": "bef58587-98d5-4351-9a78-07f6d1f93a87",
+    "Textures": [
+        {
+            "Name": "cubemap",
+            "Value": "1a1745a0-41ec-413d-8fb6-9da520e7961c"
+        }
+    ],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

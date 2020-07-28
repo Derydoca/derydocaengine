@@ -10,7 +10,7 @@ namespace DerydocaEngine::Animation {
 	public:
 		Skeleton();
 		Skeleton(const std::shared_ptr<Bone>& rootBone, const glm::mat4& rootTransform);
-
+		
 		const glm::mat4& getGlobalInverseTransform() const { return m_rootTransform; }
 		std::string getName() const { return m_rootBone->getName(); }
 		size_t getNumBones() const { return  m_rootBone->getTotalBoneCount(); }

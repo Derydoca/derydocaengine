@@ -10,6 +10,7 @@ namespace DerydocaEngine::Components
 	{
 	public:
 		GENINSTANCE(KeyboardMover);
+		SERIALIZE_FUNC_DEFINITIONS;
 		KeyboardMover();
 		KeyboardMover(
 			Input::Keyboard* const& keyboard,
@@ -25,18 +26,19 @@ namespace DerydocaEngine::Components
 		void init();
 		void update(const float deltaTime);
 
-		void deserialize(const YAML::Node& node);
 	private:
-		std::shared_ptr<Transform> m_transform;
-		Input::Keyboard* m_keyboard;
-		float m_movementSpeed;
-		int m_keyForward;
-		int m_keyBackward;
-		int m_keyLeft;
-		int m_keyRight;
-		int m_key;
-		int m_keyUp;
-		int m_keyDown;
+		float m_MovementSpeed;
+		int m_KeyForward;
+		int m_KeyBackward;
+		int m_KeyLeft;
+		int m_KeyRight;
+		int m_KeyUp;
+		int m_KeyDown;
+
+		std::shared_ptr<Transform> m_Transform;
+		Input::Keyboard* m_Keyboard;
 	};
 
 }
+
+REGISTER_SERIALIZED_TYPE(DerydocaEngine::Components::KeyboardMover, 0);

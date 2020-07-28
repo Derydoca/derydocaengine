@@ -1,2 +1,14 @@
-Shader: c37769f6-aad2-48f7-8cc5-6fb222a3dc59
-MaterialParameters:
+{
+    "ShaderId": "c37769f6-aad2-48f7-8cc5-6fb222a3dc59",
+    "Textures": [],
+    "Bools": [],
+    "Ints": [],
+    "Floats": [],
+    "FloatArrays": [],
+    "Float3s": [],
+    "Float4s": [],
+    "Float3x3s": [],
+    "Float4x4s": [],
+    "Float4x4Arrays": [],
+    "SubroutineValues": []
+}

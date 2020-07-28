@@ -11,12 +11,7 @@ namespace DerydocaEngine::Ext
 
 	void ShaderSubroutineSwitcher::init()
 	{
-		setSubroutine(GL_VERTEX_SHADER, m_subroutineName);
-	}
-
-	void ShaderSubroutineSwitcher::deserialize(const YAML::Node& compNode)
-	{
-		m_subroutineName = compNode["SubroutineName"].as<std::string>();
+		setSubroutine(GL_VERTEX_SHADER, m_SubroutineName);
 	}
 
 	void ShaderSubroutineSwitcher::setSubroutine(unsigned int const& program, std::string const& subroutineName)
@@ -36,12 +31,15 @@ namespace DerydocaEngine::Ext
 		}
 		// Copy the material from the mesh renderer
 		auto material = std::make_shared<Rendering::Material>();
-		material->copyFrom(mr->getMaterial());
+		auto mrMat = mr->getMaterial();
+		auto mrMaterialId = mr->getMaterialId();
+		material->copyFrom(mrMat);
 		auto materialResource = std::make_shared<Resources::MaterialResource>();
 		materialResource->setData(material);
 
 		// Set the mesh renderer's material to our copy
 		mr->setMaterial(materialResource);
+		mr->setMaterialId(mrMaterialId);
 
 		// Get the shader from the material
 		auto shader = material->getShader();
@@ -56,6 +54,20 @@ namespace DerydocaEngine::Ext
 
 		// Tell the shader to use this subroutine
 		material->setSubroutine(program, subroutineIndex);
+	}
+
+	SERIALIZE_FUNC_LOAD(archive, ShaderSubroutineSwitcher)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_SubroutineName)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, ShaderSubroutineSwitcher)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_SubroutineName)
+		);
 	}
 
 }

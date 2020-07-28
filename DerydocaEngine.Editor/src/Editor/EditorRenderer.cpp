@@ -9,51 +9,88 @@
 #include "Rendering\GraphicsAPI.h"
 #include "Rendering\LightManager.h"
 #include "ObjectLibrary.h"
+#include "Files\FileUtils.h"
 
 namespace DerydocaEngine::Editor
 {
+	const char* SETTINGS_PATH = "./EditorWindowSettings.json";
 
 	EditorRenderer::EditorRenderer() :
 		RendererImplementation("Derydoca Engine - Editor", 300, 300),
 		m_editorComponentsScene(std::make_shared<Scenes::SerializedScene>()),
 		m_editorGuiScene(std::make_shared<Scenes::SerializedScene>()),
-		m_editorSkyboxMaterial(std::make_shared<Rendering::Material>())
+		m_editorSkyboxMaterialResource(std::make_shared<Resources::MaterialResource>()),
+		m_settings()
 	{
 		DerydocaEngine::Rendering::Gui::DearImgui::init(m_display);
+		try
+		{
+			std::ifstream fs(SETTINGS_PATH);
+			if(fs.is_open())
+			{
+				cereal::JSONInputArchive iarchive(fs);
+				iarchive(SERIALIZE_NAMED("Settings", m_settings));
+			}
+		}
+		catch(std::string err)
+		{
+			m_settings = Settings::EditorWindowSettings();
+		}
 	}
 
 	EditorRenderer::~EditorRenderer()
 	{
+		{
+			m_settings.setPosition(m_display->getNonMaximizedPosition());
+			m_settings.setSize(m_display->getNonMaximizedSize());
+			m_settings.setState(m_display->getWindowState());
+			
+			std::ofstream fs(SETTINGS_PATH);
+			cereal::JSONOutputArchive oarchive(fs);
+			oarchive(SERIALIZE_NAMED("Settings", m_settings));
+		}
+
 		DerydocaEngine::Rendering::Gui::DearImgui::shutdown();
 	}
 
 	void EditorRenderer::init()
 	{
 		// Load the settings
-		auto settings = DerydocaEngine::Settings::EngineSettings(".\\engineSettings.yaml");
-		m_display->setSize(settings.getWidth(), settings.getHeight());
-		if (settings.shouldBeFullScreen())
+		m_display->setSize(m_settings.getSize());
+		int2 windowPosition = m_settings.getPosition();
+		if (windowPosition.x >= 0)
 		{
-			m_display->setFullScreen(true);
+			m_display->setPosition(windowPosition);
 		}
-		if (settings.shouldBeMaximized())
+		DerydocaEngine::Settings::WindowState state = m_settings.getState();
+		switch (state)
 		{
+		case DerydocaEngine::Settings::WindowState::Normal:
+			break;
+		case DerydocaEngine::Settings::WindowState::Maximized:
 			m_display->maximize();
+			break;
+		case DerydocaEngine::Settings::WindowState::FullScreen:
+			m_display->setFullScreen(true);
+			break;
+		default:
+			break;
 		}
 		
 		m_display->init();
 
 		// Load the editor skybox material
-		auto skyboxIdString = settings.getEditorSkyboxMaterialIdentifier();
+		auto engineSettings = DerydocaEngine::Settings::EngineSettings::getInstance();
+		auto skyboxIdString = engineSettings->getEditorSkyboxMaterialIdentifier();
 		if (skyboxIdString.size() > 0)
 		{
 			auto skyboxId = boost::lexical_cast<boost::uuids::uuid>(skyboxIdString);
-			m_editorSkyboxMaterial = ObjectLibrary::getInstance().getResourceObjectPointer<Rendering::Material>(skyboxId);
+			m_editorSkyboxMaterialResource = ObjectLibrary::getInstance().getResource<Resources::MaterialResource>(skyboxId);
 		}
 
 		// Load the scenes
-		loadScene(settings.getEditorComponentsSceneIdentifier(), m_editorComponentsScene);
-		loadScene(settings.getEditorGuiSceneIdentifier(), m_editorGuiScene);
+		m_editorComponentsScene = loadScene(engineSettings->getEditorComponentsSceneIdentifier());
+		m_editorGuiScene = loadScene(engineSettings->getEditorGuiSceneIdentifier());
 	}
 
 	void EditorRenderer::renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH)
@@ -98,7 +135,11 @@ namespace DerydocaEngine::Editor
 		DerydocaEngine::Rendering::Gui::DearImgui::newFrame(m_display);
 
 		// Update
-		m_editorGuiScene->getRoot()->update(deltaTime);
+		auto rootElement = m_editorGuiScene->getRoot();
+		if (rootElement)
+		{
+			rootElement->update(deltaTime);
+		}
 		if (m_playing)
 		{
 			auto scene = Scenes::SceneManager::getInstance().getActiveScene();
@@ -146,16 +187,20 @@ namespace DerydocaEngine::Editor
 		return resource;
 	}
 
-	void EditorRenderer::loadScene(const std::string& sceneId, std::shared_ptr<Scenes::SerializedScene> scene)
+	std::shared_ptr<Scenes::SerializedScene> EditorRenderer::loadScene(const std::string& sceneId)
 	{
 		auto editorComponentsSceneResource = getSceneResource(sceneId, "editor components");
 		if (editorComponentsSceneResource != nullptr)
 		{
-			scene->LoadFromFile(editorComponentsSceneResource->getSourceFilePath());
+			std::string path = editorComponentsSceneResource->getSourceFilePath();
+			auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
+			auto scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
 			scene->setUp();
 			scene->getRoot()->init();
 			scene->getRoot()->postInit();
+			return scene;
 		}
+		return nullptr;
 	}
 
 }

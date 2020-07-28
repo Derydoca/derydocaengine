@@ -6,14 +6,14 @@ namespace DerydocaEngine::Components
 {
 
 	Rotator::Rotator() :
-		m_rotVal(0.0f),
-		m_rotSpeed(1.0f)
+		m_Value(0.0f),
+		m_Speed(1.0f)
 	{
 	}
 
 	Rotator::Rotator(float rotationSpeed) :
-		m_rotVal(0.0f),
-		m_rotSpeed(rotationSpeed)
+		m_Value(0.0f),
+		m_Speed(rotationSpeed)
 	{
 	}
 
@@ -24,13 +24,22 @@ namespace DerydocaEngine::Components
 
 	void Rotator::update(const float deltaTime)
 	{
-		m_rotVal += deltaTime * m_rotSpeed;
-		getGameObject()->getTransform()->setEulerAngles(glm::vec3(0, m_rotVal, 0));
+		m_Value += deltaTime * m_Speed;
+		getGameObject()->getTransform()->setEulerAngles(glm::vec3(0, m_Value, 0));
 	}
 
-	void Rotator::deserialize(const YAML::Node& node)
+	SERIALIZE_FUNC_LOAD(archive, Rotator)
 	{
-		m_rotSpeed = node["rotationSpeed"].as<float>();
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Speed)
+		);
+	}
+
+	SERIALIZE_FUNC_SAVE(archive, Rotator)
+	{
+		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+			SERIALIZE(m_Speed)
+		);
 	}
 
 }

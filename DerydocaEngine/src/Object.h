@@ -17,22 +17,25 @@ namespace DerydocaEngine
 	{
 	public:
 		Object() :
-			m_id()
+			m_ID()
 		{
 		}
 
 		Object(boost::uuids::uuid id) :
-			m_id(id)
+			m_ID(id)
 		{
 		}
 
-		boost::uuids::uuid getId() const { return m_id; }
+		virtual ~Object() {};
+
+		boost::uuids::uuid getId() const { return m_ID; }
 
 		virtual unsigned long getTypeId() const = 0;
 
-	protected:
-		boost::uuids::uuid m_id;
+		SERIALIZE_FUNC(SERIALIZE(m_ID));
 
+	protected:
+		boost::uuids::uuid m_ID;
 	};
 
 }

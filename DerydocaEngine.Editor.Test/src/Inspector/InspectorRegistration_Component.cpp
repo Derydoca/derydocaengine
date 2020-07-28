@@ -6,13 +6,11 @@
 #include "Components\FrameStats.h"
 #include "Components\KeyboardMover.h"
 #include "Components\Light.h"
-#include "Components\MaterialRefresher.h"
 #include "Components\MeshRenderer.h"
 #include "Components\Rotator.h"
 #include "Components\ScreenshotUtil.h"
 #include "Components\SkinnedMeshRenderer.h"
 #include "Components\SpriteRenderer.h"
-#include "Components\Terrain.h"
 #include "Components\TextRenderer.h"
 #include "Components\Transform.h"
 #include "Components\WasdMover.h"
@@ -33,10 +31,6 @@ TEST(InspectorRegistration_Component, Light) {
 	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::Light);
 }
 
-TEST(InspectorRegistration_Component, MaterialRefresher) {
-	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::MaterialRefresher);
-}
-
 TEST(InspectorRegistration_Component, MeshRenderer) {
 	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::MeshRenderer);
 }
@@ -55,10 +49,6 @@ TEST(InspectorRegistration_Component, SkinnedMeshRenderer) {
 
 TEST(InspectorRegistration_Component, SpriteRenderer) {
 	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::SpriteRenderer);
-}
-
-TEST(InspectorRegistration_Component, Terrain) {
-	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::Terrain);
 }
 
 TEST(InspectorRegistration_Component, TextRenderer) {

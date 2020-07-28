@@ -8,6 +8,8 @@
 #include "Editor\EditorRenderer.h"
 #include "Rendering\Display.h"
 #include "Rendering\DisplayManager.h"
+#include "Scenes\SceneManager.h"
+#include "Settings\EngineSettings.h"
 
 DerydocaEngine::Editor::EditorGUI::EditorGUI()
 {
@@ -69,8 +71,19 @@ void DerydocaEngine::Editor::EditorGUI::render()
 			// which we can't undo at the moment without finer window depth/z control.
 			//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 			if (ImGui::MenuItem("Open Scene")) {}
-			if (ImGui::MenuItem("Save Scene")) {}
-			if (ImGui::MenuItem("Save Scene As")) {}
+			if (ImGui::MenuItem("Save Scene"))
+			{
+				const std::string path = Scenes::SceneManager::getInstance().GetLoadedScenePath();
+				if (path.length() == 0)
+				{
+					D_LOG_INFO("No scene is loaded.");
+				}
+				else
+				{
+					Scenes::SceneManager::getInstance().SaveScene(path);
+				}
+			}
+			//if (ImGui::MenuItem("Save Scene As")) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Exit", ""))
 			{

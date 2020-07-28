@@ -4,71 +4,42 @@
 #include "Rendering\Texture.h"
 #include "Resources\Resource.h"
 #include "Rendering\ShaderLibrary.h"
+#include "Files\FileUtils.h"
+#include "AssetData\MaterialData.h"
+#include "ObjectLibrary.h"
+#include "Rendering\Shader.h"
+#include "Serialization\CerealGlmTypes.h"
 
 namespace DerydocaEngine::Resources::Serializers
 {
+    std::shared_ptr<void> MaterialResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
+    {
+        auto data = Files::Utils::ReadFromDisk<AssetData::MaterialData>(resource->getSourceFilePath());
+        auto material = std::make_shared<Rendering::Material>();
 
-	std::shared_ptr<void> MaterialResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
-	{
-		// Load the yaml file
-		YAML::Node root = YAML::LoadFile(resource->getSourceFilePath());
+        auto shader = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(data.ShaderId);
+        material->setShader(shader);
 
-		// Load the shader specified in the file
-		boost::uuids::uuid shaderId = root["Shader"].as<boost::uuids::uuid>();
-		auto shader = Rendering::ShaderLibrary::getInstance().find(shaderId);
+        for (auto prop : data.Textures)
+        {
+            if (prop.Value)
+            {
+                material->setTexture(prop.Name, prop.Value);
+            }
+        }
 
-		// Create a material with the shader we created
-		auto material = std::make_shared<Rendering::Material>();
-		material->setShader(shader);
+        for (auto prop : data.Bools) material->setBool(prop.Name, prop.Value);
+        for (auto prop : data.Ints) material->setInt(prop.Name, prop.Value);
+        for (auto prop : data.Floats) material->setFloat(prop.Name, prop.Value);
+        for (auto prop : data.FloatArrays) material->setFloatArray(prop.Name, prop.Value);
+        for (auto prop : data.Float3s) material->setVec3(prop.Name, prop.Value);
+        for (auto prop : data.Float4s) material->setVec4(prop.Name, prop.Value);
+        for (auto prop : data.Float3x3s) material->setMat3(prop.Name, prop.Value);
+        for (auto prop : data.Float4x4s) material->setMat4(prop.Name, prop.Value);
+        for (auto prop : data.Float4x4Arrays) material->setMat4Array(prop.Name, prop.Value);
+        for (auto prop : data.SubroutineValues) material->setSubroutine(prop.Program, prop.Value);
 
-		// Assign all material parameters to the material
-		YAML::Node parameters = root["MaterialParameters"];
-		for (size_t i = 0; i < parameters.size(); i++)
-		{
-			std::string paramType = parameters[i]["Type"].as<std::string>();
-			if (paramType == "Texture")
-			{
-				auto texture = loadResourcePointer<Rendering::Texture>(parameters[i], "ID");
-
-				YAML::Node nameNode = parameters[i]["Name"];
-				if (texture != nullptr && nameNode)
-				{
-					material->setTexture(nameNode.as<std::string>(), texture);
-				}
-			}
-			else if (paramType == "Color")
-			{
-				Color paramValue = parameters[i]["Value"].as<Color>();
-				std::string paramName = parameters[i]["Name"].as<std::string>();
-				material->setColorRGBA(paramName, paramValue);
-			}
-			else if (paramType == "Float")
-			{
-				float paramValue = parameters[i]["Value"].as<float>();
-				std::string paramName = parameters[i]["Name"].as<std::string>();
-				material->setFloat(paramName, paramValue);
-			}
-			else if (paramType == "Bool")
-			{
-				bool paramValue = parameters[i]["Value"].as<bool>();
-				std::string paramName = parameters[i]["Name"].as<std::string>();
-				material->setBool(paramName, paramValue);
-			}
-			else if (paramType == "Cubemap")
-			{
-				std::string xpos = getSourceFilePath(parameters[i], "XPos");
-				std::string xneg = getSourceFilePath(parameters[i], "XNeg");
-				std::string ypos = getSourceFilePath(parameters[i], "YPos");
-				std::string yneg = getSourceFilePath(parameters[i], "YNeg");
-				std::string zpos = getSourceFilePath(parameters[i], "ZPos");
-				std::string zneg = getSourceFilePath(parameters[i], "ZNeg");
-				auto paramValue = std::make_shared<Rendering::Texture>(xpos, xneg, ypos, yneg, zpos, zneg);
-				std::string paramName = parameters[i]["Name"].as<std::string>();
-				material->setTexture(paramName, paramValue);
-			}
-		}
-
-		return material;
-	}
+        return material;
+    }
 
 }

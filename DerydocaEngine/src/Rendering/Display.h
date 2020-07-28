@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Settings/EditorWindowSettings.h"
 
 typedef void *SDL_GLContext;
 struct SDL_Window;
@@ -27,14 +28,21 @@ namespace DerydocaEngine::Rendering
 		void newFrame();
 		void update();
 		bool isClosed();
-		inline float getAspectRatio() { return (float)m_width / (float)m_height; }
+		inline float getAspectRatio() { return (float)m_actualSize.x / (float)m_actualSize.y; }
 
-		inline int getWidth() const { return m_width; }
-		inline int getHeight() const { return m_height; }
+		inline int2 getNonMaximizedPosition() const {
+			return m_windowState == Settings::WindowState::Normal ? m_actualPosition : m_lastPosition;
+		}
+		inline int2 getNonMaximizedSize() const {
+			return m_windowState == Settings::WindowState::Normal ? m_actualSize : m_lastSize;
+		}
+		inline int2 getActualSize() const { return m_actualSize; }
+		inline const Settings::WindowState getWindowState() const { return m_windowState; }
 		inline SystemWindow* getWindow() const { return m_window; }
 		inline GraphicsAPIContext* getContext() { return &(m_context); }
 
-		void setSize(int width, int height);
+		void setPosition(int2 position);
+		void setSize(int2 size);
 		void setFullScreen(bool isFullScreen);
 
 		void bindAsRenderTarget();
@@ -45,13 +53,20 @@ namespace DerydocaEngine::Rendering
 		Display(Display const& other) {}
 		Display& operator=(Display const& other) {}
 
+		void windowPositionChanged(const int x, const int y);
 		void windowSizeChanged(int const& width, int const& height);
 
 		SystemWindow* m_window;
 		GraphicsAPIContext m_context;
+		bool m_hasLoadedInitialDimensions;
 		bool m_isClosed;
-		int m_width;
-		int m_height;
+		Settings::WindowState m_windowState;
+		int2 m_lastPosition;
+		int2 m_actualPosition;
+		int2 m_windowPosition;
+		int2 m_lastSize;
+		int2 m_actualSize;
+		int2 m_windowSize;
 		Input::Keyboard* m_keyboard;
 		Input::Mouse* m_mouse;
 		Components::Camera* m_camera;
