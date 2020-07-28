@@ -73,5 +73,5 @@ Smoke Particle System | -project ..\\..\\exampleProject -scene 8cf10126-65aa-474
 *  ASSIMP (3.1.1) - For importing 3D art assets
 *  GLM (0.9.8.5) - For all the complex math made to make games
 *  stb_image - For image loading
-*  yaml-cpp (0.6.0) - For configuration files and serialized objects
+*  cereal - For configuration files and serialized objects
 *  Boost (1.68.0) - For keeping the project cross-platform
