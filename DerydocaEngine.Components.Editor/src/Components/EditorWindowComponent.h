@@ -11,6 +11,7 @@ namespace DerydocaEngine::Components
 		virtual ~EditorWindowComponent();
 
 		virtual glm::ivec2 getWindowInitialSize() { return {0.0f, 0.0f}; }
+		virtual glm::vec2 getWindowPadding() { return { -1, -1 }; }
 		virtual ImGuiWindowFlags getWindowFlags() = 0;
 		virtual std::string getWindowTitle() = 0;
 		virtual void renderWindow() = 0;

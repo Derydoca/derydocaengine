@@ -84,17 +84,10 @@ namespace DerydocaEngine::Components
 		// Store the window's active state
 		m_isActive = ImGui::IsWindowFocused();
 
-		// Get useful information about the window
-		auto windowSize = ImGui::GetWindowSize();
-		auto itemSize = ImGui::GetItemRectSize();
-		auto windowPos = ImGui::GetWindowPos();
-		auto frameHeight = ImGui::GetFrameHeight();
-		auto viewport = ImGui::GetWindowViewport();
-
 		// Define the display size of the render area
-		glm::vec2 padding = getViewPadding();
-		m_displayWidth = windowSize.x - padding.x;
-		m_displayHeight = windowSize.y - padding.y;
+		auto contentArea = ImGui::GetContentRegionAvail();
+		m_displayWidth = contentArea.x;
+		m_displayHeight = contentArea.y;
 
 		// Default the display size to 1x1 if the values are invalid
 		if (m_displayWidth <= 0 || m_displayHeight <= 0)

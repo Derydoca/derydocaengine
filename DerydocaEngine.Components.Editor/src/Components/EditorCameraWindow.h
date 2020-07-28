@@ -17,6 +17,7 @@ namespace DerydocaEngine::Components
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
 		virtual glm::vec2 getViewPadding() override;
 		virtual void renderToActiveBuffer() override;
+		virtual glm::vec2 getWindowPadding() override { return { 0, 0 }; }
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::SceneViewerWindow);
 	private:

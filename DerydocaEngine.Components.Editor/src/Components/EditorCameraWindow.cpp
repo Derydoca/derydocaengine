@@ -23,14 +23,14 @@ namespace DerydocaEngine::Components
 	{
 		SceneViewerWindow::updateDisplayProperties();
 
-		// Show button to show/hide the properties panel
-		if (ImGui::Button(m_ShowPropertiesPanel ? "Hide Properties" : "Show Properties"))
-		{
-			m_ShowPropertiesPanel = !m_ShowPropertiesPanel;
-		}
-		// Also add status text to let the user know if the window is focued
-		ImGui::SameLine();
-		ImGui::Text(isActive() ? "Focused" : "Not Focused");
+		//// Show button to show/hide the properties panel
+		//if (ImGui::Button(m_ShowPropertiesPanel ? "Hide Properties" : "Show Properties"))
+		//{
+		//	m_ShowPropertiesPanel = !m_ShowPropertiesPanel;
+		//}
+		//// Also add status text to let the user know if the window is focued
+		//ImGui::SameLine();
+		//ImGui::Text(isActive() ? "Focused" : "Not Focused");
 
 		// Render the scene view
 		SceneViewerWindow::renderViewToWindow();
