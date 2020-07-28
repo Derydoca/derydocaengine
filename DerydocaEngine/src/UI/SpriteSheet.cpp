@@ -102,7 +102,7 @@ namespace DerydocaEngine::UI
 	{
 		// Write the generated texture to disk
 		std::string imageFileName = filePath + ".bmp";
-		int imgw, imgh, imgch;
+		int imgw = 0, imgh = 0, imgch = 0;
 		stbi_write_bmp(imageFileName.c_str(), imgw, imgh, imgch, m_imageBuffer);
 		ObjectLibrary::getInstance().updateMetaFiles(imageFileName);
 		auto textureId = ObjectLibrary::getInstance().assetPathToId(imageFileName);

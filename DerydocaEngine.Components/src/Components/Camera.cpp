@@ -93,10 +93,10 @@ namespace DerydocaEngine::Components
 			if (m_RenderingMode == Rendering::RenderingMode::Deferred)
 			{
 				m_RenderTextureDeferred = std::make_shared<Rendering::RenderTexture>(Rendering::RenderingMode::Deferred);
-				m_RenderTextureDeferred->initializeTexture(m_RenderTextureSize.x, m_RenderTextureSize.y);
+				m_RenderTextureDeferred->initializeTexture((int)m_RenderTextureSize.x, (int)m_RenderTextureSize.y);
 			}
 			m_RenderTexture = std::make_shared<Rendering::RenderTexture>(Rendering::RenderingMode::Forward);
-			m_RenderTexture->initializeTexture(m_RenderTextureSize.x, m_RenderTextureSize.y);
+			m_RenderTexture->initializeTexture((int)m_RenderTextureSize.x, (int)m_RenderTextureSize.y);
 		}
 
 		m_Projection.recalculateProjectionMatrix();

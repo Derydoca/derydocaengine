@@ -200,6 +200,7 @@ namespace DerydocaEngine::Editor
 			scene->getRoot()->postInit();
 			return scene;
 		}
+		return nullptr;
 	}
 
 }
