@@ -40,6 +40,7 @@ namespace DerydocaEngine::Components
 
 		// Store the camera's transform for later use
 		m_cameraTransform = m_camera->getGameObject()->getTransform();
+		m_cameraTransform->setPosition({ 0.0f, 0.5f, 1.0f });
 
 		// Set the initial camera position
 		m_sceneCameraInputStrategy->updateCameraTransform(m_cameraTransform);
