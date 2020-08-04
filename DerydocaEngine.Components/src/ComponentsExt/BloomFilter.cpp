@@ -52,8 +52,10 @@ namespace DerydocaEngine::Ext
 		m_BlurTex2 = std::make_shared<Rendering::RenderTexture>();
 		m_BlurTex2->initializeTexture(width, height);
 
-		auto shader = m_PostProcessCamera->getPostProcessShader();
-		if (shader != nullptr)
+		//auto shader = m_PostProcessCamera->getPostProcessShader();
+		ResourceRef<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>("dce99f15-ae1a-44b3-be03-76276da752d1");
+
+		if (shaderResource)
 		{
 			Rendering::RenderPass subPassNames[3] =
 			{
@@ -61,10 +63,12 @@ namespace DerydocaEngine::Ext
 				Rendering::RenderPass("blurY", m_BlurTex2, "BlurTex2"),
 				Rendering::RenderPass("blurX")
 			};
-			shader->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 3);
+			shaderResource.As<Rendering::Shader>()->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 3);
 		}
 
 		updateShader();
+
+		m_PostProcessCamera->setPostProcessShader(shaderResource);
 	}
 
 	void BloomFilter::update(const float deltaTime)

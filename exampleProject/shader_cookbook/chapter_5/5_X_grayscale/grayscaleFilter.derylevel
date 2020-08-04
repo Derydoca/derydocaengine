@@ -142,7 +142,7 @@
                                             "ptr_wrapper": {
                                                 "id": 2147483656,
                                                 "data": {
-                                                    "cereal_class_version": 0,
+                                                    "cereal_class_version": 1,
                                                     "__base_DerydocaEngine::Components::GameComponent": {
                                                         "__base_DerydocaEngine::Object": {
                                                             "m_ID": "7876c373-112d-4113-a97f-a5e8b3dbe3d5"
@@ -150,7 +150,8 @@
                                                     },
                                                     "m_Mesh": "b1b135df-0f8a-4ebf-bd9d-a98127daf307",
                                                     "m_Material": "9886e9a7-f340-47a2-9edf-2e764acc3b08",
-                                                    "m_Transparent": false
+                                                    "m_Transparent": false,
+                                                    "m_FindRenderTextureCameraHack": false
                                                 }
                                             }
                                         },
@@ -218,7 +219,8 @@
                                                     },
                                                     "m_Mesh": "deb8fa30-119b-4483-b3fe-58978a4a73ac",
                                                     "m_Material": "88bf10c9-bc91-4d03-b5a5-4aaaf1dfa4f6",
-                                                    "m_Transparent": false
+                                                    "m_Transparent": false,
+                                                    "m_FindRenderTextureCameraHack": true
                                                 }
                                             }
                                         }
@@ -301,7 +303,8 @@
                                                     },
                                                     "m_Mesh": "c8692242-532d-4905-a1eb-0ed40dab3114",
                                                     "m_Material": "9a932980-a824-4ec9-bd89-e67cc45e992a",
-                                                    "m_Transparent": false
+                                                    "m_Transparent": false,
+                                                    "m_FindRenderTextureCameraHack": false
                                                 }
                                             }
                                         }
@@ -382,7 +385,8 @@
                                                     },
                                                     "m_Mesh": "c8692242-532d-4905-a1eb-0ed40dab3114",
                                                     "m_Material": "9a932980-a824-4ec9-bd89-e67cc45e992a",
-                                                    "m_Transparent": false
+                                                    "m_Transparent": false,
+                                                    "m_FindRenderTextureCameraHack": false
                                                 }
                                             }
                                         }

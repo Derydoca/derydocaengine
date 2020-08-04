@@ -12,6 +12,8 @@ namespace DerydocaEngine::Ext
 
 	void GaussianBlurFilter::init()
 	{
+		ResourceRef<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>("76302590-c8a1-494b-9a60-eef651c1b7ad");
+
 		m_PostProcessCamera = getComponentInChildren<Components::Camera>();
 		if (m_PostProcessCamera == nullptr)
 		{
@@ -43,6 +45,8 @@ namespace DerydocaEngine::Ext
 		}
 
 		updateShader();
+
+		m_PostProcessCamera->setPostProcessShader(shaderResource);
 	}
 
 	void GaussianBlurFilter::update(const float deltaTime)

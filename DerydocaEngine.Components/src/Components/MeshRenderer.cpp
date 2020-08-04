@@ -12,6 +12,7 @@
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Texture.h"
 #include "Components\Transform.h"
+#include "Scenes\SceneManager.h"
 
 namespace DerydocaEngine::Components
 {
@@ -19,14 +20,16 @@ namespace DerydocaEngine::Components
 	MeshRenderer::MeshRenderer() :
 		m_Mesh(),
 		m_Material(),
-		m_Transparent(false)
+		m_Transparent(false),
+		m_FindRenderTextureCameraHack(false)
 	{
 	}
 
 	MeshRenderer::MeshRenderer(std::shared_ptr<Resources::MeshResource> mesh, std::shared_ptr<Resources::MaterialResource> material) :
 		m_Mesh(mesh),
 		m_Material(material),
-		m_Transparent(false)
+		m_Transparent(false),
+		m_FindRenderTextureCameraHack(true)
 	{
 	}
 
@@ -36,10 +39,24 @@ namespace DerydocaEngine::Components
 
 	void MeshRenderer::init()
 	{
+		if (m_FindRenderTextureCameraHack)
+		{
+			auto camera = Scenes::SceneManager::getInstance().getActiveScene()->getRoot()->getComponentInChildren<Components::Camera>();
+			if (camera)
+			{
+				setRenderTextureSource(camera, "RenderTex");
+			}
+		}
 	}
 
 	void MeshRenderer::preDestroy()
 	{
+	}
+
+	void MeshRenderer::setRenderTextureSource(const std::shared_ptr<Components::Camera> camera, const std::string& textureName)
+	{
+		m_MeshRendererCamera = camera;
+		getMaterial()->setTexture(textureName, camera->getRenderTexture());
 	}
 
 	void MeshRenderer::render(std::shared_ptr<Rendering::MatrixStack> const matrixStack)
@@ -84,11 +101,23 @@ namespace DerydocaEngine::Components
 
 	SERIALIZE_FUNC_LOAD(archive, MeshRenderer)
 	{
-		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
-			SERIALIZE(m_Mesh),
-			SERIALIZE(m_Material),
-			SERIALIZE(m_Transparent)
-		);
+		if (version == 0)
+		{
+			archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+				SERIALIZE(m_Mesh),
+				SERIALIZE(m_Material),
+				SERIALIZE(m_Transparent)
+			);
+		}
+		else if (version == 1)
+		{
+			archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
+				SERIALIZE(m_Mesh),
+				SERIALIZE(m_Material),
+				SERIALIZE(m_Transparent),
+				SERIALIZE(m_FindRenderTextureCameraHack)
+			);
+		}
 	}
 
 	SERIALIZE_FUNC_SAVE(archive, MeshRenderer)
@@ -96,7 +125,8 @@ namespace DerydocaEngine::Components
 		archive(SERIALIZE_BASE(DerydocaEngine::Components::GameComponent),
 			SERIALIZE(m_Mesh),
 			SERIALIZE(m_Material),
-			SERIALIZE(m_Transparent)
+			SERIALIZE(m_Transparent),
+			SERIALIZE(m_FindRenderTextureCameraHack)
 		);
 	}
 

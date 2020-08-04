@@ -40,9 +40,9 @@ namespace DerydocaEngine::Scenes
 		auto sceneObj = Files::Utils::ReadFromDisk<Scenes::SerializedScene>(path);
 		auto scene = std::make_shared<Scenes::SerializedScene>(sceneObj);
 		scene->setUp();
+		m_ActiveScene = scene;
 		scene->getRoot()->init();
 		scene->getRoot()->postInit();
-		m_ActiveScene = scene;
 	}
 
 	void SceneManager::SaveScene(const std::string& outputPath)

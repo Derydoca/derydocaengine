@@ -378,7 +378,9 @@ namespace DerydocaEngine::Rendering
 
 	unsigned int Shader::getSubroutineIndex(const unsigned int program, const std::string& subroutineName)
 	{
-		return glGetSubroutineIndex(m_rendererId, program, subroutineName.c_str());
+		unsigned int index = -1;
+		GL_CHECK(index = glGetSubroutineIndex(m_rendererId, program, subroutineName.c_str()));
+		return index;
 	}
 
 	void Shader::setSubroutine(const unsigned int program, const unsigned int subroutineIndex)

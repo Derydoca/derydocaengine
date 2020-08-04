@@ -100,6 +100,8 @@ namespace DerydocaEngine::Components
 		}
 
 		m_Projection.recalculateProjectionMatrix();
+
+		updatePostProcessMaterialShader();
 	}
 
 	SERIALIZE_FUNC_SAVE(archive, Camera)
@@ -266,6 +268,12 @@ namespace DerydocaEngine::Components
 		m_DisplayRect.setHeight(x);
 	}
 
+	void Camera::setPostProcessShader(const ResourceRef<Resources::ShaderResource>& shader)
+	{
+		m_PostProcessShader = shader;
+		updatePostProcessMaterialShader();
+	}
+
 	void Camera::setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader)
 	{
 		glm::mat4 m = glm::mat4(1.0);
@@ -279,6 +287,20 @@ namespace DerydocaEngine::Components
 		shader->setMat4("ModelViewMatrix", mv);
 		shader->setMat3("NormalMatrix", glm::mat3(mv[0], glm::vec3(mv[1]), glm::vec3(mv[2])));
 		shader->setMat4("MVP", mvp);
+	}
+
+	void Camera::updatePostProcessMaterialShader()
+	{
+		if (!m_PostProcessShader)
+		{
+			return;
+		}
+
+		if (!m_PostProcessMaterial)
+		{
+			m_PostProcessMaterial = std::make_shared<Rendering::Material>();
+		}
+		m_PostProcessMaterial->setShader(m_PostProcessShader);
 	}
 
 	void Camera::setProjectionMode(Rendering::ProjectionMode const& mode)

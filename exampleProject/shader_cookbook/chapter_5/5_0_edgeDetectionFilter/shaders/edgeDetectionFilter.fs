@@ -9,6 +9,9 @@ uniform float EdgeThreshold; // Squared threshold value
 uniform int Width; // Pixel width
 uniform int Height; // Pixel height
 
+subroutine vec4 RenderPassType();
+subroutine uniform RenderPassType RenderPass;
+
 struct MaterialInfo
 {
     vec4 Kd;
@@ -25,7 +28,8 @@ float luma(vec3 color)
     return 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b;
 }
 
-vec4 calcEdgeColor()
+subroutine(RenderPassType)
+vec4 edgeDetection()
 {
     float dx = 1.0 / float(Width);
     float dy = 1.0 / float(Height);
@@ -56,5 +60,5 @@ vec4 calcEdgeColor()
 
 void main()
 {
-    FragColor = calcEdgeColor();
+    FragColor = edgeDetection();
 }

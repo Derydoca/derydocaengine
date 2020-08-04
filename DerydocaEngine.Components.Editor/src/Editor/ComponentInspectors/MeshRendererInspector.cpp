@@ -3,6 +3,8 @@
 #include "Rendering\Material.h"
 #include "Rendering\Mesh.h"
 #include "Dgui\ResourcePicker.h"
+#include "Scenes\SceneManager.h"
+#include "Components\Camera.h"
 
 void DerydocaEngine::Editor::Inspector::ComponentInspectors::MeshRendererInspector::render(std::shared_ptr<Object> object)
 {
@@ -24,5 +26,11 @@ void DerydocaEngine::Editor::Inspector::ComponentInspectors::MeshRendererInspect
 			meshRenderer->setMesh(std::static_pointer_cast<Resources::MeshResource>(modifiedResource));
 		}
 	}
+
+	// Used to enable the render texture hack
+	/*if (ImGui::Button("Render Texture Hack"))
+	{
+		meshRenderer->setFindRenderTextureCameraHack(true);
+	}*/
 
 }

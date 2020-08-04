@@ -70,6 +70,7 @@ namespace DerydocaEngine::Components
 		void setClearColor(Color const& clearColor) { m_ClearColor = clearColor; }
 		void setClearMode(ClearMode const& clearMode) { m_ClearMode = clearMode; }
 		void setDisplayRect(float const& x, float const& y, float const& w, float const& h);
+		void setPostProcessShader(const ResourceRef<Resources::ShaderResource>& shader);
 		void setProjection(Rendering::Projection projection)
 		{
 			m_Projection = projection;
@@ -83,6 +84,7 @@ namespace DerydocaEngine::Components
 
 		void clear();
 		void setIdentityMatricies(std::shared_ptr<Rendering::Shader> shader);
+		void updatePostProcessMaterialShader();
 
 		std::shared_ptr<Rendering::Shader> GetDeferredCompositorShader()
 		{

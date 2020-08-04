@@ -6,6 +6,7 @@
 #include "Rendering\Shader.h"
 #include <iostream>
 #include "Rendering\Material.h"
+#include "Rendering\RenderPass.h"
 
 namespace DerydocaEngine::Ext
 {
@@ -22,6 +23,16 @@ namespace DerydocaEngine::Ext
 
 	void EdgeDetectionFilter::init()
 	{
+		ResourceRef<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>("c72aa38d-9cc4-44ea-8ec0-028dc5d13e28");
+		if (shaderResource)
+		{
+			Rendering::RenderPass subPassNames[1] =
+			{
+				Rendering::RenderPass("edgeDetection")
+			};
+			shaderResource.As<Rendering::Shader>()->setSubPasses(GL_FRAGMENT_SHADER, subPassNames, 1);
+		}
+
 		m_PostProcessCamera = getComponentInChildren<Components::Camera>();
 		if (m_PostProcessCamera == nullptr)
 		{
@@ -30,6 +41,8 @@ namespace DerydocaEngine::Ext
 		}
 
 		updateShader();
+
+		m_PostProcessCamera->setPostProcessShader(shaderResource);
 	}
 
 	void EdgeDetectionFilter::update(const float deltaTime)
