@@ -56,7 +56,11 @@ namespace DerydocaEngine::Ext
 			SERIALIZE(m_Material)
 		);
 
-		m_Material.As<Rendering::Material>()->copyFrom(m_Material.As<Rendering::Material>());
+		auto material = std::make_shared<Rendering::Material>();
+		material->copyFrom(m_Material.As<Rendering::Material>());
+		auto materialResource = std::make_shared<Resources::MaterialResource>();
+		materialResource->setData(material);
+		m_Material.Set(materialResource);
 	}
 
 	SERIALIZE_FUNC_SAVE(archive, TessellatingQuad)
