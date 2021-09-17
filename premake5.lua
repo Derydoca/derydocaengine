@@ -11,7 +11,7 @@ workspace "DerydocaEngine"
     }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-boostdir = "D:/local/boost_1_68_0"
+boostdir = "C:/local/boost_1_68_0"
 vendorincludes = {
     (boostdir),
     "%{wks.location}/vendor/cereal/include",
