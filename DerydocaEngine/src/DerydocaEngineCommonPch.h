@@ -64,6 +64,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <filesystem>
 
 // SDL
 #include <sdl2/SDL.h>
