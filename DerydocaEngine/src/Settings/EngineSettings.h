@@ -1,6 +1,5 @@
 #pragma once
 #include <assert.h>
-#include <boost\filesystem.hpp>
 #include <boost\uuid\uuid.hpp>
 #include <string>
 #include "glm/glm.hpp"

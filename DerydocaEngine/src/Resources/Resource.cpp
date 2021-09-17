@@ -21,7 +21,7 @@ namespace DerydocaEngine::Resources
 	Resource::Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
 		Resource(id, "", type, sourceFilePath, metaFilePath)
 	{
-		auto filePath = boost::filesystem::path(sourceFilePath);
+		auto filePath = std::filesystem::path(sourceFilePath);
 		if (filePath.has_stem())
 		{
 			m_name = filePath.stem().string();
@@ -59,7 +59,7 @@ namespace DerydocaEngine::Resources
 		m_sourceFilePath = sourceFilePath;
 		m_metaFilePath = metaFilePath;
 
-		auto filePath = boost::filesystem::path(sourceFilePath);
+		auto filePath = std::filesystem::path(sourceFilePath);
 		if (filePath.has_stem())
 		{
 			m_name = filePath.stem().string();
