@@ -1,8 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\ShaderFileSerializer.h"
 #include "Resources\ShaderResource.h"
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/convenience.hpp>
 #include "Rendering\ShaderLibrary.h"
 
 namespace fs = boost::filesystem;
