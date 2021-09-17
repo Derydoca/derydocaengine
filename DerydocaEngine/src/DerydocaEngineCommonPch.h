@@ -7,7 +7,6 @@
 #include <assimp/scene.h>
 
 // Boost
-#include <boost/algorithm/string.hpp>
 #include <boost/uuid/random_generator.hpp>
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid.hpp>
