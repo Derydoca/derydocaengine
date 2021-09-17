@@ -1,11 +1,7 @@
 #include "EnginePch.h"
 #include "Files\Serializers\ShaderFileSerializer.h"
 #include "Resources\ShaderResource.h"
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/convenience.hpp>
 #include "Rendering\ShaderLibrary.h"
-
-namespace fs = boost::filesystem;
 
 namespace DerydocaEngine::Files::Serializers {
 
@@ -28,17 +24,17 @@ namespace DerydocaEngine::Files::Serializers {
 	void ShaderFileSerializer::postLoadInitialize(std::shared_ptr<Resources::Resource> resource)
 	{
 		auto shaderResource = std::static_pointer_cast<Resources::ShaderResource>(resource);
-		fs::path vertexShaderPath(shaderResource->getVertexShaderLocation());
+		std::filesystem::path vertexShaderPath(shaderResource->getVertexShaderLocation());
 
 		// Get the path that this exists for
-		fs::path shaderDirectory = vertexShaderPath.parent_path();
+		std::filesystem::path shaderDirectory = vertexShaderPath.parent_path();
 
 		// Remove the extension from the file name so we can append to all other shader types
-		fs::path rawShaderName = change_extension(vertexShaderPath, "");
+		std::filesystem::path rawShaderName = vertexShaderPath.replace_extension();
 		shaderResource->setRawShaderName(rawShaderName.string());
 
 		// If a fragment shader exists
-		fs::path fragmentShaderPath = rawShaderName.append(".fs");
+		std::filesystem::path fragmentShaderPath = rawShaderName.append(".fs");
 		if (exists(fragmentShaderPath))
 		{
 			// Set the path to the fragment shader
@@ -46,7 +42,7 @@ namespace DerydocaEngine::Files::Serializers {
 		}
 
 		// If a geometry shader exists
-		fs::path geometryShaderPath = rawShaderName.append(".gs");
+		std::filesystem::path geometryShaderPath = rawShaderName.append(".gs");
 		if (exists(geometryShaderPath))
 		{
 			// Set the path to the geometry shader

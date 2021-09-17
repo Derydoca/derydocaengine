@@ -2,7 +2,6 @@
 #include "ObjectLibrary.h"
 #include <iostream>
 #include <string>
-#include <boost\filesystem.hpp>
 #include <boost\uuid\uuid_generators.hpp>
 #include "Files\Serializers\FileSerializerLibrary.h"
 #include "Helpers\StringUtils.h"
@@ -12,20 +11,18 @@
 namespace DerydocaEngine
 {
 
-	namespace fs = boost::filesystem;
-
 	ObjectLibrary::ObjectLibrary() :
 		m_projectResourceRoot(std::make_shared<Resources::ResourceTreeNode>("__projectRoot__"))
 	{
 	}
 
-	void ObjectLibrary::loadEngineResources(const boost::filesystem::path& path)
+	void ObjectLibrary::loadEngineResources(const std::filesystem::path& path)
 	{
 		D_LOG_TRACE("Loading engine files: {}", path.string());
 		loadDirectory(path);
 	}
 
-	void ObjectLibrary::loadProjectResources(const boost::filesystem::path& path)
+	void ObjectLibrary::loadProjectResources(const std::filesystem::path& path)
 	{
 		D_LOG_TRACE("Updating meta files: {}", path.string());
 		updateMetaFilesDirectory(path);
@@ -96,10 +93,10 @@ namespace DerydocaEngine
 		return Files::Utils::ReadFromDisk2<std::vector<sptr<Resources::Resource>>>(metaFilePath);
 	}
 
-	void ObjectLibrary::updateMetaFilesDirectory(const boost::filesystem::path& directoryPath)
+	void ObjectLibrary::updateMetaFilesDirectory(const std::filesystem::path& directoryPath)
 	{
-		fs::directory_iterator it{ directoryPath };
-		while (it != fs::directory_iterator{})
+		std::filesystem::directory_iterator it{ directoryPath };
+		while (it != std::filesystem::directory_iterator{})
 		{
 			if (is_directory(it->path()))
 			{
@@ -121,7 +118,7 @@ namespace DerydocaEngine
 		std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 		// If the meta file does not exist
-		if (!fs::exists(metaFilePath))
+		if (!std::filesystem::exists(metaFilePath))
 		{
 			// Create the meta file
 			if (!createMetaFile(sourceFilePath, metaFilePath))
@@ -140,10 +137,10 @@ namespace DerydocaEngine
 
 	}
 
-	void ObjectLibrary::loadDirectory(const boost::filesystem::path& directory)
+	void ObjectLibrary::loadDirectory(const std::filesystem::path& directory)
 	{
-		fs::directory_iterator it{ directory };
-		while (it != fs::directory_iterator{})
+		std::filesystem::directory_iterator it{ directory };
+		while (it != std::filesystem::directory_iterator{})
 		{
 			if (is_directory(it->path()))
 			{
@@ -201,7 +198,7 @@ namespace DerydocaEngine
 
 	std::shared_ptr<Resources::ResourceTreeNode> ObjectLibrary::getResourceTreeNode(const std::string& resourcePath)
 	{
-		auto path = boost::filesystem::path(resourcePath);
+		auto path = std::filesystem::path(resourcePath);
 
 		bool passedFirstDir = false;
 		std::istringstream ss(path.parent_path().string());
@@ -251,7 +248,7 @@ namespace DerydocaEngine
 		std::string metaFilePath = sourceFilePath + m_metaExtension;
 
 		// If the meta file does not exist, skip loading this resource
-		if (!fs::exists(metaFilePath))
+		if (!std::filesystem::exists(metaFilePath))
 		{
 			return;
 		}
