@@ -49,7 +49,8 @@ namespace DerydocaEngine::Resources
 
 	void Resource::generateAndSetId()
 	{
-		m_ID = uuids::Generate();
+		static uuids::uuid_time_generator gen;
+		m_ID = gen();
 	}
 
 	void Resource::setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath)

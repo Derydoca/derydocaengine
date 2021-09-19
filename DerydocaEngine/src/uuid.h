@@ -2,6 +2,9 @@
 #include "DerydocaEngineCommonPch.h"
 #include <cstdint>
 #include <iostream>
+#include <optional>
+
+using mac_address = std::array<unsigned char, 6>;
 
 namespace DerydocaEngine::uuids
 {
@@ -9,6 +12,7 @@ namespace DerydocaEngine::uuids
 	{
 	public:
 		uuid();
+		uuid(const std::array<uint8_t, 16>& rawID);
 		uuid(const std::string& stringValue);
 
 		const std::string to_string() const;
@@ -48,8 +52,19 @@ namespace DerydocaEngine::uuids
 		void load_from_string(const std::string& string);
 
 	private:
-		uint8_t data[16];
+		std::array<uint8_t, 16> data;
 	};
 
-	uuid Generate();
+	class uuid_time_generator
+	{
+	public:
+		uuid operator()();
+
+	private:
+		bool get_mac_address();
+
+	private:
+		std::optional<mac_address> device_address;
+
+	};
 };

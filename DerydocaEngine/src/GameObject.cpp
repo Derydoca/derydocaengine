@@ -26,7 +26,8 @@ namespace DerydocaEngine
 		m_Components(),
 		m_DestroyFlag(false)
 	{
-		m_ID = uuids::Generate();
+		static uuids::uuid_time_generator gen;
+		m_ID = gen();
 		m_Transform->setGameObject(this);
 	}
 

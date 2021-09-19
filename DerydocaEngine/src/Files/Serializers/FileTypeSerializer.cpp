@@ -5,7 +5,8 @@ namespace DerydocaEngine::Files::Serializers {
 
 	uuids::uuid generateUuid()
 	{
-		uuids::uuid id = uuids::Generate();
+		static uuids::uuid_time_generator gen;
+		uuids::uuid id = gen();
 		return id;
 	}
 
