@@ -2,7 +2,6 @@
 #include "ObjectLibrary.h"
 #include <iostream>
 #include <string>
-#include <boost\uuid\uuid_generators.hpp>
 #include "Files\Serializers\FileSerializerLibrary.h"
 #include "Helpers\StringUtils.h"
 #include "Files\FileType.h"
@@ -34,12 +33,11 @@ namespace DerydocaEngine
 
 	std::shared_ptr<Resources::Resource> ObjectLibrary::getResource(std::string const& uuidString)
 	{
-		boost::uuids::string_generator gen;
-		boost::uuids::uuid uuid = gen(uuidString);
+		uuids::uuid uuid(uuidString);
 		return getResource(uuid);
 	}
 
-	std::shared_ptr<Resources::Resource> ObjectLibrary::getResource(boost::uuids::uuid const& uuid)
+	std::shared_ptr<Resources::Resource> ObjectLibrary::getResource(uuids::uuid const& uuid)
 	{
 		// Find a resource with a matching uuid
 		auto search = m_resources.find(uuid);
@@ -55,14 +53,14 @@ namespace DerydocaEngine
 		}
 	}
 
-	const boost::uuids::uuid ObjectLibrary::assetPathToId(const std::string& assetPath)
+	const uuids::uuid ObjectLibrary::assetPathToId(const std::string& assetPath)
 	{
 		auto find = m_pathToIdMap.find(assetPath);
 		if (find != m_pathToIdMap.end())
 		{
 			return find->second;
 		}
-		return boost::uuids::uuid();
+		return uuids::uuid();
 	}
 
 	std::vector<std::shared_ptr<Resources::Resource>> ObjectLibrary::getResourcesOfType(Resources::ResourceType resourceType)
@@ -100,13 +98,15 @@ namespace DerydocaEngine
 		{
 			if (is_directory(it->path()))
 			{
-				updateMetaFilesDirectory(it->path().string());
+				auto pathStr = it->path().string();
+				updateMetaFilesDirectory(pathStr);
 			}
 			else
 			{
 				if (!endsWith(it->path().string(), m_metaExtension))
 				{
-					updateMetaFiles(it->path().string());
+					auto pathStr = it->path().string();
+					updateMetaFiles(pathStr);
 				}
 			}
 			it++;
@@ -131,6 +131,11 @@ namespace DerydocaEngine
 		auto resources = getResources(metaFilePath);
 		for (auto resource : resources)
 		{
+			if (resource == NULL)
+			{
+				D_LOG_ERROR("RESOURCE IS NULL");
+				continue;
+			}
 			resource->setFilePaths(sourceFilePath, metaFilePath);
 			registerResource(resource);
 		}
@@ -192,8 +197,8 @@ namespace DerydocaEngine
 		resource->postLoadInitialize();
 
 		// Load the resource into the map
-		m_resources.insert(std::pair<boost::uuids::uuid, std::shared_ptr<Resources::Resource>>(resource->getId(), resource));
-		m_pathToIdMap.insert(std::pair<std::string, boost::uuids::uuid>(resource->getSourceFilePath(), resource->getId()));
+		m_resources.insert(std::pair<uuids::uuid, std::shared_ptr<Resources::Resource>>(resource->getId(), resource));
+		m_pathToIdMap.insert(std::pair<std::string, uuids::uuid>(resource->getSourceFilePath(), resource->getId()));
 	}
 
 	std::shared_ptr<Resources::ResourceTreeNode> ObjectLibrary::getResourceTreeNode(const std::string& resourcePath)

@@ -1,5 +1,4 @@
 #pragma once
-#include <boost/uuid/uuid.hpp>
 #include <vector>
 #include <string>
 #include "UI\SpriteReference.h"
@@ -16,7 +15,7 @@ namespace DerydocaEngine::AssetData
 			const std::string& style,
 			const float fontSize,
 			const float lineHeight,
-			const boost::uuids::uuid& textureId) :
+			const uuids::uuid& textureId) :
 			name(name),
 			style(style),
 			fontSize(fontSize),
@@ -30,7 +29,7 @@ namespace DerydocaEngine::AssetData
 		std::string style;
 		float fontSize;
 		float lineHeight;
-		boost::uuids::uuid textureId;
+		uuids::uuid textureId;
 		std::vector<Utilities::TexturePackerImage> glyphs;
 
 		SERIALIZE_FUNC(

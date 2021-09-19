@@ -43,7 +43,7 @@ namespace DerydocaEngine::Components
 	void SceneHierarchyWindow::renderGameObjectTreeNode(std::shared_ptr<GameObject> gameObject)
 	{
 		// Get the string representation of the game object ID
-		auto id = boost::uuids::to_string(gameObject->getId());
+		auto id = gameObject->getId().to_string();
 		
 		// Set render flags for this game object
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_OpenOnArrow;

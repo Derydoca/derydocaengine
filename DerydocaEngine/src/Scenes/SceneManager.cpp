@@ -17,13 +17,13 @@ namespace DerydocaEngine::Scenes
 	{
 	}
 	
-	void SceneManager::LoadScene(const boost::uuids::uuid& levelId)
+	void SceneManager::LoadScene(const uuids::uuid& levelId)
 	{
 		auto resource = ObjectLibrary::getInstance().getResource<Resources::LevelResource>(levelId);
 		
 		if (resource == nullptr)
 		{
-			D_LOG_ERROR("Unable to find a scene with ID of '{}.", boost::uuids::to_string(levelId));
+			D_LOG_ERROR("Unable to find a scene with ID of '{}.", levelId.to_string());
 			return;
 		}
 

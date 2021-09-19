@@ -2,9 +2,6 @@
 #include "Resources\Resource.h"
 #include "Object.h"
 #include "ObjectLibrary.h"
-#include <boost\uuid\uuid.hpp>
-#include <boost\uuid\uuid_io.hpp>
-#include <boost\lexical_cast.hpp>
 
 // A handle holds reference to a resource type and simplifies the serialization of the object
 //  to a simple GUID.
@@ -32,7 +29,7 @@ namespace DerydocaEngine
             {
                 return "";
             }
-            std::string val = boost::lexical_cast<std::string>(m_Resource->getId());
+            std::string val = m_Resource->getId().to_string();
             return val;
         }
 

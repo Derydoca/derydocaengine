@@ -53,7 +53,7 @@ namespace DerydocaEngine::Components
 
 	void EngineAssetBrowser::renderResourceNode(std::shared_ptr<Resources::Resource> resource)
 	{
-		std::string id = boost::uuids::to_string(resource->getId());
+		std::string id = resource->getId().to_string();
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
 		if (m_SelectionGroup->isSelected(resource))
 		{

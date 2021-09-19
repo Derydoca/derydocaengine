@@ -39,7 +39,7 @@ namespace DerydocaEngine::Components
 		if (m_ShowPropertiesPanel)
 		{
 			ImGui::SameLine();
-			if (ImGui::BeginChild(boost::uuids::to_string(getId()).c_str(), { PROPERTIES_PANEL_WIDTH, (float)getDisplayHeight() }))
+			if (ImGui::BeginChild(getId().to_string().c_str(), { PROPERTIES_PANEL_WIDTH, (float)getDisplayHeight() }))
 			{
 				Editor::Inspector::InspectorRendererFactory::getInstance().renderInspector(getCamera());
 			}

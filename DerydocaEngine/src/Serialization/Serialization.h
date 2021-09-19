@@ -3,7 +3,6 @@
 #include <cereal\types\vector.hpp>
 #include <cereal\types\polymorphic.hpp>
 #include <cereal\types\base_class.hpp>
-#include "Serialization\CerealTypeBoostUuid.h"
 #include "Serialization\CerealGlmTypes.h"
 
 #define SERIALIZE_FUNC_DEFINITIONS template<class Archive>\

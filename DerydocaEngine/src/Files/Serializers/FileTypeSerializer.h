@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <boost/uuid/uuid.hpp>
 #include "Files\FileType.h"
 
 namespace DerydocaEngine::Resources {
@@ -17,7 +16,7 @@ namespace DerydocaEngine::Files::Serializers {
 		virtual Files::FileType getFileType() = 0;
 		virtual void postLoadInitialize(std::shared_ptr<Resources::Resource> resource) {}
 
-		friend boost::uuids::uuid generateUuid();
+		friend uuids::uuid generateUuid();
 	};
 
 }

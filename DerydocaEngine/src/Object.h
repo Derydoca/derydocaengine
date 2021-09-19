@@ -1,6 +1,6 @@
 #pragma once
 #include "DerydocaEngineCommonPch.h"
-#include <boost\uuid\uuid.hpp>
+#include "uuid.h"
 
 namespace DerydocaEngine
 {
@@ -21,21 +21,21 @@ namespace DerydocaEngine
 		{
 		}
 
-		Object(boost::uuids::uuid id) :
+		Object(uuids::uuid id) :
 			m_ID(id)
 		{
 		}
 
 		virtual ~Object() {};
 
-		boost::uuids::uuid getId() const { return m_ID; }
+		uuids::uuid getId() const { return m_ID; }
 
 		virtual unsigned long getTypeId() const = 0;
 
 		SERIALIZE_FUNC(SERIALIZE(m_ID));
 
 	protected:
-		boost::uuids::uuid m_ID;
+		uuids::uuid m_ID;
 	};
 
 }

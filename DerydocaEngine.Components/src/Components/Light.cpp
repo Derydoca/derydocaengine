@@ -125,8 +125,7 @@ namespace DerydocaEngine::Components
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		boost::uuids::string_generator gen;
-		boost::uuids::uuid shaderId = gen("05cdcea1-2312-4e30-828c-68717d484274");
+		uuids::uuid shaderId("05cdcea1-2312-4e30-828c-68717d484274");
 		auto shadowMapShader = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
 		m_ShadowMapMaterial = std::make_shared<Rendering::Material>();
 		m_ShadowMapMaterial->setShader(shadowMapShader);

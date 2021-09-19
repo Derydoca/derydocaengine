@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <boost/uuid/uuid.hpp>
 #include "Resources\ResourceType.h"
 #include "Object.h"
 
@@ -12,12 +11,12 @@ namespace DerydocaEngine::Resources
 	public:
 		Resource();
 		Resource(ResourceType type);
-		Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type);
+		Resource(const uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type);
 		virtual ~Resource() {}
 
 		void setData(const std::shared_ptr<void> data) { m_resourceObjectPointer = data; };
 		void setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath);
-		void setId(const boost::uuids::uuid& id) { m_ID = id; }
+		void setId(const uuids::uuid& id) { m_ID = id; }
 		void setName(const std::string& name) { m_name = name; }
 		void setType(const ResourceType type) { m_type = type; }
 
@@ -48,7 +47,7 @@ namespace DerydocaEngine::Resources
 
 	protected:
 		Resource(const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
-		Resource(const boost::uuids::uuid& id, const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
+		Resource(const uuids::uuid& id, const std::string& name, const ResourceType type, const std::string& sourceFilePath, const std::string& metaFilePath);
 
 	protected:
 		std::string m_name;

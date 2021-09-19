@@ -6,13 +6,6 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
-// Boost
-#include <boost/uuid/random_generator.hpp>
-#include <boost/uuid/string_generator.hpp>
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
-#include <boost/uuid/uuid_io.hpp>
-
 // Cereal
 #include <cereal\cereal.hpp>
 #include <cereal\types\polymorphic.hpp>
@@ -69,6 +62,7 @@
 #include "Logging\Log.h"
 #include "Serialization\Serialization.h"
 #include "ResourceRef.h"
+#include "uuid.h"
 
 // Maths
 #include "Math/TypeAliases.h"
