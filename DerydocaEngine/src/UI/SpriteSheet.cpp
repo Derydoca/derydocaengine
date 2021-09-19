@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "UI\Spritesheet.h"
 #include "ObjectLibrary.h"
-#include <boost\lexical_cast.hpp>
 #include <fstream>
 #include "Files\FileUtils.h"
 #include "AssetData\SpriteSheetData.h"
