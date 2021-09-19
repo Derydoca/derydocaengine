@@ -48,8 +48,8 @@ namespace DerydocaEngine::Components
 
 		// HACK: This was added to allow serializing of ShaderSubroutineSwitcher because it loses the material ID when creating
 		//  a new instance and the mesh renderer will not have a material to load after saving the scene.
-		void setMaterialId(boost::uuids::uuid id) { m_Material.GetSmartPointer()->setId(id); }
-		boost::uuids::uuid getMaterialId() { return m_Material.GetSmartPointer()->getId(); }
+		void setMaterialId(uuids::uuid id) { m_Material.GetSmartPointer()->setId(id); }
+		uuids::uuid getMaterialId() { return m_Material.GetSmartPointer()->getId(); }
 		void setFindRenderTextureCameraHack(const bool enable) { m_FindRenderTextureCameraHack = enable; }
 
 	private:

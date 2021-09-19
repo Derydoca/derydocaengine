@@ -84,7 +84,7 @@ namespace DerydocaEngine::Editor
 		auto skyboxIdString = engineSettings->getEditorSkyboxMaterialIdentifier();
 		if (skyboxIdString.size() > 0)
 		{
-			auto skyboxId = boost::lexical_cast<boost::uuids::uuid>(skyboxIdString);
+			uuids::uuid skyboxId(skyboxIdString);
 			m_editorSkyboxMaterialResource = ObjectLibrary::getInstance().getResource<Resources::MaterialResource>(skyboxId);
 		}
 

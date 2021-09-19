@@ -15,7 +15,7 @@ namespace DerydocaEngine::Components
 
     void EditorWindowComponent::postInit()
     {
-        m_WindowName = getWindowTitle() + "##" + boost::lexical_cast<std::string>(getGameObject()->getId());
+        m_WindowName = getWindowTitle() + "##" + getGameObject()->getId().to_string();
     }
 
     void EditorWindowComponent::renderEditorGUI()

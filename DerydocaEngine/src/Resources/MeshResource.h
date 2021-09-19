@@ -1,5 +1,4 @@
 #pragma once
-#include <boost\uuid\uuid.hpp>
 #include "Resources\Resource.h"
 #include "MeshFlags.h"
 
@@ -21,7 +20,7 @@ namespace DerydocaEngine::Resources
 
 		void setMeshIndex(unsigned int const& meshIndex) { m_meshIndex = meshIndex; }
 		void setMeshName(std::string const& meshName) { m_meshName = meshName; }
-		void setSkeletonId(boost::uuids::uuid skeletonId) { m_skeletonId = skeletonId; }
+		void setSkeletonId(uuids::uuid skeletonId) { m_skeletonId = skeletonId; }
 
 		unsigned int getMeshIndex() { return m_meshIndex; }
 		std::string getMeshName() { return m_meshName; }
@@ -29,7 +28,7 @@ namespace DerydocaEngine::Resources
 		void setFlag(Rendering::MeshFlags const& flag) {
 			m_flags = (Rendering::MeshFlags)(m_flags | flag);
 		}
-		const boost::uuids::uuid getSkeletonId() const { return m_skeletonId; }
+		const uuids::uuid getSkeletonId() const { return m_skeletonId; }
 		const bool hasSkeleton() const { return !m_skeletonId.is_nil(); }
 
 		template<class Archive>
@@ -57,7 +56,7 @@ namespace DerydocaEngine::Resources
 		}
 
 	private:
-		boost::uuids::uuid m_skeletonId;
+		uuids::uuid m_skeletonId;
 		unsigned int m_meshIndex;
 		std::string m_meshName;
 		Rendering::MeshFlags m_flags{};

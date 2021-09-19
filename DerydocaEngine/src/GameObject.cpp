@@ -26,12 +26,11 @@ namespace DerydocaEngine
 		m_Components(),
 		m_DestroyFlag(false)
 	{
-		auto idGen = boost::uuids::random_generator_pure();
-		m_ID = idGen();
+		m_ID = uuids::Generate();
 		m_Transform->setGameObject(this);
 	}
 
-	GameObject::GameObject(const boost::uuids::uuid id, const std::string & name) :
+	GameObject::GameObject(const uuids::uuid id, const std::string & name) :
 		Object(id),
 		m_Name(name),
 		m_Transform(std::make_shared<Components::Transform>()),

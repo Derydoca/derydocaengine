@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "boost/uuid/uuid.hpp"
 #include "glm/glm.hpp"
 #include "Resources\TextureResource.h"
 
@@ -60,7 +59,7 @@ namespace DerydocaEngine::AssetData
 		{
 		}
 
-		boost::uuids::uuid ShaderId;
+		uuids::uuid ShaderId;
 		std::vector<MaterialPropertyData<ResourceRef<Resources::TextureResource>>> Textures;
 		std::vector<MaterialPropertyData<bool>> Bools;
 		std::vector<MaterialPropertyData<int>> Ints;

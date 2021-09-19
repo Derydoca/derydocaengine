@@ -2,7 +2,6 @@
 #include "Resources\Resource.h"
 #include "Files\Serializers\FileSerializerLibrary.h"
 #include "Resources\Serializers\ResourceSerializerLibrary.h"
-#include <boost\uuid\uuid.hpp>
 
 namespace DerydocaEngine::Resources
 {
@@ -18,7 +17,7 @@ namespace DerydocaEngine::Resources
 	{
 	}
 
-	Resource::Resource(const boost::uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
+	Resource::Resource(const uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
 		Resource(id, "", type, sourceFilePath, metaFilePath)
 	{
 		auto filePath = std::filesystem::path(sourceFilePath);
@@ -38,7 +37,7 @@ namespace DerydocaEngine::Resources
 	{
 	}
 
-	Resource::Resource(const boost::uuids::uuid& id, const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+	Resource::Resource(const uuids::uuid& id, const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
 		Object(id),
 		m_name(name),
 		m_type(type),
@@ -50,8 +49,7 @@ namespace DerydocaEngine::Resources
 
 	void Resource::generateAndSetId()
 	{
-		boost::uuids::random_generator gen;
-		m_ID = gen();
+		m_ID = uuids::Generate();
 	}
 
 	void Resource::setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath)

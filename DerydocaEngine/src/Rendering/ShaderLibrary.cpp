@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\ShaderLibrary.h"
 
-#include <boost/uuid/uuid_io.hpp>
 #include <iostream>
 #include "ObjectLibrary.h"
 #include "Rendering\Shader.h"
@@ -21,19 +20,19 @@ namespace DerydocaEngine::Rendering
 	{
 	}
 
-	std::shared_ptr<Resources::ShaderResource> Rendering::ShaderLibrary::findResource(const boost::uuids::uuid& shaderId)
+	std::shared_ptr<Resources::ShaderResource> Rendering::ShaderLibrary::findResource(const uuids::uuid& shaderId)
 	{
 		// Convert the resource object to a shader resource object
 		std::shared_ptr<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
 		if (!shaderResource)
 		{
-			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", boost::uuids::to_string(shaderId));
+			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", shaderId.to_string());
 			return nullptr;
 		}
 		return shaderResource;
 	}
 
-	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const boost::uuids::uuid& shaderId)
+	std::shared_ptr<Shader> Rendering::ShaderLibrary::find(const uuids::uuid& shaderId)
 	{
 		// Look through the list of already loaded shaders
 		auto it = m_shaders.find(shaderId);
@@ -48,7 +47,7 @@ namespace DerydocaEngine::Rendering
 		std::shared_ptr<Resources::ShaderResource> shaderResource = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>(shaderId);
 		if (!shaderResource)
 		{
-			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", boost::uuids::to_string(shaderId));
+			D_LOG_ERROR("The resource with ID of '{}' is not a shader.", shaderId.to_string());
 			return nullptr;
 		}
 
@@ -83,9 +82,9 @@ namespace DerydocaEngine::Rendering
 		m_errorShader = ObjectLibrary::getInstance().getResource<Resources::ShaderResource>("3a8405f2-e16f-4aa7-bef0-5644d7d19cdd");
 	}
 
-	void Rendering::ShaderLibrary::registerShaderName(std::string const& shaderPath, boost::uuids::uuid const& shaderUuid)
+	void Rendering::ShaderLibrary::registerShaderName(std::string const& shaderPath, uuids::uuid const& shaderUuid)
 	{
-		m_shaderPaths.insert(std::pair<std::string, boost::uuids::uuid>(shaderPath, shaderUuid));
+		m_shaderPaths.insert(std::pair<std::string, uuids::uuid>(shaderPath, shaderUuid));
 	}
 
 }

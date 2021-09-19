@@ -33,7 +33,7 @@ namespace DerydocaEngine::Files::Serializers {
 		const aiScene* scene = importer.ReadFile(assetPath.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 		std::map<std::string, std::shared_ptr<Animation::Skeleton>> skeletons;
-		std::map<std::string, boost::uuids::uuid> skeletonIdMap;
+		std::map<std::string, uuids::uuid> skeletonIdMap;
 
 		for (size_t i = 0; i < scene->mNumMeshes; i++)
 		{

@@ -5,7 +5,7 @@
 
 TEST(ObjectLibrary, ReturnsAllMeshes_When_GetIsCalledWithMeshType)
 {
-	boost::uuids::random_generator uuidGen;
+	uuids::random_generator uuidGen;
 	auto& objectLibrary = DerydocaEngine::ObjectLibrary::getInstance();
 
 	auto meshResource = std::make_shared<DerydocaEngine::Resources::MeshResource>();

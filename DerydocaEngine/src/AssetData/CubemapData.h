@@ -1,16 +1,15 @@
 #pragma once
-#include "boost/uuid/uuid.hpp"
 
 namespace DerydocaEngine::AssetData
 {
 	struct CubemapData
 	{
-		boost::uuids::uuid texXPos;
-		boost::uuids::uuid texXNeg;
-		boost::uuids::uuid texYPos;
-		boost::uuids::uuid texYNeg;
-		boost::uuids::uuid texZPos;
-		boost::uuids::uuid texZNeg;
+		uuids::uuid texXPos;
+		uuids::uuid texXNeg;
+		uuids::uuid texYPos;
+		uuids::uuid texYNeg;
+		uuids::uuid texZPos;
+		uuids::uuid texZNeg;
 
 		SERIALIZE_FUNC(
 			SERIALIZE(texXPos),

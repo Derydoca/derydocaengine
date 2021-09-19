@@ -1,5 +1,4 @@
 #pragma once
-#include <boost/uuid/uuid.hpp>
 #include <memory>
 #include <vector>
 #include "Components\Transform.h"
@@ -25,7 +24,7 @@ namespace DerydocaEngine
 		REGISTER_TYPE_ID(GameObject);
 		GameObject();
 		GameObject(const std::string& name);
-		GameObject(const boost::uuids::uuid id, const std::string& name);
+		GameObject(const uuids::uuid id, const std::string& name);
 		~GameObject();
 
 		void addChild(const std::shared_ptr<GameObject> gameObject);
@@ -88,7 +87,7 @@ namespace DerydocaEngine
 		}
 
 		template <class T>
-		std::shared_ptr<T> getComponentInChildren(boost::uuids::uuid id)
+		std::shared_ptr<T> getComponentInChildren(uuids::uuid id)
 		{
 			for (std::vector<std::shared_ptr<Components::GameComponent>>::iterator it = m_Components.begin(); it != m_Components.end(); ++it)
 			{

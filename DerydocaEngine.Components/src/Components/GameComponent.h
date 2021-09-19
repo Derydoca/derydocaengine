@@ -1,6 +1,5 @@
 #pragma once
 
-#include <boost\uuid\uuid.hpp>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -79,7 +78,7 @@ namespace DerydocaEngine::Components
 			const std::shared_ptr<Transform> projectionTransform) {}
 
 		inline void setGameObject(const std::weak_ptr<GameObject> gameObject) { m_gameObject = gameObject; }
-		inline void setId(const boost::uuids::uuid& id) { m_ID = id; }
+		inline void setId(const uuids::uuid& id) { m_ID = id; }
 		inline std::shared_ptr<GameObject> getGameObject() { return m_gameObject.lock(); }
 
 		void destroy(std::shared_ptr<GameObject> objectToDestroy);
@@ -109,7 +108,7 @@ namespace DerydocaEngine::Components
 		}
 
 		template<typename T>
-		inline std::shared_ptr<T> findComponentOfType(boost::uuids::uuid id)
+		inline std::shared_ptr<T> findComponentOfType(uuids::uuid id)
 		{
 			std::shared_ptr<GameObject> root = getGameObject();
 			while (root->hasParent())
@@ -126,7 +125,7 @@ namespace DerydocaEngine::Components
 
 	protected:
 		template<typename T>
-		inline std::shared_ptr<T> getResourcePointer(const boost::uuids::uuid& resourceId)
+		inline std::shared_ptr<T> getResourcePointer(const uuids::uuid& resourceId)
 		{
 			return ObjectLibrary::getInstance().getResourceObjectPointer<T>(resourceId);
 		}

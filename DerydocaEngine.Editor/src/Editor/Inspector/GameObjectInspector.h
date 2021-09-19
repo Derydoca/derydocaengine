@@ -13,7 +13,7 @@ namespace DerydocaEngine::Editor::Inspector
 
 		void renderComponent(std::shared_ptr<Components::GameComponent> component)
 		{
-			ImGui::PushID(boost::uuids::to_string(component->getId()).c_str());
+			ImGui::PushID(component->getId().to_string().c_str());
 			if (ImGui::CollapsingHeader(TypeNameLookup::get().get(component).c_str()))
 			{
 				ImGui::TreePush();
