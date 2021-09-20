@@ -12,9 +12,6 @@ Watch a short demo video of the engine in action by clicking the thumbnail below
 ![Screenshot of dynamic LOD system](https://user-images.githubusercontent.com/3605996/52811473-0caeb480-304a-11e9-9e41-8a52f4ed8b9a.png)
 ![Screenshot of bumpmapping](https://user-images.githubusercontent.com/3605996/52811389-ceb19080-3049-11e9-94d6-108df728787e.png)
 
-## Prerequisites
-The Boost C++ library is required to build this project. The project will look for boost version 1.68.0 in either "C:\local\boost_1_68_0" or "D:\local\boost_1_68_0. You can download it from here: https://sourceforge.net/projects/boost/files/boost-binaries/1.68.0/
-
 ## How To Build
 After cloning the project you will have to restore the project's submodules. Run the two commands below in your console/terminal window:
 ```
@@ -74,4 +71,3 @@ Smoke Particle System | -project ..\\..\\exampleProject -scene 8cf10126-65aa-474
 *  GLM (0.9.8.5) - For all the complex math made to make games
 *  stb_image - For image loading
 *  cereal - For configuration files and serialized objects
-*  Boost (1.68.0) - For keeping the project cross-platform

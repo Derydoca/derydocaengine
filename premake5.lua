@@ -11,9 +11,7 @@ workspace "DerydocaEngine"
     }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-boostdir = "C:/local/boost_1_68_0"
 vendorincludes = {
-    (boostdir),
     "%{wks.location}/vendor/cereal/include",
     "%{wks.location}/vendor/freetype/include"
 }
@@ -277,7 +275,6 @@ project "DerydocaEngine.Editor.UI"
     }
 
     libdirs {
-        (boostdir .. "/lib64-msvc-14.1"),
         "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}"
     }
 
@@ -372,7 +369,6 @@ project "DerydocaEngine.Test"
     }
 
     libdirs {
-        (boostdir .. "/lib64-msvc-14.1"),
         "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}"
     }
 
@@ -463,7 +459,6 @@ project "DerydocaEngine.Editor.Test"
     }
 
     libdirs {
-        (boostdir .. "/lib64-msvc-14.1"),
         "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}"
     }
 
