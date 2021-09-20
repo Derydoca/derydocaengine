@@ -1,6 +1,6 @@
 #include "EnginePch.h"
-#include "Helpers\StringUtils.h"
-#include <boost/algorithm/string.hpp>
+#include "Helpers/StringUtils.h"
+#include <algorithm>
 
 namespace DerydocaEngine
 {
@@ -29,25 +29,25 @@ namespace DerydocaEngine
 
 	std::string getFileExtension(std::string const& path)
 	{
-		// Find the last instance of a period in the string
-		size_t strScanIndex;
-		for (strScanIndex = path.length(); strScanIndex > 0; strScanIndex--)
-		{
-			if (path[strScanIndex] == '.')
-			{
-				// Move the index forward one so we don't include the period in the returned string
-				strScanIndex++;
-				break;
-			}
-		}
+		auto p = std::filesystem::path(path);
 
-		// If a period could not be found, there is no extension
-		if (strScanIndex == 0) {
+		auto ext = p.extension();
+		if (ext.empty())
+		{
 			return "";
 		}
+		else
+		{
+			auto extStr = ext.string();
+			extStr = extStr.substr(1, extStr.length() - 1);
+			toLower(extStr);
+			return extStr;
+		}
+	}
 
-		// Otherwise, return the substring of just the extension
-		return boost::algorithm::to_lower_copy(path.substr(strScanIndex));
+	void toLower(std::string& str)
+	{
+		std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return std::tolower(c); });
 	}
 
 }
