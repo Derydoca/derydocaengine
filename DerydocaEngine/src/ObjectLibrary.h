@@ -12,6 +12,18 @@ namespace DerydocaEngine::Components {
 
 namespace DerydocaEngine
 {
+	struct File : public Object
+	{
+		REGISTER_TYPE_ID(File);
+		std::filesystem::path Path;
+	};
+
+	struct Directory
+	{
+		std::filesystem::path Path;
+		std::vector<File> Files;
+		std::vector<std::shared_ptr<Directory>> Children;
+	};
 
 	class ObjectLibrary
 	{
@@ -37,9 +49,10 @@ namespace DerydocaEngine
 		std::vector<sptr<Resources::Resource>> getResources(const std::string& metaFilePath);
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(uuids::uuid const& uuid);
+		std::shared_ptr<Directory> getProjectResourceDirectoryRoot() const { return m_projectResourceDirectoryRoot; }
 		void updateMetaFilesDirectory(const std::filesystem::path& directoryPath);
 		void updateMetaFiles(std::string const& file);
-		void loadDirectory(const std::filesystem::path& path);
+		void loadDirectory(std::shared_ptr<Directory> path);
 		void loadFile(const std::filesystem::path& sourceFilePath);
 
 		template<class GameComponentClass>
@@ -99,6 +112,8 @@ namespace DerydocaEngine
 		std::map<uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
 		std::map<std::string, uuids::uuid> m_pathToIdMap;
 		std::shared_ptr<Resources::ResourceTreeNode> m_projectResourceRoot;
+		std::shared_ptr<Directory> m_projectResourceDirectoryRoot;
+		std::shared_ptr<Directory> m_engineResourceDirectoryRoot;
 	};
 
 }

@@ -18,7 +18,9 @@ namespace DerydocaEngine
 	void ObjectLibrary::loadEngineResources(const std::filesystem::path& path)
 	{
 		D_LOG_TRACE("Loading engine files: {}", path.string());
-		loadDirectory(path);
+		m_engineResourceDirectoryRoot = std::make_shared<Directory>();
+		m_engineResourceDirectoryRoot->Path = path;
+		loadDirectory(m_engineResourceDirectoryRoot);
 	}
 
 	void ObjectLibrary::loadProjectResources(const std::filesystem::path& path)
@@ -26,7 +28,9 @@ namespace DerydocaEngine
 		D_LOG_TRACE("Updating meta files: {}", path.string());
 		updateMetaFilesDirectory(path);
 		D_LOG_TRACE("Loading project files: {}", path.string());
-		loadDirectory(path);
+		m_projectResourceDirectoryRoot = std::make_shared<Directory>();
+		m_projectResourceDirectoryRoot->Path = path;
+		loadDirectory(m_projectResourceDirectoryRoot);
 		m_projectDirectory = path;
 
 		loadResourceTree();
@@ -143,23 +147,32 @@ namespace DerydocaEngine
 
 	}
 
-	void ObjectLibrary::loadDirectory(const std::filesystem::path& directory)
+	void ObjectLibrary::loadDirectory(std::shared_ptr<Directory> directory)
 	{
-		std::filesystem::directory_iterator it{ directory };
-		while (it != std::filesystem::directory_iterator{})
+		//std::filesystem::directory_iterator it{ directory.Path };
+		//while (it != std::filesystem::directory_iterator{})
+		for (auto const& dir_entry : std::filesystem::directory_iterator{ directory->Path })
 		{
-			if (is_directory(it->path()))
+			if (dir_entry.is_directory())
 			{
-				loadDirectory(it->path());
+				auto childDir = std::make_shared<Directory>();
+				childDir->Path = dir_entry.path();
+
+				loadDirectory(childDir);
+
+				directory->Children.push_back(childDir);
 			}
 			else
 			{
-				if (!endsWith(it->path().string(), m_metaExtension))
+				if (dir_entry.path().has_extension() && !endsWith(dir_entry.path().string(), m_metaExtension))
 				{
-					loadFile(it->path());
+					File f{};
+					f.Path = dir_entry.path();
+					directory->Files.push_back(f);
+
+					loadFile(dir_entry.path());
 				}
 			}
-			it++;
 		}
 	}
 

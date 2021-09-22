@@ -9,8 +9,6 @@ namespace DerydocaEngine::Components
 	EngineAssetBrowser::EngineAssetBrowser()
 	{
 		m_SelectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
-
-		refresh();
 	}
 
 	EngineAssetBrowser::~EngineAssetBrowser()
@@ -27,25 +25,25 @@ namespace DerydocaEngine::Components
 
 		auto root = m_ResourceNode.lock();
 
-		renderFileSystemContent(m_RootDir);
+		renderFileSystemContent(ObjectLibrary::getInstance().getProjectResourceDirectoryRoot());
 	}
 
-	void EngineAssetBrowser::renderFileSystemContent(Directory directory)
+	void EngineAssetBrowser::renderFileSystemContent(std::shared_ptr<Directory> directory)
 	{
-		for (auto child : directory.Children)
+		for (auto child : directory->Children)
 		{
 			renderFolderNode(child);
 		}
 
-		for (auto file : directory.Files)
+		for (auto file : directory->Files)
 		{
 			renderFileNode(file);
 		}
 	}
 
-	void EngineAssetBrowser::renderFolderNode(Directory directory)
+	void EngineAssetBrowser::renderFolderNode(std::shared_ptr<Directory> directory)
 	{
-		if (ImGui::TreeNode(directory.Path.filename().string().c_str()))
+		if (ImGui::TreeNode(directory->Path.filename().string().c_str()))
 		{
 			renderFileSystemContent(directory);
 
@@ -67,39 +65,6 @@ namespace DerydocaEngine::Components
 		if (ImGui::IsItemClicked())
 		{
 			//m_SelectionGroup->select(resource);
-		}
-	}
-
-	void EngineAssetBrowser::refresh()
-	{
-		std::filesystem::path rootPath = ObjectLibrary::getInstance().getProjectDirectory();
-		m_RootDir.Path = rootPath;
-		refreshDir(m_RootDir);
-	}
-
-	void EngineAssetBrowser::refreshDir(Directory& dir)
-	{
-		for (auto const& dir_entry : std::filesystem::directory_iterator{ dir.Path })
-		{
-			if (dir_entry.is_directory())
-			{
-				Directory childDir{};
-				childDir.Path = dir_entry.path();
-
-				refreshDir(childDir);
-
-				dir.Children.push_back(childDir);
-			}
-			else
-			{
-				if (dir_entry.path().has_extension() && dir_entry.path().extension() == ".dmeta")
-				{
-					continue;
-				}
-				File f{};
-				f.Path = dir_entry.path();
-				dir.Files.push_back(f);
-			}
 		}
 	}
 
