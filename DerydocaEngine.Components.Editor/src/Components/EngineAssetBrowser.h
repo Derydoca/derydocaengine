@@ -4,6 +4,19 @@
 
 namespace DerydocaEngine::Components
 {
+	struct File : public Object
+	{
+		REGISTER_TYPE_ID(File);
+		std::filesystem::path Path;
+	};
+
+	struct Directory
+	{
+		std::filesystem::path Path;
+		std::vector<File> Files;
+		std::vector<Directory> Children;
+	};
+
 	class EngineAssetBrowser : public EditorWindowComponent, SelfRegister<EngineAssetBrowser>
 	{
 	public:
@@ -16,14 +29,21 @@ namespace DerydocaEngine::Components
 		virtual std::string getWindowTitle() { return "Asset Browser"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
 
-		void renderNode(std::shared_ptr<Resources::ResourceTreeNode> node);
-		void renderNodeContent(std::shared_ptr<Resources::ResourceTreeNode> node);
-		void renderResourceNode(std::shared_ptr<Resources::Resource> resource);
+		void renderFileSystemContent(Directory directory);
+		void renderFolderNode(Directory directory);
+		void renderFileNode(File file);
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::EditorWindowComponent);
+
+	private:
+		void refresh();
+		void refreshDir(Directory& dir);
+
 	private:
 		std::weak_ptr<Resources::ResourceTreeNode> m_ResourceNode;
 		std::shared_ptr<Editor::SelectionGroup> m_SelectionGroup;
+		Directory m_RootDir;
+
 	};
 }
 

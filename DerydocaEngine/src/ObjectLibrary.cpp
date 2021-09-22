@@ -27,6 +27,7 @@ namespace DerydocaEngine
 		updateMetaFilesDirectory(path);
 		D_LOG_TRACE("Loading project files: {}", path.string());
 		loadDirectory(path);
+		m_projectDirectory = path;
 
 		loadResourceTree();
 	}
@@ -149,13 +150,13 @@ namespace DerydocaEngine
 		{
 			if (is_directory(it->path()))
 			{
-				loadDirectory(it->path().string());
+				loadDirectory(it->path());
 			}
 			else
 			{
 				if (!endsWith(it->path().string(), m_metaExtension))
 				{
-					loadFile(it->path().string());
+					loadFile(it->path());
 				}
 			}
 			it++;
@@ -248,9 +249,9 @@ namespace DerydocaEngine
 		m_projectResourceRoot->sort();
 	}
 
-	void ObjectLibrary::loadFile(const std::string& sourceFilePath)
+	void ObjectLibrary::loadFile(const std::filesystem::path& sourceFilePath)
 	{
-		std::string metaFilePath = sourceFilePath + m_metaExtension;
+		std::filesystem::path metaFilePath(sourceFilePath.string() + m_metaExtension);
 
 		// If the meta file does not exist, skip loading this resource
 		if (!std::filesystem::exists(metaFilePath))
@@ -263,7 +264,8 @@ namespace DerydocaEngine
 		{
 			try
 			{
-				std::ifstream fs(metaFilePath);
+				std::string metaFilePathStr = metaFilePath.string();
+				std::ifstream fs(metaFilePathStr);
 				cereal::JSONInputArchive iarchive(fs);
 				iarchive(resources);
 
@@ -275,11 +277,13 @@ namespace DerydocaEngine
 			}
 			catch (const std::exception & ex)
 			{
-				D_LOG_ERROR("An error occurred while attempting to load this meta file: {}\n{}", metaFilePath, ex.what());
+				std::string metaFilePathStr = metaFilePath.string();
+				D_LOG_ERROR("An error occurred while attempting to load this meta file: {}\n{}", metaFilePathStr, ex.what());
 			}
 			catch (...)
 			{
-				D_LOG_ERROR("An unknown error occurred while attempting to load this meta file: {}", metaFilePath);
+				std::string metaFilePathStr = metaFilePath.string();
+				D_LOG_ERROR("An unknown error occurred while attempting to load this meta file: {}", metaFilePathStr);
 			}
 		}
 	}

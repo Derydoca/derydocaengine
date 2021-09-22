@@ -9,6 +9,8 @@ namespace DerydocaEngine::Components
 	EngineAssetBrowser::EngineAssetBrowser()
 	{
 		m_SelectionGroup = Editor::SelectionManager::getInstance().getPrimarySelectionGroup();
+
+		refresh();
 	}
 
 	EngineAssetBrowser::~EngineAssetBrowser()
@@ -25,44 +27,79 @@ namespace DerydocaEngine::Components
 
 		auto root = m_ResourceNode.lock();
 
-		renderNodeContent(root);
+		renderFileSystemContent(m_RootDir);
 	}
 
-	void EngineAssetBrowser::renderNodeContent(std::shared_ptr<Resources::ResourceTreeNode> node)
+	void EngineAssetBrowser::renderFileSystemContent(Directory directory)
 	{
-		for (auto child : node->getChildren())
+		for (auto child : directory.Children)
 		{
-			renderNode(child);
+			renderFolderNode(child);
 		}
 
-		for (auto resource : node->getResources())
+		for (auto file : directory.Files)
 		{
-			renderResourceNode(resource);
+			renderFileNode(file);
 		}
 	}
 
-	void EngineAssetBrowser::renderNode(std::shared_ptr<Resources::ResourceTreeNode> node)
+	void EngineAssetBrowser::renderFolderNode(Directory directory)
 	{
-		if (ImGui::TreeNode(node->getName().c_str()))
+		if (ImGui::TreeNode(directory.Path.filename().string().c_str()))
 		{
-			renderNodeContent(node);
+			renderFileSystemContent(directory);
 
 			ImGui::TreePop();
 		}
 	}
 
-	void EngineAssetBrowser::renderResourceNode(std::shared_ptr<Resources::Resource> resource)
+	void EngineAssetBrowser::renderFileNode(File file)
 	{
-		std::string id = resource->getId().to_string();
+		//std::string id = resource->getId().to_string();
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-		if (m_SelectionGroup->isSelected(resource))
-		{
-			flags |= ImGuiTreeNodeFlags_Selected;
-		}
-		ImGui::TreeNodeEx(id.c_str(), flags, "%s", resource->getName().c_str());
+		//if (m_SelectionGroup->isSelected(file))
+		//{
+		//	flags |= ImGuiTreeNodeFlags_Selected;
+		//}
+		std::string pathStr = file.Path.string();
+		std::string filenameStr = file.Path.filename().string();
+		ImGui::TreeNodeEx(pathStr.c_str(), flags, "%s", filenameStr.c_str());
 		if (ImGui::IsItemClicked())
 		{
-			m_SelectionGroup->select(resource);
+			//m_SelectionGroup->select(resource);
+		}
+	}
+
+	void EngineAssetBrowser::refresh()
+	{
+		std::filesystem::path rootPath = ObjectLibrary::getInstance().getProjectDirectory();
+		m_RootDir.Path = rootPath;
+		refreshDir(m_RootDir);
+	}
+
+	void EngineAssetBrowser::refreshDir(Directory& dir)
+	{
+		for (auto const& dir_entry : std::filesystem::directory_iterator{ dir.Path })
+		{
+			if (dir_entry.is_directory())
+			{
+				Directory childDir{};
+				childDir.Path = dir_entry.path();
+
+				refreshDir(childDir);
+
+				dir.Children.push_back(childDir);
+			}
+			else
+			{
+				if (dir_entry.path().has_extension() && dir_entry.path().extension() == ".dmeta")
+				{
+					continue;
+				}
+				File f{};
+				f.Path = dir_entry.path();
+				dir.Files.push_back(f);
+			}
 		}
 	}
 
