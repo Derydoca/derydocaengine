@@ -43,28 +43,38 @@ namespace DerydocaEngine::Components
 
 	void EngineAssetBrowser::renderFolderNode(std::shared_ptr<Directory> directory)
 	{
-		if (ImGui::TreeNode(directory->Path.filename().string().c_str()))
+		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+		if (m_SelectionGroup->isSelected(directory))
+		{
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		std::string pathStr = directory->Path.string();
+		std::string filenameStr = directory->Path.filename().string();
+		bool isOpen = ImGui::TreeNodeEx(pathStr.c_str(), flags, "%s", filenameStr.c_str());
+		if (ImGui::IsItemClicked())
+		{
+			m_SelectionGroup->select(directory);
+		}
+		if (isOpen)
 		{
 			renderFileSystemContent(directory);
-
 			ImGui::TreePop();
 		}
 	}
 
-	void EngineAssetBrowser::renderFileNode(File file)
+	void EngineAssetBrowser::renderFileNode(std::shared_ptr<File> file)
 	{
-		//std::string id = resource->getId().to_string();
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-		//if (m_SelectionGroup->isSelected(file))
-		//{
-		//	flags |= ImGuiTreeNodeFlags_Selected;
-		//}
-		std::string pathStr = file.Path.string();
-		std::string filenameStr = file.Path.filename().string();
+		if (m_SelectionGroup->isSelected(file))
+		{
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		std::string pathStr = file->Path.string();
+		std::string filenameStr = file->Path.filename().string();
 		ImGui::TreeNodeEx(pathStr.c_str(), flags, "%s", filenameStr.c_str());
 		if (ImGui::IsItemClicked())
 		{
-			//m_SelectionGroup->select(resource);
+			m_SelectionGroup->select(file);
 		}
 	}
 

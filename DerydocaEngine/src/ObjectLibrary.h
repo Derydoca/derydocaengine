@@ -12,16 +12,19 @@ namespace DerydocaEngine::Components {
 
 namespace DerydocaEngine
 {
-	struct File : public Object
+	class File : public Object
 	{
+	public:
 		REGISTER_TYPE_ID(File);
 		std::filesystem::path Path;
 	};
 
-	struct Directory
+	class Directory : public Object
 	{
+	public:
+		REGISTER_TYPE_ID(Directory);
 		std::filesystem::path Path;
-		std::vector<File> Files;
+		std::vector<std::shared_ptr<File>> Files;
 		std::vector<std::shared_ptr<Directory>> Children;
 	};
 

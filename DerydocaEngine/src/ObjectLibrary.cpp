@@ -166,8 +166,8 @@ namespace DerydocaEngine
 			{
 				if (dir_entry.path().has_extension() && !endsWith(dir_entry.path().string(), m_metaExtension))
 				{
-					File f{};
-					f.Path = dir_entry.path();
+					auto f = std::make_shared<File>();
+					f->Path = dir_entry.path();
 					directory->Files.push_back(f);
 
 					loadFile(dir_entry.path());
