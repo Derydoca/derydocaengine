@@ -19,6 +19,7 @@ namespace DerydocaEngine::Components
 		void renderFileSystemContent(std::shared_ptr<Directory> directory);
 		void renderFolderNode(std::shared_ptr<Directory> directory);
 		void renderFileNode(std::shared_ptr<File> file);
+		void renderResourceNode(std::shared_ptr<Resources::Resource> resource);
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::EditorWindowComponent);
 

@@ -170,7 +170,7 @@ namespace DerydocaEngine
 					f->Path = dir_entry.path();
 					directory->Files.push_back(f);
 
-					loadFile(dir_entry.path());
+					loadFile(f);
 				}
 			}
 		}
@@ -262,8 +262,9 @@ namespace DerydocaEngine
 		m_projectResourceRoot->sort();
 	}
 
-	void ObjectLibrary::loadFile(const std::filesystem::path& sourceFilePath)
+	void ObjectLibrary::loadFile(std::shared_ptr<File> file)
 	{
+		const auto& sourceFilePath = file->Path;
 		std::filesystem::path metaFilePath(sourceFilePath.string() + m_metaExtension);
 
 		// If the meta file does not exist, skip loading this resource
@@ -285,6 +286,7 @@ namespace DerydocaEngine
 				for (auto resource : resources)
 				{
 					resource->setFilePaths(sourceFilePath, metaFilePath);
+					file->Resources.push_back(resource);
 					registerResource(resource);
 				}
 			}

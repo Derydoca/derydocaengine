@@ -17,6 +17,7 @@ namespace DerydocaEngine
 	public:
 		REGISTER_TYPE_ID(File);
 		std::filesystem::path Path;
+		std::vector<std::shared_ptr<Resources::Resource>> Resources;
 	};
 
 	class Directory : public Object
@@ -56,7 +57,7 @@ namespace DerydocaEngine
 		void updateMetaFilesDirectory(const std::filesystem::path& directoryPath);
 		void updateMetaFiles(std::string const& file);
 		void loadDirectory(std::shared_ptr<Directory> path);
-		void loadFile(const std::filesystem::path& sourceFilePath);
+		void loadFile(std::shared_ptr<File> file);
 
 		template<class GameComponentClass>
 		std::shared_ptr<GameComponentClass> getComponent(const uuids::uuid& id)
