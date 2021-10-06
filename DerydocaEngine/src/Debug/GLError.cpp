@@ -1,5 +1,4 @@
 #include "EnginePch.h"
-#include "Debug\DebugVisualizer.h"
 
 #include <assert.h>
 #include <gl/glew.h>

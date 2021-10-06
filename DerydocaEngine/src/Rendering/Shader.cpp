@@ -7,7 +7,6 @@
 #include <sys/stat.h>
 #include "Components\Camera.h"
 #include "Rendering\CameraManager.h"
-#include "Debug\DebugVisualizer.h"
 #include "Rendering\GraphicsAPI.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Mesh.h"

@@ -4,7 +4,6 @@
 #include <GL/glew.h>
 
 #include "MeshAdjacencyCalculator.h"
-#include "Debug\DebugVisualizer.h"
 
 namespace DerydocaEngine::Rendering
 {
