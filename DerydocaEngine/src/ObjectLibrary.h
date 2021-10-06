@@ -12,6 +12,22 @@ namespace DerydocaEngine::Components {
 
 namespace DerydocaEngine
 {
+	class File : public Object
+	{
+	public:
+		REGISTER_TYPE_ID(File);
+		std::filesystem::path Path;
+		std::vector<std::shared_ptr<Resources::Resource>> Resources;
+	};
+
+	class Directory : public Object
+	{
+	public:
+		REGISTER_TYPE_ID(Directory);
+		std::filesystem::path Path;
+		std::vector<std::shared_ptr<File>> Files;
+		std::vector<std::shared_ptr<Directory>> Children;
+	};
 
 	class ObjectLibrary
 	{
@@ -31,15 +47,17 @@ namespace DerydocaEngine
 		}
 		const uuids::uuid assetPathToId(const std::string& assetPath);
 		const std::string& getMetaExtension() const { return m_metaExtension; }
+		const std::filesystem::path& getProjectDirectory() const { return m_projectDirectory; }
 		std::vector<std::shared_ptr<Resources::Resource>> getResourcesOfType(Resources::ResourceType resourceType);
 		std::shared_ptr<Resources::ResourceTreeNode> getRootResourceTreeNode() const { return m_projectResourceRoot; }
 		std::vector<sptr<Resources::Resource>> getResources(const std::string& metaFilePath);
 		std::shared_ptr<Resources::Resource> getResource(std::string const& uuidString);
 		std::shared_ptr<Resources::Resource> getResource(uuids::uuid const& uuid);
+		std::shared_ptr<Directory> getProjectResourceDirectoryRoot() const { return m_projectResourceDirectoryRoot; }
 		void updateMetaFilesDirectory(const std::filesystem::path& directoryPath);
 		void updateMetaFiles(std::string const& file);
-		void loadDirectory(const std::filesystem::path& path);
-		void loadFile(const std::string& sourceFilePath);
+		void loadDirectory(std::shared_ptr<Directory> path);
+		void loadFile(std::shared_ptr<File> file);
 
 		template<class GameComponentClass>
 		std::shared_ptr<GameComponentClass> getComponent(const uuids::uuid& id)
@@ -94,9 +112,12 @@ namespace DerydocaEngine
 		void loadResourceTree();
 
 		const std::string m_metaExtension = ".dmeta";
+		std::filesystem::path m_projectDirectory;
 		std::map<uuids::uuid, std::shared_ptr<Resources::Resource>> m_resources;
 		std::map<std::string, uuids::uuid> m_pathToIdMap;
 		std::shared_ptr<Resources::ResourceTreeNode> m_projectResourceRoot;
+		std::shared_ptr<Directory> m_projectResourceDirectoryRoot;
+		std::shared_ptr<Directory> m_engineResourceDirectoryRoot;
 	};
 
 }

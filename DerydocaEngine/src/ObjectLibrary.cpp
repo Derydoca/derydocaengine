@@ -18,7 +18,9 @@ namespace DerydocaEngine
 	void ObjectLibrary::loadEngineResources(const std::filesystem::path& path)
 	{
 		D_LOG_TRACE("Loading engine files: {}", path.string());
-		loadDirectory(path);
+		m_engineResourceDirectoryRoot = std::make_shared<Directory>();
+		m_engineResourceDirectoryRoot->Path = path;
+		loadDirectory(m_engineResourceDirectoryRoot);
 	}
 
 	void ObjectLibrary::loadProjectResources(const std::filesystem::path& path)
@@ -26,7 +28,10 @@ namespace DerydocaEngine
 		D_LOG_TRACE("Updating meta files: {}", path.string());
 		updateMetaFilesDirectory(path);
 		D_LOG_TRACE("Loading project files: {}", path.string());
-		loadDirectory(path);
+		m_projectResourceDirectoryRoot = std::make_shared<Directory>();
+		m_projectResourceDirectoryRoot->Path = path;
+		loadDirectory(m_projectResourceDirectoryRoot);
+		m_projectDirectory = path;
 
 		loadResourceTree();
 	}
@@ -142,23 +147,32 @@ namespace DerydocaEngine
 
 	}
 
-	void ObjectLibrary::loadDirectory(const std::filesystem::path& directory)
+	void ObjectLibrary::loadDirectory(std::shared_ptr<Directory> directory)
 	{
-		std::filesystem::directory_iterator it{ directory };
-		while (it != std::filesystem::directory_iterator{})
+		//std::filesystem::directory_iterator it{ directory.Path };
+		//while (it != std::filesystem::directory_iterator{})
+		for (auto const& dir_entry : std::filesystem::directory_iterator{ directory->Path })
 		{
-			if (is_directory(it->path()))
+			if (dir_entry.is_directory())
 			{
-				loadDirectory(it->path().string());
+				auto childDir = std::make_shared<Directory>();
+				childDir->Path = dir_entry.path();
+
+				loadDirectory(childDir);
+
+				directory->Children.push_back(childDir);
 			}
 			else
 			{
-				if (!endsWith(it->path().string(), m_metaExtension))
+				if (dir_entry.path().has_extension() && !endsWith(dir_entry.path().string(), m_metaExtension))
 				{
-					loadFile(it->path().string());
+					auto f = std::make_shared<File>();
+					f->Path = dir_entry.path();
+					directory->Files.push_back(f);
+
+					loadFile(f);
 				}
 			}
-			it++;
 		}
 	}
 
@@ -248,9 +262,10 @@ namespace DerydocaEngine
 		m_projectResourceRoot->sort();
 	}
 
-	void ObjectLibrary::loadFile(const std::string& sourceFilePath)
+	void ObjectLibrary::loadFile(std::shared_ptr<File> file)
 	{
-		std::string metaFilePath = sourceFilePath + m_metaExtension;
+		const auto& sourceFilePath = file->Path;
+		std::filesystem::path metaFilePath(sourceFilePath.string() + m_metaExtension);
 
 		// If the meta file does not exist, skip loading this resource
 		if (!std::filesystem::exists(metaFilePath))
@@ -263,23 +278,27 @@ namespace DerydocaEngine
 		{
 			try
 			{
-				std::ifstream fs(metaFilePath);
+				std::string metaFilePathStr = metaFilePath.string();
+				std::ifstream fs(metaFilePathStr);
 				cereal::JSONInputArchive iarchive(fs);
 				iarchive(resources);
 
 				for (auto resource : resources)
 				{
 					resource->setFilePaths(sourceFilePath, metaFilePath);
+					file->Resources.push_back(resource);
 					registerResource(resource);
 				}
 			}
 			catch (const std::exception & ex)
 			{
-				D_LOG_ERROR("An error occurred while attempting to load this meta file: {}\n{}", metaFilePath, ex.what());
+				std::string metaFilePathStr = metaFilePath.string();
+				D_LOG_ERROR("An error occurred while attempting to load this meta file: {}\n{}", metaFilePathStr, ex.what());
 			}
 			catch (...)
 			{
-				D_LOG_ERROR("An unknown error occurred while attempting to load this meta file: {}", metaFilePath);
+				std::string metaFilePathStr = metaFilePath.string();
+				D_LOG_ERROR("An unknown error occurred while attempting to load this meta file: {}", metaFilePathStr);
 			}
 		}
 	}

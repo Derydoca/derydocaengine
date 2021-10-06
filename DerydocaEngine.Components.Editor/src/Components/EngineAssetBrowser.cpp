@@ -25,28 +25,76 @@ namespace DerydocaEngine::Components
 
 		auto root = m_ResourceNode.lock();
 
-		renderNodeContent(root);
+		renderFileSystemContent(ObjectLibrary::getInstance().getProjectResourceDirectoryRoot());
 	}
 
-	void EngineAssetBrowser::renderNodeContent(std::shared_ptr<Resources::ResourceTreeNode> node)
+	void EngineAssetBrowser::renderFileSystemContent(std::shared_ptr<Directory> directory)
 	{
-		for (auto child : node->getChildren())
+		for (auto child : directory->Children)
 		{
-			renderNode(child);
+			renderFolderNode(child);
 		}
 
-		for (auto resource : node->getResources())
+		for (auto file : directory->Files)
 		{
-			renderResourceNode(resource);
+			renderFileNode(file);
 		}
 	}
 
-	void EngineAssetBrowser::renderNode(std::shared_ptr<Resources::ResourceTreeNode> node)
+	void EngineAssetBrowser::renderFolderNode(std::shared_ptr<Directory> directory)
 	{
-		if (ImGui::TreeNode(node->getName().c_str()))
+		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+		if (m_SelectionGroup->isSelected(directory))
 		{
-			renderNodeContent(node);
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		std::string pathStr = directory->Path.string();
+		std::string filenameStr = directory->Path.filename().string();
+		bool isOpen = ImGui::TreeNodeEx(pathStr.c_str(), flags, "%s", filenameStr.c_str());
+		if (ImGui::IsItemClicked())
+		{
+			m_SelectionGroup->select(directory);
+		}
+		if (isOpen)
+		{
+			renderFileSystemContent(directory);
+			ImGui::TreePop();
+		}
+	}
 
+	void EngineAssetBrowser::renderFileNode(std::shared_ptr<File> file)
+	{
+		int numResources = file->Resources.size();
+
+		ImGuiTreeNodeFlags flags =
+			(numResources <= 1) ?
+			ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen :
+			ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+
+		if (m_SelectionGroup->isSelected(file) || (numResources == 1 && m_SelectionGroup->isSelected(file->Resources.at(0))))
+		{
+			flags |= ImGuiTreeNodeFlags_Selected;
+		}
+		std::string pathStr = file->Path.string();
+		std::string filenameStr = file->Path.filename().string();
+		bool isOpen = ImGui::TreeNodeEx(pathStr.c_str(), flags, "%s", filenameStr.c_str());
+		if (ImGui::IsItemClicked())
+		{
+			if (numResources > 0)
+			{
+				m_SelectionGroup->select(file->Resources.at(0));
+			}
+			else
+			{
+				m_SelectionGroup->select(file);
+			}
+		}
+		if (numResources > 1 && isOpen)
+		{
+			for (auto resource : file->Resources)
+			{
+				renderResourceNode(resource);
+			}
 			ImGui::TreePop();
 		}
 	}

@@ -17,7 +17,7 @@ namespace DerydocaEngine::Resources
 	{
 	}
 
-	Resource::Resource(const uuids::uuid& id, const std::string& sourceFilePath, const std::string& metaFilePath, const ResourceType type) :
+	Resource::Resource(const uuids::uuid& id, const std::filesystem::path& sourceFilePath, const std::filesystem::path& metaFilePath, const ResourceType type) :
 		Resource(id, "", type, sourceFilePath, metaFilePath)
 	{
 		auto filePath = std::filesystem::path(sourceFilePath);
@@ -27,7 +27,7 @@ namespace DerydocaEngine::Resources
 		}
 	}
 
-	Resource::Resource(const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+	Resource::Resource(const std::string & name, const ResourceType type, const std::filesystem::path& sourceFilePath, const std::filesystem::path& metaFilePath) :
 		Object(),
 		m_name(name),
 		m_type(type),
@@ -37,7 +37,7 @@ namespace DerydocaEngine::Resources
 	{
 	}
 
-	Resource::Resource(const uuids::uuid& id, const std::string & name, const ResourceType type, const std::string & sourceFilePath, const std::string & metaFilePath) :
+	Resource::Resource(const uuids::uuid& id, const std::string & name, const ResourceType type, const std::filesystem::path& sourceFilePath, const std::filesystem::path& metaFilePath) :
 		Object(id),
 		m_name(name),
 		m_type(type),
@@ -53,7 +53,7 @@ namespace DerydocaEngine::Resources
 		m_ID = gen();
 	}
 
-	void Resource::setFilePaths(const std::string& sourceFilePath, const std::string& metaFilePath)
+	void Resource::setFilePaths(const std::filesystem::path& sourceFilePath, const std::filesystem::path& metaFilePath)
 	{
 		m_sourceFilePath = sourceFilePath;
 		m_metaFilePath = metaFilePath;

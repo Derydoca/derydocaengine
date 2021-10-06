@@ -16,14 +16,17 @@ namespace DerydocaEngine::Components
 		virtual std::string getWindowTitle() { return "Asset Browser"; }
 		virtual ImGuiWindowFlags getWindowFlags() { return ImGuiWindowFlags_None; }
 
-		void renderNode(std::shared_ptr<Resources::ResourceTreeNode> node);
-		void renderNodeContent(std::shared_ptr<Resources::ResourceTreeNode> node);
+		void renderFileSystemContent(std::shared_ptr<Directory> directory);
+		void renderFolderNode(std::shared_ptr<Directory> directory);
+		void renderFileNode(std::shared_ptr<File> file);
 		void renderResourceNode(std::shared_ptr<Resources::Resource> resource);
 
 		SERIALIZE_FUNC_BASE(DerydocaEngine::Components::EditorWindowComponent);
+
 	private:
 		std::weak_ptr<Resources::ResourceTreeNode> m_ResourceNode;
 		std::shared_ptr<Editor::SelectionGroup> m_SelectionGroup;
+
 	};
 }
 

@@ -23,7 +23,7 @@ namespace DerydocaEngine::Resources
 		void setGeometryShaderSource(std::string const& geometryShaderSource) { m_geometryShaderSource = geometryShaderSource; }
 
 		std::string getRawShaderName() const { return m_rawShaderName; }
-		std::string getVertexShaderLocation() const { return m_sourceFilePath; }
+		std::string getVertexShaderLocation() const { return m_sourceFilePath.string(); }
 		std::string getFragmentShaderSource() const { return m_fragmentShaderSource; }
 		std::string getGeometryShaderSource() const { return m_geometryShaderSource; }
 
