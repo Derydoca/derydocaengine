@@ -2,11 +2,9 @@
 #include "Rendering\Texture.h"
 
 #include <cassert>
-#include "Rendering\TextureParameters.h"
 
 namespace DerydocaEngine::Rendering
 {
-
 	Texture::Texture() :
 		m_rendererId(0),
 		m_width(0),
@@ -94,6 +92,25 @@ namespace DerydocaEngine::Rendering
 		deleteTexture();
 	}
 
+	unsigned int textureWrapModeToOpenGL(const TextureWrapMode mode)
+	{
+		switch (mode)
+		{
+		case CLAMP_TO_EDGE:
+			return GL_CLAMP_TO_EDGE;
+		case CLAMP_TO_BORDER:
+			return GL_CLAMP_TO_BORDER;
+		case MIRRORED_REPEAT:
+			return GL_MIRRORED_REPEAT;
+		case REPEAT:
+			return GL_REPEAT;
+		case MIRROR_CLAMP_TO_EDGE:
+			return GL_MIRROR_CLAMP_TO_EDGE;
+		default:
+			return GL_REPEAT;
+		}
+	}
+
 	void Texture::bind(const unsigned int unit) const
 	{
 		glActiveTexture(GL_TEXTURE0 + unit);
@@ -137,8 +154,8 @@ namespace DerydocaEngine::Rendering
 		glGenTextures(1, &m_rendererId);
 		glBindTexture(m_textureType, m_rendererId);
 		glTexImage2D(m_textureType, 0, pixelFormat, width, height, 0, pixelFormat, GL_UNSIGNED_BYTE, data);
-		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, TextureParameters::textureWrapModeToOpenGL(wrapModeS));
-		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, TextureParameters::textureWrapModeToOpenGL(wrapModeT));
+		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_S, textureWrapModeToOpenGL(wrapModeS));
+		glTexParameteri(m_textureType, GL_TEXTURE_WRAP_T, textureWrapModeToOpenGL(wrapModeT));
 		glTexParameteri(m_textureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(m_textureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
