@@ -264,6 +264,44 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
+	std::vector<uint32_t> GraphicsAPI::createDeferredRenderBuffer(const uint16_t width, const uint16_t height, const std::vector<FramebufferDescriptor>& framebufferDescs, uint32_t& renderbuffer)
+	{
+		glGenRenderbuffers(1, &renderbuffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+
+		std::vector<uint32_t> framebufferTextures(framebufferDescs.size());
+		glGenTextures(framebufferDescs.size(), &framebufferTextures[0]);
+
+		for (int framebufferIdx = 0; framebufferIdx < framebufferDescs.size(); framebufferIdx++)
+		{
+			auto desc = framebufferDescs[framebufferIdx];
+
+			glActiveTexture(GL_TEXTURE0 + desc.TextureUnit);
+			glBindTexture(GL_TEXTURE_2D, framebufferTextures[framebufferIdx]);
+			glTexStorage2D(GL_TEXTURE_2D, 1, translate(desc.Format), width, height);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, translate(desc.MinFilter));
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, translate(desc.MagFilter));
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
+		}
+
+		// Attach the textures to the framebuffer
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
+
+		std::vector<GLenum> drawBuffers;
+		drawBuffers.push_back(GL_NONE);
+		for (int framebufferIdx = 0; framebufferIdx < framebufferTextures.size(); framebufferIdx++)
+		{
+			GLenum attachment = GL_COLOR_ATTACHMENT0 + framebufferIdx;
+			glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, framebufferTextures[framebufferIdx], 0);
+			drawBuffers.push_back(attachment);
+		}
+
+		glDrawBuffers(drawBuffers.size(), &drawBuffers[0]);
+
+		return framebufferTextures;
+	}
+
 	void GraphicsAPI::createForwardRendererBuffer(const uint16_t width, const uint16_t height, SizedTextureFormat format, uint32_t& colorBuffer, uint32_t& depthBuffer)
 	{
 		auto internalTextureFormat = getInternalTextureFormat(format);
