@@ -45,15 +45,15 @@ namespace DerydocaEngine::Rendering
 
 		if (m_renderingMode == RenderingMode::Forward)
 		{
-			createRenderbuffers_Forward();
+			GraphicsAPI::createForwardRendererBuffer(m_width, m_height, SizedTextureFormat::RGB8, m_rendererId, m_renderBufferIds[0]);
 		}
 		else
 		{
 			createRenderbuffers_Deferred();
 		}
 
-		auto framebufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-		if (framebufferStatus != GL_FRAMEBUFFER_COMPLETE) {
+		if (!GraphicsAPI::isFramebufferCreated())
+		{
 			D_LOG_ERROR("UNABLE TO CREATE RENDER TEXTURE!");
 		}
 	}
@@ -67,24 +67,6 @@ namespace DerydocaEngine::Rendering
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
-	}
-
-	void RenderTexture::createRenderbuffers_Forward()
-	{
-		// Create the color buffer (Also can be bound to sampler in a shader that takes a single sampler)
-		GraphicsAPI::createTexture2D(&m_rendererId, m_width, m_height);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-		// Create the depth buffer
-		GraphicsAPI::createRenderBuffers(1, &m_renderBufferIds[0]);
-		glBindRenderbuffer(GL_RENDERBUFFER, m_renderBufferIds[0]);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_width, m_height);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_renderBufferIds[0]);
-
-		glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_rendererId, 0);
-		GLenum colorAttachments[] = { GL_COLOR_ATTACHMENT0 };
-		glDrawBuffers(1, colorAttachments);
 	}
 
 	void RenderTexture::createRenderbuffers_Deferred()

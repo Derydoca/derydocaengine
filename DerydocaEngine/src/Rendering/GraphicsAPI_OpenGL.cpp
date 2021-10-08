@@ -90,6 +90,11 @@ namespace DerydocaEngine::Rendering
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
+	bool GraphicsAPI::isFramebufferCreated()
+	{
+		return glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE;
+	}
+
 	void GraphicsAPI::disableTransparancy()
 	{
 		glDisable(GL_BLEND);
@@ -167,6 +172,119 @@ namespace DerydocaEngine::Rendering
 		GL_CHECK(p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY));
 		memcpy(p, buffer, size);
 		GL_CHECK(glUnmapBuffer(GL_UNIFORM_BUFFER));
+	}
+
+	uint32_t GraphicsAPI::translate(FilterMode filterMode)
+	{
+		switch (filterMode)
+		{
+		case DerydocaEngine::Rendering::FilterMode::Nearest:
+			return GL_NEAREST;
+		case DerydocaEngine::Rendering::FilterMode::Linear:
+			return GL_LINEAR;
+		default:
+			D_LOG_CRITICAL("Unable to translate FilterMode!");
+			return -1;
+		}
+	}
+
+	uint32_t GraphicsAPI::translate(InternalTextureFormat internalTextureFormat)
+	{
+		switch (internalTextureFormat)
+		{
+		case DerydocaEngine::Rendering::InternalTextureFormat::R:
+			return GL_RED;
+		case DerydocaEngine::Rendering::InternalTextureFormat::RG:
+			return GL_RG;
+		case DerydocaEngine::Rendering::InternalTextureFormat::RGB:
+			return GL_RGB;
+		case DerydocaEngine::Rendering::InternalTextureFormat::RGBA:
+			return GL_RGBA;
+		case DerydocaEngine::Rendering::InternalTextureFormat::Depth:
+			return GL_DEPTH_COMPONENT;
+		case DerydocaEngine::Rendering::InternalTextureFormat::DepthStencil:
+			return GL_DEPTH_STENCIL;
+		default:
+			D_LOG_CRITICAL("Unable to translate InternalTextureFormat!");
+			return -1;
+		}
+	}
+
+	uint32_t GraphicsAPI::translate(SizedTextureFormat textureFormat)
+	{
+		switch (textureFormat)
+		{
+		case DerydocaEngine::Rendering::SizedTextureFormat::RGB32F:
+			return GL_RGB32F;
+		case DerydocaEngine::Rendering::SizedTextureFormat::RGB8:
+			return GL_RGB8;
+		default:
+			D_LOG_CRITICAL("Unable to translate SizedTextureFormat!");
+			return -1;
+		}
+	}
+
+	uint32_t GraphicsAPI::translate(TextureDataType textureFormat)
+	{
+		switch (textureFormat)
+		{
+		case DerydocaEngine::Rendering::TextureDataType::UnsignedByte:
+			return GL_UNSIGNED_BYTE;
+		default:
+			D_LOG_CRITICAL("Unable to translate TextureDataType!");
+			return -1;
+		}
+	}
+
+	InternalTextureFormat GraphicsAPI::getInternalTextureFormat(SizedTextureFormat textureFormat)
+	{
+		switch (textureFormat)
+		{
+		case DerydocaEngine::Rendering::SizedTextureFormat::RGB32F:
+			return InternalTextureFormat::RGB;
+		case DerydocaEngine::Rendering::SizedTextureFormat::RGB8:
+			return InternalTextureFormat::RGB;
+		default:
+			D_LOG_CRITICAL("Unable to translate SizedTextureFormat to InternalTextureFormat!");
+			return InternalTextureFormat::RGB;
+		}
+	}
+
+	TextureDataType GraphicsAPI::getTextureDataType(SizedTextureFormat textureFormat)
+	{
+		switch (textureFormat)
+		{
+		case DerydocaEngine::Rendering::SizedTextureFormat::RGB32F:
+			return TextureDataType::Float;
+		case DerydocaEngine::Rendering::SizedTextureFormat::RGB8:
+			return TextureDataType::UnsignedByte;
+		default:
+			D_LOG_CRITICAL("Unable to translate SizedTextureFormat to TextureDataType!");
+			return TextureDataType::Float;
+		}
+	}
+
+	void GraphicsAPI::createForwardRendererBuffer(const uint16_t width, const uint16_t height, SizedTextureFormat format, uint32_t& colorBuffer, uint32_t& depthBuffer)
+	{
+		auto internalTextureFormat = getInternalTextureFormat(format);
+		auto textureDataType = getTextureDataType(format);
+
+		// Create the color buffer (Also can be bound to sampler in a shader that takes a single sampler)
+		glGenTextures(1, &colorBuffer);
+		glBindTexture(GL_TEXTURE_2D, colorBuffer);
+		glTexImage2D(GL_TEXTURE_2D, 0, translate(internalTextureFormat), width, height, 0, translate(internalTextureFormat), translate(textureDataType), 0);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+		// Create the depth buffer
+		glGenRenderbuffers(1, &depthBuffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
+
+		glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, colorBuffer, 0);
+		GLenum colorAttachments[] = { GL_COLOR_ATTACHMENT0 };
+		glDrawBuffers(1, colorAttachments);
 	}
 
 }

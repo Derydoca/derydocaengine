@@ -23,7 +23,6 @@ namespace DerydocaEngine::Rendering
 
 	private:
 		void createRenderbuffer(int textureUnit, GLenum format, unsigned int & textureId);
-		void createRenderbuffers_Forward();
 		void createRenderbuffers_Deferred();
 		void destroyGraphicsApiObjects();
 
