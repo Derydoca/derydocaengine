@@ -47,7 +47,6 @@ namespace DerydocaEngine::Rendering
 
 		void addLight(std::weak_ptr<Components::Light> const& light) { m_lights.push_back(light); }
 		void bindLightsToShader(const std::shared_ptr<Rendering::Shader>& shader);
-		void bindShadowDataToShader(const std::shared_ptr<Rendering::Shader> shader, const glm::mat4& modelMatrix);
 		void removeLight(std::weak_ptr<Components::Light> const& light) {
 			if (m_lights.size() == 0)
 			{
@@ -63,7 +62,6 @@ namespace DerydocaEngine::Rendering
 				return false;
 			});
 		}
-		void renderShadowMaps(const std::vector<std::shared_ptr<Scenes::Scene>> scenes, std::shared_ptr<Components::Transform> cameraTransform);
 		void uploadLightUniformBufferData(const std::shared_ptr<Components::Transform> objectTransform);
 
 		void operator=(LightManager const&) = delete;
@@ -82,7 +80,6 @@ namespace DerydocaEngine::Rendering
 		LightManager(LightManager const&);
 		~LightManager();
 
-		void buildOffsetTex(int const& texSize, int const& samplesU, int const& samplesV);
 		std::vector<std::shared_ptr<Components::Light>> getLights(std::shared_ptr<Components::Transform> const& objectTransform) const;
 	};
 

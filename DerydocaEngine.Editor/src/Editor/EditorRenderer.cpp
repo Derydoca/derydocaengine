@@ -113,7 +113,6 @@ namespace DerydocaEngine::Editor
 	{
 		// Render the scenes
 		Rendering::CameraManager::getInstance().renderCamerasToAttachedRenderTextures(scenes);
-		Rendering::LightManager::getInstance().renderShadowMaps(scenes, camera->getGameObject()->getTransform());
 		Rendering::CameraManager::getInstance().setCurrentCamera(camera);
 		camera->renderScenesToActiveBuffer(scenes, textureW, textureH);
 
