@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\LightManager.h"
 
-#include <GL\glew.h>
 #include <glm\glm.hpp>
 #include "Components\Camera.h"
 #include "Rendering\CameraManager.h"
