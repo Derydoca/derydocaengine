@@ -37,7 +37,6 @@ namespace DerydocaEngine::Resources::Serializers
         for (auto prop : data.Float3x3s) material->setMat3(prop.Name, prop.Value);
         for (auto prop : data.Float4x4s) material->setMat4(prop.Name, prop.Value);
         for (auto prop : data.Float4x4Arrays) material->setMat4Array(prop.Name, prop.Value);
-        for (auto prop : data.SubroutineValues) material->setSubroutine(prop.Program, prop.Value);
 
         return material;
     }

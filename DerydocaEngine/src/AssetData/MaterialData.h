@@ -70,7 +70,6 @@ namespace DerydocaEngine::AssetData
 		std::vector<MaterialPropertyData<glm::mat3>> Float3x3s;
 		std::vector<MaterialPropertyData<glm::mat4>> Float4x4s;
 		std::vector<MaterialPropertyData<std::vector<glm::mat4>>> Float4x4Arrays;
-		std::vector<SubroutineMap> SubroutineValues;
 
 		SERIALIZE_FUNC(
 			SERIALIZE(ShaderId),
@@ -83,8 +82,7 @@ namespace DerydocaEngine::AssetData
 			SERIALIZE(Float4s),
 			SERIALIZE(Float3x3s),
 			SERIALIZE(Float4x4s),
-			SERIALIZE(Float4x4Arrays),
-			SERIALIZE(SubroutineValues)
+			SERIALIZE(Float4x4Arrays)
 		)
 	};
 }
