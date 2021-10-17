@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\Material.h"
 
-#include <gl\glew.h>
 #include "Rendering\Shader.h"
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Texture.h"

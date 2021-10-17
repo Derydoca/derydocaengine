@@ -118,10 +118,10 @@ namespace DerydocaEngine::Rendering
 		return boundFrameBufferId;
 	}
 
-	void GraphicsAPI::setTexture(const int uniformLocation, const int textureUnit, const unsigned int textureType, const unsigned int textureId)
+	void GraphicsAPI::setTexture(const int uniformLocation, const int textureUnit, const TextureType textureType, const unsigned int textureId)
 	{
 		glActiveTexture(GL_TEXTURE0 + textureUnit);
-		glBindTexture(textureType, textureId);
+		glBindTexture(GraphicsAPI::translate(textureType), textureId);
 		glUniform1i(uniformLocation, textureUnit);
 	}
 
@@ -269,6 +269,26 @@ namespace DerydocaEngine::Rendering
 			return GL_COMPILE_STATUS;
 		default:
 			D_LOG_CRITICAL("Unable to translate ShaderValidationFlag!");
+			return -1;
+		}
+	}
+
+	uint32_t GraphicsAPI::translate(TextureType textureType)
+	{
+		switch (textureType)
+		{
+		case DerydocaEngine::Rendering::TextureType::Texture2D:
+			return GL_TEXTURE_2D;
+		case DerydocaEngine::Rendering::TextureType::Texture2DArray:
+			return GL_TEXTURE_2D_ARRAY;
+		case DerydocaEngine::Rendering::TextureType::Texture3D:
+			return GL_TEXTURE_3D;
+		case DerydocaEngine::Rendering::TextureType::Cubemap:
+			return GL_TEXTURE_CUBE_MAP;
+		case DerydocaEngine::Rendering::TextureType::CubemapArray:
+			return GL_TEXTURE_CUBE_MAP_ARRAY;
+		default:
+			D_LOG_CRITICAL("Unable to translate TextureType!");
 			return -1;
 		}
 	}

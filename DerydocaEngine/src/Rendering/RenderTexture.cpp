@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\RenderTexture.h"
 
-#include <GL/glew.h>
 #include <cassert>
 #include "GraphicsAPI.h"
 
@@ -90,9 +89,9 @@ namespace DerydocaEngine::Rendering
 
 	void RenderTexture::bindDeferredTextures(std::shared_ptr<Rendering::Shader> shader)
 	{
-		shader->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_renderBufferIds[1]);
-		shader->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_renderBufferIds[2]);
-		shader->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_renderBufferIds[3]);
+		shader->setTexture("PositionTex", 0, TextureType::Texture2D, m_renderBufferIds[1]);
+		shader->setTexture("NormalTex", 1, TextureType::Texture2D, m_renderBufferIds[2]);
+		shader->setTexture("ColorTex", 2, TextureType::Texture2D, m_renderBufferIds[3]);
 	}
 
 	void RenderTexture::bindAsRenderTexture()

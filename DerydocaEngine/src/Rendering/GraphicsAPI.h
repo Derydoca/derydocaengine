@@ -48,6 +48,15 @@ namespace DerydocaEngine::Rendering
 		Linear
 	};
 
+	enum class TextureType : uint8_t
+	{
+		Texture2D,
+		Texture2DArray,
+		Texture3D,
+		Cubemap,
+		CubemapArray
+	};
+
 	struct ShaderAttribute
 	{
 		int index;
@@ -86,7 +95,7 @@ namespace DerydocaEngine::Rendering
 		static void setViewport(std::shared_ptr<Components::Camera> camera, int textureW, int textureH);
 		static int getCurrentFramebufferID();
 		static int getUniformLocation(const unsigned int rendererId, const std::string& name);
-		static void setTexture(const int uniformLocation, const int textureUnit, const unsigned int textureType, const unsigned int textureId);
+		static void setTexture(const int uniformLocation, const int textureUnit, const TextureType textureType, const unsigned int textureId);
 		static void setUniform(const int uniformLocation, const int val);
 		static void setUniform(const int uniformLocation, const float val);
 		static void setUniform(const int uniformLocation, const float v0, const float v1);
@@ -102,6 +111,7 @@ namespace DerydocaEngine::Rendering
 		static uint32_t translate(TextureDataType textureFormat);
 		static uint32_t translate(ShaderProgramType shaderProgramType);
 		static uint32_t translate(ShaderValidationFlag shaderValidationFlag);
+		static uint32_t translate(TextureType textureType);
 		static InternalTextureFormat getInternalTextureFormat(SizedTextureFormat textureFormat);
 		static TextureDataType getTextureDataType(SizedTextureFormat textureFormat);
 

@@ -52,7 +52,7 @@ namespace DerydocaEngine::Rendering
 		void setMat4(const std::string& name, const glm::mat4& val);
 		void setMat4Array(const std::string& name, const std::vector<glm::mat4>& valArray);
 		void setTexture(const std::string& name, const int textureUnit, const std::shared_ptr<Rendering::Texture> handle);
-		void setTexture(const std::string& name, const int textureUnit, const unsigned int textureType, const unsigned int handle);
+		void setTexture(const std::string& name, const int textureUnit, const TextureType textureType, const unsigned int handle);
 
 		void clearFloat(const std::string& name);
 		void clearFloatArray(const std::string& name, const unsigned int arrayLength);
@@ -64,7 +64,7 @@ namespace DerydocaEngine::Rendering
 		void clearVec4(const std::string& name);
 		void clearMat3(const std::string& name);
 		void clearMat4(const std::string& name);
-		void clearTexture(const std::string& name, const int textureUnit, const unsigned int textureType);
+		void clearTexture(const std::string& name, const int textureUnit, const TextureType textureType);
 
 		std::string GetLoadPath() const { return m_loadPath; }
 		std::string GetVertexShaderPath() const { return m_loadPath + ".vs"; }

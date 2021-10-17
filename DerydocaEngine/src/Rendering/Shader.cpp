@@ -246,7 +246,7 @@ namespace DerydocaEngine::Rendering
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, texture->getTextureType(), texture->getRendererId());
 	}
 
-	void Shader::setTexture(const std::string& name, const int textureUnit, const unsigned int textureType, const unsigned int textureId)
+	void Shader::setTexture(const std::string& name, const int textureUnit, const TextureType textureType, const unsigned int textureId)
 	{
 		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, textureType, textureId);
@@ -424,7 +424,7 @@ namespace DerydocaEngine::Rendering
 		GraphicsAPI::setUniformMat4(uniformLocation, emptyMatrix, 1);
 	}
 
-	void Shader::clearTexture(const std::string& name, const int textureUnit, const unsigned int textureType)
+	void Shader::clearTexture(const std::string& name, const int textureUnit, const TextureType textureType)
 	{
 		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, textureType, 0);
