@@ -5,6 +5,7 @@
 #include <vector>
 #include "Color.h"
 #include "Rendering\Projection.h"
+#include "GraphicsAPI.h"
 
 namespace DerydocaEngine {
 	namespace Components {
@@ -21,12 +22,10 @@ namespace DerydocaEngine {
 
 namespace DerydocaEngine::Rendering
 {
-
 	class Shader
 	{
 	public:
 		Shader(const std::string& fileName);
-		Shader(const std::string& fileName, const int count, const char *const * varyings);
 		~Shader();
 
 		void bind();
@@ -74,26 +73,19 @@ namespace DerydocaEngine::Rendering
 		std::string GetGeometryShaderPath() const { return m_loadPath + ".gs"; }
 		std::string GetFragmentShaderPath() const { return m_loadPath + ".fs"; }
 		unsigned int getRendererId() const { return m_rendererId; }
-
-		unsigned int getSubroutineIndex(const unsigned int program, const std::string& subroutineName);
-		void setSubroutine(const unsigned int program, const unsigned int subroutineIndex);
-
-		void setSubPasses(const unsigned int program, RenderPass* renderPasses, const int numPasses);
+		static uint32_t getErrorShaderID();
 
 		void renderMesh(const std::shared_ptr<Mesh> mesh, const std::shared_ptr<RenderTexture> renderTexture);
 	private:
 		static const unsigned int NUM_SHADERS = 5;
-		Shader(const Shader& other) {}
+		Shader(const Shader& other) = delete;
 		void operator=(const Shader& other) {}
 		int getUniformLocation(const std::string& stringName);
-		void setTransformFeedbackVaryings(const int count, const char *const * varyings);
 		void deleteShaderProgram();
+		void loadShaderIfExists(const size_t shaderIndex, const ShaderProgramType shaderType, const std::string& shaderPath);
 
-		static bool CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage);
 		static std::string LoadShader(const std::string& fileName);
 		static bool CheckIfShaderExists(const std::string& fileName);
-		static unsigned int CreateShader(const std::string& text, const unsigned int shaderType);
-		static int getErrorShaderID();
 
 		enum {
 			TRANSFORM_MVP = 0,

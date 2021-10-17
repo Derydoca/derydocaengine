@@ -4,6 +4,22 @@
 
 namespace DerydocaEngine::Rendering
 {
+	enum class ShaderProgramType : uint8_t
+	{
+		VertexShader,
+		TesselationControlShader,
+		TesselationEvaluationShader,
+		GeometryShader,
+		FragmentShader
+	};
+
+	enum class ShaderValidationFlag : uint8_t
+	{
+		LinkStatus,
+		ValidateStatus,
+		CompileStatus
+	};
+
 	enum class InternalTextureFormat : uint8_t
 	{
 		R,
@@ -30,6 +46,12 @@ namespace DerydocaEngine::Rendering
 	{
 		Nearest,
 		Linear
+	};
+
+	struct ShaderAttribute
+	{
+		int index;
+		std::string name;
 	};
 
 	struct FramebufferDescriptor
@@ -78,6 +100,8 @@ namespace DerydocaEngine::Rendering
 		static uint32_t translate(InternalTextureFormat internalTextureFormat);
 		static uint32_t translate(SizedTextureFormat textureFormat);
 		static uint32_t translate(TextureDataType textureFormat);
+		static uint32_t translate(ShaderProgramType shaderProgramType);
+		static uint32_t translate(ShaderValidationFlag shaderValidationFlag);
 		static InternalTextureFormat getInternalTextureFormat(SizedTextureFormat textureFormat);
 		static TextureDataType getTextureDataType(SizedTextureFormat textureFormat);
 
@@ -89,6 +113,16 @@ namespace DerydocaEngine::Rendering
 			SizedTextureFormat format,
 			uint32_t& colorBuffer,
 			uint32_t& depthBuffer);
+
+		static bool validateShader(uint32_t shader, ShaderValidationFlag flag, const std::string& errorMessage);
+		static bool validateShaderProgram(uint32_t shader, ShaderValidationFlag flag, const std::string& errorMessage);
+
+		static uint32_t createShader(const std::string& shaderProgramSource, ShaderProgramType shaderProgramType);
+		static uint32_t createShaderProgram(uint32_t vertexShader, uint32_t tessControlShader, uint32_t tessEvalShader, uint32_t geometryShader, uint32_t fragmentShader, std::vector<ShaderAttribute> shaderAttributes, std::vector<ShaderAttribute> outputAttributes);
+		static void deleteShader(const uint32_t shaderProgram, const uint32_t shader);
+		static void deleteShaderProgram(const uint32_t shaderProgram);
+		static void bindShaderProgram(const uint32_t shaderProgram);
+		static void bindUniformBuffer(const uint32_t shaderProgram, const std::string& name, const uint32_t uniformBufferId);
 	};
 
 }

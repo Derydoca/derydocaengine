@@ -4,6 +4,7 @@
 
 #include "GraphicsAPI.h"
 #include "Debug\GLError.h"
+#include "Shader.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -236,6 +237,42 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
+	uint32_t GraphicsAPI::translate(ShaderProgramType shaderProgramType)
+	{
+		switch (shaderProgramType)
+		{
+		case DerydocaEngine::Rendering::ShaderProgramType::VertexShader:
+			return GL_VERTEX_SHADER;
+		case DerydocaEngine::Rendering::ShaderProgramType::TesselationControlShader:
+			return GL_TESS_CONTROL_SHADER;
+		case DerydocaEngine::Rendering::ShaderProgramType::TesselationEvaluationShader:
+			return GL_TESS_EVALUATION_SHADER;
+		case DerydocaEngine::Rendering::ShaderProgramType::GeometryShader:
+			return GL_GEOMETRY_SHADER;
+		case DerydocaEngine::Rendering::ShaderProgramType::FragmentShader:
+			return GL_FRAGMENT_SHADER;
+		default:
+			D_LOG_CRITICAL("Unable to translate ShaderProgramType!");
+			return -1;
+		}
+	}
+
+	uint32_t GraphicsAPI::translate(ShaderValidationFlag shaderValidationFlag)
+	{
+		switch (shaderValidationFlag)
+		{
+		case DerydocaEngine::Rendering::ShaderValidationFlag::LinkStatus:
+			return GL_LINK_STATUS;
+		case DerydocaEngine::Rendering::ShaderValidationFlag::ValidateStatus:
+			return GL_VALIDATE_STATUS;
+		case DerydocaEngine::Rendering::ShaderValidationFlag::CompileStatus:
+			return GL_COMPILE_STATUS;
+		default:
+			D_LOG_CRITICAL("Unable to translate ShaderValidationFlag!");
+			return -1;
+		}
+	}
+
 	InternalTextureFormat GraphicsAPI::getInternalTextureFormat(SizedTextureFormat textureFormat)
 	{
 		switch (textureFormat)
@@ -325,6 +362,136 @@ namespace DerydocaEngine::Rendering
 		glDrawBuffers(1, colorAttachments);
 	}
 
+	bool GraphicsAPI::validateShader(uint32_t shader, ShaderValidationFlag flag, const std::string& errorMessage)
+	{
+		GLint success = 0;
+		GLchar error[1024] = { 0 };
+
+		glGetShaderiv(shader, translate(flag), &success);
+
+		if (success == GL_FALSE) {
+			glGetShaderInfoLog(shader, sizeof(error), NULL, error);
+
+			D_LOG_ERROR("{}:\n{}", errorMessage, error);
+
+			return false;
+		}
+
+		return true;
+	}
+
+	bool GraphicsAPI::validateShaderProgram(uint32_t shaderProgram, ShaderValidationFlag flag, const std::string& errorMessage)
+	{
+		GLint success = 0;
+		GLchar error[1024] = { 0 };
+
+		glGetProgramiv(shaderProgram, translate(flag), &success);
+
+		if (success == GL_FALSE) {
+			glGetProgramInfoLog(shaderProgram, sizeof(error), NULL, error);
+
+			D_LOG_ERROR("{}:\n{}", errorMessage, error);
+
+			return false;
+		}
+
+		return true;
+	}
+
+	uint32_t GraphicsAPI::createShader(const std::string& shaderProgramSource, ShaderProgramType shaderProgramType)
+	{
+		GLuint shader = glCreateShader(translate(shaderProgramType));
+
+		if (shader == 0)
+		{
+			D_LOG_ERROR("Shader creation failed!");
+		}
+
+		const GLchar* shaderSourceStrings[1];
+		GLint shaderSourceStringLengths[1];
+
+		shaderSourceStrings[0] = shaderProgramSource.c_str();
+		shaderSourceStringLengths[0] = static_cast<GLint>(shaderProgramSource.length());
+
+		glShaderSource(shader, 1, shaderSourceStrings, shaderSourceStringLengths);
+		glCompileShader(shader);
+
+		if (!validateShader(shader, ShaderValidationFlag::CompileStatus, "Error: Shader compilation failed: "))
+		{
+			return Shader::getErrorShaderID();
+		}
+
+		return shader;
+	}
+
+	uint32_t GraphicsAPI::createShaderProgram(uint32_t vertexShader, uint32_t tessControlShader, uint32_t tessEvalShader, uint32_t geometryShader, uint32_t fragmentShader, std::vector<ShaderAttribute> shaderAttributes, std::vector<ShaderAttribute> outputAttributes)
+	{
+		// Create the program
+		uint32_t shaderProgram = glCreateProgram();
+		if (0 == shaderProgram)
+		{
+			D_LOG_ERROR("Error creating program object.");
+		}
+
+		if (vertexShader > 0) glAttachShader(shaderProgram, vertexShader);
+		if (tessControlShader > 0) glAttachShader(shaderProgram, tessControlShader);
+		if (tessEvalShader > 0) glAttachShader(shaderProgram, tessEvalShader);
+		if (geometryShader > 0) glAttachShader(shaderProgram, geometryShader);
+		if (fragmentShader > 0) glAttachShader(shaderProgram, fragmentShader);
+
+		// Get the vertex attribute locations
+		for (auto attribute : shaderAttributes)
+		{
+			glBindAttribLocation(shaderProgram, attribute.index, attribute.name.c_str());
+		}
+
+		// Bind the output buffers
+		for (auto attribute : outputAttributes)
+		{
+			glBindFragDataLocation(shaderProgram, attribute.index, attribute.name.c_str());
+		}
+
+		// Link the program
+		glLinkProgram(shaderProgram);
+		if (!validateShaderProgram(shaderProgram, ShaderValidationFlag::LinkStatus, "Error: Program linking failed"))
+		{
+			glDeleteProgram(shaderProgram);
+			return -1;
+		}
+
+		glValidateProgram(shaderProgram);
+		if (!validateShaderProgram(shaderProgram, ShaderValidationFlag::ValidateStatus, "Error: Program is invalid"))
+		{
+			glDeleteProgram(shaderProgram);
+			return -1;
+		}
+
+		return shaderProgram;
+	}
+
+	void GraphicsAPI::deleteShader(const uint32_t shaderProgram, const uint32_t shader)
+	{
+		glDetachShader(shaderProgram, shader);
+		glDeleteShader(shader);
+	}
+
+	void GraphicsAPI::deleteShaderProgram(const uint32_t shaderProgram)
+	{
+		glDeleteProgram(shaderProgram);
+	}
+
+	void GraphicsAPI::bindShaderProgram(const uint32_t shaderProgram)
+	{
+		glUseProgram(shaderProgram);
+	}
+	void GraphicsAPI::bindUniformBuffer(const uint32_t shaderProgram, const std::string& name, const uint32_t uniformBufferId)
+	{
+		unsigned int blockIndex = glGetUniformBlockIndex(shaderProgram, name.c_str());
+		if (blockIndex != GL_INVALID_INDEX)
+		{
+			GL_CHECK(glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, uniformBufferId));
+		}
+	}
 }
 
 #endif

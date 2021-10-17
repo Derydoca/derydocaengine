@@ -129,11 +129,6 @@ namespace DerydocaEngine::Rendering
 			shader->setMat4Array(x.first, x.second);
 		}
 
-		for (auto const& x : m_subroutineValues)
-		{
-			shader->setSubroutine(x.first, x.second);
-		}
-
 	}
 
 	void Material::copyFrom(std::shared_ptr<Material> other)
