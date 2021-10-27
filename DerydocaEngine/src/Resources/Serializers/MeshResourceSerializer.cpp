@@ -15,12 +15,6 @@ namespace DerydocaEngine::Resources::Serializers
 	{
 		auto mr = std::static_pointer_cast<MeshResource>(resource);
 
-		std::shared_ptr<Animation::Skeleton> skeleton;
-		if (mr->hasSkeleton())
-		{
-			skeleton = ObjectLibrary::getInstance().getResourceObjectPointer<Animation::Skeleton>(mr->getSkeletonId());
-		}
-
 		Assimp::Importer importer;
 
 		const aiScene* aiScene = importer.ReadFile(resource->getSourceFilePath().c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
@@ -47,15 +41,9 @@ namespace DerydocaEngine::Resources::Serializers
 		std::vector<unsigned int> m_indices;
 		std::vector<glm::vec3> m_tangents;
 		std::vector<glm::vec3> m_bitangents;
-		std::vector<Animation::VertexBoneWeights> m_boneWeights;
 		Rendering::MeshFlags m_flags = mr->getFlags();
 
 		ProcessMeshData(mesh, m_positions, uvIndex, m_texCoords, m_normals, m_flags, m_indices, m_tangents, m_bitangents);
-
-		if (mesh->mNumBones > 0)
-		{
-			ProcessBoneData(mesh, m_boneWeights, skeleton);
-		}
 
 		std::shared_ptr<Rendering::Mesh> m = std::make_shared<Rendering::Mesh>(
 			m_positions,
@@ -64,10 +52,7 @@ namespace DerydocaEngine::Resources::Serializers
 			m_texCoords,
 			m_tangents,
 			m_bitangents,
-			std::vector<Color>(),
-			m_boneWeights);
-
-		m->setSkeleton(skeleton);
+			std::vector<Color>());
 
 		m->setFlags(mr->getFlags());
 
@@ -143,46 +128,6 @@ namespace DerydocaEngine::Resources::Serializers
 			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 			{
 				m_bitangents.push_back(glm::vec3(mesh->mBitangents[i].x, mesh->mBitangents[i].y, mesh->mBitangents[i].z));
-			}
-		}
-	}
-
-	void MeshResourceSerializer::ProcessBoneData(
-		aiMesh * mesh,
-		std::vector<Animation::VertexBoneWeights> &m_boneWeights,
-		const std::shared_ptr<Animation::Skeleton>& skeleton)
-	{
-		// Create buffers that will store the bone indices and bone weights
-		m_boneWeights = std::vector<Animation::VertexBoneWeights>(mesh->mNumVertices);
-
-		// For each bone in the source mesh file
-		for (unsigned int i = 0; i < mesh->mNumBones; i++)
-		{
-			// Get the bone
-			aiBone* bone = mesh->mBones[i];
-			int boneIndex = skeleton->getBoneID(bone->mName.data);
-
-			// For each weight associated with the bone
-			for (unsigned int w = 0; w < bone->mNumWeights; w++)
-			{
-				// Extract the weight data
-				aiVertexWeight vertWeight = bone->mWeights[w];
-				int vertexIndex = vertWeight.mVertexId;
-
-				// Get the bone weight object
-				Animation::VertexBoneWeights& boneWeight = m_boneWeights[vertWeight.mVertexId];
-
-				// For each vertex associated with the weight
-				for (int weightIndex = 0; weightIndex < Animation::MAX_BONES; weightIndex++)
-				{
-					if (boneWeight.weights[weightIndex] <= 0)
-					{
-						boneWeight.boneIds[weightIndex] = boneIndex;
-						boneWeight.weights[weightIndex] = vertWeight.mWeight;
-
-						break;
-					}
-				}
 			}
 		}
 	}

@@ -293,6 +293,22 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
+	uint32_t GraphicsAPI::translate(DataType dataType)
+	{
+		switch (dataType)
+		{
+		case DerydocaEngine::Rendering::DataType::Float:
+			return GL_FLOAT;
+		case DerydocaEngine::Rendering::DataType::Int:
+			return GL_INT;
+		case DerydocaEngine::Rendering::DataType::UnsignedInt:
+			return GL_UNSIGNED_INT;
+		default:
+			D_LOG_CRITICAL("Unable to translate DataType!");
+			return -1;
+		}
+	}
+
 	InternalTextureFormat GraphicsAPI::getInternalTextureFormat(SizedTextureFormat textureFormat)
 	{
 		switch (textureFormat)
@@ -318,6 +334,22 @@ namespace DerydocaEngine::Rendering
 		default:
 			D_LOG_CRITICAL("Unable to translate SizedTextureFormat to TextureDataType!");
 			return TextureDataType::Float;
+		}
+	}
+
+	size_t GraphicsAPI::getSize(DataType dataType)
+	{
+		switch (dataType)
+		{
+		case DerydocaEngine::Rendering::DataType::Float:
+			return sizeof(float);
+		case DerydocaEngine::Rendering::DataType::Int:
+			return sizeof(int);
+		case DerydocaEngine::Rendering::DataType::UnsignedInt:
+			return sizeof(unsigned int);
+		default:
+			D_LOG_CRITICAL("Unable to get size of DataType!");
+			return 0;
 		}
 	}
 

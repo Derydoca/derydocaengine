@@ -57,6 +57,13 @@ namespace DerydocaEngine::Rendering
 		CubemapArray
 	};
 
+	enum class DataType : uint8_t
+	{
+		Float,
+		Int,
+		UnsignedInt
+	};
+
 	struct ShaderAttribute
 	{
 		int index;
@@ -112,8 +119,10 @@ namespace DerydocaEngine::Rendering
 		static uint32_t translate(ShaderProgramType shaderProgramType);
 		static uint32_t translate(ShaderValidationFlag shaderValidationFlag);
 		static uint32_t translate(TextureType textureType);
+		static uint32_t translate(DataType dataType);
 		static InternalTextureFormat getInternalTextureFormat(SizedTextureFormat textureFormat);
 		static TextureDataType getTextureDataType(SizedTextureFormat textureFormat);
+		static size_t getSize(DataType dataType);
 
 		static std::vector<uint32_t> createDeferredRenderBuffer(const uint16_t width, const uint16_t height, const std::vector<FramebufferDescriptor>& framebufferDescs, uint32_t& renderbuffer);
 
@@ -133,6 +142,27 @@ namespace DerydocaEngine::Rendering
 		static void deleteShaderProgram(const uint32_t shaderProgram);
 		static void bindShaderProgram(const uint32_t shaderProgram);
 		static void bindUniformBuffer(const uint32_t shaderProgram, const std::string& name, const uint32_t uniformBufferId);
+
+		static void uploadVertexBuffer(uint32_t gpuBuffer, DataType dataType, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
+			glBufferData(GL_ARRAY_BUFFER, count * getSize(dataType) * stride, buffer, GL_STATIC_DRAW);
+			glEnableVertexAttribArray(attributeIndex);
+			glVertexAttribPointer(attributeIndex, stride, translate(dataType), GL_FALSE, 0, 0);
+		}
+
+		//static void uploadVertexBuffer(uint32_t gpuBuffer, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex)
+		//{
+		//	//glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
+		//	//glBufferData(GL_ARRAY_BUFFER, count * getSize(dataType) * stride, buffer, GL_STATIC_DRAW);
+		//	//glEnableVertexAttribArray(attributeIndex);
+		//	//glVertexAttribPointer(attributeIndex, stride, translate(dataType), GL_FALSE, 0, 0);
+
+		//	glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
+		//	glBufferData(GL_ARRAY_BUFFER, count * sizeof(Animation::VertexBoneWeights), buffer, GL_STATIC_DRAW);
+		//	glEnableVertexAttribArray(attributeIndex);
+		//	glVertexAttribIPointer(attributeIndex, Animation::MAX_BONES, GL_UNSIGNED_INT, sizeof(Animation::VertexBoneWeights), 0);
+		//}
 	};
 
 }

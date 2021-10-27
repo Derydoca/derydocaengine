@@ -1,6 +1,5 @@
 #include "EditorTestPch.h"
 #include "Inspector\InspectorRegistrationMacros.h"
-#include "Resources\AnimationResource.h"
 #include "Resources\CubemapResource.h"
 #include "Resources\FontResource.h"
 #include "Resources\LevelResource.h"
@@ -8,13 +7,8 @@
 #include "Resources\MeshResource.h"
 #include "Resources\RasterFontResource.h"
 #include "Resources\ShaderResource.h"
-#include "Resources\SkeletonResource.h"
 #include "Resources\SpriteSheetResource.h"
 #include "Resources\TextureResource.h"
-
-TEST(InspectorRegistration_Resource, AnimationResource) {
-	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Resources::AnimationResource);
-}
 
 TEST(InspectorRegistration_Resource, CubemapResource) {
 	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Resources::CubemapResource);
@@ -42,10 +36,6 @@ TEST(InspectorRegistration_Resource, RasterFontResource) {
 
 TEST(InspectorRegistration_Resource, ShaderResource) {
 	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Resources::ShaderResource);
-}
-
-TEST(InspectorRegistration_Resource, SkeletonResource) {
-	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Resources::SkeletonResource);
 }
 
 TEST(InspectorRegistration_Resource, SpriteSheetResource) {

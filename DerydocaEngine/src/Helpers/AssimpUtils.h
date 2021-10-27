@@ -7,9 +7,6 @@
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 
-#include "Animation\AnimationData.h"
-#include "Animation\Skeleton.h"
-
 namespace DerydocaEngine::Helpers::AssimpUtils
 {
 
@@ -19,16 +16,10 @@ namespace DerydocaEngine::Helpers::AssimpUtils
 
 	glm::quat aiToGlm(const aiQuaternion& quat);
 
-	aiBone* findBone(const aiMesh*& mesh, const aiString& name);
-
 	aiNode* findNode(aiNode* node, const aiString& name);
-
-	std::shared_ptr<Animation::Skeleton> getSkeleton(const aiScene*& scene, unsigned int meshIndex);
 
 	void scanNodeChildren(aiNode*& node, std::function<void(aiNode*&)> func);
 
 	void scanNodeParents(aiNode*& node, std::function<bool(aiNode*&)> func);
-
-	std::shared_ptr<Animation::AnimationData> getAnimation(const aiScene *& scene, unsigned int animationIndex);
 
 }

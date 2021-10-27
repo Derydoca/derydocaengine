@@ -17,36 +17,6 @@
                     "m_flags": 0
                 }
             }
-        },
-        {
-            "polymorphic_id": 2147483650,
-            "polymorphic_name": "DerydocaEngine::Resources::SkeletonResource",
-            "ptr_wrapper": {
-                "id": 2147483650,
-                "data": {
-                    "__base_DerydocaEngine::Resources::Resource": {
-                        "__base_DerydocaEngine::Object": {
-                            "m_ID": "fe805b7e-1579-4629-8abb-6c89f63f4fae"
-                        }
-                    },
-                    "m_name": ""
-                }
-            }
-        },
-        {
-            "polymorphic_id": 2147483651,
-            "polymorphic_name": "DerydocaEngine::Resources::AnimationResource",
-            "ptr_wrapper": {
-                "id": 2147483651,
-                "data": {
-                    "__base_DerydocaEngine::Resources::Resource": {
-                        "__base_DerydocaEngine::Object": {
-                            "m_ID": "e9d70d40-7ad0-439a-a023-a875090b6e8f"
-                        }
-                    },
-                    "m_name": "AnimStack::MeshArmature|Action"
-                }
-            }
         }
     ]
 }
