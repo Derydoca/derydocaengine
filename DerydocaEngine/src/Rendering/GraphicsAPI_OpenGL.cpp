@@ -2,6 +2,7 @@
 
 #if OPENGL
 
+#include <GL/glew.h>
 #include "GraphicsAPI.h"
 #include "Debug\GLError.h"
 #include "Shader.h"
@@ -543,6 +544,42 @@ namespace DerydocaEngine::Rendering
 		{
 			GL_CHECK(glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, uniformBufferId));
 		}
+	}
+	void GraphicsAPI::uploadVertexBuffer(uint32_t gpuBuffer, DataType dataType, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
+		glBufferData(GL_ARRAY_BUFFER, count * getSize(dataType) * stride, buffer, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(attributeIndex);
+		glVertexAttribPointer(attributeIndex, stride, translate(dataType), GL_FALSE, 0, 0);
+	}
+	void GraphicsAPI::deleteVertexArray(uint32_t& vertexArrayObject)
+	{
+		glDeleteVertexArrays(1, &vertexArrayObject);
+	}
+	void GraphicsAPI::drawBoundVertexArray(const size_t numIndices)
+	{
+		glDrawElementsBaseVertex(GL_TRIANGLES, static_cast<int>(numIndices), GL_UNSIGNED_INT, 0, 0);
+	}
+
+	void GraphicsAPI::uploadIndexBuffer(const uint32_t& indexBuffer, const size_t numIndices, void* cpuIndexBuffer)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(GLuint), cpuIndexBuffer, GL_STATIC_DRAW);
+	}
+
+	void GraphicsAPI::bindVertexArray(const uint32_t vertexArrayObject)
+	{
+		glBindVertexArray(vertexArrayObject);
+	}
+
+	void GraphicsAPI::generateVertexArray(uint32_t& vertexArrayObject)
+	{
+		glGenVertexArrays(1, &vertexArrayObject);
+	}
+
+	void GraphicsAPI::generateBuffers(size_t numBuffers, uint32_t& buffers)
+	{
+		glGenBuffers(numBuffers, &buffers);
 	}
 }
 

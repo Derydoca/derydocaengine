@@ -143,13 +143,14 @@ namespace DerydocaEngine::Rendering
 		static void bindShaderProgram(const uint32_t shaderProgram);
 		static void bindUniformBuffer(const uint32_t shaderProgram, const std::string& name, const uint32_t uniformBufferId);
 
-		static void uploadVertexBuffer(uint32_t gpuBuffer, DataType dataType, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
-			glBufferData(GL_ARRAY_BUFFER, count * getSize(dataType) * stride, buffer, GL_STATIC_DRAW);
-			glEnableVertexAttribArray(attributeIndex);
-			glVertexAttribPointer(attributeIndex, stride, translate(dataType), GL_FALSE, 0, 0);
-		}
+		static void uploadVertexBuffer(uint32_t gpuBuffer, DataType dataType, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex);
+
+		static void deleteVertexArray(uint32_t& vertexArrayObject);
+		static void drawBoundVertexArray(const size_t numIndices);
+		static void uploadIndexBuffer(const uint32_t& indexBuffer, const size_t numIndices, void* cpuIndexBuffer);
+		static void bindVertexArray(const uint32_t vertexArrayObject);
+		static void generateVertexArray(uint32_t& vertexArrayObject);
+		static void generateBuffers(size_t numBuffers, uint32_t& buffers);
 
 		//static void uploadVertexBuffer(uint32_t gpuBuffer, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex)
 		//{

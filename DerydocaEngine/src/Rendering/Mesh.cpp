@@ -87,7 +87,7 @@ namespace DerydocaEngine::Rendering
 
 	Mesh::~Mesh()
 	{
-		glDeleteVertexArrays(1, &m_vertexArrayObject);
+		GraphicsAPI::deleteVertexArray(m_vertexArrayObject);
 	}
 
 	void Mesh::uploadToGpu(const MeshComponents& meshComponentFlags)
@@ -145,8 +145,7 @@ namespace DerydocaEngine::Rendering
 	{
 		bind();
 
-		GLenum mode = m_flags & MeshFlags::load_adjacent ? GL_TRIANGLES_ADJACENCY : GL_TRIANGLES;
-		glDrawElementsBaseVertex(mode, static_cast<int>(getNumIndices()), GL_UNSIGNED_INT, 0, 0);
+		GraphicsAPI::drawBoundVertexArray(getNumIndices());
 
 		unbind();
 	}
@@ -178,8 +177,7 @@ namespace DerydocaEngine::Rendering
 
 	void Mesh::uploadIndices()
 	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vertexArrayBuffers[INDEX_VB]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), &m_indices[0], GL_STATIC_DRAW);
+		GraphicsAPI::uploadIndexBuffer(m_vertexArrayBuffers[INDEX_VB], m_indices.size(), &m_indices[0]);
 	}
 
 	void Mesh::uploadColors()
@@ -190,23 +188,23 @@ namespace DerydocaEngine::Rendering
 	void Mesh::bind()
 	{
 		assert(m_vertexArrayObject != 0);
-		glBindVertexArray(m_vertexArrayObject);
+		GraphicsAPI::bindVertexArray(m_vertexArrayObject);
 	}
 
 	void Mesh::unbind()
 	{
-		glBindVertexArray(0);
+		GraphicsAPI::bindVertexArray(0);
 	}
 
 	void Mesh::generateVao()
 	{
 		assert(m_vertexArrayObject == 0);
-		glGenVertexArrays(1, &m_vertexArrayObject);
+		GraphicsAPI::generateVertexArray(m_vertexArrayObject);
 	}
 
 	void Mesh::generateBuffers()
 	{
-		glGenBuffers(NUM_BUFFERS, &m_vertexArrayBuffers[0]);
+		GraphicsAPI::generateBuffers(NUM_BUFFERS, m_vertexArrayBuffers[0]);
 	}
 
 }
