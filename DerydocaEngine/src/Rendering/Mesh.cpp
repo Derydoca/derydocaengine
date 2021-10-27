@@ -1,8 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\Mesh.h"
 
-#include <GL/glew.h>
-
 #include "MeshAdjacencyCalculator.h"
 #include "GraphicsAPI.h"
 
