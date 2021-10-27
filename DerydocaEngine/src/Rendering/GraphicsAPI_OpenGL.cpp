@@ -581,6 +581,18 @@ namespace DerydocaEngine::Rendering
 	{
 		glGenBuffers(numBuffers, &buffers);
 	}
+
+	void GraphicsAPI::setDepthTest(const bool enabled)
+	{
+		if (enabled)
+		{
+			glEnable(GL_DEPTH_TEST);
+		}
+		else
+		{
+			glDisable(GL_DEPTH_TEST);
+		}
+	}
 }
 
 #endif

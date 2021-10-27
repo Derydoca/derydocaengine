@@ -152,6 +152,8 @@ namespace DerydocaEngine::Rendering
 		static void generateVertexArray(uint32_t& vertexArrayObject);
 		static void generateBuffers(size_t numBuffers, uint32_t& buffers);
 
+		static void setDepthTest(const bool enabled);
+
 		//static void uploadVertexBuffer(uint32_t gpuBuffer, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex)
 		//{
 		//	//glBindBuffer(GL_ARRAY_BUFFER, gpuBuffer);
