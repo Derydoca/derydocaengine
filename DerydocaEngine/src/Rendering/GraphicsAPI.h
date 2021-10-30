@@ -85,13 +85,15 @@ namespace DerydocaEngine::Rendering
 
 		static void init();
 		static void bindFramebuffer(unsigned int rendererId);
-		static void bindTexture2D(unsigned int unit, unsigned int rendererId);
+		static void bindTexture2D(const uint32_t rendererId, const TextureType textureType, const uint16_t unit);
+		static void bindTexture2D(unsigned int unit, unsigned int rendererId); // Deprecated
 		static void deleteRenderBuffer(int count, const unsigned int* rendererIds);
 		static void deleteTextures(int count, const unsigned int* rendererIds);
 		static void deleteFramebuffers(int count, const unsigned int* rendererIds);
 		static void deleteUniformBuffer(const unsigned int& rendererId);
 		static void createFramebuffers(int count, unsigned int* rendererIds);
-		static void createTexture2D(unsigned int* rendererId, int width, int height);
+		static void createTexture2D(unsigned int* rendererId, int width, int height); // Deprecated
+		static void createTexture2D(uint32_t& rendererId, const TextureType textureType, const InternalTextureFormat textureFormat, const uint32_t width, const uint32_t height, bool createMipmaps, const void* imageData);
 		static void createRenderBuffers(int count, unsigned int* rendererIds);
 		static void createUniformBuffer(unsigned int& rendererId, const void* buffer, const size_t size, const int usagePattern);
 		static void clearDepthBuffer();
@@ -153,6 +155,8 @@ namespace DerydocaEngine::Rendering
 		static void generateBuffers(size_t numBuffers, uint32_t& buffers);
 
 		static void setDepthTest(const bool enabled);
+
+		static void generateCubemap(uint32_t& rendererId, const std::array<char*, 6> cubemapSourceImageData, const uint32_t width, const uint32_t height, const InternalTextureFormat textureFormat, const TextureDataType textureDataType, const bool generateMipmaps);
 
 		//static void uploadVertexBuffer(uint32_t gpuBuffer, int8_t stride, const void* buffer, size_t count, uint32_t attributeIndex)
 		//{

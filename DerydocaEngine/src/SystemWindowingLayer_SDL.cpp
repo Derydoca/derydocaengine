@@ -3,6 +3,7 @@
 #if OPENGL||VULKAN
 
 #include "SystemWindowingLayer.h"
+#include "Rendering/GraphicsAPI.h"
 
 namespace DerydocaEngine
 {
@@ -68,14 +69,7 @@ namespace DerydocaEngine
 
 	void SystemWindowingLayer::setDepthTesting(bool enabled)
 	{
-		if (enabled)
-		{
-			glEnable(GL_DEPTH_TEST);
-		}
-		else
-		{
-			glDisable(GL_DEPTH_TEST);
-		}
+		Rendering::GraphicsAPI::setDepthTest(enabled);
 	}
 
 }

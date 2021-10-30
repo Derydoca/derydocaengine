@@ -12,9 +12,6 @@
 #include <cereal\archives\json.hpp>
 #include <cereal\types\memory.hpp>
 
-// GLEW
-#include <GL/glew.h>
-
 // GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>

@@ -25,6 +25,12 @@ namespace DerydocaEngine::Rendering
 		glBindFramebuffer(GL_FRAMEBUFFER, rendererId);
 	}
 
+	void GraphicsAPI::bindTexture2D(const uint32_t rendererId, const TextureType textureType, const uint16_t unit)
+	{
+		glActiveTexture(GL_TEXTURE0 + unit);
+		glBindTexture(translate(textureType), rendererId);
+	}
+
 	void GraphicsAPI::bindTexture2D(unsigned int unit, unsigned int rendererId)
 	{
 		glActiveTexture(GL_TEXTURE0 + unit);
@@ -69,6 +75,40 @@ namespace DerydocaEngine::Rendering
 		glGenTextures(1, rendererId);
 		glBindTexture(GL_TEXTURE_2D, *rendererId);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+	}
+
+	void GraphicsAPI::createTexture2D(uint32_t& rendererId, const TextureType textureType, const InternalTextureFormat textureFormat, const uint32_t width, const uint32_t height, bool createMipmaps, const void* imageData)
+	{
+		if (textureFormat == InternalTextureFormat::R)
+		{
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		}
+
+		auto translatedTextureType = GraphicsAPI::translate(textureType);
+		auto translatedPixelFormat = GraphicsAPI::translate(textureFormat);
+
+		glGenTextures(1, &rendererId);
+		glBindTexture(translatedTextureType, rendererId);
+
+		switch (textureType)
+		{
+		case TextureType::Texture2D:
+			glTexImage2D(translatedTextureType, 0, translatedPixelFormat, width, height, 0, translatedPixelFormat, GL_UNSIGNED_BYTE, imageData);
+			break;
+		default:
+			D_LOG_CRITICAL("Unable to create texture. Unknown texture type.");
+			break;
+		}
+
+		glTexParameteri(translatedTextureType, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(translatedTextureType, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(translatedTextureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(translatedTextureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		if (createMipmaps)
+		{
+			glGenerateMipmap(translatedTextureType);
+		}
 	}
 
 	void GraphicsAPI::createRenderBuffers(int count, unsigned int * rendererIds)
@@ -591,6 +631,36 @@ namespace DerydocaEngine::Rendering
 		else
 		{
 			glDisable(GL_DEPTH_TEST);
+		}
+	}
+
+	void GraphicsAPI::generateCubemap(uint32_t& rendererId, const std::array<char*, 6> cubemapSourceImageData, const uint32_t width, const uint32_t height, const InternalTextureFormat textureFormat, const TextureDataType textureDataType, const bool generateMipmaps)
+	{
+		auto translatedTextureFormat = GraphicsAPI::translate(textureFormat);
+		auto translatedTextureDataType = GraphicsAPI::translate(textureDataType);
+		auto translatedTextureType = GraphicsAPI::translate(TextureType::Cubemap);
+
+		glGenTextures(1, &rendererId);
+		glBindTexture(translatedTextureType, rendererId);
+		for (unsigned int i = 0; i < 6; i++)
+		{
+			if (cubemapSourceImageData[i] == 0)
+			{
+				D_LOG_ERROR("Failed to load texture for cubemap.");
+				continue;
+			}
+
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, translatedTextureFormat, width, height, 0, translatedTextureFormat, translatedTextureDataType, cubemapSourceImageData[i]);
+			if (generateMipmaps)
+			{
+				glGenerateMipmap(GL_TEXTURE_2D);
+			}
+
+			glTexParameteri(translatedTextureType, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(translatedTextureType, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glTexParameteri(translatedTextureType, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+			glTexParameteri(translatedTextureType, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(translatedTextureType, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
 	}
 }

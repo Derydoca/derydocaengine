@@ -87,7 +87,8 @@ namespace DerydocaEngine::Rendering
 
 	void Display::bindAsRenderTarget()
 	{
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+		GraphicsAPI::bindFramebuffer(0);
+		//glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	}
 
 	void Display::windowPositionChanged(const int x, const int y)

@@ -26,7 +26,7 @@ namespace DerydocaEngine::Rendering
 			return;
 		}
 		
-		glEnable(GL_DEPTH_TEST);
+		GraphicsAPI::setDepthTest(true);
 
 		// Clear the buffers
 		GraphicsAPI::clearDepthBuffer();
