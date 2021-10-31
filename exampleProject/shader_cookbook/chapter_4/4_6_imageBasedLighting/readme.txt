@@ -1,1 +1,0 @@
-This section was skipped because HDRShop is referenced to create diffuse and specular maps. The software has since stopped being free to use and I was also unable to find good documentation on it. Also, the GitHub page did not contain specular or diffuse maps to use in place of this. I am including this empty folder for posterity's sake.
