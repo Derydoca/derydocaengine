@@ -8,8 +8,6 @@
 #include "Components\Light.h"
 #include "Components\MeshRenderer.h"
 #include "Components\Rotator.h"
-#include "Components\ScreenshotUtil.h"
-#include "Components\SkinnedMeshRenderer.h"
 #include "Components\SpriteRenderer.h"
 #include "Components\TextRenderer.h"
 #include "Components\Transform.h"
@@ -37,14 +35,6 @@ TEST(InspectorRegistration_Component, MeshRenderer) {
 
 TEST(InspectorRegistration_Component, Rotator) {
 	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::Rotator);
-}
-
-TEST(InspectorRegistration_Component, ScreenshotUtil) {
-	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::ScreenshotUtil);
-}
-
-TEST(InspectorRegistration_Component, SkinnedMeshRenderer) {
-	TEST_INSPECTOR_REGISTRATION(DerydocaEngine::Components::SkinnedMeshRenderer);
 }
 
 TEST(InspectorRegistration_Component, SpriteRenderer) {

@@ -3,10 +3,8 @@
 #include <glm/vec3.hpp>
 #include <string>
 
-#include "Animation\VertexBoneWeights.h"
 #include "Color.h"
 #include "MeshFlags.h"
-#include "Animation\Skeleton.h"
 
 namespace DerydocaEngine::Rendering
 {
@@ -20,8 +18,7 @@ namespace DerydocaEngine::Rendering
 		Normals = 0x16,
 		Indices = 0x32,
 		Colors = 0x64,
-		BoneWeights = 0x128,
-		All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors | BoneWeights
+		All = Positions | Tangents | Bitangents | TexCoords | Normals | Indices | Colors
 	};
 
 	class Mesh
@@ -34,8 +31,7 @@ namespace DerydocaEngine::Rendering
 			const std::vector<glm::vec2>& texCoords = std::vector<glm::vec2>(),
 			const std::vector<glm::vec3>& tangents = std::vector<glm::vec3>(),
 			const std::vector<glm::vec3>& bitangents = std::vector<glm::vec3>(),
-			const std::vector<Color>& colors = std::vector<Color>(),
-			const std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
+			const std::vector<Color>& colors = std::vector<Color>());
 
 		~Mesh();
 
@@ -47,15 +43,12 @@ namespace DerydocaEngine::Rendering
 			const std::vector<glm::vec2>& texCoords = std::vector<glm::vec2>(),
 			const std::vector<glm::vec3>& tangents = std::vector<glm::vec3>(),
 			const std::vector<glm::vec3>& bitangents = std::vector<glm::vec3>(),
-			const std::vector<Color>& colors = std::vector<Color>(),
-			const std::vector<Animation::VertexBoneWeights> boneWeights = std::vector<Animation::VertexBoneWeights>());
+			const std::vector<Color>& colors = std::vector<Color>());
 		void draw();
 		void setFlags(const MeshFlags& flags) { m_flags = flags; }
 		unsigned int getVao() const { return m_vertexArrayObject; }
 		size_t getNumVertices() const { return m_positions.size(); }
 		size_t getNumIndices() const { return m_indices.size(); }
-		std::shared_ptr<Animation::Skeleton> getSkeleton() { return m_skeleton; }
-		void setSkeleton(const std::shared_ptr<Animation::Skeleton> skeleton) { m_skeleton = skeleton; }
 
 	private:
 		enum {
@@ -66,8 +59,6 @@ namespace DerydocaEngine::Rendering
 			NORMAL_VB,
 			INDEX_VB,
 			COLOR_VB,
-			BONE_INDICES_VB,
-			BONE_WEIGHTS_VB,
 			NUM_BUFFERS
 		};
 
@@ -82,7 +73,6 @@ namespace DerydocaEngine::Rendering
 		void uploadBitangents();
 		void uploadIndices();
 		void uploadColors();
-		void uploadBoneWeights();
 		void bind();
 		void unbind();
 		void generateVao();
@@ -97,8 +87,6 @@ namespace DerydocaEngine::Rendering
 		std::vector<glm::vec3> m_tangents;
 		std::vector<glm::vec3> m_bitangents;
 		std::vector<Color> m_colors;
-		std::vector<Animation::VertexBoneWeights> m_boneWeights;
-		std::shared_ptr<Animation::Skeleton> m_skeleton;
 		MeshFlags m_flags{};
 	};
 

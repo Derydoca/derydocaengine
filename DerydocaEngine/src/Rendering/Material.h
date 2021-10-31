@@ -46,7 +46,6 @@ namespace DerydocaEngine::Rendering
 		void setMat3(const std::string& name, glm::mat3 const& value);
 		void setMat4(const std::string& name, glm::mat4 const& value);
 		void setMat4Array(const std::string& name, std::vector<glm::mat4> matrixArray);
-		void setSubroutine(unsigned int program, unsigned int value);
 		void setTexture(const std::string& name, std::shared_ptr<Rendering::Texture> texture);
 		void setTexture(const std::string& name, ResourceRef<Resources::TextureResource> texture);
 		void setTextureSlot(int const& slot, ResourceRef<Resources::TextureResource> texture);
@@ -62,7 +61,6 @@ namespace DerydocaEngine::Rendering
 		bool mat3Exists(const std::string& name);
 		bool mat4Exists(const std::string& name);
 		bool mat4ArrayExists(const std::string& name);
-		bool subroutineValueExists(unsigned int program);
 		bool textureExists(const std::string& name);
 		bool textureSlotExists(int slot);
 		bool vec3Exists(const std::string& name);
@@ -77,7 +75,6 @@ namespace DerydocaEngine::Rendering
 		glm::mat3 getMat3(const std::string& name);
 		glm::mat4 getMat4(const std::string& name);
 		std::vector<glm::mat4> getMat4Array(const std::string& name);
-		unsigned int getSubroutineValue(unsigned int program);
 		ResourceRef<Resources::TextureResource> getTexture(const std::string& name);
 		ResourceRef<Resources::TextureResource> getTextureSlot(int slot);
 		glm::vec3 getVec3(const std::string& name);
@@ -99,7 +96,6 @@ namespace DerydocaEngine::Rendering
 		std::map<std::string, glm::mat3> m_mat3Values;
 		std::map<std::string, glm::mat4> m_mat4Values;
 		std::map<std::string, std::vector<glm::mat4>> m_mat4ArrayValues;
-		std::map<unsigned int, unsigned int> m_subroutineValues;
 	};
 
 }

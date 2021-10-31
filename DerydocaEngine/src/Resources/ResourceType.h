@@ -16,8 +16,6 @@ namespace DerydocaEngine::Resources
 		FontResourceType,
 		RasterFontResourceType,
 		SpriteSheetType,
-		SkeletonResourceType,
-		AnimationResourceType,
 	};
 
 }

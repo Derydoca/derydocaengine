@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\Material.h"
 
-#include <gl\glew.h>
 #include "Rendering\Shader.h"
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Texture.h"
@@ -21,8 +20,7 @@ namespace DerydocaEngine::Rendering
 		m_vec4Values(),
 		m_mat3Values(),
 		m_mat4Values(),
-		m_mat4ArrayValues(),
-		m_subroutineValues()
+		m_mat4ArrayValues()
 	{
 	}
 
@@ -129,11 +127,6 @@ namespace DerydocaEngine::Rendering
 			shader->setMat4Array(x.first, x.second);
 		}
 
-		for (auto const& x : m_subroutineValues)
-		{
-			shader->setSubroutine(x.first, x.second);
-		}
-
 	}
 
 	void Material::copyFrom(std::shared_ptr<Material> other)
@@ -145,7 +138,6 @@ namespace DerydocaEngine::Rendering
 		m_mat3Values = other->m_mat3Values;
 		m_mat4Values = other->m_mat4Values;
 		m_mat4ArrayValues = other->m_mat4ArrayValues;
-		m_subroutineValues = other->m_subroutineValues;
 		m_textures = other->m_textures;
 		m_texture = other->m_texture;
 		m_vec3Values = other->m_vec3Values;
@@ -243,11 +235,6 @@ namespace DerydocaEngine::Rendering
 		m_mat4ArrayValues[name] = matrixArray;
 	}
 
-	void Material::setSubroutine(unsigned int program, unsigned int value)
-	{
-		m_subroutineValues[program] = value;
-	}
-
 	void Material::setTexture(const std::string& name, std::shared_ptr<Rendering::Texture> texture)
 	{
 		auto res = std::make_shared<Resources::TextureResource>();
@@ -318,11 +305,6 @@ namespace DerydocaEngine::Rendering
 	bool Material::mat4ArrayExists(const std::string& name)
 	{
 		return m_mat4ArrayValues.find(name) != m_mat4ArrayValues.end();
-	}
-
-	bool Material::subroutineValueExists(unsigned int program)
-	{
-		return m_subroutineValues.find(program) != m_subroutineValues.end();
 	}
 
 	bool Material::textureExists(const std::string& name)
@@ -462,19 +444,6 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	unsigned int Material::getSubroutineValue(unsigned int program)
-	{
-		auto it = m_subroutineValues.find(program);
-		if (it == m_subroutineValues.end())
-		{
-			return 0;
-		}
-		else
-		{
-			return (*it).second;
-		}
-	}
-
 	ResourceRef<Resources::TextureResource> Material::getTexture(const std::string& name)
 	{
 		auto it = m_textures.find(name);
@@ -542,7 +511,6 @@ namespace DerydocaEngine::Rendering
 		for (auto prop : m_mat3Values) data.Float3x3s.push_back(AssetData::MaterialPropertyData<glm::mat3>(prop.first, prop.second));
 		for (auto prop : m_mat4Values) data.Float4x4s.push_back(AssetData::MaterialPropertyData<glm::mat4>(prop.first, prop.second));
 		for (auto prop : m_mat4ArrayValues) data.Float4x4Arrays.push_back(AssetData::MaterialPropertyData<std::vector<glm::mat4>>(prop.first, prop.second));
-		for (auto prop : m_subroutineValues) data.SubroutineValues.push_back(AssetData::SubroutineMap(prop.first, prop.second));
 
 		return data;
     }

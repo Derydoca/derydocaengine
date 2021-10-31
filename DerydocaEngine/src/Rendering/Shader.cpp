@@ -2,12 +2,10 @@
 #include "Rendering\Shader.h"
 
 #include <fstream>
-#include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <sys/stat.h>
 #include "Components\Camera.h"
 #include "Rendering\CameraManager.h"
-#include "Debug\DebugVisualizer.h"
 #include "Rendering\GraphicsAPI.h"
 #include "Rendering\MatrixStack.h"
 #include "Rendering\Mesh.h"
@@ -16,18 +14,17 @@
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Texture.h"
 #include "Components\Transform.h"
-#include "..\Debug\GLError.h"
 
 namespace DerydocaEngine::Rendering
 {
+	void Shader::loadShaderIfExists(const size_t shaderIndex, const ShaderProgramType shaderType, const std::string& shaderPath)
+	{
+		if (CheckIfShaderExists(shaderPath))
+		{
+			m_shaders[shaderIndex] = GraphicsAPI::createShader(LoadShader(shaderPath), shaderType);
+		}
+	}
 
-#define LOAD_SHADER_IF_EXISTS(shaderIndex, shaderType, fileName) \
-{ \
-	if(CheckIfShaderExists(fileName)) \
-	{ \
-		m_shaders[(shaderIndex)] = CreateShader(LoadShader(fileName), shaderType); \
-	} \
-}
 	Shader::Shader(const std::string& fileName) :
 		m_rendererId(0),
 		m_shaders(),
@@ -37,137 +34,31 @@ namespace DerydocaEngine::Rendering
 		m_numPasses(0),
 		m_renderPasses()
 	{
+		std::vector<ShaderAttribute> shaderAttributes = {
+			{ 0, "VertexPosition" },
+			{ 1, "VertexTexCoord" },
+			{ 2, "VertexNormal" },
+			{ 3, "VertexTangent" },
+			{ 4, "VertexBitangent" },
+			{ 5, "VertexColor" },
+			{ 6, "VertexBoneIndices" },
+			{ 7, "VertexBoneWeights" }
+		};
+
+		std::vector<ShaderAttribute> outputAttributes = {
+			{ 0, "FragColor" }
+		};
+
 		D_LOG_TRACE("Loading shader: {}", fileName);
 
 		// Create the shaders
-		LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
-		LOAD_SHADER_IF_EXISTS(1, GL_TESS_CONTROL_SHADER, GetTesslleationControlShaderPath());
-		LOAD_SHADER_IF_EXISTS(2, GL_TESS_EVALUATION_SHADER, GetTessellationEvaluationShaderPath());
-		LOAD_SHADER_IF_EXISTS(3, GL_GEOMETRY_SHADER, GetGeometryShaderPath());
-		LOAD_SHADER_IF_EXISTS(4, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
+		loadShaderIfExists(0, ShaderProgramType::VertexShader, GetVertexShaderPath());
+		loadShaderIfExists(1, ShaderProgramType::TesselationControlShader, GetTesslleationControlShaderPath());
+		loadShaderIfExists(2, ShaderProgramType::TesselationEvaluationShader, GetTessellationEvaluationShaderPath());
+		loadShaderIfExists(3, ShaderProgramType::GeometryShader, GetGeometryShaderPath());
+		loadShaderIfExists(4, ShaderProgramType::FragmentShader, GetFragmentShaderPath());
 
-		// Create the program
-		m_rendererId = glCreateProgram();
-		if (0 == m_rendererId)
-		{
-			D_LOG_ERROR("Error creating program object.");
-			__debugbreak();
-		}
-
-		// Attach the shaders to the program
-		for (unsigned int i = 0; i < NUM_SHADERS; i++) {
-			// Skip shaders that were not loaded (i.e. shaders w/o geom shaders)
-			if (m_shaders[i] == 0)
-			{
-				continue;
-			}
-
-			glAttachShader(m_rendererId, m_shaders[i]);
-		}
-
-		// Get the vertex attribute locations
-		glBindAttribLocation(m_rendererId, 0, "VertexPosition");
-		glBindAttribLocation(m_rendererId, 1, "VertexTexCoord");
-		glBindAttribLocation(m_rendererId, 2, "VertexNormal");
-		glBindAttribLocation(m_rendererId, 3, "VertexTangent");
-		glBindAttribLocation(m_rendererId, 4, "VertexBitangent");
-		glBindAttribLocation(m_rendererId, 5, "VertexColor");
-		glBindAttribLocation(m_rendererId, 6, "VertexBoneIndices");
-		glBindAttribLocation(m_rendererId, 7, "VertexBoneWeights");
-
-		// Bind the output color to 0
-		glBindFragDataLocation(m_rendererId, 0, "FragColor");
-
-		// Link the program
-		glLinkProgram(m_rendererId);
-		if (!CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed"))
-		{
-			deleteShaderProgram();
-			return;
-		}
-
-		glValidateProgram(m_rendererId);
-		if (!CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid"))
-		{
-			deleteShaderProgram();
-			return;
-		}
-
-		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
-		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
-		m_uniforms[TRANSFORM_NORMAL] = GraphicsAPI::getUniformLocation(m_rendererId, "NormalMatrix");
-		m_uniforms[TRANSFORM_PROJECTION] = GraphicsAPI::getUniformLocation(m_rendererId, "ProjectionMatrix");
-		m_uniforms[TRANSFORM_MODEL] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelMatrix");
-		m_uniforms[TRANSFORM_VIEW] = GraphicsAPI::getUniformLocation(m_rendererId, "ViewMatrix");
-	}
-
-	Shader::Shader(const std::string& fileName, const int varyingsCount, const char * const * varyings) :
-		m_rendererId(0),
-		m_shaders(),
-		m_uniforms(),
-		m_loadPath(fileName),
-		m_uniformLookup(),
-		m_numPasses(0),
-		m_renderPasses()
-	{
-		D_LOG_TRACE("Loading shader: {}", fileName);
-
-		// Create the shaders
-		LOAD_SHADER_IF_EXISTS(0, GL_VERTEX_SHADER, GetVertexShaderPath());
-		LOAD_SHADER_IF_EXISTS(1, GL_TESS_CONTROL_SHADER, GetTesslleationControlShaderPath());
-		LOAD_SHADER_IF_EXISTS(2, GL_TESS_EVALUATION_SHADER, GetTessellationEvaluationShaderPath());
-		LOAD_SHADER_IF_EXISTS(3, GL_GEOMETRY_SHADER, GetGeometryShaderPath());
-		LOAD_SHADER_IF_EXISTS(4, GL_FRAGMENT_SHADER, GetFragmentShaderPath());
-
-		// Create the program
-		m_rendererId = glCreateProgram();
-		if (0 == m_rendererId)
-		{
-			D_LOG_ERROR("Error creating program object.");
-			__debugbreak();
-		}
-
-		// Attach the shaders to the program
-		for (unsigned int i = 0; i < NUM_SHADERS; i++) {
-			// Skip shaders that were not loaded (i.e. shaders w/o geom shaders)
-			if (m_shaders[i] == 0)
-			{
-				continue;
-			}
-
-			glAttachShader(m_rendererId, m_shaders[i]);
-		}
-
-		// Get the vertex attribute locations
-		glBindAttribLocation(m_rendererId, 0, "VertexPosition");
-		glBindAttribLocation(m_rendererId, 1, "VertexTexCoord");
-		glBindAttribLocation(m_rendererId, 2, "VertexNormal");
-		glBindAttribLocation(m_rendererId, 3, "VertexTangent");
-		glBindAttribLocation(m_rendererId, 4, "VertexBitangent");
-		glBindAttribLocation(m_rendererId, 5, "VertexColor");
-		glBindAttribLocation(m_rendererId, 6, "VertexBoneIndices");
-		glBindAttribLocation(m_rendererId, 7, "VertexBoneWeights");
-
-		// Bind the output color to 0
-		glBindFragDataLocation(m_rendererId, 0, "FragColor");
-
-		// Bind the varyings
-		setTransformFeedbackVaryings(varyingsCount, varyings);
-
-		// Link the program
-		glLinkProgram(m_rendererId);
-		if(!CheckShaderError(m_rendererId, GL_LINK_STATUS, true, "Error: Program linking failed: "))
-		{
-			deleteShaderProgram();
-			return;
-		}
-
-		glValidateProgram(m_rendererId);
-		if(!CheckShaderError(m_rendererId, GL_VALIDATE_STATUS, true, "Error: Program is invalid: "))
-		{
-			deleteShaderProgram();
-			return;
-		}
+		m_rendererId = GraphicsAPI::createShaderProgram(m_shaders[0], m_shaders[1], m_shaders[2], m_shaders[3], m_shaders[4], shaderAttributes, outputAttributes);
 
 		m_uniforms[TRANSFORM_MVP] = GraphicsAPI::getUniformLocation(m_rendererId, "MVP");
 		m_uniforms[TRANSFORM_MV] = GraphicsAPI::getUniformLocation(m_rendererId, "ModelViewMatrix");
@@ -180,8 +71,7 @@ namespace DerydocaEngine::Rendering
 	Shader::~Shader()
 	{
 		for (unsigned int i = 0; i < NUM_SHADERS; i++) {
-			glDetachShader(m_rendererId, m_shaders[i]);
-			glDeleteShader(m_shaders[i]);
+			GraphicsAPI::deleteShader(m_rendererId, m_shaders[i]);
 		}
 
 		deleteShaderProgram();
@@ -191,7 +81,7 @@ namespace DerydocaEngine::Rendering
 
 	void Shader::bind()
 	{
-		glUseProgram(m_rendererId);
+		GraphicsAPI::bindShaderProgram(m_rendererId);
 	}
 
 	void Shader::update(
@@ -262,11 +152,7 @@ namespace DerydocaEngine::Rendering
 
 	void Shader::bindUniformBuffer(const std::string & name, int uniformBufferId)
 	{
-		unsigned int blockIndex = glGetUniformBlockIndex(m_rendererId, name.c_str());
-		if (blockIndex != GL_INVALID_INDEX)
-		{
-			GL_CHECK(glBindBufferBase(GL_UNIFORM_BUFFER, blockIndex, uniformBufferId));
-		}
+		GraphicsAPI::bindUniformBuffer(m_rendererId, name, uniformBufferId);
 	}
 
 	void Shader::setFloat(const std::string& name, const float val)
@@ -359,46 +245,16 @@ namespace DerydocaEngine::Rendering
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, texture->getTextureType(), texture->getRendererId());
 	}
 
-	void Shader::setTexture(const std::string& name, const int textureUnit, const unsigned int textureType, const unsigned int textureId)
+	void Shader::setTexture(const std::string& name, const int textureUnit, const TextureType textureType, const unsigned int textureId)
 	{
 		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, textureType, textureId);
 	}
 
-	void Shader::setTransformFeedbackVaryings(const int count, const char *const * varyings)
-	{
-		glTransformFeedbackVaryings(m_rendererId, count, varyings, GL_SEPARATE_ATTRIBS);
-	}
-
 	void Shader::deleteShaderProgram()
 	{
-		glDeleteProgram(m_rendererId);
+		GraphicsAPI::deleteShaderProgram(m_rendererId);
 		m_rendererId = 0;
-	}
-
-	unsigned int Shader::getSubroutineIndex(const unsigned int program, const std::string& subroutineName)
-	{
-		unsigned int index = -1;
-		GL_CHECK(index = glGetSubroutineIndex(m_rendererId, program, subroutineName.c_str()));
-		return index;
-	}
-
-	void Shader::setSubroutine(const unsigned int program, const unsigned int subroutineIndex)
-	{
-		glUniformSubroutinesuiv(program, 1, &subroutineIndex);
-	}
-
-	void Shader::setSubPasses(const unsigned int program, RenderPass* renderPasses, const int numPasses)
-	{
-		m_numPasses = numPasses;
-
-		delete[] m_renderPasses;
-		m_renderPasses = new RenderPass[numPasses];
-		for (int i = 0; i < numPasses; i++)
-		{
-			int subroutineIndex = getSubroutineIndex(program, renderPasses[i].getName());
-			m_renderPasses[i] = RenderPass(&renderPasses[i], subroutineIndex);
-		}
 	}
 
 	void Shader::renderMesh(const std::shared_ptr<Mesh> mesh, const std::shared_ptr<RenderTexture> m_renderTexture)
@@ -442,7 +298,6 @@ namespace DerydocaEngine::Rendering
 				//	(GLint)(textureH * m_displayRect->getHeight()));
 
 				setTexture("RenderTex", 0, m_renderTexture);
-				setSubroutine(GL_FRAGMENT_SHADER, rp.getShaderSubroutineIndex());
 				if (i > 0 && m_renderPasses[i - 1].hasRenderTextureAssigned())
 				{
 					setTexture(m_renderPasses[i - 1].getRenderTextureName(), 1, m_renderPasses[i - 1].getRenderTexture());
@@ -466,31 +321,7 @@ namespace DerydocaEngine::Rendering
 		}
 	}
 
-	unsigned int Shader::CreateShader(const std::string& text, const unsigned int shaderType) {
-		GLuint shader = glCreateShader(shaderType);
-
-		if (shader == 0) {
-			D_LOG_ERROR("Shader creation failed!");
-		}
-
-		const GLchar* shaderSourceStrings[1];
-		GLint shaderSourceStringLengths[1];
-
-		shaderSourceStrings[0] = text.c_str();
-		shaderSourceStringLengths[0] = static_cast<GLint>(text.length());
-
-		glShaderSource(shader, 1, shaderSourceStrings, shaderSourceStringLengths);
-		glCompileShader(shader);
-
-		if (!CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error: Shader compilation failed: "))
-		{
-			return getErrorShaderID();
-		}
-
-		return shader;
-	}
-
-	int Shader::getErrorShaderID()
+	uint32_t Shader::getErrorShaderID()
 	{
 		auto errorShader = Rendering::ShaderLibrary::getInstance().getErrorShader();
 		return errorShader.As<Rendering::Shader>()->m_rendererId;
@@ -520,33 +351,6 @@ namespace DerydocaEngine::Rendering
 	{
 		struct stat buffer;
 		return (stat(fileName.c_str(), &buffer) == 0);
-	}
-
-	bool Shader::CheckShaderError(const unsigned int shader, const unsigned int flag, const bool isProgram, const std::string& errorMessage) {
-		GLint success = 0;
-		GLchar error[1024] = { 0 };
-
-		if (isProgram) {
-			glGetProgramiv(shader, flag, &success);
-		}
-		else {
-			glGetShaderiv(shader, flag, &success);
-		}
-
-		if (success == GL_FALSE) {
-			if (isProgram) {
-				glGetProgramInfoLog(shader, sizeof(error), NULL, error);
-			}
-			else {
-				glGetShaderInfoLog(shader, sizeof(error), NULL, error);
-			}
-
-			D_LOG_ERROR("{}:\n{}", errorMessage, error);
-			
-			return false;
-		}
-
-		return true;
 	}
 
 	void Shader::clearFloat(const std::string& name)
@@ -619,7 +423,7 @@ namespace DerydocaEngine::Rendering
 		GraphicsAPI::setUniformMat4(uniformLocation, emptyMatrix, 1);
 	}
 
-	void Shader::clearTexture(const std::string& name, const int textureUnit, const unsigned int textureType)
+	void Shader::clearTexture(const std::string& name, const int textureUnit, const TextureType textureType)
 	{
 		int uniformLocation = getUniformLocation(name);
 		GraphicsAPI::setTexture(uniformLocation, textureUnit, textureType, 0);

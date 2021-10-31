@@ -161,7 +161,7 @@ namespace DerydocaEngine::Components
 		m_Projection.recalculateProjectionMatrix();
 
 		// Ensure depth testing is on
-		glEnable(GL_DEPTH_TEST);
+		Rendering::GraphicsAPI::setDepthTest(true);
 
 		// Clear the buffer
 		clear();
@@ -208,7 +208,7 @@ namespace DerydocaEngine::Components
 
 			Rendering::GraphicsAPI::clearDepthBuffer();
 			Rendering::GraphicsAPI::clearColorBuffer({ 0.0f, 0.0f, 0.0f, 1.0f });
-			glDisable(GL_DEPTH_TEST);
+			Rendering::GraphicsAPI::setDepthTest(false);
 
 			// Set the identity matrices so that the quad renders to the entire render area
 			auto deferredCompositorShader = GetDeferredCompositorShader();
@@ -223,7 +223,7 @@ namespace DerydocaEngine::Components
 		// Postprocessing happens here
 		if (m_PostProcessMaterial != nullptr)
 		{
-			glDisable(GL_DEPTH_TEST);
+			Rendering::GraphicsAPI::setDepthTest(false);
 
 			m_PostProcessMaterial->bind();
 

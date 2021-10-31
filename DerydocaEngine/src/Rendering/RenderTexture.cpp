@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\RenderTexture.h"
 
-#include <GL/glew.h>
 #include <cassert>
 #include "GraphicsAPI.h"
 
@@ -45,68 +44,26 @@ namespace DerydocaEngine::Rendering
 
 		if (m_renderingMode == RenderingMode::Forward)
 		{
-			createRenderbuffers_Forward();
+			GraphicsAPI::createForwardRendererBuffer(m_width, m_height, SizedTextureFormat::RGB8, m_rendererId, m_renderBufferIds[0]);
 		}
 		else
 		{
-			createRenderbuffers_Deferred();
+			std::vector<FramebufferDescriptor> framebufferDescs = {
+				{0, SizedTextureFormat::RGB32F, FilterMode::Nearest, FilterMode::Nearest},
+				{1, SizedTextureFormat::RGB32F, FilterMode::Nearest, FilterMode::Nearest},
+				{2, SizedTextureFormat::RGB8, FilterMode::Nearest, FilterMode::Nearest}
+			};
+			auto framebuffers = GraphicsAPI::createDeferredRenderBuffer(m_width, m_height, framebufferDescs, m_renderBufferIds[0]);
+			for (size_t i = 0; i < framebuffers.size(); i++)
+			{
+				m_renderBufferIds[i + 1] = framebuffers[i];
+			}
 		}
 
-		auto framebufferStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-		if (framebufferStatus != GL_FRAMEBUFFER_COMPLETE) {
+		if (!GraphicsAPI::isFramebufferCreated())
+		{
 			D_LOG_ERROR("UNABLE TO CREATE RENDER TEXTURE!");
 		}
-	}
-
-	void RenderTexture::createRenderbuffer(int textureUnit, GLenum format, unsigned int & textureId)
-	{
-		glActiveTexture(GL_TEXTURE0 + textureUnit);
-		glGenTextures(1, &textureId);
-		glBindTexture(GL_TEXTURE_2D, textureId);
-		glTexStorage2D(GL_TEXTURE_2D, 1, format, m_width, m_height);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
-	}
-
-	void RenderTexture::createRenderbuffers_Forward()
-	{
-		// Create the color buffer (Also can be bound to sampler in a shader that takes a single sampler)
-		GraphicsAPI::createTexture2D(&m_rendererId, m_width, m_height);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-		// Create the depth buffer
-		GraphicsAPI::createRenderBuffers(1, &m_renderBufferIds[0]);
-		glBindRenderbuffer(GL_RENDERBUFFER, m_renderBufferIds[0]);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_width, m_height);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_renderBufferIds[0]);
-
-		glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_rendererId, 0);
-		GLenum colorAttachments[] = { GL_COLOR_ATTACHMENT0 };
-		glDrawBuffers(1, colorAttachments);
-	}
-
-	void RenderTexture::createRenderbuffers_Deferred()
-	{
-		// Create the depth buffer
-		glGenRenderbuffers(1, &m_renderBufferIds[0]);
-		glBindRenderbuffer(GL_RENDERBUFFER, m_renderBufferIds[0]);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, m_width, m_height);
-
-		// Create the other renderbuffers
-		createRenderbuffer(0, GL_RGB32F, m_renderBufferIds[1]);
-		createRenderbuffer(1, GL_RGB32F, m_renderBufferIds[2]);
-		createRenderbuffer(2, GL_RGB8, m_renderBufferIds[3]);
-
-		// Attach the textures to the framebuffer
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_renderBufferIds[0]);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_renderBufferIds[1], 0);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, m_renderBufferIds[2], 0);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, m_renderBufferIds[3], 0);
-
-		GLenum drawBuffers[] = { GL_NONE, GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
-		glDrawBuffers(4, drawBuffers);
 	}
 
 	void RenderTexture::destroyGraphicsApiObjects()
@@ -132,9 +89,9 @@ namespace DerydocaEngine::Rendering
 
 	void RenderTexture::bindDeferredTextures(std::shared_ptr<Rendering::Shader> shader)
 	{
-		shader->setTexture("PositionTex", 0, GL_TEXTURE_2D, m_renderBufferIds[1]);
-		shader->setTexture("NormalTex", 1, GL_TEXTURE_2D, m_renderBufferIds[2]);
-		shader->setTexture("ColorTex", 2, GL_TEXTURE_2D, m_renderBufferIds[3]);
+		shader->setTexture("PositionTex", 0, TextureType::Texture2D, m_renderBufferIds[1]);
+		shader->setTexture("NormalTex", 1, TextureType::Texture2D, m_renderBufferIds[2]);
+		shader->setTexture("ColorTex", 2, TextureType::Texture2D, m_renderBufferIds[3]);
 	}
 
 	void RenderTexture::bindAsRenderTexture()
