@@ -14,7 +14,6 @@
 #include "Rendering\ShaderLibrary.h"
 #include "Rendering\Texture.h"
 #include "Components\Transform.h"
-#include "..\Debug\GLError.h"
 
 namespace DerydocaEngine::Rendering
 {
