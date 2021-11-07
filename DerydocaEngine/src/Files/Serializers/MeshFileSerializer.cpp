@@ -10,11 +10,6 @@ namespace DerydocaEngine::Files::Serializers {
 
 	static Rendering::MeshFlags stringToFlag(std::string const& flagString)
 	{
-		if (flagString == "load_adjacent")
-		{
-			return Rendering::MeshFlags::load_adjacent;
-		}
-
 		return (Rendering::MeshFlags)0;
 	}
 

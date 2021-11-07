@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Files\Serializers\FileSerializerLibrary.h"
 
-#include "Files\Serializers\BezierPatchMeshFileSerializer.h"
 #include "Files\Serializers\CubemapFileSerializer.h"
 #include "Files\Serializers\FileTypeSerializer.h"
 #include "Files\Serializers\FontFileSerializer.h"
@@ -52,7 +51,6 @@ namespace DerydocaEngine::Files::Serializers {
 		registerTypeSerializer(new ImageFileSerializer());
 		registerTypeSerializer(new LevelFileSerializer());
 		registerTypeSerializer(new ShaderFileSerializer());
-		registerTypeSerializer(new BezierPatchMeshFileSerializer());
 		registerTypeSerializer(new FontFileSerializer());
 		registerTypeSerializer(new RasterFontFileSerializer());
 		registerTypeSerializer(new SpriteSheetFileSerializer());

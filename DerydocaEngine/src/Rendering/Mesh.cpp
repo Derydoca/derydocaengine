@@ -1,7 +1,6 @@
 #include "EnginePch.h"
 #include "Rendering\Mesh.h"
 
-#include "MeshAdjacencyCalculator.h"
 #include "GraphicsAPI.h"
 
 namespace DerydocaEngine::Rendering

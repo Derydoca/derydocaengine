@@ -32,10 +32,6 @@ namespace DerydocaEngine::Files
 		{
 			return ShaderFileType;
 		}
-		else if (extension == "bpm")
-		{
-			return BezierPatchMeshType;
-		}
 		else if (extension == "ttf")
 		{
 			return FontType;

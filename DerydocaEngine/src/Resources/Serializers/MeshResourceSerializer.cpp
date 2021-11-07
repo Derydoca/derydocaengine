@@ -7,8 +7,6 @@
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 
-#include "MeshAdjacencyCalculator.h"
-
 namespace DerydocaEngine::Resources::Serializers
 {
 	std::shared_ptr<void> MeshResourceSerializer::deserializePointer(std::shared_ptr<Resource> resource)
@@ -99,20 +97,12 @@ namespace DerydocaEngine::Resources::Serializers
 
 		if (mesh->HasFaces())
 		{
-			if (m_flags & Rendering::MeshFlags::load_adjacent)
+			m_indices = std::vector<unsigned int>(mesh->mNumFaces * 3);
+			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 			{
-				Ext::MeshAdjacencyCalculator mac;
-				mac.buildAdjacencyList(mesh, m_indices);
-			}
-			else
-			{
-				m_indices = std::vector<unsigned int>(mesh->mNumFaces * 3);
-				for (unsigned int i = 0; i < mesh->mNumFaces; i++)
-				{
-					m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
-					m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
-					m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
-				}
+				m_indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
+				m_indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
+				m_indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
 			}
 		}
 
