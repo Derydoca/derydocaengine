@@ -18,3 +18,4 @@ add_compile_definitions(OPENGL)
 
 add_subdirectory(DerydocaEngine)
 add_subdirectory(DerydocaEngine.Components)
+add_subdirectory(DerydocaEngine.Editor)
