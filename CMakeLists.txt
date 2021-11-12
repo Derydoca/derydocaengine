@@ -11,8 +11,10 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
 include_directories(
     vendor/cereal/include
     vendor/freetype/include
+    "include"
 )
 
 add_compile_definitions(OPENGL)
 
 add_subdirectory(DerydocaEngine)
+add_subdirectory(DerydocaEngine.Components)
