@@ -1,11 +1,8 @@
-cmake_minimum_required(VERSION 3.21.4)
-
 project (DerydocaEngine.Core)
 
 include_directories(
     src
     ../DerydocaEngine.Components/src
-    ../include
     )
 
 #[[ Other defines that were in the premake file
