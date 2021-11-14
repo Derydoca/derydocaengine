@@ -9,6 +9,7 @@ endif()
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
 
 include_directories(
+    vendor/sdl2/include
     vendor/cereal/include
     vendor/freetype/include
     "include"
@@ -16,7 +17,11 @@ include_directories(
 
 add_compile_definitions(OPENGL)
 
+add_subdirectory(vendor/freetype)
+add_subdirectory(vendor/sdl2)
+
 add_subdirectory(DerydocaEngine)
 add_subdirectory(DerydocaEngine.Components)
 add_subdirectory(DerydocaEngine.Components.Editor)
 add_subdirectory(DerydocaEngine.Editor)
+add_subdirectory(DerydocaEngine.Editor.UI)

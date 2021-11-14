@@ -3,6 +3,7 @@ bin/*
 bin-int/*
 packages/*
 build/*
+vendor/*
 
 *.tlog
 

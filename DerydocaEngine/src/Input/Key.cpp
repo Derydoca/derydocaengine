@@ -1,8 +1,6 @@
 #include "EnginePch.h"
 #include "Input\Key.h"
 
-#include "sdl2\SDL.h"
-
 namespace DerydocaEngine::Input
 {
 

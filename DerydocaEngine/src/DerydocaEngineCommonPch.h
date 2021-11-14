@@ -52,7 +52,7 @@
 #include <filesystem>
 
 // SDL
-#include <sdl2/SDL.h>
+#include <SDL.h>
 #undef main
 
 // Derydoca Engine Classes

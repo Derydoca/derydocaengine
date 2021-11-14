@@ -7,3 +7,6 @@
 [submodule "vendor/cereal"]
 	path = vendor/cereal
 	url = https://github.com/USCiLab/cereal.git
+[submodule "vendor/sdl2"]
+	path = vendor/sdl2
+	url = https://github.com/libsdl-org/SDL.git
