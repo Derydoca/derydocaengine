@@ -14,6 +14,6 @@ add_compile_definitions(
     )
 
 file(GLOB_RECURSE derydocaengine_src ./src/*.h ./src/*.cpp)
-add_library(${PROJECT_NAME} ${derydocaengine_src})
+add_library(${PROJECT_NAME} STATIC ${derydocaengine_src})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE "./src/EnginePch.h")

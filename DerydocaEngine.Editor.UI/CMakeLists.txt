@@ -13,7 +13,12 @@ add_executable(${PROJECT_NAME} ${derydocaengine_editor_ui_src})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE "./src/EditorPch.h")
 
+find_package(OpenGL REQUIRED)
+
 target_link_libraries(${PROJECT_NAME}
+    ${OPENGL_LIBRARIES}
+    ../../libs/x86_64/Debug/glew32
+    ../../libs/x86_64/Debug/assimp
     SDL2
     freetype
     DerydocaEngine.Core

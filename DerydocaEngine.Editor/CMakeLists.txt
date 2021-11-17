@@ -8,6 +8,6 @@ include_directories(
     )
 
 file(GLOB_RECURSE derydocaengine_editor_src ./src/*.h ./src/*.cpp)
-add_library(${PROJECT_NAME} ${derydocaengine_editor_src})
+add_library(${PROJECT_NAME} STATIC ${derydocaengine_editor_src})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE "./src/EditorPch.h")
