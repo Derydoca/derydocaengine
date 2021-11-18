@@ -17,8 +17,8 @@ find_package(OpenGL REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
     ${OPENGL_LIBRARIES}
+    assimp::assimp
     ../../libs/x86_64/Debug/glew32
-    ../../libs/x86_64/Debug/assimp
     SDL2
     freetype
     DerydocaEngine.Core

@@ -19,6 +19,7 @@ add_compile_definitions(OPENGL)
 
 add_subdirectory(vendor/freetype)
 add_subdirectory(vendor/sdl2)
+add_subdirectory(vendor/assimp)
 
 add_subdirectory(DerydocaEngine)
 add_subdirectory(DerydocaEngine.Components)

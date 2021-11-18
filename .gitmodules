@@ -10,3 +10,6 @@
 [submodule "vendor/sdl2"]
 	path = vendor/sdl2
 	url = https://github.com/libsdl-org/SDL.git
+[submodule "vendor/assimp"]
+	path = vendor/assimp
+	url = https://github.com/assimp/assimp.git
