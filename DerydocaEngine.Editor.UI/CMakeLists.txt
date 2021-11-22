@@ -22,46 +22,26 @@ target_link_libraries(${PROJECT_NAME}
     SDL2
     freetype
     DerydocaEngine.Core
+    DerydocaEngine.Editor
     DerydocaEngine.Components
     DerydocaEngine.Components.Editor
-    DerydocaEngine.Editor
 )
 
-#[[
-    debugdir "$(OutputPath)"
-    debugargs ("-project ../../../exampleProject")
-    linkoptions {
-        "/WHOLEARCHIVE:DerydocaEngine.Components.lib",
-        "/WHOLEARCHIVE:DerydocaEngine.Components.Editor.lib"
-    }
-    links {
-        "assimp",
-        "glew32",
-        "SDL2",
-        "OpenGL32",
-        "freetype"
-    }
-    links
-    {
-        "DerydocaEngine",
-        "DerydocaEngine.Components",
-        "DerydocaEngine.Components.Editor",
-        "DerydocaEngine.Editor"
-    }
-    libdirs {
-        "%{wks.location}/libs/%{cfg.architecture}/%{cfg.shortname}"
-    }
-        postbuildcommands
-        {
-            "@echo Copying DLLs",
-            "xcopy /y /d \"%{wks.location}libs\\%{cfg.architecture}\\%{cfg.shortname}\\*.dll\" \"%{cfg.buildtarget.directory}\"",
-            "@echo Copying engine settings file",
-            "xcopy /y /f \"%{wks.location}engineSettings.json\" \"%{cfg.buildtarget.directory}\"",
-            "@echo Copying IMGUI default layout file",
-            "xcopy /y /f \"%{wks.location}imgui.ini\" \"%{cfg.buildtarget.directory}\"",
-            "@echo Processing the engine resource directory",
-            "\"%{prj.name}.exe\" -processDirectory \"%{wks.location}engineResources\"",
-            "@echo Copying engine resources",
-            "xcopy /y /d /e \"%{wks.location}engineResources\\*\" \"%{cfg.buildtarget.directory}engineResources\\\"",
-        }
-]]
+set(MY_VAR "$<TARGET_FILE_NAME:DerydocaEngine.Editor.UI>")
+
+set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/WHOLEARCHIVE:DerydocaEngine.Componentsd.lib /WHOLEARCHIVE:DerydocaEngine.Components.Editord.lib")
+
+# HACK: Remove the glew32.dll copy line once the library is replaced
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:DerydocaEngine.Editor.UI> $<TARGET_FILE_DIR:DerydocaEngine.Editor.UI>
+    COMMAND ${CMAKE_COMMAND} -E copy "${PROJECT_SOURCE_DIR}/../libs/x86_64/Debug/glew32.dll" $<TARGET_FILE_DIR:DerydocaEngine.Editor.UI>
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/../engineResources" "$<TARGET_FILE_DIR:DerydocaEngine.Editor.UI>/engineResources"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "$<TARGET_FILE_DIR:DerydocaEngine.Editor.UI>/engineResources/configs" $<TARGET_FILE_DIR:DerydocaEngine.Editor.UI>
+    COMMAND_EXPAND_LISTS
+)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    VS_DEBUGGER_COMMAND_ARGUMENTS "-project ${PROJECT_SOURCE_DIR}/../exampleProject"
+    VS_DEBUGGER_WORKING_DIRECTORY $<TARGET_FILE_DIR:DerydocaEngine.Editor.UI>
+    VS_STARTUP_PROJECT ${PROJECT_NAME}
+)
