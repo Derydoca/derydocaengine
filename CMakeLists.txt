@@ -40,12 +40,3 @@ add_subdirectory(DerydocaEngine.Components)
 add_subdirectory(DerydocaEngine.Components.Editor)
 add_subdirectory(DerydocaEngine.Editor)
 add_subdirectory(DerydocaEngine.Editor.UI)
-
-#PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME
-option(PACKAGE_TESTS "Build the tests" OFF)
-if (PACKAGE_TESTS)
-    enable_testing()
-    include(GoogleTest)
-    add_subdirectory(DerydocaEngine.Test)
-    #add_subdirectory(DerydocaEngine.Editor.Test)
-endif()
