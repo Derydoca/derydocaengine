@@ -91,6 +91,8 @@ namespace DerydocaEngine::Editor
 		// Load the scenes
 		m_editorComponentsScene = loadScene(engineSettings->getEditorComponentsSceneIdentifier());
 		m_editorGuiScene = loadScene(engineSettings->getEditorGuiSceneIdentifier());
+
+		DerydocaEngine::Rendering::Gui::DearImgui::newFrame(m_display);
 	}
 
 	void EditorRenderer::renderEditorCameraToActiveBuffer(std::shared_ptr<Components::Camera> camera, int textureW, int textureH)
@@ -130,9 +132,7 @@ namespace DerydocaEngine::Editor
 	}
 	void EditorRenderer::renderFrame(const float deltaTime)
 	{
-		// Initialize a new immediate mode GUI frame
-		DerydocaEngine::Rendering::Gui::DearImgui::newFrame(m_display);
-
+		static bool ImGuiFrameStarted = false;
 		// Update
 		auto rootElement = m_editorGuiScene->getRoot();
 		if (rootElement)
@@ -155,8 +155,9 @@ namespace DerydocaEngine::Editor
 		// Render
 		render(glm::mat4(), m_editorGuiScene);
 
-		// Render the immediate mode GUI frame to the framebuffer
+		// Render the current Imgui frame and queue up a new one right after so any piece of code can contribute to the UI
 		DerydocaEngine::Rendering::Gui::DearImgui::render(m_display);
+		DerydocaEngine::Rendering::Gui::DearImgui::newFrame(m_display);
 
 		// Post render
 		m_editorGuiScene->getRoot()->postRender();
