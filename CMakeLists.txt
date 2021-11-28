@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21.4)
-project(DerydocaEngineCmake)
+project(DerydocaEngine)
 set (CMAKE_CXX_STANDARD 17)
 
 if (MSVC)
