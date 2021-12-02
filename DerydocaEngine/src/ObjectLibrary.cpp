@@ -17,6 +17,8 @@ namespace DerydocaEngine
 
 	void ObjectLibrary::loadEngineResources(const std::filesystem::path& path)
 	{
+		D_LOG_TRACE("Updating meta files: {}", path.string());
+		updateMetaFilesDirectory(path);
 		D_LOG_TRACE("Loading engine files: {}", path.string());
 		m_engineResourceDirectoryRoot = std::make_shared<Directory>();
 		m_engineResourceDirectoryRoot->Path = path;
@@ -192,7 +194,7 @@ namespace DerydocaEngine
 		// If the serializer was not found, abort and return false
 		if (serializer == nullptr)
 		{
-			D_LOG_ERROR("The file '{}' does not have a serializer associated with it.", assetPath);
+			//D_LOG_ERROR("The file '{}' does not have a serializer associated with it.", assetPath);
 			return false;
 		}
 

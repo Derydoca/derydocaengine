@@ -2,6 +2,7 @@
 bin/*
 bin-int/*
 packages/*
+build/*
 
 *.tlog
 

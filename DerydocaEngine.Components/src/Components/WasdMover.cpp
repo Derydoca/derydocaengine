@@ -4,7 +4,6 @@
 #include "Input\InputManager.h"
 #include "Input\Keyboard.h"
 #include "Input\Mouse.h"
-#include "sdl2\SDL.h"
 
 namespace DerydocaEngine::Components
 {

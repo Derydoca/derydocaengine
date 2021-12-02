@@ -14,18 +14,4 @@ git submodule init
 git submodule update
 ```
 
-You will also need to generate the solution and project files. This repo is utilizing Premake for project generation. It has only been tested to be working by generating Visual Studio project files, but you may also try other generators at your own risk.
-
-Creating the Visual Studio solution and project files are simple. You will need to have Premake5 installed on your machine and run premake in the repo root. If you want to use the generateProjects.bat file, you will have to define an environment variable %PREMAKE_INSTALLATION_DIR% that points to the directory it is installed at on your machine.
-
-If you do not have Visual Studio 2017 installed on your system, you can change "vs2017" to any valid generator. For more information, check out the [official Premake documentation](https://github.com/premake/premake-core/wiki/Using-Premake).
-
-After running the command, open the solution file in the root directory and proceede as usual.
-
-## Third Party Libraries
-*  GLEW (2.1.0) - For exposing OpenGL functions
-*  SDL2 (2.0.7) - For window management
-*  ASSIMP (3.1.1) - For importing 3D art assets
-*  GLM (0.9.8.5) - For all the complex math made to make games
-*  stb_image - For image loading
-*  cereal - For configuration files and serialized objects
+You will also need to generate the solution and project files. This repo is utilizing CMake for project generation. It has only been tested to be working by generating Visual Studio project files, but you may also try other generators at your own risk. This project will currently only build in debug mode due to the explicit dependency to the glew32 library. This is planned to be fixed in the future when the renderer is upgraded to DX12.
