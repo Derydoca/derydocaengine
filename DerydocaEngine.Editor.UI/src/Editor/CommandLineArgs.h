@@ -1,11 +1,11 @@
 #pragma once
-#include <map>
-#include <vector>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace DerydocaEngine::Editor
 {
-	using ArgumentCollection = std::map<std::string, std::vector<std::string>>;
+	using ArgumentCollection = std::unordered_map<std::string, std::vector<std::string>>;
 
 	class CommandLineArgs
 	{
