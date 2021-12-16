@@ -3,21 +3,12 @@
 namespace DerydocaEngine::Editor
 {
 
-	CommandLineArgs::CommandLineArgs(int const& argc, char* argv[])
-	{
-		processArguments(argc, argv);
-	}
-
-	CommandLineArgs::~CommandLineArgs()
-	{
-	}
-
-	void CommandLineArgs::processArguments(int const& argc, char * argv[])
+	CommandLineArgs::CommandLineArgs(const int& argc, const char* argv[])
 	{
 		// Extract the path to the executable
 		if (argc > 0)
 		{
-			m_executablePath = argv[0];
+			m_ExecutablePath = argv[0];
 		}
 
 		// Iterate through all of the arguments
@@ -32,7 +23,7 @@ namespace DerydocaEngine::Editor
 				currentArgumentKey = currentArgument.substr(1);
 
 				// Force the argument into the map
-				m_arguments[currentArgumentKey];
+				m_Arguments[currentArgumentKey];
 			}
 			else
 			{
@@ -40,25 +31,25 @@ namespace DerydocaEngine::Editor
 				if (currentArgumentKey != "")
 				{
 					// Add this argument to the current key's list of values
-					m_arguments[currentArgumentKey].push_back(currentArgument);
+					m_Arguments[currentArgumentKey].push_back(currentArgument);
 				}
 			}
 		}
 	}
 
-	bool CommandLineArgs::keyExists(std::string const& key)
+	const bool CommandLineArgs::KeyExists(const std::string& key)
 	{
-		return m_arguments.find(key) != m_arguments.end();
+		return m_Arguments.find(key) != m_Arguments.end();
 	}
 
-	std::vector<std::string> CommandLineArgs::getValues(std::string const& key)
+	const std::vector<std::string> CommandLineArgs::GetValues(const std::string& key)
 	{
-		if (!keyExists(key))
+		if (!KeyExists(key))
 		{
 			return std::vector<std::string>();
 		}
 
-		return m_arguments[key];
+		return m_Arguments[key];
 	}
 
 }

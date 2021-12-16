@@ -5,22 +5,21 @@
 
 namespace DerydocaEngine::Editor
 {
-	using argumentCollection = std::map<std::string, std::vector<std::string>>;
+	using ArgumentCollection = std::map<std::string, std::vector<std::string>>;
 
 	class CommandLineArgs
 	{
 	public:
-		CommandLineArgs(int const& argc, char* argv[]);
-		~CommandLineArgs();
+		CommandLineArgs(const int& argc, const char* argv[]);
 
-		std::string getExecutablePath() const { return m_executablePath; }
-		bool keyExists(std::string const& key);
-		std::vector<std::string> getValues(std::string const& key);
+		const std::string GetExecutablePath() const { return m_ExecutablePath; }
+		const std::vector<std::string> GetValues(const std::string& key);
+		const bool KeyExists(const std::string& key);
+
 	private:
-		void processArguments(int const& argc, char* argv[]);
+		std::string m_ExecutablePath;
+		ArgumentCollection m_Arguments;
 
-		std::string m_executablePath;
-		argumentCollection m_arguments;
 	};
 
 }
