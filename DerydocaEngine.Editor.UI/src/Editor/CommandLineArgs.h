@@ -3,9 +3,8 @@
 #include <vector>
 #include <string>
 
-namespace DerydocaEngine::Editor::Execution
+namespace DerydocaEngine::Editor
 {
-
 	using argumentCollection = std::map<std::string, std::vector<std::string>>;
 
 	class CommandLineArgs

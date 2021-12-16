@@ -1,7 +1,6 @@
-#include "EditorPch.h"
 #include "CommandLineArgs.h"
 
-namespace DerydocaEngine::Editor::Execution
+namespace DerydocaEngine::Editor
 {
 
 	CommandLineArgs::CommandLineArgs(int const& argc, char* argv[])
