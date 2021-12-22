@@ -21,7 +21,9 @@
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
-        }
+        },
+        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": true,
+        "BUILD_SHARED_LIBS": true
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {

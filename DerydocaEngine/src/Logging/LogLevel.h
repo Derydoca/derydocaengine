@@ -2,8 +2,7 @@
 
 namespace DerydocaEngine::Logging
 {
-
-	enum LogLevel
+	enum class LogLevel
 	{
 		Trace = 1,
 		Debug = 2,
@@ -13,5 +12,4 @@ namespace DerydocaEngine::Logging
 		Critical = 32,
 		All = Trace | Debug | Info | Warn | Err | Critical
 	};
-
 }

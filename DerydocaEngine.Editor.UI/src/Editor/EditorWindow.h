@@ -6,6 +6,11 @@
 
 namespace DerydocaEngine::Editor::UI
 {
+	struct EditorWindowConfig
+	{
+
+	};
+
 	class EditorWindow
 	{
 	public:

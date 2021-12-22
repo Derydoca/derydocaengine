@@ -1,12 +1,12 @@
 #pragma once
 
 #include <spdlog/spdlog.h>
-#include "Logging/InternalEngineSync.h"
 #include "Logging/LogLevel.h"
+#include "Logging/LogDomain.h"
+#include "Logging/InternalEngineSink.h"
 
 namespace DerydocaEngine::Logging
 {
-
 	class Log
 	{
 	public:
@@ -14,25 +14,27 @@ namespace DerydocaEngine::Logging
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger()
 		{
-			return s_coreLogger;
+			return s_CoreLogger;
 		}
 
 		inline static std::shared_ptr<engine_console_sync_mt>& GetConsoleSink()
 		{
-			return s_sink;
+			return s_EngineConsoleSync;
 		}
 
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger()
 		{
-			return s_clientLogger;
+			return s_ClientLogger;
 		}
 
-	private:
-		static std::shared_ptr<engine_console_sync_mt> s_sink;
-		static std::shared_ptr<spdlog::logger> s_coreLogger;
-		static std::shared_ptr<spdlog::logger> s_clientLogger;
-	};
+		static void PrintIt();
 
+	private:
+		static std::shared_ptr<engine_console_sync_mt> s_EngineConsoleSync;
+		static std::shared_ptr<spdlog::logger> s_ClientLogger;
+		static std::shared_ptr<spdlog::logger> s_CoreLogger;
+
+	};
 }
 
 #define D_LOG_TRACE(...) ::DerydocaEngine::Logging::Log::GetCoreLogger()->log(spdlog::source_loc(__FILE__, __LINE__, __FUNCTION__), spdlog::level::level_enum::trace, __VA_ARGS__)

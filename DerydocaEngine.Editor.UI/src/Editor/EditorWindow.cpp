@@ -27,7 +27,11 @@ namespace DerydocaEngine::Editor::UI
 			return 1;
 		}
 
-		m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED);
+		m_Renderer = SDL_CreateRenderer(
+			m_Window,
+			-1,
+			SDL_RendererFlags::SDL_RENDERER_ACCELERATED | SDL_RendererFlags::SDL_RENDERER_PRESENTVSYNC | SDL_RendererFlags::SDL_RENDERER_TARGETTEXTURE
+		);
 
 		if (m_Renderer == NULL)
 		{

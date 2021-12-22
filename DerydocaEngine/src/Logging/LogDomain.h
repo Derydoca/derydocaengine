@@ -2,7 +2,7 @@
 
 namespace DerydocaEngine::Logging
 {
-	enum LogDomain
+	enum class LogDomain
 	{
 		Engine = 1,
 		Client = 2
