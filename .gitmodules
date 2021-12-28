@@ -10,3 +10,6 @@
 [submodule "vendor/assimp"]
 	path = vendor/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "vendor/nvrhi"]
+	path = vendor/nvrhi
+	url = https://github.com/NVIDIAGameWorks/nvrhi.git
