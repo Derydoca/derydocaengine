@@ -1,14 +1,16 @@
 #include <memory>
-#include <SDL2/SDL.h>
-
-//template <class T> using sptr = std::shared_ptr<T>;
-//template <class T> using uptr = std::unique_ptr<T>;
+#include <GLFW/glfw3.h>
 
 namespace DerydocaEngine::Editor::UI
 {
-	struct EditorWindowConfig
+	struct EditorWindowSettings
 	{
-
+		uint32_t BackbufferWidth = 1280;
+		uint32_t BackbufferHeight = 720;
+		uint32_t SwapChainSampleCount = 1;
+		uint32_t RefreshRate = 0;
+		int WindowPosX = -1;
+		int WindowPosY = -1;
 	};
 
 	class EditorWindow
@@ -20,7 +22,7 @@ namespace DerydocaEngine::Editor::UI
 	public:
 		EditorWindow();
 
-		int CreateWindowAndSwapChain();
+		int CreateWindowAndSwapChain(EditorWindowSettings settings, const char* windowTitle);
 		int RunUpdateLoop();
 		void Cleanup();
 
@@ -29,8 +31,9 @@ namespace DerydocaEngine::Editor::UI
 
 	private:
 		bool m_Running;
-		SDL_Window* m_Window;
-		SDL_Renderer* m_Renderer;
+		GLFWwindow* m_Window;
+		EditorWindowSettings m_WindowParams;
+		const char* m_WindowTitle;
 
 	};
 }

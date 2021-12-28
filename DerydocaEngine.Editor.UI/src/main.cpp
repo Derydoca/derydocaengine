@@ -1,5 +1,3 @@
-#include <SDL.h>
-#include <SDL_main.h>
 #include <stdio.h>
 #include "Editor/CommandLineArgs.h"
 #include "Editor/EditorWindow.h"
@@ -16,7 +14,12 @@ int main(int argc, char* argv[])
 
     int returnCode = 0;
 
-    returnCode = editorWindow.CreateWindowAndSwapChain();
+    auto editorWindowSettings = DerydocaEngine::Editor::UI::EditorWindowSettings();
+    editorWindowSettings.BackbufferWidth = 800;
+    editorWindowSettings.BackbufferHeight = 600;
+    editorWindowSettings.SwapChainSampleCount = 1;
+    editorWindowSettings.RefreshRate = 60;
+    returnCode = editorWindow.CreateWindowAndSwapChain(editorWindowSettings, "Derydoca Editor");
     if (returnCode != 0)
     {
         return returnCode;
