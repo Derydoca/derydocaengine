@@ -1,9 +1,8 @@
-#include <memory>
 #include <GLFW/glfw3.h>
 
-namespace DerydocaEngine::Editor::UI
+namespace DerydocaEngine
 {
-	struct EditorWindowSettings
+	struct DeviceManagerSettings
 	{
 		uint32_t BackbufferWidth = 1280;
 		uint32_t BackbufferHeight = 720;
@@ -13,16 +12,16 @@ namespace DerydocaEngine::Editor::UI
 		int WindowPosY = -1;
 	};
 
-	class EditorWindow
+	class DeviceManager
 	{
 	public:
 		const int DEFAULT_WINDOW_HEIGHT = 600;
 		const int DEFAULT_WINDOW_WIDTH = 800;
 
 	public:
-		EditorWindow();
+		DeviceManager();
 
-		int CreateWindowAndSwapChain(EditorWindowSettings settings, const char* windowTitle);
+		int CreateWindowAndSwapChain(DeviceManagerSettings settings, const char* windowTitle);
 		int RunUpdateLoop();
 		void Cleanup();
 
@@ -32,7 +31,7 @@ namespace DerydocaEngine::Editor::UI
 	private:
 		bool m_Running;
 		GLFWwindow* m_Window;
-		EditorWindowSettings m_WindowParams;
+		DeviceManagerSettings m_WindowParams;
 		const char* m_WindowTitle;
 
 	};

@@ -1,8 +1,7 @@
-#include "EditorWindow.h"
-#include <random>
+#include "DeviceManager.h"
 #include "Logging/Log.h"
 
-namespace DerydocaEngine::Editor::UI
+namespace DerydocaEngine
 {
 	void GLFWErrorCallback(int error, const char* description)
 	{
@@ -22,13 +21,13 @@ namespace DerydocaEngine::Editor::UI
 		}
 	}
 
-	EditorWindow::EditorWindow()
+	DeviceManager::DeviceManager()
 		: m_Running(true)
 		, m_Window(NULL)
 	{
 	}
 
-	int EditorWindow::CreateWindowAndSwapChain(EditorWindowSettings settings, const char* windowTitle)
+	int DeviceManager::CreateWindowAndSwapChain(DeviceManagerSettings settings, const char* windowTitle)
 	{
 		if (!glfwInit())
 		{
@@ -79,7 +78,7 @@ namespace DerydocaEngine::Editor::UI
 		return 0;
 	}
 
-	int EditorWindow::RunUpdateLoop()
+	int DeviceManager::RunUpdateLoop()
 	{
 		while (!glfwWindowShouldClose(m_Window))
 		{
@@ -96,13 +95,13 @@ namespace DerydocaEngine::Editor::UI
 		return 0;
 	}
 
-	void EditorWindow::Cleanup()
+	void DeviceManager::Cleanup()
 	{
 		glfwDestroyWindow(m_Window);
 		glfwTerminate();
 	}
 
-	void EditorWindow::ProcessWindowEvents()
+	void DeviceManager::ProcessWindowEvents()
 	{
 	}
 }
