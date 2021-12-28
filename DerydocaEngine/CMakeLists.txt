@@ -2,9 +2,7 @@ project(derydoca-engine-core)
 
 add_library(${PROJECT_NAME} STATIC
 	"./src/Logging/LogMessage.cpp"
-	"./src/Logging/Log.cpp"
-	"src/Logging/LogLevel.h"
-	"src/Logging/LogDomain.h" "Include/DerydocaEngine/DeviceManager.h" "src/DeviceManager.cpp")
+	"./src/Logging/Log.cpp" "src/DeviceManager.cpp")
 
 find_package(spdlog CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
