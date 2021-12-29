@@ -1,4 +1,4 @@
-#include "LogMessage.h"
+#include "DerydocaEngine/Logging/LogMessage.h"
 
 namespace DerydocaEngine::Logging
 {

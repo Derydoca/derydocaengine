@@ -1,9 +1,9 @@
 #pragma once
 
 #include <spdlog/spdlog.h>
-#include "Logging/LogLevel.h"
-#include "Logging/LogDomain.h"
-#include "Logging/InternalEngineSink.h"
+#include "LogLevel.h"
+#include "LogDomain.h"
+#include "InternalEngineSink.h"
 
 namespace DerydocaEngine::Logging
 {

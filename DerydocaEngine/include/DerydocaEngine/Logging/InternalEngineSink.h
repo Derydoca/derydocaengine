@@ -3,7 +3,7 @@
 #include <spdlog/details/null_mutex.h>
 #include <spdlog/sinks/base_sink.h>
 #include <spdlog/details/synchronous_factory.h>
-#include "Logging/LogMessage.h"
+#include "DerydocaEngine/Logging/LogMessage.h"
 
 namespace DerydocaEngine::Logging
 {

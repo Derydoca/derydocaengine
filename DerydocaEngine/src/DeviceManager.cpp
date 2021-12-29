@@ -1,5 +1,5 @@
-#include "DeviceManager.h"
-#include "Logging/Log.h"
+#include "DerydocaEngine/DeviceManager.h"
+#include "DerydocaEngine/Logging/Log.h"
 
 namespace DerydocaEngine
 {

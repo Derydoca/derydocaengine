@@ -3,8 +3,8 @@
 #include <spdlog/spdlog.h>
 #include <string>
 #include <chrono>
-#include "Logging/LogLevel.h"
-#include "Logging/LogDomain.h"
+#include "DerydocaEngine/Logging/LogLevel.h"
+#include "DerydocaEngine/Logging/LogDomain.h"
 
 namespace DerydocaEngine::Logging
 {
