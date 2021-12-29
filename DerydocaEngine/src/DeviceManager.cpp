@@ -89,7 +89,7 @@ namespace DerydocaEngine
 
 			double time = glfwGetTime();
 
-			glfwSwapBuffers(m_Window);
+			//glfwSwapBuffers(m_Window);
 			glfwPollEvents();
 		}
 		return 0;
