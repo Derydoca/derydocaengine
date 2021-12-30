@@ -27,10 +27,12 @@ nvrhi::GraphicsAPI GetGraphicsAPIFromArgs(DerydocaEngine::Editor::CommandLineArg
     std::string gapiValue = values[0];
     if (gapiValue == VulkanValue)
     {
+        D_LOG_TRACE("Graphics API set to Vulkan.");
         return nvrhi::GraphicsAPI::VULKAN;
     }
     else if (gapiValue == D3D12Value)
     {
+        D_LOG_TRACE("Graphics API set to D3D12.");
         return nvrhi::GraphicsAPI::D3D12;
     }
 

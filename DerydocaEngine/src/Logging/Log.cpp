@@ -12,10 +12,12 @@ namespace DerydocaEngine::Logging
 	{
 		s_EngineConsoleSync = std::make_shared<engine_console_sync_mt>();
 		auto fileSync = std::make_shared<spdlog::sinks::basic_file_sink_mt>("log.txt");
+		auto consoleSync = std::make_shared<spdlog::sinks::stdout_color_sink_mt>(spdlog::color_mode::always);
 
 		std::vector<spdlog::sink_ptr> sinks;
 		sinks.push_back(s_EngineConsoleSync);
 		sinks.push_back(fileSync);
+		sinks.push_back(consoleSync);
 
 		s_CoreLogger = std::make_shared<spdlog::logger>("Engine", begin(sinks), end(sinks));
 		s_CoreLogger->set_level(spdlog::level::trace);
