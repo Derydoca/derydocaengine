@@ -1,3 +1,5 @@
+#pragma once
+
 #include <GLFW/glfw3.h>
 #include <nvrhi/nvrhi.h>
 
@@ -16,8 +18,7 @@ namespace DerydocaEngine
 	class DeviceManager
 	{
 	public:
-		const int DEFAULT_WINDOW_HEIGHT = 600;
-		const int DEFAULT_WINDOW_WIDTH = 800;
+		static DeviceManager* Create(nvrhi::GraphicsAPI gapi);
 
 	public:
 		DeviceManager();

@@ -1,5 +1,11 @@
 #include "DerydocaEngine/DeviceManager.h"
 #include "DerydocaEngine/Logging/Log.h"
+#ifdef USE_DX12
+#include "DerydocaEngine/Rendering/DX12/DeviceManagerDX12.h"
+#endif
+#ifdef USE_VULKAN
+#include "DerydocaEngine/Rendering/VK/DeviceManagerVK.h"
+#endif
 
 namespace DerydocaEngine
 {
@@ -25,6 +31,28 @@ namespace DerydocaEngine
 		: m_Running(true)
 		, m_Window(NULL)
 	{
+	}
+
+	DeviceManager* DeviceManager::Create(nvrhi::GraphicsAPI gapi)
+	{
+		switch (gapi)
+		{
+		case nvrhi::GraphicsAPI::D3D11:
+			D_LOG_CRITICAL("The graphics API D3D11 is not supported!");
+			return nullptr;
+#ifdef USE_DX12
+		case nvrhi::GraphicsAPI::D3D12:
+			return new Rendering::DeviceManagerDX12();
+#endif
+#ifdef USE_VULKAN
+		case nvrhi::GraphicsAPI::VULKAN:
+			return new Rendering::DeviceManagerVK();
+			return nullptr;
+#endif
+		default:
+			D_LOG_CRITICAL("Invalid graphics API!");
+			return nullptr;
+		}
 	}
 
 	int DeviceManager::CreateWindowAndSwapChain(DeviceManagerSettings settings, const char* windowTitle)
