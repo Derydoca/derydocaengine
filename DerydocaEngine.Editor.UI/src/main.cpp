@@ -78,6 +78,12 @@ int main(int argc, const char* argv[])
     editorWindowSettings.BackbufferHeight = 600;
     editorWindowSettings.SwapChainSampleCount = 1;
     editorWindowSettings.RefreshRate = 60;
+
+#ifdef _DEBUG
+    editorWindowSettings.EnableDebugRuntime = true;
+    editorWindowSettings.EnableValidationLayer = true;
+#endif
+
     returnCode = deviceManager->CreateWindowAndSwapChain(editorWindowSettings, "Derydoca Editor");
     if (returnCode != 0)
     {

@@ -13,6 +13,8 @@ namespace DerydocaEngine
 		uint32_t RefreshRate = 0;
 		int WindowPosX = -1;
 		int WindowPosY = -1;
+		bool EnableDebugRuntime = false;
+		bool EnableValidationLayer = false;
 	};
 
 	class DeviceManager
