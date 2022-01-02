@@ -92,8 +92,9 @@ int main(int argc, const char* argv[])
 
     returnCode = deviceManager->RunUpdateLoop();
 
-    deviceManager->Cleanup();
     D_LOG_TRACE("Engine shutdown");
+    deviceManager->Cleanup();
+    delete(deviceManager);
 
     return returnCode;
 }

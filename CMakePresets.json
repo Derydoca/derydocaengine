@@ -7,9 +7,9 @@
   },
   "configurePresets": [
     {
-      "name": "x64-windows",
+      "name": "base",
       "hidden": true,
-      "displayName": "Windows x64",
+      "displayName": "Base configuration",
       "description": "Sets Ninja generator, compilers, x64 architecture, build and install directory, debug build type",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/out/build/${presetName}",
@@ -23,8 +23,17 @@
           "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
           "type": "FILEPATH"
         },
-        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": true,
         "BUILD_SHARED_LIBS": true
+      }
+    },
+    {
+      "name": "x64-windows-base",
+      "hidden": true,
+      "displayName": "Windows x64 Base",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": true,
+        "PLATFORM_WINDOWS": true
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -35,7 +44,7 @@
     {
       "name": "x64-windows-debug",
       "displayName": "Windows x64 Debug",
-      "inherits": "x64-windows",
+      "inherits": "x64-windows-base",
       "hidden": false,
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
@@ -44,7 +53,34 @@
     {
       "name": "x64-windows-release",
       "displayName": "Windows x64 Release",
-      "inherits": "x64-windows",
+      "inherits": "x64-windows-base",
+      "hidden": false,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x64-linux-base",
+      "hidden": true,
+      "displayName": "Linux x64 Base",
+      "inherits": "base",
+      "cacheVariables": {
+        "PLATFORM_LINUX": true
+      }
+    },
+    {
+      "name": "x64-linux-debug",
+      "displayName": "Linux x64 Debug",
+      "inherits": "x64-linux-base",
+      "hidden": false,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x64-linux-release",
+      "displayName": "Linux x64 Release",
+      "inherits": "x64-linux-base",
       "hidden": false,
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
