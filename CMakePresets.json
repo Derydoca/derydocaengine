@@ -19,10 +19,6 @@
       },
       "cacheVariables": {
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
-        "CMAKE_TOOLCHAIN_FILE": {
-          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-          "type": "FILEPATH"
-        },
         "BUILD_SHARED_LIBS": true
       }
     },
@@ -33,7 +29,11 @@
       "inherits": "base",
       "cacheVariables": {
         "CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS": true,
-        "PLATFORM_WINDOWS": true
+        "PLATFORM_WINDOWS": true,
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        }
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
@@ -65,7 +65,13 @@
       "displayName": "Linux x64 Base",
       "inherits": "base",
       "cacheVariables": {
-        "PLATFORM_LINUX": true
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang",
+        "PLATFORM_LINUX": true,
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "/mnt/c/ubuntu/vcpkg/scripts/buildsystems/vcpkg.cmake",
+          "type": "FILEPATH"
+        }
       }
     },
     {
