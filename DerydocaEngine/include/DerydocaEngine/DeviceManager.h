@@ -49,7 +49,6 @@ namespace DerydocaEngine
 	public:
 		static DeviceManager* Create(nvrhi::GraphicsAPI gapi);
 
-	public:
 		DeviceManager();
 
 		[[nodiscard]] virtual nvrhi::IDevice* GetDevice() const = 0;
@@ -73,6 +72,7 @@ namespace DerydocaEngine
 		GLFWwindow* m_Window;
 		DeviceManagerSettings m_WindowParams;
 		const char* m_WindowTitle;
+		std::vector<nvrhi::FramebufferHandle> m_SwapChainFramebuffers;
 
 	};
 }

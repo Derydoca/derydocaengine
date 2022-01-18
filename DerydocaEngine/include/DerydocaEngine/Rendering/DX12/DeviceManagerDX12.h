@@ -32,6 +32,7 @@ namespace DerydocaEngine::Rendering
 
 	private:
 		bool CreateRenderTargets();
+		void ReleaseRenderTargets();
 
 	private:
 		nvrhi::RefCountPtr<ID3D12Device> m_Device12;
@@ -50,6 +51,7 @@ namespace DerydocaEngine::Rendering
 		std::vector<HANDLE> m_FrameFenceEvents;
 		UINT64 m_FrameCount = 1;
 		nvrhi::DeviceHandle m_NvrhiDevice;
+		std::string m_RendererString;
 
 	};
 }

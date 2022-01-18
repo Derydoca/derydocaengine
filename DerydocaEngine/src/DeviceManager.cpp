@@ -208,7 +208,16 @@ namespace DerydocaEngine
 
 	void DeviceManager::Cleanup()
 	{
-		glfwDestroyWindow(m_Window);
+		m_SwapChainFramebuffers.clear();
+
+		DestroyDeviceAndSwapChain();
+
+		if (m_Window)
+		{
+			glfwDestroyWindow(m_Window);
+			m_Window = nullptr;
+		}
+
 		glfwTerminate();
 	}
 

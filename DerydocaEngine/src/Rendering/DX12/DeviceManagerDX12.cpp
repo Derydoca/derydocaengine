@@ -1,6 +1,8 @@
 #include "DerydocaEngine/Rendering/DX12/DeviceManagerDX12.h"
 #include "DerydocaEngine/Logging/Log.h"
 
+#include <sstream>
+
 #define HR_RETURN(hr) if(FAILED(hr)) return false
 
 namespace DerydocaEngine::Rendering
@@ -113,6 +115,20 @@ namespace DerydocaEngine::Rendering
 				return false;
 			}
 		}
+
+        {
+            DXGI_ADAPTER_DESC adapterDesc;
+            targetAdapter->GetDesc(&adapterDesc);
+
+            std::wstring adapterName = adapterDesc.Description;
+
+            // A stupid but non-deprecated and portable way of converting a wstring to a string
+            std::stringstream ss;
+            std::wstringstream wss;
+            for (auto c : adapterName)
+                ss << wss.narrow(c, '?');
+            m_RendererString = ss.str();
+        }
 
         if (MoveWindowOntoAdapter(targetAdapter, rect))
         {
@@ -326,6 +342,45 @@ namespace DerydocaEngine::Rendering
 
 	void DeviceManagerDX12::DestroyDeviceAndSwapChain()
 	{
+        m_RhiSwapChainBuffers.clear();
+        m_RendererString.clear();
 
+        ReleaseRenderTargets();
+
+        m_NvrhiDevice = nullptr;
+
+        for (auto fenceEvent : m_FrameFenceEvents)
+        {
+            WaitForSingleObject(fenceEvent, INFINITE);
+            CloseHandle(fenceEvent);
+        }
+
+        m_FrameFenceEvents.clear();
+
+        if (m_SwapChain)
+        {
+            m_SwapChain->SetFullscreenState(false, nullptr);
+        }
+
+        m_SwapChainBuffers.clear();
+
+        m_FrameFence = nullptr;
+        m_SwapChain = nullptr;
+        m_GraphicsQueue = nullptr;
+        m_CopyQueue = nullptr;
+        m_Device12 = nullptr;
+        m_DxgiAdapter = nullptr;
 	}
+
+    void DeviceManagerDX12::ReleaseRenderTargets()
+    {
+        m_NvrhiDevice->waitForIdle();
+        m_NvrhiDevice->runGarbageCollection();
+        for (auto fenceEvent : m_FrameFenceEvents)
+        {
+            SetEvent(fenceEvent);
+        }
+        m_RhiSwapChainBuffers.clear();
+        m_SwapChainBuffers.clear();
+    }
 }
