@@ -1,4 +1,4 @@
-project(derydoca-engine-core)
+project(derydoca-core)
 
 add_library(${PROJECT_NAME} STATIC
 	"./src/Logging/LogMessage.cpp"

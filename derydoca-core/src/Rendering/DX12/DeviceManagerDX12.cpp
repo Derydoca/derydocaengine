@@ -1,5 +1,5 @@
-#include "DerydocaEngine/Rendering/DX12/DeviceManagerDX12.h"
-#include "DerydocaEngine/Logging/Log.h"
+#include "Derydoca/Rendering/DX12/DeviceManagerDX12.h"
+#include "Derydoca/Logging/Log.h"
 
 #include <sstream>
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DerydocaEngine/DeviceManager.h"
+#include "Derydoca/DeviceManager.h"
 
 namespace DerydocaEngine::Rendering
 {

@@ -14,5 +14,5 @@ elseif (UNIX)
 endif()
 
 add_subdirectory("vendor")
-add_subdirectory("DerydocaEngine")
-add_subdirectory("DerydocaEngine.Editor.UI")
+add_subdirectory("derydoca-core")
+add_subdirectory("derydoca-editor-ui")

@@ -1,4 +1,4 @@
-#include "DerydocaEngine/Rendering/VK/DeviceManagerVK.h"
+#include "Derydoca/Rendering/VK/DeviceManagerVK.h"
 
 namespace DerydocaEngine::Rendering
 {

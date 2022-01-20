@@ -1,10 +1,10 @@
-#include "DerydocaEngine/DeviceManager.h"
-#include "DerydocaEngine/Logging/Log.h"
+#include "Derydoca/DeviceManager.h"
+#include "Derydoca/Logging/Log.h"
 #ifdef USE_DX12
-#include "DerydocaEngine/Rendering/DX12/DeviceManagerDX12.h"
+#include "Derydoca/Rendering/DX12/DeviceManagerDX12.h"
 #endif
 #ifdef USE_VULKAN
-#include "DerydocaEngine/Rendering/VK/DeviceManagerVK.h"
+#include "Derydoca/Rendering/VK/DeviceManagerVK.h"
 #endif
 #ifdef PLATFORM_WINDOWS
 #include <ShellScalingApi.h>

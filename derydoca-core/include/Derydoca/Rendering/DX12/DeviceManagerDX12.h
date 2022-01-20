@@ -10,7 +10,7 @@
 #include <nvrhi/d3d12.h>
 #include <nvrhi/validation.h>
 
-#include "DerydocaEngine/DeviceManager.h"
+#include "Derydoca/DeviceManager.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")

@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "DerydocaEngine/Editor/CommandLineArgs.h"
-#include "DerydocaEngine/Logging/Log.h"
-#include "DerydocaEngine/DeviceManager.h"
+#include "Derydoca/Editor/CommandLineArgs.h"
+#include "Derydoca/Logging/Log.h"
+#include "Derydoca/DeviceManager.h"
 
 const char* WindowName = "Derydoca Engine";
 
