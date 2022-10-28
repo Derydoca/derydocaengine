@@ -2,7 +2,7 @@ project(derydoca-editor-ui)
 
 add_executable(${PROJECT_NAME} "src/main.cpp" "src/Editor/CommandLineArgs.cpp"  )
 
-target_include_directories(${PROJECT_NAME} PRIVATE "./src/" "./include/" "../derydoca-core/include/")
+target_include_directories(${PROJECT_NAME} PRIVATE "./include/" "../derydoca-core/include/")
 
 target_link_libraries(${PROJECT_NAME} PUBLIC derydoca-core)
 

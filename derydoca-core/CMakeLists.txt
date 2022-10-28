@@ -7,7 +7,7 @@ add_library(${PROJECT_NAME} STATIC
 find_package(spdlog CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
 
-target_include_directories(${PROJECT_NAME} PRIVATE "./src/" "./include/")
+target_include_directories(${PROJECT_NAME} PRIVATE "./include/")
 
 if(ENABLE_DX12)
 	target_sources(${PROJECT_NAME} PRIVATE "./src/Rendering/DX12/DeviceManagerDX12.cpp")
