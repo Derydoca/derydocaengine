@@ -7,11 +7,18 @@
 
 namespace DerydocaEngine
 {
+	enum class RenderingAPI {
+		Direct3D12,
+		Vulkan
+	};
+
 	struct DeviceManagerSettings
 	{
 	};
 
 	class DeviceManager
 	{
+	public:
+		static DeviceManager* Create(const RenderingAPI renderingAPI);
 	};
 }

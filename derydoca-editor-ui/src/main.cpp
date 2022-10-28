@@ -8,6 +8,8 @@
 
 const char* WindowName = "Derydoca Engine";
 
+using namespace DerydocaEngine;
+
 int main(int argc, const char* argv[])
 {
     DerydocaEngine::Logging::Log::Init();
@@ -19,6 +21,14 @@ int main(int argc, const char* argv[])
         D_LOG_CRITICAL("Unable to create the main window!\nError: {}", SDL_GetError());
         return -1;
     }
+
+    auto renderingAPI = DerydocaEngine::DeviceManager::Create(RenderingAPI::Direct3D12);
+    if (renderingAPI == nullptr)
+    {
+        D_LOG_CRITICAL("Unable to create device manager!");
+        return -1;
+    }
+
     SDL_Delay(2000);
     SDL_DestroyWindow(window);
     SDL_Quit();
