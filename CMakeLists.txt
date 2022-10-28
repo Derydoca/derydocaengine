@@ -13,6 +13,5 @@ elseif (UNIX)
 	add_compile_definitions(PLATFORM_LINUX=1)
 endif()
 
-add_subdirectory("vendor")
 add_subdirectory("derydoca-core")
 add_subdirectory("derydoca-editor-ui")
