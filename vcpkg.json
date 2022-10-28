@@ -2,6 +2,7 @@
   "name": "derydoca",
   "version-string": "0.1.0",
   "dependencies": [
-    "spdlog"
+    "spdlog",
+    "sdl2"
   ]
 }
