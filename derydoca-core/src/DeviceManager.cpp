@@ -12,18 +12,31 @@
 namespace DerydocaEngine {
 	DeviceManager* DerydocaEngine::DeviceManager::Create(const RenderingAPI renderingAPI)
 	{
+
+		DeviceManager* deviceManager = nullptr;
 		switch (renderingAPI)
 		{
 #ifdef USE_DX12
 		case RenderingAPI::Direct3D12:
-			return new Rendering::DeviceManagerDX12();
+		{
+			deviceManager = new Rendering::DeviceManagerDX12();
+			break;
+		}
 #endif
 #ifdef USE_VULKAN
 		case RenderingAPI::Vulkan:
-			return new Rendering::DeviceManagerVK();
+		{
+			deviceManager = new Rendering::DeviceManagerVK();
+			break;
+		}
 #endif
 		default:
-			return nullptr;
+		{
+			return deviceManager;
+			break;
 		}
+		}
+
+		deviceManager->FindLogicalDevice();
 	}
 }

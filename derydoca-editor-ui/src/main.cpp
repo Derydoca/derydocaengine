@@ -29,7 +29,6 @@ int main(int argc, const char* argv[])
         return -1;
     }
 
-    SDL_Delay(2000);
     SDL_DestroyWindow(window);
     SDL_Quit();
 

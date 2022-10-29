@@ -20,5 +20,9 @@ namespace DerydocaEngine
 	{
 	public:
 		static DeviceManager* Create(const RenderingAPI renderingAPI);
+
+		void Initialize();
+	private:
+		virtual void FindLogicalDevice() = 0;
 	};
 }

@@ -16,5 +16,13 @@ namespace DerydocaEngine::Rendering
 {
 	class DeviceManagerDX12 : public DeviceManager
 	{
+	public:
+		DeviceManagerDX12() = default;
+		DeviceManagerDX12(const DeviceManagerDX12&) = delete;
+
+		void FindLogicalDevice() override;
+
+	private:
+		void GetHardwareAdapter(IDXGIFactory1* pFactory, IDXGIAdapter1** ppAdapter);
 	};
 }
