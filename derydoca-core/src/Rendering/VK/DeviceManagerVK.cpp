@@ -3,7 +3,7 @@
 
 namespace DerydocaEngine::Rendering
 {
-	void DeviceManagerVK::FindLogicalDevice()
+	void DeviceManagerVK::Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
 	{
 		D_LOG_CRITICAL("NOT IMPLEMENTED!");
 		exit(-1);

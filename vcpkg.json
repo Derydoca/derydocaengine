@@ -3,6 +3,10 @@
   "version-string": "0.1.0",
   "dependencies": [
     "spdlog",
-    "sdl2"
+    "sdl2",
+    {
+      "name": "directx-headers",
+      "platform": "windows"
+    }
   ]
 }

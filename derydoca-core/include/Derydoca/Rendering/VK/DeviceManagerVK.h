@@ -10,6 +10,6 @@ namespace DerydocaEngine::Rendering
 		DeviceManagerVK() = default;
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
 
-		void FindLogicalDevice() override;
+		void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) override;
 	};
 }

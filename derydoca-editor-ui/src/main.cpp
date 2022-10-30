@@ -15,18 +15,32 @@ int main(int argc, const char* argv[])
     DerydocaEngine::Logging::Log::Init();
     D_LOG_TRACE("Engine startup");
 
-    auto window = SDL_CreateWindow("Derydoca Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
+    auto deviceManagerSettings = DeviceManagerSettings();
+
+    auto window = SDL_CreateWindow("Derydoca Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, deviceManagerSettings.width, deviceManagerSettings.height, SDL_WINDOW_SHOWN);
     if (window == NULL)
     {
         D_LOG_CRITICAL("Unable to create the main window!\nError: {}", SDL_GetError());
         return -1;
     }
 
-    auto renderingAPI = DerydocaEngine::DeviceManager::Create(RenderingAPI::Direct3D12);
+    auto renderingAPI = DerydocaEngine::DeviceManager::Create(RenderingAPI::Direct3D12, deviceManagerSettings, window);
     if (renderingAPI == nullptr)
     {
         D_LOG_CRITICAL("Unable to create device manager!");
         return -1;
+    }
+
+    while (true)
+    {
+        SDL_Event event;
+        if (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                break;
+            }
+        }
     }
 
     SDL_DestroyWindow(window);

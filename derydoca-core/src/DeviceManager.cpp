@@ -10,7 +10,7 @@
 #endif
 
 namespace DerydocaEngine {
-	DeviceManager* DerydocaEngine::DeviceManager::Create(const RenderingAPI renderingAPI)
+	DeviceManager* DerydocaEngine::DeviceManager::Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
 	{
 
 		DeviceManager* deviceManager = nullptr;
@@ -37,6 +37,6 @@ namespace DerydocaEngine {
 		}
 		}
 
-		deviceManager->FindLogicalDevice();
+		deviceManager->Initialize(settings, sdlWindow);
 	}
 }
