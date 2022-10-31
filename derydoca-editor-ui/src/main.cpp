@@ -40,6 +40,13 @@ int main(int argc, const char* argv[])
             {
                 break;
             }
+            else if (event.type == SDL_KEYDOWN)
+            {
+                if (event.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    break;
+                }
+            }
         }
         renderingAPI->Render();
     }
