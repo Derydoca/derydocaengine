@@ -1,10 +1,5 @@
 #pragma once
 
-#if USE_DX12
-#include <DXGI.h>
-#include <d3d12.h>
-#endif
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 

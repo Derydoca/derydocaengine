@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include <directx/d3d12.h>
+#include <directx/d3dx12.h>
 #include <Windows.h>
 #include <dxgi1_5.h>
 #include <dxgidebug.h>

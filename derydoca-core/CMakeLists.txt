@@ -16,7 +16,7 @@ if(ENABLE_DX12)
 	target_compile_definitions(${PROJECT_NAME} PUBLIC USE_DX12=1)
 
 	find_package(directx-headers CONFIG REQUIRED)
-	set(PRIVATE_INCLUDES ${PRIVATE_INCLUDES} Microsoft::DirectX-Headers)
+	set(PRIVATE_INCLUDES ${PRIVATE_INCLUDES} Microsoft::DirectX-Headers Microsoft::DirectX-Guids)
 endif()
 
 if(ENABLE_VULKAN)

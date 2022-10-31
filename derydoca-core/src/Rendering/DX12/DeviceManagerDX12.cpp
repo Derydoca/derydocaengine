@@ -106,18 +106,13 @@ namespace DerydocaEngine::Rendering
         }
 
         {
-            D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
+            CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
 
             for (UINT n = 0; n < FrameCount; n++)
             {
                 ThrowIfFailed(m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_renderTargets[n])));
                 m_device->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr, rtvHandle);
-                //rtvHandle.Offset(1, m_rtvDescriptorSize); // <-- Requires d3dx12.h which was causing issues. Here is the equivalent:
-                {
-                    INT offsetInDescriptors = 1;
-                    UINT descriptorIncrementSize = m_rtvDescriptorSize;
-                    rtvHandle.ptr = SIZE_T(INT64(rtvHandle.ptr) + INT64(offsetInDescriptors) * INT64(descriptorIncrementSize));
-                }
+                rtvHandle.Offset(1, m_rtvDescriptorSize);
 
                 ThrowIfFailed(m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&m_commandAllocators[n])));
             }
@@ -156,23 +151,9 @@ namespace DerydocaEngine::Rendering
         m_commandList->RSSetViewports(1, &viewport);
         m_commandList->RSSetScissorRects(1, &scissorRect);
 
-        //m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET)
-        {
-            D3D12_RESOURCE_BARRIER barrier = {};
-            barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-            barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-            barrier.Transition.pResource = m_renderTargets[m_frameIndex].Get();
-            barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
-            barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-            barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+        m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
 
-            m_commandList->ResourceBarrier(1, &barrier);
-        }
-
-        //CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), m_frameIndex, m_rtvDescriptorSize);
-        D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = {};
-        rtvHandle.ptr = SIZE_T(INT64(m_rtvHeap->GetCPUDescriptorHandleForHeapStart().ptr) + INT64(m_frameIndex) * INT64(m_rtvDescriptorSize));
-
+        CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), m_frameIndex, m_rtvDescriptorSize);
         m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
 
         static float t = 0.0f;
@@ -181,18 +162,7 @@ namespace DerydocaEngine::Rendering
         const float clearColor[] = { r, 0.2f, 0.4f, 1.0f };
         m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 
-        //m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
-        {
-            D3D12_RESOURCE_BARRIER barrier = {};
-            barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-            barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-            barrier.Transition.pResource = m_renderTargets[m_frameIndex].Get();
-            barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-            barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
-            barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-
-            m_commandList->ResourceBarrier(1, &barrier);
-        }
+        m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
 
         ThrowIfFailed(m_commandList->Close());
 
