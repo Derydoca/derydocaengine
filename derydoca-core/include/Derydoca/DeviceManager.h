@@ -147,6 +147,7 @@ namespace DerydocaEngine
 		static DeviceManager* Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
 
 		void Initialize();
+        virtual void Render() = 0;
 	private:
 		virtual void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) = 0;
 	};

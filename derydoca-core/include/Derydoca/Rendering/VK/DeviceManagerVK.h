@@ -11,5 +11,6 @@ namespace DerydocaEngine::Rendering
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
 
 		void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) override;
+		void Render() override;
 	};
 }

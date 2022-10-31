@@ -8,4 +8,11 @@ namespace DerydocaEngine::Rendering
 		D_LOG_CRITICAL("NOT IMPLEMENTED!");
 		exit(-1);
 	}
+
+	void DeviceManagerVK::Render()
+	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED!");
+		exit(-1);
+	}
+
 }

@@ -41,6 +41,7 @@ int main(int argc, const char* argv[])
                 break;
             }
         }
+        renderingAPI->Render();
     }
 
     SDL_DestroyWindow(window);

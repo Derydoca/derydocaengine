@@ -38,5 +38,7 @@ namespace DerydocaEngine {
 		}
 
 		deviceManager->Initialize(settings, sdlWindow);
+
+		return deviceManager;
 	}
 }
