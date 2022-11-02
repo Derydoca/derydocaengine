@@ -16,16 +16,24 @@ int main(int argc, const char* argv[])
     D_LOG_TRACE("Engine startup");
 
     auto deviceManagerSettings = DeviceManagerSettings();
+    auto renderingAPI = RenderingAPI::Vulkan;
 
-    auto window = SDL_CreateWindow("Derydoca Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, deviceManagerSettings.width, deviceManagerSettings.height, SDL_WINDOW_SHOWN);
+    SDL_Init(SDL_INIT_EVERYTHING);
+
+    Uint32 windowFlags = SDL_WINDOW_SHOWN;
+    if (renderingAPI == RenderingAPI::Vulkan)
+    {
+        windowFlags |= SDL_WINDOW_VULKAN;
+    }
+    auto window = SDL_CreateWindow("Derydoca Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, deviceManagerSettings.width, deviceManagerSettings.height, windowFlags);
     if (window == NULL)
     {
         D_LOG_CRITICAL("Unable to create the main window!\nError: {}", SDL_GetError());
         return -1;
     }
 
-    auto renderingAPI = DerydocaEngine::DeviceManager::Create(RenderingAPI::Direct3D12, deviceManagerSettings, window);
-    if (renderingAPI == nullptr)
+    auto deviceManager = DerydocaEngine::DeviceManager::Create(renderingAPI, deviceManagerSettings, window);
+    if (deviceManager == nullptr)
     {
         D_LOG_CRITICAL("Unable to create device manager!");
         return -1;
@@ -48,8 +56,10 @@ int main(int argc, const char* argv[])
                 }
             }
         }
-        renderingAPI->Render();
+        deviceManager->Render();
     }
+
+    deviceManager->Cleanup();
 
     SDL_DestroyWindow(window);
     SDL_Quit();

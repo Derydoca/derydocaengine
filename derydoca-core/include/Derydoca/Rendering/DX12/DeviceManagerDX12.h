@@ -29,6 +29,7 @@ namespace DerydocaEngine::Rendering
 
 		void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) override;
 		void Render() override;
+		void Cleanup() override;
 
 	private:
 		DXGI_FORMAT Translate(ImageFormat imageFormat);

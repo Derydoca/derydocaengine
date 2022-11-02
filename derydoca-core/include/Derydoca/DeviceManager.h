@@ -143,6 +143,7 @@ namespace DerydocaEngine
 
 		void Initialize();
         virtual void Render() = 0;
+        virtual void Cleanup() = 0;
 	private:
 		virtual void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) = 0;
 	};

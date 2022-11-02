@@ -190,6 +190,12 @@ namespace DerydocaEngine::Rendering
         m_fenceValues[m_frameIndex] = currentFenceValue + 1;
     }
 
+    void DeviceManagerDX12::Cleanup()
+    {
+        D_LOG_CRITICAL("NOT IMPLEMENTED!");
+        exit(-1);
+    }
+
     void DeviceManagerDX12::CheckTearingSupport()
     {
         ComPtr<IDXGIFactory6> factory;

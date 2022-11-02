@@ -3,7 +3,12 @@
   "version-string": "0.1.0",
   "dependencies": [
     "spdlog",
-    "sdl2",
+    {
+      "name": "sdl2",
+      "features": [
+        "vulkan"
+      ]
+    },
     {
       "name": "directx-headers",
       "platform": "windows"

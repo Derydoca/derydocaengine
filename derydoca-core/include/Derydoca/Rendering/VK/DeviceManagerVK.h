@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Derydoca/DeviceManager.h"
+#include <vulkan/vulkan.h>
 
 namespace DerydocaEngine::Rendering
 {
@@ -12,5 +13,12 @@ namespace DerydocaEngine::Rendering
 
 		void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) override;
 		void Render() override;
+		void Cleanup() override;
+
+	private:
+		VkInstance instance;
+
+		VkAllocationCallbacks* allocationCallbacks = nullptr;
+
 	};
 }
