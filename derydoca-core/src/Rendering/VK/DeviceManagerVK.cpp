@@ -3,8 +3,9 @@
 #include "Derydoca/Rendering/VK/VKHelper.h"
 
 #include <SDL2/SDL_vulkan.h>
+#include <set>
 
-//https://vulkan-tutorial.com/en/Drawing_a_triangle/Presentation/Window_surface
+//https://vulkan-tutorial.com/Drawing_a_triangle/Presentation/Swap_chain
 
 namespace DerydocaEngine::Rendering
 {
@@ -54,6 +55,8 @@ namespace DerydocaEngine::Rendering
 
 		return VK_FALSE;
 	}
+
+	VkSurfaceKHR surface;
 
 	void DeviceManagerVK::Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
 	{
@@ -112,7 +115,7 @@ namespace DerydocaEngine::Rendering
 
 		VkInstanceCreateInfo createInfo { VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO };
 		createInfo.pApplicationInfo = &appInfo;
-		createInfo.enabledExtensionCount = extensionCount;
+		createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
 		createInfo.ppEnabledExtensionNames = extensions.data();
 #ifdef _DEBUG
 		createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
@@ -129,6 +132,13 @@ namespace DerydocaEngine::Rendering
 		ThrowIfFailed(vkCreateInstance(&createInfo, nullptr, &instance));
 
 		ThrowIfFailed(CreateDebugUtilsMessengerEXT(instance, &messengerCreateInfo, allocationCallbacks, &debugMessenger));
+
+		// Create surface
+		if (SDL_Vulkan_CreateSurface(sdlWindow, instance, &surface) == SDL_FALSE)
+		{
+			D_LOG_CRITICAL("Unable to create Vulkan window surface!");
+			exit(-1);
+		}
 
 		// Pick the device
 		uint32_t deviceCount = 0;
@@ -160,18 +170,25 @@ namespace DerydocaEngine::Rendering
 		// Create the logical device
 		QueueFamilyIndices indices = FindDeviceQueues(physicalDevice);
 
-		VkDeviceQueueCreateInfo queueCreateInfo{ VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO };
-		queueCreateInfo.queueFamilyIndex = indices.graphicsFamily.value();
-		queueCreateInfo.queueCount = 1;
+		std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
+		std::set<uint32_t> uniqueQueueFamilies = { indices.graphicsFamily.value(), indices.presentFamily.value() };
 
 		float queuePriority = 1.0f;
-		queueCreateInfo.pQueuePriorities = &queuePriority;
+
+		for (uint32_t queueFamily : uniqueQueueFamilies)
+		{
+			VkDeviceQueueCreateInfo queueCreateInfo { VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO };
+			queueCreateInfo.queueFamilyIndex = queueFamily;
+			queueCreateInfo.queueCount = 1;
+			queueCreateInfo.pQueuePriorities = &queuePriority;
+			queueCreateInfos.push_back(queueCreateInfo);
+		}
 
 		VkPhysicalDeviceFeatures deviceFeatures{};
 
 		VkDeviceCreateInfo deviceCreateInfo{ VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
-		deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
-		deviceCreateInfo.queueCreateInfoCount = 1;
+		deviceCreateInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
+		deviceCreateInfo.pQueueCreateInfos = queueCreateInfos.data();
 
 		deviceCreateInfo.pEnabledFeatures = &deviceFeatures;
 
@@ -181,6 +198,7 @@ namespace DerydocaEngine::Rendering
 		ThrowIfFailed(vkCreateDevice(physicalDevice, &deviceCreateInfo, allocationCallbacks, &device));
 
 		vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
+		vkGetDeviceQueue(device, indices.presentFamily.value(), 0, &presentQueue);
 
 		D_LOG_CRITICAL("NOT IMPLEMENTED!");
 		exit(-1);
@@ -198,6 +216,7 @@ namespace DerydocaEngine::Rendering
 #ifdef _DEBUG
 		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, allocationCallbacks);
 #endif
+		vkDestroySurfaceKHR(instance, surface, allocationCallbacks);
 		vkDestroyInstance(instance, allocationCallbacks);
 	}
 
@@ -295,6 +314,14 @@ namespace DerydocaEngine::Rendering
 			if (indices.IsComplete())
 			{
 				break;
+			}
+
+			VkBool32 presentSupport = false;
+			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+
+			if (presentSupport)
+			{
+				indices.presentFamily = i;
 			}
 
 			i++;
