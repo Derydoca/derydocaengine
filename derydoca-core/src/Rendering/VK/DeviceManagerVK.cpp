@@ -4,7 +4,7 @@
 
 #include <SDL2/SDL_vulkan.h>
 
-//https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Physical_devices_and_queue_families
+//https://vulkan-tutorial.com/en/Drawing_a_triangle/Presentation/Window_surface
 
 namespace DerydocaEngine::Rendering
 {
@@ -130,7 +130,57 @@ namespace DerydocaEngine::Rendering
 
 		ThrowIfFailed(CreateDebugUtilsMessengerEXT(instance, &messengerCreateInfo, allocationCallbacks, &debugMessenger));
 
-		auto x = VK_SUCCESS;
+		// Pick the device
+		uint32_t deviceCount = 0;
+		vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+		if (deviceCount == 0)
+		{
+			D_LOG_CRITICAL("No physical devices support Vulkan on this machine!");
+			exit(-1);
+		}
+
+		std::vector<VkPhysicalDevice> devices(deviceCount);
+		vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
+
+		for (const auto& device : devices)
+		{
+			if (DeviceIsSuitable(device))
+			{
+				physicalDevice = device;
+				break;
+			}
+		}
+
+		if (physicalDevice == VK_NULL_HANDLE)
+		{
+			D_LOG_CRITICAL("Failed to find a suitable GPU!");
+			exit(-1);
+		}
+
+		// Create the logical device
+		QueueFamilyIndices indices = FindDeviceQueues(physicalDevice);
+
+		VkDeviceQueueCreateInfo queueCreateInfo{ VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO };
+		queueCreateInfo.queueFamilyIndex = indices.graphicsFamily.value();
+		queueCreateInfo.queueCount = 1;
+
+		float queuePriority = 1.0f;
+		queueCreateInfo.pQueuePriorities = &queuePriority;
+
+		VkPhysicalDeviceFeatures deviceFeatures{};
+
+		VkDeviceCreateInfo deviceCreateInfo{ VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
+		deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
+		deviceCreateInfo.queueCreateInfoCount = 1;
+
+		deviceCreateInfo.pEnabledFeatures = &deviceFeatures;
+
+		deviceCreateInfo.enabledExtensionCount = 0;
+		deviceCreateInfo.enabledLayerCount = 0; // No longer required
+
+		ThrowIfFailed(vkCreateDevice(physicalDevice, &deviceCreateInfo, allocationCallbacks, &device));
+
+		vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
 
 		D_LOG_CRITICAL("NOT IMPLEMENTED!");
 		exit(-1);
@@ -144,6 +194,7 @@ namespace DerydocaEngine::Rendering
 
 	void DeviceManagerVK::Cleanup()
 	{
+		vkDestroyDevice(device, nullptr);
 #ifdef _DEBUG
 		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, allocationCallbacks);
 #endif
@@ -208,5 +259,47 @@ namespace DerydocaEngine::Rendering
 		createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT;
 		createInfo.pfnUserCallback = debugCallback;
 		createInfo.pUserData = nullptr;
+	}
+
+	bool DeviceManagerVK::DeviceIsSuitable(VkPhysicalDevice device)
+	{
+		VkPhysicalDeviceProperties deviceProperties;
+		vkGetPhysicalDeviceProperties(device, &deviceProperties);
+
+		VkPhysicalDeviceFeatures deviceFeatures;
+		vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+
+		QueueFamilyIndices indices = FindDeviceQueues(device);
+
+		return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU && deviceFeatures.geometryShader && indices.IsComplete();
+	}
+
+	QueueFamilyIndices DeviceManagerVK::FindDeviceQueues(VkPhysicalDevice device)
+	{
+		QueueFamilyIndices indices;
+
+		uint32_t queueFamilyCount = 0;
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+
+		std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+		int i = 0;
+		for (const auto& queueFamily : queueFamilies)
+		{
+			if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			{
+				indices.graphicsFamily = i;
+			}
+
+			if (indices.IsComplete())
+			{
+				break;
+			}
+
+			i++;
+		}
+
+		return indices;
 	}
 }
