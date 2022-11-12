@@ -18,6 +18,13 @@ namespace DerydocaEngine::Rendering
 		}
 	};
 
+	struct SwapChainSupportDetails
+	{
+		VkSurfaceCapabilitiesKHR capabilities;
+		std::vector<VkSurfaceFormatKHR> formats;
+		std::vector<VkPresentModeKHR> presentModes;
+	};
+
 	class DeviceManagerVK : public DeviceManager
 	{
 	public:
@@ -34,7 +41,12 @@ namespace DerydocaEngine::Rendering
 		void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
 		void PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 		bool DeviceIsSuitable(VkPhysicalDevice device);
+		bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 		QueueFamilyIndices FindDeviceQueues(VkPhysicalDevice device);
+		SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device);
+		VkSurfaceFormatKHR ChooseSwapChainSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats, VkFormat preferredFormat, VkColorSpaceKHR preferredColorSpace);
+		VkPresentModeKHR ChooseSwapChainPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+		VkExtent2D ChooseSwapChainExtent(const VkSurfaceCapabilitiesKHR& capabilities, SDL_Window* window);
 
 		VkInstance instance;
 		VkDebugUtilsMessengerEXT debugMessenger;
@@ -42,8 +54,17 @@ namespace DerydocaEngine::Rendering
 		VkDevice device;
 		VkQueue graphicsQueue;
 		VkQueue presentQueue;
+		VkSwapchainKHR swapChain;
+		std::vector<VkImage> swapChainImages;
+		VkFormat swapChainImageFormat;
+		VkExtent2D swapChainExtent;
 
 		VkAllocationCallbacks* allocationCallbacks = nullptr;
+
+		const std::vector<const char*> deviceExtensions =
+		{
+			VK_KHR_SWAPCHAIN_EXTENSION_NAME
+		};
 
 	};
 }
