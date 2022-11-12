@@ -7,7 +7,7 @@
 #include <limits>
 #include <algorithm>
 
-//https://vulkan-tutorial.com/en/Drawing_a_triangle/Presentation/Image_views
+//https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Introduction
 
 namespace DerydocaEngine::Rendering
 {
@@ -256,6 +256,32 @@ namespace DerydocaEngine::Rendering
 		swapChainImageFormat = surfaceFormat.format;
 		swapChainExtent = extent;
 
+		// Image views
+		swapChainImageViews.resize(swapChainImages.size());
+
+		for (size_t i = 0; i < swapChainImages.size(); i++)
+		{
+			VkImageViewCreateInfo imageViewCreateInfo{ VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO };
+			imageViewCreateInfo.image = swapChainImages[i];
+			imageViewCreateInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+			imageViewCreateInfo.format = swapChainImageFormat;
+			imageViewCreateInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+			imageViewCreateInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+			imageViewCreateInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+			imageViewCreateInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+			imageViewCreateInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+			imageViewCreateInfo.subresourceRange.baseMipLevel = 0;
+			imageViewCreateInfo.subresourceRange.levelCount = 1;
+			imageViewCreateInfo.subresourceRange.baseArrayLayer = 0;
+			imageViewCreateInfo.subresourceRange.layerCount = 1; // Use multiple layers for stereoscopic 3D (VR?)
+
+			if (vkCreateImageView(device, &imageViewCreateInfo, allocationCallbacks, &swapChainImageViews[i]) != VK_SUCCESS)
+			{
+				D_LOG_CRITICAL("Failed to create image views!");
+				exit(-1);
+			}
+		}
+
 		D_LOG_CRITICAL("NOT IMPLEMENTED!");
 		exit(-1);
 	}
@@ -268,6 +294,11 @@ namespace DerydocaEngine::Rendering
 
 	void DeviceManagerVK::Cleanup()
 	{
+		for (auto imageView : swapChainImageViews)
+		{
+			vkDestroyImageView(device, imageView, allocationCallbacks);
+		}
+
 		vkDestroySwapchainKHR(device, swapChain, allocationCallbacks);
 		vkDestroyDevice(device, allocationCallbacks);
 #ifdef _DEBUG
