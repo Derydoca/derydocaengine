@@ -192,8 +192,6 @@ namespace DerydocaEngine::Rendering
 
     void DeviceManagerDX12::Cleanup()
     {
-        D_LOG_CRITICAL("NOT IMPLEMENTED!");
-        exit(-1);
     }
 
     void DeviceManagerDX12::CheckTearingSupport()
