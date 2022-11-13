@@ -145,8 +145,11 @@ namespace DerydocaEngine
         virtual void Render() = 0;
         virtual void Cleanup() = 0;
 
+        void SignalWindowResizedEvent();
+
     protected:
         SDL_Window* window;
+        bool framebufferResized = false;
 
 	private:
 		virtual void Initialize(const DeviceManagerSettings& settings) = 0;

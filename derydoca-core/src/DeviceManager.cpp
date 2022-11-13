@@ -42,4 +42,9 @@ namespace DerydocaEngine {
 
 		return deviceManager;
 	}
+
+	void DeviceManager::SignalWindowResizedEvent()
+	{
+		framebufferResized = true;
+	}
 }

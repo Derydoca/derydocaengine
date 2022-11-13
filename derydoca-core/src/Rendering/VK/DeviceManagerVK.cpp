@@ -280,10 +280,22 @@ namespace DerydocaEngine::Rendering
 	void DeviceManagerVK::Render()
 	{
 		vkWaitForFences(device, 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
-		vkResetFences(device, 1, &inFlightFences[currentFrame]);
 
 		uint32_t imageIndex = 0;
-		vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
+		VkResult result = vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
+
+		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || framebufferResized)
+		{
+			framebufferResized = false;
+			RecreateSwapChain();
+			return;
+		}
+		else if (result != VK_SUCCESS)
+		{
+			throw std::runtime_error("Failed to aquire the swap chain image!");
+		}
+
+		vkResetFences(device, 1, &inFlightFences[currentFrame]);
 
 		VkCommandBufferAllocateInfo allocInfo{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
 		allocInfo.commandPool = commandPool;
@@ -364,6 +376,8 @@ namespace DerydocaEngine::Rendering
 	{
 		vkDeviceWaitIdle(device);
 
+		CleanupSwapChain();
+
 		for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
 		{
 			vkDestroySemaphore(device, imageAvailableSemaphores[i], allocationCallbacks);
@@ -373,12 +387,22 @@ namespace DerydocaEngine::Rendering
 
 		vkDestroyCommandPool(device, commandPool, allocationCallbacks);
 
+		vkDestroyRenderPass(device, renderPass, allocationCallbacks);
+
+		vkDestroyDevice(device, allocationCallbacks);
+#ifdef _DEBUG
+		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, allocationCallbacks);
+#endif
+		vkDestroySurfaceKHR(instance, surface, allocationCallbacks);
+		vkDestroyInstance(instance, allocationCallbacks);
+	}
+
+	void DeviceManagerVK::CleanupSwapChain()
+	{
 		for (auto framebuffer : swapChainFramebuffers)
 		{
 			vkDestroyFramebuffer(device, framebuffer, allocationCallbacks);
 		}
-
-		vkDestroyRenderPass(device, renderPass, allocationCallbacks);
 
 		for (auto imageView : swapChainImageViews)
 		{
@@ -386,12 +410,6 @@ namespace DerydocaEngine::Rendering
 		}
 
 		vkDestroySwapchainKHR(device, swapChain, allocationCallbacks);
-		vkDestroyDevice(device, allocationCallbacks);
-#ifdef _DEBUG
-		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, allocationCallbacks);
-#endif
-		vkDestroySurfaceKHR(instance, surface, allocationCallbacks);
-		vkDestroyInstance(instance, allocationCallbacks);
 	}
 
 	bool DeviceManagerVK::CheckValidationLayerSupport(const std::vector<const char*>& validationLayers)
@@ -632,6 +650,7 @@ namespace DerydocaEngine::Rendering
 		swapchainCreateInfo.imageExtent = extent;
 		swapchainCreateInfo.imageArrayLayers = 1; // Use 2 for stereoscopic image generation (VR?)
 		swapchainCreateInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT; // Use VK_IMAGE_USAGE_TRANSFER_DST_BIT when we want to render to an intermediate buffer first
+		//swapchainCreateInfo.oldSwapchain = swapChain;
 
 		QueueFamilyIndices indices = FindDeviceQueues(physicalDevice);
 		uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
@@ -719,5 +738,26 @@ namespace DerydocaEngine::Rendering
 				exit(-1);
 			}
 		}
+	}
+
+	void DeviceManagerVK::RecreateSwapChain()
+	{
+		// If the window is minimized, wait for it to be restored because width and height will be zero values which is invalid.
+		int width = 0, height = 0;
+		SDL_Vulkan_GetDrawableSize(window, &width, &height);
+		while (width <= 0 || height <= 0)
+		{
+			SDL_Vulkan_GetDrawableSize(window, &width, &height);
+			SDL_Event evt;
+			SDL_WaitEvent(&evt);
+		}
+
+		vkDeviceWaitIdle(device);
+
+		CleanupSwapChain();
+
+		CreateSwapChain();
+		CreateImageViews();
+		CreateFramebuffers();
 	}
 }

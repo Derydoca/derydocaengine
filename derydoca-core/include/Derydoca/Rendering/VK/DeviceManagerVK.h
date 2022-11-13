@@ -52,6 +52,9 @@ namespace DerydocaEngine::Rendering
 		void CreateImageViews();
 		void CreateFramebuffers();
 
+		void RecreateSwapChain();
+		void CleanupSwapChain();
+
 		VkInstance instance;
 		VkDebugUtilsMessengerEXT debugMessenger;
 		VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
