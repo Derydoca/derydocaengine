@@ -59,6 +59,8 @@ namespace DerydocaEngine::Rendering
 		VkFormat swapChainImageFormat;
 		VkExtent2D swapChainExtent;
 		std::vector<VkImageView> swapChainImageViews;
+		std::vector<VkFramebuffer> swapChainFramebuffers;
+		VkRenderPass renderPass;
 
 		VkAllocationCallbacks* allocationCallbacks = nullptr;
 

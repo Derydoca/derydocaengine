@@ -7,7 +7,7 @@
 #include <limits>
 #include <algorithm>
 
-//https://vulkan-tutorial.com/en/Drawing_a_triangle/Graphics_pipeline_basics/Introduction
+//https://vulkan-tutorial.com/Drawing_a_triangle/Drawing/Command_buffers
 
 namespace DerydocaEngine::Rendering
 {
@@ -282,8 +282,57 @@ namespace DerydocaEngine::Rendering
 			}
 		}
 
-		D_LOG_CRITICAL("NOT IMPLEMENTED!");
-		exit(-1);
+		// Create render pass
+		VkAttachmentDescription colorAttachment{};
+		colorAttachment.format = swapChainImageFormat;
+		colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT; // Change for multisampling
+		colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+		colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+		colorAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+		colorAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+		colorAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+		colorAttachment.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+
+		VkAttachmentReference colorAttachmentRef{};
+		colorAttachmentRef.attachment = 0;
+		colorAttachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+		VkSubpassDescription subpass{};
+		subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+		subpass.colorAttachmentCount = 1;
+		subpass.pColorAttachments = &colorAttachmentRef;
+
+		VkRenderPassCreateInfo renderPassInfo{ VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO };
+		renderPassInfo.attachmentCount = 1;
+		renderPassInfo.pAttachments = &colorAttachment;
+		renderPassInfo.subpassCount = 1;
+		renderPassInfo.pSubpasses = &subpass;
+
+		ThrowIfFailed(vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass));
+
+		// Create framebuffers
+		swapChainFramebuffers.resize(swapChainImageViews.size());
+		for (size_t i = 0; i < swapChainImageViews.size(); i++)
+		{
+			VkImageView attachments[] =
+			{
+				swapChainImageViews[i]
+			};
+
+			VkFramebufferCreateInfo framebufferInfo{ VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO };
+			framebufferInfo.renderPass = renderPass; // We don't have a render pass to bind
+			framebufferInfo.attachmentCount = 1;
+			framebufferInfo.pAttachments = attachments;
+			framebufferInfo.width = swapChainExtent.width;
+			framebufferInfo.height = swapChainExtent.height;
+			framebufferInfo.layers = 1;
+
+			if (vkCreateFramebuffer(device, &framebufferInfo, allocationCallbacks, &swapChainFramebuffers[i]) != VK_SUCCESS)
+			{
+				D_LOG_CRITICAL("Failed to create framebuffer!");
+				exit(-1);
+			}
+		}
 	}
 
 	void DeviceManagerVK::Render()
@@ -294,6 +343,13 @@ namespace DerydocaEngine::Rendering
 
 	void DeviceManagerVK::Cleanup()
 	{
+		for (auto framebuffer : swapChainFramebuffers)
+		{
+			vkDestroyFramebuffer(device, framebuffer, allocationCallbacks);
+		}
+
+		vkDestroyRenderPass(device, renderPass, allocationCallbacks);
+
 		for (auto imageView : swapChainImageViews)
 		{
 			vkDestroyImageView(device, imageView, allocationCallbacks);
