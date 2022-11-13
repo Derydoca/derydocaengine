@@ -9,6 +9,8 @@
 
 //https://vulkan-tutorial.com/en/Drawing_a_triangle/Drawing/Frames_in_flight
 
+const int MAX_FRAMES_IN_FLIGHT = 2;
+
 namespace DerydocaEngine::Rendering
 {
 	VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
@@ -352,27 +354,34 @@ namespace DerydocaEngine::Rendering
 		ThrowIfFailed(vkCreateCommandPool(device, &poolInfo, allocationCallbacks, &commandPool));
 
 		// Create sync objects
+		imageAvailableSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
+		renderFinishedSemaphores.resize(MAX_FRAMES_IN_FLIGHT);
+		inFlightFences.resize(MAX_FRAMES_IN_FLIGHT);
+
 		VkSemaphoreCreateInfo semaphoreInfo{ VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO };
 
 		VkFenceCreateInfo fenceInfo{ VK_STRUCTURE_TYPE_FENCE_CREATE_INFO };
 		// Start the fence with it signaled so the first call to Render isn't waiting indefinitely since vkWaitForFences(...) will never fire on the first call.
 		fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
-		if (vkCreateSemaphore(device, &semaphoreInfo, allocationCallbacks, &imageAvailableSemaphore) != VK_SUCCESS ||
-			vkCreateSemaphore(device, &semaphoreInfo, allocationCallbacks, &renderFinishedSemaphore) != VK_SUCCESS ||
-			vkCreateFence(device, &fenceInfo, allocationCallbacks, &inFlightFence) != VK_SUCCESS)
+		for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
 		{
-			throw std::runtime_error("Failed to create semaphores!");
+			if (vkCreateSemaphore(device, &semaphoreInfo, allocationCallbacks, &imageAvailableSemaphores[i]) != VK_SUCCESS ||
+				vkCreateSemaphore(device, &semaphoreInfo, allocationCallbacks, &renderFinishedSemaphores[i]) != VK_SUCCESS ||
+				vkCreateFence(device, &fenceInfo, allocationCallbacks, &inFlightFences[i]) != VK_SUCCESS)
+			{
+				throw std::runtime_error("Failed to create semaphores!");
+			}
 		}
 	}
 
 	void DeviceManagerVK::Render()
 	{
-		vkWaitForFences(device, 1, &inFlightFence, VK_TRUE, UINT64_MAX);
-		vkResetFences(device, 1, &inFlightFence);
+		vkWaitForFences(device, 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
+		vkResetFences(device, 1, &inFlightFences[currentFrame]);
 
 		uint32_t imageIndex = 0;
-		vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex);
+		vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
 
 		VkCommandBufferAllocateInfo allocInfo{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
 		allocInfo.commandPool = commandPool;
@@ -417,7 +426,7 @@ namespace DerydocaEngine::Rendering
 
 		VkSubmitInfo submitInfo{ VK_STRUCTURE_TYPE_SUBMIT_INFO };
 
-		VkSemaphore waitSemaphores[] = { imageAvailableSemaphore };
+		VkSemaphore waitSemaphores[] = { imageAvailableSemaphores[currentFrame] };
 		VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
 		submitInfo.waitSemaphoreCount = 1;
 		submitInfo.pWaitSemaphores = waitSemaphores;
@@ -425,11 +434,11 @@ namespace DerydocaEngine::Rendering
 		submitInfo.commandBufferCount = 1;
 		submitInfo.pCommandBuffers = &commandBuffer;
 
-		VkSemaphore signalSemaphores[] = { renderFinishedSemaphore };
+		VkSemaphore signalSemaphores[] = { renderFinishedSemaphores[currentFrame] };
 		submitInfo.signalSemaphoreCount = 1;
 		submitInfo.pSignalSemaphores = signalSemaphores;
 
-		if (vkQueueSubmit(graphicsQueue, 1, &submitInfo, inFlightFence) != VK_SUCCESS)
+		if (vkQueueSubmit(graphicsQueue, 1, &submitInfo, inFlightFences[currentFrame]) != VK_SUCCESS)
 		{
 			throw std::runtime_error("Failed to submit draw command buffer!");
 		}
@@ -446,14 +455,19 @@ namespace DerydocaEngine::Rendering
 
 		vkQueuePresentKHR(presentQueue, &presentInfo);
 
-		vkDeviceWaitIdle(device);
+		currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
 	}
 
 	void DeviceManagerVK::Cleanup()
 	{
-		vkDestroySemaphore(device, imageAvailableSemaphore, allocationCallbacks);
-		vkDestroySemaphore(device, renderFinishedSemaphore, allocationCallbacks);
-		vkDestroyFence(device, inFlightFence, allocationCallbacks);
+		vkDeviceWaitIdle(device);
+
+		for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
+		{
+			vkDestroySemaphore(device, imageAvailableSemaphores[i], allocationCallbacks);
+			vkDestroySemaphore(device, renderFinishedSemaphores[i], allocationCallbacks);
+			vkDestroyFence(device, inFlightFences[i], allocationCallbacks);
+		}
 
 		vkDestroyCommandPool(device, commandPool, allocationCallbacks);
 
