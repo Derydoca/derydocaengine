@@ -7,7 +7,7 @@
 #include <limits>
 #include <algorithm>
 
-//https://vulkan-tutorial.com/Drawing_a_triangle/Drawing/Command_buffers
+//https://vulkan-tutorial.com/en/Drawing_a_triangle/Drawing/Frames_in_flight
 
 namespace DerydocaEngine::Rendering
 {
@@ -283,6 +283,14 @@ namespace DerydocaEngine::Rendering
 		}
 
 		// Create render pass
+		VkSubpassDependency dependency{};
+		dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
+		dependency.dstSubpass = 0;
+		dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dependency.srcAccessMask = 0;
+		dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+
 		VkAttachmentDescription colorAttachment{};
 		colorAttachment.format = swapChainImageFormat;
 		colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT; // Change for multisampling
@@ -307,6 +315,8 @@ namespace DerydocaEngine::Rendering
 		renderPassInfo.pAttachments = &colorAttachment;
 		renderPassInfo.subpassCount = 1;
 		renderPassInfo.pSubpasses = &subpass;
+		renderPassInfo.dependencyCount = 1;
+		renderPassInfo.pDependencies = &dependency;
 
 		ThrowIfFailed(vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass));
 
@@ -340,10 +350,30 @@ namespace DerydocaEngine::Rendering
 		poolInfo.queueFamilyIndex = indices.graphicsFamily.value();
 
 		ThrowIfFailed(vkCreateCommandPool(device, &poolInfo, allocationCallbacks, &commandPool));
+
+		// Create sync objects
+		VkSemaphoreCreateInfo semaphoreInfo{ VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO };
+
+		VkFenceCreateInfo fenceInfo{ VK_STRUCTURE_TYPE_FENCE_CREATE_INFO };
+		// Start the fence with it signaled so the first call to Render isn't waiting indefinitely since vkWaitForFences(...) will never fire on the first call.
+		fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+
+		if (vkCreateSemaphore(device, &semaphoreInfo, allocationCallbacks, &imageAvailableSemaphore) != VK_SUCCESS ||
+			vkCreateSemaphore(device, &semaphoreInfo, allocationCallbacks, &renderFinishedSemaphore) != VK_SUCCESS ||
+			vkCreateFence(device, &fenceInfo, allocationCallbacks, &inFlightFence) != VK_SUCCESS)
+		{
+			throw std::runtime_error("Failed to create semaphores!");
+		}
 	}
 
 	void DeviceManagerVK::Render()
 	{
+		vkWaitForFences(device, 1, &inFlightFence, VK_TRUE, UINT64_MAX);
+		vkResetFences(device, 1, &inFlightFence);
+
+		uint32_t imageIndex = 0;
+		vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex);
+
 		VkCommandBufferAllocateInfo allocInfo{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
 		allocInfo.commandPool = commandPool;
 		allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -364,16 +394,16 @@ namespace DerydocaEngine::Rendering
 			throw std::runtime_error("Failed to begin recording command buffer!");
 		}
 
-		// TODO: Populate imageIndex properly
-		uint32_t imageIndex = 0;
-
 		VkRenderPassBeginInfo renderPassInfo{ VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO };
 		renderPassInfo.renderPass = renderPass;
 		renderPassInfo.framebuffer = swapChainFramebuffers[imageIndex];
 		renderPassInfo.renderArea.offset = { 0, 0 };
 		renderPassInfo.renderArea.extent = swapChainExtent;
 
-		VkClearValue clearColor = { {{0.0f, 0.0f, 0.0f, 1.0f}} };
+		static float t = 0.0f;
+		t += 0.005f;
+		float r = (sin(t) + 1.0) * 0.5f;
+		VkClearValue clearColor = { {{r, 0.2f, 0.4f, 1.0f}} };
 		renderPassInfo.clearValueCount = 1;
 		renderPassInfo.pClearValues = &clearColor;
 
@@ -385,12 +415,46 @@ namespace DerydocaEngine::Rendering
 			throw std::runtime_error("Failed to record command buffer!");
 		}
 
-		D_LOG_CRITICAL("NOT IMPLEMENTED!");
-		exit(-1);
+		VkSubmitInfo submitInfo{ VK_STRUCTURE_TYPE_SUBMIT_INFO };
+
+		VkSemaphore waitSemaphores[] = { imageAvailableSemaphore };
+		VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+		submitInfo.waitSemaphoreCount = 1;
+		submitInfo.pWaitSemaphores = waitSemaphores;
+		submitInfo.pWaitDstStageMask = waitStages;
+		submitInfo.commandBufferCount = 1;
+		submitInfo.pCommandBuffers = &commandBuffer;
+
+		VkSemaphore signalSemaphores[] = { renderFinishedSemaphore };
+		submitInfo.signalSemaphoreCount = 1;
+		submitInfo.pSignalSemaphores = signalSemaphores;
+
+		if (vkQueueSubmit(graphicsQueue, 1, &submitInfo, inFlightFence) != VK_SUCCESS)
+		{
+			throw std::runtime_error("Failed to submit draw command buffer!");
+		}
+
+		VkPresentInfoKHR presentInfo{ VK_STRUCTURE_TYPE_PRESENT_INFO_KHR };
+		presentInfo.waitSemaphoreCount = 1;
+		presentInfo.pWaitSemaphores = signalSemaphores;
+
+		VkSwapchainKHR swapChains[] = { swapChain };
+		presentInfo.swapchainCount = 1;
+		presentInfo.pSwapchains = swapChains;
+		presentInfo.pImageIndices = &imageIndex;
+		presentInfo.pResults = nullptr;
+
+		vkQueuePresentKHR(presentQueue, &presentInfo);
+
+		vkDeviceWaitIdle(device);
 	}
 
 	void DeviceManagerVK::Cleanup()
 	{
+		vkDestroySemaphore(device, imageAvailableSemaphore, allocationCallbacks);
+		vkDestroySemaphore(device, renderFinishedSemaphore, allocationCallbacks);
+		vkDestroyFence(device, inFlightFence, allocationCallbacks);
+
 		vkDestroyCommandPool(device, commandPool, allocationCallbacks);
 
 		for (auto framebuffer : swapChainFramebuffers)
@@ -468,7 +532,7 @@ namespace DerydocaEngine::Rendering
 	void DeviceManagerVK::PopulateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
 	{
 		createInfo = { VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT };
-		createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+		createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 		createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT;
 		createInfo.pfnUserCallback = debugCallback;
 		createInfo.pUserData = nullptr;

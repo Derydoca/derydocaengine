@@ -62,6 +62,9 @@ namespace DerydocaEngine::Rendering
 		std::vector<VkFramebuffer> swapChainFramebuffers;
 		VkRenderPass renderPass;
 		VkCommandPool commandPool;
+		VkSemaphore imageAvailableSemaphore;
+		VkSemaphore renderFinishedSemaphore;
+		VkFence inFlightFence;
 
 		VkAllocationCallbacks* allocationCallbacks = nullptr;
 
