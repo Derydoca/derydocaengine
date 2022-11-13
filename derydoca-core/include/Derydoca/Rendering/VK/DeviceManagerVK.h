@@ -31,7 +31,7 @@ namespace DerydocaEngine::Rendering
 		DeviceManagerVK() = default;
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
 
-		void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) override;
+		void Initialize(const DeviceManagerSettings& settings) override;
 		void Render() override;
 		void Cleanup() override;
 
@@ -47,6 +47,10 @@ namespace DerydocaEngine::Rendering
 		VkSurfaceFormatKHR ChooseSwapChainSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats, VkFormat preferredFormat, VkColorSpaceKHR preferredColorSpace);
 		VkPresentModeKHR ChooseSwapChainPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
 		VkExtent2D ChooseSwapChainExtent(const VkSurfaceCapabilitiesKHR& capabilities, SDL_Window* window);
+
+		void CreateSwapChain();
+		void CreateImageViews();
+		void CreateFramebuffers();
 
 		VkInstance instance;
 		VkDebugUtilsMessengerEXT debugMessenger;

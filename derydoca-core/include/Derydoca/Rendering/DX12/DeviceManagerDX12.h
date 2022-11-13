@@ -27,7 +27,7 @@ namespace DerydocaEngine::Rendering
 		DeviceManagerDX12() = default;
 		DeviceManagerDX12(const DeviceManagerDX12&) = delete;
 
-		void Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow) override;
+		void Initialize(const DeviceManagerSettings& settings) override;
 		void Render() override;
 		void Cleanup() override;
 

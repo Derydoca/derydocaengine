@@ -8,7 +8,7 @@
 
 namespace DerydocaEngine::Rendering
 {
-	void DeviceManagerDX12::Initialize(const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
+	void DeviceManagerDX12::Initialize(const DeviceManagerSettings& settings)
 	{
 		UINT dxgiFactoryFlags = 0;
 
@@ -54,20 +54,20 @@ namespace DerydocaEngine::Rendering
         // It is recommended to always use the tearing flag when it is available.
         swapChainDesc.Flags = m_tearingSupport ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0;
 
-        HWND window = NULL;
+        HWND osWindow = NULL;
         {
             SDL_SysWMinfo info = {};
             SDL_VERSION(&info.version);
-            if (SDL_GetWindowWMInfo(sdlWindow, &info))
+            if (SDL_GetWindowWMInfo(window, &info))
             {
                 if (info.subsystem != SDL_SYSWM_WINDOWS)
                 {
                     D_LOG_CRITICAL("Incompatible SDL window subsystem! {0:x}", info.subsystem);
                     exit(-1);
                 }
-                window = info.info.win.window;
+                osWindow = info.info.win.window;
             }
-            if (window == NULL)
+            if (osWindow == NULL)
             {
                 D_LOG_CRITICAL("Unable to aquire the handle of the window!");
                 exit(-1);
@@ -77,7 +77,7 @@ namespace DerydocaEngine::Rendering
         ComPtr<IDXGISwapChain1> swapChain;
         ThrowIfFailed(m_dxgiFactory->CreateSwapChainForHwnd(
             m_commandQueue.Get(),
-            window,
+            osWindow,
             &swapChainDesc,
             nullptr,
             nullptr,
@@ -86,12 +86,12 @@ namespace DerydocaEngine::Rendering
 
         if (m_tearingSupport)
         {
-            m_dxgiFactory->MakeWindowAssociation(window, DXGI_MWA_NO_ALT_ENTER);
+            m_dxgiFactory->MakeWindowAssociation(osWindow, DXGI_MWA_NO_ALT_ENTER);
         }
 
         ThrowIfFailed(swapChain.As(&m_swapChain));
 
-        PrintDisplayColorSpaceInfo(sdlWindow);
+        PrintDisplayColorSpaceInfo(window);
 
         m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
 
