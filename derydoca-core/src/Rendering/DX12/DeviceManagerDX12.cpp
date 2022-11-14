@@ -6,7 +6,7 @@
 
 #define D3D_ACTIVE_FEATURE_LEVEL D3D_FEATURE_LEVEL_12_1
 
-namespace DerydocaEngine::Rendering
+namespace Derydoca::Rendering
 {
 	void DeviceManagerDX12::Initialize(const DeviceManagerSettings& settings)
 	{

@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace DerydocaEngine::Editor
+namespace Derydoca::Editor
 {
 	using ArgumentCollection = std::unordered_map<std::string, std::vector<std::string>>;
 

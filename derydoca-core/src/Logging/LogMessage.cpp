@@ -1,6 +1,6 @@
 #include "Derydoca/Logging/LogMessage.h"
 
-namespace DerydocaEngine::Logging
+namespace Derydoca::Logging
 {
 	LogMessage::LogMessage() :
 		Level(),

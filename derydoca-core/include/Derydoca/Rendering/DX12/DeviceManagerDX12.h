@@ -17,7 +17,7 @@
 
 using namespace Microsoft::WRL;
 
-namespace DerydocaEngine::Rendering
+namespace Derydoca::Rendering
 {
 	class DeviceManagerDX12 : public DeviceManager
 	{

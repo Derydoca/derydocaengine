@@ -11,7 +11,7 @@
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
-namespace DerydocaEngine::Rendering
+namespace Derydoca::Rendering
 {
 	VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 		VkDebugUtilsMessageSeverityFlagBitsEXT severity,

@@ -2,7 +2,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
 
-namespace DerydocaEngine::Logging
+namespace Derydoca::Logging
 {
 	std::shared_ptr<engine_console_sync_mt> Log::s_EngineConsoleSync;
 	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;

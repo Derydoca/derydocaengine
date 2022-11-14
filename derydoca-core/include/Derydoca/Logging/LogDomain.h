@@ -1,6 +1,6 @@
 #pragma once
 
-namespace DerydocaEngine::Logging
+namespace Derydoca::Logging
 {
 	enum class LogDomain
 	{

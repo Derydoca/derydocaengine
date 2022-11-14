@@ -8,11 +8,11 @@
 
 const char* WindowName = "Derydoca Engine";
 
-using namespace DerydocaEngine;
+using namespace Derydoca;
 
 int main(int argc, const char* argv[])
 {
-    DerydocaEngine::Logging::Log::Init();
+    Derydoca::Logging::Log::Init();
     D_LOG_TRACE("Engine startup");
 
     auto deviceManagerSettings = DeviceManagerSettings();
@@ -32,7 +32,7 @@ int main(int argc, const char* argv[])
         return -1;
     }
 
-    auto deviceManager = DerydocaEngine::DeviceManager::Create(renderingAPI, deviceManagerSettings, window);
+    auto deviceManager = Derydoca::DeviceManager::Create(renderingAPI, deviceManagerSettings, window);
     if (deviceManager == nullptr)
     {
         D_LOG_CRITICAL("Unable to create device manager!");

@@ -5,7 +5,7 @@
 #include <spdlog/details/synchronous_factory.h>
 #include "Derydoca/Logging/LogMessage.h"
 
-namespace DerydocaEngine::Logging
+namespace Derydoca::Logging
 {
 	template<typename Mutex>
 	class InternalEngineSink final : public ::spdlog::sinks::base_sink<Mutex>

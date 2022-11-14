@@ -5,7 +5,7 @@
 #include <vector>
 #include <optional>
 
-namespace DerydocaEngine::Rendering
+namespace Derydoca::Rendering
 {
 	struct QueueFamilyIndices
 	{

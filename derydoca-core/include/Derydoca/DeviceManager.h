@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 
-namespace DerydocaEngine
+namespace Derydoca
 {
 	enum class RenderingAPI {
 		Direct3D12,

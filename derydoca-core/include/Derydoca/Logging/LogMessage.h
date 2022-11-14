@@ -6,7 +6,7 @@
 #include "Derydoca/Logging/LogLevel.h"
 #include "Derydoca/Logging/LogDomain.h"
 
-namespace DerydocaEngine::Logging
+namespace Derydoca::Logging
 {
 	struct LogMessage
 	{
