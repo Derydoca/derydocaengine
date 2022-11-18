@@ -26,7 +26,7 @@ if(ENABLE_VULKAN)
 	set(PRIVATE_INCLUDES ${PRIVATE_INCLUDES} ${Vulkan_INCLUDE_DIRS})
 	set(PUBLIC_LIBS ${PUBLIC_LIBS} ${Vulkan_LIBRARIES})
 
-	target_sources(${PROJECT_NAME} PRIVATE "./src/Rendering/VK/DeviceManagerVK.cpp")
+	target_sources(${PROJECT_NAME} PRIVATE "./src/Rendering/VK/DeviceManagerVK.cpp" "./src/Rendering/VK/CommandBufferVK.cpp")
 	target_compile_definitions(${PROJECT_NAME} PUBLIC USE_VULKAN=1)
 endif()
 

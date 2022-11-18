@@ -317,6 +317,26 @@ namespace Derydoca::Rendering
 			throw std::runtime_error("Failed to begin recording command buffer!");
 		}
 
+		{
+			VkViewport viewport{};
+			viewport.height = 1080;
+			viewport.width = 1920;
+			viewport.minDepth = 0.0;
+			viewport.maxDepth = 1.0;
+
+			vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
+		}
+
+		{
+			VkRect2D rect{};
+			rect.offset.x = 0;
+			rect.offset.y = 0;
+			rect.extent.width = 1080;
+			rect.extent.height = 1920;
+
+			vkCmdSetScissor(commandBuffer, 0, 1, &rect);
+		}
+
 		VkRenderPassBeginInfo renderPassInfo{ VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO };
 		renderPassInfo.renderPass = renderPass;
 		renderPassInfo.framebuffer = swapChainFramebuffers[imageIndex];
