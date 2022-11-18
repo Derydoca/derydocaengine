@@ -119,10 +119,13 @@ namespace Derydoca::Rendering
         }
 
         {
-            ThrowIfFailed(m_device->CreateFence(m_fenceValues[m_frameIndex], D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_fence)));
+            for (UINT n = 0; n < FrameCount; n++)
+            {
+                ThrowIfFailed(m_device->CreateFence(m_fenceValues[m_frameIndex], D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_fences[n])));
+            }
             m_fenceValues[m_frameIndex]++;
 
-            m_fenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
+            m_fenceEvent = CreateEvent(nullptr, FALSE, TRUE, nullptr);
             if (m_fenceEvent == nullptr)
             {
                 ThrowIfFailed(HRESULT_FROM_WIN32(GetLastError()));
@@ -138,18 +141,23 @@ namespace Derydoca::Rendering
 
         ThrowIfFailed(m_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, m_commandAllocators[m_frameIndex].Get(), nullptr, IID_PPV_ARGS(&m_commandList)));
 
-        D3D12_VIEWPORT viewport = {};
-        viewport.Height = 1080;
-        viewport.Width = 1920;
-        viewport.MinDepth = D3D12_MIN_DEPTH;
-        viewport.MaxDepth = D3D12_MAX_DEPTH;
+        {
+            D3D12_VIEWPORT viewport = {};
+            viewport.Height = 1080;
+            viewport.Width = 1920;
+            viewport.MinDepth = D3D12_MIN_DEPTH;
+            viewport.MaxDepth = D3D12_MAX_DEPTH;
 
-        D3D12_RECT scissorRect = {};
-        scissorRect.right = 1080;
-        scissorRect.bottom = 1920;
+            m_commandList->RSSetViewports(1, &viewport);
+        }
 
-        m_commandList->RSSetViewports(1, &viewport);
-        m_commandList->RSSetScissorRects(1, &scissorRect);
+        {
+            D3D12_RECT scissorRect = {};
+            scissorRect.right = 1080;
+            scissorRect.bottom = 1920;
+
+            m_commandList->RSSetScissorRects(1, &scissorRect);
+        }
 
         m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
 
@@ -177,13 +185,13 @@ namespace Derydoca::Rendering
         //...
 
         const UINT currentFenceValue = m_fenceValues[m_frameIndex];
-        ThrowIfFailed(m_commandQueue->Signal(m_fence.Get(), currentFenceValue));
+        ThrowIfFailed(m_commandQueue->Signal(m_fences[m_frameIndex].Get(), currentFenceValue));
 
         m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
 
-        if (m_fence->GetCompletedValue() < m_fenceValues[m_frameIndex])
+        if (m_fences[m_frameIndex]->GetCompletedValue() < m_fenceValues[m_frameIndex])
         {
-            ThrowIfFailed(m_fence->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvent));
+            ThrowIfFailed(m_fences[m_frameIndex]->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvent));
             WaitForSingleObjectEx(m_fenceEvent, INFINITE, FALSE);
         }
 
@@ -338,9 +346,9 @@ namespace Derydoca::Rendering
 
     void DeviceManagerDX12::WaitForGpu()
     {
-        ThrowIfFailed(m_commandQueue->Signal(m_fence.Get(), m_fenceValues[m_frameIndex]));
+        ThrowIfFailed(m_commandQueue->Signal(m_fences[m_frameIndex].Get(), m_fenceValues[m_frameIndex]));
 
-        ThrowIfFailed(m_fence->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvent));
+        ThrowIfFailed(m_fences[m_frameIndex]->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvent));
         WaitForSingleObjectEx(m_fenceEvent, INFINITE, FALSE);
 
         m_fenceValues[m_frameIndex]++;

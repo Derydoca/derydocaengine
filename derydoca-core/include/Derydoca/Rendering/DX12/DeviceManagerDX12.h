@@ -50,7 +50,7 @@ namespace Derydoca::Rendering
 
 		UINT m_frameIndex;
 		HANDLE m_fenceEvent;
-		ComPtr<ID3D12Fence> m_fence;
+		ComPtr<ID3D12Fence> m_fences[FrameCount];
 		UINT64 m_fenceValues[FrameCount];
 
 		// Whether or not tearing is available for fullscreen borderless windowed mode.
