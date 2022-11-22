@@ -151,7 +151,12 @@ namespace Derydoca::Rendering
         //vkAcquireNextImageKHR
         m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
 
-        //?? Swapchain recreation if out of date
+        // Swapchain recreation if resized
+        if (framebufferResized)
+        {
+            D_LOG_WARN("Window was resized but framebuffer resizing has yet to be implemented in the DX12 renderer!");
+            framebufferResized = false;
+        }
 
         //vkResetFences
         m_fenceValues[m_frameIndex]++;
@@ -199,9 +204,8 @@ namespace Derydoca::Rendering
 
         ThrowIfFailed(m_commandList->Close());
 
-        //vkEndCommandBuffer???
-
-        //...
+        //vkEndCommandBuffer
+        m_commandList->Close();
 
         //vkQueueSubmit
         ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
@@ -209,8 +213,6 @@ namespace Derydoca::Rendering
 
         //vkQueuePresentKHR
         ThrowIfFailed(m_swapChain->Present(1, 0));
-
-        //...
 
         const UINT currentFenceValue = m_fenceValues[m_frameIndex];
         ThrowIfFailed(m_renderingCommandQueue->Signal(m_fences[m_frameIndex].Get(), currentFenceValue));
