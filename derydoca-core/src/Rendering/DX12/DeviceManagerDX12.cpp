@@ -106,13 +106,11 @@ namespace Derydoca::Rendering
         }
 
         {
-            CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart());
-
             for (UINT n = 0; n < FrameCount; n++)
             {
+                m_renderTargetHandles[n].InitOffsetted(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), n, m_rtvDescriptorSize);
                 ThrowIfFailed(m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_renderTargets[n])));
-                m_device->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr, rtvHandle);
-                rtvHandle.Offset(1, m_rtvDescriptorSize);
+                m_device->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr, m_renderTargetHandles[n]);
 
                 ThrowIfFailed(m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&m_commandAllocators[n])));
             }
@@ -158,9 +156,6 @@ namespace Derydoca::Rendering
         //vkResetFences
         m_fenceValues[m_frameIndex]++;
 
-        // Not sure if this is even needed
-        //ThrowIfFailed(m_commandAllocators[m_frameIndex]->Reset());
-
         //vkAllocateCommandBuffers;vkBeginCommandBuffer
         ThrowIfFailed(m_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, m_commandAllocators[m_frameIndex].Get(), nullptr, IID_PPV_ARGS(&m_commandList)));
 
@@ -184,34 +179,35 @@ namespace Derydoca::Rendering
             m_commandList->RSSetScissorRects(1, &scissorRect);
         }
 
-        m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
+        //vkCmdBeginRenderPass
+        {
+            static float t = 0.0f;
+            t += 0.05f;
+            float r = (sin(t) + 1.0) * 0.5f;
+            const float clearColor[] = { r, 0.2f, 0.4f, 1.0f };
+            CD3DX12_CLEAR_VALUE clearValue{ DXGI_FORMAT_R32G32B32_FLOAT, clearColor };
+            D3D12_RENDER_PASS_BEGINNING_ACCESS renderPassBeginningAccessClear{ D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR, { clearValue } };
+            D3D12_RENDER_PASS_ENDING_ACCESS renderPassEndingAccessPreserve{ D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE, {} };
+            D3D12_RENDER_PASS_RENDER_TARGET_DESC renderPassRenderTargetDesc{ m_renderTargetHandles[m_frameIndex], renderPassBeginningAccessClear, renderPassEndingAccessPreserve };
+            m_commandList->BeginRenderPass(1, &renderPassRenderTargetDesc, nullptr, D3D12_RENDER_PASS_FLAG_NONE);
+        }
 
-        //CD3DX12_CLEAR_VALUE clearValue{ DXGI_FORMAT_R32G32B32_FLOAT, clearColor };
-        //D3D12_RENDER_PASS_BEGINNING_ACCESS renderPassBeginningAccessClear{ D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR, { clearValue } };
-        //D3D12_RENDER_PASS_ENDING_ACCESS renderPassEndingAccessPreserve{ D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE, {} };
-        //D3D12_RENDER_PASS_RENDER_TARGET_DESC renderPassRenderTargetDesc{ m_renderTargetHandles[m_frameIndex], renderPassBeginningAccessClear, renderPassEndingAccessPreserve };
-        //m_commandList->BeginRenderPass(1, &renderPassRenderTargetDesc, nullptr, D3D12_RENDER_PASS_FLAG_NONE);
-        //m_commandList->EndRenderPass();
-
-        CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), m_frameIndex, m_rtvDescriptorSize);
-        m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
-
-        static float t = 0.0f;
-        t += 0.05f;
-        float r = (sin(t) + 1.0) * 0.5f;
-        const float clearColor[] = { r, 0.2f, 0.4f, 1.0f };
-        m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
-
-        m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
+        //vkCmdEndRenderPass
+        {
+            m_commandList->EndRenderPass();
+        }
 
         ThrowIfFailed(m_commandList->Close());
 
+        //vkEndCommandBuffer???
 
         //...
 
+        //vkQueueSubmit
         ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
         m_renderingCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
+        //vkQueuePresentKHR
         ThrowIfFailed(m_swapChain->Present(1, 0));
 
         //...

@@ -45,7 +45,7 @@ namespace Derydoca::Rendering
 		ComPtr<IDXGIFactory4> m_dxgiFactory;
 		ComPtr<IDXGISwapChain4> m_swapChain;
 		ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
-		ComPtr<ID3D12GraphicsCommandList> m_commandList;
+		ComPtr<ID3D12GraphicsCommandList4> m_commandList;
 		UINT m_rtvDescriptorSize;
 
 		UINT m_frameIndex;
