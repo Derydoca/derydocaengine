@@ -36,12 +36,12 @@ namespace Derydoca::Rendering
 		void GetHardwareAdapter(IDXGIFactory1* pFactory, IDXGIAdapter1** ppAdapter);
 		void CheckTearingSupport();
 		void PrintDisplayColorSpaceInfo(SDL_Window* window);
-		void WaitForGpu();
 
 		ComPtr<ID3D12Device> m_device;
+		CD3DX12_CPU_DESCRIPTOR_HANDLE m_renderTargetHandles[FrameCount];
 		ComPtr<ID3D12Resource> m_renderTargets[FrameCount];
 		ComPtr<ID3D12CommandAllocator> m_commandAllocators[FrameCount];
-		ComPtr<ID3D12CommandQueue> m_commandQueue;
+		ComPtr<ID3D12CommandQueue> m_renderingCommandQueue;
 		ComPtr<IDXGIFactory4> m_dxgiFactory;
 		ComPtr<IDXGISwapChain4> m_swapChain;
 		ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
@@ -49,7 +49,7 @@ namespace Derydoca::Rendering
 		UINT m_rtvDescriptorSize;
 
 		UINT m_frameIndex;
-		HANDLE m_fenceEvent;
+		HANDLE m_fenceEvents[FrameCount];
 		ComPtr<ID3D12Fence> m_fences[FrameCount];
 		UINT64 m_fenceValues[FrameCount];
 

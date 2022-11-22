@@ -39,8 +39,8 @@ namespace Derydoca::Rendering
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
         queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
 
-        ThrowIfFailed(m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_commandQueue)));
-        NAME_D3D_OBJECT(m_commandQueue);
+        ThrowIfFailed(m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_renderingCommandQueue)));
+        NAME_D3D_OBJECT(m_renderingCommandQueue);
 
         DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
         swapChainDesc.BufferCount = FrameCount;
@@ -76,7 +76,7 @@ namespace Derydoca::Rendering
 
         ComPtr<IDXGISwapChain1> swapChain;
         ThrowIfFailed(m_dxgiFactory->CreateSwapChainForHwnd(
-            m_commandQueue.Get(),
+            m_renderingCommandQueue.Get(),
             osWindow,
             &swapChainDesc,
             nullptr,
@@ -122,25 +122,49 @@ namespace Derydoca::Rendering
             for (UINT n = 0; n < FrameCount; n++)
             {
                 ThrowIfFailed(m_device->CreateFence(m_fenceValues[m_frameIndex], D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_fences[n])));
-            }
-            m_fenceValues[m_frameIndex]++;
+                m_fenceValues[n]++;
+                ThrowIfFailed(m_renderingCommandQueue->Signal(m_fences[m_frameIndex].Get(), m_fenceValues[m_frameIndex]));
 
-            m_fenceEvent = CreateEvent(nullptr, FALSE, TRUE, nullptr);
-            if (m_fenceEvent == nullptr)
-            {
-                ThrowIfFailed(HRESULT_FROM_WIN32(GetLastError()));
+                m_fenceEvents[n] = CreateEvent(nullptr, FALSE, TRUE, nullptr);
+                if (m_fenceEvents[n] == nullptr)
+                {
+                    ThrowIfFailed(HRESULT_FROM_WIN32(GetLastError()));
+                }
             }
+        }
 
-            WaitForGpu();
+        for (UINT n = 0; n < FrameCount; n++)
+        {
+            // Wait for fence
+            ThrowIfFailed(m_fences[m_frameIndex]->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvents[n]));
+            WaitForSingleObjectEx(m_fenceEvents[n], INFINITE, FALSE);
         }
 	}
     
     void DeviceManagerDX12::Render()
     {
-        ThrowIfFailed(m_commandAllocators[m_frameIndex]->Reset());
+        //vkWaitForFences
+        if (m_fences[m_frameIndex]->GetCompletedValue() < m_fenceValues[m_frameIndex])
+        {
+            ThrowIfFailed(m_fences[m_frameIndex]->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvents[m_frameIndex]));
+            WaitForSingleObjectEx(m_fenceEvents[m_frameIndex], INFINITE, FALSE);
+        }
 
+        //vkAcquireNextImageKHR
+        m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
+
+        //?? Swapchain recreation if out of date
+
+        //vkResetFences
+        m_fenceValues[m_frameIndex]++;
+
+        // Not sure if this is even needed
+        //ThrowIfFailed(m_commandAllocators[m_frameIndex]->Reset());
+
+        //vkAllocateCommandBuffers;vkBeginCommandBuffer
         ThrowIfFailed(m_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, m_commandAllocators[m_frameIndex].Get(), nullptr, IID_PPV_ARGS(&m_commandList)));
 
+        //vkCmdSetViewport
         {
             D3D12_VIEWPORT viewport = {};
             viewport.Height = 1080;
@@ -151,6 +175,7 @@ namespace Derydoca::Rendering
             m_commandList->RSSetViewports(1, &viewport);
         }
 
+        //vkCmdSetScissor
         {
             D3D12_RECT scissorRect = {};
             scissorRect.right = 1080;
@@ -160,6 +185,13 @@ namespace Derydoca::Rendering
         }
 
         m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
+
+        //CD3DX12_CLEAR_VALUE clearValue{ DXGI_FORMAT_R32G32B32_FLOAT, clearColor };
+        //D3D12_RENDER_PASS_BEGINNING_ACCESS renderPassBeginningAccessClear{ D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR, { clearValue } };
+        //D3D12_RENDER_PASS_ENDING_ACCESS renderPassEndingAccessPreserve{ D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE, {} };
+        //D3D12_RENDER_PASS_RENDER_TARGET_DESC renderPassRenderTargetDesc{ m_renderTargetHandles[m_frameIndex], renderPassBeginningAccessClear, renderPassEndingAccessPreserve };
+        //m_commandList->BeginRenderPass(1, &renderPassRenderTargetDesc, nullptr, D3D12_RENDER_PASS_FLAG_NONE);
+        //m_commandList->EndRenderPass();
 
         CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), m_frameIndex, m_rtvDescriptorSize);
         m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
@@ -178,24 +210,14 @@ namespace Derydoca::Rendering
         //...
 
         ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
-        m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
+        m_renderingCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
         ThrowIfFailed(m_swapChain->Present(1, 0));
 
         //...
 
         const UINT currentFenceValue = m_fenceValues[m_frameIndex];
-        ThrowIfFailed(m_commandQueue->Signal(m_fences[m_frameIndex].Get(), currentFenceValue));
-
-        m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
-
-        if (m_fences[m_frameIndex]->GetCompletedValue() < m_fenceValues[m_frameIndex])
-        {
-            ThrowIfFailed(m_fences[m_frameIndex]->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvent));
-            WaitForSingleObjectEx(m_fenceEvent, INFINITE, FALSE);
-        }
-
-        m_fenceValues[m_frameIndex] = currentFenceValue + 1;
+        ThrowIfFailed(m_renderingCommandQueue->Signal(m_fences[m_frameIndex].Get(), currentFenceValue));
     }
 
     void DeviceManagerDX12::Cleanup()
@@ -342,15 +364,5 @@ namespace Derydoca::Rendering
             desc1.GreenPrimary[0], desc1.GreenPrimary[1],
             desc1.BluePrimary[0], desc1.BluePrimary[1]
         );
-    }
-
-    void DeviceManagerDX12::WaitForGpu()
-    {
-        ThrowIfFailed(m_commandQueue->Signal(m_fences[m_frameIndex].Get(), m_fenceValues[m_frameIndex]));
-
-        ThrowIfFailed(m_fences[m_frameIndex]->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvent));
-        WaitForSingleObjectEx(m_fenceEvent, INFINITE, FALSE);
-
-        m_fenceValues[m_frameIndex]++;
     }
 }

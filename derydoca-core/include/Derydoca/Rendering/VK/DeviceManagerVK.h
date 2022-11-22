@@ -68,7 +68,7 @@ namespace Derydoca::Rendering
 		std::vector<VkImageView> swapChainImageViews;
 		std::vector<VkFramebuffer> swapChainFramebuffers;
 		VkRenderPass renderPass;
-		VkCommandPool commandPool; // TODO: Create instance for each frame in-flight & thread?
+		VkCommandPool renderingCommandPool; // TODO: Create instance for each frame in-flight & thread?
 		std::vector<VkSemaphore> imageAvailableSemaphores;
 		std::vector<VkSemaphore> renderFinishedSemaphores;
 		std::vector<VkFence> inFlightFences;
