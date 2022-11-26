@@ -11,9 +11,9 @@ namespace Derydoca::Rendering
     class CommandBufferVK : public CommandBuffer
     {
     public:
+        //void WaitForFence(Fence fence) override;
         void SetViewport(Viewport viewport) override;
-        void SetScissorRect(RectI rect);
-        void Transition();
+        void SetScissorRect(RectI rect) override;
 
     private:
         VkCommandBuffer commandBuffer;

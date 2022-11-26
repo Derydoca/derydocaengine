@@ -25,8 +25,4 @@ namespace Derydoca::Rendering
 
         vkCmdSetScissor(commandBuffer, 0, 1, &vkRect);
     }
-
-    void CommandBufferVK::Transition()
-    {
-    }
 }
