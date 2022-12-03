@@ -81,7 +81,7 @@ namespace Derydoca::Rendering
         renderPassBeginInfo.clearValueCount = beginInfo.ClearValueCount;
         renderPassBeginInfo.pClearValues = clearValues.data();
         renderPassBeginInfo.renderArea = Convert(beginInfo.Area);
-        
+
         vkCmdBeginRenderPass(commandBuffer, &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
     }
 
