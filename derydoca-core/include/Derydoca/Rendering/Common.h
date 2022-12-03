@@ -5,6 +5,8 @@
 
 namespace Derydoca::Rendering
 {
+    typedef void RenderPass;
+
     enum class RenderingAPI {
         Direct3D12,
         Vulkan
