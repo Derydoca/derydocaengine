@@ -15,13 +15,13 @@ int main(int argc, const char* argv[])
     Derydoca::Logging::Log::Init();
     D_LOG_TRACE("Engine startup");
 
-    auto deviceManagerSettings = DeviceManagerSettings();
-    auto renderingAPI = RenderingAPI::Direct3D12;
+    auto deviceManagerSettings = Rendering::DeviceManagerSettings();
+    auto renderingAPI = Rendering::RenderingAPI::Vulkan;
 
     SDL_Init(SDL_INIT_EVERYTHING);
 
     Uint32 windowFlags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
-    if (renderingAPI == RenderingAPI::Vulkan)
+    if (renderingAPI == Rendering::RenderingAPI::Vulkan)
     {
         windowFlags |= SDL_WINDOW_VULKAN;
     }
@@ -32,7 +32,7 @@ int main(int argc, const char* argv[])
         return -1;
     }
 
-    auto deviceManager = Derydoca::DeviceManager::Create(renderingAPI, deviceManagerSettings, window);
+    auto deviceManager = Derydoca::Rendering::DeviceManager::Create(renderingAPI, deviceManagerSettings, window);
     if (deviceManager == nullptr)
     {
         D_LOG_CRITICAL("Unable to create device manager!");

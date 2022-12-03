@@ -190,7 +190,7 @@ namespace Derydoca::Rendering
             t += 0.05f;
             float r = (sin(t) + 1.0) * 0.5f;
             const float clearColor[] = { r, 0.2f, 0.4f, 1.0f };
-            CD3DX12_CLEAR_VALUE clearValue{ DXGI_FORMAT_R32G32B32_FLOAT, clearColor };
+            CD3DX12_CLEAR_VALUE clearValue{ DXGI_FORMAT_R8G8B8A8_UNORM, clearColor };
             D3D12_RENDER_PASS_BEGINNING_ACCESS renderPassBeginningAccessClear{ D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR, { clearValue } };
             D3D12_RENDER_PASS_ENDING_ACCESS renderPassEndingAccessPreserve{ D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE, {} };
             D3D12_RENDER_PASS_RENDER_TARGET_DESC renderPassRenderTargetDesc{ m_renderTargetHandles[m_frameIndex], renderPassBeginningAccessClear, renderPassEndingAccessPreserve };
@@ -220,6 +220,12 @@ namespace Derydoca::Rendering
 
     void DeviceManagerDX12::Cleanup()
     {
+    }
+
+    void DeviceManagerDX12::CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass)
+    {
+        D_LOG_CRITICAL("DX does not implement CreateRenderPass yet.");
+        exit(-1);
     }
 
     void DeviceManagerDX12::CheckTearingSupport()

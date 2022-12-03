@@ -30,6 +30,7 @@ namespace Derydoca::Rendering
 		void Initialize(const DeviceManagerSettings& settings) override;
 		void Render() override;
 		void Cleanup() override;
+		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 
 	private:
 		DXGI_FORMAT Translate(ImageFormat imageFormat);

@@ -1,4 +1,5 @@
 #pragma once
+#include "Derydoca/Core.h"
 
 inline void ThrowIfFailed(VkResult result)
 {

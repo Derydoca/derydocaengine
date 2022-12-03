@@ -1,9 +1,12 @@
 #pragma once
 
-#include "Derydoca/DeviceManager.h"
 #include <vulkan/vulkan.h>
 #include <vector>
 #include <optional>
+
+#include "Derydoca/DeviceManager.h"
+#include "Derydoca/Rendering/Common.h"
+#include "Derydoca/Rendering/VK/RenderPassVK.h"
 
 namespace Derydoca::Rendering
 {
@@ -34,8 +37,24 @@ namespace Derydoca::Rendering
 		void Initialize(const DeviceManagerSettings& settings) override;
 		void Render() override;
 		void Cleanup() override;
+		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 
 	private:
+		VkFormat Translate(const ImageFormat format);
+		ImageFormat Translate(const VkFormat format);
+		VkSampleCountFlagBits Translate(const ImageSampleCount sampleCount);
+		VkAttachmentLoadOp Translate(const RenderPassBeginningAccess access);
+		VkAttachmentStoreOp Translate(const RenderPassEndingAccess access);
+		VkImageLayout Translate(const ImageLayout layout);
+		VkPipelineBindPoint Translate(const PipelineBindPoint bindPoint);
+		VkAttachmentReference Translate(AttachmentReference attachment);
+		VkDependencyFlags Translate(DependencyFlags flags);
+		VkAccessFlags Translate(AccessFlags flags);
+		VkPipelineStageFlags Translate(PipelineStageFlags flags);
+		inline VkRenderPass* Translate(RenderPass* renderPass) { return static_cast<VkRenderPass*>(renderPass); }
+
+		std::vector<VkAttachmentReference> Translate(AttachmentReference* attachment, uint32_t size);
+
 		bool CheckValidationLayerSupport(const std::vector<const char*>& validationLayers);
 		VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
 		void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
@@ -67,7 +86,7 @@ namespace Derydoca::Rendering
 		VkExtent2D swapChainExtent;
 		std::vector<VkImageView> swapChainImageViews;
 		std::vector<VkFramebuffer> swapChainFramebuffers;
-		VkRenderPass renderPass;
+		VkRenderPass mainRenderPass;
 		VkCommandPool renderingCommandPool; // TODO: Create instance for each frame in-flight & thread?
 		std::vector<VkSemaphore> imageAvailableSemaphores;
 		std::vector<VkSemaphore> renderFinishedSemaphores;
