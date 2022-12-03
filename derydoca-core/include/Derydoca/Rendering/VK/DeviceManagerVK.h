@@ -6,7 +6,6 @@
 
 #include "Derydoca/DeviceManager.h"
 #include "Derydoca/Rendering/Common.h"
-#include "Derydoca/Rendering/VK/RenderPassVK.h"
 
 namespace Derydoca::Rendering
 {
@@ -30,9 +29,9 @@ namespace Derydoca::Rendering
 
 	class DeviceManagerVK : public DeviceManager
 	{
-#define DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, VkType) inline VkType Translate(GenericType value) { return static_cast<VkType>(value); }
-#define DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, VkType) inline GenericType Translate(VkType value) { return static_cast<GenericType>(value); }
-#define DIRECT_ENUM_TRANSLATE_FUNCS(GenericType, VkType) DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, VkType); DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, VkType)
+#define DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, SpecificType) inline SpecificType Translate(GenericType value) { return static_cast<SpecificType>(value); }
+#define DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType) inline GenericType Translate(SpecificType value) { return static_cast<GenericType>(value); }
+#define DIRECT_ENUM_TRANSLATE_FUNCS(GenericType, SpecificType) DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, SpecificType); DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType)
 	public:
 		DeviceManagerVK() = default;
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
@@ -43,23 +42,18 @@ namespace Derydoca::Rendering
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 
 	private:
+		DIRECT_ENUM_TRANSLATE_FUNCS(ImageSampleCount, VkSampleCountFlagBits);
+		DIRECT_ENUM_TRANSLATE_FUNCS(ImageLayout, VkImageLayout);
+		DIRECT_ENUM_TRANSLATE_FUNCS(PipelineBindPoint, VkPipelineBindPoint);
+		DIRECT_ENUM_TRANSLATE_FUNCS(DependencyFlags, VkDependencyFlags);
+		DIRECT_ENUM_TRANSLATE_FUNC_TO(AccessFlags, VkAccessFlags);
+		DIRECT_ENUM_TRANSLATE_FUNC_TO(PipelineStageFlags, VkPipelineStageFlags);
+
 		VkFormat Translate(const ImageFormat format);
 		ImageFormat Translate(const VkFormat format);
-		//VkSampleCountFlagBits Translate(const ImageSampleCount sampleCount);
-		DIRECT_ENUM_TRANSLATE_FUNCS(ImageSampleCount, VkSampleCountFlagBits);
 		VkAttachmentLoadOp Translate(const RenderPassBeginningAccess access);
 		VkAttachmentStoreOp Translate(const RenderPassEndingAccess access);
-		//VkImageLayout Translate(const ImageLayout layout);
-		DIRECT_ENUM_TRANSLATE_FUNCS(ImageLayout, VkImageLayout);
-		//VkPipelineBindPoint Translate(const PipelineBindPoint bindPoint);
-		DIRECT_ENUM_TRANSLATE_FUNCS(PipelineBindPoint, VkPipelineBindPoint);
 		VkAttachmentReference Translate(AttachmentReference attachment);
-		//VkDependencyFlags Translate(DependencyFlags flags);
-		DIRECT_ENUM_TRANSLATE_FUNCS(DependencyFlags, VkDependencyFlags);
-		//VkAccessFlags Translate(AccessFlags flags);
-		DIRECT_ENUM_TRANSLATE_FUNC_TO(AccessFlags, VkAccessFlags);
-		//VkPipelineStageFlags Translate(PipelineStageFlags flags);
-		DIRECT_ENUM_TRANSLATE_FUNC_TO(PipelineStageFlags, VkPipelineStageFlags);
 		inline VkRenderPass* Translate(RenderPass* renderPass) { return static_cast<VkRenderPass*>(renderPass); }
 
 		bool CheckValidationLayerSupport(const std::vector<const char*>& validationLayers);

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Derydoca/Core.h"
-#include "Derydoca/Rendering/RenderTarget.h"
 
 namespace Derydoca::Rendering
 {
     typedef void RenderPass;
+    typedef void RenderTarget;
 
     enum class RenderingAPI {
         Direct3D12,

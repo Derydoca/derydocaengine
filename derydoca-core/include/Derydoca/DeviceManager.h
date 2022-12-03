@@ -4,7 +4,6 @@
 #include <SDL2/SDL_syswm.h>
 
 #include "Derydoca/Rendering/Common.h"
-#include "Derydoca/Rendering/RenderPass.h"
 
 namespace Derydoca::Rendering
 {

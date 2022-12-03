@@ -1,7 +1,6 @@
 #pragma once
 #include "Derydoca/Core.h"
 #include "Derydoca/Rendering/Common.h"
-#include "Derydoca/Rendering/RenderPass.h"
 
 namespace Derydoca::Rendering
 {

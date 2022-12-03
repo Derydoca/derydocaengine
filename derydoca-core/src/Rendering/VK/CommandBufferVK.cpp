@@ -2,8 +2,6 @@
 #include <vulkan/vulkan.h>
 
 #include "Derydoca/Rendering/VK/CommandBufferVK.h"
-#include "Derydoca/Rendering/VK/RenderTargetVK.h"
-#include "Derydoca/Rendering/VK/RenderPassVK.h"
 
 namespace Derydoca::Rendering
 {
@@ -77,7 +75,7 @@ namespace Derydoca::Rendering
 
         VkRenderPassBeginInfo renderPassBeginInfo{ VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO };
         renderPassBeginInfo.renderPass = *activeRenderPass;
-        renderPassBeginInfo.framebuffer = *static_cast<RenderTargetVK*>(beginInfo.Target)->Framebuffer;
+        renderPassBeginInfo.framebuffer = *static_cast<VkFramebuffer*>(beginInfo.Target);
         renderPassBeginInfo.clearValueCount = beginInfo.ClearValueCount;
         renderPassBeginInfo.pClearValues = clearValues.data();
         renderPassBeginInfo.renderArea = Convert(beginInfo.Area);
