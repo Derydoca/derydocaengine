@@ -751,8 +751,8 @@ namespace Derydoca::Rendering
 			//	return VK_FORMAT_R10G10B10_XR_BIAS_A2_UNORM;
 			//case ImageFormat::B8G8R8A8_TYPELESS:
 			//	return VK_FORMAT_B8G8R8A8_TYPELESS;
-			//case ImageFormat::B8G8R8A8_UNORM_SRGB:
-			//	return VK_FORMAT_B8G8R8A8_UNORM_SRGB;
+			case ImageFormat::B8G8R8A8_UNORM_SRGB:
+				return VK_FORMAT_B8G8R8A8_SRGB;
 			//case ImageFormat::B8G8R8X8_TYPELESS:
 			//	return VK_FORMAT_B8G8R8X8_TYPELESS;
 			//case ImageFormat::B8G8R8X8_UNORM_SRGB:
@@ -802,7 +802,7 @@ namespace Derydoca::Rendering
 			//case ImageFormat::B4G4R4A4_UNORM:
 			//	return VK_FORMAT_B4G4R4A4_UNORM;
 		default:
-			D_LOG_WARN("Unknown ImageFormat!");
+			D_LOG_WARN("Unable to translate ImageFormat!");
 			return VK_FORMAT_UNDEFINED;
 		}
 	}
@@ -911,8 +911,8 @@ namespace Derydoca::Rendering
 			//	return ImageFormat::B8G8R8A8_UINT;
 			//case VK_FORMAT_B8G8R8A8_SINT:
 			//	return ImageFormat::B8G8R8A8_SINT;
-			//case VK_FORMAT_B8G8R8A8_SRGB:
-			//	return ImageFormat::B8G8R8A8_SRGB;
+			case VK_FORMAT_B8G8R8A8_SRGB:
+				return ImageFormat::B8G8R8A8_UNORM_SRGB;
 			//case VK_FORMAT_A8B8G8R8_UNORM_PACK32:
 			//	return ImageFormat::A8B8G8R8_UNORM_PACK32;
 			//case VK_FORMAT_A8B8G8R8_SNORM_PACK32:
@@ -1308,7 +1308,8 @@ namespace Derydoca::Rendering
 			//case VK_FORMAT_R16G16_S10_5_NV:
 			//	return ImageFormat::R16G16_S10_5_NV;
 		default:
-			break;
+			D_LOG_ERROR("Unable to translate VK image format!");
+			return ImageFormat::UNKNOWN;
 		}
 	}
 
