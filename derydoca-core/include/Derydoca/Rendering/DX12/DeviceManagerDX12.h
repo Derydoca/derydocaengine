@@ -11,6 +11,7 @@
 #include <dxgi1_6.h>
 
 #include "Derydoca/DeviceManager.h"
+#include "Derydoca/Rendering/DX12/RenderPassDX12.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -33,6 +34,9 @@ namespace Derydoca::Rendering
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 
 	private:
+		DIRECT_ENUM_TRANSLATE_FUNCS(RenderPassBeginningAccess, D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE);
+		DIRECT_ENUM_TRANSLATE_FUNCS(RenderPassEndingAccess, D3D12_RENDER_PASS_ENDING_ACCESS_TYPE);
+
 		DXGI_FORMAT Translate(ImageFormat imageFormat);
 		void GetHardwareAdapter(IDXGIFactory1* pFactory, IDXGIAdapter1** ppAdapter);
 		void CheckTearingSupport();
@@ -48,6 +52,7 @@ namespace Derydoca::Rendering
 		ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
 		ComPtr<ID3D12GraphicsCommandList4> m_commandList;
 		UINT m_rtvDescriptorSize;
+		RenderPassDX12 m_renderPass;
 
 		UINT m_frameIndex;
 		HANDLE m_fenceEvents[FrameCount];

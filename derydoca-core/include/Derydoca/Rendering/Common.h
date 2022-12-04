@@ -7,6 +7,8 @@ namespace Derydoca::Rendering
     typedef void RenderPass;
     typedef void RenderTarget;
 
+#define SUBPASS_EXTERNAL               (~0U)
+
     enum class RenderingAPI {
         Direct3D12,
         Vulkan

@@ -209,7 +209,7 @@ namespace Derydoca::Rendering
 		CreateImageViews();
 
 		SubpassDependency dependency{};
-		dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
+		dependency.srcSubpass = SUBPASS_EXTERNAL;
 		dependency.dstSubpass = 0;
 		dependency.srcStageMask = PipelineStageFlags::ColorAttachmentOutput;
 		dependency.srcAccessMask = AccessFlags::None;

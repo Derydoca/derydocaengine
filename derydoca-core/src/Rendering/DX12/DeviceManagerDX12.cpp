@@ -116,6 +116,42 @@ namespace Derydoca::Rendering
             }
         }
 
+
+        SubpassDependency dependency{};
+        dependency.srcSubpass = SUBPASS_EXTERNAL;
+        dependency.dstSubpass = 0;
+        dependency.srcStageMask = PipelineStageFlags::ColorAttachmentOutput;
+        dependency.srcAccessMask = AccessFlags::None;
+        dependency.dstStageMask = PipelineStageFlags::ColorAttachmentOutput;
+        dependency.dstAccessMask = AccessFlags::ColorAttachmentWrite;
+
+        RenderPassRenderTargetDesc renderTargetDesc{};
+        renderTargetDesc.Format = settings.imageFormat;
+        renderTargetDesc.Samples = ImageSampleCount::_1;
+        renderTargetDesc.BeginningAccess = RenderPassBeginningAccess::Clear;
+        renderTargetDesc.EndingAccess = RenderPassEndingAccess::Preserve;
+        renderTargetDesc.InitialLayout = ImageLayout::Undefined;
+        renderTargetDesc.FinalLayout = ImageLayout::PresentSrc;
+
+        AttachmentReference colorAttachmentRef{};
+        colorAttachmentRef.Attachment = 0;
+        colorAttachmentRef.Layout = ImageLayout::ColorAttachmentOptimal;
+
+        SubpassDesc subpass{};
+        subpass.BindPoint = PipelineBindPoint::Graphics;
+        subpass.ColorAttachmentCount = 1;
+        subpass.ColorAttachments = &colorAttachmentRef;
+
+        RenderPassDesc renderPassDesc{};
+        renderPassDesc.DependencyCount = 1;
+        renderPassDesc.Dependencies = &dependency;
+        renderPassDesc.AttachmentCount = 1;
+        renderPassDesc.RenderTargets = &renderTargetDesc;
+        renderPassDesc.SubpassCount = 1;
+        renderPassDesc.Subpasses = &subpass;
+
+        CreateRenderPass(renderPassDesc, static_cast<RenderPass*>(&m_renderPass));
+
         {
             for (UINT n = 0; n < FrameCount; n++)
             {
@@ -188,13 +224,21 @@ namespace Derydoca::Rendering
         {
             static float t = 0.0f;
             t += 0.05f;
-            float r = (sin(t) + 1.0) * 0.5f;
-            const float clearColor[] = { r, 0.2f, 0.4f, 1.0f };
-            CD3DX12_CLEAR_VALUE clearValue{ DXGI_FORMAT_R8G8B8A8_UNORM, clearColor };
-            D3D12_RENDER_PASS_BEGINNING_ACCESS renderPassBeginningAccessClear{ D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_CLEAR, { clearValue } };
-            D3D12_RENDER_PASS_ENDING_ACCESS renderPassEndingAccessPreserve{ D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_PRESERVE, {} };
-            D3D12_RENDER_PASS_RENDER_TARGET_DESC renderPassRenderTargetDesc{ m_renderTargetHandles[m_frameIndex], renderPassBeginningAccessClear, renderPassEndingAccessPreserve };
-            m_commandList->BeginRenderPass(1, &renderPassRenderTargetDesc, nullptr, D3D12_RENDER_PASS_FLAG_NONE);
+            float g = (sin(t) + 1.0) * 0.5f;
+            const float clearColor[] = { 0.2, g, 0.4f, 1.0f };
+
+            auto subpass = m_renderPass.Subpasses[0];
+
+            subpass.RenderTargets[0].cpuDescriptor = m_renderTargetHandles[m_frameIndex];
+            CD3DX12_CLEAR_VALUE clearValue{ subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue.Format, clearColor };
+            subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue = clearValue;
+
+            m_commandList->BeginRenderPass(
+                subpass.RenderTargets.size(),
+                subpass.RenderTargets.data(),
+                subpass.DepthStencil.has_value() ? &subpass.DepthStencil.value() : nullptr,
+                subpass.Flags
+            );
         }
 
         //vkCmdEndRenderPass
@@ -224,8 +268,61 @@ namespace Derydoca::Rendering
 
     void DeviceManagerDX12::CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass)
     {
-        D_LOG_CRITICAL("DX does not implement CreateRenderPass yet.");
-        exit(-1);
+        RenderPassDX12* renderPassDX12 = static_cast<RenderPassDX12*>(renderPass);
+        if (renderPassDX12 == nullptr)
+        {
+            D_LOG_TRACE("Creating render pass...");
+            renderPassDX12 = new RenderPassDX12();
+        }
+
+        renderPassDX12->Subpasses.resize(renderPassDesc.AttachmentCount);
+        for (size_t subpassIndex = 0; subpassIndex < renderPassDesc.SubpassCount; subpassIndex++)
+        {
+            auto& subpass = renderPassDesc.Subpasses[subpassIndex];
+            auto& dxSubpass = renderPassDX12->Subpasses[subpassIndex];
+            dxSubpass.RenderTargets.resize(subpass.ColorAttachmentCount);
+            for (size_t attachmentIndex = 0; attachmentIndex < subpass.ColorAttachmentCount; attachmentIndex++)
+            {
+                auto& subpassColorAttachment = subpass.ColorAttachments[attachmentIndex];
+                auto& colorAttachment = renderPassDesc.RenderTargets[subpassColorAttachment.Attachment];
+                auto& dxColorAttachment = dxSubpass.RenderTargets[attachmentIndex];
+
+                // Properties to be set via render pass begin:
+                //    dxColorAttachment.BeginningAccess.Clear.ClearValue.Color
+                //    dxColorAttachment.cpuDescriptor
+
+                dxColorAttachment.BeginningAccess.Clear.ClearValue.Format = Translate(colorAttachment.Format);
+                dxColorAttachment.BeginningAccess.Type = Translate(colorAttachment.BeginningAccess);
+                // TODO: Add support for multisample resolve textures
+                dxColorAttachment.EndingAccess.Resolve = {};
+                dxColorAttachment.EndingAccess.Type = Translate(colorAttachment.EndingAccess);
+            }
+
+            if (renderPassDesc.DepthStencil != nullptr)
+            {
+                D3D12_RENDER_PASS_DEPTH_STENCIL_DESC depthStencilDesc;
+
+                // Properties to be set via render pass begin:
+                //    depthStencilDesc.cpuDescriptor
+                //    depthStencilDesc.DepthBeginningAccess.Clear.ClearValue.DepthStencil.Depth
+                //    depthStencilDesc.StencilBeginningAccess.Clear.ClearValue.DepthStencil.Stencil
+
+                depthStencilDesc.DepthBeginningAccess.Clear.ClearValue.Format = Translate(renderPassDesc.DepthStencil->Format);
+                depthStencilDesc.DepthBeginningAccess.Type = Translate(renderPassDesc.DepthStencil->DepthBeginningAccess);
+                depthStencilDesc.DepthEndingAccess.Resolve = {};
+                depthStencilDesc.DepthEndingAccess.Type = Translate(renderPassDesc.DepthStencil->DepthEndingAccess);
+                depthStencilDesc.StencilBeginningAccess.Type = Translate(renderPassDesc.DepthStencil->StencilBeginningAccess);
+                depthStencilDesc.StencilEndingAccess.Resolve = {};
+                depthStencilDesc.StencilEndingAccess.Type = Translate(renderPassDesc.DepthStencil->StencilEndingAccess);
+            }
+            else
+            {
+                dxSubpass.DepthStencil.reset();
+            }
+
+            // TODO: Add support for DX render pass flags
+            dxSubpass.Flags = D3D12_RENDER_PASS_FLAG_NONE;
+        }
     }
 
     void DeviceManagerDX12::CheckTearingSupport()
