@@ -244,9 +244,9 @@ namespace Derydoca::Rendering
             beginInfo.ClearValues = clearValues.data();
             beginInfo.Targets = targets.data();
 
-            auto subpass = m_renderPass.Subpasses[0];
+            // Command buffer begin render pass: subpass, m_renderPass
 
-            // Command buffer begin render pass: subpass, beginInfo
+            auto subpass = m_renderPass.Subpasses[0];
 
             for (size_t targetIndex = 0; targetIndex < beginInfo.ClearValueCount; targetIndex++)
             {
@@ -256,7 +256,13 @@ namespace Derydoca::Rendering
                 subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue = clearValue;
             }
 
-            // TODO: Set depthstencil's clear value
+            if (subpass.DepthStencil.has_value())
+            {
+                auto& depthStencilClear = subpass.DepthStencil.value();
+
+                depthStencilClear.DepthBeginningAccess.Clear.ClearValue.DepthStencil.Depth = beginInfo.DepthStencil->DepthStencil.Depth;
+                depthStencilClear.StencilBeginningAccess.Clear.ClearValue.DepthStencil.Depth = beginInfo.DepthStencil->DepthStencil.Stencil;
+            }
 
             m_commandList->BeginRenderPass(
                 subpass.RenderTargets.size(),
