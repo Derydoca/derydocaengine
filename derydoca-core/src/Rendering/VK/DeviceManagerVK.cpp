@@ -337,20 +337,67 @@ namespace Derydoca::Rendering
 			vkCmdSetScissor(commandBuffer, 0, 1, &rect);
 		}
 
-		VkRenderPassBeginInfo renderPassInfo{ VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO };
-		renderPassInfo.renderPass = mainRenderPass;
-		renderPassInfo.framebuffer = swapChainFramebuffers[imageIndex];
-		renderPassInfo.renderArea.offset = { 0, 0 };
-		renderPassInfo.renderArea.extent = swapChainExtent;
+		{
+			static float t = 0.0f;
+			t += 0.005f;
+			float b = (sin(t) + 1.0) * 0.5f;
+			const float clearColor[] = { 0.2, 0.1, b, 1.0f };
 
-		static float t = 0.0f;
-		t += 0.005f;
-		float r = (sin(t) + 1.0) * 0.5f;
-		VkClearValue clearColor = { {{r, 0.2f, 0.4f, 1.0f}} };
-		renderPassInfo.clearValueCount = 1;
-		renderPassInfo.pClearValues = &clearColor;
+			int numTargets = 1;
+			auto clearValues = std::vector<ClearValue>(numTargets);
+			clearValues[0].Color.float32[0] = clearColor[0];
+			clearValues[0].Color.float32[1] = clearColor[1];
+			clearValues[0].Color.float32[2] = clearColor[2];
+			clearValues[0].Color.float32[3] = clearColor[3];
 
-		vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+			auto targets = std::vector<RenderTarget*>(numTargets);
+			targets[0] = &swapChainFramebuffers[imageIndex];
+
+			RenderPassBeginInfo beginInfo{};
+			beginInfo.Area.offset = { 0,0 };
+			beginInfo.Area.extent = { swapChainExtent.width, swapChainExtent.height };
+			beginInfo.ClearValueCount = clearValues.size();
+			beginInfo.ClearValues = clearValues.data();
+			beginInfo.Targets = targets.data();
+
+			// Command buffer begin render pass: mainRenderPass, beginInfo
+
+			auto framebuffer = static_cast<VkFramebuffer*>(beginInfo.Targets[0]);
+
+			bool hasDepthStencil = beginInfo.DepthStencil != nullptr;
+			auto clearValuesVK = std::vector<VkClearValue>(beginInfo.ClearValueCount + (hasDepthStencil ? 1 : 0));
+			for (size_t clearValueIndex = 0; clearValueIndex < beginInfo.ClearValueCount; clearValueIndex++)
+			{
+				auto& clearValueVK = clearValuesVK[clearValueIndex];
+				auto& clearValue = beginInfo.ClearValues[clearValueIndex];
+
+				for (size_t colorIndex = 0; colorIndex < 4; colorIndex++)
+				{
+					clearValueVK.color.float32[colorIndex] = clearValue.Color.float32[colorIndex];
+					clearValueVK.color.int32[colorIndex] = clearValue.Color.int32[colorIndex];
+					clearValueVK.color.uint32[colorIndex] = clearValue.Color.uint32[colorIndex];
+				}
+			}
+
+			if (hasDepthStencil)
+			{
+				auto& clearValueVK = clearValuesVK[clearValues.size() - 1];
+
+				clearValueVK.depthStencil.depth = beginInfo.DepthStencil->DepthStencil.Depth;
+				clearValueVK.depthStencil.stencil = beginInfo.DepthStencil->DepthStencil.Stencil;
+			}
+
+			VkRenderPassBeginInfo renderPassInfo{ VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO };
+			renderPassInfo.renderPass = mainRenderPass;
+			renderPassInfo.framebuffer = *framebuffer;
+			renderPassInfo.renderArea.offset = { beginInfo.Area.offset.x, beginInfo.Area.offset.y };
+			renderPassInfo.renderArea.extent = { beginInfo.Area.extent.x, beginInfo.Area.extent.y };
+			renderPassInfo.pNext = nullptr;
+			renderPassInfo.clearValueCount = clearValuesVK.size();
+			renderPassInfo.pClearValues = clearValuesVK.data();
+
+			vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+		}
 
 		vkCmdEndRenderPass(commandBuffer);
 		if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS)

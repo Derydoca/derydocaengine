@@ -10,17 +10,16 @@ namespace Derydoca
         T y;
     };
 
-    template<typename T>
+    template<typename TO, typename TE>
     struct Rect
     {
-        Vector2<T> offset;
-        Vector2<T> extent;
+        Vector2<TO> offset;
+        Vector2<TE> extent;
     };
 
     typedef Vector2<int> int2;
 
-    typedef Rect<int32_t> RectI;
-    typedef Rect<uint32_t> RectUI;
+    typedef Rect<int32_t, uint32_t> RectI;
 
     struct Viewport
     {

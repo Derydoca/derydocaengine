@@ -256,6 +256,8 @@ namespace Derydoca::Rendering
                 subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue = clearValue;
             }
 
+            // TODO: Set depthstencil's clear value
+
             m_commandList->BeginRenderPass(
                 subpass.RenderTargets.size(),
                 subpass.RenderTargets.data(),

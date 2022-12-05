@@ -16,7 +16,7 @@ int main(int argc, const char* argv[])
     D_LOG_TRACE("Engine startup");
 
     auto deviceManagerSettings = Rendering::DeviceManagerSettings();
-    auto renderingAPI = Rendering::RenderingAPI::Direct3D12;
+    auto renderingAPI = Rendering::RenderingAPI::Vulkan;
 
     SDL_Init(SDL_INIT_EVERYTHING);
 
