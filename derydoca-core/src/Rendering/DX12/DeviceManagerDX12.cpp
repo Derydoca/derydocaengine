@@ -227,11 +227,34 @@ namespace Derydoca::Rendering
             float g = (sin(t) + 1.0) * 0.5f;
             const float clearColor[] = { 0.2, g, 0.4f, 1.0f };
 
+            int numTargets = 1;
+            auto clearValues = std::vector<ClearValue>(numTargets);
+            clearValues[0].Color.float32[0] = clearColor[0];
+            clearValues[0].Color.float32[1] = clearColor[1];
+            clearValues[0].Color.float32[2] = clearColor[2];
+            clearValues[0].Color.float32[3] = clearColor[3];
+
+            auto targets = std::vector<RenderTarget*>(numTargets);
+            targets[0] = &m_renderTargetHandles[m_frameIndex];
+
+            RenderPassBeginInfo beginInfo{};
+            beginInfo.Area.offset = { 0,0 };
+            beginInfo.Area.extent = { 1080, 1920 };
+            beginInfo.ClearValueCount = clearValues.size();
+            beginInfo.ClearValues = clearValues.data();
+            beginInfo.Targets = targets.data();
+
             auto subpass = m_renderPass.Subpasses[0];
 
-            subpass.RenderTargets[0].cpuDescriptor = m_renderTargetHandles[m_frameIndex];
-            CD3DX12_CLEAR_VALUE clearValue{ subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue.Format, clearColor };
-            subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue = clearValue;
+            // Command buffer begin render pass: subpass, beginInfo
+
+            for (size_t targetIndex = 0; targetIndex < beginInfo.ClearValueCount; targetIndex++)
+            {
+                RenderTarget* rt = beginInfo.Targets[0];
+                subpass.RenderTargets[targetIndex].cpuDescriptor = *static_cast<D3D12_CPU_DESCRIPTOR_HANDLE*>(rt);
+                CD3DX12_CLEAR_VALUE clearValue{ subpass.RenderTargets[targetIndex].BeginningAccess.Clear.ClearValue.Format, beginInfo.ClearValues[0].Color.float32 };
+                subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue = clearValue;
+            }
 
             m_commandList->BeginRenderPass(
                 subpass.RenderTargets.size(),

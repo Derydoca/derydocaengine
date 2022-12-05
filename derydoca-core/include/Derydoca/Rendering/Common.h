@@ -343,9 +343,11 @@ namespace Derydoca::Rendering
 
     struct ClearColorValue
     {
-        float float32[4];
-        int32_t int32[4];
-        uint32_t uint32[4];
+        union {
+            float float32[4];
+            int32_t int32[4];
+            uint32_t uint32[4];
+        };
     };
 
     struct DepthStencilClearValue
@@ -362,9 +364,10 @@ namespace Derydoca::Rendering
 
     struct RenderPassBeginInfo
     {
-        RenderTarget* Target;
         RectI Area;
         uint32_t ClearValueCount;
         ClearValue* ClearValues;
+        RenderTarget** Targets;
+        ClearValue* DepthStencil;
     };
 }
