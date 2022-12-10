@@ -8,6 +8,77 @@
 
 namespace Derydoca::Rendering
 {
+    void MessageCallback(
+        D3D12_MESSAGE_CATEGORY Category,
+        D3D12_MESSAGE_SEVERITY Severity,
+        D3D12_MESSAGE_ID ID,
+        LPCSTR pDescription,
+        void* pContext)
+    {
+        std::string categoryStr;
+        switch (Category)
+        {
+        case D3D12_MESSAGE_CATEGORY_APPLICATION_DEFINED:
+            categoryStr = "Application Defined";
+            break;
+        case D3D12_MESSAGE_CATEGORY_MISCELLANEOUS:
+            categoryStr = "Miscellaneous";
+            break;
+        case D3D12_MESSAGE_CATEGORY_INITIALIZATION:
+            categoryStr = "Initialization";
+            break;
+        case D3D12_MESSAGE_CATEGORY_CLEANUP:
+            categoryStr = "Cleanup";
+            break;
+        case D3D12_MESSAGE_CATEGORY_COMPILATION:
+            categoryStr = "Compilation";
+            break;
+        case D3D12_MESSAGE_CATEGORY_STATE_CREATION:
+            categoryStr = "State Creation";
+            break;
+        case D3D12_MESSAGE_CATEGORY_STATE_SETTING:
+            categoryStr = "State Setting";
+            break;
+        case D3D12_MESSAGE_CATEGORY_STATE_GETTING:
+            categoryStr = "State Getting";
+            break;
+        case D3D12_MESSAGE_CATEGORY_RESOURCE_MANIPULATION:
+            categoryStr = "Resource Manipulation";
+            break;
+        case D3D12_MESSAGE_CATEGORY_EXECUTION:
+            categoryStr = "Execution";
+            break;
+        case D3D12_MESSAGE_CATEGORY_SHADER:
+            categoryStr = "Shader";
+            break;
+        default:
+            categoryStr = "Unknown";
+            break;
+        }
+
+        switch (Severity)
+        {
+        case D3D12_MESSAGE_SEVERITY_CORRUPTION:
+            D_LOG_CRITICAL("D3D12 Corruption: {0}\n    Message ID: {1} [{1:x}]\n    Category:   {2}", pDescription, ID, categoryStr);
+            break;
+        case D3D12_MESSAGE_SEVERITY_ERROR:
+            D_LOG_ERROR("D3D12 Error: {0}\n    Message ID: {1} [{1:x}]\n    Category:   {2}", pDescription, ID, categoryStr);
+            break;
+        case D3D12_MESSAGE_SEVERITY_WARNING:
+            D_LOG_WARN("D3D12 Warning: {0}\n    Message ID: {1} [{1:x}]\n    Category:   {2}", pDescription, ID, categoryStr);
+            break;
+        case D3D12_MESSAGE_SEVERITY_INFO:
+            D_LOG_INFO("D3D12 Info: {0}\n    Message ID: {1} [{1:x}]\n    Category:   {2}", pDescription, ID, categoryStr);
+            break;
+        case D3D12_MESSAGE_SEVERITY_MESSAGE:
+            D_LOG_TRACE("D3D12 Message: {0}\n    Message ID: {1} [{1:x}]\n    Category:   {2}", pDescription, ID, categoryStr);
+            break;
+        default:
+            D_LOG_ERROR("D3D12 Unknown Severity Message: {0}\n    Message ID: {1} [{1:x}]\n    Category:   {2}", pDescription, ID, categoryStr);
+            break;
+        }
+    }
+
     DeviceManagerDX12::DeviceManagerDX12(const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
         : m_fenceValues()
     {
@@ -41,6 +112,14 @@ namespace Derydoca::Rendering
             D3D_ACTIVE_FEATURE_LEVEL,
             IID_PPV_ARGS(&m_device)
         ));
+
+        ComPtr<ID3D12InfoQueue1> infoQueue;
+        if (SUCCEEDED(m_device->QueryInterface(IID_PPV_ARGS(&infoQueue))))
+        {
+            DWORD callbackCookie{};
+            infoQueue->RegisterMessageCallback(MessageCallback, D3D12_MESSAGE_CALLBACK_FLAG_NONE, nullptr, &callbackCookie);
+            D_LOG_INFO("{0}", callbackCookie);
+        }
 
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
