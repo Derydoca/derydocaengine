@@ -2,7 +2,7 @@ project(derydoca-core)
 
 add_library(${PROJECT_NAME} STATIC
 	"./src/Logging/LogMessage.cpp"
-	"./src/Logging/Log.cpp" "src/DeviceManager.cpp")
+	"./src/Logging/Log.cpp" "src/DeviceManager.cpp" "src/Rendering/Renderer.cpp")
 
 set(PRIVATE_INCLUDES)
 set(PUBLIC_LIBS)

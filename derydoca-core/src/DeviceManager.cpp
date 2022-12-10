@@ -10,40 +10,37 @@
 #endif
 
 namespace Derydoca::Rendering {
-	DeviceManager* DeviceManager::Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
-	{
-		DeviceManager* deviceManager = nullptr;
-		switch (renderingAPI)
-		{
+    DeviceManager* DeviceManager::Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
+    {
+        DeviceManager* deviceManager = nullptr;
+        switch (renderingAPI)
+        {
 #ifdef USE_DX12
-		case RenderingAPI::Direct3D12:
-		{
-			deviceManager = new Rendering::DeviceManagerDX12();
-			break;
-		}
+        case RenderingAPI::Direct3D12:
+        {
+            deviceManager = new Rendering::DeviceManagerDX12(settings, sdlWindow);
+            break;
+        }
 #endif
 #ifdef USE_VULKAN
-		case RenderingAPI::Vulkan:
-		{
-			deviceManager = new Rendering::DeviceManagerVK();
-			break;
-		}
+        case RenderingAPI::Vulkan:
+        {
+            deviceManager = new Rendering::DeviceManagerVK(settings, sdlWindow);
+            break;
+        }
 #endif
-		default:
-		{
-			return deviceManager;
-			break;
-		}
-		}
+        default:
+        {
+            return deviceManager;
+            break;
+        }
+        }
 
-		deviceManager->window = sdlWindow;
-		deviceManager->Initialize(settings);
+        return deviceManager;
+    }
 
-		return deviceManager;
-	}
-
-	void DeviceManager::SignalWindowResizedEvent()
-	{
-		framebufferResized = true;
-	}
+    void DeviceManager::SignalWindowResizedEvent()
+    {
+        framebufferResized = true;
+    }
 }

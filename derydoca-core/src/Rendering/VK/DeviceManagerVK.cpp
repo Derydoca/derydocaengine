@@ -62,6 +62,37 @@ namespace Derydoca::Rendering
 
 	VkSurfaceKHR surface;
 
+	DeviceManagerVK::DeviceManagerVK(const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
+	{
+		window = sdlWindow;
+		Initialize(settings);
+	}
+
+	DeviceManagerVK::~DeviceManagerVK()
+	{
+		vkDeviceWaitIdle(device);
+
+		CleanupSwapChain();
+
+		for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
+		{
+			vkDestroySemaphore(device, imageAvailableSemaphores[i], allocationCallbacks);
+			vkDestroySemaphore(device, renderFinishedSemaphores[i], allocationCallbacks);
+			vkDestroyFence(device, inFlightFences[i], allocationCallbacks);
+		}
+
+		vkDestroyCommandPool(device, renderingCommandPool, allocationCallbacks);
+
+		vkDestroyRenderPass(device, mainRenderPass, allocationCallbacks);
+
+		vkDestroyDevice(device, allocationCallbacks);
+#ifdef _DEBUG
+		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, allocationCallbacks);
+#endif
+		vkDestroySurfaceKHR(instance, surface, allocationCallbacks);
+		vkDestroyInstance(instance, allocationCallbacks);
+	}
+
 	void DeviceManagerVK::Initialize(const DeviceManagerSettings& settings)
 	{
 		VkApplicationInfo appInfo{ VK_STRUCTURE_TYPE_APPLICATION_INFO };
@@ -437,31 +468,6 @@ namespace Derydoca::Rendering
 		vkQueuePresentKHR(presentQueue, &presentInfo);
 
 		currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
-	}
-
-	void DeviceManagerVK::Cleanup()
-	{
-		vkDeviceWaitIdle(device);
-
-		CleanupSwapChain();
-
-		for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
-		{
-			vkDestroySemaphore(device, imageAvailableSemaphores[i], allocationCallbacks);
-			vkDestroySemaphore(device, renderFinishedSemaphores[i], allocationCallbacks);
-			vkDestroyFence(device, inFlightFences[i], allocationCallbacks);
-		}
-
-		vkDestroyCommandPool(device, renderingCommandPool, allocationCallbacks);
-
-		vkDestroyRenderPass(device, mainRenderPass, allocationCallbacks);
-
-		vkDestroyDevice(device, allocationCallbacks);
-#ifdef _DEBUG
-		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, allocationCallbacks);
-#endif
-		vkDestroySurfaceKHR(instance, surface, allocationCallbacks);
-		vkDestroyInstance(instance, allocationCallbacks);
 	}
 
 	void DeviceManagerVK::CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass)

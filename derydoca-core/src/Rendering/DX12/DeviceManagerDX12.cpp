@@ -8,6 +8,13 @@
 
 namespace Derydoca::Rendering
 {
+    DeviceManagerDX12::DeviceManagerDX12(const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
+        : m_fenceValues()
+    {
+        window = sdlWindow;
+        Initialize(settings);
+    }
+
 	void DeviceManagerDX12::Initialize(const DeviceManagerSettings& settings)
 	{
 		UINT dxgiFactoryFlags = 0;
@@ -277,10 +284,9 @@ namespace Derydoca::Rendering
             m_commandList->EndRenderPass();
         }
 
-        ThrowIfFailed(m_commandList->Close());
 
         //vkEndCommandBuffer
-        m_commandList->Close();
+        ThrowIfFailed(m_commandList->Close());
 
         //vkQueueSubmit
         ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
@@ -291,10 +297,6 @@ namespace Derydoca::Rendering
 
         const UINT currentFenceValue = m_fenceValues[m_frameIndex];
         ThrowIfFailed(m_renderingCommandQueue->Signal(m_fences[m_frameIndex].Get(), currentFenceValue));
-    }
-
-    void DeviceManagerDX12::Cleanup()
-    {
     }
 
     void DeviceManagerDX12::CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass)

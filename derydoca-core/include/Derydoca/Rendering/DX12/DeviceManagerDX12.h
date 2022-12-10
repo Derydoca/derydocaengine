@@ -25,12 +25,10 @@ namespace Derydoca::Rendering
 	public:
 		static const UINT FrameCount = 2;
 
-		DeviceManagerDX12() = default;
+		DeviceManagerDX12(const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
 		DeviceManagerDX12(const DeviceManagerDX12&) = delete;
 
-		void Initialize(const DeviceManagerSettings& settings) override;
 		void Render() override;
-		void Cleanup() override;
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 
 	private:
@@ -38,6 +36,8 @@ namespace Derydoca::Rendering
 		DIRECT_ENUM_TRANSLATE_FUNCS(RenderPassEndingAccess, D3D12_RENDER_PASS_ENDING_ACCESS_TYPE);
 
 		DXGI_FORMAT Translate(ImageFormat imageFormat);
+
+		void Initialize(const DeviceManagerSettings& settings);
 		void GetHardwareAdapter(IDXGIFactory1* pFactory, IDXGIAdapter1** ppAdapter);
 		void CheckTearingSupport();
 		void PrintDisplayColorSpaceInfo(SDL_Window* window);

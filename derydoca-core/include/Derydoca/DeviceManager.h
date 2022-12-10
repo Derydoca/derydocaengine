@@ -22,10 +22,9 @@ namespace Derydoca::Rendering
 #define DIRECT_ENUM_TRANSLATE_FUNCS(GenericType, SpecificType) DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, SpecificType); DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType)
 
 		static DeviceManager* Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
+		virtual ~DeviceManager() {};
 
-		void Initialize();
         virtual void Render() = 0;
-        virtual void Cleanup() = 0;
 		virtual void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) = 0;
 
         void SignalWindowResizedEvent();

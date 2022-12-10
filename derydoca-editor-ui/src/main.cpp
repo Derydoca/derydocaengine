@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #undef main
+#include <memory>
 
 #include "Derydoca/Editor/CommandLineArgs.h"
 #include "Derydoca/Logging/Log.h"
@@ -9,6 +10,7 @@
 const char* WindowName = "Derydoca Engine";
 
 using namespace Derydoca;
+using namespace Derydoca::Rendering;
 
 int main(int argc, const char* argv[])
 {
@@ -32,7 +34,7 @@ int main(int argc, const char* argv[])
         return -1;
     }
 
-    auto deviceManager = Derydoca::Rendering::DeviceManager::Create(renderingAPI, deviceManagerSettings, window);
+    auto deviceManager = std::unique_ptr<DeviceManager>(DeviceManager::Create(renderingAPI, deviceManagerSettings, window));
     if (deviceManager == nullptr)
     {
         D_LOG_CRITICAL("Unable to create device manager!");
@@ -67,8 +69,6 @@ int main(int argc, const char* argv[])
         }
         deviceManager->Render();
     }
-
-    deviceManager->Cleanup();
 
     SDL_DestroyWindow(window);
     SDL_Quit();

@@ -30,12 +30,11 @@ namespace Derydoca::Rendering
 	class DeviceManagerVK : public DeviceManager
 	{
 	public:
-		DeviceManagerVK() = default;
+		DeviceManagerVK(const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
+		~DeviceManagerVK();
 
-		void Initialize(const DeviceManagerSettings& settings) override;
 		void Render() override;
-		void Cleanup() override;
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 
 	private:
@@ -53,6 +52,7 @@ namespace Derydoca::Rendering
 		VkAttachmentReference Translate(AttachmentReference attachment);
 		inline VkRenderPass* Translate(RenderPass* renderPass) { return static_cast<VkRenderPass*>(renderPass); }
 
+		void Initialize(const DeviceManagerSettings& settings);
 		bool CheckValidationLayerSupport(const std::vector<const char*>& validationLayers);
 		VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
 		void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
