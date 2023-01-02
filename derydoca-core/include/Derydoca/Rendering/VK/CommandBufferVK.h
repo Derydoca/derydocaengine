@@ -11,6 +11,8 @@ namespace Derydoca::Rendering
     class CommandBufferVK : public CommandBuffer
     {
     public:
+        CommandBufferVK(VkCommandBuffer* internalCommandBuffer);
+
         void SetViewport(Viewport viewport) override;
         void SetScissorRect(RectI rect) override;
         void BeginRenderPass(RenderPass* renderPass, RenderPassBeginInfo& beginInfo) override;
@@ -18,7 +20,7 @@ namespace Derydoca::Rendering
         void EndRenderPass() override;
 
     private:
-        VkCommandBuffer commandBuffer;
+        VkCommandBuffer* commandBuffer;
         VkRenderPass* activeRenderPass;
 
     };

@@ -4,6 +4,7 @@
 #include <SDL2/SDL_syswm.h>
 
 #include "Derydoca/Rendering/Common.h"
+#include "Derydoca/Rendering/CommandBuffer.h"
 
 namespace Derydoca::Rendering
 {
@@ -26,6 +27,7 @@ namespace Derydoca::Rendering
 
         virtual void Render() = 0;
 		virtual void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) = 0;
+		virtual void CreateCommandBuffer(CommandBuffer* commandBuffer) = 0;
 
         void SignalWindowResizedEvent();
 

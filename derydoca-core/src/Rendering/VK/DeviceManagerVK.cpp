@@ -1,6 +1,7 @@
 #include "Derydoca/Rendering/VK/DeviceManagerVK.h"
 #include "Derydoca/Logging/Log.h"
 #include "Derydoca/Rendering/VK/VKHelper.h"
+#include "Derydoca/Rendering/VK/CommandBufferVK.h"
 
 #include <SDL2/SDL_vulkan.h>
 #include <set>
@@ -370,7 +371,7 @@ namespace Derydoca::Rendering
 
 		{
 			static float t = 0.0f;
-			t += 0.005f;
+			t += 0.05f;
 			float b = (sin(t) + 1.0) * 0.5f;
 			const float clearColor[] = { 0.2, 0.1, b, 1.0f };
 
@@ -578,6 +579,36 @@ namespace Derydoca::Rendering
 		renderPassInfo.pNext = nullptr;
 
 		ThrowIfFailed(vkCreateRenderPass(device, &renderPassInfo, nullptr, static_cast<VkRenderPass*>(renderPass)));
+	}
+
+	void DeviceManagerVK::CreateCommandBuffer(CommandBuffer* commandBuffer)
+	{
+		VkCommandBufferAllocateInfo allocInfo{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
+		allocInfo.commandPool = renderingCommandPool;
+		allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		allocInfo.commandBufferCount = 1;
+
+		// DX12 creates command buffers in the recording state so we should do the same here
+		VkCommandBuffer internalCommandBuffer;
+		{
+			if (vkAllocateCommandBuffers(device, &allocInfo, &internalCommandBuffer) != VK_SUCCESS)
+			{
+				throw("Failed to allocate command buffers!");
+			}
+
+			VkCommandBufferBeginInfo beginInfo{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO };
+			beginInfo.flags = 0;
+			beginInfo.pInheritanceInfo = nullptr;
+
+			if (vkBeginCommandBuffer(internalCommandBuffer, &beginInfo) != VK_SUCCESS)
+			{
+				throw std::runtime_error("Failed to begin recording command buffer!");
+			}
+		}
+
+		auto vkCommandBuffer = new CommandBufferVK(&internalCommandBuffer);
+
+		commandBuffer = static_cast<CommandBuffer*>(vkCommandBuffer);
 	}
 
 	VkFormat DeviceManagerVK::Translate(const ImageFormat format)

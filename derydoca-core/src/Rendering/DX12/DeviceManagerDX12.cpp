@@ -443,6 +443,11 @@ namespace Derydoca::Rendering
         }
     }
 
+    void DeviceManagerDX12::CreateCommandBuffer(CommandBuffer* commandBuffer)
+    {
+        D_LOG_CRITICAL("NOT IMPLEMENTED");
+    }
+
     void DeviceManagerDX12::CheckTearingSupport()
     {
         ComPtr<IDXGIFactory6> factory;

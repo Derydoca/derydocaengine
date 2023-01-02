@@ -5,6 +5,11 @@
 
 namespace Derydoca::Rendering
 {
+    CommandBufferVK::CommandBufferVK(VkCommandBuffer* internalCommandBuffer)
+        : commandBuffer(internalCommandBuffer)
+    {
+    }
+
     void CommandBufferVK::SetViewport(Viewport viewport)
     {
         VkViewport vkViewport{};
@@ -15,7 +20,7 @@ namespace Derydoca::Rendering
         vkViewport.minDepth = viewport.minDepth;
         vkViewport.maxDepth = viewport.maxDepth;
 
-        vkCmdSetViewport(commandBuffer, 0, 1, &vkViewport);
+        vkCmdSetViewport(*commandBuffer, 0, 1, &vkViewport);
     }
 
     void CommandBufferVK::SetScissorRect(RectI rect)
@@ -26,7 +31,7 @@ namespace Derydoca::Rendering
         vkRect.offset.x = rect.offset.x;
         vkRect.offset.y = rect.offset.y;
 
-        vkCmdSetScissor(commandBuffer, 0, 1, &vkRect);
+        vkCmdSetScissor(*commandBuffer, 0, 1, &vkRect);
     }
 
     // TODO: Move to VKHelper.h
