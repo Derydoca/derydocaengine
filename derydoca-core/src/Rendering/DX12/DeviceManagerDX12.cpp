@@ -3,6 +3,7 @@
 #include "Derydoca/Rendering/DX12/DXHelper.h"
 
 #include <string>
+#include <fmt/xchar.h>
 
 #define D3D_ACTIVE_FEATURE_LEVEL D3D_FEATURE_LEVEL_12_1
 
@@ -197,6 +198,7 @@ namespace Derydoca::Rendering
                 m_renderTargetHandles[n].InitOffsetted(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), n, m_rtvDescriptorSize);
                 ThrowIfFailed(m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_renderTargets[n])));
                 m_device->CreateRenderTargetView(m_renderTargets[n].Get(), nullptr, m_renderTargetHandles[n]);
+                m_renderTargets[n]->SetName(L"RenderTarget");
 
                 ThrowIfFailed(m_device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&m_commandAllocators[n])));
             }
@@ -285,6 +287,7 @@ namespace Derydoca::Rendering
 
         //vkAllocateCommandBuffers;vkBeginCommandBuffer
         ThrowIfFailed(m_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, m_commandAllocators[m_frameIndex].Get(), nullptr, IID_PPV_ARGS(&m_commandList)));
+        m_commandList->SetName(L"Main");
 
         //vkCmdSetViewport
         {
@@ -334,6 +337,8 @@ namespace Derydoca::Rendering
 
             auto subpass = m_renderPass.Subpasses[0];
 
+            m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
+
             for (size_t targetIndex = 0; targetIndex < beginInfo.ClearValueCount; targetIndex++)
             {
                 RenderTarget* rt = beginInfo.Targets[0];
@@ -361,6 +366,7 @@ namespace Derydoca::Rendering
         //vkCmdEndRenderPass
         {
             m_commandList->EndRenderPass();
+            m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
         }
 
 
