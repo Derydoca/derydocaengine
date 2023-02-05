@@ -6,6 +6,7 @@ namespace Derydoca::Rendering
 {
     class CommandBuffer
     {
+    public:
         virtual void SetViewport(Viewport viewport) = 0;
         virtual void SetScissorRect(RectI rect) = 0;
         virtual void BeginRenderPass(RenderPass* renderPass, RenderPassBeginInfo& beginInfo) = 0;

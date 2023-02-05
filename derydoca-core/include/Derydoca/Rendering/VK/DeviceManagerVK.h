@@ -36,7 +36,7 @@ namespace Derydoca::Rendering
 
 		void Render() override;
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
-		void CreateCommandBuffer(CommandBuffer* commandBuffer) override;
+		void CreateCommandBuffer(CommandBuffer* commandBuffer) const override;
 
 	private:
 		DIRECT_ENUM_TRANSLATE_FUNCS(ImageSampleCount, VkSampleCountFlagBits);

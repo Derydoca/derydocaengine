@@ -27,7 +27,7 @@ namespace Derydoca::Rendering
 
         virtual void Render() = 0;
 		virtual void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) = 0;
-		virtual void CreateCommandBuffer(CommandBuffer* commandBuffer) = 0;
+		virtual void CreateCommandBuffer(CommandBuffer* commandBuffer) const = 0;
 
         void SignalWindowResizedEvent();
 

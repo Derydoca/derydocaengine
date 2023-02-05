@@ -443,7 +443,7 @@ namespace Derydoca::Rendering
         }
     }
 
-    void DeviceManagerDX12::CreateCommandBuffer(CommandBuffer* commandBuffer)
+    void DeviceManagerDX12::CreateCommandBuffer(CommandBuffer* commandBuffer) const
     {
         D_LOG_CRITICAL("NOT IMPLEMENTED");
     }

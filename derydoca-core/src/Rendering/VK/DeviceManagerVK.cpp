@@ -326,6 +326,53 @@ namespace Derydoca::Rendering
 
 		vkResetFences(device, 1, &inFlightFences[currentFrame]);
 
+#if 0
+		CommandBuffer* cmd = nullptr;
+		CreateCommandBuffer(cmd);
+
+		Viewport viewport;
+		viewport.height = 1080;
+		viewport.width = 1920;
+		viewport.minDepth = 0.0;
+		viewport.maxDepth = 1.0;
+		viewport.x = 0.0;
+		viewport.y = 0.0;
+		cmd->SetViewport(viewport);
+
+		RectI scissorRect;
+		scissorRect.extent = { 1920, 1080 };
+		scissorRect.offset = { 0, 0 };
+		cmd->SetScissorRect(scissorRect);
+
+		static float t = 0.0f;
+		t += 0.05f;
+		float b = (sin(t) + 1.0) * 0.5f;
+		const float clearColor[] = { 0.2, 0.1, b, 1.0f };
+
+		int numTargets = 1;
+		auto clearValues = std::vector<ClearValue>(numTargets);
+		clearValues[0].Color.float32[0] = clearColor[0];
+		clearValues[0].Color.float32[1] = clearColor[1];
+		clearValues[0].Color.float32[2] = clearColor[2];
+		clearValues[0].Color.float32[3] = clearColor[3];
+
+		auto targets = std::vector<RenderTarget*>(numTargets);
+		targets[0] = &swapChainFramebuffers[imageIndex];
+
+		RenderPassBeginInfo beginInfo{};
+		beginInfo.Area.offset = { 0,0 };
+		beginInfo.Area.extent = { swapChainExtent.width, swapChainExtent.height };
+		beginInfo.ClearValueCount = clearValues.size();
+		beginInfo.ClearValues = clearValues.data();
+		beginInfo.Targets = targets.data();
+
+		cmd->BeginRenderPass(mainRenderPass, beginInfo);
+
+		cmd->EndRenderPass();
+
+		// TODO: Wrap up the command submit info data into a rendering API agnostic structure
+		SubmitCommandBuffer(cmd, submitInfo);
+#else
 		VkCommandBufferAllocateInfo allocInfo{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
 		allocInfo.commandPool = renderingCommandPool;
 		allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -467,6 +514,7 @@ namespace Derydoca::Rendering
 		presentInfo.pResults = nullptr;
 
 		vkQueuePresentKHR(presentQueue, &presentInfo);
+#endif
 
 		currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
 	}
@@ -581,7 +629,7 @@ namespace Derydoca::Rendering
 		ThrowIfFailed(vkCreateRenderPass(device, &renderPassInfo, nullptr, static_cast<VkRenderPass*>(renderPass)));
 	}
 
-	void DeviceManagerVK::CreateCommandBuffer(CommandBuffer* commandBuffer)
+	void DeviceManagerVK::CreateCommandBuffer(CommandBuffer* commandBuffer) const
 	{
 		VkCommandBufferAllocateInfo allocInfo{ VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
 		allocInfo.commandPool = renderingCommandPool;
