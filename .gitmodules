@@ -1,0 +1,3 @@
+[submodule "vendor/nvrhi"]
+	path = vendor/nvrhi
+	url = https://github.com/NVIDIAGameWorks/nvrhi

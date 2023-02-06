@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
+#include <nvrhi/nvrhi.h>
 
 #include "Derydoca/Rendering/Common.h"
 #include "Derydoca/Rendering/CommandBuffer.h"
@@ -13,6 +14,13 @@ namespace Derydoca::Rendering
 		uint32_t width = 1920;
 		uint32_t height = 1080;
         ImageFormat imageFormat = ImageFormat::R8G8B8A8_UNORM;
+	};
+
+	struct DefaultMessageCallback : public nvrhi::IMessageCallback
+	{
+		static DefaultMessageCallback& GetInstance();
+
+		void message(nvrhi::MessageSeverity severity, const char* messageText) override;
 	};
 
 	class DeviceManager

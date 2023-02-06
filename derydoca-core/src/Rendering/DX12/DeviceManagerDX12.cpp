@@ -171,6 +171,15 @@ namespace Derydoca::Rendering
             &swapChain
         ));
 
+        nvrhi::d3d12::DeviceDesc deviceDesc;
+        deviceDesc.errorCB = &DefaultMessageCallback::GetInstance();
+        deviceDesc.pDevice = m_device;
+        deviceDesc.pGraphicsCommandQueue = m_renderingCommandQueue;
+        // TODO: Add other command queues
+        //deviceDesc.pComputeCommandQueue = m_computeCommandQueue;
+        //deviceDesc.pCopyCommandQueue = m_copyCommandQueue;
+        m_nvrhiDevice = nvrhi::d3d12::createDevice(deviceDesc);
+
         if (m_tearingSupport)
         {
             m_dxgiFactory->MakeWindowAssociation(osWindow, DXGI_MWA_NO_ALT_ENTER);

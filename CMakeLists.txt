@@ -13,5 +13,9 @@ elseif (UNIX)
 	add_compile_definitions(PLATFORM_LINUX=1)
 endif()
 
+set(NVRHI_WITH_DX12 "${ENABLE_DX12}" CACHE BOOL "" FORCE)
+set(NVRHI_WITH_VULKAN "${ENABLE_VULKAN}" CACHE BOOL "" FORCE)
+
+add_subdirectory("vendor/nvrhi")
 add_subdirectory("derydoca-core")
 add_subdirectory("derydoca-editor-ui")
