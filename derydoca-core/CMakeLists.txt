@@ -5,6 +5,7 @@ add_library(${PROJECT_NAME} STATIC
 	"./src/Logging/Log.cpp" "src/DeviceManager.cpp" "src/Rendering/Renderer.cpp" "src/Rendering/VK/VulkanBackend.cpp")
 
 set(PRIVATE_INCLUDES)
+set(PUBLIC_INCLUDES)
 set(PUBLIC_LIBS)
 
 find_package(spdlog CONFIG REQUIRED)
@@ -35,7 +36,8 @@ endif()
 
 set(PUBLIC_LIBS ${PUBLIC_LIBS} nvrhi)
 
-set(PRIVATE_INCLUDES ${PRIVATE_INCLUDES} "../vendor/nvrhi/include")
+set(PUBLIC_INCLUDES ${PUBLIC_INCLUDES} "../vendor/nvrhi/include")
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PRIVATE_INCLUDES})
+target_include_directories(${PROJECT_NAME} PUBLIC ${PUBLIC_INCLUDES})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PUBLIC_LIBS})

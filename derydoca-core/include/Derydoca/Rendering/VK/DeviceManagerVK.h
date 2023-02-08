@@ -46,14 +46,12 @@ namespace Derydoca::Rendering
 		DIRECT_ENUM_TRANSLATE_FUNC_TO(AccessFlags, VkAccessFlags);
 		DIRECT_ENUM_TRANSLATE_FUNC_TO(PipelineStageFlags, VkPipelineStageFlags);
 
-		VkFormat Translate(const ImageFormat format);
 		ImageFormat Translate(const VkFormat format);
 		VkAttachmentLoadOp Translate(const RenderPassBeginningAccess access);
 		VkAttachmentStoreOp Translate(const RenderPassEndingAccess access);
 		VkAttachmentReference Translate(AttachmentReference attachment);
 		inline VkRenderPass* Translate(RenderPass* renderPass) { return static_cast<VkRenderPass*>(renderPass); }
 
-		void Initialize(const DeviceManagerSettings& settings);
 		bool CheckValidationLayerSupport(const std::vector<const char*>& validationLayers);
 		VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
 		void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);

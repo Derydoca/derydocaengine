@@ -22,7 +22,7 @@ int main(int argc, const char* argv[])
 
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    Uint32 windowFlags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+    Uint32 windowFlags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIDDEN;
     if (renderingAPI == Rendering::RenderingAPI::Vulkan)
     {
         windowFlags |= SDL_WINDOW_VULKAN;
@@ -40,6 +40,8 @@ int main(int argc, const char* argv[])
         D_LOG_CRITICAL("Unable to create device manager!");
         return -1;
     }
+
+    SDL_ShowWindow(window);
 
     while (true)
     {
@@ -62,12 +64,12 @@ int main(int argc, const char* argv[])
                 switch (event.window.event)
                 {
                 case SDL_WINDOWEVENT_RESIZED:
-                    deviceManager->SignalWindowResizedEvent();
+                    //deviceManager->SignalWindowResizedEvent();
                     break;
                 }
             }
         }
-        deviceManager->Render();
+        //deviceManager->Render();
     }
 
     SDL_DestroyWindow(window);

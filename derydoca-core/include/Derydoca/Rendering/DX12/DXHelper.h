@@ -7,13 +7,15 @@
 #define NAME_D3D_OBJECT(x)
 #endif
 
+#define HR_RETURN(hr) if(FAILED(hr)) return false;
+
 #if defined(_DEBUG)
 
 inline void ThrowIfFailed(HRESULT hr)
 {
     if (FAILED(hr))
     {
-        D_LOG_CRITICAL("DXFailure: {0:x}", hr);
+        D_LOG_CRITICAL("DXFailure: 0x{0:x}", hr);
         exit(-1);
     }
 }

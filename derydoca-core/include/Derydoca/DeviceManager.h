@@ -3,6 +3,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 #include <nvrhi/nvrhi.h>
+#ifdef USE_DX12
+#include <dxgi.h>
+#include <d3d12.h>
+#endif
 
 #include "Derydoca/Rendering/Common.h"
 #include "Derydoca/Rendering/CommandBuffer.h"
@@ -13,7 +17,23 @@ namespace Derydoca::Rendering
 	{
 		uint32_t width = 1920;
 		uint32_t height = 1080;
-        ImageFormat imageFormat = ImageFormat::R8G8B8A8_UNORM;
+		uint32_t sampleCount = 1;
+		uint32_t sampleQuality = 0;
+        ImageFormat imageFormat = ImageFormat::RGBA8_UNORM;
+		std::wstring adapterNameSubstring = L"";
+		uint32_t bufferCount = 3;
+		bool allowModeSwitch = true;
+		bool enableDebugRuntime = true;
+		bool enableComputeQueue = true;
+		bool enableCopyQueue = true;
+		uint32_t refreshRate = 0;
+		bool startFullscreen = false;
+		bool enableNvrhiValidationLayer = true;
+
+#ifdef USE_DX12
+		DXGI_USAGE swapChainUsage = DXGI_USAGE_SHADER_INPUT | DXGI_USAGE_RENDER_TARGET_OUTPUT;
+		D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_12_0;
+#endif
 	};
 
 	struct DefaultMessageCallback : public nvrhi::IMessageCallback
@@ -40,10 +60,11 @@ namespace Derydoca::Rendering
         void SignalWindowResizedEvent();
 
     protected:
+		DeviceManager(const DeviceManagerSettings& deviceSettings, SDL_Window* sdlWindow);
+
+		DeviceManagerSettings m_DeviceSettings;
         SDL_Window* window;
         bool framebufferResized = false;
 
-	private:
-		virtual void Initialize(const DeviceManagerSettings& settings) = 0;
 	};
 }

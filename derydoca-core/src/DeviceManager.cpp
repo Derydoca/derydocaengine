@@ -16,6 +16,12 @@ namespace Derydoca::Rendering {
         return Instance;
     }
 
+    DeviceManager::DeviceManager(const DeviceManagerSettings& deviceSettings, SDL_Window* sdlWindow)
+    {
+        m_DeviceSettings = deviceSettings;
+        window = sdlWindow;
+    }
+
     void DefaultMessageCallback::message(nvrhi::MessageSeverity severity, const char* messageText)
     {
         switch (severity)
