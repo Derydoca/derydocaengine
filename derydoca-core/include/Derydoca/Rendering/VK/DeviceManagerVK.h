@@ -38,6 +38,12 @@ namespace Derydoca::Rendering
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 		void CreateCommandBuffer(CommandBuffer* commandBuffer) const override;
 
+	protected:
+		nvrhi::GraphicsAPI GetGraphicsAPI() const override;
+		uint32_t GetBackBufferCount() override;
+		void ResizeSwapChain() override;
+		nvrhi::ITexture* GetBackBuffer(uint32_t index) override;
+
 	private:
 		DIRECT_ENUM_TRANSLATE_FUNCS(ImageSampleCount, VkSampleCountFlagBits);
 		DIRECT_ENUM_TRANSLATE_FUNCS(ImageLayout, VkImageLayout);

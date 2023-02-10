@@ -20,6 +20,8 @@ namespace Derydoca::Rendering {
     {
         m_DeviceSettings = deviceSettings;
         window = sdlWindow;
+
+        m_RequestedVSync = m_DeviceSettings.vsyncEnabled;
     }
 
     void DefaultMessageCallback::message(nvrhi::MessageSeverity severity, const char* messageText)
@@ -71,6 +73,73 @@ namespace Derydoca::Rendering {
         }
 
         return deviceManager;
+    }
+
+    void DeviceManager::UpdateWindowSize()
+    {
+        int width;
+        int height;
+        SDL_GetWindowSize(window, &width, &height);
+
+        if (width == 0 || height == 0)
+        {
+            // window is minimized
+            m_windowVisible = false;
+            return;
+        }
+
+        m_windowVisible = true;
+
+        if (int(m_DeviceSettings.width) != width ||
+            int(m_DeviceSettings.height) != height ||
+            (m_DeviceSettings.vsyncEnabled != m_RequestedVSync && GetGraphicsAPI() == nvrhi::GraphicsAPI::VULKAN))
+        {
+            // window is not minimized, and the size has changed
+
+            BackBufferResizing();
+
+            m_DeviceSettings.width = width;
+            m_DeviceSettings.height = height;
+            m_DeviceSettings.vsyncEnabled = m_RequestedVSync;
+
+            ResizeSwapChain();
+            BackBufferResized();
+        }
+
+        //m_DeviceParams.vsyncEnabled = m_RequestedVSync;
+    }
+
+    void DeviceManager::BackBufferResizing()
+    {
+        m_SwapChainFramebuffers.clear();
+
+        //for (auto it : m_vRenderPasses)
+        //{
+        //    it->BackBufferResizing();
+        //}
+    }
+
+    void DeviceManager::BackBufferResized()
+    {
+        //for (auto it : m_vRenderPasses)
+        //{
+        //    it->BackBufferResized(m_DeviceParams.backBufferWidth,
+        //        m_DeviceParams.backBufferHeight,
+        //        m_DeviceParams.swapChainSampleCount);
+        //}
+
+        uint32_t backBufferCount = GetBackBufferCount();
+        m_SwapChainFramebuffers.resize(backBufferCount);
+        for (uint32_t index = 0; index < backBufferCount; index++)
+        {
+            m_SwapChainFramebuffers[index] = GetDevice()->createFramebuffer(
+                nvrhi::FramebufferDesc().addColorAttachment(GetBackBuffer(index)));
+        }
+    }
+
+    nvrhi::IDevice* DeviceManager::GetDevice()
+    {
+        return m_nvrhiDevice;
     }
 
     void DeviceManager::SignalWindowResizedEvent()

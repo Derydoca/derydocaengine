@@ -86,6 +86,11 @@ namespace Derydoca::Rendering
         : DeviceManager(deviceSettings, sdlWindow)
     {
         CreateDeviceAndSwapChain();
+
+        m_DeviceSettings.width = 0;
+        m_DeviceSettings.height = 0;
+
+        UpdateWindowSize();
     }
 
     bool DeviceManagerDX12::CreateRenderTargets()
@@ -114,6 +119,23 @@ namespace Derydoca::Rendering
         }
 
         return true;
+    }
+
+    void DeviceManagerDX12::ReleaseRenderTargets()
+    {
+        // Make sure that all frames have finished rendering
+        m_nvrhiDevice->waitForIdle();
+
+        // Release all in-flight references to the render targets
+        m_nvrhiDevice->runGarbageCollection();
+
+        // Set the events so that WaitForSingleObject in OneFrame will not hang later
+        for (auto e : m_FrameFenceEvents)
+            SetEvent(e);
+
+        // Release the old buffers because ResizeBuffers requires that
+        m_RhiSwapChainBuffers.clear();
+        m_SwapChainBuffers.clear();
     }
 
     bool DeviceManagerDX12::MoveWindowOntoAdapter(IDXGIAdapter* targetAdapter, RECT& rect)
@@ -355,7 +377,7 @@ namespace Derydoca::Rendering
 
         return true;
 	}
-    
+
     void DeviceManagerDX12::Render()
     {
         ////vkWaitForFences
@@ -539,6 +561,51 @@ namespace Derydoca::Rendering
     void DeviceManagerDX12::CreateCommandBuffer(CommandBuffer* commandBuffer) const
     {
         D_LOG_CRITICAL("NOT IMPLEMENTED");
+    }
+
+    nvrhi::GraphicsAPI DeviceManagerDX12::GetGraphicsAPI() const
+    {
+        return nvrhi::GraphicsAPI::D3D12;
+    }
+
+    uint32_t DeviceManagerDX12::GetBackBufferCount()
+    {
+        return m_SwapChainDesc.BufferCount;
+    }
+
+    void DeviceManagerDX12::ResizeSwapChain()
+    {
+        ReleaseRenderTargets();
+
+        if (!m_nvrhiDevice)
+            return;
+
+        if (!m_swapChain)
+            return;
+
+        const HRESULT hr = m_swapChain->ResizeBuffers(m_DeviceSettings.bufferCount,
+            m_DeviceSettings.width,
+            m_DeviceSettings.height,
+            m_SwapChainDesc.Format,
+            m_SwapChainDesc.Flags);
+
+        if (FAILED(hr))
+        {
+            D_LOG_CRITICAL("ResizeBuffers failed");
+        }
+
+        bool ret = CreateRenderTargets();
+        if (!ret)
+        {
+            D_LOG_CRITICAL("CreateRenderTarget failed");
+        }
+    }
+
+    nvrhi::ITexture* DeviceManagerDX12::GetBackBuffer(uint32_t index)
+    {
+        if (index < m_RhiSwapChainBuffers.size())
+            return m_RhiSwapChainBuffers[index];
+        return nullptr;
     }
 
     //void DeviceManagerDX12::CheckTearingSupport()

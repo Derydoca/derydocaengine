@@ -29,6 +29,7 @@ namespace Derydoca::Rendering
 		uint32_t refreshRate = 0;
 		bool startFullscreen = false;
 		bool enableNvrhiValidationLayer = true;
+		bool vsyncEnabled = false;
 
 #ifdef USE_DX12
 		DXGI_USAGE swapChainUsage = DXGI_USAGE_SHADER_INPUT | DXGI_USAGE_RENDER_TARGET_OUTPUT;
@@ -57,14 +58,30 @@ namespace Derydoca::Rendering
 		virtual void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) = 0;
 		virtual void CreateCommandBuffer(CommandBuffer* commandBuffer) const = 0;
 
+		[[nodiscard]] virtual nvrhi::IDevice* GetDevice();
         void SignalWindowResizedEvent();
 
     protected:
 		DeviceManager(const DeviceManagerSettings& deviceSettings, SDL_Window* sdlWindow);
 
+		void UpdateWindowSize();
+		void BackBufferResizing();
+		void BackBufferResized();
+
+		virtual nvrhi::GraphicsAPI GetGraphicsAPI() const = 0;
+		virtual uint32_t GetBackBufferCount() = 0;
+		virtual void ResizeSwapChain() = 0;
+		virtual nvrhi::ITexture* GetBackBuffer(uint32_t index) = 0;
+
 		DeviceManagerSettings m_DeviceSettings;
         SDL_Window* window;
         bool framebufferResized = false;
+		bool m_windowVisible = false;
+		bool m_RequestedVSync = false;
+
+
+		nvrhi::DeviceHandle m_nvrhiDevice;
+		std::vector<nvrhi::FramebufferHandle> m_SwapChainFramebuffers;
 
 	};
 }

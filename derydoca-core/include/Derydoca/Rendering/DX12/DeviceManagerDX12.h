@@ -32,16 +32,22 @@ namespace Derydoca::Rendering
 		DeviceManagerDX12(const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
 		DeviceManagerDX12(const DeviceManagerDX12&) = delete;
 
-		bool CreateRenderTargets();
-
 		void Render() override;
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 		void CreateCommandBuffer(CommandBuffer* commandBuffer) const override;
+
+	protected:
+		nvrhi::GraphicsAPI GetGraphicsAPI() const override;
+		uint32_t GetBackBufferCount() override;
+		void ResizeSwapChain() override;
+		nvrhi::ITexture* GetBackBuffer(uint32_t index) override;
 
 	private:
 		bool CreateDeviceAndSwapChain();
 		RefCountPtr<IDXGIAdapter> GetHardwareAdapter(const std::wstring& targetName);
 		void PrintDisplayColorSpaceInfo(SDL_Window* window);
+		bool CreateRenderTargets();
+		void ReleaseRenderTargets();
 
 		static bool MoveWindowOntoAdapter(IDXGIAdapter* targetAdapter, RECT& rect);
 
@@ -66,7 +72,6 @@ namespace Derydoca::Rendering
 		UINT64 m_fenceValues[FrameCount];
 		DXGI_SWAP_CHAIN_FULLSCREEN_DESC m_FullScreenDesc{};
 
-		nvrhi::DeviceHandle m_nvrhiDevice;
 		std::string m_RendererString;
 		HWND m_hWnd;
 		bool m_TearingSupported = false;

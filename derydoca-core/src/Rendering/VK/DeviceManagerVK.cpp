@@ -94,6 +94,25 @@ namespace Derydoca::Rendering
 		vkDestroyInstance(instance, allocationCallbacks);
 	}
 
+	nvrhi::GraphicsAPI DeviceManagerVK::GetGraphicsAPI() const
+	{
+		return nvrhi::GraphicsAPI::VULKAN;
+	}
+
+	uint32_t DeviceManagerVK::GetBackBufferCount()
+	{
+		return 0;
+	}
+
+	void DeviceManagerVK::ResizeSwapChain()
+	{
+	}
+
+	nvrhi::ITexture* DeviceManagerVK::GetBackBuffer(uint32_t index)
+	{
+		return nullptr;
+	}
+
 //	void DeviceManagerVK::Initialize(const DeviceManagerSettings& settings)
 //	{
 //		VkApplicationInfo appInfo{ VK_STRUCTURE_TYPE_APPLICATION_INFO };
