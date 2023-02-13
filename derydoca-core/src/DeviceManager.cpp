@@ -113,20 +113,20 @@ namespace Derydoca::Rendering {
     {
         m_SwapChainFramebuffers.clear();
 
-        //for (auto it : m_vRenderPasses)
-        //{
-        //    it->BackBufferResizing();
-        //}
+        for (auto it : m_vApplicationLayers)
+        {
+            it->BackBufferResizing();
+        }
     }
 
     void DeviceManager::BackBufferResized()
     {
-        //for (auto it : m_vRenderPasses)
-        //{
-        //    it->BackBufferResized(m_DeviceParams.backBufferWidth,
-        //        m_DeviceParams.backBufferHeight,
-        //        m_DeviceParams.swapChainSampleCount);
-        //}
+        for (auto it : m_vApplicationLayers)
+        {
+            it->BackBufferResized(m_DeviceSettings.width,
+                m_DeviceSettings.height,
+                m_DeviceSettings.sampleCount);
+        }
 
         uint32_t backBufferCount = GetBackBufferCount();
         m_SwapChainFramebuffers.resize(backBufferCount);

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <list>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
 #include <nvrhi/nvrhi.h>
@@ -13,6 +14,8 @@
 
 namespace Derydoca::Rendering
 {
+	class IApplicationLayer;
+
 	struct DeviceManagerSettings
 	{
 		uint32_t width = 1920;
@@ -59,6 +62,7 @@ namespace Derydoca::Rendering
 		virtual void CreateCommandBuffer(CommandBuffer* commandBuffer) const = 0;
 
 		[[nodiscard]] virtual nvrhi::IDevice* GetDevice();
+		[[nodiscard]] uint32_t GetFrameIndex() const { return m_FrameIndex; }
         void SignalWindowResizedEvent();
 
     protected:
@@ -82,6 +86,30 @@ namespace Derydoca::Rendering
 
 		nvrhi::DeviceHandle m_nvrhiDevice;
 		std::vector<nvrhi::FramebufferHandle> m_SwapChainFramebuffers;
+		uint32_t m_FrameIndex = 0;
+		std::list<IApplicationLayer*> m_vApplicationLayers;
+
+	};
+
+	class IApplicationLayer
+	{
+	public:
+		explicit IApplicationLayer(DeviceManager* deviceManager)
+			: m_DeviceManager(deviceManager)
+		{ }
+
+		virtual ~IApplicationLayer() = default;
+
+		virtual void Render(nvrhi::IFramebuffer* framebuffer) { }
+		virtual void Animate(float elapsedSeconds) { }
+		virtual void BackBufferResizing() { }
+		virtual void BackBufferResized(const uint32_t width, uint32_t height, const uint32_t sampleCount) { }
+
+		[[nodiscard]] DeviceManager* GetDeviceManager() const { return m_DeviceManager; }
+		[[nodiscard]] nvrhi::IDevice* GetDevice() const { return m_DeviceManager->GetDevice(); }
+		[[nodiscard]] uint32_t GetFrameIndex() const { return m_DeviceManager->GetFrameIndex(); }
+	private:
+		DeviceManager* m_DeviceManager;
 
 	};
 }
