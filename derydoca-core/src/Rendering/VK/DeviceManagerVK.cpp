@@ -63,8 +63,8 @@ namespace Derydoca::Rendering
 
 	VkSurfaceKHR surface;
 
-	DeviceManagerVK::DeviceManagerVK(const DeviceManagerSettings& deviceSettings, SDL_Window* sdlWindow)
-		: DeviceManager(deviceSettings, sdlWindow)
+	DeviceManagerVK::DeviceManagerVK(const DeviceManagerSettings& deviceSettings)
+		: DeviceManager(deviceSettings)
 	{
 		//Initialize(deviceSettings);
 	}
@@ -111,6 +111,11 @@ namespace Derydoca::Rendering
 	nvrhi::ITexture* DeviceManagerVK::GetBackBuffer(uint32_t index)
 	{
 		return nullptr;
+	}
+	
+	bool DeviceManagerVK::CreateDeviceAndSwapChain()
+	{
+		return false;
 	}
 
 //	void DeviceManagerVK::Initialize(const DeviceManagerSettings& settings)

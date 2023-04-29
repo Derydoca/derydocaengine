@@ -6,6 +6,8 @@
 #include <fmt/xchar.h>
 #include <sstream>
 #include <SDL2/SDL_syswm.h>
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
 
 #define D3D_ACTIVE_FEATURE_LEVEL D3D_FEATURE_LEVEL_12_1
 
@@ -82,15 +84,15 @@ namespace Derydoca::Rendering
         }
     }
 
-    DeviceManagerDX12::DeviceManagerDX12(const DeviceManagerSettings& deviceSettings, SDL_Window* sdlWindow)
-        : DeviceManager(deviceSettings, sdlWindow)
+    DeviceManagerDX12::DeviceManagerDX12(const DeviceManagerSettings& deviceSettings)
+        : DeviceManager(deviceSettings)
     {
-        CreateDeviceAndSwapChain();
+        //CreateDeviceAndSwapChain();
 
-        m_DeviceSettings.width = 0;
-        m_DeviceSettings.height = 0;
+        //m_DeviceSettings.width = 0;
+        //m_DeviceSettings.height = 0;
 
-        UpdateWindowSize();
+        //UpdateWindowSize();
     }
 
     bool DeviceManagerDX12::CreateRenderTargets()
@@ -177,17 +179,27 @@ namespace Derydoca::Rendering
 
     bool DeviceManagerDX12::CreateDeviceAndSwapChain()
     {
+        UINT windowStyle = m_DeviceSettings.startFullscreen
+            ? (WS_POPUP | WS_SYSMENU | WS_VISIBLE)
+            : m_DeviceSettings.startMaximized
+            ? (WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_MAXIMIZE)
+            : (WS_OVERLAPPEDWINDOW | WS_VISIBLE);
+
         RECT rect = { 0, 0, LONG(m_DeviceSettings.width), LONG(m_DeviceSettings.height) };
+        AdjustWindowRect(&rect, windowStyle, FALSE);
 
         RefCountPtr<IDXGIAdapter> targetAdapter;
-        targetAdapter = GetHardwareAdapter(m_DeviceSettings.adapterNameSubstring);
-
-        if (!targetAdapter)
+        // TODO: Allow m_DeviceSettings to hold onto an adapter as an override
         {
-            std::wstring adapterNameStr(m_DeviceSettings.adapterNameSubstring.begin(), m_DeviceSettings.adapterNameSubstring.end());
+            targetAdapter = GetHardwareAdapter(m_DeviceSettings.adapterNameSubstring);
 
-            D_LOG_CRITICAL("Unable to find adapter with the name filter of '{0}'.", "adapterNameStr");
-            return false;
+            if (!targetAdapter)
+            {
+                std::wstring adapterNameStr(m_DeviceSettings.adapterNameSubstring.begin(), m_DeviceSettings.adapterNameSubstring.end());
+
+                D_LOG_CRITICAL("Unable to find adapter with the name filter of '{0}'.", "adapterNameStr");
+                return false;
+            }
         }
 
         {
@@ -210,10 +222,7 @@ namespace Derydoca::Rendering
             SDL_SetWindowPosition(window, rect.left, rect.top);
         }
 
-        SDL_SysWMinfo wmInfo;
-        SDL_VERSION(&wmInfo.version);
-        SDL_GetWindowWMInfo(window, &wmInfo);
-        m_hWnd = wmInfo.info.win.window;
+        m_hWnd = glfwGetWin32Window(m_Window);
 
         HRESULT hr = E_FAIL;
 

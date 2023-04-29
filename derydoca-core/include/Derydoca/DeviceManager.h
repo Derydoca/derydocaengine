@@ -3,6 +3,7 @@
 #include <list>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_syswm.h>
+#include <GLFW/glfw3.h>
 #include <nvrhi/nvrhi.h>
 #ifdef USE_DX12
 #include <dxgi.h>
@@ -22,7 +23,8 @@ namespace Derydoca::Rendering
 		uint32_t height = 1080;
 		uint32_t sampleCount = 1;
 		uint32_t sampleQuality = 0;
-        ImageFormat imageFormat = ImageFormat::RGBA8_UNORM;
+        ImageFormat imageFormat = ImageFormat::RGBA8_UNORM; // REMOVE
+		nvrhi::Format swapChainFormat = nvrhi::Format::SRGBA8_UNORM;
 		std::wstring adapterNameSubstring = L"";
 		uint32_t bufferCount = 3;
 		bool allowModeSwitch = true;
@@ -31,6 +33,7 @@ namespace Derydoca::Rendering
 		bool enableCopyQueue = true;
 		uint32_t refreshRate = 0;
 		bool startFullscreen = false;
+		bool startMaximized = false;
 		bool enableNvrhiValidationLayer = true;
 		bool vsyncEnabled = false;
 
@@ -54,7 +57,7 @@ namespace Derydoca::Rendering
 #define DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType) inline GenericType Translate(SpecificType value) { return static_cast<GenericType>(value); }
 #define DIRECT_ENUM_TRANSLATE_FUNCS(GenericType, SpecificType) DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, SpecificType); DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType)
 
-		static DeviceManager* Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
+		static DeviceManager* Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings);
 		virtual ~DeviceManager() {};
 
         virtual void Render() = 0;
@@ -64,14 +67,16 @@ namespace Derydoca::Rendering
 		[[nodiscard]] virtual nvrhi::IDevice* GetDevice();
 		[[nodiscard]] uint32_t GetFrameIndex() const { return m_FrameIndex; }
         void SignalWindowResizedEvent();
+		bool CreateWindowDeviceAndSwapChain(const DeviceManagerSettings& settings, const char* windowTitle);
 
     protected:
-		DeviceManager(const DeviceManagerSettings& deviceSettings, SDL_Window* sdlWindow);
+		DeviceManager(const DeviceManagerSettings& deviceSettings);
 
 		void UpdateWindowSize();
 		void BackBufferResizing();
 		void BackBufferResized();
 
+		virtual bool CreateDeviceAndSwapChain() = 0;
 		virtual nvrhi::GraphicsAPI GetGraphicsAPI() const = 0;
 		virtual uint32_t GetBackBufferCount() = 0;
 		virtual void ResizeSwapChain() = 0;
@@ -79,10 +84,12 @@ namespace Derydoca::Rendering
 
 		DeviceManagerSettings m_DeviceSettings;
         SDL_Window* window;
+		GLFWwindow* m_Window = nullptr;
         bool framebufferResized = false;
 		bool m_windowVisible = false;
 		bool m_RequestedVSync = false;
 
+		std::string m_WindowTitle;
 
 		nvrhi::DeviceHandle m_nvrhiDevice;
 		std::vector<nvrhi::FramebufferHandle> m_SwapChainFramebuffers;

@@ -30,7 +30,7 @@ namespace Derydoca::Rendering
 	class DeviceManagerVK : public DeviceManager
 	{
 	public:
-		DeviceManagerVK(const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
+		DeviceManagerVK(const DeviceManagerSettings& settings);
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
 		~DeviceManagerVK();
 
@@ -43,6 +43,7 @@ namespace Derydoca::Rendering
 		uint32_t GetBackBufferCount() override;
 		void ResizeSwapChain() override;
 		nvrhi::ITexture* GetBackBuffer(uint32_t index) override;
+		bool CreateDeviceAndSwapChain() override;
 
 	private:
 		DIRECT_ENUM_TRANSLATE_FUNCS(ImageSampleCount, VkSampleCountFlagBits);

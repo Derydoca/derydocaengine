@@ -29,7 +29,7 @@ namespace Derydoca::Rendering
 	public:
 		static const UINT FrameCount = 2;
 
-		DeviceManagerDX12(const DeviceManagerSettings& settings, SDL_Window* sdlWindow);
+		DeviceManagerDX12(const DeviceManagerSettings& settings);
 		DeviceManagerDX12(const DeviceManagerDX12&) = delete;
 
 		void Render() override;
@@ -41,9 +41,9 @@ namespace Derydoca::Rendering
 		uint32_t GetBackBufferCount() override;
 		void ResizeSwapChain() override;
 		nvrhi::ITexture* GetBackBuffer(uint32_t index) override;
+		bool CreateDeviceAndSwapChain() override;
 
 	private:
-		bool CreateDeviceAndSwapChain();
 		RefCountPtr<IDXGIAdapter> GetHardwareAdapter(const std::wstring& targetName);
 		void PrintDisplayColorSpaceInfo(SDL_Window* window);
 		bool CreateRenderTargets();

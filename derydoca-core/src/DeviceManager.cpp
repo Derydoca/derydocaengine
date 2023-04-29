@@ -10,16 +10,55 @@
 #endif
 
 namespace Derydoca::Rendering {
+
+    static const struct
+    {
+        nvrhi::Format format;
+        uint32_t redBits;
+        uint32_t greenBits;
+        uint32_t blueBits;
+        uint32_t alphaBits;
+        uint32_t depthBits;
+        uint32_t stencilBits;
+    } formatInfo[] = {
+        { nvrhi::Format::UNKNOWN,            0,  0,  0,  0,  0,  0, },
+        { nvrhi::Format::R8_UINT,            8,  0,  0,  0,  0,  0, },
+        { nvrhi::Format::RG8_UINT,           8,  8,  0,  0,  0,  0, },
+        { nvrhi::Format::RG8_UNORM,          8,  8,  0,  0,  0,  0, },
+        { nvrhi::Format::R16_UINT,          16,  0,  0,  0,  0,  0, },
+        { nvrhi::Format::R16_UNORM,         16,  0,  0,  0,  0,  0, },
+        { nvrhi::Format::R16_FLOAT,         16,  0,  0,  0,  0,  0, },
+        { nvrhi::Format::RGBA8_UNORM,        8,  8,  8,  8,  0,  0, },
+        { nvrhi::Format::RGBA8_SNORM,        8,  8,  8,  8,  0,  0, },
+        { nvrhi::Format::BGRA8_UNORM,        8,  8,  8,  8,  0,  0, },
+        { nvrhi::Format::SRGBA8_UNORM,       8,  8,  8,  8,  0,  0, },
+        { nvrhi::Format::SBGRA8_UNORM,       8,  8,  8,  8,  0,  0, },
+        { nvrhi::Format::R10G10B10A2_UNORM, 10, 10, 10,  2,  0,  0, },
+        { nvrhi::Format::R11G11B10_FLOAT,   11, 11, 10,  0,  0,  0, },
+        { nvrhi::Format::RG16_UINT,         16, 16,  0,  0,  0,  0, },
+        { nvrhi::Format::RG16_FLOAT,        16, 16,  0,  0,  0,  0, },
+        { nvrhi::Format::R32_UINT,          32,  0,  0,  0,  0,  0, },
+        { nvrhi::Format::R32_FLOAT,         32,  0,  0,  0,  0,  0, },
+        { nvrhi::Format::RGBA16_FLOAT,      16, 16, 16, 16,  0,  0, },
+        { nvrhi::Format::RGBA16_UNORM,      16, 16, 16, 16,  0,  0, },
+        { nvrhi::Format::RGBA16_SNORM,      16, 16, 16, 16,  0,  0, },
+        { nvrhi::Format::RG32_UINT,         32, 32,  0,  0,  0,  0, },
+        { nvrhi::Format::RG32_FLOAT,        32, 32,  0,  0,  0,  0, },
+        { nvrhi::Format::RGB32_UINT,        32, 32, 32,  0,  0,  0, },
+        { nvrhi::Format::RGB32_FLOAT,       32, 32, 32,  0,  0,  0, },
+        { nvrhi::Format::RGBA32_UINT,       32, 32, 32, 32,  0,  0, },
+        { nvrhi::Format::RGBA32_FLOAT,      32, 32, 32, 32,  0,  0, },
+    };
+
     DefaultMessageCallback& DefaultMessageCallback::GetInstance()
     {
         static DefaultMessageCallback Instance;
         return Instance;
     }
 
-    DeviceManager::DeviceManager(const DeviceManagerSettings& deviceSettings, SDL_Window* sdlWindow)
+    DeviceManager::DeviceManager(const DeviceManagerSettings& deviceSettings)
     {
         m_DeviceSettings = deviceSettings;
-        window = sdlWindow;
 
         m_RequestedVSync = m_DeviceSettings.vsyncEnabled;
     }
@@ -46,7 +85,7 @@ namespace Derydoca::Rendering {
         }
     }
 
-    DeviceManager* DeviceManager::Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings, SDL_Window* sdlWindow)
+    DeviceManager* DeviceManager::Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings)
     {
         DeviceManager* deviceManager = nullptr;
         switch (renderingAPI)
@@ -54,14 +93,14 @@ namespace Derydoca::Rendering {
 #ifdef USE_DX12
         case RenderingAPI::Direct3D12:
         {
-            deviceManager = new Rendering::DeviceManagerDX12(settings, sdlWindow);
+            deviceManager = new Rendering::DeviceManagerDX12(settings);
             break;
         }
 #endif
 #ifdef USE_VULKAN
         case RenderingAPI::Vulkan:
         {
-            deviceManager = new Rendering::DeviceManagerVK(settings, sdlWindow);
+            deviceManager = new Rendering::DeviceManagerVK(settings);
             break;
         }
 #endif
@@ -79,7 +118,7 @@ namespace Derydoca::Rendering {
     {
         int width;
         int height;
-        SDL_GetWindowSize(window, &width, &height);
+        glfwGetWindowSize(m_Window, &width, &height);
 
         if (width == 0 || height == 0)
         {
@@ -106,7 +145,120 @@ namespace Derydoca::Rendering {
             BackBufferResized();
         }
 
-        //m_DeviceParams.vsyncEnabled = m_RequestedVSync;
+        m_DeviceSettings.vsyncEnabled = m_RequestedVSync;
+    }
+
+    bool DeviceManager::CreateWindowDeviceAndSwapChain(const DeviceManagerSettings& settings, const char* windowTitle)
+    {
+        // TODO: Per-monitor DPI for Windows
+
+        if (!glfwInit())
+        {
+            return false;
+        }
+
+        // TODO: VSync, GLFW error callback
+
+        glfwDefaultWindowHints();
+
+
+        bool foundFormat = false;
+        for (const auto& info : formatInfo)
+        {
+            if (info.format == settings.swapChainFormat)
+            {
+                glfwWindowHint(GLFW_RED_BITS, info.redBits);
+                glfwWindowHint(GLFW_GREEN_BITS, info.greenBits);
+                glfwWindowHint(GLFW_BLUE_BITS, info.blueBits);
+                glfwWindowHint(GLFW_ALPHA_BITS, info.alphaBits);
+                glfwWindowHint(GLFW_DEPTH_BITS, info.depthBits);
+                glfwWindowHint(GLFW_STENCIL_BITS, info.stencilBits);
+                foundFormat = true;
+                break;
+            }
+        }
+
+        assert(foundFormat);
+
+        glfwWindowHint(GLFW_SAMPLES, settings.sampleCount);
+        glfwWindowHint(GLFW_REFRESH_RATE, settings.refreshRate);
+
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);   // Ignored for fullscreen
+
+        m_Window = glfwCreateWindow(settings.width, settings.height,
+            windowTitle ? windowTitle : "",
+            settings.startFullscreen ? glfwGetPrimaryMonitor() : nullptr,
+            nullptr);
+
+        if (m_Window == nullptr)
+        {
+            return false;
+        }
+
+        if (settings.startFullscreen)
+        {
+            glfwSetWindowMonitor(m_Window, glfwGetPrimaryMonitor(), 0, 0,
+                m_DeviceSettings.width, m_DeviceSettings.height, m_DeviceSettings.refreshRate);
+        }
+        else
+        {
+            int fbWidth = 0, fbHeight = 0;
+            glfwGetFramebufferSize(m_Window, &fbWidth, &fbHeight);
+            m_DeviceSettings.width = fbWidth;
+            m_DeviceSettings.height = fbHeight;
+        }
+
+        if (windowTitle)
+        {
+            m_WindowTitle = windowTitle;
+        }
+
+        glfwSetWindowUserPointer(m_Window, this);
+
+        // TODO: Add window position setting
+        //if (settings.windowPosX != -1 && settings.windowPosY != -1)
+        //{
+        //    glfwSetWindowPos(m_Window, settings.windowPosX, settings.windowPosY);
+        //}
+
+        if (settings.startMaximized)
+        {
+            glfwMaximizeWindow(m_Window);
+        }
+
+        //glfwSetWindowPosCallback(m_Window, WindowPosCallback_GLFW);
+        //glfwSetWindowCloseCallback(m_Window, WindowCloseCallback_GLFW);
+        //glfwSetWindowRefreshCallback(m_Window, WindowRefreshCallback_GLFW);
+        //glfwSetWindowFocusCallback(m_Window, WindowFocusCallback_GLFW);
+        //glfwSetWindowIconifyCallback(m_Window, WindowIconifyCallback_GLFW);
+        //glfwSetKeyCallback(m_Window, KeyCallback_GLFW);
+        //glfwSetCharModsCallback(m_Window, CharModsCallback_GLFW);
+        //glfwSetCursorPosCallback(m_Window, MousePosCallback_GLFW);
+        //glfwSetMouseButtonCallback(m_Window, MouseButtonCallback_GLFW);
+        //glfwSetScrollCallback(m_Window, MouseScrollCallback_GLFW);
+        //glfwSetJoystickCallback(JoystickConnectionCallback_GLFW);
+
+        //// If there are multiple device managers, then this would be called by each one which isn't necessary
+        //// but should not hurt.
+        //JoyStickManager::Singleton().EnumerateJoysticks();
+
+        if (!CreateDeviceAndSwapChain())
+        {
+            return false;
+        }
+
+        glfwShowWindow(m_Window);
+
+        // reset the back buffer size state to enforce a resize event
+        m_DeviceSettings.width = 0;
+        m_DeviceSettings.height = 0;
+
+        UpdateWindowSize();
+
+
+        return true;
     }
 
     void DeviceManager::BackBufferResizing()
