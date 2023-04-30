@@ -86,12 +86,6 @@ namespace Derydoca::Rendering
     DeviceManagerDX12::DeviceManagerDX12(const DeviceManagerSettings& deviceSettings)
         : DeviceManager(deviceSettings)
     {
-        //CreateDeviceAndSwapChain();
-
-        //m_DeviceSettings.width = 0;
-        //m_DeviceSettings.height = 0;
-
-        //UpdateWindowSize();
     }
 
     bool DeviceManagerDX12::CreateRenderTargets()
@@ -388,182 +382,12 @@ namespace Derydoca::Rendering
 
     void DeviceManagerDX12::Render()
     {
-        ////vkWaitForFences
-        //if (m_fences[m_frameIndex]->GetCompletedValue() < m_fenceValues[m_frameIndex])
-        //{
-        //    ThrowIfFailed(m_fences[m_frameIndex]->SetEventOnCompletion(m_fenceValues[m_frameIndex], m_fenceEvents[m_frameIndex]));
-        //    WaitForSingleObjectEx(m_fenceEvents[m_frameIndex], INFINITE, FALSE);
-        //}
-
-        ////vkAcquireNextImageKHR
-        //m_frameIndex = m_swapChain->GetCurrentBackBufferIndex();
-
-        //// Swapchain recreation if resized
-        //if (framebufferResized)
-        //{
-        //    D_LOG_WARN("Window was resized but framebuffer resizing has yet to be implemented in the DX12 renderer!");
-        //    framebufferResized = false;
-        //}
-
-        ////vkResetFences
-        //m_fenceValues[m_frameIndex]++;
-
-        ////vkAllocateCommandBuffers;vkBeginCommandBuffer
-        //ThrowIfFailed(m_device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, m_commandAllocators[m_frameIndex].Get(), nullptr, IID_PPV_ARGS(&m_commandList)));
-        //m_commandList->SetName(L"Main");
-
-        ////vkCmdSetViewport
-        //{
-        //    D3D12_VIEWPORT viewport = {};
-        //    viewport.Height = 1080;
-        //    viewport.Width = 1920;
-        //    viewport.MinDepth = D3D12_MIN_DEPTH;
-        //    viewport.MaxDepth = D3D12_MAX_DEPTH;
-
-        //    m_commandList->RSSetViewports(1, &viewport);
-        //}
-
-        ////vkCmdSetScissor
-        //{
-        //    D3D12_RECT scissorRect = {};
-        //    scissorRect.right = 1080;
-        //    scissorRect.bottom = 1920;
-
-        //    m_commandList->RSSetScissorRects(1, &scissorRect);
-        //}
-
-        ////vkCmdBeginRenderPass
-        //{
-        //    static float t = 0.0f;
-        //    t += 0.05f;
-        //    float g = (sin(t) + 1.0) * 0.5f;
-        //    const float clearColor[] = { 0.2, g, 0.4f, 1.0f };
-
-        //    int numTargets = 1;
-        //    auto clearValues = std::vector<ClearValue>(numTargets);
-        //    clearValues[0].Color.float32[0] = clearColor[0];
-        //    clearValues[0].Color.float32[1] = clearColor[1];
-        //    clearValues[0].Color.float32[2] = clearColor[2];
-        //    clearValues[0].Color.float32[3] = clearColor[3];
-
-        //    auto targets = std::vector<RenderTarget*>(numTargets);
-        //    targets[0] = &m_renderTargetHandles[m_frameIndex];
-
-        //    RenderPassBeginInfo beginInfo{};
-        //    beginInfo.Area.offset = { 0,0 };
-        //    beginInfo.Area.extent = { 1080, 1920 };
-        //    beginInfo.ClearValueCount = clearValues.size();
-        //    beginInfo.ClearValues = clearValues.data();
-        //    beginInfo.Targets = targets.data();
-
-        //    // Command buffer begin render pass: subpass, m_renderPass
-
-        //    auto subpass = m_renderPass.Subpasses[0];
-
-        //    m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_swapChainBuffers[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
-
-        //    for (size_t targetIndex = 0; targetIndex < beginInfo.ClearValueCount; targetIndex++)
-        //    {
-        //        RenderTarget* rt = beginInfo.Targets[0];
-        //        subpass.RenderTargets[targetIndex].cpuDescriptor = *static_cast<D3D12_CPU_DESCRIPTOR_HANDLE*>(rt);
-        //        CD3DX12_CLEAR_VALUE clearValue{ subpass.RenderTargets[targetIndex].BeginningAccess.Clear.ClearValue.Format, beginInfo.ClearValues[0].Color.float32 };
-        //        subpass.RenderTargets[0].BeginningAccess.Clear.ClearValue = clearValue;
-        //    }
-
-        //    if (subpass.DepthStencil.has_value())
-        //    {
-        //        auto& depthStencilClear = subpass.DepthStencil.value();
-
-        //        depthStencilClear.DepthBeginningAccess.Clear.ClearValue.DepthStencil.Depth = beginInfo.DepthStencil->DepthStencil.Depth;
-        //        depthStencilClear.StencilBeginningAccess.Clear.ClearValue.DepthStencil.Depth = beginInfo.DepthStencil->DepthStencil.Stencil;
-        //    }
-
-        //    m_commandList->BeginRenderPass(
-        //        subpass.RenderTargets.size(),
-        //        subpass.RenderTargets.data(),
-        //        subpass.DepthStencil.has_value() ? &subpass.DepthStencil.value() : nullptr,
-        //        subpass.Flags
-        //    );
-        //}
-
-        ////vkCmdEndRenderPass
-        //{
-        //    m_commandList->EndRenderPass();
-        //    m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_swapChainBuffers[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
-        //}
-
-
-        ////vkEndCommandBuffer
-        //ThrowIfFailed(m_commandList->Close());
-
-        ////vkQueueSubmit
-        //ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
-        //m_GraphicsCommandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
-
-        ////vkQueuePresentKHR
-        //ThrowIfFailed(m_swapChain->Present(1, 0));
-
-        //const UINT currentFenceValue = m_fenceValues[m_frameIndex];
-        //ThrowIfFailed(m_GraphicsCommandQueue->Signal(m_fences[m_frameIndex].Get(), currentFenceValue));
+        D_LOG_CRITICAL("NOT IMPLEMENTED");
     }
 
     void DeviceManagerDX12::CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass)
     {
-        //RenderPassDX12* renderPassDX12 = static_cast<RenderPassDX12*>(renderPass);
-        //if (renderPassDX12 == nullptr)
-        //{
-        //    D_LOG_TRACE("Creating render pass...");
-        //    renderPassDX12 = new RenderPassDX12();
-        //}
-
-        //renderPassDX12->Subpasses.resize(renderPassDesc.AttachmentCount);
-        //for (size_t subpassIndex = 0; subpassIndex < renderPassDesc.SubpassCount; subpassIndex++)
-        //{
-        //    auto& subpass = renderPassDesc.Subpasses[subpassIndex];
-        //    auto& dxSubpass = renderPassDX12->Subpasses[subpassIndex];
-        //    dxSubpass.RenderTargets.resize(subpass.ColorAttachmentCount);
-        //    for (size_t attachmentIndex = 0; attachmentIndex < subpass.ColorAttachmentCount; attachmentIndex++)
-        //    {
-        //        auto& subpassColorAttachment = subpass.ColorAttachments[attachmentIndex];
-        //        auto& colorAttachment = renderPassDesc.RenderTargets[subpassColorAttachment.Attachment];
-        //        auto& dxColorAttachment = dxSubpass.RenderTargets[attachmentIndex];
-
-        //        // Properties to be set via render pass begin:
-        //        //    dxColorAttachment.BeginningAccess.Clear.ClearValue.Color
-        //        //    dxColorAttachment.cpuDescriptor
-
-        //        dxColorAttachment.BeginningAccess.Clear.ClearValue.Format = Translate(colorAttachment.Format);
-        //        dxColorAttachment.BeginningAccess.Type = Translate(colorAttachment.BeginningAccess);
-        //        // TODO: Add support for multisample resolve textures
-        //        dxColorAttachment.EndingAccess.Resolve = {};
-        //        dxColorAttachment.EndingAccess.Type = Translate(colorAttachment.EndingAccess);
-        //    }
-
-        //    if (renderPassDesc.DepthStencil != nullptr)
-        //    {
-        //        D3D12_RENDER_PASS_DEPTH_STENCIL_DESC depthStencilDesc;
-
-        //        // Properties to be set via render pass begin:
-        //        //    depthStencilDesc.cpuDescriptor
-        //        //    depthStencilDesc.DepthBeginningAccess.Clear.ClearValue.DepthStencil.Depth
-        //        //    depthStencilDesc.StencilBeginningAccess.Clear.ClearValue.DepthStencil.Stencil
-
-        //        depthStencilDesc.DepthBeginningAccess.Clear.ClearValue.Format = Translate(renderPassDesc.DepthStencil->Format);
-        //        depthStencilDesc.DepthBeginningAccess.Type = Translate(renderPassDesc.DepthStencil->DepthBeginningAccess);
-        //        depthStencilDesc.DepthEndingAccess.Resolve = {};
-        //        depthStencilDesc.DepthEndingAccess.Type = Translate(renderPassDesc.DepthStencil->DepthEndingAccess);
-        //        depthStencilDesc.StencilBeginningAccess.Type = Translate(renderPassDesc.DepthStencil->StencilBeginningAccess);
-        //        depthStencilDesc.StencilEndingAccess.Resolve = {};
-        //        depthStencilDesc.StencilEndingAccess.Type = Translate(renderPassDesc.DepthStencil->StencilEndingAccess);
-        //    }
-        //    else
-        //    {
-        //        dxSubpass.DepthStencil.reset();
-        //    }
-
-        //    // TODO: Add support for DX render pass flags
-        //    dxSubpass.Flags = D3D12_RENDER_PASS_FLAG_NONE;
-        //}
+        D_LOG_CRITICAL("NOT IMPLEMENTED");
     }
 
     void DeviceManagerDX12::CreateCommandBuffer(CommandBuffer* commandBuffer) const
@@ -616,19 +440,6 @@ namespace Derydoca::Rendering
         return nullptr;
     }
 
-    //void DeviceManagerDX12::CheckTearingSupport()
-    //{
-    //    ComPtr<IDXGIFactory6> factory;
-    //    HRESULT hr = CreateDXGIFactory1(IID_PPV_ARGS(&factory));
-    //    BOOL allowTearing = FALSE;
-    //    if (SUCCEEDED(hr))
-    //    {
-    //        hr = factory->CheckFeatureSupport(DXGI_FEATURE_PRESENT_ALLOW_TEARING, &allowTearing, sizeof(allowTearing));
-    //    }
-
-    //    m_tearingSupport = SUCCEEDED(hr) && allowTearing;
-    //}
-
     RefCountPtr<IDXGIAdapter> DeviceManagerDX12::GetHardwareAdapter(const std::wstring& targetName)
     {
         RefCountPtr<IDXGIAdapter> targetAdapter;
@@ -677,77 +488,4 @@ namespace Derydoca::Rendering
         return std::max(0, std::min(ax2, bx2) - std::max(ax1, bx1)) * std::max(0, std::min(ay2, by2) - std::max(ay1, by1));
     }
 
-    //    ComPtr<IDXGIAdapter1> dxgiAdapter;
-    //    ThrowIfFailed(m_dxgiFactory->EnumAdapters1(0, &dxgiAdapter));
-
-    //    UINT i = 0;
-    //    ComPtr<IDXGIOutput> currentOutput;
-    //    ComPtr<IDXGIOutput> bestOutput;
-    //    float bestIntersectArea = -1;
-
-    //    // Get the window bounds
-    //    int ax1 = 0;
-    //    int ay1 = 0;
-    //    int ax2 = 0;
-    //    int ay2 = 0;
-    //    SDL_GetWindowPosition(window, &ax1, &ay1);
-    //    SDL_GetWindowSize(window, &ax2, &ay2);
-    //    ax2 += ax1;
-    //    ay2 += ay1;
-
-    //    while (dxgiAdapter->EnumOutputs(i, &currentOutput) != DXGI_ERROR_NOT_FOUND)
-    //    {
-    //        DXGI_OUTPUT_DESC desc;
-    //        ThrowIfFailed(currentOutput->GetDesc(&desc));
-    //        RECT r = desc.DesktopCoordinates;
-    //        int bx1 = r.left;
-    //        int by1 = r.top;
-    //        int bx2 = r.right;
-    //        int by2 = r.bottom;
-
-    //        int intersectArea = ComputeIntersectionArea(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2);
-    //        if (intersectArea > bestIntersectArea)
-    //        {
-    //            bestOutput = currentOutput;
-    //            bestIntersectArea = static_cast<float>(intersectArea);
-    //        }
-
-    //        i++;
-    //    }
-
-    //    ComPtr<IDXGIOutput6> output6;
-    //    ThrowIfFailed(bestOutput.As(&output6));
-
-    //    DXGI_OUTPUT_DESC1 desc1;
-    //    ThrowIfFailed(output6->GetDesc1(&desc1));
-
-    //    std::string rotation = "UNDEFINED";
-    //    if (desc1.Rotation >= 0) {
-    //        rotation = fmt::format("{} degrees", (desc1.Rotation - 1) * 90);
-    //    }
-
-    //    D_LOG_INFO(
-    //        "\nActive Display Info:\n"
-    //        "  Device Name: {}\n"
-    //        "  Bits Per Color: {}\n"
-    //        "  Max Luminance: {}\n"
-    //        "  Min Luminance: {}\n"
-    //        "  Max Full Frame Luminance: {}\n"
-    //        "  Rotation: {}\n"
-    //        "  White Point: [{}, {}]\n"
-    //        "  R Primary: [{}, {}]\n"
-    //        "  G Primary: [{}, {}]\n"
-    //        "  B Primary: [{}, {}]",
-    //        CharArrToStr(desc1.DeviceName, 128),
-    //        desc1.BitsPerColor,
-    //        desc1.MaxLuminance,
-    //        desc1.MinLuminance,
-    //        desc1.MaxFullFrameLuminance,
-    //        rotation,
-    //        desc1.WhitePoint[0], desc1.WhitePoint[1],
-    //        desc1.RedPrimary[0], desc1.RedPrimary[1],
-    //        desc1.GreenPrimary[0], desc1.GreenPrimary[1],
-    //        desc1.BluePrimary[0], desc1.BluePrimary[1]
-    //    );
-    //}
 }
