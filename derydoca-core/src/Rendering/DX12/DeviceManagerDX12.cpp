@@ -5,7 +5,6 @@
 #include <string>
 #include <fmt/xchar.h>
 #include <sstream>
-#include <SDL2/SDL_syswm.h>
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
 
@@ -219,7 +218,7 @@ namespace Derydoca::Rendering
 
         if (MoveWindowOntoAdapter(targetAdapter, rect))
         {
-            SDL_SetWindowPosition(window, rect.left, rect.top);
+            glfwSetWindowPos(m_Window, rect.left, rect.top);
         }
 
         m_hWnd = glfwGetWin32Window(m_Window);
@@ -677,15 +676,6 @@ namespace Derydoca::Rendering
     {
         return std::max(0, std::min(ax2, bx2) - std::max(ax1, bx1)) * std::max(0, std::min(ay2, by2) - std::max(ay1, by1));
     }
-
-    //void DeviceManagerDX12::PrintDisplayColorSpaceInfo(SDL_Window* window)
-    //{
-    //    if (m_dxgiFactory->IsCurrent() == false)
-    //    {
-    //        ThrowIfFailed(
-    //            CreateDXGIFactory2(0, IID_PPV_ARGS(&m_dxgiFactory))
-    //        );
-    //    }
 
     //    ComPtr<IDXGIAdapter1> dxgiAdapter;
     //    ThrowIfFailed(m_dxgiFactory->EnumAdapters1(0, &dxgiAdapter));

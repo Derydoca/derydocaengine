@@ -5,12 +5,6 @@
     "spdlog",
     "glfw3",
     {
-      "name": "sdl2",
-      "features": [
-        "vulkan"
-      ]
-    },
-    {
       "name": "directx-headers",
       "platform": "windows"
     }

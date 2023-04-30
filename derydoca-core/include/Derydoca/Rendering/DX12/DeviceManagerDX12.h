@@ -45,7 +45,6 @@ namespace Derydoca::Rendering
 
 	private:
 		RefCountPtr<IDXGIAdapter> GetHardwareAdapter(const std::wstring& targetName);
-		void PrintDisplayColorSpaceInfo(SDL_Window* window);
 		bool CreateRenderTargets();
 		void ReleaseRenderTargets();
 

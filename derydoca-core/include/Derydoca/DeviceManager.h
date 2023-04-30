@@ -1,8 +1,6 @@
 #pragma once
 
 #include <list>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_syswm.h>
 #include <GLFW/glfw3.h>
 #include <nvrhi/nvrhi.h>
 #ifdef USE_DX12
@@ -83,7 +81,6 @@ namespace Derydoca::Rendering
 		virtual nvrhi::ITexture* GetBackBuffer(uint32_t index) = 0;
 
 		DeviceManagerSettings m_DeviceSettings;
-        SDL_Window* window;
 		GLFWwindow* m_Window = nullptr;
         bool framebufferResized = false;
 		bool m_windowVisible = false;
