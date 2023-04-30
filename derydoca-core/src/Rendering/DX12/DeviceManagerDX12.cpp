@@ -90,7 +90,7 @@ namespace Derydoca::Rendering
 
         for (UINT n = 0; n < m_SwapChainDesc.BufferCount; n++)
         {
-            const HRESULT hr = m_swapChain->GetBuffer(n, IID_PPV_ARGS(&m_SwapChainBuffers[n]));
+            const HRESULT hr = m_SwapChain->GetBuffer(n, IID_PPV_ARGS(&m_SwapChainBuffers[n]));
             HR_RETURN(hr);
 
             nvrhi::TextureDesc textureDesc;
@@ -105,7 +105,7 @@ namespace Derydoca::Rendering
             textureDesc.initialState = nvrhi::ResourceStates::Present;
             textureDesc.keepInitialState = true;
 
-            m_RhiSwapChainBuffers[n] = m_nvrhiDevice->createHandleForNativeTexture(nvrhi::ObjectTypes::D3D12_Resource, nvrhi::Object(m_SwapChainBuffers[n]), textureDesc);
+            m_RhiSwapChainBuffers[n] = m_NvrhiDevice->createHandleForNativeTexture(nvrhi::ObjectTypes::D3D12_Resource, nvrhi::Object(m_SwapChainBuffers[n]), textureDesc);
         }
 
         return true;
@@ -114,10 +114,10 @@ namespace Derydoca::Rendering
     void DeviceManagerDX12::ReleaseRenderTargets()
     {
         // Make sure that all frames have finished rendering
-        m_nvrhiDevice->waitForIdle();
+        m_NvrhiDevice->waitForIdle();
 
         // Release all in-flight references to the render targets
-        m_nvrhiDevice->runGarbageCollection();
+        m_NvrhiDevice->runGarbageCollection();
 
         // Set the events so that WaitForSingleObject in OneFrame will not hang later
         for (auto e : m_FrameFenceEvents)
@@ -277,13 +277,13 @@ namespace Derydoca::Rendering
         hr = D3D12CreateDevice(
             targetAdapter,
             m_DeviceParams.featureLevel,
-            IID_PPV_ARGS(&m_device));
+            IID_PPV_ARGS(&m_Device12));
         HR_RETURN(hr);
 
         if (m_DeviceParams.enableDebugRuntime)
         {
             RefCountPtr<ID3D12InfoQueue> pInfoQueue;
-            m_device->QueryInterface(&pInfoQueue);
+            m_Device12->QueryInterface(&pInfoQueue);
 
             if (pInfoQueue)
             {
@@ -311,14 +311,14 @@ namespace Derydoca::Rendering
         queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
         queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
         queueDesc.NodeMask = 1;
-        hr = m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_GraphicsQueue));
+        hr = m_Device12->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_GraphicsQueue));
         HR_RETURN(hr);
         m_GraphicsQueue->SetName(L"Graphics Queue");
 
         if (m_DeviceParams.enableComputeQueue)
         {
             queueDesc.Type = D3D12_COMMAND_LIST_TYPE_COMPUTE;
-            hr = m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_ComputeQueue));
+            hr = m_Device12->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_ComputeQueue));
             HR_RETURN(hr);
             m_ComputeQueue->SetName(L"Compute Queue");
         }
@@ -326,7 +326,7 @@ namespace Derydoca::Rendering
         if (m_DeviceParams.enableCopyQueue)
         {
             queueDesc.Type = D3D12_COMMAND_LIST_TYPE_COPY;
-            hr = m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_CopyQueue));
+            hr = m_Device12->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_CopyQueue));
             HR_RETURN(hr);
             m_CopyQueue->SetName(L"Copy Queue");
         }
@@ -342,21 +342,21 @@ namespace Derydoca::Rendering
         hr = pDxgiFactory->CreateSwapChainForHwnd(m_GraphicsQueue, m_hWnd, &m_SwapChainDesc, &m_FullScreenDesc, nullptr, &pSwapChain1);
         HR_RETURN(hr);
 
-        hr = pSwapChain1->QueryInterface(IID_PPV_ARGS(&m_swapChain));
+        hr = pSwapChain1->QueryInterface(IID_PPV_ARGS(&m_SwapChain));
         HR_RETURN(hr);
 
         nvrhi::d3d12::DeviceDesc deviceDesc;
         deviceDesc.errorCB = &DefaultMessageCallback::GetInstance();
-        deviceDesc.pDevice = m_device;
+        deviceDesc.pDevice = m_Device12;
         deviceDesc.pGraphicsCommandQueue = m_GraphicsQueue;
         deviceDesc.pComputeCommandQueue = m_ComputeQueue;
         deviceDesc.pCopyCommandQueue = m_CopyQueue;
 
-        m_nvrhiDevice = nvrhi::d3d12::createDevice(deviceDesc);
+        m_NvrhiDevice = nvrhi::d3d12::createDevice(deviceDesc);
 
         if (m_DeviceParams.enableNvrhiValidationLayer)
         {
-            m_nvrhiDevice = nvrhi::validation::createValidationLayer(m_nvrhiDevice);
+            m_NvrhiDevice = nvrhi::validation::createValidationLayer(m_NvrhiDevice);
         }
 
         if (!CreateRenderTargets())
@@ -364,7 +364,7 @@ namespace Derydoca::Rendering
             return false;
         }
 
-        hr = m_device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_FrameFence));
+        hr = m_Device12->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&m_FrameFence));
         HR_RETURN(hr);
 
         for (UINT bufferIndex = 0; bufferIndex < m_SwapChainDesc.BufferCount; bufferIndex++)
@@ -374,6 +374,39 @@ namespace Derydoca::Rendering
 
         return true;
 	}
+
+    void DeviceManagerDX12::DestroyDeviceAndSwapChain()
+    {
+        m_RhiSwapChainBuffers.clear();
+        m_RendererString.clear();
+
+        ReleaseRenderTargets();
+
+        m_NvrhiDevice = nullptr;
+
+        for (auto fenceEvent : m_FrameFenceEvents)
+        {
+            WaitForSingleObject(fenceEvent, INFINITE);
+            CloseHandle(fenceEvent);
+        }
+
+        m_FrameFenceEvents.clear();
+
+        if (m_SwapChain)
+        {
+            m_SwapChain->SetFullscreenState(false, nullptr);
+        }
+
+        m_SwapChainBuffers.clear();
+
+        m_FrameFence = nullptr;
+        m_SwapChain = nullptr;
+        m_GraphicsQueue = nullptr;
+        m_ComputeQueue = nullptr;
+        m_CopyQueue = nullptr;
+        m_Device12 = nullptr;
+        m_DxgiAdapter = nullptr;
+    }
 
     void DeviceManagerDX12::Render()
     {
@@ -404,13 +437,13 @@ namespace Derydoca::Rendering
     {
         ReleaseRenderTargets();
 
-        if (!m_nvrhiDevice)
+        if (!m_NvrhiDevice)
             return;
 
-        if (!m_swapChain)
+        if (!m_SwapChain)
             return;
 
-        const HRESULT hr = m_swapChain->ResizeBuffers(m_DeviceParams.bufferCount,
+        const HRESULT hr = m_SwapChain->ResizeBuffers(m_DeviceParams.bufferCount,
             m_DeviceParams.width,
             m_DeviceParams.height,
             m_SwapChainDesc.Format,

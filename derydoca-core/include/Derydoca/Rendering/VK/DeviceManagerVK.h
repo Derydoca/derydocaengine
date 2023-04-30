@@ -32,18 +32,19 @@ namespace Derydoca::Rendering
 	public:
 		DeviceManagerVK() = default;
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
-		~DeviceManagerVK();
+		~DeviceManagerVK() = default;
 
 		void Render() override;
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 		void CreateCommandBuffer(CommandBuffer* commandBuffer) const override;
 
 	protected:
+		bool CreateDeviceAndSwapChain() override;
+		void DestroyDeviceAndSwapChain() override;
 		nvrhi::GraphicsAPI GetGraphicsAPI() const override;
 		uint32_t GetBackBufferCount() override;
 		void ResizeSwapChain() override;
 		nvrhi::ITexture* GetBackBuffer(uint32_t index) override;
-		bool CreateDeviceAndSwapChain() override;
 
 	private:
 		DIRECT_ENUM_TRANSLATE_FUNCS(ImageSampleCount, VkSampleCountFlagBits);

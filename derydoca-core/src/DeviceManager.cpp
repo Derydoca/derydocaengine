@@ -288,7 +288,22 @@ namespace Derydoca::Rendering {
 
     nvrhi::IDevice* DeviceManager::GetDevice()
     {
-        return m_nvrhiDevice;
+        return m_NvrhiDevice;
+    }
+
+    void DeviceManager::Shutdown()
+    {
+        m_SwapChainFramebuffers.clear();
+
+        DestroyDeviceAndSwapChain();
+
+        if (m_Window)
+        {
+            glfwDestroyWindow(m_Window);
+            m_Window = nullptr;
+        }
+
+        glfwTerminate();
     }
 
     void DeviceManager::SignalWindowResizedEvent()

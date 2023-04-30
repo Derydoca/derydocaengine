@@ -56,7 +56,7 @@ namespace Derydoca::Rendering
 #define DIRECT_ENUM_TRANSLATE_FUNCS(GenericType, SpecificType) DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, SpecificType); DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType)
 
 		static DeviceManager* Create(const RenderingAPI renderingAPI);
-		virtual ~DeviceManager() {};
+		virtual ~DeviceManager() = default;
 
         virtual void Render() = 0;
 		virtual void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) = 0;
@@ -64,6 +64,7 @@ namespace Derydoca::Rendering
 
 		[[nodiscard]] virtual nvrhi::IDevice* GetDevice();
 		[[nodiscard]] uint32_t GetFrameIndex() const { return m_FrameIndex; }
+		void Shutdown();
         void SignalWindowResizedEvent();
 		bool CreateWindowDeviceAndSwapChain(const DeviceCreationParams& params, const char* windowTitle);
 
@@ -75,6 +76,7 @@ namespace Derydoca::Rendering
 		void BackBufferResized();
 
 		virtual bool CreateDeviceAndSwapChain() = 0;
+		virtual void DestroyDeviceAndSwapChain() = 0;
 		virtual nvrhi::GraphicsAPI GetGraphicsAPI() const = 0;
 		virtual uint32_t GetBackBufferCount() = 0;
 		virtual void ResizeSwapChain() = 0;
@@ -88,7 +90,7 @@ namespace Derydoca::Rendering
 
 		std::string m_WindowTitle;
 
-		nvrhi::DeviceHandle m_nvrhiDevice;
+		nvrhi::DeviceHandle m_NvrhiDevice;
 		std::vector<nvrhi::FramebufferHandle> m_SwapChainFramebuffers;
 		uint32_t m_FrameIndex = 0;
 		std::list<IApplicationLayer*> m_vApplicationLayers;

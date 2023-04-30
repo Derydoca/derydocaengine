@@ -37,5 +37,9 @@ int main(int argc, const char* argv[])
         return -1;
     }
 
+    // TODO: Insert render loop
+
+    deviceManager->Shutdown();
+
     return 0;
 }

@@ -62,31 +62,6 @@ namespace Derydoca::Rendering
 
 	VkSurfaceKHR surface;
 
-	DeviceManagerVK::~DeviceManagerVK()
-	{
-		vkDeviceWaitIdle(device);
-
-		CleanupSwapChain();
-
-		for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++)
-		{
-			vkDestroySemaphore(device, imageAvailableSemaphores[i], allocationCallbacks);
-			vkDestroySemaphore(device, renderFinishedSemaphores[i], allocationCallbacks);
-			vkDestroyFence(device, inFlightFences[i], allocationCallbacks);
-		}
-
-		vkDestroyCommandPool(device, renderingCommandPool, allocationCallbacks);
-
-		vkDestroyRenderPass(device, mainRenderPass, allocationCallbacks);
-
-		vkDestroyDevice(device, allocationCallbacks);
-#ifdef _DEBUG
-		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, allocationCallbacks);
-#endif
-		vkDestroySurfaceKHR(instance, surface, allocationCallbacks);
-		vkDestroyInstance(instance, allocationCallbacks);
-	}
-
 	nvrhi::GraphicsAPI DeviceManagerVK::GetGraphicsAPI() const
 	{
 		return nvrhi::GraphicsAPI::VULKAN;
@@ -109,6 +84,11 @@ namespace Derydoca::Rendering
 	bool DeviceManagerVK::CreateDeviceAndSwapChain()
 	{
 		return false;
+	}
+
+	void DeviceManagerVK::DestroyDeviceAndSwapChain()
+	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
 	}
 
 	void DeviceManagerVK::Render()

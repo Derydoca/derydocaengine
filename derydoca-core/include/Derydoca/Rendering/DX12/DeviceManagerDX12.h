@@ -37,11 +37,12 @@ namespace Derydoca::Rendering
 		void CreateCommandBuffer(CommandBuffer* commandBuffer) const override;
 
 	protected:
+		bool CreateDeviceAndSwapChain() override;
+		void DestroyDeviceAndSwapChain() override;
 		nvrhi::GraphicsAPI GetGraphicsAPI() const override;
 		uint32_t GetBackBufferCount() override;
 		void ResizeSwapChain() override;
 		nvrhi::ITexture* GetBackBuffer(uint32_t index) override;
-		bool CreateDeviceAndSwapChain() override;
 
 	private:
 		RefCountPtr<IDXGIAdapter> GetHardwareAdapter(const std::wstring& targetName);
@@ -50,7 +51,7 @@ namespace Derydoca::Rendering
 
 		static bool MoveWindowOntoAdapter(IDXGIAdapter* targetAdapter, RECT& rect);
 
-		RefCountPtr<ID3D12Device> m_device;
+		RefCountPtr<ID3D12Device> m_Device12;
 		std::vector<RefCountPtr<ID3D12Resource>> m_SwapChainBuffers;
 		std::vector<nvrhi::TextureHandle> m_RhiSwapChainBuffers;
 		ComPtr<ID3D12CommandAllocator> m_commandAllocators[FrameCount];
@@ -58,7 +59,7 @@ namespace Derydoca::Rendering
 		RefCountPtr<ID3D12CommandQueue> m_ComputeQueue;
 		RefCountPtr<ID3D12CommandQueue> m_CopyQueue;
 		RefCountPtr<IDXGIFactory> m_dxgiFactory;
-		ComPtr<IDXGISwapChain3> m_swapChain;
+		ComPtr<IDXGISwapChain3> m_SwapChain;
 		ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
 		ComPtr<ID3D12GraphicsCommandList4> m_commandList;
 		UINT m_rtvDescriptorSize;
