@@ -29,7 +29,7 @@ namespace Derydoca::Rendering
 	public:
 		static const UINT FrameCount = 2;
 
-		DeviceManagerDX12(const DeviceManagerSettings& settings);
+		DeviceManagerDX12() = default;
 		DeviceManagerDX12(const DeviceManagerDX12&) = delete;
 
 		void Render() override;

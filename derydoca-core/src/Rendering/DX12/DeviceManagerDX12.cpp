@@ -83,11 +83,6 @@ namespace Derydoca::Rendering
         }
     }
 
-    DeviceManagerDX12::DeviceManagerDX12(const DeviceManagerSettings& deviceSettings)
-        : DeviceManager(deviceSettings)
-    {
-    }
-
     bool DeviceManagerDX12::CreateRenderTargets()
     {
         m_SwapChainBuffers.resize(m_SwapChainDesc.BufferCount);
@@ -99,11 +94,11 @@ namespace Derydoca::Rendering
             HR_RETURN(hr);
 
             nvrhi::TextureDesc textureDesc;
-            textureDesc.width = m_DeviceSettings.width;
-            textureDesc.height = m_DeviceSettings.height;
-            textureDesc.sampleCount = m_DeviceSettings.sampleCount;
-            textureDesc.sampleQuality = m_DeviceSettings.sampleQuality;
-            textureDesc.format = m_DeviceSettings.imageFormat;
+            textureDesc.width = m_DeviceParams.width;
+            textureDesc.height = m_DeviceParams.height;
+            textureDesc.sampleCount = m_DeviceParams.sampleCount;
+            textureDesc.sampleQuality = m_DeviceParams.sampleQuality;
+            textureDesc.format = m_DeviceParams.imageFormat;
             textureDesc.debugName = "SwapChainBuffer";
             textureDesc.isRenderTarget = true;
             textureDesc.isUAV = false;
@@ -172,23 +167,23 @@ namespace Derydoca::Rendering
 
     bool DeviceManagerDX12::CreateDeviceAndSwapChain()
     {
-        UINT windowStyle = m_DeviceSettings.startFullscreen
+        UINT windowStyle = m_DeviceParams.startFullscreen
             ? (WS_POPUP | WS_SYSMENU | WS_VISIBLE)
-            : m_DeviceSettings.startMaximized
+            : m_DeviceParams.startMaximized
             ? (WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_MAXIMIZE)
             : (WS_OVERLAPPEDWINDOW | WS_VISIBLE);
 
-        RECT rect = { 0, 0, LONG(m_DeviceSettings.width), LONG(m_DeviceSettings.height) };
+        RECT rect = { 0, 0, LONG(m_DeviceParams.width), LONG(m_DeviceParams.height) };
         AdjustWindowRect(&rect, windowStyle, FALSE);
 
         RefCountPtr<IDXGIAdapter> targetAdapter;
-        // TODO: Allow m_DeviceSettings to hold onto an adapter as an override
+        // TODO: Allow m_DeviceParams to hold onto an adapter as an override
         {
-            targetAdapter = GetHardwareAdapter(m_DeviceSettings.adapterNameSubstring);
+            targetAdapter = GetHardwareAdapter(m_DeviceParams.adapterNameSubstring);
 
             if (!targetAdapter)
             {
-                std::wstring adapterNameStr(m_DeviceSettings.adapterNameSubstring.begin(), m_DeviceSettings.adapterNameSubstring.end());
+                std::wstring adapterNameStr(m_DeviceParams.adapterNameSubstring.begin(), m_DeviceParams.adapterNameSubstring.end());
 
                 D_LOG_CRITICAL("Unable to find adapter with the name filter of '{0}'.", "adapterNameStr");
                 return false;
@@ -227,17 +222,17 @@ namespace Derydoca::Rendering
         ZeroMemory(&m_SwapChainDesc, sizeof(m_SwapChainDesc));
         m_SwapChainDesc.Width = width;
         m_SwapChainDesc.Height = height;
-        m_SwapChainDesc.SampleDesc.Count = m_DeviceSettings.sampleCount;
+        m_SwapChainDesc.SampleDesc.Count = m_DeviceParams.sampleCount;
         m_SwapChainDesc.SampleDesc.Quality = 0;
-        m_SwapChainDesc.BufferUsage = m_DeviceSettings.swapChainUsage;
-        m_SwapChainDesc.BufferCount = m_DeviceSettings.bufferCount;
+        m_SwapChainDesc.BufferUsage = m_DeviceParams.swapChainUsage;
+        m_SwapChainDesc.BufferCount = m_DeviceParams.bufferCount;
         m_SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-        m_SwapChainDesc.Flags = m_DeviceSettings.allowModeSwitch ? DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH : 0;
+        m_SwapChainDesc.Flags = m_DeviceParams.allowModeSwitch ? DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH : 0;
 
         // Special processing for sRGB swap chain formats.
         // DXGI will not create a swap chain with an sRGB format, but its contents will be interpreted as sRGB.
         // So we need to use a non-sRGB format here, but store the true sRGB format for later framebuffer creation.
-        switch (m_DeviceSettings.imageFormat)  // NOLINT(clang-diagnostic-switch-enum)
+        switch (m_DeviceParams.imageFormat)  // NOLINT(clang-diagnostic-switch-enum)
         {
         case nvrhi::Format::SRGBA8_UNORM:
             m_SwapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -246,11 +241,11 @@ namespace Derydoca::Rendering
             m_SwapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
             break;
         default:
-            m_SwapChainDesc.Format = nvrhi::d3d12::convertFormat(m_DeviceSettings.imageFormat);
+            m_SwapChainDesc.Format = nvrhi::d3d12::convertFormat(m_DeviceParams.imageFormat);
             break;
         }
 
-        if (m_DeviceSettings.enableDebugRuntime)
+        if (m_DeviceParams.enableDebugRuntime)
         {
             RefCountPtr<ID3D12Debug> pDebug;
             hr = D3D12GetDebugInterface(IID_PPV_ARGS(&pDebug));
@@ -260,7 +255,7 @@ namespace Derydoca::Rendering
         }
 
         RefCountPtr<IDXGIFactory2> pDxgiFactory;
-        UINT dxgiFactoryFlags = m_DeviceSettings.enableDebugRuntime ? DXGI_CREATE_FACTORY_DEBUG : 0;
+        UINT dxgiFactoryFlags = m_DeviceParams.enableDebugRuntime ? DXGI_CREATE_FACTORY_DEBUG : 0;
         hr = CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(&pDxgiFactory));
         HR_RETURN(hr);
 
@@ -281,11 +276,11 @@ namespace Derydoca::Rendering
 
         hr = D3D12CreateDevice(
             targetAdapter,
-            m_DeviceSettings.featureLevel,
+            m_DeviceParams.featureLevel,
             IID_PPV_ARGS(&m_device));
         HR_RETURN(hr);
 
-        if (m_DeviceSettings.enableDebugRuntime)
+        if (m_DeviceParams.enableDebugRuntime)
         {
             RefCountPtr<ID3D12InfoQueue> pInfoQueue;
             m_device->QueryInterface(&pInfoQueue);
@@ -320,7 +315,7 @@ namespace Derydoca::Rendering
         HR_RETURN(hr);
         m_GraphicsQueue->SetName(L"Graphics Queue");
 
-        if (m_DeviceSettings.enableComputeQueue)
+        if (m_DeviceParams.enableComputeQueue)
         {
             queueDesc.Type = D3D12_COMMAND_LIST_TYPE_COMPUTE;
             hr = m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_ComputeQueue));
@@ -328,7 +323,7 @@ namespace Derydoca::Rendering
             m_ComputeQueue->SetName(L"Compute Queue");
         }
 
-        if (m_DeviceSettings.enableCopyQueue)
+        if (m_DeviceParams.enableCopyQueue)
         {
             queueDesc.Type = D3D12_COMMAND_LIST_TYPE_COPY;
             hr = m_device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&m_CopyQueue));
@@ -337,11 +332,11 @@ namespace Derydoca::Rendering
         }
 
         m_FullScreenDesc = {};
-        m_FullScreenDesc.RefreshRate.Numerator = m_DeviceSettings.refreshRate;
+        m_FullScreenDesc.RefreshRate.Numerator = m_DeviceParams.refreshRate;
         m_FullScreenDesc.RefreshRate.Denominator = 1;
         m_FullScreenDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE;
         m_FullScreenDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-        m_FullScreenDesc.Windowed = !m_DeviceSettings.startFullscreen;
+        m_FullScreenDesc.Windowed = !m_DeviceParams.startFullscreen;
 
         RefCountPtr<IDXGISwapChain1> pSwapChain1;
         hr = pDxgiFactory->CreateSwapChainForHwnd(m_GraphicsQueue, m_hWnd, &m_SwapChainDesc, &m_FullScreenDesc, nullptr, &pSwapChain1);
@@ -359,7 +354,7 @@ namespace Derydoca::Rendering
 
         m_nvrhiDevice = nvrhi::d3d12::createDevice(deviceDesc);
 
-        if (m_DeviceSettings.enableNvrhiValidationLayer)
+        if (m_DeviceParams.enableNvrhiValidationLayer)
         {
             m_nvrhiDevice = nvrhi::validation::createValidationLayer(m_nvrhiDevice);
         }
@@ -415,9 +410,9 @@ namespace Derydoca::Rendering
         if (!m_swapChain)
             return;
 
-        const HRESULT hr = m_swapChain->ResizeBuffers(m_DeviceSettings.bufferCount,
-            m_DeviceSettings.width,
-            m_DeviceSettings.height,
+        const HRESULT hr = m_swapChain->ResizeBuffers(m_DeviceParams.bufferCount,
+            m_DeviceParams.width,
+            m_DeviceParams.height,
             m_SwapChainDesc.Format,
             m_SwapChainDesc.Flags);
 

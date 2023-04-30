@@ -30,7 +30,7 @@ namespace Derydoca::Rendering
 	class DeviceManagerVK : public DeviceManager
 	{
 	public:
-		DeviceManagerVK(const DeviceManagerSettings& settings);
+		DeviceManagerVK() = default;
 		DeviceManagerVK(const DeviceManagerVK&) = delete;
 		~DeviceManagerVK();
 

@@ -56,11 +56,8 @@ namespace Derydoca::Rendering {
         return Instance;
     }
 
-    DeviceManager::DeviceManager(const DeviceManagerSettings& deviceSettings)
+    DeviceManager::DeviceManager()
     {
-        m_DeviceSettings = deviceSettings;
-
-        m_RequestedVSync = m_DeviceSettings.vsyncEnabled;
     }
 
     void DefaultMessageCallback::message(nvrhi::MessageSeverity severity, const char* messageText)
@@ -85,7 +82,7 @@ namespace Derydoca::Rendering {
         }
     }
 
-    DeviceManager* DeviceManager::Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings)
+    DeviceManager* DeviceManager::Create(const RenderingAPI renderingAPI)
     {
         DeviceManager* deviceManager = nullptr;
         switch (renderingAPI)
@@ -93,14 +90,14 @@ namespace Derydoca::Rendering {
 #ifdef USE_DX12
         case RenderingAPI::Direct3D12:
         {
-            deviceManager = new Rendering::DeviceManagerDX12(settings);
+            deviceManager = new Rendering::DeviceManagerDX12();
             break;
         }
 #endif
 #ifdef USE_VULKAN
         case RenderingAPI::Vulkan:
         {
-            deviceManager = new Rendering::DeviceManagerVK(settings);
+            deviceManager = new Rendering::DeviceManagerVK();
             break;
         }
 #endif
@@ -129,26 +126,26 @@ namespace Derydoca::Rendering {
 
         m_windowVisible = true;
 
-        if (int(m_DeviceSettings.width) != width ||
-            int(m_DeviceSettings.height) != height ||
-            (m_DeviceSettings.vsyncEnabled != m_RequestedVSync && GetGraphicsAPI() == nvrhi::GraphicsAPI::VULKAN))
+        if (int(m_DeviceParams.width) != width ||
+            int(m_DeviceParams.height) != height ||
+            (m_DeviceParams.vsyncEnabled != m_RequestedVSync && GetGraphicsAPI() == nvrhi::GraphicsAPI::VULKAN))
         {
             // window is not minimized, and the size has changed
 
             BackBufferResizing();
 
-            m_DeviceSettings.width = width;
-            m_DeviceSettings.height = height;
-            m_DeviceSettings.vsyncEnabled = m_RequestedVSync;
+            m_DeviceParams.width = width;
+            m_DeviceParams.height = height;
+            m_DeviceParams.vsyncEnabled = m_RequestedVSync;
 
             ResizeSwapChain();
             BackBufferResized();
         }
 
-        m_DeviceSettings.vsyncEnabled = m_RequestedVSync;
+        m_DeviceParams.vsyncEnabled = m_RequestedVSync;
     }
 
-    bool DeviceManager::CreateWindowDeviceAndSwapChain(const DeviceManagerSettings& settings, const char* windowTitle)
+    bool DeviceManager::CreateWindowDeviceAndSwapChain(const DeviceCreationParams& params, const char* windowTitle)
     {
         // TODO: Per-monitor DPI for Windows
 
@@ -165,7 +162,7 @@ namespace Derydoca::Rendering {
         bool foundFormat = false;
         for (const auto& info : formatInfo)
         {
-            if (info.format == settings.swapChainFormat)
+            if (info.format == params.swapChainFormat)
             {
                 glfwWindowHint(GLFW_RED_BITS, info.redBits);
                 glfwWindowHint(GLFW_GREEN_BITS, info.greenBits);
@@ -180,16 +177,16 @@ namespace Derydoca::Rendering {
 
         assert(foundFormat);
 
-        glfwWindowHint(GLFW_SAMPLES, settings.sampleCount);
-        glfwWindowHint(GLFW_REFRESH_RATE, settings.refreshRate);
+        glfwWindowHint(GLFW_SAMPLES, params.sampleCount);
+        glfwWindowHint(GLFW_REFRESH_RATE, params.refreshRate);
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);   // Ignored for fullscreen
 
-        m_Window = glfwCreateWindow(settings.width, settings.height,
+        m_Window = glfwCreateWindow(params.width, params.height,
             windowTitle ? windowTitle : "",
-            settings.startFullscreen ? glfwGetPrimaryMonitor() : nullptr,
+            params.startFullscreen ? glfwGetPrimaryMonitor() : nullptr,
             nullptr);
 
         if (m_Window == nullptr)
@@ -197,17 +194,17 @@ namespace Derydoca::Rendering {
             return false;
         }
 
-        if (settings.startFullscreen)
+        if (params.startFullscreen)
         {
             glfwSetWindowMonitor(m_Window, glfwGetPrimaryMonitor(), 0, 0,
-                m_DeviceSettings.width, m_DeviceSettings.height, m_DeviceSettings.refreshRate);
+                m_DeviceParams.width, m_DeviceParams.height, m_DeviceParams.refreshRate);
         }
         else
         {
             int fbWidth = 0, fbHeight = 0;
             glfwGetFramebufferSize(m_Window, &fbWidth, &fbHeight);
-            m_DeviceSettings.width = fbWidth;
-            m_DeviceSettings.height = fbHeight;
+            m_DeviceParams.width = fbWidth;
+            m_DeviceParams.height = fbHeight;
         }
 
         if (windowTitle)
@@ -223,7 +220,7 @@ namespace Derydoca::Rendering {
         //    glfwSetWindowPos(m_Window, settings.windowPosX, settings.windowPosY);
         //}
 
-        if (settings.startMaximized)
+        if (params.startMaximized)
         {
             glfwMaximizeWindow(m_Window);
         }
@@ -252,8 +249,8 @@ namespace Derydoca::Rendering {
         glfwShowWindow(m_Window);
 
         // reset the back buffer size state to enforce a resize event
-        m_DeviceSettings.width = 0;
-        m_DeviceSettings.height = 0;
+        m_DeviceParams.width = 0;
+        m_DeviceParams.height = 0;
 
         UpdateWindowSize();
 
@@ -275,9 +272,9 @@ namespace Derydoca::Rendering {
     {
         for (auto it : m_vApplicationLayers)
         {
-            it->BackBufferResized(m_DeviceSettings.width,
-                m_DeviceSettings.height,
-                m_DeviceSettings.sampleCount);
+            it->BackBufferResized(m_DeviceParams.width,
+                m_DeviceParams.height,
+                m_DeviceParams.sampleCount);
         }
 
         uint32_t backBufferCount = GetBackBufferCount();

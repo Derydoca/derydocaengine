@@ -15,7 +15,7 @@ namespace Derydoca::Rendering
 {
 	class IApplicationLayer;
 
-	struct DeviceManagerSettings
+	struct DeviceCreationParams
 	{
 		uint32_t width = 1920;
 		uint32_t height = 1080;
@@ -55,7 +55,7 @@ namespace Derydoca::Rendering
 #define DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType) inline GenericType Translate(SpecificType value) { return static_cast<GenericType>(value); }
 #define DIRECT_ENUM_TRANSLATE_FUNCS(GenericType, SpecificType) DIRECT_ENUM_TRANSLATE_FUNC_TO(GenericType, SpecificType); DIRECT_ENUM_TRANSLATE_FUNC_FROM(GenericType, SpecificType)
 
-		static DeviceManager* Create(const RenderingAPI renderingAPI, const DeviceManagerSettings& settings);
+		static DeviceManager* Create(const RenderingAPI renderingAPI);
 		virtual ~DeviceManager() {};
 
         virtual void Render() = 0;
@@ -65,10 +65,10 @@ namespace Derydoca::Rendering
 		[[nodiscard]] virtual nvrhi::IDevice* GetDevice();
 		[[nodiscard]] uint32_t GetFrameIndex() const { return m_FrameIndex; }
         void SignalWindowResizedEvent();
-		bool CreateWindowDeviceAndSwapChain(const DeviceManagerSettings& settings, const char* windowTitle);
+		bool CreateWindowDeviceAndSwapChain(const DeviceCreationParams& params, const char* windowTitle);
 
     protected:
-		DeviceManager(const DeviceManagerSettings& deviceSettings);
+		DeviceManager();
 
 		void UpdateWindowSize();
 		void BackBufferResizing();
@@ -80,7 +80,7 @@ namespace Derydoca::Rendering
 		virtual void ResizeSwapChain() = 0;
 		virtual nvrhi::ITexture* GetBackBuffer(uint32_t index) = 0;
 
-		DeviceManagerSettings m_DeviceSettings;
+		DeviceCreationParams m_DeviceParams;
 		GLFWwindow* m_Window = nullptr;
         bool framebufferResized = false;
 		bool m_windowVisible = false;

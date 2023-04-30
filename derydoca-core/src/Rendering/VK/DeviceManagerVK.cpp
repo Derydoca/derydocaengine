@@ -62,11 +62,6 @@ namespace Derydoca::Rendering
 
 	VkSurfaceKHR surface;
 
-	DeviceManagerVK::DeviceManagerVK(const DeviceManagerSettings& deviceSettings)
-		: DeviceManager(deviceSettings)
-	{
-	}
-
 	DeviceManagerVK::~DeviceManagerVK()
 	{
 		vkDeviceWaitIdle(device);

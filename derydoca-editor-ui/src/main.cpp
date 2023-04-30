@@ -16,17 +16,22 @@ int main(int argc, const char* argv[])
     Derydoca::Logging::Log::Init();
     D_LOG_TRACE("Engine startup");
 
-    auto deviceManagerSettings = Rendering::DeviceManagerSettings();
     auto renderingAPI = Rendering::RenderingAPI::Direct3D12;
 
-    auto deviceManager = std::unique_ptr<DeviceManager>(DeviceManager::Create(renderingAPI, deviceManagerSettings));
+    auto deviceManager = std::unique_ptr<DeviceManager>(DeviceManager::Create(renderingAPI));
     if (deviceManager == nullptr)
     {
         D_LOG_CRITICAL("Unable to create device manager!");
         return -1;
     }
 
-    if (!deviceManager->CreateWindowDeviceAndSwapChain(deviceManagerSettings, "Derydoca Engine"))
+    auto deviceParams = Rendering::DeviceCreationParams();
+#if _DEBUG
+    deviceParams.enableDebugRuntime = true;
+    deviceParams.enableNvrhiValidationLayer = true;
+#endif
+
+    if (!deviceManager->CreateWindowDeviceAndSwapChain(deviceParams, "Derydoca Engine"))
     {
         D_LOG_CRITICAL("Cannot initialize a graphics device with the requested parameters.");
         return -1;
