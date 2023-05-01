@@ -214,11 +214,10 @@ namespace Derydoca::Rendering {
 
         glfwSetWindowUserPointer(m_Window, this);
 
-        // TODO: Add window position setting
-        //if (settings.windowPosX != -1 && settings.windowPosY != -1)
-        //{
-        //    glfwSetWindowPos(m_Window, settings.windowPosX, settings.windowPosY);
-        //}
+        if (params.windowPosX != -1 && params.windowPosY != -1)
+        {
+            glfwSetWindowPos(m_Window, params.windowPosX, params.windowPosY);
+        }
 
         if (params.startMaximized)
         {

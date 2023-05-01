@@ -21,6 +21,8 @@ namespace Derydoca::Rendering
 		uint32_t height = 1080;
 		uint32_t sampleCount = 1;
 		uint32_t sampleQuality = 0;
+		uint32_t windowPosX = -1;
+		uint32_t windowPosY = -1;
         ImageFormat imageFormat = ImageFormat::RGBA8_UNORM; // REMOVE
 		nvrhi::Format swapChainFormat = nvrhi::Format::SRGBA8_UNORM;
 		std::wstring adapterNameSubstring = L"";
