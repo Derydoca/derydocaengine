@@ -405,7 +405,7 @@ namespace Derydoca::Rendering {
 
     void DeviceManager::KeyboardUpdate(int key, int scancode, int action, int mods)
     {
-        D_LOG_TRACE("Keyboard uppdate");
+        D_LOG_TRACE("Keyboard uppdate: Key: {}, scancode: {}, action: {}, mods: {}", key, scancode, action, mods);
 
         if (key == -1)
         {
@@ -423,7 +423,7 @@ namespace Derydoca::Rendering {
 
     void DeviceManager::KeyboardCharInput(unsigned int unicode, int mods)
     {
-        D_LOG_TRACE("Keyboard character input");
+        D_LOG_TRACE("Keyboard character input: Unicode: {}, mods: {}", unicode, mods);
 
         //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
         //{
@@ -435,7 +435,7 @@ namespace Derydoca::Rendering {
 
     void DeviceManager::MousePosUpdate(double xpos, double ypos)
     {
-        D_LOG_TRACE("Mouse position update");
+        D_LOG_TRACE("Mouse position update: [{}, {}]", xpos, ypos);
 
         xpos /= m_DPIScaleFactorX;
         ypos /= m_DPIScaleFactorY;
@@ -450,7 +450,7 @@ namespace Derydoca::Rendering {
 
     void DeviceManager::MouseButtonUpdate(int button, int action, int mods)
     {
-        D_LOG_TRACE("Mouse button update");
+        D_LOG_TRACE("Mouse button update: Button: {}, action: {}, mods: {}", button, action, mods);
 
         //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
         //{
@@ -462,7 +462,7 @@ namespace Derydoca::Rendering {
 
     void DeviceManager::MouseScrollUpdate(double xoffset, double yoffset)
     {
-        D_LOG_TRACE("Mouse scroll update");
+        D_LOG_TRACE("Mouse scroll update: Xoffset: {}, yoffset: {}", xoffset, yoffset);
 
         //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
         //{
