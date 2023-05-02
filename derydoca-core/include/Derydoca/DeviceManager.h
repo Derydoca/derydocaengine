@@ -75,6 +75,8 @@ namespace Derydoca::Rendering
         void SignalWindowResizedEvent();
 		bool CreateWindowDeviceAndSwapChain(const DeviceCreationParams& params, const char* windowTitle);
 
+		void RunMessageLoop();
+
 		// these are public in order to be called from the GLFW callback functions
 		void WindowCloseCallback() { }
 		void WindowIconifyCallback(int iconified) { }
@@ -102,6 +104,8 @@ namespace Derydoca::Rendering
 		virtual void ResizeSwapChain() = 0;
 		virtual nvrhi::ITexture* GetBackBuffer(uint32_t index) = 0;
 
+		// timestamp in seconds for the previous frame
+		double m_PreviousFrameTimestamp = 0.0;
 		DeviceCreationParams m_DeviceParams;
 		GLFWwindow* m_Window = nullptr;
         bool framebufferResized = false;
