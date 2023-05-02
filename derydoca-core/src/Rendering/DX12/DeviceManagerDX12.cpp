@@ -5,8 +5,6 @@
 #include <string>
 #include <fmt/xchar.h>
 #include <sstream>
-#define GLFW_EXPOSE_NATIVE_WIN32
-#include <GLFW/glfw3native.h>
 
 #define D3D_ACTIVE_FEATURE_LEVEL D3D_FEATURE_LEVEL_12_1
 

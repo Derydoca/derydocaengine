@@ -7,6 +7,10 @@
 #include <dxgi.h>
 #include <d3d12.h>
 #endif
+#ifdef D_WIN32
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
+#endif
 
 #include "Derydoca/Rendering/Common.h"
 #include "Derydoca/Rendering/CommandBuffer.h"
@@ -36,6 +40,7 @@ namespace Derydoca::Rendering
 		bool startMaximized = false;
 		bool enableNvrhiValidationLayer = true;
 		bool vsyncEnabled = false;
+		bool enablePerMonitorDPI = false;
 
 #ifdef USE_DX12
 		DXGI_USAGE swapChainUsage = DXGI_USAGE_SHADER_INPUT | DXGI_USAGE_RENDER_TARGET_OUTPUT;
@@ -70,6 +75,19 @@ namespace Derydoca::Rendering
         void SignalWindowResizedEvent();
 		bool CreateWindowDeviceAndSwapChain(const DeviceCreationParams& params, const char* windowTitle);
 
+		// these are public in order to be called from the GLFW callback functions
+		void WindowCloseCallback() { }
+		void WindowIconifyCallback(int iconified) { }
+		void WindowFocusCallback(int focused) { }
+		void WindowRefreshCallback() { }
+		void WindowPosCallback(int xpos, int ypos);
+
+		void KeyboardUpdate(int key, int scancode, int action, int mods);
+		void KeyboardCharInput(unsigned int unicode, int mods);
+		void MousePosUpdate(double xpos, double ypos);
+		void MouseButtonUpdate(int button, int action, int mods);
+		void MouseScrollUpdate(double xoffset, double yoffset);
+
     protected:
 		DeviceManager();
 
@@ -89,6 +107,9 @@ namespace Derydoca::Rendering
         bool framebufferResized = false;
 		bool m_windowVisible = false;
 		bool m_RequestedVSync = false;
+		// current DPI scale info (updated when window moves)
+		float m_DPIScaleFactorX = 1.f;
+		float m_DPIScaleFactorY = 1.f;
 
 		std::string m_WindowTitle;
 

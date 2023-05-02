@@ -15,6 +15,10 @@ set(PUBLIC_LIBS ${PUBLIC_LIBS} nvrhi)
 
 set(PRIVATE_INCLUDES ${PRIVATE_INCLUDES} "./include/")
 
+if (WIN32)
+	target_compile_definitions(${PROJECT_NAME} PUBLIC D_WIN32=1)
+endif()
+
 if(ENABLE_DX12)
 	target_sources(${PROJECT_NAME} PRIVATE "./src/Rendering/DX12/DeviceManagerDX12.cpp")
 	target_compile_definitions(${PROJECT_NAME} PUBLIC USE_DX12=1)

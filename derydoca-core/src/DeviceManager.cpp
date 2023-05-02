@@ -9,6 +9,11 @@
 #include "Derydoca/Rendering/VK/DeviceManagerVK.h"
 #endif
 
+#ifdef D_WIN32
+#include <ShellScalingApi.h>
+#pragma comment(lib, "shcore.lib")
+#endif
+
 namespace Derydoca::Rendering {
 
     static const struct
@@ -49,6 +54,81 @@ namespace Derydoca::Rendering {
         { nvrhi::Format::RGBA32_UINT,       32, 32, 32, 32,  0,  0, },
         { nvrhi::Format::RGBA32_FLOAT,      32, 32, 32, 32,  0,  0, },
     };
+
+    static void WindowIconifyCallback_GLFW(GLFWwindow* window, int iconified)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->WindowIconifyCallback(iconified);
+    }
+
+    static void WindowFocusCallback_GLFW(GLFWwindow* window, int focused)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->WindowFocusCallback(focused);
+    }
+
+    static void WindowRefreshCallback_GLFW(GLFWwindow* window)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->WindowRefreshCallback();
+    }
+
+    static void WindowCloseCallback_GLFW(GLFWwindow* window)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->WindowCloseCallback();
+    }
+
+    static void WindowPosCallback_GLFW(GLFWwindow* window, int xpos, int ypos)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->WindowPosCallback(xpos, ypos);
+    }
+
+    static void KeyCallback_GLFW(GLFWwindow* window, int key, int scancode, int action, int mods)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->KeyboardUpdate(key, scancode, action, mods);
+    }
+
+    static void CharModsCallback_GLFW(GLFWwindow* window, unsigned int unicode, int mods)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->KeyboardCharInput(unicode, mods);
+    }
+
+    static void MousePosCallback_GLFW(GLFWwindow* window, double xpos, double ypos)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->MousePosUpdate(xpos, ypos);
+    }
+
+    static void MouseButtonCallback_GLFW(GLFWwindow* window, int button, int action, int mods)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->MouseButtonUpdate(button, action, mods);
+    }
+
+    static void MouseScrollCallback_GLFW(GLFWwindow* window, double xoffset, double yoffset)
+    {
+        DeviceManager* manager = reinterpret_cast<DeviceManager*>(glfwGetWindowUserPointer(window));
+        manager->MouseScrollUpdate(xoffset, yoffset);
+    }
+
+    static void JoystickConnectionCallback_GLFW(int joyId, int connectDisconnect)
+    {
+        // TODO: Joystick support
+        if (connectDisconnect == GLFW_CONNECTED)
+        {
+            D_LOG_INFO("Joystick connected.");
+            //JoyStickManager::Singleton().ConnectJoystick(joyId);
+        }
+        if (connectDisconnect == GLFW_DISCONNECTED)
+        {
+            D_LOG_INFO("Joystick disconnected.");
+            //JoyStickManager::Singleton().DisconnectJoystick(joyId);
+        }
+    }
 
     DefaultMessageCallback& DefaultMessageCallback::GetInstance()
     {
@@ -224,18 +304,19 @@ namespace Derydoca::Rendering {
             glfwMaximizeWindow(m_Window);
         }
 
-        //glfwSetWindowPosCallback(m_Window, WindowPosCallback_GLFW);
-        //glfwSetWindowCloseCallback(m_Window, WindowCloseCallback_GLFW);
-        //glfwSetWindowRefreshCallback(m_Window, WindowRefreshCallback_GLFW);
-        //glfwSetWindowFocusCallback(m_Window, WindowFocusCallback_GLFW);
-        //glfwSetWindowIconifyCallback(m_Window, WindowIconifyCallback_GLFW);
-        //glfwSetKeyCallback(m_Window, KeyCallback_GLFW);
-        //glfwSetCharModsCallback(m_Window, CharModsCallback_GLFW);
-        //glfwSetCursorPosCallback(m_Window, MousePosCallback_GLFW);
-        //glfwSetMouseButtonCallback(m_Window, MouseButtonCallback_GLFW);
-        //glfwSetScrollCallback(m_Window, MouseScrollCallback_GLFW);
-        //glfwSetJoystickCallback(JoystickConnectionCallback_GLFW);
+        glfwSetWindowPosCallback(m_Window, WindowPosCallback_GLFW);
+        glfwSetWindowCloseCallback(m_Window, WindowCloseCallback_GLFW);
+        glfwSetWindowRefreshCallback(m_Window, WindowRefreshCallback_GLFW);
+        glfwSetWindowFocusCallback(m_Window, WindowFocusCallback_GLFW);
+        glfwSetWindowIconifyCallback(m_Window, WindowIconifyCallback_GLFW);
+        glfwSetKeyCallback(m_Window, KeyCallback_GLFW);
+        glfwSetCharModsCallback(m_Window, CharModsCallback_GLFW);
+        glfwSetCursorPosCallback(m_Window, MousePosCallback_GLFW);
+        glfwSetMouseButtonCallback(m_Window, MouseButtonCallback_GLFW);
+        glfwSetScrollCallback(m_Window, MouseScrollCallback_GLFW);
+        glfwSetJoystickCallback(JoystickConnectionCallback_GLFW);
 
+        // TODO: Joystick support
         //// If there are multiple device managers, then this would be called by each one which isn't necessary
         //// but should not hurt.
         //JoyStickManager::Singleton().EnumerateJoysticks();
@@ -255,6 +336,95 @@ namespace Derydoca::Rendering {
 
 
         return true;
+    }
+
+    void DeviceManager::WindowPosCallback(int xpos, int ypos)
+    {
+        D_LOG_TRACE("Window position update. [{}, {}]", xpos, ypos);
+
+#ifdef D_WIN32
+        if (m_DeviceParams.enablePerMonitorDPI)
+        {
+            HWND hwnd = glfwGetWin32Window(m_Window);
+            auto monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+
+            unsigned int dpiX;
+            unsigned int dpiY;
+            GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &dpiX, &dpiY);
+
+            m_DPIScaleFactorX = dpiX / 96.f;
+            m_DPIScaleFactorY = dpiY / 96.f;
+        }
+#endif
+    }
+
+    void DeviceManager::KeyboardUpdate(int key, int scancode, int action, int mods)
+    {
+        D_LOG_TRACE("Keyboard uppdate");
+
+        if (key == -1)
+        {
+            // filter unknown keys
+            return;
+        }
+
+        //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
+        //{
+        //    bool ret = (*it)->KeyboardUpdate(key, scancode, action, mods);
+        //    if (ret)
+        //        break;
+        //}
+    }
+
+    void DeviceManager::KeyboardCharInput(unsigned int unicode, int mods)
+    {
+        D_LOG_TRACE("Keyboard character input");
+
+        //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
+        //{
+        //    bool ret = (*it)->KeyboardCharInput(unicode, mods);
+        //    if (ret)
+        //        break;
+        //}
+    }
+
+    void DeviceManager::MousePosUpdate(double xpos, double ypos)
+    {
+        D_LOG_TRACE("Mouse position update");
+
+        xpos /= m_DPIScaleFactorX;
+        ypos /= m_DPIScaleFactorY;
+
+        //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
+        //{
+        //    bool ret = (*it)->MousePosUpdate(xpos, ypos);
+        //    if (ret)
+        //        break;
+        //}
+    }
+
+    void DeviceManager::MouseButtonUpdate(int button, int action, int mods)
+    {
+        D_LOG_TRACE("Mouse button update");
+
+        //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
+        //{
+        //    bool ret = (*it)->MouseButtonUpdate(button, action, mods);
+        //    if (ret)
+        //        break;
+        //}
+    }
+
+    void DeviceManager::MouseScrollUpdate(double xoffset, double yoffset)
+    {
+        D_LOG_TRACE("Mouse scroll update");
+
+        //for (auto it = m_vRenderPasses.crbegin(); it != m_vRenderPasses.crend(); it++)
+        //{
+        //    bool ret = (*it)->MouseScrollUpdate(xoffset, yoffset);
+        //    if (ret)
+        //        break;
+        //}
     }
 
     void DeviceManager::BackBufferResizing()
