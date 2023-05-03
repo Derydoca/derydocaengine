@@ -11,6 +11,21 @@ const char* WindowName = "Derydoca Engine";
 using namespace Derydoca;
 using namespace Derydoca::Rendering;
 
+class Example : public IRenderPass
+{
+public:
+    using IRenderPass::IRenderPass;
+
+    bool Init();
+};
+
+#pragma region Example_Impl
+bool Example::Init()
+{
+    return true;
+}
+#pragma endregion Example_Impl
+
 int main(int argc, const char* argv[])
 {
     Derydoca::Logging::Log::Init();
@@ -18,7 +33,7 @@ int main(int argc, const char* argv[])
 
     auto renderingAPI = Rendering::RenderingAPI::Direct3D12;
 
-    auto deviceManager = std::unique_ptr<DeviceManager>(DeviceManager::Create(renderingAPI));
+    DeviceManager* deviceManager = DeviceManager::Create(renderingAPI);
     if (deviceManager == nullptr)
     {
         D_LOG_CRITICAL("Unable to create device manager!");
@@ -39,7 +54,13 @@ int main(int argc, const char* argv[])
 
     // TODO: Insert render loop
 
-    deviceManager->RunMessageLoop();
+    Example example(deviceManager);
+    if (example.Init())
+    {
+        deviceManager->AddRenderPassToBack(&example);
+        deviceManager->RunMessageLoop();
+        deviceManager->RemoveRenderPass(&example);
+    }
 
     deviceManager->Shutdown();
 

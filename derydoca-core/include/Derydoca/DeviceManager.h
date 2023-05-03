@@ -18,12 +18,13 @@
 namespace Derydoca::Rendering
 {
 	class IApplicationLayer;
+	class IRenderPass;
 
 	struct DeviceCreationParams
 	{
-		uint32_t width = 1920;
-		uint32_t height = 1080;
-		uint32_t sampleCount = 1;
+		uint32_t backBufferWidth = 1920;
+		uint32_t backBufferHeight = 1080;
+		uint32_t swapChainSampleCount = 1;
 		uint32_t sampleQuality = 0;
 		uint32_t windowPosX = -1;
 		uint32_t windowPosY = -1;
@@ -64,6 +65,10 @@ namespace Derydoca::Rendering
 
 		static DeviceManager* Create(const RenderingAPI renderingAPI);
 		virtual ~DeviceManager() = default;
+
+		void AddRenderPassToFront(IRenderPass* pController);
+		void AddRenderPassToBack(IRenderPass* pController);
+		void RemoveRenderPass(IRenderPass* pController);
 
         virtual void Render() = 0;
 		virtual void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) = 0;
@@ -108,6 +113,7 @@ namespace Derydoca::Rendering
 		double m_PreviousFrameTimestamp = 0.0;
 		DeviceCreationParams m_DeviceParams;
 		GLFWwindow* m_Window = nullptr;
+		std::list<IRenderPass*> m_vRenderPasses;
         bool framebufferResized = false;
 		bool m_windowVisible = false;
 		bool m_RequestedVSync = false;
@@ -121,7 +127,6 @@ namespace Derydoca::Rendering
 		std::vector<nvrhi::FramebufferHandle> m_SwapChainFramebuffers;
 		uint32_t m_FrameIndex = 0;
 		std::list<IApplicationLayer*> m_vApplicationLayers;
-
 	};
 
 	class IApplicationLayer
@@ -143,6 +148,38 @@ namespace Derydoca::Rendering
 		[[nodiscard]] uint32_t GetFrameIndex() const { return m_DeviceManager->GetFrameIndex(); }
 	private:
 		DeviceManager* m_DeviceManager;
+	};
 
+	class IRenderPass
+	{
+	private:
+		DeviceManager* m_DeviceManager;
+
+	public:
+		explicit IRenderPass(DeviceManager* deviceManager)
+			: m_DeviceManager(deviceManager)
+		{ }
+
+		virtual ~IRenderPass() = default;
+
+		virtual void Render(nvrhi::IFramebuffer* framebuffer) { }
+		virtual void Animate(float fElapsedTimeSeconds) { }
+		virtual void BackBufferResizing() { }
+		virtual void BackBufferResized(const uint32_t width, const uint32_t height, const uint32_t sampleCount) { }
+
+		// all of these pass in GLFW constants as arguments
+		// see http://www.glfw.org/docs/latest/input.html
+		// return value is true if the event was consumed by this render pass, false if it should be passed on
+		virtual bool KeyboardUpdate(int key, int scancode, int action, int mods) { return false; }
+		virtual bool KeyboardCharInput(unsigned int unicode, int mods) { return false; }
+		virtual bool MousePosUpdate(double xpos, double ypos) { return false; }
+		virtual bool MouseScrollUpdate(double xoffset, double yoffset) { return false; }
+		virtual bool MouseButtonUpdate(int button, int action, int mods) { return false; }
+		virtual bool JoystickButtonUpdate(int button, bool pressed) { return false; }
+		virtual bool JoystickAxisUpdate(int axis, float value) { return false; }
+
+		[[nodiscard]] DeviceManager* GetDeviceManager() const { return m_DeviceManager; }
+		[[nodiscard]] nvrhi::IDevice* GetDevice() const { return m_DeviceManager->GetDevice(); }
+		[[nodiscard]] uint32_t GetFrameIndex() const { return m_DeviceManager->GetFrameIndex(); }
 	};
 }

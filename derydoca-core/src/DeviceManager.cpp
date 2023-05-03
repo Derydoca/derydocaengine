@@ -190,6 +190,35 @@ namespace Derydoca::Rendering {
 
         return deviceManager;
     }
+    
+    void DeviceManager::AddRenderPassToFront(IRenderPass* pRenderPass)
+    {
+        m_vRenderPasses.remove(pRenderPass);
+        m_vRenderPasses.push_front(pRenderPass);
+
+        pRenderPass->BackBufferResizing();
+        pRenderPass->BackBufferResized(
+            m_DeviceParams.backBufferWidth,
+            m_DeviceParams.backBufferHeight,
+            m_DeviceParams.swapChainSampleCount);
+    }
+    
+    void DeviceManager::AddRenderPassToBack(IRenderPass* pRenderPass)
+    {
+        m_vRenderPasses.remove(pRenderPass);
+        m_vRenderPasses.push_back(pRenderPass);
+
+        pRenderPass->BackBufferResizing();
+        pRenderPass->BackBufferResized(
+            m_DeviceParams.backBufferWidth,
+            m_DeviceParams.backBufferHeight,
+            m_DeviceParams.swapChainSampleCount);
+    }
+
+    void DeviceManager::RemoveRenderPass(IRenderPass* pRenderPass)
+    {
+        m_vRenderPasses.remove(pRenderPass);
+    }
 
     void DeviceManager::UpdateWindowSize()
     {
@@ -206,16 +235,16 @@ namespace Derydoca::Rendering {
 
         m_windowVisible = true;
 
-        if (int(m_DeviceParams.width) != width ||
-            int(m_DeviceParams.height) != height ||
+        if (int(m_DeviceParams.backBufferWidth) != width ||
+            int(m_DeviceParams.backBufferHeight) != height ||
             (m_DeviceParams.vsyncEnabled != m_RequestedVSync && GetGraphicsAPI() == nvrhi::GraphicsAPI::VULKAN))
         {
             // window is not minimized, and the size has changed
 
             BackBufferResizing();
 
-            m_DeviceParams.width = width;
-            m_DeviceParams.height = height;
+            m_DeviceParams.backBufferWidth = width;
+            m_DeviceParams.backBufferHeight = height;
             m_DeviceParams.vsyncEnabled = m_RequestedVSync;
 
             ResizeSwapChain();
@@ -257,14 +286,14 @@ namespace Derydoca::Rendering {
 
         assert(foundFormat);
 
-        glfwWindowHint(GLFW_SAMPLES, params.sampleCount);
+        glfwWindowHint(GLFW_SAMPLES, params.swapChainSampleCount);
         glfwWindowHint(GLFW_REFRESH_RATE, params.refreshRate);
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);   // Ignored for fullscreen
 
-        m_Window = glfwCreateWindow(params.width, params.height,
+        m_Window = glfwCreateWindow(params.backBufferWidth, params.backBufferHeight,
             windowTitle ? windowTitle : "",
             params.startFullscreen ? glfwGetPrimaryMonitor() : nullptr,
             nullptr);
@@ -277,14 +306,14 @@ namespace Derydoca::Rendering {
         if (params.startFullscreen)
         {
             glfwSetWindowMonitor(m_Window, glfwGetPrimaryMonitor(), 0, 0,
-                m_DeviceParams.width, m_DeviceParams.height, m_DeviceParams.refreshRate);
+                m_DeviceParams.backBufferWidth, m_DeviceParams.backBufferHeight, m_DeviceParams.refreshRate);
         }
         else
         {
             int fbWidth = 0, fbHeight = 0;
             glfwGetFramebufferSize(m_Window, &fbWidth, &fbHeight);
-            m_DeviceParams.width = fbWidth;
-            m_DeviceParams.height = fbHeight;
+            m_DeviceParams.backBufferWidth = fbWidth;
+            m_DeviceParams.backBufferHeight = fbHeight;
         }
 
         if (windowTitle)
@@ -329,8 +358,8 @@ namespace Derydoca::Rendering {
         glfwShowWindow(m_Window);
 
         // reset the back buffer size state to enforce a resize event
-        m_DeviceParams.width = 0;
-        m_DeviceParams.height = 0;
+        m_DeviceParams.backBufferWidth = 0;
+        m_DeviceParams.backBufferHeight = 0;
 
         UpdateWindowSize();
 
@@ -486,9 +515,9 @@ namespace Derydoca::Rendering {
     {
         for (auto it : m_vApplicationLayers)
         {
-            it->BackBufferResized(m_DeviceParams.width,
-                m_DeviceParams.height,
-                m_DeviceParams.sampleCount);
+            it->BackBufferResized(m_DeviceParams.backBufferWidth,
+                m_DeviceParams.backBufferHeight,
+                m_DeviceParams.swapChainSampleCount);
         }
 
         uint32_t backBufferCount = GetBackBufferCount();

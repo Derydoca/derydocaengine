@@ -92,9 +92,9 @@ namespace Derydoca::Rendering
             HR_RETURN(hr);
 
             nvrhi::TextureDesc textureDesc;
-            textureDesc.width = m_DeviceParams.width;
-            textureDesc.height = m_DeviceParams.height;
-            textureDesc.sampleCount = m_DeviceParams.sampleCount;
+            textureDesc.width = m_DeviceParams.backBufferWidth;
+            textureDesc.height = m_DeviceParams.backBufferHeight;
+            textureDesc.sampleCount = m_DeviceParams.swapChainSampleCount;
             textureDesc.sampleQuality = m_DeviceParams.sampleQuality;
             textureDesc.format = m_DeviceParams.imageFormat;
             textureDesc.debugName = "SwapChainBuffer";
@@ -171,7 +171,7 @@ namespace Derydoca::Rendering
             ? (WS_OVERLAPPEDWINDOW | WS_VISIBLE | WS_MAXIMIZE)
             : (WS_OVERLAPPEDWINDOW | WS_VISIBLE);
 
-        RECT rect = { 0, 0, LONG(m_DeviceParams.width), LONG(m_DeviceParams.height) };
+        RECT rect = { 0, 0, LONG(m_DeviceParams.backBufferWidth), LONG(m_DeviceParams.backBufferHeight) };
         AdjustWindowRect(&rect, windowStyle, FALSE);
 
         RefCountPtr<IDXGIAdapter> targetAdapter;
@@ -220,7 +220,7 @@ namespace Derydoca::Rendering
         ZeroMemory(&m_SwapChainDesc, sizeof(m_SwapChainDesc));
         m_SwapChainDesc.Width = width;
         m_SwapChainDesc.Height = height;
-        m_SwapChainDesc.SampleDesc.Count = m_DeviceParams.sampleCount;
+        m_SwapChainDesc.SampleDesc.Count = m_DeviceParams.swapChainSampleCount;
         m_SwapChainDesc.SampleDesc.Quality = 0;
         m_SwapChainDesc.BufferUsage = m_DeviceParams.swapChainUsage;
         m_SwapChainDesc.BufferCount = m_DeviceParams.bufferCount;
@@ -442,8 +442,8 @@ namespace Derydoca::Rendering
             return;
 
         const HRESULT hr = m_SwapChain->ResizeBuffers(m_DeviceParams.bufferCount,
-            m_DeviceParams.width,
-            m_DeviceParams.height,
+            m_DeviceParams.backBufferWidth,
+            m_DeviceParams.backBufferHeight,
             m_SwapChainDesc.Format,
             m_SwapChainDesc.Flags);
 
