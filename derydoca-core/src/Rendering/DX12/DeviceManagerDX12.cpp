@@ -406,11 +406,6 @@ namespace Derydoca::Rendering
         m_DxgiAdapter = nullptr;
     }
 
-    void DeviceManagerDX12::Render()
-    {
-        D_LOG_CRITICAL("NOT IMPLEMENTED");
-    }
-
     void DeviceManagerDX12::CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass)
     {
         D_LOG_CRITICAL("NOT IMPLEMENTED");
@@ -429,6 +424,53 @@ namespace Derydoca::Rendering
     uint32_t DeviceManagerDX12::GetBackBufferCount()
     {
         return m_SwapChainDesc.BufferCount;
+    }
+
+    void DeviceManagerDX12::BeginFrame()
+    {
+        DXGI_SWAP_CHAIN_DESC1 newSwapChainDesc;
+        DXGI_SWAP_CHAIN_FULLSCREEN_DESC newFullScreenDesc;
+        if (SUCCEEDED(m_SwapChain->GetDesc1(&newSwapChainDesc)) && SUCCEEDED(m_SwapChain->GetFullscreenDesc(&newFullScreenDesc)))
+        {
+            if (m_FullScreenDesc.Windowed != newFullScreenDesc.Windowed)
+            {
+                BackBufferResizing();
+
+                m_FullScreenDesc = newFullScreenDesc;
+                m_SwapChainDesc = newSwapChainDesc;
+                m_DeviceParams.backBufferWidth = newSwapChainDesc.Width;
+                m_DeviceParams.backBufferHeight = newSwapChainDesc.Height;
+
+                if (newFullScreenDesc.Windowed)
+                    glfwSetWindowMonitor(m_Window, nullptr, 50, 50, newSwapChainDesc.Width, newSwapChainDesc.Height, 0);
+
+                ResizeSwapChain();
+                BackBufferResized();
+            }
+
+        }
+
+        auto bufferIndex = m_SwapChain->GetCurrentBackBufferIndex();
+
+        WaitForSingleObject(m_FrameFenceEvents[bufferIndex], INFINITE);
+    }
+
+    void DeviceManagerDX12::Present()
+    {
+        if (!m_windowVisible)
+            return;
+
+        auto bufferIndex = m_SwapChain->GetCurrentBackBufferIndex();
+
+        UINT presentFlags = 0;
+        if (!m_DeviceParams.vsyncEnabled && m_FullScreenDesc.Windowed && m_TearingSupported)
+            presentFlags |= DXGI_PRESENT_ALLOW_TEARING;
+
+        m_SwapChain->Present(m_DeviceParams.vsyncEnabled ? 1 : 0, presentFlags);
+
+        m_FrameFence->SetEventOnCompletion(m_FrameCount, m_FrameFenceEvents[bufferIndex]);
+        m_GraphicsQueue->Signal(m_FrameFence, m_FrameCount);
+        m_FrameCount++;
     }
 
     void DeviceManagerDX12::ResizeSwapChain()
@@ -464,6 +506,11 @@ namespace Derydoca::Rendering
         if (index < m_RhiSwapChainBuffers.size())
             return m_RhiSwapChainBuffers[index];
         return nullptr;
+    }
+
+    uint32_t DeviceManagerDX12::GetCurrentBackBufferIndex()
+    {
+        return m_SwapChain->GetCurrentBackBufferIndex();
     }
 
     RefCountPtr<IDXGIAdapter> DeviceManagerDX12::GetHardwareAdapter(const std::wstring& targetName)

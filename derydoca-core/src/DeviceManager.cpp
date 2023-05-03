@@ -385,24 +385,24 @@ namespace Derydoca::Rendering {
             //JoyStickManager::Singleton().EraseDisconnectedJoysticks();
             //JoyStickManager::Singleton().UpdateAllJoysticks(m_vRenderPasses);
 
-            //if (m_windowVisible)
-            //{
-            //    if (m_callbacks.beforeAnimate) m_callbacks.beforeAnimate(*this);
-            //    Animate(elapsedTime);
-            //    if (m_callbacks.afterAnimate) m_callbacks.afterAnimate(*this);
-            //    if (m_callbacks.beforeRender) m_callbacks.beforeRender(*this);
-            //    Render();
-            //    if (m_callbacks.afterRender) m_callbacks.afterRender(*this);
-            //    if (m_callbacks.beforePresent) m_callbacks.beforePresent(*this);
-            //    Present();
-            //    if (m_callbacks.afterPresent) m_callbacks.afterPresent(*this);
-            //}
+            if (m_windowVisible)
+            {
+                //if (m_callbacks.beforeAnimate) m_callbacks.beforeAnimate(*this);
+                Animate(elapsedTime);
+                //if (m_callbacks.afterAnimate) m_callbacks.afterAnimate(*this);
+                //if (m_callbacks.beforeRender) m_callbacks.beforeRender(*this);
+                Render();
+                //if (m_callbacks.afterRender) m_callbacks.afterRender(*this);
+                //if (m_callbacks.beforePresent) m_callbacks.beforePresent(*this);
+                Present();
+                //if (m_callbacks.afterPresent) m_callbacks.afterPresent(*this);
+            }
 
             std::this_thread::sleep_for(std::chrono::milliseconds(0));
 
             GetDevice()->runGarbageCollection();
 
-            //UpdateAverageFrameTime(elapsedTime);
+            UpdateAverageFrameTime(elapsedTime);
             m_PreviousFrameTimestamp = curTime;
 
             ++m_FrameIndex;
@@ -526,6 +526,40 @@ namespace Derydoca::Rendering {
         {
             m_SwapChainFramebuffers[index] = GetDevice()->createFramebuffer(
                 nvrhi::FramebufferDesc().addColorAttachment(GetBackBuffer(index)));
+        }
+    }
+
+    void DeviceManager::Animate(double elapsedTime)
+    {
+        for (auto it : m_vRenderPasses)
+        {
+            it->Animate(float(elapsedTime));
+        }
+    }
+
+    void DeviceManager::Render()
+    {
+        BeginFrame();
+
+        nvrhi::IFramebuffer* framebuffer = m_SwapChainFramebuffers[GetCurrentBackBufferIndex()];
+
+        for (auto it : m_vRenderPasses)
+        {
+            it->Render(framebuffer);
+        }
+    }
+
+    void DeviceManager::UpdateAverageFrameTime(double elapsedTime)
+    {
+        m_FrameTimeSum += elapsedTime;
+        m_NumberOfAccumulatedFrames += 1;
+
+        if (m_FrameTimeSum > m_AverageTimeUpdateInterval && m_NumberOfAccumulatedFrames > 0)
+        {
+            m_AverageFrameTime = m_FrameTimeSum / double(m_NumberOfAccumulatedFrames);
+            m_NumberOfAccumulatedFrames = 0;
+            m_FrameTimeSum = 0.0;
+            D_LOG_TRACE("Average frame time: {}", m_AverageFrameTime);
         }
     }
 

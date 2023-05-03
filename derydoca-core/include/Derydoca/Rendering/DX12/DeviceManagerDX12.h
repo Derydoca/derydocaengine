@@ -32,17 +32,19 @@ namespace Derydoca::Rendering
 		DeviceManagerDX12() = default;
 		DeviceManagerDX12(const DeviceManagerDX12&) = delete;
 
-		void Render() override;
 		void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) override;
 		void CreateCommandBuffer(CommandBuffer* commandBuffer) const override;
 
 	protected:
 		bool CreateDeviceAndSwapChain() override;
 		void DestroyDeviceAndSwapChain() override;
-		nvrhi::GraphicsAPI GetGraphicsAPI() const override;
-		uint32_t GetBackBufferCount() override;
 		void ResizeSwapChain() override;
 		nvrhi::ITexture* GetBackBuffer(uint32_t index) override;
+		uint32_t GetCurrentBackBufferIndex() override;
+		uint32_t GetBackBufferCount() override;
+		void BeginFrame() override;
+		void Present() override;
+		nvrhi::GraphicsAPI GetGraphicsAPI() const override;
 
 	private:
 		RefCountPtr<IDXGIAdapter> GetHardwareAdapter(const std::wstring& targetName);
@@ -71,6 +73,8 @@ namespace Derydoca::Rendering
 		RefCountPtr<ID3D12Fence> m_FrameFence;
 		UINT64 m_fenceValues[FrameCount];
 		DXGI_SWAP_CHAIN_FULLSCREEN_DESC m_FullScreenDesc{};
+
+		UINT64 m_FrameCount = 1;
 
 		std::string m_RendererString;
 		HWND m_hWnd;

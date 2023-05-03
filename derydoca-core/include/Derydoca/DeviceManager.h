@@ -70,7 +70,6 @@ namespace Derydoca::Rendering
 		void AddRenderPassToBack(IRenderPass* pController);
 		void RemoveRenderPass(IRenderPass* pController);
 
-        virtual void Render() = 0;
 		virtual void CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass) = 0;
 		virtual void CreateCommandBuffer(CommandBuffer* commandBuffer) const = 0;
 
@@ -102,11 +101,19 @@ namespace Derydoca::Rendering
 		void BackBufferResizing();
 		void BackBufferResized();
 
+		void Animate(double elapsedTime);
+		void Render();
+		void UpdateAverageFrameTime(double elapsedTime);
+
 		virtual bool CreateDeviceAndSwapChain() = 0;
 		virtual void DestroyDeviceAndSwapChain() = 0;
-		virtual nvrhi::GraphicsAPI GetGraphicsAPI() const = 0;
-		virtual uint32_t GetBackBufferCount() = 0;
 		virtual void ResizeSwapChain() = 0;
+		virtual void BeginFrame() = 0;
+		virtual void Present() = 0;
+
+		virtual nvrhi::GraphicsAPI GetGraphicsAPI() const = 0;
+		virtual uint32_t GetCurrentBackBufferIndex() = 0;
+		virtual uint32_t GetBackBufferCount() = 0;
 		virtual nvrhi::ITexture* GetBackBuffer(uint32_t index) = 0;
 
 		// timestamp in seconds for the previous frame
@@ -117,6 +124,12 @@ namespace Derydoca::Rendering
         bool framebufferResized = false;
 		bool m_windowVisible = false;
 		bool m_RequestedVSync = false;
+
+		double m_AverageFrameTime = 0.0;
+		double m_AverageTimeUpdateInterval = 0.5;
+		double m_FrameTimeSum = 0.0;
+		int m_NumberOfAccumulatedFrames = 0;
+
 		// current DPI scale info (updated when window moves)
 		float m_DPIScaleFactorX = 1.f;
 		float m_DPIScaleFactorY = 1.f;

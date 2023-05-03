@@ -69,20 +69,40 @@ namespace Derydoca::Rendering
 
 	uint32_t DeviceManagerVK::GetBackBufferCount()
 	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
 		return 0;
+	}
+
+	void DeviceManagerVK::BeginFrame()
+	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
+	}
+
+	void DeviceManagerVK::Present()
+	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
 	}
 
 	void DeviceManagerVK::ResizeSwapChain()
 	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
 	}
 
 	nvrhi::ITexture* DeviceManagerVK::GetBackBuffer(uint32_t index)
 	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
 		return nullptr;
 	}
-	
+
+	uint32_t DeviceManagerVK::GetCurrentBackBufferIndex()
+	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
+		return 0;
+	}
+
 	bool DeviceManagerVK::CreateDeviceAndSwapChain()
 	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
 		return false;
 	}
 
@@ -91,13 +111,9 @@ namespace Derydoca::Rendering
 		D_LOG_CRITICAL("NOT IMPLEMENTED");
 	}
 
-	void DeviceManagerVK::Render()
-	{
-		D_LOG_CRITICAL("NOT IMPLEMENTED");
-	}
-
 	void DeviceManagerVK::CreateRenderPass(const RenderPassDesc& renderPassDesc, RenderPass* renderPass)
 	{
+		D_LOG_CRITICAL("NOT IMPLEMENTED");
 	}
 
 	void DeviceManagerVK::CreateCommandBuffer(CommandBuffer* commandBuffer) const
